@@ -1,11 +1,11 @@
 ---
-id: initiate-a-file-download
-title: "Initiate a file download"
-description: "Start a download for a specified URL and folder path"
-sidebar_label: "Initiate a file download"
+id: get-thread
+title: "Get Thread"
+description: "Fetch information about a specific chat thread by its ID"
+sidebar_label: "Get Thread"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVE2T0zAM/Ssenc10YeCSGx97gGHYTrs9dfagxmrjxbG9stNuyeS/M0oaCN3CAJtLHEXRe3p6SguGUsk2Zhs8FLDMyFmhMuHgXUCjtoEVqhSptFtLRq0WnxV6iTtDrCLmCjQwPTSU8rtgjlC0UAafyWc5YozOlijlZ/dJMFpIZUU1yilyiMTZUpKnoeZcShYt5GMkKCBltn4HnYaG3YV4p8dI2NxTmaGT0K9dfRi7WQw8T4wtk4Eic0OdBFIMPg1MXl1dye03Vay32WImo1JTlpTStnHuCPrv+0ZjrLxCN58oIEwudNNpeH2Jz0e/R2eN+rS8+fIv4OcCDgAvnwKsPDa5Cmy/kXkuwJvLHWRij04tiffE6po58POQxA64S1CsYfQw3GmoKVfBQAEx9OPvfVvAbMyZmQAaBGDx08rXj1hHR+fWHOFOjpw41PptGP2PpfAXOjZLDQANe+I0dC7ZQqXGviOPNfV6DMZSqLbW0Y8thDNDTzbsfzf2pFymxzyLDq2fbNggzkRADSaIipWIV6yhbTeYaMWu6yT80BAfoVjfadgjW9xIv+u7TkNFaIihWLfwlY5QwPuB94tbgZd01wiNJ1Pu9PjF27KkmP+YO53v/GZ5Cxo2pz9RHYx8w3iQncfDMIfQ69hveh9rwaHfNbiT3KGmXN8BrdHG0g==
+api: eJylVcFu2zAM/RWBZ63Zhu3iW7d1Q3ZYhzY9ZT3QEhOrsyVVotN6gf99oO2gaWcUK+qLZYoiH5/I5z1Yyia5yC54KOArsamU85uQGhSbwjK0rFDlSMZtnFGmQlZcJUKryk45zmr5BTQkum0p86dgOyj2YIJn8ixLjLF2Zgi3uMmSZw/ZVNSgrGIKkRI7yvI1Bl7aYd1FggIyJ+e30Pf6YAnlDRmGXkyP8X8jVqsR28WIZ0LmElkoOLXUiyHH4POY8f3bt/J6HGeKYYnR1Vnl1hjKedPWdacScXK0Iwv6dVX+azeJkMme8kz5GtwcKxrYcU0zJYhZhY3iiqb7OgE9czxEZ5Y2z0SYdpSljfOU1V3lTKWGA/korCqpDn6bFYeTX341bhv0KoV2W9WdKsVT1ix4MCvGbVabkKYAWYA5pibPFzgaMCXs5LuN9hmW2kxptpyrcWMA7mw+UCP+UloYIGcSrC4fMfa/wGb6c6Zjew0f5jpu6XdYO6u+X57/eEljPR2SMcG7mfI9tlyF5P68rHPnEnycr4ApeazVJaUdJXWWUkivyyQE4jZDsQaRHbjW0BBXwUIBMQzDHZErKGAh+4tprjRI8IsHQTq7xyaOQ/IgMMeT5TfhIFpoBOrDXAFo2FHKY5HiLZkbHMB7bOiR7MATRToSwteI60QN0z0vYo3OD52e6kFCBgYmhvRBW641VMJQsYb9vsRMV6nuezHftpQ6KNbXGnaYHJZS5fq611ARWkpQrPfwmzoo4POI/c1K0ot73Q4N//Qae304cWoMRX7W9/gSf55frkBDOf00mmDlTMI7kW28G9kPA5fDCA62PdToty1uxXeMKc9fVD9cZA==
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Initiate a file download"}
+  children={"Get Thread"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/download/do"}
+  path={"/chat/thread"}
 >
   
 </MethodEndpoint>
 
 
 
-Start a download for a specified URL and folder path
+Fetch information about a specific chat thread by its ID
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Start a download for a specified URL and folder path
         >
           
           
-          Download Request
+          Get Thread Request
           
           
         </div>
@@ -93,16 +93,7 @@ Start a download for a specified URL and folder path
       >
         <SchemaItem
           collapsible={false}
-          name={"folderPath"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"url"}
+          name={"threadId"}
           required={false}
           schemaName={"string"}
           qualifierMessage={undefined}
@@ -126,7 +117,7 @@ Start a download for a specified URL and folder path
         <div>
           
           
-          Download initiated successfully
+          Thread details successfully retrieved
           
           
         </div><div>
@@ -166,15 +157,89 @@ Start a download for a specified URL and folder path
                       style={{"marginLeft":"1rem"}}
                     >
                       <SchemaItem
-                        name={"property name*"}
-                        required={false}
-                        schemaName={"any"}
-                        qualifierMessage={undefined}
-                        schema={{"additionalProperties":true,"type":"object"}}
-                        collapsible={false}
-                        discriminator={false}
+                        collapsible={true}
+                        className={"schemaItem"}
                       >
-                        
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                thread
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"createdAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"title"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Title of the thread.","type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"topicIds"}
+                              required={false}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"updatedAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"userIds"}
+                              required={false}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
                       </SchemaItem>
                     </ul>
                   </details>
@@ -183,7 +248,7 @@ Start a download for a specified URL and folder path
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{}"}
+                    responseExample={"{\n  \"thread\": {\n    \"createdAt\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"topicIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\",\n    \"userIds\": [\n      \"string\"\n    ]\n  }\n}"}
                     language={"json"}
                   >
                     

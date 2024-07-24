@@ -1,11 +1,11 @@
 ---
-id: send-a-new-message-to-a-chat-thread
-title: "Send a new message to a chat thread"
-description: "Add a new message to a specific chat thread"
-sidebar_label: "Send a new message to a chat thread"
+id: do
+title: "Do"
+description: "Start a download for a specified URL and folder path"
+sidebar_label: "Do"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVU1v2zAM/SsCL7t4TTdsF1+GbOiwDNhaNN0pzYGxmFidLamSnDQL/N8HynbtJEaxYj5JlMTHj8fnA0jymVM2KKMhhamUAoWmnSjJe9yQCEag8JYytVaZyHIMIuSOUEICjh4r8uGzkXtID5AZHUgHXqK1hcqQvU4ePLs+gM9yKpFX1hlLLijyvGuRzg/QewozGdcnYbYnQtJaafIi5CQwBMzyknRo9l0GOfoLSEAFKqOrsLcEKfjglN5AnXQGdA73vB/kcQz7pTkQZn0EQJsLcQ/fVCJ2OYY3XlT20z1Aco6UOcJAchpG41ByPLxY7pk8j+euPTkJ6GIMurLyBejKkxtD+BXtQjUVVc9IfF/sciN2zgQ6Ar/XX40T01ln4KfKi7WiIjqi0ob9SIh9I8zqgbIwaqmTEcL+aPtw29CxJaZyJCENrqKaDd4a7Rtevb+8PM+0c+KrLCPv11VR7AVKSUz0f2Y2Sqn4CIubAZU5iJFc6gQ+jIUy01sslBTf59c/XwN+WtAG4N1IVzVWITdO/XlddmMAH8czCOQ0FmJObktOXDln3P8hMRlw4yFdAIsQLBMoKeRGQgrWxK5bDDmkMOHzScu+CUpOkRFue7W6esLSFnSiPr3eLDrk5SDmznY0xr2Rp7ff9UPb2wYjODC2kzecA6XXphNUzLhcnL0KHDHrypacbwrNs8vZlxgLqLHkK3PSozJ+rN5HLRuo9yt/Am2rAj2FiS1Q6agnroh6HjvSdix5rnXCc8K1zblx6QIOhxV6+uWKumbzY0VuD+limcAWncIVJ75Y1gnkhJIcpIsD/KZ9L8lv7zgKvl5UUctP2VUn3YtplpENL94dcuvmen4HCazaf1xpJL9xuGOZwV3TEBOrGMUl2g5QoN5UkVfQ+OTvLw6CkIc=
+api: eJylVEtv2zAM/isCzxrSDdvFtz162DCsQdKcgh4Yi4nVyZJKyUkzw/99oB1jbpoN2+pLHJrm99BHt2AolWxjtsFDAcuMnBUqEw7eBTRqG1ihSpFKu7Vk1GrxVaGXujPEKmKuQAPTQ0MpfwjmCEULZfCZfJZbjNHZEmX87D4JRguprKhGuYscInG2lOTfMHMuI4sW8jESFJAyW7+DTkPD7kK902MlbO6pzNBJ6amqT6OaxcDzxNgyGSgyN9RJIcXg08DkzdWV/PxmivU2W8xkVGrKklLaNs4dQf+9bjTGyiN084kDwuSCmk7D20t8Pvs9OmvUl+XNt38BPzdwAHj9HGDlsclVYPuDzEsB3l1WkIk9OrUk3hOra+bAL0OSOOAuQbGGMcNwp6GmXAUDBcTQH3+f2wJmY8/MBNAgAItfUb5+xDo6Oo/mCHdK5CSh1m/DmH8shb/QsVlmAGjYE6dBuXQLlRp7RR5r6hMGZ9Gd7NL/7ubJo0yPeRYdWj/ZpcGGiVUaTBC/KrGpWEPbbjDRil3XSfmhIT5Csb7TsEe2uBFl67tOQ0VoiKFYt/CdjlDAx4H3q1uBl3bXCI1n59np8Y33ZUkx/7F3epLzm+UtaNicvjl1MPIO40G2Gw+D46H3sd/pvtaCQ79rcCe9w0y5fgK+br6V
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Send a new message to a chat thread"}
+  children={"Do"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/message/add"}
+  path={"/download/do"}
 >
   
 </MethodEndpoint>
 
 
 
-Add a new message to a specific chat thread
+Start a download for a specified URL and folder path
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Add a new message to a specific chat thread
         >
           
           
-          Add Message Request
+          Download Request
           
           
         </div>
@@ -92,98 +92,23 @@ Add a new message to a specific chat thread
         style={{"marginLeft":"1rem"}}
       >
         <SchemaItem
-          collapsible={true}
-          className={"schemaItem"}
+          collapsible={false}
+          name={"folderPath"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
         >
-          <details
-            style={{}}
-            className={"openapi-markdown__details"}
-          >
-            <summary
-              style={{}}
-            >
-              <span
-                className={"openapi-schema__container"}
-              >
-                <strong
-                  className={"openapi-schema__property"}
-                >
-                  message
-                </strong><span
-                  className={"openapi-schema__name"}
-                >
-                   object
-                </span>
-              </span>
-            </summary><div
-              style={{"marginLeft":"1rem"}}
-            >
-              <SchemaItem
-                collapsible={false}
-                name={"assetIds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"description":"AssetIds defines the attachments the message has.","items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"content"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"description":"Content of the message eg. \"Hi, what's up?\"","type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"createdAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"id"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"threadId"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"description":"ThreadId of the message.","type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"updatedAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"userId"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"description":"UserId is the id of the user who wrote the message.\nFor AI messages this field is empty.","type":"string"}}
-              >
-                
-              </SchemaItem>
-            </div>
-          </details>
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"url"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
         </SchemaItem>
       </ul>
     </details>
@@ -201,7 +126,7 @@ Add a new message to a specific chat thread
         <div>
           
           
-          Message successfully added
+          Download initiated successfully
           
           
         </div><div>

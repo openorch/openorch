@@ -1,11 +1,11 @@
 ---
-id: remove-a-message-from-a-chat-thread
-title: "Remove a message from a chat thread"
-description: "Delete a specific message from a chat thread by its ID"
-sidebar_label: "Remove a message from a chat thread"
+id: add-message
+title: "Add Message"
+description: "Add a new message to a specific chat thread"
+sidebar_label: "Add Message"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVM1y0zAQfhXNnsWkMHDRDWgPYQbaSdpTJoeNtIlVZEmV5LTG43dn1nYgpIGh4Iut1Urfz+66A0NZJxuLDR4UXJKjQgJFjqTt1mpRU864I7FNoRYodIVFlCoRGrFphS1ZzC9BQqKHhnL5EEwLqgMdfCFf+BNjdFYjA8zuM6N0kHVFNfJXTCFSKpYyryawueFFaSOBglyS9Tvoe3mIhM096QI9h87S/zxxXoykJno2kQFVUkM9B3IMPo+wby4u+PXrXYdLcqM15bxtnGuFGQAMyL9XiMZY3kJ3c6SVaZwR1Et4e47M3O/RWSM+La+/vAT81MMR4PVzgDuPTalCst9epu4cwLvzCgolj04sKe0piauUQvo/JO4I3GVQK+C2hLWEmkoVDCiIYah7xFKBghnvz6bumo1FBAkMsvjZuFdPWEdHJ434A1GC9dtw6G7UzJkp2MJnACTsKeVRLWczhRoHFR5rTllQHfY8Xb8fKjhp6aNR+vfhnKwr9FRm0aH1TK9JbhjAwaHJQXkQPtAYXFpLqNhLtYKu22Cmu+T6nsMPDaUW1GotYY/J4oZtWK17CRWhoQRq1cFXakHBx1HDq1smwumuYULPCt7Lw4n3WlMsf8w9LvfN9fIWJGym308dDJ9J+Mizj49jecLg6TDxQ6wDh37XsFwF4538fAc7AsLL
+api: eJylVU1v2zAM/SsCL7t4TTdsF1+GbuiwDNhatN0pzYGxmFidLakSnTQL/N8H2k7tJEaxYjlJpMzHj8eXHWiKWTCejbOQwoXWCpWljSopRlyRYqdQRU+ZWZpMZTmy4jwQakgg0GNFkT87vYV0B5mzTJbliN4XJkOJOnmIEnoHMcupRDn54DwFNhTl1iGdOjBG4qluzkdpdh6laWksRcU5KWTGLC/JcnvfV5BjPIMEDFPZhOKtJ0ghcjB2BXWyN2AIuJX7oI5D2C+tQ7nlAQCtztQ9fDOJ2uTIb6Kq/Kd7gOQUKQuETPqCR/Mwejy9pt1TfZrPXec5SuhsDLry+gXoKlIYQ/jV2JVpO2qekeS92uRObYJjOgC/t19dUBfTvUE+NVEtDRVNICo9b0dS7AfhFg+U8ailTkYI+6Obw01Lx46YJpCGlENFtRiidza2vHp/fn5a6T5IrLKMYlxWRbFVqDUJ0f+Z2ai1ERcW1wMqSxIjtdQJfBhLZWrXWBitvt9e/XwN+HFDW4B3I1O1WHHugvnzuurGAD6OV8AULBbqlsKagroMwYX/QxIy4CpCOgMRIZgnUBLnTkMK3jVT98g5pDAR/6Rj3wS1lCgIN71aXT5h6Qs6Up9eb2Z75Pkg573tYI17o2xvf+uXtrcNVnBg7DZvuAfGLt1eUDGTdkn1hiVj0ZU1hdg2WnZXqi+xaaDFkg6XAo4WZqDSrxT7biRMTzzxBRrb6EYoGt1uOt9NJnnuaSL7ID3MZUDpDHa7BUb6FYq6FvNjRWEL6WyewBqDwYUUOJvXCeSEmgKksx38pm0vvW/vJAt5XlSNZh+zqE72X1xkGXl+8e2QQ9dXt3eQwKL7Lyudlm8CbkROcNM23jVdbESkse2gQLuqGv5AG1N+fwFjcYgf
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Remove a message from a chat thread"}
+  children={"Add Message"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/message/delete"}
+  path={"/chat/message/add"}
 >
   
 </MethodEndpoint>
 
 
 
-Delete a specific message from a chat thread by its ID
+Add a new message to a specific chat thread
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Delete a specific message from a chat thread by its ID
         >
           
           
-          Delete Message Request
+          Add Message Request
           
           
         </div>
@@ -92,14 +92,98 @@ Delete a specific message from a chat thread by its ID
         style={{"marginLeft":"1rem"}}
       >
         <SchemaItem
-          collapsible={false}
-          name={"messageId"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
+          collapsible={true}
+          className={"schemaItem"}
         >
-          
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  message
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <SchemaItem
+                collapsible={false}
+                name={"assetIds"}
+                required={false}
+                schemaName={"string[]"}
+                qualifierMessage={undefined}
+                schema={{"description":"AssetIds defines the attachments the message has.","items":{"type":"string"},"type":"array"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"content"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"Content of the message eg. \"Hi, what's up?\"","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"createdAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"id"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"threadId"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"ThreadId of the message.","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"updatedAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"userId"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"UserId is the id of the user who wrote the message.\nFor AI messages this field is empty.","type":"string"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
         </SchemaItem>
       </ul>
     </details>
@@ -117,7 +201,7 @@ Delete a specific message from a chat thread by its ID
         <div>
           
           
-          Message successfully deleted
+          Message successfully added
           
           
         </div><div>

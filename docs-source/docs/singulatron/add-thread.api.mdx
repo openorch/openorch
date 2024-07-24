@@ -1,11 +1,11 @@
 ---
-id: retrieve-a-list-of-chat-threads-for-a-user
-title: "Retrieve a list of chat threads for a user"
-description: "Fetch all chat threads associated with a specific user"
-sidebar_label: "Retrieve a list of chat threads for a user"
+id: add-thread
+title: "Add Thread"
+description: "Create a new chat thread and add the requesting user to it"
+sidebar_label: "Add Thread"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVcFyEzEM/RWPzktTGLjsrTCFgQNl2vQUclC8StbFsV1bmzRk9t8ZeXfbNN0pLeQSR5alpyfpZQ8VJR1NYOMdlPCZWNcKrVW6RlZcR8IqKUzJa4NMldoarhWqFEibpdGqSRShgEi3DSX+6KsdlHvQ3jE5liOGYI1GSTC5SZJlD0nXtEY58S4QlOAXN6QZ2rYtjhB9IVbTHsZll6RPZyJVUHJsqBVDCt4lShL03empfD0ONARJjdaU0rKxdqcicTS0oQqKl2MO0QeKbLpkPUdyNEzr9NRDRxLqzvig4MTRuBW0BZhq1MyGLY1UIWbll4pr6ttzAsXIcx+M/trBOorQ36iKlsZRUtva6FrlB+kgrFqQ9W6VFPuTn27aXWt0KvpmVdudWoinnFnwYFKMq6SWPg5jI8DuKXmKsDNgjLiT302onmFJxmy0nOvuIgM3VRqoEX8pzWfIiQSrSQeMvRTYg2GY0b975DF+PzaEX90GranUt6uL768ZuSOQfYK3I3Q4bLj20fx+3UyPJfgwXgFTdGjVFcUNRXUeo4//l0kIxFWCcgaiOjAvYE1c+wpKCD7ve0CuoYSJ3E+GjStAol8+KM/5Ha5D3hrZK7f0gxSh5s7YbxVAARuKqStJWip51pihOlyLy2UvDQqVNSnP+CNNlEHHQf4ecXQgf/8uqD1NTHc8CRaNy1sQbZaXzEbPVnGvQPMCaqGrnMF+v8BE19G2rZhvG4o7KGfzAjYYDS6EhNm8LaAmrChCOdvDL9pBCZ866G+mkl/cbZNn/binbTG8ONOaAj/re9jRHxdXUyhg0f9TrH0lbyJuRdZx2zXHZyrzfmbbHiy6VYMr8e1iyucP5xRYzw==
+api: eJztVrFy2zAM/RUeZjZOe+2iLe1lSIemlziT6wEmYYmpTCokZUfV6d97IOXYcXW55rLGE/UIEnjAA+EeNAXlTRONs1DAN08YSaCwtBOqwihi5Qm1QKsFai1iRcLTQ0shGluKNpAX0QkTQcKIf3W6g6IH5WwkG3mJTVMbhexkdh/YUw9BVbRBXjXeNeSjocBf2eG/uEqh6Yt0YewaggJC9MaWMEgwehKOJtbEO89pzhkWbp3oZIdnICeOu8aoKx0mbhh3hKa1sRTErjKqEulAOLpWrKh2tgwiurNfdp63FVrhXVtWdSdWbMnryPFgEBHLINbOjxcEDsxE2oRpghlA77Hj77bRL2SJyzVJ5y5vpMCNDvvUsD1TcynkQByrCUcZ+9/ADoBb3ZOKk8ggT6K60FrMcxpvsrZGlRlPGoroWxoYCI2zIavk0/n5RLHyHaFVikJYt3XdiVFOIN91+q7TV+p0kPB5SmdXdou10eL77fWP1wjrJKjRwccJ+hbbWDlv/rxOuVMOvkwziOQt1uKW/Ja8uPTe+bd54gRiGaBYAA8UWErYUKychgIal1q6wVhBATPen+WizVAzQ3Zwcxgrl4+4aXKjHNrvqOH2fnOfHb7G9joCnhpmsQeXz0R5MH3S4sGSORm7dvsph4ozc2hjAAlb8iHnlFXGRDeYcmVxQ8/eNjh59o4m59vm8ViLSI9x1tRobGotX6c3K6V8LIncZ1MCp30poeLCFAvo+xUGuvP1MDD80JLvoFgsJWzRG1wx28VykFARavJQLHr4TR1Hnjl8mHMQbF63qc9O1TPI/YkLpaiJL9oea+fn9e0cJKzGfxsbp/mMxx3PCNzlKriU09T5CeuhRlu2WLJtvpN/fwFwtSDl
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Retrieve a list of chat threads for a user"}
+  children={"Add Thread"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/threads"}
+  path={"/chat/thread/add"}
 >
   
 </MethodEndpoint>
 
 
 
-Fetch all chat threads associated with a specific user
+Create a new chat thread and add the requesting user to it
 
 <Heading
   id={"request"}
@@ -84,22 +84,98 @@ Fetch all chat threads associated with a specific user
         >
           
           
-          Get Threads Request
+          Add Thread Request
           
           
         </div>
       </div><ul
         style={{"marginLeft":"1rem"}}
       >
-        <div
-          style={{"marginTop":".5rem","marginBottom":".5rem"}}
+        <SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
         >
-          
-          
-          object
-          
-          
-        </div>
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  thread
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <SchemaItem
+                collapsible={false}
+                name={"createdAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"id"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"title"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"Title of the thread.","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"topicIds"}
+                required={false}
+                schemaName={"string[]"}
+                qualifierMessage={undefined}
+                schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"updatedAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"userIds"}
+                required={false}
+                schemaName={"string[]"}
+                qualifierMessage={undefined}
+                schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem>
       </ul>
     </details>
   </TabItem>
@@ -116,7 +192,7 @@ Fetch all chat threads associated with a specific user
         <div>
           
           
-          Threads successfully retrieved
+          Thread successfully created
           
           
         </div><div>
@@ -172,23 +248,17 @@ Fetch all chat threads associated with a specific user
                               <strong
                                 className={"openapi-schema__property"}
                               >
-                                threads
+                                thread
                               </strong><span
                                 className={"openapi-schema__name"}
                               >
-                                 object[]
+                                 object
                               </span>
                             </span>
                           </summary><div
                             style={{"marginLeft":"1rem"}}
                           >
-                            <li>
-                              <div
-                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
-                              >
-                                Array [
-                              </div>
-                            </li><SchemaItem
+                            <SchemaItem
                               collapsible={false}
                               name={"createdAt"}
                               required={false}
@@ -242,13 +312,7 @@ Fetch all chat threads associated with a specific user
                               schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
                             >
                               
-                            </SchemaItem><li>
-                              <div
-                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
-                              >
-                                ]
-                              </div>
-                            </li>
+                            </SchemaItem>
                           </div>
                         </details>
                       </SchemaItem>
@@ -259,7 +323,7 @@ Fetch all chat threads associated with a specific user
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"threads\": [\n    {\n      \"createdAt\": \"string\",\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"topicIds\": [\n        \"string\"\n      ],\n      \"updatedAt\": \"string\",\n      \"userIds\": [\n        \"string\"\n      ]\n    }\n  ]\n}"}
+                    responseExample={"{\n  \"thread\": {\n    \"createdAt\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"topicIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\",\n    \"userIds\": [\n      \"string\"\n    ]\n  }\n}"}
                     language={"json"}
                   >
                     

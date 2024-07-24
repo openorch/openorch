@@ -1,11 +1,11 @@
 ---
-id: update-an-existing-chat-thread
-title: "Update an existing chat thread"
-description: "Modify the details of a specific chat thread"
-sidebar_label: "Update an existing chat thread"
+id: delete-thread
+title: "Delete Thread"
+description: "Delete a specific chat thread by its ID"
+sidebar_label: "Delete Thread"
 hide_title: true
 hide_table_of_contents: true
-api: eJztVsFu2zAM/RWBZ63phu3iWzf00AFbhzY9ZTkwEmOrcyRVktN6gf99oOXUaWYUC3ZtTjJFUXyPj2J2oCmqYHwyzkIB35w261akioSmhKaOwq0FiuhJmbVRQlWYRKoCoQYJgR4aiumz0y0UO1DOJrKJl+h9bRRy2Nl95Ng7iKqiDfLKB+cpJEORv4Zwf9lVIEykL/qAqfUEBcQUjC2hk2D0pDmZVBPvvAQ2ZzNjYWj5wjOQE8edN+pKx4kIw47QtDaWonisjKpEfyAehBUrqp0to0ju7Ked522FVgTXlFXdihV78jr13EaRsIxi7cIQIHJiJtEmTgPMBgwBW/5uvH6FpSZSmIRzlzf6xI2Oe2rYn6G5PuVInKuJB4z9a2Kjwa3uSaVJSyePs+rBiHlm8ibLaxCaCaShSKGhjg3ROxuzUD6cn0/UK8eIjVIU47qp61YMXIF8k+qbVE+Uaifh45TOruwWa6PF19vr76cI6yip4YL3E/AtNqlywfw+TblTF3yaRpAoWKzFLYUtBXEZggv/dxMTiGWEYgE8MWApYUOpchoK8K5vaY+pggJmvD/LRZtlgYAEvuNmHC6XT7jxuVfGDjzouf3VudXGr6HDDgzPPbPYG5cvdDm6Pstx9GRYxq7dftahYnLGTgaQsKUQM60sNMa6wZ4uixsaXzi0gp5MTMaWRzP1RW0OZuqps3koSqKnNPM1Gtv3WKj7x6vnfqiNhOczA/9LCRUXqVjAbrfCSHeh7jo2PzQUWigWSwlbDAZXDHux7CRUhJoCFIsd/KIWCviSE3835zzYvW76njtWUif3Jy6UIp9e9T3U0Y/r2zlIWA1/PjZO85mAjzwv8DGXw/VE9q9Ab9tBjbZssGTfHJN/fwCMFyMI
+api: eJylVMFu2zAM/RWBZw3phu3i27b2kB3WoklPQQ6MxMTqZEmV5LSe4X8fKDtbmgbDgvlimaL43qMe3YOmpKIJ2XgHFVyTpUwCRQqkzNYooWrMIteRUItNJ0xOYn4NEiI9tZTyF687qHpQ3mVymZcYgjUKueLsMXHZHpKqqUFehegDxWwo8ddYeK7LugsEFaQcjdvBMMhDxG8eSWUYOHSW7nKkdz9SmsiZSBqqHFsaOJCCd2kE/XB1xa/XpaYaqVWKUtq21nZCl/Ia5L/LQ60Nb6G9OxLKLM7IGSR8PMdl7vZojRbfFrffLwE/7eAI8P4twIPDNtc+mp+XqTsH8Om8gkzRoRULinuK4iZGH/8Pif2AuwTVCtiTsJbQUK69hgqCL9ceMNdQwYz3Z6O1ZuMdggTGuP9j2psXbIKl1yb8jSfBuK0/GBsVM2YCJvMRAAl7imnUytlMoMGiwWFDp9aEE+MezcsFIzf1JNNLngWLxjFyG20ZqyJ9ao2cJBXYIn8toeYeVSvo+w0meoh2GDj81FLsoFqtJewxGtywwNV6kFATaopQrXr4QR1U8HXk/G7JPDjdtsznzUUO8nDis1IU8l9zj6/x7naxBAmb6Z/SeM1nIj7zSOPz2HhfelgGucR6sOh2Le44d6zJzy8eSa2z
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Update an existing chat thread"}
+  children={"Delete Thread"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/thread/update"}
+  path={"/chat/thread/delete"}
 >
   
 </MethodEndpoint>
 
 
 
-Modify the details of a specific chat thread
+Delete a specific chat thread by its ID
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Modify the details of a specific chat thread
         >
           
           
-          Update Thread Request
+          Delete Thread Request
           
           
         </div>
@@ -92,89 +92,14 @@ Modify the details of a specific chat thread
         style={{"marginLeft":"1rem"}}
       >
         <SchemaItem
-          collapsible={true}
-          className={"schemaItem"}
+          collapsible={false}
+          name={"threadId"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
         >
-          <details
-            style={{}}
-            className={"openapi-markdown__details"}
-          >
-            <summary
-              style={{}}
-            >
-              <span
-                className={"openapi-schema__container"}
-              >
-                <strong
-                  className={"openapi-schema__property"}
-                >
-                  thread
-                </strong><span
-                  className={"openapi-schema__name"}
-                >
-                   object
-                </span>
-              </span>
-            </summary><div
-              style={{"marginLeft":"1rem"}}
-            >
-              <SchemaItem
-                collapsible={false}
-                name={"createdAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"id"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"title"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"description":"Title of the thread.","type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"topicIds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"updatedAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"userIds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem>
-            </div>
-          </details>
+          
         </SchemaItem>
       </ul>
     </details>
@@ -192,7 +117,7 @@ Modify the details of a specific chat thread
         <div>
           
           
-          Thread successfully updated
+          Thread successfully deleted
           
           
         </div><div>
@@ -232,89 +157,15 @@ Modify the details of a specific chat thread
                       style={{"marginLeft":"1rem"}}
                     >
                       <SchemaItem
-                        collapsible={true}
-                        className={"schemaItem"}
+                        name={"property name*"}
+                        required={false}
+                        schemaName={"any"}
+                        qualifierMessage={undefined}
+                        schema={{"additionalProperties":true,"type":"object"}}
+                        collapsible={false}
+                        discriminator={false}
                       >
-                        <details
-                          style={{}}
-                          className={"openapi-markdown__details"}
-                        >
-                          <summary
-                            style={{}}
-                          >
-                            <span
-                              className={"openapi-schema__container"}
-                            >
-                              <strong
-                                className={"openapi-schema__property"}
-                              >
-                                thread
-                              </strong><span
-                                className={"openapi-schema__name"}
-                              >
-                                 object
-                              </span>
-                            </span>
-                          </summary><div
-                            style={{"marginLeft":"1rem"}}
-                          >
-                            <SchemaItem
-                              collapsible={false}
-                              name={"createdAt"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"id"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"title"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"Title of the thread.","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"topicIds"}
-                              required={false}
-                              schemaName={"string[]"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"updatedAt"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"userIds"}
-                              required={false}
-                              schemaName={"string[]"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
-                            >
-                              
-                            </SchemaItem>
-                          </div>
-                        </details>
+                        
                       </SchemaItem>
                     </ul>
                   </details>
@@ -323,7 +174,7 @@ Modify the details of a specific chat thread
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"thread\": {\n    \"createdAt\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"topicIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\",\n    \"userIds\": [\n      \"string\"\n    ]\n  }\n}"}
+                    responseExample={"{}"}
                     language={"json"}
                   >
                     

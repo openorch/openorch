@@ -1,12 +1,12 @@
 ---
-id: pause-an-ongoing-download
-title: "Pause an ongoing download"
-description: "Pause a download that is currently in progress"
-sidebar_label: "Pause an ongoing download"
+id: subscribe
+title: "Subscribe"
+description: "Establish a subscription to firehose events and stream them to the client in real-time."
+sidebar_label: "Subscribe"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVE1v2zAM/SsCzxrSDdvFt330sB3WYGlPQQ6MxdrqZEml5KSe4f8+MI5XNw2KFfXFEk3xvUc9ugdDqWQbsw0eClhim0ihMmHvXUCjco1Z2aTKlpl8dp2yXkUOFVNKoIHpvqWUvwTTQdFDGXwmn2WJMTpbohRe3CWp3kMqa2pQVpFDJM6WkuxugzPES8y17HIXCQpIma2vYNDQsjsTH/QUCds7KjMMEnqq59uk48hTRexkf2RumQwUmVsaJJBi8Glk9OHiQl5Pq63asqSU1JQJ+v8FozFWPqFbzqQL9BkZg4aP5wh89zt01qgfq6ufrwE/7dwI8P45wI3HNteB7R8ybwX4dF5BJvbo1Ip4R6wumQO/DUl8gFWCYg2TbWGjoaFcBwMFxJAyaIgHd8FiyllE8TpoEIxfjza+fMAmOjq15YR4dOPMndbfhsn7WIoEYWSz1ADQsCNOo3jJFjYNHkR5bOhx5rwKvgrWV/+GD07cPBuv1w/qsW+ZHvIiOrR+Nlhja2btk25JczYaaulesYa+32KiG3bDIOH7lriDYr3RsEO2uBW1682goSY0xFCse/hNHRTwdST97loYSLprhcmzax70dOJzWVLML+bOL3h5tboGDdvjP6gJRs4w7mXKcT/eQjg08TDbh1gPDn3VYiW5Y015/gKW9cTE
-sidebar_class_name: "post api-method"
+api: eJy1Uj1v2zAQ/SvEm5naDdqFWwej6JxmMjycpItJlCLV40mIK/C/F7Tz4bTdgk4EeI/v67hi4NJLmDTkBIddUepiKN6QKXP3MjKazUMQ9rmw4YWTFkNpMEWFaTTqeWwQ9Wz6GDipCckIU7zRMPIHWAiXKafCBW7F7Xbbjj+0G60ZSAkWfU7KSRtK+VE3Z82bi1y7LL3nkc7j08RwKCohHVFrrRafth//5r9PNKvPEn7x8G6Fz/9K8C0pS6Jo7lgWFrMTyfJOqWqhdCxwezwvAAeLkdXnAQ5HVlhMpB4Om2fI5ml5HcMipIfcyJsN6puNRho0NilYLCzlEgDVYspFR0rtQaKxQe6uuN4EXl+T/cef89TJubkpUkjN5Syx6V9yX1Vj8Zr8YOFz0TZf144K30ustV3/nFlOcPuDxUISqGtV7A/VwjMNLHD7FT/4BIcvfc9Tq3ihOL/4eLPBer2Pr7vvqPU3dQcqHQ==
+sidebar_class_name: "get api-method"
 custom_edit_url: null
 ---
 
@@ -27,93 +27,22 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Pause an ongoing download"}
+  children={"Subscribe"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"post"}
-  path={"/download/pause"}
+  method={"get"}
+  path={"/firehose/subscribe"}
 >
   
 </MethodEndpoint>
 
 
 
-Pause a download that is currently in progress
+Establish a subscription to firehose events and stream them to the client in real-time.
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
->
-</Heading>
-
-<MimeTabs
-  className={"openapi-tabs__mime"}
->
-  <TabItem
-    label={"application/json"}
-    value={"application/json-schema"}
-  >
-    <details
-      style={{}}
-      className={"openapi-markdown__details mime"}
-      data-collapsed={false}
-      open={true}
-    >
-      <summary
-        style={{}}
-        className={"openapi-markdown__details-summary-mime"}
-      >
-        <h3
-          className={"openapi-markdown__details-summary-header-body"}
-        >
-          Body
-        </h3><strong
-          className={"openapi-schema__required"}
-        >
-          required
-        </strong>
-      </summary><div
-        style={{"textAlign":"left","marginLeft":"1rem"}}
-      >
-        <div
-          style={{"marginTop":"1rem","marginBottom":"1rem"}}
-        >
-          
-          
-          Download request payload
-          
-          
-        </div>
-      </div><ul
-        style={{"marginLeft":"1rem"}}
-      >
-        <SchemaItem
-          collapsible={false}
-          name={"folderPath"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"url"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem>
-      </ul>
-    </details>
-  </TabItem>
-</MimeTabs><div>
+<div>
   <div>
     <ApiTabs
       label={undefined}
@@ -126,7 +55,7 @@ Pause a download that is currently in progress
         <div>
           
           
-          Success response
+          Event data
           
           
         </div><div>
@@ -135,82 +64,8 @@ Pause a download that is currently in progress
             schemaType={"response"}
           >
             <TabItem
-              label={"application/json"}
-              value={"application/json"}
-            >
-              <SchemaTabs
-                className={"openapi-tabs__schema"}
-              >
-                <TabItem
-                  label={"Schema"}
-                  value={"Schema"}
-                >
-                  <details
-                    style={{}}
-                    className={"openapi-markdown__details response"}
-                    data-collapsed={false}
-                    open={true}
-                  >
-                    <summary
-                      style={{}}
-                      className={"openapi-markdown__details-summary-response"}
-                    >
-                      <strong>
-                        Schema
-                      </strong>
-                    </summary><div
-                      style={{"textAlign":"left","marginLeft":"1rem"}}
-                    >
-                      
-                    </div><ul
-                      style={{"marginLeft":"1rem"}}
-                    >
-                      <SchemaItem
-                        name={"property name*"}
-                        required={false}
-                        schemaName={"any"}
-                        qualifierMessage={undefined}
-                        schema={{"additionalProperties":true,"type":"object"}}
-                        collapsible={false}
-                        discriminator={false}
-                      >
-                        
-                      </SchemaItem>
-                    </ul>
-                  </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
-                </TabItem>
-              </SchemaTabs>
-            </TabItem>
-          </MimeTabs>
-        </div>
-      </TabItem><TabItem
-        label={"400"}
-        value={"400"}
-      >
-        <div>
-          
-          
-          Invalid JSON
-          
-          
-        </div><div>
-          <MimeTabs
-            className={"openapi-tabs__mime"}
-            schemaType={"response"}
-          >
-            <TabItem
-              label={"application/json"}
-              value={"application/json"}
+              label={"text/event-stream"}
+              value={"text/event-stream"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}
@@ -271,8 +126,8 @@ Pause a download that is currently in progress
             schemaType={"response"}
           >
             <TabItem
-              label={"application/json"}
-              value={"application/json"}
+              label={"text/event-stream"}
+              value={"text/event-stream"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}
@@ -333,8 +188,8 @@ Pause a download that is currently in progress
             schemaType={"response"}
           >
             <TabItem
-              label={"application/json"}
-              value={"application/json"}
+              label={"text/event-stream"}
+              value={"text/event-stream"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}

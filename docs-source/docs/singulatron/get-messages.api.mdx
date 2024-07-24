@@ -1,11 +1,11 @@
 ---
-id: create-a-new-chat-thread
-title: "Create a new chat thread"
-description: "Create a new chat thread and add the requesting user to it"
-sidebar_label: "Create a new chat thread"
+id: get-messages
+title: "Get Messages"
+description: "Fetch messages (and associated assets) for a specific chat thread."
+sidebar_label: "Get Messages"
 hide_title: true
 hide_table_of_contents: true
-api: eJztVrFy2zAM/RUeZjVOe+2iLe1lSIemlziT6wEmYYmpRCokZUfV6d97IOXIcXW55rLGE/UIEnjAA+EeFHnpdBO0NZDDN0cYSKAwtBeyxCBC6QiVQKMEKiVCScLRQ0s+aFOI1pMTwQodIIMR/2pVB3kP0ppAJvASm6bSEtnJ4t6zpx68LKlGXjXONuSCJs9fyeG/uIyhqYt4Yegaghx8cNoUMGSg1SwcdKiId57TXDIs7DbSSQ7PIJs5bhstr5SfuWHcEYq22pAX+1LLUsQD/uhasaHKmsKLYM9+mWXalmiEs21RVp3YsCWvA8eDXgQsvNhaN17gOTAdqPbzBBOAzmHH322jXsgSl2uWzl3aiIFr5Q+pYXumZmPInjhW7Y8y9r+BTYDd3JMMs8iQnUR1oZRYpjTeJG2NKtOOFOTBtTQw4BtrfFLJp/PzmWKlO3wrJXm/bauqE6OcIHvX6btOX6nTIYPPczq7MjustBLfb69/vEZYJ0GNDj7O0DfYhtI6/ed1yp1z8GWeQSBnsBK35HbkxKVz1r3NEycQCw/5CnigwDqDmkJpFeTQ2NjSDYYScljw/iIVbYGKGbKDm2msXD5i3aRGmdrvqOEOflOfTV9jex0BTw2zOoDrZ6KcTJ+0OFkyJ2229jDlUHJmpjYGyGBHzqecssqYaI0xVwZremHSwskjeDRH3zadx8oEegyLpkJtYqO5Kr5gsQBjgTJ4ioSLsM6g5DLlK+j7DXq6c9UwMPzQkusgX60z2KHTuGHuq/WQQUmoyEG+6uE3dRx54vBhyUGwedXGrjvV0pAdTlxISU140fZYST+vb5eQwWb871FbxWcc7nli4D7VxMacxncgYj1UaIoWC7ZNd/LvL/EbJfs=
+api: eJytVk1v5DYM/SsCL20BN9kW2x58KdJit02BdotNcprkwJHosba25KXomXUH/u8L2p7JfHgTpO1cRiIlPvKRIr0FR8myb8THADm8JbGlqSklXFEyX2NwBlOK1qPQsCRJ35giskGTGrK+8NbYEsVIyYTuAjJg+thSkp+j6yDfgo1BKIgusWkqb1HBLj8kRdxCsiXVqKuGY0MsnpLuRnvXblh3DUEOSdiHFfR9tpPE5QeyAr2KjiP5lcT8sYvj/ejR5JtncpALt9SrIDUxpBHz+1ev9O/Y0t7KRAZJMqm1llIq2qrqDJOwpzU5yP5tsKNZXXmhOp0fOLB77N0vo8L4ZKQks8REP742FGx05MzSB+TOFL4i4zyTrTpD9ZKcKn0YrgzYxkuiqoDslOsMLJMm/0pmMnHC+ozezyVwhzKjaBv3BFrL1TkFd1yZWBzEsimJ6TyU87LZC5AZO93vSv+JVAwY1y6dO3I1aYyjwgcaM4IiaMuagoz7CcGUmPSx7EG+QNGja8+WwMTBDoBWF+YefvOZ2ZQoXyXTNj/dw8sz/KUMHrzPY39uJ82JQxdz0M+kOxHPIdwN8l3N+z2SnjebMpoNR6Ej8PvwNrK5un5sblL6ZApP1WCI6ka6GRefL5q5btRn8Hqul1yHNVbemd9v3v35km5x6tQI8N0MMwFbKSP7f17WjuYAfpiPQIgDVuaGeE1s3jBH/m9ISiCuEuQL0EkCD/oMpYwOcmji0LYblBJyuFT95f6NZqDm3z+OmzefsG4qOh4fh6UcirjrpmjVWcX2olf0ZayJ0ximnlbsGgf3A9Z0MlTgrPftKfh/xuhElNAnuWwq9OGgAY58THwddK2HDEplLF/Adquz4I6rvlfxx5a4g3zxkMEa2eNSY1489BmUhI4Y8sUW/qbusZ98e6sO6PGqHcr9NK19trtxZS018uTZw6T+9e7mFjJYTh8IdXR6h3GjAxo3Yy7iwOvQGgfZFioMqxZXena0qb/PKhMKTQ==
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Create a new chat thread"}
+  children={"Get Messages"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/thread/add"}
+  path={"/chat/messages"}
 >
   
 </MethodEndpoint>
 
 
 
-Create a new chat thread and add the requesting user to it
+Fetch messages (and associated assets) for a specific chat thread.
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Create a new chat thread and add the requesting user to it
         >
           
           
-          Add Thread Request
+          Get Messages Request
           
           
         </div>
@@ -92,89 +92,14 @@ Create a new chat thread and add the requesting user to it
         style={{"marginLeft":"1rem"}}
       >
         <SchemaItem
-          collapsible={true}
-          className={"schemaItem"}
+          collapsible={false}
+          name={"threadId"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
         >
-          <details
-            style={{}}
-            className={"openapi-markdown__details"}
-          >
-            <summary
-              style={{}}
-            >
-              <span
-                className={"openapi-schema__container"}
-              >
-                <strong
-                  className={"openapi-schema__property"}
-                >
-                  thread
-                </strong><span
-                  className={"openapi-schema__name"}
-                >
-                   object
-                </span>
-              </span>
-            </summary><div
-              style={{"marginLeft":"1rem"}}
-            >
-              <SchemaItem
-                collapsible={false}
-                name={"createdAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"id"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"title"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"description":"Title of the thread.","type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"topicIds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"updatedAt"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"userIds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem>
-            </div>
-          </details>
+          
         </SchemaItem>
       </ul>
     </details>
@@ -192,7 +117,7 @@ Create a new chat thread and add the requesting user to it
         <div>
           
           
-          Thread successfully created
+          Messages and assets successfully retrieved
           
           
         </div><div>
@@ -248,17 +173,146 @@ Create a new chat thread and add the requesting user to it
                               <strong
                                 className={"openapi-schema__property"}
                               >
-                                thread
+                                assets
                               </strong><span
                                 className={"openapi-schema__name"}
                               >
-                                 object
+                                 object[]
                               </span>
                             </span>
                           </summary><div
                             style={{"marginLeft":"1rem"}}
                           >
-                            <SchemaItem
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
+                              collapsible={false}
+                              name={"content"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Content is the base64 encoded binary file direcly embedded in the asset itself","type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"createdAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"description"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"updatedAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"url"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Url of the asset where","type":"string"}}
+                            >
+                              
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                messages
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object[]
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
+                              collapsible={false}
+                              name={"assetIds"}
+                              required={false}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"AssetIds defines the attachments the message has.","items":{"type":"string"},"type":"array"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"content"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Content of the message eg. \"Hi, what's up?\"","type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
                               collapsible={false}
                               name={"createdAt"}
                               required={false}
@@ -278,20 +332,11 @@ Create a new chat thread and add the requesting user to it
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"title"}
+                              name={"threadId"}
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"Title of the thread.","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"topicIds"}
-                              required={false}
-                              schemaName={"string[]"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
+                              schema={{"description":"ThreadId of the message.","type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
@@ -305,14 +350,20 @@ Create a new chat thread and add the requesting user to it
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"userIds"}
+                              name={"userId"}
                               required={false}
-                              schemaName={"string[]"}
+                              schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
+                              schema={{"description":"UserId is the id of the user who wrote the message.\nFor AI messages this field is empty.","type":"string"}}
                             >
                               
-                            </SchemaItem>
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
                           </div>
                         </details>
                       </SchemaItem>
@@ -323,7 +374,7 @@ Create a new chat thread and add the requesting user to it
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"thread\": {\n    \"createdAt\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"topicIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\",\n    \"userIds\": [\n      \"string\"\n    ]\n  }\n}"}
+                    responseExample={"{\n  \"assets\": [\n    {\n      \"content\": \"string\",\n      \"createdAt\": \"string\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"updatedAt\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"assetIds\": [\n        \"string\"\n      ],\n      \"content\": \"string\",\n      \"createdAt\": \"string\",\n      \"id\": \"string\",\n      \"threadId\": \"string\",\n      \"updatedAt\": \"string\",\n      \"userId\": \"string\"\n    }\n  ]\n}"}
                     language={"json"}
                   >
                     

@@ -1,11 +1,11 @@
 ---
-id: retrieve-details-of-a-chat-thread
-title: "Retrieve details of a chat thread"
-description: "Fetch information about a specific chat thread by its ID"
-sidebar_label: "Retrieve details of a chat thread"
+id: pause
+title: "Pause"
+description: "Pause a download that is currently in progress"
+sidebar_label: "Pause"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVcFy1DAM/RWPzqZbGLjkVqAwy4Ey7fa07EGxtYlLYqe2sm3Yyb8zSrJ0WzIdOs0ljixL78nSyx4sJRNdwy54yOALsSmV89sQaxSbwjy0rFClhozbOqNMiay4jIRW5Z1ynNTyM2iIdNtS4o/BdpDtwQTP5FmW2DSVM0O4xU2SPHtIpqQaZdXE0FBkR0m+xsBLO6y7hiCDxNH5AvpeHywhvyHD0IvpMf6vxGo1Yrsc8UzIXCQLGceWejGkJvg0Znx3eiqvx3GmGJYYXZVUao2hlLZtVXUqEkdHO7KgX8fyX7uJhEz2jGfoa3BzVdHAjiuaoSBmFbaKS5ru6wT0zPHQOLO0aSbCtKMsbZ2npO5KZ0o1HEhHYVVOVfBFUhxOfvrVuG3Qqxjaoqw6lYunrFnwYFKMRVLbEKcASYA5pjrNExwNGCN28t029pkqtYniLJ3rcWMA7mw6lEb8hVoYICcSrC4dVex/gc3050zH9hrez3Xc0u+wclZ9u7r4/pLGejokY4K3M/Q9tlyG6H6/rHPnEnyYZ8AUPVbqiuKOojqPMcTXZZICYpEgW4PIDmw01MRlsJBBE4bhbpBLyGAh+4tprjRI8MsHQTq/x7oZh+RBYI4ny2/DQbTQCNSHuQLQsKOYRpLiLZlrHMB7rMXlcpKEv4IhbX6slPBEqI708TWaO1WM6Z4XTYXODwMQq0FZhsJMhdMHydloKKVw2Rr2+xwTXceq78V821LsIFtvNOwwOsyF/HrTaygJLUXI1nv4RR1k8GnE/mYl6cW9aoc5eHq7vT6cODOGGn7W9/huf1xcrUBDPv1L6mDlTMQ7UXO8Gy8lDLUcJnOw7aFCX7RYiO8YU54/Hxxk5g==
+api: eJylVE1v2zAM/SsCzxrSDdvFt330sB3WYGlPQQ6MxMbqZEml5LSe4f8+MI4xNw2GFvXFEk3xvUc9ugdL2bBLxcUAFSyxzaRQ2fgQfESrSo1FuaxMy0yh+E65oBLHHVPOoIHpvqVcvkTbQdWDiaFQKLLElLwzKIUXd1mq95BNTQ3KKnFMxMVRlt1t9JZ4iaWWXekSQQW5sAs7GDS07M/EBz1F4vaOTIFBQk/1fJt0HHmqhJ3sj8wdk4WqcEuDBHKKIY+MPlxcyOtptVVrDOWspkzQLxeM1jr5hH45ky7QZ2QMGj6eI/A97NE7q36srn6+Bvy0cyPA++cANwHbUkd2f8i+FeDTeQWFOKBXK+I9sbpkjvw2JPEB7jJUa5hsCxsNDZU6WqggxVxAQzq4CxZTziKJ10GDYPz6Z+PLR2ySp1NbTohHN87c6cJtnLyPRiQII1ekBoCGPXEexUu2sGnwICpgQ9PMwYlzZ6P0+qE89qjQY1kkjy7Mhmhsw6xV0hkhsNFQS6eqNfT9FjPdsB8GCd+3xB1U642GPbLDrShbbwYNNaElhmrdw2/qoIKvI+l318JA0n0rTJ5d6aCnE5+NoVT+mzu/zOXV6ho0bI//myZaOcP4IBOND2PH46GJhzk+xHrwGHYt7iR3rCnPX42vvUw=
 sidebar_class_name: "post api-method"
 custom_edit_url: null
 ---
@@ -27,20 +27,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Retrieve details of a chat thread"}
+  children={"Pause"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/chat/thread"}
+  path={"/download/pause"}
 >
   
 </MethodEndpoint>
 
 
 
-Fetch information about a specific chat thread by its ID
+Pause a download that is currently in progress
 
 <Heading
   id={"request"}
@@ -84,7 +84,7 @@ Fetch information about a specific chat thread by its ID
         >
           
           
-          Get Thread Request
+          Download request payload
           
           
         </div>
@@ -93,7 +93,16 @@ Fetch information about a specific chat thread by its ID
       >
         <SchemaItem
           collapsible={false}
-          name={"threadId"}
+          name={"folderPath"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"url"}
           required={false}
           schemaName={"string"}
           qualifierMessage={undefined}
@@ -117,7 +126,7 @@ Fetch information about a specific chat thread by its ID
         <div>
           
           
-          Thread details successfully retrieved
+          Success response
           
           
         </div><div>
@@ -157,89 +166,15 @@ Fetch information about a specific chat thread by its ID
                       style={{"marginLeft":"1rem"}}
                     >
                       <SchemaItem
-                        collapsible={true}
-                        className={"schemaItem"}
+                        name={"property name*"}
+                        required={false}
+                        schemaName={"any"}
+                        qualifierMessage={undefined}
+                        schema={{"additionalProperties":true,"type":"object"}}
+                        collapsible={false}
+                        discriminator={false}
                       >
-                        <details
-                          style={{}}
-                          className={"openapi-markdown__details"}
-                        >
-                          <summary
-                            style={{}}
-                          >
-                            <span
-                              className={"openapi-schema__container"}
-                            >
-                              <strong
-                                className={"openapi-schema__property"}
-                              >
-                                thread
-                              </strong><span
-                                className={"openapi-schema__name"}
-                              >
-                                 object
-                              </span>
-                            </span>
-                          </summary><div
-                            style={{"marginLeft":"1rem"}}
-                          >
-                            <SchemaItem
-                              collapsible={false}
-                              name={"createdAt"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"id"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"title"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"Title of the thread.","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"topicIds"}
-                              required={false}
-                              schemaName={"string[]"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"TopicIds defines which topics the thread belongs to.\nTopics can roughly be thought of as tags for threads.","items":{"type":"string"},"type":"array"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"updatedAt"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"userIds"}
-                              required={false}
-                              schemaName={"string[]"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"UserIds the ids of the users who can see this thread.","items":{"type":"string"},"type":"array"}}
-                            >
-                              
-                            </SchemaItem>
-                          </div>
-                        </details>
+                        
                       </SchemaItem>
                     </ul>
                   </details>
@@ -248,7 +183,7 @@ Fetch information about a specific chat thread by its ID
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"thread\": {\n    \"createdAt\": \"string\",\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"topicIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\",\n    \"userIds\": [\n      \"string\"\n    ]\n  }\n}"}
+                    responseExample={"{}"}
                     language={"json"}
                   >
                     
