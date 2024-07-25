@@ -1,3 +1,6 @@
+# This yaml file builds the current code in this repo.
+# For production use the docker-compose.yaml found at ./docs-source/docs/start/docker-compose.yaml
+# or search for "Docker Compose" here https://superplatform.ai/
 version: "3.8"
 
 volumes:
@@ -7,7 +10,7 @@ volumes:
 
 services:
   singulatron-frontend:
-    build: ./frontend/docker
+    image: crufter/singulatron-frontend:latest
     ports:
       - "3901:80"
     environment:
@@ -16,9 +19,7 @@ services:
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
   singulatron-backend:
-    build: ./localtron/docker/Dockerfile
-    # use this if you have an nvidia card
-    # build: ./localtron/docker/DockerfileNvidia
+    image: crufter/singulatron-backend:latest
     ports:
       - "58231:58231"
     volumes:
@@ -37,3 +38,4 @@ services:
       # Uncomment this envar for NVIDIA GPUs.
       #
       # - SINGULATRON_GPU_PLATFORM=cuda
+
