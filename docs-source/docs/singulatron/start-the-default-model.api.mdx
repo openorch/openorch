@@ -1,12 +1,12 @@
 ---
-id: subscribe
-title: "Subscribe"
-description: "Establish a subscription to firehose events and stream them to the client in real-time."
-sidebar_label: "Subscribe"
+id: start-the-default-model
+title: "Start the Default Model"
+description: "Starts The Default Model."
+sidebar_label: "Start the Default Model"
 hide_title: true
 hide_table_of_contents: true
-api: eJy1U8Fu2zAM/RWBZ8VO2xUYfFoHdEWBASuW9jAMOTA2YwuTJY2ik2WB/32gk7Zpt1uxk2HxiXyP72kPDeWaXRIXA1RwnQVX3uXOoMnD6qlkJJq1Y+piJkMbCpINhsZkYcLeSEe9QqQjU3tHQYwLhgn9TFxPBVhgyimGTBmqPZzP5/p5NVvbmgYFwUIdg1AQRQn9knKaOTuM08Ncd9TjVN4lggqysAstjOM4Wng3P/u7/0PAQbrI7jc1b55w+S8Ft0GIA3qzIN4Qm2vmyG8cNVoQbDNU3+HRAFha6Em62EAFLQlYSCgdVFA+QsqjeSsCC3lioy32MLBXXOljjb6LWarL9+cXZzAuFVcP7GS3UDoHoz5idvXVoM2fyHUiSbtOKKhgpRhQoi6sowJVL9aTXurR6cSMnvKH7EI7eBSOoahjDxYCTj2u7m7NYkgpsqo5kNQ5VVnmIREnj7KO3BfoShjtq71/HcKUxoY25GMymfx6puKoMVe3BlPKhfkWBzaJY8vY97jyZFyYdXHIZG7u7gtz35H55JhWmMmsI09h1tvtlF/vagqZVNMj55u7z2ZzUcxfMM5VWW6326INQxG5LY/3colt8rOLYl500nvVIMR9/rLWrLiaTgRvsW2JCxfLCVKCBXHiFbJ4XiBYUFcPG5gX59oyxSw9hhOSi5McvFja/jmV//HVHyMzpT55dEFZTsvaHzN7EmsLz6ldWlADtb7fqyUP7MdRj38OxDuovi8tbJCdOql/o4WOsCGeYv6DdupQXVPSQG3QD088Xry+8fQt3Vzfwzj+AevuwOA=
-sidebar_class_name: "get api-method"
+api: eJy9lE1v2zAMhv+KwLNjp+0KDD6tw7ai+2rQtIehDVDGZmx1sqRScrIu8H8fqKRr+nEZMPRkWaLIh+RLraGmULH2UTsLJUwjcgzqvCX1gRbYm6i+uZpMfmWv7Bnd9popqNiSuu7SfsWEka6VJ+50CNrZHDJgCt7ZQAHKNeyPx/J5HOj0C2RQORvJRjlF742uUE6LmyAmawhVSx3KKt55ghLc/IaqCMMwDBm8ecntiV2i0bX6PD39/i8BPDtPHPWGmJgd78QNkbVtQKK+TLL3nOTCYh9bx/o31a9GcvhyTSKxRaOmxEti9TH5fB0k2cQmQHkJSS8wy6Cj2LoaSvB9hAw8xhZKKNL5KBAvdUVFvVFfEUSQkEFI7OJoDT0buVAYV6FpXYjl4dv9gz0YZmJX9azj3VToN8DvMejqqJcof6HbGL14TVZQwlxsUg7aLpwYSnWwStWhDrVEDGgovAvaNr3ByM7mlesgA4vJx9HkRE17710C3kBKnLIoQu+JvcG4cNzlqAsYsiddOuutQlurmpZknFeBzGIkyVGtjk4Ueh9y9cP1rDy7hrHrcG5IaTtqXR9IHU/O8zS3nzTTHAOpheM0qXK7IRlLoyuygSSne+bjyVe1PMjHj4hDWRSr1SpvbJ87bortvVBg483oIB/nbeyM5BCJu3C6mG66tpPwCpuGONeuSCYFZBB1NGIyfSggZCBd3VRgnO+LS+9C7NDuQKZHKaXy6E2CJyVcPyj6f71jW7VE+hULb1BbAUx1Wm91u9X1vW4TU4on6kranWUgbRTT9Voac8FmGGT7tie+g/JylsESWUs/5W/IoCWsiZPYf9Kd9KmqyIvPJZpekJ5N7LA7WZOLcxiGP4nkBlQ=
+sidebar_class_name: "put api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
 ---
@@ -28,20 +28,22 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Subscribe"}
+  children={"Start the Default Model"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"get"}
-  path={"/firehose/subscribe"}
+  method={"put"}
+  path={"/model-service/default/start"}
 >
   
 </MethodEndpoint>
 
 
 
-Establish a subscription to firehose events and stream them to the client in real-time.
+Starts The Default Model.
+
+Requires the `model.create` permission.
 
 <div>
   <div>
@@ -56,7 +58,7 @@ Establish a subscription to firehose events and stream them to the client in rea
         <div>
           
           
-          Event data
+          OK
           
           
         </div><div>
@@ -65,8 +67,8 @@ Establish a subscription to firehose events and stream them to the client in rea
             schemaType={"response"}
           >
             <TabItem
-              label={"text/event-stream"}
-              value={"text/event-stream"}
+              label={"application/json"}
+              value={"application/json"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}
@@ -100,12 +102,95 @@ Establish a subscription to firehose events and stream them to the client in rea
                       >
                         
                         
-                        string
+                        object
                         
                         
                       </div>
                     </ul>
                   </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"400"}
+        value={"400"}
+      >
+        <div>
+          
+          
+          Invalid JSON
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>
@@ -127,8 +212,8 @@ Establish a subscription to firehose events and stream them to the client in rea
             schemaType={"response"}
           >
             <TabItem
-              label={"text/event-stream"}
-              value={"text/event-stream"}
+              label={"application/json"}
+              value={"application/json"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}
@@ -157,17 +242,28 @@ Establish a subscription to firehose events and stream them to the client in rea
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <div
-                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
                       >
                         
-                        
-                        string
-                        
-                        
-                      </div>
+                      </SchemaItem>
                     </ul>
                   </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>
@@ -189,8 +285,8 @@ Establish a subscription to firehose events and stream them to the client in rea
             schemaType={"response"}
           >
             <TabItem
-              label={"text/event-stream"}
-              value={"text/event-stream"}
+              label={"application/json"}
+              value={"application/json"}
             >
               <SchemaTabs
                 className={"openapi-tabs__schema"}
@@ -219,17 +315,28 @@ Establish a subscription to firehose events and stream them to the client in rea
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <div
-                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
                       >
                         
-                        
-                        string
-                        
-                        
-                      </div>
+                      </SchemaItem>
                     </ul>
                   </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>

@@ -9,20 +9,38 @@ package modelservice
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	modeltypes "github.com/singulatron/singulatron/localtron/services/model/types"
 	usertypes "github.com/singulatron/singulatron/localtron/services/user/types"
 )
 
-func (ms *ModelService) Start_(
+// StartSpecific godoc
+// @Summary Start a Model
+// @Description Starts a model by ID
+// @Tags model
+// @Accept json
+// @Produce json
+// @Param modelId path string true "Model ID"
+// @Success 200 {object} modeltypes.StartResponse
+// @Failure 400 {object} modeltypes.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} modeltypes.ErrorResponse "Unauthorized"
+// @Failure 500 {object} modeltypes.ErrorResponse "Internal Server Error"
+// @Router /model-service/{modelId}/start [put]
+func (ms *ModelService) StartSpecific(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
+	v := mux.Vars(r)
+	if v["id"] == "" {
+		http.Error(w, "Missing model ID in request path", http.StatusUnauthorized)
+		return
+	}
+
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := ms.router.AsRequestMaker(r).Post(r.Context(), "user", "/is-authorized", &usertypes.IsAuthorizedRequest{
-		PermissionId: modeltypes.PermissionModelCreate.Id,
-	}, rsp)
+	err := ms.router.AsRequestMaker(r).Post(r.Context(), "user-service", fmt.Sprintf("/permission/%v/is-authorized", modeltypes.PermissionModelCreate.Id), &usertypes.IsAuthorizedRequest{}, rsp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -35,12 +53,12 @@ func (ms *ModelService) Start_(
 	req := modeltypes.StartRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		http.Error(w, `invalid JSON`, http.StatusBadRequest)
+		http.Error(w, `Invalid JSON`, http.StatusBadRequest)
 		return
 	}
 	defer r.Body.Close()
 
-	err = ms.start(req.ModelId)
+	err = ms.start(v["modelId"])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
