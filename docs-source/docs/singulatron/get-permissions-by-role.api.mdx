@@ -1,12 +1,12 @@
 ---
-id: create-a-new-role
-title: "Create a New Role"
-description: "Create a new role."
-sidebar_label: "Create a New Role"
+id: get-permissions-by-role
+title: "Get Permissions by Role"
+description: "Retrieve permissions associated with a specific role ID."
+sidebar_label: "Get Permissions by Role"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9Vl1v3DYQ/CvEPsuSYzdAoac6RRq4DWLDZz8U9gGhpT2JCUXSS/IuV0H/vVhK92HfpS1SwC+GjlySszOcoXuo0VekXFDWQAm/EsqAQgqDK0FWY/5gHswNPkVF6EVoUXxOw1Uq/CwcUqe8V9bkkAHhU0Qf3tl6DWUPlTUBTeBP6ZxWleRjii+ez+rBVy12kr8cWYcUFHr+9QxSD2HtEErwgZRpYMjAyA6PTuzAXNZpJxWw80dLpwFJJNcw7Abs4xesAgw8dJSaG6tR3Ix9Th0rwhrKQBEHHvDOGj92cnZ6etAQpB1G/mrhY1Wh94uo9RqyH2WMJTkcnc64CEcZ+DeWVf1K5GcQXf1doEekOSLWkMFPx7i+NEupVS1+n119+nF6kcjSf8M2InlziOTOyBhaS+ovrF8NydvjnAQkI7WYIS2RxPu05+tAGjLwWEVSYQ3lfQ/vUBLSRQwtlPfzYZ5BkI2H8h7uPFJCqCqEeQYdhtbWUIKzyXhO8hoookc68WNdkXzAR3BjPp0QSXNZoW0ldWt9KN/+fHb+BvisDZQZtzZ2sw/oJXG3a4fiYSp5ALGwWtsV1uJxLaTwTlYopKlFsF/RCFmNySAWZLuUnKklP/UkPtpGGYGmdlaZwOmp+JAWZY0sx2g0uJhuTRIDdt5x6g8ck4sFutkF7/tvsnNjHDyHPwmz3Xn7+4Vz7zczc04Bs7CbKJdVuhzYScWceqnR/+KVaaKWgazJK9vtAb++FLPonCWWa5ShDcGVReGjQ3JahoWlLpeqOMgjuIkmcVnjErV1wqNenLB8WIuLSyGd87n400YSjmxDsuvko0ahzElro0fx4fo2F7ctit8U4aP0KBaWkgq8ukHmW6sKjU9MbTB/uP4oluf56TPEviyK1WqVNybmlppiWucL2Th9cp6f5m3odAo2pM5fLTbXdtfwSjYNUq5skUoKFlIFVglmOwIhA763IwOn+VmKVetDJ80eyO0b/QlX6TmCgzDfWvn/PujTbQv4LRROS2VSXDMz/eTAe9h3IL+IjGieAYvF033P9N+RHgYefopI7P15BktJilVL1s82N59N+xXXjH3s4oR9x9RIHcer/yKchmyz4qKq0IV/rN2Pkuur2S1k8Dj9u9LZmteQXHEbcgUlQAY2sTo+szzWg5amibLh2nFPdqGcImPnT4aUbT64q82UWe8hfOnvsRH+y20dXdL3o/uHYVs/Tn13xTZUxmqWcT4Mw99JbXRl
-sidebar_class_name: "post api-method"
+api: eJylVd9v2zYQ/leIe9oARXKTFRj0tBTrAq/FEsTJgCLxw0U6S2wpkj1S9jxD//twkh0rtlNgyIstkvfzu/vuNlBSKFj7qJ2FHG4psqYlKU/c6BC0s0FhCK7QGKlUKx1rhSp4KvRCF4qdITX9PYUEPDI2FIkD5A+bQ7uDHCSg5egx1pCAxYYgBzEyLSEBpu+tZiohj9xSAqGoqUHINxDXXiS1jVQRQ9fNRTp4ZwMFETifTOTvpdfrT5BA4WwkG+UVvTe6QHnNvgYR2Yx8eHaeOOrB4AgAOepITTiWKpgEl8s4CjJE1raCLnkZzYl3XR7HTFWqHqENxOlS04r4ESA5Vh2gO618H4jV3z9QditLPD3hfEa81AWpVe2UW9mgYj1uhVO2Wl++ikD3LO+evlIRYX+BzLg+JdHJ3S+nqjm1SzS6VH/Orv/6P3U9DGpw8O7Ywb3FNtaO9b9UvtXB+9MZRGKLRgnOxOojs+O3eeoSCFS0rOO6p90HQia+bGMN+cNcaBKxEka+aOh5Ag3F2pWQQ0WxZ69oQCaNdxaGNsiEmNlmoGeXjQ2IV0lh4HrLRnQz4wo0tQsxf//r+cU7EPe76GaSxECacYyHEN2tPanHrcgjqIUzxq2oVE/rfu5gQQptqaL7RlZhMQwMtWDX9M3a937Y9fFnV2mryJbeaRvT3fipCUvi/QC63Ja9h33f5Oj1JxqaVNuF6/nubMSirxQ1qCXtgIbCb0HbqjUY2dm0cM3I9s1UzVrvHQvMA1J1jD7PstB6Ym8wLhw3KersaGbAbWv7dEtaknFeBTKLM0GYSnU5Veh9SNUX17Ly7CrGpsEnQ0rbs9q1gdTVzV2q7mpSf2imJwykFo57oES7IoHE6IJs6KfJLuarm89qeZFOXkQc8ixbrVZpZdvUcZVt9UKGlTdnF+kkrWNjeo4TN+F6sa3CKOEVVhVxql3Wi2SCtY5GRGZ7ACEBaa0BgUl6Lia9C7FBOwryiqK6GW2pp7WSLQNHY/eZXW/ZbtuWiPRPzLxBbfvZJ9hsttx5gDF3ZJsN0eTP6+2AgVJGUdtspDD3bLpOrr+3xMLleQJLZC31HBaqDvJdQr5AE+gHaf50u92jP6v93j2ZwK7R7VowR9PKCRL4Ruv9Xu7mXbKjjAQyPF4WBfk4UjuaXN14ylx9vIMEcMv5PcHEWLL7EOsnQzok6BCC/HbJKyqbzUDfrnuWH55e1XieCoO0IDTvuu4/j4Qi6A==
+sidebar_class_name: "get api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
 ---
@@ -28,22 +28,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Create a New Role"}
+  children={"Get Permissions by Role"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"post"}
-  path={"/user-service/role"}
+  method={"get"}
+  path={"/user-service/role/{roleId}/permissions"}
 >
   
 </MethodEndpoint>
 
 
 
-Create a new role.
-
-Requires the `role.create` permission.
+Retrieve permissions associated with a specific role ID.
 
 <Heading
   id={"request"}
@@ -53,79 +51,31 @@ Requires the `role.create` permission.
 >
 </Heading>
 
-<MimeTabs
-  className={"openapi-tabs__mime"}
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
 >
-  <TabItem
-    label={"application/json"}
-    value={"application/json-schema"}
+  <summary
+    style={{}}
   >
-    <details
-      style={{}}
-      className={"openapi-markdown__details mime"}
-      data-collapsed={false}
-      open={true}
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
     >
-      <summary
-        style={{}}
-        className={"openapi-markdown__details-summary-mime"}
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"description":"Role ID","in":"path","name":"roleId","required":true,"schema":{"type":"integer"}}}
       >
-        <h3
-          className={"openapi-markdown__details-summary-header-body"}
-        >
-          Body
-        </h3><strong
-          className={"openapi-schema__required"}
-        >
-          required
-        </strong>
-      </summary><div
-        style={{"textAlign":"left","marginLeft":"1rem"}}
-      >
-        <div
-          style={{"marginTop":"1rem","marginBottom":"1rem"}}
-        >
-          
-          
-          Create Role Request
-          
-          
-        </div>
-      </div><ul
-        style={{"marginLeft":"1rem"}}
-      >
-        <SchemaItem
-          collapsible={false}
-          name={"description"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"name"}
-          required={false}
-          schemaName={"string"}
-          qualifierMessage={undefined}
-          schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"permissionIds"}
-          required={false}
-          schemaName={"string[]"}
-          qualifierMessage={undefined}
-          schema={{"items":{"type":"string"},"type":"array"}}
-        >
-          
-        </SchemaItem>
-      </ul>
-    </details>
-  </TabItem>
-</MimeTabs><div>
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
   <div>
     <ApiTabs
       label={undefined}
@@ -138,7 +88,7 @@ Requires the `role.create` permission.
         <div>
           
           
-          Role created successfully
+          OK
           
           
         </div><div>
@@ -194,17 +144,23 @@ Requires the `role.create` permission.
                               <strong
                                 className={"openapi-schema__property"}
                               >
-                                role
+                                permissions
                               </strong><span
                                 className={"openapi-schema__name"}
                               >
-                                 object
+                                 object[]
                               </span>
                             </span>
                           </summary><div
                             style={{"marginLeft":"1rem"}}
                           >
-                            <SchemaItem
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
                               collapsible={false}
                               name={"createdAt"}
                               required={false}
@@ -228,7 +184,7 @@ Requires the `role.create` permission.
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"type":"string"}}
+                              schema={{"description":"eg. \"user.viewer\"","type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
@@ -237,16 +193,16 @@ Requires the `role.create` permission.
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"type":"string"}}
+                              schema={{"description":"eg. \"User Viewer\"","type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"permissionIds"}
+                              name={"ownerId"}
                               required={false}
-                              schemaName={"string[]"}
+                              schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"items":{"type":"string"},"type":"array"}}
+                              schema={{"description":"Service who owns the permission","type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
@@ -258,7 +214,13 @@ Requires the `role.create` permission.
                               schema={{"type":"string"}}
                             >
                               
-                            </SchemaItem>
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
                           </div>
                         </details>
                       </SchemaItem>
@@ -269,7 +231,7 @@ Requires the `role.create` permission.
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"role\": {\n    \"createdAt\": \"string\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"permissionIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\"\n  }\n}"}
+                    responseExample={"{\n  \"permissions\": [\n    {\n      \"createdAt\": \"string\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"ownerId\": \"string\",\n      \"updatedAt\": \"string\"\n    }\n  ]\n}"}
                     language={"json"}
                   >
                     
@@ -325,28 +287,17 @@ Requires the `role.create` permission.
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
                       >
                         
-                      </SchemaItem>
+                        
+                        string
+                        
+                        
+                      </div>
                     </ul>
                   </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>
@@ -398,28 +349,17 @@ Requires the `role.create` permission.
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
                       >
                         
-                      </SchemaItem>
+                        
+                        string
+                        
+                        
+                      </div>
                     </ul>
                   </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>
@@ -471,28 +411,17 @@ Requires the `role.create` permission.
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
                       >
                         
-                      </SchemaItem>
+                        
+                        string
+                        
+                        
+                      </div>
                     </ul>
                   </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
                 </TabItem>
               </SchemaTabs>
             </TabItem>
