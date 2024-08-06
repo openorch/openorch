@@ -1,12 +1,12 @@
 ---
-id: launch-a-docker-container
-title: "Launch a Docker Container"
-description: "Launches a Docker container with the specified parameters."
-sidebar_label: "Launch a Docker Container"
+id: get-user-by-token
+title: "Read User by Token"
+description: "Retrieve user information based on an authentication token."
+sidebar_label: "Read User by Token"
 hide_title: true
 hide_table_of_contents: true
-api: eJzFlt9v2zYQx/8Vgs+K5CYrMOhpSZYVWYPWiJOHITHQs3SW2FAkc6Tseob+9+Eo+VfiDF0fuhdbIu/Iu/vyPtRalugLUi4oa2Qub6A1RY1egPjdFk9IorAmgDJIYqlCLUKNwjss1FxhKRwQNBiQfPpoHs0tPreK0EerL2Vc4MQvirx/zAtCCPhFOKRGea+sSWUiCZ9b9OHCliuZryVviCbwIzinVQEcW/bVc4Br6YsaG+AnR9YhBYWe32rrw9hS9AsrhzKXygSskGSXSNVAhXtTPpAyFc/YmLp/vSCaRfxXARt/1HUYACJY8Xvl2isDM43lnvnMWo1geL4GXx9diGO/UKb8j/tpmKGOplCWitMAPT7I4a0l7OwrFoEHDDTH6nLM1L1R3de2PHTsXInL7WG67UUf5FfENQvUYscD3lnj+wxORyP+O1zt80eZ/Og5UWZuX48aXG5jmwSg8JaGXIRPbTND+s5SHClOl8hfjqV1bRagVSn+nHz+9OMJIpGl75J0iOTd60juDbShtqT+xvKnRfL+eE0CkgEtJkgLJHEV1/w5IXWJ9Fi0pMJK5g9reYFASOdtqGX+MO2miQxQeZk/yIGVHKMqUE4T2WCobSlz6Vo+5A7YSWY7JmZbsErehpPzcZeWNFtm2hagmQz5+19Pz95J3m8TzoTT6zPaD+pl8e5WDsXjYPIoxdxqbZdYitlKgPAOChRgShHsExoBRd+IYk62iQi/90jCD1mJG1spI9CUzioTmNyKN6kRyphEjxJ5PpycKIjcUcupj7iKlWaRbnfQv/oGjdN4CPHRltkbjQ5Q3cP5YTM3PYQvg2SD2537HmX3HbcU3dJwj5c980Z8gwzciLIV8eBhA4q18qDR/+aVqVoNgaxJC9vsFWR8LSati0slg7x1CC7PMt86JKchzC01KahMviLnbWuiRiUuUFsnPOr5CaeCpTi/FuCcT8VftiXhyFYETcNFEMqc1Lb1KD6M71JxV6P4QxHOwKOYW4rqsneFrKNWBRofFdjE/GF8IxZn6eggYp9n2XK5TCvTppaqbPDzGVROn5ylo7QOjY73DFLjP883DbFLeAlVhZQqm0WTjA+ICqy+nOwKKBPJ/dBXYJSe9lL40IDZC3K4VLafKpd7HXVQxL2Piv/lC2dogYDfQuY0qHiTxLKuBzI8yN1aA936TKb9uWWL9ZrluyfddTz83CIxl6aJXAApVj1iKdl0JMPkCVcyl5d99ifMAy4t6LZvyRfg7JKNx3lRoAv/arsPufH9nUzkbPiCa2zJLgRLvt5hKXN52L1xbC01mKrte7xfkuEAA8l22OCIks0DJ7WZMqu9AF9ip8+Dfzmroy7rdQ+lrtva91NvemxZ11uzkNOu6/4BNvHoXw==
-sidebar_class_name: "put api-method"
+api: eJy9Vt1v2zYQ/1eIe1akLF2BQU9LhqzL2i1BnD4MqR/O0lliS5HskbKrGvrfh6PkxE2cYeiAvdj0fZC/+/qdd1BTqFj7qJ2FEm4psqYNqT4QK23XjjsUnVphoFo5q9Aq7GNLNupqUkX3iWwOGThPnERXNZTQUHwfiC+GO9FDBkyfewrxwtUDlDuonI1koxzRezPfVnwMgmQHoWqpQzl5loujpiC/0mvpMHiCEkJkbRsYx2wvcauPVEUYRfQ0PKyVgFIXg0qw1O0EaoanmWooI/c0iiB4Z8P07NnpqXx9e9/1W8i+Nw7J8HNpxYSR6vN4JEKJxtDLWupQm+cgL0WsHKeaWuwIsue+uj56pQ4L4o2u6EC7cs4QWlGn2475eQxh67j+DUN71ICdoas6PEf7B9pBRac6+WYyKZmh1V6tKG6J7FQ/tLW6dUZi0ZG6cPSRWYDMOMjv3tcvJvdI+xxpqDGDH481wpXdoNG1+n1x/ef3twQxO/6XrT1m8Po4kihVNkoKR6wu053/D6Qxg0BVzzoOUN7v4IKQic/72EJ5vxyXGURsApT3kGq4b61lBh3F1glpeJdm0aP4QCEtexI2VToUq+EkzlwSUnQhPdOzEdvCuApN60IsX/909uoHkAf3eBYS3xTSIaqn2bsbPKkPs8kHUGtnjNtSrVaDQhU8VpRaL8FQWE2ModbsOhVbmnpzPzPqnWu0VWRr77SNwpBaHmkJa5KaTOMDAsWx/poq8jic6PVbGlKqpUq3j+x5+QU7b+iADQ9H1q7dnl6xSgWfiQECGgo/B22b3mBkZ/PKdQc4bq7UovfesZRgymoboy+LIvSe2BuMshBy1AU859beptTUtCHjvApk1idSDarV+ZVC70Ou/nI9K8+uYew6XBlS2p60rg+k3tzc5equJfWrZpJto9aOU1LFuyFJn9EV2ZAC32N+c/NObV7lp98gDmVRbLfbvLF97rgpZr9QYOPNyav8NG9jZxJFEHfhev3Acg8Bb7FpiHPtimRSSF10lKTD4jGBkIG04ZSB0/wscZ8LsUN7APJx7azmtQNPsnewDf/jDp6bJ9KXWHiDOvF0ysxunqp72E+V5CykTnyYrGUGUjOx2u3kvfdsxlHEn3tiGetlBhtkLcVLU53t+1lG8RMNUMIvUywnMk2SITT91NBPeGfM9h7nVUU+/qPtIUvcXC/uBPX8T6JztfgwbmWN4xZKSP9G0uoQgyTbgUHb9NiI7XSnzBbORPA4dQIp2x8kqr3KDgcIn07tFIh8SlhHXXa7aabH8cF+Ur3o8UAVk7VUczmO4982b1nn
+sidebar_class_name: "post api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
 ---
@@ -28,22 +28,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Launch a Docker Container"}
+  children={"Read User by Token"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"put"}
-  path={"/docker-svc/container"}
+  method={"post"}
+  path={"/user-svc/user/by-token"}
 >
   
 </MethodEndpoint>
 
 
 
-Launches a Docker container with the specified parameters.
-
-Requires the `docker-svc:docker:create` permission.
+Retrieve user information based on an authentication token.
 
 <Heading
   id={"request"}
@@ -87,7 +85,7 @@ Requires the `docker-svc:docker:create` permission.
         >
           
           
-          Launch Container Request
+          Read User By Token Request
           
           
         </div>
@@ -96,144 +94,11 @@ Requires the `docker-svc:docker:create` permission.
       >
         <SchemaItem
           collapsible={false}
-          name={"hostPort"}
-          required={false}
-          schemaName={"integer"}
-          qualifierMessage={undefined}
-          schema={{"type":"integer"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"image"}
+          name={"token"}
           required={false}
           schemaName={"string"}
           qualifierMessage={undefined}
           schema={{"type":"string"}}
-        >
-          
-        </SchemaItem><SchemaItem
-          collapsible={true}
-          className={"schemaItem"}
-        >
-          <details
-            style={{}}
-            className={"openapi-markdown__details"}
-          >
-            <summary
-              style={{}}
-            >
-              <span
-                className={"openapi-schema__container"}
-              >
-                <strong
-                  className={"openapi-schema__property"}
-                >
-                  options
-                </strong><span
-                  className={"openapi-schema__name"}
-                >
-                   object
-                </span>
-              </span>
-            </summary><div
-              style={{"marginLeft":"1rem"}}
-            >
-              <SchemaItem
-                collapsible={false}
-                name={"envs"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"gpuEnabled"}
-                required={false}
-                schemaName={"boolean"}
-                qualifierMessage={undefined}
-                schema={{"type":"boolean"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"hash"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"hostBinds"}
-                required={false}
-                schemaName={"string[]"}
-                qualifierMessage={undefined}
-                schema={{"items":{"type":"string"},"type":"array"}}
-              >
-                
-              </SchemaItem><SchemaItem
-                collapsible={true}
-                className={"schemaItem"}
-              >
-                <details
-                  style={{}}
-                  className={"openapi-markdown__details"}
-                >
-                  <summary
-                    style={{}}
-                  >
-                    <span
-                      className={"openapi-schema__container"}
-                    >
-                      <strong
-                        className={"openapi-schema__property"}
-                      >
-                        labels
-                      </strong><span
-                        className={"openapi-schema__name"}
-                      >
-                         object
-                      </span>
-                    </span>
-                  </summary><div
-                    style={{"marginLeft":"1rem"}}
-                  >
-                    <SchemaItem
-                      name={"property name*"}
-                      required={false}
-                      schemaName={"string"}
-                      qualifierMessage={undefined}
-                      schema={{"type":"string"}}
-                      collapsible={false}
-                      discriminator={false}
-                    >
-                      
-                    </SchemaItem>
-                  </div>
-                </details>
-              </SchemaItem><SchemaItem
-                collapsible={false}
-                name={"name"}
-                required={false}
-                schemaName={"string"}
-                qualifierMessage={undefined}
-                schema={{"type":"string"}}
-              >
-                
-              </SchemaItem>
-            </div>
-          </details>
-        </SchemaItem><SchemaItem
-          collapsible={false}
-          name={"port"}
-          required={false}
-          schemaName={"integer"}
-          qualifierMessage={undefined}
-          schema={{"type":"integer"}}
         >
           
         </SchemaItem>
@@ -309,7 +174,7 @@ Requires the `docker-svc:docker:create` permission.
                               <strong
                                 className={"openapi-schema__property"}
                               >
-                                info
+                                user
                               </strong><span
                                 className={"openapi-schema__name"}
                               >
@@ -321,7 +186,43 @@ Requires the `docker-svc:docker:create` permission.
                           >
                             <SchemaItem
                               collapsible={false}
-                              name={"newContainerStarted"}
+                              name={"createdAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"deletedAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"email"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Email or username","type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"isService"}
                               required={false}
                               schemaName={"boolean"}
                               qualifierMessage={undefined}
@@ -330,11 +231,38 @@ Requires the `docker-svc:docker:create` permission.
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"portNumber"}
+                              name={"name"}
                               required={false}
-                              schemaName={"integer"}
+                              schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"type":"integer"}}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"passwordHash"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"roleIds"}
+                              required={false}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Many to many relationship between User and Role","items":{"type":"string"},"type":"array"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"updatedAt"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
                             >
                               
                             </SchemaItem>
@@ -348,7 +276,7 @@ Requires the `docker-svc:docker:create` permission.
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"info\": {\n    \"newContainerStarted\": true,\n    \"portNumber\": 0\n  }\n}"}
+                    responseExample={"{\n  \"user\": {\n    \"createdAt\": \"string\",\n    \"deletedAt\": \"string\",\n    \"email\": \"string\",\n    \"id\": \"string\",\n    \"isService\": true,\n    \"name\": \"string\",\n    \"passwordHash\": \"string\",\n    \"roleIds\": [\n      \"string\"\n    ],\n    \"updatedAt\": \"string\"\n  }\n}"}
                     language={"json"}
                   >
                     
@@ -366,79 +294,6 @@ Requires the `docker-svc:docker:create` permission.
           
           
           Invalid JSON
-          
-          
-        </div><div>
-          <MimeTabs
-            className={"openapi-tabs__mime"}
-            schemaType={"response"}
-          >
-            <TabItem
-              label={"application/json"}
-              value={"application/json"}
-            >
-              <SchemaTabs
-                className={"openapi-tabs__schema"}
-              >
-                <TabItem
-                  label={"Schema"}
-                  value={"Schema"}
-                >
-                  <details
-                    style={{}}
-                    className={"openapi-markdown__details response"}
-                    data-collapsed={false}
-                    open={true}
-                  >
-                    <summary
-                      style={{}}
-                      className={"openapi-markdown__details-summary-response"}
-                    >
-                      <strong>
-                        Schema
-                      </strong>
-                    </summary><div
-                      style={{"textAlign":"left","marginLeft":"1rem"}}
-                    >
-                      
-                    </div><ul
-                      style={{"marginLeft":"1rem"}}
-                    >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
-                      >
-                        
-                      </SchemaItem>
-                    </ul>
-                  </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
-                </TabItem>
-              </SchemaTabs>
-            </TabItem>
-          </MimeTabs>
-        </div>
-      </TabItem><TabItem
-        label={"401"}
-        value={"401"}
-      >
-        <div>
-          
-          
-          Unauthorized
           
           
         </div><div>

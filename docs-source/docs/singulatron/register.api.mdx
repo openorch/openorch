@@ -1,12 +1,12 @@
 ---
-id: ge-public-key
-title: "Ge Public Key"
-description: "Get the public key to descrypt the JWT."
-sidebar_label: "Ge Public Key"
+id: register
+title: "Register a New User"
+description: "Register a new user with a name, email, and password."
+sidebar_label: "Register a New User"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9lE1v1DAQhv/KaM7ZZGlBQjlRJFiVIlqxWyFUevA6s4mpY5uxs0tY5b+jSXbpB1zgwCmJPRm/88w73mNFUbMJyXiHJS4oQWoIQre2RsMd9ZA8jDF9mLbefVrlmCFTDN5Filju8WQ+l8fjXJcXmKH2LpFLsqtCsEYr2S2+RgnZY9QNtUreAvtAnMyUcDr/gnr5SH0gLDEmNq7GYciOK379lXTCYZC153/ScO62ypoK3i0vP4BnaE2MxtUQiMdX78BU/y6TmD3/jcRnv0u8dqpLjWfzg/6XEllUdcTyBq8jMSyJt0YT3mbYUmp8hSXWlDDDoFKDJRZdJJ7FrS6mxszuqMcMI/GWWPLssWMrgYX1WtnGx1S+eHly+gyHW4nTHZvUL0X8pPc1KSY+6yT9UyKrPhB8OYR8Qdh4a/2OKlj3oCAGpQmUqyD5O3Kg9LfOMFWwYd+ODh1rioei4L2vjQNyVfDGJbGukUMaUhUxZuhUK3jODk0YceMvaioYcaEgM27jRax0SOmxQ9QqI2VHZSm+Emd1ViX2Lte+fZD76hyWXQiehelEqkkplEURu0AcrEobz22uTIFD9gTHx86N5Va0JesDRLKbmRCmCs7OQYUQc/jsO4bAvmbVtmptCYybNb6LBIurVQ6rhuCtYVqrSLDxPIKSv2sSJNZocpGkpqPmxdV72J7m80eKY1kUu90ur12Xe66Lw3+xUHWws9N8njeptVJDIm7j5eZorfuCd6quiXPjizGkENYmWQlZ3gPEDMVaE4F5fiIpg4+pVe6ByAXB1XRTXYyGfARufz9Lf3GvHfqe6HsqglXGyckjgP1hGm7wOA0yIPfzcJuhdEUC9nvhfM12GGT5W0fcY3lzm+FWsZH2yNeQHV0oAyQpSjzTmoK4ZKtsNxnwySUwPJzSxZsVDsNP1qT7Tg==
-sidebar_class_name: "get api-method"
+api: eJy9VVFv2zgM/isCnx07127A4KfrDtvQbViLpns4dH1gbMbWJksaJcfLBf7vA+W4TbvesN3D5SUSJVIfP/Kj91BTqFj7qJ2FEq6o0SESK1SWBtUHYjXo2MoeO8oUdahNptDWymMIg+M6hwycJ0aJcV5DCXyIAhkwfe0pxJeu3kG5h8rZSDbKEr03ukpOxecgr+8hVC11KCvPEjJqCrJLr8oi7jxBCSGytg2MGQiqJw9mdE8cjtlscevPVEUYxfQvRFxNCRxS0Uw1lJF7GsUQvLNhgniyXMrfwygX7yD79Zx/ADVm8OypsOd2i0bX6u3q4sPvPPCIVGbHv0jPmMHzp5FEYotGrYi3xOpVivn/QBIjNgHKG/gofSoQdEVwm0FHsXXSid6l0nmMLZRQSD8vwrYqjjo0JOQSZg89G7lWGFehaV2I5fMXJ6d/wHgr96qeddytBPsE9yUhE5/1EvwxM9c7T+rT4conUBtnjBuoVuudQhU8VpRUFN0XsgqrqbfUhl2nYksqpRQOOan3rtFWka290zaK4rQ80hLWKYlJBiBQHOt/EttwRxp6/Y52iUapwNW9Jl99w84bOtLYzPldzLv9vaKOZKbtxs3Cxio+CISGwp9B26Y3GNnZvHLdEdbLc7XqvXcsFZqYb2P0ZVGE3hN7g3HjuMtRF/CjPnub6KtpS8Z5FchsFlIxqtXZuULvQ67+dj0rz65h7DpcG1LaLlrXB1JvLq9zdd2Seq2Z1hhIbRwn4sW7IaHY6IpsSOTMmN9cvlfb03z5AHEoi2IYhryxfe64KQ5+ocDGm8Vpvszb2BnJIRJ34WIzd+p9wgM2DXGuXZGuFFI7HaUwsLonEDKQVp0YWOYnac65EDu0RyCPZvgHGlIjwSP6jgbxfx75h96K9C0W3qC2giaRsj/o7QZmvaXpeVDcbQZSJzne74X5j2zGUcxfe+IdlDe3GWyRtRRMdmM297lI9AvtoIS/JvgLUZmwgqafGv3RrBmz2eOsqsjHn949HhyXF6tryGB9+G51rhYfxkFSwQFKSF898U6jINn2YNA2PTZyd4opv+9vhIvk
+sidebar_class_name: "post api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
 ---
@@ -28,22 +28,102 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Ge Public Key"}
+  children={"Register a New User"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"get"}
-  path={"/user-svc/public-key"}
+  method={"post"}
+  path={"/user-svc/register"}
 >
   
 </MethodEndpoint>
 
 
 
-Get the public key to descrypt the JWT.
+Register a new user with a name, email, and password.
 
-<div>
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":"1rem","marginBottom":"1rem"}}
+        >
+          
+          
+          Register Request
+          
+          
+        </div>
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"email"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"password"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
   <div>
     <ApiTabs
       label={undefined}
@@ -95,16 +175,15 @@ Get the public key to descrypt the JWT.
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"publicKey"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
                       >
                         
-                      </SchemaItem>
+                        
+                        object
+                        
+                        
+                      </div>
                     </ul>
                   </details>
                 </TabItem><TabItem
@@ -112,7 +191,7 @@ Get the public key to descrypt the JWT.
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"publicKey\": \"string\"\n}"}
+                    responseExample={"{}"}
                     language={"json"}
                   >
                     
@@ -129,7 +208,7 @@ Get the public key to descrypt the JWT.
         <div>
           
           
-          Invalid JSON or missing permission id
+          Invalid JSON
           
           
         </div><div>
@@ -196,13 +275,13 @@ Get the public key to descrypt the JWT.
           </MimeTabs>
         </div>
       </TabItem><TabItem
-        label={"401"}
-        value={"401"}
+        label={"500"}
+        value={"500"}
       >
         <div>
           
           
-          Unauthorized
+          Internal Server Error
           
           
         </div><div>

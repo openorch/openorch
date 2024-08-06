@@ -1,12 +1,12 @@
 ---
-id: delete-a-role
-title: "Delete a Role"
-description: "Delete a role based on the role ID."
-sidebar_label: "Delete a Role"
+id: upsert-permission
+title: "Upsert a Permission"
+description: "Creates or updates a permission."
+sidebar_label: "Upsert a Permission"
 hide_title: true
 hide_table_of_contents: true
-api: eJylVE1v4zYQ/SvEnFqAkbxJFyh0aoqkC3eDJlgnhyLrAyONJe5SJHdI2XUF/vdi9BF7nWxRdC+2JM7wvXnzZnqoMJSkfdTOQgFXaDCiUIKcQfGkAlbCWREbHL8srzKQ4BWpFiNSgOKxP7niwxgHEjS/ehUbkGBVi1AAX7KsQALhl04TVlBE6lBCKBtsFRQ9xL3nyBBJ2xpSWnNw8M4GDHx+vljw39egt+9BQulsRBv5VHlvdKn4NP8UOKR/CeGePmEZIaWUJPz02rVLu1VGV+L31e0f/wPguYYR4M1LgAerutg40n9j9b0Ab1+vICJZZcQKaYskrokcfR9SkhCw7EjH/dD+X1ER0mUXGyge19yvqGp2BjwEpAFYlwhrCS3GxlVQQDXYbHASZ0HeBaSzsC1zNkjejzZJwEhMe/RZR4Zjc+NKZRoXYvH25/OLN8CQM6MVEx+NcszrVJb7vUfxcQr5CGLjjHE7rMTTXigRvCpRKFuJ6D6jFaoczSo25NphGIbKwlSauHG1tgJt5Z22MZut36CqkA7mv5xaPUgNcpZWef0e98C6artxTJa7o8qhO9gqzWUHZTD8ErStO6MiOZuVrj26+24pVp33jiLISakmRl/keeg8kjcqbhy1mdI5JHk6s50dyq1wi8Z5EdBszlhhrMTlUijvQyb+dB0JT64m1bbqyaDQ9qxxXUDx7u4+E/cNit80IW8NsXE0CMXZNbIkRpdoA3JNM+d3dzdie5EtvmIcijzf7XZZbbvMUZ1PeSFXtTdnF9kia2JruIaI1IbbzWywQ8E7VddImXb5EJKz1joaDlkdBAQJbK1RgUV2zld6F2Kr7BHJ543Iew1OhOsPc/QfV+fU84h/xdwbpS2jDsX30zA8wjwMvCZH0GLam2sJ3BUO6nuGeCCTEn/+0iHxOK4lbBVpbs+4m3Xg5wqKjTIB/4X/Dx+mlfyjOKzwV+nOvrV7llCZjt9AwmfcH1Z8Wic5TwATGQ8vyxJ9PEp7sXzS8Z64ur65vr8GCWqa4sPI8H1yfmCAV1mdjtzIgn+T/EZK348DmdJz/Hj0zYznOR+jWaR1Sukfx11+qw==
-sidebar_class_name: "delete api-method"
+api: eJztVm1v2zYQ/isEv6wFFClNVmAQimJJmxVei8bIy4AhNhBaOktsKJI9UnY8Q/99OMqyZVsLhvXrvggi+dz73UOueQ4uQ2m9NJqn/AOC8OCYQVbbPPwKZgEr6Zw0Op7od7P3dyX09tjoI6tq59kMmEWYy2fI2WzFfAksE0oBOlY7QC0qYK+gElK9jt8ls/cTfVXETM4D0iw14E+OhfNki5eOPVrwzhuEE7fIHgO4Z9yVplY5U8Y8MSWfYB+eWvAp5NI/xhM90TfwvZYILih5JCMbUKcuzUL8j/2QecSNBRSUoVHOU15bB+jHWwSPuBUoKvCAjqcP64Ocjvup4hGXtGmFL3nEKUhabSGjnEccWz9znnqsIeIuK6ESPF1zv7KEdx6lLnjTTFswOH9p8hUhMqM9aE+/wlols+B48s2RL+ueKosUlpfgwmoXztFZm5T8wg94EO0HO3Auc9reTwkUMZtwKkC8kLAEnHAeHYu22RkWvneA7I8XhENHjQaM3wIuZAZsWRpqO3fQUkO62lkYzkCzxZvZN8j84M5hnvpN8RG8kMod1b2hDWeNdm0Zzk5Pj4O5/syjf1/zI7eaiP88pPZS5OymbayUjfRCKJmz32+vvxIz0OFXUYGzIoP/YH6budb8m2Pz91rUvjQo/4L8Rw28HYpvpD0xjGLUDIDsCtHgj1lqIu4gq1H6VSCBSxAIeFH7kqcPU5pULwrih7Z1N13IpxGvwJeGmMXWPpAJifCk46dk15vJus8UDSeT5H9LOzUqkkuUyYQqjfPp21/Ozt9wst25dksRtP3Ud/AwP3crC2yygUw4mxulzLIldsFC4ZnQOfPmCTQTWdu3bI6mCuMUQnTdpH0xhdQMdG6N1D7uOLAEkQPuWPBiU/OQ890YCis/wyqMFdXhZsd3V8+isgqO+avHWF2JDgdwu038tFttXNmutyyy2+qRQZ8EpJ6bjoBFFlooXGaEEgrcr07qolbCo9FxZqpe3OMRu62tNUjlb6tYem/TJHG1BbRK+LnBKhYyOWJcflPrUIocFqCMZQ7U/ISqDzm7GDFhrYvZn6ZGZtEUKKpKzBQwqU9KUztgn8Z3MaMr/TeJMBMO2NxgKCJJF0DlUjID7UKiO58/jb+wxXl8uuexS5NkuVzGha5jg0WykXOJKKw6OY9P49JXimLwgJW7nndTsAt4KYoCMJYmCZCE+kB6KjK/3SWQR5zavs3AaXxGKq1xvhK65+R9uKmZYHuX9cGFtR35/x8/g4+fzRR6ePaJVULqcCFSydcbqnrgnTZir36q072HzTTi1JcksF5Tp92jahra/l4DEmtOI74QKKlB24eUdPSf83QulIMXavdqE17+mh2+twYD6LhFr6iVhKppxSP+BKvD91gzbaKOq8ipFvKhNX1CTNlTcXRrNFEncZFlYP2L2P5lML6/4xGfbZ51lclJBMWS3gli2XprQiYCm4e9NVdCF7UoCNuqJGoSG47fESp5FHU/FNRgPg4JuY2DvhTVoMh63dJ102zx7dE/SmxvgRZN5Zk2TfM3oe9kEg==
+sidebar_class_name: "put api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
 ---
@@ -28,20 +28,24 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Delete a Role"}
+  children={"Upsert a Permission"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"delete"}
-  path={"/user-svc/role/{roleId}"}
+  method={"put"}
+  path={"/user-svc/permission/{permissionId}"}
 >
   
 </MethodEndpoint>
 
 
 
-Delete a role based on the role ID.
+Creates or updates a permission.
+<b>The permission ID must be prefixed by the callers username (email).</b>
+Eg. if the owner's email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+
+Requires the `user-svc:permission:create` permission.
 
 <Heading
   id={"request"}
@@ -69,13 +73,142 @@ Delete a role based on the role ID.
     <ul>
       <ParamsItem
         className={"paramsItem"}
-        param={{"description":"Role ID","in":"path","name":"roleId","required":true,"schema":{"type":"string"}}}
+        param={{"description":"Permission ID","in":"path","name":"permissionId","required":true,"schema":{"type":"string"}}}
       >
         
       </ParamsItem>
     </ul>
   </div>
-</details><div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":"1rem","marginBottom":"1rem"}}
+        >
+          
+          
+          Permission Details
+          
+          
+        </div>
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  permission
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <SchemaItem
+                collapsible={false}
+                name={"createdAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"description"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"id"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"eg. \"user.viewer\"","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"name"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"eg. \"User Viewer\"","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"ownerId"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"Service who owns the permission","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"updatedAt"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
   <div>
     <ApiTabs
       label={undefined}
@@ -160,7 +293,7 @@ Delete a role based on the role ID.
         <div>
           
           
-          Invalid JSON
+          Bad Request: Invalid JSON or Bad Namespace
           
           
         </div><div>

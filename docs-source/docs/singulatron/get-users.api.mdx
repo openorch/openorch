@@ -1,11 +1,11 @@
 ---
-id: list-prompts
-title: "List Prompts"
-description: "List prompts that satisfy a query."
-sidebar_label: "List Prompts"
+id: get-users
+title: "List Users"
+description: "Fetches a list of users with optional query filters and pagination."
+sidebar_label: "List Users"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/singulatron/singulatron
 custom_edit_url: null
@@ -28,20 +28,20 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"List Prompts"}
+  children={"List Users"}
 >
 </Heading>
 
 <MethodEndpoint
   method={"post"}
-  path={"/prompt-svc/list"}
+  path={"/user-svc/users"}
 >
   
 </MethodEndpoint>
 
 
 
-List prompts that satisfy a query.
+Fetches a list of users with optional query filters and pagination.
 
 <Heading
   id={"request"}
@@ -81,7 +81,7 @@ List prompts that satisfy a query.
         >
           
           
-          List Prompts Request
+          Get Users Request
           
           
         </div>
@@ -611,7 +611,7 @@ List prompts that satisfy a query.
         <div>
           
           
-          OK
+          List of users retrieved successfully
           
           
         </div><div>
@@ -654,9 +654,9 @@ List prompts that satisfy a query.
                         collapsible={false}
                         name={"after"}
                         required={false}
-                        schemaName={""}
+                        schemaName={"string"}
                         qualifierMessage={undefined}
-                        schema={{}}
+                        schema={{"type":"string"}}
                       >
                         
                       </SchemaItem><SchemaItem
@@ -685,7 +685,7 @@ List prompts that satisfy a query.
                               <strong
                                 className={"openapi-schema__property"}
                               >
-                                prompts
+                                users
                               </strong><span
                                 className={"openapi-schema__name"}
                               >
@@ -707,16 +707,25 @@ List prompts that satisfy a query.
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"CreatedAt is the time of the prompt creation.","type":"string"}}
+                              schema={{"type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"error"}
+                              name={"deletedAt"}
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"Error that arose during prompt execution, if any.","type":"string"}}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"email"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Email or username","type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
@@ -725,88 +734,43 @@ List prompts that satisfy a query.
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"Id is the unique ID of the prompt.","type":"string"}}
+                              schema={{"type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"lastRun"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"LastRun is the time of the last prompt run.","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"maxRetries"}
-                              required={false}
-                              schemaName={"integer"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"MaxRetries specified how many times the system should retry a prompt when it keeps erroring.","example":10,"type":"integer"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"modelId"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"ModelId is just the Singulatron internal ID of the model.","example":"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"prompt"}
-                              required={true}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"Prompt is the message itself eg. \"What's a banana?","example":"What's a banana?","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"runCount"}
-                              required={false}
-                              schemaName={"integer"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"RunCount is the number of times the prompt was retried due to errors","type":"integer"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"status"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={"**Possible values:** [`scheduled`, `running`, `completed`, `errored`, `abandoned`, `canceled`]"}
-                              schema={{"enum":["scheduled","running","completed","errored","abandoned","canceled"],"type":"string","x-enum-varnames":["PromptStatusScheduled","PromptStatusRunning","PromptStatusCompleted","PromptStatusErrored","PromptStatusAbandoned","PromptStatusCanceled"]}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"sync"}
+                              name={"isService"}
                               required={false}
                               schemaName={"boolean"}
                               qualifierMessage={undefined}
-                              schema={{"description":"Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things syncronously.\nIn those cases set Sync to true.","type":"boolean"}}
+                              schema={{"type":"boolean"}}
                             >
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"template"}
+                              name={"name"}
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"Template of the prompt. Optional. If not present it's derived from ModelId.","example":"[INST]{prompt}[/INST]","type":"string"}}
+                              schema={{"type":"string"}}
                             >
                               
                             </SchemaItem><SchemaItem
                               collapsible={false}
-                              name={"threadId"}
+                              name={"passwordHash"}
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set `prompt.sync` to true for a blocking answer.","type":"string"}}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"roleIds"}
+                              required={false}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"description":"Many to many relationship between User and Role","items":{"type":"string"},"type":"array"}}
                             >
                               
                             </SchemaItem><SchemaItem
@@ -815,16 +779,7 @@ List prompts that satisfy a query.
                               required={false}
                               schemaName={"string"}
                               qualifierMessage={undefined}
-                              schema={{"description":"UpdatedAt is the last time the prompt was updated.","type":"string"}}
-                            >
-                              
-                            </SchemaItem><SchemaItem
-                              collapsible={false}
-                              name={"userId"}
-                              required={false}
-                              schemaName={"string"}
-                              qualifierMessage={undefined}
-                              schema={{"description":"UserId contains the ID of the user who submitted the prompt.","type":"string"}}
+                              schema={{"type":"string"}}
                             >
                               
                             </SchemaItem><li>
@@ -844,7 +799,7 @@ List prompts that satisfy a query.
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"after\": {},\n  \"count\": 0,\n  \"prompts\": [\n    {\n      \"createdAt\": \"string\",\n      \"error\": \"string\",\n      \"id\": \"string\",\n      \"lastRun\": \"string\",\n      \"maxRetries\": 10,\n      \"modelId\": \"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf\",\n      \"prompt\": \"What's a banana?\",\n      \"runCount\": 0,\n      \"status\": \"scheduled\",\n      \"sync\": true,\n      \"template\": \"[INST]{prompt}[/INST]\",\n      \"threadId\": \"string\",\n      \"updatedAt\": \"string\",\n      \"userId\": \"string\"\n    }\n  ]\n}"}
+                    responseExample={"{\n  \"after\": \"string\",\n  \"count\": 0,\n  \"users\": [\n    {\n      \"createdAt\": \"string\",\n      \"deletedAt\": \"string\",\n      \"email\": \"string\",\n      \"id\": \"string\",\n      \"isService\": true,\n      \"name\": \"string\",\n      \"passwordHash\": \"string\",\n      \"roleIds\": [\n        \"string\"\n      ],\n      \"updatedAt\": \"string\"\n    }\n  ]\n}"}
                     language={"json"}
                   >
                     
