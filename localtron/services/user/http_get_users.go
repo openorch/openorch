@@ -11,33 +11,35 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/singulatron/singulatron/localtron/datastore"
 	user "github.com/singulatron/singulatron/localtron/services/user/types"
 )
 
-// CreateUser allows an administrator to create a new user
-// @ID createUser
-// @Summary Create a New User
-// @Description Allows an authenticated administrator to create a new user with specified details.
+// GetUsers retrieves a list of users based on query parameters
+// @ID getUsers
+// @Summary List Users
+// @Description Fetches a list of users with optional query filters and pagination.
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.CreateUserRequest true "Create User Request"
-// @Success 200 {object} user.CreateUserResponse "User created successfully"
+// @Param request body user.GetUsersRequest false "Get Users Request"
+// @Success 200 {object} user.GetUsersResponse "List of users retrieved successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /user-svc/user [post]
-func (s *UserService) CreateUser(
+// @Router /user-svc/users [post]
+func (s *UserService) GetUsers(
 	w http.ResponseWriter,
-	r *http.Request) {
-	_, err := s.isAuthorized(r, user.PermissionUserCreate.Id, nil)
+	r *http.Request,
+) {
+	_, err := s.isAuthorized(r, user.PermissionUserView.Id, nil, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 
-	req := user.CreateUserRequest{}
+	req := user.GetUsersRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		http.Error(w, `Invalid JSON`, http.StatusBadRequest)
@@ -45,12 +47,29 @@ func (s *UserService) CreateUser(
 	}
 	defer r.Body.Close()
 
-	err = s.createUser(req.User, req.Password, req.RoleIds)
+	options := &user.GetUsersOptions{
+		Query: req.Query,
+	}
+	if options.Query == nil {
+		options.Query = &datastore.Query{}
+	}
+	if options.Query.Limit == 0 {
+		options.Query.Limit = 20
+	}
+
+	users, count, err := s.getUsers(options)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	bs, _ := json.Marshal(user.CreateUserResponse{})
+	for i := range users {
+		users[i].PasswordHash = ""
+	}
+
+	bs, _ := json.Marshal(user.GetUsersResponse{
+		Users: users,
+		Count: count,
+	})
 	w.Write(bs)
 }

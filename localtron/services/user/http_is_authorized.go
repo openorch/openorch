@@ -56,7 +56,7 @@ func (s *UserService) IsAuthorized(
 		return
 	}
 
-	usr, err := s.isAuthorized(r, permissionId, req.EmailsGranted)
+	usr, err := s.isAuthorized(r, permissionId, req.SlugsGranted, nil)
 	if err != nil {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
@@ -71,35 +71,44 @@ func (s *UserService) IsAuthorized(
 }
 
 func (s *UserService) isAuthorized(r *http.Request, permissionId string,
-	emailsGranted []string) (*user.User, error) {
+	slugsGranted, contactsGranted []string) (*user.User, error) {
 	usr, err := s.getUserFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
-	emailGrant := false
-	for _, v := range emailsGranted {
-		if usr.Email == v {
-			emailGrant = true
+	slugGrant := false
+	for _, v := range slugsGranted {
+		if usr.Slug == v {
+			slugGrant = true
 		}
 	}
-	if emailGrant {
+	if slugGrant {
 		return usr, nil
 	}
+	roleLinks, err := s.userRoleLinksStore.Query(
+		datastore.Equal(datastore.Field("userId"), usr.Id),
+	).Find()
+	if err != nil {
+		return nil, err
+	}
+	roleIds := []string{}
+	for _, role := range roleLinks {
+		roleIds = append(roleIds, role.(*user.UserRoleLink).RoleId)
+	}
 
-	roles, err := s.rolesStore.Query(
-		datastore.Equal(datastore.Field("id"), usr.RoleIds),
+	permissionLinks, err := s.permissionRoleLinksStore.Query(
+		datastore.Equal(datastore.Field("roleId"), roleIds),
 	).Find()
 	if err != nil {
 		return nil, err
 	}
 
-	for _, role := range roles {
-		for _, permId := range role.(*user.Role).PermissionIds {
-			if permId == permissionId {
-				return usr, nil
-			}
+	for _, permissionLink := range permissionLinks {
+		if permissionLink.(*user.PermissionRoleLink).PermissionId == permissionId {
+			return usr, nil
 		}
+
 	}
 
 	return nil, errors.New("unauthorized")
