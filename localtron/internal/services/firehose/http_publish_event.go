@@ -18,7 +18,7 @@ import (
 )
 
 // @Summary Publish an Event
-// @ID eventPublish
+// @ID publishEvent
 // @Description Publishes an event to the firehose service after authorization check
 // @Tags Firehose Svc
 // @Accept json
@@ -28,7 +28,7 @@ import (
 // @Failure 400 {object} firehose.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} firehose.ErrorResponse "Unauthorized"
 // @Security BearerAuth
-// @Router /firehose-svc/publish [post]
+// @Router /firehose-svc/event [post]
 func (p *FirehoseService) Publish(w http.ResponseWriter,
 	r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")

@@ -20,7 +20,7 @@ import (
 )
 
 // Subscribe subscribes to a firehose stream and streams events to the client
-// @ID eventSubscribe
+// @ID subscribeToEvents
 // @Summary Subscribe to the Event Stream
 // @Description Establish a subscription to the firehose events and accept a real time stream of them.
 // @Tags Firehose Svc
@@ -30,7 +30,7 @@ import (
 // @Failure 401 {object} firehose.ErrorResponse "Unauthorized"
 // @Failure 500 {object} firehose.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /firehose-svc/subscribe [get]
+// @Router /firehose-svc/events/subscribe [get]
 func (p *FirehoseService) Subscribe(
 	w http.ResponseWriter,
 	r *http.Request,
