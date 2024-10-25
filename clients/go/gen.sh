@@ -14,4 +14,6 @@ rm -rf *.go
 openapi-generator-cli generate -i "$LOCALTRON_DIR/docs/swagger.yaml" -g go -o .
 rm -rf api docs go.mod
 cp go.mod.template go.mod
+
+# A hack to fix gopls because it doesn't like lots of client files being regenerated
 killall gopls || true

@@ -122,6 +122,7 @@ func (ns *DeployService) cycle() error {
 				slog.String("deploymentId", command.DeploymentId),
 				slog.String("commandAction", string(command.Action)),
 			)
+			continue
 		}
 
 		for _, v := range listDefinitionsRsp.Definitions {
@@ -130,7 +131,7 @@ func (ns *DeployService) cycle() error {
 			}
 		}
 
-		err := ns.processCommand(ctx, command, node, definition)
+		err := ns.processCommand(ctx, command, node, definition, deployment)
 		if err != nil {
 			logger.Error("Error processing deploy command", slog.Any("error", err))
 		}
@@ -144,6 +145,7 @@ func (ns *DeployService) processCommand(
 	command *deploy.Command,
 	node *openapi.RegistrySvcNode,
 	definition *openapi.RegistrySvcDefinition,
+	deployment *deploy.Deployment,
 ) error {
 	deployment, err := ns.getDeploymentById(command.DeploymentId)
 	if err != nil {
@@ -159,45 +161,74 @@ func (ns *DeployService) processCommand(
 
 	switch command.Action {
 	case deploy.CommandTypeStart:
-		logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
-
-		err = func() error {
-			if definition == nil {
-				return fmt.Errorf("No definition for deployment '%v'", deployment.Id)
-			}
-			_, _, err := ns.clientFactory.Client(sdk.WithAddress(*command.NodeUrl), sdk.WithToken(ns.token)).DockerSvcAPI.LaunchContainer(ctx).Request(
-				openapi.DockerSvcLaunchContainerRequest{
-					Image: definition.Image.Name,
-					Port:  definition.Image.Port,
-				},
-			).Execute()
-
-			return sdk.OpenAPIError(err)
-		}()
-
-		if err != nil {
-			logger.Warn("Error executing start command",
-				slog.String("deploymentId", deployment.Id),
-				slog.Any("error", err),
-			)
-			deployment, readErr := ns.getDeploymentById(command.DeploymentId)
-			if readErr != nil {
-				return readErr
-			}
-			deployment.Status = deploy.DeploymentStatus(openapi.StatusError)
-			deployment.Details = err.Error()
-
-			writeErr := ns.deploymentStore.Upsert(deployment)
-			if writeErr != nil {
-				return writeErr
-			}
-		} else {
-			logger.Debug("Successfully executed start command",
-				slog.String("deploymentId", deployment.Id),
-			)
-		}
+		ns.executeStartCommand(ctx, command, node, definition, deployment)
 	case deploy.CommandTypeScale:
 	case deploy.CommandTypeKill:
+	}
+
+	return nil
+}
+
+func (ns *DeployService) executeStartCommand(
+	ctx context.Context,
+	command *deploy.Command,
+	node *openapi.RegistrySvcNode,
+	definition *openapi.RegistrySvcDefinition,
+	deployment *deploy.Deployment,
+) error {
+	logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
+
+	err := func() error {
+		if definition == nil {
+			return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
+		}
+		_, _, err := ns.clientFactory.Client(sdk.WithAddress(*command.NodeUrl), sdk.WithToken(ns.token)).DockerSvcAPI.LaunchContainer(ctx).Request(
+			openapi.DockerSvcLaunchContainerRequest{
+				Image:    definition.Image.Name,
+				Port:     definition.Image.Port,
+				HostPort: definition.HostPort,
+				Options: &openapi.DockerSvcLaunchContainerOptions{
+					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+				},
+			},
+		).Execute()
+		err = sdk.OpenAPIError(err)
+
+		return err
+	}()
+
+	if err != nil {
+		logger.Warn("Error executing start command",
+			slog.String("deploymentId", deployment.Id),
+			slog.Any("error", err),
+		)
+		deployment, readErr := ns.getDeploymentById(command.DeploymentId)
+		if readErr != nil {
+			return readErr
+		}
+		deployment.Status = deploy.DeploymentStatus(openapi.StatusError)
+		deployment.Details = err.Error()
+
+		writeErr := ns.deploymentStore.Upsert(deployment)
+		if writeErr != nil {
+			return writeErr
+		}
+	}
+
+	logger.Debug("Successfully executed start command",
+		slog.String("deploymentId", deployment.Id),
+	)
+	deployment, readErr := ns.getDeploymentById(command.DeploymentId)
+	if readErr != nil {
+		return readErr
+	}
+
+	deployment.Status = deploy.DeploymentStatus(openapi.StatusOK)
+	deployment.Details = ""
+
+	writeErr := ns.deploymentStore.Upsert(deployment)
+	if writeErr != nil {
+		return writeErr
 	}
 
 	return nil
