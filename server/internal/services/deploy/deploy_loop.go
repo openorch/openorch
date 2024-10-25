@@ -9,7 +9,11 @@ package deployservice
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/pkg/errors"
@@ -22,18 +26,40 @@ import (
 )
 
 func (ns *DeployService) loop() {
-	for {
-		func() {
-			if r := recover(); r != nil {
-				logger.Error("Deploy cycle panic", slog.Any("panic", r))
-			}
+	ticker := time.NewTicker(15 * time.Second)
+	defer ticker.Stop()
 
-			err := ns.cycle()
-			if err != nil {
-				logger.Error("Deploy cycle error", slog.Any("error", err))
-			}
-			time.Sleep(5 * time.Second)
-		}()
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+
+	go func() {
+		ns.triggerChan <- struct{}{}
+	}()
+
+	for {
+		select {
+		case <-ticker.C:
+			ns.runCycle()
+
+		case <-ns.triggerChan:
+			ns.runCycle()
+
+		case <-sigChan:
+			return
+		}
+	}
+}
+
+func (ns *DeployService) runCycle() {
+	defer func() {
+		if r := recover(); r != nil {
+			logger.Error("Deploy cycle panic", slog.Any("panic", r))
+		}
+	}()
+
+	err := ns.cycle()
+	if err != nil {
+		logger.Error("Deploy cycle error", slog.Any("error", err))
 	}
 }
 
@@ -77,6 +103,7 @@ func (ns *DeployService) cycle() error {
 	for _, command := range commands {
 		var node *openapi.RegistrySvcNode
 		var definition *openapi.RegistrySvcDefinition
+		var deployment *deploy.Deployment
 
 		for _, v := range listNodesRsp.Nodes {
 			if v.Url == command.NodeUrl {
@@ -84,8 +111,21 @@ func (ns *DeployService) cycle() error {
 			}
 		}
 
-		for _, v := range listDefinitionsRsp.Definitions {
+		for _, v := range deployments {
 			if v.Id == command.DeploymentId {
+				deployment = v
+			}
+		}
+
+		if deployment == nil {
+			logger.Error("No deployment with id '%v' found for command '%v'",
+				slog.String("deploymentId", command.DeploymentId),
+				slog.String("commandAction", string(command.Action)),
+			)
+		}
+
+		for _, v := range listDefinitionsRsp.Definitions {
+			if v.Id == deployment.DefinitionId {
 				definition = &v
 			}
 		}
@@ -121,16 +161,25 @@ func (ns *DeployService) processCommand(
 	case deploy.CommandTypeStart:
 		logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
 
-		_, _, err := ns.clientFactory.Client(sdk.WithAddress(*command.NodeUrl), sdk.WithToken(ns.token)).DockerSvcAPI.LaunchContainer(ctx).Request(
-			openapi.DockerSvcLaunchContainerRequest{
-				Image: definition.Image.Name,
-				Port:  definition.Image.Port,
-			},
-		).Execute()
-		err = sdk.OpenAPIError(err)
+		err = func() error {
+			if definition == nil {
+				return fmt.Errorf("No definition for deployment '%v'", deployment.Id)
+			}
+			_, _, err := ns.clientFactory.Client(sdk.WithAddress(*command.NodeUrl), sdk.WithToken(ns.token)).DockerSvcAPI.LaunchContainer(ctx).Request(
+				openapi.DockerSvcLaunchContainerRequest{
+					Image: definition.Image.Name,
+					Port:  definition.Image.Port,
+				},
+			).Execute()
+
+			return sdk.OpenAPIError(err)
+		}()
 
 		if err != nil {
-			logger.Info("Error executing start command", slog.Any("error", err))
+			logger.Warn("Error executing start command",
+				slog.String("deploymentId", deployment.Id),
+				slog.Any("error", err),
+			)
 			deployment, readErr := ns.getDeploymentById(command.DeploymentId)
 			if readErr != nil {
 				return readErr
@@ -142,6 +191,10 @@ func (ns *DeployService) processCommand(
 			if writeErr != nil {
 				return writeErr
 			}
+		} else {
+			logger.Debug("Successfully executed start command",
+				slog.String("deploymentId", deployment.Id),
+			)
 		}
 	case deploy.CommandTypeScale:
 	case deploy.CommandTypeKill:

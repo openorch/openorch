@@ -24,6 +24,8 @@ type DeployService struct {
 
 	credentialStore datastore.DataStore
 	deploymentStore datastore.DataStore
+
+	triggerChan chan struct{}
 }
 
 func NewDeployService(
@@ -47,6 +49,8 @@ func NewDeployService(
 		lock:            lock,
 		credentialStore: credentialStore,
 		deploymentStore: deploymentStore,
+
+		triggerChan: make(chan struct{}),
 	}
 
 	return service, nil
