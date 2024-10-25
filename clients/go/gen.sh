@@ -11,7 +11,7 @@ swag init --parseDependency
 
 cd "$SCRIPT_DIR"
 rm -rf *.go
-openapi-generator-cli generate -i "$LOCALTRON_DIR/docs/swagger.yaml" -g go -o .
+openapi-generator-cli generate -i "$LOCALTRON_DIR/docs/swagger.yaml" -g go -o . --additional-properties generateInterfaces=true
 rm -rf api docs go.mod
 cp go.mod.template go.mod
 

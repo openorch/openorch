@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Find all interface.go files
-find . -name 'interface.go' | while read file; do
+find . ../sdk/go -name '*interface.go' | while read file; do
     # Get the directory of the file
     dir=$(dirname "${file}")
     # Extract the package name from the source file

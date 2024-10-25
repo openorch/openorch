@@ -21,12 +21,90 @@ import (
 )
 
 
+type DockerSvcAPI interface {
+
+	/*
+	GetContainerSummary Get Container Summary
+
+	Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param hash Container Hash
+	@param numberOfLines Number of Lines
+	@return ApiGetContainerSummaryRequest
+	*/
+	GetContainerSummary(ctx context.Context, hash string, numberOfLines int32) ApiGetContainerSummaryRequest
+
+	// GetContainerSummaryExecute executes the request
+	//  @return DockerSvcGetContainerSummaryResponse
+	GetContainerSummaryExecute(r ApiGetContainerSummaryRequest) (*DockerSvcGetContainerSummaryResponse, *http.Response, error)
+
+	/*
+	GetHost Get Docker Host
+
+	Retrieve information about the Docker host
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHostRequest
+	*/
+	GetHost(ctx context.Context) ApiGetHostRequest
+
+	// GetHostExecute executes the request
+	//  @return DockerSvcGetDockerHostResponse
+	GetHostExecute(r ApiGetHostRequest) (*DockerSvcGetDockerHostResponse, *http.Response, error)
+
+	/*
+	GetInfo Get Docker Service Information
+
+	Retrieve detailed information about the Docker service
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInfoRequest
+	*/
+	GetInfo(ctx context.Context) ApiGetInfoRequest
+
+	// GetInfoExecute executes the request
+	//  @return DockerSvcGetInfoResponse
+	GetInfoExecute(r ApiGetInfoRequest) (*DockerSvcGetInfoResponse, *http.Response, error)
+
+	/*
+	IsRunning Check If a Container Is Running
+
+	Check if a Docker container identified by the hash is running
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param hash Container Hash
+	@return ApiIsRunningRequest
+	*/
+	IsRunning(ctx context.Context, hash string) ApiIsRunningRequest
+
+	// IsRunningExecute executes the request
+	//  @return DockerSvcContainerIsRunningResponse
+	IsRunningExecute(r ApiIsRunningRequest) (*DockerSvcContainerIsRunningResponse, *http.Response, error)
+
+	/*
+	LaunchContainer Launch a Container
+
+	Launches a Docker container with the specified parameters.
+
+Requires the `docker-svc:docker:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiLaunchContainerRequest
+	*/
+	LaunchContainer(ctx context.Context) ApiLaunchContainerRequest
+
+	// LaunchContainerExecute executes the request
+	//  @return DockerSvcLaunchContainerResponse
+	LaunchContainerExecute(r ApiLaunchContainerRequest) (*DockerSvcLaunchContainerResponse, *http.Response, error)
+}
+
 // DockerSvcAPIService DockerSvcAPI service
 type DockerSvcAPIService service
 
 type ApiGetContainerSummaryRequest struct {
 	ctx context.Context
-	ApiService *DockerSvcAPIService
+	ApiService DockerSvcAPI
 	hash string
 	numberOfLines int32
 }
@@ -179,7 +257,7 @@ func (a *DockerSvcAPIService) GetContainerSummaryExecute(r ApiGetContainerSummar
 
 type ApiGetHostRequest struct {
 	ctx context.Context
-	ApiService *DockerSvcAPIService
+	ApiService DockerSvcAPI
 }
 
 func (r ApiGetHostRequest) Execute() (*DockerSvcGetDockerHostResponse, *http.Response, error) {
@@ -313,7 +391,7 @@ func (a *DockerSvcAPIService) GetHostExecute(r ApiGetHostRequest) (*DockerSvcGet
 
 type ApiGetInfoRequest struct {
 	ctx context.Context
-	ApiService *DockerSvcAPIService
+	ApiService DockerSvcAPI
 }
 
 func (r ApiGetInfoRequest) Execute() (*DockerSvcGetInfoResponse, *http.Response, error) {
@@ -447,7 +525,7 @@ func (a *DockerSvcAPIService) GetInfoExecute(r ApiGetInfoRequest) (*DockerSvcGet
 
 type ApiIsRunningRequest struct {
 	ctx context.Context
-	ApiService *DockerSvcAPIService
+	ApiService DockerSvcAPI
 	hash string
 }
 
@@ -596,7 +674,7 @@ func (a *DockerSvcAPIService) IsRunningExecute(r ApiIsRunningRequest) (*DockerSv
 
 type ApiLaunchContainerRequest struct {
 	ctx context.Context
-	ApiService *DockerSvcAPIService
+	ApiService DockerSvcAPI
 	request *DockerSvcLaunchContainerRequest
 }
 

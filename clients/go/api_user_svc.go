@@ -21,12 +21,335 @@ import (
 )
 
 
+type UserSvcAPI interface {
+
+	/*
+	AddPermissionToRole Add Permission to Role
+
+	Adds a specific permission to a role identified by roleId.
+
+Requires the `user-svc:permission:assign` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId Role ID
+	@param permissionId Permission ID
+	@return ApiAddPermissionToRoleRequest
+	*/
+	AddPermissionToRole(ctx context.Context, roleId string, permissionId string) ApiAddPermissionToRoleRequest
+
+	// AddPermissionToRoleExecute executes the request
+	//  @return map[string]interface{}
+	AddPermissionToRoleExecute(r ApiAddPermissionToRoleRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	AddUserToOrganization Add a User to an Organization
+
+	Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId Organization ID
+	@return ApiAddUserToOrganizationRequest
+	*/
+	AddUserToOrganization(ctx context.Context, organizationId string) ApiAddUserToOrganizationRequest
+
+	// AddUserToOrganizationExecute executes the request
+	//  @return map[string]interface{}
+	AddUserToOrganizationExecute(r ApiAddUserToOrganizationRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	ChangePassword Change User Password
+
+	Allows an authenticated user to change their own password.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiChangePasswordRequest
+	*/
+	ChangePassword(ctx context.Context) ApiChangePasswordRequest
+
+	// ChangePasswordExecute executes the request
+	//  @return map[string]interface{}
+	ChangePasswordExecute(r ApiChangePasswordRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	ChangePasswordAdmin Change User Password (Admin)
+
+	Allows an administrator to change a user's password.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiChangePasswordAdminRequest
+	*/
+	ChangePasswordAdmin(ctx context.Context) ApiChangePasswordAdminRequest
+
+	// ChangePasswordAdminExecute executes the request
+	//  @return map[string]interface{}
+	ChangePasswordAdminExecute(r ApiChangePasswordAdminRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	CreateOrganization Create an Organization
+
+	Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.
+The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization.
+Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOrganizationRequest
+	*/
+	CreateOrganization(ctx context.Context) ApiCreateOrganizationRequest
+
+	// CreateOrganizationExecute executes the request
+	//  @return map[string]interface{}
+	CreateOrganizationExecute(r ApiCreateOrganizationRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	CreateRole Create a New Role
+
+	Create a new role.
+<b>The role ID must be prefixed by the callers username (email).</b>
+Eg. if the owner's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
+The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.
+
+Requires the `user-svc:role:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRoleRequest
+	*/
+	CreateRole(ctx context.Context) ApiCreateRoleRequest
+
+	// CreateRoleExecute executes the request
+	//  @return UserSvcCreateRoleResponse
+	CreateRoleExecute(r ApiCreateRoleRequest) (*UserSvcCreateRoleResponse, *http.Response, error)
+
+	/*
+	CreateUser Create a New User
+
+	Allows an authenticated administrator to create a new user with specified details.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUserRequest
+	*/
+	CreateUser(ctx context.Context) ApiCreateUserRequest
+
+	// CreateUserExecute executes the request
+	//  @return map[string]interface{}
+	CreateUserExecute(r ApiCreateUserRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	DeleteRole Delete a Role
+
+	Delete a role based on the role ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId Role ID
+	@return ApiDeleteRoleRequest
+	*/
+	DeleteRole(ctx context.Context, roleId string) ApiDeleteRoleRequest
+
+	// DeleteRoleExecute executes the request
+	//  @return map[string]interface{}
+	DeleteRoleExecute(r ApiDeleteRoleRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	DeleteUser Delete a User
+
+	Delete a user based on the user ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId User ID
+	@return ApiDeleteUserRequest
+	*/
+	DeleteUser(ctx context.Context, userId string) ApiDeleteUserRequest
+
+	// DeleteUserExecute executes the request
+	//  @return map[string]interface{}
+	DeleteUserExecute(r ApiDeleteUserRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	GetPermissionsByRole Get Permissions by Role
+
+	Retrieve permissions associated with a specific role ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId Role ID
+	@return ApiGetPermissionsByRoleRequest
+	*/
+	GetPermissionsByRole(ctx context.Context, roleId string) ApiGetPermissionsByRoleRequest
+
+	// GetPermissionsByRoleExecute executes the request
+	//  @return UserSvcGetPermissionsResponse
+	GetPermissionsByRoleExecute(r ApiGetPermissionsByRoleRequest) (*UserSvcGetPermissionsResponse, *http.Response, error)
+
+	/*
+	GetPublicKey Get Public Key
+
+	Get the public key to descrypt the JWT.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetPublicKeyRequest
+	*/
+	GetPublicKey(ctx context.Context) ApiGetPublicKeyRequest
+
+	// GetPublicKeyExecute executes the request
+	//  @return UserSvcGetPublicKeyResponse
+	GetPublicKeyExecute(r ApiGetPublicKeyRequest) (*UserSvcGetPublicKeyResponse, *http.Response, error)
+
+	/*
+	GetRoles Get all Roles
+
+	Retrieve all roles from the user service.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRolesRequest
+	*/
+	GetRoles(ctx context.Context) ApiGetRolesRequest
+
+	// GetRolesExecute executes the request
+	//  @return UserSvcGetRolesResponse
+	GetRolesExecute(r ApiGetRolesRequest) (*UserSvcGetRolesResponse, *http.Response, error)
+
+	/*
+	GetUsers List Users
+
+	Fetches a list of users with optional query filters and pagination.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUsersRequest
+	*/
+	GetUsers(ctx context.Context) ApiGetUsersRequest
+
+	// GetUsersExecute executes the request
+	//  @return UserSvcGetUsersResponse
+	GetUsersExecute(r ApiGetUsersRequest) (*UserSvcGetUsersResponse, *http.Response, error)
+
+	/*
+	IsAuthorized Is Authorized
+
+	Check if a user is authorized for a specific permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param permissionId Permission ID
+	@return ApiIsAuthorizedRequest
+	*/
+	IsAuthorized(ctx context.Context, permissionId string) ApiIsAuthorizedRequest
+
+	// IsAuthorizedExecute executes the request
+	//  @return UserSvcIsAuthorizedResponse
+	IsAuthorizedExecute(r ApiIsAuthorizedRequest) (*UserSvcIsAuthorizedResponse, *http.Response, error)
+
+	/*
+	Login Login
+
+	Authenticates a user and returns a token.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiLoginRequest
+	*/
+	Login(ctx context.Context) ApiLoginRequest
+
+	// LoginExecute executes the request
+	//  @return UserSvcLoginResponse
+	LoginExecute(r ApiLoginRequest) (*UserSvcLoginResponse, *http.Response, error)
+
+	/*
+	ReadUserByToken Read User by Token
+
+	Retrieve user information based on an authentication token.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiReadUserByTokenRequest
+	*/
+	ReadUserByToken(ctx context.Context) ApiReadUserByTokenRequest
+
+	// ReadUserByTokenExecute executes the request
+	//  @return UserSvcReadUserByTokenResponse
+	ReadUserByTokenExecute(r ApiReadUserByTokenRequest) (*UserSvcReadUserByTokenResponse, *http.Response, error)
+
+	/*
+	Register Register
+
+	Register a new user with a name, email, and password.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRegisterRequest
+	*/
+	Register(ctx context.Context) ApiRegisterRequest
+
+	// RegisterExecute executes the request
+	//  @return map[string]interface{}
+	RegisterExecute(r ApiRegisterRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	RemoveUserFromOrganization Remove a User from an Organization
+
+	Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId Organization ID
+	@param userId User ID
+	@return ApiRemoveUserFromOrganizationRequest
+	*/
+	RemoveUserFromOrganization(ctx context.Context, organizationId string, userId string) ApiRemoveUserFromOrganizationRequest
+
+	// RemoveUserFromOrganizationExecute executes the request
+	//  @return map[string]interface{}
+	RemoveUserFromOrganizationExecute(r ApiRemoveUserFromOrganizationRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	SaveUserProfile Save User Profile
+
+	Save user profile information based on the provided user ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId User ID
+	@return ApiSaveUserProfileRequest
+	*/
+	SaveUserProfile(ctx context.Context, userId string) ApiSaveUserProfileRequest
+
+	// SaveUserProfileExecute executes the request
+	//  @return map[string]interface{}
+	SaveUserProfileExecute(r ApiSaveUserProfileRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	SetRolePermission Set Role Permissions
+
+	Set permissions for a specified role. The caller can add permissions it owns to any role.
+If the caller tries to add a permission it doesn't own to a role, `StatusBadRequest` will be returned.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleId Role ID
+	@return ApiSetRolePermissionRequest
+	*/
+	SetRolePermission(ctx context.Context, roleId string) ApiSetRolePermissionRequest
+
+	// SetRolePermissionExecute executes the request
+	//  @return map[string]interface{}
+	SetRolePermissionExecute(r ApiSetRolePermissionRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	UpsertPermission Upsert a Permission
+
+	Creates or updates a permission.
+<b>The permission ID must be prefixed by the callers username (email).</b>
+Eg. if the owner's email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+
+Requires the `user-svc:permission:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param permissionId Permission ID
+	@return ApiUpsertPermissionRequest
+	*/
+	UpsertPermission(ctx context.Context, permissionId string) ApiUpsertPermissionRequest
+
+	// UpsertPermissionExecute executes the request
+	//  @return map[string]interface{}
+	UpsertPermissionExecute(r ApiUpsertPermissionRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // UserSvcAPIService UserSvcAPI service
 type UserSvcAPIService service
 
 type ApiAddPermissionToRoleRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	roleId string
 	permissionId string
 }
@@ -170,7 +493,7 @@ func (a *UserSvcAPIService) AddPermissionToRoleExecute(r ApiAddPermissionToRoleR
 
 type ApiAddUserToOrganizationRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	organizationId string
 	request *UserSvcAddUserToOrganizationRequest
 }
@@ -353,7 +676,7 @@ func (a *UserSvcAPIService) AddUserToOrganizationExecute(r ApiAddUserToOrganizat
 
 type ApiChangePasswordRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcChangePasswordRequest
 }
 
@@ -510,7 +833,7 @@ func (a *UserSvcAPIService) ChangePasswordExecute(r ApiChangePasswordRequest) (m
 
 type ApiChangePasswordAdminRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcChangePasswordAdminRequest
 }
 
@@ -667,7 +990,7 @@ func (a *UserSvcAPIService) ChangePasswordAdminExecute(r ApiChangePasswordAdminR
 
 type ApiCreateOrganizationRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcCreateOrganizationRequest
 }
 
@@ -826,7 +1149,7 @@ func (a *UserSvcAPIService) CreateOrganizationExecute(r ApiCreateOrganizationReq
 
 type ApiCreateRoleRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcCreateRoleRequest
 }
 
@@ -988,7 +1311,7 @@ func (a *UserSvcAPIService) CreateRoleExecute(r ApiCreateRoleRequest) (*UserSvcC
 
 type ApiCreateUserRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcCreateUserRequest
 }
 
@@ -1145,7 +1468,7 @@ func (a *UserSvcAPIService) CreateUserExecute(r ApiCreateUserRequest) (map[strin
 
 type ApiDeleteRoleRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	roleId string
 }
 
@@ -1294,7 +1617,7 @@ func (a *UserSvcAPIService) DeleteRoleExecute(r ApiDeleteRoleRequest) (map[strin
 
 type ApiDeleteUserRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	userId string
 }
 
@@ -1432,7 +1755,7 @@ func (a *UserSvcAPIService) DeleteUserExecute(r ApiDeleteUserRequest) (map[strin
 
 type ApiGetPermissionsByRoleRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	roleId string
 }
 
@@ -1581,7 +1904,7 @@ func (a *UserSvcAPIService) GetPermissionsByRoleExecute(r ApiGetPermissionsByRol
 
 type ApiGetPublicKeyRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 }
 
 func (r ApiGetPublicKeyRequest) Execute() (*UserSvcGetPublicKeyResponse, *http.Response, error) {
@@ -1701,7 +2024,7 @@ func (a *UserSvcAPIService) GetPublicKeyExecute(r ApiGetPublicKeyRequest) (*User
 
 type ApiGetRolesRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 }
 
 func (r ApiGetRolesRequest) Execute() (*UserSvcGetRolesResponse, *http.Response, error) {
@@ -1835,7 +2158,7 @@ func (a *UserSvcAPIService) GetRolesExecute(r ApiGetRolesRequest) (*UserSvcGetRo
 
 type ApiGetUsersRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcGetUsersRequest
 }
 
@@ -1989,7 +2312,7 @@ func (a *UserSvcAPIService) GetUsersExecute(r ApiGetUsersRequest) (*UserSvcGetUs
 
 type ApiIsAuthorizedRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	permissionId string
 	body *UserSvcIsAuthorizedRequest
 }
@@ -2136,7 +2459,7 @@ func (a *UserSvcAPIService) IsAuthorizedExecute(r ApiIsAuthorizedRequest) (*User
 
 type ApiLoginRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	request *UserSvcLoginRequest
 }
 
@@ -2268,7 +2591,7 @@ func (a *UserSvcAPIService) LoginExecute(r ApiLoginRequest) (*UserSvcLoginRespon
 
 type ApiReadUserByTokenRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 }
 
 func (r ApiReadUserByTokenRequest) Execute() (*UserSvcReadUserByTokenResponse, *http.Response, error) {
@@ -2402,7 +2725,7 @@ func (a *UserSvcAPIService) ReadUserByTokenExecute(r ApiReadUserByTokenRequest) 
 
 type ApiRegisterRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	body *UserSvcRegisterRequest
 }
 
@@ -2534,7 +2857,7 @@ func (a *UserSvcAPIService) RegisterExecute(r ApiRegisterRequest) (map[string]in
 
 type ApiRemoveUserFromOrganizationRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	organizationId string
 	userId string
 	request *map[string]interface{}
@@ -2718,7 +3041,7 @@ func (a *UserSvcAPIService) RemoveUserFromOrganizationExecute(r ApiRemoveUserFro
 
 type ApiSaveUserProfileRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	userId string
 	body *UserSvcSaveProfileRequest
 }
@@ -2879,7 +3202,7 @@ func (a *UserSvcAPIService) SaveUserProfileExecute(r ApiSaveUserProfileRequest) 
 
 type ApiSetRolePermissionRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	roleId string
 	body *UserSvcSetRolePermissionsRequest
 }
@@ -3041,7 +3364,7 @@ func (a *UserSvcAPIService) SetRolePermissionExecute(r ApiSetRolePermissionReque
 
 type ApiUpsertPermissionRequest struct {
 	ctx context.Context
-	ApiService *UserSvcAPIService
+	ApiService UserSvcAPI
 	permissionId string
 	requestBody *UserSvcUpserPermissionRequest
 }

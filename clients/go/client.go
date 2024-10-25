@@ -50,29 +50,29 @@ type APIClient struct {
 
 	// API Services
 
-	ChatSvcAPI *ChatSvcAPIService
+	ChatSvcAPI ChatSvcAPI
 
-	ConfigSvcAPI *ConfigSvcAPIService
+	ConfigSvcAPI ConfigSvcAPI
 
-	DeploySvcAPI *DeploySvcAPIService
+	DeploySvcAPI DeploySvcAPI
 
-	DockerSvcAPI *DockerSvcAPIService
+	DockerSvcAPI DockerSvcAPI
 
-	DownloadSvcAPI *DownloadSvcAPIService
+	DownloadSvcAPI DownloadSvcAPI
 
-	DynamicSvcAPI *DynamicSvcAPIService
+	DynamicSvcAPI DynamicSvcAPI
 
-	FirehoseSvcAPI *FirehoseSvcAPIService
+	FirehoseSvcAPI FirehoseSvcAPI
 
-	ModelSvcAPI *ModelSvcAPIService
+	ModelSvcAPI ModelSvcAPI
 
-	PolicySvcAPI *PolicySvcAPIService
+	PolicySvcAPI PolicySvcAPI
 
-	PromptSvcAPI *PromptSvcAPIService
+	PromptSvcAPI PromptSvcAPI
 
-	RegistrySvcAPI *RegistrySvcAPIService
+	RegistrySvcAPI RegistrySvcAPI
 
-	UserSvcAPI *UserSvcAPIService
+	UserSvcAPI UserSvcAPI
 }
 
 type service struct {
