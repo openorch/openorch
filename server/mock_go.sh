@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Find all interface.go files
-find . ../sdk/go -name '*interface.go' | while read file; do
+find . ../sdk/go ../clients/go \( -name '*interface.go' -o -name 'api*svc.go' \) | while read file; do
     # Get the directory of the file
     dir=$(dirname "${file}")
     # Extract the package name from the source file
     pkg=$(grep -E '^package ' "${file}" | awk '{print $2}')
     # Define the output file for the mock
-    output="${dir}/mock_${pkg}.go"
+    output="${dir}/mock_$(basename "$file")
+    "
     
     # Generate the mock with the correct package name
     mockgen -source="${file}" -destination="${output}" -package="${pkg}"

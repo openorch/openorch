@@ -23,7 +23,7 @@ func TestDeployLoop(t *testing.T) {
 	mockClientFactory := sdk.NewMockClientFactory(ctrl)
 	mockClientFactory.EXPECT().Client()
 	mockClientFactory.EXPECT().Client().Return(&openapi.APIClient{
-		//UserSvcAPI: ,
+		UserSvcAPI: openapi.NewMockUserSvcAPI(ctrl),
 	})
 
 	options := &di.Options{
