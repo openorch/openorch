@@ -26,13 +26,15 @@ type DeployService struct {
 	deploymentStore datastore.DataStore
 
 	triggerChan chan struct{}
+	triggerOnly bool
 }
 
 func NewDeployService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
-	datastoreFactory func(tableName string, instance any,
-	) (datastore.DataStore, error)) (*DeployService, error) {
+	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+	triggerOnly bool,
+) (*DeployService, error) {
 
 	credentialStore, err := datastoreFactory("deploySvcCredentials", &sdk.Credential{})
 	if err != nil {
@@ -51,6 +53,8 @@ func NewDeployService(
 		deploymentStore: deploymentStore,
 
 		triggerChan: make(chan struct{}),
+
+		triggerOnly: triggerOnly,
 	}
 
 	return service, nil
@@ -68,7 +72,7 @@ func (ns *DeployService) Start() error {
 
 	ns.token = token
 
-	go ns.loop()
+	go ns.loop(ns.triggerOnly)
 
 	return ns.registerPermissions()
 }

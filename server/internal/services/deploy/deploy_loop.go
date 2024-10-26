@@ -25,16 +25,23 @@ import (
 	deploy "github.com/singulatron/superplatform/server/internal/services/deploy/types"
 )
 
-func (ns *DeployService) loop() {
-	ticker := time.NewTicker(15 * time.Second)
+func (ns *DeployService) loop(triggerOnly bool) {
+	interval := 15 * time.Second
+	if triggerOnly {
+		interval = 100 * 365 * 24 * time.Hour
+	}
+
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 
-	go func() {
-		ns.triggerChan <- struct{}{}
-	}()
+	if !ns.triggerOnly {
+		go func() {
+			ns.triggerChan <- struct{}{}
+		}()
+	}
 
 	for {
 		select {

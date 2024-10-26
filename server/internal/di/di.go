@@ -258,6 +258,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
+		!options.Test,
 	)
 	if err != nil {
 		logger.Error("Node service creation failed", slog.String("error", err.Error()))

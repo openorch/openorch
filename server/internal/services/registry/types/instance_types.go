@@ -19,12 +19,12 @@ type ErrorResponse struct {
 }
 
 type Instance struct {
-	ID            string    `json:"id,omitempty" example:"https://api.com:999/user-svc" binding:"required"` // Required: ID of the instance
-	DeploymentId  string    `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`    // The ID of the deployment that this instance is an instance of.
-	URL           string    `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`   // Full address URL of the instance.
-	Path          string    `json:"path,omitempty" example:"/your-svc"`                                     // Path of the instance address. Optional (e.g., "/api")
-	NodeURL       string    `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`                 // URL of the Singulatron daemon
-	LastHeartbeat time.Time `json:"lastHeartbeat,omitempty"`                                                // Last time the instance gave a sign of life
+	ID            string    `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`            // Required: ID of the instance
+	DeploymentId  string    `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`  // The ID of the deployment that this instance is an instance of.
+	URL           string    `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"` // Full address URL of the instance.
+	Path          string    `json:"path,omitempty" example:"/your-svc"`                                   // Path of the instance address. Optional (e.g., "/api")
+	NodeURL       string    `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`               // URL of the Singulatron daemon
+	LastHeartbeat time.Time `json:"lastHeartbeat,omitempty"`                                              // Last time the instance gave a sign of life
 
 	// URL alternative fields
 

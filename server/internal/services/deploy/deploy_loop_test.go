@@ -4,64 +4,135 @@ import (
 	"context"
 	"net/http/httptest"
 	"testing"
+	"time"
 
+	"github.com/gorilla/mux"
+	"github.com/onsi/ginkgo/v2"
+	"github.com/onsi/gomega"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
+	"github.com/singulatron/superplatform/sdk/go/test"
 	"github.com/singulatron/superplatform/server/internal/di"
-	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 )
 
-// TestDeployLoop simulates a deployment cycle in the deploy loop.
-func TestDeployLoop(t *testing.T) {
-	hs := &di.HandlerSwitcher{}
-	server := httptest.NewServer(hs)
-	defer server.Close()
-
-	ctrl := gomock.NewController(t)
-	defer ctrl.Finish()
-	ctx := context.Background()
-
-	mockUserSvc := openapi.NewMockUserSvcAPI(ctrl)
-	mockClientFactory := sdk.NewMockClientFactory(ctrl)
-
-	expectedUserSvcLoginResponse := &openapi.UserSvcLoginResponse{
-		Token: &openapi.UserSvcAuthToken{
-			Token: openapi.PtrString("HELLO"),
-		},
-	}
-	mockLoginRequest := openapi.ApiLoginRequest{
-		ApiService: mockUserSvc,
-	}
-	mockAddPermissionToRoleRequest := openapi.ApiAddPermissionToRoleRequest{
-		ApiService: mockUserSvc,
-	}
-	expectedUserSvcAddPermissionToRoleResponse := map[string]interface{}{}
-	expectedUserSvcUpsertPermissionResponse := map[string]interface{}{}
-	mockUpsertPermissionRequest := openapi.ApiUpsertPermissionRequest{
-		ApiService: mockUserSvc,
-	}
-
-	mockUserSvc.EXPECT().Login(ctx).Return(mockLoginRequest)
-	mockUserSvc.EXPECT().LoginExecute(gomock.Any()).Return(expectedUserSvcLoginResponse, nil, nil)
-	mockUserSvc.EXPECT().UpsertPermission(ctx, gomock.Any()).Return(mockUpsertPermissionRequest).AnyTimes()
-	mockUserSvc.EXPECT().UpsertPermissionExecute(gomock.Any()).Return(expectedUserSvcUpsertPermissionResponse, nil, nil).AnyTimes()
-	mockUserSvc.EXPECT().AddPermissionToRole(ctx, gomock.Any(), gomock.Any()).Return(mockAddPermissionToRoleRequest).AnyTimes()
-	mockUserSvc.EXPECT().AddPermissionToRoleExecute(gomock.Any()).Return(expectedUserSvcAddPermissionToRoleResponse, nil, nil).AnyTimes()
-	mockClientFactory.EXPECT().Client(gomock.Any()).Return(&openapi.APIClient{
-		UserSvcAPI: mockUserSvc,
-	}).AnyTimes()
-
-	options := &di.Options{
-		Test:          true,
-		Url:           server.URL,
-		ClientFactory: mockClientFactory,
-	}
-	universe, starterFunc, err := di.BigBang(options)
-	require.NoError(t, err)
-
-	hs.UpdateHandler(universe)
-
-	err = starterFunc()
-	require.NoError(t, err)
+func TestDeployService(t *testing.T) {
+	gomega.RegisterFailHandler(ginkgo.Fail)
+	ginkgo.RunSpecs(t, "DeployService Suite")
 }
+
+var _ = ginkgo.Describe("Deploy Loop", func() {
+	var (
+		server            *httptest.Server
+		ctrl              *gomock.Controller
+		ctx               context.Context
+		mockClientFactory *sdk.MockClientFactory
+		mockUserSvc       *openapi.MockUserSvcAPI
+		universe          *mux.Router
+		mockRegistrySvc   *openapi.MockRegistrySvcAPI
+		mockDeploySvc     *openapi.MockDeploySvcAPI
+		starterFunc       func() error
+		adminClient       *openapi.APIClient
+	)
+
+	ginkgo.BeforeEach(func() {
+		ctx = context.Background()
+		ctrl = gomock.NewController(ginkgo.GinkgoT())
+		hs := &di.HandlerSwitcher{}
+		server = httptest.NewServer(hs)
+
+		mockClientFactory = sdk.NewMockClientFactory(ctrl)
+		mockUserSvc = test.MockUserSvc(ctx, ctrl)
+		mockRegistrySvc = openapi.NewMockRegistrySvcAPI(ctrl)
+		mockDeploySvc = openapi.NewMockDeploySvcAPI(ctrl)
+
+		mockClientFactory.EXPECT().Client(gomock.Any()).Return(&openapi.APIClient{
+			UserSvcAPI:     mockUserSvc,
+			RegistrySvcAPI: mockRegistrySvc,
+			DeploySvcAPI:   mockDeploySvc,
+		}).AnyTimes()
+
+		options := &di.Options{
+			Test:          true,
+			Url:           server.URL,
+			ClientFactory: mockClientFactory,
+		}
+		var err error
+		universe, starterFunc, err = di.BigBang(options)
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+		hs.UpdateHandler(universe)
+
+		adminClient, _, err = test.AdminClient(server.URL)
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
+	})
+
+	ginkgo.AfterEach(func() {
+		server.Close()
+		ctrl.Finish()
+	})
+
+	ginkgo.Context("when registry has one active node", func() {
+		ginkgo.BeforeEach(func() {
+			// Mock response for ListNodes
+			mockListNodesRequest := openapi.ApiListNodesRequest{ApiService: mockRegistrySvc}
+			mockRegistrySvc.EXPECT().ListNodes(ctx).Return(mockListNodesRequest).AnyTimes()
+			mockRegistrySvc.EXPECT().ListNodesExecute(gomock.Any()).Return(
+				&openapi.RegistrySvcListNodesResponse{
+					Nodes: []openapi.RegistrySvcNode{
+						{Url: openapi.PtrString(server.URL)},
+					},
+				}, nil, nil,
+			).AnyTimes()
+
+			// Mock response for ListInstances
+			mockListInstancesRequest := openapi.ApiListInstancesRequest{ApiService: mockRegistrySvc}
+			mockRegistrySvc.EXPECT().ListInstances(ctx).Return(mockListInstancesRequest).AnyTimes()
+			mockRegistrySvc.EXPECT().ListInstancesExecute(gomock.Any()).Return(
+				&openapi.RegistrySvcListInstancesResponse{
+					Instances: []openapi.RegistrySvcInstance{},
+				}, nil, nil,
+			).AnyTimes()
+
+			// Mock response for ListDefinitions
+			mockListDefinitionsRequest := openapi.ApiListDefinitionsRequest{ApiService: mockRegistrySvc}
+			mockRegistrySvc.EXPECT().ListDefinitions(ctx).Return(mockListDefinitionsRequest).AnyTimes()
+			mockRegistrySvc.EXPECT().ListDefinitionsExecute(gomock.Any()).Return(
+				&openapi.RegistrySvcListDefinitionsResponse{
+					Definitions: []openapi.RegistrySvcDefinition{},
+				}, nil, nil,
+			).AnyTimes()
+		})
+
+		ginkgo.It("saves a deployment successfully", func() {
+			err := starterFunc()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			_, _, err = adminClient.DeploySvcAPI.SaveDeployment(ctx).Body(openapi.DeploySvcSaveDeploymentRequest{
+				Deployment: &openapi.DeploySvcDeployment{
+					DefinitionId: "test-a",
+				},
+			}).Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			maxRetries := 5
+
+			var rsp *openapi.DeploySvcListDeploymentsResponse
+			for i := 0; i < maxRetries; i++ {
+				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
+				gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+				if *rsp.Deployments[0].Status == openapi.StatusOK {
+					break
+				}
+
+				time.Sleep(time.Second)
+			}
+
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+			gomega.Expect(rsp.Deployments).To(gomega.HaveLen(1))
+			gomega.Expect(rsp.Deployments[0].DefinitionId).To(gomega.Equal("test-a"))
+		})
+	})
+
+})
