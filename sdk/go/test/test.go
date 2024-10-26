@@ -3,10 +3,12 @@ package test
 import (
 	"context"
 	"fmt"
+	"net/http"
 
 	client "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/router"
+	"go.uber.org/mock/gomock"
 )
 
 func Client(url string) *client.APIClient {
@@ -85,4 +87,15 @@ func MakeClients(router *router.Router, num int) ([]*client.APIClient, error) {
 	}
 
 	return ret, nil
+}
+
+func mMckLoginFlow(ctrl *gomock.Controller, expectedResp *openapi.UserSvcLoginResponse, expectedHTTPResp *http.Response) *openapi.MockUserSvcAPI {
+	mockUserSvc := openapi.NewMockUserSvcAPI(ctrl)
+	mockApiLoginRequest := openapi.NewMockApiLoginRequest(ctrl)
+
+	mockUserSvc.EXPECT().Login(gomock.Any()).Return(mockApiLoginRequest)
+	mockApiLoginRequest.EXPECT().Request().Return(mockApiLoginRequest)
+	mockUserSvc.EXPECT().LoginExecute(mockApiLoginRequest).Return(expectedResp, expectedHTTPResp, nil)
+
+	return mockUserSvc
 }
