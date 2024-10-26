@@ -31,6 +31,13 @@ export interface RegistrySvcDefinition {
      */
     clients?: Array<RegistrySvcClient>;
     /**
+     * HostPort is a clutch until automatic port assignment works.
+     * It will go a way as it doesn't make any sense in a Definition.
+     * @type {number}
+     * @memberof RegistrySvcDefinition
+     */
+    hostPort?: number;
+    /**
      *
      * @type {string}
      * @memberof RegistrySvcDefinition

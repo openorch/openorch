@@ -21,6 +21,10 @@ export declare class RegistrySvcDefinition {
     * Programming language clients such as on npm or GitHub.
     */
     'clients'?: Array<RegistrySvcClient>;
+    /**
+    * HostPort is a clutch until automatic port assignment works. It will go a way as it doesn\'t make any sense in a Definition.
+    */
+    'hostPort'?: number;
     'id': string;
     /**
     * Container specifications for Docker, K8s, etc.

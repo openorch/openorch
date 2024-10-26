@@ -1232,7 +1232,7 @@ definitions:
         type: string
       id:
         description: 'Required: ID of the instance'
-        example: https://api.com:999/user-svc
+        example: inst_di9riJEvH2
         type: string
       ip:
         description: 'IP of the instance address. Optional: to register by IP instead
