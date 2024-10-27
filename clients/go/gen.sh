@@ -18,4 +18,8 @@ cp go.mod.template go.mod
 bash "$SERVER_DIR/mock_go.sh"
 
 # A hack to fix gopls because it doesn't like lots of client files being regenerated
-killall gopls || true
+if command -v gopls &> /dev/null; then
+    killall gopls || true
+else
+    echo "gopls is not running, skipping kill command."
+fi
