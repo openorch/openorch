@@ -20,6 +20,7 @@ import (
 type MockConfigSvcAPI struct {
 	ctrl     *gomock.Controller
 	recorder *MockConfigSvcAPIMockRecorder
+	isgomock struct{}
 }
 
 // MockConfigSvcAPIMockRecorder is the mock recorder for MockConfigSvcAPI.

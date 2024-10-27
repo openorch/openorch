@@ -20,6 +20,7 @@ import (
 type MockDockerSvcAPI struct {
 	ctrl     *gomock.Controller
 	recorder *MockDockerSvcAPIMockRecorder
+	isgomock struct{}
 }
 
 // MockDockerSvcAPIMockRecorder is the mock recorder for MockDockerSvcAPI.
