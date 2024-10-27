@@ -22,6 +22,10 @@ find "$SCRIPT_DIR" "$SCRIPT_DIR/../sdk/go" "$SCRIPT_DIR/../clients/go" \( -name 
     
     # Generate the mock with the correct package name
     mockgen -source="${file}" -destination="${output}" -package="${pkg}"
+
+    # Remove the Source line from the generated mock
+    # to prevent CI diff failing the build
+    sed -i '/^\/\/ Source: /d' "${output}"  # Remove the Source line
     
     echo "Mock generated for ${file} in ${output} with package ${pkg}"
 done
