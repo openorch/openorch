@@ -26,6 +26,8 @@ type RegistrySvcDefinition struct {
 	ApiSpecs []RegistrySvcAPISpec `json:"apiSpecs,omitempty"`
 	// Programming language clients such as on npm or GitHub.
 	Clients []RegistrySvcClient `json:"clients,omitempty"`
+	// HostPort is a clutch until automatic port assignment works. It will go a way as it doesn't make any sense in a Definition.
+	HostPort *int32 `json:"hostPort,omitempty"`
 	Id string `json:"id"`
 	// Container specifications for Docker, K8s, etc.
 	Image RegistrySvcImageSpec `json:"image"`
@@ -116,6 +118,38 @@ func (o *RegistrySvcDefinition) SetClients(v []RegistrySvcClient) {
 	o.Clients = v
 }
 
+// GetHostPort returns the HostPort field value if set, zero value otherwise.
+func (o *RegistrySvcDefinition) GetHostPort() int32 {
+	if o == nil || IsNil(o.HostPort) {
+		var ret int32
+		return ret
+	}
+	return *o.HostPort
+}
+
+// GetHostPortOk returns a tuple with the HostPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcDefinition) GetHostPortOk() (*int32, bool) {
+	if o == nil || IsNil(o.HostPort) {
+		return nil, false
+	}
+	return o.HostPort, true
+}
+
+// HasHostPort returns a boolean if a field has been set.
+func (o *RegistrySvcDefinition) HasHostPort() bool {
+	if o != nil && !IsNil(o.HostPort) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostPort gets a reference to the given int32 and assigns it to the HostPort field.
+func (o *RegistrySvcDefinition) SetHostPort(v int32) {
+	o.HostPort = &v
+}
+
 // GetId returns the Id field value
 func (o *RegistrySvcDefinition) GetId() string {
 	if o == nil {
@@ -179,6 +213,9 @@ func (o RegistrySvcDefinition) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Clients) {
 		toSerialize["clients"] = o.Clients
+	}
+	if !IsNil(o.HostPort) {
+		toSerialize["hostPort"] = o.HostPort
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["image"] = o.Image

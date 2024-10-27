@@ -96,10 +96,7 @@ func findAvailableNode(nodes []openapi.RegistrySvcNode, assignedNodes map[string
 	for _, node := range nodes {
 		// Check if the node is not assigned to this service and has available CPU capacity
 		if !assignedNodes[*node.Url] &&
-			node.Usage != nil &&
-			node.Usage.Cpu != nil &&
-			node.Usage.Cpu.Percent != nil &&
-			*node.Usage.Cpu.Percent < 80 {
+			(node.Usage == nil || node.Usage.Cpu == nil || node.Usage.Cpu.Percent == nil || *node.Usage.Cpu.Percent < 80) {
 			return &node
 		}
 	}

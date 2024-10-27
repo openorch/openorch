@@ -5519,6 +5519,10 @@ const docTemplate = `{
                         "$ref": "#/definitions/registry_svc.Client"
                     }
                 },
+                "hostPort": {
+                    "description": "HostPort is a clutch until automatic port assignment works.\nIt will go a way as it doesn't make any sense in a Definition.",
+                    "type": "integer"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -5628,7 +5632,7 @@ const docTemplate = `{
                 "id": {
                     "description": "Required: ID of the instance",
                     "type": "string",
-                    "example": "https://api.com:999/user-svc"
+                    "example": "inst_di9riJEvH2"
                 },
                 "ip": {
                     "description": "IP of the instance address. Optional: to register by IP instead of host",

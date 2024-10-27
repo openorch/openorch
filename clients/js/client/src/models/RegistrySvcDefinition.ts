@@ -51,6 +51,13 @@ export interface RegistrySvcDefinition {
      */
     clients?: Array<RegistrySvcClient>;
     /**
+     * HostPort is a clutch until automatic port assignment works.
+     * It will go a way as it doesn't make any sense in a Definition.
+     * @type {number}
+     * @memberof RegistrySvcDefinition
+     */
+    hostPort?: number;
+    /**
      * 
      * @type {string}
      * @memberof RegistrySvcDefinition
@@ -85,6 +92,7 @@ export function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminato
         
         'apiSpecs': json['apiSpecs'] == null ? undefined : ((json['apiSpecs'] as Array<any>).map(RegistrySvcAPISpecFromJSON)),
         'clients': json['clients'] == null ? undefined : ((json['clients'] as Array<any>).map(RegistrySvcClientFromJSON)),
+        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
         'image': RegistrySvcImageSpecFromJSON(json['image']),
     };
@@ -98,6 +106,7 @@ export function RegistrySvcDefinitionToJSON(value?: RegistrySvcDefinition | null
         
         'apiSpecs': value['apiSpecs'] == null ? undefined : ((value['apiSpecs'] as Array<any>).map(RegistrySvcAPISpecToJSON)),
         'clients': value['clients'] == null ? undefined : ((value['clients'] as Array<any>).map(RegistrySvcClientToJSON)),
+        'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpecToJSON(value['image']),
     };

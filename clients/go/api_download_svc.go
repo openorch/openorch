@@ -21,12 +21,81 @@ import (
 )
 
 
+type DownloadSvcAPI interface {
+
+	/*
+	Download Download a File
+
+	Start a download for a specified URL.
+
+Requires the `download-svc:download:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDownloadRequest
+	*/
+	Download(ctx context.Context) ApiDownloadRequest
+
+	// DownloadExecute executes the request
+	//  @return map[string]interface{}
+	DownloadExecute(r ApiDownloadRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	GetDownload Get a Download
+
+	Get a download by ID.
+
+Requires the `download-svc:download:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param downloadId Download ID
+	@return ApiGetDownloadRequest
+	*/
+	GetDownload(ctx context.Context, downloadId string) ApiGetDownloadRequest
+
+	// GetDownloadExecute executes the request
+	//  @return DownloadSvcGetDownloadResponse
+	GetDownloadExecute(r ApiGetDownloadRequest) (*DownloadSvcGetDownloadResponse, *http.Response, error)
+
+	/*
+	ListDownloads List Downloads
+
+	Fetch a list of all download details.
+
+Requires the `download-svc:download:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListDownloadsRequest
+	*/
+	ListDownloads(ctx context.Context) ApiListDownloadsRequest
+
+	// ListDownloadsExecute executes the request
+	//  @return DownloadSvcDownloadsResponse
+	ListDownloadsExecute(r ApiListDownloadsRequest) (*DownloadSvcDownloadsResponse, *http.Response, error)
+
+	/*
+	Pause Pause a Download
+
+	Pause a download that is currently in progress.
+
+Requires the `download-svc:download:edit` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param downloadId Download ID
+	@return ApiPauseRequest
+	*/
+	Pause(ctx context.Context, downloadId string) ApiPauseRequest
+
+	// PauseExecute executes the request
+	//  @return map[string]interface{}
+	PauseExecute(r ApiPauseRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // DownloadSvcAPIService DownloadSvcAPI service
 type DownloadSvcAPIService service
 
 type ApiDownloadRequest struct {
 	ctx context.Context
-	ApiService *DownloadSvcAPIService
+	ApiService DownloadSvcAPI
 	request *DownloadSvcDownloadRequest
 }
 
@@ -185,7 +254,7 @@ func (a *DownloadSvcAPIService) DownloadExecute(r ApiDownloadRequest) (map[strin
 
 type ApiGetDownloadRequest struct {
 	ctx context.Context
-	ApiService *DownloadSvcAPIService
+	ApiService DownloadSvcAPI
 	downloadId string
 }
 
@@ -325,7 +394,7 @@ func (a *DownloadSvcAPIService) GetDownloadExecute(r ApiGetDownloadRequest) (*Do
 
 type ApiListDownloadsRequest struct {
 	ctx context.Context
-	ApiService *DownloadSvcAPIService
+	ApiService DownloadSvcAPI
 }
 
 func (r ApiListDownloadsRequest) Execute() (*DownloadSvcDownloadsResponse, *http.Response, error) {
@@ -461,7 +530,7 @@ func (a *DownloadSvcAPIService) ListDownloadsExecute(r ApiListDownloadsRequest) 
 
 type ApiPauseRequest struct {
 	ctx context.Context
-	ApiService *DownloadSvcAPIService
+	ApiService DownloadSvcAPI
 	downloadId string
 }
 

@@ -21,12 +21,44 @@ import (
 )
 
 
+type PolicySvcAPI interface {
+
+	/*
+	Check Check
+
+	Check records a resource access and returns if the access is allowed.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCheckRequest
+	*/
+	Check(ctx context.Context) ApiCheckRequest
+
+	// CheckExecute executes the request
+	//  @return PolicySvcCheckResponse
+	CheckExecute(r ApiCheckRequest) (*PolicySvcCheckResponse, *http.Response, error)
+
+	/*
+	UpsertInstance Upsert an Instance
+
+	Allows user to upsert a new policy instance based on a template.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance ID
+	@return ApiUpsertInstanceRequest
+	*/
+	UpsertInstance(ctx context.Context, instanceId string) ApiUpsertInstanceRequest
+
+	// UpsertInstanceExecute executes the request
+	//  @return map[string]interface{}
+	UpsertInstanceExecute(r ApiUpsertInstanceRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // PolicySvcAPIService PolicySvcAPI service
 type PolicySvcAPIService service
 
 type ApiCheckRequest struct {
 	ctx context.Context
-	ApiService *PolicySvcAPIService
+	ApiService PolicySvcAPI
 	request *PolicySvcCheckRequest
 }
 
@@ -183,7 +215,7 @@ func (a *PolicySvcAPIService) CheckExecute(r ApiCheckRequest) (*PolicySvcCheckRe
 
 type ApiUpsertInstanceRequest struct {
 	ctx context.Context
-	ApiService *PolicySvcAPIService
+	ApiService PolicySvcAPI
 	instanceId string
 	request *PolicySvcUpsertInstanceRequest
 }

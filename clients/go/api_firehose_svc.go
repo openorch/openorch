@@ -20,12 +20,42 @@ import (
 )
 
 
+type FirehoseSvcAPI interface {
+
+	/*
+	PublishEvent Publish an Event
+
+	Publishes an event to the firehose service after authorization check
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPublishEventRequest
+	*/
+	PublishEvent(ctx context.Context) ApiPublishEventRequest
+
+	// PublishEventExecute executes the request
+	PublishEventExecute(r ApiPublishEventRequest) (*http.Response, error)
+
+	/*
+	SubscribeToEvents Subscribe to the Event Stream
+
+	Establish a subscription to the firehose events and accept a real time stream of them.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSubscribeToEventsRequest
+	*/
+	SubscribeToEvents(ctx context.Context) ApiSubscribeToEventsRequest
+
+	// SubscribeToEventsExecute executes the request
+	//  @return string
+	SubscribeToEventsExecute(r ApiSubscribeToEventsRequest) (string, *http.Response, error)
+}
+
 // FirehoseSvcAPIService FirehoseSvcAPI service
 type FirehoseSvcAPIService service
 
 type ApiPublishEventRequest struct {
 	ctx context.Context
-	ApiService *FirehoseSvcAPIService
+	ApiService FirehoseSvcAPI
 	event *FirehoseSvcEventPublishRequest
 }
 
@@ -160,7 +190,7 @@ func (a *FirehoseSvcAPIService) PublishEventExecute(r ApiPublishEventRequest) (*
 
 type ApiSubscribeToEventsRequest struct {
 	ctx context.Context
-	ApiService *FirehoseSvcAPIService
+	ApiService FirehoseSvcAPI
 }
 
 func (r ApiSubscribeToEventsRequest) Execute() (string, *http.Response, error) {

@@ -24,7 +24,7 @@ func List(cmd *cobra.Command, args []string) error {
 
 	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListNodes(ctx).Execute()
 	if err != nil {
-		fmt.Errorf("Failed to list nodes: '%v'", err)
+		return fmt.Errorf("Failed to list nodes: '%v'", err)
 	}
 
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
