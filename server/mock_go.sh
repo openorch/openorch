@@ -1,5 +1,12 @@
 #!/bin/bash
 
+set -e
+
+if ! command -v mockgen &> /dev/null; then
+    echo "mockgen could not be found, installing..."
+    go install github.com/golang/mock/mockgen@latest
+fi
+
 # Find all interface.go files
 find . ../sdk/go ../clients/go \( -name '*interface.go' -o -name 'api*svc.go' \) ! -name '*mock*' | while read file; do
     # Get the directory of the file
