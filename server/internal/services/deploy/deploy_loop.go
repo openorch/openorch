@@ -13,6 +13,7 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"syscall"
 	"time"
 
@@ -60,6 +61,7 @@ func (ns *DeployService) loop(triggerOnly bool) {
 func (ns *DeployService) runCycle() {
 	defer func() {
 		if r := recover(); r != nil {
+			debug.PrintStack()
 			logger.Error("Deploy cycle panic", slog.Any("panic", r))
 		}
 	}()

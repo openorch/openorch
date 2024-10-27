@@ -31,6 +31,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		universe          *mux.Router
 		mockRegistrySvc   *openapi.MockRegistrySvcAPI
 		mockDeploySvc     *openapi.MockDeploySvcAPI
+		mockDockerSvc     *openapi.MockDockerSvcAPI
 		starterFunc       func() error
 		adminClient       *openapi.APIClient
 
@@ -49,11 +50,13 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		mockUserSvc = test.MockUserSvc(ctx, ctrl)
 		mockRegistrySvc = openapi.NewMockRegistrySvcAPI(ctrl)
 		mockDeploySvc = openapi.NewMockDeploySvcAPI(ctrl)
+		mockDockerSvc = openapi.NewMockDockerSvcAPI(ctrl)
 
 		mockClientFactory.EXPECT().Client(gomock.Any()).Return(&openapi.APIClient{
 			UserSvcAPI:     mockUserSvc,
 			RegistrySvcAPI: mockRegistrySvc,
 			DeploySvcAPI:   mockDeploySvc,
+			DockerSvcAPI:   mockDockerSvc,
 		}).AnyTimes()
 
 		options := &di.Options{
@@ -70,7 +73,9 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		adminClient, _, err = test.AdminClient(server.URL)
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-		// Mock response for ListNodes
+	})
+
+	ginkgo.JustBeforeEach(func() {
 		mockListNodesRequest := openapi.ApiListNodesRequest{ApiService: mockRegistrySvc}
 		mockRegistrySvc.EXPECT().ListNodes(ctx).Return(mockListNodesRequest).AnyTimes()
 		mockRegistrySvc.EXPECT().ListNodesExecute(gomock.Any()).Return(
@@ -79,7 +84,6 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}, nil, nil,
 		).AnyTimes()
 
-		// Mock response for ListInstances
 		mockListInstancesRequest := openapi.ApiListInstancesRequest{ApiService: mockRegistrySvc}
 		mockRegistrySvc.EXPECT().ListInstances(ctx).Return(mockListInstancesRequest).AnyTimes()
 		mockRegistrySvc.EXPECT().ListInstancesExecute(gomock.Any()).Return(
@@ -88,7 +92,6 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}, nil, nil,
 		).AnyTimes()
 
-		// Mock response for ListDefinitions
 		mockListDefinitionsRequest := openapi.ApiListDefinitionsRequest{ApiService: mockRegistrySvc}
 		mockRegistrySvc.EXPECT().ListDefinitions(ctx).Return(mockListDefinitionsRequest).AnyTimes()
 		mockRegistrySvc.EXPECT().ListDefinitionsExecute(gomock.Any()).Return(
@@ -96,6 +99,10 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				Definitions: definitions,
 			}, nil, nil,
 		).AnyTimes()
+
+		mockLaunchContainerRequest := openapi.ApiLaunchContainerRequest{ApiService: mockDockerSvc}
+		mockDockerSvc.EXPECT().LaunchContainer(ctx).Return(mockLaunchContainerRequest).AnyTimes()
+		mockDockerSvc.EXPECT().LaunchContainerExecute(gomock.Any()).Return(nil, nil, nil).AnyTimes()
 	})
 
 	ginkgo.AfterEach(func() {
@@ -106,7 +113,18 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 	ginkgo.Context("when registry has one active node", func() {
 		ginkgo.BeforeEach(func() {
 			nodes = []openapi.RegistrySvcNode{
-				{Url: openapi.PtrString(server.URL)},
+				{
+					Url: openapi.PtrString(server.URL),
+				},
+			}
+			definitions = []openapi.RegistrySvcDefinition{
+				{
+					Id: "test-a", Image: openapi.RegistrySvcImageSpec{
+						Name: "hashicorp/http-echo",
+						Port: 8080,
+					},
+					HostPort: openapi.PtrInt32(8887),
+				},
 			}
 		})
 
