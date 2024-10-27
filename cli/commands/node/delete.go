@@ -3,6 +3,7 @@ package node
 import (
 	"fmt"
 
+	"github.com/pkg/errors"
 	"github.com/singulatron/superplatform/cli/config"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/spf13/cobra"
@@ -15,7 +16,7 @@ func Delete(cmd *cobra.Command, args []string) error {
 
 	ur, token, err := config.GetSelectedUrlAndToken()
 	if err != nil {
-		return fmt.Errorf("Cannot get env url: '%v'", err)
+		return errors.Wrap(err, "cannot get env url")
 	}
 
 	cf := sdk.NewApiClientFactory(ur)

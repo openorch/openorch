@@ -68,7 +68,7 @@ func RegisterService(serviceSlug, serviceName string, router *router.Router, sto
 	return *loginRsp.Token.Token, nil
 }
 
-func RegisterServiceNoRouter(userService *client.UserSvcAPIService, serviceSlug, serviceName string, store datastore.DataStore) (string, error) {
+func RegisterServiceNoRouter(userService client.UserSvcAPI, serviceSlug, serviceName string, store datastore.DataStore) (string, error) {
 	ctx := context.Background()
 
 	res, err := store.Query().Find()

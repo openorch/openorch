@@ -21,12 +21,72 @@ import (
 )
 
 
+type PromptSvcAPI interface {
+
+	/*
+	AddPrompt Add Prompt
+
+	Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddPromptRequest
+	*/
+	AddPrompt(ctx context.Context) ApiAddPromptRequest
+
+	// AddPromptExecute executes the request
+	//  @return PromptSvcAddPromptResponse
+	AddPromptExecute(r ApiAddPromptRequest) (*PromptSvcAddPromptResponse, *http.Response, error)
+
+	/*
+	ListPrompts List Prompts
+
+	List prompts that satisfy a query.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListPromptsRequest
+	*/
+	ListPrompts(ctx context.Context) ApiListPromptsRequest
+
+	// ListPromptsExecute executes the request
+	//  @return PromptSvcListPromptsResponse
+	ListPromptsExecute(r ApiListPromptsRequest) (*PromptSvcListPromptsResponse, *http.Response, error)
+
+	/*
+	RemovePrompt Remove Prompt
+
+	Remove a prompt by ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRemovePromptRequest
+	*/
+	RemovePrompt(ctx context.Context) ApiRemovePromptRequest
+
+	// RemovePromptExecute executes the request
+	//  @return map[string]interface{}
+	RemovePromptExecute(r ApiRemovePromptRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	SubscribeToPromptResponses Subscribe to Prompt Responses by Thread
+
+	Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiSubscribeToPromptResponsesRequest
+	*/
+	SubscribeToPromptResponses(ctx context.Context, threadId string) ApiSubscribeToPromptResponsesRequest
+
+	// SubscribeToPromptResponsesExecute executes the request
+	//  @return string
+	SubscribeToPromptResponsesExecute(r ApiSubscribeToPromptResponsesRequest) (string, *http.Response, error)
+}
+
 // PromptSvcAPIService PromptSvcAPI service
 type PromptSvcAPIService service
 
 type ApiAddPromptRequest struct {
 	ctx context.Context
-	ApiService *PromptSvcAPIService
+	ApiService PromptSvcAPI
 	request *PromptSvcAddPromptRequest
 }
 
@@ -183,7 +243,7 @@ func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSv
 
 type ApiListPromptsRequest struct {
 	ctx context.Context
-	ApiService *PromptSvcAPIService
+	ApiService PromptSvcAPI
 	request *PromptSvcListPromptsRequest
 }
 
@@ -337,7 +397,7 @@ func (a *PromptSvcAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*Prom
 
 type ApiRemovePromptRequest struct {
 	ctx context.Context
-	ApiService *PromptSvcAPIService
+	ApiService PromptSvcAPI
 	request *PromptSvcRemovePromptRequest
 }
 
@@ -494,7 +554,7 @@ func (a *PromptSvcAPIService) RemovePromptExecute(r ApiRemovePromptRequest) (map
 
 type ApiSubscribeToPromptResponsesRequest struct {
 	ctx context.Context
-	ApiService *PromptSvcAPIService
+	ApiService PromptSvcAPI
 	threadId string
 }
 

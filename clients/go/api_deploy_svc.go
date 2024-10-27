@@ -20,12 +20,43 @@ import (
 )
 
 
+type DeploySvcAPI interface {
+
+	/*
+	ListDeployments List Deployments
+
+	Retrieve a list of deployments.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListDeploymentsRequest
+	*/
+	ListDeployments(ctx context.Context) ApiListDeploymentsRequest
+
+	// ListDeploymentsExecute executes the request
+	//  @return DeploySvcListDeploymentsResponse
+	ListDeploymentsExecute(r ApiListDeploymentsRequest) (*DeploySvcListDeploymentsResponse, *http.Response, error)
+
+	/*
+	SaveDeployment Save Deployment
+
+	Save a deployment.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSaveDeploymentRequest
+	*/
+	SaveDeployment(ctx context.Context) ApiSaveDeploymentRequest
+
+	// SaveDeploymentExecute executes the request
+	//  @return map[string]interface{}
+	SaveDeploymentExecute(r ApiSaveDeploymentRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // DeploySvcAPIService DeploySvcAPI service
 type DeploySvcAPIService service
 
 type ApiListDeploymentsRequest struct {
 	ctx context.Context
-	ApiService *DeploySvcAPIService
+	ApiService DeploySvcAPI
 	body *map[string]interface{}
 }
 
@@ -179,7 +210,7 @@ func (a *DeploySvcAPIService) ListDeploymentsExecute(r ApiListDeploymentsRequest
 
 type ApiSaveDeploymentRequest struct {
 	ctx context.Context
-	ApiService *DeploySvcAPIService
+	ApiService DeploySvcAPI
 	body *DeploySvcSaveDeploymentRequest
 }
 

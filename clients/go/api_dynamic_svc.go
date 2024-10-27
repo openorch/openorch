@@ -21,12 +21,90 @@ import (
 )
 
 
+type DynamicSvcAPI interface {
+
+	/*
+	CreateObject Create a Generic Object
+
+	Creates a new object with the provided details. Requires authorization and user authentication.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateObjectRequest
+	*/
+	CreateObject(ctx context.Context) ApiCreateObjectRequest
+
+	// CreateObjectExecute executes the request
+	//  @return DynamicSvcCreateObjectResponse
+	CreateObjectExecute(r ApiCreateObjectRequest) (*DynamicSvcCreateObjectResponse, *http.Response, error)
+
+	/*
+	DeleteObjects Delete a Generic Object
+
+	Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteObjectsRequest
+	*/
+	DeleteObjects(ctx context.Context) ApiDeleteObjectsRequest
+
+	// DeleteObjectsExecute executes the request
+	//  @return map[string]interface{}
+	DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	Query Query Objects
+
+	Retrieves objects from a specified table based on search criteria.
+Requires authorization and user authentication.
+
+
+Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryRequest
+	*/
+	Query(ctx context.Context) ApiQueryRequest
+
+	// QueryExecute executes the request
+	//  @return DynamicSvcQueryResponse
+	QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryResponse, *http.Response, error)
+
+	/*
+	UpdateObjects Update Objects
+
+	Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateObjectsRequest
+	*/
+	UpdateObjects(ctx context.Context) ApiUpdateObjectsRequest
+
+	// UpdateObjectsExecute executes the request
+	//  @return map[string]interface{}
+	UpdateObjectsExecute(r ApiUpdateObjectsRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	UpsertObject Upsert a Generic Object
+
+	Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param objectId Object ID
+	@return ApiUpsertObjectRequest
+	*/
+	UpsertObject(ctx context.Context, objectId string) ApiUpsertObjectRequest
+
+	// UpsertObjectExecute executes the request
+	//  @return DynamicSvcUpsertObjectResponse
+	UpsertObjectExecute(r ApiUpsertObjectRequest) (*DynamicSvcUpsertObjectResponse, *http.Response, error)
+}
+
 // DynamicSvcAPIService DynamicSvcAPI service
 type DynamicSvcAPIService service
 
 type ApiCreateObjectRequest struct {
 	ctx context.Context
-	ApiService *DynamicSvcAPIService
+	ApiService DynamicSvcAPI
 	body *DynamicSvcCreateObjectRequest
 }
 
@@ -183,7 +261,7 @@ func (a *DynamicSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*D
 
 type ApiDeleteObjectsRequest struct {
 	ctx context.Context
-	ApiService *DynamicSvcAPIService
+	ApiService DynamicSvcAPI
 	body *DynamicSvcDeleteObjectRequest
 }
 
@@ -340,7 +418,7 @@ func (a *DynamicSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (
 
 type ApiQueryRequest struct {
 	ctx context.Context
-	ApiService *DynamicSvcAPIService
+	ApiService DynamicSvcAPI
 	body *DynamicSvcQueryRequest
 }
 
@@ -498,7 +576,7 @@ func (a *DynamicSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQuery
 
 type ApiUpdateObjectsRequest struct {
 	ctx context.Context
-	ApiService *DynamicSvcAPIService
+	ApiService DynamicSvcAPI
 	body *DynamicSvcUpdateObjectRequest
 }
 
@@ -655,7 +733,7 @@ func (a *DynamicSvcAPIService) UpdateObjectsExecute(r ApiUpdateObjectsRequest) (
 
 type ApiUpsertObjectRequest struct {
 	ctx context.Context
-	ApiService *DynamicSvcAPIService
+	ApiService DynamicSvcAPI
 	objectId string
 	body *DynamicSvcUpsertObjectRequest
 }

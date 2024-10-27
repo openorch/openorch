@@ -53,6 +53,7 @@ type Options struct {
 	Router           *router.Router
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 	HomeDir          string
+	ClientFactory    sdk.ClientFactory
 }
 
 func BigBang(options *Options) (*mux.Router, func() error, error) {
@@ -245,16 +246,19 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	ur := router.SelfAddress()
-	if options.Url != "" {
-		ur = options.Url
+	if options.ClientFactory == nil {
+		ur := router.SelfAddress()
+		if options.Url != "" {
+			ur = options.Url
+		}
+		options.ClientFactory = sdk.NewApiClientFactory(ur)
 	}
-	clientFactory := sdk.NewApiClientFactory(ur)
 
 	deployService, err := deployservice.NewDeployService(
-		clientFactory,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
+		!options.Test,
 	)
 	if err != nil {
 		logger.Error("Node service creation failed", slog.String("error", err.Error()))

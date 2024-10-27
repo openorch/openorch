@@ -29,6 +29,11 @@ RegistrySvcDefinition.attributeTypeMap = [
         "type": "Array<RegistrySvcClient>"
     },
     {
+        "name": "hostPort",
+        "baseName": "hostPort",
+        "type": "number"
+    },
+    {
         "name": "id",
         "baseName": "id",
         "type": "string"

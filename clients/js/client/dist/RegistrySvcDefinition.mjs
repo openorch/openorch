@@ -36,6 +36,7 @@ function RegistrySvcDefinitionFromJSONTyped(json, ignoreDiscriminator) {
     return {
         'apiSpecs': json['apiSpecs'] == null ? undefined : (json['apiSpecs'].map(RegistrySvcAPISpecFromJSON)),
         'clients': json['clients'] == null ? undefined : (json['clients'].map(RegistrySvcClientFromJSON)),
+        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
         'image': RegistrySvcImageSpecFromJSON(json['image']),
     };
@@ -47,6 +48,7 @@ function RegistrySvcDefinitionToJSON(value) {
     return {
         'apiSpecs': value['apiSpecs'] == null ? undefined : (value['apiSpecs'].map(RegistrySvcAPISpecToJSON)),
         'clients': value['clients'] == null ? undefined : (value['clients'].map(RegistrySvcClientToJSON)),
+        'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpecToJSON(value['image']),
     };

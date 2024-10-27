@@ -63,6 +63,10 @@ func (ns *DeployService) SaveDeployment(
 		return
 	}
 
+	go func() {
+		ns.triggerChan <- struct{}{}
+	}()
+
 	w.Write([]byte(`{}`))
 }
 

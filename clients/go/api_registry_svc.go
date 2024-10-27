@@ -21,12 +21,127 @@ import (
 )
 
 
+type RegistrySvcAPI interface {
+
+	/*
+	DeleteDefinition Delete Definition
+
+	Deletes a registered definition by ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Definition ID
+	@return ApiDeleteDefinitionRequest
+	*/
+	DeleteDefinition(ctx context.Context, id string) ApiDeleteDefinitionRequest
+
+	// DeleteDefinitionExecute executes the request
+	DeleteDefinitionExecute(r ApiDeleteDefinitionRequest) (*http.Response, error)
+
+	/*
+	DeleteNode Delete Node
+
+	Deletes a registered node by node URL. This endpoint is useful when a node is no longer available but it's still present in the database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param url Node URL
+	@return ApiDeleteNodeRequest
+	*/
+	DeleteNode(ctx context.Context, url string) ApiDeleteNodeRequest
+
+	// DeleteNodeExecute executes the request
+	DeleteNodeExecute(r ApiDeleteNodeRequest) (*http.Response, error)
+
+	/*
+	ListDefinitions List Definitions
+
+	Retrieves a list of all definitions or filters them by specific criteria.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListDefinitionsRequest
+	*/
+	ListDefinitions(ctx context.Context) ApiListDefinitionsRequest
+
+	// ListDefinitionsExecute executes the request
+	//  @return RegistrySvcListDefinitionsResponse
+	ListDefinitionsExecute(r ApiListDefinitionsRequest) (*RegistrySvcListDefinitionsResponse, *http.Response, error)
+
+	/*
+	ListInstances List Service Instances
+
+	Retrieves a list of all instances or filters them by specific criteria (e.g., host, IP).
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListInstancesRequest
+	*/
+	ListInstances(ctx context.Context) ApiListInstancesRequest
+
+	// ListInstancesExecute executes the request
+	//  @return RegistrySvcListInstancesResponse
+	ListInstancesExecute(r ApiListInstancesRequest) (*RegistrySvcListInstancesResponse, *http.Response, error)
+
+	/*
+	ListNodes List Nodes
+
+	Retrieve a list of nodes.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListNodesRequest
+	*/
+	ListNodes(ctx context.Context) ApiListNodesRequest
+
+	// ListNodesExecute executes the request
+	//  @return RegistrySvcListNodesResponse
+	ListNodesExecute(r ApiListNodesRequest) (*RegistrySvcListNodesResponse, *http.Response, error)
+
+	/*
+	RegisterInstance Register Instance
+
+	Registers an instance, associating an instance address with a slug acquired from the bearer token.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRegisterInstanceRequest
+	*/
+	RegisterInstance(ctx context.Context) ApiRegisterInstanceRequest
+
+	// RegisterInstanceExecute executes the request
+	//  @return map[string]interface{}
+	RegisterInstanceExecute(r ApiRegisterInstanceRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	RemoveInstance Remove Instance
+
+	Removes a registered instance by ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Instance ID
+	@return ApiRemoveInstanceRequest
+	*/
+	RemoveInstance(ctx context.Context, id string) ApiRemoveInstanceRequest
+
+	// RemoveInstanceExecute executes the request
+	RemoveInstanceExecute(r ApiRemoveInstanceRequest) (*http.Response, error)
+
+	/*
+	SaveDefinition Register a Definition
+
+	Registers a new definition, associating an definition address with a slug acquired from the bearer token.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSaveDefinitionRequest
+	*/
+	SaveDefinition(ctx context.Context) ApiSaveDefinitionRequest
+
+	// SaveDefinitionExecute executes the request
+	//  @return map[string]interface{}
+	SaveDefinitionExecute(r ApiSaveDefinitionRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // RegistrySvcAPIService RegistrySvcAPI service
 type RegistrySvcAPIService service
 
 type ApiDeleteDefinitionRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	id string
 }
 
@@ -175,7 +290,7 @@ func (a *RegistrySvcAPIService) DeleteDefinitionExecute(r ApiDeleteDefinitionReq
 
 type ApiDeleteNodeRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	url string
 }
 
@@ -324,7 +439,7 @@ func (a *RegistrySvcAPIService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*http
 
 type ApiListDefinitionsRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 }
 
 func (r ApiListDefinitionsRequest) Execute() (*RegistrySvcListDefinitionsResponse, *http.Response, error) {
@@ -458,7 +573,7 @@ func (a *RegistrySvcAPIService) ListDefinitionsExecute(r ApiListDefinitionsReque
 
 type ApiListInstancesRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	scheme *string
 	ip *string
 	deploymentId *string
@@ -652,7 +767,7 @@ func (a *RegistrySvcAPIService) ListInstancesExecute(r ApiListInstancesRequest) 
 
 type ApiListNodesRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	body *map[string]interface{}
 }
 
@@ -806,7 +921,7 @@ func (a *RegistrySvcAPIService) ListNodesExecute(r ApiListNodesRequest) (*Regist
 
 type ApiRegisterInstanceRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	request *RegistrySvcRegisterInstanceRequest
 }
 
@@ -963,7 +1078,7 @@ func (a *RegistrySvcAPIService) RegisterInstanceExecute(r ApiRegisterInstanceReq
 
 type ApiRemoveInstanceRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	id string
 }
 
@@ -1112,7 +1227,7 @@ func (a *RegistrySvcAPIService) RemoveInstanceExecute(r ApiRemoveInstanceRequest
 
 type ApiSaveDefinitionRequest struct {
 	ctx context.Context
-	ApiService *RegistrySvcAPIService
+	ApiService RegistrySvcAPI
 	request *RegistrySvcSaveDefinitionRequest
 }
 

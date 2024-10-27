@@ -21,6 +21,10 @@ type Definition struct {
 
 	// Programming language clients such as on npm or GitHub.
 	Clients []Client `json:"clients,omitempty"`
+
+	// HostPort is a clutch until automatic port assignment works.
+	// It will go a way as it doesn't make any sense in a Definition.
+	HostPort int32 `json:"hostPort,omitempty"`
 }
 
 func (s Definition) GetId() string {

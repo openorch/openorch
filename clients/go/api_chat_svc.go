@@ -21,12 +21,148 @@ import (
 )
 
 
+type ChatSvcAPI interface {
+
+	/*
+	AddMessage Add Message
+
+	Add a new message to a specific thread.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiAddMessageRequest
+	*/
+	AddMessage(ctx context.Context, threadId string) ApiAddMessageRequest
+
+	// AddMessageExecute executes the request
+	//  @return map[string]interface{}
+	AddMessageExecute(r ApiAddMessageRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	AddThread Add Thread
+
+	Create a new chat thread and add the requesting user to it.
+Requires the `chat-svc:thread:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddThreadRequest
+	*/
+	AddThread(ctx context.Context) ApiAddThreadRequest
+
+	// AddThreadExecute executes the request
+	//  @return ChatSvcAddThreadResponse
+	AddThreadExecute(r ApiAddThreadRequest) (*ChatSvcAddThreadResponse, *http.Response, error)
+
+	/*
+	DeleteMessage Delete a Message
+
+	Delete a specific message from a chat thread by its ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param messageId Message ID
+	@return ApiDeleteMessageRequest
+	*/
+	DeleteMessage(ctx context.Context, messageId string) ApiDeleteMessageRequest
+
+	// DeleteMessageExecute executes the request
+	//  @return map[string]interface{}
+	DeleteMessageExecute(r ApiDeleteMessageRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	DeleteThread Delete a Thread
+
+	Delete a specific chat thread by its ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiDeleteThreadRequest
+	*/
+	DeleteThread(ctx context.Context, threadId string) ApiDeleteThreadRequest
+
+	// DeleteThreadExecute executes the request
+	//  @return map[string]interface{}
+	DeleteThreadExecute(r ApiDeleteThreadRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	Events Events
+
+	Events is a dummy endpoint to display documentation about the events that this service emits.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEventsRequest
+	*/
+	Events(ctx context.Context) ApiEventsRequest
+
+	// EventsExecute executes the request
+	//  @return ChatSvcEventThreadUpdate
+	EventsExecute(r ApiEventsRequest) (*ChatSvcEventThreadUpdate, *http.Response, error)
+
+	/*
+	GetMessages List Messages
+
+	Fetch messages (and associated assets) for a specific chat thread.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiGetMessagesRequest
+	*/
+	GetMessages(ctx context.Context, threadId string) ApiGetMessagesRequest
+
+	// GetMessagesExecute executes the request
+	//  @return ChatSvcGetMessagesResponse
+	GetMessagesExecute(r ApiGetMessagesRequest) (*ChatSvcGetMessagesResponse, *http.Response, error)
+
+	/*
+	GetThread Get Thread
+
+	Fetch information about a specific chat thread by its ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiGetThreadRequest
+	*/
+	GetThread(ctx context.Context, threadId string) ApiGetThreadRequest
+
+	// GetThreadExecute executes the request
+	//  @return ChatSvcGetThreadResponse
+	GetThreadExecute(r ApiGetThreadRequest) (*ChatSvcGetThreadResponse, *http.Response, error)
+
+	/*
+	GetThreads Get Threads
+
+	Fetch all chat threads associated with a specific user
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetThreadsRequest
+	*/
+	GetThreads(ctx context.Context) ApiGetThreadsRequest
+
+	// GetThreadsExecute executes the request
+	//  @return ChatSvcGetThreadsResponse
+	GetThreadsExecute(r ApiGetThreadsRequest) (*ChatSvcGetThreadsResponse, *http.Response, error)
+
+	/*
+	UpdateThread Update Thread
+
+	Modify the details of a specific chat thread
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param threadId Thread ID
+	@return ApiUpdateThreadRequest
+	*/
+	UpdateThread(ctx context.Context, threadId string) ApiUpdateThreadRequest
+
+	// UpdateThreadExecute executes the request
+	//  @return ChatSvcAddThreadResponse
+	UpdateThreadExecute(r ApiUpdateThreadRequest) (*ChatSvcAddThreadResponse, *http.Response, error)
+}
+
 // ChatSvcAPIService ChatSvcAPI service
 type ChatSvcAPIService service
 
 type ApiAddMessageRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	threadId string
 	request *ChatSvcAddMessageRequest
 }
@@ -187,7 +323,7 @@ func (a *ChatSvcAPIService) AddMessageExecute(r ApiAddMessageRequest) (map[strin
 
 type ApiAddThreadRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	request *ChatSvcAddThreadRequest
 }
 
@@ -345,7 +481,7 @@ func (a *ChatSvcAPIService) AddThreadExecute(r ApiAddThreadRequest) (*ChatSvcAdd
 
 type ApiDeleteMessageRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	messageId string
 }
 
@@ -494,7 +630,7 @@ func (a *ChatSvcAPIService) DeleteMessageExecute(r ApiDeleteMessageRequest) (map
 
 type ApiDeleteThreadRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	threadId string
 }
 
@@ -643,7 +779,7 @@ func (a *ChatSvcAPIService) DeleteThreadExecute(r ApiDeleteThreadRequest) (map[s
 
 type ApiEventsRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 }
 
 func (r ApiEventsRequest) Execute() (*ChatSvcEventThreadUpdate, *http.Response, error) {
@@ -742,7 +878,7 @@ func (a *ChatSvcAPIService) EventsExecute(r ApiEventsRequest) (*ChatSvcEventThre
 
 type ApiGetMessagesRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	threadId string
 }
 
@@ -891,7 +1027,7 @@ func (a *ChatSvcAPIService) GetMessagesExecute(r ApiGetMessagesRequest) (*ChatSv
 
 type ApiGetThreadRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	threadId string
 }
 
@@ -1040,7 +1176,7 @@ func (a *ChatSvcAPIService) GetThreadExecute(r ApiGetThreadRequest) (*ChatSvcGet
 
 type ApiGetThreadsRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	request *map[string]interface{}
 }
 
@@ -1194,7 +1330,7 @@ func (a *ChatSvcAPIService) GetThreadsExecute(r ApiGetThreadsRequest) (*ChatSvcG
 
 type ApiUpdateThreadRequest struct {
 	ctx context.Context
-	ApiService *ChatSvcAPIService
+	ApiService ChatSvcAPI
 	threadId string
 	request *ChatSvcUpdateThreadRequest
 }

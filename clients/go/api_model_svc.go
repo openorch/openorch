@@ -21,12 +21,127 @@ import (
 )
 
 
+type ModelSvcAPI interface {
+
+	/*
+	GetDefaultModelStatus Get Default Model Status
+
+	Retrieves the status of the default model.
+
+Requires the `model-svc:model:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDefaultModelStatusRequest
+	*/
+	GetDefaultModelStatus(ctx context.Context) ApiGetDefaultModelStatusRequest
+
+	// GetDefaultModelStatusExecute executes the request
+	//  @return ModelSvcStatusResponse
+	GetDefaultModelStatusExecute(r ApiGetDefaultModelStatusRequest) (*ModelSvcStatusResponse, *http.Response, error)
+
+	/*
+	GetModel Get a Model
+
+	Retrieves the details of a model by its ID.
+
+the Requires `model.view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Model ID
+	@return ApiGetModelRequest
+	*/
+	GetModel(ctx context.Context, modelId string) ApiGetModelRequest
+
+	// GetModelExecute executes the request
+	//  @return ModelSvcGetModelResponse
+	GetModelExecute(r ApiGetModelRequest) (*ModelSvcGetModelResponse, *http.Response, error)
+
+	/*
+	GetModelStatus Get Model Status
+
+	Retrieves the status of a model by ID.
+
+Requires the `model-svc:model:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Model ID
+	@return ApiGetModelStatusRequest
+	*/
+	GetModelStatus(ctx context.Context, modelId string) ApiGetModelStatusRequest
+
+	// GetModelStatusExecute executes the request
+	//  @return ModelSvcStatusResponse
+	GetModelStatusExecute(r ApiGetModelStatusRequest) (*ModelSvcStatusResponse, *http.Response, error)
+
+	/*
+	ListModels List Models
+
+	Retrieves a list of models.
+
+Requires `model-svc:model:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListModelsRequest
+	*/
+	ListModels(ctx context.Context) ApiListModelsRequest
+
+	// ListModelsExecute executes the request
+	//  @return ModelSvcListResponse
+	ListModelsExecute(r ApiListModelsRequest) (*ModelSvcListResponse, *http.Response, error)
+
+	/*
+	MakeDefault Make a Model Default
+
+	Sets a model as the default model — when prompts are sent without a Model ID, the default model is used.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Model ID
+	@return ApiMakeDefaultRequest
+	*/
+	MakeDefault(ctx context.Context, modelId string) ApiMakeDefaultRequest
+
+	// MakeDefaultExecute executes the request
+	//  @return map[string]interface{}
+	MakeDefaultExecute(r ApiMakeDefaultRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	StartDefaultModel Start the Default Model
+
+	Starts The Default Model.
+
+Requires the `model-svc:model:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiStartDefaultModelRequest
+	*/
+	StartDefaultModel(ctx context.Context) ApiStartDefaultModelRequest
+
+	// StartDefaultModelExecute executes the request
+	//  @return map[string]interface{}
+	StartDefaultModelExecute(r ApiStartDefaultModelRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	StartModel Start a Model
+
+	Starts a model by ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Model ID
+	@return ApiStartModelRequest
+	*/
+	StartModel(ctx context.Context, modelId string) ApiStartModelRequest
+
+	// StartModelExecute executes the request
+	//  @return map[string]interface{}
+	StartModelExecute(r ApiStartModelRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // ModelSvcAPIService ModelSvcAPI service
 type ModelSvcAPIService service
 
 type ApiGetDefaultModelStatusRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 }
 
 func (r ApiGetDefaultModelStatusRequest) Execute() (*ModelSvcStatusResponse, *http.Response, error) {
@@ -162,7 +277,7 @@ func (a *ModelSvcAPIService) GetDefaultModelStatusExecute(r ApiGetDefaultModelSt
 
 type ApiGetModelRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 	modelId string
 }
 
@@ -302,7 +417,7 @@ func (a *ModelSvcAPIService) GetModelExecute(r ApiGetModelRequest) (*ModelSvcGet
 
 type ApiGetModelStatusRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 	modelId string
 }
 
@@ -442,7 +557,7 @@ func (a *ModelSvcAPIService) GetModelStatusExecute(r ApiGetModelStatusRequest) (
 
 type ApiListModelsRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 }
 
 func (r ApiListModelsRequest) Execute() (*ModelSvcListResponse, *http.Response, error) {
@@ -578,7 +693,7 @@ func (a *ModelSvcAPIService) ListModelsExecute(r ApiListModelsRequest) (*ModelSv
 
 type ApiMakeDefaultRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 	modelId string
 }
 
@@ -727,7 +842,7 @@ func (a *ModelSvcAPIService) MakeDefaultExecute(r ApiMakeDefaultRequest) (map[st
 
 type ApiStartDefaultModelRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 }
 
 func (r ApiStartDefaultModelRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -874,7 +989,7 @@ func (a *ModelSvcAPIService) StartDefaultModelExecute(r ApiStartDefaultModelRequ
 
 type ApiStartModelRequest struct {
 	ctx context.Context
-	ApiService *ModelSvcAPIService
+	ApiService ModelSvcAPI
 	modelId string
 }
 

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -23,6 +22,7 @@ func main() {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()
 		},
+		SilenceUsage: true,
 	}
 
 	addEnvCommands(rootCmd)
@@ -35,7 +35,6 @@ func main() {
 	node.AddNodeCommands(rootCmd)
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
 		os.Exit(1)
 	}
 }

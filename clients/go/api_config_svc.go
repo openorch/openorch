@@ -20,12 +20,43 @@ import (
 )
 
 
+type ConfigSvcAPI interface {
+
+	/*
+	GetConfig Get Config
+
+	Fetch the current configuration from the server
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConfigRequest
+	*/
+	GetConfig(ctx context.Context) ApiGetConfigRequest
+
+	// GetConfigExecute executes the request
+	//  @return ConfigSvcGetConfigResponse
+	GetConfigExecute(r ApiGetConfigRequest) (*ConfigSvcGetConfigResponse, *http.Response, error)
+
+	/*
+	SaveConfig Save Config
+
+	Save the provided configuration to the server
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSaveConfigRequest
+	*/
+	SaveConfig(ctx context.Context) ApiSaveConfigRequest
+
+	// SaveConfigExecute executes the request
+	//  @return map[string]interface{}
+	SaveConfigExecute(r ApiSaveConfigRequest) (map[string]interface{}, *http.Response, error)
+}
+
 // ConfigSvcAPIService ConfigSvcAPI service
 type ConfigSvcAPIService service
 
 type ApiGetConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigSvcAPIService
+	ApiService ConfigSvcAPI
 }
 
 func (r ApiGetConfigRequest) Execute() (*ConfigSvcGetConfigResponse, *http.Response, error) {
@@ -159,7 +190,7 @@ func (a *ConfigSvcAPIService) GetConfigExecute(r ApiGetConfigRequest) (*ConfigSv
 
 type ApiSaveConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigSvcAPIService
+	ApiService ConfigSvcAPI
 	request *ConfigSvcSaveConfigRequest
 }
 

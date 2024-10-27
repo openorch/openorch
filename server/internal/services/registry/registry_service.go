@@ -15,8 +15,10 @@ import (
 	"log/slog"
 	"os"
 	"os/exec"
+	"os/signal"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/pkg/errors"
@@ -43,6 +45,8 @@ type RegistryService struct {
 	definitionStore datastore.DataStore
 	instanceStore   datastore.DataStore
 	nodeStore       datastore.DataStore
+
+	triggerChan chan struct{}
 }
 
 func NewRegistryService(
@@ -97,6 +101,8 @@ func NewRegistryService(
 		nodeStore:        nodeStore,
 		AvailabilityZone: az,
 		Region:           region,
+
+		triggerChan: make(chan struct{}),
 	}
 
 	return service, nil
@@ -119,46 +125,64 @@ func (ns *RegistryService) Start() error {
 }
 
 func (ns *RegistryService) nodeHeartbeat() {
-	first := true
+	ticker := time.NewTicker(15 * time.Second)
+	defer ticker.Stop()
+
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+
+	go func() {
+		ns.triggerChan <- struct{}{}
+	}()
+
 	for {
-		if !first {
-			time.Sleep(30 * time.Second)
+		select {
+		case <-ticker.C:
+			ns.heartbeatCycle()
+
+		case <-ns.triggerChan:
+			ns.heartbeatCycle()
+
+		case <-sigChan:
+			return
 		}
-		first = false
-
-		node := registry.Node{
-			URL:              ns.URL,
-			AvailabilityZone: ns.AvailabilityZone,
-			Region:           ns.Region,
-			LastHeartbeat:    time.Now(),
-		}
-
-		usage, err := getResourceUsage()
-		if err != nil {
-			logger.Warn("Failed to get resource usage", slog.Any("error", err))
-		}
-
-		node.Usage = usage
-
-		// @todo detect non-nvidia gpus
-		outp, err := ns.getNvidiaSmiOutput()
-		if err != nil {
-			// logger.Debug("Failed to get smi output", slog.Any("error", err))
-		} else {
-			gpus, err := ns.ParseNvidiaSmiOutput(outp)
-			if err != nil {
-				logger.Warn("Failed to parse smi output", slog.Any("error", err))
-			} else {
-				node.GPUs = gpus
-			}
-		}
-
-		err = ns.nodeStore.Upsert(node)
-		if err != nil {
-			logger.Error("Failed to save node", err)
-		}
-
 	}
+}
+
+func (ns *RegistryService) heartbeatCycle() error {
+	node := registry.Node{
+		URL:              ns.URL,
+		AvailabilityZone: ns.AvailabilityZone,
+		Region:           ns.Region,
+		LastHeartbeat:    time.Now(),
+	}
+
+	usage, err := getResourceUsage()
+	if err != nil {
+		logger.Warn("Failed to get resource usage", slog.Any("error", err))
+	}
+
+	node.Usage = usage
+
+	// @todo detect non-nvidia gpus
+	outp, err := ns.getNvidiaSmiOutput()
+	if err != nil {
+		// logger.Debug("Failed to get smi output", slog.Any("error", err))
+	} else {
+		gpus, err := ns.ParseNvidiaSmiOutput(outp)
+		if err != nil {
+			logger.Warn("Failed to parse smi output", slog.Any("error", err))
+		} else {
+			node.GPUs = gpus
+		}
+	}
+
+	err = ns.nodeStore.Upsert(node)
+	if err != nil {
+		logger.Error("Failed to save node", err)
+	}
+
+	return nil
 }
 
 func (ns *RegistryService) ParseNvidiaSmiOutput(output string) ([]*registry.GPU, error) {
