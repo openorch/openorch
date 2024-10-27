@@ -2,7 +2,6 @@ module github.com/singulatron/superplatform/clients/go
 
 go 1.23
 
-require (
-	github.com/golang/mock v1.6.0 // indirect
-	go.uber.org/mock v0.5.0 // indirect
-)
+require go.uber.org/mock v0.5.0
+
+require github.com/golang/mock v1.6.0 // indirect
