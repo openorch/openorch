@@ -222,6 +222,8 @@ func (ns *DeployService) executeStartCommand(
 		if writeErr != nil {
 			return writeErr
 		}
+
+		return err
 	}
 
 	logger.Debug("Successfully executed start command",
