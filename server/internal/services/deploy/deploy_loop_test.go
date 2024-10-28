@@ -2,6 +2,7 @@ package deployservice_test
 
 import (
 	"context"
+	"fmt"
 	"net/http/httptest"
 	"testing"
 	"time"
@@ -23,17 +24,18 @@ func TestDeployService(t *testing.T) {
 
 var _ = ginkgo.Describe("Deploy Loop", func() {
 	var (
-		server            *httptest.Server
-		ctrl              *gomock.Controller
-		ctx               context.Context
-		mockClientFactory *sdk.MockClientFactory
-		mockUserSvc       *openapi.MockUserSvcAPI
-		universe          *mux.Router
-		mockRegistrySvc   *openapi.MockRegistrySvcAPI
-		mockDeploySvc     *openapi.MockDeploySvcAPI
-		mockDockerSvc     *openapi.MockDockerSvcAPI
-		starterFunc       func() error
-		adminClient       *openapi.APIClient
+		server               *httptest.Server
+		ctrl                 *gomock.Controller
+		ctx                  context.Context
+		mockClientFactory    *sdk.MockClientFactory
+		mockUserSvc          *openapi.MockUserSvcAPI
+		universe             *mux.Router
+		mockRegistrySvc      *openapi.MockRegistrySvcAPI
+		mockDeploySvc        *openapi.MockDeploySvcAPI
+		mockDockerSvc        *openapi.MockDockerSvcAPI
+		starterFunc          func() error
+		adminClient          *openapi.APIClient
+		launchContainerError error
 
 		nodes       []openapi.RegistrySvcNode
 		instances   []openapi.RegistrySvcInstance
@@ -102,7 +104,10 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 
 		mockLaunchContainerRequest := openapi.ApiLaunchContainerRequest{ApiService: mockDockerSvc}
 		mockDockerSvc.EXPECT().LaunchContainer(ctx).Return(mockLaunchContainerRequest).AnyTimes()
-		mockDockerSvc.EXPECT().LaunchContainerExecute(gomock.Any()).Return(nil, nil, nil).AnyTimes()
+		mockDockerSvc.EXPECT().LaunchContainerExecute(gomock.Any()).Return(nil, nil, launchContainerError).AnyTimes()
+
+		err := starterFunc()
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 	})
 
 	ginkgo.AfterEach(func() {
@@ -129,10 +134,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		})
 
 		ginkgo.It("saves a deployment successfully", func() {
-			err := starterFunc()
-			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-
-			_, _, err = adminClient.DeploySvcAPI.SaveDeployment(ctx).Body(openapi.DeploySvcSaveDeploymentRequest{
+			_, _, err := adminClient.DeploySvcAPI.SaveDeployment(ctx).Body(openapi.DeploySvcSaveDeploymentRequest{
 				Deployment: &openapi.DeploySvcDeployment{
 					DefinitionId: "test-a",
 				},
@@ -162,4 +164,54 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		})
 	})
 
+	ginkgo.When("docker launch container fails", func() {
+		ginkgo.BeforeEach(func() {
+			launchContainerError = fmt.Errorf("Internal Server Error")
+			nodes = []openapi.RegistrySvcNode{
+				{
+					Url: openapi.PtrString(server.URL),
+				},
+			}
+			definitions = []openapi.RegistrySvcDefinition{
+				{
+					Id: "test-a", Image: openapi.RegistrySvcImageSpec{
+						Name: "hashicorp/http-echo",
+						Port: 8080,
+					},
+					HostPort: openapi.PtrInt32(8887),
+				},
+			}
+		})
+
+		ginkgo.It("status of the deployment is error", func() {
+			_, _, err := adminClient.DeploySvcAPI.SaveDeployment(ctx).Body(openapi.DeploySvcSaveDeploymentRequest{
+				Deployment: &openapi.DeploySvcDeployment{
+					DefinitionId: "test-a",
+				},
+			}).Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			maxRetries := 5
+
+			var rsp *openapi.DeploySvcListDeploymentsResponse
+			for i := 0; i < maxRetries; i++ {
+				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
+				gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+				if *rsp.Deployments[0].Status == openapi.StatusError {
+					break
+				}
+
+				if i == maxRetries-1 {
+					ginkgo.Fail("Missing OK status for deployment")
+				}
+				time.Sleep(time.Second)
+			}
+
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+			gomega.Expect(rsp.Deployments).To(gomega.HaveLen(1))
+			gomega.Expect(rsp.Deployments[0].DefinitionId).To(gomega.Equal("test-a"))
+			gomega.Expect(*rsp.Deployments[0].Details).To(gomega.Equal("Internal Server Error"))
+		})
+	})
 })
