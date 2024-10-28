@@ -322,11 +322,11 @@ definitions:
     - Deploying
     type: string
     x-enum-varnames:
-    - StatusOK
-    - StatusError
-    - StatusPending
-    - StatusFailed
-    - StatusDeploying
+    - DeploymentStatusOK
+    - DeploymentStatusError
+    - DeploymentStatusPending
+    - DeploymentStatusFailed
+    - DeploymentStatusDeploying
   deploy_svc.DeploymentStrategy:
     properties:
       maxSurge:
@@ -1342,6 +1342,10 @@ definitions:
         items:
           $ref: '#/definitions/registry_svc.GPU'
         type: array
+      id:
+        description: 'Required: ID of the instance'
+        example: node_di9riJEvH2
+        type: string
       lastHeartbeat:
         description: Last time the instance gave a sign of life
         type: string
@@ -1357,6 +1361,9 @@ definitions:
         allOf:
         - $ref: '#/definitions/registry_svc.ResourceUsage'
         description: Resource usage metrics of the node.
+    required:
+    - id
+    - url
     type: object
   registry_svc.Process:
     properties:

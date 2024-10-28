@@ -58,9 +58,10 @@ func scaleDeployment(
 				commands = append(commands, &deploy.Command{
 					Action:       "START",
 					DeploymentId: deployment.Id,
+					NodeId:       node.Id,
 					NodeUrl:      node.Url,
 				})
-				assignedNodes[*node.Url] = true // Mark this node as assigned for this service
+				assignedNodes[node.Url] = true // Mark this node as assigned for this service
 			}
 		}
 	}
@@ -95,7 +96,7 @@ func checkHealthAndKill(instance openapi.RegistrySvcInstance) []*deploy.Command 
 func findAvailableNode(nodes []openapi.RegistrySvcNode, assignedNodes map[string]bool) *openapi.RegistrySvcNode {
 	for _, node := range nodes {
 		// Check if the node is not assigned to this service and has available CPU capacity
-		if !assignedNodes[*node.Url] &&
+		if !assignedNodes[node.Url] &&
 			(node.Usage == nil || node.Usage.Cpu == nil || node.Usage.Cpu.Percent == nil || *node.Usage.Cpu.Percent < 80) {
 			return &node
 		}

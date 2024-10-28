@@ -4356,11 +4356,11 @@ const docTemplate = `{
                 "Deploying"
             ],
             "x-enum-varnames": [
-                "StatusOK",
-                "StatusError",
-                "StatusPending",
-                "StatusFailed",
-                "StatusDeploying"
+                "DeploymentStatusOK",
+                "DeploymentStatusError",
+                "DeploymentStatusPending",
+                "DeploymentStatusFailed",
+                "DeploymentStatusDeploying"
             ]
         },
         "deploy_svc.DeploymentStrategy": {
@@ -5753,6 +5753,10 @@ const docTemplate = `{
         },
         "registry_svc.Node": {
             "type": "object",
+            "required": [
+                "id",
+                "url"
+            ],
             "properties": {
                 "availabilityZone": {
                     "description": "The availability zone of the node",
@@ -5764,6 +5768,11 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/registry_svc.GPU"
                     }
+                },
+                "id": {
+                    "description": "Required: ID of the instance",
+                    "type": "string",
+                    "example": "node_di9riJEvH2"
                 },
                 "lastHeartbeat": {
                     "description": "Last time the instance gave a sign of life",

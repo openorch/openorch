@@ -119,7 +119,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		ginkgo.BeforeEach(func() {
 			nodes = []openapi.RegistrySvcNode{
 				{
-					Url: openapi.PtrString(server.URL),
+					Url: server.URL,
 				},
 			}
 			definitions = []openapi.RegistrySvcDefinition{
@@ -148,7 +148,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
 				gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-				if *rsp.Deployments[0].Status == openapi.StatusOK {
+				if *rsp.Deployments[0].Status == openapi.DeploymentStatusOK {
 					break
 				}
 
@@ -169,7 +169,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			launchContainerError = fmt.Errorf("Internal Server Error")
 			nodes = []openapi.RegistrySvcNode{
 				{
-					Url: openapi.PtrString(server.URL),
+					Url: server.URL,
 				},
 			}
 			definitions = []openapi.RegistrySvcDefinition{
@@ -198,7 +198,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
 				gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-				if *rsp.Deployments[0].Status == openapi.StatusError {
+				if *rsp.Deployments[0].Status == openapi.DeploymentStatusError {
 					break
 				}
 

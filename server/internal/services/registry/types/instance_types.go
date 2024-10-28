@@ -18,25 +18,52 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
+type InstanceStatus string
+
+const (
+	InstanceStatusUnknown     InstanceStatus = "Unknown"     // Default state when the instance status is not yet determined
+	InstanceStatusHealthy     InstanceStatus = "Healthy"     // Instance is fully operational and responding as expected
+	InstanceStatusDegraded    InstanceStatus = "Degraded"    // Instance is responding but with performance issues or partial failures
+	InstanceStatusUnreachable InstanceStatus = "Unreachable" // Instance is not reachable, possibly down or with network issues
+	InstanceStatusError       InstanceStatus = "Error"       // Instance encountered errors or failed multiple health checks
+)
+
 type Instance struct {
-	ID            string    `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`            // Required: ID of the instance
-	DeploymentId  string    `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`  // The ID of the deployment that this instance is an instance of.
-	URL           string    `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"` // Full address URL of the instance.
-	Path          string    `json:"path,omitempty" example:"/your-svc"`                                   // Path of the instance address. Optional (e.g., "/api")
-	NodeURL       string    `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`               // URL of the Singulatron daemon
-	LastHeartbeat time.Time `json:"lastHeartbeat,omitempty"`                                              // Last time the instance gave a sign of life
+	// Required: ID of the instance
+	ID string `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`
+
+	// Full address URL of the instance.
+	URL string `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`
+
+	// The ID of the deployment that this instance is an instance of.
+	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
+
+	// URL of the Singulatron daemon
+	NodeURL string `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`
+
+	// Last time the instance gave a sign of life
+	LastHeartbeat time.Time `json:"lastHeartbeat,omitempty"`
+
+	// Path of the instance address. Optional (e.g., "/api")
+	Path string `json:"path,omitempty" example:"/your-svc"`
 
 	// URL alternative fields
 
-	Scheme string `json:"scheme,omitempty" example:"https"`      // Scheme of the instance address. Required if URL is not provided.
-	Host   string `json:"host,omitempty" example:"myserver.com"` // Host of the instance address. Required if URL is not provided
-	IP     string `json:"ip,omitempty" example:"8.8.8.8"`        // IP of the instance address. Optional: to register by IP instead of host
-	Port   int    `json:"port,omitempty" example:"8080"`         // Port of the instance address. Required if URL is not provided
+	// Scheme of the instance address. Required if URL is not provided.
+	Scheme string `json:"scheme,omitempty" example:"https"`
 
+	// Host of the instance address. Required if URL is not provided
+	Host string `json:"host,omitempty" example:"myserver.com"`
+
+	// IP of the instance address. Optional: to register by IP instead of host
+	IP string `json:"ip,omitempty" example:"8.8.8.8"`
+
+	// Port of the instance address. Required if URL is not provided
+	Port int `json:"port,omitempty" example:"8080"`
 }
 
 func (s *Instance) GetId() string {
-	return s.ID
+	return s.DeriveID()
 }
 
 func (s *Instance) DeriveID() string {
