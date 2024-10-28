@@ -211,14 +211,15 @@ func (ns *DeployService) executeStartCommand(
 			slog.String("deploymentId", deployment.Id),
 			slog.Any("error", err),
 		)
-		deployment, readErr := ns.getDeploymentById(command.DeploymentId)
-		if readErr != nil {
-			return readErr
-		}
+
 		deployment.Status = deploy.DeploymentStatus(openapi.StatusError)
 		deployment.Details = err.Error()
 
-		writeErr := ns.deploymentStore.Upsert(deployment)
+		writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
+			"status":  deployment.Status,
+			"details": deployment.Details,
+		})
+
 		if writeErr != nil {
 			return writeErr
 		}
@@ -229,15 +230,14 @@ func (ns *DeployService) executeStartCommand(
 	logger.Debug("Successfully executed start command",
 		slog.String("deploymentId", deployment.Id),
 	)
-	deployment, readErr := ns.getDeploymentById(command.DeploymentId)
-	if readErr != nil {
-		return readErr
-	}
 
 	deployment.Status = deploy.DeploymentStatus(openapi.StatusOK)
 	deployment.Details = ""
 
-	writeErr := ns.deploymentStore.Upsert(deployment)
+	writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
+		"status":  deployment.Status,
+		"details": deployment.Details,
+	})
 	if writeErr != nil {
 		return writeErr
 	}
