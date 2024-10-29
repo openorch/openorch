@@ -84,7 +84,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 		ginkgo.It("saves an instance successfully", func() {
 			_, _, err := adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
 				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           openapi.PtrString("test-a"),
+					Id:           "test-a",
 					Url:          "http://test-a",
 					DeploymentId: "test-deployment",
 				},
@@ -107,7 +107,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
 				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           openapi.PtrString("test-a"),
+					Id:           "test-a",
 					Url:          healthServer.URL,
 					DeploymentId: "test-deployment",
 				},
@@ -127,7 +127,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
 				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           openapi.PtrString("test-a"),
+					Id:           "test-a",
 					Url:          healthServer.URL,
 					DeploymentId: "test-deployment",
 				},

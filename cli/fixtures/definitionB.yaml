@@ -2,3 +2,4 @@ id: test-b
 image:
   name: nginx
   port: 999
+hostPort: 9998

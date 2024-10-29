@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/davecgh/go-spew/spew"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
@@ -32,7 +31,9 @@ func (rs *RegistryService) RegisterInstance(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionNodeView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceEdit.Id), &usertypes.IsAuthorizedRequest{
+		SlugsGranted: []string{"deploy-svc"},
+	}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -120,8 +121,6 @@ func (rs *RegistryService) registerInstance(req *registry.RegisterInstanceReques
 	if instance.Status == "" {
 		instance.Status = registry.InstanceStatusUnknown
 	}
-
-	spew.Dump("registering", instance)
 
 	return rs.instanceStore.Upsert(&instance)
 }

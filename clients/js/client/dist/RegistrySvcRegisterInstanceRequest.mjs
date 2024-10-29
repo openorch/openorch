@@ -17,6 +17,8 @@
 function instanceOfRegistrySvcRegisterInstanceRequest(value) {
     if (!('deploymentId' in value) || value['deploymentId'] === undefined)
         return false;
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
     if (!('url' in value) || value['url'] === undefined)
         return false;
     return true;
@@ -31,7 +33,7 @@ function RegistrySvcRegisterInstanceRequestFromJSONTyped(json, ignoreDiscriminat
     return {
         'deploymentId': json['deploymentId'],
         'host': json['host'] == null ? undefined : json['host'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
