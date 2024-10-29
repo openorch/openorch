@@ -1442,6 +1442,7 @@ definitions:
         type: string
     required:
     - deploymentId
+    - id
     - url
     type: object
   registry_svc.RegisterInstanceResponse:

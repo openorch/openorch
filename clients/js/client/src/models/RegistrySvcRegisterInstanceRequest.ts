@@ -36,7 +36,7 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    id?: string;
+    id: string;
     /**
      * IP of the instance address. Optional: to register by IP instead of host
      * @type {string}
@@ -74,6 +74,7 @@ export interface RegistrySvcRegisterInstanceRequest {
  */
 export function instanceOfRegistrySvcRegisterInstanceRequest(value: object): value is RegistrySvcRegisterInstanceRequest {
     if (!('deploymentId' in value) || value['deploymentId'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
@@ -90,7 +91,7 @@ export function RegistrySvcRegisterInstanceRequestFromJSONTyped(json: any, ignor
         
         'deploymentId': json['deploymentId'],
         'host': json['host'] == null ? undefined : json['host'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],

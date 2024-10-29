@@ -18,7 +18,7 @@ export declare class RegistrySvcRegisterInstanceRequest {
     * Host of the instance address. Required if URL is not provided
     */
     'host'?: string;
-    'id'?: string;
+    'id': string;
     /**
     * IP of the instance address. Optional: to register by IP instead of host
     */
