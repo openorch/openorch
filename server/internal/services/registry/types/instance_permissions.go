@@ -14,22 +14,22 @@ import (
 
 var PermissionInstanceCreate = usertypes.Permission{
 	Id:   "registry-svc:instance:create",
-	Name: " Create",
+	Name: "Registry Svc - Instance Create",
 }
 
 var PermissionInstanceView = usertypes.Permission{
 	Id:   "registry-svc:instance:view",
-	Name: " View",
+	Name: "Registry Svc - Instance View",
 }
 
 var PermissionInstanceEdit = usertypes.Permission{
 	Id:   "registry-svc:instance:edit",
-	Name: " Edit",
+	Name: "Registry Svc - Instance Edit",
 }
 
 var PermissionInstanceDelete = usertypes.Permission{
 	Id:   "registry-svc:instance:delete",
-	Name: " Delete",
+	Name: "Registry Svc - Instance Delete",
 }
 
 var InstancePermissions = []usertypes.Permission{

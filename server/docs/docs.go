@@ -5853,6 +5853,7 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "deploymentId",
+                "id",
                 "url"
             ],
             "properties": {

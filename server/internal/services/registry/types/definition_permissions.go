@@ -14,22 +14,22 @@ import (
 
 var PermissionDefinitionCreate = usertypes.Permission{
 	Id:   "registry-svc:definition:create",
-	Name: "Registry Create",
+	Name: "Registry Svc - Definition Create",
 }
 
 var PermissionDefinitionView = usertypes.Permission{
 	Id:   "registry-svc:definition:view",
-	Name: "Registry View",
+	Name: "Registry Svc - Definition View",
 }
 
 var PermissionDefinitionEdit = usertypes.Permission{
 	Id:   "registry-svc:definition:edit",
-	Name: "Registry Edit",
+	Name: "Registry Svc - Definition Edit",
 }
 
 var PermissionDefinitionDelete = usertypes.Permission{
 	Id:   "registry-svc:definition:delete",
-	Name: "Registry Delete",
+	Name: "Registry Svc - Definition Delete",
 }
 
 var DefinitionPermissions = []usertypes.Permission{

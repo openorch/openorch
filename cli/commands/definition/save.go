@@ -2,6 +2,7 @@ package definition
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 
 	"github.com/pkg/errors"
@@ -35,12 +36,15 @@ func Save(cmd *cobra.Command, args []string) error {
 	if fileInfo.Size() == 0 {
 		return fmt.Errorf("service definition file is empty at '%v'", filePath)
 	}
+	data, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("failed to read definition file: '%v'", filePath))
+	}
 
 	definition := openapi.RegistrySvcDefinition{}
 
-	decoder := yaml.NewDecoder(file)
-	if err := decoder.Decode(&definition); err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to decode service definition file: '%v'", filePath))
+	if err := yaml.Unmarshal(data, &definition); err != nil {
+		return errors.Wrap(err, fmt.Sprintf("failed to decode deployment file: '%v'", filePath))
 	}
 
 	url, token, err := config.GetSelectedUrlAndToken()

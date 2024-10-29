@@ -64,13 +64,13 @@ func (ns *RegistryService) heartbeatCycle() error {
 	var id string
 
 	if len(nodes) > 0 {
-		id = nodes[0].(*registry.Node).ID
+		id = nodes[0].(*registry.Node).Id
 	} else {
 		id = sdk.Id("node")
 	}
 
 	node := registry.Node{
-		ID:               id,
+		Id:               id,
 		URL:              ns.URL,
 		AvailabilityZone: ns.AvailabilityZone,
 		Region:           ns.Region,

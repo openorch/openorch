@@ -251,8 +251,9 @@ func (ns *DeployService) executeStartCommand(
 	}
 	ur.Host = strings.Replace(ur.Host, ur.Port(), fmt.Sprintf("%v", definition.HostPort), 1)
 
-	client.RegistrySvcAPI.RegisterInstance(ctx).Request(
+	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Request(
 		openapi.RegistrySvcRegisterInstanceRequest{
+			Id:           sdk.Id("inst"),
 			DeploymentId: deployment.Id,
 			Url:          ur.String(),
 			Host:         openapi.PtrString(ur.Hostname()),
@@ -260,7 +261,10 @@ func (ns *DeployService) executeStartCommand(
 			Scheme:       openapi.PtrString(ur.Scheme),
 			Path:         openapi.PtrString(ur.Path),
 		},
-	)
+	).Execute()
+	if err != nil {
+		return errors.Wrap(err, "error registering instance")
+	}
 
 	return nil
 }
