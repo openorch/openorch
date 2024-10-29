@@ -8,11 +8,14 @@
 package registryservice
 
 import (
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
 )
@@ -50,7 +53,7 @@ func (ns *RegistryService) instanceScanCycle() {
 	}
 
 	for _, instance := range instances {
-		err = ns.scanInstance(instance)
+		err = ns.scanInstance(instance.(*registry.Instance))
 		if err != nil {
 			logger.Error("Failed to scan instance: %v", err)
 			continue
@@ -61,5 +64,43 @@ func (ns *RegistryService) instanceScanCycle() {
 
 // scan the port of the instance to see if its available, update lastHeartbeat if it is
 func (ns *RegistryService) scanInstance(instance *registry.Instance) error {
+	now := time.Now()
+	listening := checkPortListening(instance.URL, 3*time.Second)
+	lastHeartbeat := time.Now()
+	duration := time.Since(now)
+
+	var status registry.InstanceStatus
+
+	switch {
+	case !listening:
+		status = registry.InstanceStatusUnreachable
+	case listening && duration > 1*time.Second:
+		status = registry.InstanceStatusDegraded
+	case listening && duration <= 1*time.Second:
+		status = registry.InstanceStatusHealthy
+	}
+
+	updateFields := map[string]any{
+		"status": status,
+	}
+
+	if listening {
+		updateFields["lastHeartbeat"] = lastHeartbeat
+	}
+
+	err := ns.instanceStore.Query(datastore.Equals([]string{"id"}, instance.ID)).UpdateFields(updateFields)
+	if err != nil {
+		return errors.Wrap(err, "Failed to update instance")
+	}
+
 	return nil
+}
+
+func checkPortListening(address string, timeout time.Duration) bool {
+	conn, err := net.DialTimeout("tcp", address, timeout)
+	if err != nil {
+		return false
+	}
+	conn.Close()
+	return true
 }

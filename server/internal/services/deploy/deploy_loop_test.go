@@ -106,6 +106,10 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		mockDockerSvc.EXPECT().LaunchContainer(ctx).Return(mockLaunchContainerRequest).AnyTimes()
 		mockDockerSvc.EXPECT().LaunchContainerExecute(gomock.Any()).Return(nil, nil, launchContainerError).AnyTimes()
 
+		mockRegisterInstanceRequest := openapi.ApiRegisterInstanceRequest{ApiService: mockRegistrySvc}
+		mockRegistrySvc.EXPECT().RegisterInstance(ctx).Return(mockRegisterInstanceRequest).AnyTimes()
+		mockRegistrySvc.EXPECT().RegisterInstanceExecute(gomock.Any()).Return(nil, nil, nil).AnyTimes()
+
 		err := starterFunc()
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 	})
@@ -141,22 +145,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}).Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			maxRetries := 5
-
-			var rsp *openapi.DeploySvcListDeploymentsResponse
-			for i := 0; i < maxRetries; i++ {
-				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
-				gomega.Expect(err).NotTo(gomega.HaveOccurred())
-
-				if *rsp.Deployments[0].Status == openapi.DeploymentStatusOK {
-					break
-				}
-
-				if i == maxRetries-1 {
-					ginkgo.Fail("Missing OK status for deployment")
-				}
-				time.Sleep(time.Second)
-			}
+			rsp, err := waitForDeploymentStatus(ctx, adminClient, openapi.DeploymentStatusOK, 5)
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(rsp.Deployments).To(gomega.HaveLen(1))
@@ -191,22 +180,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}).Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			maxRetries := 5
-
-			var rsp *openapi.DeploySvcListDeploymentsResponse
-			for i := 0; i < maxRetries; i++ {
-				rsp, _, err = adminClient.DeploySvcAPI.ListDeployments(ctx).Execute()
-				gomega.Expect(err).NotTo(gomega.HaveOccurred())
-
-				if *rsp.Deployments[0].Status == openapi.DeploymentStatusError {
-					break
-				}
-
-				if i == maxRetries-1 {
-					ginkgo.Fail("Missing OK status for deployment")
-				}
-				time.Sleep(time.Second)
-			}
+			rsp, err := waitForDeploymentStatus(ctx, adminClient, openapi.DeploymentStatusError, 5)
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(rsp.Deployments).To(gomega.HaveLen(1))
@@ -215,3 +189,19 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		})
 	})
 })
+
+func waitForDeploymentStatus(ctx context.Context, client *openapi.APIClient, expectedStatus openapi.DeploySvcDeploymentStatus, retries int) (*openapi.DeploySvcListDeploymentsResponse, error) {
+	for i := 0; i < retries; i++ {
+		rsp, _, err := client.DeploySvcAPI.ListDeployments(ctx).Execute()
+		if err != nil {
+			return nil, err
+		}
+		if len(rsp.Deployments) > 0 && *rsp.Deployments[0].Status == expectedStatus {
+			return rsp, nil
+		}
+
+		time.Sleep(time.Second)
+	}
+
+	return nil, fmt.Errorf("expected status %s not reached", expectedStatus)
+}
