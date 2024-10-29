@@ -24,6 +24,8 @@ var _ MappedNullable = &RegistrySvcInstance{}
 type RegistrySvcInstance struct {
 	// The ID of the deployment that this instance is an instance of.
 	DeploymentId string `json:"deploymentId"`
+	// Details
+	Details *string `json:"details,omitempty"`
 	// Host of the instance address. Required if URL is not provided
 	Host *string `json:"host,omitempty"`
 	// Required: ID of the instance
@@ -40,6 +42,8 @@ type RegistrySvcInstance struct {
 	Port *int32 `json:"port,omitempty"`
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme *string `json:"scheme,omitempty"`
+	// Status
+	Status RegistrySvcInstanceStatus `json:"status"`
 	// Full address URL of the instance.
 	Url string `json:"url"`
 }
@@ -50,10 +54,11 @@ type _RegistrySvcInstance RegistrySvcInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcInstance(deploymentId string, id string, url string) *RegistrySvcInstance {
+func NewRegistrySvcInstance(deploymentId string, id string, status RegistrySvcInstanceStatus, url string) *RegistrySvcInstance {
 	this := RegistrySvcInstance{}
 	this.DeploymentId = deploymentId
 	this.Id = id
+	this.Status = status
 	this.Url = url
 	return &this
 }
@@ -88,6 +93,38 @@ func (o *RegistrySvcInstance) GetDeploymentIdOk() (*string, bool) {
 // SetDeploymentId sets field value
 func (o *RegistrySvcInstance) SetDeploymentId(v string) {
 	o.DeploymentId = v
+}
+
+// GetDetails returns the Details field value if set, zero value otherwise.
+func (o *RegistrySvcInstance) GetDetails() string {
+	if o == nil || IsNil(o.Details) {
+		var ret string
+		return ret
+	}
+	return *o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcInstance) GetDetailsOk() (*string, bool) {
+	if o == nil || IsNil(o.Details) {
+		return nil, false
+	}
+	return o.Details, true
+}
+
+// HasDetails returns a boolean if a field has been set.
+func (o *RegistrySvcInstance) HasDetails() bool {
+	if o != nil && !IsNil(o.Details) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given string and assigns it to the Details field.
+func (o *RegistrySvcInstance) SetDetails(v string) {
+	o.Details = &v
 }
 
 // GetHost returns the Host field value if set, zero value otherwise.
@@ -338,6 +375,30 @@ func (o *RegistrySvcInstance) SetScheme(v string) {
 	o.Scheme = &v
 }
 
+// GetStatus returns the Status field value
+func (o *RegistrySvcInstance) GetStatus() RegistrySvcInstanceStatus {
+	if o == nil {
+		var ret RegistrySvcInstanceStatus
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcInstance) GetStatusOk() (*RegistrySvcInstanceStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *RegistrySvcInstance) SetStatus(v RegistrySvcInstanceStatus) {
+	o.Status = v
+}
+
 // GetUrl returns the Url field value
 func (o *RegistrySvcInstance) GetUrl() string {
 	if o == nil {
@@ -373,6 +434,9 @@ func (o RegistrySvcInstance) MarshalJSON() ([]byte, error) {
 func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["deploymentId"] = o.DeploymentId
+	if !IsNil(o.Details) {
+		toSerialize["details"] = o.Details
+	}
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
 	}
@@ -395,6 +459,7 @@ func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scheme) {
 		toSerialize["scheme"] = o.Scheme
 	}
+	toSerialize["status"] = o.Status
 	toSerialize["url"] = o.Url
 	return toSerialize, nil
 }
@@ -406,6 +471,7 @@ func (o *RegistrySvcInstance) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"deploymentId",
 		"id",
+		"status",
 		"url",
 	}
 

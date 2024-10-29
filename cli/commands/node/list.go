@@ -30,7 +30,7 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "URL\tLAST HEARTBEAT")
+	fmt.Fprintln(writer, "ID\tURL\tLAST HEARTBEAT")
 
 	for _, node := range rsp.Nodes {
 		const layout = "2006-01-02T15:04:05.999999999-07:00"
@@ -45,7 +45,7 @@ func List(cmd *cobra.Command, args []string) error {
 			ago = roundDuration(duration)
 
 		}
-		fmt.Fprintf(writer, "%s\t%s\n", *node.Url, ago)
+		fmt.Fprintf(writer, "%s\t%s\t%s\n", node.Id, node.Url, ago)
 	}
 
 	return nil

@@ -11,14 +11,27 @@ package registry_svc
 import "time"
 
 type Node struct {
+	// Required: ID of the instance
+	ID string `json:"id,omitempty" example:"node_di9riJEvH2" binding:"required"`
+
 	// URL of the daemon running on the node.
 	// If not configured defaults to hostname + default Singulatron daemon port.
-	URL              string        `json:"url"`                        // Status of the node (online, offline, error, unknown)
-	AvailabilityZone string        `json:"availabilityZone,omitempty"` // The availability zone of the node
-	LastHeartbeat    time.Time     `json:"lastHeartbeat,omitempty"`    // Last time the instance gave a sign of life
-	Region           string        `json:"region,omitempty"`           // The region of the node
-	Usage            ResourceUsage `json:"usage,omitempty"`            // Resource usage metrics of the node.
-	GPUs             []*GPU        `json:"gpus,omitempty"`             // List of GPUs available on the node
+	URL string `json:"url" binding:"required"`
+
+	// The availability zone of the node
+	AvailabilityZone string `json:"availabilityZone,omitempty"`
+
+	// Last time the instance gave a sign of life
+	LastHeartbeat time.Time `json:"lastHeartbeat,omitempty"`
+
+	// The region of the node
+	Region string `json:"region,omitempty"`
+
+	// Resource usage metrics of the node.
+	Usage ResourceUsage `json:"usage,omitempty"`
+
+	// List of GPUs available on the node
+	GPUs []*GPU `json:"gpus,omitempty"`
 }
 
 func (n Node) GetId() string {

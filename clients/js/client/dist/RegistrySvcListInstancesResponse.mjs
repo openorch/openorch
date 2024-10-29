@@ -1,4 +1,5 @@
 import { RegistrySvcInstanceFromJSON, RegistrySvcInstanceToJSON } from './RegistrySvcInstance.mjs';
+import './RegistrySvcInstanceStatus.mjs';
 
 /* tslint:disable */
 /* eslint-disable */

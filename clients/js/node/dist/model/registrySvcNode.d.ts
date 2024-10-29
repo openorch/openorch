@@ -21,6 +21,10 @@ export declare class RegistrySvcNode {
     */
     'gpus'?: Array<RegistrySvcGPU>;
     /**
+    * Required: ID of the instance
+    */
+    'id': string;
+    /**
     * Last time the instance gave a sign of life
     */
     'lastHeartbeat'?: string;
@@ -31,7 +35,7 @@ export declare class RegistrySvcNode {
     /**
     * URL of the daemon running on the node. If not configured defaults to hostname + default Singulatron daemon port.
     */
-    'url'?: string;
+    'url': string;
     /**
     * Resource usage metrics of the node.
     */

@@ -100,6 +100,7 @@ require('./RegistrySvcClient.js');
 require('./RegistrySvcLanguage.js');
 require('./RegistrySvcListInstancesResponse.js');
 require('./RegistrySvcInstance.js');
+require('./RegistrySvcInstanceStatus.js');
 require('./RegistrySvcListNodesResponse.js');
 require('./RegistrySvcNode.js');
 require('./RegistrySvcGPU.js');

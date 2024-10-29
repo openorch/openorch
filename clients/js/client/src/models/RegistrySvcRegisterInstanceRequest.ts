@@ -20,17 +20,23 @@ import { mapValues } from '../runtime';
  */
 export interface RegistrySvcRegisterInstanceRequest {
     /**
-     * The service definition id.
+     * The ID of the deployment that this instance is an instance of.
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    definitionId: string;
+    deploymentId: string;
     /**
      * Host of the instance address. Required if URL is not provided
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
     host?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegistrySvcRegisterInstanceRequest
+     */
+    id?: string;
     /**
      * IP of the instance address. Optional: to register by IP instead of host
      * @type {string}
@@ -60,14 +66,15 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    url?: string;
+    url: string;
 }
 
 /**
  * Check if a given object implements the RegistrySvcRegisterInstanceRequest interface.
  */
 export function instanceOfRegistrySvcRegisterInstanceRequest(value: object): value is RegistrySvcRegisterInstanceRequest {
-    if (!('definitionId' in value) || value['definitionId'] === undefined) return false;
+    if (!('deploymentId' in value) || value['deploymentId'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
 
@@ -81,13 +88,14 @@ export function RegistrySvcRegisterInstanceRequestFromJSONTyped(json: any, ignor
     }
     return {
         
-        'definitionId': json['definitionId'],
+        'deploymentId': json['deploymentId'],
         'host': json['host'] == null ? undefined : json['host'],
+        'id': json['id'] == null ? undefined : json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'url': json['url'],
     };
 }
 
@@ -97,8 +105,9 @@ export function RegistrySvcRegisterInstanceRequestToJSON(value?: RegistrySvcRegi
     }
     return {
         
-        'definitionId': value['definitionId'],
+        'deploymentId': value['deploymentId'],
         'host': value['host'],
+        'id': value['id'],
         'ip': value['ip'],
         'path': value['path'],
         'port': value['port'],

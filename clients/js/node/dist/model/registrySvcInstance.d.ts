@@ -9,11 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 export declare class RegistrySvcInstance {
     /**
     * The ID of the deployment that this instance is an instance of.
     */
     'deploymentId': string;
+    /**
+    * Details
+    */
+    'details'?: string;
     /**
     * Host of the instance address. Required if URL is not provided
     */
@@ -47,6 +52,10 @@ export declare class RegistrySvcInstance {
     */
     'scheme'?: string;
     /**
+    * Status
+    */
+    'status': RegistrySvcInstanceStatus;
+    /**
     * Full address URL of the instance.
     */
     'url': string;
@@ -61,4 +70,6 @@ export declare class RegistrySvcInstance {
         baseName: string;
         type: string;
     }[];
+}
+export declare namespace RegistrySvcInstance {
 }

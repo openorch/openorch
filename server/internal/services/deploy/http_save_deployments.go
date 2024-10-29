@@ -73,7 +73,7 @@ func (ns *DeployService) SaveDeployment(
 // This method is designed to be called frm the API endpoint, if you want to modify internal
 // fields do a direct update.
 func (ns *DeployService) saveDeployment(deployment *deploy.Deployment) error {
-	deployment.Status = deploy.StatusPending
+	deployment.Status = deploy.DeploymentStatusPending
 
 	if deployment.Replicas == 0 {
 		deployment.Replicas = 1

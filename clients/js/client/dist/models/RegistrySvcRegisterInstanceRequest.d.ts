@@ -16,17 +16,23 @@
  */
 export interface RegistrySvcRegisterInstanceRequest {
     /**
-     * The service definition id.
+     * The ID of the deployment that this instance is an instance of.
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    definitionId: string;
+    deploymentId: string;
     /**
      * Host of the instance address. Required if URL is not provided
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
     host?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RegistrySvcRegisterInstanceRequest
+     */
+    id?: string;
     /**
      * IP of the instance address. Optional: to register by IP instead of host
      * @type {string}
@@ -56,7 +62,7 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    url?: string;
+    url: string;
 }
 /**
  * Check if a given object implements the RegistrySvcRegisterInstanceRequest interface.

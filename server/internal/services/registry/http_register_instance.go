@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/davecgh/go-spew/spew"
+	sdk "github.com/singulatron/superplatform/sdk/go"
+	"github.com/singulatron/superplatform/sdk/go/datastore"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
@@ -12,7 +15,7 @@ import (
 // Register a new instance
 // @ID registerInstance
 // @Summary Register Instance
-// @Description Registers an instance, associating an instance address with a slug acquired from the bearer token.
+// @Description Registers an instance. Idempoent.
 // @Tags Registry Svc
 // @Accept json
 // @Produce json
@@ -49,49 +52,76 @@ func (rs *RegistryService) RegisterInstance(
 	}
 	defer r.Body.Close()
 
-	err = rs.registerInstance(req, rsp.User.Slug)
+	err = rs.registerInstance(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
+	go func() {
+		rs.triggerChan <- struct{}{}
+		// @todo remove this and the tests fail ???
+		rs.triggerChan <- struct{}{}
+	}()
+
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte(`{}`))
 }
 
-func (rs *RegistryService) registerInstance(req *registry.RegisterInstanceRequest, userSlug string) error {
-	if req.URL == "" {
-		if req.Scheme == "" {
-			return fmt.Errorf("scheme is mandatory when full URL is not provided")
-		}
-		if req.Host == "" && req.IP == "" {
-			return fmt.Errorf("host or IP is mandatory when full URL is not provided")
+func (rs *RegistryService) registerInstance(req *registry.RegisterInstanceRequest) error {
+	var instance registry.Instance
+
+	if req.Id == "" {
+		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).Find()
+		if err != nil {
+			return err
 		}
 
-		host := req.Host
-		if host == "" {
-			host = req.IP
+		if len(instances) > 0 {
+			instance = *instances[0].(*registry.Instance)
+		} else {
+			instance.Id = sdk.Id("inst")
 		}
 
-		req.URL = fmt.Sprintf("%s://%s", req.Scheme, host)
-
-		if req.Port != 0 {
-			req.URL = fmt.Sprintf("%s:%d", req.URL, req.Port)
+	} else {
+		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"id"}, req.Id)).Find()
+		if err != nil {
+			return err
 		}
-		if req.Path != "" {
-			req.URL = fmt.Sprintf("%s%s", req.URL, req.Path)
+
+		if len(instances) > 0 {
+			instance = *instances[0].(*registry.Instance)
 		}
 	}
 
-	inst := &registry.Instance{
-		URL:    req.URL,
-		Scheme: req.Scheme,
-		Host:   req.Host,
-		IP:     req.IP,
-		Path:   req.Path,
+	if req.Id != "" {
+		instance.Id = req.Id
 	}
-	inst.ID = inst.DeriveID()
+	if req.URL != "" {
+		instance.URL = req.URL
+	}
+	if req.Scheme != "" {
+		instance.Scheme = req.Scheme
+	}
+	if req.Host != "" {
+		instance.Host = req.Host
+	}
+	if req.IP != "" {
+		instance.IP = req.IP
+	}
+	if req.Path != "" {
+		instance.Path = req.Path
+	}
+	if req.DeploymentId != "" {
+		instance.DeploymentId = req.DeploymentId
+	}
 
-	return rs.instanceStore.Upsert(inst)
+	if instance.Status == "" {
+		instance.Status = registry.InstanceStatusUnknown
+	}
+
+	spew.Dump("registering", instance)
+
+	return rs.instanceStore.Upsert(&instance)
 }

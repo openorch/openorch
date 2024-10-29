@@ -96,7 +96,7 @@ type RegistrySvcAPI interface {
 	/*
 	RegisterInstance Register Instance
 
-	Registers an instance, associating an instance address with a slug acquired from the bearer token.
+	Registers an instance. Idempoent.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiRegisterInstanceRequest
@@ -938,7 +938,7 @@ func (r ApiRegisterInstanceRequest) Execute() (map[string]interface{}, *http.Res
 /*
 RegisterInstance Register Instance
 
-Registers an instance, associating an instance address with a slug acquired from the bearer token.
+Registers an instance. Idempoent.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRegisterInstanceRequest

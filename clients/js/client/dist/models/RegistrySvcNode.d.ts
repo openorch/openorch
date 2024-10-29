@@ -30,6 +30,12 @@ export interface RegistrySvcNode {
      */
     gpus?: Array<RegistrySvcGPU>;
     /**
+     * Required: ID of the instance
+     * @type {string}
+     * @memberof RegistrySvcNode
+     */
+    id: string;
+    /**
      * Last time the instance gave a sign of life
      * @type {string}
      * @memberof RegistrySvcNode
@@ -47,7 +53,7 @@ export interface RegistrySvcNode {
      * @type {string}
      * @memberof RegistrySvcNode
      */
-    url?: string;
+    url: string;
     /**
      * Resource usage metrics of the node.
      * @type {RegistrySvcResourceUsage}

@@ -27,6 +27,11 @@ RegistrySvcNode.attributeTypeMap = [
         "type": "Array<RegistrySvcGPU>"
     },
     {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
         "name": "lastHeartbeat",
         "baseName": "lastHeartbeat",
         "type": "string"

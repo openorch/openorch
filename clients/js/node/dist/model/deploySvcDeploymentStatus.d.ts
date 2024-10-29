@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 export declare enum DeploySvcDeploymentStatus {
-    StatusOK,
-    StatusError,
-    StatusPending,
-    StatusFailed,
-    StatusDeploying
+    DeploymentStatusOK,
+    DeploymentStatusError,
+    DeploymentStatusPending,
+    DeploymentStatusFailed,
+    DeploymentStatusDeploying
 }

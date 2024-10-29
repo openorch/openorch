@@ -250,6 +250,7 @@ Class | Method | HTTP request | Description
  - [RegistrySvcGPU](docs/RegistrySvcGPU.md)
  - [RegistrySvcImageSpec](docs/RegistrySvcImageSpec.md)
  - [RegistrySvcInstance](docs/RegistrySvcInstance.md)
+ - [RegistrySvcInstanceStatus](docs/RegistrySvcInstanceStatus.md)
  - [RegistrySvcLanguage](docs/RegistrySvcLanguage.md)
  - [RegistrySvcListDefinitionsResponse](docs/RegistrySvcListDefinitionsResponse.md)
  - [RegistrySvcListInstancesResponse](docs/RegistrySvcListInstancesResponse.md)

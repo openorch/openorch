@@ -96,6 +96,7 @@ export { RegistrySvcErrorResponse } from './registrySvcErrorResponse.mjs';
 export { RegistrySvcGPU } from './registrySvcGPU.mjs';
 export { RegistrySvcImageSpec } from './registrySvcImageSpec.mjs';
 export { RegistrySvcInstance } from './registrySvcInstance.mjs';
+export { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus.mjs';
 export { RegistrySvcLanguage } from './registrySvcLanguage.mjs';
 export { RegistrySvcListDefinitionsResponse } from './registrySvcListDefinitionsResponse.mjs';
 export { RegistrySvcListInstancesResponse } from './registrySvcListInstancesResponse.mjs';

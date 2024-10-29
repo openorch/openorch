@@ -14,11 +14,11 @@
  * @export
  */
 export declare const DeploySvcDeploymentStatus: {
-    readonly StatusOK: "OK";
-    readonly StatusError: "Error";
-    readonly StatusPending: "Pending";
-    readonly StatusFailed: "Failed";
-    readonly StatusDeploying: "Deploying";
+    readonly DeploymentStatusOK: "OK";
+    readonly DeploymentStatusError: "Error";
+    readonly DeploymentStatusPending: "Pending";
+    readonly DeploymentStatusFailed: "Failed";
+    readonly DeploymentStatusDeploying: "Deploying";
 };
 export type DeploySvcDeploymentStatus = typeof DeploySvcDeploymentStatus[keyof typeof DeploySvcDeploymentStatus];
 export declare function instanceOfDeploySvcDeploymentStatus(value: any): boolean;
