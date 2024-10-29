@@ -11,9 +11,11 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net/url"
 	"os"
 	"os/signal"
 	"runtime/debug"
+	"strings"
 	"syscall"
 	"time"
 
@@ -160,8 +162,8 @@ func (ns *DeployService) processCommand(
 	if err != nil {
 		return err
 	}
-	if deployment.Status == deploy.StatusPending {
-		deployment.Status = deploy.StatusDeploying
+	if deployment.Status == deploy.DeploymentStatusPending {
+		deployment.Status = deploy.DeploymentStatusDeploying
 		err = ns.deploymentStore.Upsert(deployment)
 		if err != nil {
 			return err
@@ -186,12 +188,13 @@ func (ns *DeployService) executeStartCommand(
 	deployment *deploy.Deployment,
 ) error {
 	logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
+	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
 
 	err := func() error {
 		if definition == nil {
 			return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
 		}
-		_, _, err := ns.clientFactory.Client(sdk.WithAddress(*command.NodeUrl), sdk.WithToken(ns.token)).DockerSvcAPI.LaunchContainer(ctx).Request(
+		_, _, err := client.DockerSvcAPI.LaunchContainer(ctx).Request(
 			openapi.DockerSvcLaunchContainerRequest{
 				Image:    definition.Image.Name,
 				Port:     definition.Image.Port,
@@ -212,7 +215,7 @@ func (ns *DeployService) executeStartCommand(
 			slog.Any("error", err),
 		)
 
-		deployment.Status = deploy.DeploymentStatus(openapi.StatusError)
+		deployment.Status = deploy.DeploymentStatus(openapi.DeploymentStatusError)
 		deployment.Details = err.Error()
 
 		writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
@@ -231,7 +234,7 @@ func (ns *DeployService) executeStartCommand(
 		slog.String("deploymentId", deployment.Id),
 	)
 
-	deployment.Status = deploy.DeploymentStatus(openapi.StatusOK)
+	deployment.Status = deploy.DeploymentStatus(openapi.DeploymentStatusOK)
 	deployment.Details = ""
 
 	writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
@@ -241,6 +244,23 @@ func (ns *DeployService) executeStartCommand(
 	if writeErr != nil {
 		return writeErr
 	}
+
+	ur, err := url.Parse(node.Url)
+	if err != nil {
+		return errors.Wrap(err, "error parsing node url")
+	}
+	ur.Host = strings.Replace(ur.Host, ur.Port(), fmt.Sprintf("%v", definition.HostPort), 1)
+
+	client.RegistrySvcAPI.RegisterInstance(ctx).Request(
+		openapi.RegistrySvcRegisterInstanceRequest{
+			DeploymentId: deployment.Id,
+			Url:          ur.String(),
+			Host:         openapi.PtrString(ur.Hostname()),
+			Port:         definition.HostPort,
+			Scheme:       openapi.PtrString(ur.Scheme),
+			Path:         openapi.PtrString(ur.Path),
+		},
+	)
 
 	return nil
 }
@@ -254,4 +274,17 @@ func (ns *DeployService) getDeploymentById(deploymentId string) (*deploy.Deploym
 	deployment := deploymentIs[0].(*deploy.Deployment)
 
 	return deployment, err
+}
+
+func rewritePort(inputURL string, newPort string) (string, error) {
+	ur, err := url.Parse(inputURL)
+	if err != nil {
+		return "", fmt.Errorf("error parsing URL: %w", err)
+	}
+
+	// Split the host part and rewrite the port
+	host := ur.Hostname() // Get the hostname without the port
+	ur.Host = fmt.Sprintf("%s:%s", host, newPort)
+
+	return ur.String(), nil
 }

@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RegistrySvcNode type satisfies the MappedNullable interface at compile time
@@ -24,22 +26,28 @@ type RegistrySvcNode struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty"`
 	// List of GPUs available on the node
 	Gpus []RegistrySvcGPU `json:"gpus,omitempty"`
+	// Required: ID of the instance
+	Id string `json:"id"`
 	// Last time the instance gave a sign of life
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
 	// The region of the node
 	Region *string `json:"region,omitempty"`
 	// URL of the daemon running on the node. If not configured defaults to hostname + default Singulatron daemon port.
-	Url *string `json:"url,omitempty"`
+	Url string `json:"url"`
 	// Resource usage metrics of the node.
 	Usage *RegistrySvcResourceUsage `json:"usage,omitempty"`
 }
+
+type _RegistrySvcNode RegistrySvcNode
 
 // NewRegistrySvcNode instantiates a new RegistrySvcNode object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcNode() *RegistrySvcNode {
+func NewRegistrySvcNode(id string, url string) *RegistrySvcNode {
 	this := RegistrySvcNode{}
+	this.Id = id
+	this.Url = url
 	return &this
 }
 
@@ -115,6 +123,30 @@ func (o *RegistrySvcNode) SetGpus(v []RegistrySvcGPU) {
 	o.Gpus = v
 }
 
+// GetId returns the Id field value
+func (o *RegistrySvcNode) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcNode) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *RegistrySvcNode) SetId(v string) {
+	o.Id = v
+}
+
 // GetLastHeartbeat returns the LastHeartbeat field value if set, zero value otherwise.
 func (o *RegistrySvcNode) GetLastHeartbeat() string {
 	if o == nil || IsNil(o.LastHeartbeat) {
@@ -179,36 +211,28 @@ func (o *RegistrySvcNode) SetRegion(v string) {
 	o.Region = &v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
 func (o *RegistrySvcNode) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *RegistrySvcNode) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *RegistrySvcNode) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *RegistrySvcNode) SetUrl(v string) {
-	o.Url = &v
+	o.Url = v
 }
 
 // GetUsage returns the Usage field value if set, zero value otherwise.
@@ -259,19 +283,56 @@ func (o RegistrySvcNode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Gpus) {
 		toSerialize["gpus"] = o.Gpus
 	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.LastHeartbeat) {
 		toSerialize["lastHeartbeat"] = o.LastHeartbeat
 	}
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
+	toSerialize["url"] = o.Url
 	if !IsNil(o.Usage) {
 		toSerialize["usage"] = o.Usage
 	}
 	return toSerialize, nil
+}
+
+func (o *RegistrySvcNode) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRegistrySvcNode := _RegistrySvcNode{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRegistrySvcNode)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RegistrySvcNode(varRegistrySvcNode)
+
+	return err
 }
 
 type NullableRegistrySvcNode struct {

@@ -22,6 +22,11 @@ RegistrySvcInstance.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "details",
+        "baseName": "details",
+        "type": "string"
+    },
+    {
         "name": "host",
         "baseName": "host",
         "type": "string"
@@ -60,6 +65,11 @@ RegistrySvcInstance.attributeTypeMap = [
         "name": "scheme",
         "baseName": "scheme",
         "type": "string"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "RegistrySvcInstanceStatus"
     },
     {
         "name": "url",

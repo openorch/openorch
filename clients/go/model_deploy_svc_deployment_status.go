@@ -21,11 +21,11 @@ type DeploySvcDeploymentStatus string
 
 // List of deploy_svc.DeploymentStatus
 const (
-	StatusOK DeploySvcDeploymentStatus = "OK"
-	StatusError DeploySvcDeploymentStatus = "Error"
-	StatusPending DeploySvcDeploymentStatus = "Pending"
-	StatusFailed DeploySvcDeploymentStatus = "Failed"
-	StatusDeploying DeploySvcDeploymentStatus = "Deploying"
+	DeploymentStatusOK DeploySvcDeploymentStatus = "OK"
+	DeploymentStatusError DeploySvcDeploymentStatus = "Error"
+	DeploymentStatusPending DeploySvcDeploymentStatus = "Pending"
+	DeploymentStatusFailed DeploySvcDeploymentStatus = "Failed"
+	DeploymentStatusDeploying DeploySvcDeploymentStatus = "Deploying"
 )
 
 // All allowed values of DeploySvcDeploymentStatus enum

@@ -10,6 +10,7 @@ import './RegistrySvcImageSpec.mjs';
 import './RegistrySvcClient.mjs';
 import './RegistrySvcLanguage.mjs';
 import './RegistrySvcInstance.mjs';
+import './RegistrySvcInstanceStatus.mjs';
 import './RegistrySvcNode.mjs';
 import './RegistrySvcGPU.mjs';
 import './RegistrySvcProcess.mjs';
@@ -208,7 +209,7 @@ class RegistrySvcApi extends BaseAPI {
         });
     }
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * Register Instance
      */
     registerInstanceRaw(requestParameters, initOverrides) {
@@ -233,7 +234,7 @@ class RegistrySvcApi extends BaseAPI {
         });
     }
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * Register Instance
      */
     registerInstance(requestParameters, initOverrides) {

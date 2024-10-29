@@ -11,13 +11,14 @@
  */
 export declare class RegistrySvcRegisterInstanceRequest {
     /**
-    * The service definition id.
+    * The ID of the deployment that this instance is an instance of.
     */
-    'definitionId': string;
+    'deploymentId': string;
     /**
     * Host of the instance address. Required if URL is not provided
     */
     'host'?: string;
+    'id'?: string;
     /**
     * IP of the instance address. Optional: to register by IP instead of host
     */
@@ -37,7 +38,7 @@ export declare class RegistrySvcRegisterInstanceRequest {
     /**
     * Full address URL of the instance.
     */
-    'url'?: string;
+    'url': string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

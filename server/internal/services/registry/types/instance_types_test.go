@@ -64,10 +64,10 @@ func TestGenerateID(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			id := tt.instance.DeriveID()
+			id := tt.instance.BuildURL()
 
 			if id != tt.expectedID {
-				t.Errorf("DeriveID() = %v, want %v", id, tt.expectedID)
+				t.Errorf("BuildURL() = %v, want %v", id, tt.expectedID)
 			}
 		})
 	}

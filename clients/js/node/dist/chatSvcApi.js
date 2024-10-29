@@ -114,6 +114,7 @@ require('./registrySvcErrorResponse.js');
 require('./registrySvcGPU.js');
 require('./registrySvcImageSpec.js');
 require('./registrySvcInstance.js');
+require('./registrySvcInstanceStatus.js');
 require('./registrySvcLanguage.js');
 require('./registrySvcListDefinitionsResponse.js');
 require('./registrySvcListInstancesResponse.js');

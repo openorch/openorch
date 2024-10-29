@@ -96,6 +96,7 @@ var registrySvcErrorResponse = require('./registrySvcErrorResponse.js');
 var registrySvcGPU = require('./registrySvcGPU.js');
 var registrySvcImageSpec = require('./registrySvcImageSpec.js');
 var registrySvcInstance = require('./registrySvcInstance.js');
+var registrySvcInstanceStatus = require('./registrySvcInstanceStatus.js');
 var registrySvcLanguage = require('./registrySvcLanguage.js');
 var registrySvcListDefinitionsResponse = require('./registrySvcListDefinitionsResponse.js');
 var registrySvcListInstancesResponse = require('./registrySvcListInstancesResponse.js');
@@ -154,6 +155,7 @@ let enumsMap = {
     "PolicySvcScope": policySvcScope.PolicySvcScope,
     "PolicySvcTemplateId": policySvcTemplateId.PolicySvcTemplateId,
     "PromptSvcPromptStatus": promptSvcPromptStatus.PromptSvcPromptStatus,
+    "RegistrySvcInstanceStatus": registrySvcInstanceStatus.RegistrySvcInstanceStatus,
     "RegistrySvcLanguage": registrySvcLanguage.RegistrySvcLanguage,
 };
 let typeMap = {
@@ -585,6 +587,10 @@ exports.RegistrySvcErrorResponse = registrySvcErrorResponse.RegistrySvcErrorResp
 exports.RegistrySvcGPU = registrySvcGPU.RegistrySvcGPU;
 exports.RegistrySvcImageSpec = registrySvcImageSpec.RegistrySvcImageSpec;
 exports.RegistrySvcInstance = registrySvcInstance.RegistrySvcInstance;
+Object.defineProperty(exports, 'RegistrySvcInstanceStatus', {
+    enumerable: true,
+    get: function () { return registrySvcInstanceStatus.RegistrySvcInstanceStatus; }
+});
 Object.defineProperty(exports, 'RegistrySvcLanguage', {
     enumerable: true,
     get: function () { return registrySvcLanguage.RegistrySvcLanguage; }

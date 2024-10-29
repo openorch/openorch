@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { RegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus';
 /**
  *
  * @export
@@ -21,6 +22,12 @@ export interface RegistrySvcInstance {
      * @memberof RegistrySvcInstance
      */
     deploymentId: string;
+    /**
+     * Details
+     * @type {string}
+     * @memberof RegistrySvcInstance
+     */
+    details?: string;
     /**
      * Host of the instance address. Required if URL is not provided
      * @type {string}
@@ -69,6 +76,12 @@ export interface RegistrySvcInstance {
      * @memberof RegistrySvcInstance
      */
     scheme?: string;
+    /**
+     * Status
+     * @type {RegistrySvcInstanceStatus}
+     * @memberof RegistrySvcInstance
+     */
+    status: RegistrySvcInstanceStatus;
     /**
      * Full address URL of the instance.
      * @type {string}

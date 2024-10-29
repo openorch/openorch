@@ -15,11 +15,11 @@ type ErrorResponse struct {
 type DeploymentStatus string
 
 const (
-	StatusOK        DeploymentStatus = "OK"
-	StatusError     DeploymentStatus = "Error"
-	StatusPending   DeploymentStatus = "Pending"
-	StatusFailed    DeploymentStatus = "Failed"
-	StatusDeploying DeploymentStatus = "Deploying"
+	DeploymentStatusOK        DeploymentStatus = "OK"
+	DeploymentStatusError     DeploymentStatus = "Error"
+	DeploymentStatusPending   DeploymentStatus = "Pending"
+	DeploymentStatusFailed    DeploymentStatus = "Failed"
+	DeploymentStatusDeploying DeploymentStatus = "Deploying"
 )
 
 type Deployment struct {

@@ -94,6 +94,7 @@ export { RegistrySvcErrorResponseFromJSON, RegistrySvcErrorResponseFromJSONTyped
 export { RegistrySvcGPUFromJSON, RegistrySvcGPUFromJSONTyped, RegistrySvcGPUToJSON, instanceOfRegistrySvcGPU } from './RegistrySvcGPU.mjs';
 export { RegistrySvcImageSpecFromJSON, RegistrySvcImageSpecFromJSONTyped, RegistrySvcImageSpecToJSON, instanceOfRegistrySvcImageSpec } from './RegistrySvcImageSpec.mjs';
 export { RegistrySvcInstanceFromJSON, RegistrySvcInstanceFromJSONTyped, RegistrySvcInstanceToJSON, instanceOfRegistrySvcInstance } from './RegistrySvcInstance.mjs';
+export { RegistrySvcInstanceStatus, RegistrySvcInstanceStatusFromJSON, RegistrySvcInstanceStatusFromJSONTyped, RegistrySvcInstanceStatusToJSON, instanceOfRegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus.mjs';
 export { RegistrySvcLanguage, RegistrySvcLanguageFromJSON, RegistrySvcLanguageFromJSONTyped, RegistrySvcLanguageToJSON, instanceOfRegistrySvcLanguage } from './RegistrySvcLanguage.mjs';
 export { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListDefinitionsResponseFromJSONTyped, RegistrySvcListDefinitionsResponseToJSON, instanceOfRegistrySvcListDefinitionsResponse } from './RegistrySvcListDefinitionsResponse.mjs';
 export { RegistrySvcListInstancesResponseFromJSON, RegistrySvcListInstancesResponseFromJSONTyped, RegistrySvcListInstancesResponseToJSON, instanceOfRegistrySvcListInstancesResponse } from './RegistrySvcListInstancesResponse.mjs';

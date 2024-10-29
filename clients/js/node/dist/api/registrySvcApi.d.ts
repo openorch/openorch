@@ -108,7 +108,7 @@ export declare class RegistrySvcApi {
         body: RegistrySvcListNodesResponse;
     }>;
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * @summary Register Instance
      * @param request Register Instance Request
      */

@@ -45,6 +45,12 @@ export interface RegistrySvcNode {
      */
     gpus?: Array<RegistrySvcGPU>;
     /**
+     * Required: ID of the instance
+     * @type {string}
+     * @memberof RegistrySvcNode
+     */
+    id: string;
+    /**
      * Last time the instance gave a sign of life
      * @type {string}
      * @memberof RegistrySvcNode
@@ -62,7 +68,7 @@ export interface RegistrySvcNode {
      * @type {string}
      * @memberof RegistrySvcNode
      */
-    url?: string;
+    url: string;
     /**
      * Resource usage metrics of the node.
      * @type {RegistrySvcResourceUsage}
@@ -75,6 +81,8 @@ export interface RegistrySvcNode {
  * Check if a given object implements the RegistrySvcNode interface.
  */
 export function instanceOfRegistrySvcNode(value: object): value is RegistrySvcNode {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
 
@@ -90,9 +98,10 @@ export function RegistrySvcNodeFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'availabilityZone': json['availabilityZone'] == null ? undefined : json['availabilityZone'],
         'gpus': json['gpus'] == null ? undefined : ((json['gpus'] as Array<any>).map(RegistrySvcGPUFromJSON)),
+        'id': json['id'],
         'lastHeartbeat': json['lastHeartbeat'] == null ? undefined : json['lastHeartbeat'],
         'region': json['region'] == null ? undefined : json['region'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'url': json['url'],
         'usage': json['usage'] == null ? undefined : RegistrySvcResourceUsageFromJSON(json['usage']),
     };
 }
@@ -105,6 +114,7 @@ export function RegistrySvcNodeToJSON(value?: RegistrySvcNode | null): any {
         
         'availabilityZone': value['availabilityZone'],
         'gpus': value['gpus'] == null ? undefined : ((value['gpus'] as Array<any>).map(RegistrySvcGPUToJSON)),
+        'id': value['id'],
         'lastHeartbeat': value['lastHeartbeat'],
         'region': value['region'],
         'url': value['url'],

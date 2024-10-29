@@ -18,11 +18,11 @@
  * @export
  */
 export const DeploySvcDeploymentStatus = {
-    StatusOK: 'OK',
-    StatusError: 'Error',
-    StatusPending: 'Pending',
-    StatusFailed: 'Failed',
-    StatusDeploying: 'Deploying'
+    DeploymentStatusOK: 'OK',
+    DeploymentStatusError: 'Error',
+    DeploymentStatusPending: 'Pending',
+    DeploymentStatusFailed: 'Failed',
+    DeploymentStatusDeploying: 'Deploying'
 } as const;
 export type DeploySvcDeploymentStatus = typeof DeploySvcDeploymentStatus[keyof typeof DeploySvcDeploymentStatus];
 

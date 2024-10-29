@@ -11,12 +11,17 @@
  */
 
 import { RequestFile } from './models';
+import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 
 export class RegistrySvcInstance {
     /**
     * The ID of the deployment that this instance is an instance of.
     */
     'deploymentId': string;
+    /**
+    * Details
+    */
+    'details'?: string;
     /**
     * Host of the instance address. Required if URL is not provided
     */
@@ -50,6 +55,10 @@ export class RegistrySvcInstance {
     */
     'scheme'?: string;
     /**
+    * Status
+    */
+    'status': RegistrySvcInstanceStatus;
+    /**
     * Full address URL of the instance.
     */
     'url': string;
@@ -60,6 +69,11 @@ export class RegistrySvcInstance {
         {
             "name": "deploymentId",
             "baseName": "deploymentId",
+            "type": "string"
+        },
+        {
+            "name": "details",
+            "baseName": "details",
             "type": "string"
         },
         {
@@ -103,6 +117,11 @@ export class RegistrySvcInstance {
             "type": "string"
         },
         {
+            "name": "status",
+            "baseName": "status",
+            "type": "RegistrySvcInstanceStatus"
+        },
+        {
             "name": "url",
             "baseName": "url",
             "type": "string"
@@ -113,3 +132,5 @@ export class RegistrySvcInstance {
     }
 }
 
+export namespace RegistrySvcInstance {
+}

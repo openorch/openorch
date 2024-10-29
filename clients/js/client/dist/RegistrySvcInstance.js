@@ -1,5 +1,7 @@
 'use strict';
 
+var RegistrySvcInstanceStatus = require('./RegistrySvcInstanceStatus.js');
+
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -21,6 +23,8 @@ function instanceOfRegistrySvcInstance(value) {
         return false;
     if (!('id' in value) || value['id'] === undefined)
         return false;
+    if (!('status' in value) || value['status'] === undefined)
+        return false;
     if (!('url' in value) || value['url'] === undefined)
         return false;
     return true;
@@ -34,6 +38,7 @@ function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'deploymentId': json['deploymentId'],
+        'details': json['details'] == null ? undefined : json['details'],
         'host': json['host'] == null ? undefined : json['host'],
         'id': json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
@@ -42,6 +47,7 @@ function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'status': RegistrySvcInstanceStatus.RegistrySvcInstanceStatusFromJSON(json['status']),
         'url': json['url'],
     };
 }
@@ -51,6 +57,7 @@ function RegistrySvcInstanceToJSON(value) {
     }
     return {
         'deploymentId': value['deploymentId'],
+        'details': value['details'],
         'host': value['host'],
         'id': value['id'],
         'ip': value['ip'],
@@ -59,6 +66,7 @@ function RegistrySvcInstanceToJSON(value) {
         'path': value['path'],
         'port': value['port'],
         'scheme': value['scheme'],
+        'status': RegistrySvcInstanceStatus.RegistrySvcInstanceStatusToJSON(value['status']),
         'url': value['url'],
     };
 }

@@ -98,6 +98,7 @@ import './RegistrySvcClient.mjs';
 import './RegistrySvcLanguage.mjs';
 import './RegistrySvcListInstancesResponse.mjs';
 import './RegistrySvcInstance.mjs';
+import './RegistrySvcInstanceStatus.mjs';
 import './RegistrySvcListNodesResponse.mjs';
 import './RegistrySvcNode.mjs';
 import './RegistrySvcGPU.mjs';

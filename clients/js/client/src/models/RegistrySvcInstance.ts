@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { RegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus';
+import {
+    RegistrySvcInstanceStatusFromJSON,
+    RegistrySvcInstanceStatusFromJSONTyped,
+    RegistrySvcInstanceStatusToJSON,
+} from './RegistrySvcInstanceStatus';
+
 /**
  * 
  * @export
@@ -25,6 +32,12 @@ export interface RegistrySvcInstance {
      * @memberof RegistrySvcInstance
      */
     deploymentId: string;
+    /**
+     * Details
+     * @type {string}
+     * @memberof RegistrySvcInstance
+     */
+    details?: string;
     /**
      * Host of the instance address. Required if URL is not provided
      * @type {string}
@@ -74,6 +87,12 @@ export interface RegistrySvcInstance {
      */
     scheme?: string;
     /**
+     * Status
+     * @type {RegistrySvcInstanceStatus}
+     * @memberof RegistrySvcInstance
+     */
+    status: RegistrySvcInstanceStatus;
+    /**
      * Full address URL of the instance.
      * @type {string}
      * @memberof RegistrySvcInstance
@@ -81,12 +100,15 @@ export interface RegistrySvcInstance {
     url: string;
 }
 
+
+
 /**
  * Check if a given object implements the RegistrySvcInstance interface.
  */
 export function instanceOfRegistrySvcInstance(value: object): value is RegistrySvcInstance {
     if (!('deploymentId' in value) || value['deploymentId'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
     return true;
 }
@@ -102,6 +124,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'deploymentId': json['deploymentId'],
+        'details': json['details'] == null ? undefined : json['details'],
         'host': json['host'] == null ? undefined : json['host'],
         'id': json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
@@ -110,6 +133,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'status': RegistrySvcInstanceStatusFromJSON(json['status']),
         'url': json['url'],
     };
 }
@@ -121,6 +145,7 @@ export function RegistrySvcInstanceToJSON(value?: RegistrySvcInstance | null): a
     return {
         
         'deploymentId': value['deploymentId'],
+        'details': value['details'],
         'host': value['host'],
         'id': value['id'],
         'ip': value['ip'],
@@ -129,6 +154,7 @@ export function RegistrySvcInstanceToJSON(value?: RegistrySvcInstance | null): a
         'path': value['path'],
         'port': value['port'],
         'scheme': value['scheme'],
+        'status': RegistrySvcInstanceStatusToJSON(value['status']),
         'url': value['url'],
     };
 }
