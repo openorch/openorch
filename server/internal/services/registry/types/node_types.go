@@ -12,7 +12,7 @@ import "time"
 
 type Node struct {
 	// Required: ID of the instance
-	ID string `json:"id,omitempty" example:"node_di9riJEvH2" binding:"required"`
+	Id string `json:"id,omitempty" example:"node_di9riJEvH2" binding:"required"`
 
 	// URL of the daemon running on the node.
 	// If not configured defaults to hostname + default Singulatron daemon port.

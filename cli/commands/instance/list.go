@@ -1,4 +1,4 @@
-package definition
+package instance
 
 import (
 	"fmt"
@@ -21,18 +21,18 @@ func List(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListDefinitions(ctx).Execute()
+	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListInstances(ctx).Execute()
 	if err != nil {
-		return fmt.Errorf("Failed to save service definition: '%v'", err)
+		return fmt.Errorf("Failed to save service instance: '%v'", err)
 	}
 
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tIMAGE NAME")
+	fmt.Fprintln(writer, "ID\tURL\tSTATUS")
 
-	for _, definition := range rsp.Definitions {
-		fmt.Fprintf(writer, "%s\t%s\n", definition.Id, definition.Image.Name)
+	for _, instance := range rsp.Instances {
+		fmt.Fprintf(writer, "%s\t%s\t%s\n", instance.Id, instance.Url, instance.Status)
 	}
 
 	return nil

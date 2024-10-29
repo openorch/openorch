@@ -32,7 +32,7 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    id?: string;
+    id: string;
     /**
      * IP of the instance address. Optional: to register by IP instead of host
      * @type {string}

@@ -14,27 +14,27 @@ import (
 
 var PermissionNodeCreate = usertypes.Permission{
 	Id:   "registry-svc:node:create",
-	Name: "Node Create",
+	Name: "Registry Svc - Node Create",
 }
 
 var PermissionNodeView = usertypes.Permission{
 	Id:   "registry-svc:node:view",
-	Name: "Node View",
+	Name: "Registry Svc - Node View",
 }
 
 var PermissionNodeEdit = usertypes.Permission{
 	Id:   "registry-svc:node:edit",
-	Name: "Node Edit",
+	Name: "Registry Svc - Node Edit",
 }
 
 var PermissionNodeDelete = usertypes.Permission{
 	Id:   "registry-svc:node:delete",
-	Name: "Node Delete",
+	Name: "Registry Svc - Node Delete",
 }
 
 var PermissionNodeStream = usertypes.Permission{
 	Id:   "registry-svc:node:stream",
-	Name: "Node Stream",
+	Name: "Registry Svc - Node Stream",
 }
 
 var NodeAdminPermissions = []usertypes.Permission{

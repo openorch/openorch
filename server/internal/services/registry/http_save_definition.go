@@ -49,7 +49,7 @@ func (rs *RegistryService) SaveDefinition(
 	}
 	defer r.Body.Close()
 
-	err = rs.saveServiceDefinition(req, rsp.User.Slug)
+	err = rs.saveServiceDefinition(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -60,6 +60,6 @@ func (rs *RegistryService) SaveDefinition(
 	w.Write([]byte(`{}`))
 }
 
-func (rs *RegistryService) saveServiceDefinition(req *registry.SaveDefinitionRequest, userSlug string) error {
+func (rs *RegistryService) saveServiceDefinition(req *registry.SaveDefinitionRequest) error {
 	return rs.definitionStore.Upsert(req.Definition)
 }

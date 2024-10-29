@@ -105,7 +105,7 @@ var ErrNotFound = errors.New("service not found")
 // Additionally, if both host and port are provided, they cannot both be specified at the same time.
 // The IP field is optional and can be used for registration by IP instead of host.
 type RegisterInstanceRequest struct {
-	Id string `json:"id,omitempty" example:"inst_di9riJEvH2"`
+	Id string `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`
 
 	// The ID of the deployment that this instance is an instance of.
 	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
