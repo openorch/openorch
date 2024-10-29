@@ -194,6 +194,7 @@ func (ns *DeployService) executeStartCommand(
 		if definition == nil {
 			return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
 		}
+
 		_, _, err := client.DockerSvcAPI.LaunchContainer(ctx).Request(
 			openapi.DockerSvcLaunchContainerRequest{
 				Image:    definition.Image.Name,
@@ -249,7 +250,9 @@ func (ns *DeployService) executeStartCommand(
 	if err != nil {
 		return errors.Wrap(err, "error parsing node url")
 	}
-	ur.Host = strings.Replace(ur.Host, ur.Port(), fmt.Sprintf("%v", definition.HostPort), 1)
+	if definition.HostPort != nil {
+		ur.Host = strings.Replace(ur.Host, ur.Port(), fmt.Sprintf("%v", *definition.HostPort), 1)
+	}
 
 	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Request(
 		openapi.RegistrySvcRegisterInstanceRequest{

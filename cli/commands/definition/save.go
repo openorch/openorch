@@ -5,12 +5,12 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/ghodss/yaml"
 	"github.com/pkg/errors"
 	"github.com/singulatron/superplatform/cli/config"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v2"
 )
 
 // Save /home/user/definitionA.yaml
