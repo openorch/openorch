@@ -2419,7 +2419,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Registers an instance, associating an instance address with a slug acquired from the bearer token.",
+                "description": "Registers an instance. Idempoent.",
                 "consumes": [
                     "application/json"
                 ],
@@ -5616,6 +5616,7 @@ const docTemplate = `{
             "required": [
                 "deploymentId",
                 "id",
+                "status",
                 "url"
             ],
             "properties": {
@@ -5623,6 +5624,11 @@ const docTemplate = `{
                     "description": "The ID of the deployment that this instance is an instance of.",
                     "type": "string",
                     "example": "depl_deBUCtJirc"
+                },
+                "details": {
+                    "description": "Details",
+                    "type": "string",
+                    "example": "Instance is healthy"
                 },
                 "host": {
                     "description": "Host of the instance address. Required if URL is not provided",
@@ -5663,12 +5669,45 @@ const docTemplate = `{
                     "type": "string",
                     "example": "https"
                 },
+                "status": {
+                    "description": "Status",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/registry_svc.InstanceStatus"
+                        }
+                    ],
+                    "example": "Healthy"
+                },
                 "url": {
                     "description": "Full address URL of the instance.",
                     "type": "string",
                     "example": "https://myserver.com:5981"
                 }
             }
+        },
+        "registry_svc.InstanceStatus": {
+            "type": "string",
+            "enum": [
+                "Unknown",
+                "Healthy",
+                "Degraded",
+                "Unreachable",
+                "Error"
+            ],
+            "x-enum-comments": {
+                "InstanceStatusDegraded": "Instance is responding but with performance issues or partial failures",
+                "InstanceStatusError": "Instance encountered errors or failed multiple health checks",
+                "InstanceStatusHealthy": "Instance is fully operational and responding as expected",
+                "InstanceStatusUnknown": "Default state when the instance status is not yet determined",
+                "InstanceStatusUnreachable": "Instance is not reachable, possibly down or with network issues"
+            },
+            "x-enum-varnames": [
+                "InstanceStatusUnknown",
+                "InstanceStatusHealthy",
+                "InstanceStatusDegraded",
+                "InstanceStatusUnreachable",
+                "InstanceStatusError"
+            ]
         },
         "registry_svc.Language": {
             "type": "string",
@@ -5813,18 +5852,23 @@ const docTemplate = `{
         "registry_svc.RegisterInstanceRequest": {
             "type": "object",
             "required": [
-                "definitionId"
+                "deploymentId",
+                "url"
             ],
             "properties": {
-                "definitionId": {
-                    "description": "The service definition id.",
+                "deploymentId": {
+                    "description": "The ID of the deployment that this instance is an instance of.",
                     "type": "string",
-                    "example": "user-svc"
+                    "example": "depl_deBUCtJirc"
                 },
                 "host": {
                     "description": "Host of the instance address. Required if URL is not provided",
                     "type": "string",
                     "example": "myserver.com"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "inst_di9riJEvH2"
                 },
                 "ip": {
                     "description": "IP of the instance address. Optional: to register by IP instead of host",

@@ -22,10 +22,11 @@ var _ MappedNullable = &RegistrySvcRegisterInstanceRequest{}
 
 // RegistrySvcRegisterInstanceRequest struct for RegistrySvcRegisterInstanceRequest
 type RegistrySvcRegisterInstanceRequest struct {
-	// The service definition id.
-	DefinitionId string `json:"definitionId"`
+	// The ID of the deployment that this instance is an instance of.
+	DeploymentId string `json:"deploymentId"`
 	// Host of the instance address. Required if URL is not provided
 	Host *string `json:"host,omitempty"`
+	Id *string `json:"id,omitempty"`
 	// IP of the instance address. Optional: to register by IP instead of host
 	Ip *string `json:"ip,omitempty"`
 	// Path of the instance address. Optional (e.g., \"/api\")
@@ -35,7 +36,7 @@ type RegistrySvcRegisterInstanceRequest struct {
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme *string `json:"scheme,omitempty"`
 	// Full address URL of the instance.
-	Url *string `json:"url,omitempty"`
+	Url string `json:"url"`
 }
 
 type _RegistrySvcRegisterInstanceRequest RegistrySvcRegisterInstanceRequest
@@ -44,9 +45,10 @@ type _RegistrySvcRegisterInstanceRequest RegistrySvcRegisterInstanceRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcRegisterInstanceRequest(definitionId string) *RegistrySvcRegisterInstanceRequest {
+func NewRegistrySvcRegisterInstanceRequest(deploymentId string, url string) *RegistrySvcRegisterInstanceRequest {
 	this := RegistrySvcRegisterInstanceRequest{}
-	this.DefinitionId = definitionId
+	this.DeploymentId = deploymentId
+	this.Url = url
 	return &this
 }
 
@@ -58,28 +60,28 @@ func NewRegistrySvcRegisterInstanceRequestWithDefaults() *RegistrySvcRegisterIns
 	return &this
 }
 
-// GetDefinitionId returns the DefinitionId field value
-func (o *RegistrySvcRegisterInstanceRequest) GetDefinitionId() string {
+// GetDeploymentId returns the DeploymentId field value
+func (o *RegistrySvcRegisterInstanceRequest) GetDeploymentId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.DefinitionId
+	return o.DeploymentId
 }
 
-// GetDefinitionIdOk returns a tuple with the DefinitionId field value
+// GetDeploymentIdOk returns a tuple with the DeploymentId field value
 // and a boolean to check if the value has been set.
-func (o *RegistrySvcRegisterInstanceRequest) GetDefinitionIdOk() (*string, bool) {
+func (o *RegistrySvcRegisterInstanceRequest) GetDeploymentIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.DefinitionId, true
+	return &o.DeploymentId, true
 }
 
-// SetDefinitionId sets field value
-func (o *RegistrySvcRegisterInstanceRequest) SetDefinitionId(v string) {
-	o.DefinitionId = v
+// SetDeploymentId sets field value
+func (o *RegistrySvcRegisterInstanceRequest) SetDeploymentId(v string) {
+	o.DeploymentId = v
 }
 
 // GetHost returns the Host field value if set, zero value otherwise.
@@ -112,6 +114,38 @@ func (o *RegistrySvcRegisterInstanceRequest) HasHost() bool {
 // SetHost gets a reference to the given string and assigns it to the Host field.
 func (o *RegistrySvcRegisterInstanceRequest) SetHost(v string) {
 	o.Host = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *RegistrySvcRegisterInstanceRequest) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcRegisterInstanceRequest) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *RegistrySvcRegisterInstanceRequest) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *RegistrySvcRegisterInstanceRequest) SetId(v string) {
+	o.Id = &v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
@@ -242,36 +276,28 @@ func (o *RegistrySvcRegisterInstanceRequest) SetScheme(v string) {
 	o.Scheme = &v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
 func (o *RegistrySvcRegisterInstanceRequest) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *RegistrySvcRegisterInstanceRequest) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *RegistrySvcRegisterInstanceRequest) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *RegistrySvcRegisterInstanceRequest) SetUrl(v string) {
-	o.Url = &v
+	o.Url = v
 }
 
 func (o RegistrySvcRegisterInstanceRequest) MarshalJSON() ([]byte, error) {
@@ -284,9 +310,12 @@ func (o RegistrySvcRegisterInstanceRequest) MarshalJSON() ([]byte, error) {
 
 func (o RegistrySvcRegisterInstanceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["definitionId"] = o.DefinitionId
+	toSerialize["deploymentId"] = o.DeploymentId
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.Ip) {
 		toSerialize["ip"] = o.Ip
@@ -300,9 +329,7 @@ func (o RegistrySvcRegisterInstanceRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Scheme) {
 		toSerialize["scheme"] = o.Scheme
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
+	toSerialize["url"] = o.Url
 	return toSerialize, nil
 }
 
@@ -311,7 +338,8 @@ func (o *RegistrySvcRegisterInstanceRequest) UnmarshalJSON(data []byte) (err err
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"definitionId",
+		"deploymentId",
+		"url",
 	}
 
 	allProperties := make(map[string]interface{})

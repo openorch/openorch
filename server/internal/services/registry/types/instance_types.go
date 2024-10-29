@@ -30,7 +30,7 @@ const (
 
 type Instance struct {
 	// Required: ID of the instance
-	ID string `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`
+	Id string `json:"id,omitempty" example:"inst_di9riJEvH2" binding:"required"`
 
 	// Full address URL of the instance.
 	URL string `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`
@@ -60,13 +60,19 @@ type Instance struct {
 
 	// Port of the instance address. Required if URL is not provided
 	Port int `json:"port,omitempty" example:"8080"`
+
+	// Status
+	Status InstanceStatus `json:"status,omitempty" example:"Healthy" binding:"required"`
+
+	// Details
+	Details string `json:"details,omitempty" example:"Instance is healthy"`
 }
 
 func (s *Instance) GetId() string {
-	return s.DeriveID()
+	return s.Id
 }
 
-func (s *Instance) DeriveID() string {
+func (s *Instance) BuildURL() string {
 	if s.URL != "" {
 		return s.URL
 	}
@@ -99,13 +105,28 @@ var ErrNotFound = errors.New("service not found")
 // Additionally, if both host and port are provided, they cannot both be specified at the same time.
 // The IP field is optional and can be used for registration by IP instead of host.
 type RegisterInstanceRequest struct {
-	DefinitionId string `json:"definitionId,omitempty" example:"user-svc" binding:"required"` // The service definition id.
-	URL          string `json:"url,omitempty" example:"https://myserver.com:5981"`            // Full address URL of the instance.
-	Scheme       string `json:"scheme,omitempty" example:"https"`                             // Scheme of the instance address. Required if URL is not provided.
-	Host         string `json:"host,omitempty" example:"myserver.com"`                        // Host of the instance address. Required if URL is not provided
-	IP           string `json:"ip,omitempty" example:"8.8.8.8"`                               // IP of the instance address. Optional: to register by IP instead of host
-	Port         int    `json:"port,omitempty" example:"8080"`                                // Port of the instance address. Required if URL is not provided
-	Path         string `json:"path,omitempty" example:"/your-svc"`                           // Path of the instance address. Optional (e.g., "/api")
+	Id string `json:"id,omitempty" example:"inst_di9riJEvH2"`
+
+	// The ID of the deployment that this instance is an instance of.
+	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
+
+	// Full address URL of the instance.
+	URL string `json:"url,omitempty" example:"https://myserver.com:5981"  binding:"required"`
+
+	// Scheme of the instance address. Required if URL is not provided.
+	Scheme string `json:"scheme,omitempty" example:"https"`
+
+	// Host of the instance address. Required if URL is not provided
+	Host string `json:"host,omitempty" example:"myserver.com"`
+
+	// IP of the instance address. Optional: to register by IP instead of host
+	IP string `json:"ip,omitempty" example:"8.8.8.8"`
+
+	// Port of the instance address. Required if URL is not provided
+	Port int `json:"port,omitempty" example:"8080"`
+
+	// Path of the instance address. Optional (e.g., "/api")
+	Path string `json:"path,omitempty" example:"/your-svc"`
 }
 
 type RegisterInstanceResponse struct {

@@ -31,7 +31,6 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		mockUserSvc          *openapi.MockUserSvcAPI
 		universe             *mux.Router
 		mockRegistrySvc      *openapi.MockRegistrySvcAPI
-		mockDeploySvc        *openapi.MockDeploySvcAPI
 		mockDockerSvc        *openapi.MockDockerSvcAPI
 		starterFunc          func() error
 		adminClient          *openapi.APIClient
@@ -51,13 +50,11 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
 		mockUserSvc = test.MockUserSvc(ctx, ctrl)
 		mockRegistrySvc = openapi.NewMockRegistrySvcAPI(ctrl)
-		mockDeploySvc = openapi.NewMockDeploySvcAPI(ctrl)
 		mockDockerSvc = openapi.NewMockDockerSvcAPI(ctrl)
 
 		mockClientFactory.EXPECT().Client(gomock.Any()).Return(&openapi.APIClient{
 			UserSvcAPI:     mockUserSvc,
 			RegistrySvcAPI: mockRegistrySvc,
-			DeploySvcAPI:   mockDeploySvc,
 			DockerSvcAPI:   mockDockerSvc,
 		}).AnyTimes()
 
@@ -203,5 +200,5 @@ func waitForDeploymentStatus(ctx context.Context, client *openapi.APIClient, exp
 		time.Sleep(time.Second)
 	}
 
-	return nil, fmt.Errorf("expected status %s not reached", expectedStatus)
+	return nil, fmt.Errorf("expected deployment status %s not reached", expectedStatus)
 }

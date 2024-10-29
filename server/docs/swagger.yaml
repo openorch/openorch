@@ -1226,6 +1226,10 @@ definitions:
         description: The ID of the deployment that this instance is an instance of.
         example: depl_deBUCtJirc
         type: string
+      details:
+        description: Details
+        example: Instance is healthy
+        type: string
       host:
         description: Host of the instance address. Required if URL is not provided
         example: myserver.com
@@ -1258,6 +1262,11 @@ definitions:
         description: Scheme of the instance address. Required if URL is not provided.
         example: https
         type: string
+      status:
+        allOf:
+        - $ref: '#/definitions/registry_svc.InstanceStatus'
+        description: Status
+        example: Healthy
       url:
         description: Full address URL of the instance.
         example: https://myserver.com:5981
@@ -1265,8 +1274,31 @@ definitions:
     required:
     - deploymentId
     - id
+    - status
     - url
     type: object
+  registry_svc.InstanceStatus:
+    enum:
+    - Unknown
+    - Healthy
+    - Degraded
+    - Unreachable
+    - Error
+    type: string
+    x-enum-comments:
+      InstanceStatusDegraded: Instance is responding but with performance issues or
+        partial failures
+      InstanceStatusError: Instance encountered errors or failed multiple health checks
+      InstanceStatusHealthy: Instance is fully operational and responding as expected
+      InstanceStatusUnknown: Default state when the instance status is not yet determined
+      InstanceStatusUnreachable: Instance is not reachable, possibly down or with
+        network issues
+    x-enum-varnames:
+    - InstanceStatusUnknown
+    - InstanceStatusHealthy
+    - InstanceStatusDegraded
+    - InstanceStatusUnreachable
+    - InstanceStatusError
   registry_svc.Language:
     enum:
     - JavaScript
@@ -1376,13 +1408,16 @@ definitions:
     type: object
   registry_svc.RegisterInstanceRequest:
     properties:
-      definitionId:
-        description: The service definition id.
-        example: user-svc
+      deploymentId:
+        description: The ID of the deployment that this instance is an instance of.
+        example: depl_deBUCtJirc
         type: string
       host:
         description: Host of the instance address. Required if URL is not provided
         example: myserver.com
+        type: string
+      id:
+        example: inst_di9riJEvH2
         type: string
       ip:
         description: 'IP of the instance address. Optional: to register by IP instead
@@ -1406,7 +1441,8 @@ definitions:
         example: https://myserver.com:5981
         type: string
     required:
-    - definitionId
+    - deploymentId
+    - url
     type: object
   registry_svc.RegisterInstanceResponse:
     type: object
@@ -3376,8 +3412,7 @@ paths:
     put:
       consumes:
       - application/json
-      description: Registers an instance, associating an instance address with a slug
-        acquired from the bearer token.
+      description: Registers an instance. Idempoent.
       operationId: registerInstance
       parameters:
       - description: Register Instance Request

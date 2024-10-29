@@ -11,6 +11,7 @@ import (
 	"net"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -36,13 +37,18 @@ func (ns *RegistryService) instanceScan() {
 		case <-ticker.C:
 			ns.instanceScanCycle()
 
-		case <-ns.triggerChan:
+		case _, ok := <-ns.triggerChan:
+			if !ok {
+				logger.Error("RegistrySvc trigger channel closed")
+			}
+
 			ns.instanceScanCycle()
 
 		case <-sigChan:
 			return
 		}
 	}
+
 }
 
 func (ns *RegistryService) instanceScanCycle() {
@@ -88,7 +94,7 @@ func (ns *RegistryService) scanInstance(instance *registry.Instance) error {
 		updateFields["lastHeartbeat"] = lastHeartbeat
 	}
 
-	err := ns.instanceStore.Query(datastore.Equals([]string{"id"}, instance.ID)).UpdateFields(updateFields)
+	err := ns.instanceStore.Query(datastore.Equals([]string{"id"}, instance.Id)).UpdateFields(updateFields)
 	if err != nil {
 		return errors.Wrap(err, "Failed to update instance")
 	}
@@ -97,6 +103,9 @@ func (ns *RegistryService) scanInstance(instance *registry.Instance) error {
 }
 
 func checkPortListening(address string, timeout time.Duration) bool {
+	addressParts := strings.Split(address, "://")
+	address = addressParts[len(addressParts)-1]
+
 	conn, err := net.DialTimeout("tcp", address, timeout)
 	if err != nil {
 		return false
