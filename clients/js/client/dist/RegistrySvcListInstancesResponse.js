@@ -1,6 +1,7 @@
 'use strict';
 
 var RegistrySvcInstance = require('./RegistrySvcInstance.js');
+require('./RegistrySvcInstanceStatus.js');
 
 /* tslint:disable */
 /* eslint-disable */

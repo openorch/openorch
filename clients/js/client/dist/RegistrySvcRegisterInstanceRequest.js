@@ -17,7 +17,9 @@
  * Check if a given object implements the RegistrySvcRegisterInstanceRequest interface.
  */
 function instanceOfRegistrySvcRegisterInstanceRequest(value) {
-    if (!('definitionId' in value) || value['definitionId'] === undefined)
+    if (!('deploymentId' in value) || value['deploymentId'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
         return false;
     return true;
 }
@@ -29,13 +31,14 @@ function RegistrySvcRegisterInstanceRequestFromJSONTyped(json, ignoreDiscriminat
         return json;
     }
     return {
-        'definitionId': json['definitionId'],
+        'deploymentId': json['deploymentId'],
         'host': json['host'] == null ? undefined : json['host'],
+        'id': json['id'] == null ? undefined : json['id'],
         'ip': json['ip'] == null ? undefined : json['ip'],
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'url': json['url'],
     };
 }
 function RegistrySvcRegisterInstanceRequestToJSON(value) {
@@ -43,8 +46,9 @@ function RegistrySvcRegisterInstanceRequestToJSON(value) {
         return value;
     }
     return {
-        'definitionId': value['definitionId'],
+        'deploymentId': value['deploymentId'],
         'host': value['host'],
+        'id': value['id'],
         'ip': value['ip'],
         'path': value['path'],
         'port': value['port'],

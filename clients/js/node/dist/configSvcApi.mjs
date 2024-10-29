@@ -112,6 +112,7 @@ import './registrySvcErrorResponse.mjs';
 import './registrySvcGPU.mjs';
 import './registrySvcImageSpec.mjs';
 import './registrySvcInstance.mjs';
+import './registrySvcInstanceStatus.mjs';
 import './registrySvcLanguage.mjs';
 import './registrySvcListDefinitionsResponse.mjs';
 import './registrySvcListInstancesResponse.mjs';

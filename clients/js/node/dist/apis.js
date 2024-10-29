@@ -113,6 +113,7 @@ require('./registrySvcErrorResponse.js');
 require('./registrySvcGPU.js');
 require('./registrySvcImageSpec.js');
 require('./registrySvcInstance.js');
+require('./registrySvcInstanceStatus.js');
 require('./registrySvcLanguage.js');
 require('./registrySvcListDefinitionsResponse.js');
 require('./registrySvcListInstancesResponse.js');
@@ -57913,7 +57914,7 @@ class RegistrySvcApi {
         });
     }
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * @summary Register Instance
      * @param request Register Instance Request
      */

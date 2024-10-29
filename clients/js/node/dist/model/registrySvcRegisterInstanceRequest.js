@@ -17,13 +17,18 @@ export class RegistrySvcRegisterInstanceRequest {
 RegistrySvcRegisterInstanceRequest.discriminator = undefined;
 RegistrySvcRegisterInstanceRequest.attributeTypeMap = [
     {
-        "name": "definitionId",
-        "baseName": "definitionId",
+        "name": "deploymentId",
+        "baseName": "deploymentId",
         "type": "string"
     },
     {
         "name": "host",
         "baseName": "host",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
         "type": "string"
     },
     {

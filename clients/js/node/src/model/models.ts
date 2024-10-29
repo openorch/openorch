@@ -96,6 +96,7 @@ export * from './registrySvcErrorResponse';
 export * from './registrySvcGPU';
 export * from './registrySvcImageSpec';
 export * from './registrySvcInstance';
+export * from './registrySvcInstanceStatus';
 export * from './registrySvcLanguage';
 export * from './registrySvcListDefinitionsResponse';
 export * from './registrySvcListInstancesResponse';
@@ -244,6 +245,7 @@ import { RegistrySvcErrorResponse } from './registrySvcErrorResponse';
 import { RegistrySvcGPU } from './registrySvcGPU';
 import { RegistrySvcImageSpec } from './registrySvcImageSpec';
 import { RegistrySvcInstance } from './registrySvcInstance';
+import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 import { RegistrySvcLanguage } from './registrySvcLanguage';
 import { RegistrySvcListDefinitionsResponse } from './registrySvcListDefinitionsResponse';
 import { RegistrySvcListInstancesResponse } from './registrySvcListInstancesResponse';
@@ -303,6 +305,7 @@ let enumsMap: {[index: string]: any} = {
         "PolicySvcScope": PolicySvcScope,
         "PolicySvcTemplateId": PolicySvcTemplateId,
         "PromptSvcPromptStatus": PromptSvcPromptStatus,
+        "RegistrySvcInstanceStatus": RegistrySvcInstanceStatus,
         "RegistrySvcLanguage": RegistrySvcLanguage,
 }
 

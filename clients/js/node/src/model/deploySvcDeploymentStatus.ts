@@ -13,9 +13,9 @@
 import { RequestFile } from './models';
 
 export enum DeploySvcDeploymentStatus {
-    StatusOK = <any> 'OK',
-    StatusError = <any> 'Error',
-    StatusPending = <any> 'Pending',
-    StatusFailed = <any> 'Failed',
-    StatusDeploying = <any> 'Deploying'
+    DeploymentStatusOK = <any> 'OK',
+    DeploymentStatusError = <any> 'Error',
+    DeploymentStatusPending = <any> 'Pending',
+    DeploymentStatusFailed = <any> 'Failed',
+    DeploymentStatusDeploying = <any> 'Deploying'
 }

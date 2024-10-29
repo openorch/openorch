@@ -275,7 +275,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * Register Instance
      */
     async registerInstanceRaw(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -308,7 +308,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Registers an instance, associating an instance address with a slug acquired from the bearer token.
+     * Registers an instance. Idempoent.
      * Register Instance
      */
     async registerInstance(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {

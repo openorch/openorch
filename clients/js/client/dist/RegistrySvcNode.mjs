@@ -20,6 +20,10 @@ import './RegistrySvcUsage.mjs';
  * Check if a given object implements the RegistrySvcNode interface.
  */
 function instanceOfRegistrySvcNode(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
     return true;
 }
 function RegistrySvcNodeFromJSON(json) {
@@ -32,9 +36,10 @@ function RegistrySvcNodeFromJSONTyped(json, ignoreDiscriminator) {
     return {
         'availabilityZone': json['availabilityZone'] == null ? undefined : json['availabilityZone'],
         'gpus': json['gpus'] == null ? undefined : (json['gpus'].map(RegistrySvcGPUFromJSON)),
+        'id': json['id'],
         'lastHeartbeat': json['lastHeartbeat'] == null ? undefined : json['lastHeartbeat'],
         'region': json['region'] == null ? undefined : json['region'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'url': json['url'],
         'usage': json['usage'] == null ? undefined : RegistrySvcResourceUsageFromJSON(json['usage']),
     };
 }
@@ -45,6 +50,7 @@ function RegistrySvcNodeToJSON(value) {
     return {
         'availabilityZone': value['availabilityZone'],
         'gpus': value['gpus'] == null ? undefined : (value['gpus'].map(RegistrySvcGPUToJSON)),
+        'id': value['id'],
         'lastHeartbeat': value['lastHeartbeat'],
         'region': value['region'],
         'url': value['url'],

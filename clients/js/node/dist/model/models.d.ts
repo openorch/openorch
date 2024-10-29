@@ -95,6 +95,7 @@ export * from './registrySvcErrorResponse';
 export * from './registrySvcGPU';
 export * from './registrySvcImageSpec';
 export * from './registrySvcInstance';
+export * from './registrySvcInstanceStatus';
 export * from './registrySvcLanguage';
 export * from './registrySvcListDefinitionsResponse';
 export * from './registrySvcListInstancesResponse';

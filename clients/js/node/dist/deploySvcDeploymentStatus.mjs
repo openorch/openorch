@@ -11,11 +11,11 @@
  */
 var DeploySvcDeploymentStatus;
 (function (DeploySvcDeploymentStatus) {
-    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["StatusOK"] = 'OK'] = "StatusOK";
-    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["StatusError"] = 'Error'] = "StatusError";
-    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["StatusPending"] = 'Pending'] = "StatusPending";
-    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["StatusFailed"] = 'Failed'] = "StatusFailed";
-    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["StatusDeploying"] = 'Deploying'] = "StatusDeploying";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusOK"] = 'OK'] = "DeploymentStatusOK";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusError"] = 'Error'] = "DeploymentStatusError";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusPending"] = 'Pending'] = "DeploymentStatusPending";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusFailed"] = 'Failed'] = "DeploymentStatusFailed";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusDeploying"] = 'Deploying'] = "DeploymentStatusDeploying";
 })(DeploySvcDeploymentStatus || (DeploySvcDeploymentStatus = {}));
 
 export { DeploySvcDeploymentStatus };
