@@ -26,7 +26,7 @@ import {
 } from '@angular/common/http';
 import {
 	LOCALTRON_SERVICE_CONFIG,
-	LocaltronService,
+	ServerService,
 } from './app/services/server.service';
 import { MobileService } from './app/services/mobile.service';
 import { FooterService } from './app/services/footer.service';
@@ -65,7 +65,7 @@ import { FooterService } from './app/services/footer.service';
 			provide: LOCALTRON_SERVICE_CONFIG,
 			useValue: { env: environment },
 		},
-		LocaltronService,
+		ServerService,
 		provideHttpClient(withInterceptorsFromDi()),
 		provideAnimations(),
 	],

@@ -11,7 +11,7 @@ import {
 	Component,
 	OnInit,
 } from '@angular/core';
-import { LocaltronService } from '../services/server.service';
+import { ServerService } from '../services/server.service';
 
 import { ElectronIpcService } from '../services/electron-ipc.service';
 import { WindowApiConst } from 'shared-lib';
@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit {
 	private subscriptions: Subscription[] = [];
 
 	constructor(
-		private server: LocaltronService,
+		private server: ServerService,
 		private chatService: ChatService,
 		private configService: ConfigService,
 		public promptService: PromptService,

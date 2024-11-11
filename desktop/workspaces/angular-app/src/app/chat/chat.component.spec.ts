@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatComponent } from './chat.component';
 import { IonicModule } from '@ionic/angular';
-import { LocaltronService } from '../services/server.service';
+import { ServerService } from '../services/server.service';
 import { ChatService } from '../services/chat.service';
 import { ConfigService } from '../services/config.service';
 import { ModelService } from '../services/model.service';
@@ -54,7 +54,7 @@ describe('ChatComponent', () => {
 				{ provide: ChatService, useValue: chatServiceMock },
 				{ provide: ConfigService, useValue: configServiceMock },
 				{ provide: ModelService, useValue: modelServiceMock },
-				LocaltronService,
+				ServerService,
 				ElectronIpcService,
 				PromptService,
 				ChangeDetectorRef,

@@ -5,12 +5,12 @@
  * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
-import { sendLogToLocaltron } from '../../../angular-app/shared/backend-api/app_backend';
+import { sendLogToServer } from '../../../angular-app/shared/backend-api/app_backend';
 import { Log } from '../../../angular-app/shared/backend-api/app';
 
 export function sendLogToLocalServer(log: Log) {
 	try {
-		sendLogToLocaltron({
+		sendLogToServer({
 			logs: [log],
 		});
 	} catch (err) {
