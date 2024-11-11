@@ -16,7 +16,7 @@
 ![frontend build](https://github.com/singulatron/superplatform/actions/workflows/frontend-container-build-github.yaml/badge.svg)
 ![go client build](https://github.com/singulatron/superplatform/actions/workflows/go-client-build.yaml/badge.svg)
 ![js client build](https://github.com/singulatron/superplatform/actions/workflows/js-client-build.yaml/badge.svg)
-![go sdk](https://github.com/singulatron/superplatform/actions/workflows/go-client-build.yaml/badge.svg)
+![go sdk](https://github.com/singulatron/superplatform/actions/workflows/go-sdk-build.yaml/badge.svg)
 
 Superplatform is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
 
