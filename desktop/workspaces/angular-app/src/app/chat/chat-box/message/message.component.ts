@@ -18,7 +18,7 @@ import {
 	ChatSvcAsset as Asset,
 } from '@singulatron/client';
 import { PromptService } from '../../../services/prompt.service';
-import { LocaltronService } from '../../../services/server.service';
+import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent } from 'ngx-markdown';
 import { IonicModule } from '@ionic/angular';
 import { NgIf, DatePipe, AsyncPipe } from '@angular/common';
@@ -38,7 +38,7 @@ export class MessageComponent {
 		private chatService: ChatService,
 		private promptService: PromptService,
 		public userService: UserService,
-		private server: LocaltronService,
+		private server: ServerService,
 		public mobile: MobileService
 	) {}
 	hasAsset = false;

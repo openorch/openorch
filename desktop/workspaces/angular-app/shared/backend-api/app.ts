@@ -11,7 +11,7 @@ export interface Log {
 	level: string;
 	time?: string;
 	source: string;
-	/* Anonymized client id, will be filled in Localtron */
+	/* Anonymized client id, will be filled in Server */
 	clientId?: string;
 	platform?: string;
 	message: string;

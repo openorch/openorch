@@ -7,7 +7,7 @@
  */
 import { Injectable } from '@angular/core';
 import { DynamicService } from './generic.service';
-import { LocaltronService } from './server.service';
+import { ServerService } from './server.service';
 import { UserService } from './user.service';
 import { first } from 'rxjs';
 import { DynamicSvcObject } from '@singulatron/client';
@@ -22,7 +22,7 @@ export class CharacterService {
 	public selectedCharacter!: Character;
 
 	constructor(
-		private server: LocaltronService,
+		private server: ServerService,
 		private dynamicService: DynamicService,
 		private userService: UserService
 	) {

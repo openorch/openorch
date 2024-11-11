@@ -24,7 +24,7 @@ import { RouterLink } from '@angular/router';
 import { NgStyle, NgIf, NgClass } from '@angular/common';
 import { MobileService } from '../../services/mobile.service';
 import { FooterService } from '../../services/footer.service';
-import { LocaltronService } from '../../services/server.service';
+import { ServerService } from '../../services/server.service';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
@@ -72,7 +72,7 @@ export class PageComponent implements AfterContentInit {
 		public mobile: MobileService,
 		public footer: FooterService,
 		private cd: ChangeDetectorRef,
-		private server: LocaltronService,
+		private server: ServerService,
 		private router: Router
 	) {
 		this.id = this.server.id('page');

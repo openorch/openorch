@@ -30,7 +30,7 @@ let serverProcess: cp.ChildProcessWithoutNullStreams;
 
 installWindows();
 launchFrontendServer();
-launchLocaltron();
+launchServer();
 
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
@@ -229,19 +229,19 @@ process.on('SIGTERM', () => {
 	}
 });
 
-function launchLocaltron() {
-	console.log('Launching Localtron');
+function launchServer() {
+	console.log('Launching Server');
 
 	app.on('before-quit', (event) => {
-		console.log('Application is quitting - closing Localtron');
+		console.log('Application is quitting - closing Server');
 		if (serverProcess) {
 			serverProcess.kill();
-			console.log('Localtron closed');
+			console.log('Server closed');
 		}
 	});
 
 	process.on('SIGINT', () => {
-		console.log('SIGINT signal received: closing Localtron');
+		console.log('SIGINT signal received: closing Server');
 		if (serverProcess) {
 			serverProcess.kill();
 		}
@@ -255,7 +255,7 @@ function launchLocaltron() {
 
 	if (!fs.existsSync(thePath)) {
 		setInterval(() => {
-			`Localtron at '${thePath}' does not exist`;
+			`Server at '${thePath}' does not exist`;
 		}, 3000);
 
 		return;
@@ -269,25 +269,25 @@ function launchLocaltron() {
 		serverProcess = child;
 
 		child.stdout.on('data', (data) => {
-			consoleLogLocaltron(data?.toString()?.replace(/\n+$/, ''));
+			consoleLogServer(data?.toString()?.replace(/\n+$/, ''));
 		});
 
 		child.stderr.on('data', (data) => {
-			consoleLogLocaltron(data?.toString()?.replace(/\n+$/, ''));
+			consoleLogServer(data?.toString()?.replace(/\n+$/, ''));
 		});
 
 		child.on('close', function (code) {
 			if (code != null && code > 0) {
-				console.error('Localtron closed with error', {
+				console.error('Server closed with error', {
 					code: code,
 				});
 				return;
 			}
-			console.log(`Localtron closed successfully`);
+			console.log(`Server closed successfully`);
 		});
 
 		child.on('error', function (err) {
-			console.error(`Failed to start Localtron`, {
+			console.error(`Failed to start Server`, {
 				error: err,
 			});
 		});
@@ -295,7 +295,7 @@ function launchLocaltron() {
 		console.error('Error spawning server', {
 			error: JSON.stringify(err),
 		});
-		throw `Error spawning Localtron: ${err}`;
+		throw `Error spawning Server: ${err}`;
 	}
 }
 
@@ -303,7 +303,7 @@ function splitStringByNewline(inputString: string) {
 	return inputString.split(/\r?\n/);
 }
 
-function consoleLogLocaltron(jsonMessages: string) {
+function consoleLogServer(jsonMessages: string) {
 	// this split is needed because sometimes two or more logs
 	// are coming back from server, like this:
 	// {one json}\n{another json}
@@ -314,7 +314,7 @@ function consoleLogLocaltron(jsonMessages: string) {
 		try {
 			msg = JSON.parse(jsonMessage);
 		} catch (err) {
-			console.error('Error parsing Localtron line', {
+			console.error('Error parsing Server line', {
 				line: jsonMessage,
 			});
 			return;

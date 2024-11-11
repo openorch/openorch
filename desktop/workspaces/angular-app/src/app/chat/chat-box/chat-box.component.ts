@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 
-import { LocaltronService } from '../../services/server.service';
+import { ServerService } from '../../services/server.service';
 import { ChatService } from '../../services/chat.service';
 import { PromptService } from '../../services/prompt.service';
 import { PromptSvcPrompt as Prompt } from '@singulatron/client';
@@ -95,7 +95,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 	private mutationObserver!: MutationObserver;
 
 	constructor(
-		private server: LocaltronService,
+		private server: ServerService,
 		public lapi: ElectronAppService,
 		private cd: ChangeDetectorRef,
 		private promptService: PromptService,

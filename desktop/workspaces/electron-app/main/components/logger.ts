@@ -53,7 +53,7 @@ const originalConsole: { [key: string]: (...data: any[]) => void } = {
 		}
 		// local Nodejs logs are coming like
 		// console.log("Log message", extraObject)
-		// however Localtron logs come prepared as single object as first arg
+		// however Server logs come prepared as single object as first arg
 		if (typeof args[0] === 'object') {
 			log = args[0];
 		} else {

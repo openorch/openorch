@@ -6,7 +6,7 @@
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
 import { Injectable } from '@angular/core';
-import { LocaltronService } from './server.service';
+import { ServerService } from './server.service';
 import { CookieService } from 'ngx-cookie-service';
 import {
 	ReplaySubject,
@@ -52,7 +52,7 @@ export class UserService {
 	} = {};
 
 	constructor(
-		private server: LocaltronService,
+		private server: ServerService,
 		private cookieService: CookieService,
 		private router: Router
 	) {
