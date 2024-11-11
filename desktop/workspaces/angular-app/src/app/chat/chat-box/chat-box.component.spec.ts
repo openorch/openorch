@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { ChatBoxComponent } from './chat-box.component';
-import { LocaltronService } from '../../services/server.service';
+import { ServerService } from '../../services/server.service';
 import { ChatService } from '../../services/chat.service';
 import { PromptService } from '../../services/prompt.service';
 import { ElectronAppService } from '../../services/electron-app.service';
@@ -50,7 +50,7 @@ describe('ChatBoxComponent', () => {
 			url: '/chat',
 		};
 
-		serverMock = jasmine.createSpyObj('LocaltronService', ['uuid']);
+		serverMock = jasmine.createSpyObj('ServerService', ['uuid']);
 		serverMock.uuid.and.returnValue('mock-uuid');
 
 		mobileServiceMock = jasmine.createSpyObj('MobileService', [
@@ -70,7 +70,7 @@ describe('ChatBoxComponent', () => {
 				{ provide: ChatService, useValue: chatServiceMock },
 				{ provide: PromptService, useValue: promptServiceMock },
 				{ provide: Router, useValue: routerMock },
-				{ provide: LocaltronService, useValue: serverMock },
+				{ provide: ServerService, useValue: serverMock },
 				{ provide: MobileService, useValue: mobileServiceMock },
 				{ provide: FooterService, useValue: footerServiceMock },
 				{ provide: UserService, useValue: userServiceMock },

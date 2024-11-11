@@ -18,7 +18,7 @@ const TIME_WINDOW = 60000;
 let requestCount = 0;
 let timeWindowStart = Date.now();
 
-export async function sendLogToLocaltron(req: LogRequest): Promise<any> {
+export async function sendLogToServer(req: LogRequest): Promise<any> {
 	try {
 		if (Date.now() > timeWindowStart + TIME_WINDOW) {
 			timeWindowStart = Date.now();

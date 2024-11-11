@@ -21,21 +21,21 @@ export interface Environment {
 	serverAddress: string;
 }
 
-export interface LocaltronServiceConfig {
+export interface ServerServiceConfig {
 	env: Environment;
 }
 export const LOCALTRON_SERVICE_CONFIG =
-	new InjectionToken<LocaltronServiceConfig>('LocaltronServiceConfig');
+	new InjectionToken<ServerServiceConfig>('ServerServiceConfig');
 
 @Injectable({
 	providedIn: 'root',
 })
-export class LocaltronService {
-	public config: LocaltronServiceConfig;
+export class ServerService {
+	public config: ServerServiceConfig;
 
 	constructor(
 		private cs: CookieService,
-		@Inject(LOCALTRON_SERVICE_CONFIG) config: LocaltronServiceConfig
+		@Inject(LOCALTRON_SERVICE_CONFIG) config: ServerServiceConfig
 	) {
 		this.config = config;
 	}
