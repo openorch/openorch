@@ -11,7 +11,7 @@ tags:
 
 # User Svc
 
-The user service is at the heart of Singulatron, managing users, tokens, organizations, permissions and more. Each service and human on the Singulatron network has an account in the `User Svc`.
+The user service is at the heart of Superplatform, managing users, tokens, organizations, permissions and more. Each service and human on the Superplatform network has an account in the `User Svc`.
 
 > This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/superplatform/login).
 
@@ -97,7 +97,7 @@ func (cs *PromptService) Start() error {
 
 ### Static
 
-Static roles, such as `user-svc:admin` and `user-svc:user` defined by the `User Svc` are primarily used for simple role-based access control: in the Singulatron UI and API you can edit static roles to add or remove endpoints a user can call.
+Static roles, such as `user-svc:admin` and `user-svc:user` defined by the `User Svc` are primarily used for simple role-based access control: in the Superplatform UI and API you can edit static roles to add or remove endpoints a user can call.
 
 > If you are looking at restricting access to endpoints in other ways, you might be interested in: [Policy Svc](/docs/services/policy-svc).
 
@@ -123,4 +123,4 @@ Each permission created must by prefixed by the slug of the account that created
 
 > Once you (your service) own a permission (by creating it, and it being prefixed by your account slug), you can add it to any role, not just roles owned by you.
 
-Example; let's say your service is `petstore-svc`. Singulatron prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.
+Example; let's say your service is `petstore-svc`. Superplatform prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.

@@ -6,19 +6,19 @@ tags:
 
 # Privacy Notice
 
-This document details the privacy considerations of Singulatron.
+This document details the privacy considerations of Superplatform.
 
 ## Overview
 
-By running AIs locally/on-premise with Singulatron, neither the questions nor the answers leave your computer/premises.
+By running AIs locally/on-premise with Superplatform, neither the questions nor the answers leave your computer/premises.
 
-There are a few dependencies that are so huge that they are not bundled with Singulatron and must be downloaded at the start of the application:
+There are a few dependencies that are so huge that they are not bundled with Superplatform and must be downloaded at the start of the application:
 
-## Things Singulatron downloads
+## Things Superplatform downloads
 
 ### Model List
 
-There is a small list of hardcoded models in Singulatron, but the rest of the model list is downloaded from `https://api.commonagi.com`, a server owned by the authors of the Singulatron.
+There is a small list of hardcoded models in Superplatform, but the rest of the model list is downloaded from `https://api.commonagi.com`, a server owned by the authors of the Superplatform.
 
 ### Model Files
 
@@ -26,8 +26,8 @@ The model weights themselves are downloaded from `https://huggingface.co`.
 
 ### Docker Containers
 
-Docker containers are a form of lightweight virtualization technology that enables Singulatron to run a wide range of AI architectures.
+Docker containers are a form of lightweight virtualization technology that enables Superplatform to run a wide range of AI architectures.
 
-## Things Singulatron uploads
+## Things Superplatform uploads
 
 None.

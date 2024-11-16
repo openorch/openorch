@@ -1,6 +1,6 @@
 # dapper
 
-Dapper is a funky little configuration management tool that exists to install you runtime dependencies of Singulatron locally on your computer - mostly Docker and related dependencies like WSL on Windows.
+Dapper is a funky little configuration management tool that exists to install you runtime dependencies of Superplatform locally on your computer - mostly Docker and related dependencies like WSL on Windows.
 
 There were some design decisions that shaped it:
 
@@ -8,7 +8,7 @@ There were some design decisions that shaped it:
 - Be quick - never redo an already done job
 - Stream things are they as happening for user feedback
 
-You can see it in action when you click on the "Install Runtime" button on the Start screen of Singulatron.
+You can see it in action when you click on the "Install Runtime" button on the Start screen of Superplatform.
 
 ## How it works
 

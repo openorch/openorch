@@ -1,9 +1,9 @@
 {
 	"name": "singulatron",
-	"productName": "Singulatron",
+	"productName": "Superplatform",
 	"version": "0.0.5",
 	"description": "Your personal AI",
-	"author": "Singulatron",
+	"author": "Superplatform",
 	"main": ".webpack/main",
 	"keywords": [
 		""

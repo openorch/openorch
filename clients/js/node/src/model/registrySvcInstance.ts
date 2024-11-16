@@ -39,7 +39,7 @@ export class RegistrySvcInstance {
     */
     'lastHeartbeat'?: string;
     /**
-    * URL of the Singulatron daemon
+    * URL of the Superplatform daemon
     */
     'nodeUrl'?: string;
     /**

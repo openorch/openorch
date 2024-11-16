@@ -7,7 +7,7 @@
  */
 module.exports = {
 	packagerConfig: {
-		name: 'Singulatron',
+		name: 'Superplatform',
 		executableName: 'singulatron',
 		icon: './workspaces/electron-app/main/assets/icons/icon.png',
 	},

@@ -823,7 +823,7 @@ definitions:
         example: 10
         type: integer
       modelId:
-        description: ModelId is just the Singulatron internal ID of the model.
+        description: ModelId is just the Superplatform internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
       prompt:
@@ -899,7 +899,7 @@ definitions:
         example: 10
         type: integer
       modelId:
-        description: ModelId is just the Singulatron internal ID of the model.
+        description: ModelId is just the Superplatform internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
       prompt:
@@ -1030,7 +1030,7 @@ definitions:
       url:
         description: |-
           URL of the daemon running on the node.
-          If not configured defaults to hostname + default Singulatron daemon port.
+          If not configured defaults to hostname + default Superplatform daemon port.
         type: string
       usage:
         allOf:

@@ -34,7 +34,7 @@ type RegistrySvcInstance struct {
 	Ip *string `json:"ip,omitempty"`
 	// Last time the instance gave a sign of life
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
-	// URL of the Singulatron daemon
+	// URL of the Superplatform daemon
 	NodeUrl *string `json:"nodeUrl,omitempty"`
 	// Path of the instance address. Optional (e.g., \"/api\")
 	Path *string `json:"path,omitempty"`

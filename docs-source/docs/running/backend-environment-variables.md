@@ -17,57 +17,57 @@ Do not set this if your card doesn't support the given architecture or things wi
 
 ## `SINGULATRON_VOLUME_NAME`
 
-**This flag is typically unnecessary since Singulatron automatically detects the volume that is bound to `/root/.singulatron`. Use it only as a corrective action.**
+**This flag is typically unnecessary since Superplatform automatically detects the volume that is bound to `/root/.singulatron`. Use it only as a corrective action.**
 
-This envar is needed when Singulatron runs as a container next to containers it starts:
+This envar is needed when Superplatform runs as a container next to containers it starts:
 
 ```sh
 Host
  |
- |-> Singulatron Container
- |-> Container Launched By Singulatron
+ |-> Superplatform Container
+ |-> Container Launched By Superplatform
 ```
 
-For the containers like `llama-cpp` to be able to read the models downloaded by Singulatron we they must both mount the same docker volume.
+For the containers like `llama-cpp` to be able to read the models downloaded by Superplatform we they must both mount the same docker volume.
 
 An example of this can be seen in the root `docker-compose.yaml` file: `SINGULATRON_VOLUME_NAME=singulatron-data`.
 
 So cycle goes like this:
 
-- Singulatron container writes to `/root/.singulatron`, which is mounted to the volume `singulatron-data`
-- Assets (which are basically downloaded files) will be passed to containers created by Singulatron by mounting files in `singulatron-data`.
+- Superplatform container writes to `/root/.singulatron`, which is mounted to the volume `singulatron-data`
+- Assets (which are basically downloaded files) will be passed to containers created by Superplatform by mounting files in `singulatron-data`.
 
 ## `SINGULATRON_LLM_HOST`
 
-**This flag is typically unnecessary since Singulatron retrieves the IP of the Docker bridge. Use it only as a corrective action.**
+**This flag is typically unnecessary since Superplatform retrieves the IP of the Docker bridge. Use it only as a corrective action.**
 
-When Singulatron is running in a container, it needs to know how to address its siblings (other containers it started):
+When Superplatform is running in a container, it needs to know how to address its siblings (other containers it started):
 
 ```sh
 Host
  |
- |-> Singulatron Container
- |-> Container Launched By Singulatron
+ |-> Superplatform Container
+ |-> Container Launched By Superplatform
 ```
 
-The `Singulatron Container` uses the envar `SINGULATRON_LLM_HOST` to address `Container Launched By Singulatron`.
+The `Superplatform Container` uses the envar `SINGULATRON_LLM_HOST` to address `Container Launched By Superplatform`.
 
 Typically this value should be `172.17.0.1` if you are using the default docker network.
 
 If you are using an other network than default, use `docker network inspect` to find out the IP of your docker bridge for that network.
 Usually it's going to be `172.18.0.1`.
 
-This envar is not needed if Singulatron runs directly on the host:
+This envar is not needed if Superplatform runs directly on the host:
 
 ```sh
-Host With Singulatron
+Host With Superplatform
  |
- |-> Container Launched By Singulatron
+ |-> Container Launched By Superplatform
 ```
 
 ## `SINGULATRON_DB`
 
-You can use this envar to make Singulatron actually use a database instead of local file storage to store data.
+You can use this envar to make Superplatform actually use a database instead of local file storage to store data.
 
 ### PostgreSQL
 
