@@ -23,7 +23,7 @@
   },
   "author": "Janos Dobronszki",
   "license": "AGPL-3.0-only",
-  "description": "JS/TS client for Singulatron. Works both from the browser and from Node.js",
+  "description": "JS/TS client for Superplatform. Works both from the browser and from Node.js",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "rollup": "^3.0.0",

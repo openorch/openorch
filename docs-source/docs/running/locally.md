@@ -8,7 +8,7 @@ tags:
 
 # Running Locally
 
-The easiest way to run Singulatron is to use [Docker Compose](https://docs.docker.com/compose/install/).
+The easiest way to run Superplatform is to use [Docker Compose](https://docs.docker.com/compose/install/).
 
 ## Docker Compose
 
@@ -30,7 +30,7 @@ After the containers successfully start, you can go to [http://127.0.0.1:3901](h
 
 ## Natively (Go & Angular)
 
-If you have both Go and Angular installed on your computer, the easiest way to dip your feet into Singulatron is to run things locally.
+If you have both Go and Angular installed on your computer, the easiest way to dip your feet into Superplatform is to run things locally.
 
 ## Backend
 
@@ -54,7 +54,7 @@ After the both the backend and frontend starts, you can go to [http://127.0.0.1:
 
 ### Local files
 
-By default Singulatron uses the folder `~/.singulatron` on your machine for config, file downloads and for the local database.
+By default Superplatform uses the folder `~/.singulatron` on your machine for config, file downloads and for the local database.
 
 #### Config file
 
@@ -72,7 +72,7 @@ This file contains all the local downloads on a node. Losing is file is not a bi
 
 #### Data files
 
-By default Singulatron uses local gzipped json files to store database entries. Data access across Singulatron is interface based so the this implementation can be easily swapped out for PostgreSQL and other database backends.
+By default Superplatform uses local gzipped json files to store database entries. Data access across Superplatform is interface based so the this implementation can be easily swapped out for PostgreSQL and other database backends.
 
 The files are located at
 

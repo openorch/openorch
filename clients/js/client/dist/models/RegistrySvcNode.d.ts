@@ -49,7 +49,7 @@ export interface RegistrySvcNode {
     region?: string;
     /**
      * URL of the daemon running on the node.
-     * If not configured defaults to hostname + default Singulatron daemon port.
+     * If not configured defaults to hostname + default Superplatform daemon port.
      * @type {string}
      * @memberof RegistrySvcNode
      */

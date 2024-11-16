@@ -5283,7 +5283,7 @@ const docTemplate = `{
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Singulatron internal ID of the model.",
+                    "description": "ModelId is just the Superplatform internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -5377,7 +5377,7 @@ const docTemplate = `{
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Singulatron internal ID of the model.",
+                    "description": "ModelId is just the Superplatform internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -5650,7 +5650,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "nodeUrl": {
-                    "description": "URL of the Singulatron daemon",
+                    "description": "URL of the Superplatform daemon",
                     "type": "string",
                     "example": "https://myserver.com:58231"
                 },
@@ -5822,7 +5822,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "url": {
-                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default Singulatron daemon port.",
+                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default Superplatform daemon port.",
                     "type": "string"
                 },
                 "usage": {

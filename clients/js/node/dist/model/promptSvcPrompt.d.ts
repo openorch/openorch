@@ -32,7 +32,7 @@ export declare class PromptSvcPrompt {
     */
     'maxRetries'?: number;
     /**
-    * ModelId is just the Singulatron internal ID of the model.
+    * ModelId is just the Superplatform internal ID of the model.
     */
     'modelId'?: string;
     /**

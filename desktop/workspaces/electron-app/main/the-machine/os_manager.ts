@@ -96,7 +96,7 @@ export class OSManager {
 			sudo.exec(
 				command,
 				{
-					name: 'Singulatron Environment Setup',
+					name: 'Superplatform Environment Setup',
 					icns: getIconPath(this.assetFolder),
 				},
 				(error, stdout, stderr) => {

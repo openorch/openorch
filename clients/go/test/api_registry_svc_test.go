@@ -1,5 +1,5 @@
 /*
-Singulatron
+Superplatform
 
 Testing RegistrySvcAPIService
 
@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/singulatron/superplatform/clients/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/singulatron/superplatform/clients/go"
 )
 
 func Test_openapi_RegistrySvcAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_RegistrySvcAPIService(t *testing.T) {
 
 	t.Run("Test RegistrySvcAPIService QueryServiceInstances", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.RegistrySvcAPI.QueryServiceInstances(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_openapi_RegistrySvcAPIService(t *testing.T) {
 
 	t.Run("Test RegistrySvcAPIService RegisterServiceInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.RegistrySvcAPI.RegisterServiceInstance(context.Background()).Execute()
 
@@ -48,7 +48,7 @@ func Test_openapi_RegistrySvcAPIService(t *testing.T) {
 
 	t.Run("Test RegistrySvcAPIService RemoveServiceInstance", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
