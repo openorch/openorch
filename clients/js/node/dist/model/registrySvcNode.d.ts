@@ -33,7 +33,7 @@ export declare class RegistrySvcNode {
     */
     'region'?: string;
     /**
-    * URL of the daemon running on the node. If not configured defaults to hostname + default Singulatron daemon port.
+    * URL of the daemon running on the node. If not configured defaults to hostname + default Superplatform daemon port.
     */
     'url': string;
     /**

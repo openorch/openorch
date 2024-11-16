@@ -32,7 +32,7 @@ export interface PromptSvcAddPromptRequest {
      */
     maxRetries?: number;
     /**
-     * ModelId is just the Singulatron internal ID of the model.
+     * ModelId is just the Superplatform internal ID of the model.
      * @type {string}
      * @memberof PromptSvcAddPromptRequest
      */

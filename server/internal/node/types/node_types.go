@@ -10,7 +10,7 @@ package node_types
 type Options struct {
 	Port        int
 	GpuPlatform string
-	// Singulatron Server Address
+	// Superplatform Server Address
 	Address    string
 	Az         string
 	Region     string

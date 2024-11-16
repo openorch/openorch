@@ -53,7 +53,7 @@ export interface RegistrySvcInstance {
      */
     lastHeartbeat?: string;
     /**
-     * URL of the Singulatron daemon
+     * URL of the Superplatform daemon
      * @type {string}
      * @memberof RegistrySvcInstance
      */

@@ -39,7 +39,7 @@ type Options struct {
 	NodeOptions node_types.Options
 
 	// Url that will be passed down to the router when calling
-	// the Singulatron daemon from itself.
+	// the Superplatform daemon from itself.
 	// (Inter-service calls go through the network.)
 	Url string
 

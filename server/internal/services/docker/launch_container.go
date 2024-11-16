@@ -176,10 +176,10 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 		envs = append(envs, fmt.Sprintf("%v=/root/.singulatron/downloads/%v", envName, fileName))
 	}
 
-	// If the Singulatron daemon is running in Docker, we need to find the volume it mounted so we can share
-	// the downloaded files with containers the Singulatron daemon starts.
-	// If the Singulatron daemon is running directly on the host, we will just mount the ~/.singulatron folder in
-	// the containers the Singulatron daemon starts.
+	// If the Superplatform daemon is running in Docker, we need to find the volume it mounted so we can share
+	// the downloaded files with containers the Superplatform daemon starts.
+	// If the Superplatform daemon is running directly on the host, we will just mount the ~/.singulatron folder in
+	// the containers the Superplatform daemon starts.
 
 	singulatronVolumeName := d.volumeName
 	if singulatronVolumeName == "" {

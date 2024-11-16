@@ -137,7 +137,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Singulatron, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Superplatform, Inc. Built with Docusaurus.`,
     },
     prism: {
       prism: {

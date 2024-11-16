@@ -46,13 +46,13 @@ Definitions become instances through the [Deployment entity of the Deploy Servic
 
 ### Node
 
-A `Node` is a physical or virtual machine that runs a Singulatron daemon. The daemon can then lauch service instances or other processes such as containers on these machines.
+A `Node` is a physical or virtual machine that runs a Superplatform daemon. The daemon can then lauch service instances or other processes such as containers on these machines.
 
 Maintaining a list of nodes is important so the daemon can efficiently distribute workload across the nodes.
 
 ## How It Works
 
-The registry is needed when you want to call services not included in the Singulatron daemon. You can think of the daemon as the standard library and services in the registry as third party libraries.
+The registry is needed when you want to call services not included in the Superplatform daemon. You can think of the daemon as the standard library and services in the registry as third party libraries.
 
 When you want to call a service, you can ask the registry to provide you with a list of instance addresses for a service by service slug. Then you can use any of those instance addresses to make a call.
 

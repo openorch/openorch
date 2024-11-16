@@ -39,7 +39,7 @@ services:
       # We mount a volume so data will be persisted
       - singulatron-data:/root/.singulatron
     environment:
-      # This volume will be mounted by the LLM containers to access the models downloaded by Singulatron.
+      # This volume will be mounted by the LLM containers to access the models downloaded by Superplatform.
       - SINGULATRON_VOLUME_NAME=singulatron-data
       #
       # GPU Acceleration for NVIDIA GPUs

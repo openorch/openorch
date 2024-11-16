@@ -1,5 +1,5 @@
 /*
-Singulatron
+Superplatform
 
 Testing GenericSvcAPIService
 

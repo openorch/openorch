@@ -9,7 +9,7 @@ tags:
 
 # Download Svc
 
-The download service keeps a network local copy of files frequently accessed by services in the Singulatron platform.
+The download service keeps a network local copy of files frequently accessed by services in the Superplatform platform.
 
 > This page is a high level overview of the `Download Svc`. For more details, please see the [Download Svc API documentation](/docs/superplatform/download).
 

@@ -38,7 +38,7 @@ type Instance struct {
 	// The ID of the deployment that this instance is an instance of.
 	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
 
-	// URL of the Singulatron daemon
+	// URL of the Superplatform daemon
 	NodeURL string `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`
 
 	// Last time the instance gave a sign of life
