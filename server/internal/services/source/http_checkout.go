@@ -79,6 +79,10 @@ func (s *SourceService) checkoutRepo(
 		return "", fmt.Errorf("failed to create temp dir: %w", err)
 	}
 
+	if req.Version == "" {
+		req.Version = "main"
+	}
+
 	refName := plumbing.NewBranchReferenceName(req.Version)
 	if strings.HasPrefix(req.Version, "refs/") || len(req.Version) == 40 { // For tag or commit SHA
 		refName = plumbing.ReferenceName(req.Version)

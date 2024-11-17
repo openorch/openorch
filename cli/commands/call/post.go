@@ -10,6 +10,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/singulatron/superplatform/cli/config"
+	"github.com/singulatron/superplatform/cli/util"
 	"github.com/spf13/cobra"
 )
 
@@ -21,6 +22,9 @@ func Post(cmd *cobra.Command, args []string) error {
 		if strings.HasPrefix(arg, "--") {
 			flagStart = i
 			break
+		}
+		if i == len(args)-1 {
+			flagStart = len(args)
 		}
 	}
 
@@ -66,7 +70,12 @@ func Post(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "failed to read response body")
 	}
 
-	fmt.Println(string(respBody))
+	prettyJSON, err := util.PrettyJSON(respBody)
+	if err != nil {
+		return errors.Wrap(err, "failed to prettify JSON")
+	}
+
+	fmt.Println(prettyJSON)
 
 	return nil
 }
