@@ -105,6 +105,8 @@ export { RegistrySvcRegisterInstanceRequestFromJSON, RegistrySvcRegisterInstance
 export { RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, instanceOfRegistrySvcResourceUsage } from './RegistrySvcResourceUsage.mjs';
 export { RegistrySvcSaveDefinitionRequestFromJSON, RegistrySvcSaveDefinitionRequestFromJSONTyped, RegistrySvcSaveDefinitionRequestToJSON, instanceOfRegistrySvcSaveDefinitionRequest } from './RegistrySvcSaveDefinitionRequest.mjs';
 export { RegistrySvcUsageFromJSON, RegistrySvcUsageFromJSONTyped, RegistrySvcUsageToJSON, instanceOfRegistrySvcUsage } from './RegistrySvcUsage.mjs';
+export { SourceSvcCheckoutRepoResponseFromJSON, SourceSvcCheckoutRepoResponseFromJSONTyped, SourceSvcCheckoutRepoResponseToJSON, instanceOfSourceSvcCheckoutRepoResponse } from './SourceSvcCheckoutRepoResponse.mjs';
+export { SourceSvcErrorResponseFromJSON, SourceSvcErrorResponseFromJSONTyped, SourceSvcErrorResponseToJSON, instanceOfSourceSvcErrorResponse } from './SourceSvcErrorResponse.mjs';
 export { UserSvcAddUserToOrganizationRequestFromJSON, UserSvcAddUserToOrganizationRequestFromJSONTyped, UserSvcAddUserToOrganizationRequestToJSON, instanceOfUserSvcAddUserToOrganizationRequest } from './UserSvcAddUserToOrganizationRequest.mjs';
 export { UserSvcAuthTokenFromJSON, UserSvcAuthTokenFromJSONTyped, UserSvcAuthTokenToJSON, instanceOfUserSvcAuthToken } from './UserSvcAuthToken.mjs';
 export { UserSvcChangePasswordAdminRequestFromJSON, UserSvcChangePasswordAdminRequestFromJSONTyped, UserSvcChangePasswordAdminRequestToJSON, instanceOfUserSvcChangePasswordAdminRequest } from './UserSvcChangePasswordAdminRequest.mjs';

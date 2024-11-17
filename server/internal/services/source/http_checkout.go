@@ -25,7 +25,7 @@ import (
 // @Tags Source Svc
 // @Accept json
 // @Produce json
-// @Success 200 {object} source.SaveDeploymentResponse
+// @Success 200 {object} source.CheckoutRepoResponse "Successfully checked out the repository"
 // @Failure 400 {object} source.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} source.ErrorResponse "Unauthorized"
 // @Failure 500 {object} source.ErrorResponse "Internal Server Error"

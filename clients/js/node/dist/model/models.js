@@ -105,6 +105,8 @@ export * from './registrySvcRegisterInstanceRequest';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
+export * from './sourceSvcCheckoutRepoResponse';
+export * from './sourceSvcErrorResponse';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAuthToken';
 export * from './userSvcChangePasswordAdminRequest';
@@ -240,6 +242,8 @@ import { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanc
 import { RegistrySvcResourceUsage } from './registrySvcResourceUsage';
 import { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest';
 import { RegistrySvcUsage } from './registrySvcUsage';
+import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
+import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
 import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
@@ -389,6 +393,8 @@ let typeMap = {
     "RegistrySvcResourceUsage": RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": RegistrySvcUsage,
+    "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
+    "SourceSvcErrorResponse": SourceSvcErrorResponse,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,

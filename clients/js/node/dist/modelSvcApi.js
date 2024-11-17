@@ -125,6 +125,8 @@ require('./registrySvcRegisterInstanceRequest.js');
 require('./registrySvcResourceUsage.js');
 require('./registrySvcSaveDefinitionRequest.js');
 require('./registrySvcUsage.js');
+require('./sourceSvcCheckoutRepoResponse.js');
+require('./sourceSvcErrorResponse.js');
 require('./userSvcAddUserToOrganizationRequest.js');
 require('./userSvcAuthToken.js');
 require('./userSvcChangePasswordAdminRequest.js');

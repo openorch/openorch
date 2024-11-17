@@ -374,6 +374,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Source Svc",
+      items: [
+        {
+          type: "doc",
+          id: "superplatform/checkout-repo",
+          label: "Checkout a git repository",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "User Svc",
       items: [
         {

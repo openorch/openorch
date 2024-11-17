@@ -107,6 +107,8 @@ export * from './RegistrySvcRegisterInstanceRequest';
 export * from './RegistrySvcResourceUsage';
 export * from './RegistrySvcSaveDefinitionRequest';
 export * from './RegistrySvcUsage';
+export * from './SourceSvcCheckoutRepoResponse';
+export * from './SourceSvcErrorResponse';
 export * from './UserSvcAddUserToOrganizationRequest';
 export * from './UserSvcAuthToken';
 export * from './UserSvcChangePasswordAdminRequest';

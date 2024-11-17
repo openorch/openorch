@@ -107,6 +107,8 @@ var registrySvcRegisterInstanceRequest = require('./registrySvcRegisterInstanceR
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
+var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
+var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
 var userSvcAddUserToOrganizationRequest = require('./userSvcAddUserToOrganizationRequest.js');
 var userSvcAuthToken = require('./userSvcAuthToken.js');
 var userSvcChangePasswordAdminRequest = require('./userSvcChangePasswordAdminRequest.js');
@@ -257,6 +259,8 @@ let typeMap = {
     "RegistrySvcResourceUsage": registrySvcResourceUsage.RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": registrySvcUsage.RegistrySvcUsage,
+    "SourceSvcCheckoutRepoResponse": sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse,
+    "SourceSvcErrorResponse": sourceSvcErrorResponse.SourceSvcErrorResponse,
     "UserSvcAddUserToOrganizationRequest": userSvcAddUserToOrganizationRequest.UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": userSvcAuthToken.UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": userSvcChangePasswordAdminRequest.UserSvcChangePasswordAdminRequest,
@@ -604,6 +608,8 @@ exports.RegistrySvcRegisterInstanceRequest = registrySvcRegisterInstanceRequest.
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
+exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
+exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;
 exports.UserSvcAddUserToOrganizationRequest = userSvcAddUserToOrganizationRequest.UserSvcAddUserToOrganizationRequest;
 exports.UserSvcAuthToken = userSvcAuthToken.UserSvcAuthToken;
 exports.UserSvcChangePasswordAdminRequest = userSvcChangePasswordAdminRequest.UserSvcChangePasswordAdminRequest;

@@ -1,4 +1,4 @@
-export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
+export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
 export { ApiKeyAuth, HttpBasicAuth, HttpBearerAuth, OAuth, ObjectSerializer, VoidAuth } from './models.mjs';
 export { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest.mjs';
 export { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest.mjs';
@@ -107,6 +107,8 @@ export { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanc
 export { RegistrySvcResourceUsage } from './registrySvcResourceUsage.mjs';
 export { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest.mjs';
 export { RegistrySvcUsage } from './registrySvcUsage.mjs';
+export { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse.mjs';
+export { SourceSvcErrorResponse } from './sourceSvcErrorResponse.mjs';
 export { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest.mjs';
 export { UserSvcAuthToken } from './userSvcAuthToken.mjs';
 export { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest.mjs';

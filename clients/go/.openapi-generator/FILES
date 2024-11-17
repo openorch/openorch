@@ -13,6 +13,7 @@ api_model_svc.go
 api_policy_svc.go
 api_prompt_svc.go
 api_registry_svc.go
+api_source_svc.go
 api_user_svc.go
 client.go
 configuration.go
@@ -134,6 +135,9 @@ docs/RegistrySvcRegisterInstanceRequest.md
 docs/RegistrySvcResourceUsage.md
 docs/RegistrySvcSaveDefinitionRequest.md
 docs/RegistrySvcUsage.md
+docs/SourceSvcAPI.md
+docs/SourceSvcCheckoutRepoResponse.md
+docs/SourceSvcErrorResponse.md
 docs/UserSvcAPI.md
 docs/UserSvcAddUserToOrganizationRequest.md
 docs/UserSvcAuthToken.md
@@ -273,6 +277,8 @@ model_registry_svc_register_instance_request.go
 model_registry_svc_resource_usage.go
 model_registry_svc_save_definition_request.go
 model_registry_svc_usage.go
+model_source_svc_checkout_repo_response.go
+model_source_svc_error_response.go
 model_user_svc_add_user_to_organization_request.go
 model_user_svc_auth_token.go
 model_user_svc_change_password_admin_request.go
@@ -302,4 +308,5 @@ model_user_svc_set_role_permissions_request.go
 model_user_svc_upser_permission_request.go
 model_user_svc_user.go
 response.go
+test/api_source_svc_test.go
 utils.go

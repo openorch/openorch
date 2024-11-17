@@ -123,6 +123,8 @@ import './registrySvcRegisterInstanceRequest.mjs';
 import './registrySvcResourceUsage.mjs';
 import './registrySvcSaveDefinitionRequest.mjs';
 import './registrySvcUsage.mjs';
+import './sourceSvcCheckoutRepoResponse.mjs';
+import './sourceSvcErrorResponse.mjs';
 import './userSvcAddUserToOrganizationRequest.mjs';
 import './userSvcAuthToken.mjs';
 import './userSvcChangePasswordAdminRequest.mjs';
