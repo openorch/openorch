@@ -169,7 +169,7 @@ func TestParseFlagToJSON(t *testing.T) {
 			}
 
 			for _, arg := range args {
-				err := parseFlagToJSON(payload, arg)
+				err := parseFlagToMap(payload, arg)
 				assert.NoError(t, err, "expected no error for flag: "+tt.flag)
 			}
 

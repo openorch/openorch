@@ -266,7 +266,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	sourceservice, err := sourceservice.NewSourceService(
+	sourceService, err := sourceservice.NewSourceService(
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
@@ -528,7 +528,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/source-svc/repo/checkout", appl(func(w http.ResponseWriter, r *http.Request) {
-		sourceservice.CheckoutRepo(w, r)
+		sourceService.CheckoutRepo(w, r)
 	})).Methods("OPTIONS", "POST")
 
 	return router, func() error {
@@ -573,6 +573,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 			return err
 		}
 		err = deployService.Start()
+		if err != nil {
+			return err
+		}
+		err = sourceService.Start()
 		if err != nil {
 			return err
 		}

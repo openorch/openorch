@@ -24,3 +24,7 @@ type CheckoutRepoRequest struct {
 	SSHKey    string `json:"ssh_key"`     // SSH private key (optional for SSH connection)
 	SSHKeyPwd string `json:"ssh_key_pwd"` // Password for SSH private key if encrypted (optional)
 }
+
+type CheckoutRepoResponse struct {
+	Dir string `json:"dir"` // Directory where the repository was checked out
+}

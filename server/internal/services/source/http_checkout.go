@@ -2,6 +2,7 @@ package sourceservice
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -45,6 +46,27 @@ func (s *SourceService) CheckoutRepo(w http.ResponseWriter,
 		return
 	}
 
+	req := &source.CheckoutRepoRequest{}
+	if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`Invalid JSON`))
+		return
+	}
+	defer r.Body.Close()
+
+	dir, err := s.checkoutRepo(*req)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	response := source.CheckoutRepoResponse{
+		Dir: dir,
+	}
+
+	bs, _ := json.Marshal(response)
+	w.Write(bs)
 }
 
 // checkoutRepo checks out a repository at a specified version using the given auth method.

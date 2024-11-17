@@ -104,12 +104,37 @@ func addWhoamiCommands(rootCmd *cobra.Command) {
 }
 
 func addCallCommands(rootCmd *cobra.Command) {
-	var runCmd = &cobra.Command{
-		Use:   "call [key=value]...",
-		Args:  cobra.MinimumNArgs(1),
-		Short: "Call a service",
-		RunE:  call.Call,
+	var postCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Post,
+		DisableFlagParsing: true,
+	}
+	var getCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Get,
+		DisableFlagParsing: true,
+	}
+	var putCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Put,
+		DisableFlagParsing: true,
+	}
+	var deleteCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Delete,
+		DisableFlagParsing: true,
 	}
 
-	rootCmd.AddCommand(runCmd)
+	rootCmd.AddCommand(postCmd)
+	rootCmd.AddCommand(getCmd)
+	rootCmd.AddCommand(putCmd)
+	rootCmd.AddCommand(deleteCmd)
 }

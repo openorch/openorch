@@ -1,72 +1,22 @@
 package call
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/singulatron/superplatform/cli/config"
-	"github.com/spf13/cobra"
 )
 
-// Call method for making a POST request with custom JSON construction from flags
-func Call(cmd *cobra.Command, args []string) error {
-	ctx := cmd.Context()
-
-	payload := make(map[string]interface{})
-	for _, arg := range args {
-		if err := parseFlagToJSON(payload, arg); err != nil {
-			return err
-		}
-	}
-
-	jsonData, err := json.Marshal(payload)
-	if err != nil {
-		return errors.Wrap(err, "failed to marshal payload to JSON")
-	}
-
-	url, token, err := config.GetSelectedUrlAndToken()
-	if err != nil {
-		return errors.Wrap(err, "cannot get environment URL and token")
-	}
-
-	request, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewBuffer(jsonData))
-	if err != nil {
-		return errors.Wrap(err, "failed to create HTTP request")
-	}
-	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
-	request.Header.Set("Content-Type", "application/json")
-
-	client := &http.Client{}
-	resp, err := client.Do(request)
-	if err != nil {
-		return errors.Wrap(err, "failed to execute HTTP request")
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode >= 400 {
-		body, _ := ioutil.ReadAll(resp.Body)
-		return fmt.Errorf("HTTP request failed with status %d: %s", resp.StatusCode, string(body))
-	}
-
-	fmt.Println("Request successful")
-	return nil
-}
-
-func parseFlagToJSON(payload map[string]interface{}, flag string) error {
+func parseFlagToMap(payload map[string]interface{}, flag string) error {
 	if !strings.HasPrefix(flag, "--") {
-		return errors.New("invalid flag format")
+		return fmt.Errorf("invalid flag format: %s", flag)
 	}
 	flag = strings.TrimPrefix(flag, "--")
 
 	parts := strings.SplitN(flag, "=", 2)
 	if len(parts) != 2 {
-		return errors.New("invalid flag format")
+		return fmt.Errorf("invalid flag format: %s", flag)
 	}
 	key := parts[0]
 	valueStr := parts[1]
