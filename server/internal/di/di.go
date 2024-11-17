@@ -29,6 +29,7 @@ import (
 	policyservice "github.com/singulatron/superplatform/server/internal/services/policy"
 	promptservice "github.com/singulatron/superplatform/server/internal/services/prompt"
 	registryservice "github.com/singulatron/superplatform/server/internal/services/registry"
+	sourceservice "github.com/singulatron/superplatform/server/internal/services/source"
 	userservice "github.com/singulatron/superplatform/server/internal/services/user"
 )
 
@@ -264,6 +265,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		logger.Error("Node service creation failed", slog.String("error", err.Error()))
 		os.Exit(1)
 	}
+
+	sourceservice, err := sourceservice.NewSourceService(
+		options.ClientFactory,
+		options.Lock,
+		options.DatastoreFactory,
+	)
 
 	mws := []middlewares.Middleware{
 		middlewares.ThrottledLogger,
@@ -518,6 +525,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).Methods("OPTIONS", "PUT")
 	router.HandleFunc("/deploy-svc/deployments", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.ListDeployments(w, r)
+	})).Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/source-svc/repo/checkout", appl(func(w http.ResponseWriter, r *http.Request) {
+		sourceservice.CheckoutRepo(w, r)
 	})).Methods("OPTIONS", "POST")
 
 	return router, func() error {

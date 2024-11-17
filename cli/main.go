@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	call "github.com/singulatron/superplatform/cli/commands/call"
 	definition "github.com/singulatron/superplatform/cli/commands/definition"
 	deployment "github.com/singulatron/superplatform/cli/commands/deployment"
 	"github.com/singulatron/superplatform/cli/commands/env"
@@ -28,6 +29,7 @@ func main() {
 	addEnvCommands(rootCmd)
 	addLoginCommands(rootCmd)
 	addWhoamiCommands(rootCmd)
+	addCallCommands(rootCmd)
 
 	definition.AddDefinitionCommands(rootCmd)
 	instance.AddInstanceCommands(rootCmd)
@@ -96,6 +98,17 @@ func addWhoamiCommands(rootCmd *cobra.Command) {
 		Args:  cobra.ExactArgs(0),
 		Short: "Display the user currently logged in",
 		RunE:  whoami.Whoami,
+	}
+
+	rootCmd.AddCommand(runCmd)
+}
+
+func addCallCommands(rootCmd *cobra.Command) {
+	var runCmd = &cobra.Command{
+		Use:   "call [key=value]...",
+		Args:  cobra.MinimumNArgs(1),
+		Short: "Call a service",
+		RunE:  call.Call,
 	}
 
 	rootCmd.AddCommand(runCmd)
