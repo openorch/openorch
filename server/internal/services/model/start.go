@@ -75,7 +75,7 @@ func (ms *ModelService) start(modelId string) error {
 }
 
 func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *modeltypes.Platform) error {
-	launchOptions := &dockertypes.LaunchContainerOptions{
+	launchOptions := &dockertypes.RunContainerOptions{
 		Name: platform.Id,
 	}
 
@@ -108,13 +108,13 @@ func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *model
 	}
 	launchOptions.Hash = hash
 
-	launchReq := &dockertypes.LaunchContainerRequest{
+	launchReq := &dockertypes.RunContainerRequest{
 		Image:    image,
 		Port:     port,
 		HostPort: hostPortNum,
 		Options:  launchOptions,
 	}
-	launchRsp := &dockertypes.LaunchContainerResponse{}
+	launchRsp := &dockertypes.RunContainerResponse{}
 	err = ms.router.Put(context.Background(), "docker-svc", "/container", launchReq, &launchRsp)
 	if err != nil {
 		return errors.Wrap(err, "failed to launch container")

@@ -29,8 +29,10 @@ type RegistrySvcDefinition struct {
 	// HostPort is a clutch until automatic port assignment works. It will go a way as it doesn't make any sense in a Definition.
 	HostPort *int32 `json:"hostPort,omitempty"`
 	Id string `json:"id"`
-	// Container specifications for Docker, K8s, etc.
-	Image RegistrySvcImageSpec `json:"image"`
+	// Container specifications for Docker, K8s, etc. Use this to deploy already built images.
+	Image *RegistrySvcImageSpec `json:"image,omitempty"`
+	// Repository based definitions is an alternative to Image definitions. Instead of deploying an already built and pushed image, a source code repository url can be provided. The container will be built from the source.
+	Repository *RegistrySvcRepositorySpec `json:"repository,omitempty"`
 }
 
 type _RegistrySvcDefinition RegistrySvcDefinition
@@ -39,10 +41,9 @@ type _RegistrySvcDefinition RegistrySvcDefinition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcDefinition(id string, image RegistrySvcImageSpec) *RegistrySvcDefinition {
+func NewRegistrySvcDefinition(id string) *RegistrySvcDefinition {
 	this := RegistrySvcDefinition{}
 	this.Id = id
-	this.Image = image
 	return &this
 }
 
@@ -174,28 +175,68 @@ func (o *RegistrySvcDefinition) SetId(v string) {
 	o.Id = v
 }
 
-// GetImage returns the Image field value
+// GetImage returns the Image field value if set, zero value otherwise.
 func (o *RegistrySvcDefinition) GetImage() RegistrySvcImageSpec {
-	if o == nil {
+	if o == nil || IsNil(o.Image) {
 		var ret RegistrySvcImageSpec
 		return ret
 	}
-
-	return o.Image
+	return *o.Image
 }
 
-// GetImageOk returns a tuple with the Image field value
+// GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RegistrySvcDefinition) GetImageOk() (*RegistrySvcImageSpec, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Image) {
 		return nil, false
 	}
-	return &o.Image, true
+	return o.Image, true
 }
 
-// SetImage sets field value
+// HasImage returns a boolean if a field has been set.
+func (o *RegistrySvcDefinition) HasImage() bool {
+	if o != nil && !IsNil(o.Image) {
+		return true
+	}
+
+	return false
+}
+
+// SetImage gets a reference to the given RegistrySvcImageSpec and assigns it to the Image field.
 func (o *RegistrySvcDefinition) SetImage(v RegistrySvcImageSpec) {
-	o.Image = v
+	o.Image = &v
+}
+
+// GetRepository returns the Repository field value if set, zero value otherwise.
+func (o *RegistrySvcDefinition) GetRepository() RegistrySvcRepositorySpec {
+	if o == nil || IsNil(o.Repository) {
+		var ret RegistrySvcRepositorySpec
+		return ret
+	}
+	return *o.Repository
+}
+
+// GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcDefinition) GetRepositoryOk() (*RegistrySvcRepositorySpec, bool) {
+	if o == nil || IsNil(o.Repository) {
+		return nil, false
+	}
+	return o.Repository, true
+}
+
+// HasRepository returns a boolean if a field has been set.
+func (o *RegistrySvcDefinition) HasRepository() bool {
+	if o != nil && !IsNil(o.Repository) {
+		return true
+	}
+
+	return false
+}
+
+// SetRepository gets a reference to the given RegistrySvcRepositorySpec and assigns it to the Repository field.
+func (o *RegistrySvcDefinition) SetRepository(v RegistrySvcRepositorySpec) {
+	o.Repository = &v
 }
 
 func (o RegistrySvcDefinition) MarshalJSON() ([]byte, error) {
@@ -218,7 +259,12 @@ func (o RegistrySvcDefinition) ToMap() (map[string]interface{}, error) {
 		toSerialize["hostPort"] = o.HostPort
 	}
 	toSerialize["id"] = o.Id
-	toSerialize["image"] = o.Image
+	if !IsNil(o.Image) {
+		toSerialize["image"] = o.Image
+	}
+	if !IsNil(o.Repository) {
+		toSerialize["repository"] = o.Repository
+	}
 	return toSerialize, nil
 }
 
@@ -228,7 +274,6 @@ func (o *RegistrySvcDefinition) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"image",
 	}
 
 	allProperties := make(map[string]interface{})

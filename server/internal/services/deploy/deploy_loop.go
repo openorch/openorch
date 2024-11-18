@@ -19,6 +19,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/pkg/errors"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -190,25 +191,7 @@ func (ns *DeployService) executeStartCommand(
 	logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
 	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
 
-	err := func() error {
-		if definition == nil {
-			return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
-		}
-
-		_, _, err := client.DockerSvcAPI.LaunchContainer(ctx).Request(
-			openapi.DockerSvcLaunchContainerRequest{
-				Image:    definition.Image.Name,
-				Port:     definition.Image.Port,
-				HostPort: definition.HostPort,
-				Options: &openapi.DockerSvcLaunchContainerOptions{
-					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
-				},
-			},
-		).Execute()
-		err = sdk.OpenAPIError(err)
-
-		return err
-	}()
+	err := ns.makeSureItRuns(client, ctx, definition, deployment)
 
 	if err != nil {
 		logger.Warn("Error executing start command",
@@ -270,6 +253,44 @@ func (ns *DeployService) executeStartCommand(
 	}
 
 	return nil
+}
+
+func (ns *DeployService) makeSureItRuns(
+	client *openapi.APIClient,
+	ctx context.Context,
+	definition *openapi.RegistrySvcDefinition,
+	deployment *deploy.Deployment,
+) error {
+	if definition == nil {
+		return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
+	}
+
+	var err error
+
+	if definition.Image != nil {
+		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
+			openapi.DockerSvcRunContainerRequest{
+				Image:    definition.Image.Name,
+				Port:     definition.Image.Port,
+				HostPort: definition.HostPort,
+				Options: &openapi.DockerSvcRunContainerOptions{
+					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+				},
+			},
+		).Execute()
+	} else {
+		var checkoutRsp *openapi.SourceSvcCheckoutRepoResponse
+
+		checkoutRsp, _, err = client.SourceSvcAPI.CheckoutRepo(ctx).Request(openapi.SourceSvcCheckoutRepoRequest{
+			Url: &definition.Repository.Url,
+		}).Execute()
+
+		spew.Dump(checkoutRsp)
+	}
+
+	err = sdk.OpenAPIError(err)
+
+	return err
 }
 
 func (ns *DeployService) getDeploymentById(deploymentId string) (*deploy.Deployment, error) {

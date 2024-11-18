@@ -425,7 +425,7 @@ definitions:
       info:
         $ref: '#/definitions/docker_svc.DockerInfo'
     type: object
-  docker_svc.LaunchContainerOptions:
+  docker_svc.RunContainerOptions:
     properties:
       assets:
         additionalProperties:
@@ -463,7 +463,7 @@ definitions:
         description: Name is the name of the container
         type: string
     type: object
-  docker_svc.LaunchContainerRequest:
+  docker_svc.RunContainerRequest:
     properties:
       hostPort:
         description: HostPort is the port on the host machine that will be mapped
@@ -476,7 +476,7 @@ definitions:
         type: string
       options:
         allOf:
-        - $ref: '#/definitions/docker_svc.LaunchContainerOptions'
+        - $ref: '#/definitions/docker_svc.RunContainerOptions'
         description: Options provides additional options for launching the container
       port:
         description: Port is the port number that the container will expose
@@ -486,12 +486,12 @@ definitions:
     - image
     - port
     type: object
-  docker_svc.LaunchContainerResponse:
+  docker_svc.RunContainerResponse:
     properties:
       info:
-        $ref: '#/definitions/docker_svc.LaunchInfo'
+        $ref: '#/definitions/docker_svc.RunInfo'
     type: object
-  docker_svc.LaunchInfo:
+  docker_svc.RunInfo:
     properties:
       newContainerStarted:
         type: boolean
@@ -1164,10 +1164,18 @@ definitions:
       image:
         allOf:
         - $ref: '#/definitions/registry_svc.ImageSpec'
-        description: Container specifications for Docker, K8s, etc.
+        description: |-
+          Container specifications for Docker, K8s, etc.
+          Use this to deploy already built images.
+      repository:
+        allOf:
+        - $ref: '#/definitions/registry_svc.RepositorySpec'
+        description: |-
+          Repository based definitions is an alternative to Image definitions.
+          Instead of deploying an already built and pushed image, a source code repository
+          url can be provided. The container will be built from the source.
     required:
     - id
-    - image
     type: object
   registry_svc.ErrorResponse:
     properties:
@@ -1447,6 +1455,19 @@ definitions:
     type: object
   registry_svc.RegisterInstanceResponse:
     type: object
+  registry_svc.RepositorySpec:
+    properties:
+      subfolder:
+        description: Branch is the branch to use for the repository
+        example: path/to/subfolder
+        type: string
+      url:
+        description: URL is the URL to the repository
+        example: https://github.com/singulatron/superplatform.git
+        type: string
+    required:
+    - url
+    type: object
   registry_svc.ResourceUsage:
     properties:
       cpu:
@@ -1482,6 +1503,27 @@ definitions:
         description: Used amount (in bytes).
         format: int64
         type: integer
+    type: object
+  source_svc.CheckoutRepoRequest:
+    properties:
+      password:
+        description: Password or token for HTTPS auth
+        type: string
+      ssh_key:
+        description: SSH private key (optional for SSH connection)
+        type: string
+      ssh_key_pwd:
+        description: Password for SSH private key if encrypted (optional)
+        type: string
+      url:
+        description: Full repository URL (e.g., https://github.com/user/repo)
+        type: string
+      username:
+        description: Username for HTTPS or SSH user (optional for SSH)
+        type: string
+      version:
+        description: Branch, tag, or commit SHA
+        type: string
     type: object
   source_svc.CheckoutRepoResponse:
     properties:
@@ -2297,24 +2339,24 @@ paths:
       consumes:
       - application/json
       description: |-
-        Launches a Docker container with the specified parameters.
+        Runes a Docker container with the specified parameters.
 
         Requires the `docker-svc:docker:create` permission.
-      operationId: launchContainer
+      operationId: runContainer
       parameters:
-      - description: Launch Container Request
+      - description: Run Container Request
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/docker_svc.LaunchContainerRequest'
+          $ref: '#/definitions/docker_svc.RunContainerRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.LaunchContainerResponse'
+            $ref: '#/definitions/docker_svc.RunContainerResponse'
         "400":
           description: Invalid JSON
           schema:
@@ -2329,7 +2371,7 @@ paths:
             $ref: '#/definitions/docker_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Launch a Container
+      summary: Run a Container
       tags:
       - Docker Svc
   /docker-svc/container/{hash}/is-running:
@@ -2337,7 +2379,7 @@ paths:
       consumes:
       - application/json
       description: Check if a Docker container identified by the hash is running
-      operationId: isRunning
+      operationId: containerIsRunning
       parameters:
       - description: Container Hash
         in: path
@@ -3630,6 +3672,13 @@ paths:
         Checkout a git repository over https or ssh at a specific version into a temporary directory.
         Performs a shallow clone with minimal history for faster checkout.
       operationId: checkoutRepo
+      parameters:
+      - description: Checkout Repo Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/source_svc.CheckoutRepoRequest'
       produces:
       - application/json
       responses:

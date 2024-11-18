@@ -1,0 +1,643 @@
+---
+id: run-container
+title: "Run a Container"
+description: "Runes a Docker container with the specified parameters."
+sidebar_label: "Run a Container"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/superplatform/superplatform
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Run a Container"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/docker-svc/container"}
+>
+  
+</MethodEndpoint>
+
+
+
+Runes a Docker container with the specified parameters.
+
+Requires the `docker-svc:docker:create` permission.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        <div
+          style={{"marginTop":"1rem","marginBottom":"1rem"}}
+        >
+          
+          
+          Run Container Request
+          
+          
+        </div>
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"hostPort"}
+          required={false}
+          schemaName={"integer"}
+          qualifierMessage={undefined}
+          schema={{"description":"HostPort is the port on the host machine that will be mapped to the container's port","example":8081,"type":"integer"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"image"}
+          required={true}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"description":"Image is the Docker image to use for the container","example":"nginx:latest","type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  options
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <SchemaItem
+                collapsible={true}
+                className={"schemaItem"}
+              >
+                <details
+                  style={{}}
+                  className={"openapi-markdown__details"}
+                >
+                  <summary
+                    style={{}}
+                  >
+                    <span
+                      className={"openapi-schema__container"}
+                    >
+                      <strong
+                        className={"openapi-schema__property"}
+                      >
+                        assets
+                      </strong><span
+                        className={"openapi-schema__name"}
+                      >
+                         object
+                      </span>
+                    </span>
+                  </summary><div
+                    style={{"marginLeft":"1rem"}}
+                  >
+                    <div
+                      style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                    >
+                      
+                      
+                      Assets maps environment variable names to file URLs.
+                      Example: \{"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"\}
+                      These files are downloaded by the Download Svc and mounted in the container.
+                      The environment variable `MODEL` will point to the local file path in the container.
+                      
+                      
+                    </div><SchemaItem
+                      name={"property name*"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string"}}
+                      collapsible={false}
+                      discriminator={false}
+                    >
+                      
+                    </SchemaItem>
+                  </div>
+                </details>
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"envs"}
+                required={false}
+                schemaName={"string[]"}
+                qualifierMessage={undefined}
+                schema={{"description":"Envs are environment variables to set in the container","type":"array","items":{"type":"string"}}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"gpuEnabled"}
+                required={false}
+                schemaName={"boolean"}
+                qualifierMessage={undefined}
+                schema={{"description":"GPUEnabled specifies if GPU support is enabled","type":"boolean"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"hash"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"Hash is a unique identifier for the container","type":"string"}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"keeps"}
+                required={false}
+                schemaName={"string[]"}
+                qualifierMessage={undefined}
+                schema={{"description":"Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.","type":"array","items":{"type":"string"}}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={true}
+                className={"schemaItem"}
+              >
+                <details
+                  style={{}}
+                  className={"openapi-markdown__details"}
+                >
+                  <summary
+                    style={{}}
+                  >
+                    <span
+                      className={"openapi-schema__container"}
+                    >
+                      <strong
+                        className={"openapi-schema__property"}
+                      >
+                        labels
+                      </strong><span
+                        className={"openapi-schema__name"}
+                      >
+                         object
+                      </span>
+                    </span>
+                  </summary><div
+                    style={{"marginLeft":"1rem"}}
+                  >
+                    <div
+                      style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                    >
+                      
+                      
+                      Labels are metadata labels associated with the container
+                      
+                      
+                    </div><SchemaItem
+                      name={"property name*"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string"}}
+                      collapsible={false}
+                      discriminator={false}
+                    >
+                      
+                    </SchemaItem>
+                  </div>
+                </details>
+              </SchemaItem><SchemaItem
+                collapsible={false}
+                name={"name"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"description":"Name is the name of the container","type":"string"}}
+              >
+                
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"port"}
+          required={true}
+          schemaName={"integer"}
+          qualifierMessage={undefined}
+          schema={{"description":"Port is the port number that the container will expose","example":8080,"type":"integer"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          OK
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                info
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"newContainerStarted"}
+                              required={false}
+                              schemaName={"boolean"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"boolean"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"portNumber"}
+                              required={false}
+                              schemaName={"integer"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"integer"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"info\": {\n    \"newContainerStarted\": true,\n    \"portNumber\": 0\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"400"}
+        value={"400"}
+      >
+        <div>
+          
+          
+          Invalid JSON
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"401"}
+        value={"401"}
+      >
+        <div>
+          
+          
+          Unauthorized
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"500"}
+        value={"500"}
+      >
+        <div>
+          
+          
+          Internal Server Error
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"error"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"error\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

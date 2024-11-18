@@ -108,13 +108,13 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "superplatform/launch-container",
-          label: "Launch a Container",
+          id: "superplatform/run-container",
+          label: "Run a Container",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "superplatform/is-running",
+          id: "superplatform/container-is-running",
           label: "Check If a Container Is Running",
           className: "api-method get",
         },

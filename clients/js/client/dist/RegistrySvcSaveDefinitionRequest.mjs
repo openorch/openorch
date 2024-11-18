@@ -1,6 +1,7 @@
 import { RegistrySvcDefinitionFromJSON, RegistrySvcDefinitionToJSON } from './RegistrySvcDefinition.mjs';
 import './RegistrySvcAPISpec.mjs';
 import './RegistrySvcImageSpec.mjs';
+import './RegistrySvcRepositorySpec.mjs';
 import './RegistrySvcClient.mjs';
 import './RegistrySvcLanguage.mjs';
 

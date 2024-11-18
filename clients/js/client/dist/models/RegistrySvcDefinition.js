@@ -13,14 +13,13 @@
  */
 import { RegistrySvcAPISpecFromJSON, RegistrySvcAPISpecToJSON, } from './RegistrySvcAPISpec';
 import { RegistrySvcImageSpecFromJSON, RegistrySvcImageSpecToJSON, } from './RegistrySvcImageSpec';
+import { RegistrySvcRepositorySpecFromJSON, RegistrySvcRepositorySpecToJSON, } from './RegistrySvcRepositorySpec';
 import { RegistrySvcClientFromJSON, RegistrySvcClientToJSON, } from './RegistrySvcClient';
 /**
  * Check if a given object implements the RegistrySvcDefinition interface.
  */
 export function instanceOfRegistrySvcDefinition(value) {
     if (!('id' in value) || value['id'] === undefined)
-        return false;
-    if (!('image' in value) || value['image'] === undefined)
         return false;
     return true;
 }
@@ -36,7 +35,8 @@ export function RegistrySvcDefinitionFromJSONTyped(json, ignoreDiscriminator) {
         'clients': json['clients'] == null ? undefined : (json['clients'].map(RegistrySvcClientFromJSON)),
         'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
-        'image': RegistrySvcImageSpecFromJSON(json['image']),
+        'image': json['image'] == null ? undefined : RegistrySvcImageSpecFromJSON(json['image']),
+        'repository': json['repository'] == null ? undefined : RegistrySvcRepositorySpecFromJSON(json['repository']),
     };
 }
 export function RegistrySvcDefinitionToJSON(value) {
@@ -49,5 +49,6 @@ export function RegistrySvcDefinitionToJSON(value) {
         'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpecToJSON(value['image']),
+        'repository': RegistrySvcRepositorySpecToJSON(value['repository']),
     };
 }

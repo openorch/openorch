@@ -42,6 +42,11 @@ RegistrySvcDefinition.attributeTypeMap = [
         "name": "image",
         "baseName": "image",
         "type": "RegistrySvcImageSpec"
+    },
+    {
+        "name": "repository",
+        "baseName": "repository",
+        "type": "RegistrySvcRepositorySpec"
     }
 ];
 

@@ -27,7 +27,7 @@ type DockerService struct {
 	imagesCache          map[string]bool
 	imagePullMutexes     map[string]*sync.Mutex
 	imagePullGlobalMutex sync.Mutex
-	launchModelMutex     sync.Mutex
+	runContainerMutex    sync.Mutex
 	dockerHost           string
 	dockerPort           int
 	client               *client.Client

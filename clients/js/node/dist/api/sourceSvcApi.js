@@ -78,9 +78,10 @@ export class SourceSvcApi {
     /**
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * @summary Checkout a git repository
+     * @param request Checkout Repo Request
      */
-    checkoutRepo() {
-        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+    checkoutRepo(request_1) {
+        return __awaiter(this, arguments, void 0, function* (request, options = { headers: {} }) {
             const localVarPath = this.basePath + '/source-svc/repo/checkout';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
@@ -93,6 +94,10 @@ export class SourceSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling checkoutRepo.');
+            }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;
             let localVarRequestOptions = {
@@ -102,6 +107,7 @@ export class SourceSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
+                body: ObjectSerializer.serialize(request, "SourceSvcCheckoutRepoRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {

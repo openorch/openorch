@@ -44,6 +44,13 @@ type SourceSvcAPIService service
 type ApiCheckoutRepoRequest struct {
 	ctx context.Context
 	ApiService SourceSvcAPI
+	request *SourceSvcCheckoutRepoRequest
+}
+
+// Checkout Repo Request
+func (r ApiCheckoutRepoRequest) Request(request SourceSvcCheckoutRepoRequest) ApiCheckoutRepoRequest {
+	r.request = &request
+	return r
 }
 
 func (r ApiCheckoutRepoRequest) Execute() (*SourceSvcCheckoutRepoResponse, *http.Response, error) {
@@ -86,9 +93,12 @@ func (a *SourceSvcAPIService) CheckoutRepoExecute(r ApiCheckoutRepoRequest) (*So
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.request == nil {
+		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -104,6 +114,8 @@ func (a *SourceSvcAPIService) CheckoutRepoExecute(r ApiCheckoutRepoRequest) (*So
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.request
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

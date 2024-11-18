@@ -92,11 +92,11 @@ Class | Method | HTTP request | Description
 *ConfigSvcAPI* | [**SaveConfig**](docs/ConfigSvcAPI.md#saveconfig) | **Put** /config-svc/config | Save Config
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
+*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
 *DockerSvcAPI* | [**GetContainerSummary**](docs/DockerSvcAPI.md#getcontainersummary) | **Get** /docker-svc/container/{hash}/summary/{numberOfLines} | Get Container Summary
 *DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /docker-svc/host | Get Docker Host
 *DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /docker-svc/info | Get Docker Service Information
-*DockerSvcAPI* | [**IsRunning**](docs/DockerSvcAPI.md#isrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
-*DockerSvcAPI* | [**LaunchContainer**](docs/DockerSvcAPI.md#launchcontainer) | **Put** /docker-svc/container | Launch a Container
+*DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /docker-svc/container | Run a Container
 *DownloadSvcAPI* | [**Download**](docs/DownloadSvcAPI.md#download) | **Put** /download-svc/download | Download a File
 *DownloadSvcAPI* | [**GetDownload**](docs/DownloadSvcAPI.md#getdownload) | **Get** /download-svc/download/{downloadId} | Get a Download
 *DownloadSvcAPI* | [**ListDownloads**](docs/DownloadSvcAPI.md#listdownloads) | **Post** /download-svc/downloads | List Downloads
@@ -194,10 +194,10 @@ Class | Method | HTTP request | Description
  - [DockerSvcGetContainerSummaryResponse](docs/DockerSvcGetContainerSummaryResponse.md)
  - [DockerSvcGetDockerHostResponse](docs/DockerSvcGetDockerHostResponse.md)
  - [DockerSvcGetInfoResponse](docs/DockerSvcGetInfoResponse.md)
- - [DockerSvcLaunchContainerOptions](docs/DockerSvcLaunchContainerOptions.md)
- - [DockerSvcLaunchContainerRequest](docs/DockerSvcLaunchContainerRequest.md)
- - [DockerSvcLaunchContainerResponse](docs/DockerSvcLaunchContainerResponse.md)
- - [DockerSvcLaunchInfo](docs/DockerSvcLaunchInfo.md)
+ - [DockerSvcRunContainerOptions](docs/DockerSvcRunContainerOptions.md)
+ - [DockerSvcRunContainerRequest](docs/DockerSvcRunContainerRequest.md)
+ - [DockerSvcRunContainerResponse](docs/DockerSvcRunContainerResponse.md)
+ - [DockerSvcRunInfo](docs/DockerSvcRunInfo.md)
  - [DownloadSvcDownloadDetails](docs/DownloadSvcDownloadDetails.md)
  - [DownloadSvcDownloadRequest](docs/DownloadSvcDownloadRequest.md)
  - [DownloadSvcDownloadsResponse](docs/DownloadSvcDownloadsResponse.md)
@@ -259,9 +259,11 @@ Class | Method | HTTP request | Description
  - [RegistrySvcNode](docs/RegistrySvcNode.md)
  - [RegistrySvcProcess](docs/RegistrySvcProcess.md)
  - [RegistrySvcRegisterInstanceRequest](docs/RegistrySvcRegisterInstanceRequest.md)
+ - [RegistrySvcRepositorySpec](docs/RegistrySvcRepositorySpec.md)
  - [RegistrySvcResourceUsage](docs/RegistrySvcResourceUsage.md)
  - [RegistrySvcSaveDefinitionRequest](docs/RegistrySvcSaveDefinitionRequest.md)
  - [RegistrySvcUsage](docs/RegistrySvcUsage.md)
+ - [SourceSvcCheckoutRepoRequest](docs/SourceSvcCheckoutRepoRequest.md)
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)

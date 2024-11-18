@@ -56,10 +56,10 @@ require('./dockerSvcErrorResponse.js');
 require('./dockerSvcGetContainerSummaryResponse.js');
 require('./dockerSvcGetDockerHostResponse.js');
 require('./dockerSvcGetInfoResponse.js');
-require('./dockerSvcLaunchContainerOptions.js');
-require('./dockerSvcLaunchContainerRequest.js');
-require('./dockerSvcLaunchContainerResponse.js');
-require('./dockerSvcLaunchInfo.js');
+require('./dockerSvcRunContainerOptions.js');
+require('./dockerSvcRunContainerRequest.js');
+require('./dockerSvcRunContainerResponse.js');
+require('./dockerSvcRunInfo.js');
 require('./downloadSvcDownloadDetails.js');
 require('./downloadSvcDownloadRequest.js');
 require('./downloadSvcDownloadsResponse.js');
@@ -121,9 +121,11 @@ require('./registrySvcListNodesResponse.js');
 require('./registrySvcNode.js');
 require('./registrySvcProcess.js');
 require('./registrySvcRegisterInstanceRequest.js');
+require('./registrySvcRepositorySpec.js');
 require('./registrySvcResourceUsage.js');
 require('./registrySvcSaveDefinitionRequest.js');
 require('./registrySvcUsage.js');
+require('./sourceSvcCheckoutRepoRequest.js');
 require('./sourceSvcCheckoutRepoResponse.js');
 require('./sourceSvcErrorResponse.js');
 require('./userSvcAddUserToOrganizationRequest.js');
@@ -55203,6 +55205,73 @@ class DockerSvcApi {
         this.interceptors.push(interceptor);
     }
     /**
+     * Check if a Docker container identified by the hash is running
+     * @summary Check If a Container Is Running
+     * @param hash Container Hash
+     */
+    containerIsRunning(hash_1) {
+        return __awaiter(this, arguments, void 0, function* (hash, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/{hash}/is-running'
+                .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'hash' is not null or undefined
+            if (hash === null || hash === undefined) {
+                throw new Error('Required parameter hash was null or undefined when calling containerIsRunning.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = models.ObjectSerializer.deserialize(body, "DockerSvcContainerIsRunningResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
      * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
      * @summary Get Container Summary
      * @param hash Container Hash
@@ -55398,78 +55467,11 @@ class DockerSvcApi {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
-     * @summary Check If a Container Is Running
-     * @param hash Container Hash
+     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * @summary Run a Container
+     * @param request Run Container Request
      */
-    isRunning(hash_1) {
-        return __awaiter(this, arguments, void 0, function* (hash, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/{hash}/is-running'
-                .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)));
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            // verify required parameter 'hash' is not null or undefined
-            if (hash === null || hash === undefined) {
-                throw new Error('Required parameter hash was null or undefined when calling isRunning.');
-            }
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'GET',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = models.ObjectSerializer.deserialize(body, "DockerSvcContainerIsRunningResponse");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-    /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * @summary Launch a Container
-     * @param request Launch Container Request
-     */
-    launchContainer(request_1) {
+    runContainer(request_1) {
         return __awaiter(this, arguments, void 0, function* (request, options = { headers: {} }) {
             const localVarPath = this.basePath + '/docker-svc/container';
             let localVarQueryParameters = {};
@@ -55485,7 +55487,7 @@ class DockerSvcApi {
             let localVarFormParams = {};
             // verify required parameter 'request' is not null or undefined
             if (request === null || request === undefined) {
-                throw new Error('Required parameter request was null or undefined when calling launchContainer.');
+                throw new Error('Required parameter request was null or undefined when calling runContainer.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -55495,7 +55497,7 @@ class DockerSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: models.ObjectSerializer.serialize(request, "DockerSvcLaunchContainerRequest")
+                body: models.ObjectSerializer.serialize(request, "DockerSvcRunContainerRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -55519,7 +55521,7 @@ class DockerSvcApi {
                         }
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = models.ObjectSerializer.deserialize(body, "DockerSvcLaunchContainerResponse");
+                                body = models.ObjectSerializer.deserialize(body, "DockerSvcRunContainerResponse");
                                 resolve({ response: response, body: body });
                             }
                             else {
@@ -58184,9 +58186,10 @@ class SourceSvcApi {
     /**
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * @summary Checkout a git repository
+     * @param request Checkout Repo Request
      */
-    checkoutRepo() {
-        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+    checkoutRepo(request_1) {
+        return __awaiter(this, arguments, void 0, function* (request, options = { headers: {} }) {
             const localVarPath = this.basePath + '/source-svc/repo/checkout';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
@@ -58199,6 +58202,10 @@ class SourceSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling checkoutRepo.');
+            }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
                 method: 'POST',
@@ -58207,6 +58214,7 @@ class SourceSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
+                body: models.ObjectSerializer.serialize(request, "SourceSvcCheckoutRepoRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {

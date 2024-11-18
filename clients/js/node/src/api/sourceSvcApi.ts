@@ -15,6 +15,7 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
+import { SourceSvcCheckoutRepoRequest } from '../model/sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from '../model/sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from '../model/sourceSvcErrorResponse';
 
@@ -93,8 +94,9 @@ export class SourceSvcApi {
     /**
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * @summary Checkout a git repository
+     * @param request Checkout Repo Request
      */
-    public async checkoutRepo (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SourceSvcCheckoutRepoResponse;  }> {
+    public async checkoutRepo (request: SourceSvcCheckoutRepoRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SourceSvcCheckoutRepoResponse;  }> {
         const localVarPath = this.basePath + '/source-svc/repo/checkout';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -107,6 +109,11 @@ export class SourceSvcApi {
         }
         let localVarFormParams: any = {};
 
+        // verify required parameter 'request' is not null or undefined
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling checkoutRepo.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -118,6 +125,7 @@ export class SourceSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(request, "SourceSvcCheckoutRepoRequest")
         };
 
         let authenticationPromise = Promise.resolve();

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import http from 'http';
+import { SourceSvcCheckoutRepoRequest } from '../model/sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from '../model/sourceSvcCheckoutRepoResponse';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
@@ -37,8 +38,9 @@ export declare class SourceSvcApi {
     /**
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * @summary Checkout a git repository
+     * @param request Checkout Repo Request
      */
-    checkoutRepo(options?: {
+    checkoutRepo(request: SourceSvcCheckoutRepoRequest, options?: {
         headers: {
             [name: string]: string;
         };

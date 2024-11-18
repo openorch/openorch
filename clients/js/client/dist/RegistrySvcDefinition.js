@@ -2,6 +2,7 @@
 
 var RegistrySvcAPISpec = require('./RegistrySvcAPISpec.js');
 var RegistrySvcImageSpec = require('./RegistrySvcImageSpec.js');
+var RegistrySvcRepositorySpec = require('./RegistrySvcRepositorySpec.js');
 var RegistrySvcClient = require('./RegistrySvcClient.js');
 require('./RegistrySvcLanguage.js');
 
@@ -24,8 +25,6 @@ require('./RegistrySvcLanguage.js');
 function instanceOfRegistrySvcDefinition(value) {
     if (!('id' in value) || value['id'] === undefined)
         return false;
-    if (!('image' in value) || value['image'] === undefined)
-        return false;
     return true;
 }
 function RegistrySvcDefinitionFromJSON(json) {
@@ -40,7 +39,8 @@ function RegistrySvcDefinitionFromJSONTyped(json, ignoreDiscriminator) {
         'clients': json['clients'] == null ? undefined : (json['clients'].map(RegistrySvcClient.RegistrySvcClientFromJSON)),
         'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
-        'image': RegistrySvcImageSpec.RegistrySvcImageSpecFromJSON(json['image']),
+        'image': json['image'] == null ? undefined : RegistrySvcImageSpec.RegistrySvcImageSpecFromJSON(json['image']),
+        'repository': json['repository'] == null ? undefined : RegistrySvcRepositorySpec.RegistrySvcRepositorySpecFromJSON(json['repository']),
     };
 }
 function RegistrySvcDefinitionToJSON(value) {
@@ -53,6 +53,7 @@ function RegistrySvcDefinitionToJSON(value) {
         'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpec.RegistrySvcImageSpecToJSON(value['image']),
+        'repository': RegistrySvcRepositorySpec.RegistrySvcRepositorySpecToJSON(value['repository']),
     };
 }
 

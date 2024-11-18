@@ -10,7 +10,10 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { SourceSvcCheckoutRepoResponse } from '../models/index';
+import type { SourceSvcCheckoutRepoRequest, SourceSvcCheckoutRepoResponse } from '../models/index';
+export interface CheckoutRepoRequest {
+    request: SourceSvcCheckoutRepoRequest;
+}
 /**
  *
  */
@@ -19,10 +22,10 @@ export declare class SourceSvcApi extends runtime.BaseAPI {
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    checkoutRepoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceSvcCheckoutRepoResponse>>;
+    checkoutRepoRaw(requestParameters: CheckoutRepoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceSvcCheckoutRepoResponse>>;
     /**
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    checkoutRepo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceSvcCheckoutRepoResponse>;
+    checkoutRepo(requestParameters: CheckoutRepoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceSvcCheckoutRepoResponse>;
 }

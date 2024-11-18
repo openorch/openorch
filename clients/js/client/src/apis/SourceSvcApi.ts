@@ -15,15 +15,22 @@
 
 import * as runtime from '../runtime';
 import type {
+  SourceSvcCheckoutRepoRequest,
   SourceSvcCheckoutRepoResponse,
   SourceSvcErrorResponse,
 } from '../models/index';
 import {
+    SourceSvcCheckoutRepoRequestFromJSON,
+    SourceSvcCheckoutRepoRequestToJSON,
     SourceSvcCheckoutRepoResponseFromJSON,
     SourceSvcCheckoutRepoResponseToJSON,
     SourceSvcErrorResponseFromJSON,
     SourceSvcErrorResponseToJSON,
 } from '../models/index';
+
+export interface CheckoutRepoRequest {
+    request: SourceSvcCheckoutRepoRequest;
+}
 
 /**
  * 
@@ -34,10 +41,19 @@ export class SourceSvcApi extends runtime.BaseAPI {
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    async checkoutRepoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceSvcCheckoutRepoResponse>> {
+    async checkoutRepoRaw(requestParameters: CheckoutRepoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceSvcCheckoutRepoResponse>> {
+        if (requestParameters['request'] == null) {
+            throw new runtime.RequiredError(
+                'request',
+                'Required parameter "request" was null or undefined when calling checkoutRepo().'
+            );
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
@@ -48,6 +64,7 @@ export class SourceSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: SourceSvcCheckoutRepoRequestToJSON(requestParameters['request']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SourceSvcCheckoutRepoResponseFromJSON(jsonValue));
@@ -57,8 +74,8 @@ export class SourceSvcApi extends runtime.BaseAPI {
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    async checkoutRepo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceSvcCheckoutRepoResponse> {
-        const response = await this.checkoutRepoRaw(initOverrides);
+    async checkoutRepo(requestParameters: CheckoutRepoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceSvcCheckoutRepoResponse> {
+        const response = await this.checkoutRepoRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

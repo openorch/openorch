@@ -728,7 +728,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Launches a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:docker:create` + "`" + ` permission.",
+                "description": "Runes a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:docker:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -738,16 +738,16 @@ const docTemplate = `{
                 "tags": [
                     "Docker Svc"
                 ],
-                "summary": "Launch a Container",
-                "operationId": "launchContainer",
+                "summary": "Run a Container",
+                "operationId": "runContainer",
                 "parameters": [
                     {
-                        "description": "Launch Container Request",
+                        "description": "Run Container Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerRequest"
+                            "$ref": "#/definitions/docker_svc.RunContainerRequest"
                         }
                     }
                 ],
@@ -755,7 +755,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerResponse"
+                            "$ref": "#/definitions/docker_svc.RunContainerResponse"
                         }
                     },
                     "400": {
@@ -797,7 +797,7 @@ const docTemplate = `{
                     "Docker Svc"
                 ],
                 "summary": "Check If a Container Is Running",
-                "operationId": "isRunning",
+                "operationId": "containerIsRunning",
                 "parameters": [
                     {
                         "type": "string",
@@ -2743,6 +2743,17 @@ const docTemplate = `{
                 ],
                 "summary": "Checkout a git repository",
                 "operationId": "checkoutRepo",
+                "parameters": [
+                    {
+                        "description": "Checkout Repo Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.CheckoutRepoRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successfully checked out the repository",
@@ -4559,7 +4570,7 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerOptions": {
+        "docker_svc.RunContainerOptions": {
             "type": "object",
             "properties": {
                 "assets": {
@@ -4604,7 +4615,7 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerRequest": {
+        "docker_svc.RunContainerRequest": {
             "type": "object",
             "required": [
                 "image",
@@ -4625,7 +4636,7 @@ const docTemplate = `{
                     "description": "Options provides additional options for launching the container",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerOptions"
+                            "$ref": "#/definitions/docker_svc.RunContainerOptions"
                         }
                     ]
                 },
@@ -4636,15 +4647,15 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerResponse": {
+        "docker_svc.RunContainerResponse": {
             "type": "object",
             "properties": {
                 "info": {
-                    "$ref": "#/definitions/docker_svc.LaunchInfo"
+                    "$ref": "#/definitions/docker_svc.RunInfo"
                 }
             }
         },
-        "docker_svc.LaunchInfo": {
+        "docker_svc.RunInfo": {
             "type": "object",
             "properties": {
                 "newContainerStarted": {
@@ -5548,8 +5559,7 @@ const docTemplate = `{
         "registry_svc.Definition": {
             "type": "object",
             "required": [
-                "id",
-                "image"
+                "id"
             ],
             "properties": {
                 "apiSpecs": {
@@ -5574,10 +5584,18 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "image": {
-                    "description": "Container specifications for Docker, K8s, etc.",
+                    "description": "Container specifications for Docker, K8s, etc.\nUse this to deploy already built images.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/registry_svc.ImageSpec"
+                        }
+                    ]
+                },
+                "repository": {
+                    "description": "Repository based definitions is an alternative to Image definitions.\nInstead of deploying an already built and pushed image, a source code repository\nurl can be provided. The container will be built from the source.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/registry_svc.RepositorySpec"
                         }
                     ]
                 }
@@ -5948,6 +5966,24 @@ const docTemplate = `{
         "registry_svc.RegisterInstanceResponse": {
             "type": "object"
         },
+        "registry_svc.RepositorySpec": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "subfolder": {
+                    "description": "Branch is the branch to use for the repository",
+                    "type": "string",
+                    "example": "path/to/subfolder"
+                },
+                "url": {
+                    "description": "URL is the URL to the repository",
+                    "type": "string",
+                    "example": "https://github.com/singulatron/superplatform.git"
+                }
+            }
+        },
         "registry_svc.ResourceUsage": {
             "type": "object",
             "properties": {
@@ -6004,6 +6040,35 @@ const docTemplate = `{
                     "description": "Used amount (in bytes).",
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "source_svc.CheckoutRepoRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "description": "Password or token for HTTPS auth",
+                    "type": "string"
+                },
+                "ssh_key": {
+                    "description": "SSH private key (optional for SSH connection)",
+                    "type": "string"
+                },
+                "ssh_key_pwd": {
+                    "description": "Password for SSH private key if encrypted (optional)",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "Full repository URL (e.g., https://github.com/user/repo)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username for HTTPS or SSH user (optional for SSH)",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Branch, tag, or commit SHA",
+                    "type": "string"
                 }
             }
         },

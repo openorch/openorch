@@ -20,8 +20,8 @@ import { DockerSvcErrorResponse } from '../model/dockerSvcErrorResponse';
 import { DockerSvcGetContainerSummaryResponse } from '../model/dockerSvcGetContainerSummaryResponse';
 import { DockerSvcGetDockerHostResponse } from '../model/dockerSvcGetDockerHostResponse';
 import { DockerSvcGetInfoResponse } from '../model/dockerSvcGetInfoResponse';
-import { DockerSvcLaunchContainerRequest } from '../model/dockerSvcLaunchContainerRequest';
-import { DockerSvcLaunchContainerResponse } from '../model/dockerSvcLaunchContainerResponse';
+import { DockerSvcRunContainerRequest } from '../model/dockerSvcRunContainerRequest';
+import { DockerSvcRunContainerResponse } from '../model/dockerSvcRunContainerResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -95,6 +95,78 @@ export class DockerSvcApi {
         this.interceptors.push(interceptor);
     }
 
+    /**
+     * Check if a Docker container identified by the hash is running
+     * @summary Check If a Container Is Running
+     * @param hash Container Hash
+     */
+    public async containerIsRunning (hash: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcContainerIsRunningResponse;  }> {
+        const localVarPath = this.basePath + '/docker-svc/container/{hash}/is-running'
+            .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'hash' is not null or undefined
+        if (hash === null || hash === undefined) {
+            throw new Error('Required parameter hash was null or undefined when calling containerIsRunning.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.BearerAuth.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: DockerSvcContainerIsRunningResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "DockerSvcContainerIsRunningResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
     /**
      * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
      * @summary Get Container Summary
@@ -305,83 +377,11 @@ export class DockerSvcApi {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
-     * @summary Check If a Container Is Running
-     * @param hash Container Hash
+     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * @summary Run a Container
+     * @param request Run Container Request
      */
-    public async isRunning (hash: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcContainerIsRunningResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/container/{hash}/is-running'
-            .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'hash' is not null or undefined
-        if (hash === null || hash === undefined) {
-            throw new Error('Required parameter hash was null or undefined when calling isRunning.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.BearerAuth.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: DockerSvcContainerIsRunningResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "DockerSvcContainerIsRunningResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * @summary Launch a Container
-     * @param request Launch Container Request
-     */
-    public async launchContainer (request: DockerSvcLaunchContainerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcLaunchContainerResponse;  }> {
+    public async runContainer (request: DockerSvcRunContainerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcRunContainerResponse;  }> {
         const localVarPath = this.basePath + '/docker-svc/container';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -396,7 +396,7 @@ export class DockerSvcApi {
 
         // verify required parameter 'request' is not null or undefined
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling launchContainer.');
+            throw new Error('Required parameter request was null or undefined when calling runContainer.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -410,7 +410,7 @@ export class DockerSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(request, "DockerSvcLaunchContainerRequest")
+            body: ObjectSerializer.serialize(request, "DockerSvcRunContainerRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -432,13 +432,13 @@ export class DockerSvcApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: DockerSvcLaunchContainerResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: DockerSvcRunContainerResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "DockerSvcLaunchContainerResponse");
+                            body = ObjectSerializer.deserialize(body, "DockerSvcRunContainerResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

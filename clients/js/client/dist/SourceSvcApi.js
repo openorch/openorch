@@ -1,6 +1,7 @@
 'use strict';
 
 var runtime = require('./runtime2.js');
+var SourceSvcCheckoutRepoRequest = require('./SourceSvcCheckoutRepoRequest.js');
 var SourceSvcCheckoutRepoResponse = require('./SourceSvcCheckoutRepoResponse.js');
 
 /* tslint:disable */
@@ -24,10 +25,14 @@ class SourceSvcApi extends runtime.BaseAPI {
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    checkoutRepoRaw(initOverrides) {
+    checkoutRepoRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['request'] == null) {
+                throw new runtime.RequiredError('request', 'Required parameter "request" was null or undefined when calling checkoutRepo().');
+            }
             const queryParameters = {};
             const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
             if (this.configuration && this.configuration.apiKey) {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
@@ -36,6 +41,7 @@ class SourceSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
+                body: SourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequestToJSON(requestParameters['request']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response, (jsonValue) => SourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponseFromJSON(jsonValue));
         });
@@ -44,9 +50,9 @@ class SourceSvcApi extends runtime.BaseAPI {
      * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
      * Checkout a git repository
      */
-    checkoutRepo(initOverrides) {
+    checkoutRepo(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
-            const response = yield this.checkoutRepoRaw(initOverrides);
+            const response = yield this.checkoutRepoRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
