@@ -41,8 +41,11 @@ type RepositorySpec struct {
 	// URL is the URL to the repository
 	URL string `json:"url,omitempty" example:"https://github.com/singulatron/superplatform.git" binding:"required"`
 
-	// Branch is the branch to use for the repository
-	Subfolder string `json:"subfolder,omitempty" example:"path/to/subfolder"`
+	// Version of the code to use
+	Version string `json:"version,omitempty" example:"v1.0.0"`
+
+	// Folder is the path to the subfolder in the repository where the code is located
+	Folder string `json:"folder,omitempty" example:"path/to/subfolder"`
 }
 
 type ImageSpec struct {

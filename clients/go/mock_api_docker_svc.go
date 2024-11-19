@@ -39,6 +39,36 @@ func (m *MockDockerSvcAPI) EXPECT() *MockDockerSvcAPIMockRecorder {
 	return m.recorder
 }
 
+// BuildImage mocks base method.
+func (m *MockDockerSvcAPI) BuildImage(ctx context.Context) ApiBuildImageRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "BuildImage", ctx)
+	ret0, _ := ret[0].(ApiBuildImageRequest)
+	return ret0
+}
+
+// BuildImage indicates an expected call of BuildImage.
+func (mr *MockDockerSvcAPIMockRecorder) BuildImage(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BuildImage", reflect.TypeOf((*MockDockerSvcAPI)(nil).BuildImage), ctx)
+}
+
+// BuildImageExecute mocks base method.
+func (m *MockDockerSvcAPI) BuildImageExecute(r ApiBuildImageRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "BuildImageExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// BuildImageExecute indicates an expected call of BuildImageExecute.
+func (mr *MockDockerSvcAPIMockRecorder) BuildImageExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BuildImageExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).BuildImageExecute), r)
+}
+
 // ContainerIsRunning mocks base method.
 func (m *MockDockerSvcAPI) ContainerIsRunning(ctx context.Context, hash string) ApiContainerIsRunningRequest {
 	m.ctrl.T.Helper()

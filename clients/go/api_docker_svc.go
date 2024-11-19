@@ -24,6 +24,22 @@ import (
 type DockerSvcAPI interface {
 
 	/*
+	BuildImage Build an Image
+
+	Builds a Docker image with the specified parameters.
+
+Requires the `docker-svc:image:build` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiBuildImageRequest
+	*/
+	BuildImage(ctx context.Context) ApiBuildImageRequest
+
+	// BuildImageExecute executes the request
+	//  @return map[string]interface{}
+	BuildImageExecute(r ApiBuildImageRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
 	ContainerIsRunning Check If a Container Is Running
 
 	Check if a Docker container identified by the hash is running
@@ -85,9 +101,9 @@ type DockerSvcAPI interface {
 	/*
 	RunContainer Run a Container
 
-	Runes a Docker container with the specified parameters.
+	Runs a Docker container with the specified parameters.
 
-Requires the `docker-svc:docker:create` permission.
+Requires the `docker-svc:container:run` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiRunContainerRequest
@@ -101,6 +117,165 @@ Requires the `docker-svc:docker:create` permission.
 
 // DockerSvcAPIService DockerSvcAPI service
 type DockerSvcAPIService service
+
+type ApiBuildImageRequest struct {
+	ctx context.Context
+	ApiService DockerSvcAPI
+	request *DockerSvcBuildImageRequest
+}
+
+// Build Image Request
+func (r ApiBuildImageRequest) Request(request DockerSvcBuildImageRequest) ApiBuildImageRequest {
+	r.request = &request
+	return r
+}
+
+func (r ApiBuildImageRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.BuildImageExecute(r)
+}
+
+/*
+BuildImage Build an Image
+
+Builds a Docker image with the specified parameters.
+
+Requires the `docker-svc:image:build` permission.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiBuildImageRequest
+*/
+func (a *DockerSvcAPIService) BuildImage(ctx context.Context) ApiBuildImageRequest {
+	return ApiBuildImageRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *DockerSvcAPIService) BuildImageExecute(r ApiBuildImageRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DockerSvcAPIService.BuildImage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/docker-svc/image"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.request == nil {
+		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.request
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v DockerSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DockerSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v DockerSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiContainerIsRunningRequest struct {
 	ctx context.Context
@@ -691,9 +866,9 @@ func (r ApiRunContainerRequest) Execute() (*DockerSvcRunContainerResponse, *http
 /*
 RunContainer Run a Container
 
-Runes a Docker container with the specified parameters.
+Runs a Docker container with the specified parameters.
 
-Requires the `docker-svc:docker:create` permission.
+Requires the `docker-svc:container:run` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRunContainerRequest

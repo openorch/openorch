@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 
 	git "github.com/go-git/go-git/v5"
@@ -13,6 +14,7 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport"
 	ghttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 	gssh "github.com/go-git/go-git/v5/plumbing/transport/ssh"
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	source "github.com/singulatron/superplatform/server/internal/services/source/types"
 	"golang.org/x/crypto/ssh"
@@ -35,7 +37,12 @@ import (
 func (s *SourceService) CheckoutRepo(w http.ResponseWriter,
 	r *http.Request) {
 
-	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(context.Background(), source.PermissionSourceRepoCheckout.Id).Execute()
+	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(context.Background(), source.PermissionSourceRepoCheckout.Id).Body(
+		openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -75,7 +82,9 @@ func (s *SourceService) checkoutRepo(
 	req source.CheckoutRepoRequest,
 ) (string, error) {
 
-	tempDir, err := os.MkdirTemp("", fmt.Sprintf("repo-%s-*", req.Version))
+	tempDir := path.Join(os.TempDir(), fmt.Sprintf("repo-%s-%s", makeFilenameSafeURL(req.URL), req.Version))
+
+	err := os.MkdirAll(tempDir, 0755)
 	if err != nil {
 		return "", fmt.Errorf("failed to create temp dir: %w", err)
 	}
@@ -137,4 +146,15 @@ func getSSHAuth(sshKey string, sshKeyPwd string, username string) (transport.Aut
 		User:   username,
 		Signer: signer,
 	}, nil
+}
+
+func makeFilenameSafeURL(urlStr string) string {
+	replacer := strings.NewReplacer(
+		"/", "_",
+		":", "_",
+		"?", "_",
+		"&", "_",
+		"=", "_",
+	)
+	return replacer.Replace(urlStr)
 }

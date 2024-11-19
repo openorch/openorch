@@ -18,9 +18,9 @@ import (
 
 // @ID runContainer
 // @Summary Run a Container
-// @Description Runes a Docker container with the specified parameters.
+// @Description Runs a Docker container with the specified parameters.
 // @Description
-// @Description Requires the `docker-svc:docker:create` permission.
+// @Description Requires the `docker-svc:container:run` permission.
 // @Tags Docker Svc
 // @Accept json
 // @Produce json
@@ -38,7 +38,7 @@ func (dm *DockerService) RunContainer(
 
 	rsp := &usertypes.IsAuthorizedResponse{}
 
-	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionDockerCreate.Id), &usertypes.IsAuthorizedRequest{
+	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionContainerCreate.Id), &usertypes.IsAuthorizedRequest{
 		SlugsGranted: []string{"model-svc", "deploy-svc"},
 	}, rsp)
 	if err != nil {

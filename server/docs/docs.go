@@ -728,7 +728,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Runes a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:docker:create` + "`" + ` permission.",
+                "description": "Runs a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:container:run` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -922,6 +922,64 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/docker_svc.GetDockerHostResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/docker-svc/image": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Builds a Docker image with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:image:build` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Docker Svc"
+                ],
+                "summary": "Build an Image",
+                "operationId": "buildImage",
+                "parameters": [
+                    {
+                        "description": "Build Image Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.BuildImageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.BuildImageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
                         }
                     },
                     "401": {
@@ -4516,6 +4574,33 @@ const docTemplate = `{
                 }
             }
         },
+        "docker_svc.BuildImageRequest": {
+            "type": "object",
+            "required": [
+                "contextPath",
+                "name"
+            ],
+            "properties": {
+                "contextPath": {
+                    "description": "ContextPath is the local path to the build context",
+                    "type": "string",
+                    "example": "."
+                },
+                "dockerfilePath": {
+                    "description": "DockerfilePath is the local path to the Dockerfile",
+                    "type": "string",
+                    "example": "Dockerfile"
+                },
+                "name": {
+                    "description": "Name is the name of the image to build",
+                    "type": "string",
+                    "example": "nginx:latest"
+                }
+            }
+        },
+        "docker_svc.BuildImageResponse": {
+            "type": "object"
+        },
         "docker_svc.ContainerIsRunningResponse": {
             "type": "object",
             "properties": {
@@ -5972,8 +6057,8 @@ const docTemplate = `{
                 "url"
             ],
             "properties": {
-                "subfolder": {
-                    "description": "Branch is the branch to use for the repository",
+                "folder": {
+                    "description": "Folder is the path to the subfolder in the repository where the code is located",
                     "type": "string",
                     "example": "path/to/subfolder"
                 },
@@ -5981,6 +6066,11 @@ const docTemplate = `{
                     "description": "URL is the URL to the repository",
                     "type": "string",
                     "example": "https://github.com/singulatron/superplatform.git"
+                },
+                "version": {
+                    "description": "Version of the code to use",
+                    "type": "string",
+                    "example": "v1.0.0"
                 }
             }
         },

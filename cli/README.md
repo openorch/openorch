@@ -11,7 +11,7 @@ This CLI is first and foremost aimed at administrators (as opposed to both admin
 #### List
 
 ```sh
-$ ~/superplatform/cli$ go run main.go env list
+~/superplatform/cli$ go run main.go env list
 SELECTED   NAME    URL                                DESCRIPTION
 *          local   http://127.0.0.1:58231
            prod    https://api.myprodserver.com
@@ -22,7 +22,7 @@ SELECTED   NAME    URL                                DESCRIPTION
 #### Login
 
 ```sh
-$ ~/superplatform/cli$ go run main.go login singulatron changeme
+~/superplatform/cli$ go run main.go login singulatron changeme
 ```
 
 #### Whoami
@@ -30,4 +30,24 @@ $ ~/superplatform/cli$ go run main.go login singulatron changeme
 ```sh
 $ ~/superplatform/cli$ go run main.go whoami
 singularon
+```
+
+### Service Definitions
+
+```sh
+~/superplatform/cli$ cat fixtures/definitionA.yaml
+id: test-a
+image:
+  name: hashicorp/http-echo
+  port: 8080
+hostPort: 8887
+
+~/singulatron/cli$ cat fixtures/definitionB.yaml
+id: test-b
+repository:
+  url: https://github.com/singulatron/superplatform.git
+  folder: test-b
+
+~/singulatron/cli$ go run main.go definition save fixtures/definitionA.yaml
+~/singulatron/cli$ go run main.go definition save fixtures/definitionB.yaml
 ```

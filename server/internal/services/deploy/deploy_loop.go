@@ -19,7 +19,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/pkg/errors"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -188,13 +187,13 @@ func (ns *DeployService) executeStartCommand(
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
 ) error {
-	logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
+	logger.Info("Executing deploy start command", slog.String("deploymentId", deployment.Id))
 	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
 
 	err := ns.makeSureItRuns(client, ctx, definition, deployment)
 
 	if err != nil {
-		logger.Warn("Error executing start command",
+		logger.Warn("Error executing deploy start command",
 			slog.String("deploymentId", deployment.Id),
 			slog.Any("error", err),
 		)
@@ -214,7 +213,7 @@ func (ns *DeployService) executeStartCommand(
 		return err
 	}
 
-	logger.Debug("Successfully executed start command",
+	logger.Debug("Successfully executed deploy start command",
 		slog.String("deploymentId", deployment.Id),
 	)
 
@@ -285,7 +284,20 @@ func (ns *DeployService) makeSureItRuns(
 			Url: &definition.Repository.Url,
 		}).Execute()
 
-		spew.Dump(checkoutRsp)
+		if err != nil {
+			return errors.Wrap(err, "error checking out repo")
+		}
+
+		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Request(
+			openapi.DockerSvcBuildImageRequest{
+				ContextPath: *checkoutRsp.Dir,
+				Name:        fmt.Sprintf("superplatform-%v", definition.Id),
+			},
+		).Execute()
+
+		if err != nil {
+			return errors.Wrap(err, "error building image")
+		}
 	}
 
 	err = sdk.OpenAPIError(err)

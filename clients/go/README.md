@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *ConfigSvcAPI* | [**SaveConfig**](docs/ConfigSvcAPI.md#saveconfig) | **Put** /config-svc/config | Save Config
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
+*DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /docker-svc/image | Build an Image
 *DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
 *DockerSvcAPI* | [**GetContainerSummary**](docs/DockerSvcAPI.md#getcontainersummary) | **Get** /docker-svc/container/{hash}/summary/{numberOfLines} | Get Container Summary
 *DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /docker-svc/host | Get Docker Host
@@ -188,6 +189,7 @@ Class | Method | HTTP request | Description
  - [DeploySvcSaveDeploymentRequest](docs/DeploySvcSaveDeploymentRequest.md)
  - [DeploySvcStrategyType](docs/DeploySvcStrategyType.md)
  - [DeploySvcTargetRegion](docs/DeploySvcTargetRegion.md)
+ - [DockerSvcBuildImageRequest](docs/DockerSvcBuildImageRequest.md)
  - [DockerSvcContainerIsRunningResponse](docs/DockerSvcContainerIsRunningResponse.md)
  - [DockerSvcDockerInfo](docs/DockerSvcDockerInfo.md)
  - [DockerSvcErrorResponse](docs/DockerSvcErrorResponse.md)

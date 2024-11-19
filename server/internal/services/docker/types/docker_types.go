@@ -73,6 +73,20 @@ type RunContainerRequest struct {
 	Options *RunContainerOptions `json:"options"`
 }
 
+type BuildImageRequest struct {
+	// Name is the name of the image to build
+	Name string `json:"name" example:"nginx:latest" binding:"required"`
+
+	// ContextPath is the local path to the build context
+	ContextPath string `json:"contextPath" example:"." binding:"required"`
+
+	// DockerfilePath is the local path to the Dockerfile
+	DockerfilePath string `json:"dockerfilePath" example:"Dockerfile"`
+}
+
+type BuildImageResponse struct {
+}
+
 type RunContainerResponse struct {
 	Info *RunInfo `json:"info"`
 }

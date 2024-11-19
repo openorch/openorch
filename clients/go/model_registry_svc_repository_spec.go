@@ -22,10 +22,12 @@ var _ MappedNullable = &RegistrySvcRepositorySpec{}
 
 // RegistrySvcRepositorySpec struct for RegistrySvcRepositorySpec
 type RegistrySvcRepositorySpec struct {
-	// Branch is the branch to use for the repository
-	Subfolder *string `json:"subfolder,omitempty"`
+	// Folder is the path to the subfolder in the repository where the code is located
+	Folder *string `json:"folder,omitempty"`
 	// URL is the URL to the repository
 	Url string `json:"url"`
+	// Version of the code to use
+	Version *string `json:"version,omitempty"`
 }
 
 type _RegistrySvcRepositorySpec RegistrySvcRepositorySpec
@@ -48,36 +50,36 @@ func NewRegistrySvcRepositorySpecWithDefaults() *RegistrySvcRepositorySpec {
 	return &this
 }
 
-// GetSubfolder returns the Subfolder field value if set, zero value otherwise.
-func (o *RegistrySvcRepositorySpec) GetSubfolder() string {
-	if o == nil || IsNil(o.Subfolder) {
+// GetFolder returns the Folder field value if set, zero value otherwise.
+func (o *RegistrySvcRepositorySpec) GetFolder() string {
+	if o == nil || IsNil(o.Folder) {
 		var ret string
 		return ret
 	}
-	return *o.Subfolder
+	return *o.Folder
 }
 
-// GetSubfolderOk returns a tuple with the Subfolder field value if set, nil otherwise
+// GetFolderOk returns a tuple with the Folder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RegistrySvcRepositorySpec) GetSubfolderOk() (*string, bool) {
-	if o == nil || IsNil(o.Subfolder) {
+func (o *RegistrySvcRepositorySpec) GetFolderOk() (*string, bool) {
+	if o == nil || IsNil(o.Folder) {
 		return nil, false
 	}
-	return o.Subfolder, true
+	return o.Folder, true
 }
 
-// HasSubfolder returns a boolean if a field has been set.
-func (o *RegistrySvcRepositorySpec) HasSubfolder() bool {
-	if o != nil && !IsNil(o.Subfolder) {
+// HasFolder returns a boolean if a field has been set.
+func (o *RegistrySvcRepositorySpec) HasFolder() bool {
+	if o != nil && !IsNil(o.Folder) {
 		return true
 	}
 
 	return false
 }
 
-// SetSubfolder gets a reference to the given string and assigns it to the Subfolder field.
-func (o *RegistrySvcRepositorySpec) SetSubfolder(v string) {
-	o.Subfolder = &v
+// SetFolder gets a reference to the given string and assigns it to the Folder field.
+func (o *RegistrySvcRepositorySpec) SetFolder(v string) {
+	o.Folder = &v
 }
 
 // GetUrl returns the Url field value
@@ -104,6 +106,38 @@ func (o *RegistrySvcRepositorySpec) SetUrl(v string) {
 	o.Url = v
 }
 
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *RegistrySvcRepositorySpec) GetVersion() string {
+	if o == nil || IsNil(o.Version) {
+		var ret string
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcRepositorySpec) GetVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.Version) {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *RegistrySvcRepositorySpec) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
+func (o *RegistrySvcRepositorySpec) SetVersion(v string) {
+	o.Version = &v
+}
+
 func (o RegistrySvcRepositorySpec) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -114,10 +148,13 @@ func (o RegistrySvcRepositorySpec) MarshalJSON() ([]byte, error) {
 
 func (o RegistrySvcRepositorySpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Subfolder) {
-		toSerialize["subfolder"] = o.Subfolder
+	if !IsNil(o.Folder) {
+		toSerialize["folder"] = o.Folder
 	}
 	toSerialize["url"] = o.Url
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
 }
 
