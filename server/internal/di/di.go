@@ -529,6 +529,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	router.HandleFunc("/deploy-svc/deployments", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.ListDeployments(w, r)
 	})).Methods("OPTIONS", "POST")
+	router.HandleFunc("/deploy-svc/deployment", appl(func(w http.ResponseWriter, r *http.Request) {
+		deployService.DeleteDeployment(w, r)
+	})).Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/source-svc/repo/checkout", appl(func(w http.ResponseWriter, r *http.Request) {
 		sourceService.CheckoutRepo(w, r)

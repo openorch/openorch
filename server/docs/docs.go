@@ -662,6 +662,61 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete a deployment.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Deploy Svc"
+                ],
+                "summary": "Delete Deployment",
+                "operationId": "deleteDeployment",
+                "parameters": [
+                    {
+                        "description": "Delete Deploys Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.DeleteDeploymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.DeleteDeploymentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    }
+                }
             }
         },
         "/deploy-svc/deployments": {
@@ -4384,6 +4439,20 @@ const docTemplate = `{
                 }
             }
         },
+        "deploy_svc.DeleteDeploymentRequest": {
+            "type": "object",
+            "required": [
+                "deploymentId"
+            ],
+            "properties": {
+                "deploymentId": {
+                    "type": "string"
+                }
+            }
+        },
+        "deploy_svc.DeleteDeploymentResponse": {
+            "type": "object"
+        },
         "deploy_svc.Deployment": {
             "type": "object",
             "required": [
@@ -6057,10 +6126,15 @@ const docTemplate = `{
                 "url"
             ],
             "properties": {
-                "folder": {
-                    "description": "Folder is the path to the subfolder in the repository where the code is located",
+                "buildContext": {
+                    "description": "Context is the path to the image build context",
                     "type": "string",
                     "example": "path/to/subfolder"
+                },
+                "containerFile": {
+                    "description": "ContainerFile is the path to the file that contains the container build instructions\nRelative from the build context. By default, it is assumed to be a Dockerfile.",
+                    "type": "string",
+                    "example": "docker/Dockerfile"
                 },
                 "url": {
                     "description": "URL is the URL to the repository",

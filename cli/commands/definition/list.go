@@ -29,7 +29,7 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tIMAGE NAME\tREPO URL\tREPO FOLDER")
+	fmt.Fprintln(writer, "ID\tIMAGE NAME\tREPO URL\tREPO BUILD CONTEXT\tREPO CONTAINER FILE")
 
 	for _, definition := range rsp.Definitions {
 		imageName := ""
@@ -40,12 +40,16 @@ func List(cmd *cobra.Command, args []string) error {
 		if definition.Repository != nil {
 			repoUrl = definition.Repository.Url
 		}
-		repoFolder := ""
-		if definition.Repository != nil && definition.Repository.Folder != nil {
-			repoFolder = *definition.Repository.Folder
+		buildContext := ""
+		if definition.Repository != nil && definition.Repository.BuildContext != nil {
+			buildContext = *definition.Repository.BuildContext
+		}
+		containerFile := ""
+		if definition.Repository != nil && definition.Repository.ContainerFile != nil {
+			containerFile = *definition.Repository.ContainerFile
 		}
 
-		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\n", definition.Id, imageName, repoUrl, repoFolder)
+		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\t%s\n", definition.Id, imageName, repoUrl, buildContext, containerFile)
 	}
 
 	return nil

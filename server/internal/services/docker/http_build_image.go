@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 
@@ -69,6 +70,7 @@ func (dm *DockerService) BuildImage(
 func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 	ctx := context.Background()
 
+	spew.Dump(req.ContextPath)
 	tarBuffer, err := createTarFromContext(req.ContextPath)
 	if err != nil {
 		return errors.Wrap(err, "failed to create build context tar")
@@ -79,6 +81,7 @@ func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 		dockerfilePath = "Dockerfile"
 	}
 
+	spew.Dump(dockerfilePath)
 	options := types.ImageBuildOptions{
 		Tags:           []string{req.Name},
 		Dockerfile:     dockerfilePath,

@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 *ChatSvcAPI* | [**UpdateThread**](docs/ChatSvcAPI.md#updatethread) | **Put** /chat-svc/thread/{threadId} | Update Thread
 *ConfigSvcAPI* | [**GetConfig**](docs/ConfigSvcAPI.md#getconfig) | **Get** /config-svc/config | Get Config
 *ConfigSvcAPI* | [**SaveConfig**](docs/ConfigSvcAPI.md#saveconfig) | **Put** /config-svc/config | Save Config
+*DeploySvcAPI* | [**DeleteDeployment**](docs/DeploySvcAPI.md#deletedeployment) | **Delete** /deploy-svc/deployment | Delete Deployment
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
 *DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /docker-svc/image | Build an Image
@@ -180,6 +181,7 @@ Class | Method | HTTP request | Description
  - [DatastoreOrderBy](docs/DatastoreOrderBy.md)
  - [DatastoreQuery](docs/DatastoreQuery.md)
  - [DeploySvcAutoScalingConfig](docs/DeploySvcAutoScalingConfig.md)
+ - [DeploySvcDeleteDeploymentRequest](docs/DeploySvcDeleteDeploymentRequest.md)
  - [DeploySvcDeployment](docs/DeploySvcDeployment.md)
  - [DeploySvcDeploymentStatus](docs/DeploySvcDeploymentStatus.md)
  - [DeploySvcDeploymentStrategy](docs/DeploySvcDeploymentStrategy.md)

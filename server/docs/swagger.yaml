@@ -260,6 +260,15 @@ definitions:
         description: Minimum number of replicas to run
         type: integer
     type: object
+  deploy_svc.DeleteDeploymentRequest:
+    properties:
+      deploymentId:
+        type: string
+    required:
+    - deploymentId
+    type: object
+  deploy_svc.DeleteDeploymentResponse:
+    type: object
   deploy_svc.Deployment:
     properties:
       autoScaling:
@@ -1477,10 +1486,15 @@ definitions:
     type: object
   registry_svc.RepositorySpec:
     properties:
-      folder:
-        description: Folder is the path to the subfolder in the repository where the
-          code is located
+      buildContext:
+        description: Context is the path to the image build context
         example: path/to/subfolder
+        type: string
+      containerFile:
+        description: |-
+          ContainerFile is the path to the file that contains the container build instructions
+          Relative from the build context. By default, it is assumed to be a Dockerfile.
+        example: docker/Dockerfile
         type: string
       url:
         description: URL is the URL to the repository
@@ -2288,6 +2302,41 @@ paths:
       tags:
       - Config Svc
   /deploy-svc/deployment:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a deployment.
+      operationId: deleteDeployment
+      parameters:
+      - description: Delete Deploys Request
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/deploy_svc.DeleteDeploymentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/deploy_svc.DeleteDeploymentResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete Deployment
+      tags:
+      - Deploy Svc
     put:
       consumes:
       - application/json

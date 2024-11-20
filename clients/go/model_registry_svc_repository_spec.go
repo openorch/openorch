@@ -22,8 +22,10 @@ var _ MappedNullable = &RegistrySvcRepositorySpec{}
 
 // RegistrySvcRepositorySpec struct for RegistrySvcRepositorySpec
 type RegistrySvcRepositorySpec struct {
-	// Folder is the path to the subfolder in the repository where the code is located
-	Folder *string `json:"folder,omitempty"`
+	// Context is the path to the image build context
+	BuildContext *string `json:"buildContext,omitempty"`
+	// ContainerFile is the path to the file that contains the container build instructions Relative from the build context. By default, it is assumed to be a Dockerfile.
+	ContainerFile *string `json:"containerFile,omitempty"`
 	// URL is the URL to the repository
 	Url string `json:"url"`
 	// Version of the code to use
@@ -50,36 +52,68 @@ func NewRegistrySvcRepositorySpecWithDefaults() *RegistrySvcRepositorySpec {
 	return &this
 }
 
-// GetFolder returns the Folder field value if set, zero value otherwise.
-func (o *RegistrySvcRepositorySpec) GetFolder() string {
-	if o == nil || IsNil(o.Folder) {
+// GetBuildContext returns the BuildContext field value if set, zero value otherwise.
+func (o *RegistrySvcRepositorySpec) GetBuildContext() string {
+	if o == nil || IsNil(o.BuildContext) {
 		var ret string
 		return ret
 	}
-	return *o.Folder
+	return *o.BuildContext
 }
 
-// GetFolderOk returns a tuple with the Folder field value if set, nil otherwise
+// GetBuildContextOk returns a tuple with the BuildContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RegistrySvcRepositorySpec) GetFolderOk() (*string, bool) {
-	if o == nil || IsNil(o.Folder) {
+func (o *RegistrySvcRepositorySpec) GetBuildContextOk() (*string, bool) {
+	if o == nil || IsNil(o.BuildContext) {
 		return nil, false
 	}
-	return o.Folder, true
+	return o.BuildContext, true
 }
 
-// HasFolder returns a boolean if a field has been set.
-func (o *RegistrySvcRepositorySpec) HasFolder() bool {
-	if o != nil && !IsNil(o.Folder) {
+// HasBuildContext returns a boolean if a field has been set.
+func (o *RegistrySvcRepositorySpec) HasBuildContext() bool {
+	if o != nil && !IsNil(o.BuildContext) {
 		return true
 	}
 
 	return false
 }
 
-// SetFolder gets a reference to the given string and assigns it to the Folder field.
-func (o *RegistrySvcRepositorySpec) SetFolder(v string) {
-	o.Folder = &v
+// SetBuildContext gets a reference to the given string and assigns it to the BuildContext field.
+func (o *RegistrySvcRepositorySpec) SetBuildContext(v string) {
+	o.BuildContext = &v
+}
+
+// GetContainerFile returns the ContainerFile field value if set, zero value otherwise.
+func (o *RegistrySvcRepositorySpec) GetContainerFile() string {
+	if o == nil || IsNil(o.ContainerFile) {
+		var ret string
+		return ret
+	}
+	return *o.ContainerFile
+}
+
+// GetContainerFileOk returns a tuple with the ContainerFile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcRepositorySpec) GetContainerFileOk() (*string, bool) {
+	if o == nil || IsNil(o.ContainerFile) {
+		return nil, false
+	}
+	return o.ContainerFile, true
+}
+
+// HasContainerFile returns a boolean if a field has been set.
+func (o *RegistrySvcRepositorySpec) HasContainerFile() bool {
+	if o != nil && !IsNil(o.ContainerFile) {
+		return true
+	}
+
+	return false
+}
+
+// SetContainerFile gets a reference to the given string and assigns it to the ContainerFile field.
+func (o *RegistrySvcRepositorySpec) SetContainerFile(v string) {
+	o.ContainerFile = &v
 }
 
 // GetUrl returns the Url field value
@@ -148,8 +182,11 @@ func (o RegistrySvcRepositorySpec) MarshalJSON() ([]byte, error) {
 
 func (o RegistrySvcRepositorySpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Folder) {
-		toSerialize["folder"] = o.Folder
+	if !IsNil(o.BuildContext) {
+		toSerialize["buildContext"] = o.BuildContext
+	}
+	if !IsNil(o.ContainerFile) {
+		toSerialize["containerFile"] = o.ContainerFile
 	}
 	toSerialize["url"] = o.Url
 	if !IsNil(o.Version) {

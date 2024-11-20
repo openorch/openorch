@@ -14,6 +14,7 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"path"
 	"runtime/debug"
 	"strings"
 	"syscall"
@@ -290,8 +291,9 @@ func (ns *DeployService) makeSureItRuns(
 
 		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Request(
 			openapi.DockerSvcBuildImageRequest{
-				ContextPath: *checkoutRsp.Dir,
-				Name:        fmt.Sprintf("superplatform-%v", definition.Id),
+				ContextPath:    path.Join(*checkoutRsp.Dir, *definition.Repository.BuildContext),
+				DockerfilePath: definition.Repository.ContainerFile,
+				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
 			},
 		).Execute()
 

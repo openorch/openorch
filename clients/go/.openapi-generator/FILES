@@ -44,6 +44,7 @@ docs/DatastoreOrderBy.md
 docs/DatastoreQuery.md
 docs/DeploySvcAPI.md
 docs/DeploySvcAutoScalingConfig.md
+docs/DeploySvcDeleteDeploymentRequest.md
 docs/DeploySvcDeployment.md
 docs/DeploySvcDeploymentStatus.md
 docs/DeploySvcDeploymentStrategy.md
@@ -197,6 +198,7 @@ model_datastore_op.go
 model_datastore_order_by.go
 model_datastore_query.go
 model_deploy_svc_auto_scaling_config.go
+model_deploy_svc_delete_deployment_request.go
 model_deploy_svc_deployment.go
 model_deploy_svc_deployment_status.go
 model_deploy_svc_deployment_strategy.go

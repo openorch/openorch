@@ -1,5 +1,6 @@
 id: test-b
 repository:
   url: https://github.com/singulatron/superplatform.git
-  folder: test-b
+  buildContext: server
+  containerFile: docker/Dockerfile
 hostPort: 9998

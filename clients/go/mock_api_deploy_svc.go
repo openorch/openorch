@@ -39,6 +39,36 @@ func (m *MockDeploySvcAPI) EXPECT() *MockDeploySvcAPIMockRecorder {
 	return m.recorder
 }
 
+// DeleteDeployment mocks base method.
+func (m *MockDeploySvcAPI) DeleteDeployment(ctx context.Context) ApiDeleteDeploymentRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteDeployment", ctx)
+	ret0, _ := ret[0].(ApiDeleteDeploymentRequest)
+	return ret0
+}
+
+// DeleteDeployment indicates an expected call of DeleteDeployment.
+func (mr *MockDeploySvcAPIMockRecorder) DeleteDeployment(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteDeployment", reflect.TypeOf((*MockDeploySvcAPI)(nil).DeleteDeployment), ctx)
+}
+
+// DeleteDeploymentExecute mocks base method.
+func (m *MockDeploySvcAPI) DeleteDeploymentExecute(r ApiDeleteDeploymentRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteDeploymentExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// DeleteDeploymentExecute indicates an expected call of DeleteDeploymentExecute.
+func (mr *MockDeploySvcAPIMockRecorder) DeleteDeploymentExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteDeploymentExecute", reflect.TypeOf((*MockDeploySvcAPI)(nil).DeleteDeploymentExecute), r)
+}
+
 // ListDeployments mocks base method.
 func (m *MockDeploySvcAPI) ListDeployments(ctx context.Context) ApiListDeploymentsRequest {
 	m.ctrl.T.Helper()

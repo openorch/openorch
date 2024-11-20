@@ -44,8 +44,12 @@ type RepositorySpec struct {
 	// Version of the code to use
 	Version string `json:"version,omitempty" example:"v1.0.0"`
 
-	// Folder is the path to the subfolder in the repository where the code is located
-	Folder string `json:"folder,omitempty" example:"path/to/subfolder"`
+	// Context is the path to the image build context
+	BuildContext string `json:"buildContext,omitempty" example:"path/to/subfolder"`
+
+	// ContainerFile is the path to the file that contains the container build instructions
+	// Relative from the build context. By default, it is assumed to be a Dockerfile.
+	ContainerFile string `json:"containerFile,omitempty" example:"docker/Dockerfile"`
 }
 
 type ImageSpec struct {

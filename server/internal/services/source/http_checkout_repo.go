@@ -81,16 +81,23 @@ func (s *SourceService) CheckoutRepo(w http.ResponseWriter,
 func (s *SourceService) checkoutRepo(
 	req source.CheckoutRepoRequest,
 ) (string, error) {
+	if req.Version == "" {
+		req.Version = "main"
+	}
 
 	tempDir := path.Join(os.TempDir(), fmt.Sprintf("repo-%s-%s", makeFilenameSafeURL(req.URL), req.Version))
+
+	if !isCommitHash(req.Version) {
+		// delete branch checkouts as they might be outdated
+		err := os.RemoveAll(tempDir)
+		if err != nil {
+			return "", fmt.Errorf("failed to remove temp dir: %w", err)
+		}
+	}
 
 	err := os.MkdirAll(tempDir, 0755)
 	if err != nil {
 		return "", fmt.Errorf("failed to create temp dir: %w", err)
-	}
-
-	if req.Version == "" {
-		req.Version = "main"
 	}
 
 	refName := plumbing.NewBranchReferenceName(req.Version)
@@ -157,4 +164,17 @@ func makeFilenameSafeURL(urlStr string) string {
 		"=", "_",
 	)
 	return replacer.Replace(urlStr)
+}
+
+func isCommitHash(s string) bool {
+	// Check if the string is 40 characters long and contains only valid hex characters
+	if len(s) == 40 {
+		for _, c := range s {
+			if !((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) {
+				return false
+			}
+		}
+		return true
+	}
+	return false
 }
