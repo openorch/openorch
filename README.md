@@ -61,7 +61,7 @@ See [this page](https://superplatform.ai/docs/category/running) to help you get 
 
 ## Main Services
 
-https://superplatform.ai/docs/category/singulatron-api
+https://superplatform.ai/docs/category/superplatform-api/
 
 ### Prompt Svc
 
