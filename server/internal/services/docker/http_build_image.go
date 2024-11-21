@@ -2,18 +2,20 @@ package dockerservice
 
 import (
 	"archive/tar"
+	"bufio"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
 	"path/filepath"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 
+	"github.com/singulatron/superplatform/sdk/go/logger"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
@@ -60,7 +62,7 @@ func (dm *DockerService) BuildImage(
 	err = dm.buildImage(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: err.Error()})
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -70,7 +72,6 @@ func (dm *DockerService) BuildImage(
 func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 	ctx := context.Background()
 
-	spew.Dump(req.ContextPath)
 	tarBuffer, err := createTarFromContext(req.ContextPath)
 	if err != nil {
 		return errors.Wrap(err, "failed to create build context tar")
@@ -81,7 +82,6 @@ func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 		dockerfilePath = "Dockerfile"
 	}
 
-	spew.Dump(dockerfilePath)
 	options := types.ImageBuildOptions{
 		Tags:           []string{req.Name},
 		Dockerfile:     dockerfilePath,
@@ -98,7 +98,7 @@ func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 
 	// Stream the build output to logs
 	if err := streamBuildOutput(imageBuildResponse.Body); err != nil {
-		return errors.Wrap(err, "failed to read build output")
+		return errors.Wrap(err, "build failed")
 	}
 
 	return nil
@@ -161,19 +161,48 @@ func createTarFromContext(sourceDir string) (io.Reader, error) {
 	return pr, nil
 }
 
+// JSON structure for Docker build output
+type BuildOutput struct {
+	Stream      string `json:"stream"`
+	ErrorDetail struct {
+		Message string `json:"message"`
+	} `json:"errorDetail"`
+	Error string `json:"error"`
+}
+
+// streamBuildOutput reads the output and detects errors
 func streamBuildOutput(reader io.Reader) error {
-	buf := make([]byte, 4096)
-	for {
-		n, err := reader.Read(buf)
-		if n > 0 {
-			fmt.Print(string(buf[:n]))
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		// Parse JSON line
+		var output BuildOutput
+		if err := json.Unmarshal([]byte(line), &output); err != nil {
+			logger.Error("Failed to parse line as JSON",
+				slog.String("line", line),
+				slog.Any("error", err),
+			)
+			continue
 		}
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return err
+
+		// Print stream content
+		if output.Stream != "" {
+			logger.Info(output.Stream)
+		}
+
+		// Check for errors
+		if output.Error != "" || output.ErrorDetail.Message != "" {
+			logger.Error("Build failed",
+				slog.String("error", output.Error))
+
+			return errors.New(output.ErrorDetail.Message)
 		}
 	}
+
+	if err := scanner.Err(); err != nil {
+		return fmt.Errorf("error reading stream: %w", err)
+	}
+
 	return nil
 }

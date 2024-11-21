@@ -163,6 +163,7 @@ func (ns *DeployService) processCommand(
 	if err != nil {
 		return err
 	}
+
 	if deployment.Status == deploy.DeploymentStatusPending {
 		deployment.Status = deploy.DeploymentStatusDeploying
 		err = ns.deploymentStore.Upsert(deployment)
@@ -260,12 +261,14 @@ func (ns *DeployService) makeSureItRuns(
 	ctx context.Context,
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
-) error {
+) (err error) {
+	defer func() {
+		err = sdk.OpenAPIError(err)
+	}()
+
 	if definition == nil {
 		return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
 	}
-
-	var err error
 
 	if definition.Image != nil {
 		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
@@ -297,8 +300,6 @@ func (ns *DeployService) makeSureItRuns(
 			},
 		).Execute()
 	}
-
-	err = sdk.OpenAPIError(err)
 
 	return err
 }
