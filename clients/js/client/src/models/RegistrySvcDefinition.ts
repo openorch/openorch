@@ -25,6 +25,12 @@ import {
     RegistrySvcImageSpecFromJSONTyped,
     RegistrySvcImageSpecToJSON,
 } from './RegistrySvcImageSpec';
+import type { RegistrySvcRepositorySpec } from './RegistrySvcRepositorySpec';
+import {
+    RegistrySvcRepositorySpecFromJSON,
+    RegistrySvcRepositorySpecFromJSONTyped,
+    RegistrySvcRepositorySpecToJSON,
+} from './RegistrySvcRepositorySpec';
 import type { RegistrySvcClient } from './RegistrySvcClient';
 import {
     RegistrySvcClientFromJSON,
@@ -65,10 +71,19 @@ export interface RegistrySvcDefinition {
     id: string;
     /**
      * Container specifications for Docker, K8s, etc.
+     * Use this to deploy already built images.
      * @type {RegistrySvcImageSpec}
      * @memberof RegistrySvcDefinition
      */
-    image: RegistrySvcImageSpec;
+    image?: RegistrySvcImageSpec;
+    /**
+     * Repository based definitions is an alternative to Image definitions.
+     * Instead of deploying an already built and pushed image, a source code repository
+     * url can be provided. The container will be built from the source.
+     * @type {RegistrySvcRepositorySpec}
+     * @memberof RegistrySvcDefinition
+     */
+    repository?: RegistrySvcRepositorySpec;
 }
 
 /**
@@ -76,7 +91,6 @@ export interface RegistrySvcDefinition {
  */
 export function instanceOfRegistrySvcDefinition(value: object): value is RegistrySvcDefinition {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('image' in value) || value['image'] === undefined) return false;
     return true;
 }
 
@@ -94,7 +108,8 @@ export function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminato
         'clients': json['clients'] == null ? undefined : ((json['clients'] as Array<any>).map(RegistrySvcClientFromJSON)),
         'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
-        'image': RegistrySvcImageSpecFromJSON(json['image']),
+        'image': json['image'] == null ? undefined : RegistrySvcImageSpecFromJSON(json['image']),
+        'repository': json['repository'] == null ? undefined : RegistrySvcRepositorySpecFromJSON(json['repository']),
     };
 }
 
@@ -109,6 +124,7 @@ export function RegistrySvcDefinitionToJSON(value?: RegistrySvcDefinition | null
         'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpecToJSON(value['image']),
+        'repository': RegistrySvcRepositorySpecToJSON(value['repository']),
     };
 }
 

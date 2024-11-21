@@ -662,6 +662,61 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete a deployment.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Deploy Svc"
+                ],
+                "summary": "Delete Deployment",
+                "operationId": "deleteDeployment",
+                "parameters": [
+                    {
+                        "description": "Delete Deploys Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.DeleteDeploymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.DeleteDeploymentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/deploy_svc.ErrorResponse"
+                        }
+                    }
+                }
             }
         },
         "/deploy-svc/deployments": {
@@ -728,7 +783,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Launches a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:docker:create` + "`" + ` permission.",
+                "description": "Runs a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:container:run` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -738,16 +793,16 @@ const docTemplate = `{
                 "tags": [
                     "Docker Svc"
                 ],
-                "summary": "Launch a Container",
-                "operationId": "launchContainer",
+                "summary": "Run a Container",
+                "operationId": "runContainer",
                 "parameters": [
                     {
-                        "description": "Launch Container Request",
+                        "description": "Run Container Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerRequest"
+                            "$ref": "#/definitions/docker_svc.RunContainerRequest"
                         }
                     }
                 ],
@@ -755,7 +810,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerResponse"
+                            "$ref": "#/definitions/docker_svc.RunContainerResponse"
                         }
                     },
                     "400": {
@@ -797,7 +852,7 @@ const docTemplate = `{
                     "Docker Svc"
                 ],
                 "summary": "Check If a Container Is Running",
-                "operationId": "isRunning",
+                "operationId": "containerIsRunning",
                 "parameters": [
                     {
                         "type": "string",
@@ -922,6 +977,64 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/docker_svc.GetDockerHostResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/docker-svc/image": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Builds a Docker image with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:image:build` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Docker Svc"
+                ],
+                "summary": "Build an Image",
+                "operationId": "buildImage",
+                "parameters": [
+                    {
+                        "description": "Build Image Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.BuildImageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.BuildImageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
                         }
                     },
                     "401": {
@@ -2724,6 +2837,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/source-svc/repo/checkout": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Checkout a git repository over https or ssh at a specific version into a temporary directory.\nPerforms a shallow clone with minimal history for faster checkout.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Source Svc"
+                ],
+                "summary": "Checkout a git repository",
+                "operationId": "checkoutRepo",
+                "parameters": [
+                    {
+                        "description": "Checkout Repo Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.CheckoutRepoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully checked out the repository",
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.CheckoutRepoResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/source_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user-svc/change-password": {
             "post": {
                 "security": [
@@ -4268,6 +4439,20 @@ const docTemplate = `{
                 }
             }
         },
+        "deploy_svc.DeleteDeploymentRequest": {
+            "type": "object",
+            "required": [
+                "deploymentId"
+            ],
+            "properties": {
+                "deploymentId": {
+                    "type": "string"
+                }
+            }
+        },
+        "deploy_svc.DeleteDeploymentResponse": {
+            "type": "object"
+        },
         "deploy_svc.Deployment": {
             "type": "object",
             "required": [
@@ -4458,6 +4643,33 @@ const docTemplate = `{
                 }
             }
         },
+        "docker_svc.BuildImageRequest": {
+            "type": "object",
+            "required": [
+                "contextPath",
+                "name"
+            ],
+            "properties": {
+                "contextPath": {
+                    "description": "ContextPath is the local path to the build context",
+                    "type": "string",
+                    "example": "."
+                },
+                "dockerfilePath": {
+                    "description": "DockerfilePath is the local path to the Dockerfile",
+                    "type": "string",
+                    "example": "Dockerfile"
+                },
+                "name": {
+                    "description": "Name is the name of the image to build",
+                    "type": "string",
+                    "example": "nginx:latest"
+                }
+            }
+        },
+        "docker_svc.BuildImageResponse": {
+            "type": "object"
+        },
         "docker_svc.ContainerIsRunningResponse": {
             "type": "object",
             "properties": {
@@ -4512,7 +4724,7 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerOptions": {
+        "docker_svc.RunContainerOptions": {
             "type": "object",
             "properties": {
                 "assets": {
@@ -4557,7 +4769,7 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerRequest": {
+        "docker_svc.RunContainerRequest": {
             "type": "object",
             "required": [
                 "image",
@@ -4578,7 +4790,7 @@ const docTemplate = `{
                     "description": "Options provides additional options for launching the container",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/docker_svc.LaunchContainerOptions"
+                            "$ref": "#/definitions/docker_svc.RunContainerOptions"
                         }
                     ]
                 },
@@ -4589,15 +4801,15 @@ const docTemplate = `{
                 }
             }
         },
-        "docker_svc.LaunchContainerResponse": {
+        "docker_svc.RunContainerResponse": {
             "type": "object",
             "properties": {
                 "info": {
-                    "$ref": "#/definitions/docker_svc.LaunchInfo"
+                    "$ref": "#/definitions/docker_svc.RunInfo"
                 }
             }
         },
-        "docker_svc.LaunchInfo": {
+        "docker_svc.RunInfo": {
             "type": "object",
             "properties": {
                 "newContainerStarted": {
@@ -5501,8 +5713,7 @@ const docTemplate = `{
         "registry_svc.Definition": {
             "type": "object",
             "required": [
-                "id",
-                "image"
+                "id"
             ],
             "properties": {
                 "apiSpecs": {
@@ -5527,10 +5738,18 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "image": {
-                    "description": "Container specifications for Docker, K8s, etc.",
+                    "description": "Container specifications for Docker, K8s, etc.\nUse this to deploy already built images.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/registry_svc.ImageSpec"
+                        }
+                    ]
+                },
+                "repository": {
+                    "description": "Repository based definitions is an alternative to Image definitions.\nInstead of deploying an already built and pushed image, a source code repository\nurl can be provided. The container will be built from the source.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/registry_svc.RepositorySpec"
                         }
                     ]
                 }
@@ -5901,6 +6120,34 @@ const docTemplate = `{
         "registry_svc.RegisterInstanceResponse": {
             "type": "object"
         },
+        "registry_svc.RepositorySpec": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "buildContext": {
+                    "description": "Context is the path to the image build context",
+                    "type": "string",
+                    "example": "path/to/subfolder"
+                },
+                "containerFile": {
+                    "description": "ContainerFile is the path to the file that contains the container build instructions\nRelative from the build context. By default, it is assumed to be a Dockerfile.",
+                    "type": "string",
+                    "example": "docker/Dockerfile"
+                },
+                "url": {
+                    "description": "URL is the URL to the repository",
+                    "type": "string",
+                    "example": "https://github.com/singulatron/superplatform.git"
+                },
+                "version": {
+                    "description": "Version of the code to use",
+                    "type": "string",
+                    "example": "v1.0.0"
+                }
+            }
+        },
         "registry_svc.ResourceUsage": {
             "type": "object",
             "properties": {
@@ -5957,6 +6204,52 @@ const docTemplate = `{
                     "description": "Used amount (in bytes).",
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "source_svc.CheckoutRepoRequest": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "description": "Password or token for HTTPS auth",
+                    "type": "string"
+                },
+                "ssh_key": {
+                    "description": "SSH private key (optional for SSH connection)",
+                    "type": "string"
+                },
+                "ssh_key_pwd": {
+                    "description": "Password for SSH private key if encrypted (optional)",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "Full repository URL (e.g., https://github.com/user/repo)",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "Username for HTTPS or SSH user (optional for SSH)",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Branch, tag, or commit SHA",
+                    "type": "string"
+                }
+            }
+        },
+        "source_svc.CheckoutRepoResponse": {
+            "type": "object",
+            "properties": {
+                "dir": {
+                    "description": "Directory where the repository was checked out",
+                    "type": "string"
+                }
+            }
+        },
+        "source_svc.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
                 }
             }
         },

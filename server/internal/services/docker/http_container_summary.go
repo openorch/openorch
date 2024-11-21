@@ -38,7 +38,7 @@ func (dm *DockerService) Summary(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionDockerView.Id), &usertypes.IsAuthorizedRequest{
+	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionContainerView.Id), &usertypes.IsAuthorizedRequest{
 		SlugsGranted: []string{"model-svc"},
 	}, rsp)
 	if err != nil {

@@ -90,13 +90,15 @@ Class | Method | HTTP request | Description
 *ChatSvcAPI* | [**UpdateThread**](docs/ChatSvcAPI.md#updatethread) | **Put** /chat-svc/thread/{threadId} | Update Thread
 *ConfigSvcAPI* | [**GetConfig**](docs/ConfigSvcAPI.md#getconfig) | **Get** /config-svc/config | Get Config
 *ConfigSvcAPI* | [**SaveConfig**](docs/ConfigSvcAPI.md#saveconfig) | **Put** /config-svc/config | Save Config
+*DeploySvcAPI* | [**DeleteDeployment**](docs/DeploySvcAPI.md#deletedeployment) | **Delete** /deploy-svc/deployment | Delete Deployment
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
+*DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /docker-svc/image | Build an Image
+*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
 *DockerSvcAPI* | [**GetContainerSummary**](docs/DockerSvcAPI.md#getcontainersummary) | **Get** /docker-svc/container/{hash}/summary/{numberOfLines} | Get Container Summary
 *DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /docker-svc/host | Get Docker Host
 *DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /docker-svc/info | Get Docker Service Information
-*DockerSvcAPI* | [**IsRunning**](docs/DockerSvcAPI.md#isrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
-*DockerSvcAPI* | [**LaunchContainer**](docs/DockerSvcAPI.md#launchcontainer) | **Put** /docker-svc/container | Launch a Container
+*DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /docker-svc/container | Run a Container
 *DownloadSvcAPI* | [**Download**](docs/DownloadSvcAPI.md#download) | **Put** /download-svc/download | Download a File
 *DownloadSvcAPI* | [**GetDownload**](docs/DownloadSvcAPI.md#getdownload) | **Get** /download-svc/download/{downloadId} | Get a Download
 *DownloadSvcAPI* | [**ListDownloads**](docs/DownloadSvcAPI.md#listdownloads) | **Post** /download-svc/downloads | List Downloads
@@ -129,6 +131,7 @@ Class | Method | HTTP request | Description
 *RegistrySvcAPI* | [**RegisterInstance**](docs/RegistrySvcAPI.md#registerinstance) | **Put** /registry-svc/instance | Register Instance
 *RegistrySvcAPI* | [**RemoveInstance**](docs/RegistrySvcAPI.md#removeinstance) | **Delete** /registry-svc/instance/{id} | Remove Instance
 *RegistrySvcAPI* | [**SaveDefinition**](docs/RegistrySvcAPI.md#savedefinition) | **Put** /registry-svc/definition | Register a Definition
+*SourceSvcAPI* | [**CheckoutRepo**](docs/SourceSvcAPI.md#checkoutrepo) | **Post** /source-svc/repo/checkout | Checkout a git repository
 *UserSvcAPI* | [**AddPermissionToRole**](docs/UserSvcAPI.md#addpermissiontorole) | **Put** /user-svc/role/{roleId}/permission/{permissionId} | Add Permission to Role
 *UserSvcAPI* | [**AddUserToOrganization**](docs/UserSvcAPI.md#addusertoorganization) | **Post** /user-svc/organization/{organizationId}/user | Add a User to an Organization
 *UserSvcAPI* | [**ChangePassword**](docs/UserSvcAPI.md#changepassword) | **Post** /user-svc/change-password | Change User Password
@@ -178,6 +181,7 @@ Class | Method | HTTP request | Description
  - [DatastoreOrderBy](docs/DatastoreOrderBy.md)
  - [DatastoreQuery](docs/DatastoreQuery.md)
  - [DeploySvcAutoScalingConfig](docs/DeploySvcAutoScalingConfig.md)
+ - [DeploySvcDeleteDeploymentRequest](docs/DeploySvcDeleteDeploymentRequest.md)
  - [DeploySvcDeployment](docs/DeploySvcDeployment.md)
  - [DeploySvcDeploymentStatus](docs/DeploySvcDeploymentStatus.md)
  - [DeploySvcDeploymentStrategy](docs/DeploySvcDeploymentStrategy.md)
@@ -187,16 +191,17 @@ Class | Method | HTTP request | Description
  - [DeploySvcSaveDeploymentRequest](docs/DeploySvcSaveDeploymentRequest.md)
  - [DeploySvcStrategyType](docs/DeploySvcStrategyType.md)
  - [DeploySvcTargetRegion](docs/DeploySvcTargetRegion.md)
+ - [DockerSvcBuildImageRequest](docs/DockerSvcBuildImageRequest.md)
  - [DockerSvcContainerIsRunningResponse](docs/DockerSvcContainerIsRunningResponse.md)
  - [DockerSvcDockerInfo](docs/DockerSvcDockerInfo.md)
  - [DockerSvcErrorResponse](docs/DockerSvcErrorResponse.md)
  - [DockerSvcGetContainerSummaryResponse](docs/DockerSvcGetContainerSummaryResponse.md)
  - [DockerSvcGetDockerHostResponse](docs/DockerSvcGetDockerHostResponse.md)
  - [DockerSvcGetInfoResponse](docs/DockerSvcGetInfoResponse.md)
- - [DockerSvcLaunchContainerOptions](docs/DockerSvcLaunchContainerOptions.md)
- - [DockerSvcLaunchContainerRequest](docs/DockerSvcLaunchContainerRequest.md)
- - [DockerSvcLaunchContainerResponse](docs/DockerSvcLaunchContainerResponse.md)
- - [DockerSvcLaunchInfo](docs/DockerSvcLaunchInfo.md)
+ - [DockerSvcRunContainerOptions](docs/DockerSvcRunContainerOptions.md)
+ - [DockerSvcRunContainerRequest](docs/DockerSvcRunContainerRequest.md)
+ - [DockerSvcRunContainerResponse](docs/DockerSvcRunContainerResponse.md)
+ - [DockerSvcRunInfo](docs/DockerSvcRunInfo.md)
  - [DownloadSvcDownloadDetails](docs/DownloadSvcDownloadDetails.md)
  - [DownloadSvcDownloadRequest](docs/DownloadSvcDownloadRequest.md)
  - [DownloadSvcDownloadsResponse](docs/DownloadSvcDownloadsResponse.md)
@@ -258,9 +263,13 @@ Class | Method | HTTP request | Description
  - [RegistrySvcNode](docs/RegistrySvcNode.md)
  - [RegistrySvcProcess](docs/RegistrySvcProcess.md)
  - [RegistrySvcRegisterInstanceRequest](docs/RegistrySvcRegisterInstanceRequest.md)
+ - [RegistrySvcRepositorySpec](docs/RegistrySvcRepositorySpec.md)
  - [RegistrySvcResourceUsage](docs/RegistrySvcResourceUsage.md)
  - [RegistrySvcSaveDefinitionRequest](docs/RegistrySvcSaveDefinitionRequest.md)
  - [RegistrySvcUsage](docs/RegistrySvcUsage.md)
+ - [SourceSvcCheckoutRepoRequest](docs/SourceSvcCheckoutRepoRequest.md)
+ - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
+ - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)
  - [UserSvcAuthToken](docs/UserSvcAuthToken.md)
  - [UserSvcChangePasswordAdminRequest](docs/UserSvcChangePasswordAdminRequest.md)

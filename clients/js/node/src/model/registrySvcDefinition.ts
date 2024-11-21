@@ -14,6 +14,7 @@ import { RequestFile } from './models';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcImageSpec } from './registrySvcImageSpec';
+import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 
 export class RegistrySvcDefinition {
     /**
@@ -30,9 +31,13 @@ export class RegistrySvcDefinition {
     'hostPort'?: number;
     'id': string;
     /**
-    * Container specifications for Docker, K8s, etc.
+    * Container specifications for Docker, K8s, etc. Use this to deploy already built images.
     */
-    'image': RegistrySvcImageSpec;
+    'image'?: RegistrySvcImageSpec;
+    /**
+    * Repository based definitions is an alternative to Image definitions. Instead of deploying an already built and pushed image, a source code repository url can be provided. The container will be built from the source.
+    */
+    'repository'?: RegistrySvcRepositorySpec;
 
     static discriminator: string | undefined = undefined;
 
@@ -61,6 +66,11 @@ export class RegistrySvcDefinition {
             "name": "image",
             "baseName": "image",
             "type": "RegistrySvcImageSpec"
+        },
+        {
+            "name": "repository",
+            "baseName": "repository",
+            "type": "RegistrySvcRepositorySpec"
         }    ];
 
     static getAttributeTypeMap() {

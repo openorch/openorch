@@ -15,15 +15,18 @@
 
 import * as runtime from '../runtime';
 import type {
+  DockerSvcBuildImageRequest,
   DockerSvcContainerIsRunningResponse,
   DockerSvcErrorResponse,
   DockerSvcGetContainerSummaryResponse,
   DockerSvcGetDockerHostResponse,
   DockerSvcGetInfoResponse,
-  DockerSvcLaunchContainerRequest,
-  DockerSvcLaunchContainerResponse,
+  DockerSvcRunContainerRequest,
+  DockerSvcRunContainerResponse,
 } from '../models/index';
 import {
+    DockerSvcBuildImageRequestFromJSON,
+    DockerSvcBuildImageRequestToJSON,
     DockerSvcContainerIsRunningResponseFromJSON,
     DockerSvcContainerIsRunningResponseToJSON,
     DockerSvcErrorResponseFromJSON,
@@ -34,29 +37,114 @@ import {
     DockerSvcGetDockerHostResponseToJSON,
     DockerSvcGetInfoResponseFromJSON,
     DockerSvcGetInfoResponseToJSON,
-    DockerSvcLaunchContainerRequestFromJSON,
-    DockerSvcLaunchContainerRequestToJSON,
-    DockerSvcLaunchContainerResponseFromJSON,
-    DockerSvcLaunchContainerResponseToJSON,
+    DockerSvcRunContainerRequestFromJSON,
+    DockerSvcRunContainerRequestToJSON,
+    DockerSvcRunContainerResponseFromJSON,
+    DockerSvcRunContainerResponseToJSON,
 } from '../models/index';
+
+export interface BuildImageRequest {
+    request: DockerSvcBuildImageRequest;
+}
+
+export interface ContainerIsRunningRequest {
+    hash: string;
+}
 
 export interface GetContainerSummaryRequest {
     hash: string;
     numberOfLines: number;
 }
 
-export interface IsRunningRequest {
-    hash: string;
-}
-
-export interface LaunchContainerRequest {
-    request: DockerSvcLaunchContainerRequest;
+export interface RunContainerRequest {
+    request: DockerSvcRunContainerRequest;
 }
 
 /**
  * 
  */
 export class DockerSvcApi extends runtime.BaseAPI {
+
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    async buildImageRaw(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['request'] == null) {
+            throw new runtime.RequiredError(
+                'request',
+                'Required parameter "request" was null or undefined when calling buildImage().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/docker-svc/image`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DockerSvcBuildImageRequestToJSON(requestParameters['request']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    async buildImage(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.buildImageRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Check if a Docker container identified by the hash is running
+     * Check If a Container Is Running
+     */
+    async containerIsRunningRaw(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcContainerIsRunningResponse>> {
+        if (requestParameters['hash'] == null) {
+            throw new runtime.RequiredError(
+                'hash',
+                'Required parameter "hash" was null or undefined when calling containerIsRunning().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcContainerIsRunningResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Check if a Docker container identified by the hash is running
+     * Check If a Container Is Running
+     */
+    async containerIsRunning(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse> {
+        const response = await this.containerIsRunningRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
@@ -169,53 +257,14 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Check if a Docker container identified by the hash is running
-     * Check If a Container Is Running
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
      */
-    async isRunningRaw(requestParameters: IsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcContainerIsRunningResponse>> {
-        if (requestParameters['hash'] == null) {
-            throw new runtime.RequiredError(
-                'hash',
-                'Required parameter "hash" was null or undefined when calling isRunning().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
-        }
-
-        const response = await this.request({
-            path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcContainerIsRunningResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Check if a Docker container identified by the hash is running
-     * Check If a Container Is Running
-     */
-    async isRunning(requestParameters: IsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse> {
-        const response = await this.isRunningRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * Launch a Container
-     */
-    async launchContainerRaw(requestParameters: LaunchContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcLaunchContainerResponse>> {
+    async runContainerRaw(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcRunContainerResponse>> {
         if (requestParameters['request'] == null) {
             throw new runtime.RequiredError(
                 'request',
-                'Required parameter "request" was null or undefined when calling launchContainer().'
+                'Required parameter "request" was null or undefined when calling runContainer().'
             );
         }
 
@@ -234,18 +283,18 @@ export class DockerSvcApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: DockerSvcLaunchContainerRequestToJSON(requestParameters['request']),
+            body: DockerSvcRunContainerRequestToJSON(requestParameters['request']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcLaunchContainerResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcRunContainerResponseFromJSON(jsonValue));
     }
 
     /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * Launch a Container
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
      */
-    async launchContainer(requestParameters: LaunchContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcLaunchContainerResponse> {
-        const response = await this.launchContainerRaw(requestParameters, initOverrides);
+    async runContainer(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcRunContainerResponse> {
+        const response = await this.runContainerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

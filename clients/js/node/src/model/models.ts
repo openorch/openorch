@@ -24,6 +24,7 @@ export * from './datastoreOp';
 export * from './datastoreOrderBy';
 export * from './datastoreQuery';
 export * from './deploySvcAutoScalingConfig';
+export * from './deploySvcDeleteDeploymentRequest';
 export * from './deploySvcDeployment';
 export * from './deploySvcDeploymentStatus';
 export * from './deploySvcDeploymentStrategy';
@@ -33,16 +34,17 @@ export * from './deploySvcResourceLimits';
 export * from './deploySvcSaveDeploymentRequest';
 export * from './deploySvcStrategyType';
 export * from './deploySvcTargetRegion';
+export * from './dockerSvcBuildImageRequest';
 export * from './dockerSvcContainerIsRunningResponse';
 export * from './dockerSvcDockerInfo';
 export * from './dockerSvcErrorResponse';
 export * from './dockerSvcGetContainerSummaryResponse';
 export * from './dockerSvcGetDockerHostResponse';
 export * from './dockerSvcGetInfoResponse';
-export * from './dockerSvcLaunchContainerOptions';
-export * from './dockerSvcLaunchContainerRequest';
-export * from './dockerSvcLaunchContainerResponse';
-export * from './dockerSvcLaunchInfo';
+export * from './dockerSvcRunContainerOptions';
+export * from './dockerSvcRunContainerRequest';
+export * from './dockerSvcRunContainerResponse';
+export * from './dockerSvcRunInfo';
 export * from './downloadSvcDownloadDetails';
 export * from './downloadSvcDownloadRequest';
 export * from './downloadSvcDownloadsResponse';
@@ -104,9 +106,13 @@ export * from './registrySvcListNodesResponse';
 export * from './registrySvcNode';
 export * from './registrySvcProcess';
 export * from './registrySvcRegisterInstanceRequest';
+export * from './registrySvcRepositorySpec';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
+export * from './sourceSvcCheckoutRepoRequest';
+export * from './sourceSvcCheckoutRepoResponse';
+export * from './sourceSvcErrorResponse';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAuthToken';
 export * from './userSvcChangePasswordAdminRequest';
@@ -173,6 +179,7 @@ import { DatastoreOp } from './datastoreOp';
 import { DatastoreOrderBy } from './datastoreOrderBy';
 import { DatastoreQuery } from './datastoreQuery';
 import { DeploySvcAutoScalingConfig } from './deploySvcAutoScalingConfig';
+import { DeploySvcDeleteDeploymentRequest } from './deploySvcDeleteDeploymentRequest';
 import { DeploySvcDeployment } from './deploySvcDeployment';
 import { DeploySvcDeploymentStatus } from './deploySvcDeploymentStatus';
 import { DeploySvcDeploymentStrategy } from './deploySvcDeploymentStrategy';
@@ -182,16 +189,17 @@ import { DeploySvcResourceLimits } from './deploySvcResourceLimits';
 import { DeploySvcSaveDeploymentRequest } from './deploySvcSaveDeploymentRequest';
 import { DeploySvcStrategyType } from './deploySvcStrategyType';
 import { DeploySvcTargetRegion } from './deploySvcTargetRegion';
+import { DockerSvcBuildImageRequest } from './dockerSvcBuildImageRequest';
 import { DockerSvcContainerIsRunningResponse } from './dockerSvcContainerIsRunningResponse';
 import { DockerSvcDockerInfo } from './dockerSvcDockerInfo';
 import { DockerSvcErrorResponse } from './dockerSvcErrorResponse';
 import { DockerSvcGetContainerSummaryResponse } from './dockerSvcGetContainerSummaryResponse';
 import { DockerSvcGetDockerHostResponse } from './dockerSvcGetDockerHostResponse';
 import { DockerSvcGetInfoResponse } from './dockerSvcGetInfoResponse';
-import { DockerSvcLaunchContainerOptions } from './dockerSvcLaunchContainerOptions';
-import { DockerSvcLaunchContainerRequest } from './dockerSvcLaunchContainerRequest';
-import { DockerSvcLaunchContainerResponse } from './dockerSvcLaunchContainerResponse';
-import { DockerSvcLaunchInfo } from './dockerSvcLaunchInfo';
+import { DockerSvcRunContainerOptions } from './dockerSvcRunContainerOptions';
+import { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest';
+import { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse';
+import { DockerSvcRunInfo } from './dockerSvcRunInfo';
 import { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails';
 import { DownloadSvcDownloadRequest } from './downloadSvcDownloadRequest';
 import { DownloadSvcDownloadsResponse } from './downloadSvcDownloadsResponse';
@@ -253,9 +261,13 @@ import { RegistrySvcListNodesResponse } from './registrySvcListNodesResponse';
 import { RegistrySvcNode } from './registrySvcNode';
 import { RegistrySvcProcess } from './registrySvcProcess';
 import { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanceRequest';
+import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 import { RegistrySvcResourceUsage } from './registrySvcResourceUsage';
 import { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest';
 import { RegistrySvcUsage } from './registrySvcUsage';
+import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
+import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
+import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
 import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
@@ -333,6 +345,7 @@ let typeMap: {[index: string]: any} = {
     "DatastoreOrderBy": DatastoreOrderBy,
     "DatastoreQuery": DatastoreQuery,
     "DeploySvcAutoScalingConfig": DeploySvcAutoScalingConfig,
+    "DeploySvcDeleteDeploymentRequest": DeploySvcDeleteDeploymentRequest,
     "DeploySvcDeployment": DeploySvcDeployment,
     "DeploySvcDeploymentStrategy": DeploySvcDeploymentStrategy,
     "DeploySvcErrorResponse": DeploySvcErrorResponse,
@@ -340,16 +353,17 @@ let typeMap: {[index: string]: any} = {
     "DeploySvcResourceLimits": DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": DeploySvcTargetRegion,
+    "DockerSvcBuildImageRequest": DockerSvcBuildImageRequest,
     "DockerSvcContainerIsRunningResponse": DockerSvcContainerIsRunningResponse,
     "DockerSvcDockerInfo": DockerSvcDockerInfo,
     "DockerSvcErrorResponse": DockerSvcErrorResponse,
     "DockerSvcGetContainerSummaryResponse": DockerSvcGetContainerSummaryResponse,
     "DockerSvcGetDockerHostResponse": DockerSvcGetDockerHostResponse,
     "DockerSvcGetInfoResponse": DockerSvcGetInfoResponse,
-    "DockerSvcLaunchContainerOptions": DockerSvcLaunchContainerOptions,
-    "DockerSvcLaunchContainerRequest": DockerSvcLaunchContainerRequest,
-    "DockerSvcLaunchContainerResponse": DockerSvcLaunchContainerResponse,
-    "DockerSvcLaunchInfo": DockerSvcLaunchInfo,
+    "DockerSvcRunContainerOptions": DockerSvcRunContainerOptions,
+    "DockerSvcRunContainerRequest": DockerSvcRunContainerRequest,
+    "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
+    "DockerSvcRunInfo": DockerSvcRunInfo,
     "DownloadSvcDownloadDetails": DownloadSvcDownloadDetails,
     "DownloadSvcDownloadRequest": DownloadSvcDownloadRequest,
     "DownloadSvcDownloadsResponse": DownloadSvcDownloadsResponse,
@@ -405,9 +419,13 @@ let typeMap: {[index: string]: any} = {
     "RegistrySvcNode": RegistrySvcNode,
     "RegistrySvcProcess": RegistrySvcProcess,
     "RegistrySvcRegisterInstanceRequest": RegistrySvcRegisterInstanceRequest,
+    "RegistrySvcRepositorySpec": RegistrySvcRepositorySpec,
     "RegistrySvcResourceUsage": RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": RegistrySvcUsage,
+    "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
+    "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
+    "SourceSvcErrorResponse": SourceSvcErrorResponse,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,

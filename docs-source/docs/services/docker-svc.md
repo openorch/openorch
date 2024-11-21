@@ -15,10 +15,10 @@ For simplicity the Docker Svc is only concerned with the node it resides on. In 
 
 ## Used By
 
-- [Model Svc](/docs/services/download-svc) to launch AI models.
+- [Model Svc](/docs/services/download-svc) to launch containers running AI models.
 - [Deploy Svc](/docs/services/download-svc) to launch containers to deploy service instances.
 
-> This page is a high level overview of the `Docker Svc`. For more details, please see the [Docker Svc API documentation](/docs/superplatform/launch-container).
+> This page is a high level overview of the `Docker Svc`. For more details, please see the [Docker Svc API documentation](/docs/superplatform/run-container).
 
 ## Responsibilities
 

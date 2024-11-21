@@ -9,6 +9,7 @@ var RegistrySvcSaveDefinitionRequest = require('./RegistrySvcSaveDefinitionReque
 require('./RegistrySvcDefinition.js');
 require('./RegistrySvcAPISpec.js');
 require('./RegistrySvcImageSpec.js');
+require('./RegistrySvcRepositorySpec.js');
 require('./RegistrySvcClient.js');
 require('./RegistrySvcLanguage.js');
 require('./RegistrySvcInstance.js');

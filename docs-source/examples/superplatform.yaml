@@ -260,6 +260,15 @@ definitions:
         description: Minimum number of replicas to run
         type: integer
     type: object
+  deploy_svc.DeleteDeploymentRequest:
+    properties:
+      deploymentId:
+        type: string
+    required:
+    - deploymentId
+    type: object
+  deploy_svc.DeleteDeploymentResponse:
+    type: object
   deploy_svc.Deployment:
     properties:
       autoScaling:
@@ -391,6 +400,26 @@ definitions:
         description: 'Optional: Specific zone for the deployment'
         type: string
     type: object
+  docker_svc.BuildImageRequest:
+    properties:
+      contextPath:
+        description: ContextPath is the local path to the build context
+        example: .
+        type: string
+      dockerfilePath:
+        description: DockerfilePath is the local path to the Dockerfile
+        example: Dockerfile
+        type: string
+      name:
+        description: Name is the name of the image to build
+        example: nginx:latest
+        type: string
+    required:
+    - contextPath
+    - name
+    type: object
+  docker_svc.BuildImageResponse:
+    type: object
   docker_svc.ContainerIsRunningResponse:
     properties:
       isRunning:
@@ -425,7 +454,7 @@ definitions:
       info:
         $ref: '#/definitions/docker_svc.DockerInfo'
     type: object
-  docker_svc.LaunchContainerOptions:
+  docker_svc.RunContainerOptions:
     properties:
       assets:
         additionalProperties:
@@ -463,7 +492,7 @@ definitions:
         description: Name is the name of the container
         type: string
     type: object
-  docker_svc.LaunchContainerRequest:
+  docker_svc.RunContainerRequest:
     properties:
       hostPort:
         description: HostPort is the port on the host machine that will be mapped
@@ -476,7 +505,7 @@ definitions:
         type: string
       options:
         allOf:
-        - $ref: '#/definitions/docker_svc.LaunchContainerOptions'
+        - $ref: '#/definitions/docker_svc.RunContainerOptions'
         description: Options provides additional options for launching the container
       port:
         description: Port is the port number that the container will expose
@@ -486,12 +515,12 @@ definitions:
     - image
     - port
     type: object
-  docker_svc.LaunchContainerResponse:
+  docker_svc.RunContainerResponse:
     properties:
       info:
-        $ref: '#/definitions/docker_svc.LaunchInfo'
+        $ref: '#/definitions/docker_svc.RunInfo'
     type: object
-  docker_svc.LaunchInfo:
+  docker_svc.RunInfo:
     properties:
       newContainerStarted:
         type: boolean
@@ -1164,10 +1193,18 @@ definitions:
       image:
         allOf:
         - $ref: '#/definitions/registry_svc.ImageSpec'
-        description: Container specifications for Docker, K8s, etc.
+        description: |-
+          Container specifications for Docker, K8s, etc.
+          Use this to deploy already built images.
+      repository:
+        allOf:
+        - $ref: '#/definitions/registry_svc.RepositorySpec'
+        description: |-
+          Repository based definitions is an alternative to Image definitions.
+          Instead of deploying an already built and pushed image, a source code repository
+          url can be provided. The container will be built from the source.
     required:
     - id
-    - image
     type: object
   registry_svc.ErrorResponse:
     properties:
@@ -1447,6 +1484,29 @@ definitions:
     type: object
   registry_svc.RegisterInstanceResponse:
     type: object
+  registry_svc.RepositorySpec:
+    properties:
+      buildContext:
+        description: Context is the path to the image build context
+        example: path/to/subfolder
+        type: string
+      containerFile:
+        description: |-
+          ContainerFile is the path to the file that contains the container build instructions
+          Relative from the build context. By default, it is assumed to be a Dockerfile.
+        example: docker/Dockerfile
+        type: string
+      url:
+        description: URL is the URL to the repository
+        example: https://github.com/singulatron/superplatform.git
+        type: string
+      version:
+        description: Version of the code to use
+        example: v1.0.0
+        type: string
+    required:
+    - url
+    type: object
   registry_svc.ResourceUsage:
     properties:
       cpu:
@@ -1482,6 +1542,38 @@ definitions:
         description: Used amount (in bytes).
         format: int64
         type: integer
+    type: object
+  source_svc.CheckoutRepoRequest:
+    properties:
+      password:
+        description: Password or token for HTTPS auth
+        type: string
+      ssh_key:
+        description: SSH private key (optional for SSH connection)
+        type: string
+      ssh_key_pwd:
+        description: Password for SSH private key if encrypted (optional)
+        type: string
+      url:
+        description: Full repository URL (e.g., https://github.com/user/repo)
+        type: string
+      username:
+        description: Username for HTTPS or SSH user (optional for SSH)
+        type: string
+      version:
+        description: Branch, tag, or commit SHA
+        type: string
+    type: object
+  source_svc.CheckoutRepoResponse:
+    properties:
+      dir:
+        description: Directory where the repository was checked out
+        type: string
+    type: object
+  source_svc.ErrorResponse:
+    properties:
+      error:
+        type: string
     type: object
   user_svc.AddUserToOrganizationRequest:
     properties:
@@ -2210,6 +2302,41 @@ paths:
       tags:
       - Config Svc
   /deploy-svc/deployment:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a deployment.
+      operationId: deleteDeployment
+      parameters:
+      - description: Delete Deploys Request
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/deploy_svc.DeleteDeploymentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/deploy_svc.DeleteDeploymentResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/deploy_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete Deployment
+      tags:
+      - Deploy Svc
     put:
       consumes:
       - application/json
@@ -2286,24 +2413,24 @@ paths:
       consumes:
       - application/json
       description: |-
-        Launches a Docker container with the specified parameters.
+        Runs a Docker container with the specified parameters.
 
-        Requires the `docker-svc:docker:create` permission.
-      operationId: launchContainer
+        Requires the `docker-svc:container:run` permission.
+      operationId: runContainer
       parameters:
-      - description: Launch Container Request
+      - description: Run Container Request
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/docker_svc.LaunchContainerRequest'
+          $ref: '#/definitions/docker_svc.RunContainerRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.LaunchContainerResponse'
+            $ref: '#/definitions/docker_svc.RunContainerResponse'
         "400":
           description: Invalid JSON
           schema:
@@ -2318,7 +2445,7 @@ paths:
             $ref: '#/definitions/docker_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Launch a Container
+      summary: Run a Container
       tags:
       - Docker Svc
   /docker-svc/container/{hash}/is-running:
@@ -2326,7 +2453,7 @@ paths:
       consumes:
       - application/json
       description: Check if a Docker container identified by the hash is running
-      operationId: isRunning
+      operationId: containerIsRunning
       parameters:
       - description: Container Hash
         in: path
@@ -2423,6 +2550,46 @@ paths:
       security:
       - BearerAuth: []
       summary: Get Docker Host
+      tags:
+      - Docker Svc
+  /docker-svc/image:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Builds a Docker image with the specified parameters.
+
+        Requires the `docker-svc:image:build` permission.
+      operationId: buildImage
+      parameters:
+      - description: Build Image Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/docker_svc.BuildImageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/docker_svc.BuildImageResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Build an Image
       tags:
       - Docker Svc
   /docker-svc/info:
@@ -3611,6 +3778,45 @@ paths:
       summary: List Nodes
       tags:
       - Registry Svc
+  /source-svc/repo/checkout:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Checkout a git repository over https or ssh at a specific version into a temporary directory.
+        Performs a shallow clone with minimal history for faster checkout.
+      operationId: checkoutRepo
+      parameters:
+      - description: Checkout Repo Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/source_svc.CheckoutRepoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully checked out the repository
+          schema:
+            $ref: '#/definitions/source_svc.CheckoutRepoResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/source_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/source_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/source_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Checkout a git repository
+      tags:
+      - Source Svc
   /user-svc/change-password:
     post:
       consumes:

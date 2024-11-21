@@ -12,22 +12,28 @@ import (
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
-var PermissionDockerCreate = usertypes.Permission{
+var PermissionContainerCreate = usertypes.Permission{
 	Id:   "docker-svc:container:create",
 	Name: "Docker Service - Container Create",
 }
 
-var PermissionDockerView = usertypes.Permission{
+var PermissionContainerView = usertypes.Permission{
 	Id:   "docker-svc:container:view",
 	Name: "Docker Service - Container View",
 }
 
-var PermissionDockerEdit = usertypes.Permission{
-	Id:   "docker-svc:container:.edit",
+var PermissionContainerEdit = usertypes.Permission{
+	Id:   "docker-svc:container:edit",
 	Name: "Docker Service - Container Edit",
 }
 
+var PermissionImageBuild = usertypes.Permission{
+	Id:   "docker-svc:image:build",
+	Name: "Docker Service - Image Build",
+}
+
 var DockerPermissions = []usertypes.Permission{
-	PermissionDockerView,
-	PermissionDockerEdit,
+	PermissionContainerView,
+	PermissionContainerEdit,
+	PermissionImageBuild,
 }

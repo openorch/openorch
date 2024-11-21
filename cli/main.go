@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	call "github.com/singulatron/superplatform/cli/commands/call"
 	definition "github.com/singulatron/superplatform/cli/commands/definition"
 	deployment "github.com/singulatron/superplatform/cli/commands/deployment"
 	"github.com/singulatron/superplatform/cli/commands/env"
@@ -28,6 +29,7 @@ func main() {
 	addEnvCommands(rootCmd)
 	addLoginCommands(rootCmd)
 	addWhoamiCommands(rootCmd)
+	addCallCommands(rootCmd)
 
 	definition.AddDefinitionCommands(rootCmd)
 	instance.AddInstanceCommands(rootCmd)
@@ -99,4 +101,40 @@ func addWhoamiCommands(rootCmd *cobra.Command) {
 	}
 
 	rootCmd.AddCommand(runCmd)
+}
+
+func addCallCommands(rootCmd *cobra.Command) {
+	var postCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Post,
+		DisableFlagParsing: true,
+	}
+	var getCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Get,
+		DisableFlagParsing: true,
+	}
+	var putCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Put,
+		DisableFlagParsing: true,
+	}
+	var deleteCmd = &cobra.Command{
+		Use:                "post [service] [password] [key=value]...",
+		Args:               cobra.ArbitraryArgs,
+		Short:              "Make a post request to a service",
+		RunE:               call.Delete,
+		DisableFlagParsing: true,
+	}
+
+	rootCmd.AddCommand(postCmd)
+	rootCmd.AddCommand(getCmd)
+	rootCmd.AddCommand(putCmd)
+	rootCmd.AddCommand(deleteCmd)
 }

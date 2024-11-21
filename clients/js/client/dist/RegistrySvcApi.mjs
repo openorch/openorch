@@ -7,6 +7,7 @@ import { RegistrySvcSaveDefinitionRequestToJSON } from './RegistrySvcSaveDefinit
 import './RegistrySvcDefinition.mjs';
 import './RegistrySvcAPISpec.mjs';
 import './RegistrySvcImageSpec.mjs';
+import './RegistrySvcRepositorySpec.mjs';
 import './RegistrySvcClient.mjs';
 import './RegistrySvcLanguage.mjs';
 import './RegistrySvcInstance.mjs';

@@ -5,19 +5,27 @@ import (
 )
 
 func AddInstanceCommands(rootCmd *cobra.Command) {
-	var envCmd = &cobra.Command{
+	var instanceCmd = &cobra.Command{
 		Use:     "instance",
 		Aliases: []string{"inst", "instances"},
 		Short:   "Manage service instances",
 	}
 
-	var envListCmd = &cobra.Command{
+	var listCmd = &cobra.Command{
 		Use:   "list",
 		Short: "List all environments",
 		RunE:  List,
 	}
 
-	envCmd.AddCommand(envListCmd)
+	var deleteCmd = &cobra.Command{
+		Use:   "remove [instanceId]",
+		Short: "Remove service instance",
+		Args:  cobra.ExactArgs(1),
+		RunE:  Remove,
+	}
 
-	rootCmd.AddCommand(envCmd)
+	instanceCmd.AddCommand(listCmd)
+	instanceCmd.AddCommand(deleteCmd)
+
+	rootCmd.AddCommand(instanceCmd)
 }

@@ -24,11 +24,17 @@ func AddDeploymentCommands(rootCmd *cobra.Command) {
 		RunE:    Delete,
 	}
 
+	var full bool
+
 	var envListCmd = &cobra.Command{
 		Use:   "list",
 		Short: "List deployments",
-		RunE:  List,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return List(cmd, args, full)
+		},
 	}
+
+	envListCmd.Flags().BoolVar(&full, "full", false, "Show full deployment details without truncation")
 
 	envCmd.AddCommand(envSaveCmd)
 	envCmd.AddCommand(envDeleteCmd)

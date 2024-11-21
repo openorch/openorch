@@ -29,7 +29,31 @@ A `Definition` or service definition consists of the following things:
 - A set of endpoint definitions (OpenAPI etc.)
 - The URL of different clients (JS, Go etc.)
 
-A `Definition` is an abstract concept that can not be called. For a callable entity look at `Instance`s.
+A `Definition` is an abstract concept that can not be called. For a callable entity look at `Instance`s. Definitions are basically things you can deploy as an instance with a deployment.
+
+#### Container based definition
+
+```yaml
+id: test-a
+image:
+  name: hashicorp/http-echo
+  port: 8080
+hostPort: 8887
+```
+
+#### Notes
+
+HostPorts are a temporary requirement until support for dynamic port assignment lands.
+
+#### Source code based definition
+
+```yaml
+id: test-b
+repository:
+  url: https://github.com/singulatron/superplatform.git
+  containerFile: server/docker/Dockerfile
+hostPort: 9998
+```
 
 ### Instance
 
