@@ -99,9 +99,9 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}, nil, nil,
 		).AnyTimes()
 
-		mockLaunchContainerRequest := openapi.ApiLaunchContainerRequest{ApiService: mockDockerSvc}
-		mockDockerSvc.EXPECT().LaunchContainer(ctx).Return(mockLaunchContainerRequest).AnyTimes()
-		mockDockerSvc.EXPECT().LaunchContainerExecute(gomock.Any()).Return(nil, nil, launchContainerError).AnyTimes()
+		mockLaunchContainerRequest := openapi.ApiRunContainerRequest{ApiService: mockDockerSvc}
+		mockDockerSvc.EXPECT().RunContainer(ctx).Return(mockLaunchContainerRequest).AnyTimes()
+		mockDockerSvc.EXPECT().RunContainerExecute(gomock.Any()).Return(nil, nil, launchContainerError).AnyTimes()
 
 		mockRegisterInstanceRequest := openapi.ApiRegisterInstanceRequest{ApiService: mockRegistrySvc}
 		mockRegistrySvc.EXPECT().RegisterInstance(ctx).Return(mockRegisterInstanceRequest).AnyTimes()
@@ -125,7 +125,8 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}
 			definitions = []openapi.RegistrySvcDefinition{
 				{
-					Id: "test-a", Image: openapi.RegistrySvcImageSpec{
+					Id: "test-a",
+					Image: &openapi.RegistrySvcImageSpec{
 						Name: "hashicorp/http-echo",
 						Port: 8080,
 					},
@@ -160,7 +161,8 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}
 			definitions = []openapi.RegistrySvcDefinition{
 				{
-					Id: "test-a", Image: openapi.RegistrySvcImageSpec{
+					Id: "test-a",
+					Image: &openapi.RegistrySvcImageSpec{
 						Name: "hashicorp/http-echo",
 						Port: 8080,
 					},

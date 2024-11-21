@@ -29,6 +29,7 @@ import (
 	policyservice "github.com/singulatron/superplatform/server/internal/services/policy"
 	promptservice "github.com/singulatron/superplatform/server/internal/services/prompt"
 	registryservice "github.com/singulatron/superplatform/server/internal/services/registry"
+	sourceservice "github.com/singulatron/superplatform/server/internal/services/source"
 	userservice "github.com/singulatron/superplatform/server/internal/services/user"
 )
 
@@ -265,6 +266,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
+	sourceService, err := sourceservice.NewSourceService(
+		options.ClientFactory,
+		options.Lock,
+		options.DatastoreFactory,
+	)
+
 	mws := []middlewares.Middleware{
 		middlewares.ThrottledLogger,
 		middlewares.Recover,
@@ -309,10 +316,13 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		dockerService.Host(w, r)
 	})).Methods("OPTIONS", "GET")
 	router.HandleFunc("/docker-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.LaunchContainer(w, r)
+		dockerService.RunContainer(w, r)
+	})).Methods("OPTIONS", "PUT")
+	router.HandleFunc("/docker-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
+		dockerService.BuildImage(w, r)
 	})).Methods("OPTIONS", "PUT")
 	router.HandleFunc("/docker-svc/container/{hash}/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.HashIsRunning(w, r)
+		dockerService.ContainerIsRunning(w, r)
 	})).Methods("OPTIONS", "GET")
 	router.HandleFunc("/docker-svc/container/{hash}/summary/{numberOfLines}", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Summary(w, r)
@@ -519,6 +529,13 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	router.HandleFunc("/deploy-svc/deployments", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.ListDeployments(w, r)
 	})).Methods("OPTIONS", "POST")
+	router.HandleFunc("/deploy-svc/deployment", appl(func(w http.ResponseWriter, r *http.Request) {
+		deployService.DeleteDeployment(w, r)
+	})).Methods("OPTIONS", "DELETE")
+
+	router.HandleFunc("/source-svc/repo/checkout", appl(func(w http.ResponseWriter, r *http.Request) {
+		sourceService.CheckoutRepo(w, r)
+	})).Methods("OPTIONS", "POST")
 
 	return router, func() error {
 		err = configService.Start()
@@ -562,6 +579,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 			return err
 		}
 		err = deployService.Start()
+		if err != nil {
+			return err
+		}
+		err = sourceService.Start()
 		if err != nil {
 			return err
 		}

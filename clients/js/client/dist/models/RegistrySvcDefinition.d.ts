@@ -11,6 +11,7 @@
  */
 import type { RegistrySvcAPISpec } from './RegistrySvcAPISpec';
 import type { RegistrySvcImageSpec } from './RegistrySvcImageSpec';
+import type { RegistrySvcRepositorySpec } from './RegistrySvcRepositorySpec';
 import type { RegistrySvcClient } from './RegistrySvcClient';
 /**
  *
@@ -45,10 +46,19 @@ export interface RegistrySvcDefinition {
     id: string;
     /**
      * Container specifications for Docker, K8s, etc.
+     * Use this to deploy already built images.
      * @type {RegistrySvcImageSpec}
      * @memberof RegistrySvcDefinition
      */
-    image: RegistrySvcImageSpec;
+    image?: RegistrySvcImageSpec;
+    /**
+     * Repository based definitions is an alternative to Image definitions.
+     * Instead of deploying an already built and pushed image, a source code repository
+     * url can be provided. The container will be built from the source.
+     * @type {RegistrySvcRepositorySpec}
+     * @memberof RegistrySvcDefinition
+     */
+    repository?: RegistrySvcRepositorySpec;
 }
 /**
  * Check if a given object implements the RegistrySvcDefinition interface.

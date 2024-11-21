@@ -10,7 +10,10 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { DeploySvcListDeploymentsResponse, DeploySvcSaveDeploymentRequest } from '../models/index';
+import type { DeploySvcDeleteDeploymentRequest, DeploySvcListDeploymentsResponse, DeploySvcSaveDeploymentRequest } from '../models/index';
+export interface DeleteDeploymentRequest {
+    body?: DeploySvcDeleteDeploymentRequest;
+}
 export interface ListDeploymentsRequest {
     body?: object;
 }
@@ -21,6 +24,16 @@ export interface SaveDeploymentRequest {
  *
  */
 export declare class DeploySvcApi extends runtime.BaseAPI {
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeploymentRaw(requestParameters: DeleteDeploymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeployment(requestParameters?: DeleteDeploymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
      * Retrieve a list of deployments.
      * List Deployments

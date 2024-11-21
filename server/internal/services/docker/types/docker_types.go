@@ -11,14 +11,14 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type LaunchInfo struct {
+type RunInfo struct {
 	NewContainerStarted bool
 	PortNumber          int
 }
 
-type ModelLaunchRequest struct{}
+type ModelRunRequest struct{}
 
-type OnModelLaunch struct {
+type OnModelRun struct {
 	Error *string `json:"error,omitempty"`
 }
 
@@ -32,7 +32,7 @@ type DockerInfo struct {
 	Error               *string `json:"error,omitempty"`
 }
 
-type LaunchContainerOptions struct {
+type RunContainerOptions struct {
 	// Name is the name of the container
 	Name string `json:"name,omitempty"`
 
@@ -59,7 +59,7 @@ type LaunchContainerOptions struct {
 	Assets map[string]string `json:"assets,omitempty"`
 }
 
-type LaunchContainerRequest struct {
+type RunContainerRequest struct {
 	// Image is the Docker image to use for the container
 	Image string `json:"image" example:"nginx:latest" binding:"required"`
 
@@ -70,11 +70,25 @@ type LaunchContainerRequest struct {
 	HostPort int `json:"hostPort" example:"8081"`
 
 	// Options provides additional options for launching the container
-	Options *LaunchContainerOptions `json:"options"`
+	Options *RunContainerOptions `json:"options"`
 }
 
-type LaunchContainerResponse struct {
-	Info *LaunchInfo `json:"info"`
+type BuildImageRequest struct {
+	// Name is the name of the image to build
+	Name string `json:"name" example:"nginx:latest" binding:"required"`
+
+	// ContextPath is the local path to the build context
+	ContextPath string `json:"contextPath" example:"." binding:"required"`
+
+	// DockerfilePath is the local path to the Dockerfile
+	DockerfilePath string `json:"dockerfilePath" example:"Dockerfile"`
+}
+
+type BuildImageResponse struct {
+}
+
+type RunContainerResponse struct {
+	Info *RunInfo `json:"info"`
 }
 
 type GetContainerSummaryRequest struct {

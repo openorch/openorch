@@ -107,3 +107,10 @@ type SaveDeploymentRequest struct {
 
 type SaveDeploymentResponse struct {
 }
+
+type DeleteDeploymentRequest struct {
+	DeploymentId string `json:"deploymentId,omitempty" binding:"required"`
+}
+
+type DeleteDeploymentResponse struct {
+}

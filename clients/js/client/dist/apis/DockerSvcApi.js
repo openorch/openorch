@@ -21,11 +21,79 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { DockerSvcContainerIsRunningResponseFromJSON, DockerSvcGetContainerSummaryResponseFromJSON, DockerSvcGetDockerHostResponseFromJSON, DockerSvcGetInfoResponseFromJSON, DockerSvcLaunchContainerRequestToJSON, DockerSvcLaunchContainerResponseFromJSON, } from '../models/index';
+import { DockerSvcBuildImageRequestToJSON, DockerSvcContainerIsRunningResponseFromJSON, DockerSvcGetContainerSummaryResponseFromJSON, DockerSvcGetDockerHostResponseFromJSON, DockerSvcGetInfoResponseFromJSON, DockerSvcRunContainerRequestToJSON, DockerSvcRunContainerResponseFromJSON, } from '../models/index';
 /**
  *
  */
 export class DockerSvcApi extends runtime.BaseAPI {
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['request'] == null) {
+                throw new runtime.RequiredError('request', 'Required parameter "request" was null or undefined when calling buildImage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/image`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcBuildImageRequestToJSON(requestParameters['request']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.buildImageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Check if a Docker container identified by the hash is running
+     * Check If a Container Is Running
+     */
+    containerIsRunningRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['hash'] == null) {
+                throw new runtime.RequiredError('hash', 'Required parameter "hash" was null or undefined when calling containerIsRunning().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcContainerIsRunningResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Check if a Docker container identified by the hash is running
+     * Check If a Container Is Running
+     */
+    containerIsRunning(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.containerIsRunningRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
     /**
      * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
      * Get Container Summary
@@ -123,46 +191,13 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
-     * Check If a Container Is Running
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
      */
-    isRunningRaw(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['hash'] == null) {
-                throw new runtime.RequiredError('hash', 'Required parameter "hash" was null or undefined when calling isRunning().');
-            }
-            const queryParameters = {};
-            const headerParameters = {};
-            if (this.configuration && this.configuration.apiKey) {
-                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
-            }
-            const response = yield this.request({
-                path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
-                method: 'GET',
-                headers: headerParameters,
-                query: queryParameters,
-            }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcContainerIsRunningResponseFromJSON(jsonValue));
-        });
-    }
-    /**
-     * Check if a Docker container identified by the hash is running
-     * Check If a Container Is Running
-     */
-    isRunning(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.isRunningRaw(requestParameters, initOverrides);
-            return yield response.value();
-        });
-    }
-    /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * Launch a Container
-     */
-    launchContainerRaw(requestParameters, initOverrides) {
+    runContainerRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             if (requestParameters['request'] == null) {
-                throw new runtime.RequiredError('request', 'Required parameter "request" was null or undefined when calling launchContainer().');
+                throw new runtime.RequiredError('request', 'Required parameter "request" was null or undefined when calling runContainer().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -175,18 +210,18 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DockerSvcLaunchContainerRequestToJSON(requestParameters['request']),
+                body: DockerSvcRunContainerRequestToJSON(requestParameters['request']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcLaunchContainerResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => DockerSvcRunContainerResponseFromJSON(jsonValue));
         });
     }
     /**
-     * Launches a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
-     * Launch a Container
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
      */
-    launchContainer(requestParameters, initOverrides) {
+    runContainer(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.launchContainerRaw(requestParameters, initOverrides);
+            const response = yield this.runContainerRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

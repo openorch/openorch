@@ -24,6 +24,7 @@ var datastoreOp = require('./datastoreOp.js');
 var datastoreOrderBy = require('./datastoreOrderBy.js');
 var datastoreQuery = require('./datastoreQuery.js');
 var deploySvcAutoScalingConfig = require('./deploySvcAutoScalingConfig.js');
+var deploySvcDeleteDeploymentRequest = require('./deploySvcDeleteDeploymentRequest.js');
 var deploySvcDeployment = require('./deploySvcDeployment.js');
 var deploySvcDeploymentStatus = require('./deploySvcDeploymentStatus.js');
 var deploySvcDeploymentStrategy = require('./deploySvcDeploymentStrategy.js');
@@ -33,16 +34,17 @@ var deploySvcResourceLimits = require('./deploySvcResourceLimits.js');
 var deploySvcSaveDeploymentRequest = require('./deploySvcSaveDeploymentRequest.js');
 var deploySvcStrategyType = require('./deploySvcStrategyType.js');
 var deploySvcTargetRegion = require('./deploySvcTargetRegion.js');
+var dockerSvcBuildImageRequest = require('./dockerSvcBuildImageRequest.js');
 var dockerSvcContainerIsRunningResponse = require('./dockerSvcContainerIsRunningResponse.js');
 var dockerSvcDockerInfo = require('./dockerSvcDockerInfo.js');
 var dockerSvcErrorResponse = require('./dockerSvcErrorResponse.js');
 var dockerSvcGetContainerSummaryResponse = require('./dockerSvcGetContainerSummaryResponse.js');
 var dockerSvcGetDockerHostResponse = require('./dockerSvcGetDockerHostResponse.js');
 var dockerSvcGetInfoResponse = require('./dockerSvcGetInfoResponse.js');
-var dockerSvcLaunchContainerOptions = require('./dockerSvcLaunchContainerOptions.js');
-var dockerSvcLaunchContainerRequest = require('./dockerSvcLaunchContainerRequest.js');
-var dockerSvcLaunchContainerResponse = require('./dockerSvcLaunchContainerResponse.js');
-var dockerSvcLaunchInfo = require('./dockerSvcLaunchInfo.js');
+var dockerSvcRunContainerOptions = require('./dockerSvcRunContainerOptions.js');
+var dockerSvcRunContainerRequest = require('./dockerSvcRunContainerRequest.js');
+var dockerSvcRunContainerResponse = require('./dockerSvcRunContainerResponse.js');
+var dockerSvcRunInfo = require('./dockerSvcRunInfo.js');
 var downloadSvcDownloadDetails = require('./downloadSvcDownloadDetails.js');
 var downloadSvcDownloadRequest = require('./downloadSvcDownloadRequest.js');
 var downloadSvcDownloadsResponse = require('./downloadSvcDownloadsResponse.js');
@@ -104,9 +106,13 @@ var registrySvcListNodesResponse = require('./registrySvcListNodesResponse.js');
 var registrySvcNode = require('./registrySvcNode.js');
 var registrySvcProcess = require('./registrySvcProcess.js');
 var registrySvcRegisterInstanceRequest = require('./registrySvcRegisterInstanceRequest.js');
+var registrySvcRepositorySpec = require('./registrySvcRepositorySpec.js');
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
+var sourceSvcCheckoutRepoRequest = require('./sourceSvcCheckoutRepoRequest.js');
+var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
+var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
 var userSvcAddUserToOrganizationRequest = require('./userSvcAddUserToOrganizationRequest.js');
 var userSvcAuthToken = require('./userSvcAuthToken.js');
 var userSvcChangePasswordAdminRequest = require('./userSvcChangePasswordAdminRequest.js');
@@ -182,6 +188,7 @@ let typeMap = {
     "DatastoreOrderBy": datastoreOrderBy.DatastoreOrderBy,
     "DatastoreQuery": datastoreQuery.DatastoreQuery,
     "DeploySvcAutoScalingConfig": deploySvcAutoScalingConfig.DeploySvcAutoScalingConfig,
+    "DeploySvcDeleteDeploymentRequest": deploySvcDeleteDeploymentRequest.DeploySvcDeleteDeploymentRequest,
     "DeploySvcDeployment": deploySvcDeployment.DeploySvcDeployment,
     "DeploySvcDeploymentStrategy": deploySvcDeploymentStrategy.DeploySvcDeploymentStrategy,
     "DeploySvcErrorResponse": deploySvcErrorResponse.DeploySvcErrorResponse,
@@ -189,16 +196,17 @@ let typeMap = {
     "DeploySvcResourceLimits": deploySvcResourceLimits.DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": deploySvcSaveDeploymentRequest.DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": deploySvcTargetRegion.DeploySvcTargetRegion,
+    "DockerSvcBuildImageRequest": dockerSvcBuildImageRequest.DockerSvcBuildImageRequest,
     "DockerSvcContainerIsRunningResponse": dockerSvcContainerIsRunningResponse.DockerSvcContainerIsRunningResponse,
     "DockerSvcDockerInfo": dockerSvcDockerInfo.DockerSvcDockerInfo,
     "DockerSvcErrorResponse": dockerSvcErrorResponse.DockerSvcErrorResponse,
     "DockerSvcGetContainerSummaryResponse": dockerSvcGetContainerSummaryResponse.DockerSvcGetContainerSummaryResponse,
     "DockerSvcGetDockerHostResponse": dockerSvcGetDockerHostResponse.DockerSvcGetDockerHostResponse,
     "DockerSvcGetInfoResponse": dockerSvcGetInfoResponse.DockerSvcGetInfoResponse,
-    "DockerSvcLaunchContainerOptions": dockerSvcLaunchContainerOptions.DockerSvcLaunchContainerOptions,
-    "DockerSvcLaunchContainerRequest": dockerSvcLaunchContainerRequest.DockerSvcLaunchContainerRequest,
-    "DockerSvcLaunchContainerResponse": dockerSvcLaunchContainerResponse.DockerSvcLaunchContainerResponse,
-    "DockerSvcLaunchInfo": dockerSvcLaunchInfo.DockerSvcLaunchInfo,
+    "DockerSvcRunContainerOptions": dockerSvcRunContainerOptions.DockerSvcRunContainerOptions,
+    "DockerSvcRunContainerRequest": dockerSvcRunContainerRequest.DockerSvcRunContainerRequest,
+    "DockerSvcRunContainerResponse": dockerSvcRunContainerResponse.DockerSvcRunContainerResponse,
+    "DockerSvcRunInfo": dockerSvcRunInfo.DockerSvcRunInfo,
     "DownloadSvcDownloadDetails": downloadSvcDownloadDetails.DownloadSvcDownloadDetails,
     "DownloadSvcDownloadRequest": downloadSvcDownloadRequest.DownloadSvcDownloadRequest,
     "DownloadSvcDownloadsResponse": downloadSvcDownloadsResponse.DownloadSvcDownloadsResponse,
@@ -254,9 +262,13 @@ let typeMap = {
     "RegistrySvcNode": registrySvcNode.RegistrySvcNode,
     "RegistrySvcProcess": registrySvcProcess.RegistrySvcProcess,
     "RegistrySvcRegisterInstanceRequest": registrySvcRegisterInstanceRequest.RegistrySvcRegisterInstanceRequest,
+    "RegistrySvcRepositorySpec": registrySvcRepositorySpec.RegistrySvcRepositorySpec,
     "RegistrySvcResourceUsage": registrySvcResourceUsage.RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": registrySvcUsage.RegistrySvcUsage,
+    "SourceSvcCheckoutRepoRequest": sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest,
+    "SourceSvcCheckoutRepoResponse": sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse,
+    "SourceSvcErrorResponse": sourceSvcErrorResponse.SourceSvcErrorResponse,
     "UserSvcAddUserToOrganizationRequest": userSvcAddUserToOrganizationRequest.UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": userSvcAuthToken.UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": userSvcChangePasswordAdminRequest.UserSvcChangePasswordAdminRequest,
@@ -497,6 +509,7 @@ Object.defineProperty(exports, 'DatastoreOp', {
 exports.DatastoreOrderBy = datastoreOrderBy.DatastoreOrderBy;
 exports.DatastoreQuery = datastoreQuery.DatastoreQuery;
 exports.DeploySvcAutoScalingConfig = deploySvcAutoScalingConfig.DeploySvcAutoScalingConfig;
+exports.DeploySvcDeleteDeploymentRequest = deploySvcDeleteDeploymentRequest.DeploySvcDeleteDeploymentRequest;
 exports.DeploySvcDeployment = deploySvcDeployment.DeploySvcDeployment;
 Object.defineProperty(exports, 'DeploySvcDeploymentStatus', {
     enumerable: true,
@@ -512,16 +525,17 @@ Object.defineProperty(exports, 'DeploySvcStrategyType', {
     get: function () { return deploySvcStrategyType.DeploySvcStrategyType; }
 });
 exports.DeploySvcTargetRegion = deploySvcTargetRegion.DeploySvcTargetRegion;
+exports.DockerSvcBuildImageRequest = dockerSvcBuildImageRequest.DockerSvcBuildImageRequest;
 exports.DockerSvcContainerIsRunningResponse = dockerSvcContainerIsRunningResponse.DockerSvcContainerIsRunningResponse;
 exports.DockerSvcDockerInfo = dockerSvcDockerInfo.DockerSvcDockerInfo;
 exports.DockerSvcErrorResponse = dockerSvcErrorResponse.DockerSvcErrorResponse;
 exports.DockerSvcGetContainerSummaryResponse = dockerSvcGetContainerSummaryResponse.DockerSvcGetContainerSummaryResponse;
 exports.DockerSvcGetDockerHostResponse = dockerSvcGetDockerHostResponse.DockerSvcGetDockerHostResponse;
 exports.DockerSvcGetInfoResponse = dockerSvcGetInfoResponse.DockerSvcGetInfoResponse;
-exports.DockerSvcLaunchContainerOptions = dockerSvcLaunchContainerOptions.DockerSvcLaunchContainerOptions;
-exports.DockerSvcLaunchContainerRequest = dockerSvcLaunchContainerRequest.DockerSvcLaunchContainerRequest;
-exports.DockerSvcLaunchContainerResponse = dockerSvcLaunchContainerResponse.DockerSvcLaunchContainerResponse;
-exports.DockerSvcLaunchInfo = dockerSvcLaunchInfo.DockerSvcLaunchInfo;
+exports.DockerSvcRunContainerOptions = dockerSvcRunContainerOptions.DockerSvcRunContainerOptions;
+exports.DockerSvcRunContainerRequest = dockerSvcRunContainerRequest.DockerSvcRunContainerRequest;
+exports.DockerSvcRunContainerResponse = dockerSvcRunContainerResponse.DockerSvcRunContainerResponse;
+exports.DockerSvcRunInfo = dockerSvcRunInfo.DockerSvcRunInfo;
 exports.DownloadSvcDownloadDetails = downloadSvcDownloadDetails.DownloadSvcDownloadDetails;
 exports.DownloadSvcDownloadRequest = downloadSvcDownloadRequest.DownloadSvcDownloadRequest;
 exports.DownloadSvcDownloadsResponse = downloadSvcDownloadsResponse.DownloadSvcDownloadsResponse;
@@ -601,9 +615,13 @@ exports.RegistrySvcListNodesResponse = registrySvcListNodesResponse.RegistrySvcL
 exports.RegistrySvcNode = registrySvcNode.RegistrySvcNode;
 exports.RegistrySvcProcess = registrySvcProcess.RegistrySvcProcess;
 exports.RegistrySvcRegisterInstanceRequest = registrySvcRegisterInstanceRequest.RegistrySvcRegisterInstanceRequest;
+exports.RegistrySvcRepositorySpec = registrySvcRepositorySpec.RegistrySvcRepositorySpec;
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
+exports.SourceSvcCheckoutRepoRequest = sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest;
+exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
+exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;
 exports.UserSvcAddUserToOrganizationRequest = userSvcAddUserToOrganizationRequest.UserSvcAddUserToOrganizationRequest;
 exports.UserSvcAuthToken = userSvcAuthToken.UserSvcAuthToken;
 exports.UserSvcChangePasswordAdminRequest = userSvcChangePasswordAdminRequest.UserSvcChangePasswordAdminRequest;

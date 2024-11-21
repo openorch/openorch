@@ -21,11 +21,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { DeploySvcListDeploymentsResponseFromJSON, DeploySvcSaveDeploymentRequestToJSON, } from '../models/index';
+import { DeploySvcDeleteDeploymentRequestToJSON, DeploySvcListDeploymentsResponseFromJSON, DeploySvcSaveDeploymentRequestToJSON, } from '../models/index';
 /**
  *
  */
 export class DeploySvcApi extends runtime.BaseAPI {
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeploymentRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/deploy-svc/deployment`,
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DeploySvcDeleteDeploymentRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeployment() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.deleteDeploymentRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
     /**
      * Retrieve a list of deployments.
      * List Deployments

@@ -12,35 +12,17 @@ import (
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
-var PermissionFirehoseCreate = usertypes.Permission{
-	Id:   "firehose-svc:firehose:create",
-	Name: "Firehose Create",
-}
-
-var PermissionFirehoseView = usertypes.Permission{
-	Id:   "firehose-svc:firehose:view",
-	Name: "Firehose View",
-}
-
-var PermissionFirehoseEdit = usertypes.Permission{
-	Id:   "firehose-svc:firehose:edit",
-	Name: "Firehose Edit",
-}
-
-var PermissionFirehoseDelete = usertypes.Permission{
-	Id:   "firehose-svc:firehose:delete",
-	Name: "Firehose Delete",
+var PermissionEventPublish = usertypes.Permission{
+	Id:   "firehose-svc:event:publish",
+	Name: "Firehose Svc - Event Publish",
 }
 
 var PermissionFirehoseStream = usertypes.Permission{
-	Id:   "firehose-svc:firehose:stream",
-	Name: "Firehose Stream",
+	Id:   "firehose-svc:event:stream",
+	Name: "Firehose Svc - Event Stream",
 }
 
 var FirehosePermissions = []usertypes.Permission{
-	PermissionFirehoseCreate,
-	PermissionFirehoseView,
-	PermissionFirehoseEdit,
-	PermissionFirehoseDelete,
+	PermissionEventPublish,
 	PermissionFirehoseStream,
 }

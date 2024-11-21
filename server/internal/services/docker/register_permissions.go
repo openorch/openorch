@@ -32,7 +32,6 @@ func (p *DockerService) registerPermissions() error {
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
-		usertypes.RoleUser,
 	} {
 		for _, permission := range dockertypes.DockerPermissions {
 			rsp := &usertypes.AddPermissionToRoleResponse{}

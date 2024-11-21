@@ -90,6 +90,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "superplatform/delete-deployment",
+          label: "Delete Deployment",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "superplatform/save-deployment",
           label: "Save Deployment",
           className: "api-method put",
@@ -108,13 +114,13 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "superplatform/launch-container",
-          label: "Launch a Container",
+          id: "superplatform/run-container",
+          label: "Run a Container",
           className: "api-method put",
         },
         {
           type: "doc",
-          id: "superplatform/is-running",
+          id: "superplatform/container-is-running",
           label: "Check If a Container Is Running",
           className: "api-method get",
         },
@@ -129,6 +135,12 @@ const sidebar: SidebarsConfig = {
           id: "superplatform/get-host",
           label: "Get Docker Host",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "superplatform/build-image",
+          label: "Build an Image",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -368,6 +380,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "superplatform/list-nodes",
           label: "List Nodes",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Source Svc",
+      items: [
+        {
+          type: "doc",
+          id: "superplatform/checkout-repo",
+          label: "Checkout a git repository",
           className: "api-method post",
         },
       ],

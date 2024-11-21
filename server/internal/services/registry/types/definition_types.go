@@ -14,7 +14,13 @@ type Definition struct {
 	Id string `json:"id,omitempty" binding:"required"`
 
 	// Container specifications for Docker, K8s, etc.
-	Image *ImageSpec `json:"image,omitempty" binding:"required"`
+	// Use this to deploy already built images.
+	Image *ImageSpec `json:"image,omitempty"`
+
+	// Repository based definitions is an alternative to Image definitions.
+	// Instead of deploying an already built and pushed image, a source code repository
+	// url can be provided. The container will be built from the source.
+	Repository *RepositorySpec `json:"repository,omitempty"`
 
 	// API Specs such as OpenAPI definitions etc.
 	APISpecs []APISpec `json:"apiSpecs,omitempty"`
@@ -29,6 +35,21 @@ type Definition struct {
 
 func (s Definition) GetId() string {
 	return s.Id
+}
+
+type RepositorySpec struct {
+	// URL is the URL to the repository
+	URL string `json:"url,omitempty" example:"https://github.com/singulatron/superplatform.git" binding:"required"`
+
+	// Version of the code to use
+	Version string `json:"version,omitempty" example:"v1.0.0"`
+
+	// Context is the path to the image build context
+	BuildContext string `json:"buildContext,omitempty" example:"path/to/subfolder"`
+
+	// ContainerFile is the path to the file that contains the container build instructions
+	// Relative from the build context. By default, it is assumed to be a Dockerfile.
+	ContainerFile string `json:"containerFile,omitempty" example:"docker/Dockerfile"`
 }
 
 type ImageSpec struct {

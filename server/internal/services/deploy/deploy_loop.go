@@ -14,6 +14,7 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"path"
 	"runtime/debug"
 	"strings"
 	"syscall"
@@ -162,6 +163,7 @@ func (ns *DeployService) processCommand(
 	if err != nil {
 		return err
 	}
+
 	if deployment.Status == deploy.DeploymentStatusPending {
 		deployment.Status = deploy.DeploymentStatusDeploying
 		err = ns.deploymentStore.Upsert(deployment)
@@ -187,31 +189,13 @@ func (ns *DeployService) executeStartCommand(
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
 ) error {
-	logger.Info("Executing start command", slog.String("deploymentId", deployment.Id))
+	logger.Info("Executing deploy start command", slog.String("deploymentId", deployment.Id))
 	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
 
-	err := func() error {
-		if definition == nil {
-			return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
-		}
-
-		_, _, err := client.DockerSvcAPI.LaunchContainer(ctx).Request(
-			openapi.DockerSvcLaunchContainerRequest{
-				Image:    definition.Image.Name,
-				Port:     definition.Image.Port,
-				HostPort: definition.HostPort,
-				Options: &openapi.DockerSvcLaunchContainerOptions{
-					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
-				},
-			},
-		).Execute()
-		err = sdk.OpenAPIError(err)
-
-		return err
-	}()
+	err := ns.makeSureItRuns(client, ctx, definition, deployment)
 
 	if err != nil {
-		logger.Warn("Error executing start command",
+		logger.Warn("Error executing deploy start command",
 			slog.String("deploymentId", deployment.Id),
 			slog.Any("error", err),
 		)
@@ -231,7 +215,7 @@ func (ns *DeployService) executeStartCommand(
 		return err
 	}
 
-	logger.Debug("Successfully executed start command",
+	logger.Debug("Successfully executed deploy start command",
 		slog.String("deploymentId", deployment.Id),
 	)
 
@@ -270,6 +254,59 @@ func (ns *DeployService) executeStartCommand(
 	}
 
 	return nil
+}
+
+func (ns *DeployService) makeSureItRuns(
+	client *openapi.APIClient,
+	ctx context.Context,
+	definition *openapi.RegistrySvcDefinition,
+	deployment *deploy.Deployment,
+) (err error) {
+	defer func() {
+		err = sdk.OpenAPIError(err)
+	}()
+
+	if definition == nil {
+		return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
+	}
+
+	if definition.Image != nil {
+		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
+			openapi.DockerSvcRunContainerRequest{
+				Image:    definition.Image.Name,
+				Port:     definition.Image.Port,
+				HostPort: definition.HostPort,
+				Options: &openapi.DockerSvcRunContainerOptions{
+					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+				},
+			},
+		).Execute()
+	} else {
+		var checkoutRsp *openapi.SourceSvcCheckoutRepoResponse
+
+		checkoutRsp, _, err = client.SourceSvcAPI.CheckoutRepo(ctx).Request(openapi.SourceSvcCheckoutRepoRequest{
+			Url: &definition.Repository.Url,
+		}).Execute()
+
+		if err != nil {
+			return errors.Wrap(err, "error checking out repo")
+		}
+
+		buildContext := *checkoutRsp.Dir
+		if definition.Repository.BuildContext != nil {
+			buildContext = path.Join(buildContext, *definition.Repository.BuildContext)
+		}
+
+		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Request(
+			openapi.DockerSvcBuildImageRequest{
+				ContextPath:    buildContext,
+				DockerfilePath: definition.Repository.ContainerFile,
+				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
+			},
+		).Execute()
+	}
+
+	return err
 }
 
 func (ns *DeployService) getDeploymentById(deploymentId string) (*deploy.Deployment, error) {

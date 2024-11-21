@@ -1,5 +1,5 @@
 id: test-b
-image:
-  name: nginx
-  port: 999
+repository:
+  url: https://github.com/singulatron/superplatform.git
+  containerFile: server/docker/Dockerfile
 hostPort: 9998

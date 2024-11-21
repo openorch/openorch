@@ -53,6 +53,7 @@ func scaleDeployment(
 	// Scale up: Add instances if replicas required > active instances
 	if activeInstances < deployment.Replicas {
 		for i := activeInstances; i < deployment.Replicas; i++ {
+
 			node := findAvailableNode(nodes, assignedNodes)
 			if node != nil {
 				commands = append(commands, &deploy.Command{

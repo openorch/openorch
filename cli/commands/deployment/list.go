@@ -3,6 +3,7 @@ package deployment
 import (
 	"fmt"
 	"os"
+	"strings"
 	"text/tabwriter"
 
 	"github.com/pkg/errors"
@@ -12,7 +13,7 @@ import (
 )
 
 // List
-func List(cmd *cobra.Command, args []string) error {
+func List(cmd *cobra.Command, args []string, full bool) error {
 	ctx := cmd.Context()
 
 	url, token, err := config.GetSelectedUrlAndToken()
@@ -34,10 +35,15 @@ func List(cmd *cobra.Command, args []string) error {
 
 	for _, deployment := range rsp.Deployments {
 		details := ""
-		if deployment.Details != nil && len(*deployment.Details) > 50 {
-			d := *deployment.Details
-			details = d[0:50]
+		if deployment.Details != nil {
+			details = *deployment.Details
 		}
+		charsToTrim := " .,"
+
+		if len(details) > 75 && !full {
+			details = strings.Trim(details[0:75], charsToTrim) + "…"
+		}
+
 		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\n", deployment.Id, deployment.DefinitionId, *deployment.Status, details)
 	}
 

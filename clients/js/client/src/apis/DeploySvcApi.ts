@@ -15,11 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  DeploySvcDeleteDeploymentRequest,
   DeploySvcErrorResponse,
   DeploySvcListDeploymentsResponse,
   DeploySvcSaveDeploymentRequest,
 } from '../models/index';
 import {
+    DeploySvcDeleteDeploymentRequestFromJSON,
+    DeploySvcDeleteDeploymentRequestToJSON,
     DeploySvcErrorResponseFromJSON,
     DeploySvcErrorResponseToJSON,
     DeploySvcListDeploymentsResponseFromJSON,
@@ -27,6 +30,10 @@ import {
     DeploySvcSaveDeploymentRequestFromJSON,
     DeploySvcSaveDeploymentRequestToJSON,
 } from '../models/index';
+
+export interface DeleteDeploymentRequest {
+    body?: DeploySvcDeleteDeploymentRequest;
+}
 
 export interface ListDeploymentsRequest {
     body?: object;
@@ -40,6 +47,41 @@ export interface SaveDeploymentRequest {
  * 
  */
 export class DeploySvcApi extends runtime.BaseAPI {
+
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    async deleteDeploymentRaw(requestParameters: DeleteDeploymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/deploy-svc/deployment`,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DeploySvcDeleteDeploymentRequestToJSON(requestParameters['body']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    async deleteDeployment(requestParameters: DeleteDeploymentRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.deleteDeploymentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Retrieve a list of deployments.
