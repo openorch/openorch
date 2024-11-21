@@ -29,6 +29,11 @@ RegistrySvcRepositorySpec.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    },
+    {
         "name": "url",
         "baseName": "url",
         "type": "string"

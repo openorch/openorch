@@ -33,6 +33,12 @@ export interface RegistrySvcRepositorySpec {
      */
     containerFile?: string;
     /**
+     * Port is the port number that the container will listen on internally
+     * @type {number}
+     * @memberof RegistrySvcRepositorySpec
+     */
+    port?: number;
+    /**
      * URL is the URL to the repository
      * @type {string}
      * @memberof RegistrySvcRepositorySpec
@@ -66,6 +72,7 @@ export function RegistrySvcRepositorySpecFromJSONTyped(json: any, ignoreDiscrimi
         
         'buildContext': json['buildContext'] == null ? undefined : json['buildContext'],
         'containerFile': json['containerFile'] == null ? undefined : json['containerFile'],
+        'port': json['port'] == null ? undefined : json['port'],
         'url': json['url'],
         'version': json['version'] == null ? undefined : json['version'],
     };
@@ -79,6 +86,7 @@ export function RegistrySvcRepositorySpecToJSON(value?: RegistrySvcRepositorySpe
         
         'buildContext': value['buildContext'],
         'containerFile': value['containerFile'],
+        'port': value['port'],
         'url': value['url'],
         'version': value['version'],
     };

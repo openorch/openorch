@@ -29,6 +29,7 @@ function RegistrySvcRepositorySpecFromJSONTyped(json, ignoreDiscriminator) {
     return {
         'buildContext': json['buildContext'] == null ? undefined : json['buildContext'],
         'containerFile': json['containerFile'] == null ? undefined : json['containerFile'],
+        'port': json['port'] == null ? undefined : json['port'],
         'url': json['url'],
         'version': json['version'] == null ? undefined : json['version'],
     };
@@ -40,6 +41,7 @@ function RegistrySvcRepositorySpecToJSON(value) {
     return {
         'buildContext': value['buildContext'],
         'containerFile': value['containerFile'],
+        'port': value['port'],
         'url': value['url'],
         'version': value['version'],
     };
