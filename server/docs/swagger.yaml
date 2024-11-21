@@ -1496,6 +1496,10 @@ definitions:
           Relative from the build context. By default, it is assumed to be a Dockerfile.
         example: docker/Dockerfile
         type: string
+      port:
+        description: Port is the port number that the container will listen on internally
+        example: 8080
+        type: integer
       url:
         description: URL is the URL to the repository
         example: https://github.com/singulatron/superplatform.git

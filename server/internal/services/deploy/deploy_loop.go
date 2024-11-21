@@ -289,7 +289,7 @@ func (ns *DeployService) makeSureItRuns(
 		}).Execute()
 
 		if err != nil {
-			return errors.Wrap(err, "error checking out repo")
+			return err
 		}
 
 		buildContext := *checkoutRsp.Dir
@@ -302,6 +302,21 @@ func (ns *DeployService) makeSureItRuns(
 				ContextPath:    buildContext,
 				DockerfilePath: definition.Repository.ContainerFile,
 				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
+			},
+		).Execute()
+
+		if err != nil {
+			return err
+		}
+
+		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
+			openapi.DockerSvcRunContainerRequest{
+				Image:    fmt.Sprintf("superplatform-%v", definition.Id),
+				Port:     *definition.Repository.Port,
+				HostPort: definition.HostPort,
+				Options: &openapi.DockerSvcRunContainerOptions{
+					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+				},
 			},
 		).Execute()
 	}

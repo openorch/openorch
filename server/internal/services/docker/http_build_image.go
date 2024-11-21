@@ -12,7 +12,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 
@@ -90,8 +89,6 @@ func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 		ForceRemove:    true,
 		SuppressOutput: false,
 	}
-
-	spew.Dump("build opt", options)
 
 	imageBuildResponse, err := dm.client.ImageBuild(ctx, tarBuffer, options)
 	if err != nil {

@@ -50,6 +50,9 @@ type RepositorySpec struct {
 	// ContainerFile is the path to the file that contains the container build instructions
 	// Relative from the build context. By default, it is assumed to be a Dockerfile.
 	ContainerFile string `json:"containerFile,omitempty" example:"docker/Dockerfile"`
+
+	// Port is the port number that the container will listen on internally
+	Port int `json:"port" example:"8080"`
 }
 
 type ImageSpec struct {

@@ -6136,6 +6136,11 @@ const docTemplate = `{
                     "type": "string",
                     "example": "docker/Dockerfile"
                 },
+                "port": {
+                    "description": "Port is the port number that the container will listen on internally",
+                    "type": "integer",
+                    "example": 8080
+                },
                 "url": {
                     "description": "URL is the URL to the repository",
                     "type": "string",
