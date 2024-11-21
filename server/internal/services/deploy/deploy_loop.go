@@ -296,10 +296,6 @@ func (ns *DeployService) makeSureItRuns(
 				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
 			},
 		).Execute()
-
-		if err != nil {
-			return errors.Wrap(err, "error building image")
-		}
 	}
 
 	err = sdk.OpenAPIError(err)

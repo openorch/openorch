@@ -116,8 +116,8 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 		Authorized: openapi.PtrBool(true),
 	}
 
-	mockUserSvc.EXPECT().Login(ctx).Return(mockLoginRequest)
-	mockUserSvc.EXPECT().LoginExecute(gomock.Any()).Return(expectedUserSvcLoginResponse, nil, nil)
+	mockUserSvc.EXPECT().Login(ctx).Return(mockLoginRequest).AnyTimes()
+	mockUserSvc.EXPECT().LoginExecute(gomock.Any()).Return(expectedUserSvcLoginResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().UpsertPermission(ctx, gomock.Any()).Return(mockUpsertPermissionRequest).AnyTimes()
 	mockUserSvc.EXPECT().UpsertPermissionExecute(gomock.Any()).Return(expectedUserSvcUpsertPermissionResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().AddPermissionToRole(ctx, gomock.Any(), gomock.Any()).Return(mockAddPermissionToRoleRequest).AnyTimes()
