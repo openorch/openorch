@@ -51,3 +51,14 @@ repository:
 ~/singulatron/cli$ go run main.go definition save fixtures/definitionA.yaml
 ~/singulatron/cli$ go run main.go definition save fixtures/definitionB.yaml
 ```
+
+### Deployments
+
+#### List
+
+```sh
+~/singulatron/cli$ go run main.go deployment list
+ID                DEFINITION ID   STATUS   DETAILS
+depl_dy2PDIkzqf   test-b          Error    build failed: COPY failed: file not found in build context or excluded by…
+depl_dbOdi5eLQK   test-a          OK  
+```

@@ -292,9 +292,14 @@ func (ns *DeployService) makeSureItRuns(
 			return errors.Wrap(err, "error checking out repo")
 		}
 
+		buildContext := *checkoutRsp.Dir
+		if definition.Repository.BuildContext != nil {
+			buildContext = path.Join(buildContext, *definition.Repository.BuildContext)
+		}
+
 		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Request(
 			openapi.DockerSvcBuildImageRequest{
-				ContextPath:    path.Join(*checkoutRsp.Dir, *definition.Repository.BuildContext),
+				ContextPath:    buildContext,
 				DockerfilePath: definition.Repository.ContainerFile,
 				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
 			},
