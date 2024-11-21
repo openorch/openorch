@@ -11,13 +11,21 @@
  */
 export declare class RegistrySvcRepositorySpec {
     /**
-    * Branch is the branch to use for the repository
+    * Context is the path to the image build context
     */
-    'subfolder'?: string;
+    'buildContext'?: string;
+    /**
+    * ContainerFile is the path to the file that contains the container build instructions Relative from the build context. By default, it is assumed to be a Dockerfile.
+    */
+    'containerFile'?: string;
     /**
     * URL is the URL to the repository
     */
     'url': string;
+    /**
+    * Version of the code to use
+    */
+    'version'?: string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

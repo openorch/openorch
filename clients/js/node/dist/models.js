@@ -24,6 +24,7 @@ var datastoreOp = require('./datastoreOp.js');
 var datastoreOrderBy = require('./datastoreOrderBy.js');
 var datastoreQuery = require('./datastoreQuery.js');
 var deploySvcAutoScalingConfig = require('./deploySvcAutoScalingConfig.js');
+var deploySvcDeleteDeploymentRequest = require('./deploySvcDeleteDeploymentRequest.js');
 var deploySvcDeployment = require('./deploySvcDeployment.js');
 var deploySvcDeploymentStatus = require('./deploySvcDeploymentStatus.js');
 var deploySvcDeploymentStrategy = require('./deploySvcDeploymentStrategy.js');
@@ -33,6 +34,7 @@ var deploySvcResourceLimits = require('./deploySvcResourceLimits.js');
 var deploySvcSaveDeploymentRequest = require('./deploySvcSaveDeploymentRequest.js');
 var deploySvcStrategyType = require('./deploySvcStrategyType.js');
 var deploySvcTargetRegion = require('./deploySvcTargetRegion.js');
+var dockerSvcBuildImageRequest = require('./dockerSvcBuildImageRequest.js');
 var dockerSvcContainerIsRunningResponse = require('./dockerSvcContainerIsRunningResponse.js');
 var dockerSvcDockerInfo = require('./dockerSvcDockerInfo.js');
 var dockerSvcErrorResponse = require('./dockerSvcErrorResponse.js');
@@ -186,6 +188,7 @@ let typeMap = {
     "DatastoreOrderBy": datastoreOrderBy.DatastoreOrderBy,
     "DatastoreQuery": datastoreQuery.DatastoreQuery,
     "DeploySvcAutoScalingConfig": deploySvcAutoScalingConfig.DeploySvcAutoScalingConfig,
+    "DeploySvcDeleteDeploymentRequest": deploySvcDeleteDeploymentRequest.DeploySvcDeleteDeploymentRequest,
     "DeploySvcDeployment": deploySvcDeployment.DeploySvcDeployment,
     "DeploySvcDeploymentStrategy": deploySvcDeploymentStrategy.DeploySvcDeploymentStrategy,
     "DeploySvcErrorResponse": deploySvcErrorResponse.DeploySvcErrorResponse,
@@ -193,6 +196,7 @@ let typeMap = {
     "DeploySvcResourceLimits": deploySvcResourceLimits.DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": deploySvcSaveDeploymentRequest.DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": deploySvcTargetRegion.DeploySvcTargetRegion,
+    "DockerSvcBuildImageRequest": dockerSvcBuildImageRequest.DockerSvcBuildImageRequest,
     "DockerSvcContainerIsRunningResponse": dockerSvcContainerIsRunningResponse.DockerSvcContainerIsRunningResponse,
     "DockerSvcDockerInfo": dockerSvcDockerInfo.DockerSvcDockerInfo,
     "DockerSvcErrorResponse": dockerSvcErrorResponse.DockerSvcErrorResponse,
@@ -505,6 +509,7 @@ Object.defineProperty(exports, 'DatastoreOp', {
 exports.DatastoreOrderBy = datastoreOrderBy.DatastoreOrderBy;
 exports.DatastoreQuery = datastoreQuery.DatastoreQuery;
 exports.DeploySvcAutoScalingConfig = deploySvcAutoScalingConfig.DeploySvcAutoScalingConfig;
+exports.DeploySvcDeleteDeploymentRequest = deploySvcDeleteDeploymentRequest.DeploySvcDeleteDeploymentRequest;
 exports.DeploySvcDeployment = deploySvcDeployment.DeploySvcDeployment;
 Object.defineProperty(exports, 'DeploySvcDeploymentStatus', {
     enumerable: true,
@@ -520,6 +525,7 @@ Object.defineProperty(exports, 'DeploySvcStrategyType', {
     get: function () { return deploySvcStrategyType.DeploySvcStrategyType; }
 });
 exports.DeploySvcTargetRegion = deploySvcTargetRegion.DeploySvcTargetRegion;
+exports.DockerSvcBuildImageRequest = dockerSvcBuildImageRequest.DockerSvcBuildImageRequest;
 exports.DockerSvcContainerIsRunningResponse = dockerSvcContainerIsRunningResponse.DockerSvcContainerIsRunningResponse;
 exports.DockerSvcDockerInfo = dockerSvcDockerInfo.DockerSvcDockerInfo;
 exports.DockerSvcErrorResponse = dockerSvcErrorResponse.DockerSvcErrorResponse;

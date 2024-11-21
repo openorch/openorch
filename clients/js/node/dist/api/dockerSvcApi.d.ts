@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import http from 'http';
+import { DockerSvcBuildImageRequest } from '../model/dockerSvcBuildImageRequest';
 import { DockerSvcContainerIsRunningResponse } from '../model/dockerSvcContainerIsRunningResponse';
 import { DockerSvcGetContainerSummaryResponse } from '../model/dockerSvcGetContainerSummaryResponse';
 import { DockerSvcGetDockerHostResponse } from '../model/dockerSvcGetDockerHostResponse';
@@ -39,6 +40,19 @@ export declare class DockerSvcApi {
     setDefaultAuthentication(auth: Authentication): void;
     setApiKey(key: DockerSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * @summary Build an Image
+     * @param request Build Image Request
+     */
+    buildImage(request: DockerSvcBuildImageRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
     /**
      * Check if a Docker container identified by the hash is running
      * @summary Check If a Container Is Running
@@ -91,7 +105,7 @@ export declare class DockerSvcApi {
         body: DockerSvcGetInfoResponse;
     }>;
     /**
-     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
      * @summary Run a Container
      * @param request Run Container Request
      */

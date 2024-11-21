@@ -36,6 +36,7 @@ export { DatastoreOp, DatastoreOpFromJSON, DatastoreOpFromJSONTyped, DatastoreOp
 export { DatastoreOrderByFromJSON, DatastoreOrderByFromJSONTyped, DatastoreOrderByToJSON, instanceOfDatastoreOrderBy } from './DatastoreOrderBy.mjs';
 export { DatastoreQueryFromJSON, DatastoreQueryFromJSONTyped, DatastoreQueryToJSON, instanceOfDatastoreQuery } from './DatastoreQuery.mjs';
 export { DeploySvcAutoScalingConfigFromJSON, DeploySvcAutoScalingConfigFromJSONTyped, DeploySvcAutoScalingConfigToJSON, instanceOfDeploySvcAutoScalingConfig } from './DeploySvcAutoScalingConfig.mjs';
+export { DeploySvcDeleteDeploymentRequestFromJSON, DeploySvcDeleteDeploymentRequestFromJSONTyped, DeploySvcDeleteDeploymentRequestToJSON, instanceOfDeploySvcDeleteDeploymentRequest } from './DeploySvcDeleteDeploymentRequest.mjs';
 export { DeploySvcDeploymentFromJSON, DeploySvcDeploymentFromJSONTyped, DeploySvcDeploymentToJSON, instanceOfDeploySvcDeployment } from './DeploySvcDeployment.mjs';
 export { DeploySvcDeploymentStatus, DeploySvcDeploymentStatusFromJSON, DeploySvcDeploymentStatusFromJSONTyped, DeploySvcDeploymentStatusToJSON, instanceOfDeploySvcDeploymentStatus } from './DeploySvcDeploymentStatus.mjs';
 export { DeploySvcDeploymentStrategyFromJSON, DeploySvcDeploymentStrategyFromJSONTyped, DeploySvcDeploymentStrategyToJSON, instanceOfDeploySvcDeploymentStrategy } from './DeploySvcDeploymentStrategy.mjs';
@@ -45,6 +46,7 @@ export { DeploySvcResourceLimitsFromJSON, DeploySvcResourceLimitsFromJSONTyped, 
 export { DeploySvcSaveDeploymentRequestFromJSON, DeploySvcSaveDeploymentRequestFromJSONTyped, DeploySvcSaveDeploymentRequestToJSON, instanceOfDeploySvcSaveDeploymentRequest } from './DeploySvcSaveDeploymentRequest.mjs';
 export { DeploySvcStrategyType, DeploySvcStrategyTypeFromJSON, DeploySvcStrategyTypeFromJSONTyped, DeploySvcStrategyTypeToJSON, instanceOfDeploySvcStrategyType } from './DeploySvcStrategyType.mjs';
 export { DeploySvcTargetRegionFromJSON, DeploySvcTargetRegionFromJSONTyped, DeploySvcTargetRegionToJSON, instanceOfDeploySvcTargetRegion } from './DeploySvcTargetRegion.mjs';
+export { DockerSvcBuildImageRequestFromJSON, DockerSvcBuildImageRequestFromJSONTyped, DockerSvcBuildImageRequestToJSON, instanceOfDockerSvcBuildImageRequest } from './DockerSvcBuildImageRequest.mjs';
 export { DockerSvcContainerIsRunningResponseFromJSON, DockerSvcContainerIsRunningResponseFromJSONTyped, DockerSvcContainerIsRunningResponseToJSON, instanceOfDockerSvcContainerIsRunningResponse } from './DockerSvcContainerIsRunningResponse.mjs';
 export { DockerSvcDockerInfoFromJSON, DockerSvcDockerInfoFromJSONTyped, DockerSvcDockerInfoToJSON, instanceOfDockerSvcDockerInfo } from './DockerSvcDockerInfo.mjs';
 export { DockerSvcErrorResponseFromJSON, DockerSvcErrorResponseFromJSONTyped, DockerSvcErrorResponseToJSON, instanceOfDockerSvcErrorResponse } from './DockerSvcErrorResponse.mjs';

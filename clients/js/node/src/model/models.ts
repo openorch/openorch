@@ -24,6 +24,7 @@ export * from './datastoreOp';
 export * from './datastoreOrderBy';
 export * from './datastoreQuery';
 export * from './deploySvcAutoScalingConfig';
+export * from './deploySvcDeleteDeploymentRequest';
 export * from './deploySvcDeployment';
 export * from './deploySvcDeploymentStatus';
 export * from './deploySvcDeploymentStrategy';
@@ -33,6 +34,7 @@ export * from './deploySvcResourceLimits';
 export * from './deploySvcSaveDeploymentRequest';
 export * from './deploySvcStrategyType';
 export * from './deploySvcTargetRegion';
+export * from './dockerSvcBuildImageRequest';
 export * from './dockerSvcContainerIsRunningResponse';
 export * from './dockerSvcDockerInfo';
 export * from './dockerSvcErrorResponse';
@@ -177,6 +179,7 @@ import { DatastoreOp } from './datastoreOp';
 import { DatastoreOrderBy } from './datastoreOrderBy';
 import { DatastoreQuery } from './datastoreQuery';
 import { DeploySvcAutoScalingConfig } from './deploySvcAutoScalingConfig';
+import { DeploySvcDeleteDeploymentRequest } from './deploySvcDeleteDeploymentRequest';
 import { DeploySvcDeployment } from './deploySvcDeployment';
 import { DeploySvcDeploymentStatus } from './deploySvcDeploymentStatus';
 import { DeploySvcDeploymentStrategy } from './deploySvcDeploymentStrategy';
@@ -186,6 +189,7 @@ import { DeploySvcResourceLimits } from './deploySvcResourceLimits';
 import { DeploySvcSaveDeploymentRequest } from './deploySvcSaveDeploymentRequest';
 import { DeploySvcStrategyType } from './deploySvcStrategyType';
 import { DeploySvcTargetRegion } from './deploySvcTargetRegion';
+import { DockerSvcBuildImageRequest } from './dockerSvcBuildImageRequest';
 import { DockerSvcContainerIsRunningResponse } from './dockerSvcContainerIsRunningResponse';
 import { DockerSvcDockerInfo } from './dockerSvcDockerInfo';
 import { DockerSvcErrorResponse } from './dockerSvcErrorResponse';
@@ -341,6 +345,7 @@ let typeMap: {[index: string]: any} = {
     "DatastoreOrderBy": DatastoreOrderBy,
     "DatastoreQuery": DatastoreQuery,
     "DeploySvcAutoScalingConfig": DeploySvcAutoScalingConfig,
+    "DeploySvcDeleteDeploymentRequest": DeploySvcDeleteDeploymentRequest,
     "DeploySvcDeployment": DeploySvcDeployment,
     "DeploySvcDeploymentStrategy": DeploySvcDeploymentStrategy,
     "DeploySvcErrorResponse": DeploySvcErrorResponse,
@@ -348,6 +353,7 @@ let typeMap: {[index: string]: any} = {
     "DeploySvcResourceLimits": DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": DeploySvcTargetRegion,
+    "DockerSvcBuildImageRequest": DockerSvcBuildImageRequest,
     "DockerSvcContainerIsRunningResponse": DockerSvcContainerIsRunningResponse,
     "DockerSvcDockerInfo": DockerSvcDockerInfo,
     "DockerSvcErrorResponse": DockerSvcErrorResponse,

@@ -20,17 +20,30 @@ import { mapValues } from '../runtime';
  */
 export interface RegistrySvcRepositorySpec {
     /**
-     * Branch is the branch to use for the repository
+     * Context is the path to the image build context
      * @type {string}
      * @memberof RegistrySvcRepositorySpec
      */
-    subfolder?: string;
+    buildContext?: string;
+    /**
+     * ContainerFile is the path to the file that contains the container build instructions
+     * Relative from the build context. By default, it is assumed to be a Dockerfile.
+     * @type {string}
+     * @memberof RegistrySvcRepositorySpec
+     */
+    containerFile?: string;
     /**
      * URL is the URL to the repository
      * @type {string}
      * @memberof RegistrySvcRepositorySpec
      */
     url: string;
+    /**
+     * Version of the code to use
+     * @type {string}
+     * @memberof RegistrySvcRepositorySpec
+     */
+    version?: string;
 }
 
 /**
@@ -51,8 +64,10 @@ export function RegistrySvcRepositorySpecFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'subfolder': json['subfolder'] == null ? undefined : json['subfolder'],
+        'buildContext': json['buildContext'] == null ? undefined : json['buildContext'],
+        'containerFile': json['containerFile'] == null ? undefined : json['containerFile'],
         'url': json['url'],
+        'version': json['version'] == null ? undefined : json['version'],
     };
 }
 
@@ -62,8 +77,10 @@ export function RegistrySvcRepositorySpecToJSON(value?: RegistrySvcRepositorySpe
     }
     return {
         
-        'subfolder': value['subfolder'],
+        'buildContext': value['buildContext'],
+        'containerFile': value['containerFile'],
         'url': value['url'],
+        'version': value['version'],
     };
 }
 

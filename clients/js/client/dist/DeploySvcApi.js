@@ -1,6 +1,7 @@
 'use strict';
 
 var runtime = require('./runtime2.js');
+var DeploySvcDeleteDeploymentRequest = require('./DeploySvcDeleteDeploymentRequest.js');
 var DeploySvcListDeploymentsResponse = require('./DeploySvcListDeploymentsResponse.js');
 var DeploySvcSaveDeploymentRequest = require('./DeploySvcSaveDeploymentRequest.js');
 require('./DeploySvcDeployment.js');
@@ -28,6 +29,38 @@ require('./DeploySvcResourceLimits.js');
  *
  */
 class DeploySvcApi extends runtime.BaseAPI {
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeploymentRaw(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/deploy-svc/deployment`,
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DeploySvcDeleteDeploymentRequest.DeploySvcDeleteDeploymentRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeployment() {
+        return runtime.__awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.deleteDeploymentRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
     /**
      * Retrieve a list of deployments.
      * List Deployments

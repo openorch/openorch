@@ -1,4 +1,5 @@
 import { a as BaseAPI, _ as __awaiter, b as RequiredError, J as JSONApiResponse } from './runtime2.mjs';
+import { DockerSvcBuildImageRequestToJSON } from './DockerSvcBuildImageRequest.mjs';
 import { DockerSvcContainerIsRunningResponseFromJSON } from './DockerSvcContainerIsRunningResponse.mjs';
 import { DockerSvcGetContainerSummaryResponseFromJSON } from './DockerSvcGetContainerSummaryResponse.mjs';
 import { DockerSvcGetDockerHostResponseFromJSON } from './DockerSvcGetDockerHostResponse.mjs';
@@ -26,6 +27,41 @@ import './DockerSvcRunInfo.mjs';
  *
  */
 class DockerSvcApi extends BaseAPI {
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['request'] == null) {
+                throw new RequiredError('request', 'Required parameter "request" was null or undefined when calling buildImage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/image`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcBuildImageRequestToJSON(requestParameters['request']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.buildImageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
     /**
      * Check if a Docker container identified by the hash is running
      * Check If a Container Is Running
@@ -156,7 +192,7 @@ class DockerSvcApi extends BaseAPI {
         });
     }
     /**
-     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
      * Run a Container
      */
     runContainerRaw(requestParameters, initOverrides) {
@@ -181,7 +217,7 @@ class DockerSvcApi extends BaseAPI {
         });
     }
     /**
-     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
      * Run a Container
      */
     runContainer(requestParameters, initOverrides) {

@@ -17,13 +17,23 @@ export class RegistrySvcRepositorySpec {
 RegistrySvcRepositorySpec.discriminator = undefined;
 RegistrySvcRepositorySpec.attributeTypeMap = [
     {
-        "name": "subfolder",
-        "baseName": "subfolder",
+        "name": "buildContext",
+        "baseName": "buildContext",
+        "type": "string"
+    },
+    {
+        "name": "containerFile",
+        "baseName": "containerFile",
         "type": "string"
     },
     {
         "name": "url",
         "baseName": "url",
+        "type": "string"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
         "type": "string"
     }
 ];

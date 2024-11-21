@@ -27,8 +27,10 @@ function RegistrySvcRepositorySpecFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'subfolder': json['subfolder'] == null ? undefined : json['subfolder'],
+        'buildContext': json['buildContext'] == null ? undefined : json['buildContext'],
+        'containerFile': json['containerFile'] == null ? undefined : json['containerFile'],
         'url': json['url'],
+        'version': json['version'] == null ? undefined : json['version'],
     };
 }
 function RegistrySvcRepositorySpecToJSON(value) {
@@ -36,8 +38,10 @@ function RegistrySvcRepositorySpecToJSON(value) {
         return value;
     }
     return {
-        'subfolder': value['subfolder'],
+        'buildContext': value['buildContext'],
+        'containerFile': value['containerFile'],
         'url': value['url'],
+        'version': value['version'],
     };
 }
 

@@ -90,6 +90,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "superplatform/delete-deployment",
+          label: "Delete Deployment",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "superplatform/save-deployment",
           label: "Save Deployment",
           className: "api-method put",
@@ -129,6 +135,12 @@ const sidebar: SidebarsConfig = {
           id: "superplatform/get-host",
           label: "Get Docker Host",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "superplatform/build-image",
+          label: "Build an Image",
+          className: "api-method put",
         },
         {
           type: "doc",

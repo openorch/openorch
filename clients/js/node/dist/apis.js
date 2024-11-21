@@ -41,6 +41,7 @@ require('./datastoreOp.js');
 require('./datastoreOrderBy.js');
 require('./datastoreQuery.js');
 require('./deploySvcAutoScalingConfig.js');
+require('./deploySvcDeleteDeploymentRequest.js');
 require('./deploySvcDeployment.js');
 require('./deploySvcDeploymentStatus.js');
 require('./deploySvcDeploymentStrategy.js');
@@ -50,6 +51,7 @@ require('./deploySvcResourceLimits.js');
 require('./deploySvcSaveDeploymentRequest.js');
 require('./deploySvcStrategyType.js');
 require('./deploySvcTargetRegion.js');
+require('./dockerSvcBuildImageRequest.js');
 require('./dockerSvcContainerIsRunningResponse.js');
 require('./dockerSvcDockerInfo.js');
 require('./dockerSvcErrorResponse.js');
@@ -55013,6 +55015,69 @@ class DeploySvcApi {
         this.interceptors.push(interceptor);
     }
     /**
+     * Delete a deployment.
+     * @summary Delete Deployment
+     * @param body Delete Deploys Request
+     */
+    deleteDeployment(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/deploy-svc/deployment';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: models.ObjectSerializer.serialize(body, "DeploySvcDeleteDeploymentRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = models.ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
      * Retrieve a list of deployments.
      * @summary List Deployments
      * @param body List Deploys Request
@@ -55203,6 +55268,73 @@ class DockerSvcApi {
     }
     addInterceptor(interceptor) {
         this.interceptors.push(interceptor);
+    }
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * @summary Build an Image
+     * @param request Build Image Request
+     */
+    buildImage(request_1) {
+        return __awaiter(this, arguments, void 0, function* (request, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/image';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling buildImage.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: models.ObjectSerializer.serialize(request, "DockerSvcBuildImageRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = models.ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
     }
     /**
      * Check if a Docker container identified by the hash is running
@@ -55467,7 +55599,7 @@ class DockerSvcApi {
         });
     }
     /**
-     * Runes a Docker container with the specified parameters.  Requires the `docker-svc:docker:create` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
      * @summary Run a Container
      * @param request Run Container Request
      */

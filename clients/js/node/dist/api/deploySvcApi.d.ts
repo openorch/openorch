@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import http from 'http';
+import { DeploySvcDeleteDeploymentRequest } from '../model/deploySvcDeleteDeploymentRequest';
 import { DeploySvcListDeploymentsResponse } from '../model/deploySvcListDeploymentsResponse';
 import { DeploySvcSaveDeploymentRequest } from '../model/deploySvcSaveDeploymentRequest';
 import { Authentication, Interceptor } from '../model/models';
@@ -35,6 +36,19 @@ export declare class DeploySvcApi {
     setDefaultAuthentication(auth: Authentication): void;
     setApiKey(key: DeploySvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
+    /**
+     * Delete a deployment.
+     * @summary Delete Deployment
+     * @param body Delete Deploys Request
+     */
+    deleteDeployment(body?: DeploySvcDeleteDeploymentRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
     /**
      * Retrieve a list of deployments.
      * @summary List Deployments
