@@ -24,21 +24,10 @@ It's a server and ecosystem enables you to self-host AI models, build apps that 
 
 ## Primary Use Cases
 
-### Run AI Models [x]
-
-Run open-source AI models privately on your own infrastructure, ensuring that your data and operations remain fully under your control.
-
-### Quickly Build Backendless AI Apps [x]
-
-Build backendless application by using Superplatform as a database and AI prompting API. Like Firebase, but with a focus on AI.
-
-### Develop Microservices-Based AI Applications [ ]
-
-Build your own backend services around Superplatform, which itself is built on a microservices architecture. Run these services outside or inside the Superplatform platform.
-
-### Deploy Third-Party AI Apps Easily [ ]
-
-Superplatform is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), Superplatform seamlessly integrates other applications into its ecosystem.
+- Run open-source AI models privately on your own infrastructure, ensuring that your data and operations remain fully under your control.
+- Build backendless application by using Superplatform as a database and AI prompting API. Like Firebase, but with a focus on AI.
+- Build your own backend services around Superplatform. Run these services outside or inside the Superplatform platform.
+- Superplatform is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), Superplatform seamlessly integrates other applications into its ecosystem.
 
 <p align="center">
   <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
@@ -59,33 +48,9 @@ Superplatform is designed to make deploying third-party AI applications straight
 
 See [this page](https://superplatform.ai/docs/category/running) to help you get started.
 
-## Main Services
+## Services
 
-https://superplatform.ai/docs/category/superplatform-api/
-
-### Prompt Svc
-
-Sync or async, streamed or request/response prompting. Dump tens of thousands of prompts into the system and let the prompt queue process it.
-
-### Download Svc
-
-Start, pause, restart large file downloads to enable you to manage your AI models.
-
-### Chat Svc
-
-Manage threads, messages, assets (generated images etc.).
-
-### User Svc
-
-Role-based access control, JWT, fine tuned permissions and a unique ownership model that lets you build microservices based AI apps.
-
-### Node Svc
-
-Get information about your nodes and GPUs like temperature, VRAM usage etc.
-
-### Dynamic svc
-
-A dynamically typed (schema-free) datastore service that lets you piggyback on Superplatform's database. Lets you build backendless applications on top of Singulatorn. Think Firebase but for AI.
+See https://superplatform.ai/docs/category/superplatform-api/
 
 ## Run On Your Laptop/PC
 
