@@ -4739,6 +4739,9 @@ const docTemplate = `{
         },
         "docker_svc.ContainerIsRunningResponse": {
             "type": "object",
+            "required": [
+                "isRunning"
+            ],
             "properties": {
                 "isRunning": {
                     "type": "boolean"
@@ -4769,6 +4772,11 @@ const docTemplate = `{
         },
         "docker_svc.GetContainerSummaryResponse": {
             "type": "object",
+            "required": [
+                "logs",
+                "status",
+                "summary"
+            ],
             "properties": {
                 "logs": {
                     "type": "string"
@@ -4784,6 +4792,9 @@ const docTemplate = `{
         },
         "docker_svc.GetDockerHostResponse": {
             "type": "object",
+            "required": [
+                "host"
+            ],
             "properties": {
                 "host": {
                     "type": "string"

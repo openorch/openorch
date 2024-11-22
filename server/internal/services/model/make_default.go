@@ -11,10 +11,11 @@ import (
 	"context"
 	"fmt"
 
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 )
 
-func (ms *ModelService) makeDefault(modelId string) error {
+func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 	stat, err := ms.status(modelId)
 	if err != nil {
 		return err
@@ -23,15 +24,17 @@ func (ms *ModelService) makeDefault(modelId string) error {
 		return fmt.Errorf("cannot set model as it is not downloaded yet")
 	}
 
-	rsp := configtypes.GetConfigResponse{}
-	err = ms.router.Get(context.Background(), "config-svc", "/config", nil, &rsp)
+	rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).ConfigSvcAPI.GetConfig(ctx).Execute()
+
 	if err != nil {
 		return err
 	}
 
-	rsp.Config.Model.CurrentModelId = modelId
+	rsp.Config.Model.CurrentModelId = openapi.PtrString(modelId)
 
-	return ms.router.Put(context.Background(), "config-svc", "/config", &configtypes.SaveConfigRequest{
+	_, _, err = ms.clientFactory.Client(sdk.WithToken(ms.token)).ConfigSvcAPI.SaveConfig(ctx).Request(openapi.ConfigSvcSaveConfigRequest{
 		Config: rsp.Config,
-	}, nil)
+	}).Execute()
+
+	return err
 }

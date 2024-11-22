@@ -104,10 +104,10 @@ type GetContainerSummaryRequest struct {
 }
 
 type GetContainerSummaryResponse struct {
-	Status string `json:"status"`
-	Logs   string `json:"logs"`
+	Status string `json:"status" binding:"required"`
+	Logs   string `json:"logs" binding:"required"`
 	// DEPRECATED. Summary contains both Status and Logs.
-	Summary string `json:"summary"`
+	Summary string `json:"summary" binding:"required"`
 }
 
 type ContainerIsRunningRequest struct {
@@ -115,13 +115,13 @@ type ContainerIsRunningRequest struct {
 }
 
 type ContainerIsRunningResponse struct {
-	IsRunning bool `json:"isRunning"`
+	IsRunning bool `json:"isRunning" binding:"required"`
 }
 
 type GetDockerHostRequest struct{}
 
 type GetDockerHostResponse struct {
-	Host string `json:"host"`
+	Host string `json:"host" binding:"required"`
 }
 
 //

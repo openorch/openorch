@@ -9,14 +9,12 @@ package dynamicservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/samber/lo"
 
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	dynamic "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // Query retrieves objects based on provided criteria
@@ -42,15 +40,13 @@ func (g *DynamicService) Query(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	token, hasToken := sdk.TokenFromRequest(r)
-	err := g.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", dynamic.PermissionGenericView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericView.Id).Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized || !hasToken {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
@@ -65,6 +61,8 @@ func (g *DynamicService) Query(
 	}
 	defer r.Body.Close()
 
+	token, _ := sdk.TokenFromRequest(r)
+
 	claims, err := sdk.DecodeJWT(token, g.publicKey)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -74,11 +72,11 @@ func (g *DynamicService) Query(
 
 	for i, v := range req.Readers {
 		if v == "_self" {
-			req.Readers[i] = rsp.User.Id
+			req.Readers[i] = *isAuthRsp.User.Id
 		}
 	}
 
-	identifiers := append(claims.RoleIds, []string{rsp.User.Id, dynamic.AnyIdentifier}...)
+	identifiers := append(claims.RoleIds, []string{*isAuthRsp.User.Id, dynamic.AnyIdentifier}...)
 	allowedReaders := lo.Intersect(identifiers, req.Readers)
 
 	objects, err := g.query(allowedReaders, dynamic.QueryOptions{

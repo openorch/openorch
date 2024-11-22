@@ -17,14 +17,15 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
 	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 )
 
 type FirehoseService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	subscribers map[int]func(events []*firehosetypes.Event)
 	mu          sync.Mutex
@@ -34,7 +35,7 @@ type FirehoseService struct {
 }
 
 func NewFirehoseService(
-	r *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*FirehoseService, error) {
@@ -44,7 +45,8 @@ func NewFirehoseService(
 	}
 
 	service := &FirehoseService{
-		router:          r,
+		clientFactory: clientFactory,
+
 		lock:            lock,
 		credentialStore: credentialStore,
 		subscribers:     make(map[int]func(events []*firehosetypes.Event)),
@@ -58,11 +60,11 @@ func (fs *FirehoseService) Start() error {
 	fs.lock.Acquire(ctx, "firehose-svc-start")
 	defer fs.lock.Release(ctx, "firehose-svc-start")
 
-	token, err := sdk.RegisterService("firehose-svc", "Firehose Service", fs.router, fs.credentialStore)
+	token, err := sdk.RegisterService(fs.clientFactory.Client().UserSvcAPI, "firehose-svc", "Firehose Service", fs.credentialStore)
 	if err != nil {
 		return err
 	}
-	fs.router = fs.router.SetBearerToken(token)
+	fs.token = token
 
 	return fs.registerPermissions()
 }

@@ -38,7 +38,7 @@ func TestCreate(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	manyClients, err := test.MakeClients(options.Router, 2)
+	manyClients, err := test.MakeClients(options.ClientFactory.Client(), 2)
 	require.NoError(t, err)
 	client1 := manyClients[0]
 	client2 := manyClients[1]

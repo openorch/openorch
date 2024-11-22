@@ -10,22 +10,25 @@ package modelservice
 
 import (
 	"context"
-	"fmt"
 
+	client "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 func (p *ModelService) registerPermissions() error {
+	ctx := context.Background()
+	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
+
 	for _, permission := range modeltypes.ModelPermissions {
-		rsp := &usertypes.UpserPermissionResponse{}
-		err := p.router.Put(context.Background(), "user-svc", fmt.Sprintf("/permission/%v", permission.Id), &usertypes.UpserPermissionRequest{
-			Permission: &usertypes.Permission{
-				Name:        permission.Name,
-				Description: permission.Description,
+		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).RequestBody(client.UserSvcUpserPermissionRequest{
+			Permission: &client.UserSvcPermission{
+				Name:        client.PtrString(permission.Name),
+				Description: client.PtrString(permission.Description),
 			},
-		}, rsp)
+		}).Execute()
 		if err != nil {
 			return err
 		}
@@ -36,9 +39,7 @@ func (p *ModelService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range modeltypes.ModelPermissions {
-			rsp := &usertypes.AddPermissionToRoleResponse{}
-			err := p.router.Put(context.Background(), "user-svc",
-				fmt.Sprintf("/role/%v/permission/%v", role.Id, permission.Id), &usertypes.AddPermissionToRoleRequest{}, rsp)
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
 			if err != nil {
 				return err
 			}

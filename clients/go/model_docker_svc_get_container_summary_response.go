@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the DockerSvcGetContainerSummaryResponse type satisfies the MappedNullable interface at compile time
@@ -20,18 +22,23 @@ var _ MappedNullable = &DockerSvcGetContainerSummaryResponse{}
 
 // DockerSvcGetContainerSummaryResponse struct for DockerSvcGetContainerSummaryResponse
 type DockerSvcGetContainerSummaryResponse struct {
-	Logs *string `json:"logs,omitempty"`
-	Status *string `json:"status,omitempty"`
+	Logs string `json:"logs"`
+	Status string `json:"status"`
 	// DEPRECATED. Summary contains both Status and Logs.
-	Summary *string `json:"summary,omitempty"`
+	Summary string `json:"summary"`
 }
+
+type _DockerSvcGetContainerSummaryResponse DockerSvcGetContainerSummaryResponse
 
 // NewDockerSvcGetContainerSummaryResponse instantiates a new DockerSvcGetContainerSummaryResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDockerSvcGetContainerSummaryResponse() *DockerSvcGetContainerSummaryResponse {
+func NewDockerSvcGetContainerSummaryResponse(logs string, status string, summary string) *DockerSvcGetContainerSummaryResponse {
 	this := DockerSvcGetContainerSummaryResponse{}
+	this.Logs = logs
+	this.Status = status
+	this.Summary = summary
 	return &this
 }
 
@@ -43,100 +50,76 @@ func NewDockerSvcGetContainerSummaryResponseWithDefaults() *DockerSvcGetContaine
 	return &this
 }
 
-// GetLogs returns the Logs field value if set, zero value otherwise.
+// GetLogs returns the Logs field value
 func (o *DockerSvcGetContainerSummaryResponse) GetLogs() string {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Logs
+
+	return o.Logs
 }
 
-// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// GetLogsOk returns a tuple with the Logs field value
 // and a boolean to check if the value has been set.
 func (o *DockerSvcGetContainerSummaryResponse) GetLogsOk() (*string, bool) {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logs, true
+	return &o.Logs, true
 }
 
-// HasLogs returns a boolean if a field has been set.
-func (o *DockerSvcGetContainerSummaryResponse) HasLogs() bool {
-	if o != nil && !IsNil(o.Logs) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogs gets a reference to the given string and assigns it to the Logs field.
+// SetLogs sets field value
 func (o *DockerSvcGetContainerSummaryResponse) SetLogs(v string) {
-	o.Logs = &v
+	o.Logs = v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *DockerSvcGetContainerSummaryResponse) GetStatus() string {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *DockerSvcGetContainerSummaryResponse) GetStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *DockerSvcGetContainerSummaryResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
+// SetStatus sets field value
 func (o *DockerSvcGetContainerSummaryResponse) SetStatus(v string) {
-	o.Status = &v
+	o.Status = v
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
+// GetSummary returns the Summary field value
 func (o *DockerSvcGetContainerSummaryResponse) GetSummary() string {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Summary
+
+	return o.Summary
 }
 
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// GetSummaryOk returns a tuple with the Summary field value
 // and a boolean to check if the value has been set.
 func (o *DockerSvcGetContainerSummaryResponse) GetSummaryOk() (*string, bool) {
-	if o == nil || IsNil(o.Summary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Summary, true
+	return &o.Summary, true
 }
 
-// HasSummary returns a boolean if a field has been set.
-func (o *DockerSvcGetContainerSummaryResponse) HasSummary() bool {
-	if o != nil && !IsNil(o.Summary) {
-		return true
-	}
-
-	return false
-}
-
-// SetSummary gets a reference to the given string and assigns it to the Summary field.
+// SetSummary sets field value
 func (o *DockerSvcGetContainerSummaryResponse) SetSummary(v string) {
-	o.Summary = &v
+	o.Summary = v
 }
 
 func (o DockerSvcGetContainerSummaryResponse) MarshalJSON() ([]byte, error) {
@@ -149,16 +132,49 @@ func (o DockerSvcGetContainerSummaryResponse) MarshalJSON() ([]byte, error) {
 
 func (o DockerSvcGetContainerSummaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Logs) {
-		toSerialize["logs"] = o.Logs
-	}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
-	}
+	toSerialize["logs"] = o.Logs
+	toSerialize["status"] = o.Status
+	toSerialize["summary"] = o.Summary
 	return toSerialize, nil
+}
+
+func (o *DockerSvcGetContainerSummaryResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logs",
+		"status",
+		"summary",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDockerSvcGetContainerSummaryResponse := _DockerSvcGetContainerSummaryResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDockerSvcGetContainerSummaryResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DockerSvcGetContainerSummaryResponse(varDockerSvcGetContainerSummaryResponse)
+
+	return err
 }
 
 type NullableDockerSvcGetContainerSummaryResponse struct {

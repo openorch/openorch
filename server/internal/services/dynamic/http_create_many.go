@@ -9,25 +9,24 @@ package dynamicservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	dynamictypes "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 func (g *DynamicService) CreateMany(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := g.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", dynamictypes.PermissionGenericCreate.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+
+	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), dynamictypes.PermissionGenericCreate.Id).Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

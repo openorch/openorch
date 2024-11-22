@@ -424,6 +424,8 @@ definitions:
     properties:
       isRunning:
         type: boolean
+    required:
+    - isRunning
     type: object
   docker_svc.DockerInfo:
     properties:
@@ -448,11 +450,17 @@ definitions:
       summary:
         description: DEPRECATED. Summary contains both Status and Logs.
         type: string
+    required:
+    - logs
+    - status
+    - summary
     type: object
   docker_svc.GetDockerHostResponse:
     properties:
       host:
         type: string
+    required:
+    - host
     type: object
   docker_svc.GetInfoResponse:
     properties:

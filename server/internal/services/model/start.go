@@ -20,11 +20,10 @@ import (
 
 	"github.com/pkg/errors"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
-	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
 	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 )
 
@@ -35,18 +34,17 @@ Starts the model which has the supplied modelId or the currently activated one o
 the modelId is empty.
 */
 func (ms *ModelService) start(modelId string) error {
-	var getConfigResponse *configtypes.GetConfigResponse
-	err := ms.router.Get(context.Background(), "config-svc", "/config", nil, &getConfigResponse)
+	getConfigResponse, _, err := ms.clientFactory.Client().ConfigSvcAPI.GetConfig(context.Background()).Execute()
 	if err != nil {
 		return err
 	}
 
 	if modelId == "" {
 		conf := getConfigResponse.Config
-		if conf.Model.CurrentModelId == "" {
+		if conf.Model.CurrentModelId == nil {
 			return errors.New("no model id specified and no default model")
 		}
-		modelId = conf.Model.CurrentModelId
+		modelId = *conf.Model.CurrentModelId
 	}
 
 	modelI, found, err := ms.modelsStore.Query(
@@ -75,19 +73,20 @@ func (ms *ModelService) start(modelId string) error {
 }
 
 func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *modeltypes.Platform) error {
-	launchOptions := &dockertypes.RunContainerOptions{
-		Name: platform.Id,
+	launchOptions := &openapi.DockerSvcRunContainerOptions{
+		Name: openapi.PtrString(platform.Id),
 	}
 
 	image := platform.Architectures.Default.Image
 	port := platform.Architectures.Default.Port
 	launchOptions.Envs = platform.Architectures.Default.Envars
 	launchOptions.Keeps = platform.Architectures.Default.Keeps
-	launchOptions.Assets = model.Assets
+	launchOptions.Assets = &model.Assets
 
 	switch ms.gpuPlatform {
 	case "cuda":
-		launchOptions.GPUEnabled = true
+		launchOptions.GpuEnabled = openapi.PtrBool(true)
+
 		if platform.Architectures.Cuda.Image != "" {
 			image = platform.Architectures.Cuda.Image
 		}
@@ -106,24 +105,24 @@ func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *model
 	if err != nil {
 		return err
 	}
-	launchOptions.Hash = hash
+	launchOptions.Hash = openapi.PtrString(hash)
 
-	launchReq := &dockertypes.RunContainerRequest{
-		Image:    image,
-		Port:     port,
-		HostPort: hostPortNum,
-		Options:  launchOptions,
-	}
-	launchRsp := &dockertypes.RunContainerResponse{}
-	err = ms.router.Put(context.Background(), "docker-svc", "/container", launchReq, &launchRsp)
+	runRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.RunContainer(context.Background()).Request(
+		openapi.DockerSvcRunContainerRequest{
+			Image:    image,
+			Port:     int32(port),
+			HostPort: openapi.PtrInt32(int32(hostPortNum)),
+			Options:  launchOptions,
+		},
+	).Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to launch container")
 	}
 
-	if launchRsp.Info.NewContainerStarted {
-		state := ms.get(launchRsp.Info.PortNumber)
+	if *runRsp.Info.NewContainerStarted {
+		state := ms.get(int(*runRsp.Info.PortNumber))
 		if !state.HasCheckerRunning {
-			go ms.checkIfAnswers(model, platform, launchRsp.Info.PortNumber, state)
+			go ms.checkIfAnswers(model, platform, int(*runRsp.Info.PortNumber), state)
 		}
 	}
 
@@ -189,8 +188,7 @@ func (ms *ModelService) checkIfAnswers(
 
 		logger.Debug("Checking for answer started", slog.Int("port", port))
 
-		hashRsp := dockertypes.ContainerIsRunningResponse{}
-		err := ms.router.Get(context.Background(), "docker-svc", fmt.Sprintf("/container/%v/is-running", hash), nil, &hashRsp)
+		isRunningRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.ContainerIsRunning(context.Background()).Hash(hash).Execute()
 		if err != nil {
 			logger.Warn("Model check error",
 				slog.String("modelId", model.Id),
@@ -199,13 +197,12 @@ func (ms *ModelService) checkIfAnswers(
 			continue
 		}
 
-		if !hashRsp.IsRunning {
+		if !isRunningRsp.IsRunning {
 			ms.printContainerLogs(model.Id, hash)
 			continue
 		}
 
-		hostRsp := dockertypes.GetDockerHostResponse{}
-		err = ms.router.Get(context.Background(), "docker-svc", "/host", nil, &hostRsp)
+		hostRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.GetHost(context.Background()).Execute()
 		if err != nil {
 			logger.Warn("Docker host error",
 				slog.String("error", err.Error()),
@@ -245,8 +242,7 @@ func (ms *ModelService) checkIfAnswers(
 }
 
 func (ms *ModelService) printContainerLogs(modelId, hash string) {
-	rsp := dockertypes.GetContainerSummaryResponse{}
-	err := ms.router.Get(context.Background(), "docker-svc", fmt.Sprintf("/container/%v/summary/%v", hash, 10), nil, &rsp)
+	summaryRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.ContainerSummary(context.Background()).Hash(hash).Lines(10).Execute()
 	if err != nil {
 		logger.Warn("Error getting container logs",
 			slog.String("modelId", modelId),
@@ -254,7 +250,7 @@ func (ms *ModelService) printContainerLogs(modelId, hash string) {
 		)
 	} else {
 		logger.Info("Container logs for model that is not running",
-			slog.String("logs", rsp.Summary),
+			slog.String("logs", summaryRsp.Summary),
 		)
 	}
 }

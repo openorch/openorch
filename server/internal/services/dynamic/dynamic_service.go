@@ -23,8 +23,10 @@ import (
 )
 
 type DynamicService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	store           datastore.DataStore
 	credentialStore datastore.DataStore
@@ -33,7 +35,7 @@ type DynamicService struct {
 }
 
 func NewDynamicService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DynamicService, error) {
@@ -47,10 +49,12 @@ func NewDynamicService(
 	}
 
 	service := &DynamicService{
+		clientFactory: clientFactory,
+
 		credentialStore: credentialStore,
-		router:          router,
-		lock:            lock,
-		store:           store,
+
+		lock:  lock,
+		store: store,
 	}
 
 	return service, nil
@@ -64,7 +68,7 @@ func (g *DynamicService) Start() error {
 	g.client = clients.NewAPIClient(&clients.Configuration{
 		Servers: clients.ServerConfigurations{
 			{
-				URL:         g.router.Address(),
+				URL:         router.SelfAddress(),
 				Description: "Default server",
 			},
 		},
@@ -76,11 +80,11 @@ func (g *DynamicService) Start() error {
 	}
 	g.publicKey = *pk.PublicKey
 
-	token, err := sdk.RegisterService("dynamic-svc", "Dynamic Svc", g.router, g.credentialStore)
+	token, err := sdk.RegisterService(g.clientFactory.Client().UserSvcAPI, "dynamic-svc", "Dynamic Svc", g.credentialStore)
 	if err != nil {
 		return err
 	}
-	g.router = g.router.SetBearerToken(token)
+	g.token = token
 
 	return g.registerPermissions()
 }

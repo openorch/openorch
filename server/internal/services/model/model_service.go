@@ -14,17 +14,18 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 )
 
 type ModelService struct {
+	clientFactory sdk.ClientFactory
+	token         string
+
 	modelStateMutex sync.Mutex
 	modelPortMap    map[int]*modeltypes.ModelState
 
-	router *router.Router
-	lock   lock.DistributedLock
+	lock lock.DistributedLock
 
 	modelsStore    datastore.DataStore
 	platformsStore datastore.DataStore
@@ -38,15 +39,15 @@ type ModelService struct {
 func NewModelService(
 	gpuPlatform string,
 	llmHost string,
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, insance any) (datastore.DataStore, error),
 ) (*ModelService, error) {
 	srv := &ModelService{
-		gpuPlatform:  gpuPlatform,
-		router:       router,
-		lock:         lock,
-		modelPortMap: map[int]*modeltypes.ModelState{},
+		gpuPlatform:   gpuPlatform,
+		clientFactory: clientFactory,
+		lock:          lock,
+		modelPortMap:  map[int]*modeltypes.ModelState{},
 	}
 	modelStore, err := datastoreFactory("modelSvcModels", &modeltypes.Model{})
 	if err != nil {
@@ -79,11 +80,11 @@ func (ms *ModelService) Start() error {
 	ms.lock.Acquire(ctx, "model-svc-start")
 	defer ms.lock.Release(ctx, "model-svc-start")
 
-	token, err := sdk.RegisterService("model-svc", "Model Service", ms.router, ms.credentialStore)
+	token, err := sdk.RegisterService(ms.clientFactory.Client().UserSvcAPI, "model-svc", "Model Service", ms.credentialStore)
 	if err != nil {
 		return err
 	}
-	ms.router = ms.router.SetBearerToken(token)
+	ms.token = token
 
 	return ms.registerPermissions()
 }
