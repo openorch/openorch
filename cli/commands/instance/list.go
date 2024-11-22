@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"text/tabwriter"
+	"time"
 
 	"github.com/singulatron/superplatform/cli/config"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -29,10 +30,19 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tURL\tSTATUS")
+	fmt.Fprintln(writer, "ID\tURL\tSTATUS\tLAST HEARTBEAT")
 
 	for _, instance := range rsp.Instances {
-		fmt.Fprintf(writer, "%s\t%s\t%s\n", instance.Id, instance.Url, instance.Status)
+		heartbeat := ""
+		if instance.LastHeartbeat != nil {
+			heartbeat = *instance.LastHeartbeat
+			parsedTime, err := time.Parse(time.RFC3339Nano, heartbeat)
+			if err == nil {
+				heartbeat = time.Since(parsedTime).Truncate(time.Second).String() + " ago"
+			}
+		}
+
+		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\n", instance.Id, instance.Url, instance.Status, heartbeat)
 	}
 
 	return nil

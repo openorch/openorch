@@ -46,7 +46,9 @@ hostPort: 8887
 id: test-b
 repository:
   url: https://github.com/singulatron/superplatform.git
-  folder: test-b
+  containerFile: server/docker/Dockerfile
+  port: 58231
+hostPort: 9998
 
 ~/singulatron/cli$ go run main.go definition save fixtures/definitionA.yaml
 ~/singulatron/cli$ go run main.go definition save fixtures/definitionB.yaml

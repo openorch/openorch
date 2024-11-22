@@ -20,6 +20,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/pkg/errors"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -164,7 +165,8 @@ func (ns *DeployService) processCommand(
 		return err
 	}
 
-	if deployment.Status == deploy.DeploymentStatusPending {
+	if deployment.Status == deploy.DeploymentStatusPending ||
+		deployment.Status == deploy.DeploymentStatusError {
 		deployment.Status = deploy.DeploymentStatusDeploying
 		err = ns.deploymentStore.Upsert(deployment)
 		if err != nil {
@@ -177,6 +179,7 @@ func (ns *DeployService) processCommand(
 		ns.executeStartCommand(ctx, command, node, definition, deployment)
 	case deploy.CommandTypeScale:
 	case deploy.CommandTypeKill:
+		spew.Dump("Killing deployment", deployment)
 	}
 
 	return nil
