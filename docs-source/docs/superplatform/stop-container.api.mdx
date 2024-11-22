@@ -1,12 +1,12 @@
 ---
-id: get-container-summary
-title: "Get Container Summary"
-description: "Get a summary of the Docker container identified by the hash, limited to a specified number of lines"
-sidebar_label: "Get Container Summary"
+id: stop-container
+title: "Stop a Container"
+description: "Stops a Docker container with the specified parameters."
+sidebar_label: "Stop a Container"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VU1z2zYQ/SuYPbUzNKnYzUyHp7ptxnXjiTNVfHJ0gMAViRgEkAUoVeXwv3eWH/qykk598EUiwYfF24d9uy0UGBRpH7WzkMMNRiFFaOpa0la4lYgVit+dekISytkotUUSukAb9UpjIZbbHlLJUCXC6FpHLER0HMSjGjC2qZdIHM1oiwEScB5J8pG3BeRQYvxtij0fjoYEvCRZY0QKkD+2Jzx3ePGHDBUkoHnVy8jPVtYIOVTDF8KvjSYsII/UYAJBVVhLyFuIW8+4EEnbErouOT3lw4743Uj8zDFDdverCfKf52kbsUSCrlswOnhnAwYGXM5m/HdM4v49JMDao438VXpvtOrVy74EhrQHZ3hibaMeAo4XeTbZacUtv6CK0HW89tM5Brd2LY0uxJ/z+w8v54JEjv4PkzfPmTxY2cTKkf4Hi1dj8va8JhHJSiPmSGsk8a6P+TqUugQCqoZ03PbW+BUlIV03sYL8ccFVFWXJroHRufO1gkUCNcbKjYbrDcYbICt60EVYq2xn8axl93TZWEBZe1TlHTADznvwZkOGA2XGKWkqF2L+9ufLqzfAVCamc858SPaQ76mun7YexecR8hnEyhnjNkOj4Z4iFQppucU8oRVSDV4TK3J134geApIIfClaobhzpbYCbeGdtjGdDFyhLJD2Fr4ei6q/K9hJLr1+j9v+ErRdOSbbC6T668Vaak47SIPhl6Bt2RgZydlUufog9sdbMW+8d8SaD0pVMfo8y0LjkbyRceWoTqXOoEtOzW8vPGGtA4rrWzFhewVqrciFIdEgULmwDRFrTtJohTYgs5xY3Hy8E+urdHbEIeRZttls0tI2qaMyG/eFTJbeXFyls7SKtWFWEakO96tR14MUNrIskVLtsh6SsXo6GobMD9ODBLhchqxm6SUH9S7EWtoDmjx+9q19PwuORGn3JnuteTUWRMS/Y+aN1Jbp9zq2o40eYW+jsQ30Z0MC+TiIwi6d/HhmLBJg03CQtl3KgA9kuo6XvzbI3ftxkcBakpZLFpaHoQ78XEC+kibgdwT64a9xHP0ons3Ms1lNtW+Z6Fqaht8ggSfcTjO1H5QvYfB8nr6AwrF23aJLJj+zMgPmWin08WD3s17cHfbDm3efIAE5NqS9+zlYMj1w9LPMTrvHQIF/WaizW9p26C1dt8MPn765Y9eyBjQLtei67l941lxP
-sidebar_class_name: "get api-method"
+api: eJzFVU1z2zYQ/SuYPVOkYsdNhqc6aabjJlN7rPgkayYrcEUhJgEYACWrGv73zoKkPt1Me0kvFAXux9sHvIctFOSlUzYooyGHSTDWCxS/GflETkijAypNTqxVWIqwJOEtSbVQVAiLDmsK5Hz6qB/1PT03ypGPUd+KWGDkVzLfFcl9MPabsORq5b0yOoUEjCWH3P2mgBw44uMQDwk4em7Ihw+m2EC+BS5FOvArWlspGTOz757Bb8HLJdXIb9Zx3aDI8z9V8JNesLYVQQ5vL9+9n7/7hcZXc4QEwsZS7O2ULqFNQGNNxxm+saPdHKOX86R2t2Lm30kGaHnpnFyxm07cd7P1UypHBeTBNdTygrdG+w79xXjMP8e1bj9D8u/pOIPWJvD2tbI3eoWVKsQfk9s//0uDY77JOeMO+v6IpIjkzTmSB41NWBqn/qLipyG5ep2TQE5jJSbkVuTEp1jz50BqE/AkG6fCBvLpFj4QOnLXTVhCPp21swQClh7yKfSKnawkzBKoKSwNC8o2fMAscgJke1Vmu9OcseaA+/B0PrZpXMXhWWUkVkvjQ371/uLyDXDDAc+E5+tGOkR1yt7XjSXx2Ic8gliYqjJrKsR8I1B4i5IE6kIE80RaoOyUIBbO1NFJHjw54Zl6JUl8MaXSgnRhjdKB/UNxkyVhEf2iUy5c90cn7sherGjVZ9pEqnmX7vfm8mlQemcWpw7Rlz11gZbbL8zgTCjjYaAaFdPnsSL/q1e6bCoMzuhUmvoA492NmDTWGsc71DG+DMHmWeYbS85WGBbG1SmqDM685FaPrKNaeRLXN2KIjUzWSjrjO8K8IGn8xgeqmaxKSdI+jjmg+P3ui1hdpuMjDD7PsvV6nZa6SY0rsz7PZ1jaanSZjtNlqCtGFcjV/nbR78/BCGssS3KpMlkMyXgXVIhmOjkcDxLgY9dNNU4vuKg1PtSoD2BG60RxeDUc8XFwNfwPd1h/vAK9hMxWqDQPEdnc9tKbwr5Ybx3DHFF+swRYZhy43c7R04Or2paXnxtyrP1ZAit0CudM4XTWJsOhZ70+0QZy+NhRMGLJMa1YNd2pPzGnNhkyrqUkG34Ye2gmdw9fIYF5fxnXpuAUh2u+wnANOcT7nJOjLcS1LVSoywZLju1Ksv6wN4u9MhlRMrzwUMMnvTkAeKrsbg5+8lSvpmy3ne7bdhffffrHjJ2ddNG8n7O2bf8GzLgtCQ==
+sidebar_class_name: "put api-method"
 info_path: docs/superplatform/superplatform
 custom_edit_url: null
 ---
@@ -28,20 +28,22 @@ import TabItem from "@theme/TabItem";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Get Container Summary"}
+  children={"Stop a Container"}
 >
 </Heading>
 
 <MethodEndpoint
-  method={"get"}
-  path={"/docker-svc/container/{hash}/summary/{numberOfLines}"}
+  method={"put"}
+  path={"/docker-svc/container/stop"}
 >
   
 </MethodEndpoint>
 
 
 
-Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+Stops a Docker container with the specified parameters.
+
+Requires the `docker-svc:container:stop` permission.
 
 <Heading
   id={"request"}
@@ -51,36 +53,70 @@ Get a summary of the Docker container identified by the hash, limited to a speci
 >
 </Heading>
 
-<details
-  style={{"marginBottom":"1rem"}}
-  className={"openapi-markdown__details"}
-  data-collapsed={false}
-  open={true}
+<MimeTabs
+  className={"openapi-tabs__mime"}
 >
-  <summary
-    style={{}}
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
   >
-    <h3
-      className={"openapi-markdown__details-summary-header-params"}
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
     >
-      Path Parameters
-    </h3>
-  </summary><div>
-    <ul>
-      <ParamsItem
-        className={"paramsItem"}
-        param={{"description":"Container Hash","in":"path","name":"hash","required":true,"schema":{"type":"string"}}}
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
       >
-        
-      </ParamsItem><ParamsItem
-        className={"paramsItem"}
-        param={{"description":"Number of Lines","in":"path","name":"numberOfLines","required":true,"schema":{"type":"integer"}}}
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
       >
-        
-      </ParamsItem>
-    </ul>
-  </div>
-</details><div>
+        <div
+          style={{"marginTop":"1rem","marginBottom":"1rem"}}
+        >
+          
+          
+          Stop Container Request
+          
+          
+        </div>
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"id"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"example":"4378b76e05ba","type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"example":"sup-container-x","type":"string"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
   <div>
     <ApiTabs
       label={undefined}
@@ -132,16 +168,15 @@ Get a summary of the Docker container identified by the hash, limited to a speci
                     </div><ul
                       style={{"marginLeft":"1rem"}}
                     >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"summary"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
                       >
                         
-                      </SchemaItem>
+                        
+                        object
+                        
+                        
+                      </div>
                     </ul>
                   </details>
                 </TabItem><TabItem
@@ -149,7 +184,7 @@ Get a summary of the Docker container identified by the hash, limited to a speci
                   value={"Example (from schema)"}
                 >
                   <ResponseSamples
-                    responseExample={"{\n  \"summary\": \"string\"\n}"}
+                    responseExample={"{}"}
                     language={"json"}
                   >
                     

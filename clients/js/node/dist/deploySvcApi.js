@@ -63,6 +63,7 @@ require('./dockerSvcRunContainerOptions.js');
 require('./dockerSvcRunContainerRequest.js');
 require('./dockerSvcRunContainerResponse.js');
 require('./dockerSvcRunInfo.js');
+require('./dockerSvcStopContainerRequest.js');
 require('./downloadSvcDownloadDetails.js');
 require('./downloadSvcDownloadRequest.js');
 require('./downloadSvcDownloadsResponse.js');

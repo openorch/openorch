@@ -10,19 +10,24 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { DockerSvcBuildImageRequest, DockerSvcContainerIsRunningResponse, DockerSvcGetContainerSummaryResponse, DockerSvcGetDockerHostResponse, DockerSvcGetInfoResponse, DockerSvcRunContainerRequest, DockerSvcRunContainerResponse } from '../models/index';
+import type { DockerSvcBuildImageRequest, DockerSvcContainerIsRunningResponse, DockerSvcGetContainerSummaryResponse, DockerSvcGetDockerHostResponse, DockerSvcGetInfoResponse, DockerSvcRunContainerRequest, DockerSvcRunContainerResponse, DockerSvcStopContainerRequest } from '../models/index';
 export interface BuildImageRequest {
     request: DockerSvcBuildImageRequest;
 }
 export interface ContainerIsRunningRequest {
-    hash: string;
+    hash?: string;
+    name?: string;
 }
-export interface GetContainerSummaryRequest {
-    hash: string;
-    numberOfLines: number;
+export interface ContainerSummaryRequest {
+    hash?: string;
+    name?: string;
+    lines?: number;
 }
 export interface RunContainerRequest {
     request: DockerSvcRunContainerRequest;
+}
+export interface StopContainerRequest {
+    request: DockerSvcStopContainerRequest;
 }
 /**
  *
@@ -39,25 +44,25 @@ export declare class DockerSvcApi extends runtime.BaseAPI {
      */
     buildImage(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
     containerIsRunningRaw(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcContainerIsRunningResponse>>;
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
-    containerIsRunning(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse>;
+    containerIsRunning(requestParameters?: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse>;
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    getContainerSummaryRaw(requestParameters: GetContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcGetContainerSummaryResponse>>;
+    containerSummaryRaw(requestParameters: ContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcGetContainerSummaryResponse>>;
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    getContainerSummary(requestParameters: GetContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcGetContainerSummaryResponse>;
+    containerSummary(requestParameters?: ContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcGetContainerSummaryResponse>;
     /**
      * Retrieve information about the Docker host
      * Get Docker Host
@@ -88,4 +93,14 @@ export declare class DockerSvcApi extends runtime.BaseAPI {
      * Run a Container
      */
     runContainer(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcRunContainerResponse>;
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainerRaw(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainer(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
 }

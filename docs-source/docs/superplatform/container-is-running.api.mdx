@@ -1,11 +1,11 @@
 ---
 id: container-is-running
 title: "Check If a Container Is Running"
-description: "Check if a Docker container identified by the hash is running"
+description: "Check if a Docker container is running, identified by hash or name."
 sidebar_label: "Check If a Container Is Running"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VU1v3DYQ/SvEnFpAljZ2AxQ61U2CZJugDrLxydnDLDUrMaZIhqR2uxH434uRtB+21z00QC62lpwZvvc4b9hDRUF65aKyBkp41ZC8F2otULy28p68kNZEVIa8UBWZqNaKKrHaidiQaDA0QgXhO2OUqSED68gj15pXUMIhdx4+HUIcemwpkg9Q3vWPzz+c9g5DAxkoXnUY+dtgS1BCM+54+tYpTxWU0XeUQZANtQhlD3HnOC5EzyemtOTg4KwJFHj/cjbjfw9PvnkP2QCYTORddE4rOXApvgYO6U+OcJ6ZRjUWVAd6x9NX1mpCAyll+yW7+koyQkq89ts5EHOzQa0q8dfi5u//D4e8t/6cEM8hefEUya3BLjbWq+9U/TQkL89rEskb1GJBfkNevBlq/hxIKYNAsvMq7oZm/ZPQk7/uYgPl3ZIbK2LNfQyTWxYbCcsMWoqNZQfUFIeW5wQoqiHoImxkcbBG0XM/p0KFi6ONwkB1NEjnNecW2krUjQ2xfPn75dUL4NP34BZMduR3CvGxlJ93jsSXKeQLiLXV2m5HP6MIDiUJNJWI9p6MQDkaTKy9bQe/3wbyIvA9KEnig62VEWQqZ5WJ+d6sDWFF/mjX66mPhuuBg8ro1HvaDbors7YMdtBEDjdKLSqmHVBT+CMoU3cao7cml7Y9qf1xLhadc9azzKNSTYyuLIrQOfJOY1xb3+aoCkjZY8ubC+epVYHE9VzsYwcFWiW9DSPRIEjasAuRWiaplSQTiFHuUbz9+EFsrvLZAwyhLIrtdpvXpsutr4spLxRYO31xlc/yJraaUUXybbhZT7qeUNhiXZPPlS2GkILVU1FzyOKUHmTA7TKymuWXXNTZEFs0JzDH2T7n2X4cs/MgjqP5gTz90WE//CxMdx7pn1g4jcowwkGqfjLHHRzNMZl7KA8ZlNPAP3HIMgN2Aqf1/QoD3XqdEi9/68izV5cZbNArXLFa/MyowN8VlGvUgf6D6y+fpoflV/HkNTrLY9/QZsf3gLrjX5DBPe32r1VapmxvDEYzbl1LSS6eJD2ZY+l0lrx98xkywMnZRxtxsWz/wdXPAnpswxEC/03ZMyl9P5o0pUP8uPVsxsH7YzTrs0wp/QtEzONg
+api: eJy9VU1z2zYQ/SsYnGlSsZuZDk9120yqJo09VXxydIDAFYkYBJBdUKrK4X/vLEmJtCLnkOnkog/s19sHvN1WFkAaTYjGO5nL3yrQT8JshRK/e/0EKLR3URkHKAwJbJwzrkyEKcBFszVQiM1BVIoq4VE4VUMqE+kDoOKMy0Lm8pRhSX8P8TKRQaGqIQKSzB/bcxSnmn8oqmQiDZ9+aQAPMpFcReayGkykK6iVzFsZD4HPKSKX6Lrk5bQfOMXltG4wvZx2nUgECt4RENuvFwv+el7q7p1M+sbBRbaqEKzRPSfZZ2KXdlYiIDMWzZDQnGiaqm+8t6Acd3U88pvPoKPsOj776RKIpdspawrx5+ruA1/PX4bIuFLcT9x/N0hA9HiR9Rfwvfoa34NTTaw8mn+h+GFIXl9mKgI6ZcUKcAco3vQ5fwykLpEEukETD70UfgWFgLdNrGT+uObnFlXJKpGjIlc7LdeJrCFWnvVVQuwFxQEyK3qnK9rp7CS8zNAVnqRHfY+D7hq0HJRZr5WtPMX89c/XN68klz2iWnGXQ2NzbOccfjwEEJ9Gl09SbL21fj8MCCUoKA1CuUJE/wROKP2lMQiF2KKvRaxAPBCgIL4Ao0G896VxAlwRvHExPYq1AlUATmq9HR9Qfy/yRK8K5h0cesKN23oG25Oh+6uEWhlum5QF+oUl0VgV0btU+3qW+34pVk0IHpnfgakqxpBnGTUBMFgVtx7rVJlMdsn5BHBXAaE2BOJ2KY6+PQO10ehpaJQEaE8HilBzk9ZocASM8oji7f17sbtJF88wUJ5l+/0+LV2TeiyzMY4yVQZ7dZMu0irWllFFwJrutiOvsxb2qiwBU+Oz3iVj9ky07LKatycTyc9l6GqRXnPS4CnWys1gDotjyYtjGrNLEtPEf0ZPO0nrf9o5481H+CdmwSrjGGdPWDtq41FO2hi13RfhtzXpY51I1gG7t+1GETyg7To+HhZFv60MqY2FQuZbZQm+1dv5JrsI8wkO00LbKduwi+wX2HdUGpfbNyqNO26qtOY/aLhUP3SSo9C42yHmVmsIcRb11UDs5kPp7ZuPMpFqnBSTLDlZcvzB2Y8md5jlPpf1AIE/mZSLIW07iL7rTv6D6cWI0ywZvJmgddd1/wGviR39
 sidebar_class_name: "get api-method"
 info_path: docs/superplatform/superplatform
 custom_edit_url: null
@@ -34,14 +34,14 @@ import TabItem from "@theme/TabItem";
 
 <MethodEndpoint
   method={"get"}
-  path={"/docker-svc/container/{hash}/is-running"}
+  path={"/docker-svc/container/is-running"}
 >
   
 </MethodEndpoint>
 
 
 
-Check if a Docker container identified by the hash is running
+Check if a Docker container is running, identified by hash or name.
 
 <Heading
   id={"request"}
@@ -63,13 +63,18 @@ Check if a Docker container identified by the hash is running
     <h3
       className={"openapi-markdown__details-summary-header-params"}
     >
-      Path Parameters
+      Query Parameters
     </h3>
   </summary><div>
     <ul>
       <ParamsItem
         className={"paramsItem"}
-        param={{"description":"Container Hash","in":"path","name":"hash","required":true,"schema":{"type":"string"}}}
+        param={{"description":"Container Hash","in":"query","name":"hash","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"description":"Container Name","in":"query","name":"name","schema":{"type":"string"}}}
       >
         
       </ParamsItem>
@@ -161,7 +166,7 @@ Check if a Docker container identified by the hash is running
         <div>
           
           
-          Invalid JSON
+          Invalid JSON or Missing Parameters
           
           
         </div><div>

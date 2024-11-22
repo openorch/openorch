@@ -25,6 +25,8 @@ function DockerSvcGetContainerSummaryResponseFromJSONTyped(json, ignoreDiscrimin
         return json;
     }
     return {
+        'logs': json['logs'] == null ? undefined : json['logs'],
+        'status': json['status'] == null ? undefined : json['status'],
         'summary': json['summary'] == null ? undefined : json['summary'],
     };
 }
@@ -33,6 +35,8 @@ function DockerSvcGetContainerSummaryResponseToJSON(value) {
         return value;
     }
     return {
+        'logs': value['logs'],
+        'status': value['status'],
         'summary': value['summary'],
     };
 }
