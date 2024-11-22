@@ -9,13 +9,12 @@ package downloadservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	download "github.com/singulatron/superplatform/server/internal/services/download/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID getDownload
@@ -37,14 +36,13 @@ func (ds *DownloadService) Get(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := ds.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", download.PermissionDownloadView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadView.Id).Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

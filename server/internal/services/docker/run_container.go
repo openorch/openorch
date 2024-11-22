@@ -24,11 +24,10 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/pkg/errors"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
 	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 )
 
 /*
@@ -152,12 +151,12 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 	// by asking the Download Svc where did it download the file(s).
 
 	for envarName, assetURL := range assets {
-		rsp := downloadtypes.GetDownloadResponse{}
-		err := d.router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(assetURL)), nil, &rsp)
+
+		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(assetURL)).Execute()
 		if err != nil {
 			return nil, nil, err
 		}
-		if !rsp.Exists {
+		if !*rsp.Exists {
 			return nil, nil, fmt.Errorf("asset with URL '%v' cannot be found locally", assetURL)
 		}
 
@@ -196,13 +195,13 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 			singulatronVolumeName = mountedVolume
 		} else {
 			// If we are not running in Docker, we will ask the Config Svc about the config directory and we mount that.
-			var getConfigResponse *configtypes.GetConfigResponse
-			err := d.router.Get(context.Background(), "config-svc", "/config", nil, &getConfigResponse)
+
+			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
 			if err != nil {
 				return nil, nil, err
 			}
 
-			configFolderPath := getConfigResponse.Config.Directory
+			configFolderPath := *getConfigResponse.Config.Directory
 			if configFolderPath == "" {
 				return nil, nil, errors.New("config folder not found")
 			}

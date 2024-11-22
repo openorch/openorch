@@ -13,14 +13,15 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
 )
 
 type ChatService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	messagesStore   datastore.DataStore
 	threadsStore    datastore.DataStore
@@ -29,7 +30,7 @@ type ChatService struct {
 }
 
 func NewChatService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*ChatService, error) {
@@ -51,7 +52,8 @@ func NewChatService(
 	}
 
 	service := &ChatService{
-		router:          router,
+		clientFactory: clientFactory,
+
 		lock:            lock,
 		messagesStore:   messagesStore,
 		threadsStore:    threadsStore,
@@ -67,11 +69,11 @@ func (cs *ChatService) Start() error {
 	cs.lock.Acquire(ctx, "chat-svc-start")
 	defer cs.lock.Release(ctx, "chat-svc-start")
 
-	token, err := sdk.RegisterService("chat-svc", "Chat Service", cs.router, cs.credentialStore)
+	token, err := sdk.RegisterService(cs.clientFactory.Client().UserSvcAPI, "chat-svc", "Chat Service", cs.credentialStore)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	return cs.registerPermissions()
 }

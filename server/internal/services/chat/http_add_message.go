@@ -9,12 +9,11 @@ package chatservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	chat "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	user "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // AddMessage sends a new message to a chat thread
@@ -36,14 +35,14 @@ func (a *ChatService) AddMessage(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	rsp := &user.IsAuthorizedResponse{}
-	err := a.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", chat.PermissionMessageCreate.Id), &user.IsAuthorizedRequest{}, rsp)
+
+	isAuthRsp, _, err := a.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), chat.PermissionMessageCreate.Id).Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
@@ -62,7 +61,7 @@ func (a *ChatService) AddMessage(
 	threadId := vars["threadId"]
 	req.Message.ThreadId = threadId
 
-	err = a.addMessage(req.Message)
+	err = a.addMessage(r.Context(), req.Message)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

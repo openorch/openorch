@@ -16,18 +16,19 @@ import (
 	"sync"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
 	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	types "github.com/singulatron/superplatform/server/internal/services/download/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 )
 
 type DownloadService struct {
-	router *router.Router
-	dlock  lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	dlock lock.DistributedLock
 
 	downloads map[string]*types.Download
 	lock      sync.Mutex
@@ -43,7 +44,7 @@ type DownloadService struct {
 }
 
 func NewDownloadService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DownloadService, error) {
@@ -55,8 +56,9 @@ func NewDownloadService(
 	}
 
 	ret := &DownloadService{
+		clientFactory: clientFactory,
+
 		credentialStore: credentialStore,
-		router:          router,
 		dlock:           lock,
 
 		StateFilePath: path.Join(home, "downloads.json"),
@@ -79,11 +81,11 @@ func (dm *DownloadService) Start() error {
 	dm.dlock.Acquire(ctx, "download-svc-start")
 	defer dm.dlock.Release(ctx, "download-svc-start")
 
-	token, err := sdk.RegisterService("download-svc", "Download Service", dm.router, dm.credentialStore)
+	token, err := sdk.RegisterService(dm.clientFactory.Client().UserSvcAPI, "download-svc", "Download Service", dm.credentialStore)
 	if err != nil {
 		return err
 	}
-	dm.router = dm.router.SetBearerToken(token)
+	dm.token = token
 
 	err = dm.registerPermissions()
 	if err != nil {
@@ -154,11 +156,14 @@ func (ds *DownloadService) saveState() error {
 	ds.hasChanged = false
 	ds.lock.Unlock()
 
-	ds.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: types.EventDownloadStatusChangeName,
+	_, err = ds.clientFactory.Client(sdk.WithToken(ds.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
+		Event: &openapi.FirehoseSvcEvent{
+			Name: openapi.PtrString(types.EventDownloadStatusChangeName),
 		},
-	}, nil)
+	}).Execute()
+	if err != nil {
+		logger.Error("Failed to publish: %v", err)
+	}
 
 	err = os.WriteFile(ds.StateFilePath, data, 0666)
 	if err != nil {

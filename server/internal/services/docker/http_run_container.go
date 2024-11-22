@@ -9,11 +9,11 @@ package dockerservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID runContainer
@@ -36,19 +36,17 @@ func (dm *DockerService) RunContainer(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-
-	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionContainerCreate.Id), &usertypes.IsAuthorizedRequest{
+	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionContainerCreate.Id).Body(openapi.UserSvcIsAuthorizedRequest{
 		SlugsGranted: []string{"model-svc", "deploy-svc"},
-	}, rsp)
+	}).Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: err.Error()})
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: "Unauthorized"})
+		w.Write([]byte(`Unauthorized`))
 		return
 	}
 

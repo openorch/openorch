@@ -9,16 +9,17 @@ package chatservice
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 )
 
-func (a *ChatService) addThread(chatThread *chattypes.Thread) (*chattypes.Thread, error) {
+func (a *ChatService) addThread(ctx context.Context, chatThread *chattypes.Thread) (*chattypes.Thread, error) {
 	if chatThread.Id == "" {
 		chatThread.Id = sdk.Id("thr")
 	}
@@ -41,12 +42,16 @@ func (a *ChatService) addThread(chatThread *chattypes.Thread) (*chattypes.Thread
 		ThreadId: chatThread.Id,
 	}
 
-	err = a.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: ev.Name(),
-			Data: ev,
+	var m map[string]interface{}
+	js, _ := json.Marshal(ev)
+	json.Unmarshal(js, &m)
+
+	_, err = a.clientFactory.Client(sdk.WithToken(a.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
+		Event: &openapi.FirehoseSvcEvent{
+			Name: openapi.PtrString(ev.Name()),
+			Data: m,
 		},
-	}, nil)
+	}).Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}

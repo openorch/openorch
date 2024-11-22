@@ -9,21 +9,24 @@ package downloadservice
 
 import (
 	"context"
-	"fmt"
 
+	client "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 func (ds *DownloadService) registerPermissions() error {
+	ctx := context.Background()
+	userSvc := ds.clientFactory.Client(sdk.WithToken(ds.token)).UserSvcAPI
+
 	for _, permission := range downloadtypes.DownloadPermissions {
-		rsp := &usertypes.UpserPermissionResponse{}
-		err := ds.router.Put(context.Background(), "user-svc", fmt.Sprintf("/permission/%v", permission.Id), &usertypes.UpserPermissionRequest{
-			Permission: &usertypes.Permission{
-				Name:        permission.Name,
-				Description: permission.Description,
+		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).RequestBody(client.UserSvcUpserPermissionRequest{
+			Permission: &client.UserSvcPermission{
+				Name:        client.PtrString(permission.Name),
+				Description: client.PtrString(permission.Description),
 			},
-		}, rsp)
+		}).Execute()
 		if err != nil {
 			return err
 		}
@@ -34,9 +37,7 @@ func (ds *DownloadService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range downloadtypes.DownloadPermissions {
-			rsp := &usertypes.AddPermissionToRoleResponse{}
-			err := ds.router.Put(context.Background(), "user-svc",
-				fmt.Sprintf("/role/%v/permission/%v", role.Id, permission.Id), &usertypes.AddPermissionToRoleRequest{}, rsp)
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
 			if err != nil {
 				return err
 			}

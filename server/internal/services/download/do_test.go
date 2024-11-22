@@ -9,7 +9,6 @@ package downloadservice_test
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -19,10 +18,10 @@ import (
 	"testing"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/server/internal/di"
 	downloadservice "github.com/singulatron/superplatform/server/internal/services/download"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 	types "github.com/singulatron/superplatform/server/internal/services/download/types"
 	"github.com/stretchr/testify/require"
 )
@@ -53,28 +52,26 @@ func TestDownloadFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
-	err = router.Put(context.Background(), "download-svc", "/download", downloadtypes.DownloadRequest{
-		URL: fileHostServer.URL,
-	}, nil)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).Request(openapi.DownloadSvcDownloadRequest{
+		Url: openapi.PtrString(fileHostServer.URL),
+	}).Execute()
 	require.NoError(t, err)
 
 	for {
 		time.Sleep(5 * time.Millisecond)
-		// req := downloadtypes.GetDownloadRequest{}
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(fileHostServer.URL)), nil, &rsp)
+
+		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(fileHostServer.URL)).Execute()
 		require.NoError(t, err)
 
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
+		if *rsp.Exists && *rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			break
 		}
 	}
@@ -110,14 +107,13 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	downloadURL := fileHostServer.URL + "/file"
 
@@ -126,19 +122,16 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 		t.Fatalf("Failed to create part file: %s", err)
 	}
 
-	req := downloadtypes.DownloadRequest{
-		URL: downloadURL,
-	}
-	err = router.Put(context.Background(), "download-svc", "/download", req, nil)
-	require.NoError(t, err)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).Request(openapi.DownloadSvcDownloadRequest{
+		Url: openapi.PtrString(downloadURL),
+	}).Execute()
 
 	for {
 		time.Sleep(5 * time.Millisecond)
 
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(downloadURL)), nil, &rsp)
+		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(downloadURL)).Execute()
 		require.NoError(t, err)
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
+		if *rsp.Exists && *rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			break
 		}
 	}
@@ -162,35 +155,32 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(options.HomeDir, ".singulatron", "downloads", downloadservice.EncodeURLtoFileName(downloadURL))
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
-	req := downloadtypes.DownloadRequest{
-		URL: downloadURL,
-	}
-	err = router.Put(context.Background(), "download-svc", "/download", req, nil)
-	require.NoError(t, err)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).Request(openapi.DownloadSvcDownloadRequest{
+		Url: openapi.PtrString(downloadURL),
+	}).Execute()
 
 	var (
-		d *types.DownloadDetails
+		d *openapi.DownloadSvcDownloadDetails
 	)
 	for {
 		time.Sleep(5 * time.Millisecond)
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(downloadURL)), nil, &rsp)
+
+		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(downloadURL)).Execute()
 		require.NoError(t, err)
 
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
+		if *rsp.Exists && *rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			d = rsp.Download
 			break
 		}

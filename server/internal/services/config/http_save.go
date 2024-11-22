@@ -8,7 +8,6 @@
 package configservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
@@ -34,7 +33,7 @@ func (cs *ConfigService) Save(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(context.Background(), config.PermissionConfigEdit.Id).Body(openapi.UserSvcIsAuthorizedRequest{
+	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), config.PermissionConfigEdit.Id).Body(openapi.UserSvcIsAuthorizedRequest{
 		SlugsGranted: []string{"model-svc"},
 	}).Execute()
 	if err != nil {
