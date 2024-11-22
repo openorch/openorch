@@ -17,12 +17,13 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 )
 
 type DockerService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	imagesCache          map[string]bool
 	imagePullMutexes     map[string]*sync.Mutex
@@ -40,7 +41,7 @@ type DockerService struct {
 
 func NewDockerService(
 	volumeName string,
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DockerService, error) {
@@ -55,7 +56,7 @@ func NewDockerService(
 	}
 
 	service := &DockerService{
-		router:          router,
+		clientFactory:   clientFactory,
 		lock:            lock,
 		credentialStore: credentialStore,
 
@@ -74,11 +75,11 @@ func (ds *DockerService) Start() error {
 	ds.lock.Acquire(ctx, "docker-svc-start")
 	defer ds.lock.Release(ctx, "docker-svc-start")
 
-	token, err := sdk.RegisterService("docker-svc", "Docker Service", ds.router, ds.credentialStore)
+	token, err := sdk.RegisterService(ds.clientFactory.Client().UserSvcAPI, "docker-svc", "Docker Service", ds.credentialStore)
 	if err != nil {
 		return err
 	}
-	ds.router = ds.router.SetBearerToken(token)
+	ds.token = token
 
 	return ds.registerPermissions()
 }

@@ -51,7 +51,6 @@ type Options struct {
 	Lock lock.DistributedLock
 
 	LLMClient        llm.ClientI
-	Router           *router.Router
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 	HomeDir          string
 	ClientFactory    sdk.ClientFactory
@@ -105,18 +104,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		}
 	}
 	configService.SetDatastoreFactory(options.DatastoreFactory)
-
-	if options.Router == nil {
-		router, err := router.NewRouter(options.DatastoreFactory)
-		if err != nil {
-			logger.Error("Creating router failed", slog.String("error", err.Error()))
-			os.Exit(1)
-		}
-		if options.Url != "" {
-			router.SetDefaultAddress(options.Url)
-		}
-		options.Router = router
-	}
 
 	configService.SetRouter(options.Router)
 

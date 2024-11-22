@@ -106,6 +106,7 @@ func TestMessageCreatesThread(t *testing.T) {
 				ThreadId: threadId,
 				Content:  "hi there",
 			}}
+
 		err = router.Post(context.Background(), "chat-svc", fmt.Sprintf("/thread/%v/message", threadId), req, nil)
 		require.NoError(t, err)
 	})

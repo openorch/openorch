@@ -57,7 +57,7 @@ func AdminClient(url string) (*openapi.APIClient, string, error) {
 	return adminClient, *adminLoginRsp.Token.Token, nil
 }
 
-func MakeClients(router *router.Router, num int) ([]*openapi.APIClient, error) {
+func MakeClients(notLoggedInclient *openapi.APIClient, num int) ([]*openapi.APIClient, error) {
 	var ret []*openapi.APIClient
 
 	for i := 0; i < num; i++ {
@@ -65,7 +65,7 @@ func MakeClients(router *router.Router, num int) ([]*openapi.APIClient, error) {
 		password := fmt.Sprintf("testUserPassword%v", i)
 		username := fmt.Sprintf("Test User Name %v", i)
 
-		token, err := sdk.RegisterUser(router, slug, password, username)
+		token, err := sdk.RegisterUser(notLoggedInclient.UserSvcAPI, slug, password, username)
 		if err != nil {
 			return nil, err
 		}
@@ -73,7 +73,7 @@ func MakeClients(router *router.Router, num int) ([]*openapi.APIClient, error) {
 		c := openapi.NewAPIClient(&openapi.Configuration{
 			Servers: openapi.ServerConfigurations{
 				{
-					URL:         router.Address(),
+					URL:         router.SelfAddress(),
 					Description: "Default server",
 				},
 			},

@@ -15,9 +15,10 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID buildImage
@@ -39,14 +40,18 @@ func (dm *DockerService) BuildImage(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	rsp := &usertypes.IsAuthorizedResponse{}
 
-	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionImageBuild.Id), &usertypes.IsAuthorizedRequest{
+	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(context.Background(), docker.PermissionImageBuild.Id).Body(openapi.UserSvcIsAuthorizedRequest{
 		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
-	if err != nil || !rsp.Authorized {
+	}).Execute()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: "Unauthorized"})
+		w.Write([]byte(`Unauthorized`))
 		return
 	}
 

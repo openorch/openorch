@@ -13,9 +13,10 @@ import (
 	"path"
 
 	"github.com/pkg/errors"
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 	types "github.com/singulatron/superplatform/server/internal/services/config/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 	"gopkg.in/yaml.v2"
 )
 
@@ -34,12 +35,13 @@ func (cs *ConfigService) saveConfig(config types.Config) error {
 	}
 
 	ev := types.EventConfigUpdate{}
-	err = cs.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: ev.Name(),
-			Data: ev,
+	_, err = cs.clientFactory.Client(sdk.WithToken(cs.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
+		Event: &openapi.FirehoseSvcEvent{
+			Name: openapi.PtrString(ev.Name()),
+			Data: nil,
 		},
-	}, nil)
+	}).Execute()
+
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}

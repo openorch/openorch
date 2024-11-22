@@ -9,11 +9,10 @@ package configservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	config "github.com/singulatron/superplatform/server/internal/services/config/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // Get retrieves the current configuration
@@ -32,14 +31,13 @@ func (cs *ConfigService) Get(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := cs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", config.PermissionConfigView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), config.PermissionConfigView.Id).Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

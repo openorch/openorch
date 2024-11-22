@@ -18,9 +18,9 @@ import (
 
 type DeployService struct {
 	clientFactory sdk.ClientFactory
+	token         string
 
-	lock  lock.DistributedLock
-	token string
+	lock lock.DistributedLock
 
 	credentialStore datastore.DataStore
 	deploymentStore datastore.DataStore
@@ -65,7 +65,7 @@ func (ns *DeployService) Start() error {
 	ns.lock.Acquire(ctx, "deploy-svc-start")
 	defer ns.lock.Release(ctx, "deploy-svc-start")
 
-	token, err := sdk.RegisterServiceNoRouter(ns.clientFactory.Client().UserSvcAPI, "deploy-svc", "Deploy Service", ns.credentialStore)
+	token, err := sdk.RegisterService(ns.clientFactory.Client().UserSvcAPI, "deploy-svc", "Deploy Service", ns.credentialStore)
 	if err != nil {
 		return err
 	}

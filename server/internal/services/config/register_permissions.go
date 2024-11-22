@@ -10,35 +10,45 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
+	client "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // this is called in the Start not in constructor to avoid import cycles
 func (p *ConfigService) registerPermissions() error {
+	ctx := context.Background()
+	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
+
 	for _, permission := range configtypes.ConfigPermissions {
-		rsp := &usertypes.UpserPermissionResponse{}
-		err := p.router.Put(context.Background(), "user-svc", fmt.Sprintf("/permission/%v", permission.Id), &usertypes.UpserPermissionRequest{
-			Permission: &usertypes.Permission{
-				Name:        permission.Name,
-				Description: permission.Description,
+		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).RequestBody(client.UserSvcUpserPermissionRequest{
+			Permission: &client.UserSvcPermission{
+				Name:        client.PtrString(permission.Name),
+				Description: client.PtrString(permission.Description),
 			},
-		}, rsp)
+		}).Execute()
 		if err != nil {
 			return err
 		}
 	}
 
+	for _, role := range []*usertypes.Role{} {
+		for _, permission := range configtypes.ConfigPermissions {
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
+			if err != nil {
+				return err
+			}
+		}
+	}
+
 	for _, role := range []*usertypes.Role{
-		usertypes.RoleAdmin,
+
 		usertypes.RoleUser,
 	} {
-		for _, permission := range configtypes.ConfigPermissions {
-			rsp := &usertypes.AddPermissionToRoleResponse{}
-			err := p.router.Put(context.Background(), "user-svc",
-				fmt.Sprintf("/role/%v/permission/%v", role.Id, permission.Id), &usertypes.AddPermissionToRoleRequest{}, rsp)
+		for _, permission := range configtypes.ConfigUserPermissions {
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
 			if err != nil {
 				return err
 			}
