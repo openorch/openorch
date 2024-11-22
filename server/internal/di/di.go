@@ -321,10 +321,13 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	router.HandleFunc("/docker-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.BuildImage(w, r)
 	})).Methods("OPTIONS", "PUT")
-	router.HandleFunc("/docker-svc/container/{hash}/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/docker-svc/container/stop", appl(func(w http.ResponseWriter, r *http.Request) {
+		dockerService.StopContainer(w, r)
+	})).Methods("OPTIONS", "PUT")
+	router.HandleFunc("/docker-svc/container/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.ContainerIsRunning(w, r)
 	})).Methods("OPTIONS", "GET")
-	router.HandleFunc("/docker-svc/container/{hash}/summary/{numberOfLines}", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/docker-svc/container/summary", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Summary(w, r)
 	})).Methods("OPTIONS", "GET")
 

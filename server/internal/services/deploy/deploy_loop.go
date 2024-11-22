@@ -20,7 +20,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/pkg/errors"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -29,6 +28,9 @@ import (
 	"github.com/singulatron/superplatform/server/internal/services/deploy/allocator"
 	deploy "github.com/singulatron/superplatform/server/internal/services/deploy/types"
 )
+
+// image and container name prefix
+const containerPrefix = "sup-"
 
 func (ns *DeployService) loop(triggerOnly bool) {
 	interval := 15 * time.Second
@@ -179,10 +181,30 @@ func (ns *DeployService) processCommand(
 		ns.executeStartCommand(ctx, command, node, definition, deployment)
 	case deploy.CommandTypeScale:
 	case deploy.CommandTypeKill:
-		spew.Dump("Killing deployment", deployment)
+		ns.executeKillCommand(ctx, command, node, definition, deployment)
 	}
 
 	return nil
+}
+
+func (ns *DeployService) executeKillCommand(
+	ctx context.Context,
+	command *deploy.Command,
+	node *openapi.RegistrySvcNode,
+	definition *openapi.RegistrySvcDefinition,
+	deployment *deploy.Deployment,
+) error {
+	logger.Info("Executing deploy kill command", slog.String("deploymentId", deployment.Id))
+	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
+
+	name := fmt.Sprintf("sup-%v", definition.Id)
+	_, _, err := client.DockerSvcAPI.StopContainer(ctx).Request(
+		openapi.DockerSvcStopContainerRequest{
+			Name: &name,
+		},
+	).Execute()
+
+	return err
 }
 
 func (ns *DeployService) executeStartCommand(
@@ -304,7 +326,7 @@ func (ns *DeployService) makeSureItRuns(
 			openapi.DockerSvcBuildImageRequest{
 				ContextPath:    buildContext,
 				DockerfilePath: definition.Repository.ContainerFile,
-				Name:           fmt.Sprintf("superplatform-%v", definition.Id),
+				Name:           fmt.Sprintf("%v-%v", containerPrefix, definition.Id),
 			},
 		).Execute()
 

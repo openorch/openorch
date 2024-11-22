@@ -12,25 +12,25 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID containerIsRunning
 // @Summary      Check If a Container Is Running
-// @Description  Check if a Docker container identified by the hash is running
+// @Description  Check if a Docker container is running, identified by hash or name.
 // @Tags         Docker Svc
 // @Accept       json
 // @Produce      json
-// @Param        hash  path      string  true  "Container Hash"
+// @Param        hash  query     string  false  "Container Hash"
+// @Param        name  query     string  false  "Container Name"
 // @Success      200   {object}  docker.ContainerIsRunningResponse
-// @Failure      400   {object}  docker.ErrorResponse  "Invalid JSON"
+// @Failure      400   {object}  docker.ErrorResponse  "Invalid JSON or Missing Parameters"
 // @Failure      401   {object}  docker.ErrorResponse  "Unauthorized"
 // @Failure      500   {object}  docker.ErrorResponse  "Internal Server Error"
 // @SecurityDefinitions.bearerAuth BearerAuth
 // @Security     BearerAuth
-// @Router       /docker-svc/container/{hash}/is-running [get]
+// @Router       /docker-svc/container/is-running [get]
 func (dm *DockerService) ContainerIsRunning(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -51,9 +51,33 @@ func (dm *DockerService) ContainerIsRunning(
 		return
 	}
 
-	vars := mux.Vars(r)
+	q := r.URL.Query()
+	hash := q.Get("hash")
 
-	isRunning, err := dm.hashIsRunning(vars["hash"])
+	name := q.Get("name")
+	if name == "" {
+		w.WriteHeader(http.StatusNotImplemented)
+		w.Write([]byte(`Not Implemented`))
+		return
+	}
+
+	if hash == "" && name == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`Missing Parameters`))
+		return
+	}
+
+	var (
+		isRunning bool
+	)
+
+	if hash != "" {
+		isRunning, err = dm.hashIsRunning(hash)
+	}
+	if name != "" {
+		isRunning, err = dm.nameIsRunning(name)
+	}
+
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

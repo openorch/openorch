@@ -83,7 +83,7 @@ func scaleDeployment(
 func checkHealthAndKill(instance openapi.RegistrySvcInstance) []*deploy.Command {
 	commands := []*deploy.Command{}
 
-	if instance.LastHeartbeat == nil {
+	if instance.LastHeartbeat == nil || instance.Status == openapi.InstanceStatusUnreachable {
 		commands = append(commands, &deploy.Command{
 			Action:       "KILL",
 			DeploymentId: instance.DeploymentId,

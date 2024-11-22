@@ -20,6 +20,9 @@ var _ MappedNullable = &DockerSvcGetContainerSummaryResponse{}
 
 // DockerSvcGetContainerSummaryResponse struct for DockerSvcGetContainerSummaryResponse
 type DockerSvcGetContainerSummaryResponse struct {
+	Logs *string `json:"logs,omitempty"`
+	Status *string `json:"status,omitempty"`
+	// DEPRECATED. Summary contains both Status and Logs.
 	Summary *string `json:"summary,omitempty"`
 }
 
@@ -38,6 +41,70 @@ func NewDockerSvcGetContainerSummaryResponse() *DockerSvcGetContainerSummaryResp
 func NewDockerSvcGetContainerSummaryResponseWithDefaults() *DockerSvcGetContainerSummaryResponse {
 	this := DockerSvcGetContainerSummaryResponse{}
 	return &this
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *DockerSvcGetContainerSummaryResponse) GetLogs() string {
+	if o == nil || IsNil(o.Logs) {
+		var ret string
+		return ret
+	}
+	return *o.Logs
+}
+
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerSvcGetContainerSummaryResponse) GetLogsOk() (*string, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
+
+// HasLogs returns a boolean if a field has been set.
+func (o *DockerSvcGetContainerSummaryResponse) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given string and assigns it to the Logs field.
+func (o *DockerSvcGetContainerSummaryResponse) SetLogs(v string) {
+	o.Logs = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *DockerSvcGetContainerSummaryResponse) GetStatus() string {
+	if o == nil || IsNil(o.Status) {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerSvcGetContainerSummaryResponse) GetStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *DockerSvcGetContainerSummaryResponse) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *DockerSvcGetContainerSummaryResponse) SetStatus(v string) {
+	o.Status = &v
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
@@ -82,6 +149,12 @@ func (o DockerSvcGetContainerSummaryResponse) MarshalJSON() ([]byte, error) {
 
 func (o DockerSvcGetContainerSummaryResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}

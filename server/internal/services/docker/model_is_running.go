@@ -32,3 +32,24 @@ func (d *DockerService) hashIsRunning(hash string) (bool, error) {
 
 	return false, nil
 }
+
+func (d *DockerService) nameIsRunning(name string) (bool, error) {
+	ctx := context.Background()
+	containers, err := d.client.ContainerList(ctx, container.ListOptions{All: true})
+	if err != nil {
+		return false, errors.Wrap(err, "error listing docker containers when checking for runnign")
+	}
+
+	for _, container := range containers {
+		if container.State != "running" {
+			continue
+		}
+		for _, name := range container.Names {
+			if name == name {
+				return true, nil
+			}
+		}
+	}
+
+	return false, nil
+}

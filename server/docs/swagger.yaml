@@ -441,7 +441,12 @@ definitions:
     type: object
   docker_svc.GetContainerSummaryResponse:
     properties:
+      logs:
+        type: string
+      status:
+        type: string
       summary:
+        description: DEPRECATED. Summary contains both Status and Logs.
         type: string
     type: object
   docker_svc.GetDockerHostResponse:
@@ -526,6 +531,17 @@ definitions:
         type: boolean
       portNumber:
         type: integer
+    type: object
+  docker_svc.StopContainerRequest:
+    properties:
+      id:
+        example: 4378b76e05ba
+        type: string
+      name:
+        example: sup-container-x
+        type: string
+    type: object
+  docker_svc.StopContainerResponse:
     type: object
   download_svc.DownloadDetails:
     properties:
@@ -2452,17 +2468,20 @@ paths:
       summary: Run a Container
       tags:
       - Docker Svc
-  /docker-svc/container/{hash}/is-running:
+  /docker-svc/container/is-running:
     get:
       consumes:
       - application/json
-      description: Check if a Docker container identified by the hash is running
+      description: Check if a Docker container is running, identified by hash or name.
       operationId: containerIsRunning
       parameters:
       - description: Container Hash
-        in: path
+        in: query
         name: hash
-        required: true
+        type: string
+      - description: Container Name
+        in: query
+        name: name
         type: string
       produces:
       - application/json
@@ -2472,7 +2491,7 @@ paths:
           schema:
             $ref: '#/definitions/docker_svc.ContainerIsRunningResponse'
         "400":
-          description: Invalid JSON
+          description: Invalid JSON or Missing Parameters
           schema:
             $ref: '#/definitions/docker_svc.ErrorResponse'
         "401":
@@ -2488,23 +2507,65 @@ paths:
       summary: Check If a Container Is Running
       tags:
       - Docker Svc
-  /docker-svc/container/{hash}/summary/{numberOfLines}:
+  /docker-svc/container/stop:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Stops a Docker container with the specified parameters.
+
+        Requires the `docker-svc:container:stop` permission.
+      operationId: stopContainer
+      parameters:
+      - description: Stop Container Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/docker_svc.StopContainerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/docker_svc.StopContainerResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/docker_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Stop a Container
+      tags:
+      - Docker Svc
+  /docker-svc/container/summary:
     get:
       consumes:
       - application/json
-      description: Get a summary of the Docker container identified by the hash, limited
-        to a specified number of lines
-      operationId: getContainerSummary
+      description: Get a summary of the Docker container identified by hash or name,
+        limited to a specified number of lines.
+      operationId: containerSummary
       parameters:
       - description: Container Hash
-        in: path
+        in: query
         name: hash
-        required: true
+        type: string
+      - description: Container Name
+        in: query
+        name: name
         type: string
       - description: Number of Lines
-        in: path
-        name: numberOfLines
-        required: true
+        in: query
+        name: lines
         type: integer
       produces:
       - application/json
@@ -2514,7 +2575,7 @@ paths:
           schema:
             $ref: '#/definitions/docker_svc.GetContainerSummaryResponse'
         "400":
-          description: Invalid JSON
+          description: Invalid JSON or Missing Parameters
           schema:
             $ref: '#/definitions/docker_svc.ErrorResponse'
         "401":

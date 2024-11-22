@@ -84,6 +84,13 @@ type BuildImageRequest struct {
 	DockerfilePath string `json:"dockerfilePath" example:"Dockerfile"`
 }
 
+type StopContainerRequest struct {
+	Id   string `json:"id" example:"4378b76e05ba"`
+	Name string `json:"name" example:"sup-container-x"`
+}
+
+type StopContainerResponse struct{}
+
 type BuildImageResponse struct {
 }
 
@@ -97,6 +104,9 @@ type GetContainerSummaryRequest struct {
 }
 
 type GetContainerSummaryResponse struct {
+	Status string `json:"status"`
+	Logs   string `json:"logs"`
+	// DEPRECATED. Summary contains both Status and Logs.
 	Summary string `json:"summary"`
 }
 

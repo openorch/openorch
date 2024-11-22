@@ -110,7 +110,7 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 		if existingContainer.State != "running" || existingContainer.Labels["superplatform-hash"] != options.Hash {
 			logs, _ := d.getContainerLogsAndStatus(options.Hash, 10)
 			logger.Debug("Container state is not running or hash is mismatched, removing...",
-				slog.String("containerLogs", logs),
+				slog.String("containerLogs", logs.Summary),
 			)
 
 			if err := d.client.ContainerRemove(ctx, existingContainer.ID, container.RemoveOptions{Force: true}); err != nil {

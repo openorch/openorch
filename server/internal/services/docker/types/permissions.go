@@ -27,6 +27,11 @@ var PermissionContainerEdit = usertypes.Permission{
 	Name: "Docker Service - Container Edit",
 }
 
+var PermissionContainerStop = usertypes.Permission{
+	Id:   "docker-svc:container:stop",
+	Name: "Docker Service - Container Stop",
+}
+
 var PermissionImageBuild = usertypes.Permission{
 	Id:   "docker-svc:image:build",
 	Name: "Docker Service - Image Build",
@@ -35,5 +40,6 @@ var PermissionImageBuild = usertypes.Permission{
 var DockerPermissions = []usertypes.Permission{
 	PermissionContainerView,
 	PermissionContainerEdit,
+	PermissionContainerStop,
 	PermissionImageBuild,
 }

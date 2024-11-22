@@ -13,25 +13,25 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/mux"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
-// @ID getContainerSummary
+// @ID containerSummary
 // @Summary      Get Container Summary
-// @Description  Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+// @Description  Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
 // @Tags         Docker Svc
 // @Accept       json
 // @Produce      json
-// @Param        hash           path     string  true  "Container Hash"
-// @Param        numberOfLines  path     int     true  "Number of Lines"
+// @Param        hash           query    string  false  "Container Hash"
+// @Param        name           query    string  false  "Container Name"
+// @Param        lines          query    int     false  "Number of Lines"
 // @Success      200            {object} docker.GetContainerSummaryResponse
-// @Failure      400            {object} docker.ErrorResponse  "Invalid JSON"
+// @Failure      400            {object} docker.ErrorResponse  "Invalid JSON or Missing Parameters"
 // @Failure      401            {object} docker.ErrorResponse  "Unauthorized"
 // @Failure      500            {object} docker.ErrorResponse  "Internal Server Error"
-// @Security BearerAuth
-// @Router       /docker-svc/container/{hash}/summary/{numberOfLines} [get]
+// @Security     BearerAuth
+// @Router       /docker-svc/container/summary [get]
 func (dm *DockerService) Summary(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -52,9 +52,18 @@ func (dm *DockerService) Summary(
 		return
 	}
 
-	vars := mux.Vars(r)
-	hash := vars["hash"]
-	lines, err := strconv.ParseInt(vars["numberOfLines"], 10, 64)
+	q := r.URL.Query()
+	hash := q.Get("hash")
+	numberOfLines := q.Get("lines")
+
+	name := q.Get("name")
+	if name == "" {
+		w.WriteHeader(http.StatusNotImplemented)
+		w.Write([]byte(`Not Implemented`))
+		return
+	}
+
+	lines, err := strconv.ParseInt(numberOfLines, 10, 64)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
@@ -69,7 +78,9 @@ func (dm *DockerService) Summary(
 	}
 
 	jsonData, _ := json.Marshal(&docker.GetContainerSummaryResponse{
-		Summary: summary,
+		Summary: summary.Summary,
+		Logs:    summary.Logs,
+		Status:  summary.Status,
 	})
 	w.Write(jsonData)
 }
