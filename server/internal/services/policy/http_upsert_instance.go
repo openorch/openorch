@@ -2,13 +2,11 @@ package policyservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	policy "github.com/singulatron/superplatform/server/internal/services/policy/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // UpsertInstance allows a user to upsert a new policy instance
@@ -31,14 +29,13 @@ func (s *PolicyService) UpsertInstance(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := s.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", policy.PermissionInstanceEdit.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionInstanceEdit.Id).Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

@@ -15,15 +15,16 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	streammanager "github.com/singulatron/superplatform/server/internal/services/prompt/sub/stream_manager"
 	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
 )
 
 type PromptService struct {
+	clientFactory sdk.ClientFactory
+	token         string
+
 	llmCLient llm.ClientI
-	router    *router.Router
 	lock      lock.DistributedLock
 
 	*streammanager.StreamManager
@@ -36,7 +37,7 @@ type PromptService struct {
 }
 
 func NewPromptService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	llmClient llm.ClientI,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
@@ -52,8 +53,9 @@ func NewPromptService(
 	}
 
 	service := &PromptService{
+		clientFactory: clientFactory,
+
 		llmCLient: llmClient,
-		router:    router,
 		lock:      lock,
 
 		StreamManager: streammanager.NewStreamManager(),
@@ -94,11 +96,11 @@ func (cs *PromptService) Start() error {
 	cs.lock.Acquire(ctx, "prompt-svc-start")
 	defer cs.lock.Release(ctx, "prompt-svc-start")
 
-	token, err := sdk.RegisterService("prompt-svc", "Prompt Service", cs.router, cs.credentialStore)
+	token, err := sdk.RegisterService(cs.clientFactory.Client().UserSvcAPI, "prompt-svc", "Prompt Service", cs.credentialStore)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	return cs.registerPermissions()
 }

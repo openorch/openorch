@@ -14,14 +14,15 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	policytypes "github.com/singulatron/superplatform/server/internal/services/policy/types"
 )
 
 type PolicyService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	instancesStore  datastore.DataStore
 	credentialStore datastore.DataStore
@@ -33,7 +34,7 @@ type PolicyService struct {
 }
 
 func NewPolicyService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PolicyService, error) {
@@ -49,8 +50,9 @@ func NewPolicyService(
 	}
 
 	service := &PolicyService{
-		router: router,
-		lock:   lock,
+		clientFactory: clientFactory,
+
+		lock: lock,
 
 		instancesStore:  instancesStore,
 		credentialStore: credentialStore,
@@ -74,11 +76,11 @@ func (cs *PolicyService) Start() error {
 		cs.instances = append(cs.instances, instance)
 	}
 
-	token, err := sdk.RegisterService("policy-svc", "Policy Service", cs.router, cs.credentialStore)
+	token, err := sdk.RegisterService(cs.clientFactory.Client().UserSvcAPI, "policy-svc", "Policy Service", cs.credentialStore)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	return cs.registerPermissions()
 }

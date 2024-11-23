@@ -2,9 +2,7 @@ package modelservice_test
 
 import (
 	"context"
-	"fmt"
 	"net/http/httptest"
-	"net/url"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -12,8 +10,6 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/server/internal/di"
 	configservice "github.com/singulatron/superplatform/server/internal/services/config"
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 )
 
 func TestModel(t *testing.T) {
@@ -30,52 +26,40 @@ func TestModel(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
-
 	require.NoError(t, starterFunc())
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	t.Run("get models", func(t *testing.T) {
-		getModelsRsp := modeltypes.ListResponse{}
-		err = router.Post(context.Background(), "model-svc", "/models", nil, &getModelsRsp)
+		getModelsRsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).Execute()
 		require.NoError(t, err)
 
-		require.Equal(t, 1, len(getModelsRsp.Models[0].Assets))
+		require.Equal(t, 1, len(*getModelsRsp.Models[0].Assets))
 	})
 
 	t.Run("model status is not running, not ready", func(t *testing.T) {
-		// statusReq := modeltypes.StatusRequest{}
-		statusRsp := modeltypes.StatusResponse{}
-		err = router.Get(context.Background(), "model-svc", fmt.Sprintf("/model/%v/status", url.PathEscape("huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf")), nil, &statusRsp)
+		statusRsp, _, err := userClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").Execute()
 		require.NoError(t, err)
 
-		require.Equal(t, false, statusRsp.Status.Running)
-		require.Equal(t, false, statusRsp.Status.AssetsReady)
+		require.Equal(t, false, *statusRsp.Status.Running)
+		require.Equal(t, false, *statusRsp.Status.AssetsReady)
 		// will be ~ "172.17.0.1:8001"
-		require.Equal(t, true, statusRsp.Status.Address != "")
+		require.Equal(t, true, *statusRsp.Status.Address != "")
 	})
 
 	t.Run("default", func(t *testing.T) {
-		//getConfigReq := configtypes.GetConfigRequest{}
-		getConfigRsp := configtypes.GetConfigResponse{}
-		err = router.Get(context.Background(), "config-svc", "/config", nil, &getConfigRsp)
+		getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).Execute()
 		require.NoError(t, err)
-		require.Equal(t, configservice.DefaultModelId, getConfigRsp.Config.Model.CurrentModelId)
+		require.Equal(t, configservice.DefaultModelId, *getConfigRsp.Config.Model.CurrentModelId)
 
-		makeDefReq := modeltypes.MakeDefaultRequest{}
-		makeDefRsp := modeltypes.MakeDefaultResponse{}
-		err = router.Post(context.Background(), "model-svc", fmt.Sprintf("/%v/make-default", url.PathEscape("huggingface/TheBloke/codellama-7b.Q3_K_M.gguf")), makeDefReq, &makeDefRsp)
+		_, _, err = userClient.ModelSvcAPI.MakeDefault(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").Execute()
 		// errors because it is not downloaded yet
 		require.Error(t, err)
 
-		//getConfigReq = configtypes.GetConfigRequest{}
-		getConfigRsp = configtypes.GetConfigResponse{}
-		err = router.Get(context.Background(), "config-svc", "/config", nil, &getConfigRsp)
+		getConfigRsp, _, err = userClient.ConfigSvcAPI.GetConfig(context.Background()).Execute()
 		require.NoError(t, err)
 		require.Equal(t, configservice.DefaultModelId, getConfigRsp.Config.Model.CurrentModelId)
-
 	})
 }

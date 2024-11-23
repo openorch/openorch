@@ -9,15 +9,16 @@ package promptservice
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log/slog"
-	"net/url"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/pkg/errors"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/clients/stable_diffusion"
@@ -25,9 +26,6 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
 	apptypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
 )
@@ -160,12 +158,17 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 			PromptId: currentPrompt.Id,
 			Error:    errToString(err),
 		}
-		err = p.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-			Event: &firehosetypes.Event{
-				Name: ev.Name(),
-				Data: ev,
+
+		var m map[string]interface{}
+		js, _ := json.Marshal(ev)
+		json.Unmarshal(js, &m)
+
+		_, err = p.clientFactory.Client(sdk.WithToken(p.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
 			},
-		}, nil)
+		}).Execute()
 		if err != nil {
 			logger.Error("Failed to publish: %v", err)
 		}
@@ -188,46 +191,46 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 	ev := prompttypes.EventPromptProcessingStarted{
 		PromptId: currentPrompt.Id,
 	}
-	err = p.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: ev.Name(),
-			Data: ev,
+
+	var m map[string]interface{}
+	js, _ := json.Marshal(ev)
+	json.Unmarshal(js, &m)
+
+	_, err = p.clientFactory.Client(sdk.WithToken(p.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
+		Event: &openapi.FirehoseSvcEvent{
+			Name: openapi.PtrString(ev.Name()),
+			Data: m,
 		},
-	}, nil)
+	}).Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}
 
-	addMessageReq := &apptypes.AddMessageRequest{
-		Message: &apptypes.Message{
+	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(openapi.ChatSvcAddMessageRequest{
+		Message: &openapi.ChatSvcMessage{
 			// not a fan of taking the prompt id but at least it makes this idempotent
 			// in case prompts get retried over and over again
-			Id:        currentPrompt.Id,
-			ThreadId:  currentPrompt.ThreadId,
-			UserId:    currentPrompt.UserId,
-			Content:   currentPrompt.Prompt,
-			CreatedAt: time.Now(),
+			Id:        openapi.PtrString(currentPrompt.Id),
+			ThreadId:  openapi.PtrString(currentPrompt.ThreadId),
+			UserId:    openapi.PtrString(currentPrompt.UserId),
+			Content:   openapi.PtrString(currentPrompt.Prompt),
+			CreatedAt: openapi.PtrString(time.Now().Format(time.RFC3339Nano)),
 		},
-	}
-
-	err = p.router.Post(context.Background(), "chat-svc", fmt.Sprintf("/thread/%v/message", currentPrompt.ThreadId), addMessageReq, nil)
+	}).Execute()
 	if err != nil {
 		return err
 	}
 
 	modelId := currentPrompt.ModelId
 	if modelId == "" {
-		//getConfigReq := configtypes.GetConfigRequest{}
-		getConfigRsp := configtypes.GetConfigResponse{}
-		err := p.router.Get(context.Background(), "config-svc", "/config", nil, &getConfigRsp)
+		getConfigRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
 		if err != nil {
 			return err
 		}
-		modelId = getConfigRsp.Config.Model.CurrentModelId
+		modelId = *getConfigRsp.Config.Model.CurrentModelId
 	}
 
-	statusRsp := modeltypes.StatusResponse{}
-	err = p.router.Get(context.Background(), "model-svc", fmt.Sprintf("/model/%v/status", url.PathEscape(modelId)), nil, &statusRsp)
+	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ModelSvcAPI.GetModelStatus(context.Background(), modelId).Execute()
 	if err != nil {
 		return err
 	}
@@ -261,13 +264,12 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 }
 
 func (p *PromptService) processPlatform(address string, modelId string, fullPrompt string, currentPrompt *prompttypes.Prompt) error {
-	getModelRsp := modeltypes.GetModelResponse{}
-	err := p.router.Get(context.Background(), "model-svc", fmt.Sprintf("/model/%v", url.PathEscape(modelId)), nil, &getModelRsp)
+	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ModelSvcAPI.GetModel(context.Background(), modelId).Execute()
 	if err != nil {
 		return err
 	}
 
-	switch getModelRsp.Platform.Id {
+	switch *getModelRsp.Platform.Id {
 	case modeltypes.PlatformLlamaCpp.Id:
 		return p.processLlamaCpp(address, fullPrompt, currentPrompt)
 	case modeltypes.PlatformStableDiffusion.Id:
@@ -324,27 +326,25 @@ func (p *PromptService) processStableDiffusion(address string, fullPrompt string
 		Content: base64String,
 	}
 
-	upsertReq := chattypes.UpsertAssetsRequest{
-		Assets: []*apptypes.Asset{
-			asset,
-		},
-	}
-	upsertRsp := chattypes.UpsertAssetsResponse{}
-	err = p.router.Post(context.Background(), "chat", "/upsert-assets", upsertReq, &upsertRsp)
-	if err != nil {
-		return err
-	}
+	// @todo upsert asset
+	// upsertReq := chattypes.UpsertAssetsRequest{
+	// 	Assets: []*apptypes.Asset{
+	// 		asset,
+	// 	},
+	// }
+	// upsertRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.UpsertAssets(context.Background()).Request(upsertReq).Execute()
 
-	addMsgReq := chattypes.AddMessageRequest{
-		Message: &apptypes.Message{
-			Id:       sdk.Id("msg"),
-			ThreadId: currentPrompt.ThreadId,
-			Content:  "Sure, here is your image",
-			AssetIds: []string{asset.Id},
+	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(
+		openapi.ChatSvcAddMessageRequest{
+			Message: &openapi.ChatSvcMessage{
+				Id:       openapi.PtrString(sdk.Id("msg")),
+				ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+				Content:  openapi.PtrString("Sure, here is your image"),
+				AssetIds: []string{asset.Id},
+			},
 		},
-	}
-	addMsgRsp := chattypes.AddMessageResponse{}
-	err = p.router.Post(context.Background(), "chat", "/message/add", addMsgReq, &addMsgRsp)
+	).Execute()
+
 	if err != nil {
 		logger.Error("Error when saving chat message after image generation",
 			slog.String("error", err.Error()))
@@ -405,15 +405,15 @@ func (p *PromptService) processLlamaCpp(address string, fullPrompt string, curre
 				done <- true
 			}()
 
-			addMsgReq := chattypes.AddMessageRequest{
-				Message: &apptypes.Message{
-					Id:       sdk.Id("msg"),
-					ThreadId: currentPrompt.ThreadId,
-					Content:  llmResponseToText(p.StreamManager.History[currentPrompt.ThreadId]),
+			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:       openapi.PtrString(sdk.Id("msg")),
+						ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+						Content:  openapi.PtrString(llmResponseToText(p.StreamManager.History[currentPrompt.ThreadId])),
+					},
 				},
-			}
-			addMsgRsp := chattypes.AddMessageResponse{}
-			err := p.router.Post(context.Background(), "chat-svc", fmt.Sprintf("/thread/%v/message", currentPrompt.ThreadId), addMsgReq, &addMsgRsp)
+			).Execute()
 			if err != nil {
 				logger.Error("Error when saving chat message after broadcast",
 					slog.String("error", err.Error()))

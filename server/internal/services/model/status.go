@@ -11,20 +11,17 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
-	"net/url"
 
 	"github.com/pkg/errors"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
-	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
 	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 )
 
 func (ms *ModelService) status(modelId string) (*modeltypes.ModelStatus, error) {
-	hostRsp := dockertypes.GetDockerHostResponse{}
-	err := ms.router.Get(context.Background(), "docker-svc", "/host", nil, &hostRsp)
+	hostRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).DockerSvcAPI.GetHost(context.Background()).Execute()
 	if err != nil {
 		return nil, err
 	}
@@ -38,16 +35,15 @@ func (ms *ModelService) status(modelId string) (*modeltypes.ModelStatus, error) 
 	modelAddress := fmt.Sprintf("%v:%v", dockerHost, hostPortNum)
 
 	if modelId == "" {
-		rsp := configtypes.GetConfigResponse{}
-		err := ms.router.Get(context.Background(), "config-svc", "/config", nil, &rsp)
+		rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
 		if err != nil {
 			return nil, err
 		}
 
-		if rsp.Config.Model.CurrentModelId == "" {
+		if *rsp.Config.Model.CurrentModelId == "" {
 			return nil, errors.New("no model id specified and no default model")
 		}
-		modelId = rsp.Config.Model.CurrentModelId
+		modelId = *rsp.Config.Model.CurrentModelId
 	}
 
 	modelI, found, err := ms.modelsStore.Query(
@@ -62,12 +58,11 @@ func (ms *ModelService) status(modelId string) (*modeltypes.ModelStatus, error) 
 	model := modelI.(*modeltypes.Model)
 
 	for _, assetUrl := range model.Assets {
-		rsp := downloadtypes.GetDownloadResponse{}
-		err := ms.router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(assetUrl)), nil, &rsp)
+		rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).DownloadSvcAPI.GetDownload(context.Background(), assetUrl).Execute()
 		if err != nil {
 			return nil, err
 		}
-		if !rsp.Exists || rsp.Download.Status != string(downloadtypes.DownloadStatusCompleted) {
+		if !rsp.Exists || *rsp.Download.Status != string(downloadtypes.DownloadStatusCompleted) {
 			return &modeltypes.ModelStatus{
 				AssetsReady: false,
 				Address:     modelAddress,
@@ -93,8 +88,7 @@ func (ms *ModelService) status(modelId string) (*modeltypes.ModelStatus, error) 
 
 	isRunning := false
 
-	hashRsp := dockertypes.ContainerIsRunningResponse{}
-	err = ms.router.Get(context.Background(), "docker-svc", fmt.Sprintf("/container/%v/is-running", hash), nil, &hashRsp)
+	hashRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).DockerSvcAPI.ContainerIsRunning(context.Background()).Hash(hash).Execute()
 	if err != nil {
 		logger.Warn("Checking if running error",
 			slog.String("error", err.Error()),

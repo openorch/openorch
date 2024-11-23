@@ -100,12 +100,12 @@ func (m *ModelState) SetHasCheckerRunning(v bool) {
 }
 
 type ModelStatus struct {
-	AssetsReady bool `json:"assetsReady"`
+	AssetsReady bool `json:"assetsReady" binding:"required"`
 	/* Running triggers onModelLaunch on the frontend.
 	Running is true when the model is both running and answering
 	- fully loaded. */
-	Running bool   `json:"running"`
-	Address string `json:"address"`
+	Running bool   `json:"running" binding:"required"`
+	Address string `json:"address" binding:"required"`
 }
 
 type StatusRequest struct {
@@ -145,9 +145,9 @@ type GetModelRequest struct {
 }
 
 type GetModelResponse struct {
-	Exists   bool      `json:"exists"`
-	Model    *Model    `json:"model,omitempty"`
-	Platform *Platform `json:"platform,omitempty"`
+	Exists   bool      `json:"exists" binding:"required"`
+	Model    *Model    `json:"model,omitempty" binding:"required"`
+	Platform *Platform `json:"platform,omitempty" binding:"required"`
 }
 
 //

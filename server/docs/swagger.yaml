@@ -603,6 +603,8 @@ definitions:
         $ref: '#/definitions/download_svc.DownloadDetails'
       exists:
         type: boolean
+    required:
+    - exists
     type: object
   dynamic_svc.CreateObjectRequest:
     properties:
@@ -826,6 +828,10 @@ definitions:
         $ref: '#/definitions/model_svc.Model'
       platform:
         $ref: '#/definitions/model_svc.Platform'
+    required:
+    - exists
+    - model
+    - platform
     type: object
   model_svc.ListResponse:
     properties:
@@ -895,6 +901,10 @@ definitions:
         description: "Running triggers onModelLaunch on the frontend.\n\tRunning is
           true when the model is both running and answering\n\t- fully loaded."
         type: boolean
+    required:
+    - address
+    - assetsReady
+    - running
     type: object
   model_svc.Platform:
     properties:

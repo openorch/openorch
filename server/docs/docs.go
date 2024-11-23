@@ -4994,6 +4994,9 @@ const docTemplate = `{
         },
         "download_svc.GetDownloadResponse": {
             "type": "object",
+            "required": [
+                "exists"
+            ],
             "properties": {
                 "download": {
                     "$ref": "#/definitions/download_svc.DownloadDetails"
@@ -5288,6 +5291,11 @@ const docTemplate = `{
         },
         "model_svc.GetModelResponse": {
             "type": "object",
+            "required": [
+                "exists",
+                "model",
+                "platform"
+            ],
             "properties": {
                 "exists": {
                     "type": "boolean"
@@ -5390,6 +5398,11 @@ const docTemplate = `{
         },
         "model_svc.ModelStatus": {
             "type": "object",
+            "required": [
+                "address",
+                "assetsReady",
+                "running"
+            ],
             "properties": {
                 "address": {
                     "type": "string"
