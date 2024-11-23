@@ -20,11 +20,8 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	dynamictypes "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
-
-	clients "github.com/singulatron/superplatform/clients/go"
 )
 
 type DynamicService struct {
@@ -36,7 +33,6 @@ type DynamicService struct {
 	store           datastore.DataStore
 	credentialStore datastore.DataStore
 	publicKey       string
-	client          *clients.APIClient
 }
 
 func NewDynamicService(
@@ -73,16 +69,8 @@ func (g *DynamicService) Start() error {
 	g.lock.Acquire(ctx, "model-svc-start")
 	defer g.lock.Release(ctx, "model-svc-start")
 
-	g.client = clients.NewAPIClient(&clients.Configuration{
-		Servers: clients.ServerConfigurations{
-			{
-				URL:         router.SelfAddress(),
-				Description: "Default server",
-			},
-		},
-	})
-
-	pk, _, err := g.client.UserSvcAPI.GetPublicKey(context.Background()).
+	pk, _, err := g.clientFactory.Client(sdk.WithToken(g.token)).
+		UserSvcAPI.GetPublicKey(context.Background()).
 		Execute()
 	if err != nil {
 		return err

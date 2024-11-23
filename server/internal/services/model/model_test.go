@@ -50,10 +50,10 @@ func TestModel(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		require.Equal(t, false, *statusRsp.Status.Running)
-		require.Equal(t, false, *statusRsp.Status.AssetsReady)
+		require.Equal(t, false, statusRsp.Status.Running)
+		require.Equal(t, false, statusRsp.Status.AssetsReady)
 		// will be ~ "172.17.0.1:8001"
-		require.Equal(t, true, *statusRsp.Status.Address != "")
+		require.Equal(t, true, statusRsp.Status.Address != "")
 	})
 
 	t.Run("default", func(t *testing.T) {

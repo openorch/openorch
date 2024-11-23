@@ -95,11 +95,15 @@ func (p *PromptService) addPrompt(
 			ChatSvcAPI.AddThread(ctx).
 			Request(openapi.ChatSvcAddThreadRequest{
 				Thread: &openapi.ChatSvcThread{
-					Id:        openapi.PtrString(thread.Id),
-					Title:     openapi.PtrString(thread.Title),
-					UserIds:   thread.UserIds,
-					CreatedAt: openapi.PtrString(thread.CreatedAt.Format(time.RFC3339Nano)),
-					UpdatedAt: openapi.PtrString(thread.UpdatedAt.Format(time.RFC3339Nano)),
+					Id:      openapi.PtrString(thread.Id),
+					Title:   openapi.PtrString(thread.Title),
+					UserIds: thread.UserIds,
+					CreatedAt: openapi.PtrString(
+						thread.CreatedAt.Format(time.RFC3339Nano),
+					),
+					UpdatedAt: openapi.PtrString(
+						thread.UpdatedAt.Format(time.RFC3339Nano),
+					),
 				},
 			}).
 			Execute()

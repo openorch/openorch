@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/errors"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
@@ -33,7 +34,7 @@ import (
 	userservice "github.com/singulatron/superplatform/server/internal/services/user"
 )
 
-const singulatronFolder = ".singulatron"
+const superplatformFolder = ".superplatform"
 
 type Options struct {
 	// NodeOptions contains settings coming from envars
@@ -60,7 +61,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	var homeDir string
 	var err error
 	if options.Test {
-		homeDir, err = os.MkdirTemp("", "singulatron-")
+		homeDir, err = os.MkdirTemp("", "superplatform-")
 		if err != nil {
 			logger.Error(
 				"Homedir creation failed",
@@ -90,12 +91,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	singulatronFolder := path.Join(homeDir, singulatronFolder)
+	superplatformFolder := path.Join(homeDir, superplatformFolder)
 	if options.NodeOptions.ConfigPath != "" {
-		singulatronFolder = options.NodeOptions.ConfigPath
+		superplatformFolder = options.NodeOptions.ConfigPath
 	}
 
-	configService.ConfigDirectory = singulatronFolder
+	configService.ConfigDirectory = superplatformFolder
 
 	if options.DatastoreFactory == nil {
 		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
@@ -115,6 +116,15 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 			)
 		}
 	}
+
+	if options.Url == "" {
+		options.Url = router.SelfAddress()
+	}
+
+	if options.ClientFactory == nil {
+		options.ClientFactory = sdk.NewApiClientFactory(options.Url)
+	}
+
 	configService.SetDatastoreFactory(options.DatastoreFactory)
 
 	configService.SetClientFactory(options.ClientFactory)
@@ -152,7 +162,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	err = os.MkdirAll(singulatronFolder, 0755)
+	err = os.MkdirAll(superplatformFolder, 0755)
 	if err != nil {
 		logger.Error(
 			"Config folder creation failed",
@@ -161,7 +171,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadFolder := path.Join(singulatronFolder, "downloads")
+	downloadFolder := path.Join(superplatformFolder, "downloads")
 	err = os.MkdirAll(downloadFolder, 0755)
 	if err != nil {
 		logger.Error(
@@ -186,7 +196,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	downloadService.SetDefaultFolder(downloadFolder)
 	downloadService.SetStateFilePath(
-		path.Join(singulatronFolder, "downloads.json"),
+		path.Join(superplatformFolder, "downloads.json"),
 	)
 
 	dockerService, err := dockerservice.NewDockerService(
@@ -285,14 +295,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 			slog.String("error", err.Error()),
 		)
 		os.Exit(1)
-	}
-
-	if options.ClientFactory == nil {
-		ur := router.SelfAddress()
-		if options.Url != "" {
-			ur = options.Url
-		}
-		options.ClientFactory = sdk.NewApiClientFactory(ur)
 	}
 
 	deployService, err := deployservice.NewDeployService(
@@ -663,51 +665,51 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	return router, func() error {
 		err = configService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "config service start failed")
 		}
 		err = downloadService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "download service start failed")
 		}
 		err = firehoseService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "firehose service start failed")
 		}
 		err = dockerService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "docker service start failed")
 		}
 		err = modelService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "model service start failed")
 		}
 		err = chatService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "chat service start failed")
 		}
 		err = promptService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "prompt service start failed")
 		}
 		err = dynamicService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "dynamic service start failed")
 		}
 		err = policyService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "policy service start failed")
 		}
 		err = registryService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "registry service start failed")
 		}
 		err = deployService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "deploy service start failed")
 		}
 		err = sourceService.Start()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "source service start failed")
 		}
 
 		return nil
