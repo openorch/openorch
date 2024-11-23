@@ -56,7 +56,7 @@ func (fs *SourceService) Start() error {
 	fs.lock.Acquire(ctx, "source-svc-start")
 	defer fs.lock.Release(ctx, "source-svc-start")
 
-	token, err := sdk.RegisterServiceNoRouter(
+	token, err := sdk.RegisterService(
 		fs.clientFactory.Client().UserSvcAPI,
 		"source-svc",
 		"Source Service",

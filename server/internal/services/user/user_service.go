@@ -20,13 +20,13 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 type UserService struct {
-	router *router.Router
+	clientFactory sdk.ClientFactory
+	token         string
 
 	usersStore                 datastore.DataStore
 	rolesStore                 datastore.DataStore
@@ -46,7 +46,7 @@ type UserService struct {
 }
 
 func NewUserService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*UserService, error) {
 	usersStore, err := datastoreFactory("userSvcUsers", &usertypes.User{})
@@ -122,7 +122,7 @@ func NewUserService(
 	}
 
 	service := &UserService{
-		router:                     router,
+		clientFactory:              clientFactory,
 		usersStore:                 usersStore,
 		rolesStore:                 rolesStore,
 		authTokensStore:            authTokensStore,

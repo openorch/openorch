@@ -23,7 +23,6 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/server/internal/di"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 )
@@ -141,14 +140,14 @@ func TestAddPrompt(t *testing.T) {
 		Execute()
 	require.NoError(t, err)
 
-	var model *modeltypes.Model
+	var model *openapi.ModelSvcModel
 	for _, v := range mrsp.Models {
 		if v.Id == crsp.Config.Model.CurrentModelId {
-			model = v
+			model = &v
 		}
 	}
 
-	require.Equal(t, true, model.Id != "")
+	require.Equal(t, true, *model.Id != "")
 
 	prsp, _, err := userClient.PromptSvcAPI.AddPrompt(context.Background()).
 		Request(

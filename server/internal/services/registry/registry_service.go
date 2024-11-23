@@ -21,17 +21,18 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
 )
 
 type RegistryService struct {
+	clientFactory sdk.ClientFactory
+	token         string
+
 	URL              string
 	AvailabilityZone string
 	Region           string
 
-	router *router.Router
-	lock   lock.DistributedLock
+	lock lock.DistributedLock
 
 	credentialStore datastore.DataStore
 	definitionStore datastore.DataStore
@@ -45,7 +46,7 @@ func NewRegistryService(
 	address string,
 	az string,
 	region string,
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any,
 	) (datastore.DataStore, error)) (*RegistryService, error) {
@@ -94,7 +95,7 @@ func NewRegistryService(
 
 	service := &RegistryService{
 		URL:              nodeUrl,
-		router:           router,
+		clientFactory:    clientFactory,
 		lock:             lock,
 		credentialStore:  credentialStore,
 		definitionStore:  definitionStore,
@@ -118,15 +119,15 @@ func (ns *RegistryService) Start() error {
 	defer ns.lock.Release(ctx, "registry-svc-start")
 
 	token, err := sdk.RegisterService(
+		ns.clientFactory.Client().UserSvcAPI,
 		"registry-svc",
 		"Registry Service",
-		ns.router,
 		ns.credentialStore,
 	)
 	if err != nil {
 		return err
 	}
-	ns.router = ns.router.SetBearerToken(token)
+	ns.token = token
 
 	return ns.registerPermissions()
 }

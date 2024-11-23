@@ -192,7 +192,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 		if err != nil {
 			return nil, nil, err
 		}
-		if !*rsp.Exists {
+		if !rsp.Exists {
 			return nil, nil, fmt.Errorf(
 				"asset with URL '%v' cannot be found locally",
 				assetURL,

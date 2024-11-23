@@ -98,7 +98,7 @@ func TestOrganization(t *testing.T) {
 	adminClient, adminToken, err := test.AdminClient(server.URL)
 	require.NoError(t, err)
 
-	manyClients, err := test.MakeClients(options.Router, 2)
+	manyClients, err := test.MakeClients(options.ClientFactory.Client(), 2)
 	require.NoError(t, err)
 	otherClient := manyClients[0]
 	thirdClient := manyClients[1]

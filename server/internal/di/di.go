@@ -117,10 +117,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 	configService.SetDatastoreFactory(options.DatastoreFactory)
 
-	configService.SetRouter(options.Router)
+	configService.SetClientFactory(options.ClientFactory)
 
 	userService, err := userservice.NewUserService(
-		options.Router,
+		options.ClientFactory,
 		options.DatastoreFactory,
 	)
 	if err != nil {
@@ -140,7 +140,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	firehoseService, err := firehoseservice.NewFirehoseService(
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -172,7 +172,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	downloadService, err := downloadservice.NewDownloadService(
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -191,7 +191,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	dockerService, err := dockerservice.NewDockerService(
 		options.NodeOptions.VolumeName,
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -206,7 +206,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	modelService, err := modelservice.NewModelService(
 		options.NodeOptions.GpuPlatform,
 		options.NodeOptions.LLMHost,
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -219,7 +219,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	chatService, err := chatservice.NewChatService(
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -232,7 +232,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	promptService, err := promptservice.NewPromptService(
-		options.Router,
+		options.ClientFactory,
 		options.LLMClient,
 		options.Lock,
 		options.DatastoreFactory,
@@ -246,7 +246,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	dynamicService, err := dynamicservice.NewDynamicService(
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -259,7 +259,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	policyService, err := policyservice.NewPolicyService(
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -275,7 +275,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.NodeOptions.Address,
 		options.NodeOptions.Az,
 		options.NodeOptions.Region,
-		options.Router,
+		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
 	)

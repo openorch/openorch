@@ -1,12 +1,12 @@
 package registryservice
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // Register a new definition
@@ -28,15 +28,15 @@ func (rs *RegistryService) SaveDefinition(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).
-		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionNodeView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionNodeView.Id).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

@@ -86,7 +86,7 @@ func TestDownloadFile(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		if *rsp.Exists &&
+		if rsp.Exists &&
 			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			break
 		}
@@ -167,7 +167,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(downloadURL)).
 			Execute()
 		require.NoError(t, err)
-		if *rsp.Exists &&
+		if rsp.Exists &&
 			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			break
 		}
@@ -235,7 +235,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		if *rsp.Exists &&
+		if rsp.Exists &&
 			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
 			d = rsp.Download
 			break

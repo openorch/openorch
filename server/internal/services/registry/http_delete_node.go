@@ -1,14 +1,15 @@
 package registryservice
 
 import (
-	"fmt"
+	"context"
 	"net/http"
 	"net/url"
 
 	"github.com/gorilla/mux"
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // Delete an node
@@ -31,17 +32,18 @@ func (rs *RegistryService) DeleteNode(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).
-		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionNodeDelete.Id), &usertypes.IsAuthorizedRequest{
+	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionNodeDelete.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"deploy-svc"},
-		}, rsp)
+		}).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
