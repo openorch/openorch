@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package configservice
 
 import (
@@ -35,12 +40,15 @@ func (cs *ConfigService) saveConfig(config types.Config) error {
 	}
 
 	ev := types.EventConfigUpdate{}
-	_, err = cs.clientFactory.Client(sdk.WithToken(cs.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
-		Event: &openapi.FirehoseSvcEvent{
-			Name: openapi.PtrString(ev.Name()),
-			Data: nil,
-		},
-	}).Execute()
+	_, err = cs.clientFactory.Client(sdk.WithToken(cs.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: nil,
+			},
+		}).
+		Execute()
 
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)

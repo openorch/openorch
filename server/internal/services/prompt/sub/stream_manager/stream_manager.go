@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package streammanager
 
 import (
@@ -27,7 +32,10 @@ func NewStreamManager() *StreamManager {
 	}
 }
 
-func (sm *StreamManager) Subscribe(threadId string, subscriber prompttypes.SubscriberChan) {
+func (sm *StreamManager) Subscribe(
+	threadId string,
+	subscriber prompttypes.SubscriberChan,
+) {
 	sm.lock.Lock()
 	defer sm.lock.Unlock()
 
@@ -44,20 +52,28 @@ func (sm *StreamManager) Subscribe(threadId string, subscriber prompttypes.Subsc
 	}()
 }
 
-func (sm *StreamManager) Unsubscribe(threadId string, subscriber prompttypes.SubscriberChan) {
+func (sm *StreamManager) Unsubscribe(
+	threadId string,
+	subscriber prompttypes.SubscriberChan,
+) {
 	sm.lock.Lock()
 	defer sm.lock.Unlock()
 	subs := sm.streams[threadId]
 	for i, sub := range subs {
 		if sub == subscriber {
 			sm.streams[threadId] = append(subs[:i], subs[i+1:]...)
-			close(subscriber) // Close the channel to signify no more data will be sent
+			close(
+				subscriber,
+			) // Close the channel to signify no more data will be sent
 			break
 		}
 	}
 }
 
-func (sm *StreamManager) Broadcast(threadId string, response *llm.CompletionResponse) {
+func (sm *StreamManager) Broadcast(
+	threadId string,
+	response *llm.CompletionResponse,
+) {
 	sm.lock.Lock()
 	defer sm.lock.Unlock()
 	if subscribers, ok := sm.streams[threadId]; ok {

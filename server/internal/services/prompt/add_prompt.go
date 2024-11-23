@@ -1,31 +1,39 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package promptservice
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 	"log/slog"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
 	apptypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
 )
 
 const maxThreadTitle = 100
 
-func (p *PromptService) addPrompt(ctx context.Context, promptReq *prompttypes.AddPromptRequest, userId string) (*prompttypes.AddPromptResponse, error) {
+func (p *PromptService) addPrompt(
+	ctx context.Context,
+	promptReq *prompttypes.AddPromptRequest,
+	userId string,
+) (*prompttypes.AddPromptResponse, error) {
 	prompt := &prompttypes.Prompt{
 		PromptCreateFields: promptReq.PromptCreateFields,
 	}
@@ -55,14 +63,14 @@ func (p *PromptService) addPrompt(ctx context.Context, promptReq *prompttypes.Ad
 
 	threadId := prompt.ThreadId
 
-	//getThreadResp := apptypes.GetThreadResponse{}
-	getThreadRsp := &chattypes.GetThreadResponse{}
-	err = p.router.Get(ctx, "chat-svc", fmt.Sprintf("/thread/%v", threadId), nil, &getThreadRsp)
+	getThreadRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+		ChatSvcAPI.GetThread(ctx, threadId).
+		Execute()
 	if err != nil {
 		return nil, err
 	}
 
-	if !getThreadRsp.Exists {
+	if !*getThreadRsp.Exists {
 		logger.Info("Creating thread", slog.String("threadId", threadId))
 
 		// threads can be created when a message is sent
@@ -83,10 +91,18 @@ func (p *PromptService) addPrompt(ctx context.Context, promptReq *prompttypes.Ad
 			}
 		}
 
-		rsp := &chattypes.AddThreadResponse{}
-		err = p.router.Post(context.Background(), "chat-svc", "/thread", &chattypes.AddThreadRequest{
-			Thread: thread,
-		}, rsp)
+		_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+			ChatSvcAPI.AddThread(ctx).
+			Request(openapi.ChatSvcAddThreadRequest{
+				Thread: &openapi.ChatSvcThread{
+					Id:        openapi.PtrString(thread.Id),
+					Title:     openapi.PtrString(thread.Title),
+					UserIds:   thread.UserIds,
+					CreatedAt: openapi.PtrString(thread.CreatedAt.Format(time.RFC3339Nano)),
+					UpdatedAt: openapi.PtrString(thread.UpdatedAt.Format(time.RFC3339Nano)),
+				},
+			}).
+			Execute()
 		if err != nil {
 			return nil, err
 		}
@@ -96,12 +112,19 @@ func (p *PromptService) addPrompt(ctx context.Context, promptReq *prompttypes.Ad
 		PromptId: prompt.Id,
 	}
 
-	err = p.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: ev.Name(),
-			Data: ev,
-		},
-	}, nil)
+	var m map[string]interface{}
+	js, _ := json.Marshal(ev)
+	json.Unmarshal(js, &m)
+
+	_, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
+			},
+		}).
+		Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}

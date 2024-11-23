@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package registryservice
 
 import (
@@ -61,15 +66,24 @@ func NewRegistryService(
 		nodeUrl = "http://" + nodeUrl
 	}
 
-	credentialStore, err := datastoreFactory("registrySvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"registrySvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	instanceStore, err := datastoreFactory("registrySvcInstances", &registry.Instance{})
+	instanceStore, err := datastoreFactory(
+		"registrySvcInstances",
+		&registry.Instance{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	definitionStore, err := datastoreFactory("registrySvcDefinitions", &registry.Definition{})
+	definitionStore, err := datastoreFactory(
+		"registrySvcDefinitions",
+		&registry.Definition{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +117,12 @@ func (ns *RegistryService) Start() error {
 	ns.lock.Acquire(ctx, "registry-svc-start")
 	defer ns.lock.Release(ctx, "registry-svc-start")
 
-	token, err := sdk.RegisterService("registry-svc", "Registry Service", ns.router, ns.credentialStore)
+	token, err := sdk.RegisterService(
+		"registry-svc",
+		"Registry Service",
+		ns.router,
+		ns.credentialStore,
+	)
 	if err != nil {
 		return err
 	}

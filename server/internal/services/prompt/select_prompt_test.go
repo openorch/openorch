@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package promptservice_test
 
 import (
@@ -38,63 +43,108 @@ func TestSelectPrompt(t *testing.T) {
 		{
 			name: "Prompt with RunCount 0",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 0},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 0,
+				},
 			},
-			expectedPrompt: &prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 0},
+			expectedPrompt: &prompttypes.Prompt{
+				Status:   prompttypes.PromptStatusScheduled,
+				RunCount: 0,
+			},
 		},
 		{
 			name: "Prompt not due yet",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 1, LastRun: fixedTime.Add(-promptservice.BaseDelay / 2)},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 1,
+					LastRun:  fixedTime.Add(-promptservice.BaseDelay / 2),
+				},
 			},
 			expectedPrompt: nil,
 		},
 		{
 			name: "Prompt due",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 1, LastRun: fixedTime.Add(-promptservice.BaseDelay)},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 1,
+					LastRun:  fixedTime.Add(-promptservice.BaseDelay),
+				},
 			},
-			expectedPrompt: &prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 1, LastRun: fixedTime.Add(-promptservice.BaseDelay)},
+			expectedPrompt: &prompttypes.Prompt{
+				Status:   prompttypes.PromptStatusScheduled,
+				RunCount: 1,
+				LastRun:  fixedTime.Add(-promptservice.BaseDelay),
+			},
 		},
 		{
 			name: "Abandoned prompt",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusAbandoned, RunCount: 0},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusAbandoned,
+					RunCount: 0,
+				},
 			},
 			expectedPrompt: nil,
 		},
 		{
 			name: "Completed prompt",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusCompleted, RunCount: 0},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusCompleted,
+					RunCount: 0,
+				},
 			},
 			expectedPrompt: nil,
 		},
 		{
 			name: "Canceled prompt",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusCanceled, RunCount: 0},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusCanceled,
+					RunCount: 0,
+				},
 			},
 			expectedPrompt: nil,
 		},
 		{
 			name: "Prompt with RunCount greater than 1, not due yet",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 2, LastRun: fixedTime.Add(-promptservice.BaseDelay)},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 2,
+					LastRun:  fixedTime.Add(-promptservice.BaseDelay),
+				},
 			},
 			expectedPrompt: nil,
 		},
 		{
 			name: "Prompt with RunCount greater than 1, due",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 2, LastRun: fixedTime.Add(-promptservice.BaseDelay * 2)},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 2,
+					LastRun:  fixedTime.Add(-promptservice.BaseDelay * 2),
+				},
 			},
-			expectedPrompt: &prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 2, LastRun: fixedTime.Add(-promptservice.BaseDelay * 2)},
+			expectedPrompt: &prompttypes.Prompt{
+				Status:   prompttypes.PromptStatusScheduled,
+				RunCount: 2,
+				LastRun:  fixedTime.Add(-promptservice.BaseDelay * 2),
+			},
 		},
 		{
 			name: "Prompt with RunCount greater than 1, off by one",
 			prompts: []datastore.Row{
-				&prompttypes.Prompt{Status: prompttypes.PromptStatusScheduled, RunCount: 2, LastRun: fixedTime.Add(-promptservice.BaseDelay*2 + time.Second)},
+				&prompttypes.Prompt{
+					Status:   prompttypes.PromptStatusScheduled,
+					RunCount: 2,
+					LastRun: fixedTime.Add(
+						-promptservice.BaseDelay*2 + time.Second,
+					),
+				},
 			},
 			expectedPrompt: nil,
 		},

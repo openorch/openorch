@@ -30,7 +30,9 @@ func (s *PolicyService) Check(
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionTemplateEdit.Id).Execute()
+	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionTemplateEdit.Id).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -71,7 +73,9 @@ func (s *PolicyService) check(request *policy.CheckRequest) (bool, error) {
 		case policy.RateLimitPolicyTemplate.GetId():
 
 			maxRequests := instance.RateLimitParameters.MaxRequests
-			timeWindow, err := time.ParseDuration(instance.RateLimitParameters.TimeWindow)
+			timeWindow, err := time.ParseDuration(
+				instance.RateLimitParameters.TimeWindow,
+			)
 			if err != nil {
 				return false, err
 			}

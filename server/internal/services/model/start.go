@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package modelservice
 
 import (
@@ -34,7 +39,9 @@ Starts the model which has the supplied modelId or the currently activated one o
 the modelId is empty.
 */
 func (ms *ModelService) start(modelId string) error {
-	getConfigResponse, _, err := ms.clientFactory.Client().ConfigSvcAPI.GetConfig(context.Background()).Execute()
+	getConfigResponse, _, err := ms.clientFactory.Client().
+		ConfigSvcAPI.GetConfig(context.Background()).
+		Execute()
 	if err != nil {
 		return err
 	}
@@ -72,7 +79,10 @@ func (ms *ModelService) start(modelId string) error {
 	return ms.startWithDocker(model, platform)
 }
 
-func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *modeltypes.Platform) error {
+func (ms *ModelService) startWithDocker(
+	model *modeltypes.Model,
+	platform *modeltypes.Platform,
+) error {
 	launchOptions := &openapi.DockerSvcRunContainerOptions{
 		Name: openapi.PtrString(platform.Id),
 	}
@@ -107,14 +117,17 @@ func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *model
 	}
 	launchOptions.Hash = openapi.PtrString(hash)
 
-	runRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.RunContainer(context.Background()).Request(
-		openapi.DockerSvcRunContainerRequest{
-			Image:    image,
-			Port:     int32(port),
-			HostPort: openapi.PtrInt32(int32(hostPortNum)),
-			Options:  launchOptions,
-		},
-	).Execute()
+	runRsp, _, err := ms.clientFactory.Client().
+		DockerSvcAPI.RunContainer(context.Background()).
+		Request(
+			openapi.DockerSvcRunContainerRequest{
+				Image:    image,
+				Port:     int32(port),
+				HostPort: openapi.PtrInt32(int32(hostPortNum)),
+				Options:  launchOptions,
+			},
+		).
+		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to launch container")
 	}
@@ -122,7 +135,12 @@ func (ms *ModelService) startWithDocker(model *modeltypes.Model, platform *model
 	if *runRsp.Info.NewContainerStarted {
 		state := ms.get(int(*runRsp.Info.PortNumber))
 		if !state.HasCheckerRunning {
-			go ms.checkIfAnswers(model, platform, int(*runRsp.Info.PortNumber), state)
+			go ms.checkIfAnswers(
+				model,
+				platform,
+				int(*runRsp.Info.PortNumber),
+				state,
+			)
 		}
 	}
 
@@ -141,7 +159,10 @@ func (ms *ModelService) get(port int) *modeltypes.ModelState {
 	return ms.modelPortMap[port]
 }
 
-func modelToHash(model *modeltypes.Model, platform *modeltypes.Platform) (string, error) {
+func modelToHash(
+	model *modeltypes.Model,
+	platform *modeltypes.Platform,
+) (string, error) {
 	bs, err := json.Marshal(platform)
 	if err != nil {
 		return "", err
@@ -188,7 +209,10 @@ func (ms *ModelService) checkIfAnswers(
 
 		logger.Debug("Checking for answer started", slog.Int("port", port))
 
-		isRunningRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.ContainerIsRunning(context.Background()).Hash(hash).Execute()
+		isRunningRsp, _, err := ms.clientFactory.Client().
+			DockerSvcAPI.ContainerIsRunning(context.Background()).
+			Hash(hash).
+			Execute()
 		if err != nil {
 			logger.Warn("Model check error",
 				slog.String("modelId", model.Id),
@@ -202,7 +226,9 @@ func (ms *ModelService) checkIfAnswers(
 			continue
 		}
 
-		hostRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.GetHost(context.Background()).Execute()
+		hostRsp, _, err := ms.clientFactory.Client().
+			DockerSvcAPI.GetHost(context.Background()).
+			Execute()
 		if err != nil {
 			logger.Warn("Docker host error",
 				slog.String("error", err.Error()),
@@ -242,7 +268,11 @@ func (ms *ModelService) checkIfAnswers(
 }
 
 func (ms *ModelService) printContainerLogs(modelId, hash string) {
-	summaryRsp, _, err := ms.clientFactory.Client().DockerSvcAPI.ContainerSummary(context.Background()).Hash(hash).Lines(10).Execute()
+	summaryRsp, _, err := ms.clientFactory.Client().
+		DockerSvcAPI.ContainerSummary(context.Background()).
+		Hash(hash).
+		Lines(10).
+		Execute()
 	if err != nil {
 		logger.Warn("Error getting container logs",
 			slog.String("modelId", modelId),

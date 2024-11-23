@@ -19,11 +19,25 @@ import (
 
 func TestGenerateCommands_ScaleUp(t *testing.T) {
 	nodes := []openapi.RegistrySvcNode{
-		{Id: "node1", Usage: &openapi.RegistrySvcResourceUsage{Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)}}},
-		{Id: "node2", Usage: &openapi.RegistrySvcResourceUsage{Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(60)}}},
+		{
+			Id: "node1",
+			Usage: &openapi.RegistrySvcResourceUsage{
+				Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)},
+			},
+		},
+		{
+			Id: "node2",
+			Usage: &openapi.RegistrySvcResourceUsage{
+				Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(60)},
+			},
+		},
 	}
 	serviceInstances := []openapi.RegistrySvcInstance{
-		{Id: "instance1", DeploymentId: "service-A", LastHeartbeat: StrPtr("valid")},
+		{
+			Id:            "instance1",
+			DeploymentId:  "service-A",
+			LastHeartbeat: StrPtr("valid"),
+		},
 	}
 	deployments := []*deploy.Deployment{
 		{Id: "service-A", Replicas: 3},
@@ -42,12 +56,29 @@ func TestGenerateCommands_ScaleUp(t *testing.T) {
 
 func TestGenerateCommands_ScaleDown(t *testing.T) {
 	nodes := []openapi.RegistrySvcNode{
-		{Id: "node1", Usage: &openapi.RegistrySvcResourceUsage{Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)}}},
+		{
+			Id: "node1",
+			Usage: &openapi.RegistrySvcResourceUsage{
+				Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)},
+			},
+		},
 	}
 	serviceInstances := []openapi.RegistrySvcInstance{
-		{Id: "instance1", DeploymentId: "service-A", LastHeartbeat: StrPtr("valid")},
-		{Id: "instance2", DeploymentId: "service-A", LastHeartbeat: StrPtr("valid")},
-		{Id: "instance3", DeploymentId: "service-A", LastHeartbeat: StrPtr("valid")},
+		{
+			Id:            "instance1",
+			DeploymentId:  "service-A",
+			LastHeartbeat: StrPtr("valid"),
+		},
+		{
+			Id:            "instance2",
+			DeploymentId:  "service-A",
+			LastHeartbeat: StrPtr("valid"),
+		},
+		{
+			Id:            "instance3",
+			DeploymentId:  "service-A",
+			LastHeartbeat: StrPtr("valid"),
+		},
 	}
 	deployments := []*deploy.Deployment{
 		{Id: "service-A", Replicas: 1},
@@ -64,7 +95,12 @@ func TestGenerateCommands_ScaleDown(t *testing.T) {
 
 func TestGenerateCommands_KillUnhealthy(t *testing.T) {
 	nodes := []openapi.RegistrySvcNode{
-		{Id: "node1", Usage: &openapi.RegistrySvcResourceUsage{Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)}}},
+		{
+			Id: "node1",
+			Usage: &openapi.RegistrySvcResourceUsage{
+				Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)},
+			},
+		},
 	}
 	serviceInstances := []openapi.RegistrySvcInstance{
 		{Id: "instance1", DeploymentId: "service-A", LastHeartbeat: nil},
@@ -83,10 +119,19 @@ func TestGenerateCommands_KillUnhealthy(t *testing.T) {
 
 func TestGenerateCommands_NoAction(t *testing.T) {
 	nodes := []openapi.RegistrySvcNode{
-		{Id: "node1", Usage: &openapi.RegistrySvcResourceUsage{Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)}}},
+		{
+			Id: "node1",
+			Usage: &openapi.RegistrySvcResourceUsage{
+				Cpu: &openapi.RegistrySvcUsage{Percent: Float32Ptr(50)},
+			},
+		},
 	}
 	serviceInstances := []openapi.RegistrySvcInstance{
-		{Id: "instance1", DeploymentId: "service-A", LastHeartbeat: StrPtr("valid")},
+		{
+			Id:            "instance1",
+			DeploymentId:  "service-A",
+			LastHeartbeat: StrPtr("valid"),
+		},
 	}
 	deployments := []*deploy.Deployment{
 		{Id: "service-A", Replicas: 1},

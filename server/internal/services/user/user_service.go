@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package userservice
 
 import (
@@ -52,39 +57,66 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
-	authTokensStore, err := datastoreFactory("userSvcAuthTokens", &usertypes.AuthToken{})
+	authTokensStore, err := datastoreFactory(
+		"userSvcAuthTokens",
+		&usertypes.AuthToken{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	permissionsStore, err := datastoreFactory("userSvcPermissions", &usertypes.Permission{})
+	permissionsStore, err := datastoreFactory(
+		"userSvcPermissions",
+		&usertypes.Permission{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	credentialsStore, err := datastoreFactory("userSvcCredetentials", &sdk.Credential{})
+	credentialsStore, err := datastoreFactory(
+		"userSvcCredetentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	keyPairsStore, err := datastoreFactory("userSvcKeyPairs", &usertypes.KeyPair{})
+	keyPairsStore, err := datastoreFactory(
+		"userSvcKeyPairs",
+		&usertypes.KeyPair{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	contactsStore, err := datastoreFactory("userSvcContacts", &usertypes.Contact{})
+	contactsStore, err := datastoreFactory(
+		"userSvcContacts",
+		&usertypes.Contact{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	organizationsStore, err := datastoreFactory("userSvcOrganizations", &usertypes.Organization{})
+	organizationsStore, err := datastoreFactory(
+		"userSvcOrganizations",
+		&usertypes.Organization{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	organizationUserLinksStore, err := datastoreFactory("userSvcOrganizationUserLinks", &usertypes.OrganizationUserLink{})
+	organizationUserLinksStore, err := datastoreFactory(
+		"userSvcOrganizationUserLinks",
+		&usertypes.OrganizationUserLink{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	userRoleLinksStore, err := datastoreFactory("userSvcRoleLinks", &usertypes.UserRoleLink{})
+	userRoleLinksStore, err := datastoreFactory(
+		"userSvcRoleLinks",
+		&usertypes.UserRoleLink{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	permissionRoleLinksStore, err := datastoreFactory("userSvcPermissionRoleLinks", &usertypes.PermissionRoleLink{})
+	permissionRoleLinksStore, err := datastoreFactory(
+		"userSvcPermissionRoleLinks",
+		&usertypes.PermissionRoleLink{},
+	)
 	if err != nil {
 		return nil, err
 	}

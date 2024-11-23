@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package downloadservice
 
 import (
@@ -21,12 +26,14 @@ func (ds *DownloadService) registerPermissions() error {
 	userSvc := ds.clientFactory.Client(sdk.WithToken(ds.token)).UserSvcAPI
 
 	for _, permission := range downloadtypes.DownloadPermissions {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).RequestBody(client.UserSvcUpserPermissionRequest{
-			Permission: &client.UserSvcPermission{
-				Name:        client.PtrString(permission.Name),
-				Description: client.PtrString(permission.Description),
-			},
-		}).Execute()
+		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
+			RequestBody(client.UserSvcUpserPermissionRequest{
+				Permission: &client.UserSvcPermission{
+					Name:        client.PtrString(permission.Name),
+					Description: client.PtrString(permission.Description),
+				},
+			}).
+			Execute()
 		if err != nil {
 			return err
 		}
@@ -37,7 +44,8 @@ func (ds *DownloadService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range downloadtypes.DownloadPermissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
+				Execute()
 			if err != nil {
 				return err
 			}

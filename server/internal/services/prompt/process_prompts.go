@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package promptservice
 
 import (
@@ -63,7 +68,10 @@ func (p *PromptService) processNextPrompt() error {
 	defer p.runMutex.Unlock()
 
 	runningPrompts, err := p.promptsStore.Query(
-		datastore.Equals(datastore.Field("status"), prompttypes.PromptStatusRunning),
+		datastore.Equals(
+			datastore.Field("status"),
+			prompttypes.PromptStatusRunning,
+		),
 	).Find()
 	if err != nil {
 		return err
@@ -111,7 +119,9 @@ func (p *PromptService) processNextPrompt() error {
 	return p.processPrompt(currentPrompt)
 }
 
-func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err error) {
+func (p *PromptService) processPrompt(
+	currentPrompt *prompttypes.Prompt,
+) (err error) {
 	updateCurr := func() {
 		logger.Info("Prompt finished",
 			slog.String("promptId", currentPrompt.Id),
@@ -163,12 +173,15 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 		js, _ := json.Marshal(ev)
 		json.Unmarshal(js, &m)
 
-		_, err = p.clientFactory.Client(sdk.WithToken(p.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
-			Event: &openapi.FirehoseSvcEvent{
-				Name: openapi.PtrString(ev.Name()),
-				Data: m,
-			},
-		}).Execute()
+		_, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+			FirehoseSvcAPI.PublishEvent(context.Background()).
+			Event(openapi.FirehoseSvcEventPublishRequest{
+				Event: &openapi.FirehoseSvcEvent{
+					Name: openapi.PtrString(ev.Name()),
+					Data: m,
+				},
+			}).
+			Execute()
 		if err != nil {
 			logger.Error("Failed to publish: %v", err)
 		}
@@ -196,41 +209,53 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 	js, _ := json.Marshal(ev)
 	json.Unmarshal(js, &m)
 
-	_, err = p.clientFactory.Client(sdk.WithToken(p.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
-		Event: &openapi.FirehoseSvcEvent{
-			Name: openapi.PtrString(ev.Name()),
-			Data: m,
-		},
-	}).Execute()
+	_, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
+			},
+		}).
+		Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}
 
-	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(openapi.ChatSvcAddMessageRequest{
-		Message: &openapi.ChatSvcMessage{
-			// not a fan of taking the prompt id but at least it makes this idempotent
-			// in case prompts get retried over and over again
-			Id:        openapi.PtrString(currentPrompt.Id),
-			ThreadId:  openapi.PtrString(currentPrompt.ThreadId),
-			UserId:    openapi.PtrString(currentPrompt.UserId),
-			Content:   openapi.PtrString(currentPrompt.Prompt),
-			CreatedAt: openapi.PtrString(time.Now().Format(time.RFC3339Nano)),
-		},
-	}).Execute()
+	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
+		Request(openapi.ChatSvcAddMessageRequest{
+			Message: &openapi.ChatSvcMessage{
+				// not a fan of taking the prompt id but at least it makes this idempotent
+				// in case prompts get retried over and over again
+				Id:       openapi.PtrString(currentPrompt.Id),
+				ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+				UserId:   openapi.PtrString(currentPrompt.UserId),
+				Content:  openapi.PtrString(currentPrompt.Prompt),
+				CreatedAt: openapi.PtrString(
+					time.Now().Format(time.RFC3339Nano),
+				),
+			},
+		}).
+		Execute()
 	if err != nil {
 		return err
 	}
 
 	modelId := currentPrompt.ModelId
 	if modelId == "" {
-		getConfigRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
+		getConfigRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+			ConfigSvcAPI.GetConfig(context.Background()).
+			Execute()
 		if err != nil {
 			return err
 		}
 		modelId = *getConfigRsp.Config.Model.CurrentModelId
 	}
 
-	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ModelSvcAPI.GetModelStatus(context.Background(), modelId).Execute()
+	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+		ModelSvcAPI.GetModelStatus(context.Background(), modelId).
+		Execute()
 	if err != nil {
 		return err
 	}
@@ -248,7 +273,12 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 
 	fullPrompt := currentPrompt.Prompt
 	if currentPrompt.Template != "" {
-		fullPrompt = strings.Replace(currentPrompt.Template, "{prompt}", currentPrompt.Prompt, -1)
+		fullPrompt = strings.Replace(
+			currentPrompt.Template,
+			"{prompt}",
+			currentPrompt.Prompt,
+			-1,
+		)
 	}
 
 	err = p.processPlatform(stat.Address, modelId, fullPrompt, currentPrompt)
@@ -263,8 +293,15 @@ func (p *PromptService) processPrompt(currentPrompt *prompttypes.Prompt) (err er
 	return nil
 }
 
-func (p *PromptService) processPlatform(address string, modelId string, fullPrompt string, currentPrompt *prompttypes.Prompt) error {
-	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ModelSvcAPI.GetModel(context.Background(), modelId).Execute()
+func (p *PromptService) processPlatform(
+	address string,
+	modelId string,
+	fullPrompt string,
+	currentPrompt *prompttypes.Prompt,
+) error {
+	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+		ModelSvcAPI.GetModel(context.Background(), modelId).
+		Execute()
 	if err != nil {
 		return err
 	}
@@ -279,7 +316,11 @@ func (p *PromptService) processPlatform(address string, modelId string, fullProm
 	return fmt.Errorf("cannot find platform %v", getModelRsp.Platform.Id)
 }
 
-func (p *PromptService) processStableDiffusion(address string, fullPrompt string, currentPrompt *prompttypes.Prompt) error {
+func (p *PromptService) processStableDiffusion(
+	address string,
+	fullPrompt string,
+	currentPrompt *prompttypes.Prompt,
+) error {
 	sd := stable_diffusion.Client{
 		Address: address,
 	}
@@ -334,16 +375,19 @@ func (p *PromptService) processStableDiffusion(address string, fullPrompt string
 	// }
 	// upsertRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.UpsertAssets(context.Background()).Request(upsertReq).Execute()
 
-	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(
-		openapi.ChatSvcAddMessageRequest{
-			Message: &openapi.ChatSvcMessage{
-				Id:       openapi.PtrString(sdk.Id("msg")),
-				ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-				Content:  openapi.PtrString("Sure, here is your image"),
-				AssetIds: []string{asset.Id},
+	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
+		Request(
+			openapi.ChatSvcAddMessageRequest{
+				Message: &openapi.ChatSvcMessage{
+					Id:       openapi.PtrString(sdk.Id("msg")),
+					ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+					Content:  openapi.PtrString("Sure, here is your image"),
+					AssetIds: []string{asset.Id},
+				},
 			},
-		},
-	).Execute()
+		).
+		Execute()
 
 	if err != nil {
 		logger.Error("Error when saving chat message after image generation",
@@ -354,7 +398,11 @@ func (p *PromptService) processStableDiffusion(address string, fullPrompt string
 	return nil
 }
 
-func (p *PromptService) processLlamaCpp(address string, fullPrompt string, currentPrompt *prompttypes.Prompt) error {
+func (p *PromptService) processLlamaCpp(
+	address string,
+	fullPrompt string,
+	currentPrompt *prompttypes.Prompt,
+) error {
 	var llmClient llm.ClientI
 	if p.llmCLient != nil {
 		llmClient = p.llmCLient
@@ -377,9 +425,13 @@ func (p *PromptService) processLlamaCpp(address string, fullPrompt string, curre
 			select {
 			case <-ticker.C:
 				mu.Lock()
-				logger.Debug("LLM is streaming",
+				logger.Debug(
+					"LLM is streaming",
 					slog.String("promptId", currentPrompt.Id),
-					slog.Float64("responsesPerSecond", float64(responseCount/int(time.Since(start).Seconds()))),
+					slog.Float64(
+						"responsesPerSecond",
+						float64(responseCount/int(time.Since(start).Seconds())),
+					),
 					slog.Int("totalResponses", responseCount),
 				)
 				mu.Unlock()
@@ -405,15 +457,22 @@ func (p *PromptService) processLlamaCpp(address string, fullPrompt string, curre
 				done <- true
 			}()
 
-			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).Request(
-				openapi.ChatSvcAddMessageRequest{
-					Message: &openapi.ChatSvcMessage{
-						Id:       openapi.PtrString(sdk.Id("msg")),
-						ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-						Content:  openapi.PtrString(llmResponseToText(p.StreamManager.History[currentPrompt.ThreadId])),
+			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+				ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
+				Request(
+					openapi.ChatSvcAddMessageRequest{
+						Message: &openapi.ChatSvcMessage{
+							Id:       openapi.PtrString(sdk.Id("msg")),
+							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+							Content: openapi.PtrString(
+								llmResponseToText(
+									p.StreamManager.History[currentPrompt.ThreadId],
+								),
+							),
+						},
 					},
-				},
-			).Execute()
+				).
+				Execute()
 			if err != nil {
 				logger.Error("Error when saving chat message after broadcast",
 					slog.String("error", err.Error()))

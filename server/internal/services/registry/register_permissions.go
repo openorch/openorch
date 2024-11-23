@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package registryservice
 
 import (
@@ -32,12 +37,18 @@ func (ns *RegistryService) registerPermissions() error {
 		registrytypes.DefinitionAdminPermissions,
 	) {
 		rsp := &usertypes.UpserPermissionResponse{}
-		err := ns.router.Put(context.Background(), "user-svc", fmt.Sprintf("/permission/%v", permission.Id), &usertypes.UpserPermissionRequest{
-			Permission: &usertypes.Permission{
-				Name:        permission.Name,
-				Description: permission.Description,
+		err := ns.router.Put(
+			context.Background(),
+			"user-svc",
+			fmt.Sprintf("/permission/%v", permission.Id),
+			&usertypes.UpserPermissionRequest{
+				Permission: &usertypes.Permission{
+					Name:        permission.Name,
+					Description: permission.Description,
+				},
 			},
-		}, rsp)
+			rsp,
+		)
 		if err != nil {
 			return err
 		}
@@ -52,8 +63,17 @@ func (ns *RegistryService) registerPermissions() error {
 			registrytypes.DefinitionAdminPermissions,
 		) {
 			rsp := &usertypes.AddPermissionToRoleResponse{}
-			err := ns.router.Put(context.Background(), "user-svc",
-				fmt.Sprintf("/role/%v/permission/%v", role.Id, permission.Id), &usertypes.AddPermissionToRoleRequest{}, rsp)
+			err := ns.router.Put(
+				context.Background(),
+				"user-svc",
+				fmt.Sprintf(
+					"/role/%v/permission/%v",
+					role.Id,
+					permission.Id,
+				),
+				&usertypes.AddPermissionToRoleRequest{},
+				rsp,
+			)
 			if err != nil {
 				return err
 			}
@@ -68,8 +88,17 @@ func (ns *RegistryService) registerPermissions() error {
 			registrytypes.DefinitionPermissions,
 		) {
 			rsp := &usertypes.AddPermissionToRoleResponse{}
-			err := ns.router.Put(context.Background(), "user-svc",
-				fmt.Sprintf("/role/%v/permission/%v", role.Id, permission.Id), &usertypes.AddPermissionToRoleRequest{}, rsp)
+			err := ns.router.Put(
+				context.Background(),
+				"user-svc",
+				fmt.Sprintf(
+					"/role/%v/permission/%v",
+					role.Id,
+					permission.Id,
+				),
+				&usertypes.AddPermissionToRoleRequest{},
+				rsp,
+			)
 			if err != nil {
 				return err
 			}

@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package promptservice
 
 import (
@@ -42,12 +47,18 @@ func NewPromptService(
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PromptService, error) {
-	promptsStore, err := datastoreFactory("promptSvcPrompts", &prompttypes.Prompt{})
+	promptsStore, err := datastoreFactory(
+		"promptSvcPrompts",
+		&prompttypes.Prompt{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	credentialStore, err := datastoreFactory("promptSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"promptSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +78,10 @@ func NewPromptService(
 	}
 
 	promptIs, err := service.promptsStore.Query(
-		datastore.Equals(datastore.Field("status"), prompttypes.PromptStatusRunning),
+		datastore.Equals(
+			datastore.Field("status"),
+			prompttypes.PromptStatusRunning,
+		),
 	).Find()
 	if err != nil {
 		return nil, err
@@ -96,7 +110,12 @@ func (cs *PromptService) Start() error {
 	cs.lock.Acquire(ctx, "prompt-svc-start")
 	defer cs.lock.Release(ctx, "prompt-svc-start")
 
-	token, err := sdk.RegisterService(cs.clientFactory.Client().UserSvcAPI, "prompt-svc", "Prompt Service", cs.credentialStore)
+	token, err := sdk.RegisterService(
+		cs.clientFactory.Client().UserSvcAPI,
+		"prompt-svc",
+		"Prompt Service",
+		cs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}

@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package deployservice
 
 import (
@@ -113,7 +118,11 @@ func (ns *DeployService) cycle() error {
 		return errors.Wrap(err, "Error calling list service definitions")
 	}
 
-	commands := allocator.GenerateCommands(listNodesRsp.Nodes, listInstancesRsp.Instances, deployments)
+	commands := allocator.GenerateCommands(
+		listNodesRsp.Nodes,
+		listInstancesRsp.Instances,
+		deployments,
+	)
 
 	for _, command := range commands {
 		var node *openapi.RegistrySvcNode
@@ -148,7 +157,10 @@ func (ns *DeployService) cycle() error {
 
 		err := ns.processCommand(ctx, command, node, definition, deployment)
 		if err != nil {
-			logger.Error("Error processing deploy command", slog.Any("error", err))
+			logger.Error(
+				"Error processing deploy command",
+				slog.Any("error", err),
+			)
 		}
 	}
 
@@ -194,8 +206,14 @@ func (ns *DeployService) executeKillCommand(
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
 ) error {
-	logger.Info("Executing deploy kill command", slog.String("deploymentId", deployment.Id))
-	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
+	logger.Info(
+		"Executing deploy kill command",
+		slog.String("deploymentId", deployment.Id),
+	)
+	client := ns.clientFactory.Client(
+		sdk.WithAddress(command.NodeUrl),
+		sdk.WithToken(ns.token),
+	)
 
 	name := fmt.Sprintf("sup-%v", definition.Id)
 	_, _, err := client.DockerSvcAPI.StopContainer(ctx).Request(
@@ -214,8 +232,14 @@ func (ns *DeployService) executeStartCommand(
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
 ) error {
-	logger.Info("Executing deploy start command", slog.String("deploymentId", deployment.Id))
-	client := ns.clientFactory.Client(sdk.WithAddress(command.NodeUrl), sdk.WithToken(ns.token))
+	logger.Info(
+		"Executing deploy start command",
+		slog.String("deploymentId", deployment.Id),
+	)
+	client := ns.clientFactory.Client(
+		sdk.WithAddress(command.NodeUrl),
+		sdk.WithToken(ns.token),
+	)
 
 	err := ns.makeSureItRuns(client, ctx, definition, deployment)
 
@@ -225,13 +249,16 @@ func (ns *DeployService) executeStartCommand(
 			slog.Any("error", err),
 		)
 
-		deployment.Status = deploy.DeploymentStatus(openapi.DeploymentStatusError)
+		deployment.Status = deploy.DeploymentStatus(
+			openapi.DeploymentStatusError,
+		)
 		deployment.Details = err.Error()
 
-		writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
-			"status":  deployment.Status,
-			"details": deployment.Details,
-		})
+		writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).
+			UpdateFields(map[string]any{
+				"status":  deployment.Status,
+				"details": deployment.Details,
+			})
 
 		if writeErr != nil {
 			return writeErr
@@ -247,10 +274,11 @@ func (ns *DeployService) executeStartCommand(
 	deployment.Status = deploy.DeploymentStatus(openapi.DeploymentStatusOK)
 	deployment.Details = ""
 
-	writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).UpdateFields(map[string]any{
-		"status":  deployment.Status,
-		"details": deployment.Details,
-	})
+	writeErr := ns.deploymentStore.Query(datastore.Id(command.DeploymentId)).
+		UpdateFields(map[string]any{
+			"status":  deployment.Status,
+			"details": deployment.Details,
+		})
 	if writeErr != nil {
 		return writeErr
 	}
@@ -260,7 +288,12 @@ func (ns *DeployService) executeStartCommand(
 		return errors.Wrap(err, "error parsing node url")
 	}
 	if definition.HostPort != nil {
-		ur.Host = strings.Replace(ur.Host, ur.Port(), fmt.Sprintf("%v", *definition.HostPort), 1)
+		ur.Host = strings.Replace(
+			ur.Host,
+			ur.Port(),
+			fmt.Sprintf("%v", *definition.HostPort),
+			1,
+		)
 	}
 
 	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Request(
@@ -292,7 +325,10 @@ func (ns *DeployService) makeSureItRuns(
 	}()
 
 	if definition == nil {
-		return fmt.Errorf("definition '%v' cannot be found", deployment.DefinitionId)
+		return fmt.Errorf(
+			"definition '%v' cannot be found",
+			deployment.DefinitionId,
+		)
 	}
 
 	if definition.Image != nil {
@@ -302,7 +338,9 @@ func (ns *DeployService) makeSureItRuns(
 				Port:     definition.Image.Port,
 				HostPort: definition.HostPort,
 				Options: &openapi.DockerSvcRunContainerOptions{
-					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+					Name: openapi.PtrString(
+						fmt.Sprintf("superplatform-%v", definition.Id),
+					),
 				},
 			},
 		).Execute()
@@ -349,8 +387,11 @@ func (ns *DeployService) makeSureItRuns(
 	return err
 }
 
-func (ns *DeployService) getDeploymentById(deploymentId string) (*deploy.Deployment, error) {
-	deploymentIs, err := ns.deploymentStore.Query(datastore.Id(deploymentId)).Find()
+func (ns *DeployService) getDeploymentById(
+	deploymentId string,
+) (*deploy.Deployment, error) {
+	deploymentIs, err := ns.deploymentStore.Query(datastore.Id(deploymentId)).
+		Find()
 	if err != nil {
 		return nil, err
 	}

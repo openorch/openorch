@@ -29,7 +29,8 @@ func (rs *RegistryService) SaveDefinition(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionNodeView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	err := rs.router.AsRequestMaker(r).
+		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionNodeView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -60,6 +61,8 @@ func (rs *RegistryService) SaveDefinition(
 	w.Write([]byte(`{}`))
 }
 
-func (rs *RegistryService) saveServiceDefinition(req *registry.SaveDefinitionRequest) error {
+func (rs *RegistryService) saveServiceDefinition(
+	req *registry.SaveDefinitionRequest,
+) error {
 	return rs.definitionStore.Upsert(req.Definition)
 }

@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package policyservice
 
 import (
@@ -39,12 +44,18 @@ func NewPolicyService(
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PolicyService, error) {
 
-	instancesStore, err := datastoreFactory("policySvcInstances", &policytypes.Instance{})
+	instancesStore, err := datastoreFactory(
+		"policySvcInstances",
+		&policytypes.Instance{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	credentialStore, err := datastoreFactory("policySvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"policySvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +87,12 @@ func (cs *PolicyService) Start() error {
 		cs.instances = append(cs.instances, instance)
 	}
 
-	token, err := sdk.RegisterService(cs.clientFactory.Client().UserSvcAPI, "policy-svc", "Policy Service", cs.credentialStore)
+	token, err := sdk.RegisterService(
+		cs.clientFactory.Client().UserSvcAPI,
+		"policy-svc",
+		"Policy Service",
+		cs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}

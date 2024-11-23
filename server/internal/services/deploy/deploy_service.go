@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package deployservice
 
 import (
@@ -36,11 +41,17 @@ func NewDeployService(
 	triggerOnly bool,
 ) (*DeployService, error) {
 
-	credentialStore, err := datastoreFactory("deploySvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"deploySvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	deploymentStore, err := datastoreFactory("deploySvcDeployments", &deploy.Deployment{})
+	deploymentStore, err := datastoreFactory(
+		"deploySvcDeployments",
+		&deploy.Deployment{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +76,12 @@ func (ns *DeployService) Start() error {
 	ns.lock.Acquire(ctx, "deploy-svc-start")
 	defer ns.lock.Release(ctx, "deploy-svc-start")
 
-	token, err := sdk.RegisterService(ns.clientFactory.Client().UserSvcAPI, "deploy-svc", "Deploy Service", ns.credentialStore)
+	token, err := sdk.RegisterService(
+		ns.clientFactory.Client().UserSvcAPI,
+		"deploy-svc",
+		"Deploy Service",
+		ns.credentialStore,
+	)
 	if err != nil {
 		return err
 	}

@@ -45,10 +45,13 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 		mockUserSvc = test.MockUserSvc(ctx, ctrl)
 		mockDeploySvc := openapi.NewMockDeploySvcAPI(ctrl)
 
-		mockClientFactory.EXPECT().Client(gomock.Any()).Return(&openapi.APIClient{
-			UserSvcAPI:   mockUserSvc,
-			DeploySvcAPI: mockDeploySvc,
-		}).AnyTimes()
+		mockClientFactory.EXPECT().
+			Client(gomock.Any()).
+			Return(&openapi.APIClient{
+				UserSvcAPI:   mockUserSvc,
+				DeploySvcAPI: mockDeploySvc,
+			}).
+			AnyTimes()
 
 		options := &di.Options{
 			Test:          true,
@@ -82,69 +85,99 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 		})
 
 		ginkgo.It("saves an instance successfully", func() {
-			_, _, err := adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
-				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           "test-a",
-					Url:          "http://test-a",
-					DeploymentId: "test-deployment",
-				},
-			).Execute()
+			_, _, err := adminClient.RegistrySvcAPI.RegisterInstance(ctx).
+				Request(
+					openapi.RegistrySvcRegisterInstanceRequest{
+						Id:           "test-a",
+						Url:          "http://test-a",
+						DeploymentId: "test-deployment",
+					},
+				).
+				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			instancesRsp, err := waitForInstanceStatus(ctx, adminClient, openapi.InstanceStatusUnreachable, 5)
+			instancesRsp, err := waitForInstanceStatus(
+				ctx,
+				adminClient,
+				openapi.InstanceStatusUnreachable,
+				5,
+			)
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(instancesRsp.Instances).To(gomega.HaveLen(1))
-			gomega.Expect(instancesRsp.Instances[0].Status).To(gomega.Equal(openapi.InstanceStatusUnreachable))
+			gomega.Expect(instancesRsp.Instances[0].Status).
+				To(gomega.Equal(openapi.InstanceStatusUnreachable))
 
-			healthServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				w.WriteHeader(http.StatusOK)
-				fmt.Fprintln(w, "Hi")
-			}))
+			healthServer := httptest.NewServer(
+				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+					w.WriteHeader(http.StatusOK)
+					fmt.Fprintln(w, "Hi")
+				}),
+			)
 
 			gomega.Expect(healthServer).NotTo(gomega.BeNil())
 
-			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
-				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           "test-a",
-					Url:          healthServer.URL,
-					DeploymentId: "test-deployment",
-				},
-			).Execute()
+			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
+				Request(
+					openapi.RegistrySvcRegisterInstanceRequest{
+						Id:           "test-a",
+						Url:          healthServer.URL,
+						DeploymentId: "test-deployment",
+					},
+				).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			instancesRsp, _, err = adminClient.RegistrySvcAPI.ListInstances(ctx).Execute()
+			instancesRsp, _, err = adminClient.RegistrySvcAPI.ListInstances(ctx).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(instancesRsp.Instances).To(gomega.HaveLen(1))
-			gomega.Expect(instancesRsp.Instances[0].Url).To(gomega.Equal(healthServer.URL))
-			gomega.Expect(instancesRsp.Instances[0].Status).To(gomega.Equal(openapi.InstanceStatusHealthy))
+			gomega.Expect(instancesRsp.Instances[0].Url).
+				To(gomega.Equal(healthServer.URL))
+			gomega.Expect(instancesRsp.Instances[0].Status).
+				To(gomega.Equal(openapi.InstanceStatusHealthy))
 
-			_, err = waitForInstanceStatus(ctx, adminClient, openapi.InstanceStatusHealthy, 5)
+			_, err = waitForInstanceStatus(
+				ctx,
+				adminClient,
+				openapi.InstanceStatusHealthy,
+				5,
+			)
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
 			healthServer.Close()
 
-			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).Request(
-				openapi.RegistrySvcRegisterInstanceRequest{
-					Id:           "test-a",
-					Url:          healthServer.URL,
-					DeploymentId: "test-deployment",
-				},
-			).Execute()
+			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
+				Request(
+					openapi.RegistrySvcRegisterInstanceRequest{
+						Id:           "test-a",
+						Url:          healthServer.URL,
+						DeploymentId: "test-deployment",
+					},
+				).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			instancesRsp, _, err = adminClient.RegistrySvcAPI.ListInstances(ctx).Execute()
+			instancesRsp, _, err = adminClient.RegistrySvcAPI.ListInstances(ctx).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(instancesRsp.Instances).To(gomega.HaveLen(1))
-			gomega.Expect(instancesRsp.Instances[0].Url).To(gomega.Equal(healthServer.URL))
-			gomega.Expect(instancesRsp.Instances[0].Status).To(gomega.Equal(openapi.InstanceStatusUnreachable))
+			gomega.Expect(instancesRsp.Instances[0].Url).
+				To(gomega.Equal(healthServer.URL))
+			gomega.Expect(instancesRsp.Instances[0].Status).
+				To(gomega.Equal(openapi.InstanceStatusUnreachable))
 		})
 	})
 
 })
 
-func waitForInstanceStatus(ctx context.Context, client *openapi.APIClient, expectedStatus openapi.RegistrySvcInstanceStatus, retries int) (*openapi.RegistrySvcListInstancesResponse, error) {
+func waitForInstanceStatus(
+	ctx context.Context,
+	client *openapi.APIClient,
+	expectedStatus openapi.RegistrySvcInstanceStatus,
+	retries int,
+) (*openapi.RegistrySvcListInstancesResponse, error) {
 	lastStatus := openapi.RegistrySvcInstanceStatus("")
 
 	for i := 0; i < retries; i++ {
@@ -162,5 +195,9 @@ func waitForInstanceStatus(ctx context.Context, client *openapi.APIClient, expec
 		time.Sleep(time.Second)
 	}
 
-	return nil, fmt.Errorf("expected instance status %s not reached, last status was %v", expectedStatus, lastStatus)
+	return nil, fmt.Errorf(
+		"expected instance status %s not reached, last status was %v",
+		expectedStatus,
+		lastStatus,
+	)
 }

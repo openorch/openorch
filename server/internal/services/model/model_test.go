@@ -28,19 +28,26 @@ func TestModel(t *testing.T) {
 	hs.UpdateHandler(universe)
 	require.NoError(t, starterFunc())
 
-	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	t.Run("get models", func(t *testing.T) {
-		getModelsRsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).Execute()
+		getModelsRsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).
+			Execute()
 		require.NoError(t, err)
 
 		require.Equal(t, 1, len(*getModelsRsp.Models[0].Assets))
 	})
 
 	t.Run("model status is not running, not ready", func(t *testing.T) {
-		statusRsp, _, err := userClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").Execute()
+		statusRsp, _, err := userClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
+			Execute()
 		require.NoError(t, err)
 
 		require.Equal(t, false, *statusRsp.Status.Running)
@@ -50,16 +57,27 @@ func TestModel(t *testing.T) {
 	})
 
 	t.Run("default", func(t *testing.T) {
-		getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).Execute()
+		getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
+			Execute()
 		require.NoError(t, err)
-		require.Equal(t, configservice.DefaultModelId, *getConfigRsp.Config.Model.CurrentModelId)
+		require.Equal(
+			t,
+			configservice.DefaultModelId,
+			*getConfigRsp.Config.Model.CurrentModelId,
+		)
 
-		_, _, err = userClient.ModelSvcAPI.MakeDefault(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").Execute()
+		_, _, err = userClient.ModelSvcAPI.MakeDefault(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
+			Execute()
 		// errors because it is not downloaded yet
 		require.Error(t, err)
 
-		getConfigRsp, _, err = userClient.ConfigSvcAPI.GetConfig(context.Background()).Execute()
+		getConfigRsp, _, err = userClient.ConfigSvcAPI.GetConfig(context.Background()).
+			Execute()
 		require.NoError(t, err)
-		require.Equal(t, configservice.DefaultModelId, getConfigRsp.Config.Model.CurrentModelId)
+		require.Equal(
+			t,
+			configservice.DefaultModelId,
+			getConfigRsp.Config.Model.CurrentModelId,
+		)
 	})
 }

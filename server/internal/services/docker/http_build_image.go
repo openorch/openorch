@@ -41,9 +41,12 @@ func (dm *DockerService) BuildImage(
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionImageBuild.Id).Body(openapi.UserSvcIsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}).Execute()
+	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionImageBuild.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -117,46 +120,49 @@ func createTarFromContext(sourceDir string) (io.Reader, error) {
 		defer pw.Close()
 		defer tw.Close()
 
-		err := filepath.Walk(sourceDir, func(file string, fi os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
+		err := filepath.Walk(
+			sourceDir,
+			func(file string, fi os.FileInfo, err error) error {
+				if err != nil {
+					return err
+				}
 
-			// Preserve the directory structure in the tar file
-			if fi.IsDir() {
-				// Add directory header (empty, no contents)
+				// Preserve the directory structure in the tar file
+				if fi.IsDir() {
+					// Add directory header (empty, no contents)
+					header, err := tar.FileInfoHeader(fi, fi.Name())
+					if err != nil {
+						return err
+					}
+					header.Name = filepath.ToSlash(file[len(sourceDir):])
+					if err := tw.WriteHeader(header); err != nil {
+						return err
+					}
+					return nil // Skip adding files for directories, but still write header
+				}
+
 				header, err := tar.FileInfoHeader(fi, fi.Name())
 				if err != nil {
 					return err
 				}
+
 				header.Name = filepath.ToSlash(file[len(sourceDir):])
 				if err := tw.WriteHeader(header); err != nil {
 					return err
 				}
-				return nil // Skip adding files for directories, but still write header
-			}
 
-			header, err := tar.FileInfoHeader(fi, fi.Name())
-			if err != nil {
-				return err
-			}
-
-			header.Name = filepath.ToSlash(file[len(sourceDir):])
-			if err := tw.WriteHeader(header); err != nil {
-				return err
-			}
-
-			if fi.Mode().IsRegular() {
-				f, err := os.Open(file)
-				if err != nil {
+				if fi.Mode().IsRegular() {
+					f, err := os.Open(file)
+					if err != nil {
+						return err
+					}
+					defer f.Close()
+					_, err = io.Copy(tw, f)
 					return err
 				}
-				defer f.Close()
-				_, err = io.Copy(tw, f)
-				return err
-			}
-			return nil
-		})
+				return nil
+			},
+		)
 
 		if err != nil {
 			pw.CloseWithError(err)

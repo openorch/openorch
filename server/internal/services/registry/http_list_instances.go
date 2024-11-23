@@ -33,9 +33,10 @@ func (rs *RegistryService) ListInstances(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceView.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
+	err := rs.router.AsRequestMaker(r).
+		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceView.Id), &usertypes.IsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -84,7 +85,9 @@ type List struct {
 	Path         string
 }
 
-func (rs *RegistryService) getInstances(query List) ([]*registry.Instance, error) {
+func (rs *RegistryService) getInstances(
+	query List,
+) ([]*registry.Instance, error) {
 	instanceIs, err := rs.instanceStore.Query().Find()
 	if err != nil {
 		return nil, err

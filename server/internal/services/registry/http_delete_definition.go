@@ -31,9 +31,10 @@ func (rs *RegistryService) DeleteDefinition(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionDefinitionDelete.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
+	err := rs.router.AsRequestMaker(r).
+		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionDefinitionDelete.Id), &usertypes.IsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

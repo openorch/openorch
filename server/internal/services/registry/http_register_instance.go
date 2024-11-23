@@ -31,9 +31,10 @@ func (rs *RegistryService) RegisterInstance(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceEdit.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
+	err := rs.router.AsRequestMaker(r).
+		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceEdit.Id), &usertypes.IsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -70,11 +71,14 @@ func (rs *RegistryService) RegisterInstance(
 	w.Write([]byte(`{}`))
 }
 
-func (rs *RegistryService) registerInstance(req *registry.RegisterInstanceRequest) error {
+func (rs *RegistryService) registerInstance(
+	req *registry.RegisterInstanceRequest,
+) error {
 	var instance registry.Instance
 
 	if req.Id == "" {
-		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).Find()
+		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).
+			Find()
 		if err != nil {
 			return err
 		}

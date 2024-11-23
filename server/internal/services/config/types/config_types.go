@@ -25,8 +25,8 @@ type AppServiceConfig struct {
 
 type Config struct {
 	Download DownloadServiceConfig `json:"download" yaml:"download"`
-	Model    ModelServiceConfig    `json:"model" yaml:"model"`
-	App      AppServiceConfig      `json:"app" yaml:"app"`
+	Model    ModelServiceConfig    `json:"model"    yaml:"model"`
+	App      AppServiceConfig      `json:"app"      yaml:"app"`
 
 	/** This flag drives a minor UX feature:
 	 * if the user has not installed the runtime we show an INSTALL
@@ -34,7 +34,7 @@ type Config struct {
 	 * we show a START runtime button.
 	 * */
 	IsRuntimeInstalled bool   `json:"isRuntimeInstalled" yaml:"isRuntimeInstalled"`
-	Directory          string `json:"directory" yaml:"directory"`
+	Directory          string `json:"directory"          yaml:"directory"`
 }
 
 type GetConfigRequest struct {

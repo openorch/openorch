@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package dynamicservice
 
 import (
@@ -43,7 +48,10 @@ func NewDynamicService(
 	if err != nil {
 		return nil, err
 	}
-	credentialStore, err := datastoreFactory("genericSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"genericSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -74,13 +82,19 @@ func (g *DynamicService) Start() error {
 		},
 	})
 
-	pk, _, err := g.client.UserSvcAPI.GetPublicKey(context.Background()).Execute()
+	pk, _, err := g.client.UserSvcAPI.GetPublicKey(context.Background()).
+		Execute()
 	if err != nil {
 		return err
 	}
 	g.publicKey = *pk.PublicKey
 
-	token, err := sdk.RegisterService(g.clientFactory.Client().UserSvcAPI, "dynamic-svc", "Dynamic Svc", g.credentialStore)
+	token, err := sdk.RegisterService(
+		g.clientFactory.Client().UserSvcAPI,
+		"dynamic-svc",
+		"Dynamic Svc",
+		g.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
@@ -89,7 +103,9 @@ func (g *DynamicService) Start() error {
 	return g.registerPermissions()
 }
 
-func (g *DynamicService) create(request *dynamictypes.CreateObjectRequest) error {
+func (g *DynamicService) create(
+	request *dynamictypes.CreateObjectRequest,
+) error {
 	if request.Object.Id == "" {
 		request.Object.Id = sdk.Id(request.Object.Table)
 	}
@@ -100,7 +116,9 @@ func (g *DynamicService) create(request *dynamictypes.CreateObjectRequest) error
 	return g.store.Create(request.Object)
 }
 
-func (g *DynamicService) createMany(request *dynamictypes.CreateManyRequest) error {
+func (g *DynamicService) createMany(
+	request *dynamictypes.CreateManyRequest,
+) error {
 	objectIs := []datastore.Row{}
 	for _, object := range request.Objects {
 		if object.Id == "" {
@@ -115,7 +133,10 @@ func (g *DynamicService) createMany(request *dynamictypes.CreateManyRequest) err
 	return g.store.CreateMany(objectIs)
 }
 
-func (g *DynamicService) upsert(writers []string, request *dynamictypes.UpsertObjectRequest) error {
+func (g *DynamicService) upsert(
+	writers []string,
+	request *dynamictypes.UpsertObjectRequest,
+) error {
 	vI, found, err := g.store.Query(
 		datastore.Id(request.Object.Id),
 	).FindOne()
@@ -159,7 +180,9 @@ func intersects(slice1, slice2 []string) bool {
 	return false
 }
 
-func (g *DynamicService) upsertMany(request *dynamictypes.UpsertManyRequest) error {
+func (g *DynamicService) upsertMany(
+	request *dynamictypes.UpsertManyRequest,
+) error {
 	objectIs := []datastore.Row{}
 	for _, object := range request.Objects {
 		objectIs = append(objectIs, object)
@@ -167,12 +190,20 @@ func (g *DynamicService) upsertMany(request *dynamictypes.UpsertManyRequest) err
 	return g.store.UpsertMany(objectIs)
 }
 
-func (g *DynamicService) update(tableName string, userId string, conditions []datastore.Filter, object *dynamictypes.Object) error {
+func (g *DynamicService) update(
+	tableName string,
+	userId string,
+	conditions []datastore.Filter,
+	object *dynamictypes.Object,
+) error {
 	if len(conditions) == 0 {
 		return errors.New("no conditions")
 	}
 
-	conditions = append(conditions, datastore.Equals(datastore.Field("table"), tableName))
+	conditions = append(
+		conditions,
+		datastore.Equals(datastore.Field("table"), tableName),
+	)
 	conditions = append(conditions, datastore.Equals(
 		datastore.Field("userId"),
 		userId,
@@ -183,12 +214,19 @@ func (g *DynamicService) update(tableName string, userId string, conditions []da
 	).Update(object)
 }
 
-func (g *DynamicService) delete(tableName string, userId string, conditions []datastore.Filter) error {
+func (g *DynamicService) delete(
+	tableName string,
+	userId string,
+	conditions []datastore.Filter,
+) error {
 	if len(conditions) == 0 {
 		return errors.New("no conditions")
 	}
 
-	conditions = append(conditions, datastore.Equals(datastore.Field("table"), tableName))
+	conditions = append(
+		conditions,
+		datastore.Equals(datastore.Field("table"), tableName),
+	)
 	conditions = append(conditions, datastore.Equals(
 		datastore.Field("userId"),
 		userId,

@@ -16,11 +16,20 @@ type logsAndStatus struct {
 	Summary string `json:"summary"`
 }
 
-func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCount int) (*logsAndStatus, error) {
+func (d *DockerService) getContainerLogsAndStatus(
+	singulatronHash string,
+	logCount int,
+) (*logsAndStatus, error) {
 	ctx := context.Background()
-	containers, err := d.client.ContainerList(ctx, container.ListOptions{All: true})
+	containers, err := d.client.ContainerList(
+		ctx,
+		container.ListOptions{All: true},
+	)
 	if err != nil {
-		return nil, errors.Wrap(err, "error listing docker containers when getting logs")
+		return nil, errors.Wrap(
+			err,
+			"error listing docker containers when getting logs",
+		)
 	}
 
 	for _, modelContainer := range containers {
@@ -30,7 +39,11 @@ func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCou
 				ShowStderr: true,
 				Tail:       fmt.Sprintf("%v", logCount),
 			}
-			logsReader, err := d.client.ContainerLogs(ctx, modelContainer.ID, logOptions)
+			logsReader, err := d.client.ContainerLogs(
+				ctx,
+				modelContainer.ID,
+				logOptions,
+			)
 			if err != nil {
 				return nil, errors.Wrap(err, "error getting container logs")
 			}
@@ -42,7 +55,10 @@ func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCou
 				return nil, errors.Wrap(err, "error reading container logs")
 			}
 
-			containerJSON, err := d.client.ContainerInspect(ctx, modelContainer.ID)
+			containerJSON, err := d.client.ContainerInspect(
+				ctx,
+				modelContainer.ID,
+			)
 			if err != nil {
 				return nil, errors.Wrap(err, "error inspecting container")
 			}
@@ -51,7 +67,15 @@ func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCou
 			if containerJSON.NetworkSettings != nil {
 				for port, bindings := range containerJSON.NetworkSettings.Ports {
 					for _, binding := range bindings {
-						portMappings = append(portMappings, fmt.Sprintf("%s:%s -> %s", binding.HostIP, binding.HostPort, port))
+						portMappings = append(
+							portMappings,
+							fmt.Sprintf(
+								"%s:%s -> %s",
+								binding.HostIP,
+								binding.HostPort,
+								port,
+							),
+						)
 					}
 				}
 			} else {
@@ -81,7 +105,11 @@ func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCou
 				strings.Join(portMappings, ", "),
 			)
 
-			summary := fmt.Sprintf("Container Status:\n%s\n\nContainer Logs:\n%s", containerStatus, logs.String())
+			summary := fmt.Sprintf(
+				"Container Status:\n%s\n\nContainer Logs:\n%s",
+				containerStatus,
+				logs.String(),
+			)
 
 			return &logsAndStatus{
 				Summary: summary,
@@ -91,5 +119,7 @@ func (d *DockerService) getContainerLogsAndStatus(singulatronHash string, logCou
 		}
 	}
 
-	return nil, errors.New("no matching container found for the provided model URL")
+	return nil, errors.New(
+		"no matching container found for the provided model URL",
+	)
 }

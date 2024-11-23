@@ -104,8 +104,8 @@ type ModelStatus struct {
 	/* Running triggers onModelLaunch on the frontend.
 	Running is true when the model is both running and answering
 	- fully loaded. */
-	Running bool   `json:"running" binding:"required"`
-	Address string `json:"address" binding:"required"`
+	Running bool   `json:"running"     binding:"required"`
+	Address string `json:"address"     binding:"required"`
 }
 
 type StatusRequest struct {
@@ -145,8 +145,8 @@ type GetModelRequest struct {
 }
 
 type GetModelResponse struct {
-	Exists   bool      `json:"exists" binding:"required"`
-	Model    *Model    `json:"model,omitempty" binding:"required"`
+	Exists   bool      `json:"exists"             binding:"required"`
+	Model    *Model    `json:"model,omitempty"    binding:"required"`
 	Platform *Platform `json:"platform,omitempty" binding:"required"`
 }
 

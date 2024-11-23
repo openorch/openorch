@@ -62,7 +62,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	if options.Test {
 		homeDir, err = os.MkdirTemp("", "singulatron-")
 		if err != nil {
-			logger.Error("Homedir creation failed", slog.String("error", err.Error()))
+			logger.Error(
+				"Homedir creation failed",
+				slog.String("error", err.Error()),
+			)
 			os.Exit(1)
 		}
 	} else {
@@ -80,7 +83,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	configService, err := configservice.NewConfigService(options.Lock)
 	if err != nil {
-		logger.Error("Config service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Config service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -95,12 +101,18 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
 		err = os.MkdirAll(localStorePath, 0755)
 		if err != nil {
-			logger.Error("Creating data folder failed", slog.String("error", err.Error()))
+			logger.Error(
+				"Creating data folder failed",
+				slog.String("error", err.Error()),
+			)
 			os.Exit(1)
 		}
 
 		options.DatastoreFactory = func(tableName string, instance any) (datastore.DataStore, error) {
-			return localstore.NewLocalStore(instance, path.Join(localStorePath, tableName))
+			return localstore.NewLocalStore(
+				instance,
+				path.Join(localStorePath, tableName),
+			)
 		}
 	}
 	configService.SetDatastoreFactory(options.DatastoreFactory)
@@ -112,12 +124,18 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("User service start failed", slog.String("error", err.Error()))
+		logger.Error(
+			"User service start failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
 	if err != nil {
-		logger.Error("Config service start failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Config service start failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -127,20 +145,29 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Firehose service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Firehose service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
 	err = os.MkdirAll(singulatronFolder, 0755)
 	if err != nil {
-		logger.Error("Config folder creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Config folder creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
 	downloadFolder := path.Join(singulatronFolder, "downloads")
 	err = os.MkdirAll(downloadFolder, 0755)
 	if err != nil {
-		logger.Error("Downloads folder creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Downloads folder creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -150,12 +177,17 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Download service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Download service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
 	downloadService.SetDefaultFolder(downloadFolder)
-	downloadService.SetStateFilePath(path.Join(singulatronFolder, "downloads.json"))
+	downloadService.SetStateFilePath(
+		path.Join(singulatronFolder, "downloads.json"),
+	)
 
 	dockerService, err := dockerservice.NewDockerService(
 		options.NodeOptions.VolumeName,
@@ -164,7 +196,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Docker service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Docker service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -176,7 +211,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Model service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Model service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -186,7 +224,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Chat service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Chat service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -197,7 +238,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Prompt service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Prompt service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -207,7 +251,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Generic service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Generic service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -217,7 +264,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Policy service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Policy service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -230,7 +280,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 	if err != nil {
-		logger.Error("Node service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Node service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -249,7 +302,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Test,
 	)
 	if err != nil {
-		logger.Error("Node service creation failed", slog.String("error", err.Error()))
+		logger.Error(
+			"Node service creation failed",
+			slog.String("error", err.Error()),
+		)
 		os.Exit(1)
 	}
 
@@ -269,263 +325,340 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	router := mux.NewRouter().SkipClean(true).UseEncodedPath()
 
-	router.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("404 page not found"))
-	})
+	router.NotFoundHandler = http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("404 page not found"))
+		},
+	)
 
 	router.HandleFunc("/firehose-svc/events/subscribe", appl(func(w http.ResponseWriter, r *http.Request) {
 		firehoseService.Subscribe(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/firehose-svc/event", appl(func(w http.ResponseWriter, r *http.Request) {
 		firehoseService.Publish(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/download-svc/download", appl(func(w http.ResponseWriter, r *http.Request) {
 		downloadService.Do(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/download-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
 		downloadService.Pause(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/download-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		downloadService.Get(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/download-svc/downloads", appl(func(w http.ResponseWriter, r *http.Request) {
 		downloadService.List(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/docker-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Info(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/docker-svc/host", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Host(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/docker-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.RunContainer(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/docker-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.BuildImage(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/docker-svc/container/stop", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.StopContainer(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/docker-svc/container/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.ContainerIsRunning(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/docker-svc/container/summary", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Summary(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/model-svc/default-model/status", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.DefaultStatus(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/model-svc/model/{modelId}/status", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.Status(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/model-svc/models", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.List(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/model-svc/model/{modelId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.Get(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/model-svc/default-model/start", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.StartDefault(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/model-svc/model/{modelId}/start", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.StartSpecific(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/model-svc/model/{modelId}/make-default", appl(func(w http.ResponseWriter, r *http.Request) {
 		modelService.MakeDefault(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/config-svc/config", appl(func(w http.ResponseWriter, r *http.Request) {
 		configService.Get(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/config-svc/config", appl(func(w http.ResponseWriter, r *http.Request) {
 		configService.Save(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/chat-svc/thread/{threadId}/message", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.AddMessage(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/chat-svc/message/{messageId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.DeleteMessage(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/chat-svc/thread/{threadId}/messages", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.GetMessages(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/chat-svc/thread", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.AddThread(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/chat-svc/thread/{threadId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.DeleteThread(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/chat-svc/threads", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.GetThreads(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/chat-svc/thread/{threadId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.GetThread(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/chat-svc/thread/{threadId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.UpdateThread(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/chat-svc/evens", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.Events(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/prompt-svc/prompt", appl(func(w http.ResponseWriter, r *http.Request) {
 		promptService.AddPrompt(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/prompt-svc/prompt/{promptId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		promptService.RemovePrompt(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/prompt-svc/prompts/{threadId}/responses/subscribe", appl(func(w http.ResponseWriter, r *http.Request) {
 		promptService.SubscribeToPromptResponses(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/prompt-svc/prompts", appl(func(w http.ResponseWriter, r *http.Request) {
 		promptService.ListPrompts(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/user-svc/login", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.Login(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/user/by-token", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.ReadUserByToken(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/users", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.GetUsers(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/user/{userId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.SaveProfile(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/change-password", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.ChangePassword(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/change-password-admin", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.ChangePasswordAdmin(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/organization", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.CreateOrganization(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/organization/{organizationId}/user", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.AddUserToOrganization(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/organization/{organizationId}/user/{userId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.RemoveUserFromOrganization(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 	router.HandleFunc("/user-svc/user", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.CreateUser(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/user/{userId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.DeleteUser(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 	router.HandleFunc("/user-svc/roles", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.GetRoles(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/user-svc/role/{roleId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.DeleteRole(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 	router.HandleFunc("/user-svc/role", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.CreateRole(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/permission/{permissionId}/is-authorized", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.IsAuthorized(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/role/{roleId}/permissions", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.GetPermissions(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/user-svc/role/{roleId}/permissions", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.SetRolePermissions(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/permission/{permissionId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.UpsertPermission(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/register", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.Register(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/role/{roleId}/permission/{permissionId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.AddPermissionToRole(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/public-key", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.GetPublicKey(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/dynamic-svc/object", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Create(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/dynamic-svc/objects/update", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Update(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/dynamic-svc/objects/delete", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Delete(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/dynamic-svc/objects", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Query(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/dynamic-svc/object/{objectId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Upsert(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/registry-svc/nodes", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.List(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/policy-svc/check", appl(func(w http.ResponseWriter, r *http.Request) {
 		policyService.Check(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/policy-svc/instance/{instanceId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		policyService.UpsertInstance(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/registry-svc/instances", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.ListInstances(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/registry-svc/definitions", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.ListDefinitions(w, r)
-	})).Methods("OPTIONS", "GET")
+	})).
+		Methods("OPTIONS", "GET")
 	router.HandleFunc("/registry-svc/instance", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.RegisterInstance(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/registry-svc/definition", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.SaveDefinition(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/registry-svc/instance/{id}", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.RemoveInstance(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 	router.HandleFunc("/registry-svc/definition/{id}", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.DeleteDefinition(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 	router.HandleFunc("/registry-svc/node/{url}", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.DeleteNode(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/deploy-svc/deployment", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.SaveDeployment(w, r)
-	})).Methods("OPTIONS", "PUT")
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/deploy-svc/deployments", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.ListDeployments(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/deploy-svc/deployment", appl(func(w http.ResponseWriter, r *http.Request) {
 		deployService.DeleteDeployment(w, r)
-	})).Methods("OPTIONS", "DELETE")
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/source-svc/repo/checkout", appl(func(w http.ResponseWriter, r *http.Request) {
 		sourceService.CheckoutRepo(w, r)
-	})).Methods("OPTIONS", "POST")
+	})).
+		Methods("OPTIONS", "POST")
 
 	return router, func() error {
 		err = configService.Start()
@@ -581,7 +714,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}, nil
 }
 
-func applicator(mws []middlewares.Middleware) func(http.HandlerFunc) http.HandlerFunc {
+func applicator(
+	mws []middlewares.Middleware,
+) func(http.HandlerFunc) http.HandlerFunc {
 	return func(h http.HandlerFunc) http.HandlerFunc {
 		for _, middleware := range mws {
 			h = middleware(h)

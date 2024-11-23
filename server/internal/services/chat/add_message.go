@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package chatservice
 
 import (
@@ -22,7 +27,10 @@ import (
 	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
 )
 
-func (a *ChatService) addMessage(ctx context.Context, chatMessage *chattypes.Message) error {
+func (a *ChatService) addMessage(
+	ctx context.Context,
+	chatMessage *chattypes.Message,
+) error {
 	if chatMessage.ThreadId == "" {
 		return errors.New("empty chat message thread id")
 	}
@@ -56,12 +64,15 @@ func (a *ChatService) addMessage(ctx context.Context, chatMessage *chattypes.Mes
 	js, _ := json.Marshal(ev)
 	json.Unmarshal(js, &m)
 
-	_, err = a.clientFactory.Client(sdk.WithToken(a.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
-		Event: &openapi.FirehoseSvcEvent{
-			Name: openapi.PtrString(ev.Name()),
-			Data: m,
-		},
-	}).Execute()
+	_, err = a.clientFactory.Client(sdk.WithToken(a.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
+			},
+		}).
+		Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}

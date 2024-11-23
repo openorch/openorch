@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package userservice
 
 import (
@@ -28,7 +33,11 @@ func (us *UserService) registerPermissions() error {
 		usertypes.RoleAdmin,
 	} {
 		for _, permission := range usertypes.AdminPermissions {
-			err := us.addPermissionToRole(us.serviceUserId, role.Id, permission.Id)
+			err := us.addPermissionToRole(
+				us.serviceUserId,
+				role.Id,
+				permission.Id,
+			)
 			if err != nil {
 				return err
 			}
@@ -39,7 +48,11 @@ func (us *UserService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range usertypes.UserPermissions {
-			err := us.addPermissionToRole(us.serviceUserId, role.Id, permission.Id)
+			err := us.addPermissionToRole(
+				us.serviceUserId,
+				role.Id,
+				permission.Id,
+			)
 			if err != nil {
 				return err
 			}

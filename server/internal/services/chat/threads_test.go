@@ -30,7 +30,12 @@ func TestMessageCreatesThread(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(options.ClientFactory.Client().UserSvcAPI, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
@@ -42,14 +47,16 @@ func TestMessageCreatesThread(t *testing.T) {
 			},
 		}
 
-		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), "-").Request(
-			openapi.ChatSvcAddMessageRequest{
-				Message: &openapi.ChatSvcMessage{
-					Id:      openapi.PtrString(req.Message.Id),
-					Content: openapi.PtrString(req.Message.Content),
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), "-").
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
 				},
-			},
-		).Execute()
+			).
+			Execute()
 		require.Error(t, err)
 	})
 
@@ -62,14 +69,16 @@ func TestMessageCreatesThread(t *testing.T) {
 			},
 		}
 
-		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).Request(
-			openapi.ChatSvcAddMessageRequest{
-				Message: &openapi.ChatSvcMessage{
-					Id:      openapi.PtrString(req.Message.Id),
-					Content: openapi.PtrString(req.Message.Content),
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
 				},
-			},
-		).Execute()
+			).
+			Execute()
 		require.Error(t, err)
 	})
 
@@ -84,14 +93,16 @@ func TestMessageCreatesThread(t *testing.T) {
 			},
 		}
 
-		_, _, err = userClient.ChatSvcAPI.AddThread(context.Background()).Request(
-			openapi.ChatSvcAddThreadRequest{
-				Thread: &openapi.ChatSvcThread{
-					Id:    openapi.PtrString(req.Thread.Id),
-					Title: openapi.PtrString(req.Thread.Title),
+		_, _, err = userClient.ChatSvcAPI.AddThread(context.Background()).
+			Request(
+				openapi.ChatSvcAddThreadRequest{
+					Thread: &openapi.ChatSvcThread{
+						Id:    openapi.PtrString(req.Thread.Id),
+						Title: openapi.PtrString(req.Thread.Title),
+					},
 				},
-			},
-		).Execute()
+			).
+			Execute()
 		require.NoError(t, err)
 	})
 
@@ -110,15 +121,17 @@ func TestMessageCreatesThread(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := userClient.ChatSvcAPI.AddThread(context.Background()).Request(
-			openapi.ChatSvcAddThreadRequest{
-				Thread: &openapi.ChatSvcThread{
-					Id:      openapi.PtrString(req.Thread.Id),
-					Title:   openapi.PtrString(req.Thread.Title),
-					UserIds: []string{userId},
+		rsp, _, err := userClient.ChatSvcAPI.AddThread(context.Background()).
+			Request(
+				openapi.ChatSvcAddThreadRequest{
+					Thread: &openapi.ChatSvcThread{
+						Id:      openapi.PtrString(req.Thread.Id),
+						Title:   openapi.PtrString(req.Thread.Title),
+						UserIds: []string{userId},
+					},
 				},
-			},
-		).Execute()
+			).
+			Execute()
 		require.NoError(t, err)
 
 		thread := rsp.Thread
@@ -136,14 +149,16 @@ func TestMessageCreatesThread(t *testing.T) {
 				Content:  "hi there",
 			}}
 
-		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).Request(
-			openapi.ChatSvcAddMessageRequest{
-				Message: &openapi.ChatSvcMessage{
-					Id:      openapi.PtrString(req.Message.Id),
-					Content: openapi.PtrString(req.Message.Content),
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
 				},
-			},
-		).Execute()
+			).
+			Execute()
 		require.Error(t, err)
 	})
 }

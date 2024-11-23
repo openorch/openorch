@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package firehoseservice
 
 import (
@@ -39,7 +44,10 @@ func NewFirehoseService(
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*FirehoseService, error) {
-	credentialStore, err := datastoreFactory("firehoseSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"firehoseSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +68,12 @@ func (fs *FirehoseService) Start() error {
 	fs.lock.Acquire(ctx, "firehose-svc-start")
 	defer fs.lock.Release(ctx, "firehose-svc-start")
 
-	token, err := sdk.RegisterService(fs.clientFactory.Client().UserSvcAPI, "firehose-svc", "Firehose Service", fs.credentialStore)
+	token, err := sdk.RegisterService(
+		fs.clientFactory.Client().UserSvcAPI,
+		"firehose-svc",
+		"Firehose Service",
+		fs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
@@ -93,7 +106,9 @@ func (fs *FirehoseService) publish(event *firehosetypes.Event) {
 	fs.publishMany(event)
 }
 
-func (fs *FirehoseService) subscribe(callback func(events []*firehosetypes.Event)) int {
+func (fs *FirehoseService) subscribe(
+	callback func(events []*firehosetypes.Event),
+) int {
 	fs.mu.Lock()
 	defer fs.mu.Unlock()
 	id := fs.nextID

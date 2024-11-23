@@ -43,10 +43,12 @@ func TestCreate(t *testing.T) {
 	client1 := manyClients[0]
 	client2 := manyClients[1]
 
-	tokenReadRsp1, _, err := client1.UserSvcAPI.ReadUserByToken(context.Background()).Execute()
+	tokenReadRsp1, _, err := client1.UserSvcAPI.ReadUserByToken(context.Background()).
+		Execute()
 	require.NoError(t, err)
 
-	tokenReadRsp2, _, err := client2.UserSvcAPI.ReadUserByToken(context.Background()).Execute()
+	tokenReadRsp2, _, err := client2.UserSvcAPI.ReadUserByToken(context.Background()).
+		Execute()
 	require.NoError(t, err)
 
 	uuid1 := sdk.Id(table1)
@@ -61,9 +63,11 @@ func TestCreate(t *testing.T) {
 		Data:     map[string]interface{}{"key": "value"},
 	}
 
-	_, _, err = client1.DynamicSvcAPI.CreateObject(context.Background()).Body(client.DynamicSvcCreateObjectRequest{
-		Object: &obj,
-	}).Execute()
+	_, _, err = client1.DynamicSvcAPI.CreateObject(context.Background()).
+		Body(client.DynamicSvcCreateObjectRequest{
+			Object: &obj,
+		}).
+		Execute()
 	require.NoError(t, err)
 
 	t.Run("user 1 can find its own private record", func(t *testing.T) {
@@ -72,7 +76,9 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
 
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(req).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
 		require.Equal(t, uuid1, *rsp.Objects[0].Id)
@@ -85,9 +91,11 @@ func TestCreate(t *testing.T) {
 		Data:    map[string]interface{}{"key": "value"},
 	}
 
-	_, _, err = client2.DynamicSvcAPI.CreateObject(context.Background()).Body(client.DynamicSvcCreateObjectRequest{
-		Object: &obj2,
-	}).Execute()
+	_, _, err = client2.DynamicSvcAPI.CreateObject(context.Background()).
+		Body(client.DynamicSvcCreateObjectRequest{
+			Object: &obj2,
+		}).
+		Execute()
 	require.NoError(t, err)
 
 	t.Run("query user2 records", func(t *testing.T) {
@@ -96,7 +104,9 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp2.User.Id},
 		}
 
-		rsp, _, err := client2.DynamicSvcAPI.Query(context.Background()).Body(req).Execute()
+		rsp, _, err := client2.DynamicSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
 		require.Equal(t, uuid2, *rsp.Objects[0].Id)
@@ -116,7 +126,9 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
 
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(req).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
 		require.Equal(t, uuid1, *rsp.Objects[0].Id)
@@ -136,16 +148,20 @@ func TestCreate(t *testing.T) {
 			Readers: []string{"_self"},
 		}
 
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(req).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
 		require.Equal(t, uuid1, *rsp.Objects[0].Id)
 	})
 
 	t.Run("already exists", func(t *testing.T) {
-		_, _, err = client1.DynamicSvcAPI.CreateObject(context.Background()).Body(client.DynamicSvcCreateObjectRequest{
-			Object: &obj,
-		}).Execute()
+		_, _, err = client1.DynamicSvcAPI.CreateObject(context.Background()).
+			Body(client.DynamicSvcCreateObjectRequest{
+				Object: &obj,
+			}).
+			Execute()
 
 		require.Error(t, err)
 	})
@@ -162,7 +178,9 @@ func TestCreate(t *testing.T) {
 			}},
 			Readers: []string{*tokenReadRsp2.User.Id},
 		}
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(req).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 0, len(rsp.Objects))
 	})
@@ -171,7 +189,9 @@ func TestCreate(t *testing.T) {
 		req := &client.DynamicSvcUpsertObjectRequest{
 			Object: &obj,
 		}
-		_, _, err = client2.DynamicSvcAPI.UpsertObject(context.Background(), *obj.Id).Body(*req).Execute()
+		_, _, err = client2.DynamicSvcAPI.UpsertObject(context.Background(), *obj.Id).
+			Body(*req).
+			Execute()
 
 		// unauthorized
 		require.Error(t, err)
@@ -181,7 +201,9 @@ func TestCreate(t *testing.T) {
 		req := &client.DynamicSvcUpsertObjectRequest{
 			Object: &obj,
 		}
-		_, _, err = client1.DynamicSvcAPI.UpsertObject(context.Background(), *obj.Id).Body(*req).Execute()
+		_, _, err = client1.DynamicSvcAPI.UpsertObject(context.Background(), *obj.Id).
+			Body(*req).
+			Execute()
 
 		require.NoError(t, err)
 	})
@@ -191,7 +213,9 @@ func TestCreate(t *testing.T) {
 			Table:   client.PtrString(table1),
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(*req).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(*req).
+			Execute()
 
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
@@ -210,7 +234,9 @@ func TestCreate(t *testing.T) {
 			},
 		}
 
-		_, _, err = client2.DynamicSvcAPI.DeleteObjects(context.Background()).Body(*req).Execute()
+		_, _, err = client2.DynamicSvcAPI.DeleteObjects(context.Background()).
+			Body(*req).
+			Execute()
 
 		require.NoError(t, err)
 
@@ -219,7 +245,9 @@ func TestCreate(t *testing.T) {
 			Table:   client.PtrString(table1),
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
-		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).Body(*listReq).Execute()
+		rsp, _, err := client1.DynamicSvcAPI.Query(context.Background()).
+			Body(*listReq).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Objects))
 		require.Equal(t, *obj.Id, *rsp.Objects[0].Id)
@@ -230,7 +258,9 @@ func TestCreate(t *testing.T) {
 		req := &client.DynamicSvcQueryRequest{
 			Table: client.PtrString(table1),
 		}
-		rsp, _, err := client2.DynamicSvcAPI.Query(context.Background()).Body(*req).Execute()
+		rsp, _, err := client2.DynamicSvcAPI.Query(context.Background()).
+			Body(*req).
+			Execute()
 
 		require.NoError(t, err)
 		require.Equal(t, 0, len(rsp.Objects))

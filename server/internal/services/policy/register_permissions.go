@@ -22,12 +22,14 @@ func (p *PolicyService) registerPermissions() error {
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
 	for _, permission := range append(policytypes.AdminPermissions, policytypes.UserPermissions...) {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).RequestBody(client.UserSvcUpserPermissionRequest{
-			Permission: &client.UserSvcPermission{
-				Name:        client.PtrString(permission.Name),
-				Description: client.PtrString(permission.Description),
-			},
-		}).Execute()
+		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
+			RequestBody(client.UserSvcUpserPermissionRequest{
+				Permission: &client.UserSvcPermission{
+					Name:        client.PtrString(permission.Name),
+					Description: client.PtrString(permission.Description),
+				},
+			}).
+			Execute()
 		if err != nil {
 			return err
 		}
@@ -37,7 +39,8 @@ func (p *PolicyService) registerPermissions() error {
 		usertypes.RoleAdmin,
 	} {
 		for _, permission := range policytypes.AdminPermissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
+				Execute()
 			if err != nil {
 				return err
 			}
@@ -48,7 +51,8 @@ func (p *PolicyService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range policytypes.UserPermissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).Execute()
+			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
+				Execute()
 			if err != nil {
 				return err
 			}

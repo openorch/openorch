@@ -27,9 +27,10 @@ func (rs *RegistryService) ListDefinitions(
 ) {
 
 	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionDefinitionView.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
+	err := rs.router.AsRequestMaker(r).
+		Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionDefinitionView.Id), &usertypes.IsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}, rsp)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -58,7 +59,9 @@ func (rs *RegistryService) ListDefinitions(
 type DefinitionList struct {
 }
 
-func (rs *RegistryService) getDefinitions(query DefinitionList) ([]*registry.Definition, error) {
+func (rs *RegistryService) getDefinitions(
+	query DefinitionList,
+) ([]*registry.Definition, error) {
 	serviceInstaceIs, err := rs.definitionStore.Query().Find()
 	if err != nil {
 		return nil, err

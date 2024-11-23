@@ -71,8 +71,8 @@ type APISpec struct {
 }
 
 type Client struct {
-	Language Language `json:"language,omitempty" example:"JavaScript" binding:"required"`               // Programming language.
-	URL      string   `json:"url,omitempty" example:"https://example.com/client.js" binding:"required"` // The URL of the client.
+	Language Language `json:"language,omitempty" example:"JavaScript"                    binding:"required"` // Programming language.
+	URL      string   `json:"url,omitempty"      example:"https://example.com/client.js" binding:"required"` // The URL of the client.
 }
 
 type RuntimeType string

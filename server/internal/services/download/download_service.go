@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package downloadservice
 
 import (
@@ -50,7 +55,10 @@ func NewDownloadService(
 ) (*DownloadService, error) {
 	home, _ := os.UserHomeDir()
 
-	credentialStore, err := datastoreFactory("downloadSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"downloadSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +89,12 @@ func (dm *DownloadService) Start() error {
 	dm.dlock.Acquire(ctx, "download-svc-start")
 	defer dm.dlock.Release(ctx, "download-svc-start")
 
-	token, err := sdk.RegisterService(dm.clientFactory.Client().UserSvcAPI, "download-svc", "Download Service", dm.credentialStore)
+	token, err := sdk.RegisterService(
+		dm.clientFactory.Client().UserSvcAPI,
+		"download-svc",
+		"Download Service",
+		dm.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
@@ -156,11 +169,14 @@ func (ds *DownloadService) saveState() error {
 	ds.hasChanged = false
 	ds.lock.Unlock()
 
-	_, err = ds.clientFactory.Client(sdk.WithToken(ds.token)).FirehoseSvcAPI.PublishEvent(context.Background()).Event(openapi.FirehoseSvcEventPublishRequest{
-		Event: &openapi.FirehoseSvcEvent{
-			Name: openapi.PtrString(types.EventDownloadStatusChangeName),
-		},
-	}).Execute()
+	_, err = ds.clientFactory.Client(sdk.WithToken(ds.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(types.EventDownloadStatusChangeName),
+			},
+		}).
+		Execute()
 	if err != nil {
 		logger.Error("Failed to publish: %v", err)
 	}
@@ -180,7 +196,10 @@ func (ds *DownloadService) periodicSaveState() {
 		if ds.hasChanged {
 			ds.lock.Unlock()
 			if err := ds.saveState(); err != nil {
-				logger.Error("Failed to save state", slog.String("error", err.Error()))
+				logger.Error(
+					"Failed to save state",
+					slog.String("error", err.Error()),
+				)
 			}
 		} else {
 			ds.lock.Unlock()

@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package modelservice
 
 import (
@@ -55,13 +60,19 @@ func NewModelService(
 	}
 	srv.modelsStore = modelStore
 
-	platformsStore, err := datastoreFactory("modelSvcPlatforms", &modeltypes.Platform{})
+	platformsStore, err := datastoreFactory(
+		"modelSvcPlatforms",
+		&modeltypes.Platform{},
+	)
 	if err != nil {
 		return nil, err
 	}
 	srv.platformsStore = platformsStore
 
-	credentialStore, err := datastoreFactory("modelSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"modelSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +91,12 @@ func (ms *ModelService) Start() error {
 	ms.lock.Acquire(ctx, "model-svc-start")
 	defer ms.lock.Release(ctx, "model-svc-start")
 
-	token, err := sdk.RegisterService(ms.clientFactory.Client().UserSvcAPI, "model-svc", "Model Service", ms.credentialStore)
+	token, err := sdk.RegisterService(
+		ms.clientFactory.Client().UserSvcAPI,
+		"model-svc",
+		"Model Service",
+		ms.credentialStore,
+	)
 	if err != nil {
 		return err
 	}

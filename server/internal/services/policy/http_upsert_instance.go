@@ -29,7 +29,9 @@ func (s *PolicyService) UpsertInstance(
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionInstanceEdit.Id).Execute()
+	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionInstanceEdit.Id).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
