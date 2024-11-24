@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package dockerservice
 
 import (
@@ -17,12 +22,13 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 )
 
 type DockerService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	imagesCache          map[string]bool
 	imagePullMutexes     map[string]*sync.Mutex
@@ -40,22 +46,28 @@ type DockerService struct {
 
 func NewDockerService(
 	volumeName string,
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DockerService, error) {
-	c, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	c, err := client.NewClientWithOpts(
+		client.FromEnv,
+		client.WithAPIVersionNegotiation(),
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	credentialStore, err := datastoreFactory("dockerSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"dockerSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	service := &DockerService{
-		router:          router,
+		clientFactory:   clientFactory,
 		lock:            lock,
 		credentialStore: credentialStore,
 
@@ -74,11 +86,16 @@ func (ds *DockerService) Start() error {
 	ds.lock.Acquire(ctx, "docker-svc-start")
 	defer ds.lock.Release(ctx, "docker-svc-start")
 
-	token, err := sdk.RegisterService("docker-svc", "Docker Service", ds.router, ds.credentialStore)
+	token, err := sdk.RegisterService(
+		ds.clientFactory.Client().UserSvcAPI,
+		"docker-svc",
+		"Docker Service",
+		ds.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	ds.router = ds.router.SetBearerToken(token)
+	ds.token = token
 
 	return ds.registerPermissions()
 }

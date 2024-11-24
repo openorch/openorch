@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package policy_svc
 
 import (
@@ -41,9 +46,9 @@ const (
 // Parameters for Rate Limit policy instance
 type RateLimitParameters struct {
 	MaxRequests int    `json:"maxRequests" example:"10"`
-	TimeWindow  string `json:"timeWindow" example:"1m"`
-	Entity      Entity `json:"entity" example:"userId"`
-	Scope       Scope  `json:"scope" example:"endpoint"`
+	TimeWindow  string `json:"timeWindow"  example:"1m"`
+	Entity      Entity `json:"entity"      example:"userId"`
+	Scope       Scope  `json:"scope"       example:"endpoint"`
 }
 
 type BlocklistParameters struct {
@@ -51,8 +56,8 @@ type BlocklistParameters struct {
 }
 
 type Template struct {
-	Id          TemplateId `json:"id" example:"rate-limit"`
-	Name        string     `json:"name" example:"Rate Limit"`
+	Id          TemplateId `json:"id"          example:"rate-limit"`
+	Name        string     `json:"name"        example:"Rate Limit"`
 	Description string     `json:"description" example:"Limits the number of requests based on user ID or IP address."`
 }
 
@@ -74,8 +79,8 @@ var BlocklistTemplate = Template{
 
 type Instance struct {
 	Id         string     `json:"id"`
-	Endpoint   string     `json:"endpoint" example:"/user-svc/register"`
-	TemplateId TemplateId `json:"templateId" example:"rate-limit" binding:"required"`
+	Endpoint   string     `json:"endpoint"   example:"/user-svc/register"`
+	TemplateId TemplateId `json:"templateId" example:"rate-limit"         binding:"required"`
 
 	RateLimitParameters *RateLimitParameters `json:"rateLimitParameters,omitempty"`
 	BlocklistParameters *BlocklistParameters `json:"blocklistParameters,omitempty"`

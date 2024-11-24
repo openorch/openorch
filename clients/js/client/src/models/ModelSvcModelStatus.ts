@@ -24,13 +24,13 @@ export interface ModelSvcModelStatus {
      * @type {string}
      * @memberof ModelSvcModelStatus
      */
-    address?: string;
+    address: string;
     /**
      * 
      * @type {boolean}
      * @memberof ModelSvcModelStatus
      */
-    assetsReady?: boolean;
+    assetsReady: boolean;
     /**
      * Running triggers onModelLaunch on the frontend.
      * 	Running is true when the model is both running and answering
@@ -38,13 +38,16 @@ export interface ModelSvcModelStatus {
      * @type {boolean}
      * @memberof ModelSvcModelStatus
      */
-    running?: boolean;
+    running: boolean;
 }
 
 /**
  * Check if a given object implements the ModelSvcModelStatus interface.
  */
 export function instanceOfModelSvcModelStatus(value: object): value is ModelSvcModelStatus {
+    if (!('address' in value) || value['address'] === undefined) return false;
+    if (!('assetsReady' in value) || value['assetsReady'] === undefined) return false;
+    if (!('running' in value) || value['running'] === undefined) return false;
     return true;
 }
 
@@ -58,9 +61,9 @@ export function ModelSvcModelStatusFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'address': json['address'] == null ? undefined : json['address'],
-        'assetsReady': json['assetsReady'] == null ? undefined : json['assetsReady'],
-        'running': json['running'] == null ? undefined : json['running'],
+        'address': json['address'],
+        'assetsReady': json['assetsReady'],
+        'running': json['running'],
     };
 }
 

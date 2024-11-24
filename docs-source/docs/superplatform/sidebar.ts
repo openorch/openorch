@@ -126,7 +126,13 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "superplatform/get-container-summary",
+          id: "superplatform/stop-container",
+          label: "Stop a Container",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "superplatform/container-summary",
           label: "Get Container Summary",
           className: "api-method get",
         },

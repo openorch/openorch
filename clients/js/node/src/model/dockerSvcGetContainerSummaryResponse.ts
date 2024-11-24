@@ -13,11 +13,26 @@
 import { RequestFile } from './models';
 
 export class DockerSvcGetContainerSummaryResponse {
-    'summary'?: string;
+    'logs': string;
+    'status': string;
+    /**
+    * DEPRECATED. Summary contains both Status and Logs.
+    */
+    'summary': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "logs",
+            "baseName": "logs",
+            "type": "string"
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "string"
+        },
         {
             "name": "summary",
             "baseName": "summary",

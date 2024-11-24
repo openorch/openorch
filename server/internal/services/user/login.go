@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package userservice
 
 import (
@@ -18,7 +23,9 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (s *UserService) login(slug, password string) (*usertypes.AuthToken, error) {
+func (s *UserService) login(
+	slug, password string,
+) (*usertypes.AuthToken, error) {
 	userI, found, err := s.usersStore.Query(
 		datastore.Equals(datastore.Field("slug"), slug),
 	).FindOne()
@@ -52,7 +59,9 @@ func checkPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-func (s *UserService) generateAuthToken(user *usertypes.User) (*usertypes.AuthToken, error) {
+func (s *UserService) generateAuthToken(
+	user *usertypes.User,
+) (*usertypes.AuthToken, error) {
 	roleLinks, err := s.userRoleLinksStore.Query(
 		datastore.Equals(datastore.Field("userId"), user.Id),
 	).Find()

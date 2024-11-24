@@ -37,13 +37,14 @@ export interface DownloadSvcGetDownloadResponse {
      * @type {boolean}
      * @memberof DownloadSvcGetDownloadResponse
      */
-    _exists?: boolean;
+    _exists: boolean;
 }
 
 /**
  * Check if a given object implements the DownloadSvcGetDownloadResponse interface.
  */
 export function instanceOfDownloadSvcGetDownloadResponse(value: object): value is DownloadSvcGetDownloadResponse {
+    if (!('_exists' in value) || value['_exists'] === undefined) return false;
     return true;
 }
 
@@ -58,7 +59,7 @@ export function DownloadSvcGetDownloadResponseFromJSONTyped(json: any, ignoreDis
     return {
         
         'download': json['download'] == null ? undefined : DownloadSvcDownloadDetailsFromJSON(json['download']),
-        '_exists': json['exists'] == null ? undefined : json['exists'],
+        '_exists': json['exists'],
     };
 }
 

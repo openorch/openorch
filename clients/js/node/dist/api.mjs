@@ -45,6 +45,7 @@ export { DockerSvcRunContainerOptions } from './dockerSvcRunContainerOptions.mjs
 export { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest.mjs';
 export { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse.mjs';
 export { DockerSvcRunInfo } from './dockerSvcRunInfo.mjs';
+export { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest.mjs';
 export { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails.mjs';
 export { DownloadSvcDownloadRequest } from './downloadSvcDownloadRequest.mjs';
 export { DownloadSvcDownloadsResponse } from './downloadSvcDownloadsResponse.mjs';

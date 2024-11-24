@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the DockerSvcGetDockerHostResponse type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &DockerSvcGetDockerHostResponse{}
 
 // DockerSvcGetDockerHostResponse struct for DockerSvcGetDockerHostResponse
 type DockerSvcGetDockerHostResponse struct {
-	Host *string `json:"host,omitempty"`
+	Host string `json:"host"`
 }
+
+type _DockerSvcGetDockerHostResponse DockerSvcGetDockerHostResponse
 
 // NewDockerSvcGetDockerHostResponse instantiates a new DockerSvcGetDockerHostResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDockerSvcGetDockerHostResponse() *DockerSvcGetDockerHostResponse {
+func NewDockerSvcGetDockerHostResponse(host string) *DockerSvcGetDockerHostResponse {
 	this := DockerSvcGetDockerHostResponse{}
+	this.Host = host
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewDockerSvcGetDockerHostResponseWithDefaults() *DockerSvcGetDockerHostResp
 	return &this
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// GetHost returns the Host field value
 func (o *DockerSvcGetDockerHostResponse) GetHost() string {
-	if o == nil || IsNil(o.Host) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Host
+
+	return o.Host
 }
 
-// GetHostOk returns a tuple with the Host field value if set, nil otherwise
+// GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
 func (o *DockerSvcGetDockerHostResponse) GetHostOk() (*string, bool) {
-	if o == nil || IsNil(o.Host) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return &o.Host, true
 }
 
-// HasHost returns a boolean if a field has been set.
-func (o *DockerSvcGetDockerHostResponse) HasHost() bool {
-	if o != nil && !IsNil(o.Host) {
-		return true
-	}
-
-	return false
-}
-
-// SetHost gets a reference to the given string and assigns it to the Host field.
+// SetHost sets field value
 func (o *DockerSvcGetDockerHostResponse) SetHost(v string) {
-	o.Host = &v
+	o.Host = v
 }
 
 func (o DockerSvcGetDockerHostResponse) MarshalJSON() ([]byte, error) {
@@ -82,10 +79,45 @@ func (o DockerSvcGetDockerHostResponse) MarshalJSON() ([]byte, error) {
 
 func (o DockerSvcGetDockerHostResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Host) {
-		toSerialize["host"] = o.Host
-	}
+	toSerialize["host"] = o.Host
 	return toSerialize, nil
+}
+
+func (o *DockerSvcGetDockerHostResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"host",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDockerSvcGetDockerHostResponse := _DockerSvcGetDockerHostResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDockerSvcGetDockerHostResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DockerSvcGetDockerHostResponse(varDockerSvcGetDockerHostResponse)
+
+	return err
 }
 
 type NullableDockerSvcGetDockerHostResponse struct {

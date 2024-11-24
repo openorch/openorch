@@ -15,6 +15,12 @@
  * Check if a given object implements the ModelSvcModelStatus interface.
  */
 export function instanceOfModelSvcModelStatus(value) {
+    if (!('address' in value) || value['address'] === undefined)
+        return false;
+    if (!('assetsReady' in value) || value['assetsReady'] === undefined)
+        return false;
+    if (!('running' in value) || value['running'] === undefined)
+        return false;
     return true;
 }
 export function ModelSvcModelStatusFromJSON(json) {
@@ -25,9 +31,9 @@ export function ModelSvcModelStatusFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'address': json['address'] == null ? undefined : json['address'],
-        'assetsReady': json['assetsReady'] == null ? undefined : json['assetsReady'],
-        'running': json['running'] == null ? undefined : json['running'],
+        'address': json['address'],
+        'assetsReady': json['assetsReady'],
+        'running': json['running'],
     };
 }
 export function ModelSvcModelStatusToJSON(value) {

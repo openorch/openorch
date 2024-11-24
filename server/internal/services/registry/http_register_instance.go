@@ -1,14 +1,13 @@
 package registryservice
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // Register a new instance
@@ -30,16 +29,15 @@ func (rs *RegistryService) RegisterInstance(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := rs.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", registry.PermissionInstanceEdit.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
+	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionInstanceEdit.Id).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
@@ -70,11 +68,14 @@ func (rs *RegistryService) RegisterInstance(
 	w.Write([]byte(`{}`))
 }
 
-func (rs *RegistryService) registerInstance(req *registry.RegisterInstanceRequest) error {
+func (rs *RegistryService) registerInstance(
+	req *registry.RegisterInstanceRequest,
+) error {
 	var instance registry.Instance
 
 	if req.Id == "" {
-		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).Find()
+		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).
+			Find()
 		if err != nil {
 			return err
 		}

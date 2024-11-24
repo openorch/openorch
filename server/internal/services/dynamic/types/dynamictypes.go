@@ -17,7 +17,7 @@ type ObjectCreateFields struct {
 	// Authors is a list of user ID and organization ID who created the object.
 	// If an organization ID is not provided, the currently active organization will
 	// be queried from the User Svc.
-	Authors []string `json:"authors" example:"[\"usr_12345\", \"org_67890\"]"`
+	Authors []string `json:"authors" example:"["usr_12345", "org_67890"]"`
 
 	// Readers is a list of user IDs and role IDs that can read the object.
 	// `_self` can be used to refer to the caller user's userId and

@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ModelSvcModelStatus type satisfies the MappedNullable interface at compile time
@@ -20,18 +22,23 @@ var _ MappedNullable = &ModelSvcModelStatus{}
 
 // ModelSvcModelStatus struct for ModelSvcModelStatus
 type ModelSvcModelStatus struct {
-	Address *string `json:"address,omitempty"`
-	AssetsReady *bool `json:"assetsReady,omitempty"`
+	Address string `json:"address"`
+	AssetsReady bool `json:"assetsReady"`
 	// Running triggers onModelLaunch on the frontend.  Running is true when the model is both running and answering  - fully loaded.
-	Running *bool `json:"running,omitempty"`
+	Running bool `json:"running"`
 }
+
+type _ModelSvcModelStatus ModelSvcModelStatus
 
 // NewModelSvcModelStatus instantiates a new ModelSvcModelStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelSvcModelStatus() *ModelSvcModelStatus {
+func NewModelSvcModelStatus(address string, assetsReady bool, running bool) *ModelSvcModelStatus {
 	this := ModelSvcModelStatus{}
+	this.Address = address
+	this.AssetsReady = assetsReady
+	this.Running = running
 	return &this
 }
 
@@ -43,100 +50,76 @@ func NewModelSvcModelStatusWithDefaults() *ModelSvcModelStatus {
 	return &this
 }
 
-// GetAddress returns the Address field value if set, zero value otherwise.
+// GetAddress returns the Address field value
 func (o *ModelSvcModelStatus) GetAddress() string {
-	if o == nil || IsNil(o.Address) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Address
+
+	return o.Address
 }
 
-// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
+// GetAddressOk returns a tuple with the Address field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModelStatus) GetAddressOk() (*string, bool) {
-	if o == nil || IsNil(o.Address) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Address, true
+	return &o.Address, true
 }
 
-// HasAddress returns a boolean if a field has been set.
-func (o *ModelSvcModelStatus) HasAddress() bool {
-	if o != nil && !IsNil(o.Address) {
-		return true
-	}
-
-	return false
-}
-
-// SetAddress gets a reference to the given string and assigns it to the Address field.
+// SetAddress sets field value
 func (o *ModelSvcModelStatus) SetAddress(v string) {
-	o.Address = &v
+	o.Address = v
 }
 
-// GetAssetsReady returns the AssetsReady field value if set, zero value otherwise.
+// GetAssetsReady returns the AssetsReady field value
 func (o *ModelSvcModelStatus) GetAssetsReady() bool {
-	if o == nil || IsNil(o.AssetsReady) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.AssetsReady
+
+	return o.AssetsReady
 }
 
-// GetAssetsReadyOk returns a tuple with the AssetsReady field value if set, nil otherwise
+// GetAssetsReadyOk returns a tuple with the AssetsReady field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModelStatus) GetAssetsReadyOk() (*bool, bool) {
-	if o == nil || IsNil(o.AssetsReady) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssetsReady, true
+	return &o.AssetsReady, true
 }
 
-// HasAssetsReady returns a boolean if a field has been set.
-func (o *ModelSvcModelStatus) HasAssetsReady() bool {
-	if o != nil && !IsNil(o.AssetsReady) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetsReady gets a reference to the given bool and assigns it to the AssetsReady field.
+// SetAssetsReady sets field value
 func (o *ModelSvcModelStatus) SetAssetsReady(v bool) {
-	o.AssetsReady = &v
+	o.AssetsReady = v
 }
 
-// GetRunning returns the Running field value if set, zero value otherwise.
+// GetRunning returns the Running field value
 func (o *ModelSvcModelStatus) GetRunning() bool {
-	if o == nil || IsNil(o.Running) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Running
+
+	return o.Running
 }
 
-// GetRunningOk returns a tuple with the Running field value if set, nil otherwise
+// GetRunningOk returns a tuple with the Running field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModelStatus) GetRunningOk() (*bool, bool) {
-	if o == nil || IsNil(o.Running) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Running, true
+	return &o.Running, true
 }
 
-// HasRunning returns a boolean if a field has been set.
-func (o *ModelSvcModelStatus) HasRunning() bool {
-	if o != nil && !IsNil(o.Running) {
-		return true
-	}
-
-	return false
-}
-
-// SetRunning gets a reference to the given bool and assigns it to the Running field.
+// SetRunning sets field value
 func (o *ModelSvcModelStatus) SetRunning(v bool) {
-	o.Running = &v
+	o.Running = v
 }
 
 func (o ModelSvcModelStatus) MarshalJSON() ([]byte, error) {
@@ -149,16 +132,49 @@ func (o ModelSvcModelStatus) MarshalJSON() ([]byte, error) {
 
 func (o ModelSvcModelStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Address) {
-		toSerialize["address"] = o.Address
-	}
-	if !IsNil(o.AssetsReady) {
-		toSerialize["assetsReady"] = o.AssetsReady
-	}
-	if !IsNil(o.Running) {
-		toSerialize["running"] = o.Running
-	}
+	toSerialize["address"] = o.Address
+	toSerialize["assetsReady"] = o.AssetsReady
+	toSerialize["running"] = o.Running
 	return toSerialize, nil
+}
+
+func (o *ModelSvcModelStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"address",
+		"assetsReady",
+		"running",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varModelSvcModelStatus := _ModelSvcModelStatus{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varModelSvcModelStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ModelSvcModelStatus(varModelSvcModelStatus)
+
+	return err
 }
 
 type NullableModelSvcModelStatus struct {

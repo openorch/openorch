@@ -834,14 +834,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/docker-svc/container/{hash}/is-running": {
+        "/docker-svc/container/is-running": {
             "get": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Check if a Docker container identified by the hash is running",
+                "description": "Check if a Docker container is running, identified by hash or name.",
                 "consumes": [
                     "application/json"
                 ],
@@ -858,8 +858,13 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Container Hash",
                         "name": "hash",
-                        "in": "path",
-                        "required": true
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Container Name",
+                        "name": "name",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -867,6 +872,64 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/docker_svc.ContainerIsRunningResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON or Missing Parameters",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/docker-svc/container/stop": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Stops a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:container:stop` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Docker Svc"
+                ],
+                "summary": "Stop a Container",
+                "operationId": "stopContainer",
+                "parameters": [
+                    {
+                        "description": "Stop Container Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.StopContainerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/docker_svc.StopContainerResponse"
                         }
                     },
                     "400": {
@@ -890,14 +953,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/docker-svc/container/{hash}/summary/{numberOfLines}": {
+        "/docker-svc/container/summary": {
             "get": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get a summary of the Docker container identified by the hash, limited to a specified number of lines",
+                "description": "Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.",
                 "consumes": [
                     "application/json"
                 ],
@@ -908,21 +971,25 @@ const docTemplate = `{
                     "Docker Svc"
                 ],
                 "summary": "Get Container Summary",
-                "operationId": "getContainerSummary",
+                "operationId": "containerSummary",
                 "parameters": [
                     {
                         "type": "string",
                         "description": "Container Hash",
                         "name": "hash",
-                        "in": "path",
-                        "required": true
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Container Name",
+                        "name": "name",
+                        "in": "query"
                     },
                     {
                         "type": "integer",
                         "description": "Number of Lines",
-                        "name": "numberOfLines",
-                        "in": "path",
-                        "required": true
+                        "name": "lines",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -933,7 +1000,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Invalid JSON",
+                        "description": "Invalid JSON or Missing Parameters",
                         "schema": {
                             "$ref": "#/definitions/docker_svc.ErrorResponse"
                         }
@@ -4672,6 +4739,9 @@ const docTemplate = `{
         },
         "docker_svc.ContainerIsRunningResponse": {
             "type": "object",
+            "required": [
+                "isRunning"
+            ],
             "properties": {
                 "isRunning": {
                     "type": "boolean"
@@ -4702,14 +4772,29 @@ const docTemplate = `{
         },
         "docker_svc.GetContainerSummaryResponse": {
             "type": "object",
+            "required": [
+                "logs",
+                "status",
+                "summary"
+            ],
             "properties": {
+                "logs": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
                 "summary": {
+                    "description": "DEPRECATED. Summary contains both Status and Logs.",
                     "type": "string"
                 }
             }
         },
         "docker_svc.GetDockerHostResponse": {
             "type": "object",
+            "required": [
+                "host"
+            ],
             "properties": {
                 "host": {
                     "type": "string"
@@ -4820,6 +4905,22 @@ const docTemplate = `{
                 }
             }
         },
+        "docker_svc.StopContainerRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "4378b76e05ba"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "sup-container-x"
+                }
+            }
+        },
+        "docker_svc.StopContainerResponse": {
+            "type": "object"
+        },
         "download_svc.DownloadDetails": {
             "type": "object",
             "properties": {
@@ -4893,6 +4994,9 @@ const docTemplate = `{
         },
         "download_svc.GetDownloadResponse": {
             "type": "object",
+            "required": [
+                "exists"
+            ],
             "properties": {
                 "download": {
                     "$ref": "#/definitions/download_svc.DownloadDetails"
@@ -4957,8 +5061,7 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
+                        "["
                     ]
                 },
                 "createdAt": {
@@ -5014,8 +5117,7 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
+                        "["
                     ]
                 },
                 "data": {
@@ -5187,6 +5289,11 @@ const docTemplate = `{
         },
         "model_svc.GetModelResponse": {
             "type": "object",
+            "required": [
+                "exists",
+                "model",
+                "platform"
+            ],
             "properties": {
                 "exists": {
                     "type": "boolean"
@@ -5289,6 +5396,11 @@ const docTemplate = `{
         },
         "model_svc.ModelStatus": {
             "type": "object",
+            "required": [
+                "address",
+                "assetsReady",
+                "running"
+            ],
             "properties": {
                 "address": {
                     "type": "string"
@@ -6135,6 +6247,11 @@ const docTemplate = `{
                     "description": "ContainerFile is the path to the file that contains the container build instructions\nRelative from the build context. By default, it is assumed to be a Dockerfile.",
                     "type": "string",
                     "example": "docker/Dockerfile"
+                },
+                "port": {
+                    "description": "Port is the port number that the container will listen on internally",
+                    "type": "integer",
+                    "example": 8080
                 },
                 "url": {
                     "description": "URL is the URL to the repository",

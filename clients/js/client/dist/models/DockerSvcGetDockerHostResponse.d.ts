@@ -20,7 +20,7 @@ export interface DockerSvcGetDockerHostResponse {
      * @type {string}
      * @memberof DockerSvcGetDockerHostResponse
      */
-    host?: string;
+    host: string;
 }
 /**
  * Check if a given object implements the DockerSvcGetDockerHostResponse interface.

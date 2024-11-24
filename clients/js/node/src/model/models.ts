@@ -45,6 +45,7 @@ export * from './dockerSvcRunContainerOptions';
 export * from './dockerSvcRunContainerRequest';
 export * from './dockerSvcRunContainerResponse';
 export * from './dockerSvcRunInfo';
+export * from './dockerSvcStopContainerRequest';
 export * from './downloadSvcDownloadDetails';
 export * from './downloadSvcDownloadRequest';
 export * from './downloadSvcDownloadsResponse';
@@ -200,6 +201,7 @@ import { DockerSvcRunContainerOptions } from './dockerSvcRunContainerOptions';
 import { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest';
 import { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse';
 import { DockerSvcRunInfo } from './dockerSvcRunInfo';
+import { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest';
 import { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails';
 import { DownloadSvcDownloadRequest } from './downloadSvcDownloadRequest';
 import { DownloadSvcDownloadsResponse } from './downloadSvcDownloadsResponse';
@@ -364,6 +366,7 @@ let typeMap: {[index: string]: any} = {
     "DockerSvcRunContainerRequest": DockerSvcRunContainerRequest,
     "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
     "DockerSvcRunInfo": DockerSvcRunInfo,
+    "DockerSvcStopContainerRequest": DockerSvcStopContainerRequest,
     "DownloadSvcDownloadDetails": DownloadSvcDownloadDetails,
     "DownloadSvcDownloadRequest": DownloadSvcDownloadRequest,
     "DownloadSvcDownloadsResponse": DownloadSvcDownloadsResponse,

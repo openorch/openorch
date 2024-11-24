@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the DownloadSvcGetDownloadResponse type satisfies the MappedNullable interface at compile time
@@ -21,15 +23,18 @@ var _ MappedNullable = &DownloadSvcGetDownloadResponse{}
 // DownloadSvcGetDownloadResponse struct for DownloadSvcGetDownloadResponse
 type DownloadSvcGetDownloadResponse struct {
 	Download *DownloadSvcDownloadDetails `json:"download,omitempty"`
-	Exists *bool `json:"exists,omitempty"`
+	Exists bool `json:"exists"`
 }
+
+type _DownloadSvcGetDownloadResponse DownloadSvcGetDownloadResponse
 
 // NewDownloadSvcGetDownloadResponse instantiates a new DownloadSvcGetDownloadResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDownloadSvcGetDownloadResponse() *DownloadSvcGetDownloadResponse {
+func NewDownloadSvcGetDownloadResponse(exists bool) *DownloadSvcGetDownloadResponse {
 	this := DownloadSvcGetDownloadResponse{}
+	this.Exists = exists
 	return &this
 }
 
@@ -73,36 +78,28 @@ func (o *DownloadSvcGetDownloadResponse) SetDownload(v DownloadSvcDownloadDetail
 	o.Download = &v
 }
 
-// GetExists returns the Exists field value if set, zero value otherwise.
+// GetExists returns the Exists field value
 func (o *DownloadSvcGetDownloadResponse) GetExists() bool {
-	if o == nil || IsNil(o.Exists) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Exists
+
+	return o.Exists
 }
 
-// GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
+// GetExistsOk returns a tuple with the Exists field value
 // and a boolean to check if the value has been set.
 func (o *DownloadSvcGetDownloadResponse) GetExistsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Exists) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Exists, true
+	return &o.Exists, true
 }
 
-// HasExists returns a boolean if a field has been set.
-func (o *DownloadSvcGetDownloadResponse) HasExists() bool {
-	if o != nil && !IsNil(o.Exists) {
-		return true
-	}
-
-	return false
-}
-
-// SetExists gets a reference to the given bool and assigns it to the Exists field.
+// SetExists sets field value
 func (o *DownloadSvcGetDownloadResponse) SetExists(v bool) {
-	o.Exists = &v
+	o.Exists = v
 }
 
 func (o DownloadSvcGetDownloadResponse) MarshalJSON() ([]byte, error) {
@@ -118,10 +115,45 @@ func (o DownloadSvcGetDownloadResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Download) {
 		toSerialize["download"] = o.Download
 	}
-	if !IsNil(o.Exists) {
-		toSerialize["exists"] = o.Exists
-	}
+	toSerialize["exists"] = o.Exists
 	return toSerialize, nil
+}
+
+func (o *DownloadSvcGetDownloadResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"exists",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDownloadSvcGetDownloadResponse := _DownloadSvcGetDownloadResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDownloadSvcGetDownloadResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DownloadSvcGetDownloadResponse(varDownloadSvcGetDownloadResponse)
+
+	return err
 }
 
 type NullableDownloadSvcGetDownloadResponse struct {

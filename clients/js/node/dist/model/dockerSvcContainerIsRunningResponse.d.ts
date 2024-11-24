@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 export declare class DockerSvcContainerIsRunningResponse {
-    'isRunning'?: boolean;
+    'isRunning': boolean;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

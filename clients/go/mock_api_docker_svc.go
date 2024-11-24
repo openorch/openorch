@@ -70,17 +70,17 @@ func (mr *MockDockerSvcAPIMockRecorder) BuildImageExecute(r any) *gomock.Call {
 }
 
 // ContainerIsRunning mocks base method.
-func (m *MockDockerSvcAPI) ContainerIsRunning(ctx context.Context, hash string) ApiContainerIsRunningRequest {
+func (m *MockDockerSvcAPI) ContainerIsRunning(ctx context.Context) ApiContainerIsRunningRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ContainerIsRunning", ctx, hash)
+	ret := m.ctrl.Call(m, "ContainerIsRunning", ctx)
 	ret0, _ := ret[0].(ApiContainerIsRunningRequest)
 	return ret0
 }
 
 // ContainerIsRunning indicates an expected call of ContainerIsRunning.
-func (mr *MockDockerSvcAPIMockRecorder) ContainerIsRunning(ctx, hash any) *gomock.Call {
+func (mr *MockDockerSvcAPIMockRecorder) ContainerIsRunning(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerIsRunning", reflect.TypeOf((*MockDockerSvcAPI)(nil).ContainerIsRunning), ctx, hash)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerIsRunning", reflect.TypeOf((*MockDockerSvcAPI)(nil).ContainerIsRunning), ctx)
 }
 
 // ContainerIsRunningExecute mocks base method.
@@ -99,34 +99,34 @@ func (mr *MockDockerSvcAPIMockRecorder) ContainerIsRunningExecute(r any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerIsRunningExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).ContainerIsRunningExecute), r)
 }
 
-// GetContainerSummary mocks base method.
-func (m *MockDockerSvcAPI) GetContainerSummary(ctx context.Context, hash string, numberOfLines int32) ApiGetContainerSummaryRequest {
+// ContainerSummary mocks base method.
+func (m *MockDockerSvcAPI) ContainerSummary(ctx context.Context) ApiContainerSummaryRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetContainerSummary", ctx, hash, numberOfLines)
-	ret0, _ := ret[0].(ApiGetContainerSummaryRequest)
+	ret := m.ctrl.Call(m, "ContainerSummary", ctx)
+	ret0, _ := ret[0].(ApiContainerSummaryRequest)
 	return ret0
 }
 
-// GetContainerSummary indicates an expected call of GetContainerSummary.
-func (mr *MockDockerSvcAPIMockRecorder) GetContainerSummary(ctx, hash, numberOfLines any) *gomock.Call {
+// ContainerSummary indicates an expected call of ContainerSummary.
+func (mr *MockDockerSvcAPIMockRecorder) ContainerSummary(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetContainerSummary", reflect.TypeOf((*MockDockerSvcAPI)(nil).GetContainerSummary), ctx, hash, numberOfLines)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerSummary", reflect.TypeOf((*MockDockerSvcAPI)(nil).ContainerSummary), ctx)
 }
 
-// GetContainerSummaryExecute mocks base method.
-func (m *MockDockerSvcAPI) GetContainerSummaryExecute(r ApiGetContainerSummaryRequest) (*DockerSvcGetContainerSummaryResponse, *http.Response, error) {
+// ContainerSummaryExecute mocks base method.
+func (m *MockDockerSvcAPI) ContainerSummaryExecute(r ApiContainerSummaryRequest) (*DockerSvcGetContainerSummaryResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetContainerSummaryExecute", r)
+	ret := m.ctrl.Call(m, "ContainerSummaryExecute", r)
 	ret0, _ := ret[0].(*DockerSvcGetContainerSummaryResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// GetContainerSummaryExecute indicates an expected call of GetContainerSummaryExecute.
-func (mr *MockDockerSvcAPIMockRecorder) GetContainerSummaryExecute(r any) *gomock.Call {
+// ContainerSummaryExecute indicates an expected call of ContainerSummaryExecute.
+func (mr *MockDockerSvcAPIMockRecorder) ContainerSummaryExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetContainerSummaryExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).GetContainerSummaryExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerSummaryExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).ContainerSummaryExecute), r)
 }
 
 // GetHost mocks base method.
@@ -217,4 +217,34 @@ func (m *MockDockerSvcAPI) RunContainerExecute(r ApiRunContainerRequest) (*Docke
 func (mr *MockDockerSvcAPIMockRecorder) RunContainerExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunContainerExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).RunContainerExecute), r)
+}
+
+// StopContainer mocks base method.
+func (m *MockDockerSvcAPI) StopContainer(ctx context.Context) ApiStopContainerRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopContainer", ctx)
+	ret0, _ := ret[0].(ApiStopContainerRequest)
+	return ret0
+}
+
+// StopContainer indicates an expected call of StopContainer.
+func (mr *MockDockerSvcAPIMockRecorder) StopContainer(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopContainer", reflect.TypeOf((*MockDockerSvcAPI)(nil).StopContainer), ctx)
+}
+
+// StopContainerExecute mocks base method.
+func (m *MockDockerSvcAPI) StopContainerExecute(r ApiStopContainerRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopContainerExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// StopContainerExecute indicates an expected call of StopContainerExecute.
+func (mr *MockDockerSvcAPIMockRecorder) StopContainerExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopContainerExecute", reflect.TypeOf((*MockDockerSvcAPI)(nil).StopContainerExecute), r)
 }

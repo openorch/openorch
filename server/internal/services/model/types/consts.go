@@ -41,6 +41,7 @@ var Platforms = []*Platform{
 const mistralDescription = `Mistral excels in understanding and generating human-like text, making it a versatile tool across a multitude of domains. Its proficiency extends from generating coherent and contextually relevant text passages to providing detailed answers to queries, showcasing an impressive grasp of knowledge across a wide array of subjects.
 Mistral stands out for its ability to perform tasks with remarkable accuracy and fewer resources, a leap forward in making state-of-the-art AI more accessible and sustainable.
 `
+
 const codellamaDescription = `CodeLlama is a powerful AI model that specializes in generating code snippets and providing detailed explanations for programming-related queries. It is designed to assist developers in writing code, debugging, and understanding complex programming concepts.`
 
 const llamaChatUncensoredPrompt = `### HUMAN:

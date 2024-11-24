@@ -23,6 +23,7 @@ import type {
   DockerSvcGetInfoResponse,
   DockerSvcRunContainerRequest,
   DockerSvcRunContainerResponse,
+  DockerSvcStopContainerRequest,
 } from '../models/index';
 import {
     DockerSvcBuildImageRequestFromJSON,
@@ -41,6 +42,8 @@ import {
     DockerSvcRunContainerRequestToJSON,
     DockerSvcRunContainerResponseFromJSON,
     DockerSvcRunContainerResponseToJSON,
+    DockerSvcStopContainerRequestFromJSON,
+    DockerSvcStopContainerRequestToJSON,
 } from '../models/index';
 
 export interface BuildImageRequest {
@@ -48,16 +51,22 @@ export interface BuildImageRequest {
 }
 
 export interface ContainerIsRunningRequest {
-    hash: string;
+    hash?: string;
+    name?: string;
 }
 
-export interface GetContainerSummaryRequest {
-    hash: string;
-    numberOfLines: number;
+export interface ContainerSummaryRequest {
+    hash?: string;
+    name?: string;
+    lines?: number;
 }
 
 export interface RunContainerRequest {
     request: DockerSvcRunContainerRequest;
+}
+
+export interface StopContainerRequest {
+    request: DockerSvcStopContainerRequest;
 }
 
 /**
@@ -108,18 +117,19 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
     async containerIsRunningRaw(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcContainerIsRunningResponse>> {
-        if (requestParameters['hash'] == null) {
-            throw new runtime.RequiredError(
-                'hash',
-                'Required parameter "hash" was null or undefined when calling containerIsRunning().'
-            );
+        const queryParameters: any = {};
+
+        if (requestParameters['hash'] != null) {
+            queryParameters['hash'] = requestParameters['hash'];
         }
 
-        const queryParameters: any = {};
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -128,7 +138,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
+            path: `/docker-svc/container/is-running`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -138,34 +148,32 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
-    async containerIsRunning(requestParameters: ContainerIsRunningRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse> {
+    async containerIsRunning(requestParameters: ContainerIsRunningRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcContainerIsRunningResponse> {
         const response = await this.containerIsRunningRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    async getContainerSummaryRaw(requestParameters: GetContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcGetContainerSummaryResponse>> {
-        if (requestParameters['hash'] == null) {
-            throw new runtime.RequiredError(
-                'hash',
-                'Required parameter "hash" was null or undefined when calling getContainerSummary().'
-            );
-        }
-
-        if (requestParameters['numberOfLines'] == null) {
-            throw new runtime.RequiredError(
-                'numberOfLines',
-                'Required parameter "numberOfLines" was null or undefined when calling getContainerSummary().'
-            );
-        }
-
+    async containerSummaryRaw(requestParameters: ContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcGetContainerSummaryResponse>> {
         const queryParameters: any = {};
+
+        if (requestParameters['hash'] != null) {
+            queryParameters['hash'] = requestParameters['hash'];
+        }
+
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
+
+        if (requestParameters['lines'] != null) {
+            queryParameters['lines'] = requestParameters['lines'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -174,7 +182,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container/{hash}/summary/{numberOfLines}`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))).replace(`{${"numberOfLines"}}`, encodeURIComponent(String(requestParameters['numberOfLines']))),
+            path: `/docker-svc/container/summary`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -184,11 +192,11 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    async getContainerSummary(requestParameters: GetContainerSummaryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcGetContainerSummaryResponse> {
-        const response = await this.getContainerSummaryRaw(requestParameters, initOverrides);
+    async containerSummary(requestParameters: ContainerSummaryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcGetContainerSummaryResponse> {
+        const response = await this.containerSummaryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -295,6 +303,48 @@ export class DockerSvcApi extends runtime.BaseAPI {
      */
     async runContainer(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcRunContainerResponse> {
         const response = await this.runContainerRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    async stopContainerRaw(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['request'] == null) {
+            throw new runtime.RequiredError(
+                'request',
+                'Required parameter "request" was null or undefined when calling stopContainer().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/docker-svc/container/stop`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DockerSvcStopContainerRequestToJSON(requestParameters['request']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    async stopContainer(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.stopContainerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

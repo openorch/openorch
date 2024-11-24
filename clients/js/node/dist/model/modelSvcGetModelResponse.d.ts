@@ -12,9 +12,9 @@
 import { ModelSvcModel } from './modelSvcModel';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 export declare class ModelSvcGetModelResponse {
-    'exists'?: boolean;
-    'model'?: ModelSvcModel;
-    'platform'?: ModelSvcPlatform;
+    'exists': boolean;
+    'model': ModelSvcModel;
+    'platform': ModelSvcPlatform;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

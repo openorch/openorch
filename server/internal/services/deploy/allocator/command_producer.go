@@ -21,7 +21,9 @@ func GenerateCommands(
 	commands := []*deploy.Command{}
 
 	for _, deployment := range deployments {
-		commands = append(commands, scaleDeployment(deployment, nodes, serviceInstances)...)
+		commands = append(
+			commands,
+			scaleDeployment(deployment, nodes, serviceInstances)...)
 	}
 
 	for _, instance := range serviceInstances {
@@ -80,10 +82,13 @@ func scaleDeployment(
 	return commands
 }
 
-func checkHealthAndKill(instance openapi.RegistrySvcInstance) []*deploy.Command {
+func checkHealthAndKill(
+	instance openapi.RegistrySvcInstance,
+) []*deploy.Command {
 	commands := []*deploy.Command{}
 
-	if instance.LastHeartbeat == nil {
+	if instance.LastHeartbeat == nil ||
+		instance.Status == openapi.InstanceStatusUnreachable {
 		commands = append(commands, &deploy.Command{
 			Action:       "KILL",
 			DeploymentId: instance.DeploymentId,
@@ -94,7 +99,10 @@ func checkHealthAndKill(instance openapi.RegistrySvcInstance) []*deploy.Command 
 	return commands
 }
 
-func findAvailableNode(nodes []openapi.RegistrySvcNode, assignedNodes map[string]bool) *openapi.RegistrySvcNode {
+func findAvailableNode(
+	nodes []openapi.RegistrySvcNode,
+	assignedNodes map[string]bool,
+) *openapi.RegistrySvcNode {
 	for _, node := range nodes {
 		// Check if the node is not assigned to this service and has available CPU capacity
 		if !assignedNodes[node.Id] &&

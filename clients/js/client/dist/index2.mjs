@@ -43,6 +43,7 @@ export { DockerSvcRunContainerOptionsFromJSON, DockerSvcRunContainerOptionsFromJ
 export { DockerSvcRunContainerRequestFromJSON, DockerSvcRunContainerRequestFromJSONTyped, DockerSvcRunContainerRequestToJSON, instanceOfDockerSvcRunContainerRequest } from './DockerSvcRunContainerRequest.mjs';
 export { DockerSvcRunContainerResponseFromJSON, DockerSvcRunContainerResponseFromJSONTyped, DockerSvcRunContainerResponseToJSON, instanceOfDockerSvcRunContainerResponse } from './DockerSvcRunContainerResponse.mjs';
 export { DockerSvcRunInfoFromJSON, DockerSvcRunInfoFromJSONTyped, DockerSvcRunInfoToJSON, instanceOfDockerSvcRunInfo } from './DockerSvcRunInfo.mjs';
+export { DockerSvcStopContainerRequestFromJSON, DockerSvcStopContainerRequestFromJSONTyped, DockerSvcStopContainerRequestToJSON, instanceOfDockerSvcStopContainerRequest } from './DockerSvcStopContainerRequest.mjs';
 export { DownloadSvcDownloadDetailsFromJSON, DownloadSvcDownloadDetailsFromJSONTyped, DownloadSvcDownloadDetailsToJSON, instanceOfDownloadSvcDownloadDetails } from './DownloadSvcDownloadDetails.mjs';
 export { DownloadSvcDownloadRequestFromJSON, DownloadSvcDownloadRequestFromJSONTyped, DownloadSvcDownloadRequestToJSON, instanceOfDownloadSvcDownloadRequest } from './DownloadSvcDownloadRequest.mjs';
 export { DownloadSvcDownloadsResponseFromJSON, DownloadSvcDownloadsResponseFromJSONTyped, DownloadSvcDownloadsResponseToJSON, instanceOfDownloadSvcDownloadsResponse } from './DownloadSvcDownloadsResponse.mjs';

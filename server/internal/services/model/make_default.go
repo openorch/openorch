@@ -1,20 +1,26 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package modelservice
 
 import (
 	"context"
 	"fmt"
 
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 )
 
-func (ms *ModelService) makeDefault(modelId string) error {
+func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 	stat, err := ms.status(modelId)
 	if err != nil {
 		return err
@@ -23,15 +29,22 @@ func (ms *ModelService) makeDefault(modelId string) error {
 		return fmt.Errorf("cannot set model as it is not downloaded yet")
 	}
 
-	rsp := configtypes.GetConfigResponse{}
-	err = ms.router.Get(context.Background(), "config-svc", "/config", nil, &rsp)
+	rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+		ConfigSvcAPI.GetConfig(ctx).
+		Execute()
+
 	if err != nil {
 		return err
 	}
 
-	rsp.Config.Model.CurrentModelId = modelId
+	rsp.Config.Model.CurrentModelId = openapi.PtrString(modelId)
 
-	return ms.router.Put(context.Background(), "config-svc", "/config", &configtypes.SaveConfigRequest{
-		Config: rsp.Config,
-	}, nil)
+	_, _, err = ms.clientFactory.Client(sdk.WithToken(ms.token)).
+		ConfigSvcAPI.SaveConfig(ctx).
+		Request(openapi.ConfigSvcSaveConfigRequest{
+			Config: rsp.Config,
+		}).
+		Execute()
+
+	return err
 }

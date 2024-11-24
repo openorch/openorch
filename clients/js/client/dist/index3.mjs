@@ -49,6 +49,7 @@ import './DockerSvcRunContainerRequest.mjs';
 import './DockerSvcRunContainerOptions.mjs';
 import './DockerSvcRunContainerResponse.mjs';
 import './DockerSvcRunInfo.mjs';
+import './DockerSvcStopContainerRequest.mjs';
 import './DownloadSvcDownloadRequest.mjs';
 import './DownloadSvcDownloadsResponse.mjs';
 import './DownloadSvcDownloadDetails.mjs';

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 export declare class DockerSvcGetDockerHostResponse {
-    'host'?: string;
+    'host': string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

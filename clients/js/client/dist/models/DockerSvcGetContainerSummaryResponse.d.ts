@@ -20,7 +20,19 @@ export interface DockerSvcGetContainerSummaryResponse {
      * @type {string}
      * @memberof DockerSvcGetContainerSummaryResponse
      */
-    summary?: string;
+    logs: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DockerSvcGetContainerSummaryResponse
+     */
+    status: string;
+    /**
+     * DEPRECATED. Summary contains both Status and Logs.
+     * @type {string}
+     * @memberof DockerSvcGetContainerSummaryResponse
+     */
+    summary: string;
 }
 /**
  * Check if a given object implements the DockerSvcGetContainerSummaryResponse interface.

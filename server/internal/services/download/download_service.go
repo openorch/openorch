@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package downloadservice
 
 import (
@@ -16,18 +21,19 @@ import (
 	"sync"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
 	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	types "github.com/singulatron/superplatform/server/internal/services/download/types"
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
 )
 
 type DownloadService struct {
-	router *router.Router
-	dlock  lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	dlock lock.DistributedLock
 
 	downloads map[string]*types.Download
 	lock      sync.Mutex
@@ -43,20 +49,24 @@ type DownloadService struct {
 }
 
 func NewDownloadService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DownloadService, error) {
 	home, _ := os.UserHomeDir()
 
-	credentialStore, err := datastoreFactory("downloadSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"downloadSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	ret := &DownloadService{
+		clientFactory: clientFactory,
+
 		credentialStore: credentialStore,
-		router:          router,
 		dlock:           lock,
 
 		StateFilePath: path.Join(home, "downloads.json"),
@@ -79,11 +89,16 @@ func (dm *DownloadService) Start() error {
 	dm.dlock.Acquire(ctx, "download-svc-start")
 	defer dm.dlock.Release(ctx, "download-svc-start")
 
-	token, err := sdk.RegisterService("download-svc", "Download Service", dm.router, dm.credentialStore)
+	token, err := sdk.RegisterService(
+		dm.clientFactory.Client().UserSvcAPI,
+		"download-svc",
+		"Download Service",
+		dm.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	dm.router = dm.router.SetBearerToken(token)
+	dm.token = token
 
 	err = dm.registerPermissions()
 	if err != nil {
@@ -154,11 +169,17 @@ func (ds *DownloadService) saveState() error {
 	ds.hasChanged = false
 	ds.lock.Unlock()
 
-	ds.router.Post(context.Background(), "firehose-svc", "/event", firehosetypes.EventPublishRequest{
-		Event: &firehosetypes.Event{
-			Name: types.EventDownloadStatusChangeName,
-		},
-	}, nil)
+	_, err = ds.clientFactory.Client(sdk.WithToken(ds.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(types.EventDownloadStatusChangeName),
+			},
+		}).
+		Execute()
+	if err != nil {
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
+	}
 
 	err = os.WriteFile(ds.StateFilePath, data, 0666)
 	if err != nil {
@@ -175,7 +196,10 @@ func (ds *DownloadService) periodicSaveState() {
 		if ds.hasChanged {
 			ds.lock.Unlock()
 			if err := ds.saveState(); err != nil {
-				logger.Error("Failed to save state", slog.String("error", err.Error()))
+				logger.Error(
+					"Failed to save state",
+					slog.String("error", err.Error()),
+				)
 			}
 		} else {
 			ds.lock.Unlock()

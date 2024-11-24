@@ -20,6 +20,12 @@ import './ModelSvcContainer.mjs';
  * Check if a given object implements the ModelSvcGetModelResponse interface.
  */
 function instanceOfModelSvcGetModelResponse(value) {
+    if (!('_exists' in value) || value['_exists'] === undefined)
+        return false;
+    if (!('model' in value) || value['model'] === undefined)
+        return false;
+    if (!('platform' in value) || value['platform'] === undefined)
+        return false;
     return true;
 }
 function ModelSvcGetModelResponseFromJSON(json) {
@@ -30,9 +36,9 @@ function ModelSvcGetModelResponseFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        '_exists': json['exists'] == null ? undefined : json['exists'],
-        'model': json['model'] == null ? undefined : ModelSvcModelFromJSON(json['model']),
-        'platform': json['platform'] == null ? undefined : ModelSvcPlatformFromJSON(json['platform']),
+        '_exists': json['exists'],
+        'model': ModelSvcModelFromJSON(json['model']),
+        'platform': ModelSvcPlatformFromJSON(json['platform']),
     };
 }
 function ModelSvcGetModelResponseToJSON(value) {

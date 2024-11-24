@@ -4,32 +4,35 @@ import styles from "./styles.module.css";
 
 const FeatureList = [
   {
-    title: "Easy to Use",
+    title: "Language Agnostic",
     Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
     description: (
       <>
-        Superplatform was designed from the ground up to be easily installed and
-        used to get your projects up and running quickly.
+        Build in your language of choice. With a microservices architecture and
+        OpenAPI support, you can reuse existing services and develop new ones in
+        any programming language.
       </>
     ),
   },
   {
-    title: "Focus on What Matters",
+    title: "AI and Microservice Deployment Made Easy",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
     description: (
       <>
-        Superplatform lets you focus on using and building AI apps while getting
-        the nitty-gritty details out of the way.
+        Built on Docker and other container engines, Superplatform streamlines
+        the deployment of AI models and microservices, keeping things efficient
+        and scalable.
       </>
     ),
   },
   {
-    title: "Hit the ground running",
+    title: "Flexible and Unopinionated",
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
       <>
-        Designed by industry veterans who prefer shipping over arguing about
-        details.
+        Use what works for you. Superplatform is designed for flexibility,
+        giving you the freedom to adopt or rewrite components to suit your
+        needs.
       </>
     ),
   },

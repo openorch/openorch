@@ -8,6 +8,7 @@ var DockerSvcGetDockerHostResponse = require('./DockerSvcGetDockerHostResponse.j
 var DockerSvcGetInfoResponse = require('./DockerSvcGetInfoResponse.js');
 var DockerSvcRunContainerRequest = require('./DockerSvcRunContainerRequest.js');
 var DockerSvcRunContainerResponse = require('./DockerSvcRunContainerResponse.js');
+var DockerSvcStopContainerRequest = require('./DockerSvcStopContainerRequest.js');
 require('./DockerSvcDockerInfo.js');
 require('./DockerSvcRunContainerOptions.js');
 require('./DockerSvcRunInfo.js');
@@ -65,21 +66,24 @@ class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
     containerIsRunningRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['hash'] == null) {
-                throw new runtime.RequiredError('hash', 'Required parameter "hash" was null or undefined when calling containerIsRunning().');
-            }
             const queryParameters = {};
+            if (requestParameters['hash'] != null) {
+                queryParameters['hash'] = requestParameters['hash'];
+            }
+            if (requestParameters['name'] != null) {
+                queryParameters['name'] = requestParameters['name'];
+            }
             const headerParameters = {};
             if (this.configuration && this.configuration.apiKey) {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container/{hash}/is-running`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))),
+                path: `/docker-svc/container/is-running`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -88,34 +92,37 @@ class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
-    containerIsRunning(requestParameters, initOverrides) {
-        return runtime.__awaiter(this, void 0, void 0, function* () {
+    containerIsRunning() {
+        return runtime.__awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
             const response = yield this.containerIsRunningRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    getContainerSummaryRaw(requestParameters, initOverrides) {
+    containerSummaryRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['hash'] == null) {
-                throw new runtime.RequiredError('hash', 'Required parameter "hash" was null or undefined when calling getContainerSummary().');
-            }
-            if (requestParameters['numberOfLines'] == null) {
-                throw new runtime.RequiredError('numberOfLines', 'Required parameter "numberOfLines" was null or undefined when calling getContainerSummary().');
-            }
             const queryParameters = {};
+            if (requestParameters['hash'] != null) {
+                queryParameters['hash'] = requestParameters['hash'];
+            }
+            if (requestParameters['name'] != null) {
+                queryParameters['name'] = requestParameters['name'];
+            }
+            if (requestParameters['lines'] != null) {
+                queryParameters['lines'] = requestParameters['lines'];
+            }
             const headerParameters = {};
             if (this.configuration && this.configuration.apiKey) {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container/{hash}/summary/{numberOfLines}`.replace(`{${"hash"}}`, encodeURIComponent(String(requestParameters['hash']))).replace(`{${"numberOfLines"}}`, encodeURIComponent(String(requestParameters['numberOfLines']))),
+                path: `/docker-svc/container/summary`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -124,12 +131,12 @@ class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * Get Container Summary
      */
-    getContainerSummary(requestParameters, initOverrides) {
-        return runtime.__awaiter(this, void 0, void 0, function* () {
-            const response = yield this.getContainerSummaryRaw(requestParameters, initOverrides);
+    containerSummary() {
+        return runtime.__awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.containerSummaryRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
@@ -225,6 +232,41 @@ class DockerSvcApi extends runtime.BaseAPI {
     runContainer(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
             const response = yield this.runContainerRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainerRaw(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['request'] == null) {
+                throw new runtime.RequiredError('request', 'Required parameter "request" was null or undefined when calling stopContainer().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container/stop`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcStopContainerRequest.DockerSvcStopContainerRequestToJSON(requestParameters['request']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainer(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            const response = yield this.stopContainerRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

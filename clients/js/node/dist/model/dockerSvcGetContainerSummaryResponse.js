@@ -17,6 +17,16 @@ export class DockerSvcGetContainerSummaryResponse {
 DockerSvcGetContainerSummaryResponse.discriminator = undefined;
 DockerSvcGetContainerSummaryResponse.attributeTypeMap = [
     {
+        "name": "logs",
+        "baseName": "logs",
+        "type": "string"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "string"
+    },
+    {
         "name": "summary",
         "baseName": "summary",
         "type": "string"

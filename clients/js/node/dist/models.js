@@ -45,6 +45,7 @@ var dockerSvcRunContainerOptions = require('./dockerSvcRunContainerOptions.js');
 var dockerSvcRunContainerRequest = require('./dockerSvcRunContainerRequest.js');
 var dockerSvcRunContainerResponse = require('./dockerSvcRunContainerResponse.js');
 var dockerSvcRunInfo = require('./dockerSvcRunInfo.js');
+var dockerSvcStopContainerRequest = require('./dockerSvcStopContainerRequest.js');
 var downloadSvcDownloadDetails = require('./downloadSvcDownloadDetails.js');
 var downloadSvcDownloadRequest = require('./downloadSvcDownloadRequest.js');
 var downloadSvcDownloadsResponse = require('./downloadSvcDownloadsResponse.js');
@@ -207,6 +208,7 @@ let typeMap = {
     "DockerSvcRunContainerRequest": dockerSvcRunContainerRequest.DockerSvcRunContainerRequest,
     "DockerSvcRunContainerResponse": dockerSvcRunContainerResponse.DockerSvcRunContainerResponse,
     "DockerSvcRunInfo": dockerSvcRunInfo.DockerSvcRunInfo,
+    "DockerSvcStopContainerRequest": dockerSvcStopContainerRequest.DockerSvcStopContainerRequest,
     "DownloadSvcDownloadDetails": downloadSvcDownloadDetails.DownloadSvcDownloadDetails,
     "DownloadSvcDownloadRequest": downloadSvcDownloadRequest.DownloadSvcDownloadRequest,
     "DownloadSvcDownloadsResponse": downloadSvcDownloadsResponse.DownloadSvcDownloadsResponse,
@@ -536,6 +538,7 @@ exports.DockerSvcRunContainerOptions = dockerSvcRunContainerOptions.DockerSvcRun
 exports.DockerSvcRunContainerRequest = dockerSvcRunContainerRequest.DockerSvcRunContainerRequest;
 exports.DockerSvcRunContainerResponse = dockerSvcRunContainerResponse.DockerSvcRunContainerResponse;
 exports.DockerSvcRunInfo = dockerSvcRunInfo.DockerSvcRunInfo;
+exports.DockerSvcStopContainerRequest = dockerSvcStopContainerRequest.DockerSvcStopContainerRequest;
 exports.DownloadSvcDownloadDetails = downloadSvcDownloadDetails.DownloadSvcDownloadDetails;
 exports.DownloadSvcDownloadRequest = downloadSvcDownloadRequest.DownloadSvcDownloadRequest;
 exports.DownloadSvcDownloadsResponse = downloadSvcDownloadsResponse.DownloadSvcDownloadsResponse;

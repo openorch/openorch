@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package downloadservice
 
 import (
@@ -39,7 +44,9 @@ func (dm *DownloadService) do(url, downloadDir string) error {
 	if err != nil {
 		return err
 	}
-	partialSize, partialFileExists, err := checkFileExistsAndSize(safePartialFilePath)
+	partialSize, partialFileExists, err := checkFileExistsAndSize(
+		safePartialFilePath,
+	)
 	if err != nil {
 		return err
 	}
@@ -130,7 +137,11 @@ func (dm *DownloadService) downloadFile(d *types.Download) error {
 		// this should never happen as Do sets this to inProgress
 		return fmt.Errorf("cannot download file with status paused")
 	}
-	out, err := os.OpenFile(d.FilePath+".part", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	out, err := os.OpenFile(
+		d.FilePath+".part",
+		os.O_CREATE|os.O_WRONLY|os.O_APPEND,
+		0666,
+	)
 	if err != nil {
 		return errors.Wrap(err, "opening file for download")
 	}
@@ -156,7 +167,8 @@ func (dm *DownloadService) downloadFile(d *types.Download) error {
 		fmt.Printf("Error retrieving total size: %v\n", err)
 	}
 
-	if resp.StatusCode == http.StatusPartialContent || resp.StatusCode == http.StatusOK {
+	if resp.StatusCode == http.StatusPartialContent ||
+		resp.StatusCode == http.StatusOK {
 		buffer := make([]byte, 1024*256) // 256KB buffer
 		for {
 			if d.Status == types.DownloadStatusPaused {
@@ -203,7 +215,9 @@ func getTotalSizeFromHeaders(resp *http.Response) (int64, error) {
 	contentLength := resp.Header.Get("Content-Length")
 	contentRange := resp.Header.Get("Content-Range")
 	if contentLength == "" && contentRange == "" {
-		return 0, fmt.Errorf("Content-Length and Content-Range header is missing")
+		return 0, fmt.Errorf(
+			"Content-Length and Content-Range header is missing",
+		)
 	}
 
 	if contentLength != "" {
@@ -218,7 +232,10 @@ func getTotalSizeFromHeaders(resp *http.Response) (int64, error) {
 
 	totalSize, err := strconv.ParseInt(parts[1], 10, 64)
 	if err != nil {
-		return 0, fmt.Errorf("error parsing total size from Content-Range: %v", err)
+		return 0, fmt.Errorf(
+			"error parsing total size from Content-Range: %v",
+			err,
+		)
 	}
 
 	return totalSize, nil

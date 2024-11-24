@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ModelSvcGetModelResponse type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,22 @@ var _ MappedNullable = &ModelSvcGetModelResponse{}
 
 // ModelSvcGetModelResponse struct for ModelSvcGetModelResponse
 type ModelSvcGetModelResponse struct {
-	Exists *bool `json:"exists,omitempty"`
-	Model *ModelSvcModel `json:"model,omitempty"`
-	Platform *ModelSvcPlatform `json:"platform,omitempty"`
+	Exists bool `json:"exists"`
+	Model ModelSvcModel `json:"model"`
+	Platform ModelSvcPlatform `json:"platform"`
 }
+
+type _ModelSvcGetModelResponse ModelSvcGetModelResponse
 
 // NewModelSvcGetModelResponse instantiates a new ModelSvcGetModelResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelSvcGetModelResponse() *ModelSvcGetModelResponse {
+func NewModelSvcGetModelResponse(exists bool, model ModelSvcModel, platform ModelSvcPlatform) *ModelSvcGetModelResponse {
 	this := ModelSvcGetModelResponse{}
+	this.Exists = exists
+	this.Model = model
+	this.Platform = platform
 	return &this
 }
 
@@ -42,100 +49,76 @@ func NewModelSvcGetModelResponseWithDefaults() *ModelSvcGetModelResponse {
 	return &this
 }
 
-// GetExists returns the Exists field value if set, zero value otherwise.
+// GetExists returns the Exists field value
 func (o *ModelSvcGetModelResponse) GetExists() bool {
-	if o == nil || IsNil(o.Exists) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Exists
+
+	return o.Exists
 }
 
-// GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
+// GetExistsOk returns a tuple with the Exists field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcGetModelResponse) GetExistsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Exists) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Exists, true
+	return &o.Exists, true
 }
 
-// HasExists returns a boolean if a field has been set.
-func (o *ModelSvcGetModelResponse) HasExists() bool {
-	if o != nil && !IsNil(o.Exists) {
-		return true
-	}
-
-	return false
-}
-
-// SetExists gets a reference to the given bool and assigns it to the Exists field.
+// SetExists sets field value
 func (o *ModelSvcGetModelResponse) SetExists(v bool) {
-	o.Exists = &v
+	o.Exists = v
 }
 
-// GetModel returns the Model field value if set, zero value otherwise.
+// GetModel returns the Model field value
 func (o *ModelSvcGetModelResponse) GetModel() ModelSvcModel {
-	if o == nil || IsNil(o.Model) {
+	if o == nil {
 		var ret ModelSvcModel
 		return ret
 	}
-	return *o.Model
+
+	return o.Model
 }
 
-// GetModelOk returns a tuple with the Model field value if set, nil otherwise
+// GetModelOk returns a tuple with the Model field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcGetModelResponse) GetModelOk() (*ModelSvcModel, bool) {
-	if o == nil || IsNil(o.Model) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Model, true
+	return &o.Model, true
 }
 
-// HasModel returns a boolean if a field has been set.
-func (o *ModelSvcGetModelResponse) HasModel() bool {
-	if o != nil && !IsNil(o.Model) {
-		return true
-	}
-
-	return false
-}
-
-// SetModel gets a reference to the given ModelSvcModel and assigns it to the Model field.
+// SetModel sets field value
 func (o *ModelSvcGetModelResponse) SetModel(v ModelSvcModel) {
-	o.Model = &v
+	o.Model = v
 }
 
-// GetPlatform returns the Platform field value if set, zero value otherwise.
+// GetPlatform returns the Platform field value
 func (o *ModelSvcGetModelResponse) GetPlatform() ModelSvcPlatform {
-	if o == nil || IsNil(o.Platform) {
+	if o == nil {
 		var ret ModelSvcPlatform
 		return ret
 	}
-	return *o.Platform
+
+	return o.Platform
 }
 
-// GetPlatformOk returns a tuple with the Platform field value if set, nil otherwise
+// GetPlatformOk returns a tuple with the Platform field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcGetModelResponse) GetPlatformOk() (*ModelSvcPlatform, bool) {
-	if o == nil || IsNil(o.Platform) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Platform, true
+	return &o.Platform, true
 }
 
-// HasPlatform returns a boolean if a field has been set.
-func (o *ModelSvcGetModelResponse) HasPlatform() bool {
-	if o != nil && !IsNil(o.Platform) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatform gets a reference to the given ModelSvcPlatform and assigns it to the Platform field.
+// SetPlatform sets field value
 func (o *ModelSvcGetModelResponse) SetPlatform(v ModelSvcPlatform) {
-	o.Platform = &v
+	o.Platform = v
 }
 
 func (o ModelSvcGetModelResponse) MarshalJSON() ([]byte, error) {
@@ -148,16 +131,49 @@ func (o ModelSvcGetModelResponse) MarshalJSON() ([]byte, error) {
 
 func (o ModelSvcGetModelResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Exists) {
-		toSerialize["exists"] = o.Exists
-	}
-	if !IsNil(o.Model) {
-		toSerialize["model"] = o.Model
-	}
-	if !IsNil(o.Platform) {
-		toSerialize["platform"] = o.Platform
-	}
+	toSerialize["exists"] = o.Exists
+	toSerialize["model"] = o.Model
+	toSerialize["platform"] = o.Platform
 	return toSerialize, nil
+}
+
+func (o *ModelSvcGetModelResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"exists",
+		"model",
+		"platform",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varModelSvcGetModelResponse := _ModelSvcGetModelResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varModelSvcGetModelResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ModelSvcGetModelResponse(varModelSvcGetModelResponse)
+
+	return err
 }
 
 type NullableModelSvcGetModelResponse struct {

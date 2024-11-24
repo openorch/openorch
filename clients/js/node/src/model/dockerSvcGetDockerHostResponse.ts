@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class DockerSvcGetDockerHostResponse {
-    'host'?: string;
+    'host': string;
 
     static discriminator: string | undefined = undefined;
 

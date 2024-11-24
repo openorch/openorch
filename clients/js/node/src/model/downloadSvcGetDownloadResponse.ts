@@ -15,7 +15,7 @@ import { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails';
 
 export class DownloadSvcGetDownloadResponse {
     'download'?: DownloadSvcDownloadDetails;
-    'exists'?: boolean;
+    'exists': boolean;
 
     static discriminator: string | undefined = undefined;
 
