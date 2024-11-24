@@ -70,6 +70,9 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 	}
 	expectedUserSvcIsAuthorizedResponse := &openapi.UserSvcIsAuthorizedResponse{
 		Authorized: openapi.PtrBool(true),
+		User: &openapi.UserSvcUser{
+			Id: openapi.PtrString("user-id-1"),
+		},
 	}
 
 	mockUserSvc.EXPECT().GetPublicKey(ctx).Return(openapi.ApiGetPublicKeyRequest{

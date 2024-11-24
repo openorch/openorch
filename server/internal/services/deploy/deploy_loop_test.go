@@ -58,6 +58,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				UserSvcAPI:     mockUserSvc,
 				RegistrySvcAPI: mockRegistrySvc,
 				DockerSvcAPI:   mockDockerSvc,
+				DeploySvcAPI:   sdk.NewApiClientFactory(server.URL).Client().DeploySvcAPI,
 			}).
 			AnyTimes()
 
@@ -72,7 +73,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 
 		hs.UpdateHandler(universe)
 
-		adminClient, _, err = test.AdminClient(options.ClientFactory)
+		adminClient, _, err = test.AdminClient(mockClientFactory)
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
 	})

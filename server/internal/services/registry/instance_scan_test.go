@@ -48,8 +48,9 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 		mockClientFactory.EXPECT().
 			Client(gomock.Any()).
 			Return(&openapi.APIClient{
-				UserSvcAPI:   mockUserSvc,
-				DeploySvcAPI: mockDeploySvc,
+				UserSvcAPI:     mockUserSvc,
+				DeploySvcAPI:   mockDeploySvc,
+				RegistrySvcAPI: sdk.NewApiClientFactory(server.URL).Client().RegistrySvcAPI,
 			}).
 			AnyTimes()
 
@@ -64,7 +65,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 		hs.UpdateHandler(universe)
 
-		adminClient, _, err = test.AdminClient(options.ClientFactory)
+		adminClient, _, err = test.AdminClient(mockClientFactory)
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
 	})

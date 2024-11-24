@@ -151,11 +151,7 @@ func (p *PromptService) processPrompt(
 	}
 
 	defer func() {
-		if r := recover(); r != nil {
-			currentPrompt.Error = fmt.Sprintf("%v", r)
-			currentPrompt.Status = prompttypes.PromptStatusErrored
-			updateCurr()
-		} else if err != nil {
+		if err != nil {
 			currentPrompt.Error = err.Error()
 			currentPrompt.Status = prompttypes.PromptStatusErrored
 			updateCurr()

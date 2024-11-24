@@ -77,7 +77,7 @@ func TestModel(t *testing.T) {
 		require.Equal(
 			t,
 			configservice.DefaultModelId,
-			getConfigRsp.Config.Model.CurrentModelId,
+			*getConfigRsp.Config.Model.CurrentModelId,
 		)
 	})
 }

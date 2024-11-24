@@ -39,7 +39,9 @@ func (dm *DockerService) Host(
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(req)).
 		UserSvcAPI.IsAuthorized(req.Context(), docker.PermissionContainerView.Id).
-		Body(openapi.UserSvcIsAuthorizedRequest{}).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"model-svc"},
+		}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
