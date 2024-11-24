@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	policy "github.com/singulatron/superplatform/server/internal/services/policy/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 	"golang.org/x/time/rate"
 )
 
@@ -30,14 +30,15 @@ func (s *PolicyService) Check(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := s.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", policy.PermissionTemplateEdit.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionTemplateEdit.Id).
+		Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
@@ -72,7 +73,9 @@ func (s *PolicyService) check(request *policy.CheckRequest) (bool, error) {
 		case policy.RateLimitPolicyTemplate.GetId():
 
 			maxRequests := instance.RateLimitParameters.MaxRequests
-			timeWindow, err := time.ParseDuration(instance.RateLimitParameters.TimeWindow)
+			timeWindow, err := time.ParseDuration(
+				instance.RateLimitParameters.TimeWindow,
+			)
 			if err != nil {
 				return false, err
 			}

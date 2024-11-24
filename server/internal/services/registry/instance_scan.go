@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package registryservice
 
 import (
@@ -94,7 +99,8 @@ func (ns *RegistryService) scanInstance(instance *registry.Instance) error {
 		updateFields["lastHeartbeat"] = lastHeartbeat
 	}
 
-	err := ns.instanceStore.Query(datastore.Equals([]string{"id"}, instance.Id)).UpdateFields(updateFields)
+	err := ns.instanceStore.Query(datastore.Equals([]string{"id"}, instance.Id)).
+		UpdateFields(updateFields)
 	if err != nil {
 		return errors.Wrap(err, "Failed to update instance")
 	}

@@ -60,7 +60,7 @@ type GetDownloadRequest struct {
 }
 
 type GetDownloadResponse struct {
-	Exists   bool             `json:"exists"`
+	Exists   bool             `json:"exists"   binding:"required"`
 	Download *DownloadDetails `json:"download"`
 }
 

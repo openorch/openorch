@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package dockerservice
 
 import (
@@ -51,12 +56,19 @@ func (d *DockerService) info() (*ts.DockerInfo, error) {
 
 	ip, port, err := d.tryFixDockerAddress()
 	if err != nil {
-		logger.Warn("Cannot find Docker address", slog.String("error", err.Error()))
+		logger.Warn(
+			"Cannot find Docker address",
+			slog.String("error", err.Error()),
+		)
 		return &ts.DockerInfo{
 			HasDocker: false,
 		}, nil
 	}
-	logger.Info("Found Docker address", slog.String("ip", ip), slog.Int("port", port))
+	logger.Info(
+		"Found Docker address",
+		slog.String("ip", ip),
+		slog.Int("port", port),
+	)
 
 	d.dockerHost = ip
 	d.dockerPort = port
@@ -86,15 +98,27 @@ func (d *DockerService) tryFixDockerAddress() (ip string, port int, err error) {
 				client.WithVersion("1.44"),
 			)
 			if err != nil {
-				return "", 0, errors.Wrap(err, "error creating new Docker client")
+				return "", 0, errors.Wrap(
+					err,
+					"error creating new Docker client",
+				)
 			}
 
 			inf, err := newDockerClient.Info(context.Background())
 			if err != nil {
-				return "", 0, errors.Wrap(err, "error pinging Docker with new address")
+				return "", 0, errors.Wrap(
+					err,
+					"error pinging Docker with new address",
+				)
 			}
 			if inf.OSType != "linux" {
-				return "", 0, errors.Wrap(err, fmt.Sprintf("docker os type is not linux but '%v'", inf.OSType))
+				return "", 0, errors.Wrap(
+					err,
+					fmt.Sprintf(
+						"docker os type is not linux but '%v'",
+						inf.OSType,
+					),
+				)
 			}
 
 			d.client = newDockerClient
@@ -104,7 +128,10 @@ func (d *DockerService) tryFixDockerAddress() (ip string, port int, err error) {
 				host = parts[0]
 				port64, err := strconv.ParseInt(parts[1], 10, 64)
 				if err != nil {
-					return "", 0, errors.Wrap(err, "error converting port to int")
+					return "", 0, errors.Wrap(
+						err,
+						"error converting port to int",
+					)
 				}
 				port = int(port64)
 			}
@@ -119,18 +146,26 @@ func (d *DockerService) tryFixDockerAddress() (ip string, port int, err error) {
 		if ipAddress != "" {
 			newDockerClient, err := client.NewClientWithOpts(
 				client.WithAPIVersionNegotiation(),
-				client.WithHost(fmt.Sprintf("tcp://%s:%v", ipAddress, dockerTcpPort)),
+				client.WithHost(
+					fmt.Sprintf("tcp://%s:%v", ipAddress, dockerTcpPort),
+				),
 				// I think dind is not up to date to use the current version 1.45, win breaks if we do
 				// not specify this
 				client.WithVersion("1.44"),
 			)
 			if err != nil {
-				return "", 0, errors.Wrap(err, "error creating new Docker client")
+				return "", 0, errors.Wrap(
+					err,
+					"error creating new Docker client",
+				)
 			}
 
 			_, err = newDockerClient.Ping(context.Background())
 			if err != nil {
-				return "", 0, errors.Wrap(err, "error pinging Docker with new address")
+				return "", 0, errors.Wrap(
+					err,
+					"error pinging Docker with new address",
+				)
 			}
 
 			d.client = newDockerClient
@@ -139,11 +174,20 @@ func (d *DockerService) tryFixDockerAddress() (ip string, port int, err error) {
 		}
 	}
 
-	return "", 0, fmt.Errorf("runtime '%v' has no docker address fix", runtime.GOOS)
+	return "", 0, fmt.Errorf(
+		"runtime '%v' has no docker address fix",
+		runtime.GOOS,
+	)
 }
 
 func getLimaAddress() (string, error) {
-	cmd := exec.Command("limactl", "list", "docker", "--format", `unix://{{.Dir}}/sock/docker.sock`)
+	cmd := exec.Command(
+		"limactl",
+		"list",
+		"docker",
+		"--format",
+		`unix://{{.Dir}}/sock/docker.sock`,
+	)
 
 	output, err := cmd.Output()
 	if err != nil {
@@ -169,7 +213,10 @@ func getWslIpAddress() (string, error) {
 	cmd.Stdout = &out
 	err := cmd.Run()
 	if err != nil {
-		return "", errors.Wrap(err, fmt.Sprintf("wsl output: '%v'", out.String()))
+		return "", errors.Wrap(
+			err,
+			fmt.Sprintf("wsl output: '%v'", out.String()),
+		)
 	}
 	output := out.Bytes()
 	var decodedOutput string
@@ -212,7 +259,9 @@ func detectUtf16(b []byte) (bool, bool) {
 			nullCount++
 		}
 	}
-	if nullCount > len(b)/4 { // More than 25% of the bytes in odd positions are nulls
+	if nullCount > len(
+		b,
+	)/4 { // More than 25% of the bytes in odd positions are nulls
 		return true, true // Assuming little-endian if no BOM but pattern matches
 	}
 

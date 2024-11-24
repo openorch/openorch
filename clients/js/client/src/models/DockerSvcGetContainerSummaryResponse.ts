@@ -24,13 +24,28 @@ export interface DockerSvcGetContainerSummaryResponse {
      * @type {string}
      * @memberof DockerSvcGetContainerSummaryResponse
      */
-    summary?: string;
+    logs: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DockerSvcGetContainerSummaryResponse
+     */
+    status: string;
+    /**
+     * DEPRECATED. Summary contains both Status and Logs.
+     * @type {string}
+     * @memberof DockerSvcGetContainerSummaryResponse
+     */
+    summary: string;
 }
 
 /**
  * Check if a given object implements the DockerSvcGetContainerSummaryResponse interface.
  */
 export function instanceOfDockerSvcGetContainerSummaryResponse(value: object): value is DockerSvcGetContainerSummaryResponse {
+    if (!('logs' in value) || value['logs'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('summary' in value) || value['summary'] === undefined) return false;
     return true;
 }
 
@@ -44,7 +59,9 @@ export function DockerSvcGetContainerSummaryResponseFromJSONTyped(json: any, ign
     }
     return {
         
-        'summary': json['summary'] == null ? undefined : json['summary'],
+        'logs': json['logs'],
+        'status': json['status'],
+        'summary': json['summary'],
     };
 }
 
@@ -54,6 +71,8 @@ export function DockerSvcGetContainerSummaryResponseToJSON(value?: DockerSvcGetC
     }
     return {
         
+        'logs': value['logs'],
+        'status': value['status'],
         'summary': value['summary'],
     };
 }

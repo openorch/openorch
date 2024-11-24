@@ -94,11 +94,12 @@ Class | Method | HTTP request | Description
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
 *DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /docker-svc/image | Build an Image
-*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/{hash}/is-running | Check If a Container Is Running
-*DockerSvcAPI* | [**GetContainerSummary**](docs/DockerSvcAPI.md#getcontainersummary) | **Get** /docker-svc/container/{hash}/summary/{numberOfLines} | Get Container Summary
+*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/is-running | Check If a Container Is Running
+*DockerSvcAPI* | [**ContainerSummary**](docs/DockerSvcAPI.md#containersummary) | **Get** /docker-svc/container/summary | Get Container Summary
 *DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /docker-svc/host | Get Docker Host
 *DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /docker-svc/info | Get Docker Service Information
 *DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /docker-svc/container | Run a Container
+*DockerSvcAPI* | [**StopContainer**](docs/DockerSvcAPI.md#stopcontainer) | **Put** /docker-svc/container/stop | Stop a Container
 *DownloadSvcAPI* | [**Download**](docs/DownloadSvcAPI.md#download) | **Put** /download-svc/download | Download a File
 *DownloadSvcAPI* | [**GetDownload**](docs/DownloadSvcAPI.md#getdownload) | **Get** /download-svc/download/{downloadId} | Get a Download
 *DownloadSvcAPI* | [**ListDownloads**](docs/DownloadSvcAPI.md#listdownloads) | **Post** /download-svc/downloads | List Downloads
@@ -202,6 +203,7 @@ Class | Method | HTTP request | Description
  - [DockerSvcRunContainerRequest](docs/DockerSvcRunContainerRequest.md)
  - [DockerSvcRunContainerResponse](docs/DockerSvcRunContainerResponse.md)
  - [DockerSvcRunInfo](docs/DockerSvcRunInfo.md)
+ - [DockerSvcStopContainerRequest](docs/DockerSvcStopContainerRequest.md)
  - [DownloadSvcDownloadDetails](docs/DownloadSvcDownloadDetails.md)
  - [DownloadSvcDownloadRequest](docs/DownloadSvcDownloadRequest.md)
  - [DownloadSvcDownloadsResponse](docs/DownloadSvcDownloadsResponse.md)

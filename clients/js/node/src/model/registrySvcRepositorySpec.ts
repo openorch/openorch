@@ -22,6 +22,10 @@ export class RegistrySvcRepositorySpec {
     */
     'containerFile'?: string;
     /**
+    * Port is the port number that the container will listen on internally
+    */
+    'port'?: number;
+    /**
     * URL is the URL to the repository
     */
     'url': string;
@@ -42,6 +46,11 @@ export class RegistrySvcRepositorySpec {
             "name": "containerFile",
             "baseName": "containerFile",
             "type": "string"
+        },
+        {
+            "name": "port",
+            "baseName": "port",
+            "type": "number"
         },
         {
             "name": "url",

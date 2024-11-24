@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package promptservice
 
 import (
@@ -15,15 +20,16 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	streammanager "github.com/singulatron/superplatform/server/internal/services/prompt/sub/stream_manager"
 	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
 )
 
 type PromptService struct {
+	clientFactory sdk.ClientFactory
+	token         string
+
 	llmCLient llm.ClientI
-	router    *router.Router
 	lock      lock.DistributedLock
 
 	*streammanager.StreamManager
@@ -36,24 +42,31 @@ type PromptService struct {
 }
 
 func NewPromptService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	llmClient llm.ClientI,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PromptService, error) {
-	promptsStore, err := datastoreFactory("promptSvcPrompts", &prompttypes.Prompt{})
+	promptsStore, err := datastoreFactory(
+		"promptSvcPrompts",
+		&prompttypes.Prompt{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	credentialStore, err := datastoreFactory("promptSvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"promptSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	service := &PromptService{
+		clientFactory: clientFactory,
+
 		llmCLient: llmClient,
-		router:    router,
 		lock:      lock,
 
 		StreamManager: streammanager.NewStreamManager(),
@@ -65,7 +78,10 @@ func NewPromptService(
 	}
 
 	promptIs, err := service.promptsStore.Query(
-		datastore.Equals(datastore.Field("status"), prompttypes.PromptStatusRunning),
+		datastore.Equals(
+			datastore.Field("status"),
+			prompttypes.PromptStatusRunning,
+		),
 	).Find()
 	if err != nil {
 		return nil, err
@@ -94,11 +110,16 @@ func (cs *PromptService) Start() error {
 	cs.lock.Acquire(ctx, "prompt-svc-start")
 	defer cs.lock.Release(ctx, "prompt-svc-start")
 
-	token, err := sdk.RegisterService("prompt-svc", "Prompt Service", cs.router, cs.credentialStore)
+	token, err := sdk.RegisterService(
+		cs.clientFactory.Client().UserSvcAPI,
+		"prompt-svc",
+		"Prompt Service",
+		cs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	return cs.registerPermissions()
 }

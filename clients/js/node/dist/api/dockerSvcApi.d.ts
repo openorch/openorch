@@ -17,6 +17,7 @@ import { DockerSvcGetDockerHostResponse } from '../model/dockerSvcGetDockerHostR
 import { DockerSvcGetInfoResponse } from '../model/dockerSvcGetInfoResponse';
 import { DockerSvcRunContainerRequest } from '../model/dockerSvcRunContainerRequest';
 import { DockerSvcRunContainerResponse } from '../model/dockerSvcRunContainerResponse';
+import { DockerSvcStopContainerRequest } from '../model/dockerSvcStopContainerRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum DockerSvcApiApiKeys {
@@ -54,11 +55,12 @@ export declare class DockerSvcApi {
         body: object;
     }>;
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * @summary Check If a Container Is Running
      * @param hash Container Hash
+     * @param name Container Name
      */
-    containerIsRunning(hash: string, options?: {
+    containerIsRunning(hash?: string, name?: string, options?: {
         headers: {
             [name: string]: string;
         };
@@ -67,12 +69,13 @@ export declare class DockerSvcApi {
         body: DockerSvcContainerIsRunningResponse;
     }>;
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * @summary Get Container Summary
      * @param hash Container Hash
-     * @param numberOfLines Number of Lines
+     * @param name Container Name
+     * @param lines Number of Lines
      */
-    getContainerSummary(hash: string, numberOfLines: number, options?: {
+    containerSummary(hash?: string, name?: string, lines?: number, options?: {
         headers: {
             [name: string]: string;
         };
@@ -116,5 +119,18 @@ export declare class DockerSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: DockerSvcRunContainerResponse;
+    }>;
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * @summary Stop a Container
+     * @param request Stop Container Request
+     */
+    stopContainer(request: DockerSvcStopContainerRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
     }>;
 }

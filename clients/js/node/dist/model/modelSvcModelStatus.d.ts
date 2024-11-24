@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 export declare class ModelSvcModelStatus {
-    'address'?: string;
-    'assetsReady'?: boolean;
+    'address': string;
+    'assetsReady': boolean;
     /**
     * Running triggers onModelLaunch on the frontend.  Running is true when the model is both running and answering  - fully loaded.
     */
-    'running'?: boolean;
+    'running': boolean;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

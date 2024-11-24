@@ -17,6 +17,8 @@
  * Check if a given object implements the DockerSvcContainerIsRunningResponse interface.
  */
 function instanceOfDockerSvcContainerIsRunningResponse(value) {
+    if (!('isRunning' in value) || value['isRunning'] === undefined)
+        return false;
     return true;
 }
 function DockerSvcContainerIsRunningResponseFromJSON(json) {
@@ -27,7 +29,7 @@ function DockerSvcContainerIsRunningResponseFromJSONTyped(json, ignoreDiscrimina
         return json;
     }
     return {
-        'isRunning': json['isRunning'] == null ? undefined : json['isRunning'],
+        'isRunning': json['isRunning'],
     };
 }
 function DockerSvcContainerIsRunningResponseToJSON(value) {

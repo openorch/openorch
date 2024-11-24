@@ -84,6 +84,13 @@ type BuildImageRequest struct {
 	DockerfilePath string `json:"dockerfilePath" example:"Dockerfile"`
 }
 
+type StopContainerRequest struct {
+	Id   string `json:"id"   example:"4378b76e05ba"`
+	Name string `json:"name" example:"sup-container-x"`
+}
+
+type StopContainerResponse struct{}
+
 type BuildImageResponse struct {
 }
 
@@ -97,7 +104,10 @@ type GetContainerSummaryRequest struct {
 }
 
 type GetContainerSummaryResponse struct {
-	Summary string `json:"summary"`
+	Status string `json:"status"  binding:"required"`
+	Logs   string `json:"logs"    binding:"required"`
+	// DEPRECATED. Summary contains both Status and Logs.
+	Summary string `json:"summary" binding:"required"`
 }
 
 type ContainerIsRunningRequest struct {
@@ -105,13 +115,13 @@ type ContainerIsRunningRequest struct {
 }
 
 type ContainerIsRunningResponse struct {
-	IsRunning bool `json:"isRunning"`
+	IsRunning bool `json:"isRunning" binding:"required"`
 }
 
 type GetDockerHostRequest struct{}
 
 type GetDockerHostResponse struct {
-	Host string `json:"host"`
+	Host string `json:"host" binding:"required"`
 }
 
 //

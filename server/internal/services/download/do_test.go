@@ -1,44 +1,49 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package downloadservice_test
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/server/internal/di"
 	downloadservice "github.com/singulatron/superplatform/server/internal/services/download"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 	types "github.com/singulatron/superplatform/server/internal/services/download/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestDownloadFile(t *testing.T) {
-	fileHostServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		rangeHeader := r.Header.Get("Range")
-		if rangeHeader != "" {
-			w.Header().Set("Content-Range", "bytes 0-10/11")
-			w.WriteHeader(http.StatusPartialContent)
-			io.WriteString(w, "Hello world")
-		} else {
-			w.WriteHeader(http.StatusOK)
-			io.WriteString(w, "Hello world")
-		}
-	}))
+	fileHostServer := httptest.NewServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			rangeHeader := r.Header.Get("Range")
+			if rangeHeader != "" {
+				w.Header().Set("Content-Range", "bytes 0-10/11")
+				w.WriteHeader(http.StatusPartialContent)
+				io.WriteString(w, "Hello world")
+			} else {
+				w.WriteHeader(http.StatusOK)
+				io.WriteString(w, "Hello world")
+			}
+		}),
+	)
 	defer fileHostServer.Close()
 
 	hs := &di.HandlerSwitcher{}
@@ -53,49 +58,71 @@ func TestDownloadFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
-	err = router.Put(context.Background(), "download-svc", "/download", downloadtypes.DownloadRequest{
-		URL: fileHostServer.URL,
-	}, nil)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
+		Request(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(fileHostServer.URL),
+		}).
+		Execute()
 	require.NoError(t, err)
 
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+outer:
 	for {
-		time.Sleep(5 * time.Millisecond)
-		// req := downloadtypes.GetDownloadRequest{}
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(fileHostServer.URL)), nil, &rsp)
-		require.NoError(t, err)
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+				Execute()
+			require.NoError(t, err)
 
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			break
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				break outer
+			}
 		}
 	}
 
-	expectedFilePath := filepath.Join(options.HomeDir, ".singulatron", "downloads", downloadservice.EncodeURLtoFileName(fileHostServer.URL))
+	expectedFilePath := filepath.Join(
+		options.HomeDir,
+		".superplatform",
+		"downloads",
+		downloadservice.EncodeURLtoFileName(fileHostServer.URL),
+	)
 	data, err := os.ReadFile(expectedFilePath)
 	require.NoError(t, err)
 	require.Equal(t, "Hello world", string(data))
 }
 
 func TestDownloadFileWithPartFile(t *testing.T) {
-	fileHostServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		rangeHeader := r.Header.Get("Range")
-		if rangeHeader != "bytes=5-" {
-			t.Errorf("Expected 'bytes=5-' got '%s'", rangeHeader)
-		}
+	fileHostServer := httptest.NewServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			rangeHeader := r.Header.Get("Range")
+			if rangeHeader != "bytes=5-" {
+				t.Errorf("Expected 'bytes=5-' got '%s'", rangeHeader)
+			}
 
-		w.Header().Set("Content-Range", "bytes 5-10/11")
-		w.WriteHeader(http.StatusPartialContent)
-		io.WriteString(w, " world")
-	}))
+			w.Header().Set("Content-Range", "bytes 5-10/11")
+			w.WriteHeader(http.StatusPartialContent)
+			io.WriteString(w, " world")
+		}),
+	)
 	defer fileHostServer.Close()
 
 	hs := &di.HandlerSwitcher{}
@@ -110,40 +137,65 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	downloadURL := fileHostServer.URL + "/file"
 
-	partFilePath := filepath.Join(options.HomeDir, ".singulatron", "downloads", downloadservice.EncodeURLtoFileName(downloadURL)+".part")
+	partFilePath := filepath.Join(
+		options.HomeDir,
+		".superplatform",
+		"downloads",
+		downloadservice.EncodeURLtoFileName(downloadURL)+".part",
+	)
 	if err := os.WriteFile(partFilePath, []byte("Hello"), 0644); err != nil {
 		t.Fatalf("Failed to create part file: %s", err)
 	}
 
-	req := downloadtypes.DownloadRequest{
-		URL: downloadURL,
-	}
-	err = router.Put(context.Background(), "download-svc", "/download", req, nil)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
+		Request(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(downloadURL),
+		}).
+		Execute()
 	require.NoError(t, err)
 
-	for {
-		time.Sleep(5 * time.Millisecond)
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
 
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(downloadURL)), nil, &rsp)
-		require.NoError(t, err)
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			break
+outer:
+	for {
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.NoError(t, err)
+
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				break outer
+			}
 		}
 	}
 
-	expectedFilePath := filepath.Join(options.HomeDir, ".singulatron", "downloads", downloadservice.EncodeURLtoFileName(downloadURL))
+	expectedFilePath := filepath.Join(
+		options.HomeDir,
+		".superplatform",
+		"downloads",
+		downloadservice.EncodeURLtoFileName(downloadURL),
+	)
 	data, err := os.ReadFile(expectedFilePath)
 	require.NoError(t, err)
 	require.Equal(t, "Hello world", string(data))
@@ -162,40 +214,59 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	downloadURL := "full-file"
-	fullFilePath := filepath.Join(options.HomeDir, ".singulatron", "downloads", downloadservice.EncodeURLtoFileName(downloadURL))
+	fullFilePath := filepath.Join(
+		options.HomeDir,
+		".superplatform",
+		"downloads",
+		downloadservice.EncodeURLtoFileName(downloadURL),
+	)
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
-	req := downloadtypes.DownloadRequest{
-		URL: downloadURL,
-	}
-	err = router.Put(context.Background(), "download-svc", "/download", req, nil)
+	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
+		Request(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(downloadURL),
+		}).
+		Execute()
 	require.NoError(t, err)
 
-	var (
-		d *types.DownloadDetails
-	)
-	for {
-		time.Sleep(5 * time.Millisecond)
-		rsp := downloadtypes.GetDownloadResponse{}
-		err = router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(downloadURL)), nil, &rsp)
-		require.NoError(t, err)
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
 
-		if rsp.Exists && rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			d = rsp.Download
-			break
+	var d *openapi.DownloadSvcDownloadDetails
+
+outer:
+	for {
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.NoError(t, err)
+
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				d = rsp.Download
+				break outer
+			}
 		}
 	}
 
-	require.Equal(t, int64(11), d.DownloadedBytes)
-	require.Equal(t, int64(11), *d.FullFileSize)
+	require.Equal(t, int32(11), *d.DownloadedBytes)
+	require.Equal(t, int32(11), *d.FullFileSize)
 }

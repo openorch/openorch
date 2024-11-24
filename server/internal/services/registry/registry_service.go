@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package registryservice
 
 import (
@@ -16,17 +21,18 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
 )
 
 type RegistryService struct {
+	clientFactory sdk.ClientFactory
+	token         string
+
 	URL              string
 	AvailabilityZone string
 	Region           string
 
-	router *router.Router
-	lock   lock.DistributedLock
+	lock lock.DistributedLock
 
 	credentialStore datastore.DataStore
 	definitionStore datastore.DataStore
@@ -40,7 +46,7 @@ func NewRegistryService(
 	address string,
 	az string,
 	region string,
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any,
 	) (datastore.DataStore, error)) (*RegistryService, error) {
@@ -61,15 +67,24 @@ func NewRegistryService(
 		nodeUrl = "http://" + nodeUrl
 	}
 
-	credentialStore, err := datastoreFactory("registrySvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"registrySvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	instanceStore, err := datastoreFactory("registrySvcInstances", &registry.Instance{})
+	instanceStore, err := datastoreFactory(
+		"registrySvcInstances",
+		&registry.Instance{},
+	)
 	if err != nil {
 		return nil, err
 	}
-	definitionStore, err := datastoreFactory("registrySvcDefinitions", &registry.Definition{})
+	definitionStore, err := datastoreFactory(
+		"registrySvcDefinitions",
+		&registry.Definition{},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +95,7 @@ func NewRegistryService(
 
 	service := &RegistryService{
 		URL:              nodeUrl,
-		router:           router,
+		clientFactory:    clientFactory,
 		lock:             lock,
 		credentialStore:  credentialStore,
 		definitionStore:  definitionStore,
@@ -103,11 +118,16 @@ func (ns *RegistryService) Start() error {
 	ns.lock.Acquire(ctx, "registry-svc-start")
 	defer ns.lock.Release(ctx, "registry-svc-start")
 
-	token, err := sdk.RegisterService("registry-svc", "Registry Service", ns.router, ns.credentialStore)
+	token, err := sdk.RegisterService(
+		ns.clientFactory.Client().UserSvcAPI,
+		"registry-svc",
+		"Registry Service",
+		ns.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	ns.router = ns.router.SetBearerToken(token)
+	ns.token = token
 
 	return ns.registerPermissions()
 }

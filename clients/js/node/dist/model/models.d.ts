@@ -44,6 +44,7 @@ export * from './dockerSvcRunContainerOptions';
 export * from './dockerSvcRunContainerRequest';
 export * from './dockerSvcRunContainerResponse';
 export * from './dockerSvcRunInfo';
+export * from './dockerSvcStopContainerRequest';
 export * from './downloadSvcDownloadDetails';
 export * from './downloadSvcDownloadRequest';
 export * from './downloadSvcDownloadsResponse';

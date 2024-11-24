@@ -20,7 +20,7 @@ export interface DockerSvcContainerIsRunningResponse {
      * @type {boolean}
      * @memberof DockerSvcContainerIsRunningResponse
      */
-    isRunning?: boolean;
+    isRunning: boolean;
 }
 /**
  * Check if a given object implements the DockerSvcContainerIsRunningResponse interface.

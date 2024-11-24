@@ -43,7 +43,9 @@ func generateRSAKeys(bits int) (privateKeyPem, publicKeyPem string, err error) {
 func privateKeyFromString(privateKeyPem string) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode([]byte(privateKeyPem))
 	if block == nil || block.Type != "RSA PRIVATE KEY" {
-		return nil, fmt.Errorf("failed to decode PEM block containing private key")
+		return nil, fmt.Errorf(
+			"failed to decode PEM block containing private key",
+		)
 	}
 	privateKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
@@ -53,7 +55,11 @@ func privateKeyFromString(privateKeyPem string) (*rsa.PrivateKey, error) {
 	return privateKey, nil
 }
 
-func generateJWT(user *usertypes.User, roleIds []string, privateKey *rsa.PrivateKey) (string, error) {
+func generateJWT(
+	user *usertypes.User,
+	roleIds []string,
+	privateKey *rsa.PrivateKey,
+) (string, error) {
 	claims := &sdk.Claims{
 		UserId:           user.Id,
 		Slug:             user.Slug,

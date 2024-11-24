@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package configservice
 
 import (
@@ -22,7 +27,6 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	types "github.com/singulatron/superplatform/server/internal/services/config/types"
 
 	"github.com/singulatron/superplatform/sdk/go/logger"
@@ -31,8 +35,10 @@ import (
 const DefaultModelId = `huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf`
 
 type ConfigService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	ConfigDirectory string
 	ConfigFileName  string
@@ -56,11 +62,13 @@ func (cs *ConfigService) GetConfigDirectory() string {
 	return cs.ConfigDirectory
 }
 
-func (cs *ConfigService) SetRouter(router *router.Router) {
-	cs.router = router
+func (cs *ConfigService) SetClientFactory(clientFactory sdk.ClientFactory) {
+	cs.clientFactory = clientFactory
 }
 
-func (cs *ConfigService) SetDatastoreFactory(datastoreFactory func(tableName string, instance any) (datastore.DataStore, error)) {
+func (cs *ConfigService) SetDatastoreFactory(
+	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+) {
 	cs.datastoreFactory = datastoreFactory
 }
 
@@ -68,7 +76,10 @@ func (cs *ConfigService) Start() error {
 	if cs.datastoreFactory == nil {
 		return errors.New("no datastore factory")
 	}
-	credentialStore, err := cs.datastoreFactory("configSvcCredentials", &sdk.Credential{})
+	credentialStore, err := cs.datastoreFactory(
+		"configSvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return err
 	}
@@ -78,11 +89,18 @@ func (cs *ConfigService) Start() error {
 	cs.lock.Acquire(ctx, "config-svc-start")
 	defer cs.lock.Release(ctx, "config-svc-start")
 
-	token, err := sdk.RegisterService("config-svc", "Config Service", cs.router, cs.credentialStore)
+	client := cs.clientFactory.Client()
+
+	token, err := sdk.RegisterService(
+		client.UserSvcAPI,
+		"config-svc",
+		"Config Service",
+		cs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	if cs.ConfigDirectory == "" {
 		return fmt.Errorf("config service is missing a config directory option")
@@ -110,7 +128,9 @@ func (cs *ConfigService) loadConfig() error {
 	}
 
 	if _, err := os.Stat(path.Join(cs.ConfigDirectory, cs.ConfigFileName)); err == nil {
-		data, err := ioutil.ReadFile(path.Join(cs.ConfigDirectory, cs.ConfigFileName))
+		data, err := ioutil.ReadFile(
+			path.Join(cs.ConfigDirectory, cs.ConfigFileName),
+		)
 		if err != nil {
 			return errors.Wrap(err, "failed to read config")
 		}
@@ -124,7 +144,10 @@ func (cs *ConfigService) loadConfig() error {
 	}
 
 	if cs.config.Download.DownloadFolder == "" {
-		cs.config.Download.DownloadFolder = path.Join(cs.ConfigDirectory, "downloads")
+		cs.config.Download.DownloadFolder = path.Join(
+			cs.ConfigDirectory,
+			"downloads",
+		)
 	}
 
 	if cs.config.Model.CurrentModelId == "" {

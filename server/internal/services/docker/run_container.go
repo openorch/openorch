@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package dockerservice
 
 import (
@@ -24,17 +29,20 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/pkg/errors"
 
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
 	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
 )
 
 /*
 A low level method for running containers.
 */
-func (d *DockerService) runContainer(image string, internalPort, hostPort int, options *dockertypes.RunContainerOptions) (*dockertypes.RunInfo, error) {
+func (d *DockerService) runContainer(
+	image string,
+	internalPort, hostPort int,
+	options *dockertypes.RunContainerOptions,
+) (*dockertypes.RunInfo, error) {
 	err := d.pullImage(image)
 	if err != nil {
 		return nil, errors.Wrap(err, "image pull failure")
@@ -50,7 +58,10 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 		options.Name = "the-singulatron"
 	}
 
-	envs, hostBinds, err := d.additionalEnvsAndHostBinds(options.Assets, options.Keeps)
+	envs, hostBinds, err := d.additionalEnvsAndHostBinds(
+		options.Assets,
+		options.Keeps,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -78,25 +89,35 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 	}
 
 	if options.GPUEnabled {
-		hostConfig.Resources.DeviceRequests = append(hostConfig.Resources.DeviceRequests, container.DeviceRequest{
-			Capabilities: [][]string{
-				{"gpu"},
+		hostConfig.Resources.DeviceRequests = append(
+			hostConfig.Resources.DeviceRequests,
+			container.DeviceRequest{
+				Capabilities: [][]string{
+					{"gpu"},
+				},
+				Count: -1,
 			},
-			Count: -1,
-		})
+		)
 	}
 
 	ctx := context.Background()
 
-	containers, err := d.client.ContainerList(ctx, container.ListOptions{All: true})
+	containers, err := d.client.ContainerList(
+		ctx,
+		container.ListOptions{All: true},
+	)
 	if err != nil {
-		return nil, errors.Wrap(err, "error listing docker containers when launching")
+		return nil, errors.Wrap(
+			err,
+			"error listing docker containers when launching",
+		)
 	}
 
 	var existingContainer *types.Container
 	for _, container := range containers {
 		for _, name := range container.Names {
-			if name == "/"+options.Name || name == options.Name || strings.Contains(name, options.Name) {
+			if name == "/"+options.Name || name == options.Name ||
+				strings.Contains(name, options.Name) {
 				existingContainer = &container
 				break
 			}
@@ -107,10 +128,12 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 	}
 
 	if existingContainer != nil {
-		if existingContainer.State != "running" || existingContainer.Labels["superplatform-hash"] != options.Hash {
+		if existingContainer.State != "running" ||
+			existingContainer.Labels["superplatform-hash"] != options.Hash {
 			logs, _ := d.getContainerLogsAndStatus(options.Hash, 10)
-			logger.Debug("Container state is not running or hash is mismatched, removing...",
-				slog.String("containerLogs", logs),
+			logger.Debug(
+				"Container state is not running or hash is mismatched, removing...",
+				slog.String("containerLogs", logs.Summary),
 			)
 
 			if err := d.client.ContainerRemove(ctx, existingContainer.ID, container.RemoveOptions{Force: true}); err != nil {
@@ -126,7 +149,14 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 
 	containerConfig.Labels["superplatform-hash"] = options.Hash
 
-	createdContainer, err := d.client.ContainerCreate(ctx, containerConfig, hostConfig, nil, nil, options.Name)
+	createdContainer, err := d.client.ContainerCreate(
+		ctx,
+		containerConfig,
+		hostConfig,
+		nil,
+		nil,
+		options.Name,
+	)
 	if err != nil {
 		return nil, errors.Wrap(err, "error creating Docker container")
 	}
@@ -141,7 +171,10 @@ func (d *DockerService) runContainer(image string, internalPort, hostPort int, o
 	}, nil
 }
 
-func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, persistentPaths []string) ([]string, []string, error) {
+func (d *DockerService) additionalEnvsAndHostBinds(
+	assets map[string]string,
+	persistentPaths []string,
+) ([]string, []string, error) {
 	// We turn the asset map (which is an envar name to file URL map)
 	// eg. {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
 	// to an envarNameToFilePath
@@ -152,13 +185,18 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 	// by asking the Download Svc where did it download the file(s).
 
 	for envarName, assetURL := range assets {
-		rsp := downloadtypes.GetDownloadResponse{}
-		err := d.router.Get(context.Background(), "download-svc", fmt.Sprintf("/download/%v", url.PathEscape(assetURL)), nil, &rsp)
+
+		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+			DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(assetURL)).
+			Execute()
 		if err != nil {
 			return nil, nil, err
 		}
 		if !rsp.Exists {
-			return nil, nil, fmt.Errorf("asset with URL '%v' cannot be found locally", assetURL)
+			return nil, nil, fmt.Errorf(
+				"asset with URL '%v' cannot be found locally",
+				assetURL,
+			)
 		}
 
 		assetPath := *rsp.Download.FilePath
@@ -172,7 +210,14 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 	for envName, assetPath := range envarNameToFilePath {
 		fileName := path.Base(assetPath)
 		// eg. MODEL=/root/.singulatron/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
-		envs = append(envs, fmt.Sprintf("%v=/root/.singulatron/downloads/%v", envName, fileName))
+		envs = append(
+			envs,
+			fmt.Sprintf(
+				"%v=/root/.singulatron/downloads/%v",
+				envName,
+				fileName,
+			),
+		)
 	}
 
 	// If the Superplatform daemon is running in Docker, we need to find the volume it mounted so we can share
@@ -188,7 +233,10 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 				return nil, nil, err
 			}
 
-			mountedVolume, err := d.getMountedVolume(currentContainerId, "/root/.singulatron")
+			mountedVolume, err := d.getMountedVolume(
+				currentContainerId,
+				"/root/.singulatron",
+			)
 			if err != nil {
 				return nil, nil, err
 			}
@@ -196,13 +244,13 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 			singulatronVolumeName = mountedVolume
 		} else {
 			// If we are not running in Docker, we will ask the Config Svc about the config directory and we mount that.
-			var getConfigResponse *configtypes.GetConfigResponse
-			err := d.router.Get(context.Background(), "config-svc", "/config", nil, &getConfigResponse)
+
+			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
 			if err != nil {
 				return nil, nil, err
 			}
 
-			configFolderPath := getConfigResponse.Config.Directory
+			configFolderPath := *getConfigResponse.Config.Directory
 			if configFolderPath == "" {
 				return nil, nil, errors.New("config folder not found")
 			}
@@ -214,22 +262,35 @@ func (d *DockerService) additionalEnvsAndHostBinds(assets map[string]string, per
 
 	hostBinds := []string{}
 
-	hostBinds = append(hostBinds, fmt.Sprintf("%v:/root/.singulatron", singulatronVolumeName))
+	hostBinds = append(
+		hostBinds,
+		fmt.Sprintf("%v:/root/.singulatron", singulatronVolumeName),
+	)
 
 	// Persistent paths are paths in the container we want to persist.
 	// eg. /root/.cache/huggingface/diffusers
 	// Then here we mount singulatron-data:/root/.cache/huggingface/diffusers
 	for _, persistentPath := range persistentPaths {
-		hostBinds = append(hostBinds,
-			fmt.Sprintf("%v:%v", singulatronVolumeName, path.Dir(persistentPath)),
+		hostBinds = append(
+			hostBinds,
+			fmt.Sprintf(
+				"%v:%v",
+				singulatronVolumeName,
+				path.Dir(persistentPath),
+			),
 		)
 	}
 
 	return envs, hostBinds, nil
 }
 
-func (d *DockerService) getMountedVolume(containerID, mountPoint string) (string, error) {
-	container, err := d.client.ContainerInspect(context.Background(), containerID)
+func (d *DockerService) getMountedVolume(
+	containerID, mountPoint string,
+) (string, error) {
+	container, err := d.client.ContainerInspect(
+		context.Background(),
+		containerID,
+	)
 	if err != nil {
 		return "", err
 	}
@@ -303,7 +364,8 @@ func checkContainerenvFile() bool {
 }
 
 func checkContainerEnvVars() bool {
-	if os.Getenv("DOCKER_CONTAINER") != "" || os.Getenv("KUBERNETES_SERVICE_HOST") != "" {
+	if os.Getenv("DOCKER_CONTAINER") != "" ||
+		os.Getenv("KUBERNETES_SERVICE_HOST") != "" {
 		return true
 	}
 	return false
@@ -319,7 +381,8 @@ func checkMountInfoForDockerOrKubernetes() bool {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		if strings.Contains(line, "/docker/") || strings.Contains(line, "/kubepods/") {
+		if strings.Contains(line, "/docker/") ||
+			strings.Contains(line, "/kubepods/") {
 			return true
 		}
 	}
@@ -335,7 +398,8 @@ func checkCgroupForDockerOrKubernetes() bool {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		if strings.Contains(scanner.Text(), "docker") || strings.Contains(scanner.Text(), "kubepods") {
+		if strings.Contains(scanner.Text(), "docker") ||
+			strings.Contains(scanner.Text(), "kubepods") {
 			return true
 		}
 	}
@@ -362,7 +426,8 @@ func checkHostname() bool {
 		return false
 	}
 
-	return strings.HasPrefix(hostname, "docker-") || strings.HasPrefix(hostname, "container-")
+	return strings.HasPrefix(hostname, "docker-") ||
+		strings.HasPrefix(hostname, "container-")
 }
 
 func getContainerID() (string, error) {
@@ -425,7 +490,9 @@ func getContainerIDFromEnv() (string, error) {
 	if len(id) >= 12 && len(id) <= 64 && isHex(id) {
 		return id, nil
 	}
-	return "", fmt.Errorf("environment variable HOSTNAME does not contain a valid container ID")
+	return "", fmt.Errorf(
+		"environment variable HOSTNAME does not contain a valid container ID",
+	)
 }
 
 func isHex(s string) bool {
@@ -446,10 +513,13 @@ func transformWinPaths(dirPath string) string {
 	}
 
 	driveRegex := regexp.MustCompile(`^([A-Z]):`)
-	newFirstPart := driveRegex.ReplaceAllStringFunc(parts[0], func(match string) string {
-		driveLetter := strings.ToLower(match[:1])
-		return "/mnt/" + driveLetter
-	})
+	newFirstPart := driveRegex.ReplaceAllStringFunc(
+		parts[0],
+		func(match string) string {
+			driveLetter := strings.ToLower(match[:1])
+			return "/mnt/" + driveLetter
+		},
+	)
 
 	newDirPath := newFirstPart
 	if len(parts) > 1 {

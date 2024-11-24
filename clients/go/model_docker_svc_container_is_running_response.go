@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the DockerSvcContainerIsRunningResponse type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &DockerSvcContainerIsRunningResponse{}
 
 // DockerSvcContainerIsRunningResponse struct for DockerSvcContainerIsRunningResponse
 type DockerSvcContainerIsRunningResponse struct {
-	IsRunning *bool `json:"isRunning,omitempty"`
+	IsRunning bool `json:"isRunning"`
 }
+
+type _DockerSvcContainerIsRunningResponse DockerSvcContainerIsRunningResponse
 
 // NewDockerSvcContainerIsRunningResponse instantiates a new DockerSvcContainerIsRunningResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDockerSvcContainerIsRunningResponse() *DockerSvcContainerIsRunningResponse {
+func NewDockerSvcContainerIsRunningResponse(isRunning bool) *DockerSvcContainerIsRunningResponse {
 	this := DockerSvcContainerIsRunningResponse{}
+	this.IsRunning = isRunning
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewDockerSvcContainerIsRunningResponseWithDefaults() *DockerSvcContainerIsR
 	return &this
 }
 
-// GetIsRunning returns the IsRunning field value if set, zero value otherwise.
+// GetIsRunning returns the IsRunning field value
 func (o *DockerSvcContainerIsRunningResponse) GetIsRunning() bool {
-	if o == nil || IsNil(o.IsRunning) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsRunning
+
+	return o.IsRunning
 }
 
-// GetIsRunningOk returns a tuple with the IsRunning field value if set, nil otherwise
+// GetIsRunningOk returns a tuple with the IsRunning field value
 // and a boolean to check if the value has been set.
 func (o *DockerSvcContainerIsRunningResponse) GetIsRunningOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsRunning) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsRunning, true
+	return &o.IsRunning, true
 }
 
-// HasIsRunning returns a boolean if a field has been set.
-func (o *DockerSvcContainerIsRunningResponse) HasIsRunning() bool {
-	if o != nil && !IsNil(o.IsRunning) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsRunning gets a reference to the given bool and assigns it to the IsRunning field.
+// SetIsRunning sets field value
 func (o *DockerSvcContainerIsRunningResponse) SetIsRunning(v bool) {
-	o.IsRunning = &v
+	o.IsRunning = v
 }
 
 func (o DockerSvcContainerIsRunningResponse) MarshalJSON() ([]byte, error) {
@@ -82,10 +79,45 @@ func (o DockerSvcContainerIsRunningResponse) MarshalJSON() ([]byte, error) {
 
 func (o DockerSvcContainerIsRunningResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IsRunning) {
-		toSerialize["isRunning"] = o.IsRunning
-	}
+	toSerialize["isRunning"] = o.IsRunning
 	return toSerialize, nil
+}
+
+func (o *DockerSvcContainerIsRunningResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"isRunning",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDockerSvcContainerIsRunningResponse := _DockerSvcContainerIsRunningResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDockerSvcContainerIsRunningResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DockerSvcContainerIsRunningResponse(varDockerSvcContainerIsRunningResponse)
+
+	return err
 }
 
 type NullableDockerSvcContainerIsRunningResponse struct {

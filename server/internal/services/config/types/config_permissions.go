@@ -44,3 +44,7 @@ var ConfigPermissions = []usertypes.Permission{
 	PermissionConfigDelete,
 	PermissionConfigStream,
 }
+
+var ConfigUserPermissions = []usertypes.Permission{
+	PermissionConfigView,
+}

@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package policyservice
 
 import (
@@ -14,14 +19,15 @@ import (
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/router"
 
 	policytypes "github.com/singulatron/superplatform/server/internal/services/policy/types"
 )
 
 type PolicyService struct {
-	router *router.Router
-	lock   lock.DistributedLock
+	clientFactory sdk.ClientFactory
+	token         string
+
+	lock lock.DistributedLock
 
 	instancesStore  datastore.DataStore
 	credentialStore datastore.DataStore
@@ -33,24 +39,31 @@ type PolicyService struct {
 }
 
 func NewPolicyService(
-	router *router.Router,
+	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PolicyService, error) {
 
-	instancesStore, err := datastoreFactory("policySvcInstances", &policytypes.Instance{})
+	instancesStore, err := datastoreFactory(
+		"policySvcInstances",
+		&policytypes.Instance{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	credentialStore, err := datastoreFactory("policySvcCredentials", &sdk.Credential{})
+	credentialStore, err := datastoreFactory(
+		"policySvcCredentials",
+		&sdk.Credential{},
+	)
 	if err != nil {
 		return nil, err
 	}
 
 	service := &PolicyService{
-		router: router,
-		lock:   lock,
+		clientFactory: clientFactory,
+
+		lock: lock,
 
 		instancesStore:  instancesStore,
 		credentialStore: credentialStore,
@@ -74,11 +87,16 @@ func (cs *PolicyService) Start() error {
 		cs.instances = append(cs.instances, instance)
 	}
 
-	token, err := sdk.RegisterService("policy-svc", "Policy Service", cs.router, cs.credentialStore)
+	token, err := sdk.RegisterService(
+		cs.clientFactory.Client().UserSvcAPI,
+		"policy-svc",
+		"Policy Service",
+		cs.credentialStore,
+	)
 	if err != nil {
 		return err
 	}
-	cs.router = cs.router.SetBearerToken(token)
+	cs.token = token
 
 	return cs.registerPermissions()
 }

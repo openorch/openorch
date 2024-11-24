@@ -60,6 +60,7 @@ import './dockerSvcRunContainerOptions.mjs';
 import './dockerSvcRunContainerRequest.mjs';
 import './dockerSvcRunContainerResponse.mjs';
 import './dockerSvcRunInfo.mjs';
+import './dockerSvcStopContainerRequest.mjs';
 import './downloadSvcDownloadDetails.mjs';
 import './downloadSvcDownloadRequest.mjs';
 import './downloadSvcDownloadsResponse.mjs';
@@ -55335,14 +55336,14 @@ class DockerSvcApi {
         });
     }
     /**
-     * Check if a Docker container identified by the hash is running
+     * Check if a Docker container is running, identified by hash or name.
      * @summary Check If a Container Is Running
      * @param hash Container Hash
+     * @param name Container Name
      */
-    containerIsRunning(hash_1) {
-        return __awaiter(this, arguments, void 0, function* (hash, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/{hash}/is-running'
-                .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)));
+    containerIsRunning(hash_1, name_1) {
+        return __awaiter(this, arguments, void 0, function* (hash, name, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/is-running';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -55354,9 +55355,11 @@ class DockerSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
-            // verify required parameter 'hash' is not null or undefined
-            if (hash === null || hash === undefined) {
-                throw new Error('Required parameter hash was null or undefined when calling containerIsRunning.');
+            if (hash !== undefined) {
+                localVarQueryParameters['hash'] = ObjectSerializer.serialize(hash, "string");
+            }
+            if (name !== undefined) {
+                localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -55402,16 +55405,15 @@ class DockerSvcApi {
         });
     }
     /**
-     * Get a summary of the Docker container identified by the hash, limited to a specified number of lines
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
      * @summary Get Container Summary
      * @param hash Container Hash
-     * @param numberOfLines Number of Lines
+     * @param name Container Name
+     * @param lines Number of Lines
      */
-    getContainerSummary(hash_1, numberOfLines_1) {
-        return __awaiter(this, arguments, void 0, function* (hash, numberOfLines, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/{hash}/summary/{numberOfLines}'
-                .replace('{' + 'hash' + '}', encodeURIComponent(String(hash)))
-                .replace('{' + 'numberOfLines' + '}', encodeURIComponent(String(numberOfLines)));
+    containerSummary(hash_1, name_1, lines_1) {
+        return __awaiter(this, arguments, void 0, function* (hash, name, lines, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/summary';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -55423,13 +55425,14 @@ class DockerSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
-            // verify required parameter 'hash' is not null or undefined
-            if (hash === null || hash === undefined) {
-                throw new Error('Required parameter hash was null or undefined when calling getContainerSummary.');
+            if (hash !== undefined) {
+                localVarQueryParameters['hash'] = ObjectSerializer.serialize(hash, "string");
             }
-            // verify required parameter 'numberOfLines' is not null or undefined
-            if (numberOfLines === null || numberOfLines === undefined) {
-                throw new Error('Required parameter numberOfLines was null or undefined when calling getContainerSummary.');
+            if (name !== undefined) {
+                localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+            }
+            if (lines !== undefined) {
+                localVarQueryParameters['lines'] = ObjectSerializer.serialize(lines, "number");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -55652,6 +55655,73 @@ class DockerSvcApi {
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                                 body = ObjectSerializer.deserialize(body, "DockerSvcRunContainerResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * @summary Stop a Container
+     * @param request Stop Container Request
+     */
+    stopContainer(request_1) {
+        return __awaiter(this, arguments, void 0, function* (request, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/stop';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling stopContainer.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(request, "DockerSvcStopContainerRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
                                 resolve({ response: response, body: body });
                             }
                             else {

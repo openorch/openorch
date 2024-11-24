@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package userservice
 
 import (
@@ -34,11 +39,19 @@ import (
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /user-svc/organization/{organizationId}/user [post]
-func (s *UserService) AddUserToOrganization(w http.ResponseWriter, r *http.Request) {
+func (s *UserService) AddUserToOrganization(
+	w http.ResponseWriter,
+	r *http.Request,
+) {
 
 	organizationId := mux.Vars(r)["organizationId"]
 
-	usr, err := s.isAuthorized(r, user.PermissionOrganizationAddUser.Id, nil, nil)
+	usr, err := s.isAuthorized(
+		r,
+		user.PermissionOrganizationAddUser.Id,
+		nil,
+		nil,
+	)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(err.Error()))
@@ -65,13 +78,16 @@ func (s *UserService) AddUserToOrganization(w http.ResponseWriter, r *http.Reque
 	w.Write(bs)
 }
 
-func (s *UserService) addUserToOrganization(callerId, userId, organizationId string) error {
+func (s *UserService) addUserToOrganization(
+	callerId, userId, organizationId string,
+) error {
 	roleIds, err := s.getRoleIdsByUserId(callerId)
 	if err != nil {
 		return err
 	}
 
-	org, found, err := s.organizationsStore.Query(datastore.Id(organizationId)).FindOne()
+	org, found, err := s.organizationsStore.Query(datastore.Id(organizationId)).
+		FindOne()
 	if err != nil {
 		return err
 	}
@@ -79,11 +95,17 @@ func (s *UserService) addUserToOrganization(callerId, userId, organizationId str
 		return fmt.Errorf("organization not found")
 	}
 
-	if !contains(roleIds, fmt.Sprintf("user-svc:org:{%v}:admin", org.(*user.Organization).Id)) {
+	if !contains(
+		roleIds,
+		fmt.Sprintf("user-svc:org:{%v}:admin", org.(*user.Organization).Id),
+	) {
 		return fmt.Errorf("not an admin of the organization")
 	}
 
-	return s.addRoleToUser(userId, fmt.Sprintf("user-svc:org:{%v}:user", org.(*user.Organization).Id))
+	return s.addRoleToUser(
+		userId,
+		fmt.Sprintf("user-svc:org:{%v}:user", org.(*user.Organization).Id),
+	)
 }
 
 func contains(ss []string, s string) bool {

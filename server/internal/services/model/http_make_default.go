@@ -1,21 +1,25 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package modelservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	model "github.com/singulatron/superplatform/server/internal/services/model/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // MakeDefault godoc
@@ -37,14 +41,15 @@ func (ms *ModelService) MakeDefault(
 	r *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := ms.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", model.PermissionModelEdit.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := ms.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), model.PermissionModelEdit.Id).
+		Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return
@@ -58,7 +63,7 @@ func (ms *ModelService) MakeDefault(
 		return
 	}
 
-	err = ms.makeDefault(modelId)
+	err = ms.makeDefault(r.Context(), modelId)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

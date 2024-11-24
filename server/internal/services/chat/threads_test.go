@@ -2,12 +2,12 @@ package chatservice_test
 
 import (
 	"context"
-	"fmt"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/server/internal/di"
 	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
@@ -26,14 +26,18 @@ func TestMessageCreatesThread(t *testing.T) {
 	require.NoError(t, err)
 
 	hs.UpdateHandler(universe)
-	router := options.Router
 
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(router, "someuser", "pw123", "Some name")
+	token, err := sdk.RegisterUser(
+		options.ClientFactory.Client().UserSvcAPI,
+		"someuser",
+		"pw123",
+		"Some name",
+	)
 	require.NoError(t, err)
-	router = router.SetBearerToken(token)
+	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	t.Run("no thread id", func(t *testing.T) {
 		req := &chattypes.AddMessageRequest{
@@ -42,7 +46,17 @@ func TestMessageCreatesThread(t *testing.T) {
 				Content: "hi there",
 			},
 		}
-		err = router.Post(context.Background(), "chat-svc", "/message", req, nil)
+
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), "-").
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
+				},
+			).
+			Execute()
 		require.Error(t, err)
 	})
 
@@ -54,9 +68,18 @@ func TestMessageCreatesThread(t *testing.T) {
 				Content:  "hi there",
 			},
 		}
-		err = router.Post(context.Background(), "chat-svc", "/message", req, nil)
-		require.Error(t, err)
 
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
+				},
+			).
+			Execute()
+		require.Error(t, err)
 	})
 
 	t.Run("no user id should not fail", func(t *testing.T) {
@@ -70,7 +93,16 @@ func TestMessageCreatesThread(t *testing.T) {
 			},
 		}
 
-		err = router.Post(context.Background(), "chat-svc", "/thread", req, nil)
+		_, _, err = userClient.ChatSvcAPI.AddThread(context.Background()).
+			Request(
+				openapi.ChatSvcAddThreadRequest{
+					Thread: &openapi.ChatSvcThread{
+						Id:    openapi.PtrString(req.Thread.Id),
+						Title: openapi.PtrString(req.Thread.Title),
+					},
+				},
+			).
+			Execute()
 		require.NoError(t, err)
 	})
 
@@ -88,15 +120,25 @@ func TestMessageCreatesThread(t *testing.T) {
 				UserIds: []string{userId},
 			},
 		}
-		rsp := &chattypes.AddThreadResponse{}
-		err = router.Post(context.Background(), "chat-svc", "/thread", req, rsp)
+
+		rsp, _, err := userClient.ChatSvcAPI.AddThread(context.Background()).
+			Request(
+				openapi.ChatSvcAddThreadRequest{
+					Thread: &openapi.ChatSvcThread{
+						Id:      openapi.PtrString(req.Thread.Id),
+						Title:   openapi.PtrString(req.Thread.Title),
+						UserIds: []string{userId},
+					},
+				},
+			).
+			Execute()
 		require.NoError(t, err)
 
 		thread := rsp.Thread
 
-		require.Equal(t, tid, thread.Id)
-		require.Equal(t, title, thread.Title)
-		threadId = thread.Id
+		require.Equal(t, tid, *thread.Id)
+		require.Equal(t, title, *thread.Title)
+		threadId = req.Thread.Id
 	})
 
 	t.Run("no user id", func(t *testing.T) {
@@ -106,7 +148,17 @@ func TestMessageCreatesThread(t *testing.T) {
 				ThreadId: threadId,
 				Content:  "hi there",
 			}}
-		err = router.Post(context.Background(), "chat-svc", fmt.Sprintf("/thread/%v/message", threadId), req, nil)
+
+		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
+			Request(
+				openapi.ChatSvcAddMessageRequest{
+					Message: &openapi.ChatSvcMessage{
+						Id:      openapi.PtrString(req.Message.Id),
+						Content: openapi.PtrString(req.Message.Content),
+					},
+				},
+			).
+			Execute()
 		require.NoError(t, err)
 	})
 }

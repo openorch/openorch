@@ -24,13 +24,14 @@ export interface DockerSvcContainerIsRunningResponse {
      * @type {boolean}
      * @memberof DockerSvcContainerIsRunningResponse
      */
-    isRunning?: boolean;
+    isRunning: boolean;
 }
 
 /**
  * Check if a given object implements the DockerSvcContainerIsRunningResponse interface.
  */
 export function instanceOfDockerSvcContainerIsRunningResponse(value: object): value is DockerSvcContainerIsRunningResponse {
+    if (!('isRunning' in value) || value['isRunning'] === undefined) return false;
     return true;
 }
 
@@ -44,7 +45,7 @@ export function DockerSvcContainerIsRunningResponseFromJSONTyped(json: any, igno
     }
     return {
         
-        'isRunning': json['isRunning'] == null ? undefined : json['isRunning'],
+        'isRunning': json['isRunning'],
     };
 }
 

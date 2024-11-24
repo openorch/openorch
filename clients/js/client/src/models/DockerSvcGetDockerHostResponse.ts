@@ -24,13 +24,14 @@ export interface DockerSvcGetDockerHostResponse {
      * @type {string}
      * @memberof DockerSvcGetDockerHostResponse
      */
-    host?: string;
+    host: string;
 }
 
 /**
  * Check if a given object implements the DockerSvcGetDockerHostResponse interface.
  */
 export function instanceOfDockerSvcGetDockerHostResponse(value: object): value is DockerSvcGetDockerHostResponse {
+    if (!('host' in value) || value['host'] === undefined) return false;
     return true;
 }
 
@@ -44,7 +45,7 @@ export function DockerSvcGetDockerHostResponseFromJSONTyped(json: any, ignoreDis
     }
     return {
         
-        'host': json['host'] == null ? undefined : json['host'],
+        'host': json['host'],
     };
 }
 

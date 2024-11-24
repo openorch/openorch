@@ -15,9 +15,9 @@ import { ModelSvcModel } from './modelSvcModel';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 
 export class ModelSvcGetModelResponse {
-    'exists'?: boolean;
-    'model'?: ModelSvcModel;
-    'platform'?: ModelSvcPlatform;
+    'exists': boolean;
+    'model': ModelSvcModel;
+    'platform': ModelSvcPlatform;
 
     static discriminator: string | undefined = undefined;
 

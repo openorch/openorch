@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package registryservice
 
 import (
@@ -56,7 +61,8 @@ func (ns *RegistryService) nodeHeartbeat() {
 }
 
 func (ns *RegistryService) heartbeatCycle() error {
-	nodes, err := ns.nodeStore.Query(datastore.Equals([]string{"url"}, ns.URL)).Find()
+	nodes, err := ns.nodeStore.Query(datastore.Equals([]string{"url"}, ns.URL)).
+		Find()
 	if err != nil {
 		return errors.Wrap(err, "Failed to query nodes")
 	}
@@ -105,7 +111,9 @@ func (ns *RegistryService) heartbeatCycle() error {
 	return nil
 }
 
-func (ns *RegistryService) ParseNvidiaSmiOutput(output string) ([]*registry.GPU, error) {
+func (ns *RegistryService) ParseNvidiaSmiOutput(
+	output string,
+) ([]*registry.GPU, error) {
 	reader := csv.NewReader(strings.NewReader(output))
 	reader.TrimLeadingSpace = true
 	records, err := reader.ReadAll()
@@ -167,10 +175,17 @@ func (ns *RegistryService) ParseNvidiaSmiOutput(output string) ([]*registry.GPU,
 }
 
 func (ns *RegistryService) getNvidiaSmiOutput() (string, error) {
-	cmd := exec.Command("nvidia-smi", "--query-gpu=name,temperature.gpu,utilization.gpu,memory.total,memory.used,power.draw,power.limit,driver_version,pci.bus_id,compute_mode,pstate", "--format=csv,noheader,nounits")
+	cmd := exec.Command(
+		"nvidia-smi",
+		"--query-gpu=name,temperature.gpu,utilization.gpu,memory.total,memory.used,power.draw,power.limit,driver_version,pci.bus_id,compute_mode,pstate",
+		"--format=csv,noheader,nounits",
+	)
 	output, err := cmd.Output()
 	if err != nil {
-		return "", errors.Wrap(err, fmt.Sprintf("executing nvidia-smi command: %v", string(output)))
+		return "", errors.Wrap(
+			err,
+			fmt.Sprintf("executing nvidia-smi command: %v", string(output)),
+		)
 	}
 	return string(output), nil
 }
@@ -184,9 +199,11 @@ func getResourceUsage() (registry.ResourceUsage, error) {
 		log.Println("Error getting CPU usage:", err)
 		return usage, err
 	}
-	usage.CPU.Percent = cpuPercent[0]            // Take the first element since it returns a slice
-	usage.CPU.Used = uint64(cpuPercent[0]) * 100 // Assume total is 100% for simplification
-	usage.CPU.Total = 100                        // This should be replaced with actual total if available
+	usage.CPU.Percent = cpuPercent[0] // Take the first element since it returns a slice
+	usage.CPU.Used = uint64(
+		cpuPercent[0],
+	) * 100 // Assume total is 100% for simplification
+	usage.CPU.Total = 100 // This should be replaced with actual total if available
 
 	// Get Memory usage
 	memInfo, err := mem.VirtualMemory()

@@ -66,6 +66,7 @@ docs/DockerSvcRunContainerOptions.md
 docs/DockerSvcRunContainerRequest.md
 docs/DockerSvcRunContainerResponse.md
 docs/DockerSvcRunInfo.md
+docs/DockerSvcStopContainerRequest.md
 docs/DownloadSvcAPI.md
 docs/DownloadSvcDownloadDetails.md
 docs/DownloadSvcDownloadRequest.md
@@ -219,6 +220,7 @@ model_docker_svc_run_container_options.go
 model_docker_svc_run_container_request.go
 model_docker_svc_run_container_response.go
 model_docker_svc_run_info.go
+model_docker_svc_stop_container_request.go
 model_download_svc_download_details.go
 model_download_svc_download_request.go
 model_download_svc_downloads_response.go

@@ -1,11 +1,11 @@
 ---
 id: container-is-running
 title: "Check If a Container Is Running"
-description: "Check if a Docker container identified by the hash is running"
+description: "Check if a Docker container is running, identified by hash or name."
 sidebar_label: "Check If a Container Is Running"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VU1v3DYQ/SvEnFpAljZ2AxQ61U2CZJugDrLxydnDLDUrMaZIhqR2uxH434uRtB+21z00QC62lpwZvvc4b9hDRUF65aKyBkp41ZC8F2otULy28p68kNZEVIa8UBWZqNaKKrHaidiQaDA0QgXhO2OUqSED68gj15pXUMIhdx4+HUIcemwpkg9Q3vWPzz+c9g5DAxkoXnUY+dtgS1BCM+54+tYpTxWU0XeUQZANtQhlD3HnOC5EzyemtOTg4KwJFHj/cjbjfw9PvnkP2QCYTORddE4rOXApvgYO6U+OcJ6ZRjUWVAd6x9NX1mpCAyll+yW7+koyQkq89ts5EHOzQa0q8dfi5u//D4e8t/6cEM8hefEUya3BLjbWq+9U/TQkL89rEskb1GJBfkNevBlq/hxIKYNAsvMq7oZm/ZPQk7/uYgPl3ZIbK2LNfQyTWxYbCcsMWoqNZQfUFIeW5wQoqiHoImxkcbBG0XM/p0KFi6ONwkB1NEjnNecW2krUjQ2xfPn75dUL4NP34BZMduR3CvGxlJ93jsSXKeQLiLXV2m5HP6MIDiUJNJWI9p6MQDkaTKy9bQe/3wbyIvA9KEnig62VEWQqZ5WJ+d6sDWFF/mjX66mPhuuBg8ro1HvaDbors7YMdtBEDjdKLSqmHVBT+CMoU3cao7cml7Y9qf1xLhadc9azzKNSTYyuLIrQOfJOY1xb3+aoCkjZY8ubC+epVYHE9VzsYwcFWiW9DSPRIEjasAuRWiaplSQTiFHuUbz9+EFsrvLZAwyhLIrtdpvXpsutr4spLxRYO31xlc/yJraaUUXybbhZT7qeUNhiXZPPlS2GkILVU1FzyOKUHmTA7TKymuWXXNTZEFs0JzDH2T7n2X4cs/MgjqP5gTz90WE//CxMdx7pn1g4jcowwkGqfjLHHRzNMZl7KA8ZlNPAP3HIMgN2Aqf1/QoD3XqdEi9/68izV5cZbNArXLFa/MyowN8VlGvUgf6D6y+fpoflV/HkNTrLY9/QZsf3gLrjX5DBPe32r1VapmxvDEYzbl1LSS6eJD2ZY+l0lrx98xkywMnZRxtxsWz/wdXPAnpswxEC/03ZMyl9P5o0pUP8uPVsxsH7YzTrs0wp/QtEzONg
+api: eJy9VU1z2zYQ/SsYnGlSsZuZDk9120yqJo09VXxydIDAFYkYBJBdUKrK4X/vLEmJtCLnkOnkog9gP96+xdttZQGk0YRovJO5/K0C/STMVijxu9dPgEJ7F5VxgMKQwMY548pEmAJcNFsDhdgcRKWoEh6FUzWkMpE+ACqOuCxkLk8RlvT34C8TGRSqGiIgyfyxPUdxyvmHokom0vDplwbwIBPJWWQuq+GKdAW1knkr4yHwOUXkFF2XvBz2A4e4HNYNVy+HXScSgYJ3BMT314sFfz1PdfdOJn3h4CLfqhCs0T0n2Wdik3aWIiAzFs0Q0JxomrJvvLegHFclEb40BqGQ+ePMdp0cbf3mM+gou46Nf7qEbul2yppC/Lm6+8B9+8sQGVeK+6kp340eED1ebMcL+F59je/BqSZWHs2/UPwwJK8vMxUBnbJiBbgDFG/6mD8GUpdIAt2giYdeI7+CQsDbJlYyf1zzO4yqZPnIUaqrneZnUEOsPAuvhNgrjR1kVvRGV7TT2UmRmaErPGmS+hoHQTZo2SmzXitbeYr565+vb15JTntEteIqh8Lm2M45/HgIID6NJp+k2Hpr/X6YHEpQUBqEcoWI/gmcUHp43WKLvhaxAvFAgIK4AUaDeO9L4wS4InjjYnpUcQWqAJxkfDs+oL4v8kSvCuYdHHrCjdt6BtuToftWQq0Ml03KAv3Ckmisiuhdqn09i32/FKsmBI/M78BUFWPIs4yaABisiluPdapMJrvkfDS4q4BQGwJxuxRH256B2mj0NBRKArSnA0WouUhrNDgCRnlE8fb+vdjdpItnGCjPsv1+n5auST2W2ehHmSqDvbpJF2kVa8uoImBNd9uR11kJe1WWgKnxWW+SMXsmWjZZzcuTieTnMlS1SK85aPAUa+VmMIeNsuSNMs3fJYlpFTyjp52k9T8to7HzEf6JWbDKOMbZE9aO2niUkzZGbfdJ+G1N+lgnknXA5m27UQQPaLuOj4cN0q8xQ2pjeTRvlSX4Vm3nK+4izCc4TJtup2zDJrLfbN+Radx638g0Lr8p05r/oOFU/dBJjkLjagefW60hxJnXVwOxmw+lt28+ykSqcVJMsuRgyfEHRz9eucMs9rmsBwj8yaRcdGnbQfRdd7Ifrl70OM2SwZoJWndd9x98rSbB
 sidebar_class_name: "get api-method"
 info_path: docs/superplatform/superplatform
 custom_edit_url: null
@@ -34,14 +34,14 @@ import TabItem from "@theme/TabItem";
 
 <MethodEndpoint
   method={"get"}
-  path={"/docker-svc/container/{hash}/is-running"}
+  path={"/docker-svc/container/is-running"}
 >
   
 </MethodEndpoint>
 
 
 
-Check if a Docker container identified by the hash is running
+Check if a Docker container is running, identified by hash or name.
 
 <Heading
   id={"request"}
@@ -63,13 +63,18 @@ Check if a Docker container identified by the hash is running
     <h3
       className={"openapi-markdown__details-summary-header-params"}
     >
-      Path Parameters
+      Query Parameters
     </h3>
   </summary><div>
     <ul>
       <ParamsItem
         className={"paramsItem"}
-        param={{"description":"Container Hash","in":"path","name":"hash","required":true,"schema":{"type":"string"}}}
+        param={{"description":"Container Hash","in":"query","name":"hash","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"description":"Container Name","in":"query","name":"name","schema":{"type":"string"}}}
       >
         
       </ParamsItem>
@@ -130,7 +135,7 @@ Check if a Docker container identified by the hash is running
                       <SchemaItem
                         collapsible={false}
                         name={"isRunning"}
-                        required={false}
+                        required={true}
                         schemaName={"boolean"}
                         qualifierMessage={undefined}
                         schema={{"type":"boolean"}}
@@ -161,7 +166,7 @@ Check if a Docker container identified by the hash is running
         <div>
           
           
-          Invalid JSON
+          Invalid JSON or Missing Parameters
           
           
         </div><div>

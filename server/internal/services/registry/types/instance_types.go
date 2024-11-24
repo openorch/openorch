@@ -111,7 +111,7 @@ type RegisterInstanceRequest struct {
 	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
 
 	// Full address URL of the instance.
-	URL string `json:"url,omitempty" example:"https://myserver.com:5981"  binding:"required"`
+	URL string `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`
 
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme string `json:"scheme,omitempty" example:"https"`

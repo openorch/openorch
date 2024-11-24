@@ -85,7 +85,10 @@ func (s *SourceService) checkoutRepo(
 		req.Version = "main"
 	}
 
-	tempDir := path.Join(os.TempDir(), fmt.Sprintf("repo-%s-%s", makeFilenameSafeURL(req.URL), req.Version))
+	tempDir := path.Join(
+		os.TempDir(),
+		fmt.Sprintf("repo-%s-%s", makeFilenameSafeURL(req.URL), req.Version),
+	)
 
 	if !isCommitHash(req.Version) {
 		// delete branch checkouts as they might be outdated
@@ -101,7 +104,8 @@ func (s *SourceService) checkoutRepo(
 	}
 
 	refName := plumbing.NewBranchReferenceName(req.Version)
-	if strings.HasPrefix(req.Version, "refs/") || len(req.Version) == 40 { // For tag or commit SHA
+	if strings.HasPrefix(req.Version, "refs/") ||
+		len(req.Version) == 40 { // For tag or commit SHA
 		refName = plumbing.ReferenceName(req.Version)
 	}
 
@@ -136,12 +140,19 @@ func (s *SourceService) checkoutRepo(
 	return tempDir, nil
 }
 
-func getSSHAuth(sshKey string, sshKeyPwd string, username string) (transport.AuthMethod, error) {
+func getSSHAuth(
+	sshKey string,
+	sshKeyPwd string,
+	username string,
+) (transport.AuthMethod, error) {
 	signer, err := ssh.ParsePrivateKey([]byte(sshKey))
 	if err != nil {
 		// If password is provided for private key
 		if sshKeyPwd != "" {
-			signer, err = ssh.ParsePrivateKeyWithPassphrase([]byte(sshKey), []byte(sshKeyPwd))
+			signer, err = ssh.ParsePrivateKeyWithPassphrase(
+				[]byte(sshKey),
+				[]byte(sshKeyPwd),
+			)
 			if err != nil {
 				return nil, err
 			}

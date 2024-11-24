@@ -107,28 +107,28 @@ func addCallCommands(rootCmd *cobra.Command) {
 	var postCmd = &cobra.Command{
 		Use:                "post [service] [password] [key=value]...",
 		Args:               cobra.ArbitraryArgs,
-		Short:              "Make a post request to a service",
+		Short:              "Make a POST request to a service",
 		RunE:               call.Post,
 		DisableFlagParsing: true,
 	}
 	var getCmd = &cobra.Command{
-		Use:                "post [service] [password] [key=value]...",
+		Use:                "get [service] [password] [key=value]...",
 		Args:               cobra.ArbitraryArgs,
-		Short:              "Make a post request to a service",
+		Short:              "Make a GET request to a service",
 		RunE:               call.Get,
 		DisableFlagParsing: true,
 	}
 	var putCmd = &cobra.Command{
-		Use:                "post [service] [password] [key=value]...",
+		Use:                "put [service] [password] [key=value]...",
 		Args:               cobra.ArbitraryArgs,
-		Short:              "Make a post request to a service",
+		Short:              "Make a PUT request to a service",
 		RunE:               call.Put,
 		DisableFlagParsing: true,
 	}
 	var deleteCmd = &cobra.Command{
-		Use:                "post [service] [password] [key=value]...",
+		Use:                "delete [service] [password] [key=value]...",
 		Args:               cobra.ArbitraryArgs,
-		Short:              "Make a post request to a service",
+		Short:              "Make a DELETE request to a service",
 		RunE:               call.Delete,
 		DisableFlagParsing: true,
 	}

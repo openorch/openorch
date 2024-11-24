@@ -1,19 +1,24 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package dockerservice
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID getInfo
@@ -32,14 +37,16 @@ func (dm *DockerService) Info(
 	req *http.Request,
 ) {
 
-	rsp := &usertypes.IsAuthorizedResponse{}
-	err := dm.router.AsRequestMaker(req).Post(req.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionContainerView.Id), &usertypes.IsAuthorizedRequest{}, rsp)
+	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(req)).
+		UserSvcAPI.IsAuthorized(req.Context(), docker.PermissionContainerView.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{}).
+		Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	if !rsp.Authorized {
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`Unauthorized`))
 		return

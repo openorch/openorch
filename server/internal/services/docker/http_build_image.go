@@ -12,13 +12,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 
+	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
 // @ID buildImage
@@ -40,14 +40,21 @@ func (dm *DockerService) BuildImage(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	rsp := &usertypes.IsAuthorizedResponse{}
 
-	err := dm.router.AsRequestMaker(r).Post(r.Context(), "user-svc", fmt.Sprintf("/permission/%v/is-authorized", docker.PermissionImageBuild.Id), &usertypes.IsAuthorizedRequest{
-		SlugsGranted: []string{"deploy-svc"},
-	}, rsp)
-	if err != nil || !rsp.Authorized {
+	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionImageBuild.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}).
+		Execute()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: "Unauthorized"})
+		w.Write([]byte(`Unauthorized`))
 		return
 	}
 
@@ -91,8 +98,6 @@ func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
 		SuppressOutput: false,
 	}
 
-	spew.Dump("build opt", options)
-
 	imageBuildResponse, err := dm.client.ImageBuild(ctx, tarBuffer, options)
 	if err != nil {
 		return errors.Wrap(err, "image build failed")
@@ -115,46 +120,49 @@ func createTarFromContext(sourceDir string) (io.Reader, error) {
 		defer pw.Close()
 		defer tw.Close()
 
-		err := filepath.Walk(sourceDir, func(file string, fi os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
+		err := filepath.Walk(
+			sourceDir,
+			func(file string, fi os.FileInfo, err error) error {
+				if err != nil {
+					return err
+				}
 
-			// Preserve the directory structure in the tar file
-			if fi.IsDir() {
-				// Add directory header (empty, no contents)
+				// Preserve the directory structure in the tar file
+				if fi.IsDir() {
+					// Add directory header (empty, no contents)
+					header, err := tar.FileInfoHeader(fi, fi.Name())
+					if err != nil {
+						return err
+					}
+					header.Name = filepath.ToSlash(file[len(sourceDir):])
+					if err := tw.WriteHeader(header); err != nil {
+						return err
+					}
+					return nil // Skip adding files for directories, but still write header
+				}
+
 				header, err := tar.FileInfoHeader(fi, fi.Name())
 				if err != nil {
 					return err
 				}
+
 				header.Name = filepath.ToSlash(file[len(sourceDir):])
 				if err := tw.WriteHeader(header); err != nil {
 					return err
 				}
-				return nil // Skip adding files for directories, but still write header
-			}
 
-			header, err := tar.FileInfoHeader(fi, fi.Name())
-			if err != nil {
-				return err
-			}
-
-			header.Name = filepath.ToSlash(file[len(sourceDir):])
-			if err := tw.WriteHeader(header); err != nil {
-				return err
-			}
-
-			if fi.Mode().IsRegular() {
-				f, err := os.Open(file)
-				if err != nil {
+				if fi.Mode().IsRegular() {
+					f, err := os.Open(file)
+					if err != nil {
+						return err
+					}
+					defer f.Close()
+					_, err = io.Copy(tw, f)
 					return err
 				}
-				defer f.Close()
-				_, err = io.Copy(tw, f)
-				return err
-			}
-			return nil
-		})
+				return nil
+			},
+		)
 
 		if err != nil {
 			pw.CloseWithError(err)

@@ -32,7 +32,7 @@ func TestFirehoseSubscription(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	cl, adminToken, err := test.AdminClient(server.URL)
+	cl, adminToken, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
 	firehoseSvc := cl.FirehoseSvcAPI
@@ -46,7 +46,12 @@ func TestFirehoseSubscription(t *testing.T) {
 		eventChannel := make(chan *firehose.Event, 1)
 
 		go func() {
-			req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, server.URL+"/firehose-svc/events/subscribe", nil)
+			req, err := http.NewRequestWithContext(
+				context.Background(),
+				http.MethodGet,
+				server.URL+"/firehose-svc/events/subscribe",
+				nil,
+			)
 
 			require.NoError(t, err)
 			req.Header.Set("Authorization", "Bearer "+adminToken)
@@ -64,7 +69,9 @@ func TestFirehoseSubscription(t *testing.T) {
 				}
 
 				ev := &firehose.Event{}
-				jsonData := strings.TrimSpace(strings.ReplaceAll(line, "data: ", ""))
+				jsonData := strings.TrimSpace(
+					strings.ReplaceAll(line, "data: ", ""),
+				)
 				if jsonData == "" {
 					return
 				}
@@ -78,9 +85,11 @@ func TestFirehoseSubscription(t *testing.T) {
 			require.NoError(t, scanner.Err())
 		}()
 
-		_, err := firehoseSvc.PublishEvent(context.Background()).Event(client.FirehoseSvcEventPublishRequest{
-			Event: event,
-		}).Execute()
+		_, err := firehoseSvc.PublishEvent(context.Background()).
+			Event(client.FirehoseSvcEventPublishRequest{
+				Event: event,
+			}).
+			Execute()
 		require.NoError(t, err)
 
 		receivedEvent := <-eventChannel

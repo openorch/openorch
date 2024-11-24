@@ -15,6 +15,12 @@
  * Check if a given object implements the DockerSvcGetContainerSummaryResponse interface.
  */
 export function instanceOfDockerSvcGetContainerSummaryResponse(value) {
+    if (!('logs' in value) || value['logs'] === undefined)
+        return false;
+    if (!('status' in value) || value['status'] === undefined)
+        return false;
+    if (!('summary' in value) || value['summary'] === undefined)
+        return false;
     return true;
 }
 export function DockerSvcGetContainerSummaryResponseFromJSON(json) {
@@ -25,7 +31,9 @@ export function DockerSvcGetContainerSummaryResponseFromJSONTyped(json, ignoreDi
         return json;
     }
     return {
-        'summary': json['summary'] == null ? undefined : json['summary'],
+        'logs': json['logs'],
+        'status': json['status'],
+        'summary': json['summary'],
     };
 }
 export function DockerSvcGetContainerSummaryResponseToJSON(value) {
@@ -33,6 +41,8 @@ export function DockerSvcGetContainerSummaryResponseToJSON(value) {
         return value;
     }
     return {
+        'logs': value['logs'],
+        'status': value['status'],
         'summary': value['summary'],
     };
 }

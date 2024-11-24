@@ -1,10 +1,15 @@
-/**
- * @license
- * Copyright (c) The Authors (see the AUTHORS file)
- *
- * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
- * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
- */
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
 package userservice
 
 import (
@@ -35,12 +40,20 @@ import (
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /user-svc/organization/{organizationId}/user/{userId} [delete]
-func (s *UserService) RemoveUserFromOrganization(w http.ResponseWriter, r *http.Request) {
+func (s *UserService) RemoveUserFromOrganization(
+	w http.ResponseWriter,
+	r *http.Request,
+) {
 
 	organizationId := mux.Vars(r)["organizationId"]
 	userId := mux.Vars(r)["userId"]
 
-	usr, err := s.isAuthorized(r, user.PermissionOrganizationCreate.Id, nil, nil)
+	usr, err := s.isAuthorized(
+		r,
+		user.PermissionOrganizationCreate.Id,
+		nil,
+		nil,
+	)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(err.Error()))
@@ -67,13 +80,16 @@ func (s *UserService) RemoveUserFromOrganization(w http.ResponseWriter, r *http.
 	w.Write(bs)
 }
 
-func (s *UserService) removeUserFromOrganization(callerId, userId, organizationId string) error {
+func (s *UserService) removeUserFromOrganization(
+	callerId, userId, organizationId string,
+) error {
 	roleIds, err := s.getRoleIdsByUserId(callerId)
 	if err != nil {
 		return err
 	}
 
-	org, found, err := s.organizationsStore.Query(datastore.Id(organizationId)).FindOne()
+	org, found, err := s.organizationsStore.Query(datastore.Id(organizationId)).
+		FindOne()
 	if err != nil {
 		return err
 	}
@@ -81,7 +97,10 @@ func (s *UserService) removeUserFromOrganization(callerId, userId, organizationI
 		return fmt.Errorf("organization not found")
 	}
 
-	if !contains(roleIds, fmt.Sprintf("user-svc:org:{%v}:admin", org.(*user.Organization).Id)) {
+	if !contains(
+		roleIds,
+		fmt.Sprintf("user-svc:org:{%v}:admin", org.(*user.Organization).Id),
+	) {
 		return fmt.Errorf("unauthorized")
 	}
 

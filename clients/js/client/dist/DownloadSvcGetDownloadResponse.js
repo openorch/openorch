@@ -19,6 +19,8 @@ var DownloadSvcDownloadDetails = require('./DownloadSvcDownloadDetails.js');
  * Check if a given object implements the DownloadSvcGetDownloadResponse interface.
  */
 function instanceOfDownloadSvcGetDownloadResponse(value) {
+    if (!('_exists' in value) || value['_exists'] === undefined)
+        return false;
     return true;
 }
 function DownloadSvcGetDownloadResponseFromJSON(json) {
@@ -30,7 +32,7 @@ function DownloadSvcGetDownloadResponseFromJSONTyped(json, ignoreDiscriminator) 
     }
     return {
         'download': json['download'] == null ? undefined : DownloadSvcDownloadDetails.DownloadSvcDownloadDetailsFromJSON(json['download']),
-        '_exists': json['exists'] == null ? undefined : json['exists'],
+        '_exists': json['exists'],
     };
 }
 function DownloadSvcGetDownloadResponseToJSON(value) {
