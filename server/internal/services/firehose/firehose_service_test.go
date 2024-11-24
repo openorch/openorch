@@ -32,7 +32,7 @@ func TestFirehoseSubscription(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	cl, adminToken, err := test.AdminClient(server.URL)
+	cl, adminToken, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
 	firehoseSvc := cl.FirehoseSvcAPI

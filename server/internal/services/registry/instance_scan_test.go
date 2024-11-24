@@ -64,7 +64,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 		hs.UpdateHandler(universe)
 
-		adminClient, _, err = test.AdminClient(server.URL)
+		adminClient, _, err = test.AdminClient(options.ClientFactory)
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
 	})

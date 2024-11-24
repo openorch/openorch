@@ -6,33 +6,11 @@ import (
 
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/router"
 	"go.uber.org/mock/gomock"
 )
 
-func Client(url string) *openapi.APIClient {
-	cli := openapi.NewAPIClient(&openapi.Configuration{
-		Servers: openapi.ServerConfigurations{
-			{
-				URL:         url,
-				Description: "Default server",
-			},
-		},
-	})
-
-	return cli
-}
-
-func AdminClient(url string) (*openapi.APIClient, string, error) {
-	cli := openapi.NewAPIClient(&openapi.Configuration{
-		Servers: openapi.ServerConfigurations{
-			{
-				URL:         url,
-				Description: "Default server",
-			},
-		},
-	})
-	userSvc := cli.UserSvcAPI
+func AdminClient(clientFactory sdk.ClientFactory) (*openapi.APIClient, string, error) {
+	userSvc := clientFactory.Client().UserSvcAPI
 
 	adminLoginRsp, _, err := userSvc.Login(context.Background()).Request(openapi.UserSvcLoginRequest{
 		Slug:     openapi.PtrString("singulatron"),
@@ -42,22 +20,10 @@ func AdminClient(url string) (*openapi.APIClient, string, error) {
 		return nil, "", err
 	}
 
-	adminClient := openapi.NewAPIClient(&openapi.Configuration{
-		Servers: openapi.ServerConfigurations{
-			{
-				URL:         url,
-				Description: "Default server",
-			},
-		},
-		DefaultHeader: map[string]string{
-			"Authorization": "Bearer " + *adminLoginRsp.Token.Token,
-		},
-	})
-
-	return adminClient, *adminLoginRsp.Token.Token, nil
+	return clientFactory.Client(sdk.WithToken(*adminLoginRsp.Token.Token)), *adminLoginRsp.Token.Token, nil
 }
 
-func MakeClients(notLoggedInclient *openapi.APIClient, num int) ([]*openapi.APIClient, error) {
+func MakeClients(clientFactory sdk.ClientFactory, num int) ([]*openapi.APIClient, error) {
 	var ret []*openapi.APIClient
 
 	for i := 0; i < num; i++ {
@@ -65,22 +31,12 @@ func MakeClients(notLoggedInclient *openapi.APIClient, num int) ([]*openapi.APIC
 		password := fmt.Sprintf("testUserPassword%v", i)
 		username := fmt.Sprintf("Test User Name %v", i)
 
-		token, err := sdk.RegisterUser(notLoggedInclient.UserSvcAPI, slug, password, username)
+		token, err := sdk.RegisterUser(clientFactory.Client().UserSvcAPI, slug, password, username)
 		if err != nil {
 			return nil, err
 		}
 
-		c := openapi.NewAPIClient(&openapi.Configuration{
-			Servers: openapi.ServerConfigurations{
-				{
-					URL:         router.SelfAddress(),
-					Description: "Default server",
-				},
-			},
-			DefaultHeader: map[string]string{
-				"Authorization": "Bearer " + token,
-			},
-		})
+		c := clientFactory.Client(sdk.WithToken(token))
 
 		ret = append(ret, c)
 	}

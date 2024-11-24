@@ -32,9 +32,9 @@ func TestRegistration(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	userSvc := test.Client(server.URL).UserSvcAPI
+	userSvc := options.ClientFactory.Client().UserSvcAPI
 
-	adminClient, adminToken, err := test.AdminClient(server.URL)
+	adminClient, adminToken, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
 	publicKeyRsp, _, err := userSvc.GetPublicKey(context.Background()).Execute()
@@ -95,15 +95,15 @@ func TestOrganization(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	adminClient, adminToken, err := test.AdminClient(server.URL)
+	adminClient, adminToken, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
-	manyClients, err := test.MakeClients(options.ClientFactory.Client(), 2)
+	manyClients, err := test.MakeClients(options.ClientFactory, 2)
 	require.NoError(t, err)
 	otherClient := manyClients[0]
 	thirdClient := manyClients[1]
 
-	publicKeyRsp, _, err := test.Client(server.URL).
+	publicKeyRsp, _, err := options.ClientFactory.Client().
 		UserSvcAPI.GetPublicKey(context.Background()).
 		Execute()
 	require.NoError(t, err)
