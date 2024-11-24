@@ -15,6 +15,7 @@ package configservice
 import (
 	"context"
 	"io/ioutil"
+	"log/slog"
 	"path"
 
 	"github.com/pkg/errors"
@@ -51,7 +52,7 @@ func (cs *ConfigService) saveConfig(config types.Config) error {
 		Execute()
 
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	return nil

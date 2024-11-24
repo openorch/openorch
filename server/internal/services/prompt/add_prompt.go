@@ -130,7 +130,7 @@ func (p *PromptService) addPrompt(
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	go p.triggerPromptProcessing()

@@ -15,6 +15,7 @@ package chatservice
 import (
 	"context"
 	"encoding/json"
+	"log/slog"
 
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -52,7 +53,7 @@ func (a *ChatService) updateThread(
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	return chatThread, nil

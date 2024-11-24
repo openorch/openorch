@@ -178,7 +178,7 @@ func (ds *DownloadService) saveState() error {
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	err = os.WriteFile(ds.StateFilePath, data, 0666)

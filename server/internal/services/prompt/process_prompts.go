@@ -179,7 +179,10 @@ func (p *PromptService) processPrompt(
 			}).
 			Execute()
 		if err != nil {
-			logger.Error("Failed to publish: %v", err)
+			logger.Error(
+				"Failed to publish firehose event",
+				slog.Any("error", err),
+			)
 		}
 	}()
 
@@ -215,7 +218,7 @@ func (p *PromptService) processPrompt(
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).

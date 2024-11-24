@@ -16,6 +16,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"log/slog"
 	"time"
 
 	openapi "github.com/singulatron/superplatform/clients/go"
@@ -64,7 +65,7 @@ func (a *ChatService) addThread(
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	return chatThread, nil

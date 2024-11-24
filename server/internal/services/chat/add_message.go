@@ -74,7 +74,7 @@ func (a *ChatService) addMessage(
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	return a.messagesStore.Query(

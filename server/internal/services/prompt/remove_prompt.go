@@ -56,7 +56,7 @@ func (p *PromptService) removePrompt(promptId string) error {
 		}).
 		Execute()
 	if err != nil {
-		logger.Error("Failed to publish: %v", err)
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
 	return nil
