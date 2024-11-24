@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"os"
 	"path/filepath"
 	"testing"
@@ -79,22 +78,30 @@ func TestDownloadFile(t *testing.T) {
 		Execute()
 	require.NoError(t, err)
 
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+outer:
 	for {
-		time.Sleep(5 * time.Millisecond)
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+				Execute()
+			require.NoError(t, err)
 
-		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(fileHostServer.URL)).
-			Execute()
-		require.NoError(t, err)
-
-		if rsp.Exists &&
-			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			break
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				break outer
+			}
 		}
 	}
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".singulatron",
+		".superplatform",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(fileHostServer.URL),
 	)
@@ -147,7 +154,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 
 	partFilePath := filepath.Join(
 		options.HomeDir,
-		".singulatron",
+		".superplatform",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL)+".part",
 	)
@@ -160,22 +167,32 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
+	require.NoError(t, err)
 
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+outer:
 	for {
-		time.Sleep(5 * time.Millisecond)
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.NoError(t, err)
 
-		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(downloadURL)).
-			Execute()
-		require.NoError(t, err)
-		if rsp.Exists &&
-			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			break
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				break outer
+			}
 		}
 	}
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".singulatron",
+		".superplatform",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL),
 	)
@@ -213,7 +230,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
 		options.HomeDir,
-		".singulatron",
+		".superplatform",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL),
 	)
@@ -224,24 +241,32 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
+	require.NoError(t, err)
 
-	var (
-		d *openapi.DownloadSvcDownloadDetails
-	)
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+	var d *openapi.DownloadSvcDownloadDetails
+
+outer:
 	for {
-		time.Sleep(5 * time.Millisecond)
+		select {
+		case <-timeout:
+			t.Fatal("Timeout reached while waiting for download to complete")
+		case <-ticker.C:
+			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.NoError(t, err)
 
-		rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(downloadURL)).
-			Execute()
-		require.NoError(t, err)
-
-		if rsp.Exists &&
-			*rsp.Download.Status == string(types.DownloadStatusCompleted) {
-			d = rsp.Download
-			break
+			if rsp.Exists &&
+				*rsp.Download.Status == string(types.DownloadStatusCompleted) {
+				d = rsp.Download
+				break outer
+			}
 		}
 	}
 
-	require.Equal(t, int64(11), d.DownloadedBytes)
-	require.Equal(t, int64(11), *d.FullFileSize)
+	require.Equal(t, int32(11), *d.DownloadedBytes)
+	require.Equal(t, int32(11), *d.FullFileSize)
 }
