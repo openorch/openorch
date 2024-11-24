@@ -19,173 +19,232 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gorilla/mux"
+	"github.com/onsi/ginkgo/v2"
+	"github.com/onsi/gomega"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/test"
 	"github.com/singulatron/superplatform/server/internal/di"
-	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 )
 
-func TestAddPrompt(t *testing.T) {
-	ctx := context.Background()
-	hs := &di.HandlerSwitcher{}
-	server := httptest.NewServer(hs)
-	defer server.Close()
+func TestPromptService(t *testing.T) {
+	gomega.RegisterFailHandler(ginkgo.Fail)
+	ginkgo.RunSpecs(t, "DeployService Suite")
+}
 
-	ctrl := gomock.NewController(t)
-	defer ctrl.Finish()
+var _ = ginkgo.Describe("Deploy Loop", func() {
+	var (
+		server     *httptest.Server
+		ctrl       *gomock.Controller
+		ctx        context.Context
+		lc         *llm.MockClientI
+		userClient *openapi.APIClient
 
-	lc := llm.NewMockClientI(ctrl)
+		mockClientFactory *sdk.MockClientFactory
+		mockUserSvc       *openapi.MockUserSvcAPI
+		mockChatSvc       *openapi.MockChatSvcAPI
+		mockModelSvc      *openapi.MockModelSvcAPI
+		mockConfigSvc     *openapi.MockConfigSvcAPI
+		mockFirehoseSvc   *openapi.MockFirehoseSvcAPI
 
-	mockClientFactory := sdk.NewMockClientFactory(ctrl)
-	mockUserSvc := test.MockUserSvc(ctx, ctrl)
-	mockChatSvc := openapi.NewMockChatSvcAPI(ctrl)
-	mockModelSvc := openapi.NewMockModelSvcAPI(ctrl)
-	mockConfigSvc := openapi.NewMockConfigSvcAPI(ctrl)
+		universe    *mux.Router
+		starterFunc func() error
 
-	mockClientFactory.EXPECT().
-		Client(gomock.Any()).
-		Return(&openapi.APIClient{
-			UserSvcAPI:   mockUserSvc,
-			ChatSvcAPI:   mockChatSvc,
-			ConfigSvcAPI: mockConfigSvc,
-			ModelSvcAPI:  mockModelSvc,
-			PromptSvcAPI: sdk.NewApiClientFactory(server.URL).Client().PromptSvcAPI,
-		}).
-		AnyTimes()
+		responses []*llm.CompletionResponse
+	)
 
-	options := &di.Options{
-		Test:          true,
-		Url:           server.URL,
-		LLMClient:     lc,
-		ClientFactory: mockClientFactory,
-	}
+	ginkgo.BeforeEach(func() {
+		ctx = context.Background()
+		ctrl = gomock.NewController(ginkgo.GinkgoT())
+		hs := &di.HandlerSwitcher{}
+		server = httptest.NewServer(hs)
 
-	mockConfigSvc.EXPECT().GetConfig(gomock.Any()).Return(openapi.ApiGetConfigRequest{
-		ApiService: mockConfigSvc,
+		lc = llm.NewMockClientI(ctrl)
+
+		mockClientFactory = sdk.NewMockClientFactory(ctrl)
+		mockUserSvc = test.MockUserSvc(ctx, ctrl)
+		mockChatSvc = openapi.NewMockChatSvcAPI(ctrl)
+		mockModelSvc = openapi.NewMockModelSvcAPI(ctrl)
+		mockConfigSvc = openapi.NewMockConfigSvcAPI(ctrl)
+		mockFirehoseSvc = openapi.NewMockFirehoseSvcAPI(ctrl)
+
+		mockClientFactory.EXPECT().
+			Client(gomock.Any()).
+			Return(&openapi.APIClient{
+				UserSvcAPI:     mockUserSvc,
+				ChatSvcAPI:     mockChatSvc,
+				ConfigSvcAPI:   mockConfigSvc,
+				ModelSvcAPI:    mockModelSvc,
+				FirehoseSvcAPI: mockFirehoseSvc,
+				PromptSvcAPI:   sdk.NewApiClientFactory(server.URL).Client().PromptSvcAPI,
+			}).
+			AnyTimes()
+
+		options := &di.Options{
+			Test:          true,
+			Url:           server.URL,
+			LLMClient:     lc,
+			ClientFactory: mockClientFactory,
+		}
+
+		var err error
+		universe, starterFunc, err = di.BigBang(options)
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+		hs.UpdateHandler(universe)
+
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 	})
-	mockConfigSvc.EXPECT().GetConfigExecute(gomock.Any()).Return(&openapi.ConfigSvcGetConfigResponse{
-		Config: &openapi.ConfigSvcConfig{
-			Model: &openapi.ConfigSvcModelServiceConfig{
-				CurrentModelId: openapi.PtrString("mistral-1"),
-			},
-		},
-	}, nil, nil)
 
-	mockModelSvc.EXPECT().ListModels(gomock.Any()).Return(openapi.ApiListModelsRequest{
-		ApiService: mockModelSvc,
+	ginkgo.JustBeforeEach(func() {
+		mockConfigSvc.EXPECT().GetConfig(gomock.Any()).Return(openapi.ApiGetConfigRequest{
+			ApiService: mockConfigSvc,
+		})
+		mockConfigSvc.EXPECT().GetConfigExecute(gomock.Any()).Return(&openapi.ConfigSvcGetConfigResponse{
+			Config: &openapi.ConfigSvcConfig{
+				Model: &openapi.ConfigSvcModelServiceConfig{
+					CurrentModelId: openapi.PtrString("mistral-1"),
+				},
+			},
+		}, nil, nil)
+
+		mockChatSvc.EXPECT().GetThread(gomock.Any(), gomock.Any()).Return(openapi.ApiGetThreadRequest{
+			ApiService: mockChatSvc,
+		})
+		mockChatSvc.EXPECT().GetThreadExecute(gomock.Any()).Return(&openapi.ChatSvcGetThreadResponse{
+			Exists: openapi.PtrBool(true),
+			Thread: &openapi.ChatSvcThread{
+				Id: openapi.PtrString("thread-1"),
+			},
+		}, nil, nil)
+
+		mockModelSvc.EXPECT().ListModels(gomock.Any()).Return(openapi.ApiListModelsRequest{
+			ApiService: mockModelSvc,
+		})
+		mockModelSvc.EXPECT().ListModelsExecute(gomock.Any()).Return(&openapi.ModelSvcListResponse{
+			Models: []openapi.ModelSvcModel{
+				{
+					Id: openapi.PtrString("mistral-1"),
+				},
+			},
+		}, nil, nil)
+		mockFirehoseSvc.EXPECT().PublishEvent(gomock.Any()).Return(openapi.ApiPublishEventRequest{
+			ApiService: mockFirehoseSvc,
+		})
+		mockFirehoseSvc.EXPECT().PublishEventExecute(gomock.Any()).Return(nil, nil, nil)
+
+		lc.EXPECT().
+			PostCompletionsStreamed(gomock.Any(), gomock.Any()).
+			DoAndReturn(func(req llm.PostCompletionsRequest, callback llm.StreamCallback) error {
+				go func() {
+
+					for i := range responses {
+						// without this sleep the test hangs forever
+						time.Sleep(1 * time.Millisecond)
+						callback(responses[i])
+					}
+
+				}()
+				return nil
+			})
+
+		err := starterFunc()
+		gomega.Expect(err).NotTo(gomega.HaveOccurred())
 	})
-	mockModelSvc.EXPECT().ListModelsExecute(gomock.Any()).Return(&openapi.ModelSvcListResponse{
-		Models: []openapi.ModelSvcModel{
-			{
-				Id: openapi.PtrString("mistral-1"),
-			},
-		},
-	}, nil, nil)
 
-	universe, starterFunc, err := di.BigBang(options)
-	require.NoError(t, err)
+	ginkgo.AfterEach(func() {
+		server.Close()
+		ctrl.Finish()
+	})
 
-	hs.UpdateHandler(universe)
+	ginkgo.Context("sync prompt works", func() {
+		ginkgo.BeforeEach(func() {
+			userClient = mockClientFactory.Client()
 
-	err = starterFunc()
-	require.NoError(t, err)
-
-	userClient := options.ClientFactory.Client()
-
-	responses := []*llm.CompletionResponse{
-		{
-			Choices: []struct {
-				Text         string      `json:"text,omitempty"`
-				Index        int         `json:"index,omitempty"`
-				Logprobs     interface{} `json:"logprobs,omitempty"`
-				FinishReason string      `json:"finish_reason,omitempty"`
-			}{
-				{Text: "Hi, I'm fine", FinishReason: ""},
-			},
-		},
-		{
-			Choices: []struct {
-				Text         string      `json:"text,omitempty"`
-				Index        int         `json:"index,omitempty"`
-				Logprobs     interface{} `json:"logprobs,omitempty"`
-				FinishReason string      `json:"finish_reason,omitempty"`
-			}{
-				{Text: ", how are you", FinishReason: "stop"},
-			},
-		},
-	}
-
-	lc.EXPECT().
-		PostCompletionsStreamed(gomock.Any(), gomock.Any()).
-		DoAndReturn(func(req llm.PostCompletionsRequest, callback llm.StreamCallback) error {
-			go func() {
-
-				for i := range responses {
-					// without this sleep the test hangs forever
-					time.Sleep(1 * time.Millisecond)
-					callback(responses[i])
-				}
-
-			}()
-			return nil
+			responses = []*llm.CompletionResponse{
+				{
+					Choices: []struct {
+						Text         string      `json:"text,omitempty"`
+						Index        int         `json:"index,omitempty"`
+						Logprobs     interface{} `json:"logprobs,omitempty"`
+						FinishReason string      `json:"finish_reason,omitempty"`
+					}{
+						{Text: "Hi, I'm fine", FinishReason: ""},
+					},
+				},
+				{
+					Choices: []struct {
+						Text         string      `json:"text,omitempty"`
+						Index        int         `json:"index,omitempty"`
+						Logprobs     interface{} `json:"logprobs,omitempty"`
+						FinishReason string      `json:"finish_reason,omitempty"`
+					}{
+						{Text: ", how are you", FinishReason: "stop"},
+					},
+				},
+			}
 		})
 
-	crsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
-		Execute()
-	require.NoError(t, err)
-
-	mrsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).
-		Execute()
-	require.NoError(t, err)
-
-	var model *openapi.ModelSvcModel
-	for _, v := range mrsp.Models {
-		if !strings.Contains(*v.Id, "mistral") {
-			continue
-		}
-		if *v.Id == *crsp.Config.Model.CurrentModelId {
-			model = &v
-		}
-	}
-
-	require.NotNil(t, model)
-	require.Equal(t, true, model.Id != nil)
-
-	timeout := 5 * time.Second
-	tick := 500 * time.Millisecond
-
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()
-
-	ticker := time.NewTicker(tick)
-	defer ticker.Stop()
-
-	var prsp *openapi.PromptSvcAddPromptResponse
-
-outer:
-	for {
-		select {
-		case <-ctx.Done():
-
-			require.NoError(t, ctx.Err(), "Operation timed out")
-			return
-		case <-ticker.C:
-
-			prsp, _, err = userClient.PromptSvcAPI.AddPrompt(ctx).
-				Request(
-					openapi.PromptSvcAddPromptRequest{
-						Prompt: "Hi there, how are you?",
-						Sync:   openapi.PtrBool(true),
-					},
-				).
+		ginkgo.It("saves a deployment successfully", func() {
+			crsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
 				Execute()
-			require.NoError(t, err)
-			break outer
-		}
-	}
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-	require.Equal(t, true, strings.Contains(*prsp.Answer, "how"))
-}
+			mrsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).
+				Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			var model *openapi.ModelSvcModel
+			for _, v := range mrsp.Models {
+				if !strings.Contains(*v.Id, "mistral") {
+					continue
+				}
+				if *v.Id == *crsp.Config.Model.CurrentModelId {
+					model = &v
+				}
+			}
+
+			gomega.Expect(model).NotTo(gomega.BeNil())
+			gomega.Expect(model.Id).NotTo(gomega.BeNil())
+
+			timeout := 5 * time.Second
+			tick := 500 * time.Millisecond
+
+			ctx, cancel := context.WithTimeout(context.Background(), timeout)
+			defer cancel()
+
+			ticker := time.NewTicker(tick)
+			defer ticker.Stop()
+
+			var prsp *openapi.PromptSvcAddPromptResponse
+
+		outer:
+			for {
+				select {
+				case <-ctx.Done():
+					gomega.Expect(ctx.Err()).NotTo(gomega.HaveOccurred())
+					return
+				case <-ticker.C:
+
+					prsp, _, err = userClient.PromptSvcAPI.AddPrompt(ctx).
+						Request(
+							openapi.PromptSvcAddPromptRequest{
+								Prompt: "Hi there, how are you?",
+								Sync:   openapi.PtrBool(true),
+							},
+						).
+						Execute()
+					gomega.Expect(err).NotTo(gomega.HaveOccurred())
+					break outer
+				}
+			}
+
+			gomega.Expect(prsp).NotTo(gomega.BeNil())
+			gomega.Expect(prsp.Answer).NotTo(gomega.BeNil())
+			gomega.Expect(*prsp.Answer).To(gomega.ContainSubstring("how"))
+		})
+	})
+})
