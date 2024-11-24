@@ -22,19 +22,19 @@ export interface ModelSvcGetModelResponse {
      * @type {boolean}
      * @memberof ModelSvcGetModelResponse
      */
-    _exists?: boolean;
+    _exists: boolean;
     /**
      *
      * @type {ModelSvcModel}
      * @memberof ModelSvcGetModelResponse
      */
-    model?: ModelSvcModel;
+    model: ModelSvcModel;
     /**
      *
      * @type {ModelSvcPlatform}
      * @memberof ModelSvcGetModelResponse
      */
-    platform?: ModelSvcPlatform;
+    platform: ModelSvcPlatform;
 }
 /**
  * Check if a given object implements the ModelSvcGetModelResponse interface.

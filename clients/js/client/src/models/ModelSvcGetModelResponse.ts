@@ -37,25 +37,28 @@ export interface ModelSvcGetModelResponse {
      * @type {boolean}
      * @memberof ModelSvcGetModelResponse
      */
-    _exists?: boolean;
+    _exists: boolean;
     /**
      * 
      * @type {ModelSvcModel}
      * @memberof ModelSvcGetModelResponse
      */
-    model?: ModelSvcModel;
+    model: ModelSvcModel;
     /**
      * 
      * @type {ModelSvcPlatform}
      * @memberof ModelSvcGetModelResponse
      */
-    platform?: ModelSvcPlatform;
+    platform: ModelSvcPlatform;
 }
 
 /**
  * Check if a given object implements the ModelSvcGetModelResponse interface.
  */
 export function instanceOfModelSvcGetModelResponse(value: object): value is ModelSvcGetModelResponse {
+    if (!('_exists' in value) || value['_exists'] === undefined) return false;
+    if (!('model' in value) || value['model'] === undefined) return false;
+    if (!('platform' in value) || value['platform'] === undefined) return false;
     return true;
 }
 
@@ -69,9 +72,9 @@ export function ModelSvcGetModelResponseFromJSONTyped(json: any, ignoreDiscrimin
     }
     return {
         
-        '_exists': json['exists'] == null ? undefined : json['exists'],
-        'model': json['model'] == null ? undefined : ModelSvcModelFromJSON(json['model']),
-        'platform': json['platform'] == null ? undefined : ModelSvcPlatformFromJSON(json['platform']),
+        '_exists': json['exists'],
+        'model': ModelSvcModelFromJSON(json['model']),
+        'platform': ModelSvcPlatformFromJSON(json['platform']),
     };
 }
 

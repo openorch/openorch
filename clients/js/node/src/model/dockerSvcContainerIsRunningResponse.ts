@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class DockerSvcContainerIsRunningResponse {
-    'isRunning'?: boolean;
+    'isRunning': boolean;
 
     static discriminator: string | undefined = undefined;
 

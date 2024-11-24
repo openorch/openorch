@@ -20,13 +20,13 @@ export interface ModelSvcModelStatus {
      * @type {string}
      * @memberof ModelSvcModelStatus
      */
-    address?: string;
+    address: string;
     /**
      *
      * @type {boolean}
      * @memberof ModelSvcModelStatus
      */
-    assetsReady?: boolean;
+    assetsReady: boolean;
     /**
      * Running triggers onModelLaunch on the frontend.
      * 	Running is true when the model is both running and answering
@@ -34,7 +34,7 @@ export interface ModelSvcModelStatus {
      * @type {boolean}
      * @memberof ModelSvcModelStatus
      */
-    running?: boolean;
+    running: boolean;
 }
 /**
  * Check if a given object implements the ModelSvcModelStatus interface.

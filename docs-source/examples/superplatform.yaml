@@ -424,6 +424,8 @@ definitions:
     properties:
       isRunning:
         type: boolean
+    required:
+    - isRunning
     type: object
   docker_svc.DockerInfo:
     properties:
@@ -448,11 +450,17 @@ definitions:
       summary:
         description: DEPRECATED. Summary contains both Status and Logs.
         type: string
+    required:
+    - logs
+    - status
+    - summary
     type: object
   docker_svc.GetDockerHostResponse:
     properties:
       host:
         type: string
+    required:
+    - host
     type: object
   docker_svc.GetInfoResponse:
     properties:
@@ -595,6 +603,8 @@ definitions:
         $ref: '#/definitions/download_svc.DownloadDetails'
       exists:
         type: boolean
+    required:
+    - exists
     type: object
   dynamic_svc.CreateObjectRequest:
     properties:
@@ -630,8 +640,7 @@ definitions:
           If an organization ID is not provided, the currently active organization will
           be queried from the User Svc.
         example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
+        - '['
         items:
           type: string
         type: array
@@ -682,8 +691,7 @@ definitions:
           If an organization ID is not provided, the currently active organization will
           be queried from the User Svc.
         example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
+        - '['
         items:
           type: string
         type: array
@@ -818,6 +826,10 @@ definitions:
         $ref: '#/definitions/model_svc.Model'
       platform:
         $ref: '#/definitions/model_svc.Platform'
+    required:
+    - exists
+    - model
+    - platform
     type: object
   model_svc.ListResponse:
     properties:
@@ -887,6 +899,10 @@ definitions:
         description: "Running triggers onModelLaunch on the frontend.\n\tRunning is
           true when the model is both running and answering\n\t- fully loaded."
         type: boolean
+    required:
+    - address
+    - assetsReady
+    - running
     type: object
   model_svc.Platform:
     properties:

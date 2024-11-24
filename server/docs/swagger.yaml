@@ -640,8 +640,7 @@ definitions:
           If an organization ID is not provided, the currently active organization will
           be queried from the User Svc.
         example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
+        - '['
         items:
           type: string
         type: array
@@ -692,8 +691,7 @@ definitions:
           If an organization ID is not provided, the currently active organization will
           be queried from the User Svc.
         example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
+        - '['
         items:
           type: string
         type: array

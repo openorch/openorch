@@ -12,7 +12,7 @@
 import { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails';
 export declare class DownloadSvcGetDownloadResponse {
     'download'?: DownloadSvcDownloadDetails;
-    'exists'?: boolean;
+    'exists': boolean;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

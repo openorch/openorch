@@ -5061,8 +5061,7 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
+                        "["
                     ]
                 },
                 "createdAt": {
@@ -5118,8 +5117,7 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
+                        "["
                     ]
                 },
                 "data": {

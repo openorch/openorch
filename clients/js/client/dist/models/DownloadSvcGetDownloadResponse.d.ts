@@ -27,7 +27,7 @@ export interface DownloadSvcGetDownloadResponse {
      * @type {boolean}
      * @memberof DownloadSvcGetDownloadResponse
      */
-    _exists?: boolean;
+    _exists: boolean;
 }
 /**
  * Check if a given object implements the DownloadSvcGetDownloadResponse interface.

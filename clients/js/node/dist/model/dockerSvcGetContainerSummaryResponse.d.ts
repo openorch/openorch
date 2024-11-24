@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 export declare class DockerSvcGetContainerSummaryResponse {
-    'logs'?: string;
-    'status'?: string;
+    'logs': string;
+    'status': string;
     /**
     * DEPRECATED. Summary contains both Status and Logs.
     */
-    'summary'?: string;
+    'summary': string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

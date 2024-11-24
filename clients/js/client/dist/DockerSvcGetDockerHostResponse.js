@@ -17,6 +17,8 @@
  * Check if a given object implements the DockerSvcGetDockerHostResponse interface.
  */
 function instanceOfDockerSvcGetDockerHostResponse(value) {
+    if (!('host' in value) || value['host'] === undefined)
+        return false;
     return true;
 }
 function DockerSvcGetDockerHostResponseFromJSON(json) {
@@ -27,7 +29,7 @@ function DockerSvcGetDockerHostResponseFromJSONTyped(json, ignoreDiscriminator) 
         return json;
     }
     return {
-        'host': json['host'] == null ? undefined : json['host'],
+        'host': json['host'],
     };
 }
 function DockerSvcGetDockerHostResponseToJSON(value) {

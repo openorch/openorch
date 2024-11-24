@@ -41,6 +41,7 @@ func (m *MockFirehoseSvcAPI) EXPECT() *MockFirehoseSvcAPIMockRecorder {
 
 // PublishEvent mocks base method.
 func (m *MockFirehoseSvcAPI) PublishEvent(ctx context.Context) ApiPublishEventRequest {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "PublishEvent", ctx)
 	ret0, _ := ret[0].(ApiPublishEventRequest)
 	return ret0
