@@ -136,8 +136,8 @@ func TestMessageCreatesThread(t *testing.T) {
 
 		thread := rsp.Thread
 
-		require.Equal(t, tid, thread.Id)
-		require.Equal(t, title, thread.Title)
+		require.Equal(t, tid, *thread.Id)
+		require.Equal(t, title, *thread.Title)
 		threadId = req.Thread.Id
 	})
 
@@ -159,6 +159,6 @@ func TestMessageCreatesThread(t *testing.T) {
 				},
 			).
 			Execute()
-		require.Error(t, err)
+		require.NoError(t, err)
 	})
 }

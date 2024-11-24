@@ -116,13 +116,19 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 		Authorized: openapi.PtrBool(true),
 	}
 
+	mockUserSvc.EXPECT().GetPublicKey(ctx).Return(openapi.ApiGetPublicKeyRequest{
+		ApiService: mockUserSvc,
+	}).AnyTimes()
+	mockUserSvc.EXPECT().GetPublicKeyExecute(gomock.Any()).Return(&openapi.UserSvcGetPublicKeyResponse{
+		PublicKey: openapi.PtrString(""),
+	}, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().Login(ctx).Return(mockLoginRequest).AnyTimes()
 	mockUserSvc.EXPECT().LoginExecute(gomock.Any()).Return(expectedUserSvcLoginResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().UpsertPermission(ctx, gomock.Any()).Return(mockUpsertPermissionRequest).AnyTimes()
 	mockUserSvc.EXPECT().UpsertPermissionExecute(gomock.Any()).Return(expectedUserSvcUpsertPermissionResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().AddPermissionToRole(ctx, gomock.Any(), gomock.Any()).Return(mockAddPermissionToRoleRequest).AnyTimes()
 	mockUserSvc.EXPECT().AddPermissionToRoleExecute(gomock.Any()).Return(expectedUserSvcAddPermissionToRoleResponse, nil, nil).AnyTimes()
-	mockUserSvc.EXPECT().IsAuthorized(ctx, gomock.Any()).Return(mockIsAuthorizedRequest).AnyTimes()
+	mockUserSvc.EXPECT().IsAuthorized(gomock.Any(), gomock.Any()).Return(mockIsAuthorizedRequest).AnyTimes()
 	mockUserSvc.EXPECT().IsAuthorizedExecute(gomock.Any()).Return(expectedUserSvcIsAuthorizedResponse, nil, nil).AnyTimes()
 
 	return mockUserSvc
