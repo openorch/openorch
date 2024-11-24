@@ -27,6 +27,7 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/test"
 	"github.com/singulatron/superplatform/server/internal/di"
+	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 	"go.uber.org/mock/gomock"
 )
 
@@ -79,7 +80,9 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				ConfigSvcAPI:   mockConfigSvc,
 				ModelSvcAPI:    mockModelSvc,
 				FirehoseSvcAPI: mockFirehoseSvc,
-				PromptSvcAPI:   sdk.NewApiClientFactory(server.URL).Client().PromptSvcAPI,
+				PromptSvcAPI: sdk.NewApiClientFactory(server.URL).
+					Client().
+					PromptSvcAPI,
 			}).
 			AnyTimes()
 
@@ -100,41 +103,97 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 	})
 
 	ginkgo.JustBeforeEach(func() {
-		mockConfigSvc.EXPECT().GetConfig(gomock.Any()).Return(openapi.ApiGetConfigRequest{
-			ApiService: mockConfigSvc,
-		})
-		mockConfigSvc.EXPECT().GetConfigExecute(gomock.Any()).Return(&openapi.ConfigSvcGetConfigResponse{
-			Config: &openapi.ConfigSvcConfig{
-				Model: &openapi.ConfigSvcModelServiceConfig{
-					CurrentModelId: openapi.PtrString("mistral-1"),
+		mockConfigSvc.EXPECT().
+			GetConfig(gomock.Any()).
+			Return(openapi.ApiGetConfigRequest{
+				ApiService: mockConfigSvc,
+			}).AnyTimes()
+		mockConfigSvc.EXPECT().
+			GetConfigExecute(gomock.Any()).
+			Return(&openapi.ConfigSvcGetConfigResponse{
+				Config: &openapi.ConfigSvcConfig{
+					Model: &openapi.ConfigSvcModelServiceConfig{
+						CurrentModelId: openapi.PtrString("mistral-1"),
+					},
 				},
-			},
-		}, nil, nil)
+			}, nil, nil).AnyTimes()
 
-		mockChatSvc.EXPECT().GetThread(gomock.Any(), gomock.Any()).Return(openapi.ApiGetThreadRequest{
-			ApiService: mockChatSvc,
-		})
-		mockChatSvc.EXPECT().GetThreadExecute(gomock.Any()).Return(&openapi.ChatSvcGetThreadResponse{
-			Exists: openapi.PtrBool(true),
-			Thread: &openapi.ChatSvcThread{
-				Id: openapi.PtrString("thread-1"),
-			},
-		}, nil, nil)
-
-		mockModelSvc.EXPECT().ListModels(gomock.Any()).Return(openapi.ApiListModelsRequest{
-			ApiService: mockModelSvc,
-		})
-		mockModelSvc.EXPECT().ListModelsExecute(gomock.Any()).Return(&openapi.ModelSvcListResponse{
-			Models: []openapi.ModelSvcModel{
-				{
+		mockModelSvc.EXPECT().
+			GetModel(gomock.Any(), gomock.Any()).
+			Return(openapi.ApiGetModelRequest{
+				ApiService: mockModelSvc,
+			}).AnyTimes()
+		mockModelSvc.EXPECT().
+			GetModelExecute(gomock.Any()).
+			Return(&openapi.ModelSvcGetModelResponse{
+				Exists: true,
+				Model: openapi.ModelSvcModel{
 					Id: openapi.PtrString("mistral-1"),
 				},
-			},
-		}, nil, nil)
-		mockFirehoseSvc.EXPECT().PublishEvent(gomock.Any()).Return(openapi.ApiPublishEventRequest{
-			ApiService: mockFirehoseSvc,
-		})
-		mockFirehoseSvc.EXPECT().PublishEventExecute(gomock.Any()).Return(nil, nil, nil)
+				Platform: openapi.ModelSvcPlatform{
+					Id: openapi.PtrString(modeltypes.PlatformLlamaCpp.Id),
+				},
+			}, nil, nil).AnyTimes()
+
+		mockModelSvc.EXPECT().
+			GetModelStatus(gomock.Any(), gomock.Any()).
+			Return(openapi.ApiGetModelStatusRequest{
+				ApiService: mockModelSvc,
+			}).AnyTimes()
+		mockModelSvc.EXPECT().
+			GetModelStatusExecute(gomock.Any()).
+			Return(&openapi.ModelSvcStatusResponse{
+				Status: &openapi.ModelSvcModelStatus{
+					AssetsReady: true,
+					Running:     true,
+					Address:     "localhost:8001",
+				},
+			}, nil, nil).AnyTimes()
+
+		mockChatSvc.EXPECT().
+			GetThread(gomock.Any(), gomock.Any()).
+			Return(openapi.ApiGetThreadRequest{
+				ApiService: mockChatSvc,
+			})
+		mockChatSvc.EXPECT().
+			GetThreadExecute(gomock.Any()).
+			Return(&openapi.ChatSvcGetThreadResponse{
+				Exists: openapi.PtrBool(true),
+				Thread: &openapi.ChatSvcThread{
+					Id: openapi.PtrString("thread-1"),
+				},
+			}, nil, nil)
+		mockChatSvc.EXPECT().
+			AddMessage(gomock.Any(), gomock.Any()).
+			Return(openapi.ApiAddMessageRequest{
+				ApiService: mockChatSvc,
+			}).AnyTimes()
+		mockChatSvc.EXPECT().
+			AddMessageExecute(gomock.Any()).
+			Return(nil, nil, nil).AnyTimes()
+
+		mockModelSvc.EXPECT().
+			ListModels(gomock.Any()).
+			Return(openapi.ApiListModelsRequest{
+				ApiService: mockModelSvc,
+			})
+		mockModelSvc.EXPECT().
+			ListModelsExecute(gomock.Any()).
+			Return(&openapi.ModelSvcListResponse{
+				Models: []openapi.ModelSvcModel{
+					{
+						Id: openapi.PtrString("mistral-1"),
+					},
+				},
+			}, nil, nil)
+		mockFirehoseSvc.EXPECT().
+			PublishEvent(gomock.Any()).
+			Return(openapi.ApiPublishEventRequest{
+				ApiService: mockFirehoseSvc,
+			}).AnyTimes()
+		mockFirehoseSvc.EXPECT().
+			PublishEventExecute(gomock.Any()).
+			Return(nil, nil).AnyTimes()
 
 		lc.EXPECT().
 			PostCompletionsStreamed(gomock.Any(), gomock.Any()).
@@ -160,7 +219,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		ctrl.Finish()
 	})
 
-	ginkgo.Context("sync prompt works", func() {
+	ginkgo.Context("prompting works", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
@@ -188,7 +247,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			}
 		})
 
-		ginkgo.It("saves a deployment successfully", func() {
+		ginkgo.It("sync promp returns in time", func() {
 			crsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())

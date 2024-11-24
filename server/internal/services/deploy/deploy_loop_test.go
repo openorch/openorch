@@ -58,7 +58,9 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				UserSvcAPI:     mockUserSvc,
 				RegistrySvcAPI: mockRegistrySvc,
 				DockerSvcAPI:   mockDockerSvc,
-				DeploySvcAPI:   sdk.NewApiClientFactory(server.URL).Client().DeploySvcAPI,
+				DeploySvcAPI: sdk.NewApiClientFactory(server.URL).
+					Client().
+					DeploySvcAPI,
 			}).
 			AnyTimes()
 
