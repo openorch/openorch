@@ -22,7 +22,6 @@ import (
 	"github.com/onsi/gomega"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
 	"github.com/singulatron/superplatform/sdk/go/test"
 	"github.com/singulatron/superplatform/server/internal/di"
 	"go.uber.org/mock/gomock"
@@ -38,7 +37,6 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		server     *httptest.Server
 		ctrl       *gomock.Controller
 		ctx        context.Context
-		lc         *llm.MockClientI
 		userClient *openapi.APIClient
 
 		mockClientFactory *sdk.MockClientFactory
@@ -57,10 +55,11 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		hs := &di.HandlerSwitcher{}
 		server = httptest.NewServer(hs)
 
-		lc = llm.NewMockClientI(ctrl)
-
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
-		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithSlug(userSlug))
+
+		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithSlugFactory(func() string {
+			return userSlug
+		}))
 		mockAuthorizer := sdk.NewMockAuthorizer(ctrl)
 		mockAuthorizer.EXPECT().
 			IsAdminFromRequest(gomock.Any(), gomock.Any()).
@@ -79,7 +78,6 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		options := &di.Options{
 			Test:          true,
 			Url:           server.URL,
-			LLMClient:     lc,
 			Authorizer:    mockAuthorizer,
 			ClientFactory: mockClientFactory,
 		}
@@ -156,18 +154,6 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 			gomega.Expect(*readRsp.Exists).To(gomega.Equal(true))
 
 			userSlug = "test-user-2"
-			mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithSlug(userSlug))
-
-			mockClientFactory.EXPECT().
-				Client(gomock.Any()).
-				Return(&openapi.APIClient{
-					UserSvcAPI: mockUserSvc,
-					SecretSvcAPI: sdk.NewApiClientFactory(server.URL).
-						Client().
-						SecretSvcAPI,
-				}).
-				AnyTimes()
-			userClient = mockClientFactory.Client()
 
 			_, _, err = userClient.SecretSvcAPI.ReadSecret(ctx).Body(openapi.SecretSvcReadSecretRequest{
 				Key: openapi.PtrString("nonexistent"),

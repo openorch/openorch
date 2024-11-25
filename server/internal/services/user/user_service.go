@@ -125,6 +125,7 @@ func NewUserService(
 	}
 
 	service := &UserService{
+		authorizer:                 authorizer,
 		clientFactory:              clientFactory,
 		usersStore:                 usersStore,
 		rolesStore:                 rolesStore,
