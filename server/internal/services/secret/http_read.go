@@ -16,6 +16,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/pkg/errors"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	secret "github.com/singulatron/superplatform/server/internal/services/secret/types"
@@ -28,7 +29,7 @@ import (
 // @Tags Secret Svc
 // @Accept json
 // @Produce json
-// @Param body body deploy.ListDeploymentsRequest false "List Deploys Request"
+// @Param body body secret.ReadSecretRequest false "Read Secret Request"
 // @Success 200 {object} secret.ReadSecretResponse "Read Secret Response"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
@@ -48,7 +49,6 @@ func (cs *SecretService) Read(
 	}
 	if !isAuthRsp.GetAuthorized() {
 		w.WriteHeader(http.StatusUnauthorized)
-
 		w.Write([]byte(`Unauthorized`))
 		return
 	}
@@ -69,7 +69,7 @@ func (cs *SecretService) Read(
 		return
 	}
 
-	s, found, err := cs.getSecret(req.Key, isAdmin, *isAuthRsp.User.Slug)
+	s, exists, err := cs.getSecret(req.Key, isAdmin, *isAuthRsp.User.Slug)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -77,7 +77,7 @@ func (cs *SecretService) Read(
 	}
 
 	jsonData, _ := json.Marshal(secret.ReadSecretResponse{
-		Found:  found,
+		Exists: exists,
 		Secret: s,
 	})
 	w.Write(jsonData)
@@ -108,7 +108,7 @@ func (cs *SecretService) getSecret(
 	}
 
 	if !canRead {
-		return nil, false, nil
+		return nil, false, errors.New("unauthorized")
 	}
 
 	return secret, true, nil

@@ -105,6 +105,12 @@ func (cs *SecretService) saveSecret(
 		if s.Id == "" {
 			s.Id = sdk.Id("secr")
 		}
+		if s.Writers == nil {
+			s.Writers = []string{userSlug}
+		}
+		if s.Readers == nil {
+			s.Readers = []string{userSlug}
+		}
 
 		return cs.secretStore.Upsert(&s)
 	}

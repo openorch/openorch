@@ -45,15 +45,10 @@ func NewSecretService(
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*SecretService, error) {
 	cs := &SecretService{
-		lock: lock,
-	}
-
-	return cs, nil
-}
-
-func (cs *SecretService) Start() error {
-	if cs.datastoreFactory == nil {
-		return errors.New("no datastore factory")
+		lock:             lock,
+		datastoreFactory: datastoreFactory,
+		clientFactory:    clientFactory,
+		authorizer:       authorizer,
 	}
 
 	credentialStore, err := cs.datastoreFactory(
@@ -61,7 +56,7 @@ func (cs *SecretService) Start() error {
 		&sdk.Credential{},
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	cs.credentialStore = credentialStore
 
@@ -70,9 +65,17 @@ func (cs *SecretService) Start() error {
 		&secret.Secret{},
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	cs.secretStore = secretStore
+
+	return cs, nil
+}
+
+func (cs *SecretService) Start() error {
+	if cs.datastoreFactory == nil {
+		return errors.New("no datastore factory")
+	}
 
 	ctx := context.Background()
 	cs.lock.Acquire(ctx, "secret-svc-start")

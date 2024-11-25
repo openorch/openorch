@@ -44,8 +44,25 @@ func MakeClients(clientFactory sdk.ClientFactory, num int) ([]*openapi.APIClient
 	return ret, nil
 }
 
+type MockUserOptions struct {
+	Slug string
+}
+
+type MockUserOption func(*MockUserOptions)
+
+func WithSlug(slug string) MockUserOption {
+	return func(o *MockUserOptions) {
+		o.Slug = slug
+	}
+}
+
 // Returns a mock User Svc with expects set up for calls that happen during the startup of the services.
-func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUserSvcAPI {
+func MockUserSvc(ctx context.Context, ctrl *gomock.Controller, options ...MockUserOption) *openapi.MockUserSvcAPI {
+	opts := &MockUserOptions{}
+	for _, o := range options {
+		o(opts)
+	}
+
 	mockUserSvc := openapi.NewMockUserSvcAPI(ctrl)
 
 	expectedUserSvcLoginResponse := &openapi.UserSvcLoginResponse{
@@ -71,7 +88,8 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 	expectedUserSvcIsAuthorizedResponse := &openapi.UserSvcIsAuthorizedResponse{
 		Authorized: openapi.PtrBool(true),
 		User: &openapi.UserSvcUser{
-			Id: openapi.PtrString("user-id-1"),
+			Id:   openapi.PtrString("user-id-1"),
+			Slug: &opts.Slug,
 		},
 	}
 

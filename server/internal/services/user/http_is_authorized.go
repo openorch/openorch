@@ -46,7 +46,6 @@ func (s *UserService) IsAuthorized(
 ) {
 
 	req := &user.IsAuthorizedRequest{}
-	//m := map[string]string{}
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

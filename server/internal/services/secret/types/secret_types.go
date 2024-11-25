@@ -12,11 +12,11 @@ type ErrorResponse struct {
 }
 
 type Secret struct {
-	Id      string   // Unique identifier for the secret
-	Key     string   // Identifier for the secret
-	Value   string   // Plaintext value (only stored temporarily in memory, if at all)
-	Readers []string // Slugs of services/users who can read the secret
-	Writers []string // Slugs of services/users who can modify the secret
+	Id      string   `json:"id"`      // Unique identifier for the secret
+	Key     string   `json:"key"`     // Identifier for the secret
+	Value   string   `json:"value"`   // Plaintext value (only stored temporarily in memory, if at all)
+	Readers []string `json:"readers"` // Slugs of services/users who can read the secret
+	Writers []string `json:"writers"` // Slugs of services/users who can modify the secret
 }
 
 func (s *Secret) GetId() string {
@@ -28,7 +28,7 @@ type ReadSecretRequest struct {
 }
 
 type ReadSecretResponse struct {
-	Found  bool    `json:"found"`
+	Exists  bool    `json:"exists"`
 	Secret *Secret `json:"secret"`
 }
 
