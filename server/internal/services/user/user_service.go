@@ -28,6 +28,8 @@ type UserService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
+	authorizer sdk.Authorizer
+
 	usersStore                 datastore.DataStore
 	rolesStore                 datastore.DataStore
 	permissionsStore           datastore.DataStore
@@ -47,6 +49,7 @@ type UserService struct {
 
 func NewUserService(
 	clientFactory sdk.ClientFactory,
+	authorizer sdk.Authorizer,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*UserService, error) {
 	usersStore, err := datastoreFactory("userSvcUsers", &usertypes.User{})
@@ -122,6 +125,7 @@ func NewUserService(
 	}
 
 	service := &UserService{
+		authorizer:                 authorizer,
 		clientFactory:              clientFactory,
 		usersStore:                 usersStore,
 		rolesStore:                 rolesStore,

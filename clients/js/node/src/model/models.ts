@@ -111,6 +111,10 @@ export * from './registrySvcRepositorySpec';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
+export * from './secretSvcReadSecretRequest';
+export * from './secretSvcReadSecretResponse';
+export * from './secretSvcSecret';
+export * from './secretSvcWriteSecretRequest';
 export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
@@ -267,6 +271,10 @@ import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 import { RegistrySvcResourceUsage } from './registrySvcResourceUsage';
 import { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest';
 import { RegistrySvcUsage } from './registrySvcUsage';
+import { SecretSvcReadSecretRequest } from './secretSvcReadSecretRequest';
+import { SecretSvcReadSecretResponse } from './secretSvcReadSecretResponse';
+import { SecretSvcSecret } from './secretSvcSecret';
+import { SecretSvcWriteSecretRequest } from './secretSvcWriteSecretRequest';
 import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
@@ -426,6 +434,10 @@ let typeMap: {[index: string]: any} = {
     "RegistrySvcResourceUsage": RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": RegistrySvcUsage,
+    "SecretSvcReadSecretRequest": SecretSvcReadSecretRequest,
+    "SecretSvcReadSecretResponse": SecretSvcReadSecretResponse,
+    "SecretSvcSecret": SecretSvcSecret,
+    "SecretSvcWriteSecretRequest": SecretSvcWriteSecretRequest,
     "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,

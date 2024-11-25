@@ -41,7 +41,7 @@ func TestRegistration(t *testing.T) {
 	require.NoError(t, err)
 
 	t.Run("user password change", func(t *testing.T) {
-		claim, err := sdk.DecodeJWT(adminToken, *publicKeyRsp.PublicKey)
+		claim, err := options.Authorizer.DecodeJWT(*publicKeyRsp.PublicKey, adminToken)
 		require.NoError(t, err)
 
 		byTokenRsp, _, err := adminClient.UserSvcAPI.ReadUserByToken(context.Background()).
@@ -123,7 +123,7 @@ func TestOrganization(t *testing.T) {
 				Execute()
 			require.NoError(t, err)
 
-			claim, err := sdk.DecodeJWT(adminToken, *publicKeyRsp.PublicKey)
+			claim, err := options.Authorizer.DecodeJWT(*publicKeyRsp.PublicKey, adminToken)
 			require.NoError(t, err)
 			require.NotNil(t, claim)
 			require.Equal(t, 1, len(claim.RoleIds), claim.RoleIds)
@@ -137,9 +137,9 @@ func TestOrganization(t *testing.T) {
 				Execute()
 			require.NoError(t, err)
 
-			claim, err = sdk.DecodeJWT(
-				*loginRsp.Token.Token,
+			claim, err = options.Authorizer.DecodeJWT(
 				*publicKeyRsp.PublicKey,
+				*loginRsp.Token.Token,
 			)
 			require.NoError(t, err)
 			require.NotNil(t, claim)
@@ -186,9 +186,9 @@ func TestOrganization(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		claim, err := sdk.DecodeJWT(
-			*loginRsp.Token.Token,
+		claim, err := options.Authorizer.DecodeJWT(
 			*publicKeyRsp.PublicKey,
+			*loginRsp.Token.Token,
 		)
 
 		require.NoError(t, err)

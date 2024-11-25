@@ -1,4 +1,4 @@
-export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
+export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SecretSvcApi, SecretSvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
 export { ApiKeyAuth, HttpBasicAuth, HttpBearerAuth, OAuth, ObjectSerializer, VoidAuth } from './models.mjs';
 export { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest.mjs';
 export { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest.mjs';
@@ -111,6 +111,10 @@ export { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec.mjs';
 export { RegistrySvcResourceUsage } from './registrySvcResourceUsage.mjs';
 export { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest.mjs';
 export { RegistrySvcUsage } from './registrySvcUsage.mjs';
+export { SecretSvcReadSecretRequest } from './secretSvcReadSecretRequest.mjs';
+export { SecretSvcReadSecretResponse } from './secretSvcReadSecretResponse.mjs';
+export { SecretSvcSecret } from './secretSvcSecret.mjs';
+export { SecretSvcWriteSecretRequest } from './secretSvcWriteSecretRequest.mjs';
 export { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest.mjs';
 export { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse.mjs';
 export { SourceSvcErrorResponse } from './sourceSvcErrorResponse.mjs';

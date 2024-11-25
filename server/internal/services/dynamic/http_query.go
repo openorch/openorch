@@ -68,9 +68,7 @@ func (g *DynamicService) Query(
 	}
 	defer r.Body.Close()
 
-	token, _ := sdk.TokenFromRequest(r)
-
-	claims, err := sdk.DecodeJWT(token, g.publicKey)
+	claims, err := g.authorizer.DecodeJWTFromRequest(g.publicKey, r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

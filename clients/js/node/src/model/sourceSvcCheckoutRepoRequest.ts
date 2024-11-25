@@ -26,6 +26,10 @@ export class SourceSvcCheckoutRepoRequest {
     */
     'sshKeyPwd'?: string;
     /**
+    * Token for HTTPS auth (optional for SSH)
+    */
+    'token'?: string;
+    /**
     * Full repository URL (e.g., https://github.com/user/repo)
     */
     'url'?: string;
@@ -54,6 +58,11 @@ export class SourceSvcCheckoutRepoRequest {
         {
             "name": "sshKeyPwd",
             "baseName": "ssh_key_pwd",
+            "type": "string"
+        },
+        {
+            "name": "token",
+            "baseName": "token",
             "type": "string"
         },
         {

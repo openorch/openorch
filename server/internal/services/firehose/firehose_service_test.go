@@ -1,14 +1,13 @@
 package firehoseservice_test
 
 import (
-	"bufio"
 	"context"
 	"encoding/json"
-	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
+	"time"
 
+	"github.com/r3labs/sse"
 	client "github.com/singulatron/superplatform/clients/go"
 	"github.com/singulatron/superplatform/sdk/go/test"
 	"github.com/singulatron/superplatform/server/internal/di"
@@ -37,64 +36,79 @@ func TestFirehoseSubscription(t *testing.T) {
 
 	firehoseSvc := cl.FirehoseSvcAPI
 
-	t.Run("firehose subscription", func(t *testing.T) {
+	t.Run("firehose subscription with timeout", func(t *testing.T) {
 		event := &client.FirehoseSvcEvent{
 			Name: client.PtrString("test-event"),
 			Data: map[string]any{"hi": "there"},
 		}
 
-		eventChannel := make(chan *firehose.Event, 1)
+		eventChannel := make(chan *sse.Event, 1)
 
-		go func() {
-			req, err := http.NewRequestWithContext(
-				context.Background(),
-				http.MethodGet,
-				server.URL+"/firehose-svc/events/subscribe",
-				nil,
-			)
+		errChannel := make(chan error, 1)
+		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
-			require.NoError(t, err)
-			req.Header.Set("Authorization", "Bearer "+adminToken)
+	outer:
+		for attempt := 0; attempt < 3; attempt++ {
 
-			resp, err := http.DefaultClient.Do(req)
-			require.NoError(t, err)
-			defer resp.Body.Close()
-
-			scanner := bufio.NewScanner(resp.Body)
-			for scanner.Scan() {
-				line := scanner.Text()
-
-				if !strings.HasPrefix(line, "data: ") {
-					return
-				}
-
-				ev := &firehose.Event{}
-				jsonData := strings.TrimSpace(
-					strings.ReplaceAll(line, "data: ", ""),
-				)
-				if jsonData == "" {
-					return
-				}
-
-				err = json.Unmarshal([]byte(jsonData), &ev)
-				require.NoError(t, err)
-
-				eventChannel <- ev
+			sseClient := sse.NewClient(server.URL + "/firehose-svc/events/subscribe")
+			sseClient.Headers = map[string]string{
+				"Authorization": "Bearer " + adminToken,
 			}
 
-			require.NoError(t, scanner.Err())
-		}()
+			t.Log("Subscribing to firehose")
+			go func() {
+				err := sseClient.SubscribeChan("messages", eventChannel)
+				if err != nil {
+					errChannel <- err
+				}
 
-		_, err := firehoseSvc.PublishEvent(context.Background()).
-			Event(client.FirehoseSvcEventPublishRequest{
-				Event: event,
-			}).
-			Execute()
-		require.NoError(t, err)
+			}()
 
-		receivedEvent := <-eventChannel
+			go func() {
+				_, publishErr := firehoseSvc.PublishEvent(ctx).
+					Event(client.FirehoseSvcEventPublishRequest{
+						Event: event,
+					}).
+					Execute()
 
-		require.Equal(t, *event.Name, receivedEvent.Name)
-		require.Equal(t, event.Data, receivedEvent.Data)
+				if publishErr != nil {
+					t.Logf("Failed to publish event %v", publishErr)
+				}
+			}()
+
+			select {
+			case receivedEvent := <-eventChannel:
+				t.Logf("Received data: %s", receivedEvent.Data)
+
+				ev := &firehose.Event{}
+				err = json.Unmarshal([]byte(receivedEvent.Data), ev)
+				if err != nil {
+					errChannel <- err
+					return
+				}
+
+				t.Logf("Received event: %v", receivedEvent)
+
+				require.Equal(t, *event.Name, ev.Name)
+				require.Equal(t, event.Data, ev.Data)
+
+				sseClient.Unsubscribe(eventChannel)
+				close(eventChannel)
+				return
+
+			case err := <-errChannel:
+				t.Log(err)
+				continue outer
+
+			case <-time.After(3 * time.Second):
+				continue outer
+
+			case <-time.After(10 * time.Second):
+				break outer
+			}
+
+		}
+
+		t.Fatalf("Test timed out waiting for event")
 	})
 }

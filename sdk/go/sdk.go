@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	"net/http"
-	"strings"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/pkg/errors"
@@ -62,41 +60,6 @@ func Id(prefix string) string {
 	}
 
 	return prefix + "_" + string(b)
-}
-
-func DecodeJWT(tokenString string, publicKeyString string) (*Claims, error) {
-	publicKey, err := PublicKeyFromString(publicKeyString)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to get public key from string")
-	}
-
-	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
-		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
-		}
-		return publicKey, nil
-	})
-
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse JWT: %v", err)
-	}
-
-	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
-		return claims, nil
-	}
-
-	return nil, fmt.Errorf("invalid JWT token")
-}
-
-func TokenFromRequest(r *http.Request) (string, bool) {
-	authHeader := r.Header.Get("Authorization")
-	authHeader = strings.Replace(authHeader, "Bearer ", "", 1)
-
-	if authHeader == "" || authHeader == "Bearer" {
-		return "", false
-	}
-
-	return authHeader, true
 }
 
 func PublicKeyFromString(publicKeyPem string) (*rsa.PublicKey, error) {

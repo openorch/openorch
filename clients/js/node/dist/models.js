@@ -111,6 +111,10 @@ var registrySvcRepositorySpec = require('./registrySvcRepositorySpec.js');
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
+var secretSvcReadSecretRequest = require('./secretSvcReadSecretRequest.js');
+var secretSvcReadSecretResponse = require('./secretSvcReadSecretResponse.js');
+var secretSvcSecret = require('./secretSvcSecret.js');
+var secretSvcWriteSecretRequest = require('./secretSvcWriteSecretRequest.js');
 var sourceSvcCheckoutRepoRequest = require('./sourceSvcCheckoutRepoRequest.js');
 var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
 var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
@@ -268,6 +272,10 @@ let typeMap = {
     "RegistrySvcResourceUsage": registrySvcResourceUsage.RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": registrySvcUsage.RegistrySvcUsage,
+    "SecretSvcReadSecretRequest": secretSvcReadSecretRequest.SecretSvcReadSecretRequest,
+    "SecretSvcReadSecretResponse": secretSvcReadSecretResponse.SecretSvcReadSecretResponse,
+    "SecretSvcSecret": secretSvcSecret.SecretSvcSecret,
+    "SecretSvcWriteSecretRequest": secretSvcWriteSecretRequest.SecretSvcWriteSecretRequest,
     "SourceSvcCheckoutRepoRequest": sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": sourceSvcErrorResponse.SourceSvcErrorResponse,
@@ -622,6 +630,10 @@ exports.RegistrySvcRepositorySpec = registrySvcRepositorySpec.RegistrySvcReposit
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
+exports.SecretSvcReadSecretRequest = secretSvcReadSecretRequest.SecretSvcReadSecretRequest;
+exports.SecretSvcReadSecretResponse = secretSvcReadSecretResponse.SecretSvcReadSecretResponse;
+exports.SecretSvcSecret = secretSvcSecret.SecretSvcSecret;
+exports.SecretSvcWriteSecretRequest = secretSvcWriteSecretRequest.SecretSvcWriteSecretRequest;
 exports.SourceSvcCheckoutRepoRequest = sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest;
 exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
 exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;
