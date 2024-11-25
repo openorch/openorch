@@ -51,20 +51,20 @@ var port = router.GetPort()
 // @externalDocs.description  Superplatform API
 // @externalDocs.url          https://superplatform.ai/docs/category/singulatron-api
 func main() {
-	router, starter, err := node.Start(node_types.Options{})
+	nodeInfo, err := node.Start(node_types.Options{})
 	if err != nil {
 		logger.Error("Cannot start node", slog.Any("error", err))
 		os.Exit(1)
 	}
 
 	srv := &http.Server{
-		Handler: router,
+		Handler: nodeInfo.Router,
 	}
 
 	logger.Info("Server started", slog.String("port", port))
 	go func() {
 		time.Sleep(5 * time.Millisecond)
-		err := starter()
+		err := nodeInfo.StarterFunc()
 		if err != nil {
 			logger.Error("Cannot start universe", slog.Any("error", err))
 			os.Exit(1)
