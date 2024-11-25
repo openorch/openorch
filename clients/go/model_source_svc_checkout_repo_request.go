@@ -26,6 +26,8 @@ type SourceSvcCheckoutRepoRequest struct {
 	SshKey *string `json:"ssh_key,omitempty"`
 	// Password for SSH private key if encrypted (optional)
 	SshKeyPwd *string `json:"ssh_key_pwd,omitempty"`
+	// Token for HTTPS auth (optional for SSH)
+	Token *string `json:"token,omitempty"`
 	// Full repository URL (e.g., https://github.com/user/repo)
 	Url *string `json:"url,omitempty"`
 	// Username for HTTPS or SSH user (optional for SSH)
@@ -147,6 +149,38 @@ func (o *SourceSvcCheckoutRepoRequest) SetSshKeyPwd(v string) {
 	o.SshKeyPwd = &v
 }
 
+// GetToken returns the Token field value if set, zero value otherwise.
+func (o *SourceSvcCheckoutRepoRequest) GetToken() string {
+	if o == nil || IsNil(o.Token) {
+		var ret string
+		return ret
+	}
+	return *o.Token
+}
+
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceSvcCheckoutRepoRequest) GetTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.Token) {
+		return nil, false
+	}
+	return o.Token, true
+}
+
+// HasToken returns a boolean if a field has been set.
+func (o *SourceSvcCheckoutRepoRequest) HasToken() bool {
+	if o != nil && !IsNil(o.Token) {
+		return true
+	}
+
+	return false
+}
+
+// SetToken gets a reference to the given string and assigns it to the Token field.
+func (o *SourceSvcCheckoutRepoRequest) SetToken(v string) {
+	o.Token = &v
+}
+
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *SourceSvcCheckoutRepoRequest) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
@@ -261,6 +295,9 @@ func (o SourceSvcCheckoutRepoRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SshKeyPwd) {
 		toSerialize["ssh_key_pwd"] = o.SshKeyPwd
+	}
+	if !IsNil(o.Token) {
+		toSerialize["token"] = o.Token
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url

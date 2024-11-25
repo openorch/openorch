@@ -16,7 +16,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
 	user "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
@@ -33,7 +32,7 @@ import (
 // @Router /user-svc/user/by-token [post]
 func (s *UserService) ReadUserByToken(w http.ResponseWriter, r *http.Request) {
 
-	token, exists := sdk.TokenFromRequest(r)
+	token, exists := s.authorizer.TokenFromRequest(r)
 	if !exists {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`Token Missing`))

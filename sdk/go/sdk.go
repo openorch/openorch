@@ -64,13 +64,35 @@ func Id(prefix string) string {
 	return prefix + "_" + string(b)
 }
 
-func DecodeJWT(tokenString string, publicKeyString string) (*Claims, error) {
-	publicKey, err := PublicKeyFromString(publicKeyString)
+// Authorizer can extract roles from tokens.
+// This interface is not the only thing that does authorization, however.
+// Authorization also happens by calling the User Svc to check if a user has a specific permission to call an endpoint.
+type Authorizer interface {
+	TokenFromRequest(r *http.Request) (string, bool)
+	DecodeJWT(userSvcPublicKey, token string) (*Claims, error)
+	DecodeJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error)
+	IsAdmin(userSvcPublicKey string, token string) (bool, error)
+	IsAdminFromRequest(userSvcPublicKey string, r *http.Request) (bool, error)
+}
+
+type AuthorizerImpl struct{}
+
+func (a AuthorizerImpl) DecodeJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
+	tokenString, hasToken := a.TokenFromRequest(r)
+	if !hasToken {
+		return nil, fmt.Errorf("no token found in request")
+	}
+
+	return a.DecodeJWT(userSvcPublicKey, tokenString)
+}
+
+func (a AuthorizerImpl) DecodeJWT(userSvcPublicKey, token string) (*Claims, error) {
+	publicKey, err := PublicKeyFromString(userSvcPublicKey)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get public key from string")
 	}
 
-	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+	jwtToken, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -81,14 +103,14 @@ func DecodeJWT(tokenString string, publicKeyString string) (*Claims, error) {
 		return nil, fmt.Errorf("failed to parse JWT: %v", err)
 	}
 
-	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
+	if claims, ok := jwtToken.Claims.(*Claims); ok && jwtToken.Valid {
 		return claims, nil
 	}
 
 	return nil, fmt.Errorf("invalid JWT token")
 }
 
-func TokenFromRequest(r *http.Request) (string, bool) {
+func (a AuthorizerImpl) TokenFromRequest(r *http.Request) (string, bool) {
 	authHeader := r.Header.Get("Authorization")
 	authHeader = strings.Replace(authHeader, "Bearer ", "", 1)
 
@@ -97,6 +119,31 @@ func TokenFromRequest(r *http.Request) (string, bool) {
 	}
 
 	return authHeader, true
+}
+
+func (a AuthorizerImpl) IsAdminFromRequest(userSvcPublicKey string, r *http.Request) (bool, error) {
+	tokenString, hasToken := a.TokenFromRequest(r)
+	if !hasToken {
+		return false, fmt.Errorf("no token found in request")
+	}
+
+	return a.IsAdmin(userSvcPublicKey, tokenString)
+}
+
+func (a AuthorizerImpl) IsAdmin(userSvcPublicKey, token string) (bool, error) {
+	claims, err := a.DecodeJWT(userSvcPublicKey, token)
+	if err != nil {
+		return false, err
+	}
+
+	for _, roleId := range claims.RoleIds {
+		// @todo remove constant
+		if roleId == "user-svc:admin" {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
 func PublicKeyFromString(publicKeyPem string) (*rsa.PublicKey, error) {

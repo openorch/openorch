@@ -6339,6 +6339,10 @@ const docTemplate = `{
                     "description": "Password for SSH private key if encrypted (optional)",
                     "type": "string"
                 },
+                "token": {
+                    "description": "Token for HTTPS auth (optional for SSH)",
+                    "type": "string"
+                },
                 "url": {
                     "description": "Full repository URL (e.g., https://github.com/user/repo)",
                     "type": "string"

@@ -33,10 +33,10 @@ import (
 
 func TestPromptService(t *testing.T) {
 	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "DeployService Suite")
+	ginkgo.RunSpecs(t, "PromptService Suite")
 }
 
-var _ = ginkgo.Describe("Deploy Loop", func() {
+var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 	var (
 		server     *httptest.Server
 		ctrl       *gomock.Controller

@@ -34,8 +34,8 @@ import (
 )
 
 // Start wraps the dependency injection universe creation
-// so getting envars happens outside of that.
-// The two could probably be merged.
+// so getting envars happens outside of that. The two could probably be merged.
+// Node options are a set of node specific configuration options and secrets required for bootstrapping.
 func Start(options node_types.Options) (*mux.Router, func() error, error) {
 	defer func() {
 		if r := recover(); r != nil {

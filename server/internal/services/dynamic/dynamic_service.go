@@ -28,7 +28,8 @@ type DynamicService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
-	lock lock.DistributedLock
+	lock       lock.DistributedLock
+	authorizer sdk.Authorizer
 
 	store           datastore.DataStore
 	credentialStore datastore.DataStore
@@ -38,6 +39,7 @@ type DynamicService struct {
 func NewDynamicService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
+	authorizer sdk.Authorizer,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DynamicService, error) {
 	store, err := datastoreFactory("genericSvcObjects", &dynamictypes.Object{})
@@ -56,6 +58,7 @@ func NewDynamicService(
 		clientFactory: clientFactory,
 
 		credentialStore: credentialStore,
+		authorizer:      authorizer,
 
 		lock:  lock,
 		store: store,
