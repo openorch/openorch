@@ -109,6 +109,10 @@ export { RegistrySvcRepositorySpecFromJSON, RegistrySvcRepositorySpecFromJSONTyp
 export { RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, instanceOfRegistrySvcResourceUsage } from './RegistrySvcResourceUsage.mjs';
 export { RegistrySvcSaveDefinitionRequestFromJSON, RegistrySvcSaveDefinitionRequestFromJSONTyped, RegistrySvcSaveDefinitionRequestToJSON, instanceOfRegistrySvcSaveDefinitionRequest } from './RegistrySvcSaveDefinitionRequest.mjs';
 export { RegistrySvcUsageFromJSON, RegistrySvcUsageFromJSONTyped, RegistrySvcUsageToJSON, instanceOfRegistrySvcUsage } from './RegistrySvcUsage.mjs';
+export { SecretSvcReadSecretRequestFromJSON, SecretSvcReadSecretRequestFromJSONTyped, SecretSvcReadSecretRequestToJSON, instanceOfSecretSvcReadSecretRequest } from './SecretSvcReadSecretRequest.mjs';
+export { SecretSvcReadSecretResponseFromJSON, SecretSvcReadSecretResponseFromJSONTyped, SecretSvcReadSecretResponseToJSON, instanceOfSecretSvcReadSecretResponse } from './SecretSvcReadSecretResponse.mjs';
+export { SecretSvcSecretFromJSON, SecretSvcSecretFromJSONTyped, SecretSvcSecretToJSON, instanceOfSecretSvcSecret } from './SecretSvcSecret.mjs';
+export { SecretSvcWriteSecretRequestFromJSON, SecretSvcWriteSecretRequestFromJSONTyped, SecretSvcWriteSecretRequestToJSON, instanceOfSecretSvcWriteSecretRequest } from './SecretSvcWriteSecretRequest.mjs';
 export { SourceSvcCheckoutRepoRequestFromJSON, SourceSvcCheckoutRepoRequestFromJSONTyped, SourceSvcCheckoutRepoRequestToJSON, instanceOfSourceSvcCheckoutRepoRequest } from './SourceSvcCheckoutRepoRequest.mjs';
 export { SourceSvcCheckoutRepoResponseFromJSON, SourceSvcCheckoutRepoResponseFromJSONTyped, SourceSvcCheckoutRepoResponseToJSON, instanceOfSourceSvcCheckoutRepoResponse } from './SourceSvcCheckoutRepoResponse.mjs';
 export { SourceSvcErrorResponseFromJSON, SourceSvcErrorResponseFromJSONTyped, SourceSvcErrorResponseToJSON, instanceOfSourceSvcErrorResponse } from './SourceSvcErrorResponse.mjs';

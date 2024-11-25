@@ -38,6 +38,12 @@ export interface SourceSvcCheckoutRepoRequest {
      */
     sshKeyPwd?: string;
     /**
+     * Token for HTTPS auth (optional for SSH)
+     * @type {string}
+     * @memberof SourceSvcCheckoutRepoRequest
+     */
+    token?: string;
+    /**
      * Full repository URL (e.g., https://github.com/user/repo)
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest
@@ -77,6 +83,7 @@ export function SourceSvcCheckoutRepoRequestFromJSONTyped(json: any, ignoreDiscr
         'password': json['password'] == null ? undefined : json['password'],
         'sshKey': json['ssh_key'] == null ? undefined : json['ssh_key'],
         'sshKeyPwd': json['ssh_key_pwd'] == null ? undefined : json['ssh_key_pwd'],
+        'token': json['token'] == null ? undefined : json['token'],
         'url': json['url'] == null ? undefined : json['url'],
         'username': json['username'] == null ? undefined : json['username'],
         'version': json['version'] == null ? undefined : json['version'],
@@ -92,6 +99,7 @@ export function SourceSvcCheckoutRepoRequestToJSON(value?: SourceSvcCheckoutRepo
         'password': value['password'],
         'ssh_key': value['sshKey'],
         'ssh_key_pwd': value['sshKeyPwd'],
+        'token': value['token'],
         'url': value['url'],
         'username': value['username'],
         'version': value['version'],

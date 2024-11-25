@@ -392,6 +392,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Secret Svc",
+      items: [
+        {
+          type: "doc",
+          id: "superplatform/read-secret",
+          label: "Read Secret",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "superplatform/write-secret",
+          label: "Write Secret",
+          className: "api-method put",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Source Svc",
       items: [
         {
