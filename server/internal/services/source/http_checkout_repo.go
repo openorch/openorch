@@ -115,8 +115,12 @@ func (s *SourceService) checkoutRepo(
 		if err != nil {
 			return "", fmt.Errorf("failed to set up SSH auth: %w", err)
 		}
+	} else if req.Token != "" {
+		authMethod = &ghttp.BasicAuth{
+			Username: "x-access-token", // GitHub specific
+			Password: req.Token,
+		}
 	} else {
-		// Use basic HTTP auth (GitHub token, Bitbucket app password, etc.)
 		authMethod = &ghttp.BasicAuth{
 			Username: req.Username,
 			Password: req.Password,

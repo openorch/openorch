@@ -3,6 +3,7 @@ package test
 import (
 	"context"
 	"fmt"
+	"net/http"
 
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
@@ -44,8 +45,32 @@ func MakeClients(clientFactory sdk.ClientFactory, num int) ([]*openapi.APIClient
 	return ret, nil
 }
 
+type MockUserOptions struct {
+	IdFactory   func() string
+	SlugFactory func() string
+}
+
+type MockUserOption func(*MockUserOptions)
+
+func WithIdFactory(idFactory func() string) MockUserOption {
+	return func(o *MockUserOptions) {
+		o.IdFactory = idFactory
+	}
+}
+
+func WithSlugFactory(slugFactory func() string) MockUserOption {
+	return func(o *MockUserOptions) {
+		o.SlugFactory = slugFactory
+	}
+}
+
 // Returns a mock User Svc with expects set up for calls that happen during the startup of the services.
-func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUserSvcAPI {
+func MockUserSvc(ctx context.Context, ctrl *gomock.Controller, options ...MockUserOption) *openapi.MockUserSvcAPI {
+	opts := &MockUserOptions{}
+	for _, o := range options {
+		o(opts)
+	}
+
 	mockUserSvc := openapi.NewMockUserSvcAPI(ctrl)
 
 	expectedUserSvcLoginResponse := &openapi.UserSvcLoginResponse{
@@ -68,12 +93,6 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 	mockIsAuthorizedRequest := openapi.ApiIsAuthorizedRequest{
 		ApiService: mockUserSvc,
 	}
-	expectedUserSvcIsAuthorizedResponse := &openapi.UserSvcIsAuthorizedResponse{
-		Authorized: openapi.PtrBool(true),
-		User: &openapi.UserSvcUser{
-			Id: openapi.PtrString("user-id-1"),
-		},
-	}
 
 	mockUserSvc.EXPECT().GetPublicKey(ctx).Return(openapi.ApiGetPublicKeyRequest{
 		ApiService: mockUserSvc,
@@ -88,7 +107,25 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller) *openapi.MockUser
 	mockUserSvc.EXPECT().AddPermissionToRole(ctx, gomock.Any(), gomock.Any()).Return(mockAddPermissionToRoleRequest).AnyTimes()
 	mockUserSvc.EXPECT().AddPermissionToRoleExecute(gomock.Any()).Return(expectedUserSvcAddPermissionToRoleResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().IsAuthorized(gomock.Any(), gomock.Any()).Return(mockIsAuthorizedRequest).AnyTimes()
-	mockUserSvc.EXPECT().IsAuthorizedExecute(gomock.Any()).Return(expectedUserSvcIsAuthorizedResponse, nil, nil).AnyTimes()
+	mockUserSvc.EXPECT().IsAuthorizedExecute(gomock.Any()).DoAndReturn(func(req openapi.ApiIsAuthorizedRequest) (*openapi.UserSvcIsAuthorizedResponse, *http.Response, error) {
+		var id string
+		if opts.IdFactory != nil {
+			id = opts.IdFactory()
+		}
+		var slug string
+		if opts.SlugFactory != nil {
+			slug = opts.SlugFactory()
+		}
+
+		return &openapi.UserSvcIsAuthorizedResponse{
+			Authorized: openapi.PtrBool(true),
+			User: &openapi.UserSvcUser{
+				Id:   openapi.PtrString(id),   // Dynamically evaluate
+				Slug: openapi.PtrString(slug), // Dynamically evaluate
+			},
+		}, nil, nil
+	}).
+		AnyTimes()
 
 	return mockUserSvc
 }

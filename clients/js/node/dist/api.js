@@ -113,6 +113,10 @@ var registrySvcRepositorySpec = require('./registrySvcRepositorySpec.js');
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
+var secretSvcReadSecretRequest = require('./secretSvcReadSecretRequest.js');
+var secretSvcReadSecretResponse = require('./secretSvcReadSecretResponse.js');
+var secretSvcSecret = require('./secretSvcSecret.js');
+var secretSvcWriteSecretRequest = require('./secretSvcWriteSecretRequest.js');
 var sourceSvcCheckoutRepoRequest = require('./sourceSvcCheckoutRepoRequest.js');
 var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
 var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
@@ -219,6 +223,11 @@ exports.RegistrySvcApi = chatSvcApi.RegistrySvcApi;
 Object.defineProperty(exports, 'RegistrySvcApiApiKeys', {
 	enumerable: true,
 	get: function () { return chatSvcApi.RegistrySvcApiApiKeys; }
+});
+exports.SecretSvcApi = chatSvcApi.SecretSvcApi;
+Object.defineProperty(exports, 'SecretSvcApiApiKeys', {
+	enumerable: true,
+	get: function () { return chatSvcApi.SecretSvcApiApiKeys; }
 });
 exports.SourceSvcApi = chatSvcApi.SourceSvcApi;
 Object.defineProperty(exports, 'SourceSvcApiApiKeys', {
@@ -374,6 +383,10 @@ exports.RegistrySvcRepositorySpec = registrySvcRepositorySpec.RegistrySvcReposit
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
+exports.SecretSvcReadSecretRequest = secretSvcReadSecretRequest.SecretSvcReadSecretRequest;
+exports.SecretSvcReadSecretResponse = secretSvcReadSecretResponse.SecretSvcReadSecretResponse;
+exports.SecretSvcSecret = secretSvcSecret.SecretSvcSecret;
+exports.SecretSvcWriteSecretRequest = secretSvcWriteSecretRequest.SecretSvcWriteSecretRequest;
 exports.SourceSvcCheckoutRepoRequest = sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest;
 exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
 exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;

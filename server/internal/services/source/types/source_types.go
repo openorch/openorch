@@ -19,6 +19,7 @@ type Event struct {
 type CheckoutRepoRequest struct {
 	URL       string `json:"url"`         // Full repository URL (e.g., https://github.com/user/repo)
 	Version   string `json:"version"`     // Branch, tag, or commit SHA
+	Token     string `json:"token"`       // Token for HTTPS auth (optional for SSH)
 	Username  string `json:"username"`    // Username for HTTPS or SSH user (optional for SSH)
 	Password  string `json:"password"`    // Password or token for HTTPS auth
 	SSHKey    string `json:"ssh_key"`     // SSH private key (optional for SSH connection)

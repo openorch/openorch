@@ -30,11 +30,14 @@ func TestStart(t *testing.T) {
 		Address:  server1.URL,
 	}
 
-	universe1, starterFunc1, err := Start(options1)
+	nodeInfo1, err := Start(options1)
 	require.NoError(t, err)
 
-	hs1.UpdateHandler(universe1)
-	err = starterFunc1()
+	hs1.UpdateHandler(nodeInfo1.Router)
+	// @todo why is this called here and also down below?
+	// if i remove this there is a config service error
+	// which i think points to a syncronization issue
+	err = nodeInfo1.StarterFunc()
 	require.NoError(t, err)
 
 	hs2 := &di.HandlerSwitcher{}
@@ -46,23 +49,23 @@ func TestStart(t *testing.T) {
 		DbPrefix: dbprefix,
 		Address:  server2.URL,
 	}
-	universe2, starterFunc2, err := Start(options2)
+	nodeInfo2, err := Start(options2)
 	require.NoError(t, err)
 
-	hs2.UpdateHandler(universe2)
+	hs2.UpdateHandler(nodeInfo2.Router)
 
 	var wg sync.WaitGroup
 	wg.Add(2)
 
 	go func() {
-		err := starterFunc1()
+		err := nodeInfo1.StarterFunc()
 		wg.Done()
 		require.NoError(t, err)
 
 	}()
 
 	go func() {
-		err := starterFunc2()
+		err := nodeInfo2.StarterFunc()
 		wg.Done()
 		require.NoError(t, err)
 	}()
@@ -76,7 +79,7 @@ func TestStart(t *testing.T) {
 		time.Sleep(100 * time.Millisecond)
 		c++
 
-		adminClient, _, err := test.AdminClient(server1.URL)
+		adminClient, _, err := test.AdminClient(nodeInfo1.Options.ClientFactory)
 		require.NoError(t, err)
 
 		rsp, _, err := adminClient.RegistrySvcAPI.ListNodes(context.Background()).

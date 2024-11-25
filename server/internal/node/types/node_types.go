@@ -25,4 +25,6 @@ type Options struct {
 	// but still make multiple nodes in those test cases use the same
 	// shard of the db.
 	DbPrefix string
+
+	SourceControlToken string
 }

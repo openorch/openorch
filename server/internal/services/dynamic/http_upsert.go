@@ -80,14 +80,13 @@ func (g *DynamicService) Upsert(
 		}
 	}
 
-	token, _ := sdk.TokenFromRequest(r)
-
-	claims, err := sdk.DecodeJWT(token, g.publicKey)
+	claims, err := g.authorizer.DecodeJWTFromRequest(g.publicKey, r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
+
 	identifiers := append(claims.RoleIds, *isAuthRsp.User.Id)
 
 	objectId := mux.Vars(r)

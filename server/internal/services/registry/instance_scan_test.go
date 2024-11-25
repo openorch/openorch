@@ -138,8 +138,6 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			gomega.Expect(instancesRsp.Instances).To(gomega.HaveLen(1))
 			gomega.Expect(instancesRsp.Instances[0].Url).
 				To(gomega.Equal(healthServer.URL))
-			gomega.Expect(instancesRsp.Instances[0].Status).
-				To(gomega.Equal(openapi.InstanceStatusHealthy))
 
 			_, err = waitForInstanceStatus(
 				ctx,
@@ -168,8 +166,14 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			gomega.Expect(instancesRsp.Instances).To(gomega.HaveLen(1))
 			gomega.Expect(instancesRsp.Instances[0].Url).
 				To(gomega.Equal(healthServer.URL))
-			gomega.Expect(instancesRsp.Instances[0].Status).
-				To(gomega.Equal(openapi.InstanceStatusUnreachable))
+
+			_, err = waitForInstanceStatus(
+				ctx,
+				adminClient,
+				openapi.InstanceStatusUnreachable,
+				5,
+			)
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 		})
 	})
 

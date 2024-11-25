@@ -33,10 +33,16 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
+type NodeInfo struct {
+	Options     *di.Options
+	Router      *mux.Router
+	StarterFunc func() error
+}
+
 // Start wraps the dependency injection universe creation
-// so getting envars happens outside of that.
-// The two could probably be merged.
-func Start(options node_types.Options) (*mux.Router, func() error, error) {
+// so getting envars happens outside of that. The two could probably be merged.
+// Node options are a set of node specific configuration options and secrets required for bootstrapping.
+func Start(options node_types.Options) (*NodeInfo, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			logger.Error("Panic in node.Start()",
@@ -101,12 +107,12 @@ func Start(options node_types.Options) (*mux.Router, func() error, error) {
 
 		db, err := sql.Open(options.DbDriver, options.DbString)
 		if err != nil {
-			return nil, nil, errors.Wrap(err, "error opening sql db")
+			return nil, errors.Wrap(err, "error opening sql db")
 		}
 
 		conn, err := db.Conn(ctx)
 		if err != nil {
-			return nil, nil, err
+			return nil, err
 		}
 		diopt.Lock = pglock.NewPGDistributedLock(conn)
 
@@ -129,5 +135,9 @@ func Start(options node_types.Options) (*mux.Router, func() error, error) {
 
 	router.HandleFunc("/swagger/", httpSwagger.WrapHandler)
 
-	return router, starter, err
+	return &NodeInfo{
+		Router:      router,
+		StarterFunc: starter,
+		Options:     diopt,
+	}, nil
 }

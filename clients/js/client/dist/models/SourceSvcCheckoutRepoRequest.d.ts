@@ -34,6 +34,12 @@ export interface SourceSvcCheckoutRepoRequest {
      */
     sshKeyPwd?: string;
     /**
+     * Token for HTTPS auth (optional for SSH)
+     * @type {string}
+     * @memberof SourceSvcCheckoutRepoRequest
+     */
+    token?: string;
+    /**
      * Full repository URL (e.g., https://github.com/user/repo)
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest

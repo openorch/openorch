@@ -34,6 +34,11 @@ SourceSvcCheckoutRepoRequest.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "token",
+        "baseName": "token",
+        "type": "string"
+    },
+    {
         "name": "url",
         "baseName": "url",
         "type": "string"

@@ -30,6 +30,7 @@ import (
 	policyservice "github.com/singulatron/superplatform/server/internal/services/policy"
 	promptservice "github.com/singulatron/superplatform/server/internal/services/prompt"
 	registryservice "github.com/singulatron/superplatform/server/internal/services/registry"
+	secretservice "github.com/singulatron/superplatform/server/internal/services/secret"
 	sourceservice "github.com/singulatron/superplatform/server/internal/services/source"
 	userservice "github.com/singulatron/superplatform/server/internal/services/user"
 )
@@ -55,6 +56,7 @@ type Options struct {
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 	HomeDir          string
 	ClientFactory    sdk.ClientFactory
+	Authorizer       sdk.Authorizer
 }
 
 func BigBang(options *Options) (*mux.Router, func() error, error) {
@@ -117,6 +119,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		}
 	}
 
+	if options.Authorizer == nil {
+		options.Authorizer = sdk.AuthorizerImpl{}
+	}
+
 	if options.Url == "" {
 		options.Url = router.SelfAddress()
 	}
@@ -131,6 +137,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	userService, err := userservice.NewUserService(
 		options.ClientFactory,
+		options.Authorizer,
 		options.DatastoreFactory,
 	)
 	if err != nil {
@@ -258,6 +265,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	dynamicService, err := dynamicservice.NewDynamicService(
 		options.ClientFactory,
 		options.Lock,
+		options.Authorizer,
 		options.DatastoreFactory,
 	)
 	if err != nil {
@@ -316,6 +324,20 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Lock,
 		options.DatastoreFactory,
 	)
+
+	secretService, err := secretservice.NewSecretService(
+		options.ClientFactory,
+		options.Authorizer,
+		options.Lock,
+		options.DatastoreFactory,
+	)
+	if err != nil {
+		logger.Error(
+			"Secret service creation failed",
+			slog.String("error", err.Error()),
+		)
+		os.Exit(1)
+	}
 
 	mws := []middlewares.Middleware{
 		middlewares.ThrottledLogger,
@@ -662,6 +684,16 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
+	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Read(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Write(w, r)
+	})).
+		Methods("OPTIONS", "PUT")
+
 	return router, func() error {
 		err = configService.Start()
 		if err != nil {
@@ -710,6 +742,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		err = sourceService.Start()
 		if err != nil {
 			return errors.Wrap(err, "source service start failed")
+		}
+		err = secretService.Start()
+		if err != nil {
+			return errors.Wrap(err, "secret service start failed")
 		}
 
 		return nil

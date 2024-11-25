@@ -65,10 +65,6 @@ func (p *PromptService) AddPrompt(
 	}
 	defer r.Body.Close()
 
-	if isAuthRsp == nil {
-		panic("Huh")
-	}
-
 	prsp, err := p.addPrompt(r.Context(), req, *isAuthRsp.User.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

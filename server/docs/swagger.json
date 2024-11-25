@@ -2898,6 +2898,107 @@
                 }
             }
         },
+        "/secret-svc/secret": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Write a secret if authorized",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Write Secret",
+                "operationId": "writeSecret",
+                "parameters": [
+                    {
+                        "description": "Write Secret Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.WriteSecretRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Write Secret Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.WriteSecretResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Fetch a secret by key, if authorized",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Read Secret",
+                "operationId": "readSecret",
+                "parameters": [
+                    {
+                        "description": "Read Secret Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.ReadSecretRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Read Secret Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.ReadSecretResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/source-svc/repo/checkout": {
             "post": {
                 "security": [
@@ -6318,6 +6419,67 @@
                 }
             }
         },
+        "secret_svc.ReadSecretRequest": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                }
+            }
+        },
+        "secret_svc.ReadSecretResponse": {
+            "type": "object",
+            "properties": {
+                "exists": {
+                    "type": "boolean"
+                },
+                "secret": {
+                    "$ref": "#/definitions/secret_svc.Secret"
+                }
+            }
+        },
+        "secret_svc.Secret": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for the secret",
+                    "type": "string"
+                },
+                "key": {
+                    "description": "Identifier for the secret",
+                    "type": "string"
+                },
+                "readers": {
+                    "description": "Slugs of services/users who can read the secret",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "value": {
+                    "description": "Plaintext value (only stored temporarily in memory, if at all)",
+                    "type": "string"
+                },
+                "writers": {
+                    "description": "Slugs of services/users who can modify the secret",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "secret_svc.WriteSecretRequest": {
+            "type": "object",
+            "properties": {
+                "secret": {
+                    "$ref": "#/definitions/secret_svc.Secret"
+                }
+            }
+        },
+        "secret_svc.WriteSecretResponse": {
+            "type": "object"
+        },
         "source_svc.CheckoutRepoRequest": {
             "type": "object",
             "properties": {
@@ -6331,6 +6493,10 @@
                 },
                 "ssh_key_pwd": {
                     "description": "Password for SSH private key if encrypted (optional)",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "Token for HTTPS auth (optional for SSH)",
                     "type": "string"
                 },
                 "url": {
