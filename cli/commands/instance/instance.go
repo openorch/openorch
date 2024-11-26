@@ -12,9 +12,10 @@ func AddInstanceCommands(rootCmd *cobra.Command) {
 	}
 
 	var listCmd = &cobra.Command{
-		Use:   "list",
-		Short: "List all environments",
-		RunE:  List,
+		Use:     "list",
+		Aliases: []string{"ls"},
+		Short:   "List all environments",
+		RunE:    List,
 	}
 
 	var deleteCmd = &cobra.Command{
