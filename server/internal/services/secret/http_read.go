@@ -28,8 +28,8 @@ import (
 // @Tags Secret Svc
 // @Accept json
 // @Produce json
-// @Param body body secret.ReadRequest false "Read Request"
-// @Success 200 {object} secret.ReadResponse "Read Response"
+// @Param body body secret.ReadSecretRequest false "Read Secret Request"
+// @Success 200 {object} secret.ReadSecretResponse "Read Secret Response"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth

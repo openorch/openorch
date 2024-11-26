@@ -11,6 +11,7 @@ import (
 	"github.com/singulatron/superplatform/cli/commands/env"
 	instance "github.com/singulatron/superplatform/cli/commands/instance"
 	"github.com/singulatron/superplatform/cli/commands/node"
+	secret "github.com/singulatron/superplatform/cli/commands/secret"
 	"github.com/singulatron/superplatform/cli/commands/user/login"
 	"github.com/singulatron/superplatform/cli/commands/user/whoami"
 )
@@ -35,6 +36,7 @@ func main() {
 	instance.AddInstanceCommands(rootCmd)
 	deployment.AddDeploymentCommands(rootCmd)
 	node.AddNodeCommands(rootCmd)
+	secret.AddSecretCommands(rootCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)

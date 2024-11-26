@@ -17,7 +17,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/pkg/errors"
 	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
@@ -74,7 +73,12 @@ func (cs *SecretService) Write(
 		return
 	}
 
-	err = cs.saveSecret(r.Context(), *req.Secret, isAdmin, *isAuthRsp.User.Slug)
+	err = cs.saveSecrets(
+		r.Context(),
+		req.Secrets,
+		isAdmin,
+		*isAuthRsp.User.Slug,
+	)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -85,52 +89,59 @@ func (cs *SecretService) Write(
 	w.Write(jsonData)
 }
 
-func (cs *SecretService) saveSecret(
+func (cs *SecretService) saveSecrets(
 	ctx context.Context,
-	s secret.Secret,
+	ss []*secret.Secret,
 	isAdmin bool,
 	userSlug string,
 ) error {
 	cs.lock.Acquire(ctx, "secret-svc-save")
 	defer cs.lock.Release(ctx, "secret-svc-save")
 
-	secretI, found, err := cs.secretStore.Query(datastore.Equals([]string{"key"}, s.Key)).
-		FindOne()
-	if err != nil {
-		return err
-	}
-	if !found {
-		// when secret is not found, it can be "claimed"/created
-		// without authorization
-		if s.Id == "" {
-			s.Id = sdk.Id("secr")
+	for _, s := range ss {
+		secretI, found, err := cs.secretStore.Query(datastore.Equals([]string{"key"}, s.Key)).
+			FindOne()
+		if err != nil {
+			return err
 		}
-		if s.Writers == nil {
-			s.Writers = []string{userSlug}
-		}
-		if s.Readers == nil {
-			s.Readers = []string{userSlug}
+		if !found {
+			// when secret is not found, it can be "claimed"/created
+			// without authorization
+			if s.Id == "" {
+				s.Id = sdk.Id("secr")
+			}
+			if s.Writers == nil {
+				s.Writers = []string{userSlug}
+			}
+			if s.Readers == nil {
+				s.Readers = []string{userSlug}
+			}
+
+			return cs.secretStore.Upsert(s)
 		}
 
-		return cs.secretStore.Upsert(&s)
-	}
+		secret := secretI.(*secret.Secret)
 
-	secret := secretI.(*secret.Secret)
-
-	// when secret is found, it can only be modified by authorized users
-	canWrite := isAdmin
-	if !canWrite {
-		for _, writer := range secret.Writers {
-			if writer == userSlug {
-				canWrite = true
-				break
+		// when secret is found, it can only be modified by authorized users
+		canWrite := isAdmin
+		if !canWrite {
+			for _, writer := range secret.Writers {
+				if writer == userSlug {
+					canWrite = true
+					break
+				}
 			}
 		}
+
+		if !canWrite {
+			continue
+		}
+
+		err = cs.secretStore.Upsert(s)
+		if err != nil {
+			return err
+		}
 	}
 
-	if !canWrite {
-		return errors.New("unauthorized")
-	}
-
-	return cs.secretStore.Upsert(&s)
+	return nil
 }

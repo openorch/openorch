@@ -23,7 +23,9 @@ func List(cmd *cobra.Command, args []string, full bool) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	rsp, _, err := cf.Client(sdk.WithToken(token)).DeploySvcAPI.ListDeployments(ctx).Execute()
+	rsp, _, err := cf.Client(sdk.WithToken(token)).
+		DeploySvcAPI.ListDeployments(ctx).
+		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to save service deployment")
 	}
@@ -44,7 +46,14 @@ func List(cmd *cobra.Command, args []string, full bool) error {
 			details = strings.Trim(details[0:75], charsToTrim) + "…"
 		}
 
-		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\n", deployment.Id, deployment.DefinitionId, *deployment.Status, details)
+		fmt.Fprintf(
+			writer,
+			"%s\t%s\t%s\t%s\n",
+			deployment.Id,
+			deployment.DefinitionId,
+			*deployment.Status,
+			details,
+		)
 	}
 
 	return nil

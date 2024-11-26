@@ -19,14 +19,9 @@ class SecretSvcReadSecretResponse {
 SecretSvcReadSecretResponse.discriminator = undefined;
 SecretSvcReadSecretResponse.attributeTypeMap = [
     {
-        "name": "exists",
-        "baseName": "exists",
-        "type": "boolean"
-    },
-    {
-        "name": "secret",
-        "baseName": "secret",
-        "type": "SecretSvcSecret"
+        "name": "secrets",
+        "baseName": "secrets",
+        "type": "Array<SecretSvcSecret>"
     }
 ];
 

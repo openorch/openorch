@@ -32,7 +32,7 @@ type ReadSecretResponse struct {
 }
 
 type WriteSecretRequest struct {
-	Secret *Secret `json:"secret"`
+	Secrets []*Secret `json:"secrets"`
 }
 
 type WriteSecretResponse struct {

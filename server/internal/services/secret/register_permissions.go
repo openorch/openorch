@@ -21,7 +21,7 @@ func (p *SecretService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
-	for _, permission := range secrettypes.SecretAdminPermissions {
+	for _, permission := range secrettypes.AdminPermissions {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -35,8 +35,10 @@ func (p *SecretService) registerPermissions() error {
 		}
 	}
 
-	for _, role := range []*usertypes.Role{} {
-		for _, permission := range secrettypes.SecretAdminPermissions {
+	for _, role := range []*usertypes.Role{
+		usertypes.RoleAdmin,
+	} {
+		for _, permission := range secrettypes.AdminPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {

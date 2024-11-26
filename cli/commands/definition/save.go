@@ -25,26 +25,41 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	file, err := os.Open(filePath)
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to open file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to open file: '%v'", filePath),
+		)
 	}
 	defer file.Close()
 
 	fileInfo, err := file.Stat()
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to stat service definition file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf(
+				"failed to stat service definition file: '%v'",
+				filePath,
+			),
+		)
 	}
 	if fileInfo.Size() == 0 {
 		return fmt.Errorf("service definition file is empty at '%v'", filePath)
 	}
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to read definition file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to read definition file: '%v'", filePath),
+		)
 	}
 
 	definition := openapi.RegistrySvcDefinition{}
 
 	if err := yaml.Unmarshal(data, &definition); err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to decode deployment file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to decode deployment file: '%v'", filePath),
+		)
 	}
 
 	url, token, err := config.GetSelectedUrlAndToken()
@@ -54,9 +69,12 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	_, _, err = cf.Client(sdk.WithToken(token)).RegistrySvcAPI.SaveDefinition(ctx).Request(openapi.RegistrySvcSaveDefinitionRequest{
-		Definition: &definition,
-	}).Execute()
+	_, _, err = cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.SaveDefinition(ctx).
+		Request(openapi.RegistrySvcSaveDefinitionRequest{
+			Definition: &definition,
+		}).
+		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to save service definition")
 	}

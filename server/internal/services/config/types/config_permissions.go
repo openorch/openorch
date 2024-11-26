@@ -37,7 +37,7 @@ var PermissionConfigStream = usertypes.Permission{
 	Name: "Config Stream",
 }
 
-var ConfigPermissions = []usertypes.Permission{
+var AdminPermissions = []usertypes.Permission{
 	PermissionConfigCreate,
 	PermissionConfigView,
 	PermissionConfigEdit,
@@ -45,6 +45,6 @@ var ConfigPermissions = []usertypes.Permission{
 	PermissionConfigStream,
 }
 
-var ConfigUserPermissions = []usertypes.Permission{
+var UserPermissions = []usertypes.Permission{
 	PermissionConfigView,
 }

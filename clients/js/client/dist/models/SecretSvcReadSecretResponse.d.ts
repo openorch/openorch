@@ -18,16 +18,10 @@ import type { SecretSvcSecret } from './SecretSvcSecret';
 export interface SecretSvcReadSecretResponse {
     /**
      *
-     * @type {boolean}
+     * @type {Array<SecretSvcSecret>}
      * @memberof SecretSvcReadSecretResponse
      */
-    _exists?: boolean;
-    /**
-     *
-     * @type {SecretSvcSecret}
-     * @memberof SecretSvcReadSecretResponse
-     */
-    secret?: SecretSvcSecret;
+    secrets?: Array<SecretSvcSecret>;
 }
 /**
  * Check if a given object implements the SecretSvcReadSecretResponse interface.

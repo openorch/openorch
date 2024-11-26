@@ -21,7 +21,9 @@ func Delete(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(ur)
 
-	_, err = cf.Client(sdk.WithToken(token)).RegistrySvcAPI.DeleteNode(ctx, nodeUrl).Execute()
+	_, err = cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.DeleteNode(ctx, nodeUrl).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Error deleting node: '%v'", err)
 	}

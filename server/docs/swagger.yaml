@@ -1579,12 +1579,12 @@ definitions:
         format: int64
         type: integer
     type: object
-  secret_svc.ReadRequest:
+  secret_svc.ReadSecretRequest:
     properties:
       key:
         type: string
     type: object
-  secret_svc.ReadResponse:
+  secret_svc.ReadSecretResponse:
     properties:
       secrets:
         items:
@@ -1613,12 +1613,14 @@ definitions:
           type: string
         type: array
     type: object
-  secret_svc.WriteRequest:
+  secret_svc.WriteSecretRequest:
     properties:
-      secret:
-        $ref: '#/definitions/secret_svc.Secret'
+      secrets:
+        items:
+          $ref: '#/definitions/secret_svc.Secret'
+        type: array
     type: object
-  secret_svc.WriteResponse:
+  secret_svc.WriteSecretResponse:
     type: object
   source_svc.CheckoutRepoRequest:
     properties:
@@ -3910,18 +3912,18 @@ paths:
       description: Fetch a secret by key, if authorized
       operationId: readSecret
       parameters:
-      - description: Read Request
+      - description: Read Secret Request
         in: body
         name: body
         schema:
-          $ref: '#/definitions/secret_svc.ReadRequest'
+          $ref: '#/definitions/secret_svc.ReadSecretRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: Read Response
+          description: Read Secret Response
           schema:
-            $ref: '#/definitions/secret_svc.ReadResponse'
+            $ref: '#/definitions/secret_svc.ReadSecretResponse'
         "401":
           description: Unauthorized
           schema:
@@ -3941,19 +3943,19 @@ paths:
       description: Write a secret if authorized
       operationId: writeSecret
       parameters:
-      - description: Write Request
+      - description: Write Secret Request
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/secret_svc.WriteRequest'
+          $ref: '#/definitions/secret_svc.WriteSecretRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: Write Response
+          description: Write Secret Response
           schema:
-            $ref: '#/definitions/secret_svc.WriteResponse'
+            $ref: '#/definitions/secret_svc.WriteSecretResponse'
         "401":
           description: Unauthorized
           schema:

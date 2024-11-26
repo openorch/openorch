@@ -22,7 +22,7 @@ func (p *ConfigService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
-	for _, permission := range configtypes.ConfigPermissions {
+	for _, permission := range append(configtypes.AdminPermissions, configtypes.UserPermissions...) {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -36,8 +36,10 @@ func (p *ConfigService) registerPermissions() error {
 		}
 	}
 
-	for _, role := range []*usertypes.Role{} {
-		for _, permission := range configtypes.ConfigPermissions {
+	for _, role := range []*usertypes.Role{
+		usertypes.RoleAdmin,
+	} {
+		for _, permission := range configtypes.AdminPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {
@@ -47,10 +49,9 @@ func (p *ConfigService) registerPermissions() error {
 	}
 
 	for _, role := range []*usertypes.Role{
-
 		usertypes.RoleUser,
 	} {
-		for _, permission := range configtypes.ConfigUserPermissions {
+		for _, permission := range configtypes.UserPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {

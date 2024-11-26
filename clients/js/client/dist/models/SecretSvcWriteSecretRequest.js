@@ -26,7 +26,7 @@ export function SecretSvcWriteSecretRequestFromJSONTyped(json, ignoreDiscriminat
         return json;
     }
     return {
-        'secret': json['secret'] == null ? undefined : SecretSvcSecretFromJSON(json['secret']),
+        'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecretFromJSON)),
     };
 }
 export function SecretSvcWriteSecretRequestToJSON(value) {
@@ -34,6 +34,6 @@ export function SecretSvcWriteSecretRequestToJSON(value) {
         return value;
     }
     return {
-        'secret': SecretSvcSecretToJSON(value['secret']),
+        'secrets': value['secrets'] == null ? undefined : (value['secrets'].map(SecretSvcSecretToJSON)),
     };
 }

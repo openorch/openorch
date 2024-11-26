@@ -21,7 +21,9 @@ func List(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListDefinitions(ctx).Execute()
+	rsp, _, err := cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.ListDefinitions(ctx).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Failed to list service definitions: '%v'", err)
 	}
@@ -29,7 +31,10 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tIMAGE NAME\tREPO URL\tREPO BUILD CONTEXT\tREPO CONTAINER FILE\tINTERNAL PORT")
+	fmt.Fprintln(
+		writer,
+		"ID\tIMAGE NAME\tREPO URL\tREPO BUILD CONTEXT\tREPO CONTAINER FILE\tINTERNAL PORT",
+	)
 
 	for _, definition := range rsp.Definitions {
 		imageName := ""
@@ -41,11 +46,13 @@ func List(cmd *cobra.Command, args []string) error {
 			repoUrl = definition.Repository.Url
 		}
 		buildContext := ""
-		if definition.Repository != nil && definition.Repository.BuildContext != nil {
+		if definition.Repository != nil &&
+			definition.Repository.BuildContext != nil {
 			buildContext = *definition.Repository.BuildContext
 		}
 		containerFile := ""
-		if definition.Repository != nil && definition.Repository.ContainerFile != nil {
+		if definition.Repository != nil &&
+			definition.Repository.ContainerFile != nil {
 			containerFile = *definition.Repository.ContainerFile
 		}
 
@@ -57,7 +64,16 @@ func List(cmd *cobra.Command, args []string) error {
 			port = fmt.Sprintf("%d", *definition.Repository.Port)
 		}
 
-		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\t%s\t%s\n", definition.Id, imageName, repoUrl, buildContext, containerFile, port)
+		fmt.Fprintf(
+			writer,
+			"%s\t%s\t%s\t%s\t%s\t%s\n",
+			definition.Id,
+			imageName,
+			repoUrl,
+			buildContext,
+			containerFile,
+			port,
+		)
 	}
 
 	return nil

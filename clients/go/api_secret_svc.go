@@ -33,8 +33,8 @@ type SecretSvcAPI interface {
 	ReadSecret(ctx context.Context) ApiReadSecretRequest
 
 	// ReadSecretExecute executes the request
-	//  @return SecretSvcReadResponse
-	ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadResponse, *http.Response, error)
+	//  @return SecretSvcReadSecretResponse
+	ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error)
 
 	/*
 	WriteSecret Write Secret
@@ -57,16 +57,16 @@ type SecretSvcAPIService service
 type ApiReadSecretRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	body *SecretSvcReadRequest
+	body *SecretSvcReadSecretRequest
 }
 
-// Read Request
-func (r ApiReadSecretRequest) Body(body SecretSvcReadRequest) ApiReadSecretRequest {
+// Read Secret Request
+func (r ApiReadSecretRequest) Body(body SecretSvcReadSecretRequest) ApiReadSecretRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiReadSecretRequest) Execute() (*SecretSvcReadResponse, *http.Response, error) {
+func (r ApiReadSecretRequest) Execute() (*SecretSvcReadSecretResponse, *http.Response, error) {
 	return r.ApiService.ReadSecretExecute(r)
 }
 
@@ -86,13 +86,13 @@ func (a *SecretSvcAPIService) ReadSecret(ctx context.Context) ApiReadSecretReque
 }
 
 // Execute executes the request
-//  @return SecretSvcReadResponse
-func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadResponse, *http.Response, error) {
+//  @return SecretSvcReadSecretResponse
+func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SecretSvcReadResponse
+		localVarReturnValue  *SecretSvcReadSecretResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.ReadSecret")
@@ -200,11 +200,11 @@ func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*Secret
 type ApiWriteSecretRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	request *SecretSvcWriteRequest
+	request *SecretSvcWriteSecretRequest
 }
 
-// Write Request
-func (r ApiWriteSecretRequest) Request(request SecretSvcWriteRequest) ApiWriteSecretRequest {
+// Write Secret Request
+func (r ApiWriteSecretRequest) Request(request SecretSvcWriteSecretRequest) ApiWriteSecretRequest {
 	r.request = &request
 	return r
 }

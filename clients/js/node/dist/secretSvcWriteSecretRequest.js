@@ -19,9 +19,9 @@ class SecretSvcWriteSecretRequest {
 SecretSvcWriteSecretRequest.discriminator = undefined;
 SecretSvcWriteSecretRequest.attributeTypeMap = [
     {
-        "name": "secret",
-        "baseName": "secret",
-        "type": "SecretSvcSecret"
+        "name": "secrets",
+        "baseName": "secrets",
+        "type": "Array<SecretSvcSecret>"
     }
 ];
 

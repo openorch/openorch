@@ -17,7 +17,9 @@ func Get(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 
 	if len(args) < 2 {
-		return fmt.Errorf("insufficient arguments: service and endpoint are required")
+		return fmt.Errorf(
+			"insufficient arguments: service and endpoint are required",
+		)
 	}
 
 	uri, token, err := config.GetSelectedUrlAndToken()
@@ -25,7 +27,12 @@ func Get(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "cannot get environment URL and token")
 	}
 
-	fullUrl := fmt.Sprintf("%s/%s-svc/%s", uri, args[0], strings.Join(args[1:], "/"))
+	fullUrl := fmt.Sprintf(
+		"%s/%s-svc/%s",
+		uri,
+		args[0],
+		strings.Join(args[1:], "/"),
+	)
 
 	queryParams := make(map[string]string)
 
@@ -38,14 +45,22 @@ func Get(cmd *cobra.Command, args []string) error {
 	var queryStrings []string
 	for key, value := range queryParams {
 		encodedValue := url.QueryEscape(value)
-		queryStrings = append(queryStrings, fmt.Sprintf("%s=%s", key, encodedValue))
+		queryStrings = append(
+			queryStrings,
+			fmt.Sprintf("%s=%s", key, encodedValue),
+		)
 	}
 
 	if len(queryStrings) > 0 {
 		fullUrl = fmt.Sprintf("%s?%s", fullUrl, strings.Join(queryStrings, "&"))
 	}
 
-	request, err := http.NewRequestWithContext(ctx, http.MethodGet, fullUrl, nil)
+	request, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodGet,
+		fullUrl,
+		nil,
+	)
 	if err != nil {
 		return errors.Wrap(err, "failed to create HTTP request")
 	}
