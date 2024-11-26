@@ -22,7 +22,7 @@ var PermissionSecretWrite = usertypes.Permission{
 	Name: "Secret Svc - Secret Write",
 }
 
-var SecretAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []usertypes.Permission{
 	PermissionSecretRead,
 	PermissionSecretWrite,
 }

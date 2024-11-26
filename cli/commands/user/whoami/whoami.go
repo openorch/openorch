@@ -19,16 +19,26 @@ func Whoami(cmd *cobra.Command, args []string) error {
 	}
 	env, ok := conf.Environments[conf.SelectedEnvironment]
 	if !ok {
-		return fmt.Errorf("failed to find selected env: %s", conf.SelectedEnvironment)
+		return fmt.Errorf(
+			"failed to find selected env: %s",
+			conf.SelectedEnvironment,
+		)
 	}
 
 	if env.SelectedUser == "" {
-		return fmt.Errorf("No selected user in env '%v'", conf.SelectedEnvironment)
+		return fmt.Errorf(
+			"No selected user in env '%v'",
+			conf.SelectedEnvironment,
+		)
 	}
 
 	usr, ok := env.Users[env.SelectedUser]
 	if !ok {
-		return fmt.Errorf("Cannot find user '%v' in env '%v'", env.SelectedUser, conf.SelectedEnvironment)
+		return fmt.Errorf(
+			"Cannot find user '%v' in env '%v'",
+			env.SelectedUser,
+			conf.SelectedEnvironment,
+		)
 	}
 
 	fmt.Println(usr.Slug)

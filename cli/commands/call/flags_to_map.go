@@ -28,7 +28,8 @@ func parseFlagToMap(payload map[string]interface{}, flag string) error {
 		return errors.New("invalid key format")
 	}
 
-	if len(keyParts) > 1 && strings.HasSuffix(keyParts[len(keyParts)-2], "-id") {
+	if len(keyParts) > 1 &&
+		strings.HasSuffix(keyParts[len(keyParts)-2], "-id") {
 		parentKey := keyParts[len(keyParts)-2][:len(keyParts[len(keyParts)-2])-3]
 		idKey := keyParts[len(keyParts)-1]
 

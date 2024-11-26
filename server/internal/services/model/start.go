@@ -26,6 +26,7 @@ import (
 	"github.com/pkg/errors"
 
 	openapi "github.com/singulatron/superplatform/clients/go"
+	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
 
@@ -117,7 +118,7 @@ func (ms *ModelService) startWithDocker(
 	}
 	launchOptions.Hash = openapi.PtrString(hash)
 
-	runRsp, _, err := ms.clientFactory.Client().
+	runRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		DockerSvcAPI.RunContainer(context.Background()).
 		Request(
 			openapi.DockerSvcRunContainerRequest{
@@ -209,7 +210,7 @@ func (ms *ModelService) checkIfAnswers(
 
 		logger.Debug("Checking for answer started", slog.Int("port", port))
 
-		isRunningRsp, _, err := ms.clientFactory.Client().
+		isRunningRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 			DockerSvcAPI.ContainerIsRunning(context.Background()).
 			Hash(hash).
 			Execute()
@@ -226,7 +227,7 @@ func (ms *ModelService) checkIfAnswers(
 			continue
 		}
 
-		hostRsp, _, err := ms.clientFactory.Client().
+		hostRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 			DockerSvcAPI.GetHost(context.Background()).
 			Execute()
 		if err != nil {
@@ -268,7 +269,7 @@ func (ms *ModelService) checkIfAnswers(
 }
 
 func (ms *ModelService) printContainerLogs(modelId, hash string) {
-	summaryRsp, _, err := ms.clientFactory.Client().
+	summaryRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		DockerSvcAPI.ContainerSummary(context.Background()).
 		Hash(hash).
 		Lines(10).

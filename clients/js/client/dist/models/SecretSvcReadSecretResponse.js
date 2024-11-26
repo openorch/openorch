@@ -26,8 +26,7 @@ export function SecretSvcReadSecretResponseFromJSONTyped(json, ignoreDiscriminat
         return json;
     }
     return {
-        '_exists': json['exists'] == null ? undefined : json['exists'],
-        'secret': json['secret'] == null ? undefined : SecretSvcSecretFromJSON(json['secret']),
+        'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecretFromJSON)),
     };
 }
 export function SecretSvcReadSecretResponseToJSON(value) {
@@ -35,7 +34,6 @@ export function SecretSvcReadSecretResponseToJSON(value) {
         return value;
     }
     return {
-        'exists': value['_exists'],
-        'secret': SecretSvcSecretToJSON(value['secret']),
+        'secrets': value['secrets'] == null ? undefined : (value['secrets'].map(SecretSvcSecretToJSON)),
     };
 }

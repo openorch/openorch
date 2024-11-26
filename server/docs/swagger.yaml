@@ -558,6 +558,7 @@ definitions:
       dir:
         type: string
       downloadedBytes:
+        format: int64
         type: integer
       error:
         type: string
@@ -566,6 +567,7 @@ definitions:
       filePath:
         type: string
       fullFileSize:
+        format: int64
         type: integer
       id:
         type: string
@@ -1586,18 +1588,18 @@ definitions:
     type: object
   secret_svc.ReadSecretResponse:
     properties:
-      exists:
-        type: boolean
-      secret:
-        $ref: '#/definitions/secret_svc.Secret'
+      secrets:
+        items:
+          $ref: '#/definitions/secret_svc.Secret'
+        type: array
     type: object
   secret_svc.Secret:
     properties:
       id:
-        description: Unique identifier for the secret
+        description: Id of the secret
         type: string
       key:
-        description: Identifier for the secret
+        description: Envar or slug-like key of the secret
         type: string
       readers:
         description: Slugs of services/users who can read the secret
@@ -1605,7 +1607,7 @@ definitions:
           type: string
         type: array
       value:
-        description: Plaintext value (only stored temporarily in memory, if at all)
+        description: Secret Value
         type: string
       writers:
         description: Slugs of services/users who can modify the secret
@@ -1615,8 +1617,10 @@ definitions:
     type: object
   secret_svc.WriteSecretRequest:
     properties:
-      secret:
-        $ref: '#/definitions/secret_svc.Secret'
+      secrets:
+        items:
+          $ref: '#/definitions/secret_svc.Secret'
+        type: array
     type: object
   secret_svc.WriteSecretResponse:
     type: object

@@ -45,8 +45,18 @@ func Post(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "cannot get environment URL and token")
 	}
 
-	fullUrl := fmt.Sprintf("%s/%s-svc/%s", url, args[0], strings.Join(args[1:flagStart], "/"))
-	request, err := http.NewRequestWithContext(ctx, http.MethodPost, fullUrl, bytes.NewBuffer(jsonData))
+	fullUrl := fmt.Sprintf(
+		"%s/%s-svc/%s",
+		url,
+		args[0],
+		strings.Join(args[1:flagStart], "/"),
+	)
+	request, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		fullUrl,
+		bytes.NewBuffer(jsonData),
+	)
 	if err != nil {
 		return errors.Wrap(err, "failed to create HTTP request")
 	}
@@ -62,7 +72,11 @@ func Post(cmd *cobra.Command, args []string) error {
 
 	if resp.StatusCode >= 400 {
 		body, _ := ioutil.ReadAll(resp.Body)
-		return fmt.Errorf("HTTP request failed with status %d: %s", resp.StatusCode, string(body))
+		return fmt.Errorf(
+			"HTTP request failed with status %d: %s",
+			resp.StatusCode,
+			string(body),
+		)
 	}
 
 	respBody, err := ioutil.ReadAll(resp.Body)

@@ -57,9 +57,13 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
 
-		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithSlugFactory(func() string {
-			return userSlug
-		}))
+		mockUserSvc = test.MockUserSvc(
+			ctx,
+			ctrl,
+			test.WithSlugFactory(func() string {
+				return userSlug
+			}),
+		)
 		mockAuthorizer := sdk.NewMockAuthorizer(ctrl)
 		mockAuthorizer.EXPECT().
 			IsAdminFromRequest(gomock.Any(), gomock.Any()).
@@ -110,13 +114,14 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ReadSecret(ctx).Body(openapi.SecretSvcReadSecretRequest{
-				Key: openapi.PtrString("nonexistent"),
-			}).Execute()
+			readRsp, _, err := userClient.SecretSvcAPI.ReadSecret(ctx).
+				Body(openapi.SecretSvcReadSecretRequest{
+					Key: openapi.PtrString("nonexistent"),
+				}).
+				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(readRsp.Secret).To(gomega.BeNil())
-			gomega.Expect(*readRsp.Exists).To(gomega.Equal(false))
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
 		})
 	})
 
@@ -129,36 +134,44 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ReadSecret(ctx).Body(openapi.SecretSvcReadSecretRequest{
-				Key: openapi.PtrString("nonexistent"),
-			}).Execute()
+			readRsp, _, err := userClient.SecretSvcAPI.ReadSecret(ctx).
+				Body(openapi.SecretSvcReadSecretRequest{
+					Key: openapi.PtrString("nonexistent"),
+				}).
+				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(readRsp.Secret).To(gomega.BeNil())
-			gomega.Expect(*readRsp.Exists).To(gomega.Equal(false))
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
 
-			_, _, err = userClient.SecretSvcAPI.WriteSecret(ctx).Request(openapi.SecretSvcWriteSecretRequest{
-				Secret: &openapi.SecretSvcSecret{
-					Key:   openapi.PtrString("nonexistent"),
-					Value: openapi.PtrString("value"),
-				},
-			}).Execute()
+			_, _, err = userClient.SecretSvcAPI.WriteSecret(ctx).
+				Request(openapi.SecretSvcWriteSecretRequest{
+					Secrets: []openapi.SecretSvcSecret{
+						{
+							Key:   openapi.PtrString("nonexistent"),
+							Value: openapi.PtrString("value"),
+						}},
+				}).
+				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			readRsp, _, err = userClient.SecretSvcAPI.ReadSecret(ctx).Body(openapi.SecretSvcReadSecretRequest{
-				Key: openapi.PtrString("nonexistent"),
-			}).Execute()
+			readRsp, _, err = userClient.SecretSvcAPI.ReadSecret(ctx).
+				Body(openapi.SecretSvcReadSecretRequest{
+					Key: openapi.PtrString("nonexistent"),
+				}).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(readRsp.Secret).NotTo(gomega.BeNil())
-			gomega.Expect(*readRsp.Exists).To(gomega.Equal(true))
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(1))
 
 			userSlug = "test-user-2"
 
-			_, _, err = userClient.SecretSvcAPI.ReadSecret(ctx).Body(openapi.SecretSvcReadSecretRequest{
-				Key: openapi.PtrString("nonexistent"),
-			}).Execute()
-			gomega.Expect(err).To(gomega.HaveOccurred())
+			readRsp, _, err = userClient.SecretSvcAPI.ReadSecret(ctx).
+				Body(openapi.SecretSvcReadSecretRequest{
+					Key: openapi.PtrString("nonexistent"),
+				}).
+				Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
 		})
 	})
 })

@@ -20,8 +20,7 @@ var _ MappedNullable = &SecretSvcReadSecretResponse{}
 
 // SecretSvcReadSecretResponse struct for SecretSvcReadSecretResponse
 type SecretSvcReadSecretResponse struct {
-	Exists *bool `json:"exists,omitempty"`
-	Secret *SecretSvcSecret `json:"secret,omitempty"`
+	Secrets []SecretSvcSecret `json:"secrets,omitempty"`
 }
 
 // NewSecretSvcReadSecretResponse instantiates a new SecretSvcReadSecretResponse object
@@ -41,68 +40,36 @@ func NewSecretSvcReadSecretResponseWithDefaults() *SecretSvcReadSecretResponse {
 	return &this
 }
 
-// GetExists returns the Exists field value if set, zero value otherwise.
-func (o *SecretSvcReadSecretResponse) GetExists() bool {
-	if o == nil || IsNil(o.Exists) {
-		var ret bool
+// GetSecrets returns the Secrets field value if set, zero value otherwise.
+func (o *SecretSvcReadSecretResponse) GetSecrets() []SecretSvcSecret {
+	if o == nil || IsNil(o.Secrets) {
+		var ret []SecretSvcSecret
 		return ret
 	}
-	return *o.Exists
+	return o.Secrets
 }
 
-// GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
+// GetSecretsOk returns a tuple with the Secrets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SecretSvcReadSecretResponse) GetExistsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Exists) {
+func (o *SecretSvcReadSecretResponse) GetSecretsOk() ([]SecretSvcSecret, bool) {
+	if o == nil || IsNil(o.Secrets) {
 		return nil, false
 	}
-	return o.Exists, true
+	return o.Secrets, true
 }
 
-// HasExists returns a boolean if a field has been set.
-func (o *SecretSvcReadSecretResponse) HasExists() bool {
-	if o != nil && !IsNil(o.Exists) {
+// HasSecrets returns a boolean if a field has been set.
+func (o *SecretSvcReadSecretResponse) HasSecrets() bool {
+	if o != nil && !IsNil(o.Secrets) {
 		return true
 	}
 
 	return false
 }
 
-// SetExists gets a reference to the given bool and assigns it to the Exists field.
-func (o *SecretSvcReadSecretResponse) SetExists(v bool) {
-	o.Exists = &v
-}
-
-// GetSecret returns the Secret field value if set, zero value otherwise.
-func (o *SecretSvcReadSecretResponse) GetSecret() SecretSvcSecret {
-	if o == nil || IsNil(o.Secret) {
-		var ret SecretSvcSecret
-		return ret
-	}
-	return *o.Secret
-}
-
-// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SecretSvcReadSecretResponse) GetSecretOk() (*SecretSvcSecret, bool) {
-	if o == nil || IsNil(o.Secret) {
-		return nil, false
-	}
-	return o.Secret, true
-}
-
-// HasSecret returns a boolean if a field has been set.
-func (o *SecretSvcReadSecretResponse) HasSecret() bool {
-	if o != nil && !IsNil(o.Secret) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecret gets a reference to the given SecretSvcSecret and assigns it to the Secret field.
-func (o *SecretSvcReadSecretResponse) SetSecret(v SecretSvcSecret) {
-	o.Secret = &v
+// SetSecrets gets a reference to the given []SecretSvcSecret and assigns it to the Secrets field.
+func (o *SecretSvcReadSecretResponse) SetSecrets(v []SecretSvcSecret) {
+	o.Secrets = v
 }
 
 func (o SecretSvcReadSecretResponse) MarshalJSON() ([]byte, error) {
@@ -115,11 +82,8 @@ func (o SecretSvcReadSecretResponse) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcReadSecretResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Exists) {
-		toSerialize["exists"] = o.Exists
-	}
-	if !IsNil(o.Secret) {
-		toSerialize["secret"] = o.Secret
+	if !IsNil(o.Secrets) {
+		toSerialize["secrets"] = o.Secrets
 	}
 	return toSerialize, nil
 }

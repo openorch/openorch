@@ -19,7 +19,9 @@ func Delete(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	_, err = cf.Client(sdk.WithToken(token)).RegistrySvcAPI.DeleteDefinition(ctx, serviceDefinitionId).Execute()
+	_, err = cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.DeleteDefinition(ctx, serviceDefinitionId).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Error deleting service definition: '%v'", err)
 	}

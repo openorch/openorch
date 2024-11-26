@@ -16,7 +16,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
 	config "github.com/singulatron/superplatform/server/internal/services/config/types"
 )
 
@@ -36,19 +35,8 @@ func (cs *ConfigService) Get(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), config.PermissionConfigView.Id).
-		Execute()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
-	}
-	if !isAuthRsp.GetAuthorized() {
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(`Unauthorized`))
-		return
-	}
+	// Config get should not be authorized because it is public, nonsensitive information.
+	// Think about app config, A/B tests and such.
 
 	conf, err := cs.getConfig()
 	if err != nil {

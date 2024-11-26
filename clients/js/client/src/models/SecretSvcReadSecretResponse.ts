@@ -28,16 +28,10 @@ import {
 export interface SecretSvcReadSecretResponse {
     /**
      * 
-     * @type {boolean}
+     * @type {Array<SecretSvcSecret>}
      * @memberof SecretSvcReadSecretResponse
      */
-    _exists?: boolean;
-    /**
-     * 
-     * @type {SecretSvcSecret}
-     * @memberof SecretSvcReadSecretResponse
-     */
-    secret?: SecretSvcSecret;
+    secrets?: Array<SecretSvcSecret>;
 }
 
 /**
@@ -57,8 +51,7 @@ export function SecretSvcReadSecretResponseFromJSONTyped(json: any, ignoreDiscri
     }
     return {
         
-        '_exists': json['exists'] == null ? undefined : json['exists'],
-        'secret': json['secret'] == null ? undefined : SecretSvcSecretFromJSON(json['secret']),
+        'secrets': json['secrets'] == null ? undefined : ((json['secrets'] as Array<any>).map(SecretSvcSecretFromJSON)),
     };
 }
 
@@ -68,8 +61,7 @@ export function SecretSvcReadSecretResponseToJSON(value?: SecretSvcReadSecretRes
     }
     return {
         
-        'exists': value['_exists'],
-        'secret': SecretSvcSecretToJSON(value['secret']),
+        'secrets': value['secrets'] == null ? undefined : ((value['secrets'] as Array<any>).map(SecretSvcSecretToJSON)),
     };
 }
 

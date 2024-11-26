@@ -25,13 +25,19 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	file, err := os.Open(filePath)
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to open file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to open file: '%v'", filePath),
+		)
 	}
 	defer file.Close()
 
 	fileInfo, err := file.Stat()
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to stat deployment file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to stat deployment file: '%v'", filePath),
+		)
 	}
 	if fileInfo.Size() == 0 {
 		return fmt.Errorf("service deployment file is empty at '%v'", filePath)
@@ -39,13 +45,19 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to read deployment file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to read deployment file: '%v'", filePath),
+		)
 	}
 
 	deployment := openapi.DeploySvcDeployment{}
 
 	if err := yaml.Unmarshal(data, &deployment); err != nil {
-		return errors.Wrap(err, fmt.Sprintf("failed to decode deployment file: '%v'", filePath))
+		return errors.Wrap(
+			err,
+			fmt.Sprintf("failed to decode deployment file: '%v'", filePath),
+		)
 	}
 
 	stat := openapi.DeploymentStatusDeploying
@@ -58,9 +70,12 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	_, _, err = cf.Client(sdk.WithToken(token)).DeploySvcAPI.SaveDeployment(ctx).Body(openapi.DeploySvcSaveDeploymentRequest{
-		Deployment: &deployment,
-	}).Execute()
+	_, _, err = cf.Client(sdk.WithToken(token)).
+		DeploySvcAPI.SaveDeployment(ctx).
+		Body(openapi.DeploySvcSaveDeploymentRequest{
+			Deployment: &deployment,
+		}).
+		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to save deployment")
 	}

@@ -11,7 +11,7 @@
  */
 import { SecretSvcSecret } from './secretSvcSecret';
 export declare class SecretSvcWriteSecretRequest {
-    'secret'?: SecretSvcSecret;
+    'secrets'?: Array<SecretSvcSecret>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

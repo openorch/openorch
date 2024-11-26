@@ -20,13 +20,13 @@ import { mapValues } from '../runtime';
  */
 export interface SecretSvcSecret {
     /**
-     * Unique identifier for the secret
+     * Id of the secret
      * @type {string}
      * @memberof SecretSvcSecret
      */
     id?: string;
     /**
-     * Identifier for the secret
+     * Envar or slug-like key of the secret
      * @type {string}
      * @memberof SecretSvcSecret
      */
@@ -38,7 +38,7 @@ export interface SecretSvcSecret {
      */
     readers?: Array<string>;
     /**
-     * Plaintext value (only stored temporarily in memory, if at all)
+     * Secret Value
      * @type {string}
      * @memberof SecretSvcSecret
      */

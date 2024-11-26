@@ -22,7 +22,9 @@ func List(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListInstances(ctx).Execute()
+	rsp, _, err := cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.ListInstances(ctx).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Failed to save service instance: '%v'", err)
 	}
@@ -38,11 +40,21 @@ func List(cmd *cobra.Command, args []string) error {
 			heartbeat = *instance.LastHeartbeat
 			parsedTime, err := time.Parse(time.RFC3339Nano, heartbeat)
 			if err == nil {
-				heartbeat = time.Since(parsedTime).Truncate(time.Second).String() + " ago"
+				heartbeat = time.Since(parsedTime).
+					Truncate(time.Second).
+					String() +
+					" ago"
 			}
 		}
 
-		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\n", instance.Id, instance.Url, instance.Status, heartbeat)
+		fmt.Fprintf(
+			writer,
+			"%s\t%s\t%s\t%s\n",
+			instance.Id,
+			instance.Url,
+			instance.Status,
+			heartbeat,
+		)
 	}
 
 	return nil

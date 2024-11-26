@@ -87,8 +87,6 @@ func TestFirehoseSubscription(t *testing.T) {
 					return
 				}
 
-				t.Logf("Received event: %v", receivedEvent)
-
 				require.Equal(t, *event.Name, ev.Name)
 				require.Equal(t, event.Data, ev.Data)
 
