@@ -17,10 +17,7 @@ var PermissionConfigCreate = usertypes.Permission{
 	Name: "Config Create",
 }
 
-var PermissionConfigView = usertypes.Permission{
-	Id:   "config-svc:config:view",
-	Name: "Config View",
-}
+// There is no view permission as configs are public facing, can be read without login even
 
 var PermissionConfigEdit = usertypes.Permission{
 	Id:   "config-svc:config:edit",
@@ -39,12 +36,7 @@ var PermissionConfigStream = usertypes.Permission{
 
 var AdminPermissions = []usertypes.Permission{
 	PermissionConfigCreate,
-	PermissionConfigView,
 	PermissionConfigEdit,
 	PermissionConfigDelete,
 	PermissionConfigStream,
-}
-
-var UserPermissions = []usertypes.Permission{
-	PermissionConfigView,
 }

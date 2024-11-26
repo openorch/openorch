@@ -5032,7 +5032,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "downloadedBytes": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "error": {
                     "type": "string"
@@ -5044,7 +5045,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "fullFileSize": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
                     "type": "string"

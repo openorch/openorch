@@ -558,6 +558,7 @@ definitions:
       dir:
         type: string
       downloadedBytes:
+        format: int64
         type: integer
       error:
         type: string
@@ -566,6 +567,7 @@ definitions:
       filePath:
         type: string
       fullFileSize:
+        format: int64
         type: integer
       id:
         type: string

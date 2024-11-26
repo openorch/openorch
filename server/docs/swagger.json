@@ -5026,7 +5026,8 @@
                     "type": "string"
                 },
                 "downloadedBytes": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "error": {
                     "type": "string"
@@ -5038,7 +5039,8 @@
                     "type": "string"
                 },
                 "fullFileSize": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
                     "type": "string"
