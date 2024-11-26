@@ -2925,20 +2925,20 @@ const docTemplate = `{
                 "operationId": "writeSecret",
                 "parameters": [
                     {
-                        "description": "Write Secret Request",
+                        "description": "Write Request",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretRequest"
+                            "$ref": "#/definitions/secret_svc.WriteRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Write Secret Response",
+                        "description": "Write Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretResponse"
+                            "$ref": "#/definitions/secret_svc.WriteResponse"
                         }
                     },
                     "401": {
@@ -2975,19 +2975,19 @@ const docTemplate = `{
                 "operationId": "readSecret",
                 "parameters": [
                     {
-                        "description": "Read Secret Request",
+                        "description": "Read Request",
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretRequest"
+                            "$ref": "#/definitions/secret_svc.ReadRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Secret Response",
+                        "description": "Read Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretResponse"
+                            "$ref": "#/definitions/secret_svc.ReadResponse"
                         }
                     },
                     "401": {
@@ -6425,7 +6425,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretRequest": {
+        "secret_svc.ReadRequest": {
             "type": "object",
             "properties": {
                 "key": {
@@ -6433,14 +6433,14 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretResponse": {
+        "secret_svc.ReadResponse": {
             "type": "object",
             "properties": {
-                "exists": {
-                    "type": "boolean"
-                },
-                "secret": {
-                    "$ref": "#/definitions/secret_svc.Secret"
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
                 }
             }
         },
@@ -6448,11 +6448,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "Unique identifier for the secret",
+                    "description": "Id of the secret",
                     "type": "string"
                 },
                 "key": {
-                    "description": "Identifier for the secret",
+                    "description": "Envar or slug-like key of the secret",
                     "type": "string"
                 },
                 "readers": {
@@ -6463,7 +6463,7 @@ const docTemplate = `{
                     }
                 },
                 "value": {
-                    "description": "Plaintext value (only stored temporarily in memory, if at all)",
+                    "description": "Secret Value",
                     "type": "string"
                 },
                 "writers": {
@@ -6475,7 +6475,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.WriteSecretRequest": {
+        "secret_svc.WriteRequest": {
             "type": "object",
             "properties": {
                 "secret": {
@@ -6483,7 +6483,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.WriteSecretResponse": {
+        "secret_svc.WriteResponse": {
             "type": "object"
         },
         "source_svc.CheckoutRepoRequest": {

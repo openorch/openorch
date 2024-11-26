@@ -16,7 +16,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/pkg/errors"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	secret "github.com/singulatron/superplatform/server/internal/services/secret/types"
@@ -29,8 +28,8 @@ import (
 // @Tags Secret Svc
 // @Accept json
 // @Produce json
-// @Param body body secret.ReadSecretRequest false "Read Secret Request"
-// @Success 200 {object} secret.ReadSecretResponse "Read Secret Response"
+// @Param body body secret.ReadRequest false "Read Request"
+// @Success 200 {object} secret.ReadResponse "Read Response"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
@@ -69,7 +68,7 @@ func (cs *SecretService) Read(
 		return
 	}
 
-	s, exists, err := cs.getSecret(req.Key, isAdmin, *isAuthRsp.User.Slug)
+	ss, err := cs.getSecrets(req, isAdmin, *isAuthRsp.User.Slug)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -77,39 +76,44 @@ func (cs *SecretService) Read(
 	}
 
 	jsonData, _ := json.Marshal(secret.ReadSecretResponse{
-		Exists: exists,
-		Secret: s,
+		Secrets: ss,
 	})
 	w.Write(jsonData)
 }
 
-func (cs *SecretService) getSecret(
-	secretKey string, isAdmin bool, userSlug string,
-) (*secret.Secret, bool, error) {
-	secretI, found, err := cs.secretStore.Query(datastore.Equals([]string{"key"}, secretKey)).
-		FindOne()
+func (cs *SecretService) getSecrets(
+	req secret.ReadSecretRequest, isAdmin bool, userSlug string,
+) ([]*secret.Secret, error) {
+	filters := []datastore.Filter{}
+	if req.Key != "" {
+		filters = append(filters, datastore.Equals([]string{"key"}, req.Key))
+	}
+
+	secretIs, err := cs.secretStore.Query(filters...).Find()
 	if err != nil {
-		return nil, false, err
-	}
-	if !found {
-		return nil, false, nil
+		return nil, err
 	}
 
-	secret := secretI.(*secret.Secret)
-	canRead := isAdmin
+	secrets := []*secret.Secret{}
+	for _, secretI := range secretIs {
+		s := secretI.(*secret.Secret)
+		canRead := isAdmin
 
-	if !canRead {
-		for _, slug := range secret.Readers {
-			if slug == userSlug {
-				canRead = true
-				break
+		if !canRead {
+			for _, slug := range s.Readers {
+				if slug == userSlug {
+					canRead = true
+					break
+				}
 			}
 		}
+
+		if !canRead {
+			continue
+		}
+
+		secrets = append(secrets, s)
 	}
 
-	if !canRead {
-		return nil, false, errors.New("unauthorized")
-	}
-
-	return secret, true, nil
+	return secrets, nil
 }

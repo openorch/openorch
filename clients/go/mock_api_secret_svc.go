@@ -54,10 +54,10 @@ func (mr *MockSecretSvcAPIMockRecorder) ReadSecret(ctx any) *gomock.Call {
 }
 
 // ReadSecretExecute mocks base method.
-func (m *MockSecretSvcAPI) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error) {
+func (m *MockSecretSvcAPI) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReadSecretExecute", r)
-	ret0, _ := ret[0].(*SecretSvcReadSecretResponse)
+	ret0, _ := ret[0].(*SecretSvcReadResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2

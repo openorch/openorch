@@ -20,13 +20,13 @@ var _ MappedNullable = &SecretSvcSecret{}
 
 // SecretSvcSecret struct for SecretSvcSecret
 type SecretSvcSecret struct {
-	// Unique identifier for the secret
+	// Id of the secret
 	Id *string `json:"id,omitempty"`
-	// Identifier for the secret
+	// Envar or slug-like key of the secret
 	Key *string `json:"key,omitempty"`
 	// Slugs of services/users who can read the secret
 	Readers []string `json:"readers,omitempty"`
-	// Plaintext value (only stored temporarily in memory, if at all)
+	// Secret Value
 	Value *string `json:"value,omitempty"`
 	// Slugs of services/users who can modify the secret
 	Writers []string `json:"writers,omitempty"`

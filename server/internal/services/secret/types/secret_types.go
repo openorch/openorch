@@ -12,9 +12,9 @@ type ErrorResponse struct {
 }
 
 type Secret struct {
-	Id      string   `json:"id"`      // Unique identifier for the secret
-	Key     string   `json:"key"`     // Identifier for the secret
-	Value   string   `json:"value"`   // Plaintext value (only stored temporarily in memory, if at all)
+	Id      string   `json:"id"`      // Id of the secret
+	Key     string   `json:"key"`     // Envar or slug-like key of the secret
+	Value   string   `json:"value"`   // Secret Value
 	Readers []string `json:"readers"` // Slugs of services/users who can read the secret
 	Writers []string `json:"writers"` // Slugs of services/users who can modify the secret
 }
@@ -28,8 +28,7 @@ type ReadSecretRequest struct {
 }
 
 type ReadSecretResponse struct {
-	Exists  bool    `json:"exists"`
-	Secret *Secret `json:"secret"`
+	Secrets []*Secret `json:"secrets"`
 }
 
 type WriteSecretRequest struct {
