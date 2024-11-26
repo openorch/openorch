@@ -27,8 +27,9 @@ func AddDeploymentCommands(rootCmd *cobra.Command) {
 	var full bool
 
 	var listCmd = &cobra.Command{
-		Use:   "list",
-		Short: "List deployments",
+		Use:     "list",
+		Aliases: []string{"ls"},
+		Short:   "List deployments",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return List(cmd, args, full)
 		},
