@@ -5026,7 +5026,8 @@
                     "type": "string"
                 },
                 "downloadedBytes": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "error": {
                     "type": "string"
@@ -5038,7 +5039,8 @@
                     "type": "string"
                 },
                 "fullFileSize": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
                     "type": "string"
@@ -6430,11 +6432,11 @@
         "secret_svc.ReadSecretResponse": {
             "type": "object",
             "properties": {
-                "exists": {
-                    "type": "boolean"
-                },
-                "secret": {
-                    "$ref": "#/definitions/secret_svc.Secret"
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
                 }
             }
         },
@@ -6442,11 +6444,11 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "Unique identifier for the secret",
+                    "description": "Id of the secret",
                     "type": "string"
                 },
                 "key": {
-                    "description": "Identifier for the secret",
+                    "description": "Envar or slug-like key of the secret",
                     "type": "string"
                 },
                 "readers": {
@@ -6457,7 +6459,7 @@
                     }
                 },
                 "value": {
-                    "description": "Plaintext value (only stored temporarily in memory, if at all)",
+                    "description": "Secret Value",
                     "type": "string"
                 },
                 "writers": {
@@ -6472,8 +6474,11 @@
         "secret_svc.WriteSecretRequest": {
             "type": "object",
             "properties": {
-                "secret": {
-                    "$ref": "#/definitions/secret_svc.Secret"
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
                 }
             }
         },

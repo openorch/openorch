@@ -14,15 +14,15 @@ import { RequestFile } from './models';
 import { SecretSvcSecret } from './secretSvcSecret';
 
 export class SecretSvcWriteSecretRequest {
-    'secret'?: SecretSvcSecret;
+    'secrets'?: Array<SecretSvcSecret>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "secret",
-            "baseName": "secret",
-            "type": "SecretSvcSecret"
+            "name": "secrets",
+            "baseName": "secrets",
+            "type": "Array<SecretSvcSecret>"
         }    ];
 
     static getAttributeTypeMap() {

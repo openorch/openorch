@@ -1,4 +1,4 @@
-package instance
+package secret
 
 import (
 	"fmt"
@@ -8,10 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Remove
-func Remove(cmd *cobra.Command, args []string) error {
+func Delete(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
-	instanceId := args[0]
+	serviceDefinitionId := args[0]
 
 	url, token, err := config.GetSelectedUrlAndToken()
 	if err != nil {
@@ -21,10 +20,10 @@ func Remove(cmd *cobra.Command, args []string) error {
 	cf := sdk.NewApiClientFactory(url)
 
 	_, err = cf.Client(sdk.WithToken(token)).
-		RegistrySvcAPI.RemoveInstance(ctx, instanceId).
+		RegistrySvcAPI.DeleteDefinition(ctx, serviceDefinitionId).
 		Execute()
 	if err != nil {
-		return fmt.Errorf("Error removing service deployment: '%v'", err)
+		return fmt.Errorf("Error deleting service secret: '%v'", err)
 	}
 
 	return nil

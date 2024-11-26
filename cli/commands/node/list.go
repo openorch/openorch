@@ -22,7 +22,9 @@ func List(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	rsp, _, err := cf.Client(sdk.WithToken(token)).RegistrySvcAPI.ListNodes(ctx).Execute()
+	rsp, _, err := cf.Client(sdk.WithToken(token)).
+		RegistrySvcAPI.ListNodes(ctx).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Failed to list nodes: '%v'", err)
 	}

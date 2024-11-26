@@ -20,9 +20,12 @@ func Delete(cmd *cobra.Command, args []string) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
-	_, _, err = cf.Client(sdk.WithToken(token)).DeploySvcAPI.DeleteDeployment(ctx).Body(openapi.DeploySvcDeleteDeploymentRequest{
-		DeploymentId: serviceDefinitionId,
-	}).Execute()
+	_, _, err = cf.Client(sdk.WithToken(token)).
+		DeploySvcAPI.DeleteDeployment(ctx).
+		Body(openapi.DeploySvcDeleteDeploymentRequest{
+			DeploymentId: serviceDefinitionId,
+		}).
+		Execute()
 	if err != nil {
 		return fmt.Errorf("Error deleting service deployment: '%v'", err)
 	}

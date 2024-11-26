@@ -14,21 +14,15 @@ import { RequestFile } from './models';
 import { SecretSvcSecret } from './secretSvcSecret';
 
 export class SecretSvcReadSecretResponse {
-    'exists'?: boolean;
-    'secret'?: SecretSvcSecret;
+    'secrets'?: Array<SecretSvcSecret>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "exists",
-            "baseName": "exists",
-            "type": "boolean"
-        },
-        {
-            "name": "secret",
-            "baseName": "secret",
-            "type": "SecretSvcSecret"
+            "name": "secrets",
+            "baseName": "secrets",
+            "type": "Array<SecretSvcSecret>"
         }    ];
 
     static getAttributeTypeMap() {

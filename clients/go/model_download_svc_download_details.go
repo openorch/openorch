@@ -22,11 +22,11 @@ var _ MappedNullable = &DownloadSvcDownloadDetails{}
 type DownloadSvcDownloadDetails struct {
 	Cancelled *bool `json:"cancelled,omitempty"`
 	Dir *string `json:"dir,omitempty"`
-	DownloadedBytes *int32 `json:"downloadedBytes,omitempty"`
+	DownloadedBytes *int64 `json:"downloadedBytes,omitempty"`
 	Error *string `json:"error,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	FilePath *string `json:"filePath,omitempty"`
-	FullFileSize *int32 `json:"fullFileSize,omitempty"`
+	FullFileSize *int64 `json:"fullFileSize,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Paused *bool `json:"paused,omitempty"`
 	Progress *float32 `json:"progress,omitempty"`
@@ -116,9 +116,9 @@ func (o *DownloadSvcDownloadDetails) SetDir(v string) {
 }
 
 // GetDownloadedBytes returns the DownloadedBytes field value if set, zero value otherwise.
-func (o *DownloadSvcDownloadDetails) GetDownloadedBytes() int32 {
+func (o *DownloadSvcDownloadDetails) GetDownloadedBytes() int64 {
 	if o == nil || IsNil(o.DownloadedBytes) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.DownloadedBytes
@@ -126,7 +126,7 @@ func (o *DownloadSvcDownloadDetails) GetDownloadedBytes() int32 {
 
 // GetDownloadedBytesOk returns a tuple with the DownloadedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DownloadSvcDownloadDetails) GetDownloadedBytesOk() (*int32, bool) {
+func (o *DownloadSvcDownloadDetails) GetDownloadedBytesOk() (*int64, bool) {
 	if o == nil || IsNil(o.DownloadedBytes) {
 		return nil, false
 	}
@@ -142,8 +142,8 @@ func (o *DownloadSvcDownloadDetails) HasDownloadedBytes() bool {
 	return false
 }
 
-// SetDownloadedBytes gets a reference to the given int32 and assigns it to the DownloadedBytes field.
-func (o *DownloadSvcDownloadDetails) SetDownloadedBytes(v int32) {
+// SetDownloadedBytes gets a reference to the given int64 and assigns it to the DownloadedBytes field.
+func (o *DownloadSvcDownloadDetails) SetDownloadedBytes(v int64) {
 	o.DownloadedBytes = &v
 }
 
@@ -244,9 +244,9 @@ func (o *DownloadSvcDownloadDetails) SetFilePath(v string) {
 }
 
 // GetFullFileSize returns the FullFileSize field value if set, zero value otherwise.
-func (o *DownloadSvcDownloadDetails) GetFullFileSize() int32 {
+func (o *DownloadSvcDownloadDetails) GetFullFileSize() int64 {
 	if o == nil || IsNil(o.FullFileSize) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.FullFileSize
@@ -254,7 +254,7 @@ func (o *DownloadSvcDownloadDetails) GetFullFileSize() int32 {
 
 // GetFullFileSizeOk returns a tuple with the FullFileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DownloadSvcDownloadDetails) GetFullFileSizeOk() (*int32, bool) {
+func (o *DownloadSvcDownloadDetails) GetFullFileSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.FullFileSize) {
 		return nil, false
 	}
@@ -270,8 +270,8 @@ func (o *DownloadSvcDownloadDetails) HasFullFileSize() bool {
 	return false
 }
 
-// SetFullFileSize gets a reference to the given int32 and assigns it to the FullFileSize field.
-func (o *DownloadSvcDownloadDetails) SetFullFileSize(v int32) {
+// SetFullFileSize gets a reference to the given int64 and assigns it to the FullFileSize field.
+func (o *DownloadSvcDownloadDetails) SetFullFileSize(v int64) {
 	o.FullFileSize = &v
 }
 

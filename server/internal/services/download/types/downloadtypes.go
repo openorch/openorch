@@ -36,8 +36,8 @@ type DownloadDetails struct {
 	FileName        string   `json:"fileName"`
 	Dir             *string  `json:"dir,omitempty"`
 	Progress        *float64 `json:"progress,omitempty"`
-	DownloadedBytes int64    `json:"downloadedBytes"`
-	FullFileSize    *int64   `json:"fullFileSize"`
+	DownloadedBytes int64    `json:"downloadedBytes" format:"int64"`
+	FullFileSize    *int64   `json:"fullFileSize" format:"int64"`
 	Status          string   `json:"status"`
 	FilePath        *string  `json:"filePath,omitempty"`
 	Paused          *bool    `json:"paused,omitempty"`

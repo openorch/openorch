@@ -11,8 +11,7 @@
  */
 import { SecretSvcSecret } from './secretSvcSecret';
 export declare class SecretSvcReadSecretResponse {
-    'exists'?: boolean;
-    'secret'?: SecretSvcSecret;
+    'secrets'?: Array<SecretSvcSecret>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

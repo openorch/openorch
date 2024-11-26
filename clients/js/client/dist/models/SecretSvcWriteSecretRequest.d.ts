@@ -18,10 +18,10 @@ import type { SecretSvcSecret } from './SecretSvcSecret';
 export interface SecretSvcWriteSecretRequest {
     /**
      *
-     * @type {SecretSvcSecret}
+     * @type {Array<SecretSvcSecret>}
      * @memberof SecretSvcWriteSecretRequest
      */
-    secret?: SecretSvcSecret;
+    secrets?: Array<SecretSvcSecret>;
 }
 /**
  * Check if a given object implements the SecretSvcWriteSecretRequest interface.

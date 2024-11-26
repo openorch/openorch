@@ -32,7 +32,14 @@ func List(cmd *cobra.Command, args []string) error {
 			selected = "*"
 		}
 
-		fmt.Fprintf(writer, "%s\t%s\t%s\t%s\t\n", selected, name, env.URL, env.Description)
+		fmt.Fprintf(
+			writer,
+			"%s\t%s\t%s\t%s\t\n",
+			selected,
+			name,
+			env.URL,
+			env.Description,
+		)
 	}
 
 	return nil

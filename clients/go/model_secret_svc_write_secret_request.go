@@ -20,7 +20,7 @@ var _ MappedNullable = &SecretSvcWriteSecretRequest{}
 
 // SecretSvcWriteSecretRequest struct for SecretSvcWriteSecretRequest
 type SecretSvcWriteSecretRequest struct {
-	Secret *SecretSvcSecret `json:"secret,omitempty"`
+	Secrets []SecretSvcSecret `json:"secrets,omitempty"`
 }
 
 // NewSecretSvcWriteSecretRequest instantiates a new SecretSvcWriteSecretRequest object
@@ -40,36 +40,36 @@ func NewSecretSvcWriteSecretRequestWithDefaults() *SecretSvcWriteSecretRequest {
 	return &this
 }
 
-// GetSecret returns the Secret field value if set, zero value otherwise.
-func (o *SecretSvcWriteSecretRequest) GetSecret() SecretSvcSecret {
-	if o == nil || IsNil(o.Secret) {
-		var ret SecretSvcSecret
+// GetSecrets returns the Secrets field value if set, zero value otherwise.
+func (o *SecretSvcWriteSecretRequest) GetSecrets() []SecretSvcSecret {
+	if o == nil || IsNil(o.Secrets) {
+		var ret []SecretSvcSecret
 		return ret
 	}
-	return *o.Secret
+	return o.Secrets
 }
 
-// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
+// GetSecretsOk returns a tuple with the Secrets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SecretSvcWriteSecretRequest) GetSecretOk() (*SecretSvcSecret, bool) {
-	if o == nil || IsNil(o.Secret) {
+func (o *SecretSvcWriteSecretRequest) GetSecretsOk() ([]SecretSvcSecret, bool) {
+	if o == nil || IsNil(o.Secrets) {
 		return nil, false
 	}
-	return o.Secret, true
+	return o.Secrets, true
 }
 
-// HasSecret returns a boolean if a field has been set.
-func (o *SecretSvcWriteSecretRequest) HasSecret() bool {
-	if o != nil && !IsNil(o.Secret) {
+// HasSecrets returns a boolean if a field has been set.
+func (o *SecretSvcWriteSecretRequest) HasSecrets() bool {
+	if o != nil && !IsNil(o.Secrets) {
 		return true
 	}
 
 	return false
 }
 
-// SetSecret gets a reference to the given SecretSvcSecret and assigns it to the Secret field.
-func (o *SecretSvcWriteSecretRequest) SetSecret(v SecretSvcSecret) {
-	o.Secret = &v
+// SetSecrets gets a reference to the given []SecretSvcSecret and assigns it to the Secrets field.
+func (o *SecretSvcWriteSecretRequest) SetSecrets(v []SecretSvcSecret) {
+	o.Secrets = v
 }
 
 func (o SecretSvcWriteSecretRequest) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o SecretSvcWriteSecretRequest) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcWriteSecretRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Secret) {
-		toSerialize["secret"] = o.Secret
+	if !IsNil(o.Secrets) {
+		toSerialize["secrets"] = o.Secrets
 	}
 	return toSerialize, nil
 }

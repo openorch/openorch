@@ -18,7 +18,10 @@ func GetSelectedEnv() (*types.Environment, error) {
 
 	env, ok := conf.Environments[conf.SelectedEnvironment]
 	if !ok {
-		return nil, fmt.Errorf("failed to find selected env: %s", conf.SelectedEnvironment)
+		return nil, fmt.Errorf(
+			"failed to find selected env: %s",
+			conf.SelectedEnvironment,
+		)
 	}
 
 	return env, nil

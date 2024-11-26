@@ -25,9 +25,10 @@ func AddDefinitionCommands(rootCmd *cobra.Command) {
 	}
 
 	var envListCmd = &cobra.Command{
-		Use:   "list",
-		Short: "List definitions",
-		RunE:  List,
+		Use:     "list",
+		Aliases: []string{"ls"},
+		Short:   "List definitions",
+		RunE:    List,
 	}
 
 	envCmd.AddCommand(envSaveCmd)

@@ -29,7 +29,14 @@ func Current(cmd *cobra.Command, args []string) error {
 	env := conf.Environments[conf.SelectedEnvironment]
 	selected := "*"
 
-	fmt.Fprintf(writer, "%s\t%s\t%s\t%s\t\n", selected, env.ShortName, env.URL, env.Description)
+	fmt.Fprintf(
+		writer,
+		"%s\t%s\t%s\t%s\t\n",
+		selected,
+		env.ShortName,
+		env.URL,
+		env.Description,
+	)
 
 	return nil
 }

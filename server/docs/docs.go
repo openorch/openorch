@@ -5032,7 +5032,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "downloadedBytes": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "error": {
                     "type": "string"
@@ -5044,7 +5045,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "fullFileSize": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "id": {
                     "type": "string"
@@ -6436,11 +6438,11 @@ const docTemplate = `{
         "secret_svc.ReadSecretResponse": {
             "type": "object",
             "properties": {
-                "exists": {
-                    "type": "boolean"
-                },
-                "secret": {
-                    "$ref": "#/definitions/secret_svc.Secret"
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
                 }
             }
         },
@@ -6448,11 +6450,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "Unique identifier for the secret",
+                    "description": "Id of the secret",
                     "type": "string"
                 },
                 "key": {
-                    "description": "Identifier for the secret",
+                    "description": "Envar or slug-like key of the secret",
                     "type": "string"
                 },
                 "readers": {
@@ -6463,7 +6465,7 @@ const docTemplate = `{
                     }
                 },
                 "value": {
-                    "description": "Plaintext value (only stored temporarily in memory, if at all)",
+                    "description": "Secret Value",
                     "type": "string"
                 },
                 "writers": {
@@ -6478,8 +6480,11 @@ const docTemplate = `{
         "secret_svc.WriteSecretRequest": {
             "type": "object",
             "properties": {
-                "secret": {
-                    "$ref": "#/definitions/secret_svc.Secret"
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
                 }
             }
         },

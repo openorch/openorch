@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log/slog"
-	"net/url"
 	"os"
 	"path"
 	"regexp"
@@ -130,11 +129,18 @@ func (d *DockerService) runContainer(
 	if existingContainer != nil {
 		if existingContainer.State != "running" ||
 			existingContainer.Labels["superplatform-hash"] != options.Hash {
-			logs, _ := d.getContainerLogsAndStatus(options.Hash, 10)
-			logger.Debug(
-				"Container state is not running or hash is mismatched, removing...",
-				slog.String("containerLogs", logs.Summary),
-			)
+			logs, err := d.getContainerLogsAndStatus(options.Hash, 10)
+			if err != nil {
+				logger.Warn(
+					"Error getting container logs",
+					slog.String("error", err.Error()),
+				)
+			} else {
+				logger.Debug(
+					"Container state is not running or hash is mismatched, removing...",
+					slog.String("containerLogs", logs.Summary),
+				)
+			}
 
 			if err := d.client.ContainerRemove(ctx, existingContainer.ID, container.RemoveOptions{Force: true}); err != nil {
 				return nil, errors.Wrap(err, "error removing Docker container")
@@ -187,7 +193,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	for envarName, assetURL := range assets {
 
 		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			DownloadSvcAPI.GetDownload(context.Background(), url.PathEscape(assetURL)).
+			DownloadSvcAPI.GetDownload(context.Background(), assetURL).
 			Execute()
 		if err != nil {
 			return nil, nil, err

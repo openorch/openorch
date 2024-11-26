@@ -59,18 +59,19 @@ func (dm *DockerService) ContainerIsRunning(
 	}
 
 	q := r.URL.Query()
-	hash := q.Get("hash")
 
+	hash := q.Get("hash")
 	name := q.Get("name")
-	if name == "" {
-		w.WriteHeader(http.StatusNotImplemented)
-		w.Write([]byte(`Not Implemented`))
-		return
-	}
 
 	if hash == "" && name == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`Missing Parameters`))
+		return
+	}
+
+	if name != "" {
+		w.WriteHeader(http.StatusNotImplemented)
+		w.Write([]byte(`Not Implemented`))
 		return
 	}
 

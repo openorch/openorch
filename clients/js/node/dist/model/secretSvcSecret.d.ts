@@ -11,11 +11,11 @@
  */
 export declare class SecretSvcSecret {
     /**
-    * Unique identifier for the secret
+    * Id of the secret
     */
     'id'?: string;
     /**
-    * Identifier for the secret
+    * Envar or slug-like key of the secret
     */
     'key'?: string;
     /**
@@ -23,7 +23,7 @@ export declare class SecretSvcSecret {
     */
     'readers'?: Array<string>;
     /**
-    * Plaintext value (only stored temporarily in memory, if at all)
+    * Secret Value
     */
     'value'?: string;
     /**

@@ -13,13 +13,16 @@ import (
 
 func LoadConfig() (types.Config, error) {
 	var config types.Config
-	configDir := filepath.Join(os.Getenv("HOME"), ".singulatron")
+	configDir := filepath.Join(os.Getenv("HOME"), ".superplatform")
 	configPath := filepath.Join(configDir, "cliConfig.yaml")
 
 	if _, err := os.Stat(configDir); os.IsNotExist(err) {
 		err = os.MkdirAll(configDir, 0755)
 		if err != nil {
-			return config, fmt.Errorf("failed to create config directory: %v", err)
+			return config, fmt.Errorf(
+				"failed to create config directory: %v",
+				err,
+			)
 		}
 	}
 
@@ -54,7 +57,11 @@ func LoadConfig() (types.Config, error) {
 }
 
 func SaveConfig(config types.Config) error {
-	configPath := filepath.Join(os.Getenv("HOME"), ".singulatron", "cliConfig.yaml")
+	configPath := filepath.Join(
+		os.Getenv("HOME"),
+		".superplatform",
+		"cliConfig.yaml",
+	)
 
 	file, err := os.OpenFile(configPath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {

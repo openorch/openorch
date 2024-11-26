@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	openapi "github.com/singulatron/superplatform/clients/go"
 	sdk "github.com/singulatron/superplatform/sdk/go"
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
@@ -32,6 +33,9 @@ func (rs *RegistryService) RemoveInstance(
 
 	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionInstanceDelete.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"deploy-svc"},
+		}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

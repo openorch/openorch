@@ -3,13 +3,13 @@ package node
 import "github.com/spf13/cobra"
 
 func AddNodeCommands(rootCmd *cobra.Command) {
-	var envCmd = &cobra.Command{
+	var nodeCmd = &cobra.Command{
 		Use:     "node",
 		Aliases: []string{"nodes"},
 		Short:   "Manage nodes",
 	}
 
-	var envDeleteCmd = &cobra.Command{
+	var deleteCmd = &cobra.Command{
 		Use:     "delete [url]",
 		Short:   "Delete a node by URL",
 		Aliases: []string{"del", "rm", "remove"},
@@ -17,14 +17,14 @@ func AddNodeCommands(rootCmd *cobra.Command) {
 		RunE:    Delete,
 	}
 
-	var envListCmd = &cobra.Command{
+	var listCmd = &cobra.Command{
 		Use:   "list",
 		Short: "List nodes",
 		RunE:  List,
 	}
 
-	envCmd.AddCommand(envDeleteCmd)
-	envCmd.AddCommand(envListCmd)
+	nodeCmd.AddCommand(deleteCmd)
+	nodeCmd.AddCommand(listCmd)
 
-	rootCmd.AddCommand(envCmd)
+	rootCmd.AddCommand(nodeCmd)
 }

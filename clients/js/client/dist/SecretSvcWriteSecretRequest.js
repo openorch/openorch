@@ -29,7 +29,7 @@ function SecretSvcWriteSecretRequestFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'secret': json['secret'] == null ? undefined : SecretSvcSecret.SecretSvcSecretFromJSON(json['secret']),
+        'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecret.SecretSvcSecretFromJSON)),
     };
 }
 function SecretSvcWriteSecretRequestToJSON(value) {
@@ -37,7 +37,7 @@ function SecretSvcWriteSecretRequestToJSON(value) {
         return value;
     }
     return {
-        'secret': SecretSvcSecret.SecretSvcSecretToJSON(value['secret']),
+        'secrets': value['secrets'] == null ? undefined : (value['secrets'].map(SecretSvcSecret.SecretSvcSecretToJSON)),
     };
 }
 

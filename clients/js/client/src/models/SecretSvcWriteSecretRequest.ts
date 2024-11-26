@@ -28,10 +28,10 @@ import {
 export interface SecretSvcWriteSecretRequest {
     /**
      * 
-     * @type {SecretSvcSecret}
+     * @type {Array<SecretSvcSecret>}
      * @memberof SecretSvcWriteSecretRequest
      */
-    secret?: SecretSvcSecret;
+    secrets?: Array<SecretSvcSecret>;
 }
 
 /**
@@ -51,7 +51,7 @@ export function SecretSvcWriteSecretRequestFromJSONTyped(json: any, ignoreDiscri
     }
     return {
         
-        'secret': json['secret'] == null ? undefined : SecretSvcSecretFromJSON(json['secret']),
+        'secrets': json['secrets'] == null ? undefined : ((json['secrets'] as Array<any>).map(SecretSvcSecretFromJSON)),
     };
 }
 
@@ -61,7 +61,7 @@ export function SecretSvcWriteSecretRequestToJSON(value?: SecretSvcWriteSecretRe
     }
     return {
         
-        'secret': SecretSvcSecretToJSON(value['secret']),
+        'secrets': value['secrets'] == null ? undefined : ((value['secrets'] as Array<any>).map(SecretSvcSecretToJSON)),
     };
 }
 

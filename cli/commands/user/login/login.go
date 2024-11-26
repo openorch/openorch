@@ -26,15 +26,21 @@ func Login(cmd *cobra.Command, args []string) error {
 
 	env, ok := conf.Environments[conf.SelectedEnvironment]
 	if !ok {
-		return fmt.Errorf("failed to find selected env: %s", conf.SelectedEnvironment)
+		return fmt.Errorf(
+			"failed to find selected env: %s",
+			conf.SelectedEnvironment,
+		)
 	}
 
 	cf := sdk.NewApiClientFactory(env.URL)
 
-	rsp, _, err := cf.Client().UserSvcAPI.Login(cmd.Context()).Request(openapi.UserSvcLoginRequest{
-		Slug:     &slug,
-		Password: &password,
-	}).Execute()
+	rsp, _, err := cf.Client().
+		UserSvcAPI.Login(cmd.Context()).
+		Request(openapi.UserSvcLoginRequest{
+			Slug:     &slug,
+			Password: &password,
+		}).
+		Execute()
 	if err != nil {
 		return err
 	}
