@@ -203,6 +203,7 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
+    "./smaller-diffs-webpack-plugin",
     [
       "docusaurus-plugin-openapi-docs",
       {
