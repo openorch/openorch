@@ -1,5 +1,5 @@
 {
-  "name": "@singulatron/node",
+  "name": "@superplatform/node",
   "version": "0.3.0-rc.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
