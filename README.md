@@ -57,6 +57,8 @@ Let's do a sync prompting in JS. In your project run
 npm i -s @superplatform/client
 ```
 
+Make sure your `package.json` contains `"type": "module"`, put the following snippet into `index.js`
+
 ```ts
 import { UserSvcApi, PromptSvcApi, Configuration } from "@superplatform/client";
 
@@ -87,6 +89,38 @@ async function testDrive() {
 
 testDrive();
 ```
+
+and run
+
+```sh
+crufter@cruftop:~/testjs$ node index.js 
+{
+  answer: ' Yes, a cat is an animal.\n' +
+    '\n' +
+    'But if you meant to ask whether cats are domesticated animals or pets, then the answer is also yes. Cats belong to the Felidae family and are common household pets around the world. They are often kept for companionship and to control rodent populations.',
+  prompt: undefined
+}
+```
+
+Depending on your system it might take a while for the AI to respond.
+In case it takes long check the backend logs if it's processing, you should see something like this:
+
+```sh
+superplatform-backend-1   | {"time":"2024-11-27T17:27:14.602762664Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":1,"totalResponses":1}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":4,"totalResponses":9}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:16.602428481Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":5,"totalResponses":17}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:17.602586968Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":24}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:18.602583176Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":31}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:19.602576641Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":38}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:20.602284446Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":46}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:21.602178149Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":53}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:22.602470024Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":61}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:23.174054316Z","level":"INFO","msg":"Saving chat message","messageId":"msg_e3SARBJAZe"}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:23.175854857Z","level":"DEBUG","msg":"Event published","eventName":"chatMessageAdded"}
+superplatform-backend-1   | {"time":"2024-11-27T17:27:23.176260122Z","level":"DEBUG","msg":"Finished streaming LLM","error":"<nil>"}
+```
+
+##
 
 ## Context
 
