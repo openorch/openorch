@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.2
+API version: 0.3.0-rc.1
 Contact: sales@singulatron.com
 */
 
