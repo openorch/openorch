@@ -4,12 +4,12 @@
 version: "3.8"
 
 volumes:
-  singulatron-data:
-    name: singulatron-data
+  superplatform-data:
+    name: superplatform-data
     driver: local
 
 services:
-  singulatron-frontend:
+  superplatform-frontend:
     build:
       context: ./desktop
       dockerfile: ./docker/Dockerfile
@@ -20,7 +20,7 @@ services:
       # It is not an internal address, it's the address the browser will make API requests to.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
-  singulatron-backend:
+  superplatform-backend:
     build:
       context: .
       dockerfile: ./server/docker/Dockerfile
@@ -30,8 +30,8 @@ services:
       # We mount the docker socket so the backend can start containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
-      - singulatron-data:/root/.singulatron
-    # environment:
+      - superplatform-data:/root/.superplatform
+      # environment:
       # GPU Acceleration for NVIDIA GPUs
       # Uncomment this envar for NVIDIA GPUs.
       #

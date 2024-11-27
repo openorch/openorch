@@ -10,10 +10,10 @@ cd ..
 
 cd client-example;
 npm install
-npm link @singulatron/client;
+npm link @superplatform/client;
 npm run build
 cd ..
 
 cd ../../desktop/workspaces/angular-app/
-npm link @singulatron/client
+npm link @superplatform/client
 cd ../../../clients/js
