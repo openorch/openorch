@@ -35,7 +35,7 @@ to run the platform in foreground. It stops running if you Ctrl+C it. If you wan
 docker compose up -d
 ```
 
-## Calling
+## Using
 
 Now that the Superplatform is running you have a few options to interact with it.
 
