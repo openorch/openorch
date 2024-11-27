@@ -93,7 +93,7 @@ testDrive();
 and run
 
 ```sh
-crufter@cruftop:~/testjs$ node index.js 
+$ node index.js 
 {
   answer: ' Yes, a cat is an animal.\n' +
     '\n' +
