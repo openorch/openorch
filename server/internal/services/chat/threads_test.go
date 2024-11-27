@@ -48,7 +48,7 @@ func TestMessageCreatesThread(t *testing.T) {
 		}
 
 		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), "-").
-			Request(
+			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
 						Id:      openapi.PtrString(req.Message.Id),
@@ -70,7 +70,7 @@ func TestMessageCreatesThread(t *testing.T) {
 		}
 
 		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
-			Request(
+			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
 						Id:      openapi.PtrString(req.Message.Id),
@@ -94,7 +94,7 @@ func TestMessageCreatesThread(t *testing.T) {
 		}
 
 		_, _, err = userClient.ChatSvcAPI.AddThread(context.Background()).
-			Request(
+			Body(
 				openapi.ChatSvcAddThreadRequest{
 					Thread: &openapi.ChatSvcThread{
 						Id:    openapi.PtrString(req.Thread.Id),
@@ -122,7 +122,7 @@ func TestMessageCreatesThread(t *testing.T) {
 		}
 
 		rsp, _, err := userClient.ChatSvcAPI.AddThread(context.Background()).
-			Request(
+			Body(
 				openapi.ChatSvcAddThreadRequest{
 					Thread: &openapi.ChatSvcThread{
 						Id:      openapi.PtrString(req.Thread.Id),
@@ -150,7 +150,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			}}
 
 		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
-			Request(
+			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
 						Id:      openapi.PtrString(req.Message.Id),
