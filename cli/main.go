@@ -13,6 +13,7 @@ import (
 	"github.com/singulatron/superplatform/cli/commands/node"
 	secret "github.com/singulatron/superplatform/cli/commands/secret"
 	"github.com/singulatron/superplatform/cli/commands/user/login"
+	"github.com/singulatron/superplatform/cli/commands/user/token"
 	"github.com/singulatron/superplatform/cli/commands/user/whoami"
 )
 
@@ -29,6 +30,7 @@ func main() {
 
 	addLoginCommands(rootCmd)
 	addWhoamiCommands(rootCmd)
+	addTokenCommands(rootCmd)
 	addCallCommands(rootCmd)
 
 	env.AddEnvCommands(rootCmd)
@@ -60,6 +62,17 @@ func addWhoamiCommands(rootCmd *cobra.Command) {
 		Args:  cobra.ExactArgs(0),
 		Short: "Display the user currently logged in",
 		RunE:  whoami.Whoami,
+	}
+
+	rootCmd.AddCommand(runCmd)
+}
+
+func addTokenCommands(rootCmd *cobra.Command) {
+	var runCmd = &cobra.Command{
+		Use: "token",
+		// Args:  cobra.ExactArgs(0),
+		Short: "Display the token of the user currently logged in",
+		RunE:  token.Token,
 	}
 
 	rootCmd.AddCommand(runCmd)
