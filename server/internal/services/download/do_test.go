@@ -267,6 +267,6 @@ outer:
 		}
 	}
 
-	require.Equal(t, int32(11), *d.DownloadedBytes)
-	require.Equal(t, int32(11), *d.FullFileSize)
+	require.Equal(t, int64(11), *d.DownloadedBytes)
+	require.Equal(t, int64(11), *d.FullFileSize)
 }
