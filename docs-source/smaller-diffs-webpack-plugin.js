@@ -1,3 +1,6 @@
+// DOES NOT WORK YET
+// FIX THIS
+//
 // This custom webpack plugin is here so hundreds of assets won't be generated
 // Before:
 // Untracked files:
@@ -29,17 +32,18 @@ function smallerDiffsWebpackPlugin(context, options) {
       if (!isServer) {
         return {
           optimization: {
-            runtimeChunk: false, // Disable runtime chunk
-            moduleIds: "named", // Keep the original module
-            splitChunks = {
-              chunks: 'all', // You can set this to 'all' or 'async' based on your need
+            runtimeChunk: false,
+            moduleIds: "named",
+            splitChunks: {
+              chunks: "all",
               cacheGroups: {
-                default: false, // Disable default cache group splitting
+                default: false,
               },
-            };
+            },
           },
           output: {
-            filename: "assets/js/main.js",
+            filename: "assets/js/[name].js",
+            chunkFilename: "assets/js/[name].js",
           },
         };
       }
