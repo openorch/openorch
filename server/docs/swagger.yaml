@@ -2004,7 +2004,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: Superplatform
-  version: "0.2"
+  version: 0.3.0-rc.1
 paths:
   /chat-svc/events:
     get:
