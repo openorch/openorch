@@ -18,6 +18,80 @@
 ![js client build](https://github.com/singulatron/superplatform/actions/workflows/js-client-build.yaml/badge.svg)
 ![go sdk](https://github.com/singulatron/superplatform/actions/workflows/go-sdk-build.yaml/badge.svg)
 
+Superplatform aims to give power back to the developers in the age of AI-self host your own AI platform!
+
+## Quick Start
+
+### Running
+
+Easiest way to run Superplatform is with Docker. [Install Docker if you don't have it](https://docs.docker.com/engine/install/).
+Step into repo root and:
+
+```sh
+docker compose up
+```
+
+to run the platform in foreground. It stops running if you Ctrl+C it. If you want to run it in the background:
+
+```sh
+docker compose up -d
+```
+
+### Calling
+
+Now that the Superplatform is running you have a few options to interact with it.
+
+## UI
+
+You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and password `changeme` and start using it just like you would use ChatGPT.
+
+Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
+
+## Clients
+
+For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
+
+Let's do a sync prompting in JS. In your project run
+
+```sh
+npm i -s @superplatform/client
+```
+
+```ts
+import { UserSvcApi, PromptSvcApi, Configuration } from "@superplatform/client";
+
+async function testDrive() {
+  let userService = new UserSvcApi();
+  let loginResponse = await userService.login({
+    request: {
+      slug: "singulatron",
+      password: "changeme",
+    },
+  });
+
+  const promptSvc = new PromptSvcApi(
+    new Configuration({
+      apiKey: loginResponse.token?.token,
+    })
+  );
+
+  let promptRsp = await promptSvc.addPrompt({
+    request: {
+      sync: true,
+      prompt: "Is a cat an animal? Just answer with yes or no please.",
+    },
+  });
+
+  console.log(promptRsp);
+}
+
+testDrive();
+```
+
+##
+
+## Context
+
 Superplatform is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
 
 It's a server and ecosystem enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.

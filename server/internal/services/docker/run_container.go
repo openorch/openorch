@@ -215,11 +215,11 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	for envName, assetPath := range envarNameToFilePath {
 		fileName := path.Base(assetPath)
-		// eg. MODEL=/root/.singulatron/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
+		// eg. MODEL=/root/.superplatform/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
 		envs = append(
 			envs,
 			fmt.Sprintf(
-				"%v=/root/.singulatron/downloads/%v",
+				"%v=/root/.superplatform/downloads/%v",
 				envName,
 				fileName,
 			),
@@ -228,7 +228,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	// If the Superplatform daemon is running in Docker, we need to find the volume it mounted so we can share
 	// the downloaded files with containers the Superplatform daemon starts.
-	// If the Superplatform daemon is running directly on the host, we will just mount the ~/.singulatron folder in
+	// If the Superplatform daemon is running directly on the host, we will just mount the ~/.superplatform folder in
 	// the containers the Superplatform daemon starts.
 
 	singulatronVolumeName := d.volumeName
@@ -241,7 +241,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 			mountedVolume, err := d.getMountedVolume(
 				currentContainerId,
-				"/root/.singulatron",
+				"/root/.superplatform",
 			)
 			if err != nil {
 				return nil, nil, err
@@ -270,7 +270,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	hostBinds = append(
 		hostBinds,
-		fmt.Sprintf("%v:/root/.singulatron", singulatronVolumeName),
+		fmt.Sprintf("%v:/root/.superplatform", singulatronVolumeName),
 	)
 
 	// Persistent paths are paths in the container we want to persist.
