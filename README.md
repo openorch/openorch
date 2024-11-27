@@ -41,13 +41,13 @@ docker compose up -d
 
 Now that the Superplatform is running you have a few options to interact with it.
 
-## UI
+#### UI
 
 You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and password `changeme` and start using it just like you would use ChatGPT.
 
 Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
 
-## Clients
+#### Clients
 
 For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
 
@@ -87,8 +87,6 @@ async function testDrive() {
 
 testDrive();
 ```
-
-##
 
 ## Context
 
