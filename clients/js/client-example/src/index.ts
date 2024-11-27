@@ -1,4 +1,4 @@
-import { Configuration, UserSvcApi } from "@singulatron/client";
+import { Configuration, UserSvcApi } from "@superplatform/client";
 import { dynamicTest } from "./dynamic_example.js";
 import { promptTest } from "./prompt_example.js";
 

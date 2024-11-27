@@ -37,7 +37,7 @@ services:
       # We mount the docker socket so the backend can start   containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
-      - superplatform-data:/root/.singulatron
+      - superplatform-data:/root/.superplatform
     environment:
       # This volume will be mounted by the LLM containers to access the models downloaded by Superplatform.
       - SINGULATRON_VOLUME_NAME=superplatform-data
