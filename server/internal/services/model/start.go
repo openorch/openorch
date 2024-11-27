@@ -120,7 +120,7 @@ func (ms *ModelService) startWithDocker(
 
 	runRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		DockerSvcAPI.RunContainer(context.Background()).
-		Request(
+		Body(
 			openapi.DockerSvcRunContainerRequest{
 				Image:    image,
 				Port:     int32(port),

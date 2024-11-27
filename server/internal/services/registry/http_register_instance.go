@@ -18,7 +18,7 @@ import (
 // @Tags Registry Svc
 // @Accept json
 // @Produce json
-// @Param request body registry.RegisterInstanceRequest true "Register Instance Request"
+// @Param body body registry.RegisterInstanceRequest true "Register Instance Request"
 // @Success 201 {object} registry.RegisterInstanceResponse
 // @Failure 400 {object} registry.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} registry.ErrorResponse "Unauthorized"

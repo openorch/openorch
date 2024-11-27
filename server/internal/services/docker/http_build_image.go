@@ -29,7 +29,7 @@ import (
 // @Tags Docker Svc
 // @Accept json
 // @Produce json
-// @Param request body docker.BuildImageRequest true "Build Image Request"
+// @Param body body docker.BuildImageRequest true "Build Image Request"
 // @Success 200 {object} docker.BuildImageResponse
 // @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} docker.ErrorResponse "Unauthorized"

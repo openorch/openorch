@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.1"
+        "version": "0.3.0-rc.2"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -121,7 +121,7 @@
                 "parameters": [
                     {
                         "description": "Add Thread Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -240,7 +240,7 @@
                     },
                     {
                         "description": "Update Thread Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -360,7 +360,7 @@
                     },
                     {
                         "description": "Add Message Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -475,7 +475,7 @@
                 "parameters": [
                     {
                         "description": "Get Threads Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/chat_svc.GetThreadsRequest"
@@ -571,7 +571,7 @@
                 "parameters": [
                     {
                         "description": "Save Config Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -792,7 +792,7 @@
                 "parameters": [
                     {
                         "description": "Run Container Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -911,7 +911,7 @@
                 "parameters": [
                     {
                         "description": "Stop Container Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1077,7 +1077,7 @@
                 "parameters": [
                     {
                         "description": "Build Image Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1176,7 +1176,7 @@
                 "parameters": [
                     {
                         "description": "Download Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2110,7 +2110,7 @@
                 "parameters": [
                     {
                         "description": "Check Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2175,7 +2175,7 @@
                     },
                     {
                         "description": "Upsert Instance Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2233,7 +2233,7 @@
                 "parameters": [
                     {
                         "description": "Add Prompt Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2291,7 +2291,7 @@
                 "parameters": [
                     {
                         "description": "List Prompts Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/prompt_svc.ListPromptsRequest"
@@ -2392,7 +2392,7 @@
                 "parameters": [
                     {
                         "description": "Remove Prompt Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2450,7 +2450,7 @@
                 "parameters": [
                     {
                         "description": "Register Service Definition Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2608,7 +2608,7 @@
                 "parameters": [
                     {
                         "description": "Register Instance Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2920,7 +2920,7 @@
                 "parameters": [
                     {
                         "description": "Write Secret Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3021,7 +3021,7 @@
                 "parameters": [
                     {
                         "description": "Checkout Repo Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3079,7 +3079,7 @@
                 "parameters": [
                     {
                         "description": "Change Password Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3137,7 +3137,7 @@
                 "parameters": [
                     {
                         "description": "Change Password Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3190,7 +3190,7 @@
                 "parameters": [
                     {
                         "description": "Login Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3242,7 +3242,7 @@
                 "parameters": [
                     {
                         "description": "Create User Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3307,7 +3307,7 @@
                     },
                     {
                         "description": "Add User to Organization Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3391,7 +3391,7 @@
                     },
                     {
                         "description": "Add User to Organization Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/user_svc.RemoveUserFromOrganizationRequest"
@@ -3666,7 +3666,7 @@
                 "parameters": [
                     {
                         "description": "Create Role Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3997,7 +3997,7 @@
                 "parameters": [
                     {
                         "description": "Create User Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4209,7 +4209,7 @@
                 "parameters": [
                     {
                         "description": "Get Users Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/user_svc.GetUsersRequest"

@@ -29,7 +29,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param threadId path string true "Thread ID"
-// @Param request body chat.UpdateThreadRequest true "Update Thread Request"
+// @Param body body chat.UpdateThreadRequest true "Update Thread Request"
 // @Success 200 {object} chat.AddThreadResponse "Thread successfully updated"
 // @Failure 400 {string} string "Invalid JSON"
 // @Failure 401 {string} string "Unauthorized"

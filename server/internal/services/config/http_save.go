@@ -28,7 +28,7 @@ import (
 // @Tags Config Svc
 // @Accept json
 // @Produce json
-// @Param request body config.SaveConfigRequest true "Save Config Request"
+// @Param body body config.SaveConfigRequest true "Save Config Request"
 // @Success 200 {object} config.SaveConfigResponse "Save Config Response"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"

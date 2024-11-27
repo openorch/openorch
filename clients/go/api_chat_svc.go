@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -164,12 +164,12 @@ type ApiAddMessageRequest struct {
 	ctx context.Context
 	ApiService ChatSvcAPI
 	threadId string
-	request *ChatSvcAddMessageRequest
+	body *ChatSvcAddMessageRequest
 }
 
 // Add Message Request
-func (r ApiAddMessageRequest) Request(request ChatSvcAddMessageRequest) ApiAddMessageRequest {
-	r.request = &request
+func (r ApiAddMessageRequest) Body(body ChatSvcAddMessageRequest) ApiAddMessageRequest {
+	r.body = &body
 	return r
 }
 
@@ -215,8 +215,8 @@ func (a *ChatSvcAPIService) AddMessageExecute(r ApiAddMessageRequest) (map[strin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -237,7 +237,7 @@ func (a *ChatSvcAPIService) AddMessageExecute(r ApiAddMessageRequest) (map[strin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -324,12 +324,12 @@ func (a *ChatSvcAPIService) AddMessageExecute(r ApiAddMessageRequest) (map[strin
 type ApiAddThreadRequest struct {
 	ctx context.Context
 	ApiService ChatSvcAPI
-	request *ChatSvcAddThreadRequest
+	body *ChatSvcAddThreadRequest
 }
 
 // Add Thread Request
-func (r ApiAddThreadRequest) Request(request ChatSvcAddThreadRequest) ApiAddThreadRequest {
-	r.request = &request
+func (r ApiAddThreadRequest) Body(body ChatSvcAddThreadRequest) ApiAddThreadRequest {
+	r.body = &body
 	return r
 }
 
@@ -373,8 +373,8 @@ func (a *ChatSvcAPIService) AddThreadExecute(r ApiAddThreadRequest) (*ChatSvcAdd
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -395,7 +395,7 @@ func (a *ChatSvcAPIService) AddThreadExecute(r ApiAddThreadRequest) (*ChatSvcAdd
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1177,12 +1177,12 @@ func (a *ChatSvcAPIService) GetThreadExecute(r ApiGetThreadRequest) (*ChatSvcGet
 type ApiGetThreadsRequest struct {
 	ctx context.Context
 	ApiService ChatSvcAPI
-	request *map[string]interface{}
+	body *map[string]interface{}
 }
 
 // Get Threads Request
-func (r ApiGetThreadsRequest) Request(request map[string]interface{}) ApiGetThreadsRequest {
-	r.request = &request
+func (r ApiGetThreadsRequest) Body(body map[string]interface{}) ApiGetThreadsRequest {
+	r.body = &body
 	return r
 }
 
@@ -1244,7 +1244,7 @@ func (a *ChatSvcAPIService) GetThreadsExecute(r ApiGetThreadsRequest) (*ChatSvcG
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1332,12 +1332,12 @@ type ApiUpdateThreadRequest struct {
 	ctx context.Context
 	ApiService ChatSvcAPI
 	threadId string
-	request *ChatSvcUpdateThreadRequest
+	body *ChatSvcUpdateThreadRequest
 }
 
 // Update Thread Request
-func (r ApiUpdateThreadRequest) Request(request ChatSvcUpdateThreadRequest) ApiUpdateThreadRequest {
-	r.request = &request
+func (r ApiUpdateThreadRequest) Body(body ChatSvcUpdateThreadRequest) ApiUpdateThreadRequest {
+	r.body = &body
 	return r
 }
 
@@ -1383,8 +1383,8 @@ func (a *ChatSvcAPIService) UpdateThreadExecute(r ApiUpdateThreadRequest) (*Chat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1405,7 +1405,7 @@ func (a *ChatSvcAPIService) UpdateThreadExecute(r ApiUpdateThreadRequest) (*Chat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -200,12 +200,12 @@ func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*Secret
 type ApiWriteSecretRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	request *SecretSvcWriteSecretRequest
+	body *SecretSvcWriteSecretRequest
 }
 
 // Write Secret Request
-func (r ApiWriteSecretRequest) Request(request SecretSvcWriteSecretRequest) ApiWriteSecretRequest {
-	r.request = &request
+func (r ApiWriteSecretRequest) Body(body SecretSvcWriteSecretRequest) ApiWriteSecretRequest {
+	r.body = &body
 	return r
 }
 
@@ -248,8 +248,8 @@ func (a *SecretSvcAPIService) WriteSecretExecute(r ApiWriteSecretRequest) (map[s
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -270,7 +270,7 @@ func (a *SecretSvcAPIService) WriteSecretExecute(r ApiWriteSecretRequest) (map[s
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

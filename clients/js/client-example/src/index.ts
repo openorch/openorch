@@ -5,7 +5,7 @@ import { promptTest } from "./prompt_example.js";
 async function start() {
   let userService = new UserSvcApi();
   let loginResponse = await userService.login({
-    request: {
+    body: {
       slug: "singulatron",
       password: "changeme",
     },

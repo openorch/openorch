@@ -30,7 +30,7 @@ import (
 // @Tags Secret Svc
 // @Accept json
 // @Produce json
-// @Param request body secret.WriteSecretRequest true "Write Secret Request"
+// @Param body body secret.WriteSecretRequest true "Write Secret Request"
 // @Success 200 {object} secret.WriteSecretResponse "Write Secret Response"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"

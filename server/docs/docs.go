@@ -127,7 +127,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Add Thread Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -246,7 +246,7 @@ const docTemplate = `{
                     },
                     {
                         "description": "Update Thread Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -366,7 +366,7 @@ const docTemplate = `{
                     },
                     {
                         "description": "Add Message Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -481,7 +481,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Get Threads Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/chat_svc.GetThreadsRequest"
@@ -577,7 +577,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Save Config Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -798,7 +798,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Run Container Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -917,7 +917,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Stop Container Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1083,7 +1083,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Build Image Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1182,7 +1182,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Download Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2116,7 +2116,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Check Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2181,7 +2181,7 @@ const docTemplate = `{
                     },
                     {
                         "description": "Upsert Instance Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2239,7 +2239,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Add Prompt Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2297,7 +2297,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "List Prompts Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/prompt_svc.ListPromptsRequest"
@@ -2398,7 +2398,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Remove Prompt Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2456,7 +2456,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Register Service Definition Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2614,7 +2614,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Register Instance Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -2926,7 +2926,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Write Secret Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3027,7 +3027,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Checkout Repo Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3085,7 +3085,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Change Password Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3143,7 +3143,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Change Password Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3196,7 +3196,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Login Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3248,7 +3248,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Create User Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3313,7 +3313,7 @@ const docTemplate = `{
                     },
                     {
                         "description": "Add User to Organization Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -3397,7 +3397,7 @@ const docTemplate = `{
                     },
                     {
                         "description": "Add User to Organization Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/user_svc.RemoveUserFromOrganizationRequest"
@@ -3672,7 +3672,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Create Role Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4003,7 +4003,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Create User Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -4215,7 +4215,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Get Users Request",
-                        "name": "request",
+                        "name": "body",
                         "in": "body",
                         "schema": {
                             "$ref": "#/definitions/user_svc.GetUsersRequest"
@@ -7038,7 +7038,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.1",
+	Version:          "0.3.0-rc.2",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

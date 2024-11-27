@@ -30,7 +30,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param organizationId path string true "Organization ID"
-// @Param request body user.AddUserToOrganizationRequest true "Add User to Organization Request"
+// @Param body body user.AddUserToOrganizationRequest true "Add User to Organization Request"
 // @Success 200 {object} user.AddUserToOrganizationResponse "User added successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

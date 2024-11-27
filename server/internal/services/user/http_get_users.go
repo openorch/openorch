@@ -27,7 +27,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.GetUsersRequest false "Get Users Request"
+// @Param body body user.GetUsersRequest false "Get Users Request"
 // @Success 200 {object} user.GetUsersResponse "List of users retrieved successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

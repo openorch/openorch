@@ -26,7 +26,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.LoginRequest true "Login Request"
+// @Param body body user.LoginRequest true "Login Request"
 // @Success 200 {object} user.LoginResponse "Login successful"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"

@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -44,12 +44,12 @@ type SourceSvcAPIService service
 type ApiCheckoutRepoRequest struct {
 	ctx context.Context
 	ApiService SourceSvcAPI
-	request *SourceSvcCheckoutRepoRequest
+	body *SourceSvcCheckoutRepoRequest
 }
 
 // Checkout Repo Request
-func (r ApiCheckoutRepoRequest) Request(request SourceSvcCheckoutRepoRequest) ApiCheckoutRepoRequest {
-	r.request = &request
+func (r ApiCheckoutRepoRequest) Body(body SourceSvcCheckoutRepoRequest) ApiCheckoutRepoRequest {
+	r.body = &body
 	return r
 }
 
@@ -93,8 +93,8 @@ func (a *SourceSvcAPIService) CheckoutRepoExecute(r ApiCheckoutRepoRequest) (*So
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -115,7 +115,7 @@ func (a *SourceSvcAPIService) CheckoutRepoExecute(r ApiCheckoutRepoRequest) (*So
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

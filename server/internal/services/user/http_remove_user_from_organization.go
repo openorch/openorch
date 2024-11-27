@@ -31,7 +31,7 @@ import (
 // @Produce json
 // @Param organizationId path string true "Organization ID"
 // @Param userId path string true "User ID"
-// @Param request body user.RemoveUserFromOrganizationRequest false "Add User to Organization Request"
+// @Param body body user.RemoveUserFromOrganizationRequest false "Add User to Organization Request"
 // @Success 200 {object} user.RemoveUserFromOrganizationResponse "User added successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

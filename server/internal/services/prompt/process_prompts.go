@@ -223,7 +223,7 @@ func (p *PromptService) processPrompt(
 
 	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
 		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-		Request(openapi.ChatSvcAddMessageRequest{
+		Body(openapi.ChatSvcAddMessageRequest{
 			Message: &openapi.ChatSvcMessage{
 				// not a fan of taking the prompt id but at least it makes this idempotent
 				// in case prompts get retried over and over again
@@ -376,7 +376,7 @@ func (p *PromptService) processStableDiffusion(
 
 	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
 		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-		Request(
+		Body(
 			openapi.ChatSvcAddMessageRequest{
 				Message: &openapi.ChatSvcMessage{
 					Id:       openapi.PtrString(sdk.Id("msg")),
@@ -458,7 +458,7 @@ func (p *PromptService) processLlamaCpp(
 
 			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
 				ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-				Request(
+				Body(
 					openapi.ChatSvcAddMessageRequest{
 						Message: &openapi.ChatSvcMessage{
 							Id:       openapi.PtrString(sdk.Id("msg")),

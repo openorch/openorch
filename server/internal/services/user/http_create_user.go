@@ -26,7 +26,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.CreateUserRequest true "Create User Request"
+// @Param body body user.CreateUserRequest true "Create User Request"
 // @Success 200 {object} user.CreateUserResponse "User created successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

@@ -28,7 +28,7 @@ import (
 // @Tags Prompt Svc
 // @Accept json
 // @Produce json
-// @Param request body prompt.RemovePromptRequest true "Remove Prompt Request"
+// @Param body body prompt.RemovePromptRequest true "Remove Prompt Request"
 // @Success 200 {object} prompt.RemovePromptResponse "{}"
 // @Failure 400 {object} prompt.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} prompt.ErrorResponse "Unauthorized"

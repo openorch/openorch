@@ -1,6 +1,6 @@
 {
   "name": "@superplatform/client",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
