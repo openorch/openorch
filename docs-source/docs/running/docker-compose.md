@@ -15,13 +15,13 @@ This snippet will give you a quick idea about how to deploy the frontend and bac
 version: "3.8"
 
 volumes:
-  singulatron-data:
-    name: singulatron-data
+  superplatform-data:
+    name: superplatform-data
     driver: local
 
 services:
-  singulatron-frontend:
-    image: crufter/singulatron-frontend:latest
+  superplatform-frontend:
+    image: crufter/superplatform-frontend:latest
     ports:
       - "3901:80"
     environment:
@@ -29,18 +29,18 @@ services:
       # It is not an internal address, it's the address the   browser will make API requests to.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
-  singulatron-backend:
-    image: crufter/singulatron-backend:latest
+  superplatform-backend:
+    image: crufter/superplatform-backend:latest
     ports:
       - "58231:58231"
     volumes:
       # We mount the docker socket so the backend can start   containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
-      - singulatron-data:/root/.singulatron
+      - superplatform-data:/root/.singulatron
     environment:
       # This volume will be mounted by the LLM containers to access the models downloaded by Superplatform.
-      - SINGULATRON_VOLUME_NAME=singulatron-data
+      - SINGULATRON_VOLUME_NAME=superplatform-data
       #
       # GPU Acceleration for NVIDIA GPUs
       # Uncomment this envar for NVIDIA GPUs.
