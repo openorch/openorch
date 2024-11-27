@@ -20,9 +20,7 @@
 
 Superplatform aims to give power back to the developers in the age of AI-self host your own AI platform!
 
-## Quick Start
-
-### Running
+## Starting
 
 Easiest way to run Superplatform is with Docker. [Install Docker if you don't have it](https://docs.docker.com/engine/install/).
 Step into repo root and:
@@ -37,17 +35,17 @@ to run the platform in foreground. It stops running if you Ctrl+C it. If you wan
 docker compose up -d
 ```
 
-### Calling
+## Calling
 
 Now that the Superplatform is running you have a few options to interact with it.
 
-#### UI
+### UI
 
 You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and password `changeme` and start using it just like you would use ChatGPT.
 
 Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
 
-#### Clients
+### Clients
 
 For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
 
@@ -119,8 +117,6 @@ superplatform-backend-1   | {"time":"2024-11-27T17:27:23.174054316Z","level":"IN
 superplatform-backend-1   | {"time":"2024-11-27T17:27:23.175854857Z","level":"DEBUG","msg":"Event published","eventName":"chatMessageAdded"}
 superplatform-backend-1   | {"time":"2024-11-27T17:27:23.176260122Z","level":"DEBUG","msg":"Finished streaming LLM","error":"<nil>"}
 ```
-
-##
 
 ## Context
 
