@@ -17,7 +17,7 @@ Do not set this if your card doesn't support the given architecture or things wi
 
 ## `SINGULATRON_VOLUME_NAME`
 
-**This flag is typically unnecessary since Superplatform automatically detects the volume that is bound to `/root/.singulatron`. Use it only as a corrective action.**
+**This flag is typically unnecessary since Superplatform automatically detects the volume that is bound to `/root/.superplatform`. Use it only as a corrective action.**
 
 This envar is needed when Superplatform runs as a container next to containers it starts:
 
@@ -34,7 +34,7 @@ An example of this can be seen in the root `docker-compose.yaml` file: `SINGULAT
 
 So cycle goes like this:
 
-- Superplatform container writes to `/root/.singulatron`, which is mounted to the volume `singulatron-data`
+- Superplatform container writes to `/root/.superplatform`, which is mounted to the volume `singulatron-data`
 - Assets (which are basically downloaded files) will be passed to containers created by Superplatform by mounting files in `singulatron-data`.
 
 ## `SINGULATRON_LLM_HOST`
@@ -84,4 +84,4 @@ Naturally, you should change the details of the connection string to reflect you
 
 ## `SINGULARON_LOCAL_STORAGE_PATH`
 
-By default the local file storage will place files into `~/.singulatron/data`, but this flag (and other config options) can override that.
+By default the local file storage will place files into `~/.superplatform/data`, but this flag (and other config options) can override that.

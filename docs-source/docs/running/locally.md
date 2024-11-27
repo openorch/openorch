@@ -54,12 +54,12 @@ After the both the backend and frontend starts, you can go to [http://127.0.0.1:
 
 ### Local files
 
-By default Superplatform uses the folder `~/.singulatron` on your machine for config, file downloads and for the local database.
+By default Superplatform uses the folder `~/.superplatform` on your machine for config, file downloads and for the local database.
 
 #### Config file
 
 ```bash
-cat ~/.singulatron/config.yaml
+cat ~/.superplatform/config.yaml
 ```
 
 #### Download.json
@@ -67,7 +67,7 @@ cat ~/.singulatron/config.yaml
 This file contains all the local downloads on a node. Losing is file is not a big deal as downloaded files are detected even if this file or the entry in this file is missing.
 
 ```bash
-~/.singulatron/downloads.json
+~/.superplatform/downloads.json
 ```
 
 #### Data files
@@ -77,7 +77,7 @@ By default Superplatform uses local gzipped json files to store database entries
 The files are located at
 
 ```bash
-ls ~/.singulatron/data
+ls ~/.superplatform/data
 ```
 
 Each file is prefixed by the owner service slug, so the `User Svc` `users` table becomes `userSvcUsers`.
@@ -85,8 +85,8 @@ Each file is prefixed by the owner service slug, so the `User Svc` `users` table
 If you want to view the contents of a file:
 
 ```bash
-cat ~/.singulatron/data/userSvcUsers.zip | gzip -dc
+cat ~/.superplatform/data/userSvcUsers.zip | gzip -dc
 
 # or if you jave jq installed
-cat ~/.singulatron/data/userSvcUsers.zip | gzip -dc | jq
+cat ~/.superplatform/data/userSvcUsers.zip | gzip -dc | jq
 ```
