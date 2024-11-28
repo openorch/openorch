@@ -289,7 +289,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 				case <-ticker.C:
 
 					prsp, _, err = userClient.PromptSvcAPI.AddPrompt(ctx).
-						Request(
+						Body(
 							openapi.PromptSvcAddPromptRequest{
 								Prompt: "Hi there, how are you?",
 								Sync:   openapi.PtrBool(true),

@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -191,12 +191,12 @@ func (a *ConfigSvcAPIService) GetConfigExecute(r ApiGetConfigRequest) (*ConfigSv
 type ApiSaveConfigRequest struct {
 	ctx context.Context
 	ApiService ConfigSvcAPI
-	request *ConfigSvcSaveConfigRequest
+	body *ConfigSvcSaveConfigRequest
 }
 
 // Save Config Request
-func (r ApiSaveConfigRequest) Request(request ConfigSvcSaveConfigRequest) ApiSaveConfigRequest {
-	r.request = &request
+func (r ApiSaveConfigRequest) Body(body ConfigSvcSaveConfigRequest) ApiSaveConfigRequest {
+	r.body = &body
 	return r
 }
 
@@ -239,8 +239,8 @@ func (a *ConfigSvcAPIService) SaveConfigExecute(r ApiSaveConfigRequest) (map[str
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -261,7 +261,7 @@ func (a *ConfigSvcAPIService) SaveConfigExecute(r ApiSaveConfigRequest) (map[str
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

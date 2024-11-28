@@ -89,7 +89,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 		ginkgo.It("saves an instance successfully", func() {
 			_, _, err := adminClient.RegistrySvcAPI.RegisterInstance(ctx).
-				Request(
+				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
 						Id:           "test-a",
 						Url:          "http://test-a",
@@ -122,7 +122,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			gomega.Expect(healthServer).NotTo(gomega.BeNil())
 
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
-				Request(
+				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
 						Id:           "test-a",
 						Url:          healthServer.URL,
@@ -150,7 +150,7 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			healthServer.Close()
 
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
-				Request(
+				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
 						Id:           "test-a",
 						Url:          healthServer.URL,

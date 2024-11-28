@@ -26,7 +26,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.ChangePasswordRequest true "Change Password Request"
+// @Param body body user.ChangePasswordRequest true "Change Password Request"
 // @Success 200 {object} user.ChangePasswordResponse "Password changed successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

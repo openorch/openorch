@@ -29,7 +29,7 @@ import (
 // @Tags Download Svc
 // @Accept json
 // @Produce json
-// @Param request body download.DownloadRequest true "Download Request"
+// @Param body body download.DownloadRequest true "Download Request"
 // @Success 200 {object} map[string]any "Download initiated successfully"
 // @Failure 400 {object} download.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} download.ErrorResponse "Unauthorized"

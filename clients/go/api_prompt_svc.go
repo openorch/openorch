@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -87,12 +87,12 @@ type PromptSvcAPIService service
 type ApiAddPromptRequest struct {
 	ctx context.Context
 	ApiService PromptSvcAPI
-	request *PromptSvcAddPromptRequest
+	body *PromptSvcAddPromptRequest
 }
 
 // Add Prompt Request
-func (r ApiAddPromptRequest) Request(request PromptSvcAddPromptRequest) ApiAddPromptRequest {
-	r.request = &request
+func (r ApiAddPromptRequest) Body(body PromptSvcAddPromptRequest) ApiAddPromptRequest {
+	r.body = &body
 	return r
 }
 
@@ -135,8 +135,8 @@ func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSv
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -157,7 +157,7 @@ func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSv
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -244,12 +244,12 @@ func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSv
 type ApiListPromptsRequest struct {
 	ctx context.Context
 	ApiService PromptSvcAPI
-	request *PromptSvcListPromptsRequest
+	body *PromptSvcListPromptsRequest
 }
 
 // List Prompts Request
-func (r ApiListPromptsRequest) Request(request PromptSvcListPromptsRequest) ApiListPromptsRequest {
-	r.request = &request
+func (r ApiListPromptsRequest) Body(body PromptSvcListPromptsRequest) ApiListPromptsRequest {
+	r.body = &body
 	return r
 }
 
@@ -311,7 +311,7 @@ func (a *PromptSvcAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*Prom
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -398,12 +398,12 @@ func (a *PromptSvcAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*Prom
 type ApiRemovePromptRequest struct {
 	ctx context.Context
 	ApiService PromptSvcAPI
-	request *PromptSvcRemovePromptRequest
+	body *PromptSvcRemovePromptRequest
 }
 
 // Remove Prompt Request
-func (r ApiRemovePromptRequest) Request(request PromptSvcRemovePromptRequest) ApiRemovePromptRequest {
-	r.request = &request
+func (r ApiRemovePromptRequest) Body(body PromptSvcRemovePromptRequest) ApiRemovePromptRequest {
+	r.body = &body
 	return r
 }
 
@@ -446,8 +446,8 @@ func (a *PromptSvcAPIService) RemovePromptExecute(r ApiRemovePromptRequest) (map
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -468,7 +468,7 @@ func (a *PromptSvcAPIService) RemovePromptExecute(r ApiRemovePromptRequest) (map
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

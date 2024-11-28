@@ -93,7 +93,7 @@ func (p *PromptService) addPrompt(
 
 		_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
 			ChatSvcAPI.AddThread(ctx).
-			Request(openapi.ChatSvcAddThreadRequest{
+			Body(openapi.ChatSvcAddThreadRequest{
 				Thread: &openapi.ChatSvcThread{
 					Id:      openapi.PtrString(thread.Id),
 					Title:   openapi.PtrString(thread.Title),

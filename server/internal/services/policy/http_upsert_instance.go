@@ -17,7 +17,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param instanceId path string true "Instance ID"
-// @Param request body policy.UpsertInstanceRequest true "Upsert Instance Request"
+// @Param body body policy.UpsertInstanceRequest true "Upsert Instance Request"
 // @Success 200 {object} policy.UpsertInstanceResponse "Instance upserted successfully"
 // @Failure 400 {object} policy.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} policy.ErrorResponse "Unauthorized"

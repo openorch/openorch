@@ -13,7 +13,7 @@ import (
 func AdminClient(clientFactory sdk.ClientFactory) (*openapi.APIClient, string, error) {
 	userSvc := clientFactory.Client().UserSvcAPI
 
-	adminLoginRsp, _, err := userSvc.Login(context.Background()).Request(openapi.UserSvcLoginRequest{
+	adminLoginRsp, _, err := userSvc.Login(context.Background()).Body(openapi.UserSvcLoginRequest{
 		Slug:     openapi.PtrString("singulatron"),
 		Password: openapi.PtrString("changeme"),
 	}).Execute()
