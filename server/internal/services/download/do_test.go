@@ -72,7 +72,7 @@ func TestDownloadFile(t *testing.T) {
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
 	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Request(openapi.DownloadSvcDownloadRequest{
+		Body(openapi.DownloadSvcDownloadRequest{
 			Url: openapi.PtrString(fileHostServer.URL),
 		}).
 		Execute()
@@ -163,7 +163,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	}
 
 	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Request(openapi.DownloadSvcDownloadRequest{
+		Body(openapi.DownloadSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
@@ -237,7 +237,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
 	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Request(openapi.DownloadSvcDownloadRequest{
+		Body(openapi.DownloadSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()

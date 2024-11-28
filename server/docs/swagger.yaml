@@ -2004,7 +2004,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: Superplatform
-  version: 0.3.0-rc.1
+  version: 0.3.0-rc.2
 paths:
   /chat-svc/events:
     get:
@@ -2071,7 +2071,7 @@ paths:
       parameters:
       - description: Add Thread Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/chat_svc.AddThreadRequest'
@@ -2184,7 +2184,7 @@ paths:
         type: string
       - description: Update Thread Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/chat_svc.UpdateThreadRequest'
@@ -2226,7 +2226,7 @@ paths:
         type: string
       - description: Add Message Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/chat_svc.AddMessageRequest'
@@ -2300,7 +2300,7 @@ paths:
       parameters:
       - description: Get Threads Request
         in: body
-        name: request
+        name: body
         schema:
           $ref: '#/definitions/chat_svc.GetThreadsRequest'
       produces:
@@ -2361,7 +2361,7 @@ paths:
       parameters:
       - description: Save Config Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/config_svc.SaveConfigRequest'
@@ -2504,7 +2504,7 @@ paths:
       parameters:
       - description: Run Container Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/docker_svc.RunContainerRequest'
@@ -2583,7 +2583,7 @@ paths:
       parameters:
       - description: Stop Container Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/docker_svc.StopContainerRequest'
@@ -2693,7 +2693,7 @@ paths:
       parameters:
       - description: Build Image Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/docker_svc.BuildImageRequest'
@@ -2759,7 +2759,7 @@ paths:
       parameters:
       - description: Download Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/download_svc.DownloadRequest'
@@ -3392,7 +3392,7 @@ paths:
       parameters:
       - description: Check Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/policy_svc.CheckRequest'
@@ -3434,7 +3434,7 @@ paths:
         type: string
       - description: Upsert Instance Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/policy_svc.UpsertInstanceRequest'
@@ -3472,7 +3472,7 @@ paths:
       parameters:
       - description: Add Prompt Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/prompt_svc.AddPromptRequest'
@@ -3509,7 +3509,7 @@ paths:
       parameters:
       - description: List Prompts Request
         in: body
-        name: request
+        name: body
         schema:
           $ref: '#/definitions/prompt_svc.ListPromptsRequest'
       produces:
@@ -3574,7 +3574,7 @@ paths:
       parameters:
       - description: Remove Prompt Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/prompt_svc.RemovePromptRequest'
@@ -3612,7 +3612,7 @@ paths:
       parameters:
       - description: Register Service Definition Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/registry_svc.SaveDefinitionRequest'
@@ -3714,7 +3714,7 @@ paths:
       parameters:
       - description: Register Instance Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/registry_svc.RegisterInstanceRequest'
@@ -3947,7 +3947,7 @@ paths:
       parameters:
       - description: Write Secret Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/secret_svc.WriteSecretRequest'
@@ -3982,7 +3982,7 @@ paths:
       parameters:
       - description: Checkout Repo Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/source_svc.CheckoutRepoRequest'
@@ -4019,7 +4019,7 @@ paths:
       parameters:
       - description: Change Password Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.ChangePasswordRequest'
@@ -4056,7 +4056,7 @@ paths:
       parameters:
       - description: Change Password Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.ChangePasswordAdminRequest'
@@ -4093,7 +4093,7 @@ paths:
       parameters:
       - description: Login Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.LoginRequest'
@@ -4127,7 +4127,7 @@ paths:
       parameters:
       - description: Create User Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.CreateOrganizationRequest'
@@ -4170,7 +4170,7 @@ paths:
         type: string
       - description: Add User to Organization Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.AddUserToOrganizationRequest'
@@ -4226,7 +4226,7 @@ paths:
         type: string
       - description: Add User to Organization Request
         in: body
-        name: request
+        name: body
         schema:
           $ref: '#/definitions/user_svc.RemoveUserFromOrganizationRequest'
       produces:
@@ -4415,7 +4415,7 @@ paths:
       parameters:
       - description: Create Role Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.CreateRoleRequest'
@@ -4634,7 +4634,7 @@ paths:
       parameters:
       - description: Create User Request
         in: body
-        name: request
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.CreateUserRequest'
@@ -4770,7 +4770,7 @@ paths:
       parameters:
       - description: Get Users Request
         in: body
-        name: request
+        name: body
         schema:
           $ref: '#/definitions/user_svc.GetUsersRequest'
       produces:

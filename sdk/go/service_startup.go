@@ -36,7 +36,7 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 		}
 	}
 
-	loginRsp, _, err := userService.Login(ctx).Request(client.UserSvcLoginRequest{
+	loginRsp, _, err := userService.Login(ctx).Body(client.UserSvcLoginRequest{
 		Slug:     client.PtrString(slug),
 		Password: client.PtrString(pw),
 	}).Execute()
@@ -53,7 +53,7 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 			return "", err
 		}
 
-		loginRsp, _, err = userService.Login(ctx).Request(client.UserSvcLoginRequest{
+		loginRsp, _, err = userService.Login(ctx).Body(client.UserSvcLoginRequest{
 			Slug:     client.PtrString(slug),
 			Password: client.PtrString(pw),
 		}).Execute()
@@ -76,7 +76,7 @@ func RegisterUser(userService client.UserSvcAPI, slug, password, username string
 		return "", err
 	}
 
-	loginRsp, _, err := userService.Login(context.Background()).Request(client.UserSvcLoginRequest{
+	loginRsp, _, err := userService.Login(context.Background()).Body(client.UserSvcLoginRequest{
 		Slug:     client.PtrString(slug),
 		Password: client.PtrString(password),
 	}).Execute()

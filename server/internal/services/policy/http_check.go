@@ -18,7 +18,7 @@ import (
 // @Tags Policy Svc
 // @Accept json
 // @Produce json
-// @Param request body policy.CheckRequest true "Check Request"
+// @Param body body policy.CheckRequest true "Check Request"
 // @Success 200 {object} policy.CheckResponse "Checked successfully"
 // @Failure 400 {object} policy.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} policy.ErrorResponse "Unauthorized"

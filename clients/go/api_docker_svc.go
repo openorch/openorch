@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -133,12 +133,12 @@ type DockerSvcAPIService service
 type ApiBuildImageRequest struct {
 	ctx context.Context
 	ApiService DockerSvcAPI
-	request *DockerSvcBuildImageRequest
+	body *DockerSvcBuildImageRequest
 }
 
 // Build Image Request
-func (r ApiBuildImageRequest) Request(request DockerSvcBuildImageRequest) ApiBuildImageRequest {
-	r.request = &request
+func (r ApiBuildImageRequest) Body(body DockerSvcBuildImageRequest) ApiBuildImageRequest {
+	r.body = &body
 	return r
 }
 
@@ -183,8 +183,8 @@ func (a *DockerSvcAPIService) BuildImageExecute(r ApiBuildImageRequest) (map[str
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -205,7 +205,7 @@ func (a *DockerSvcAPIService) BuildImageExecute(r ApiBuildImageRequest) (map[str
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -900,12 +900,12 @@ func (a *DockerSvcAPIService) GetInfoExecute(r ApiGetInfoRequest) (*DockerSvcGet
 type ApiRunContainerRequest struct {
 	ctx context.Context
 	ApiService DockerSvcAPI
-	request *DockerSvcRunContainerRequest
+	body *DockerSvcRunContainerRequest
 }
 
 // Run Container Request
-func (r ApiRunContainerRequest) Request(request DockerSvcRunContainerRequest) ApiRunContainerRequest {
-	r.request = &request
+func (r ApiRunContainerRequest) Body(body DockerSvcRunContainerRequest) ApiRunContainerRequest {
+	r.body = &body
 	return r
 }
 
@@ -950,8 +950,8 @@ func (a *DockerSvcAPIService) RunContainerExecute(r ApiRunContainerRequest) (*Do
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -972,7 +972,7 @@ func (a *DockerSvcAPIService) RunContainerExecute(r ApiRunContainerRequest) (*Do
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1059,12 +1059,12 @@ func (a *DockerSvcAPIService) RunContainerExecute(r ApiRunContainerRequest) (*Do
 type ApiStopContainerRequest struct {
 	ctx context.Context
 	ApiService DockerSvcAPI
-	request *DockerSvcStopContainerRequest
+	body *DockerSvcStopContainerRequest
 }
 
 // Stop Container Request
-func (r ApiStopContainerRequest) Request(request DockerSvcStopContainerRequest) ApiStopContainerRequest {
-	r.request = &request
+func (r ApiStopContainerRequest) Body(body DockerSvcStopContainerRequest) ApiStopContainerRequest {
+	r.body = &body
 	return r
 }
 
@@ -1109,8 +1109,8 @@ func (a *DockerSvcAPIService) StopContainerExecute(r ApiStopContainerRequest) (m
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1131,7 +1131,7 @@ func (a *DockerSvcAPIService) StopContainerExecute(r ApiStopContainerRequest) (m
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

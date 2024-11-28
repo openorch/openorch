@@ -41,7 +41,7 @@ func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 
 	_, _, err = ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		ConfigSvcAPI.SaveConfig(ctx).
-		Request(openapi.ConfigSvcSaveConfigRequest{
+		Body(openapi.ConfigSvcSaveConfigRequest{
 			Config: rsp.Config,
 		}).
 		Execute()

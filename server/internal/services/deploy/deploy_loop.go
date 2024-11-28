@@ -216,7 +216,7 @@ func (ns *DeployService) executeKillCommand(
 	)
 
 	name := fmt.Sprintf("sup-%v", definition.Id)
-	_, _, err := client.DockerSvcAPI.StopContainer(ctx).Request(
+	_, _, err := client.DockerSvcAPI.StopContainer(ctx).Body(
 		openapi.DockerSvcStopContainerRequest{
 			Name: &name,
 		},
@@ -296,7 +296,7 @@ func (ns *DeployService) executeStartCommand(
 		)
 	}
 
-	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Request(
+	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Body(
 		openapi.RegistrySvcRegisterInstanceRequest{
 			Id:           sdk.Id("inst"),
 			DeploymentId: deployment.Id,
@@ -332,7 +332,7 @@ func (ns *DeployService) makeSureItRuns(
 	}
 
 	if definition.Image != nil {
-		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
+		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Body(
 			openapi.DockerSvcRunContainerRequest{
 				Image:    definition.Image.Name,
 				Port:     definition.Image.Port,
@@ -347,7 +347,7 @@ func (ns *DeployService) makeSureItRuns(
 	} else {
 		var checkoutRsp *openapi.SourceSvcCheckoutRepoResponse
 
-		checkoutRsp, _, err = client.SourceSvcAPI.CheckoutRepo(ctx).Request(openapi.SourceSvcCheckoutRepoRequest{
+		checkoutRsp, _, err = client.SourceSvcAPI.CheckoutRepo(ctx).Body(openapi.SourceSvcCheckoutRepoRequest{
 			Url: &definition.Repository.Url,
 		}).Execute()
 
@@ -360,7 +360,7 @@ func (ns *DeployService) makeSureItRuns(
 			buildContext = path.Join(buildContext, *definition.Repository.BuildContext)
 		}
 
-		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Request(
+		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Body(
 			openapi.DockerSvcBuildImageRequest{
 				ContextPath:    buildContext,
 				DockerfilePath: definition.Repository.ContainerFile,
@@ -372,7 +372,7 @@ func (ns *DeployService) makeSureItRuns(
 			return err
 		}
 
-		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Request(
+		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Body(
 			openapi.DockerSvcRunContainerRequest{
 				Image:    fmt.Sprintf("superplatform-%v", definition.Id),
 				Port:     *definition.Repository.Port,

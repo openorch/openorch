@@ -29,7 +29,7 @@ import (
 // @Tags Docker Svc
 // @Accept json
 // @Produce json
-// @Param request body docker.RunContainerRequest true "Run Container Request"
+// @Param body body docker.RunContainerRequest true "Run Container Request"
 // @Success 200 {object} docker.RunContainerResponse
 // @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} docker.ErrorResponse "Unauthorized"

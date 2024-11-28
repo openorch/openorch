@@ -39,7 +39,7 @@ func TestRateLimiting(t *testing.T) {
 	})
 
 	adminLoginRsp, _, err := client.UserSvcAPI.Login(context.Background()).
-		Request(clients.UserSvcLoginRequest{
+		Body(clients.UserSvcLoginRequest{
 			Slug:     clients.PtrString("singulatron"),
 			Password: clients.PtrString("changeme"),
 		}).
@@ -78,14 +78,14 @@ func TestRateLimiting(t *testing.T) {
 		},
 	}
 	_, _, err = policySvc.UpsertInstance(context.Background(), instanceId).
-		Request(rateLimitReq).
+		Body(rateLimitReq).
 		Execute()
 	require.NoError(t, err)
 
 	t.Run("allow up to the limit", func(t *testing.T) {
 		for i := 0; i < 5; i++ {
 			checkRsp, _, err := policySvc.Check(context.Background()).
-				Request(clients.PolicySvcCheckRequest{
+				Body(clients.PolicySvcCheckRequest{
 					Endpoint: clients.PtrString("/test-endpoint"),
 					Method:   clients.PtrString("GET"),
 					Ip:       clients.PtrString("127.0.0.1"),
@@ -99,7 +99,7 @@ func TestRateLimiting(t *testing.T) {
 
 	t.Run("exceeding the limit", func(t *testing.T) {
 		checkRsp, _, err := policySvc.Check(context.Background()).
-			Request(clients.PolicySvcCheckRequest{
+			Body(clients.PolicySvcCheckRequest{
 				Endpoint: clients.PtrString("/test-endpoint"),
 				Method:   clients.PtrString("GET"),
 				Ip:       clients.PtrString("127.0.0.1"),

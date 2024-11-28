@@ -28,7 +28,7 @@ export async function promptTest(apiKey: string) {
   );
 
   await downloadSvc.download({
-    request: {
+    body: {
       url: tinyLamaAssetURL,
     },
   });
@@ -63,7 +63,7 @@ export async function promptTest(apiKey: string) {
 
   const promptRsp = await Promise.race([
     promptSvc.addPrompt({
-      request: {
+      body: {
         sync: true,
         prompt: "Is a cat an animal? Just answer with yes or no please.",
       },

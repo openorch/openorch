@@ -32,7 +32,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param request body user.CreateRoleRequest true "Create Role Request"
+// @Param body body user.CreateRoleRequest true "Create Role Request"
 // @Success 200 {object} user.CreateRoleResponse "Role created successfully"
 // @Failure 400 {object} user.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"

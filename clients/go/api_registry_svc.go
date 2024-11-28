@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.1
+API version: 0.3.0-rc.2
 Contact: sales@singulatron.com
 */
 
@@ -922,12 +922,12 @@ func (a *RegistrySvcAPIService) ListNodesExecute(r ApiListNodesRequest) (*Regist
 type ApiRegisterInstanceRequest struct {
 	ctx context.Context
 	ApiService RegistrySvcAPI
-	request *RegistrySvcRegisterInstanceRequest
+	body *RegistrySvcRegisterInstanceRequest
 }
 
 // Register Instance Request
-func (r ApiRegisterInstanceRequest) Request(request RegistrySvcRegisterInstanceRequest) ApiRegisterInstanceRequest {
-	r.request = &request
+func (r ApiRegisterInstanceRequest) Body(body RegistrySvcRegisterInstanceRequest) ApiRegisterInstanceRequest {
+	r.body = &body
 	return r
 }
 
@@ -970,8 +970,8 @@ func (a *RegistrySvcAPIService) RegisterInstanceExecute(r ApiRegisterInstanceReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -992,7 +992,7 @@ func (a *RegistrySvcAPIService) RegisterInstanceExecute(r ApiRegisterInstanceReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1228,12 +1228,12 @@ func (a *RegistrySvcAPIService) RemoveInstanceExecute(r ApiRemoveInstanceRequest
 type ApiSaveDefinitionRequest struct {
 	ctx context.Context
 	ApiService RegistrySvcAPI
-	request *RegistrySvcSaveDefinitionRequest
+	body *RegistrySvcSaveDefinitionRequest
 }
 
 // Register Service Definition Request
-func (r ApiSaveDefinitionRequest) Request(request RegistrySvcSaveDefinitionRequest) ApiSaveDefinitionRequest {
-	r.request = &request
+func (r ApiSaveDefinitionRequest) Body(body RegistrySvcSaveDefinitionRequest) ApiSaveDefinitionRequest {
+	r.body = &body
 	return r
 }
 
@@ -1276,8 +1276,8 @@ func (a *RegistrySvcAPIService) SaveDefinitionExecute(r ApiSaveDefinitionRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.request == nil {
-		return localVarReturnValue, nil, reportError("request is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1298,7 +1298,7 @@ func (a *RegistrySvcAPIService) SaveDefinitionExecute(r ApiSaveDefinitionRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.request
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

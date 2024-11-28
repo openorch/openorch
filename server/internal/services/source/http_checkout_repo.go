@@ -27,7 +27,7 @@ import (
 // @Tags Source Svc
 // @Accept json
 // @Produce json
-// @Param request body source.CheckoutRepoRequest true "Checkout Repo Request"
+// @Param body body source.CheckoutRepoRequest true "Checkout Repo Request"
 // @Success 200 {object} source.CheckoutRepoResponse "Successfully checked out the repository"
 // @Failure 400 {object} source.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} source.ErrorResponse "Unauthorized"

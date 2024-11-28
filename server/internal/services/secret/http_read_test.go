@@ -144,7 +144,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
 
 			_, _, err = userClient.SecretSvcAPI.WriteSecret(ctx).
-				Request(openapi.SecretSvcWriteSecretRequest{
+				Body(openapi.SecretSvcWriteSecretRequest{
 					Secrets: []openapi.SecretSvcSecret{
 						{
 							Key:   openapi.PtrString("nonexistent"),

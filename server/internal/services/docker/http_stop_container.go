@@ -31,7 +31,7 @@ import (
 // @Tags Docker Svc
 // @Accept json
 // @Produce json
-// @Param request body docker.StopContainerRequest true "Stop Container Request"
+// @Param body body docker.StopContainerRequest true "Stop Container Request"
 // @Success 200 {object} docker.StopContainerResponse
 // @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} docker.ErrorResponse "Unauthorized"

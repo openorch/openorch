@@ -29,7 +29,7 @@ import (
 // @Tags Prompt Svc
 // @Accept json
 // @Produce json
-// @Param request body prompt.ListPromptsRequest false "List Prompts Request"
+// @Param body body prompt.ListPromptsRequest false "List Prompts Request"
 // @Success 200 {object} prompt.ListPromptsResponse
 // @Failure 400 {object} prompt.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} prompt.ErrorResponse "Unauthorized"

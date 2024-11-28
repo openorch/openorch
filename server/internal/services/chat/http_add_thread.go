@@ -29,7 +29,7 @@ import (
 // @Tags Chat Svc
 // @Accept json
 // @Produce json
-// @Param request body chat.AddThreadRequest true "Add Thread Request"
+// @Param body body chat.AddThreadRequest true "Add Thread Request"
 // @Success 200 {object} chat.AddThreadResponse "Thread successfully created"
 // @Failure 400 {string} string "Invalid JSON"
 // @Failure 401 {string} string "Unauthorized"

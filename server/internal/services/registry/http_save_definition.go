@@ -16,7 +16,7 @@ import (
 // @Tags Registry Svc
 // @Accept json
 // @Produce json
-// @Param request body registry.SaveDefinitionRequest true "Register Service Definition Request"
+// @Param body body registry.SaveDefinitionRequest true "Register Service Definition Request"
 // @Success 201 {object} registry.SaveDefinitionResponse
 // @Failure 400 {object} registry.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} registry.ErrorResponse "Unauthorized"

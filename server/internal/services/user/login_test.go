@@ -62,12 +62,12 @@ func TestRegistration(t *testing.T) {
 			NewPassword:     clients.PtrString("yo"),
 		}
 		_, _, err = userSvc.ChangePassword(context.Background()).
-			Request(changePassReq).
+			Body(changePassReq).
 			Execute()
 		require.Error(t, err)
 
 		_, _, err = adminClient.UserSvcAPI.ChangePassword(context.Background()).
-			Request(changePassReq).
+			Body(changePassReq).
 			Execute()
 		require.NoError(t, err)
 
@@ -76,7 +76,7 @@ func TestRegistration(t *testing.T) {
 		changePassReq.NewPassword = clients.PtrString("yo1")
 
 		_, _, err = adminClient.UserSvcAPI.ChangePassword(context.Background()).
-			Request(changePassReq).
+			Body(changePassReq).
 			Execute()
 		require.Error(t, err)
 	})
@@ -122,7 +122,7 @@ func TestOrganization(t *testing.T) {
 				Name: clients.PtrString("Test Org"),
 			}
 			_, _, err := adminClient.UserSvcAPI.CreateOrganization(context.Background()).
-				Request(createOrgReq).
+				Body(createOrgReq).
 				Execute()
 			require.NoError(t, err)
 
@@ -139,7 +139,7 @@ func TestOrganization(t *testing.T) {
 				Password: clients.PtrString("changeme"),
 			}
 			loginRsp, _, err := adminClient.UserSvcAPI.Login(context.Background()).
-				Request(loginReq).
+				Body(loginReq).
 				Execute()
 			require.NoError(t, err)
 
@@ -178,7 +178,7 @@ func TestOrganization(t *testing.T) {
 			UserId: byTokenRsp.User.Id,
 		}
 		_, _, err = adminClient.UserSvcAPI.AddUserToOrganization(context.Background(), orgId1).
-			Request(addUserReq).
+			Body(addUserReq).
 			Execute()
 		require.NoError(t, err)
 
@@ -188,7 +188,7 @@ func TestOrganization(t *testing.T) {
 		}
 		// log in again and see the claim
 		loginRsp, _, err := otherClient.UserSvcAPI.Login(context.Background()).
-			Request(loginReq).
+			Body(loginReq).
 			Execute()
 		require.NoError(t, err)
 
