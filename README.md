@@ -18,7 +18,7 @@
 ![js client build](https://github.com/singulatron/superplatform/actions/workflows/js-client-build.yaml/badge.svg)
 ![go sdk](https://github.com/singulatron/superplatform/actions/workflows/go-sdk-build.yaml/badge.svg)
 
-Superplatform aims to give power back to the developers in the age of AI-self host your own AI platform!
+Superplatform gives the power back to the developers in the age of AI—self host your own AI platform!
 
 ## Starting
 
