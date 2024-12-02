@@ -6175,6 +6175,11 @@
                     "type": "string",
                     "example": "https"
                 },
+                "slug": {
+                    "description": "Slug of the account that owns this instance\nServices that want to be proxied by their slug are advised to self register\ntheir instance at startup.",
+                    "type": "string",
+                    "example": "my-svc"
+                },
                 "status": {
                     "description": "Status",
                     "allOf": [

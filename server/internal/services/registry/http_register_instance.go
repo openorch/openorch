@@ -91,8 +91,13 @@ func (rs *RegistryService) registerInstance(
 		instance.Id = sdk.Id("inst")
 	}
 
+	nu := len(instances) == 0
+	if nu {
+		instance.Slug = callerSlug
+	}
+
 	if callerSlug != "deploy-svc" && callerSlug != instance.Slug {
-		return fmt.Errorf("caller slug %s does not match instance slug %s", callerSlug, instance.Slug)
+		return fmt.Errorf("caller slug '%s' does not match instance slug '%s'", callerSlug, instance.Slug)
 	}
 
 	if req.Id != "" {

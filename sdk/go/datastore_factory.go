@@ -13,7 +13,7 @@ import (
 	"github.com/singulatron/superplatform/sdk/go/logger"
 )
 
-func DatastoreFactory(tablePrefix string) (func(tableName string, instance any) (datastore.DataStore, error), error) {
+func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance any) (datastore.DataStore, error), error) {
 	dbDriver := os.Getenv("SINGULATRON_DB_DRIVER")
 	dbString := os.Getenv("SINGULATRON_DB_STRING")
 

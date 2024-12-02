@@ -55,6 +55,10 @@ export class RegistrySvcInstance {
     */
     'scheme'?: string;
     /**
+    * Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup.
+    */
+    'slug'?: string;
+    /**
     * Status
     */
     'status': RegistrySvcInstanceStatus;
@@ -114,6 +118,11 @@ export class RegistrySvcInstance {
         {
             "name": "scheme",
             "baseName": "scheme",
+            "type": "string"
+        },
+        {
+            "name": "slug",
+            "baseName": "slug",
             "type": "string"
         },
         {

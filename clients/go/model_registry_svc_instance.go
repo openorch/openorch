@@ -42,6 +42,8 @@ type RegistrySvcInstance struct {
 	Port *int32 `json:"port,omitempty"`
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme *string `json:"scheme,omitempty"`
+	// Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup.
+	Slug *string `json:"slug,omitempty"`
 	// Status
 	Status RegistrySvcInstanceStatus `json:"status"`
 	// Full address URL of the instance.
@@ -382,6 +384,38 @@ func (o *RegistrySvcInstance) SetScheme(v string) {
 	o.Scheme = &v
 }
 
+// GetSlug returns the Slug field value if set, zero value otherwise.
+func (o *RegistrySvcInstance) GetSlug() string {
+	if o == nil || IsNil(o.Slug) {
+		var ret string
+		return ret
+	}
+	return *o.Slug
+}
+
+// GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcInstance) GetSlugOk() (*string, bool) {
+	if o == nil || IsNil(o.Slug) {
+		return nil, false
+	}
+	return o.Slug, true
+}
+
+// HasSlug returns a boolean if a field has been set.
+func (o *RegistrySvcInstance) HasSlug() bool {
+	if o != nil && !IsNil(o.Slug) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlug gets a reference to the given string and assigns it to the Slug field.
+func (o *RegistrySvcInstance) SetSlug(v string) {
+	o.Slug = &v
+}
+
 // GetStatus returns the Status field value
 func (o *RegistrySvcInstance) GetStatus() RegistrySvcInstanceStatus {
 	if o == nil {
@@ -467,6 +501,9 @@ func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Scheme) {
 		toSerialize["scheme"] = o.Scheme
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["url"] = o.Url
