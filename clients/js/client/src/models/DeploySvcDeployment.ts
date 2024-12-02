@@ -76,6 +76,13 @@ export interface DeploySvcDeployment {
      */
     details?: string;
     /**
+     * Envars is a map of environment variables that will be passed down to service instances (see Registry Svc Instance)
+     * Also see the Registry Svc Definition for required envars.
+     * @type {{ [key: string]: string; }}
+     * @memberof DeploySvcDeployment
+     */
+    envars?: { [key: string]: string; };
+    /**
      * ID of the deployment (e.g., "depl_dbOdi5eLQK")
      * @type {string}
      * @memberof DeploySvcDeployment
@@ -144,6 +151,7 @@ export function DeploySvcDeploymentFromJSONTyped(json: any, ignoreDiscriminator:
         'definitionId': json['definitionId'],
         'description': json['description'] == null ? undefined : json['description'],
         'details': json['details'] == null ? undefined : json['details'],
+        'envars': json['envars'] == null ? undefined : json['envars'],
         'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'replicas': json['replicas'] == null ? undefined : json['replicas'],
@@ -164,6 +172,7 @@ export function DeploySvcDeploymentToJSON(value?: DeploySvcDeployment | null): a
         'definitionId': value['definitionId'],
         'description': value['description'],
         'details': value['details'],
+        'envars': value['envars'],
         'id': value['id'],
         'name': value['name'],
         'replicas': value['replicas'],

@@ -32,6 +32,12 @@ export declare class DeploySvcDeployment {
     */
     'details'?: string;
     /**
+    * Envars is a map of environment variables that will be passed down to service instances (see Registry Svc Instance) Also see the Registry Svc Definition for required envars.
+    */
+    'envars'?: {
+        [key: string]: string;
+    };
+    /**
     * ID of the deployment (e.g., \"depl_dbOdi5eLQK\")
     */
     'id': string;

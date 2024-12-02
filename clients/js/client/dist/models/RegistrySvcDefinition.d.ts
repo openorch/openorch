@@ -32,6 +32,17 @@ export interface RegistrySvcDefinition {
      */
     clients?: Array<RegistrySvcClient>;
     /**
+     * Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.
+     * E.g., {"DB_URL": "mysql://user:password@host:port/db"}
+     * These will be injected into the service instances (see Registry Svc Instance) at runtime.
+     * The value of a key here is the default value. The actual value can be overridden at deployment time.
+     * @type {{ [key: string]: string; }}
+     * @memberof RegistrySvcDefinition
+     */
+    envars?: {
+        [key: string]: string;
+    };
+    /**
      * HostPort is a clutch until automatic port assignment works.
      * It will go a way as it doesn't make any sense in a Definition.
      * @type {number}

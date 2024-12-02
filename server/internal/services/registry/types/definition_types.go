@@ -28,6 +28,12 @@ type Definition struct {
 	// Programming language clients such as on npm or GitHub.
 	Clients []Client `json:"clients,omitempty"`
 
+	// Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.
+	// E.g., {"DB_URL": "mysql://user:password@host:port/db"}
+	// These will be injected into the service instances (see Registry Svc Instance) at runtime.
+	// The value of a key here is the default value. The actual value can be overridden at deployment time.
+	Envars map[string]string `json:"envars,omitempty"`
+
 	// HostPort is a clutch until automatic port assignment works.
 	// It will go a way as it doesn't make any sense in a Definition.
 	HostPort int32 `json:"hostPort,omitempty"`

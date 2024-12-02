@@ -4651,6 +4651,13 @@ const docTemplate = `{
                     "type": "string",
                     "example": "Deployment is in progress"
                 },
+                "envars": {
+                    "description": "Envars is a map of environment variables that will be passed down to service instances (see Registry Svc Instance)\nAlso see the Registry Svc Definition for required envars.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "id": {
                     "description": "ID of the deployment (e.g., \"depl_dbOdi5eLQK\")",
                     "type": "string",
@@ -5943,6 +5950,13 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/registry_svc.Client"
+                    }
+                },
+                "envars": {
+                    "description": "Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.\nE.g., {\"DB_URL\": \"mysql://user:password@host:port/db\"}\nThese will be injected into the service instances (see Registry Svc Instance) at runtime.\nThe value of a key here is the default value. The actual value can be overridden at deployment time.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
                 },
                 "hostPort": {

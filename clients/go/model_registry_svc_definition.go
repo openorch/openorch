@@ -26,6 +26,8 @@ type RegistrySvcDefinition struct {
 	ApiSpecs []RegistrySvcAPISpec `json:"apiSpecs,omitempty"`
 	// Programming language clients such as on npm or GitHub.
 	Clients []RegistrySvcClient `json:"clients,omitempty"`
+	// Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run. E.g., {\"DB_URL\": \"mysql://user:password@host:port/db\"} These will be injected into the service instances (see Registry Svc Instance) at runtime. The value of a key here is the default value. The actual value can be overridden at deployment time.
+	Envars *map[string]string `json:"envars,omitempty"`
 	// HostPort is a clutch until automatic port assignment works. It will go a way as it doesn't make any sense in a Definition.
 	HostPort *int32 `json:"hostPort,omitempty"`
 	Id string `json:"id"`
@@ -117,6 +119,38 @@ func (o *RegistrySvcDefinition) HasClients() bool {
 // SetClients gets a reference to the given []RegistrySvcClient and assigns it to the Clients field.
 func (o *RegistrySvcDefinition) SetClients(v []RegistrySvcClient) {
 	o.Clients = v
+}
+
+// GetEnvars returns the Envars field value if set, zero value otherwise.
+func (o *RegistrySvcDefinition) GetEnvars() map[string]string {
+	if o == nil || IsNil(o.Envars) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Envars
+}
+
+// GetEnvarsOk returns a tuple with the Envars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcDefinition) GetEnvarsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Envars) {
+		return nil, false
+	}
+	return o.Envars, true
+}
+
+// HasEnvars returns a boolean if a field has been set.
+func (o *RegistrySvcDefinition) HasEnvars() bool {
+	if o != nil && !IsNil(o.Envars) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvars gets a reference to the given map[string]string and assigns it to the Envars field.
+func (o *RegistrySvcDefinition) SetEnvars(v map[string]string) {
+	o.Envars = &v
 }
 
 // GetHostPort returns the HostPort field value if set, zero value otherwise.
@@ -254,6 +288,9 @@ func (o RegistrySvcDefinition) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Clients) {
 		toSerialize["clients"] = o.Clients
+	}
+	if !IsNil(o.Envars) {
+		toSerialize["envars"] = o.Envars
 	}
 	if !IsNil(o.HostPort) {
 		toSerialize["hostPort"] = o.HostPort

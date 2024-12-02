@@ -30,6 +30,8 @@ type DeploySvcDeployment struct {
 	Description *string `json:"description,omitempty"`
 	// Details provides additional information about the deployment's current state, including both success and failure conditions (e.g., \"Deployment in progress\", \"Error pulling image\").
 	Details *string `json:"details,omitempty"`
+	// Envars is a map of environment variables that will be passed down to service instances (see Registry Svc Instance) Also see the Registry Svc Definition for required envars.
+	Envars *map[string]string `json:"envars,omitempty"`
 	// ID of the deployment (e.g., \"depl_dbOdi5eLQK\")
 	Id string `json:"id"`
 	// Short name for easy reference (e.g., \"user-service-v2\")
@@ -185,6 +187,38 @@ func (o *DeploySvcDeployment) HasDetails() bool {
 // SetDetails gets a reference to the given string and assigns it to the Details field.
 func (o *DeploySvcDeployment) SetDetails(v string) {
 	o.Details = &v
+}
+
+// GetEnvars returns the Envars field value if set, zero value otherwise.
+func (o *DeploySvcDeployment) GetEnvars() map[string]string {
+	if o == nil || IsNil(o.Envars) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Envars
+}
+
+// GetEnvarsOk returns a tuple with the Envars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeploySvcDeployment) GetEnvarsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Envars) {
+		return nil, false
+	}
+	return o.Envars, true
+}
+
+// HasEnvars returns a boolean if a field has been set.
+func (o *DeploySvcDeployment) HasEnvars() bool {
+	if o != nil && !IsNil(o.Envars) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvars gets a reference to the given map[string]string and assigns it to the Envars field.
+func (o *DeploySvcDeployment) SetEnvars(v map[string]string) {
+	o.Envars = &v
 }
 
 // GetId returns the Id field value
@@ -422,6 +456,9 @@ func (o DeploySvcDeployment) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
+	}
+	if !IsNil(o.Envars) {
+		toSerialize["envars"] = o.Envars
 	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
