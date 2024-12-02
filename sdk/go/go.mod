@@ -2,7 +2,7 @@ module github.com/singulatron/superplatform/sdk/go
 
 go 1.23
 
-replace github.com/singulatron/superplatform/clients/go => ../../clients/go
+// replace github.com/singulatron/superplatform/clients/go => ../../clients/go
 
 require (
 	github.com/andybalholm/brotli v1.1.1
