@@ -29,7 +29,7 @@ import (
 var port = router.GetPort()
 
 // @title           Superplatform
-// @version         0.3.0-rc.3
+// @version         0.3.0-rc.4
 // @description     On-premise AI platform and microservices ecosystem.
 // @termsOfService  http://swagger.io/terms/
 

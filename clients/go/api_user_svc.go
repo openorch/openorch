@@ -3,7 +3,7 @@ Superplatform
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.2
+API version: 0.3.0-rc.4
 Contact: sales@singulatron.com
 */
 
@@ -274,8 +274,8 @@ Requires the `user-svc:role:create` permission.
 	Register(ctx context.Context) ApiRegisterRequest
 
 	// RegisterExecute executes the request
-	//  @return map[string]interface{}
-	RegisterExecute(r ApiRegisterRequest) (map[string]interface{}, *http.Response, error)
+	//  @return UserSvcRegisterResponse
+	RegisterExecute(r ApiRegisterRequest) (*UserSvcRegisterResponse, *http.Response, error)
 
 	/*
 	RemoveUserFromOrganization Remove a User from an Organization
@@ -2752,7 +2752,7 @@ func (r ApiRegisterRequest) Body(body UserSvcRegisterRequest) ApiRegisterRequest
 	return r
 }
 
-func (r ApiRegisterRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiRegisterRequest) Execute() (*UserSvcRegisterResponse, *http.Response, error) {
 	return r.ApiService.RegisterExecute(r)
 }
 
@@ -2772,13 +2772,13 @@ func (a *UserSvcAPIService) Register(ctx context.Context) ApiRegisterRequest {
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *UserSvcAPIService) RegisterExecute(r ApiRegisterRequest) (map[string]interface{}, *http.Response, error) {
+//  @return UserSvcRegisterResponse
+func (a *UserSvcAPIService) RegisterExecute(r ApiRegisterRequest) (*UserSvcRegisterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  *UserSvcRegisterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.Register")

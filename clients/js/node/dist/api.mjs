@@ -141,6 +141,7 @@ export { UserSvcOrganization } from './userSvcOrganization.mjs';
 export { UserSvcPermission } from './userSvcPermission.mjs';
 export { UserSvcReadUserByTokenResponse } from './userSvcReadUserByTokenResponse.mjs';
 export { UserSvcRegisterRequest } from './userSvcRegisterRequest.mjs';
+export { UserSvcRegisterResponse } from './userSvcRegisterResponse.mjs';
 export { UserSvcRole } from './userSvcRole.mjs';
 export { UserSvcSaveProfileRequest } from './userSvcSaveProfileRequest.mjs';
 export { UserSvcSetRolePermissionsRequest } from './userSvcSetRolePermissionsRequest.mjs';

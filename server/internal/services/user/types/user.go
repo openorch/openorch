@@ -174,6 +174,7 @@ type RegisterRequest struct {
 }
 
 type RegisterResponse struct {
+	Token *AuthToken `json:"token,omitempty"`
 }
 
 type LoginRequest struct {

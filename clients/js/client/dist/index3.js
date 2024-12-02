@@ -145,6 +145,7 @@ require('./UserSvcAuthToken.js');
 require('./UserSvcReadUserByTokenResponse.js');
 require('./UserSvcOrganization.js');
 require('./UserSvcRegisterRequest.js');
+require('./UserSvcRegisterResponse.js');
 require('./UserSvcSaveProfileRequest.js');
 require('./UserSvcSetRolePermissionsRequest.js');
 require('./UserSvcUpserPermissionRequest.js');
