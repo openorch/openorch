@@ -1935,6 +1935,9 @@ definitions:
         type: string
     type: object
   user_svc.RegisterResponse:
+    properties:
+      token:
+        $ref: '#/definitions/user_svc.AuthToken'
     type: object
   user_svc.RemoveUserFromOrganizationRequest:
     type: object
@@ -2020,7 +2023,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: Superplatform
-  version: 0.3.0-rc.2
+  version: 0.3.0-rc.4
 paths:
   /chat-svc/events:
     get:
