@@ -579,6 +579,36 @@ func (mr *MockUserSvcAPIMockRecorder) RemoveUserFromOrganizationExecute(r any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveUserFromOrganizationExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).RemoveUserFromOrganizationExecute), r)
 }
 
+// SaveSelf mocks base method.
+func (m *MockUserSvcAPI) SaveSelf(ctx context.Context, userId string) ApiSaveSelfRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveSelf", ctx, userId)
+	ret0, _ := ret[0].(ApiSaveSelfRequest)
+	return ret0
+}
+
+// SaveSelf indicates an expected call of SaveSelf.
+func (mr *MockUserSvcAPIMockRecorder) SaveSelf(ctx, userId any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveSelf", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveSelf), ctx, userId)
+}
+
+// SaveSelfExecute mocks base method.
+func (m *MockUserSvcAPI) SaveSelfExecute(r ApiSaveSelfRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveSelfExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SaveSelfExecute indicates an expected call of SaveSelfExecute.
+func (mr *MockUserSvcAPIMockRecorder) SaveSelfExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveSelfExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveSelfExecute), r)
+}
+
 // SaveUserProfile mocks base method.
 func (m *MockUserSvcAPI) SaveUserProfile(ctx context.Context, userId string) ApiSaveUserProfileRequest {
 	m.ctrl.T.Helper()

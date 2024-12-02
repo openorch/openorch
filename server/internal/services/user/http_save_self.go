@@ -19,11 +19,9 @@ import (
 	user "github.com/singulatron/superplatform/server/internal/services/user/types"
 )
 
-// @ID saveUserProfile
+// @ID saveSelf
 // @Summary Save User Profile
-// @Description Save user profile information based on the provided user ID.
-// @Description It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
-// @Description For a user to edit its own profile, see saveSelf.
+// @Description Save user's own profile information.
 // @Tags User Svc
 // @Accept json
 // @Produce json
@@ -34,12 +32,18 @@ import (
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /user-svc/user/{userId} [put]
-func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
+// @Router /user-svc/self [put]
+func (s *UserService) SaveSelf(w http.ResponseWriter, r *http.Request) {
+	token, exists := s.authorizer.TokenFromRequest(r)
+	if !exists {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`Token Missing`))
+		return
+	}
 
-	_, err := s.isAuthorized(r, user.PermissionUserEdit.Id, nil, nil)
+	usr, err := s.readUserByToken(token)
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
@@ -53,7 +57,8 @@ func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	err = s.saveProfile(req.Slug, req.Name)
+	// cannot change slug for now
+	err = s.saveProfile(usr.Slug, req.Name)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

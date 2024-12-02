@@ -291,7 +291,21 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user\'s own profile information.
+     * @summary Save User Profile
+     * @param userId User ID
+     * @param body Save Profile Request
+     */
+    saveSelf(userId: string, body: UserSvcSaveProfileRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
+    /**
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * @summary Save User Profile
      * @param userId User ID
      * @param body Save Profile Request

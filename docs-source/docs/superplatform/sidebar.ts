@@ -522,6 +522,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "superplatform/save-self",
+          label: "Save User Profile",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
           id: "superplatform/create-user",
           label: "Create a New User",
           className: "api-method post",

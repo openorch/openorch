@@ -532,6 +532,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		userService.SaveProfile(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
+	router.HandleFunc("/user-svc/self", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.SaveProfile(w, r)
+	})).
+		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/change-password", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.ChangePassword(w, r)
 	})).
