@@ -22,6 +22,8 @@ import (
 // @ID saveUserProfile
 // @Summary Save User Profile
 // @Description Save user profile information based on the provided user ID.
+// @Description It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
+// @Description For a user to edit its own profile, see saveSelf.
 // @Tags User Svc
 // @Accept json
 // @Produce json

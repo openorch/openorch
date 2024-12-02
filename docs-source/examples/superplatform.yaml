@@ -4640,6 +4640,48 @@ paths:
       summary: Get all Roles
       tags:
       - User Svc
+  /user-svc/self:
+    put:
+      consumes:
+      - application/json
+      description: Save user's own profile information.
+      operationId: saveSelf
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Save Profile Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user_svc.SaveProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user_svc.SaveProfileResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Save User Profile
+      tags:
+      - User Svc
   /user-svc/user:
     post:
       consumes:
@@ -4713,7 +4755,10 @@ paths:
     put:
       consumes:
       - application/json
-      description: Save user profile information based on the provided user ID.
+      description: |-
+        Save user profile information based on the provided user ID.
+        It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
+        For a user to edit its own profile, see saveSelf.
       operationId: saveUserProfile
       parameters:
       - description: User ID

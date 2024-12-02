@@ -653,7 +653,45 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelfRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['userId'] == null) {
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling saveSelf().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveSelf().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/self`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcSaveProfileRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelf(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveSelfRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     saveUserProfileRaw(requestParameters, initOverrides) {
@@ -681,7 +719,7 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     saveUserProfile(requestParameters, initOverrides) {

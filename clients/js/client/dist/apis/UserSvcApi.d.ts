@@ -61,6 +61,10 @@ export interface RemoveUserFromOrganizationRequest {
     userId: string;
     body?: object;
 }
+export interface SaveSelfRequest {
+    userId: string;
+    body: UserSvcSaveProfileRequest;
+}
 export interface SaveUserProfileRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
@@ -258,12 +262,22 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      */
     removeUserFromOrganization(requestParameters: RemoveUserFromOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelfRaw(requestParameters: SaveSelfRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelf(requestParameters: SaveSelfRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    /**
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     saveUserProfileRaw(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     saveUserProfile(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;

@@ -3981,6 +3981,71 @@ const docTemplate = `{
                 }
             }
         },
+        "/user-svc/self": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Save user's own profile information.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "Save User Profile",
+                "operationId": "saveSelf",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Save Profile Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SaveProfileRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SaveProfileResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user-svc/user": {
             "post": {
                 "security": [
@@ -4087,7 +4152,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Save user profile information based on the provided user ID.",
+                "description": "Save user profile information based on the provided user ID.\nIt is intended for admins, because it uses the ` + "`" + `user-svc:user:edit` + "`" + ` permission which only admins have.\nFor a user to edit its own profile, see saveSelf.",
                 "consumes": [
                     "application/json"
                 ],
@@ -7052,7 +7117,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.2",
+	Version:          "0.3.0-rc.3",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
