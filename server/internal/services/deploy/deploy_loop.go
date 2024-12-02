@@ -136,14 +136,14 @@ func (ns *DeployService) cycle() error {
 		}
 
 		for _, v := range deployments {
-			if v.Id == command.DeploymentId {
+			if command.DeploymentId != nil && v.Id == *command.DeploymentId {
 				deployment = v
 			}
 		}
 
 		if deployment == nil {
 			logger.Error("No deployment with id '%v' found for command '%v'",
-				slog.String("deploymentId", command.DeploymentId),
+				slog.String("deploymentId", *command.DeploymentId),
 				slog.String("commandAction", string(command.Action)),
 			)
 			continue
@@ -174,7 +174,7 @@ func (ns *DeployService) processCommand(
 	definition *openapi.RegistrySvcDefinition,
 	deployment *deploy.Deployment,
 ) error {
-	deployment, err := ns.getDeploymentById(command.DeploymentId)
+	deployment, err := ns.getDeploymentById(*command.DeploymentId)
 	if err != nil {
 		return err
 	}
@@ -295,6 +295,9 @@ func (ns *DeployService) executeStartCommand(
 			1,
 		)
 	}
+
+	// Services are expected to also call the RegisterInstance endpoint
+	// to provide their slug if they want to be proxied by the slug.
 
 	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Body(
 		openapi.RegistrySvcRegisterInstanceRequest{

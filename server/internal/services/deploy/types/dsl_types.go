@@ -20,7 +20,7 @@ type Command struct {
 	Action       CommandType
 	NodeId       string
 	NodeUrl      string
-	DeploymentId string
+	DeploymentId *string
 	InstanceId   *string
 	InstanceUrl  *string
 }

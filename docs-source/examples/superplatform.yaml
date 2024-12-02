@@ -1310,7 +1310,10 @@ definitions:
   registry_svc.Instance:
     properties:
       deploymentId:
-        description: The ID of the deployment that this instance is an instance of.
+        description: |-
+          The ID of the deployment that this instance is an instance of.
+          Only instances managed by the Superplatform have a DeploymentId.
+          Services can self-register without a DeploymentId too.
         example: depl_deBUCtJirc
         type: string
       details:
@@ -1359,7 +1362,6 @@ definitions:
         example: https://myserver.com:5981
         type: string
     required:
-    - deploymentId
     - id
     - status
     - url

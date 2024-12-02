@@ -12,9 +12,9 @@
 import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 export declare class RegistrySvcInstance {
     /**
-    * The ID of the deployment that this instance is an instance of.
+    * The ID of the deployment that this instance is an instance of. Only instances managed by the Superplatform have a DeploymentId. Services can self-register without a DeploymentId too.
     */
-    'deploymentId': string;
+    'deploymentId'?: string;
     /**
     * Details
     */

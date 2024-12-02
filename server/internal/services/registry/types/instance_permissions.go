@@ -32,13 +32,13 @@ var PermissionInstanceDelete = usertypes.Permission{
 	Name: "Registry Svc - Instance Delete",
 }
 
-var InstancePermissions = []usertypes.Permission{
+var InstanceUserPermissions = []usertypes.Permission{
 	PermissionInstanceView,
+	PermissionInstanceEdit,
 }
 
 var InstanceAdminPermissions = []usertypes.Permission{
 	PermissionInstanceView,
 	PermissionInstanceCreate,
-	PermissionInstanceEdit,
 	PermissionInstanceDelete,
 }

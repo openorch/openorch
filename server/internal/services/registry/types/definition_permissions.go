@@ -32,7 +32,7 @@ var PermissionDefinitionDelete = usertypes.Permission{
 	Name: "Registry Svc - Definition Delete",
 }
 
-var DefinitionPermissions = []usertypes.Permission{
+var DefinitionUserPermissions = []usertypes.Permission{
 	PermissionDefinitionView,
 }
 
