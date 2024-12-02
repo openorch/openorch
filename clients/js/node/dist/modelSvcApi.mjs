@@ -157,6 +157,7 @@ import './userSvcOrganization.mjs';
 import './userSvcPermission.mjs';
 import './userSvcReadUserByTokenResponse.mjs';
 import './userSvcRegisterRequest.mjs';
+import './userSvcRegisterResponse.mjs';
 import './userSvcRole.mjs';
 import './userSvcSaveProfileRequest.mjs';
 import './userSvcSetRolePermissionsRequest.mjs';

@@ -139,6 +139,7 @@ export * from './UserSvcOrganization';
 export * from './UserSvcPermission';
 export * from './UserSvcReadUserByTokenResponse';
 export * from './UserSvcRegisterRequest';
+export * from './UserSvcRegisterResponse';
 export * from './UserSvcRole';
 export * from './UserSvcSaveProfileRequest';
 export * from './UserSvcSetRolePermissionsRequest';

@@ -534,10 +534,10 @@ func (mr *MockUserSvcAPIMockRecorder) Register(ctx any) *gomock.Call {
 }
 
 // RegisterExecute mocks base method.
-func (m *MockUserSvcAPI) RegisterExecute(r ApiRegisterRequest) (map[string]any, *http.Response, error) {
+func (m *MockUserSvcAPI) RegisterExecute(r ApiRegisterRequest) (*UserSvcRegisterResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RegisterExecute", r)
-	ret0, _ := ret[0].(map[string]any)
+	ret0, _ := ret[0].(*UserSvcRegisterResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2

@@ -53,6 +53,15 @@ func (s *UserService) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	bs, _ := json.Marshal(user.RegisterResponse{})
+	token, err := s.login(req.Slug, req.Password)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	bs, _ := json.Marshal(user.RegisterResponse{
+		Token: token,
+	})
 	w.Write(bs)
 }

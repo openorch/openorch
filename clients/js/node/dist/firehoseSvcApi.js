@@ -159,6 +159,7 @@ require('./userSvcOrganization.js');
 require('./userSvcPermission.js');
 require('./userSvcReadUserByTokenResponse.js');
 require('./userSvcRegisterRequest.js');
+require('./userSvcRegisterResponse.js');
 require('./userSvcRole.js');
 require('./userSvcSaveProfileRequest.js');
 require('./userSvcSetRolePermissionsRequest.js');

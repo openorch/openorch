@@ -140,6 +140,7 @@ export * from './userSvcOrganization';
 export * from './userSvcPermission';
 export * from './userSvcReadUserByTokenResponse';
 export * from './userSvcRegisterRequest';
+export * from './userSvcRegisterResponse';
 export * from './userSvcRole';
 export * from './userSvcSaveProfileRequest';
 export * from './userSvcSetRolePermissionsRequest';

@@ -143,6 +143,7 @@ import './UserSvcAuthToken.mjs';
 import './UserSvcReadUserByTokenResponse.mjs';
 import './UserSvcOrganization.mjs';
 import './UserSvcRegisterRequest.mjs';
+import './UserSvcRegisterResponse.mjs';
 import './UserSvcSaveProfileRequest.mjs';
 import './UserSvcSetRolePermissionsRequest.mjs';
 import './UserSvcUpserPermissionRequest.mjs';
