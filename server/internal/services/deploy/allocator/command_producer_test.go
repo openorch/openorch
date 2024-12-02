@@ -35,7 +35,7 @@ func TestGenerateCommands_ScaleUp(t *testing.T) {
 	serviceInstances := []openapi.RegistrySvcInstance{
 		{
 			Id:            "instance1",
-			DeploymentId:  "service-A",
+			DeploymentId:  openapi.PtrString("service-A"),
 			LastHeartbeat: StrPtr("valid"),
 		},
 	}
@@ -47,10 +47,10 @@ func TestGenerateCommands_ScaleUp(t *testing.T) {
 
 	require.Equal(t, 2, len(commands))
 	require.Equal(t, deploy.CommandType("START"), commands[0].Action)
-	require.Equal(t, "service-A", commands[0].DeploymentId)
+	require.Equal(t, "service-A", *commands[0].DeploymentId)
 	require.Equal(t, "node1", commands[0].NodeId)
 	require.Equal(t, deploy.CommandType("START"), commands[1].Action)
-	require.Equal(t, "service-A", commands[1].DeploymentId)
+	require.Equal(t, "service-A", *commands[1].DeploymentId)
 	require.Equal(t, "node2", commands[1].NodeId)
 }
 
@@ -66,17 +66,17 @@ func TestGenerateCommands_ScaleDown(t *testing.T) {
 	serviceInstances := []openapi.RegistrySvcInstance{
 		{
 			Id:            "instance1",
-			DeploymentId:  "service-A",
+			DeploymentId:  openapi.PtrString("service-A"),
 			LastHeartbeat: StrPtr("valid"),
 		},
 		{
 			Id:            "instance2",
-			DeploymentId:  "service-A",
+			DeploymentId:  openapi.PtrString("service-A"),
 			LastHeartbeat: StrPtr("valid"),
 		},
 		{
 			Id:            "instance3",
-			DeploymentId:  "service-A",
+			DeploymentId:  openapi.PtrString("service-A"),
 			LastHeartbeat: StrPtr("valid"),
 		},
 	}
@@ -88,9 +88,9 @@ func TestGenerateCommands_ScaleDown(t *testing.T) {
 
 	require.Equal(t, 2, len(commands))
 	require.Equal(t, deploy.CommandType("KILL"), commands[0].Action)
-	require.Equal(t, "service-A", commands[0].DeploymentId)
+	require.Equal(t, "service-A", *commands[0].DeploymentId)
 	require.Equal(t, deploy.CommandType("KILL"), commands[1].Action)
-	require.Equal(t, "service-A", commands[1].DeploymentId)
+	require.Equal(t, "service-A", *commands[1].DeploymentId)
 }
 
 func TestGenerateCommands_KillUnhealthy(t *testing.T) {
@@ -103,7 +103,7 @@ func TestGenerateCommands_KillUnhealthy(t *testing.T) {
 		},
 	}
 	serviceInstances := []openapi.RegistrySvcInstance{
-		{Id: "instance1", DeploymentId: "service-A", LastHeartbeat: nil},
+		{Id: "instance1", DeploymentId: openapi.PtrString("service-A"), LastHeartbeat: nil},
 	}
 	deployments := []*deploy.Deployment{
 		{Id: "service-A", Replicas: 1},
@@ -113,7 +113,7 @@ func TestGenerateCommands_KillUnhealthy(t *testing.T) {
 
 	require.Equal(t, 1, len(commands))
 	require.Equal(t, deploy.CommandType("KILL"), commands[0].Action)
-	require.Equal(t, "service-A", commands[0].DeploymentId)
+	require.Equal(t, "service-A", *commands[0].DeploymentId)
 	require.Equal(t, "instance1", *commands[0].InstanceId)
 }
 
@@ -129,7 +129,7 @@ func TestGenerateCommands_NoAction(t *testing.T) {
 	serviceInstances := []openapi.RegistrySvcInstance{
 		{
 			Id:            "instance1",
-			DeploymentId:  "service-A",
+			DeploymentId:  openapi.PtrString("service-A"),
 			LastHeartbeat: StrPtr("valid"),
 		},
 	}
