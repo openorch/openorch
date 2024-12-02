@@ -35,9 +35,9 @@ func (ns *RegistryService) registerPermissions() error {
 
 	for _, permission := range app(
 		registrytypes.NodeAdminPermissions,
-		registrytypes.InstancePermissions,
+		registrytypes.InstanceUserPermissions,
 		registrytypes.InstanceAdminPermissions,
-		registrytypes.DefinitionPermissions,
+		registrytypes.DefinitionUserPermissions,
 		registrytypes.DefinitionAdminPermissions,
 	) {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
@@ -73,8 +73,8 @@ func (ns *RegistryService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range app(
-			registrytypes.InstancePermissions,
-			registrytypes.DefinitionPermissions,
+			registrytypes.InstanceUserPermissions,
+			registrytypes.DefinitionUserPermissions,
 		) {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()

@@ -28,10 +28,12 @@ import {
 export interface RegistrySvcInstance {
     /**
      * The ID of the deployment that this instance is an instance of.
+     * Only instances managed by the Superplatform have a DeploymentId.
+     * Services can self-register without a DeploymentId too.
      * @type {string}
      * @memberof RegistrySvcInstance
      */
-    deploymentId: string;
+    deploymentId?: string;
     /**
      * Details
      * @type {string}
@@ -87,6 +89,14 @@ export interface RegistrySvcInstance {
      */
     scheme?: string;
     /**
+     * Slug of the account that owns this instance
+     * Services that want to be proxied by their slug are advised to self register
+     * their instance at startup.
+     * @type {string}
+     * @memberof RegistrySvcInstance
+     */
+    slug?: string;
+    /**
      * Status
      * @type {RegistrySvcInstanceStatus}
      * @memberof RegistrySvcInstance
@@ -106,7 +116,6 @@ export interface RegistrySvcInstance {
  * Check if a given object implements the RegistrySvcInstance interface.
  */
 export function instanceOfRegistrySvcInstance(value: object): value is RegistrySvcInstance {
-    if (!('deploymentId' in value) || value['deploymentId'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
@@ -123,7 +132,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'deploymentId': json['deploymentId'],
+        'deploymentId': json['deploymentId'] == null ? undefined : json['deploymentId'],
         'details': json['details'] == null ? undefined : json['details'],
         'host': json['host'] == null ? undefined : json['host'],
         'id': json['id'],
@@ -133,6 +142,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
         'status': RegistrySvcInstanceStatusFromJSON(json['status']),
         'url': json['url'],
     };
@@ -154,6 +164,7 @@ export function RegistrySvcInstanceToJSON(value?: RegistrySvcInstance | null): a
         'path': value['path'],
         'port': value['port'],
         'scheme': value['scheme'],
+        'slug': value['slug'],
         'status': RegistrySvcInstanceStatusToJSON(value['status']),
         'url': value['url'],
     };

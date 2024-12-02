@@ -201,6 +201,14 @@ func (sm *StateManager) setupSignalHandler() {
 	}()
 }
 
+func (sm *StateManager) Close() error {
+	return sm.SaveState(sm.stateGetter())
+}
+
+func (sm *StateManager) Refresh() error {
+	return sm.SaveState(sm.stateGetter())
+}
+
 func zipData(filePath string, data []byte) ([]byte, error) {
 	var buf bytes.Buffer
 	zipWriter := zip.NewWriter(&buf)

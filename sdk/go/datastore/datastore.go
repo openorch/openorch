@@ -46,6 +46,9 @@ type DataStore interface {
 	IsInTransaction() bool
 
 	SetDebug(debug bool)
+
+	Close() error
+	Refresh() error
 }
 
 type QueryBuilder interface {

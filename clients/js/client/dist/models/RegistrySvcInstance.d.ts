@@ -18,10 +18,12 @@ import type { RegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus';
 export interface RegistrySvcInstance {
     /**
      * The ID of the deployment that this instance is an instance of.
+     * Only instances managed by the Superplatform have a DeploymentId.
+     * Services can self-register without a DeploymentId too.
      * @type {string}
      * @memberof RegistrySvcInstance
      */
-    deploymentId: string;
+    deploymentId?: string;
     /**
      * Details
      * @type {string}
@@ -76,6 +78,14 @@ export interface RegistrySvcInstance {
      * @memberof RegistrySvcInstance
      */
     scheme?: string;
+    /**
+     * Slug of the account that owns this instance
+     * Services that want to be proxied by their slug are advised to self register
+     * their instance at startup.
+     * @type {string}
+     * @memberof RegistrySvcInstance
+     */
+    slug?: string;
     /**
      * Status
      * @type {RegistrySvcInstanceStatus}

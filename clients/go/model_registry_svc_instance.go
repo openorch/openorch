@@ -22,8 +22,8 @@ var _ MappedNullable = &RegistrySvcInstance{}
 
 // RegistrySvcInstance struct for RegistrySvcInstance
 type RegistrySvcInstance struct {
-	// The ID of the deployment that this instance is an instance of.
-	DeploymentId string `json:"deploymentId"`
+	// The ID of the deployment that this instance is an instance of. Only instances managed by the Superplatform have a DeploymentId. Services can self-register without a DeploymentId too.
+	DeploymentId *string `json:"deploymentId,omitempty"`
 	// Details
 	Details *string `json:"details,omitempty"`
 	// Host of the instance address. Required if URL is not provided
@@ -42,6 +42,8 @@ type RegistrySvcInstance struct {
 	Port *int32 `json:"port,omitempty"`
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme *string `json:"scheme,omitempty"`
+	// Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup.
+	Slug *string `json:"slug,omitempty"`
 	// Status
 	Status RegistrySvcInstanceStatus `json:"status"`
 	// Full address URL of the instance.
@@ -54,9 +56,8 @@ type _RegistrySvcInstance RegistrySvcInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcInstance(deploymentId string, id string, status RegistrySvcInstanceStatus, url string) *RegistrySvcInstance {
+func NewRegistrySvcInstance(id string, status RegistrySvcInstanceStatus, url string) *RegistrySvcInstance {
 	this := RegistrySvcInstance{}
-	this.DeploymentId = deploymentId
 	this.Id = id
 	this.Status = status
 	this.Url = url
@@ -71,28 +72,36 @@ func NewRegistrySvcInstanceWithDefaults() *RegistrySvcInstance {
 	return &this
 }
 
-// GetDeploymentId returns the DeploymentId field value
+// GetDeploymentId returns the DeploymentId field value if set, zero value otherwise.
 func (o *RegistrySvcInstance) GetDeploymentId() string {
-	if o == nil {
+	if o == nil || IsNil(o.DeploymentId) {
 		var ret string
 		return ret
 	}
-
-	return o.DeploymentId
+	return *o.DeploymentId
 }
 
-// GetDeploymentIdOk returns a tuple with the DeploymentId field value
+// GetDeploymentIdOk returns a tuple with the DeploymentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RegistrySvcInstance) GetDeploymentIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeploymentId) {
 		return nil, false
 	}
-	return &o.DeploymentId, true
+	return o.DeploymentId, true
 }
 
-// SetDeploymentId sets field value
+// HasDeploymentId returns a boolean if a field has been set.
+func (o *RegistrySvcInstance) HasDeploymentId() bool {
+	if o != nil && !IsNil(o.DeploymentId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentId gets a reference to the given string and assigns it to the DeploymentId field.
 func (o *RegistrySvcInstance) SetDeploymentId(v string) {
-	o.DeploymentId = v
+	o.DeploymentId = &v
 }
 
 // GetDetails returns the Details field value if set, zero value otherwise.
@@ -375,6 +384,38 @@ func (o *RegistrySvcInstance) SetScheme(v string) {
 	o.Scheme = &v
 }
 
+// GetSlug returns the Slug field value if set, zero value otherwise.
+func (o *RegistrySvcInstance) GetSlug() string {
+	if o == nil || IsNil(o.Slug) {
+		var ret string
+		return ret
+	}
+	return *o.Slug
+}
+
+// GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcInstance) GetSlugOk() (*string, bool) {
+	if o == nil || IsNil(o.Slug) {
+		return nil, false
+	}
+	return o.Slug, true
+}
+
+// HasSlug returns a boolean if a field has been set.
+func (o *RegistrySvcInstance) HasSlug() bool {
+	if o != nil && !IsNil(o.Slug) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlug gets a reference to the given string and assigns it to the Slug field.
+func (o *RegistrySvcInstance) SetSlug(v string) {
+	o.Slug = &v
+}
+
 // GetStatus returns the Status field value
 func (o *RegistrySvcInstance) GetStatus() RegistrySvcInstanceStatus {
 	if o == nil {
@@ -433,7 +474,9 @@ func (o RegistrySvcInstance) MarshalJSON() ([]byte, error) {
 
 func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["deploymentId"] = o.DeploymentId
+	if !IsNil(o.DeploymentId) {
+		toSerialize["deploymentId"] = o.DeploymentId
+	}
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
@@ -459,6 +502,9 @@ func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scheme) {
 		toSerialize["scheme"] = o.Scheme
 	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["url"] = o.Url
 	return toSerialize, nil
@@ -469,7 +515,6 @@ func (o *RegistrySvcInstance) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"deploymentId",
 		"id",
 		"status",
 		"url",

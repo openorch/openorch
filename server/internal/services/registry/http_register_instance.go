@@ -3,6 +3,7 @@ package registryservice
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	openapi "github.com/singulatron/superplatform/clients/go"
@@ -55,7 +56,7 @@ func (rs *RegistryService) RegisterInstance(
 	}
 	defer r.Body.Close()
 
-	err = rs.registerInstance(req)
+	err = rs.registerInstance(*isAuthRsp.User.Slug, req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -73,32 +74,30 @@ func (rs *RegistryService) RegisterInstance(
 }
 
 func (rs *RegistryService) registerInstance(
+	callerSlug string,
 	req *registry.RegisterInstanceRequest,
 ) error {
 	var instance registry.Instance
 
-	if req.Id == "" {
-		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).
-			Find()
-		if err != nil {
-			return err
-		}
+	instances, err := rs.instanceStore.Query(datastore.Equals([]string{"url"}, req.URL)).
+		Find()
+	if err != nil {
+		return err
+	}
 
-		if len(instances) > 0 {
-			instance = *instances[0].(*registry.Instance)
-		} else {
-			instance.Id = sdk.Id("inst")
-		}
-
+	if len(instances) > 0 {
+		instance = *instances[0].(*registry.Instance)
 	} else {
-		instances, err := rs.instanceStore.Query(datastore.Equals([]string{"id"}, req.Id)).Find()
-		if err != nil {
-			return err
-		}
+		instance.Id = sdk.Id("inst")
+	}
 
-		if len(instances) > 0 {
-			instance = *instances[0].(*registry.Instance)
-		}
+	nu := len(instances) == 0
+	if nu {
+		instance.Slug = callerSlug
+	}
+
+	if callerSlug != "deploy-svc" && callerSlug != instance.Slug {
+		return fmt.Errorf("caller slug '%s' does not match instance slug '%s'", callerSlug, instance.Slug)
 	}
 
 	if req.Id != "" {
