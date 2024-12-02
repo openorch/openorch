@@ -150,6 +150,11 @@ export interface RemoveUserFromOrganizationRequest {
     body?: object;
 }
 
+export interface SaveSelfRequest {
+    userId: string;
+    body: UserSvcSaveProfileRequest;
+}
+
 export interface SaveUserProfileRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
@@ -887,7 +892,56 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    async saveSelfRaw(requestParameters: SaveSelfRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling saveSelf().'
+            );
+        }
+
+        if (requestParameters['body'] == null) {
+            throw new runtime.RequiredError(
+                'body',
+                'Required parameter "body" was null or undefined when calling saveSelf().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/user-svc/self`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserSvcSaveProfileRequestToJSON(requestParameters['body']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    async saveSelf(requestParameters: SaveSelfRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.saveSelfRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     async saveUserProfileRaw(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -927,7 +981,7 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Save user profile information based on the provided user ID.
+     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
      * Save User Profile
      */
     async saveUserProfile(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
