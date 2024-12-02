@@ -99,6 +99,14 @@ func (s *LocalStore) Create(obj datastore.Row) error {
 	return s.createWithoutLock(obj)
 }
 
+func (s *LocalStore) Close() error {
+	return s.stateManager.Close()
+}
+
+func (s *LocalStore) Refresh() error {
+	return s.stateManager.Refresh()
+}
+
 func (s *LocalStore) createWithoutLock(obj datastore.Row) error {
 	id := obj.GetId()
 	_, ok := s.data[id]

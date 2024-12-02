@@ -17,8 +17,6 @@ import { RegistrySvcInstanceStatusFromJSON, RegistrySvcInstanceStatusToJSON } fr
  * Check if a given object implements the RegistrySvcInstance interface.
  */
 function instanceOfRegistrySvcInstance(value) {
-    if (!('deploymentId' in value) || value['deploymentId'] === undefined)
-        return false;
     if (!('id' in value) || value['id'] === undefined)
         return false;
     if (!('status' in value) || value['status'] === undefined)
@@ -35,7 +33,7 @@ function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'deploymentId': json['deploymentId'],
+        'deploymentId': json['deploymentId'] == null ? undefined : json['deploymentId'],
         'details': json['details'] == null ? undefined : json['details'],
         'host': json['host'] == null ? undefined : json['host'],
         'id': json['id'],
@@ -45,6 +43,7 @@ function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'path': json['path'] == null ? undefined : json['path'],
         'port': json['port'] == null ? undefined : json['port'],
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
         'status': RegistrySvcInstanceStatusFromJSON(json['status']),
         'url': json['url'],
     };
@@ -64,6 +63,7 @@ function RegistrySvcInstanceToJSON(value) {
         'path': value['path'],
         'port': value['port'],
         'scheme': value['scheme'],
+        'slug': value['slug'],
         'status': RegistrySvcInstanceStatusToJSON(value['status']),
         'url': value['url'],
     };

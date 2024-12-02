@@ -6127,14 +6127,13 @@ const docTemplate = `{
         "registry_svc.Instance": {
             "type": "object",
             "required": [
-                "deploymentId",
                 "id",
                 "status",
                 "url"
             ],
             "properties": {
                 "deploymentId": {
-                    "description": "The ID of the deployment that this instance is an instance of.",
+                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the Superplatform have a DeploymentId.\nServices can self-register without a DeploymentId too.",
                     "type": "string",
                     "example": "depl_deBUCtJirc"
                 },
@@ -6181,6 +6180,11 @@ const docTemplate = `{
                     "description": "Scheme of the instance address. Required if URL is not provided.",
                     "type": "string",
                     "example": "https"
+                },
+                "slug": {
+                    "description": "Slug of the account that owns this instance\nServices that want to be proxied by their slug are advised to self register\ntheir instance at startup.",
+                    "type": "string",
+                    "example": "my-svc"
                 },
                 "status": {
                     "description": "Status",

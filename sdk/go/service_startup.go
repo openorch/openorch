@@ -34,6 +34,10 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 		if err != nil {
 			return "", err
 		}
+		err = store.Refresh()
+		if err != nil {
+			return "", err
+		}
 	}
 
 	loginRsp, _, err := userService.Login(ctx).Body(client.UserSvcLoginRequest{

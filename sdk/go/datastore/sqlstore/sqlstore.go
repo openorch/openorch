@@ -119,6 +119,14 @@ func (s *SQLStore) SetDebug(debug bool) {
 	s.db.Debug = true
 }
 
+func (s *SQLStore) Close() error {
+	return s.db.Close()
+}
+
+func (s *SQLStore) Refresh() error {
+	return nil
+}
+
 func (s *SQLStore) Create(obj datastore.Row) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()

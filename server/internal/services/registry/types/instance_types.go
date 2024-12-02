@@ -36,7 +36,9 @@ type Instance struct {
 	URL string `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`
 
 	// The ID of the deployment that this instance is an instance of.
-	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc" binding:"required"`
+	// Only instances managed by the Superplatform have a DeploymentId.
+	// Services can self-register without a DeploymentId too.
+	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc"`
 
 	// URL of the Superplatform daemon
 	NodeURL string `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`
@@ -66,6 +68,11 @@ type Instance struct {
 
 	// Details
 	Details string `json:"details,omitempty" example:"Instance is healthy"`
+
+	// Slug of the account that owns this instance
+	// Services that want to be proxied by their slug are advised to self register
+	// their instance at startup.
+	Slug string `json:"slug,omitempty" example:"my-svc"`
 }
 
 func (s *Instance) GetId() string {

@@ -44,7 +44,8 @@ func scaleDeployment(
 
 	// Count active instances and track nodes assigned to this service
 	for _, instance := range serviceInstances {
-		if instance.DeploymentId == deployment.Id {
+		if instance.DeploymentId != nil &&
+			*instance.DeploymentId == deployment.Id {
 			activeInstances++
 			if instance.NodeUrl != nil {
 				assignedNodes[*instance.NodeUrl] = true
@@ -60,7 +61,7 @@ func scaleDeployment(
 			if node != nil {
 				commands = append(commands, &deploy.Command{
 					Action:       "START",
-					DeploymentId: deployment.Id,
+					DeploymentId: &deployment.Id,
 					NodeId:       node.Id,
 					NodeUrl:      node.Url,
 				})
@@ -74,7 +75,7 @@ func scaleDeployment(
 		for i := deployment.Replicas; i < activeInstances; i++ {
 			commands = append(commands, &deploy.Command{
 				Action:       "KILL",
-				DeploymentId: deployment.Id,
+				DeploymentId: &deployment.Id,
 			})
 		}
 	}
