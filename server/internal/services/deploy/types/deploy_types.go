@@ -56,6 +56,10 @@ type Deployment struct {
 	// Details provides additional information about the deployment's current state,
 	// including both success and failure conditions (e.g., "Deployment in progress", "Error pulling image").
 	Details string `json:"details,omitempty" example:"Deployment is in progress"`
+
+	// Envars is a map of environment variables that will be passed down to service instances (see Registry Svc Instance)
+	// Also see the Registry Svc Definition for required envars.
+	Envars map[string]string `json:"envars,omitempty"`
 }
 
 func (d Deployment) GetId() string {

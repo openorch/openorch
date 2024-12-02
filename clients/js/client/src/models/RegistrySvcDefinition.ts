@@ -57,6 +57,15 @@ export interface RegistrySvcDefinition {
      */
     clients?: Array<RegistrySvcClient>;
     /**
+     * Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.
+     * E.g., {"DB_URL": "mysql://user:password@host:port/db"}
+     * These will be injected into the service instances (see Registry Svc Instance) at runtime.
+     * The value of a key here is the default value. The actual value can be overridden at deployment time.
+     * @type {{ [key: string]: string; }}
+     * @memberof RegistrySvcDefinition
+     */
+    envars?: { [key: string]: string; };
+    /**
      * HostPort is a clutch until automatic port assignment works.
      * It will go a way as it doesn't make any sense in a Definition.
      * @type {number}
@@ -106,6 +115,7 @@ export function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminato
         
         'apiSpecs': json['apiSpecs'] == null ? undefined : ((json['apiSpecs'] as Array<any>).map(RegistrySvcAPISpecFromJSON)),
         'clients': json['clients'] == null ? undefined : ((json['clients'] as Array<any>).map(RegistrySvcClientFromJSON)),
+        'envars': json['envars'] == null ? undefined : json['envars'],
         'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'],
         'image': json['image'] == null ? undefined : RegistrySvcImageSpecFromJSON(json['image']),
@@ -121,6 +131,7 @@ export function RegistrySvcDefinitionToJSON(value?: RegistrySvcDefinition | null
         
         'apiSpecs': value['apiSpecs'] == null ? undefined : ((value['apiSpecs'] as Array<any>).map(RegistrySvcAPISpecToJSON)),
         'clients': value['clients'] == null ? undefined : ((value['clients'] as Array<any>).map(RegistrySvcClientToJSON)),
+        'envars': value['envars'],
         'hostPort': value['hostPort'],
         'id': value['id'],
         'image': RegistrySvcImageSpecToJSON(value['image']),

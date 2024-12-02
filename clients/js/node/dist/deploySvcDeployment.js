@@ -39,6 +39,11 @@ DeploySvcDeployment.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "envars",
+        "baseName": "envars",
+        "type": "{ [key: string]: string; }"
+    },
+    {
         "name": "id",
         "baseName": "id",
         "type": "string"
