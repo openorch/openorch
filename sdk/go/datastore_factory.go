@@ -14,10 +14,11 @@ import (
 )
 
 func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance any) (datastore.DataStore, error), error) {
-	dbDriver := os.Getenv("SINGULATRON_DB_DRIVER")
-	dbString := os.Getenv("SINGULATRON_DB_STRING")
+	dbType := os.Getenv("SUPERPLATFORM_DB")
+	dbDriver := os.Getenv("SUPERPLATFORM_DB_DRIVER")
+	dbString := os.Getenv("SUPERPLATFORM_DB_STRING")
 
-	if dbDriver == "" {
+	if dbType == "" {
 		homeDir, _ := os.UserHomeDir()
 		localStorePath := path.Join(homeDir, ".superplatform", "data")
 		err := os.MkdirAll(localStorePath, 0755)

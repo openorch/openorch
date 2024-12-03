@@ -54,34 +54,34 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 	}()
 
 	if options.GpuPlatform == "" {
-		options.GpuPlatform = os.Getenv("SINGULATRON_GPU_PLATFORM")
+		options.GpuPlatform = os.Getenv("SUPERPLATFORM_GPU_PLATFORM")
 	}
 	if options.Address == "" {
-		options.Address = os.Getenv("SINGULATRON_ADDRESS")
+		options.Address = os.Getenv("SUPERPLATFORM_ADDRESS")
 	}
 	if options.Az == "" {
-		options.Az = os.Getenv("SINGULATRON_AZ")
+		options.Az = os.Getenv("SUPERPLATFORM_AZ")
 	}
 	if options.Region == "" {
-		options.Region = os.Getenv("SINGULATRON_AZ")
+		options.Region = os.Getenv("SUPERPLATFORM_AZ")
 	}
 	if options.LLMHost == "" {
-		options.LLMHost = os.Getenv("SINGULATRON_LLM_HOST")
+		options.LLMHost = os.Getenv("SUPERPLATFORM_LLM_HOST")
 	}
 	if options.VolumeName == "" {
-		options.VolumeName = os.Getenv("SINGULATRON_VOLUME_NAME")
+		options.VolumeName = os.Getenv("SUPERPLATFORM_VOLUME_NAME")
 	}
 	if options.ConfigPath == "" {
-		options.ConfigPath = os.Getenv("SINGULATRON_CONFIG_PATH")
+		options.ConfigPath = os.Getenv("SUPERPLATFORM_CONFIG_PATH")
 	}
 	if options.Db == "" {
-		options.Db = os.Getenv("SINGULATRON_DB")
+		options.Db = os.Getenv("SUPERPLATFORM_DB")
 	}
 	if options.DbDriver == "" {
-		options.DbDriver = os.Getenv("SINGULATRON_DB_DRIVER")
+		options.DbDriver = os.Getenv("SUPERPLATFORM_DB_DRIVER")
 	}
 	if options.DbString == "" {
-		options.DbString = os.Getenv("SINGULATRON_DB_STRING")
+		options.DbString = os.Getenv("SUPERPLATFORM_DB_STRING")
 	}
 
 	diopt := &di.Options{
