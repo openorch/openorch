@@ -580,6 +580,7 @@ type ApiListInstancesRequest struct {
 	host *string
 	ip2 *string
 	id *string
+	slug *string
 }
 
 // Scheme to filter by
@@ -615,6 +616,12 @@ func (r ApiListInstancesRequest) Ip2(ip2 string) ApiListInstancesRequest {
 // Id to filter by
 func (r ApiListInstancesRequest) Id(id string) ApiListInstancesRequest {
 	r.id = &id
+	return r
+}
+
+// Slug to filter by
+func (r ApiListInstancesRequest) Slug(slug string) ApiListInstancesRequest {
+	r.slug = &slug
 	return r
 }
 
@@ -675,6 +682,9 @@ func (a *RegistrySvcAPIService) ListInstancesExecute(r ApiListInstancesRequest) 
 	}
 	if r.id != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+	}
+	if r.slug != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "slug", r.slug, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

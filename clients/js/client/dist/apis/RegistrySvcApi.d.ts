@@ -24,6 +24,7 @@ export interface ListInstancesRequest {
     host?: string;
     ip2?: string;
     id?: string;
+    slug?: string;
 }
 export interface ListNodesRequest {
     body?: object;

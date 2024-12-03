@@ -52,6 +52,7 @@ export interface ListInstancesRequest {
     host?: string;
     ip2?: string;
     id?: string;
+    slug?: string;
 }
 
 export interface ListNodesRequest {
@@ -212,6 +213,10 @@ export class RegistrySvcApi extends runtime.BaseAPI {
 
         if (requestParameters['id'] != null) {
             queryParameters['id'] = requestParameters['id'];
+        }
+
+        if (requestParameters['slug'] != null) {
+            queryParameters['slug'] = requestParameters['slug'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

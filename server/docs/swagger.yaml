@@ -3840,6 +3840,10 @@ paths:
         in: query
         name: id
         type: string
+      - description: Slug to filter by
+        in: query
+        name: slug
+        type: string
       produces:
       - application/json
       responses:

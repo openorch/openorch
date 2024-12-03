@@ -29,6 +29,7 @@ import (
 	modelservice "github.com/singulatron/superplatform/server/internal/services/model"
 	policyservice "github.com/singulatron/superplatform/server/internal/services/policy"
 	promptservice "github.com/singulatron/superplatform/server/internal/services/prompt"
+	proxyservice "github.com/singulatron/superplatform/server/internal/services/proxy"
 	registryservice "github.com/singulatron/superplatform/server/internal/services/registry"
 	secretservice "github.com/singulatron/superplatform/server/internal/services/secret"
 	sourceservice "github.com/singulatron/superplatform/server/internal/services/source"
@@ -334,6 +335,20 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	if err != nil {
 		logger.Error(
 			"Secret service creation failed",
+			slog.String("error", err.Error()),
+		)
+		os.Exit(1)
+	}
+
+	proxyService, err := proxyservice.NewProxyService(
+		options.ClientFactory,
+		options.Authorizer,
+		options.Lock,
+		options.DatastoreFactory,
+	)
+	if err != nil {
+		logger.Error(
+			"Proxy service creation failed",
 			slog.String("error", err.Error()),
 		)
 		os.Exit(1)
@@ -698,6 +713,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "PUT")
 
+	router.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		proxyService.Route(w, r)
+	})
+
 	return router, func() error {
 		err = configService.Start()
 		if err != nil {
@@ -750,6 +769,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		err = secretService.Start()
 		if err != nil {
 			return errors.Wrap(err, "secret service start failed")
+		}
+		err = proxyService.Start()
+		if err != nil {
+			return errors.Wrap(err, "proxy service start failed")
 		}
 
 		return nil
