@@ -1,4 +1,4 @@
-name: Run JS/TS client-example
+name: Run JS/TS client example
 
 on:
   push:
@@ -50,4 +50,4 @@ jobs:
             ifconfig
             exit 1
           )
-        working-directory: ./clients/js/client-example
+        working-directory: ./clients/js/example
