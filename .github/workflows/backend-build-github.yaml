@@ -30,15 +30,15 @@ jobs:
           go test ./... -v -tags='!dist' -timeout=30s
 
           # We rerun nondist tests with an SQL backend
-          SINGULATRON_DB=postgres \
-            SINGULATRON_DB_DEBUG=true \
-            SINGULATRON_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
+          SUPERPLATFORM_DB=postgres \
+            SUPERPLATFORM_DB_DEBUG=true \
+            SUPERPLATFORM_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -tags='!dist' -timeout=30s
 
           # Run dist test with SQL (localstore makes no sense in a dist setting)
-          SINGULATRON_DB=postgres \
-            SINGULATRON_DB_DEBUG=true \
-            SINGULATRON_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
+          SUPERPLATFORM_DB=postgres \
+            SUPERPLATFORM_DB_DEBUG=true \
+            SUPERPLATFORM_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -tags=dist -timeout=30s
         working-directory: server
 
