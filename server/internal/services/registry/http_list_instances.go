@@ -23,6 +23,7 @@ import (
 // @Param host query string false "Host to filter by"
 // @Param ip query string false "IP to filter by"
 // @Param id query string false "Id to filter by"
+// @Param slug query string false "Slug to filter by"
 // @Success 200 {object} registry.ListInstancesResponse
 // @Failure 400 {object} registry.ErrorResponse "Invalid filters"
 // @Failure 500 {object} registry.ErrorResponse "Internal Server Error"
@@ -56,6 +57,7 @@ func (rs *RegistryService) ListInstances(
 	deploymentId := q.Get("deploymentId")
 	id := q.Get("ip")
 	path := q.Get("path")
+	slug := q.Get("slug")
 
 	instances, err := rs.getInstances(List{
 		Id:           id,
@@ -63,6 +65,7 @@ func (rs *RegistryService) ListInstances(
 		DeploymentId: deploymentId,
 		IP:           ip,
 		Path:         path,
+		Slug:         slug,
 	})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -85,6 +88,7 @@ type List struct {
 	IP           string
 	Scheme       string
 	Path         string
+	Slug         string
 }
 
 func (rs *RegistryService) getInstances(
@@ -120,6 +124,10 @@ func (rs *RegistryService) getInstances(
 			match = false
 		}
 		if query.DeploymentId != "" && v.DeploymentId != query.DeploymentId {
+			match = false
+		}
+
+		if query.Slug != "" && v.Slug != query.Slug {
 			match = false
 		}
 

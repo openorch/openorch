@@ -154,6 +154,9 @@ class RegistrySvcApi extends BaseAPI {
             if (requestParameters['id'] != null) {
                 queryParameters['id'] = requestParameters['id'];
             }
+            if (requestParameters['slug'] != null) {
+                queryParameters['slug'] = requestParameters['slug'];
+            }
             const headerParameters = {};
             if (this.configuration && this.configuration.apiKey) {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
