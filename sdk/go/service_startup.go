@@ -2,7 +2,7 @@ package sdk
 
 import (
 	"context"
-	"fmt"
+	"log/slog"
 
 	"github.com/singulatron/superplatform/sdk/go/datastore"
 	"github.com/singulatron/superplatform/sdk/go/logger"
@@ -46,7 +46,7 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 	}).Execute()
 
 	if err != nil {
-		logger.Info(fmt.Sprintf("Registering the %v service", serviceSlug))
+		logger.Info("Registering service user", slog.String("serviceSlug", serviceSlug))
 
 		_, _, err = userService.Register(ctx).Body(client.UserSvcRegisterRequest{
 			Slug:     client.PtrString(slug),

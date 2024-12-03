@@ -18,6 +18,10 @@ func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance an
 	dbDriver := os.Getenv("SUPERPLATFORM_DB_DRIVER")
 	dbString := os.Getenv("SUPERPLATFORM_DB_STRING")
 
+	if dbDriver == "" {
+		dbDriver = "postgres"
+	}
+
 	if dbType == "" {
 		homeDir, _ := os.UserHomeDir()
 		localStorePath := path.Join(homeDir, ".superplatform", "data")
@@ -48,7 +52,7 @@ func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance an
 			instance,
 			dbDriver,
 			db,
-			tablePrefix+"_"+tableName,
+			tablePrefix+tableName,
 			false,
 		)
 	}, nil

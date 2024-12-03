@@ -121,7 +121,7 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 				instance,
 				options.DbDriver,
 				db,
-				tablePrefix+"_"+tableName,
+				tablePrefix+tableName,
 				false,
 			)
 		}
