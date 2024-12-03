@@ -37,7 +37,7 @@ fi
 
 # Check and install openapi-generator-cli if not installed or version doesn't match
 echo "Checking openapi-generator-cli installation..."
-INSTALLED_OPENAPI_VERSION=$(openapi-generator-cli version 2>/dev/null)
+INSTALLED_OPENAPI_VERSION=$(openapi-generator-cli version 2>/dev/null || true)
 LATEST_OPENAPI_VERSION=$(npm show @openapitools/openapi-generator-cli version)
 
 if [[ -z "$INSTALLED_OPENAPI_VERSION" ]]; then
