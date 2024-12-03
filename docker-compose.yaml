@@ -35,4 +35,4 @@ services:
       # GPU Acceleration for NVIDIA GPUs
       # Uncomment this envar for NVIDIA GPUs.
       #
-      # - SINGULATRON_GPU_PLATFORM=cuda
+      # - SUPERPLATFORM_GPU_PLATFORM=cuda
