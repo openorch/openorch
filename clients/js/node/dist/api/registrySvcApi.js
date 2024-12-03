@@ -289,9 +289,10 @@ export class RegistrySvcApi {
      * @param host Host to filter by
      * @param ip2 IP to filter by
      * @param id Id to filter by
+     * @param slug Slug to filter by
      */
-    listInstances(scheme_1, ip_1, deploymentId_1, host_1, ip2_1, id_1) {
-        return __awaiter(this, arguments, void 0, function* (scheme, ip, deploymentId, host, ip2, id, options = { headers: {} }) {
+    listInstances(scheme_1, ip_1, deploymentId_1, host_1, ip2_1, id_1, slug_1) {
+        return __awaiter(this, arguments, void 0, function* (scheme, ip, deploymentId, host, ip2, id, slug, options = { headers: {} }) {
             const localVarPath = this.basePath + '/registry-svc/instances';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
@@ -321,6 +322,9 @@ export class RegistrySvcApi {
             }
             if (id !== undefined) {
                 localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "string");
+            }
+            if (slug !== undefined) {
+                localVarQueryParameters['slug'] = ObjectSerializer.serialize(slug, "string");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;

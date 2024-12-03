@@ -2764,6 +2764,12 @@ const docTemplate = `{
                         "description": "Id to filter by",
                         "name": "id",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Slug to filter by",
+                        "name": "slug",
+                        "in": "query"
                     }
                 ],
                 "responses": {

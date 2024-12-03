@@ -8,7 +8,7 @@ npm run build;
 npm link;
 cd ..
 
-cd client-example;
+cd example;
 npm install
 npm link @superplatform/client;
 npm run build

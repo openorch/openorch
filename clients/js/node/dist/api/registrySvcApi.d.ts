@@ -85,8 +85,9 @@ export declare class RegistrySvcApi {
      * @param host Host to filter by
      * @param ip2 IP to filter by
      * @param id Id to filter by
+     * @param slug Slug to filter by
      */
-    listInstances(scheme?: string, ip?: string, deploymentId?: string, host?: string, ip2?: string, id?: string, options?: {
+    listInstances(scheme?: string, ip?: string, deploymentId?: string, host?: string, ip2?: string, id?: string, slug?: string, options?: {
         headers: {
             [name: string]: string;
         };

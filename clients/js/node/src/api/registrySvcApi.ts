@@ -310,8 +310,9 @@ export class RegistrySvcApi {
      * @param host Host to filter by
      * @param ip2 IP to filter by
      * @param id Id to filter by
+     * @param slug Slug to filter by
      */
-    public async listInstances (scheme?: string, ip?: string, deploymentId?: string, host?: string, ip2?: string, id?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: RegistrySvcListInstancesResponse;  }> {
+    public async listInstances (scheme?: string, ip?: string, deploymentId?: string, host?: string, ip2?: string, id?: string, slug?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: RegistrySvcListInstancesResponse;  }> {
         const localVarPath = this.basePath + '/registry-svc/instances';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -346,6 +347,10 @@ export class RegistrySvcApi {
 
         if (id !== undefined) {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "string");
+        }
+
+        if (slug !== undefined) {
+            localVarQueryParameters['slug'] = ObjectSerializer.serialize(slug, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
