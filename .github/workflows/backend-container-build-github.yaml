@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - ".github/workflows/backend-container-build-github.yaml"
-      - "server/**"
-      - "sdk/**"
-      - "clients/**"
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
