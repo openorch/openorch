@@ -14,8 +14,9 @@ import (
 )
 
 func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance any) (datastore.DataStore, error), error) {
-	dbDriver := os.Getenv("SINGULATRON_DB_DRIVER")
-	dbString := os.Getenv("SINGULATRON_DB_STRING")
+	db := os.Getenv("SUPERPLATFORM_DB")
+	dbDriver := os.Getenv("SUPERPLATFORM_DB_DRIVER")
+	dbString := os.Getenv("SUPERPLATFORM_DB_STRING")
 
 	if dbDriver == "" {
 		homeDir, _ := os.UserHomeDir()
