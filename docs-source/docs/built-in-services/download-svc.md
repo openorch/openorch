@@ -19,4 +19,4 @@ The download service keeps a network local copy of files frequently accessed by 
 
 ## Current Limitations
 
-- Serving files doesn't exist yet, services that depend on the Download Svc (such as the [Docker Svc](/docs/services/docker-svc)) only work when they run on the same node as the Download Svc. This obviously doesn't work in a distributed setting.
+- Serving files doesn't exist yet, services that depend on the Download Svc (such as the [Docker Svc](/docs/built-in-services/docker-svc)) only work when they run on the same node as the Download Svc. This obviously doesn't work in a distributed setting.
