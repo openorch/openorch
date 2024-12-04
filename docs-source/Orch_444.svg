@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 577.7 646.19">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 180px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #444;
+        font-family: ZenDots-Regular, 'Zen Dots';
+      }
+
+      .cls-3 {
+        letter-spacing: .02em;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        font-size: 291px;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #444;
+        stroke-miterlimit: 11.34;
+        stroke-width: 19.14px;
+      }
+    </style>
+  </defs>
+  <g id="layer1">
+    <circle id="path14" class="cls-5" cx="288.85" cy="357.34" r="279.28"/>
+  </g>
+  <text class="cls-2" transform="translate(60.49 439.03)"><tspan x="0" y="0">o</tspan></text>
+  <text class="cls-1" transform="translate(299.98 379.09) scale(.58)"><tspan class="cls-3" x="0" y="0">r</tspan><tspan class="cls-4" x="119.34" y="0">ch</tspan></text>
+</svg>

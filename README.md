@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150px" src="https://singulatron.com/assets/logo_circled_grey.svg?v=1" />
+  <img width="150px" src="./docs-source/Orch_444.svg" />
   <div align="center">
     <span>
       <h1>OpenOrch</h1>
