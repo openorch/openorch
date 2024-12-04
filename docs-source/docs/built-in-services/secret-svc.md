@@ -21,8 +21,8 @@ The Secret Svc, like most things in OpenOrch, is designed to be simple to reason
 type Secret struct {
 	Key            string   // Identifier for the secret
 	Value          string   // Secret value
-	Readers        []string // Slugs of services/users who can read the secret
-	Writers        []string // Slugs of services/users who can modify the secret
+	Readers        []string // Slugs of built-in-services/users who can read the secret
+	Writers        []string // Slugs of built-in-services/users who can modify the secret
 }
 ```
 

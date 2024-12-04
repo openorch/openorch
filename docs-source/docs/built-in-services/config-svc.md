@@ -14,4 +14,4 @@ The Config Svc stores public, non-sensitive and end-user-facing data.
 
 ## Related
 
-- [Secret Svc](/docs/services/secret-svc) to store sensitive data like internal configuration and secrets
+- [Secret Svc](/docs/built-in-services/secret-svc) to store sensitive data like internal configuration and secrets
