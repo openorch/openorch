@@ -30,7 +30,7 @@ OpenOrch is designed to make deploying third-party AI applications straightforwa
 
 ## Running
 
-To run OpenOrch on your servers, or even to lauch on your own laptop, see [Start](./category/running/).
+To run OpenOrch on your servers, or even to lauch on your own laptop, see [Start](./category/running-the-daemon/).
 
 ## Privacy Notice
 
