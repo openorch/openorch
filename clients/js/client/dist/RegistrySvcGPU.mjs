@@ -3,7 +3,7 @@ import { RegistrySvcProcessFromJSON, RegistrySvcProcessToJSON } from './Registry
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -42,7 +42,10 @@ function RegistrySvcGPUFromJSONTyped(json, ignoreDiscriminator) {
         'temperature': json['temperature'] == null ? undefined : json['temperature'],
     };
 }
-function RegistrySvcGPUToJSON(value) {
+function RegistrySvcGPUToJSON(json) {
+    return RegistrySvcGPUToJSONTyped(json, false);
+}
+function RegistrySvcGPUToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -63,4 +66,4 @@ function RegistrySvcGPUToJSON(value) {
     };
 }
 
-export { RegistrySvcGPUFromJSON, RegistrySvcGPUFromJSONTyped, RegistrySvcGPUToJSON, instanceOfRegistrySvcGPU };
+export { RegistrySvcGPUFromJSON, RegistrySvcGPUFromJSONTyped, RegistrySvcGPUToJSON, RegistrySvcGPUToJSONTyped, instanceOfRegistrySvcGPU };

@@ -17,7 +17,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	user "github.com/singulatron/superplatform/server/internal/services/user/types"
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // AddPermissionToRole handles the addition of a permission to a role

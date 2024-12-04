@@ -21,12 +21,12 @@ import (
 	"sync"
 	"time"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	types "github.com/singulatron/superplatform/server/internal/services/download/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
+	"github.com/openorch/openorch/sdk/go/logger"
+	types "github.com/openorch/openorch/server/internal/services/download/types"
 )
 
 type DownloadService struct {

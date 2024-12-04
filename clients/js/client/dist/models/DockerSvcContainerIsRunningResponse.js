@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ export function DockerSvcContainerIsRunningResponseFromJSONTyped(json, ignoreDis
         'isRunning': json['isRunning'],
     };
 }
-export function DockerSvcContainerIsRunningResponseToJSON(value) {
+export function DockerSvcContainerIsRunningResponseToJSON(json) {
+    return DockerSvcContainerIsRunningResponseToJSONTyped(json, false);
+}
+export function DockerSvcContainerIsRunningResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

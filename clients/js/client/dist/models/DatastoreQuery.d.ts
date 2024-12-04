@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -60,4 +60,5 @@ export interface DatastoreQuery {
 export declare function instanceOfDatastoreQuery(value: object): value is DatastoreQuery;
 export declare function DatastoreQueryFromJSON(json: any): DatastoreQuery;
 export declare function DatastoreQueryFromJSONTyped(json: any, ignoreDiscriminator: boolean): DatastoreQuery;
-export declare function DatastoreQueryToJSON(value?: DatastoreQuery | null): any;
+export declare function DatastoreQueryToJSON(json: any): DatastoreQuery;
+export declare function DatastoreQueryToJSONTyped(value?: DatastoreQuery | null, ignoreDiscriminator?: boolean): any;

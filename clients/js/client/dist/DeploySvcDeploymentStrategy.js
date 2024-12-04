@@ -5,7 +5,7 @@ var DeploySvcStrategyType = require('./DeploySvcStrategyType.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function DeploySvcDeploymentStrategyFromJSONTyped(json, ignoreDiscriminator) {
         'type': json['type'] == null ? undefined : DeploySvcStrategyType.DeploySvcStrategyTypeFromJSON(json['type']),
     };
 }
-function DeploySvcDeploymentStrategyToJSON(value) {
+function DeploySvcDeploymentStrategyToJSON(json) {
+    return DeploySvcDeploymentStrategyToJSONTyped(json, false);
+}
+function DeploySvcDeploymentStrategyToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -48,4 +51,5 @@ function DeploySvcDeploymentStrategyToJSON(value) {
 exports.DeploySvcDeploymentStrategyFromJSON = DeploySvcDeploymentStrategyFromJSON;
 exports.DeploySvcDeploymentStrategyFromJSONTyped = DeploySvcDeploymentStrategyFromJSONTyped;
 exports.DeploySvcDeploymentStrategyToJSON = DeploySvcDeploymentStrategyToJSON;
+exports.DeploySvcDeploymentStrategyToJSONTyped = DeploySvcDeploymentStrategyToJSONTyped;
 exports.instanceOfDeploySvcDeploymentStrategy = instanceOfDeploySvcDeploymentStrategy;

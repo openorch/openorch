@@ -1,6 +1,6 @@
 package sdk
 
-import openapi "github.com/singulatron/superplatform/clients/go"
+import openapi "github.com/openorch/openorch/clients/go"
 
 type ClientFactory interface {
 	Client(opts ...ClientOption) *openapi.APIClient

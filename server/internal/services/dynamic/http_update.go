@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	dynamic "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
 // Update modifies existing dynamic objects based on given conditions

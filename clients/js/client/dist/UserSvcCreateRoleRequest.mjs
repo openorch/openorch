@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function UserSvcCreateRoleRequestFromJSONTyped(json, ignoreDiscriminator) {
         'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
     };
 }
-function UserSvcCreateRoleRequestToJSON(value) {
+function UserSvcCreateRoleRequestToJSON(json) {
+    return UserSvcCreateRoleRequestToJSONTyped(json, false);
+}
+function UserSvcCreateRoleRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -41,4 +44,4 @@ function UserSvcCreateRoleRequestToJSON(value) {
     };
 }
 
-export { UserSvcCreateRoleRequestFromJSON, UserSvcCreateRoleRequestFromJSONTyped, UserSvcCreateRoleRequestToJSON, instanceOfUserSvcCreateRoleRequest };
+export { UserSvcCreateRoleRequestFromJSON, UserSvcCreateRoleRequestFromJSONTyped, UserSvcCreateRoleRequestToJSON, UserSvcCreateRoleRequestToJSONTyped, instanceOfUserSvcCreateRoleRequest };

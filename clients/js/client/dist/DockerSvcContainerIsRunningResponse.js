@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DockerSvcContainerIsRunningResponseFromJSONTyped(json, ignoreDiscrimina
         'isRunning': json['isRunning'],
     };
 }
-function DockerSvcContainerIsRunningResponseToJSON(value) {
+function DockerSvcContainerIsRunningResponseToJSON(json) {
+    return DockerSvcContainerIsRunningResponseToJSONTyped(json, false);
+}
+function DockerSvcContainerIsRunningResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DockerSvcContainerIsRunningResponseToJSON(value) {
 exports.DockerSvcContainerIsRunningResponseFromJSON = DockerSvcContainerIsRunningResponseFromJSON;
 exports.DockerSvcContainerIsRunningResponseFromJSONTyped = DockerSvcContainerIsRunningResponseFromJSONTyped;
 exports.DockerSvcContainerIsRunningResponseToJSON = DockerSvcContainerIsRunningResponseToJSON;
+exports.DockerSvcContainerIsRunningResponseToJSONTyped = DockerSvcContainerIsRunningResponseToJSONTyped;
 exports.instanceOfDockerSvcContainerIsRunningResponse = instanceOfDockerSvcContainerIsRunningResponse;

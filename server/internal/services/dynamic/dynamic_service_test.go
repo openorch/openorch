@@ -7,12 +7,12 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/test"
-	"github.com/singulatron/superplatform/server/internal/di"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/test"
+	"github.com/openorch/openorch/server/internal/di"
 	"github.com/stretchr/testify/require"
 
-	client "github.com/singulatron/superplatform/clients/go"
+	client "github.com/openorch/openorch/clients/go"
 )
 
 func TestCreate(t *testing.T) {

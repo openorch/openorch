@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     FirehoseSvcEventFromJSON,
     FirehoseSvcEventFromJSONTyped,
     FirehoseSvcEventToJSON,
+    FirehoseSvcEventToJSONTyped,
 } from './FirehoseSvcEvent';
 
 /**
@@ -55,10 +56,15 @@ export function FirehoseSvcEventPublishRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function FirehoseSvcEventPublishRequestToJSON(value?: FirehoseSvcEventPublishRequest | null): any {
+  export function FirehoseSvcEventPublishRequestToJSON(json: any): FirehoseSvcEventPublishRequest {
+      return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
+  }
+
+  export function FirehoseSvcEventPublishRequestToJSONTyped(value?: FirehoseSvcEventPublishRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'event': FirehoseSvcEventToJSON(value['event']),

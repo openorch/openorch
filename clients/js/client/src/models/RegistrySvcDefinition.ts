@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,24 +18,28 @@ import {
     RegistrySvcAPISpecFromJSON,
     RegistrySvcAPISpecFromJSONTyped,
     RegistrySvcAPISpecToJSON,
+    RegistrySvcAPISpecToJSONTyped,
 } from './RegistrySvcAPISpec';
 import type { RegistrySvcImageSpec } from './RegistrySvcImageSpec';
 import {
     RegistrySvcImageSpecFromJSON,
     RegistrySvcImageSpecFromJSONTyped,
     RegistrySvcImageSpecToJSON,
+    RegistrySvcImageSpecToJSONTyped,
 } from './RegistrySvcImageSpec';
 import type { RegistrySvcRepositorySpec } from './RegistrySvcRepositorySpec';
 import {
     RegistrySvcRepositorySpecFromJSON,
     RegistrySvcRepositorySpecFromJSONTyped,
     RegistrySvcRepositorySpecToJSON,
+    RegistrySvcRepositorySpecToJSONTyped,
 } from './RegistrySvcRepositorySpec';
 import type { RegistrySvcClient } from './RegistrySvcClient';
 import {
     RegistrySvcClientFromJSON,
     RegistrySvcClientFromJSONTyped,
     RegistrySvcClientToJSON,
+    RegistrySvcClientToJSONTyped,
 } from './RegistrySvcClient';
 
 /**
@@ -123,10 +127,15 @@ export function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function RegistrySvcDefinitionToJSON(value?: RegistrySvcDefinition | null): any {
+  export function RegistrySvcDefinitionToJSON(json: any): RegistrySvcDefinition {
+      return RegistrySvcDefinitionToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcDefinitionToJSONTyped(value?: RegistrySvcDefinition | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'apiSpecs': value['apiSpecs'] == null ? undefined : ((value['apiSpecs'] as Array<any>).map(RegistrySvcAPISpecToJSON)),

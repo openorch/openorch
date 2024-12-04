@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -22,3 +22,4 @@ export declare function instanceOfPolicySvcEntity(value: any): boolean;
 export declare function PolicySvcEntityFromJSON(json: any): PolicySvcEntity;
 export declare function PolicySvcEntityFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcEntity;
 export declare function PolicySvcEntityToJSON(value?: PolicySvcEntity | null): any;
+export declare function PolicySvcEntityToJSONTyped(value: any, ignoreDiscriminator: boolean): PolicySvcEntity;

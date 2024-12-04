@@ -15,8 +15,8 @@ package prompt_svc
 import (
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/datastore"
 )
 
 type ErrorResponse struct {
@@ -92,7 +92,7 @@ type PromptCreateFields struct {
 	// Template of the prompt. Optional. If not present it's derived from ModelId.
 	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
 
-	// ModelId is just the Superplatform internal ID of the model.
+	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId string `json:"modelId,omitempty" example:"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"`
 
 	// MaxRetries specified how many times the system should retry a prompt when it keeps erroring.

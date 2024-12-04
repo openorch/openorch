@@ -8,7 +8,7 @@ require('./DatastoreOrderBy.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function PromptSvcListPromptsRequestFromJSONTyped(json, ignoreDiscriminator) {
         'query': json['query'] == null ? undefined : DatastoreQuery.DatastoreQueryFromJSON(json['query']),
     };
 }
-function PromptSvcListPromptsRequestToJSON(value) {
+function PromptSvcListPromptsRequestToJSON(json) {
+    return PromptSvcListPromptsRequestToJSONTyped(json, false);
+}
+function PromptSvcListPromptsRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -47,4 +50,5 @@ function PromptSvcListPromptsRequestToJSON(value) {
 exports.PromptSvcListPromptsRequestFromJSON = PromptSvcListPromptsRequestFromJSON;
 exports.PromptSvcListPromptsRequestFromJSONTyped = PromptSvcListPromptsRequestFromJSONTyped;
 exports.PromptSvcListPromptsRequestToJSON = PromptSvcListPromptsRequestToJSON;
+exports.PromptSvcListPromptsRequestToJSONTyped = PromptSvcListPromptsRequestToJSONTyped;
 exports.instanceOfPromptSvcListPromptsRequest = instanceOfPromptSvcListPromptsRequest;

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,7 +29,10 @@ export function DockerSvcRunInfoFromJSONTyped(json, ignoreDiscriminator) {
         'portNumber': json['portNumber'] == null ? undefined : json['portNumber'],
     };
 }
-export function DockerSvcRunInfoToJSON(value) {
+export function DockerSvcRunInfoToJSON(json) {
+    return DockerSvcRunInfoToJSONTyped(json, false);
+}
+export function DockerSvcRunInfoToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

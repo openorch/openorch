@@ -5,7 +5,7 @@ var SecretSvcSecret = require('./SecretSvcSecret.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function SecretSvcReadSecretResponseFromJSONTyped(json, ignoreDiscriminator) {
         'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecret.SecretSvcSecretFromJSON)),
     };
 }
-function SecretSvcReadSecretResponseToJSON(value) {
+function SecretSvcReadSecretResponseToJSON(json) {
+    return SecretSvcReadSecretResponseToJSONTyped(json, false);
+}
+function SecretSvcReadSecretResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function SecretSvcReadSecretResponseToJSON(value) {
 exports.SecretSvcReadSecretResponseFromJSON = SecretSvcReadSecretResponseFromJSON;
 exports.SecretSvcReadSecretResponseFromJSONTyped = SecretSvcReadSecretResponseFromJSONTyped;
 exports.SecretSvcReadSecretResponseToJSON = SecretSvcReadSecretResponseToJSON;
+exports.SecretSvcReadSecretResponseToJSONTyped = SecretSvcReadSecretResponseToJSONTyped;
 exports.instanceOfSecretSvcReadSecretResponse = instanceOfSecretSvcReadSecretResponse;

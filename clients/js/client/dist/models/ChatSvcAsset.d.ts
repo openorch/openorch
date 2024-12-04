@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -64,4 +64,5 @@ export interface ChatSvcAsset {
 export declare function instanceOfChatSvcAsset(value: object): value is ChatSvcAsset;
 export declare function ChatSvcAssetFromJSON(json: any): ChatSvcAsset;
 export declare function ChatSvcAssetFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChatSvcAsset;
-export declare function ChatSvcAssetToJSON(value?: ChatSvcAsset | null): any;
+export declare function ChatSvcAssetToJSON(json: any): ChatSvcAsset;
+export declare function ChatSvcAssetToJSONTyped(value?: ChatSvcAsset | null, ignoreDiscriminator?: boolean): any;

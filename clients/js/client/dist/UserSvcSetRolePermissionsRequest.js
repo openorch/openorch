@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function UserSvcSetRolePermissionsRequestFromJSONTyped(json, ignoreDiscriminator
         'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
     };
 }
-function UserSvcSetRolePermissionsRequestToJSON(value) {
+function UserSvcSetRolePermissionsRequestToJSON(json) {
+    return UserSvcSetRolePermissionsRequestToJSONTyped(json, false);
+}
+function UserSvcSetRolePermissionsRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,5 @@ function UserSvcSetRolePermissionsRequestToJSON(value) {
 exports.UserSvcSetRolePermissionsRequestFromJSON = UserSvcSetRolePermissionsRequestFromJSON;
 exports.UserSvcSetRolePermissionsRequestFromJSONTyped = UserSvcSetRolePermissionsRequestFromJSONTyped;
 exports.UserSvcSetRolePermissionsRequestToJSON = UserSvcSetRolePermissionsRequestToJSON;
+exports.UserSvcSetRolePermissionsRequestToJSONTyped = UserSvcSetRolePermissionsRequestToJSONTyped;
 exports.instanceOfUserSvcSetRolePermissionsRequest = instanceOfUserSvcSetRolePermissionsRequest;

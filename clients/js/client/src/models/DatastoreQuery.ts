@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,12 +18,14 @@ import {
     DatastoreFilterFromJSON,
     DatastoreFilterFromJSONTyped,
     DatastoreFilterToJSON,
+    DatastoreFilterToJSONTyped,
 } from './DatastoreFilter';
 import type { DatastoreOrderBy } from './DatastoreOrderBy';
 import {
     DatastoreOrderByFromJSON,
     DatastoreOrderByFromJSONTyped,
     DatastoreOrderByToJSON,
+    DatastoreOrderByToJSONTyped,
 } from './DatastoreOrderBy';
 
 /**
@@ -95,10 +97,15 @@ export function DatastoreQueryFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function DatastoreQueryToJSON(value?: DatastoreQuery | null): any {
+  export function DatastoreQueryToJSON(json: any): DatastoreQuery {
+      return DatastoreQueryToJSONTyped(json, false);
+  }
+
+  export function DatastoreQueryToJSONTyped(value?: DatastoreQuery | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'count': value['count'],

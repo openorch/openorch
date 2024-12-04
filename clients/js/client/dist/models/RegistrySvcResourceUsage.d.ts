@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -41,4 +41,5 @@ export interface RegistrySvcResourceUsage {
 export declare function instanceOfRegistrySvcResourceUsage(value: object): value is RegistrySvcResourceUsage;
 export declare function RegistrySvcResourceUsageFromJSON(json: any): RegistrySvcResourceUsage;
 export declare function RegistrySvcResourceUsageFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcResourceUsage;
-export declare function RegistrySvcResourceUsageToJSON(value?: RegistrySvcResourceUsage | null): any;
+export declare function RegistrySvcResourceUsageToJSON(json: any): RegistrySvcResourceUsage;
+export declare function RegistrySvcResourceUsageToJSONTyped(value?: RegistrySvcResourceUsage | null, ignoreDiscriminator?: boolean): any;

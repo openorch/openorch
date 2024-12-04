@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface FirehoseSvcEvent {
 export declare function instanceOfFirehoseSvcEvent(value: object): value is FirehoseSvcEvent;
 export declare function FirehoseSvcEventFromJSON(json: any): FirehoseSvcEvent;
 export declare function FirehoseSvcEventFromJSONTyped(json: any, ignoreDiscriminator: boolean): FirehoseSvcEvent;
-export declare function FirehoseSvcEventToJSON(value?: FirehoseSvcEvent | null): any;
+export declare function FirehoseSvcEventToJSON(json: any): FirehoseSvcEvent;
+export declare function FirehoseSvcEventToJSONTyped(value?: FirehoseSvcEvent | null, ignoreDiscriminator?: boolean): any;

@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface DynamicSvcErrorResponse {
 export declare function instanceOfDynamicSvcErrorResponse(value: object): value is DynamicSvcErrorResponse;
 export declare function DynamicSvcErrorResponseFromJSON(json: any): DynamicSvcErrorResponse;
 export declare function DynamicSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcErrorResponse;
-export declare function DynamicSvcErrorResponseToJSON(value?: DynamicSvcErrorResponse | null): any;
+export declare function DynamicSvcErrorResponseToJSON(json: any): DynamicSvcErrorResponse;
+export declare function DynamicSvcErrorResponseToJSONTyped(value?: DynamicSvcErrorResponse | null, ignoreDiscriminator?: boolean): any;

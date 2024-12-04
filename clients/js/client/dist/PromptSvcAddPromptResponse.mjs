@@ -4,7 +4,7 @@ import './PromptSvcPromptStatus.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function PromptSvcAddPromptResponseFromJSONTyped(json, ignoreDiscriminator) {
         'prompt': json['prompt'] == null ? undefined : PromptSvcPromptFromJSON(json['prompt']),
     };
 }
-function PromptSvcAddPromptResponseToJSON(value) {
+function PromptSvcAddPromptResponseToJSON(json) {
+    return PromptSvcAddPromptResponseToJSONTyped(json, false);
+}
+function PromptSvcAddPromptResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,4 @@ function PromptSvcAddPromptResponseToJSON(value) {
     };
 }
 
-export { PromptSvcAddPromptResponseFromJSON, PromptSvcAddPromptResponseFromJSONTyped, PromptSvcAddPromptResponseToJSON, instanceOfPromptSvcAddPromptResponse };
+export { PromptSvcAddPromptResponseFromJSON, PromptSvcAddPromptResponseFromJSONTyped, PromptSvcAddPromptResponseToJSON, PromptSvcAddPromptResponseToJSONTyped, instanceOfPromptSvcAddPromptResponse };

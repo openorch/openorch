@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,7 +29,10 @@ export function SecretSvcReadSecretResponseFromJSONTyped(json, ignoreDiscriminat
         'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecretFromJSON)),
     };
 }
-export function SecretSvcReadSecretResponseToJSON(value) {
+export function SecretSvcReadSecretResponseToJSON(json) {
+    return SecretSvcReadSecretResponseToJSONTyped(json, false);
+}
+export function SecretSvcReadSecretResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

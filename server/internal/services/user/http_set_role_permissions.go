@@ -17,7 +17,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	user "github.com/singulatron/superplatform/server/internal/services/user/types"
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // SetRolePermissions sets the permissions for a specified role

@@ -3,7 +3,7 @@ import { FirehoseSvcEventFromJSON, FirehoseSvcEventToJSON } from './FirehoseSvcE
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function FirehoseSvcEventPublishRequestFromJSONTyped(json, ignoreDiscriminator) 
         'event': json['event'] == null ? undefined : FirehoseSvcEventFromJSON(json['event']),
     };
 }
-function FirehoseSvcEventPublishRequestToJSON(value) {
+function FirehoseSvcEventPublishRequestToJSON(json) {
+    return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
+}
+function FirehoseSvcEventPublishRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function FirehoseSvcEventPublishRequestToJSON(value) {
     };
 }
 
-export { FirehoseSvcEventPublishRequestFromJSON, FirehoseSvcEventPublishRequestFromJSONTyped, FirehoseSvcEventPublishRequestToJSON, instanceOfFirehoseSvcEventPublishRequest };
+export { FirehoseSvcEventPublishRequestFromJSON, FirehoseSvcEventPublishRequestFromJSONTyped, FirehoseSvcEventPublishRequestToJSON, FirehoseSvcEventPublishRequestToJSONTyped, instanceOfFirehoseSvcEventPublishRequest };

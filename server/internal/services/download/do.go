@@ -22,9 +22,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/openorch/openorch/sdk/go/logger"
+	types "github.com/openorch/openorch/server/internal/services/download/types"
 	"github.com/pkg/errors"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	types "github.com/singulatron/superplatform/server/internal/services/download/types"
 )
 
 /*

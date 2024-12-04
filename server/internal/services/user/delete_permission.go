@@ -13,7 +13,7 @@
 package userservice
 
 import (
-	"github.com/singulatron/superplatform/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore"
 )
 
 func (s *UserService) deletePermission(permissionId string) error {

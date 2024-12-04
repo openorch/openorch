@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,5 +36,8 @@ export function PolicySvcScopeFromJSONTyped(json, ignoreDiscriminator) {
     return json;
 }
 export function PolicySvcScopeToJSON(value) {
+    return value;
+}
+export function PolicySvcScopeToJSONTyped(value, ignoreDiscriminator) {
     return value;
 }

@@ -17,8 +17,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	chat "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 // GetThread retrieves details of a specific chat thread

@@ -21,15 +21,15 @@ import (
 	"runtime/debug"
 
 	"github.com/gorilla/mux"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore/sqlstore"
+	pglock "github.com/openorch/openorch/sdk/go/lock/pg"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/openorch/openorch/server/internal/di"
+	node_types "github.com/openorch/openorch/server/internal/node/types"
 	"github.com/pkg/errors"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/datastore/sqlstore"
-	pglock "github.com/singulatron/superplatform/sdk/go/lock/pg"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/server/internal/di"
-	node_types "github.com/singulatron/superplatform/server/internal/node/types"
 
-	_ "github.com/singulatron/superplatform/server/docs"
+	_ "github.com/openorch/openorch/server/docs"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
@@ -54,34 +54,34 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 	}()
 
 	if options.GpuPlatform == "" {
-		options.GpuPlatform = os.Getenv("SUPERPLATFORM_GPU_PLATFORM")
+		options.GpuPlatform = os.Getenv("OPENORCH_GPU_PLATFORM")
 	}
 	if options.Address == "" {
-		options.Address = os.Getenv("SUPERPLATFORM_ADDRESS")
+		options.Address = os.Getenv("OPENORCH_ADDRESS")
 	}
 	if options.Az == "" {
-		options.Az = os.Getenv("SUPERPLATFORM_AZ")
+		options.Az = os.Getenv("OPENORCH_AZ")
 	}
 	if options.Region == "" {
-		options.Region = os.Getenv("SUPERPLATFORM_AZ")
+		options.Region = os.Getenv("OPENORCH_AZ")
 	}
 	if options.LLMHost == "" {
-		options.LLMHost = os.Getenv("SUPERPLATFORM_LLM_HOST")
+		options.LLMHost = os.Getenv("OPENORCH_LLM_HOST")
 	}
 	if options.VolumeName == "" {
-		options.VolumeName = os.Getenv("SUPERPLATFORM_VOLUME_NAME")
+		options.VolumeName = os.Getenv("OPENORCH_VOLUME_NAME")
 	}
 	if options.ConfigPath == "" {
-		options.ConfigPath = os.Getenv("SUPERPLATFORM_CONFIG_PATH")
+		options.ConfigPath = os.Getenv("OPENORCH_CONFIG_PATH")
 	}
 	if options.Db == "" {
-		options.Db = os.Getenv("SUPERPLATFORM_DB")
+		options.Db = os.Getenv("OPENORCH_DB")
 	}
 	if options.DbDriver == "" {
-		options.DbDriver = os.Getenv("SUPERPLATFORM_DB_DRIVER")
+		options.DbDriver = os.Getenv("OPENORCH_DB_DRIVER")
 	}
 	if options.DbString == "" {
-		options.DbString = os.Getenv("SUPERPLATFORM_DB_STRING")
+		options.DbString = os.Getenv("OPENORCH_DB_STRING")
 	}
 
 	diopt := &di.Options{

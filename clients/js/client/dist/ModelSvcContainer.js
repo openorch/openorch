@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,10 @@ function ModelSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
         'port': json['port'] == null ? undefined : json['port'],
     };
 }
-function ModelSvcContainerToJSON(value) {
+function ModelSvcContainerToJSON(json) {
+    return ModelSvcContainerToJSONTyped(json, false);
+}
+function ModelSvcContainerToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -48,4 +51,5 @@ function ModelSvcContainerToJSON(value) {
 exports.ModelSvcContainerFromJSON = ModelSvcContainerFromJSON;
 exports.ModelSvcContainerFromJSONTyped = ModelSvcContainerFromJSONTyped;
 exports.ModelSvcContainerToJSON = ModelSvcContainerToJSON;
+exports.ModelSvcContainerToJSONTyped = ModelSvcContainerToJSONTyped;
 exports.instanceOfModelSvcContainer = instanceOfModelSvcContainer;

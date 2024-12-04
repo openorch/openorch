@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     DeploySvcDeploymentFromJSON,
     DeploySvcDeploymentFromJSONTyped,
     DeploySvcDeploymentToJSON,
+    DeploySvcDeploymentToJSONTyped,
 } from './DeploySvcDeployment';
 
 /**
@@ -55,10 +56,15 @@ export function DeploySvcSaveDeploymentRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function DeploySvcSaveDeploymentRequestToJSON(value?: DeploySvcSaveDeploymentRequest | null): any {
+  export function DeploySvcSaveDeploymentRequestToJSON(json: any): DeploySvcSaveDeploymentRequest {
+      return DeploySvcSaveDeploymentRequestToJSONTyped(json, false);
+  }
+
+  export function DeploySvcSaveDeploymentRequestToJSONTyped(value?: DeploySvcSaveDeploymentRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'deployment': DeploySvcDeploymentToJSON(value['deployment']),

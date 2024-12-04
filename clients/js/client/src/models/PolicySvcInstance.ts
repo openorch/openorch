@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,18 +18,21 @@ import {
     PolicySvcRateLimitParametersFromJSON,
     PolicySvcRateLimitParametersFromJSONTyped,
     PolicySvcRateLimitParametersToJSON,
+    PolicySvcRateLimitParametersToJSONTyped,
 } from './PolicySvcRateLimitParameters';
 import type { PolicySvcTemplateId } from './PolicySvcTemplateId';
 import {
     PolicySvcTemplateIdFromJSON,
     PolicySvcTemplateIdFromJSONTyped,
     PolicySvcTemplateIdToJSON,
+    PolicySvcTemplateIdToJSONTyped,
 } from './PolicySvcTemplateId';
 import type { PolicySvcBlocklistParameters } from './PolicySvcBlocklistParameters';
 import {
     PolicySvcBlocklistParametersFromJSON,
     PolicySvcBlocklistParametersFromJSONTyped,
     PolicySvcBlocklistParametersToJSON,
+    PolicySvcBlocklistParametersToJSONTyped,
 } from './PolicySvcBlocklistParameters';
 
 /**
@@ -98,10 +101,15 @@ export function PolicySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function PolicySvcInstanceToJSON(value?: PolicySvcInstance | null): any {
+  export function PolicySvcInstanceToJSON(json: any): PolicySvcInstance {
+      return PolicySvcInstanceToJSONTyped(json, false);
+  }
+
+  export function PolicySvcInstanceToJSONTyped(value?: PolicySvcInstance | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'blocklistParameters': PolicySvcBlocklistParametersToJSON(value['blocklistParameters']),

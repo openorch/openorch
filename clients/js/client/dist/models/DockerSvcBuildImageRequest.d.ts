@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,4 +40,5 @@ export interface DockerSvcBuildImageRequest {
 export declare function instanceOfDockerSvcBuildImageRequest(value: object): value is DockerSvcBuildImageRequest;
 export declare function DockerSvcBuildImageRequestFromJSON(json: any): DockerSvcBuildImageRequest;
 export declare function DockerSvcBuildImageRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): DockerSvcBuildImageRequest;
-export declare function DockerSvcBuildImageRequestToJSON(value?: DockerSvcBuildImageRequest | null): any;
+export declare function DockerSvcBuildImageRequestToJSON(json: any): DockerSvcBuildImageRequest;
+export declare function DockerSvcBuildImageRequestToJSONTyped(value?: DockerSvcBuildImageRequest | null, ignoreDiscriminator?: boolean): any;

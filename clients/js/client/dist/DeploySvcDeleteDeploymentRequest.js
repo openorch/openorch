@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DeploySvcDeleteDeploymentRequestFromJSONTyped(json, ignoreDiscriminator
         'deploymentId': json['deploymentId'],
     };
 }
-function DeploySvcDeleteDeploymentRequestToJSON(value) {
+function DeploySvcDeleteDeploymentRequestToJSON(json) {
+    return DeploySvcDeleteDeploymentRequestToJSONTyped(json, false);
+}
+function DeploySvcDeleteDeploymentRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DeploySvcDeleteDeploymentRequestToJSON(value) {
 exports.DeploySvcDeleteDeploymentRequestFromJSON = DeploySvcDeleteDeploymentRequestFromJSON;
 exports.DeploySvcDeleteDeploymentRequestFromJSONTyped = DeploySvcDeleteDeploymentRequestFromJSONTyped;
 exports.DeploySvcDeleteDeploymentRequestToJSON = DeploySvcDeleteDeploymentRequestToJSON;
+exports.DeploySvcDeleteDeploymentRequestToJSONTyped = DeploySvcDeleteDeploymentRequestToJSONTyped;
 exports.instanceOfDeploySvcDeleteDeploymentRequest = instanceOfDeploySvcDeleteDeploymentRequest;

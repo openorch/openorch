@@ -9,7 +9,7 @@
 package secret_svc
 
 import (
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 var PermissionSecretRead = usertypes.Permission{

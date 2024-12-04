@@ -5,7 +5,7 @@ var DockerSvcDockerInfo = require('./DockerSvcDockerInfo.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DockerSvcGetInfoResponseFromJSONTyped(json, ignoreDiscriminator) {
         'info': json['info'] == null ? undefined : DockerSvcDockerInfo.DockerSvcDockerInfoFromJSON(json['info']),
     };
 }
-function DockerSvcGetInfoResponseToJSON(value) {
+function DockerSvcGetInfoResponseToJSON(json) {
+    return DockerSvcGetInfoResponseToJSONTyped(json, false);
+}
+function DockerSvcGetInfoResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DockerSvcGetInfoResponseToJSON(value) {
 exports.DockerSvcGetInfoResponseFromJSON = DockerSvcGetInfoResponseFromJSON;
 exports.DockerSvcGetInfoResponseFromJSONTyped = DockerSvcGetInfoResponseFromJSONTyped;
 exports.DockerSvcGetInfoResponseToJSON = DockerSvcGetInfoResponseToJSON;
+exports.DockerSvcGetInfoResponseToJSONTyped = DockerSvcGetInfoResponseToJSONTyped;
 exports.instanceOfDockerSvcGetInfoResponse = instanceOfDockerSvcGetInfoResponse;

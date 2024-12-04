@@ -5,7 +5,7 @@ import './UserSvcContact.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function UserSvcReadUserByTokenResponseFromJSONTyped(json, ignoreDiscriminator) 
         'user': json['user'] == null ? undefined : UserSvcUserFromJSON(json['user']),
     };
 }
-function UserSvcReadUserByTokenResponseToJSON(value) {
+function UserSvcReadUserByTokenResponseToJSON(json) {
+    return UserSvcReadUserByTokenResponseToJSONTyped(json, false);
+}
+function UserSvcReadUserByTokenResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -45,4 +48,4 @@ function UserSvcReadUserByTokenResponseToJSON(value) {
     };
 }
 
-export { UserSvcReadUserByTokenResponseFromJSON, UserSvcReadUserByTokenResponseFromJSONTyped, UserSvcReadUserByTokenResponseToJSON, instanceOfUserSvcReadUserByTokenResponse };
+export { UserSvcReadUserByTokenResponseFromJSON, UserSvcReadUserByTokenResponseFromJSONTyped, UserSvcReadUserByTokenResponseToJSON, UserSvcReadUserByTokenResponseToJSONTyped, instanceOfUserSvcReadUserByTokenResponse };

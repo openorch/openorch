@@ -13,10 +13,10 @@ const fs = require('fs');
 
 const child_process = require('child_process');
 
-class SuperplatformAfterEmitPlugin {
+class OpenOrchAfterEmitPlugin {
 	apply(compiler) {
 		compiler.hooks.afterEmit.tapPromise(
-			'SuperplatformAfterEmitPlugin',
+			'OpenOrchAfterEmitPlugin',
 			async (compilation) => {
 				const outputPath = compilation.outputOptions.path;
 
@@ -109,6 +109,6 @@ module.exports = {
 				},
 			],
 		}),
-		new SuperplatformAfterEmitPlugin(),
+		new OpenOrchAfterEmitPlugin(),
 	],
 };

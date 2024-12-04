@@ -96,7 +96,7 @@ export class OSManager {
 			sudo.exec(
 				command,
 				{
-					name: 'Superplatform Environment Setup',
+					name: 'OpenOrch Environment Setup',
 					icns: getIconPath(this.assetFolder),
 				},
 				(error, stdout, stderr) => {

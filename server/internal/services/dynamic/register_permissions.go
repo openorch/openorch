@@ -11,10 +11,10 @@ package dynamicservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	dynamictypes "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	dynamictypes "github.com/openorch/openorch/server/internal/services/dynamic/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (p *DynamicService) registerPermissions() error {

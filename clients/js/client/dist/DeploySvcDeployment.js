@@ -10,7 +10,7 @@ require('./DeploySvcStrategyType.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -52,7 +52,10 @@ function DeploySvcDeploymentFromJSONTyped(json, ignoreDiscriminator) {
         'targetRegions': json['targetRegions'] == null ? undefined : (json['targetRegions'].map(DeploySvcTargetRegion.DeploySvcTargetRegionFromJSON)),
     };
 }
-function DeploySvcDeploymentToJSON(value) {
+function DeploySvcDeploymentToJSON(json) {
+    return DeploySvcDeploymentToJSONTyped(json, false);
+}
+function DeploySvcDeploymentToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -75,4 +78,5 @@ function DeploySvcDeploymentToJSON(value) {
 exports.DeploySvcDeploymentFromJSON = DeploySvcDeploymentFromJSON;
 exports.DeploySvcDeploymentFromJSONTyped = DeploySvcDeploymentFromJSONTyped;
 exports.DeploySvcDeploymentToJSON = DeploySvcDeploymentToJSON;
+exports.DeploySvcDeploymentToJSONTyped = DeploySvcDeploymentToJSONTyped;
 exports.instanceOfDeploySvcDeployment = instanceOfDeploySvcDeployment;

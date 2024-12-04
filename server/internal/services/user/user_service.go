@@ -17,11 +17,11 @@ import (
 	"fmt"
 	"time"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 type UserService struct {

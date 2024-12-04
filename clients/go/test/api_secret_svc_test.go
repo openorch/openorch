@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 Testing SecretSvcAPIService
 
@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/openorch/openorch/clients/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/singulatron/superplatform/clients/go"
 )
 
 func Test_openapi_SecretSvcAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_SecretSvcAPIService(t *testing.T) {
 
 	t.Run("Test SecretSvcAPIService ReadSecret", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SecretSvcAPI.ReadSecret(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_SecretSvcAPIService(t *testing.T) {
 
 	t.Run("Test SecretSvcAPIService WriteSecret", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SecretSvcAPI.WriteSecret(context.Background()).Execute()
 

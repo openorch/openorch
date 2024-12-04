@@ -7,9 +7,9 @@ import type * as Plugin from "@docusaurus/types/src/plugin";
 import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 const config: Config = {
-  title: "Superplatform",
+  title: "OpenOrch",
   tagline: "On-premise AI platform and microservices ecosystem.",
-  url: "https://superplatform.ai",
+  url: "https://openorch.org",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -18,7 +18,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "singulatron", // Usually your GitHub org/user name.
-  projectName: "superplatform", // Usually your repo name.
+  projectName: "openorch", // Usually your repo name.
 
   presets: [
     [
@@ -29,7 +29,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/singulatron/superplatform/tree/main/docs-source/",
+            "https://github.com/openorch/openorch/tree/main/docs-source/",
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
@@ -37,7 +37,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/singulatron/superplatform/tree/main/docs-source/",
+            "https://github.com/openorch/openorch/tree/main/docs-source/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -60,18 +60,18 @@ const config: Config = {
       },
       {
         name: "title",
-        content: "Superplatform Documentation",
+        content: "OpenOrch Documentation",
       },
       {
         name: "description",
-        content: "Superplatform API, Tutorials, Snippets and more",
+        content: "OpenOrch API, Tutorials, Snippets and more",
       },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     navbar: {
-      title: "Superplatform",
+      title: "OpenOrch",
       logo: {
-        alt: "Superplatform Logo",
+        alt: "OpenOrch Logo",
         src: "img/logo_circled_grey.svg",
       },
       items: [
@@ -89,10 +89,10 @@ const config: Config = {
         {
           label: "API",
           position: "left",
-          to: "/docs/category/superplatform-api",
+          to: "/docs/category/openorch-api",
         },
         {
-          href: "https://github.com/singulatron/superplatform",
+          href: "https://github.com/openorch/openorch",
           label: "GitHub",
           position: "right",
         },
@@ -105,8 +105,8 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "superplatform.ai",
-              href: "https://superplatform.ai",
+              label: "openorch.org",
+              href: "https://openorch.org",
             },
             {
               label: "singulatron.com",
@@ -132,12 +132,12 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/singulatron/superplatform",
+              href: "https://github.com/openorch/openorch",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Superplatform, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} OpenOrch, Inc. Built with Docusaurus.`,
     },
     prism: {
       prism: {
@@ -210,11 +210,11 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          superplatform: {
-            specPath: "examples/superplatform.yaml",
-            outputDir: "docs/superplatform",
+          openorch: {
+            specPath: "examples/openorch.yaml",
+            outputDir: "docs/openorch",
             downloadUrl:
-              "https://raw.githubusercontent.com/singulatron/superplatform/main/server/docs/swagger.yaml",
+              "https://raw.githubusercontent.com/openorch/openorch/main/server/docs/swagger.yaml",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",

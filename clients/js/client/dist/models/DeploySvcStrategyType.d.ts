@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -22,3 +22,4 @@ export declare function instanceOfDeploySvcStrategyType(value: any): boolean;
 export declare function DeploySvcStrategyTypeFromJSON(json: any): DeploySvcStrategyType;
 export declare function DeploySvcStrategyTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeploySvcStrategyType;
 export declare function DeploySvcStrategyTypeToJSON(value?: DeploySvcStrategyType | null): any;
+export declare function DeploySvcStrategyTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): DeploySvcStrategyType;

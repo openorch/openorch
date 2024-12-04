@@ -1,5 +1,5 @@
 {
-  "name": "@superplatform/node",
+  "name": "@openorch/node",
   "version": "0.3.0-rc.7",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -19,11 +19,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/singulatron/superplatform.git"
+    "url": "https://github.com/openorch/openorch.git"
   },
   "author": "Janos Dobronszki",
   "license": "AGPL-3.0-only",
-  "description": "JS/TS client for Superplatform. Works both from the browser and from Node.js",
+  "description": "JS/TS client for OpenOrch. Works both from the browser and from Node.js",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",

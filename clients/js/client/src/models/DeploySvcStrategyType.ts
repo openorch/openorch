@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -45,5 +45,9 @@ export function DeploySvcStrategyTypeFromJSONTyped(json: any, ignoreDiscriminato
 
 export function DeploySvcStrategyTypeToJSON(value?: DeploySvcStrategyType | null): any {
     return value as any;
+}
+
+export function DeploySvcStrategyTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): DeploySvcStrategyType {
+    return value as DeploySvcStrategyType;
 }
 

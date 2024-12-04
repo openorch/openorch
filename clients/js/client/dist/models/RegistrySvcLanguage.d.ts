@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -39,3 +39,4 @@ export declare function instanceOfRegistrySvcLanguage(value: any): boolean;
 export declare function RegistrySvcLanguageFromJSON(json: any): RegistrySvcLanguage;
 export declare function RegistrySvcLanguageFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcLanguage;
 export declare function RegistrySvcLanguageToJSON(value?: RegistrySvcLanguage | null): any;
+export declare function RegistrySvcLanguageToJSONTyped(value: any, ignoreDiscriminator: boolean): RegistrySvcLanguage;

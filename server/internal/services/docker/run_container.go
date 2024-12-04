@@ -28,10 +28,10 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/pkg/errors"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
+	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
 )
 
 /*
@@ -128,7 +128,7 @@ func (d *DockerService) runContainer(
 
 	if existingContainer != nil {
 		if existingContainer.State != "running" ||
-			existingContainer.Labels["superplatform-hash"] != options.Hash {
+			existingContainer.Labels["openorch-hash"] != options.Hash {
 			logs, err := d.getContainerLogsAndStatus(options.Hash, 10)
 			if err != nil {
 				logger.Warn(
@@ -153,7 +153,7 @@ func (d *DockerService) runContainer(
 		}
 	}
 
-	containerConfig.Labels["superplatform-hash"] = options.Hash
+	containerConfig.Labels["openorch-hash"] = options.Hash
 
 	createdContainer, err := d.client.ContainerCreate(
 		ctx,
@@ -215,21 +215,21 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	for envName, assetPath := range envarNameToFilePath {
 		fileName := path.Base(assetPath)
-		// eg. MODEL=/root/.superplatform/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
+		// eg. MODEL=/root/.openorch/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
 		envs = append(
 			envs,
 			fmt.Sprintf(
-				"%v=/root/.superplatform/downloads/%v",
+				"%v=/root/.openorch/downloads/%v",
 				envName,
 				fileName,
 			),
 		)
 	}
 
-	// If the Superplatform daemon is running in Docker, we need to find the volume it mounted so we can share
-	// the downloaded files with containers the Superplatform daemon starts.
-	// If the Superplatform daemon is running directly on the host, we will just mount the ~/.superplatform folder in
-	// the containers the Superplatform daemon starts.
+	// If the OpenOrch daemon is running in Docker, we need to find the volume it mounted so we can share
+	// the downloaded files with containers the OpenOrch daemon starts.
+	// If the OpenOrch daemon is running directly on the host, we will just mount the ~/.openorch folder in
+	// the containers the OpenOrch daemon starts.
 
 	singulatronVolumeName := d.volumeName
 	if singulatronVolumeName == "" {
@@ -241,7 +241,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 			mountedVolume, err := d.getMountedVolume(
 				currentContainerId,
-				"/root/.superplatform",
+				"/root/.openorch",
 			)
 			if err != nil {
 				return nil, nil, err
@@ -270,7 +270,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	hostBinds = append(
 		hostBinds,
-		fmt.Sprintf("%v:/root/.superplatform", singulatronVolumeName),
+		fmt.Sprintf("%v:/root/.openorch", singulatronVolumeName),
 	)
 
 	// Persistent paths are paths in the container we want to persist.

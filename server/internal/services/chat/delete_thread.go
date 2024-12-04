@@ -7,7 +7,7 @@
  */
 package chatservice
 
-import "github.com/singulatron/superplatform/sdk/go/datastore"
+import "github.com/openorch/openorch/sdk/go/datastore"
 
 func (a *ChatService) deleteThread(id string) error {
 	return a.threadsStore.Query(

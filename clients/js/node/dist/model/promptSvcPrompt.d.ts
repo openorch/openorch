@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,7 @@ export declare class PromptSvcPrompt {
     */
     'maxRetries'?: number;
     /**
-    * ModelId is just the Superplatform internal ID of the model.
+    * ModelId is just the OpenOrch internal ID of the model.
     */
     'modelId'?: string;
     /**

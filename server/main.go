@@ -19,22 +19,22 @@ import (
 	"os"
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
-	_ "github.com/singulatron/superplatform/server/docs"
-	"github.com/singulatron/superplatform/server/internal/node"
-	node_types "github.com/singulatron/superplatform/server/internal/node/types"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/router"
+	_ "github.com/openorch/openorch/server/docs"
+	"github.com/openorch/openorch/server/internal/node"
+	node_types "github.com/openorch/openorch/server/internal/node/types"
 )
 
 var port = router.GetPort()
 
-// @title           Superplatform
+// @title           OpenOrch
 // @version         0.3.0-rc.7
 // @description     On-premise AI platform and microservices ecosystem.
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support
-// @contact.url    http://superplatform.ai/
+// @contact.url    http://openorch.org/
 // @contact.email  sales@singulatron.com
 
 // @license.name  AGPL v3.0
@@ -48,8 +48,8 @@ var port = router.GetPort()
 // @name Authorization
 // @description Type "Bearer" followed by a space and token acquired from the User sService Login endpoint.
 
-// @externalDocs.description  Superplatform API
-// @externalDocs.url          https://superplatform.ai/docs/category/singulatron-api
+// @externalDocs.description  OpenOrch API
+// @externalDocs.url          https://openorch.org/docs/category/singulatron-api
 func main() {
 	nodeInfo, err := node.Start(node_types.Options{})
 	if err != nil {

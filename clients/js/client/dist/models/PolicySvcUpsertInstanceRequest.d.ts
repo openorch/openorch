@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface PolicySvcUpsertInstanceRequest {
 export declare function instanceOfPolicySvcUpsertInstanceRequest(value: object): value is PolicySvcUpsertInstanceRequest;
 export declare function PolicySvcUpsertInstanceRequestFromJSON(json: any): PolicySvcUpsertInstanceRequest;
 export declare function PolicySvcUpsertInstanceRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcUpsertInstanceRequest;
-export declare function PolicySvcUpsertInstanceRequestToJSON(value?: PolicySvcUpsertInstanceRequest | null): any;
+export declare function PolicySvcUpsertInstanceRequestToJSON(json: any): PolicySvcUpsertInstanceRequest;
+export declare function PolicySvcUpsertInstanceRequestToJSONTyped(value?: PolicySvcUpsertInstanceRequest | null, ignoreDiscriminator?: boolean): any;

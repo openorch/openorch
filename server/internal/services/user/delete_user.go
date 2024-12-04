@@ -16,8 +16,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (s *UserService) deleteUser(userId string) error {

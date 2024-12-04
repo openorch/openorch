@@ -15,8 +15,8 @@ package chatservice
 import (
 	"net/http"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	chat "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	"github.com/openorch/openorch/sdk/go/logger"
+	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 // Events is a dummy endpoint to display documentation about the events that this service emits.

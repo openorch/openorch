@@ -3,7 +3,7 @@ import { DynamicSvcObjectCreateFieldsFromJSON, DynamicSvcObjectCreateFieldsToJSO
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function DynamicSvcUpsertObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
         'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFieldsFromJSON(json['object']),
     };
 }
-function DynamicSvcUpsertObjectRequestToJSON(value) {
+function DynamicSvcUpsertObjectRequestToJSON(json) {
+    return DynamicSvcUpsertObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcUpsertObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function DynamicSvcUpsertObjectRequestToJSON(value) {
     };
 }
 
-export { DynamicSvcUpsertObjectRequestFromJSON, DynamicSvcUpsertObjectRequestFromJSONTyped, DynamicSvcUpsertObjectRequestToJSON, instanceOfDynamicSvcUpsertObjectRequest };
+export { DynamicSvcUpsertObjectRequestFromJSON, DynamicSvcUpsertObjectRequestFromJSONTyped, DynamicSvcUpsertObjectRequestToJSON, DynamicSvcUpsertObjectRequestToJSONTyped, instanceOfDynamicSvcUpsertObjectRequest };

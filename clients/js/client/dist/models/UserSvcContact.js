@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,7 +36,10 @@ export function UserSvcContactFromJSONTyped(json, ignoreDiscriminator) {
         'verified': json['verified'] == null ? undefined : json['verified'],
     };
 }
-export function UserSvcContactToJSON(value) {
+export function UserSvcContactToJSON(json) {
+    return UserSvcContactToJSONTyped(json, false);
+}
+export function UserSvcContactToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

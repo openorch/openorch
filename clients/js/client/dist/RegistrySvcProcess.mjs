@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function RegistrySvcProcessFromJSONTyped(json, ignoreDiscriminator) {
         'processName': json['processName'] == null ? undefined : json['processName'],
     };
 }
-function RegistrySvcProcessToJSON(value) {
+function RegistrySvcProcessToJSON(json) {
+    return RegistrySvcProcessToJSONTyped(json, false);
+}
+function RegistrySvcProcessToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -41,4 +44,4 @@ function RegistrySvcProcessToJSON(value) {
     };
 }
 
-export { RegistrySvcProcessFromJSON, RegistrySvcProcessFromJSONTyped, RegistrySvcProcessToJSON, instanceOfRegistrySvcProcess };
+export { RegistrySvcProcessFromJSON, RegistrySvcProcessFromJSONTyped, RegistrySvcProcessToJSON, RegistrySvcProcessToJSONTyped, instanceOfRegistrySvcProcess };

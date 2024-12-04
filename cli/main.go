@@ -5,22 +5,22 @@ import (
 
 	"github.com/spf13/cobra"
 
-	call "github.com/singulatron/superplatform/cli/commands/call"
-	definition "github.com/singulatron/superplatform/cli/commands/definition"
-	deployment "github.com/singulatron/superplatform/cli/commands/deployment"
-	"github.com/singulatron/superplatform/cli/commands/env"
-	instance "github.com/singulatron/superplatform/cli/commands/instance"
-	"github.com/singulatron/superplatform/cli/commands/node"
-	secret "github.com/singulatron/superplatform/cli/commands/secret"
-	"github.com/singulatron/superplatform/cli/commands/user/login"
-	"github.com/singulatron/superplatform/cli/commands/user/token"
-	"github.com/singulatron/superplatform/cli/commands/user/whoami"
+	call "github.com/openorch/openorch/cli/commands/call"
+	definition "github.com/openorch/openorch/cli/commands/definition"
+	deployment "github.com/openorch/openorch/cli/commands/deployment"
+	"github.com/openorch/openorch/cli/commands/env"
+	instance "github.com/openorch/openorch/cli/commands/instance"
+	"github.com/openorch/openorch/cli/commands/node"
+	secret "github.com/openorch/openorch/cli/commands/secret"
+	"github.com/openorch/openorch/cli/commands/user/login"
+	"github.com/openorch/openorch/cli/commands/user/token"
+	"github.com/openorch/openorch/cli/commands/user/whoami"
 )
 
 func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "sup",
-		Short: "Superplatform CLI",
+		Short: "OpenOrch CLI",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()

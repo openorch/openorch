@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface RegistrySvcListNodesResponse {
 export declare function instanceOfRegistrySvcListNodesResponse(value: object): value is RegistrySvcListNodesResponse;
 export declare function RegistrySvcListNodesResponseFromJSON(json: any): RegistrySvcListNodesResponse;
 export declare function RegistrySvcListNodesResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcListNodesResponse;
-export declare function RegistrySvcListNodesResponseToJSON(value?: RegistrySvcListNodesResponse | null): any;
+export declare function RegistrySvcListNodesResponseToJSON(json: any): RegistrySvcListNodesResponse;
+export declare function RegistrySvcListNodesResponseToJSONTyped(value?: RegistrySvcListNodesResponse | null, ignoreDiscriminator?: boolean): any;

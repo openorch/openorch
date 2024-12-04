@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
 // Register a new definition

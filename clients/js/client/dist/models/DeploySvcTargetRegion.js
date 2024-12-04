@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,7 +29,10 @@ export function DeploySvcTargetRegionFromJSONTyped(json, ignoreDiscriminator) {
         'zone': json['zone'] == null ? undefined : json['zone'],
     };
 }
-export function DeploySvcTargetRegionToJSON(value) {
+export function DeploySvcTargetRegionToJSON(json) {
+    return DeploySvcTargetRegionToJSONTyped(json, false);
+}
+export function DeploySvcTargetRegionToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

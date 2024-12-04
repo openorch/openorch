@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     RegistrySvcInstanceStatusFromJSON,
     RegistrySvcInstanceStatusFromJSONTyped,
     RegistrySvcInstanceStatusToJSON,
+    RegistrySvcInstanceStatusToJSONTyped,
 } from './RegistrySvcInstanceStatus';
 
 /**
@@ -28,7 +29,7 @@ import {
 export interface RegistrySvcInstance {
     /**
      * The ID of the deployment that this instance is an instance of.
-     * Only instances managed by the Superplatform have a DeploymentId.
+     * Only instances managed by the OpenOrch have a DeploymentId.
      * Services can self-register without a DeploymentId too.
      * @type {string}
      * @memberof RegistrySvcInstance
@@ -65,7 +66,7 @@ export interface RegistrySvcInstance {
      */
     lastHeartbeat?: string;
     /**
-     * URL of the Superplatform daemon
+     * URL of the OpenOrch daemon
      * @type {string}
      * @memberof RegistrySvcInstance
      */
@@ -148,10 +149,15 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function RegistrySvcInstanceToJSON(value?: RegistrySvcInstance | null): any {
+  export function RegistrySvcInstanceToJSON(json: any): RegistrySvcInstance {
+      return RegistrySvcInstanceToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcInstanceToJSONTyped(value?: RegistrySvcInstance | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'deploymentId': value['deploymentId'],

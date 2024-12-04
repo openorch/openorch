@@ -1,4 +1,4 @@
-name: Publish @superplatform/client to npm
+name: Publish @openorch/client to npm
 
 on:
   push:

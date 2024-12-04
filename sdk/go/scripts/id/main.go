@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
+	sdk "github.com/openorch/openorch/sdk/go"
 )
 
 func main() {

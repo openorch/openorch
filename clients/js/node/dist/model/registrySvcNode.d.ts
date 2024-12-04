@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,7 @@ export declare class RegistrySvcNode {
     */
     'region'?: string;
     /**
-    * URL of the daemon running on the node. If not configured defaults to hostname + default Superplatform daemon port.
+    * URL of the daemon running on the node. If not configured defaults to hostname + default OpenOrch daemon port.
     */
     'url': string;
     /**

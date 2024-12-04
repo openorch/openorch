@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -47,7 +47,7 @@ export interface PromptSvcPrompt {
      */
     maxRetries?: number;
     /**
-     * ModelId is just the Superplatform internal ID of the model.
+     * ModelId is just the OpenOrch internal ID of the model.
      * @type {string}
      * @memberof PromptSvcPrompt
      */
@@ -113,4 +113,5 @@ export interface PromptSvcPrompt {
 export declare function instanceOfPromptSvcPrompt(value: object): value is PromptSvcPrompt;
 export declare function PromptSvcPromptFromJSON(json: any): PromptSvcPrompt;
 export declare function PromptSvcPromptFromJSONTyped(json: any, ignoreDiscriminator: boolean): PromptSvcPrompt;
-export declare function PromptSvcPromptToJSON(value?: PromptSvcPrompt | null): any;
+export declare function PromptSvcPromptToJSON(json: any): PromptSvcPrompt;
+export declare function PromptSvcPromptToJSONTyped(value?: PromptSvcPrompt | null, ignoreDiscriminator?: boolean): any;

@@ -18,9 +18,9 @@ import (
 	"net/http"
 
 	"github.com/docker/docker/api/types/container"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	docker "github.com/singulatron/superplatform/server/internal/services/docker/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	docker "github.com/openorch/openorch/server/internal/services/docker/types"
 )
 
 // @ID stopContainer

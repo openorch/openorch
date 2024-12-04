@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 

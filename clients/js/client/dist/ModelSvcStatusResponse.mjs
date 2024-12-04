@@ -3,7 +3,7 @@ import { ModelSvcModelStatusFromJSON, ModelSvcModelStatusToJSON } from './ModelS
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function ModelSvcStatusResponseFromJSONTyped(json, ignoreDiscriminator) {
         'status': json['status'] == null ? undefined : ModelSvcModelStatusFromJSON(json['status']),
     };
 }
-function ModelSvcStatusResponseToJSON(value) {
+function ModelSvcStatusResponseToJSON(json) {
+    return ModelSvcStatusResponseToJSONTyped(json, false);
+}
+function ModelSvcStatusResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function ModelSvcStatusResponseToJSON(value) {
     };
 }
 
-export { ModelSvcStatusResponseFromJSON, ModelSvcStatusResponseFromJSONTyped, ModelSvcStatusResponseToJSON, instanceOfModelSvcStatusResponse };
+export { ModelSvcStatusResponseFromJSON, ModelSvcStatusResponseFromJSONTyped, ModelSvcStatusResponseToJSON, ModelSvcStatusResponseToJSONTyped, instanceOfModelSvcStatusResponse };

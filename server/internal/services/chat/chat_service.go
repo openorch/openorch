@@ -15,11 +15,11 @@ package chatservice
 import (
 	"context"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
 
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	chattypes "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 type ChatService struct {

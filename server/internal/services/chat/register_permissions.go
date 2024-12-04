@@ -11,10 +11,10 @@ package chatservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	chattypes "github.com/openorch/openorch/server/internal/services/chat/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (p *ChatService) registerPermissions() error {

@@ -27,10 +27,10 @@ import (
 	"unicode/utf8"
 
 	"github.com/docker/docker/client"
+	ts "github.com/openorch/openorch/server/internal/services/docker/types"
 	"github.com/pkg/errors"
-	ts "github.com/singulatron/superplatform/server/internal/services/docker/types"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 func (d *DockerService) info() (*ts.DockerInfo, error) {

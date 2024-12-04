@@ -16,9 +16,9 @@ import (
 	"math"
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore"
 
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 func SelectPrompt(promptsMem datastore.DataStore) (*prompttypes.Prompt, error) {

@@ -5,7 +5,7 @@ var RegistrySvcUsage = require('./RegistrySvcUsage.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function RegistrySvcResourceUsageFromJSONTyped(json, ignoreDiscriminator) {
         'memory': json['memory'] == null ? undefined : RegistrySvcUsage.RegistrySvcUsageFromJSON(json['memory']),
     };
 }
-function RegistrySvcResourceUsageToJSON(value) {
+function RegistrySvcResourceUsageToJSON(json) {
+    return RegistrySvcResourceUsageToJSONTyped(json, false);
+}
+function RegistrySvcResourceUsageToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -48,4 +51,5 @@ function RegistrySvcResourceUsageToJSON(value) {
 exports.RegistrySvcResourceUsageFromJSON = RegistrySvcResourceUsageFromJSON;
 exports.RegistrySvcResourceUsageFromJSONTyped = RegistrySvcResourceUsageFromJSONTyped;
 exports.RegistrySvcResourceUsageToJSON = RegistrySvcResourceUsageToJSON;
+exports.RegistrySvcResourceUsageToJSONTyped = RegistrySvcResourceUsageToJSONTyped;
 exports.instanceOfRegistrySvcResourceUsage = instanceOfRegistrySvcResourceUsage;

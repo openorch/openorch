@@ -12,7 +12,7 @@ const docTemplate = `{
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
-            "url": "http://superplatform.ai/",
+            "url": "http://openorch.org/",
             "email": "sales@singulatron.com"
         },
         "license": {
@@ -5788,7 +5788,7 @@ const docTemplate = `{
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Superplatform internal ID of the model.",
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -5882,7 +5882,7 @@ const docTemplate = `{
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Superplatform internal ID of the model.",
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -6139,7 +6139,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "deploymentId": {
-                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the Superplatform have a DeploymentId.\nServices can self-register without a DeploymentId too.",
+                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the OpenOrch have a DeploymentId.\nServices can self-register without a DeploymentId too.",
                     "type": "string",
                     "example": "depl_deBUCtJirc"
                 },
@@ -6168,7 +6168,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "nodeUrl": {
-                    "description": "URL of the Superplatform daemon",
+                    "description": "URL of the OpenOrch daemon",
                     "type": "string",
                     "example": "https://myserver.com:58231"
                 },
@@ -6345,7 +6345,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "url": {
-                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default Superplatform daemon port.",
+                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default OpenOrch daemon port.",
                     "type": "string"
                 },
                 "usage": {
@@ -6448,7 +6448,7 @@ const docTemplate = `{
                 "url": {
                     "description": "URL is the URL to the repository",
                     "type": "string",
-                    "example": "https://github.com/singulatron/superplatform.git"
+                    "example": "https://github.com/openorch/openorch.git"
                 },
                 "version": {
                     "description": "Version of the code to use",
@@ -7125,8 +7125,8 @@ const docTemplate = `{
         }
     },
     "externalDocs": {
-        "description": "Superplatform API",
-        "url": "https://superplatform.ai/docs/category/singulatron-api"
+        "description": "OpenOrch API",
+        "url": "https://openorch.org/docs/category/singulatron-api"
     }
 }`
 
@@ -7136,7 +7136,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "Superplatform",
+	Title:            "OpenOrch",
 	Description:      "On-premise AI platform and microservices ecosystem.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

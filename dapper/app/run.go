@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	dt "github.com/singulatron/superplatform/dapper/types"
+	dt "github.com/openorch/openorch/dapper/types"
 )
 
 func (cm *ConfigurationManager) Run(app *dt.App, tlv map[string]string, anon bool) (*dt.RunContext, error) {

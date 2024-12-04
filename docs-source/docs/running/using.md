@@ -8,7 +8,7 @@ tags:
 
 # Once it's running
 
-Using Superplatform. Depending on how you run it, you can access Superplatform on [http://127.0.0.1:3901](http://127.0.0.1:3901) (if you use Docker Compose), or [http://127.0.0.1:4200](http://127.0.0.1:4200) (if you use Angular).
+Using OpenOrch. Depending on how you run it, you can access OpenOrch on [http://127.0.0.1:3901](http://127.0.0.1:3901) (if you use Docker Compose), or [http://127.0.0.1:4200](http://127.0.0.1:4200) (if you use Angular).
 
 ## Default Credentials
 

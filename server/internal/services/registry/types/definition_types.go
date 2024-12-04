@@ -45,7 +45,7 @@ func (s Definition) GetId() string {
 
 type RepositorySpec struct {
 	// URL is the URL to the repository
-	URL string `json:"url,omitempty" example:"https://github.com/singulatron/superplatform.git" binding:"required"`
+	URL string `json:"url,omitempty" example:"https://github.com/openorch/openorch.git" binding:"required"`
 
 	// Version of the code to use
 	Version string `json:"version,omitempty" example:"v1.0.0"`

@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface RegistrySvcImageSpec {
 export declare function instanceOfRegistrySvcImageSpec(value: object): value is RegistrySvcImageSpec;
 export declare function RegistrySvcImageSpecFromJSON(json: any): RegistrySvcImageSpec;
 export declare function RegistrySvcImageSpecFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcImageSpec;
-export declare function RegistrySvcImageSpecToJSON(value?: RegistrySvcImageSpec | null): any;
+export declare function RegistrySvcImageSpecToJSON(json: any): RegistrySvcImageSpec;
+export declare function RegistrySvcImageSpecToJSONTyped(value?: RegistrySvcImageSpec | null, ignoreDiscriminator?: boolean): any;

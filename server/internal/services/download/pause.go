@@ -15,7 +15,7 @@ package downloadservice
 import (
 	"fmt"
 
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
 )
 
 /*

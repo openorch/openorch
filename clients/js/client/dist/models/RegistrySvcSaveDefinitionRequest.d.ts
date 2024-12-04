@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface RegistrySvcSaveDefinitionRequest {
 export declare function instanceOfRegistrySvcSaveDefinitionRequest(value: object): value is RegistrySvcSaveDefinitionRequest;
 export declare function RegistrySvcSaveDefinitionRequestFromJSON(json: any): RegistrySvcSaveDefinitionRequest;
 export declare function RegistrySvcSaveDefinitionRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcSaveDefinitionRequest;
-export declare function RegistrySvcSaveDefinitionRequestToJSON(value?: RegistrySvcSaveDefinitionRequest | null): any;
+export declare function RegistrySvcSaveDefinitionRequestToJSON(json: any): RegistrySvcSaveDefinitionRequest;
+export declare function RegistrySvcSaveDefinitionRequestToJSONTyped(value?: RegistrySvcSaveDefinitionRequest | null, ignoreDiscriminator?: boolean): any;

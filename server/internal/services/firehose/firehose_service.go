@@ -18,12 +18,12 @@ import (
 	"log/slog"
 	"sync"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	firehosetypes "github.com/singulatron/superplatform/server/internal/services/firehose/types"
+	firehosetypes "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
 
 type FirehoseService struct {

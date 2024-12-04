@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,7 +36,10 @@ function DockerSvcRunContainerOptionsFromJSONTyped(json, ignoreDiscriminator) {
         'name': json['name'] == null ? undefined : json['name'],
     };
 }
-function DockerSvcRunContainerOptionsToJSON(value) {
+function DockerSvcRunContainerOptionsToJSON(json) {
+    return DockerSvcRunContainerOptionsToJSONTyped(json, false);
+}
+function DockerSvcRunContainerOptionsToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -54,4 +57,5 @@ function DockerSvcRunContainerOptionsToJSON(value) {
 exports.DockerSvcRunContainerOptionsFromJSON = DockerSvcRunContainerOptionsFromJSON;
 exports.DockerSvcRunContainerOptionsFromJSONTyped = DockerSvcRunContainerOptionsFromJSONTyped;
 exports.DockerSvcRunContainerOptionsToJSON = DockerSvcRunContainerOptionsToJSON;
+exports.DockerSvcRunContainerOptionsToJSONTyped = DockerSvcRunContainerOptionsToJSONTyped;
 exports.instanceOfDockerSvcRunContainerOptions = instanceOfDockerSvcRunContainerOptions;

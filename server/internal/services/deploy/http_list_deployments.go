@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	deploy "github.com/singulatron/superplatform/server/internal/services/deploy/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	deploy "github.com/openorch/openorch/server/internal/services/deploy/types"
 )
 
 // @ID listDeployments

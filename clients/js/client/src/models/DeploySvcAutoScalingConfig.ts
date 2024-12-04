@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -62,10 +62,15 @@ export function DeploySvcAutoScalingConfigFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function DeploySvcAutoScalingConfigToJSON(value?: DeploySvcAutoScalingConfig | null): any {
+  export function DeploySvcAutoScalingConfigToJSON(json: any): DeploySvcAutoScalingConfig {
+      return DeploySvcAutoScalingConfigToJSONTyped(json, false);
+  }
+
+  export function DeploySvcAutoScalingConfigToJSONTyped(value?: DeploySvcAutoScalingConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'cpuThreshold': value['cpuThreshold'],

@@ -18,16 +18,16 @@ const sidebars: SidebarsConfig = {
   openApiSidebar: [
     {
       type: "category",
-      label: "Superplatform",
+      label: "OpenOrch",
       link: {
         type: "generated-index",
-        title: "Superplatform API",
+        title: "OpenOrch API",
         description:
-          "API documentation for the batteries that are included with your Superplatform installation.",
-        slug: "/category/superplatform-api",
+          "API documentation for the batteries that are included with your OpenOrch installation.",
+        slug: "/category/openorch-api",
       },
       // @ts-ignore
-      items: require("./docs/superplatform/sidebar.js"),
+      items: require("./docs/openorch/sidebar.js"),
     },
   ],
 

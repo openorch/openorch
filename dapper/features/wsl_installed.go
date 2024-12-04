@@ -7,7 +7,7 @@
  */
 package features
 
-import dt "github.com/singulatron/superplatform/dapper/types"
+import dt "github.com/openorch/openorch/dapper/types"
 
 var WslInstalled = dt.Feature{
 	ID:   "wsl-installed",

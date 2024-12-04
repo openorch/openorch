@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     DownloadSvcDownloadDetailsFromJSON,
     DownloadSvcDownloadDetailsFromJSONTyped,
     DownloadSvcDownloadDetailsToJSON,
+    DownloadSvcDownloadDetailsToJSONTyped,
 } from './DownloadSvcDownloadDetails';
 
 /**
@@ -63,10 +64,15 @@ export function DownloadSvcGetDownloadResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function DownloadSvcGetDownloadResponseToJSON(value?: DownloadSvcGetDownloadResponse | null): any {
+  export function DownloadSvcGetDownloadResponseToJSON(json: any): DownloadSvcGetDownloadResponse {
+      return DownloadSvcGetDownloadResponseToJSONTyped(json, false);
+  }
+
+  export function DownloadSvcGetDownloadResponseToJSONTyped(value?: DownloadSvcGetDownloadResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'download': DownloadSvcDownloadDetailsToJSON(value['download']),

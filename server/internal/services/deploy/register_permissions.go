@@ -15,10 +15,10 @@ package deployservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	deploytypes "github.com/singulatron/superplatform/server/internal/services/deploy/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	deploytypes "github.com/openorch/openorch/server/internal/services/deploy/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func app(permSlices ...[]usertypes.Permission) []usertypes.Permission {

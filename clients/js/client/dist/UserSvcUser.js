@@ -5,7 +5,7 @@ var UserSvcContact = require('./UserSvcContact.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -39,7 +39,10 @@ function UserSvcUserFromJSONTyped(json, ignoreDiscriminator) {
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
     };
 }
-function UserSvcUserToJSON(value) {
+function UserSvcUserToJSON(json) {
+    return UserSvcUserToJSONTyped(json, false);
+}
+function UserSvcUserToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -58,4 +61,5 @@ function UserSvcUserToJSON(value) {
 exports.UserSvcUserFromJSON = UserSvcUserFromJSON;
 exports.UserSvcUserFromJSONTyped = UserSvcUserFromJSONTyped;
 exports.UserSvcUserToJSON = UserSvcUserToJSON;
+exports.UserSvcUserToJSONTyped = UserSvcUserToJSONTyped;
 exports.instanceOfUserSvcUser = instanceOfUserSvcUser;

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -48,10 +48,15 @@ export function ConfigSvcModelServiceConfigFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ConfigSvcModelServiceConfigToJSON(value?: ConfigSvcModelServiceConfig | null): any {
+  export function ConfigSvcModelServiceConfigToJSON(json: any): ConfigSvcModelServiceConfig {
+      return ConfigSvcModelServiceConfigToJSONTyped(json, false);
+  }
+
+  export function ConfigSvcModelServiceConfigToJSONTyped(value?: ConfigSvcModelServiceConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'currentModelId': value['currentModelId'],

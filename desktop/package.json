@@ -1,9 +1,9 @@
 {
 	"name": "singulatron",
-	"productName": "Superplatform",
+	"productName": "OpenOrch",
 	"version": "0.0.5",
 	"description": "Your personal AI",
-	"author": "Superplatform",
+	"author": "OpenOrch",
 	"main": ".webpack/main",
 	"keywords": [
 		""

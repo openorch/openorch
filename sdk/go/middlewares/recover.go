@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 // Panic Recovery Middleware

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,7 +29,10 @@ export function UserSvcUpserPermissionRequestFromJSONTyped(json, ignoreDiscrimin
         'permission': json['permission'] == null ? undefined : UserSvcPermissionFromJSON(json['permission']),
     };
 }
-export function UserSvcUpserPermissionRequestToJSON(value) {
+export function UserSvcUpserPermissionRequestToJSON(json) {
+    return UserSvcUpserPermissionRequestToJSONTyped(json, false);
+}
+export function UserSvcUpserPermissionRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

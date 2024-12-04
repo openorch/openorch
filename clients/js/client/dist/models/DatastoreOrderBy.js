@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ export function DatastoreOrderByFromJSONTyped(json, ignoreDiscriminator) {
         'randomize': json['randomize'] == null ? undefined : json['randomize'],
     };
 }
-export function DatastoreOrderByToJSON(value) {
+export function DatastoreOrderByToJSON(json) {
+    return DatastoreOrderByToJSONTyped(json, false);
+}
+export function DatastoreOrderByToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

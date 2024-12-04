@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface PromptSvcListPromptsRequest {
 export declare function instanceOfPromptSvcListPromptsRequest(value: object): value is PromptSvcListPromptsRequest;
 export declare function PromptSvcListPromptsRequestFromJSON(json: any): PromptSvcListPromptsRequest;
 export declare function PromptSvcListPromptsRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PromptSvcListPromptsRequest;
-export declare function PromptSvcListPromptsRequestToJSON(value?: PromptSvcListPromptsRequest | null): any;
+export declare function PromptSvcListPromptsRequestToJSON(json: any): PromptSvcListPromptsRequest;
+export declare function PromptSvcListPromptsRequestToJSONTyped(value?: PromptSvcListPromptsRequest | null, ignoreDiscriminator?: boolean): any;

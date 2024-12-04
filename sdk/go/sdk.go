@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sony/sonyflake"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
 type Claims struct {

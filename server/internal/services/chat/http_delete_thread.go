@@ -17,8 +17,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	chattypes "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 // DeleteThread removes a chat thread

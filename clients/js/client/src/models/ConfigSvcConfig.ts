@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,18 +18,21 @@ import {
     ConfigSvcAppServiceConfigFromJSON,
     ConfigSvcAppServiceConfigFromJSONTyped,
     ConfigSvcAppServiceConfigToJSON,
+    ConfigSvcAppServiceConfigToJSONTyped,
 } from './ConfigSvcAppServiceConfig';
 import type { ConfigSvcModelServiceConfig } from './ConfigSvcModelServiceConfig';
 import {
     ConfigSvcModelServiceConfigFromJSON,
     ConfigSvcModelServiceConfigFromJSONTyped,
     ConfigSvcModelServiceConfigToJSON,
+    ConfigSvcModelServiceConfigToJSONTyped,
 } from './ConfigSvcModelServiceConfig';
 import type { ConfigSvcDownloadServiceConfig } from './ConfigSvcDownloadServiceConfig';
 import {
     ConfigSvcDownloadServiceConfigFromJSON,
     ConfigSvcDownloadServiceConfigFromJSONTyped,
     ConfigSvcDownloadServiceConfigToJSON,
+    ConfigSvcDownloadServiceConfigToJSONTyped,
 } from './ConfigSvcDownloadServiceConfig';
 
 /**
@@ -99,10 +102,15 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ConfigSvcConfigToJSON(value?: ConfigSvcConfig | null): any {
+  export function ConfigSvcConfigToJSON(json: any): ConfigSvcConfig {
+      return ConfigSvcConfigToJSONTyped(json, false);
+  }
+
+  export function ConfigSvcConfigToJSONTyped(value?: ConfigSvcConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'app': ConfigSvcAppServiceConfigToJSON(value['app']),

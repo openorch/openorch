@@ -11,7 +11,7 @@ require('./DeploySvcResourceLimits.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -38,7 +38,10 @@ function DeploySvcSaveDeploymentRequestFromJSONTyped(json, ignoreDiscriminator) 
         'deployment': json['deployment'] == null ? undefined : DeploySvcDeployment.DeploySvcDeploymentFromJSON(json['deployment']),
     };
 }
-function DeploySvcSaveDeploymentRequestToJSON(value) {
+function DeploySvcSaveDeploymentRequestToJSON(json) {
+    return DeploySvcSaveDeploymentRequestToJSONTyped(json, false);
+}
+function DeploySvcSaveDeploymentRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -50,4 +53,5 @@ function DeploySvcSaveDeploymentRequestToJSON(value) {
 exports.DeploySvcSaveDeploymentRequestFromJSON = DeploySvcSaveDeploymentRequestFromJSON;
 exports.DeploySvcSaveDeploymentRequestFromJSONTyped = DeploySvcSaveDeploymentRequestFromJSONTyped;
 exports.DeploySvcSaveDeploymentRequestToJSON = DeploySvcSaveDeploymentRequestToJSON;
+exports.DeploySvcSaveDeploymentRequestToJSONTyped = DeploySvcSaveDeploymentRequestToJSONTyped;
 exports.instanceOfDeploySvcSaveDeploymentRequest = instanceOfDeploySvcSaveDeploymentRequest;

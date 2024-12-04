@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -48,4 +48,5 @@ export interface PolicySvcRateLimitParameters {
 export declare function instanceOfPolicySvcRateLimitParameters(value: object): value is PolicySvcRateLimitParameters;
 export declare function PolicySvcRateLimitParametersFromJSON(json: any): PolicySvcRateLimitParameters;
 export declare function PolicySvcRateLimitParametersFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcRateLimitParameters;
-export declare function PolicySvcRateLimitParametersToJSON(value?: PolicySvcRateLimitParameters | null): any;
+export declare function PolicySvcRateLimitParametersToJSON(json: any): PolicySvcRateLimitParameters;
+export declare function PolicySvcRateLimitParametersToJSONTyped(value?: PolicySvcRateLimitParameters | null, ignoreDiscriminator?: boolean): any;

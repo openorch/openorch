@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 Testing DeploySvcAPIService
 
@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/openorch/openorch/clients/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/singulatron/superplatform/clients/go"
 )
 
 func Test_openapi_DeploySvcAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_DeploySvcAPIService(t *testing.T) {
 
 	t.Run("Test DeploySvcAPIService ListDeployments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DeploySvcAPI.ListDeployments(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_DeploySvcAPIService(t *testing.T) {
 
 	t.Run("Test DeploySvcAPIService SaveDeployment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DeploySvcAPI.SaveDeployment(context.Background()).Execute()
 

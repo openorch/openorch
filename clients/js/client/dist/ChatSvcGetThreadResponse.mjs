@@ -3,7 +3,7 @@ import { ChatSvcThreadFromJSON, ChatSvcThreadToJSON } from './ChatSvcThread.mjs'
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -31,7 +31,10 @@ function ChatSvcGetThreadResponseFromJSONTyped(json, ignoreDiscriminator) {
         'thread': json['thread'] == null ? undefined : ChatSvcThreadFromJSON(json['thread']),
     };
 }
-function ChatSvcGetThreadResponseToJSON(value) {
+function ChatSvcGetThreadResponseToJSON(json) {
+    return ChatSvcGetThreadResponseToJSONTyped(json, false);
+}
+function ChatSvcGetThreadResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -41,4 +44,4 @@ function ChatSvcGetThreadResponseToJSON(value) {
     };
 }
 
-export { ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadResponseFromJSONTyped, ChatSvcGetThreadResponseToJSON, instanceOfChatSvcGetThreadResponse };
+export { ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadResponseFromJSONTyped, ChatSvcGetThreadResponseToJSON, ChatSvcGetThreadResponseToJSONTyped, instanceOfChatSvcGetThreadResponse };

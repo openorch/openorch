@@ -12,8 +12,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	firehose "github.com/singulatron/superplatform/server/internal/services/firehose/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	firehose "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
 
 // @Summary Publish an Event

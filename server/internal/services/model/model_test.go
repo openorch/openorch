@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/server/internal/di"
-	configservice "github.com/singulatron/superplatform/server/internal/services/config"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/server/internal/di"
+	configservice "github.com/openorch/openorch/server/internal/services/config"
 )
 
 func TestModel(t *testing.T) {

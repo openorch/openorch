@@ -1,4 +1,4 @@
-module github.com/singulatron/superplatform/dapper
+module github.com/openorch/openorch/dapper
 
 go 1.23
 
