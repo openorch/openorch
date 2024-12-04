@@ -6448,7 +6448,7 @@ const docTemplate = `{
                 "url": {
                     "description": "URL is the URL to the repository",
                     "type": "string",
-                    "example": "https://github.com/singulatron/superplatform.git"
+                    "example": "https://github.com/openorch/openorch.git"
                 },
                 "version": {
                     "description": "Version of the code to use",

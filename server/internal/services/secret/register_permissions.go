@@ -11,10 +11,10 @@ package secretservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	secrettypes "github.com/singulatron/superplatform/server/internal/services/secret/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	secrettypes "github.com/openorch/openorch/server/internal/services/secret/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (p *SecretService) registerPermissions() error {

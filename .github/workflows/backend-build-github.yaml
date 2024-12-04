@@ -30,15 +30,15 @@ jobs:
           go test ./... -v -tags='!dist' -timeout=30s
 
           # We rerun nondist tests with an SQL backend
-          SUPERPLATFORM_DB=postgres \
-            SUPERPLATFORM_DB_DEBUG=true \
-            SUPERPLATFORM_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
+          OPENORCH_DB=postgres \
+            OPENORCH_DB_DEBUG=true \
+            OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -tags='!dist' -timeout=30s
 
           # Run dist test with SQL (localstore makes no sense in a dist setting)
-          SUPERPLATFORM_DB=postgres \
-            SUPERPLATFORM_DB_DEBUG=true \
-            SUPERPLATFORM_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
+          OPENORCH_DB=postgres \
+            OPENORCH_DB_DEBUG=true \
+            OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -tags=dist -timeout=30s
         working-directory: server
 

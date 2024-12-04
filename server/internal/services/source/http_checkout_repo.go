@@ -14,9 +14,9 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport"
 	ghttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 	gssh "github.com/go-git/go-git/v5/plumbing/transport/ssh"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	source "github.com/singulatron/superplatform/server/internal/services/source/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	source "github.com/openorch/openorch/server/internal/services/source/types"
 	"golang.org/x/crypto/ssh"
 )
 

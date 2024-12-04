@@ -13,7 +13,7 @@ import (
 	"context"
 	"testing"
 
-	openapiclient "github.com/singulatron/superplatform/clients/go"
+	openapiclient "github.com/openorch/openorch/clients/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

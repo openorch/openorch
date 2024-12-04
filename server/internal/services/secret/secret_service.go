@@ -17,11 +17,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	secret "github.com/singulatron/superplatform/server/internal/services/secret/types"
+	secret "github.com/openorch/openorch/server/internal/services/secret/types"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
 )
 
 type SecretService struct {

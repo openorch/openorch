@@ -15,8 +15,8 @@ package prompt_svc
 import (
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/datastore"
 )
 
 type ErrorResponse struct {

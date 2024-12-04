@@ -24,12 +24,12 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
-	types "github.com/singulatron/superplatform/server/internal/services/config/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
+	types "github.com/openorch/openorch/server/internal/services/config/types"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 const DefaultModelId = `huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf`

@@ -25,13 +25,13 @@ import (
 	"syscall"
 	"time"
 
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/openorch/openorch/server/internal/services/deploy/allocator"
+	deploy "github.com/openorch/openorch/server/internal/services/deploy/types"
 	"github.com/pkg/errors"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/server/internal/services/deploy/allocator"
-	deploy "github.com/singulatron/superplatform/server/internal/services/deploy/types"
 )
 
 // image and container name prefix

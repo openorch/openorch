@@ -29,9 +29,9 @@ jobs:
           go test ./... -v -timeout=30s
 
           # We rerun the tests with an SQL backend
-          SUPERPLATFORM_DB=postgres \
-            SUPERPLATFORM_DB_DEBUG=true \
-            SUPERPLATFORM_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
+          OPENORCH_DB=postgres \
+            OPENORCH_DB_DEBUG=true \
+            OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -v -timeout=30s
         working-directory: sdk/go
 

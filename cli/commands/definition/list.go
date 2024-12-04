@@ -5,8 +5,8 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"github.com/singulatron/superplatform/cli/config"
-	sdk "github.com/singulatron/superplatform/sdk/go"
+	"github.com/openorch/openorch/cli/config"
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/spf13/cobra"
 )
 

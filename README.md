@@ -12,11 +12,11 @@
 </p>
 
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/eRXyzeXEvM)](https://discord.gg/eRXyzeXEvM)
-![backend build](https://github.com/singulatron/superplatform/actions/workflows/backend-build-github.yaml/badge.svg)
-![frontend build](https://github.com/singulatron/superplatform/actions/workflows/frontend-container-build-github.yaml/badge.svg)
-![go client build](https://github.com/singulatron/superplatform/actions/workflows/go-client-build.yaml/badge.svg)
-![js client build](https://github.com/singulatron/superplatform/actions/workflows/js-client-build.yaml/badge.svg)
-![go sdk](https://github.com/singulatron/superplatform/actions/workflows/go-sdk-build.yaml/badge.svg)
+![backend build](https://github.com/openorch/openorch/actions/workflows/backend-build-github.yaml/badge.svg)
+![frontend build](https://github.com/openorch/openorch/actions/workflows/frontend-container-build-github.yaml/badge.svg)
+![go client build](https://github.com/openorch/openorch/actions/workflows/go-client-build.yaml/badge.svg)
+![js client build](https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg)
+![go sdk](https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg)
 
 Superplatform gives the power back to the developers in the age of AI—self host your own AI platform!
 

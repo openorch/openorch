@@ -15,9 +15,9 @@ package sourceservice
 import (
 	"context"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
 )
 
 type SourceService struct {

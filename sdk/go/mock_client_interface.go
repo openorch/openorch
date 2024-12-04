@@ -10,7 +10,7 @@ package sdk
 import (
 	reflect "reflect"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	gomock "go.uber.org/mock/gomock"
 )
 

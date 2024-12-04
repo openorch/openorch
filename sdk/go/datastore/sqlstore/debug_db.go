@@ -12,7 +12,7 @@ import (
 	"fmt"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 type DebugDB struct {

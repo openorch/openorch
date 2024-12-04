@@ -11,10 +11,10 @@ package configservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	configtypes "github.com/singulatron/superplatform/server/internal/services/config/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	configtypes "github.com/openorch/openorch/server/internal/services/config/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // this is called in the Start not in constructor to avoid import cycles

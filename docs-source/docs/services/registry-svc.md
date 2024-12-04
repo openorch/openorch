@@ -50,7 +50,7 @@ HostPorts are a temporary requirement until support for dynamic port assignment 
 ```yaml
 id: test-b
 repository:
-  url: https://github.com/singulatron/superplatform.git
+  url: https://github.com/openorch/openorch.git
   containerFile: server/docker/Dockerfile
 hostPort: 9998
 ```

@@ -1561,7 +1561,7 @@ definitions:
         type: integer
       url:
         description: URL is the URL to the repository
-        example: https://github.com/singulatron/superplatform.git
+        example: https://github.com/openorch/openorch.git
         type: string
       version:
         description: Version of the code to use

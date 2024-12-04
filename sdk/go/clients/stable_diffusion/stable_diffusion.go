@@ -18,7 +18,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 type Client struct {

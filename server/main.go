@@ -19,11 +19,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/router"
-	_ "github.com/singulatron/superplatform/server/docs"
-	"github.com/singulatron/superplatform/server/internal/node"
-	node_types "github.com/singulatron/superplatform/server/internal/node/types"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/router"
+	_ "github.com/openorch/openorch/server/docs"
+	"github.com/openorch/openorch/server/internal/node"
+	node_types "github.com/openorch/openorch/server/internal/node/types"
 )
 
 var port = router.GetPort()

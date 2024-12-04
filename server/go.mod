@@ -1,10 +1,10 @@
-module github.com/singulatron/superplatform/server
+module github.com/openorch/openorch/server
 
 go 1.23
 
-replace github.com/singulatron/superplatform/clients/go => ../clients/go
+replace github.com/openorch/openorch/clients/go => ../clients/go
 
-replace github.com/singulatron/superplatform/sdk/go => ../sdk/go
+replace github.com/openorch/openorch/sdk/go => ../sdk/go
 
 require (
 	github.com/docker/docker v26.0.0+incompatible
@@ -19,8 +19,8 @@ require (
 	github.com/r3labs/sse v0.0.0-20210224172625-26fe804710bc
 	github.com/samber/lo v1.47.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
-	github.com/singulatron/superplatform/clients/go v0.0.0
-	github.com/singulatron/superplatform/sdk/go v0.0.0
+	github.com/openorch/openorch/clients/go v0.0.0
+	github.com/openorch/openorch/sdk/go v0.0.0
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/swaggo/swag v1.16.3

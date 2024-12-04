@@ -28,10 +28,10 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/pkg/errors"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	dockertypes "github.com/singulatron/superplatform/server/internal/services/docker/types"
+	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
 )
 
 /*

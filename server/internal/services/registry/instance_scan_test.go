@@ -11,10 +11,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/test"
-	"github.com/singulatron/superplatform/server/internal/di"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/test"
+	"github.com/openorch/openorch/server/internal/di"
 	"go.uber.org/mock/gomock"
 )
 

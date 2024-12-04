@@ -15,7 +15,7 @@ package promptservice
 import (
 	"strings"
 
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
 )
 
 func llmResponseToText(responses []*llm.CompletionResponse) string {

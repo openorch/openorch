@@ -16,11 +16,11 @@ import (
 	"context"
 	"sync"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
 
-	policytypes "github.com/singulatron/superplatform/server/internal/services/policy/types"
+	policytypes "github.com/openorch/openorch/server/internal/services/policy/types"
 )
 
 type PolicyService struct {

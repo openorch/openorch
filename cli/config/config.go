@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	types "github.com/singulatron/superplatform/cli/types"
+	types "github.com/openorch/openorch/cli/types"
 
 	"gopkg.in/yaml.v2"
 )

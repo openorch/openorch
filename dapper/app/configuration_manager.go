@@ -13,8 +13,8 @@ import (
 	"path"
 	"runtime"
 
-	features "github.com/singulatron/superplatform/dapper/features"
-	dt "github.com/singulatron/superplatform/dapper/types"
+	features "github.com/openorch/openorch/dapper/features"
+	dt "github.com/openorch/openorch/dapper/types"
 )
 
 // ConfigurationManager manages configurations and feature dependencies.

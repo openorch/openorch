@@ -11,10 +11,10 @@ package promptservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (p *PromptService) registerPermissions() error {

@@ -6,17 +6,17 @@ import (
 	"os"
 	"path"
 
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore/localstore"
+	"github.com/openorch/openorch/sdk/go/datastore/sqlstore"
+	"github.com/openorch/openorch/sdk/go/logger"
 	"github.com/pkg/errors"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/datastore/localstore"
-	"github.com/singulatron/superplatform/sdk/go/datastore/sqlstore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
 )
 
 func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance any) (datastore.DataStore, error), error) {
-	dbType := os.Getenv("SUPERPLATFORM_DB")
-	dbDriver := os.Getenv("SUPERPLATFORM_DB_DRIVER")
-	dbString := os.Getenv("SUPERPLATFORM_DB_STRING")
+	dbType := os.Getenv("OPENORCH_DB")
+	dbDriver := os.Getenv("OPENORCH_DB_DRIVER")
+	dbString := os.Getenv("OPENORCH_DB_STRING")
 
 	if dbDriver == "" {
 		dbDriver = "postgres"

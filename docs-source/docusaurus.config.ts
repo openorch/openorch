@@ -29,7 +29,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/singulatron/superplatform/tree/main/docs-source/",
+            "https://github.com/openorch/openorch/tree/main/docs-source/",
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: {
@@ -37,7 +37,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/singulatron/superplatform/tree/main/docs-source/",
+            "https://github.com/openorch/openorch/tree/main/docs-source/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -92,7 +92,7 @@ const config: Config = {
           to: "/docs/category/superplatform-api",
         },
         {
-          href: "https://github.com/singulatron/superplatform",
+          href: "https://github.com/openorch/openorch",
           label: "GitHub",
           position: "right",
         },
@@ -132,7 +132,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/singulatron/superplatform",
+              href: "https://github.com/openorch/openorch",
             },
           ],
         },
@@ -214,7 +214,7 @@ const config: Config = {
             specPath: "examples/superplatform.yaml",
             outputDir: "docs/superplatform",
             downloadUrl:
-              "https://raw.githubusercontent.com/singulatron/superplatform/main/server/docs/swagger.yaml",
+              "https://raw.githubusercontent.com/openorch/openorch/main/server/docs/swagger.yaml",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",

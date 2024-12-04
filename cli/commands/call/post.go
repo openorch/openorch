@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/util"
 	"github.com/pkg/errors"
-	"github.com/singulatron/superplatform/cli/config"
-	"github.com/singulatron/superplatform/cli/util"
 	"github.com/spf13/cobra"
 )
 

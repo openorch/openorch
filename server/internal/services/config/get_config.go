@@ -13,7 +13,7 @@
 package configservice
 
 import (
-	types "github.com/singulatron/superplatform/server/internal/services/config/types"
+	types "github.com/openorch/openorch/server/internal/services/config/types"
 )
 
 func (cs *ConfigService) getConfig() (types.Config, error) {

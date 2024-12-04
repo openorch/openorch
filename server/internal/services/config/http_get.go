@@ -16,7 +16,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	config "github.com/singulatron/superplatform/server/internal/services/config/types"
+	config "github.com/openorch/openorch/server/internal/services/config/types"
 )
 
 // Get retrieves the current configuration

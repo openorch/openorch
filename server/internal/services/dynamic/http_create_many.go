@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	dynamictypes "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	dynamictypes "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
 func (g *DynamicService) CreateMany(

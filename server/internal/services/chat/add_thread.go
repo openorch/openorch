@@ -19,10 +19,10 @@ import (
 	"log/slog"
 	"time"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/logger"
+	chattypes "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 func (a *ChatService) addThread(

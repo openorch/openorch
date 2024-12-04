@@ -11,10 +11,10 @@ package policyservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	policytypes "github.com/singulatron/superplatform/server/internal/services/policy/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	policytypes "github.com/openorch/openorch/server/internal/services/policy/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (p *PolicyService) registerPermissions() error {

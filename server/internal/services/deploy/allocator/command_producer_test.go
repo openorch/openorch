@@ -11,9 +11,9 @@ package allocator_test
 import (
 	"testing"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	"github.com/singulatron/superplatform/server/internal/services/deploy/allocator"
-	deploy "github.com/singulatron/superplatform/server/internal/services/deploy/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	"github.com/openorch/openorch/server/internal/services/deploy/allocator"
+	deploy "github.com/openorch/openorch/server/internal/services/deploy/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -45,7 +45,7 @@ hostPort: 8887
 ~/singulatron/cli$ cat fixtures/definitionB.yaml
 id: test-b
 repository:
-  url: https://github.com/singulatron/superplatform.git
+  url: https://github.com/openorch/openorch.git
   containerFile: server/docker/Dockerfile
   port: 58231
 hostPort: 9998
