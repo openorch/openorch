@@ -56,7 +56,7 @@ docker compose up
 
 ## Once it's running
 
-After the containers successfully start, you can go to `127.0.0.1:3901` and log in with the [Default Credentials](/docs/running/using#default-credentials).
+After the containers successfully start, you can go to `127.0.0.1:3901` and log in with the [Default Credentials](/docs/running-the-daemon/using#default-credentials).
 
 ## Configuring
 

@@ -26,7 +26,7 @@ The `docker-compose-yaml` in the root folder is designed to build and run the cu
 
 ### Once it's running
 
-After the containers successfully start, you can go to [http://127.0.0.1:3901](http://127.0.0.1:3901) and log in with the [Default Credentials](/docs/running/using#default-credentials).
+After the containers successfully start, you can go to [http://127.0.0.1:3901](http://127.0.0.1:3901) and log in with the [Default Credentials](/docs/running-the-daemon/using#default-credentials).
 
 ## Natively (Go & Angular)
 
@@ -48,7 +48,7 @@ npm run start
 
 ### Once it's running
 
-After the both the backend and frontend starts, you can go to [http://127.0.0.1:4200](http://127.0.0.1:4200) and log in with the [Default Credentials](/docs/running/using#default-credentials).
+After the both the backend and frontend starts, you can go to [http://127.0.0.1:4200](http://127.0.0.1:4200) and log in with the [Default Credentials](/docs/running-the-daemon/using#default-credentials).
 
 ## Administration
 
