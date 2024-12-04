@@ -117,13 +117,6 @@ OpenOrch is a microservices platform that first came to mind back in 2013 when I
 
 It's a server and ecosystem enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.
 
-## Primary Use Cases
-
-- Run open-source AI models privately on your own infrastructure, ensuring that your data and operations remain fully under your control.
-- Build backendless application by using OpenOrch as a database and AI prompting API. Like Firebase, but with a focus on AI.
-- Build your own backend services around OpenOrch. Run these services outside or inside the OpenOrch platform.
-- OpenOrch is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), OpenOrch seamlessly integrates other applications into its ecosystem.
-
 <p align="center">
   <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
     <img width="200px" src="https://singulatron.com/assets/thumbnail/chat.png?refresh=3" />
