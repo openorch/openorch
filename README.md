@@ -4,7 +4,7 @@
     <span>
       <h1>OpenOrch</h1>
     </span>
-    <div>On-premise AI platform and microservices ecosystem.</div>
+    <div>Self-hosted AI and microservices hub</div>
     <div>
       <a href="https://openorch.org">openorch.org</a>
     </div>
@@ -18,7 +18,10 @@
 ![js client build](https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg)
 ![go sdk](https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg)
 
-OpenOrch gives the power back to the developers in the age of AI—self host your own AI platform!
+OpenOrch is a lightweight daemon that transforms your servers into a powerful development environment. It can run AI models, containers, and microservices through a language-agnostic API.
+Think of it as a blend of (an extremely simplistic, early-stage) Kubernetes and a framework for building applications on top—designed for fixed-resource setups and straightforward self-hosting.
+
+Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data.
 
 ## Starting
 
