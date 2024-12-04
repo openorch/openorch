@@ -3,7 +3,7 @@ import { RegistrySvcUsageFromJSON, RegistrySvcUsageToJSON } from './RegistrySvcU
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function RegistrySvcResourceUsageFromJSONTyped(json, ignoreDiscriminator) {
         'memory': json['memory'] == null ? undefined : RegistrySvcUsageFromJSON(json['memory']),
     };
 }
-function RegistrySvcResourceUsageToJSON(value) {
+function RegistrySvcResourceUsageToJSON(json) {
+    return RegistrySvcResourceUsageToJSONTyped(json, false);
+}
+function RegistrySvcResourceUsageToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -43,4 +46,4 @@ function RegistrySvcResourceUsageToJSON(value) {
     };
 }
 
-export { RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, instanceOfRegistrySvcResourceUsage };
+export { RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, RegistrySvcResourceUsageToJSONTyped, instanceOfRegistrySvcResourceUsage };

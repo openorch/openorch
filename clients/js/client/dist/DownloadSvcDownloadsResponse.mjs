@@ -3,7 +3,7 @@ import { DownloadSvcDownloadDetailsFromJSON, DownloadSvcDownloadDetailsToJSON } 
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function DownloadSvcDownloadsResponseFromJSONTyped(json, ignoreDiscriminator) {
         'downloads': json['downloads'] == null ? undefined : (json['downloads'].map(DownloadSvcDownloadDetailsFromJSON)),
     };
 }
-function DownloadSvcDownloadsResponseToJSON(value) {
+function DownloadSvcDownloadsResponseToJSON(json) {
+    return DownloadSvcDownloadsResponseToJSONTyped(json, false);
+}
+function DownloadSvcDownloadsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function DownloadSvcDownloadsResponseToJSON(value) {
     };
 }
 
-export { DownloadSvcDownloadsResponseFromJSON, DownloadSvcDownloadsResponseFromJSONTyped, DownloadSvcDownloadsResponseToJSON, instanceOfDownloadSvcDownloadsResponse };
+export { DownloadSvcDownloadsResponseFromJSON, DownloadSvcDownloadsResponseFromJSONTyped, DownloadSvcDownloadsResponseToJSON, DownloadSvcDownloadsResponseToJSONTyped, instanceOfDownloadSvcDownloadsResponse };

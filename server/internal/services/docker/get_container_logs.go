@@ -33,7 +33,7 @@ func (d *DockerService) getContainerLogsAndStatus(
 	}
 
 	for _, modelContainer := range containers {
-		if modelContainer.Labels["superplatform-hash"] == singulatronHash {
+		if modelContainer.Labels["openorch-hash"] == singulatronHash {
 			logOptions := container.LogsOptions{
 				ShowStdout: true,
 				ShowStderr: true,

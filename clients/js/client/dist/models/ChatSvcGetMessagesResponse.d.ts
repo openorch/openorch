@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,4 +36,5 @@ export interface ChatSvcGetMessagesResponse {
 export declare function instanceOfChatSvcGetMessagesResponse(value: object): value is ChatSvcGetMessagesResponse;
 export declare function ChatSvcGetMessagesResponseFromJSON(json: any): ChatSvcGetMessagesResponse;
 export declare function ChatSvcGetMessagesResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChatSvcGetMessagesResponse;
-export declare function ChatSvcGetMessagesResponseToJSON(value?: ChatSvcGetMessagesResponse | null): any;
+export declare function ChatSvcGetMessagesResponseToJSON(json: any): ChatSvcGetMessagesResponse;
+export declare function ChatSvcGetMessagesResponseToJSONTyped(value?: ChatSvcGetMessagesResponse | null, ignoreDiscriminator?: boolean): any;

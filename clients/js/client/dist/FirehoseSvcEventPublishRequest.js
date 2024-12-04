@@ -5,7 +5,7 @@ var FirehoseSvcEvent = require('./FirehoseSvcEvent.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function FirehoseSvcEventPublishRequestFromJSONTyped(json, ignoreDiscriminator) 
         'event': json['event'] == null ? undefined : FirehoseSvcEvent.FirehoseSvcEventFromJSON(json['event']),
     };
 }
-function FirehoseSvcEventPublishRequestToJSON(value) {
+function FirehoseSvcEventPublishRequestToJSON(json) {
+    return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
+}
+function FirehoseSvcEventPublishRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function FirehoseSvcEventPublishRequestToJSON(value) {
 exports.FirehoseSvcEventPublishRequestFromJSON = FirehoseSvcEventPublishRequestFromJSON;
 exports.FirehoseSvcEventPublishRequestFromJSONTyped = FirehoseSvcEventPublishRequestFromJSONTyped;
 exports.FirehoseSvcEventPublishRequestToJSON = FirehoseSvcEventPublishRequestToJSON;
+exports.FirehoseSvcEventPublishRequestToJSONTyped = FirehoseSvcEventPublishRequestToJSONTyped;
 exports.instanceOfFirehoseSvcEventPublishRequest = instanceOfFirehoseSvcEventPublishRequest;

@@ -15,10 +15,10 @@ package downloadservice
 import (
 	"context"
 
-	client "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	client "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (ds *DownloadService) registerPermissions() error {

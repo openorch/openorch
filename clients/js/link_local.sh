@@ -10,10 +10,10 @@ cd ..
 
 cd example;
 npm install
-npm link @superplatform/client;
+npm link @openorch/client;
 npm run build
 cd ..
 
 cd ../../desktop/workspaces/angular-app/
-npm link @superplatform/client
+npm link @openorch/client
 cd ../../../clients/js

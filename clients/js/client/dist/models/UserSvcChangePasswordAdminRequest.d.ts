@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface UserSvcChangePasswordAdminRequest {
 export declare function instanceOfUserSvcChangePasswordAdminRequest(value: object): value is UserSvcChangePasswordAdminRequest;
 export declare function UserSvcChangePasswordAdminRequestFromJSON(json: any): UserSvcChangePasswordAdminRequest;
 export declare function UserSvcChangePasswordAdminRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserSvcChangePasswordAdminRequest;
-export declare function UserSvcChangePasswordAdminRequestToJSON(value?: UserSvcChangePasswordAdminRequest | null): any;
+export declare function UserSvcChangePasswordAdminRequestToJSON(json: any): UserSvcChangePasswordAdminRequest;
+export declare function UserSvcChangePasswordAdminRequestToJSONTyped(value?: UserSvcChangePasswordAdminRequest | null, ignoreDiscriminator?: boolean): any;

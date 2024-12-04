@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,12 +18,14 @@ import {
     UserSvcOrganizationFromJSON,
     UserSvcOrganizationFromJSONTyped,
     UserSvcOrganizationToJSON,
+    UserSvcOrganizationToJSONTyped,
 } from './UserSvcOrganization';
 import type { UserSvcUser } from './UserSvcUser';
 import {
     UserSvcUserFromJSON,
     UserSvcUserFromJSONTyped,
     UserSvcUserToJSON,
+    UserSvcUserToJSONTyped,
 } from './UserSvcUser';
 
 /**
@@ -75,10 +77,15 @@ export function UserSvcReadUserByTokenResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function UserSvcReadUserByTokenResponseToJSON(value?: UserSvcReadUserByTokenResponse | null): any {
+  export function UserSvcReadUserByTokenResponseToJSON(json: any): UserSvcReadUserByTokenResponse {
+      return UserSvcReadUserByTokenResponseToJSONTyped(json, false);
+  }
+
+  export function UserSvcReadUserByTokenResponseToJSONTyped(value?: UserSvcReadUserByTokenResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'activeOrganizationId': value['activeOrganizationId'],

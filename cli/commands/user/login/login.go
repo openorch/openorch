@@ -3,10 +3,10 @@ package login
 import (
 	"fmt"
 
-	"github.com/singulatron/superplatform/cli/config"
-	"github.com/singulatron/superplatform/cli/types"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
+	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/spf13/cobra"
 )
 

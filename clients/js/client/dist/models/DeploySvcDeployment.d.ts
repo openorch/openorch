@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -103,4 +103,5 @@ export interface DeploySvcDeployment {
 export declare function instanceOfDeploySvcDeployment(value: object): value is DeploySvcDeployment;
 export declare function DeploySvcDeploymentFromJSON(json: any): DeploySvcDeployment;
 export declare function DeploySvcDeploymentFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeploySvcDeployment;
-export declare function DeploySvcDeploymentToJSON(value?: DeploySvcDeployment | null): any;
+export declare function DeploySvcDeploymentToJSON(json: any): DeploySvcDeployment;
+export declare function DeploySvcDeploymentToJSONTyped(value?: DeploySvcDeployment | null, ignoreDiscriminator?: boolean): any;

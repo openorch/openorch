@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DeploySvcAutoScalingConfigFromJSONTyped(json, ignoreDiscriminator) {
         'minReplicas': json['minReplicas'] == null ? undefined : json['minReplicas'],
     };
 }
-function DeploySvcAutoScalingConfigToJSON(value) {
+function DeploySvcAutoScalingConfigToJSON(json) {
+    return DeploySvcAutoScalingConfigToJSONTyped(json, false);
+}
+function DeploySvcAutoScalingConfigToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -46,4 +49,5 @@ function DeploySvcAutoScalingConfigToJSON(value) {
 exports.DeploySvcAutoScalingConfigFromJSON = DeploySvcAutoScalingConfigFromJSON;
 exports.DeploySvcAutoScalingConfigFromJSONTyped = DeploySvcAutoScalingConfigFromJSONTyped;
 exports.DeploySvcAutoScalingConfigToJSON = DeploySvcAutoScalingConfigToJSON;
+exports.DeploySvcAutoScalingConfigToJSONTyped = DeploySvcAutoScalingConfigToJSONTyped;
 exports.instanceOfDeploySvcAutoScalingConfig = instanceOfDeploySvcAutoScalingConfig;

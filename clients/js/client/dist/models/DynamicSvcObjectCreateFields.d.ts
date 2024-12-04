@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -74,4 +74,5 @@ export interface DynamicSvcObjectCreateFields {
 export declare function instanceOfDynamicSvcObjectCreateFields(value: object): value is DynamicSvcObjectCreateFields;
 export declare function DynamicSvcObjectCreateFieldsFromJSON(json: any): DynamicSvcObjectCreateFields;
 export declare function DynamicSvcObjectCreateFieldsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcObjectCreateFields;
-export declare function DynamicSvcObjectCreateFieldsToJSON(value?: DynamicSvcObjectCreateFields | null): any;
+export declare function DynamicSvcObjectCreateFieldsToJSON(json: any): DynamicSvcObjectCreateFields;
+export declare function DynamicSvcObjectCreateFieldsToJSONTyped(value?: DynamicSvcObjectCreateFields | null, ignoreDiscriminator?: boolean): any;

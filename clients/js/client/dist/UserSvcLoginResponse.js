@@ -5,7 +5,7 @@ var UserSvcAuthToken = require('./UserSvcAuthToken.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function UserSvcLoginResponseFromJSONTyped(json, ignoreDiscriminator) {
         'token': json['token'] == null ? undefined : UserSvcAuthToken.UserSvcAuthTokenFromJSON(json['token']),
     };
 }
-function UserSvcLoginResponseToJSON(value) {
+function UserSvcLoginResponseToJSON(json) {
+    return UserSvcLoginResponseToJSONTyped(json, false);
+}
+function UserSvcLoginResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function UserSvcLoginResponseToJSON(value) {
 exports.UserSvcLoginResponseFromJSON = UserSvcLoginResponseFromJSON;
 exports.UserSvcLoginResponseFromJSONTyped = UserSvcLoginResponseFromJSONTyped;
 exports.UserSvcLoginResponseToJSON = UserSvcLoginResponseToJSON;
+exports.UserSvcLoginResponseToJSONTyped = UserSvcLoginResponseToJSONTyped;
 exports.instanceOfUserSvcLoginResponse = instanceOfUserSvcLoginResponse;

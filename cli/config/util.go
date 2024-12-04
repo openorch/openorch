@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	"github.com/singulatron/superplatform/cli/types"
+	"github.com/openorch/openorch/cli/types"
 )
 
 func GetSelectedEnv() (*types.Environment, error) {

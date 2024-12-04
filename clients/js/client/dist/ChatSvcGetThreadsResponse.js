@@ -5,7 +5,7 @@ var ChatSvcThread = require('./ChatSvcThread.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function ChatSvcGetThreadsResponseFromJSONTyped(json, ignoreDiscriminator) {
         'threads': json['threads'] == null ? undefined : (json['threads'].map(ChatSvcThread.ChatSvcThreadFromJSON)),
     };
 }
-function ChatSvcGetThreadsResponseToJSON(value) {
+function ChatSvcGetThreadsResponseToJSON(json) {
+    return ChatSvcGetThreadsResponseToJSONTyped(json, false);
+}
+function ChatSvcGetThreadsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function ChatSvcGetThreadsResponseToJSON(value) {
 exports.ChatSvcGetThreadsResponseFromJSON = ChatSvcGetThreadsResponseFromJSON;
 exports.ChatSvcGetThreadsResponseFromJSONTyped = ChatSvcGetThreadsResponseFromJSONTyped;
 exports.ChatSvcGetThreadsResponseToJSON = ChatSvcGetThreadsResponseToJSON;
+exports.ChatSvcGetThreadsResponseToJSONTyped = ChatSvcGetThreadsResponseToJSONTyped;
 exports.instanceOfChatSvcGetThreadsResponse = instanceOfChatSvcGetThreadsResponse;

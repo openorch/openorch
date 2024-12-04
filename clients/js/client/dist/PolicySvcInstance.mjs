@@ -7,7 +7,7 @@ import './PolicySvcEntity.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,7 +40,10 @@ function PolicySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'templateId': PolicySvcTemplateIdFromJSON(json['templateId']),
     };
 }
-function PolicySvcInstanceToJSON(value) {
+function PolicySvcInstanceToJSON(json) {
+    return PolicySvcInstanceToJSONTyped(json, false);
+}
+function PolicySvcInstanceToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -53,4 +56,4 @@ function PolicySvcInstanceToJSON(value) {
     };
 }
 
-export { PolicySvcInstanceFromJSON, PolicySvcInstanceFromJSONTyped, PolicySvcInstanceToJSON, instanceOfPolicySvcInstance };
+export { PolicySvcInstanceFromJSON, PolicySvcInstanceFromJSONTyped, PolicySvcInstanceToJSON, PolicySvcInstanceToJSONTyped, instanceOfPolicySvcInstance };

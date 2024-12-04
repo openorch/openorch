@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -62,10 +62,15 @@ export function UserSvcChangePasswordRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function UserSvcChangePasswordRequestToJSON(value?: UserSvcChangePasswordRequest | null): any {
+  export function UserSvcChangePasswordRequestToJSON(json: any): UserSvcChangePasswordRequest {
+      return UserSvcChangePasswordRequestToJSONTyped(json, false);
+  }
+
+  export function UserSvcChangePasswordRequestToJSONTyped(value?: UserSvcChangePasswordRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'currentPassword': value['currentPassword'],

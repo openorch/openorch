@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	chat "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 // GetThreads retrieves a list of chat threads for a user

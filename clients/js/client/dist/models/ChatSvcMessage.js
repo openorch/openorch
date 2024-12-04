@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ export function ChatSvcMessageFromJSONTyped(json, ignoreDiscriminator) {
         'userId': json['userId'] == null ? undefined : json['userId'],
     };
 }
-export function ChatSvcMessageToJSON(value) {
+export function ChatSvcMessageToJSON(json) {
+    return ChatSvcMessageToJSONTyped(json, false);
+}
+export function ChatSvcMessageToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

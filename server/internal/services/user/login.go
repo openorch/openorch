@@ -15,9 +15,9 @@ package userservice
 import (
 	"time"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	usertypes "github.com/singulatron/superplatform/server/internal/services/user/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/pkg/errors"

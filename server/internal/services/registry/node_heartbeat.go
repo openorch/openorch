@@ -25,14 +25,14 @@ import (
 	"syscall"
 	"time"
 
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
+	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 	"github.com/pkg/errors"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
 )
 
 func (ns *RegistryService) nodeHeartbeat() {

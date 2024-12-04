@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,7 +28,10 @@ export function ConfigSvcAppServiceConfigFromJSONTyped(json, ignoreDiscriminator
         'loggingDisabled': json['loggingDisabled'] == null ? undefined : json['loggingDisabled'],
     };
 }
-export function ConfigSvcAppServiceConfigToJSON(value) {
+export function ConfigSvcAppServiceConfigToJSON(json) {
+    return ConfigSvcAppServiceConfigToJSONTyped(json, false);
+}
+export function ConfigSvcAppServiceConfigToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

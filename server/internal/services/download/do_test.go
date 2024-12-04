@@ -22,11 +22,11 @@ import (
 	"testing"
 	"time"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/server/internal/di"
-	downloadservice "github.com/singulatron/superplatform/server/internal/services/download"
-	types "github.com/singulatron/superplatform/server/internal/services/download/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/server/internal/di"
+	downloadservice "github.com/openorch/openorch/server/internal/services/download"
+	types "github.com/openorch/openorch/server/internal/services/download/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -101,7 +101,7 @@ outer:
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".superplatform",
+		".openorch",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(fileHostServer.URL),
 	)
@@ -154,7 +154,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 
 	partFilePath := filepath.Join(
 		options.HomeDir,
-		".superplatform",
+		".openorch",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL)+".part",
 	)
@@ -192,7 +192,7 @@ outer:
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".superplatform",
+		".openorch",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL),
 	)
@@ -230,7 +230,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
 		options.HomeDir,
-		".superplatform",
+		".openorch",
 		"downloads",
 		downloadservice.EncodeURLtoFileName(downloadURL),
 	)

@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -31,7 +31,10 @@ function DeploySvcTargetRegionFromJSONTyped(json, ignoreDiscriminator) {
         'zone': json['zone'] == null ? undefined : json['zone'],
     };
 }
-function DeploySvcTargetRegionToJSON(value) {
+function DeploySvcTargetRegionToJSON(json) {
+    return DeploySvcTargetRegionToJSONTyped(json, false);
+}
+function DeploySvcTargetRegionToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DeploySvcTargetRegionToJSON(value) {
 exports.DeploySvcTargetRegionFromJSON = DeploySvcTargetRegionFromJSON;
 exports.DeploySvcTargetRegionFromJSONTyped = DeploySvcTargetRegionFromJSONTyped;
 exports.DeploySvcTargetRegionToJSON = DeploySvcTargetRegionToJSON;
+exports.DeploySvcTargetRegionToJSONTyped = DeploySvcTargetRegionToJSONTyped;
 exports.instanceOfDeploySvcTargetRegion = instanceOfDeploySvcTargetRegion;

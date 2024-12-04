@@ -24,7 +24,7 @@ export function enableLogging() {
 
 // Define a single path for the log file
 // @todo change this so its not fixed
-const LOG_FILE_PATH = join(homedir(), '.superplatform', 'all.log');
+const LOG_FILE_PATH = join(homedir(), '.openorch', 'all.log');
 
 const logStream = fs.createWriteStream(LOG_FILE_PATH, { flags: 'a' });
 

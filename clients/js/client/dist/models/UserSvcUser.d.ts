@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -71,4 +71,5 @@ export interface UserSvcUser {
 export declare function instanceOfUserSvcUser(value: object): value is UserSvcUser;
 export declare function UserSvcUserFromJSON(json: any): UserSvcUser;
 export declare function UserSvcUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserSvcUser;
-export declare function UserSvcUserToJSON(value?: UserSvcUser | null): any;
+export declare function UserSvcUserToJSON(json: any): UserSvcUser;
+export declare function UserSvcUserToJSONTyped(value?: UserSvcUser | null, ignoreDiscriminator?: boolean): any;

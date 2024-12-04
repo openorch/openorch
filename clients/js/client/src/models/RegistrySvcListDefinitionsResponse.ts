@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     RegistrySvcDefinitionFromJSON,
     RegistrySvcDefinitionFromJSONTyped,
     RegistrySvcDefinitionToJSON,
+    RegistrySvcDefinitionToJSONTyped,
 } from './RegistrySvcDefinition';
 
 /**
@@ -55,10 +56,15 @@ export function RegistrySvcListDefinitionsResponseFromJSONTyped(json: any, ignor
     };
 }
 
-export function RegistrySvcListDefinitionsResponseToJSON(value?: RegistrySvcListDefinitionsResponse | null): any {
+  export function RegistrySvcListDefinitionsResponseToJSON(json: any): RegistrySvcListDefinitionsResponse {
+      return RegistrySvcListDefinitionsResponseToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcListDefinitionsResponseToJSONTyped(value?: RegistrySvcListDefinitionsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'definitions': value['definitions'] == null ? undefined : ((value['definitions'] as Array<any>).map(RegistrySvcDefinitionToJSON)),

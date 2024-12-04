@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface DockerSvcContainerIsRunningResponse {
 export declare function instanceOfDockerSvcContainerIsRunningResponse(value: object): value is DockerSvcContainerIsRunningResponse;
 export declare function DockerSvcContainerIsRunningResponseFromJSON(json: any): DockerSvcContainerIsRunningResponse;
 export declare function DockerSvcContainerIsRunningResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DockerSvcContainerIsRunningResponse;
-export declare function DockerSvcContainerIsRunningResponseToJSON(value?: DockerSvcContainerIsRunningResponse | null): any;
+export declare function DockerSvcContainerIsRunningResponseToJSON(json: any): DockerSvcContainerIsRunningResponse;
+export declare function DockerSvcContainerIsRunningResponseToJSONTyped(value?: DockerSvcContainerIsRunningResponse | null, ignoreDiscriminator?: boolean): any;

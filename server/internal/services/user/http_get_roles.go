@@ -16,7 +16,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	user "github.com/singulatron/superplatform/server/internal/services/user/types"
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // GetRoles handles the retrieval of all roles.

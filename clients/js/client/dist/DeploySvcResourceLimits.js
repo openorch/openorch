@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DeploySvcResourceLimitsFromJSONTyped(json, ignoreDiscriminator) {
         'vram': json['vram'] == null ? undefined : json['vram'],
     };
 }
-function DeploySvcResourceLimitsToJSON(value) {
+function DeploySvcResourceLimitsToJSON(json) {
+    return DeploySvcResourceLimitsToJSONTyped(json, false);
+}
+function DeploySvcResourceLimitsToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -46,4 +49,5 @@ function DeploySvcResourceLimitsToJSON(value) {
 exports.DeploySvcResourceLimitsFromJSON = DeploySvcResourceLimitsFromJSON;
 exports.DeploySvcResourceLimitsFromJSONTyped = DeploySvcResourceLimitsFromJSONTyped;
 exports.DeploySvcResourceLimitsToJSON = DeploySvcResourceLimitsToJSON;
+exports.DeploySvcResourceLimitsToJSONTyped = DeploySvcResourceLimitsToJSONTyped;
 exports.instanceOfDeploySvcResourceLimits = instanceOfDeploySvcResourceLimits;

@@ -8,7 +8,7 @@ tags:
 
 # Running Locally
 
-The easiest way to run Superplatform is to use [Docker Compose](https://docs.docker.com/compose/install/).
+The easiest way to run OpenOrch is to use [Docker Compose](https://docs.docker.com/compose/install/).
 
 ## Docker Compose
 
@@ -30,7 +30,7 @@ After the containers successfully start, you can go to [http://127.0.0.1:3901](h
 
 ## Natively (Go & Angular)
 
-If you have both Go and Angular installed on your computer, the easiest way to dip your feet into Superplatform is to run things locally.
+If you have both Go and Angular installed on your computer, the easiest way to dip your feet into OpenOrch is to run things locally.
 
 ## Backend
 
@@ -54,12 +54,12 @@ After the both the backend and frontend starts, you can go to [http://127.0.0.1:
 
 ### Local files
 
-By default Superplatform uses the folder `~/.superplatform` on your machine for config, file downloads and for the local database.
+By default OpenOrch uses the folder `~/.openorch` on your machine for config, file downloads and for the local database.
 
 #### Config file
 
 ```bash
-cat ~/.superplatform/config.yaml
+cat ~/.openorch/config.yaml
 ```
 
 #### Download.json
@@ -67,17 +67,17 @@ cat ~/.superplatform/config.yaml
 This file contains all the local downloads on a node. Losing is file is not a big deal as downloaded files are detected even if this file or the entry in this file is missing.
 
 ```bash
-~/.superplatform/downloads.json
+~/.openorch/downloads.json
 ```
 
 #### Data files
 
-By default Superplatform uses local gzipped json files to store database entries. Data access across Superplatform is interface based so the this implementation can be easily swapped out for PostgreSQL and other database backends.
+By default OpenOrch uses local gzipped json files to store database entries. Data access across OpenOrch is interface based so the this implementation can be easily swapped out for PostgreSQL and other database backends.
 
 The files are located at
 
 ```bash
-ls ~/.superplatform/data
+ls ~/.openorch/data
 ```
 
 Each file is prefixed by the owner service slug, so the `User Svc` `users` table becomes `userSvcUsers`.
@@ -85,8 +85,8 @@ Each file is prefixed by the owner service slug, so the `User Svc` `users` table
 If you want to view the contents of a file:
 
 ```bash
-cat ~/.superplatform/data/userSvcUsers.zip | gzip -dc
+cat ~/.openorch/data/userSvcUsers.zip | gzip -dc
 
 # or if you jave jq installed
-cat ~/.superplatform/data/userSvcUsers.zip | gzip -dc | jq
+cat ~/.openorch/data/userSvcUsers.zip | gzip -dc | jq
 ```

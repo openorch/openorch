@@ -15,13 +15,13 @@ This snippet will give you a quick idea about how to deploy the frontend and bac
 version: "3.8"
 
 volumes:
-  superplatform-data:
-    name: superplatform-data
+  openorch-data:
+    name: openorch-data
     driver: local
 
 services:
-  superplatform-frontend:
-    image: crufter/superplatform-frontend:latest
+  openorch-frontend:
+    image: crufter/openorch-frontend:latest
     ports:
       - "3901:80"
     environment:
@@ -29,23 +29,23 @@ services:
       # It is not an internal address, it's the address the   browser will make API requests to.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
-  superplatform-backend:
-    image: crufter/superplatform-backend:latest
+  openorch-backend:
+    image: crufter/openorch-backend:latest
     ports:
       - "58231:58231"
     volumes:
       # We mount the docker socket so the backend can start   containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
-      - superplatform-data:/root/.superplatform
+      - openorch-data:/root/.openorch
     environment:
-      # This volume will be mounted by the LLM containers to access the models downloaded by Superplatform.
-      - SUPERPLATFORM_VOLUME_NAME=superplatform-data
+      # This volume will be mounted by the LLM containers to access the models downloaded by OpenOrch.
+      - OPENORCH_VOLUME_NAME=openorch-data
       #
       # GPU Acceleration for NVIDIA GPUs
       # Uncomment this envar for NVIDIA GPUs.
       #
-      # - SUPERPLATFORM_GPU_PLATFORM=cuda
+      # - OPENORCH_GPU_PLATFORM=cuda
 ```
 
 Put the above into a file called `docker-compose.yaml` in a folder on your computer and run it with the following command:

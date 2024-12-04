@@ -18,8 +18,8 @@ import (
 
 	"github.com/samber/lo"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	dynamic "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
 // Query retrieves objects based on provided criteria

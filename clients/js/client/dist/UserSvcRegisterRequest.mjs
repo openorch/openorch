@@ -3,7 +3,7 @@ import { UserSvcContactFromJSON, UserSvcContactToJSON } from './UserSvcContact.m
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,10 @@ function UserSvcRegisterRequestFromJSONTyped(json, ignoreDiscriminator) {
         'slug': json['slug'] == null ? undefined : json['slug'],
     };
 }
-function UserSvcRegisterRequestToJSON(value) {
+function UserSvcRegisterRequestToJSON(json) {
+    return UserSvcRegisterRequestToJSONTyped(json, false);
+}
+function UserSvcRegisterRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -45,4 +48,4 @@ function UserSvcRegisterRequestToJSON(value) {
     };
 }
 
-export { UserSvcRegisterRequestFromJSON, UserSvcRegisterRequestFromJSONTyped, UserSvcRegisterRequestToJSON, instanceOfUserSvcRegisterRequest };
+export { UserSvcRegisterRequestFromJSON, UserSvcRegisterRequestFromJSONTyped, UserSvcRegisterRequestToJSON, UserSvcRegisterRequestToJSONTyped, instanceOfUserSvcRegisterRequest };

@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function UserSvcAuthTokenFromJSONTyped(json, ignoreDiscriminator) {
         'userId': json['userId'] == null ? undefined : json['userId'],
     };
 }
-function UserSvcAuthTokenToJSON(value) {
+function UserSvcAuthTokenToJSON(json) {
+    return UserSvcAuthTokenToJSONTyped(json, false);
+}
+function UserSvcAuthTokenToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -52,4 +55,5 @@ function UserSvcAuthTokenToJSON(value) {
 exports.UserSvcAuthTokenFromJSON = UserSvcAuthTokenFromJSON;
 exports.UserSvcAuthTokenFromJSONTyped = UserSvcAuthTokenFromJSONTyped;
 exports.UserSvcAuthTokenToJSON = UserSvcAuthTokenToJSON;
+exports.UserSvcAuthTokenToJSONTyped = UserSvcAuthTokenToJSONTyped;
 exports.instanceOfUserSvcAuthToken = instanceOfUserSvcAuthToken;

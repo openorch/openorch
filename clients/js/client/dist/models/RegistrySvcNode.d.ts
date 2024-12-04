@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -49,7 +49,7 @@ export interface RegistrySvcNode {
     region?: string;
     /**
      * URL of the daemon running on the node.
-     * If not configured defaults to hostname + default Superplatform daemon port.
+     * If not configured defaults to hostname + default OpenOrch daemon port.
      * @type {string}
      * @memberof RegistrySvcNode
      */
@@ -67,4 +67,5 @@ export interface RegistrySvcNode {
 export declare function instanceOfRegistrySvcNode(value: object): value is RegistrySvcNode;
 export declare function RegistrySvcNodeFromJSON(json: any): RegistrySvcNode;
 export declare function RegistrySvcNodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcNode;
-export declare function RegistrySvcNodeToJSON(value?: RegistrySvcNode | null): any;
+export declare function RegistrySvcNodeToJSON(json: any): RegistrySvcNode;
+export declare function RegistrySvcNodeToJSONTyped(value?: RegistrySvcNode | null, ignoreDiscriminator?: boolean): any;

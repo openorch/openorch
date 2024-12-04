@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,4 +40,5 @@ export interface DockerSvcGetContainerSummaryResponse {
 export declare function instanceOfDockerSvcGetContainerSummaryResponse(value: object): value is DockerSvcGetContainerSummaryResponse;
 export declare function DockerSvcGetContainerSummaryResponseFromJSON(json: any): DockerSvcGetContainerSummaryResponse;
 export declare function DockerSvcGetContainerSummaryResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DockerSvcGetContainerSummaryResponse;
-export declare function DockerSvcGetContainerSummaryResponseToJSON(value?: DockerSvcGetContainerSummaryResponse | null): any;
+export declare function DockerSvcGetContainerSummaryResponseToJSON(json: any): DockerSvcGetContainerSummaryResponse;
+export declare function DockerSvcGetContainerSummaryResponseToJSONTyped(value?: DockerSvcGetContainerSummaryResponse | null, ignoreDiscriminator?: boolean): any;

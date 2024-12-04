@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ export function DatastoreQueryFromJSONTyped(json, ignoreDiscriminator) {
         'orderBys': json['orderBys'] == null ? undefined : (json['orderBys'].map(DatastoreOrderByFromJSON)),
     };
 }
-export function DatastoreQueryToJSON(value) {
+export function DatastoreQueryToJSON(json) {
+    return DatastoreQueryToJSONTyped(json, false);
+}
+export function DatastoreQueryToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

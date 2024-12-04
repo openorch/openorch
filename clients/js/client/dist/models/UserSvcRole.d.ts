@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -58,4 +58,5 @@ export interface UserSvcRole {
 export declare function instanceOfUserSvcRole(value: object): value is UserSvcRole;
 export declare function UserSvcRoleFromJSON(json: any): UserSvcRole;
 export declare function UserSvcRoleFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserSvcRole;
-export declare function UserSvcRoleToJSON(value?: UserSvcRole | null): any;
+export declare function UserSvcRoleToJSON(json: any): UserSvcRole;
+export declare function UserSvcRoleToJSONTyped(value?: UserSvcRole | null, ignoreDiscriminator?: boolean): any;

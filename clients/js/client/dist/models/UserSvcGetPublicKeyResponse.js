@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,7 +28,10 @@ export function UserSvcGetPublicKeyResponseFromJSONTyped(json, ignoreDiscriminat
         'publicKey': json['publicKey'] == null ? undefined : json['publicKey'],
     };
 }
-export function UserSvcGetPublicKeyResponseToJSON(value) {
+export function UserSvcGetPublicKeyResponseToJSON(json) {
+    return UserSvcGetPublicKeyResponseToJSONTyped(json, false);
+}
+export function UserSvcGetPublicKeyResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

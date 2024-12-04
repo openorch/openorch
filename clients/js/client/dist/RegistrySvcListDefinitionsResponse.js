@@ -10,7 +10,7 @@ require('./RegistrySvcLanguage.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -37,7 +37,10 @@ function RegistrySvcListDefinitionsResponseFromJSONTyped(json, ignoreDiscriminat
         'definitions': json['definitions'] == null ? undefined : (json['definitions'].map(RegistrySvcDefinition.RegistrySvcDefinitionFromJSON)),
     };
 }
-function RegistrySvcListDefinitionsResponseToJSON(value) {
+function RegistrySvcListDefinitionsResponseToJSON(json) {
+    return RegistrySvcListDefinitionsResponseToJSONTyped(json, false);
+}
+function RegistrySvcListDefinitionsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -49,4 +52,5 @@ function RegistrySvcListDefinitionsResponseToJSON(value) {
 exports.RegistrySvcListDefinitionsResponseFromJSON = RegistrySvcListDefinitionsResponseFromJSON;
 exports.RegistrySvcListDefinitionsResponseFromJSONTyped = RegistrySvcListDefinitionsResponseFromJSONTyped;
 exports.RegistrySvcListDefinitionsResponseToJSON = RegistrySvcListDefinitionsResponseToJSON;
+exports.RegistrySvcListDefinitionsResponseToJSONTyped = RegistrySvcListDefinitionsResponseToJSONTyped;
 exports.instanceOfRegistrySvcListDefinitionsResponse = instanceOfRegistrySvcListDefinitionsResponse;

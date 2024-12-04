@@ -7,7 +7,7 @@ require('./DatastoreOp.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -38,7 +38,10 @@ function DatastoreQueryFromJSONTyped(json, ignoreDiscriminator) {
         'orderBys': json['orderBys'] == null ? undefined : (json['orderBys'].map(DatastoreOrderBy.DatastoreOrderByFromJSON)),
     };
 }
-function DatastoreQueryToJSON(value) {
+function DatastoreQueryToJSON(json) {
+    return DatastoreQueryToJSONTyped(json, false);
+}
+function DatastoreQueryToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -54,4 +57,5 @@ function DatastoreQueryToJSON(value) {
 exports.DatastoreQueryFromJSON = DatastoreQueryFromJSON;
 exports.DatastoreQueryFromJSONTyped = DatastoreQueryFromJSONTyped;
 exports.DatastoreQueryToJSON = DatastoreQueryToJSON;
+exports.DatastoreQueryToJSONTyped = DatastoreQueryToJSONTyped;
 exports.instanceOfDatastoreQuery = instanceOfDatastoreQuery;

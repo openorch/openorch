@@ -3,7 +3,7 @@ import { UserSvcPermissionFromJSON, UserSvcPermissionToJSON } from './UserSvcPer
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function UserSvcGetPermissionsResponseFromJSONTyped(json, ignoreDiscriminator) {
         'permissions': json['permissions'] == null ? undefined : (json['permissions'].map(UserSvcPermissionFromJSON)),
     };
 }
-function UserSvcGetPermissionsResponseToJSON(value) {
+function UserSvcGetPermissionsResponseToJSON(json) {
+    return UserSvcGetPermissionsResponseToJSONTyped(json, false);
+}
+function UserSvcGetPermissionsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function UserSvcGetPermissionsResponseToJSON(value) {
     };
 }
 
-export { UserSvcGetPermissionsResponseFromJSON, UserSvcGetPermissionsResponseFromJSONTyped, UserSvcGetPermissionsResponseToJSON, instanceOfUserSvcGetPermissionsResponse };
+export { UserSvcGetPermissionsResponseFromJSON, UserSvcGetPermissionsResponseFromJSONTyped, UserSvcGetPermissionsResponseToJSON, UserSvcGetPermissionsResponseToJSONTyped, instanceOfUserSvcGetPermissionsResponse };

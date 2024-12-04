@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,4 +40,5 @@ export interface DeploySvcAutoScalingConfig {
 export declare function instanceOfDeploySvcAutoScalingConfig(value: object): value is DeploySvcAutoScalingConfig;
 export declare function DeploySvcAutoScalingConfigFromJSON(json: any): DeploySvcAutoScalingConfig;
 export declare function DeploySvcAutoScalingConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeploySvcAutoScalingConfig;
-export declare function DeploySvcAutoScalingConfigToJSON(value?: DeploySvcAutoScalingConfig | null): any;
+export declare function DeploySvcAutoScalingConfigToJSON(json: any): DeploySvcAutoScalingConfig;
+export declare function DeploySvcAutoScalingConfigToJSONTyped(value?: DeploySvcAutoScalingConfig | null, ignoreDiscriminator?: boolean): any;

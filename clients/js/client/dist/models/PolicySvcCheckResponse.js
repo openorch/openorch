@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ export function PolicySvcCheckResponseFromJSONTyped(json, ignoreDiscriminator) {
         'allowed': json['allowed'],
     };
 }
-export function PolicySvcCheckResponseToJSON(value) {
+export function PolicySvcCheckResponseToJSON(json) {
+    return PolicySvcCheckResponseToJSONTyped(json, false);
+}
+export function PolicySvcCheckResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

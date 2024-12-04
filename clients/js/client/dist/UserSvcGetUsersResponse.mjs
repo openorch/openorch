@@ -4,7 +4,7 @@ import './UserSvcContact.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,10 @@ function UserSvcGetUsersResponseFromJSONTyped(json, ignoreDiscriminator) {
         'users': json['users'] == null ? undefined : (json['users'].map(UserSvcUserFromJSON)),
     };
 }
-function UserSvcGetUsersResponseToJSON(value) {
+function UserSvcGetUsersResponseToJSON(json) {
+    return UserSvcGetUsersResponseToJSONTyped(json, false);
+}
+function UserSvcGetUsersResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,4 @@ function UserSvcGetUsersResponseToJSON(value) {
     };
 }
 
-export { UserSvcGetUsersResponseFromJSON, UserSvcGetUsersResponseFromJSONTyped, UserSvcGetUsersResponseToJSON, instanceOfUserSvcGetUsersResponse };
+export { UserSvcGetUsersResponseFromJSON, UserSvcGetUsersResponseFromJSONTyped, UserSvcGetUsersResponseToJSON, UserSvcGetUsersResponseToJSONTyped, instanceOfUserSvcGetUsersResponse };

@@ -4,7 +4,7 @@ import { PolicySvcEntityFromJSON, PolicySvcEntityToJSON } from './PolicySvcEntit
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function PolicySvcRateLimitParametersFromJSONTyped(json, ignoreDiscriminator) {
         'timeWindow': json['timeWindow'] == null ? undefined : json['timeWindow'],
     };
 }
-function PolicySvcRateLimitParametersToJSON(value) {
+function PolicySvcRateLimitParametersToJSON(json) {
+    return PolicySvcRateLimitParametersToJSONTyped(json, false);
+}
+function PolicySvcRateLimitParametersToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -46,4 +49,4 @@ function PolicySvcRateLimitParametersToJSON(value) {
     };
 }
 
-export { PolicySvcRateLimitParametersFromJSON, PolicySvcRateLimitParametersFromJSONTyped, PolicySvcRateLimitParametersToJSON, instanceOfPolicySvcRateLimitParameters };
+export { PolicySvcRateLimitParametersFromJSON, PolicySvcRateLimitParametersFromJSONTyped, PolicySvcRateLimitParametersToJSON, PolicySvcRateLimitParametersToJSONTyped, instanceOfPolicySvcRateLimitParameters };

@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface FirehoseSvcErrorResponse {
 export declare function instanceOfFirehoseSvcErrorResponse(value: object): value is FirehoseSvcErrorResponse;
 export declare function FirehoseSvcErrorResponseFromJSON(json: any): FirehoseSvcErrorResponse;
 export declare function FirehoseSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): FirehoseSvcErrorResponse;
-export declare function FirehoseSvcErrorResponseToJSON(value?: FirehoseSvcErrorResponse | null): any;
+export declare function FirehoseSvcErrorResponseToJSON(json: any): FirehoseSvcErrorResponse;
+export declare function FirehoseSvcErrorResponseToJSONTyped(value?: FirehoseSvcErrorResponse | null, ignoreDiscriminator?: boolean): any;

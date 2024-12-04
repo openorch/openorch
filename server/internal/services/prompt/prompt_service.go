@@ -16,13 +16,13 @@ import (
 	"context"
 	"sync"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
 
-	streammanager "github.com/singulatron/superplatform/server/internal/services/prompt/sub/stream_manager"
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/sub/stream_manager"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 type PromptService struct {

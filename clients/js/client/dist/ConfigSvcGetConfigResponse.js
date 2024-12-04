@@ -8,7 +8,7 @@ require('./ConfigSvcDownloadServiceConfig.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function ConfigSvcGetConfigResponseFromJSONTyped(json, ignoreDiscriminator) {
         'config': json['config'] == null ? undefined : ConfigSvcConfig.ConfigSvcConfigFromJSON(json['config']),
     };
 }
-function ConfigSvcGetConfigResponseToJSON(value) {
+function ConfigSvcGetConfigResponseToJSON(json) {
+    return ConfigSvcGetConfigResponseToJSONTyped(json, false);
+}
+function ConfigSvcGetConfigResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -47,4 +50,5 @@ function ConfigSvcGetConfigResponseToJSON(value) {
 exports.ConfigSvcGetConfigResponseFromJSON = ConfigSvcGetConfigResponseFromJSON;
 exports.ConfigSvcGetConfigResponseFromJSONTyped = ConfigSvcGetConfigResponseFromJSONTyped;
 exports.ConfigSvcGetConfigResponseToJSON = ConfigSvcGetConfigResponseToJSON;
+exports.ConfigSvcGetConfigResponseToJSONTyped = ConfigSvcGetConfigResponseToJSONTyped;
 exports.instanceOfConfigSvcGetConfigResponse = instanceOfConfigSvcGetConfigResponse;

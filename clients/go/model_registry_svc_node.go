@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
@@ -32,7 +32,7 @@ type RegistrySvcNode struct {
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
 	// The region of the node
 	Region *string `json:"region,omitempty"`
-	// URL of the daemon running on the node. If not configured defaults to hostname + default Superplatform daemon port.
+	// URL of the daemon running on the node. If not configured defaults to hostname + default OpenOrch daemon port.
 	Url string `json:"url"`
 	// Resource usage metrics of the node.
 	Usage *RegistrySvcResourceUsage `json:"usage,omitempty"`

@@ -13,7 +13,7 @@
 package policy_svc
 
 import (
-	user "github.com/singulatron/superplatform/server/internal/services/user/types"
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 type ErrorResponse struct {

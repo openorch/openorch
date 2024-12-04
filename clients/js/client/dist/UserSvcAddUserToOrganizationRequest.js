@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function UserSvcAddUserToOrganizationRequestFromJSONTyped(json, ignoreDiscrimina
         'userId': json['userId'] == null ? undefined : json['userId'],
     };
 }
-function UserSvcAddUserToOrganizationRequestToJSON(value) {
+function UserSvcAddUserToOrganizationRequestToJSON(json) {
+    return UserSvcAddUserToOrganizationRequestToJSONTyped(json, false);
+}
+function UserSvcAddUserToOrganizationRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,5 @@ function UserSvcAddUserToOrganizationRequestToJSON(value) {
 exports.UserSvcAddUserToOrganizationRequestFromJSON = UserSvcAddUserToOrganizationRequestFromJSON;
 exports.UserSvcAddUserToOrganizationRequestFromJSONTyped = UserSvcAddUserToOrganizationRequestFromJSONTyped;
 exports.UserSvcAddUserToOrganizationRequestToJSON = UserSvcAddUserToOrganizationRequestToJSON;
+exports.UserSvcAddUserToOrganizationRequestToJSONTyped = UserSvcAddUserToOrganizationRequestToJSONTyped;
 exports.instanceOfUserSvcAddUserToOrganizationRequest = instanceOfUserSvcAddUserToOrganizationRequest;

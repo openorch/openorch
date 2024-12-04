@@ -5,7 +5,7 @@ var DatastoreOp = require('./DatastoreOp.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function DatastoreFilterFromJSONTyped(json, ignoreDiscriminator) {
         'op': json['op'] == null ? undefined : DatastoreOp.DatastoreOpFromJSON(json['op']),
     };
 }
-function DatastoreFilterToJSON(value) {
+function DatastoreFilterToJSON(json) {
+    return DatastoreFilterToJSONTyped(json, false);
+}
+function DatastoreFilterToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -48,4 +51,5 @@ function DatastoreFilterToJSON(value) {
 exports.DatastoreFilterFromJSON = DatastoreFilterFromJSON;
 exports.DatastoreFilterFromJSONTyped = DatastoreFilterFromJSONTyped;
 exports.DatastoreFilterToJSON = DatastoreFilterToJSON;
+exports.DatastoreFilterToJSONTyped = DatastoreFilterToJSONTyped;
 exports.instanceOfDatastoreFilter = instanceOfDatastoreFilter;

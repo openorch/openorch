@@ -18,13 +18,13 @@ import (
 	"log/slog"
 	"time"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	apptypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 const maxThreadTitle = 100

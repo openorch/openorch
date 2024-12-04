@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,12 +18,14 @@ import {
     PolicySvcScopeFromJSON,
     PolicySvcScopeFromJSONTyped,
     PolicySvcScopeToJSON,
+    PolicySvcScopeToJSONTyped,
 } from './PolicySvcScope';
 import type { PolicySvcEntity } from './PolicySvcEntity';
 import {
     PolicySvcEntityFromJSON,
     PolicySvcEntityFromJSONTyped,
     PolicySvcEntityToJSON,
+    PolicySvcEntityToJSONTyped,
 } from './PolicySvcEntity';
 
 /**
@@ -84,10 +86,15 @@ export function PolicySvcRateLimitParametersFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function PolicySvcRateLimitParametersToJSON(value?: PolicySvcRateLimitParameters | null): any {
+  export function PolicySvcRateLimitParametersToJSON(json: any): PolicySvcRateLimitParameters {
+      return PolicySvcRateLimitParametersToJSONTyped(json, false);
+  }
+
+  export function PolicySvcRateLimitParametersToJSONTyped(value?: PolicySvcRateLimitParameters | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'entity': PolicySvcEntityToJSON(value['entity']),

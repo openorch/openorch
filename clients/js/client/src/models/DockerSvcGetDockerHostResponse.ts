@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -49,10 +49,15 @@ export function DockerSvcGetDockerHostResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function DockerSvcGetDockerHostResponseToJSON(value?: DockerSvcGetDockerHostResponse | null): any {
+  export function DockerSvcGetDockerHostResponseToJSON(json: any): DockerSvcGetDockerHostResponse {
+      return DockerSvcGetDockerHostResponseToJSONTyped(json, false);
+  }
+
+  export function DockerSvcGetDockerHostResponseToJSONTyped(value?: DockerSvcGetDockerHostResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'host': value['host'],

@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 // Define constants for log interval

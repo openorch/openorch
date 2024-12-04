@@ -10,7 +10,7 @@ require('./RegistrySvcLanguage.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -37,7 +37,10 @@ function RegistrySvcSaveDefinitionRequestFromJSONTyped(json, ignoreDiscriminator
         'definition': json['definition'] == null ? undefined : RegistrySvcDefinition.RegistrySvcDefinitionFromJSON(json['definition']),
     };
 }
-function RegistrySvcSaveDefinitionRequestToJSON(value) {
+function RegistrySvcSaveDefinitionRequestToJSON(json) {
+    return RegistrySvcSaveDefinitionRequestToJSONTyped(json, false);
+}
+function RegistrySvcSaveDefinitionRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -49,4 +52,5 @@ function RegistrySvcSaveDefinitionRequestToJSON(value) {
 exports.RegistrySvcSaveDefinitionRequestFromJSON = RegistrySvcSaveDefinitionRequestFromJSON;
 exports.RegistrySvcSaveDefinitionRequestFromJSONTyped = RegistrySvcSaveDefinitionRequestFromJSONTyped;
 exports.RegistrySvcSaveDefinitionRequestToJSON = RegistrySvcSaveDefinitionRequestToJSON;
+exports.RegistrySvcSaveDefinitionRequestToJSONTyped = RegistrySvcSaveDefinitionRequestToJSONTyped;
 exports.instanceOfRegistrySvcSaveDefinitionRequest = instanceOfRegistrySvcSaveDefinitionRequest;

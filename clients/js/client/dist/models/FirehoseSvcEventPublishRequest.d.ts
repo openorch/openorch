@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface FirehoseSvcEventPublishRequest {
 export declare function instanceOfFirehoseSvcEventPublishRequest(value: object): value is FirehoseSvcEventPublishRequest;
 export declare function FirehoseSvcEventPublishRequestFromJSON(json: any): FirehoseSvcEventPublishRequest;
 export declare function FirehoseSvcEventPublishRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): FirehoseSvcEventPublishRequest;
-export declare function FirehoseSvcEventPublishRequestToJSON(value?: FirehoseSvcEventPublishRequest | null): any;
+export declare function FirehoseSvcEventPublishRequestToJSON(json: any): FirehoseSvcEventPublishRequest;
+export declare function FirehoseSvcEventPublishRequestToJSONTyped(value?: FirehoseSvcEventPublishRequest | null, ignoreDiscriminator?: boolean): any;

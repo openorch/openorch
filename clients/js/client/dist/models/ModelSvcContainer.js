@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -31,7 +31,10 @@ export function ModelSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
         'port': json['port'] == null ? undefined : json['port'],
     };
 }
-export function ModelSvcContainerToJSON(value) {
+export function ModelSvcContainerToJSON(json) {
+    return ModelSvcContainerToJSONTyped(json, false);
+}
+export function ModelSvcContainerToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
@@ -32,7 +32,7 @@ type PromptSvcPrompt struct {
 	LastRun *string `json:"lastRun,omitempty"`
 	// MaxRetries specified how many times the system should retry a prompt when it keeps erroring.
 	MaxRetries *int32 `json:"maxRetries,omitempty"`
-	// ModelId is just the Superplatform internal ID of the model.
+	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId *string `json:"modelId,omitempty"`
 	// Prompt is the message itself eg. \"What's a banana?
 	Prompt string `json:"prompt"`

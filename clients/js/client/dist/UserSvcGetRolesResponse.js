@@ -5,7 +5,7 @@ var UserSvcRole = require('./UserSvcRole.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function UserSvcGetRolesResponseFromJSONTyped(json, ignoreDiscriminator) {
         'roles': json['roles'] == null ? undefined : (json['roles'].map(UserSvcRole.UserSvcRoleFromJSON)),
     };
 }
-function UserSvcGetRolesResponseToJSON(value) {
+function UserSvcGetRolesResponseToJSON(json) {
+    return UserSvcGetRolesResponseToJSONTyped(json, false);
+}
+function UserSvcGetRolesResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function UserSvcGetRolesResponseToJSON(value) {
 exports.UserSvcGetRolesResponseFromJSON = UserSvcGetRolesResponseFromJSON;
 exports.UserSvcGetRolesResponseFromJSONTyped = UserSvcGetRolesResponseFromJSONTyped;
 exports.UserSvcGetRolesResponseToJSON = UserSvcGetRolesResponseToJSON;
+exports.UserSvcGetRolesResponseToJSONTyped = UserSvcGetRolesResponseToJSONTyped;
 exports.instanceOfUserSvcGetRolesResponse = instanceOfUserSvcGetRolesResponse;

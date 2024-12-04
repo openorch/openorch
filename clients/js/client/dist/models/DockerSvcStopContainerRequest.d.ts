@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface DockerSvcStopContainerRequest {
 export declare function instanceOfDockerSvcStopContainerRequest(value: object): value is DockerSvcStopContainerRequest;
 export declare function DockerSvcStopContainerRequestFromJSON(json: any): DockerSvcStopContainerRequest;
 export declare function DockerSvcStopContainerRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): DockerSvcStopContainerRequest;
-export declare function DockerSvcStopContainerRequestToJSON(value?: DockerSvcStopContainerRequest | null): any;
+export declare function DockerSvcStopContainerRequestToJSON(json: any): DockerSvcStopContainerRequest;
+export declare function DockerSvcStopContainerRequestToJSONTyped(value?: DockerSvcStopContainerRequest | null, ignoreDiscriminator?: boolean): any;

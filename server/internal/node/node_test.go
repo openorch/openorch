@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/test"
-	"github.com/singulatron/superplatform/server/internal/di"
-	node_types "github.com/singulatron/superplatform/server/internal/node/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/test"
+	"github.com/openorch/openorch/server/internal/di"
+	node_types "github.com/openorch/openorch/server/internal/node/types"
 	"github.com/stretchr/testify/require"
 )
 

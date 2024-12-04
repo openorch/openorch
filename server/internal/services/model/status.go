@@ -17,12 +17,12 @@ import (
 	"fmt"
 	"log/slog"
 
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
+	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	"github.com/pkg/errors"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	downloadtypes "github.com/singulatron/superplatform/server/internal/services/download/types"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
 )
 
 func (ms *ModelService) status(

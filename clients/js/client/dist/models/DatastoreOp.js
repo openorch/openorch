@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -39,5 +39,8 @@ export function DatastoreOpFromJSONTyped(json, ignoreDiscriminator) {
     return json;
 }
 export function DatastoreOpToJSON(value) {
+    return value;
+}
+export function DatastoreOpToJSONTyped(value, ignoreDiscriminator) {
     return value;
 }

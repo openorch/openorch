@@ -119,15 +119,15 @@ const programOptions: ProgramOptions = {
 	outputDirectory: process.env.OUTPUT_DIRECTORY || './out/appx/',
 	inputDirectory:
 		process.env.INPUT_DIRECTORY || './out/make/squirrel.windows/x64/',
-	packageName: process.env.PACKAGE_NAME || packageJson.name || 'Superplatform',
+	packageName: process.env.PACKAGE_NAME || packageJson.name || 'OpenOrch',
 	packageExecutable:
 		process.env.PACKAGE_EXECUTABLE ||
-		`app\\Superplatform-${packageNodeVersion} Setup.exe`,
+		`app\\OpenOrch-${packageNodeVersion} Setup.exe`,
 	publisher: process.env.PUBLISHER || 'CN=A2452F69-42C3-494B-A516-500954C5BE4E',
 	publisherDisplayName:
-		process.env.PUBLISHER_DISPLAY_NAME || packageJson.author || 'Superplatform',
+		process.env.PUBLISHER_DISPLAY_NAME || packageJson.author || 'OpenOrch',
 	identityName:
-		'Superplatform.Superplatform' || process.env.IDENTITY_NAME || packageJson.name,
+		'OpenOrch.OpenOrch' || process.env.IDENTITY_NAME || packageJson.name,
 	packageVersion: packageWinVersion,
 	packageDisplayName:
 		process.env.PACKAGE_DISPLAY_NAME ||

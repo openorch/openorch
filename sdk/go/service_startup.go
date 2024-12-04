@@ -4,10 +4,10 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	client "github.com/singulatron/superplatform/clients/go"
+	client "github.com/openorch/openorch/clients/go"
 )
 
 func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName string, store datastore.DataStore) (string, error) {

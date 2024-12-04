@@ -6,7 +6,7 @@ require('./UserSvcContact.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function UserSvcIsAuthorizedResponseFromJSONTyped(json, ignoreDiscriminator) {
         'user': json['user'] == null ? undefined : UserSvcUser.UserSvcUserFromJSON(json['user']),
     };
 }
-function UserSvcIsAuthorizedResponseToJSON(value) {
+function UserSvcIsAuthorizedResponseToJSON(json) {
+    return UserSvcIsAuthorizedResponseToJSONTyped(json, false);
+}
+function UserSvcIsAuthorizedResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -47,4 +50,5 @@ function UserSvcIsAuthorizedResponseToJSON(value) {
 exports.UserSvcIsAuthorizedResponseFromJSON = UserSvcIsAuthorizedResponseFromJSON;
 exports.UserSvcIsAuthorizedResponseFromJSONTyped = UserSvcIsAuthorizedResponseFromJSONTyped;
 exports.UserSvcIsAuthorizedResponseToJSON = UserSvcIsAuthorizedResponseToJSON;
+exports.UserSvcIsAuthorizedResponseToJSONTyped = UserSvcIsAuthorizedResponseToJSONTyped;
 exports.instanceOfUserSvcIsAuthorizedResponse = instanceOfUserSvcIsAuthorizedResponse;

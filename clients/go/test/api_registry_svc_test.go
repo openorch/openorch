@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 Testing RegistrySvcAPIService
 
@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
-	openapiclient "github.com/singulatron/superplatform/clients/go"
+	"testing"
+
+	openapiclient "github.com/openorch/openorch/clients/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_RegistrySvcAPIService(t *testing.T) {

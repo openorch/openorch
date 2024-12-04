@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,4 +40,5 @@ export interface DatastoreOrderBy {
 export declare function instanceOfDatastoreOrderBy(value: object): value is DatastoreOrderBy;
 export declare function DatastoreOrderByFromJSON(json: any): DatastoreOrderBy;
 export declare function DatastoreOrderByFromJSONTyped(json: any, ignoreDiscriminator: boolean): DatastoreOrderBy;
-export declare function DatastoreOrderByToJSON(value?: DatastoreOrderBy | null): any;
+export declare function DatastoreOrderByToJSON(json: any): DatastoreOrderBy;
+export declare function DatastoreOrderByToJSONTyped(value?: DatastoreOrderBy | null, ignoreDiscriminator?: boolean): any;

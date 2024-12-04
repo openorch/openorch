@@ -8,42 +8,42 @@ import (
 	"sync"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore/localstore"
+	"github.com/openorch/openorch/sdk/go/lock"
+	distlock "github.com/openorch/openorch/sdk/go/lock/local"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/openorch/openorch/sdk/go/middlewares"
+	"github.com/openorch/openorch/sdk/go/router"
+	node_types "github.com/openorch/openorch/server/internal/node/types"
+	chatservice "github.com/openorch/openorch/server/internal/services/chat"
+	configservice "github.com/openorch/openorch/server/internal/services/config"
+	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
+	dockerservice "github.com/openorch/openorch/server/internal/services/docker"
+	downloadservice "github.com/openorch/openorch/server/internal/services/download"
+	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
+	firehoseservice "github.com/openorch/openorch/server/internal/services/firehose"
+	modelservice "github.com/openorch/openorch/server/internal/services/model"
+	policyservice "github.com/openorch/openorch/server/internal/services/policy"
+	promptservice "github.com/openorch/openorch/server/internal/services/prompt"
+	proxyservice "github.com/openorch/openorch/server/internal/services/proxy"
+	registryservice "github.com/openorch/openorch/server/internal/services/registry"
+	secretservice "github.com/openorch/openorch/server/internal/services/secret"
+	sourceservice "github.com/openorch/openorch/server/internal/services/source"
+	userservice "github.com/openorch/openorch/server/internal/services/user"
 	"github.com/pkg/errors"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/datastore/localstore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
-	distlock "github.com/singulatron/superplatform/sdk/go/lock/local"
-	"github.com/singulatron/superplatform/sdk/go/logger"
-	"github.com/singulatron/superplatform/sdk/go/middlewares"
-	"github.com/singulatron/superplatform/sdk/go/router"
-	node_types "github.com/singulatron/superplatform/server/internal/node/types"
-	chatservice "github.com/singulatron/superplatform/server/internal/services/chat"
-	configservice "github.com/singulatron/superplatform/server/internal/services/config"
-	deployservice "github.com/singulatron/superplatform/server/internal/services/deploy"
-	dockerservice "github.com/singulatron/superplatform/server/internal/services/docker"
-	downloadservice "github.com/singulatron/superplatform/server/internal/services/download"
-	dynamicservice "github.com/singulatron/superplatform/server/internal/services/dynamic"
-	firehoseservice "github.com/singulatron/superplatform/server/internal/services/firehose"
-	modelservice "github.com/singulatron/superplatform/server/internal/services/model"
-	policyservice "github.com/singulatron/superplatform/server/internal/services/policy"
-	promptservice "github.com/singulatron/superplatform/server/internal/services/prompt"
-	proxyservice "github.com/singulatron/superplatform/server/internal/services/proxy"
-	registryservice "github.com/singulatron/superplatform/server/internal/services/registry"
-	secretservice "github.com/singulatron/superplatform/server/internal/services/secret"
-	sourceservice "github.com/singulatron/superplatform/server/internal/services/source"
-	userservice "github.com/singulatron/superplatform/server/internal/services/user"
 )
 
-const superplatformFolder = ".superplatform"
+const openorchFolder = ".openorch"
 
 type Options struct {
 	// NodeOptions contains settings coming from envars
 	NodeOptions node_types.Options
 
 	// Url that will be passed down to the router when calling
-	// the Superplatform daemon from itself.
+	// the OpenOrch daemon from itself.
 	// (Inter-service calls go through the network.)
 	Url string
 
@@ -64,7 +64,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	var homeDir string
 	var err error
 	if options.Test {
-		homeDir, err = os.MkdirTemp("", "superplatform-")
+		homeDir, err = os.MkdirTemp("", "openorch-")
 		if err != nil {
 			logger.Error(
 				"Homedir creation failed",
@@ -94,12 +94,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	superplatformFolder := path.Join(homeDir, superplatformFolder)
+	openorchFolder := path.Join(homeDir, openorchFolder)
 	if options.NodeOptions.ConfigPath != "" {
-		superplatformFolder = options.NodeOptions.ConfigPath
+		openorchFolder = options.NodeOptions.ConfigPath
 	}
 
-	configService.ConfigDirectory = superplatformFolder
+	configService.ConfigDirectory = openorchFolder
 
 	if options.DatastoreFactory == nil {
 		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
@@ -170,7 +170,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	err = os.MkdirAll(superplatformFolder, 0755)
+	err = os.MkdirAll(openorchFolder, 0755)
 	if err != nil {
 		logger.Error(
 			"Config folder creation failed",
@@ -179,7 +179,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadFolder := path.Join(superplatformFolder, "downloads")
+	downloadFolder := path.Join(openorchFolder, "downloads")
 	err = os.MkdirAll(downloadFolder, 0755)
 	if err != nil {
 		logger.Error(
@@ -204,7 +204,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	downloadService.SetDefaultFolder(downloadFolder)
 	downloadService.SetStateFilePath(
-		path.Join(superplatformFolder, "downloads.json"),
+		path.Join(openorchFolder, "downloads.json"),
 	)
 
 	dockerService, err := dockerservice.NewDockerService(

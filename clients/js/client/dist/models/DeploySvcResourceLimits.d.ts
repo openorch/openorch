@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,4 +40,5 @@ export interface DeploySvcResourceLimits {
 export declare function instanceOfDeploySvcResourceLimits(value: object): value is DeploySvcResourceLimits;
 export declare function DeploySvcResourceLimitsFromJSON(json: any): DeploySvcResourceLimits;
 export declare function DeploySvcResourceLimitsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeploySvcResourceLimits;
-export declare function DeploySvcResourceLimitsToJSON(value?: DeploySvcResourceLimits | null): any;
+export declare function DeploySvcResourceLimitsToJSON(json: any): DeploySvcResourceLimits;
+export declare function DeploySvcResourceLimitsToJSONTyped(value?: DeploySvcResourceLimits | null, ignoreDiscriminator?: boolean): any;

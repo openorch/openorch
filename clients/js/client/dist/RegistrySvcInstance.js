@@ -5,7 +5,7 @@ var RegistrySvcInstanceStatus = require('./RegistrySvcInstanceStatus.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -50,7 +50,10 @@ function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'url': json['url'],
     };
 }
-function RegistrySvcInstanceToJSON(value) {
+function RegistrySvcInstanceToJSON(json) {
+    return RegistrySvcInstanceToJSONTyped(json, false);
+}
+function RegistrySvcInstanceToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -74,4 +77,5 @@ function RegistrySvcInstanceToJSON(value) {
 exports.RegistrySvcInstanceFromJSON = RegistrySvcInstanceFromJSON;
 exports.RegistrySvcInstanceFromJSONTyped = RegistrySvcInstanceFromJSONTyped;
 exports.RegistrySvcInstanceToJSON = RegistrySvcInstanceToJSON;
+exports.RegistrySvcInstanceToJSONTyped = RegistrySvcInstanceToJSONTyped;
 exports.instanceOfRegistrySvcInstance = instanceOfRegistrySvcInstance;

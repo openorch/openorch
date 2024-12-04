@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	download "github.com/singulatron/superplatform/server/internal/services/download/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	download "github.com/openorch/openorch/server/internal/services/download/types"
 )
 
 // List retrieves a list of download details

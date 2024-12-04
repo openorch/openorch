@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	policy "github.com/singulatron/superplatform/server/internal/services/policy/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	policy "github.com/openorch/openorch/server/internal/services/policy/types"
 )
 
 // UpsertInstance allows a user to upsert a new policy instance

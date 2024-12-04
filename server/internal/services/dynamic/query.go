@@ -16,9 +16,9 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/singulatron/superplatform/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/datastore"
 
-	dynamictypes "github.com/singulatron/superplatform/server/internal/services/dynamic/types"
+	dynamictypes "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
 func (g *DynamicService) query(

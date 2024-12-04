@@ -13,8 +13,8 @@
 package modelservice
 
 import (
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
 func (ms *ModelService) getModels() ([]*modeltypes.Model, error) {

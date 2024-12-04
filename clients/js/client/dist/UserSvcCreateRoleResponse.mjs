@@ -3,7 +3,7 @@ import { UserSvcRoleFromJSON, UserSvcRoleToJSON } from './UserSvcRole.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function UserSvcCreateRoleResponseFromJSONTyped(json, ignoreDiscriminator) {
         'role': json['role'] == null ? undefined : UserSvcRoleFromJSON(json['role']),
     };
 }
-function UserSvcCreateRoleResponseToJSON(value) {
+function UserSvcCreateRoleResponseToJSON(json) {
+    return UserSvcCreateRoleResponseToJSONTyped(json, false);
+}
+function UserSvcCreateRoleResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function UserSvcCreateRoleResponseToJSON(value) {
     };
 }
 
-export { UserSvcCreateRoleResponseFromJSON, UserSvcCreateRoleResponseFromJSONTyped, UserSvcCreateRoleResponseToJSON, instanceOfUserSvcCreateRoleResponse };
+export { UserSvcCreateRoleResponseFromJSON, UserSvcCreateRoleResponseFromJSONTyped, UserSvcCreateRoleResponseToJSON, UserSvcCreateRoleResponseToJSONTyped, instanceOfUserSvcCreateRoleResponse };

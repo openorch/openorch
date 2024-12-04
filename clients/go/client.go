@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the Superplatform API v0.3.0-rc.7
+// APIClient manages communication with the OpenOrch API v0.3.0-rc.7
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration

@@ -16,10 +16,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	prompt "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 // List lists prompts

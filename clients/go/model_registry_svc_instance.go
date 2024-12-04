@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &RegistrySvcInstance{}
 
 // RegistrySvcInstance struct for RegistrySvcInstance
 type RegistrySvcInstance struct {
-	// The ID of the deployment that this instance is an instance of. Only instances managed by the Superplatform have a DeploymentId. Services can self-register without a DeploymentId too.
+	// The ID of the deployment that this instance is an instance of. Only instances managed by the OpenOrch have a DeploymentId. Services can self-register without a DeploymentId too.
 	DeploymentId *string `json:"deploymentId,omitempty"`
 	// Details
 	Details *string `json:"details,omitempty"`
@@ -34,7 +34,7 @@ type RegistrySvcInstance struct {
 	Ip *string `json:"ip,omitempty"`
 	// Last time the instance gave a sign of life
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
-	// URL of the Superplatform daemon
+	// URL of the OpenOrch daemon
 	NodeUrl *string `json:"nodeUrl,omitempty"`
 	// Path of the instance address. Optional (e.g., \"/api\")
 	Path *string `json:"path,omitempty"`

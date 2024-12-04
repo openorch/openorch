@@ -3,7 +3,7 @@ package token
 import (
 	"fmt"
 
-	"github.com/singulatron/superplatform/cli/config"
+	"github.com/openorch/openorch/cli/config"
 	"github.com/spf13/cobra"
 )
 

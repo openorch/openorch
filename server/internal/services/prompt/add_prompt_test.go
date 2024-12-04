@@ -22,12 +22,12 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/test"
-	"github.com/singulatron/superplatform/server/internal/di"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/test"
+	"github.com/openorch/openorch/server/internal/di"
+	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	"go.uber.org/mock/gomock"
 )
 

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     DeploySvcStrategyTypeFromJSON,
     DeploySvcStrategyTypeFromJSONTyped,
     DeploySvcStrategyTypeToJSON,
+    DeploySvcStrategyTypeToJSONTyped,
 } from './DeploySvcStrategyType';
 
 /**
@@ -71,10 +72,15 @@ export function DeploySvcDeploymentStrategyFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function DeploySvcDeploymentStrategyToJSON(value?: DeploySvcDeploymentStrategy | null): any {
+  export function DeploySvcDeploymentStrategyToJSON(json: any): DeploySvcDeploymentStrategy {
+      return DeploySvcDeploymentStrategyToJSONTyped(json, false);
+  }
+
+  export function DeploySvcDeploymentStrategyToJSONTyped(value?: DeploySvcDeploymentStrategy | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'maxSurge': value['maxSurge'],

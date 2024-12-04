@@ -18,10 +18,10 @@ import (
 	"os"
 	"strings"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/lock"
-	registry "github.com/singulatron/superplatform/server/internal/services/registry/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/lock"
+	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
 type RegistryService struct {

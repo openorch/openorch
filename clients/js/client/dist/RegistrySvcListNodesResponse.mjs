@@ -7,7 +7,7 @@ import './RegistrySvcUsage.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function RegistrySvcListNodesResponseFromJSONTyped(json, ignoreDiscriminator) {
         'nodes': json['nodes'] == null ? undefined : (json['nodes'].map(RegistrySvcNodeFromJSON)),
     };
 }
-function RegistrySvcListNodesResponseToJSON(value) {
+function RegistrySvcListNodesResponseToJSON(json) {
+    return RegistrySvcListNodesResponseToJSONTyped(json, false);
+}
+function RegistrySvcListNodesResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -43,4 +46,4 @@ function RegistrySvcListNodesResponseToJSON(value) {
     };
 }
 
-export { RegistrySvcListNodesResponseFromJSON, RegistrySvcListNodesResponseFromJSONTyped, RegistrySvcListNodesResponseToJSON, instanceOfRegistrySvcListNodesResponse };
+export { RegistrySvcListNodesResponseFromJSON, RegistrySvcListNodesResponseFromJSONTyped, RegistrySvcListNodesResponseToJSON, RegistrySvcListNodesResponseToJSONTyped, instanceOfRegistrySvcListNodesResponse };

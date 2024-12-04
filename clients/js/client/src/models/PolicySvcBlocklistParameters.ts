@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -48,10 +48,15 @@ export function PolicySvcBlocklistParametersFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function PolicySvcBlocklistParametersToJSON(value?: PolicySvcBlocklistParameters | null): any {
+  export function PolicySvcBlocklistParametersToJSON(json: any): PolicySvcBlocklistParameters {
+      return PolicySvcBlocklistParametersToJSONTyped(json, false);
+  }
+
+  export function PolicySvcBlocklistParametersToJSONTyped(value?: PolicySvcBlocklistParameters | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'blockedIPs': value['blockedIPs'],

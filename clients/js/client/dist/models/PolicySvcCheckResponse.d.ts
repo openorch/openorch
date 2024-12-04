@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface PolicySvcCheckResponse {
 export declare function instanceOfPolicySvcCheckResponse(value: object): value is PolicySvcCheckResponse;
 export declare function PolicySvcCheckResponseFromJSON(json: any): PolicySvcCheckResponse;
 export declare function PolicySvcCheckResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcCheckResponse;
-export declare function PolicySvcCheckResponseToJSON(value?: PolicySvcCheckResponse | null): any;
+export declare function PolicySvcCheckResponseToJSON(json: any): PolicySvcCheckResponse;
+export declare function PolicySvcCheckResponseToJSONTyped(value?: PolicySvcCheckResponse | null, ignoreDiscriminator?: boolean): any;

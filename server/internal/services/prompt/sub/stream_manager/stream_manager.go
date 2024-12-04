@@ -15,8 +15,8 @@ package streammanager
 import (
 	"sync"
 
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 type StreamManager struct {

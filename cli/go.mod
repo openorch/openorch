@@ -1,16 +1,16 @@
-module github.com/singulatron/superplatform/cli
+module github.com/openorch/openorch/cli
 
 go 1.23
 
-replace github.com/singulatron/superplatform/clients/go => ../clients/go
+replace github.com/openorch/openorch/clients/go => ../clients/go
 
-replace github.com/singulatron/superplatform/sdk/go => ../sdk/go
+replace github.com/openorch/openorch/sdk/go => ../sdk/go
 
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/pkg/errors v0.9.1
-	github.com/singulatron/superplatform/clients/go v0.0.0
-	github.com/singulatron/superplatform/sdk/go v0.0.0-00010101000000-000000000000
+	github.com/openorch/openorch/clients/go v0.0.0
+	github.com/openorch/openorch/sdk/go v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.9.0

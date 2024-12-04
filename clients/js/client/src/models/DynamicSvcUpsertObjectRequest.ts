@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     DynamicSvcObjectCreateFieldsFromJSON,
     DynamicSvcObjectCreateFieldsFromJSONTyped,
     DynamicSvcObjectCreateFieldsToJSON,
+    DynamicSvcObjectCreateFieldsToJSONTyped,
 } from './DynamicSvcObjectCreateFields';
 
 /**
@@ -55,10 +56,15 @@ export function DynamicSvcUpsertObjectRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function DynamicSvcUpsertObjectRequestToJSON(value?: DynamicSvcUpsertObjectRequest | null): any {
+  export function DynamicSvcUpsertObjectRequestToJSON(json: any): DynamicSvcUpsertObjectRequest {
+      return DynamicSvcUpsertObjectRequestToJSONTyped(json, false);
+  }
+
+  export function DynamicSvcUpsertObjectRequestToJSONTyped(value?: DynamicSvcUpsertObjectRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'object': DynamicSvcObjectCreateFieldsToJSON(value['object']),

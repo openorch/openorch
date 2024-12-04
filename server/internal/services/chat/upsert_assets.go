@@ -15,8 +15,8 @@ package chatservice
 import (
 	"time"
 
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	chattypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	chattypes "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 func (a *ChatService) UpsertAssets(assets []*chattypes.Asset) error {

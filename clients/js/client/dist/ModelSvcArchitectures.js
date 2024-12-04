@@ -5,7 +5,7 @@ var ModelSvcContainer = require('./ModelSvcContainer.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,10 @@ function ModelSvcArchitecturesFromJSONTyped(json, ignoreDiscriminator) {
         '_default': json['default'] == null ? undefined : ModelSvcContainer.ModelSvcContainerFromJSON(json['default']),
     };
 }
-function ModelSvcArchitecturesToJSON(value) {
+function ModelSvcArchitecturesToJSON(json) {
+    return ModelSvcArchitecturesToJSONTyped(json, false);
+}
+function ModelSvcArchitecturesToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -46,4 +49,5 @@ function ModelSvcArchitecturesToJSON(value) {
 exports.ModelSvcArchitecturesFromJSON = ModelSvcArchitecturesFromJSON;
 exports.ModelSvcArchitecturesFromJSONTyped = ModelSvcArchitecturesFromJSONTyped;
 exports.ModelSvcArchitecturesToJSON = ModelSvcArchitecturesToJSON;
+exports.ModelSvcArchitecturesToJSONTyped = ModelSvcArchitecturesToJSONTyped;
 exports.instanceOfModelSvcArchitectures = instanceOfModelSvcArchitectures;

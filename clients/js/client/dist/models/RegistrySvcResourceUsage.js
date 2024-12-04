@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -31,7 +31,10 @@ export function RegistrySvcResourceUsageFromJSONTyped(json, ignoreDiscriminator)
         'memory': json['memory'] == null ? undefined : RegistrySvcUsageFromJSON(json['memory']),
     };
 }
-export function RegistrySvcResourceUsageToJSON(value) {
+export function RegistrySvcResourceUsageToJSON(json) {
+    return RegistrySvcResourceUsageToJSONTyped(json, false);
+}
+export function RegistrySvcResourceUsageToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

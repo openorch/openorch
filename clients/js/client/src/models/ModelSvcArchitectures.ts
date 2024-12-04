@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     ModelSvcContainerFromJSON,
     ModelSvcContainerFromJSONTyped,
     ModelSvcContainerToJSON,
+    ModelSvcContainerToJSONTyped,
 } from './ModelSvcContainer';
 
 /**
@@ -62,10 +63,15 @@ export function ModelSvcArchitecturesFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ModelSvcArchitecturesToJSON(value?: ModelSvcArchitectures | null): any {
+  export function ModelSvcArchitecturesToJSON(json: any): ModelSvcArchitectures {
+      return ModelSvcArchitecturesToJSONTyped(json, false);
+  }
+
+  export function ModelSvcArchitecturesToJSONTyped(value?: ModelSvcArchitectures | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'cuda': ModelSvcContainerToJSON(value['cuda']),

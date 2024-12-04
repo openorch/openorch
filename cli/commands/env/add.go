@@ -3,8 +3,8 @@ package env
 import (
 	"fmt"
 
-	"github.com/singulatron/superplatform/cli/config"
-	"github.com/singulatron/superplatform/cli/types"
+	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/types"
 	"github.com/spf13/cobra"
 )
 

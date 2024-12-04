@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	dapper "github.com/singulatron/superplatform/dapper/app"
+	dapper "github.com/openorch/openorch/dapper/app"
 	"github.com/spf13/cobra"
 )
 

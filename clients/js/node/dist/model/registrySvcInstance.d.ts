@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -12,7 +12,7 @@
 import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 export declare class RegistrySvcInstance {
     /**
-    * The ID of the deployment that this instance is an instance of. Only instances managed by the Superplatform have a DeploymentId. Services can self-register without a DeploymentId too.
+    * The ID of the deployment that this instance is an instance of. Only instances managed by the OpenOrch have a DeploymentId. Services can self-register without a DeploymentId too.
     */
     'deploymentId'?: string;
     /**
@@ -36,7 +36,7 @@ export declare class RegistrySvcInstance {
     */
     'lastHeartbeat'?: string;
     /**
-    * URL of the Superplatform daemon
+    * URL of the OpenOrch daemon
     */
     'nodeUrl'?: string;
     /**

@@ -4,7 +4,7 @@ import { ChatSvcAssetFromJSON, ChatSvcAssetToJSON } from './ChatSvcAsset.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function ChatSvcGetMessagesResponseFromJSONTyped(json, ignoreDiscriminator) {
         'messages': json['messages'] == null ? undefined : (json['messages'].map(ChatSvcMessageFromJSON)),
     };
 }
-function ChatSvcGetMessagesResponseToJSON(value) {
+function ChatSvcGetMessagesResponseToJSON(json) {
+    return ChatSvcGetMessagesResponseToJSONTyped(json, false);
+}
+function ChatSvcGetMessagesResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,4 @@ function ChatSvcGetMessagesResponseToJSON(value) {
     };
 }
 
-export { ChatSvcGetMessagesResponseFromJSON, ChatSvcGetMessagesResponseFromJSONTyped, ChatSvcGetMessagesResponseToJSON, instanceOfChatSvcGetMessagesResponse };
+export { ChatSvcGetMessagesResponseFromJSON, ChatSvcGetMessagesResponseFromJSONTyped, ChatSvcGetMessagesResponseToJSON, ChatSvcGetMessagesResponseToJSONTyped, instanceOfChatSvcGetMessagesResponse };

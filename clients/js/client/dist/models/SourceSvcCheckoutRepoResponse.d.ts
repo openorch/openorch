@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface SourceSvcCheckoutRepoResponse {
 export declare function instanceOfSourceSvcCheckoutRepoResponse(value: object): value is SourceSvcCheckoutRepoResponse;
 export declare function SourceSvcCheckoutRepoResponseFromJSON(json: any): SourceSvcCheckoutRepoResponse;
 export declare function SourceSvcCheckoutRepoResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SourceSvcCheckoutRepoResponse;
-export declare function SourceSvcCheckoutRepoResponseToJSON(value?: SourceSvcCheckoutRepoResponse | null): any;
+export declare function SourceSvcCheckoutRepoResponseToJSON(json: any): SourceSvcCheckoutRepoResponse;
+export declare function SourceSvcCheckoutRepoResponseToJSONTyped(value?: SourceSvcCheckoutRepoResponse | null, ignoreDiscriminator?: boolean): any;

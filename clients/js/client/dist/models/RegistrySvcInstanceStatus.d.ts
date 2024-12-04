@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -25,3 +25,4 @@ export declare function instanceOfRegistrySvcInstanceStatus(value: any): boolean
 export declare function RegistrySvcInstanceStatusFromJSON(json: any): RegistrySvcInstanceStatus;
 export declare function RegistrySvcInstanceStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcInstanceStatus;
 export declare function RegistrySvcInstanceStatusToJSON(value?: RegistrySvcInstanceStatus | null): any;
+export declare function RegistrySvcInstanceStatusToJSONTyped(value: any, ignoreDiscriminator: boolean): RegistrySvcInstanceStatus;

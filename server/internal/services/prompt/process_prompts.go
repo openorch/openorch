@@ -23,16 +23,16 @@ import (
 
 	"github.com/pkg/errors"
 
-	openapi "github.com/singulatron/superplatform/clients/go"
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	"github.com/singulatron/superplatform/sdk/go/clients/llm"
-	"github.com/singulatron/superplatform/sdk/go/clients/stable_diffusion"
-	"github.com/singulatron/superplatform/sdk/go/datastore"
-	"github.com/singulatron/superplatform/sdk/go/logger"
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
 
-	apptypes "github.com/singulatron/superplatform/server/internal/services/chat/types"
-	modeltypes "github.com/singulatron/superplatform/server/internal/services/model/types"
-	prompttypes "github.com/singulatron/superplatform/server/internal/services/prompt/types"
+	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
+	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
+	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 var TimeNow = time.Now

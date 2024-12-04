@@ -36,7 +36,7 @@ func (d *DockerService) hashIsRunning(hash string) (bool, error) {
 		if container.State != "running" {
 			continue
 		}
-		if container.Labels["superplatform-hash"] == hash {
+		if container.Labels["openorch-hash"] == hash {
 			return true, nil
 		}
 	}

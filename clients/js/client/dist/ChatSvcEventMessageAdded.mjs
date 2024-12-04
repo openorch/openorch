@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,7 +28,10 @@ function ChatSvcEventMessageAddedFromJSONTyped(json, ignoreDiscriminator) {
         'threadId': json['threadId'] == null ? undefined : json['threadId'],
     };
 }
-function ChatSvcEventMessageAddedToJSON(value) {
+function ChatSvcEventMessageAddedToJSON(json) {
+    return ChatSvcEventMessageAddedToJSONTyped(json, false);
+}
+function ChatSvcEventMessageAddedToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -37,4 +40,4 @@ function ChatSvcEventMessageAddedToJSON(value) {
     };
 }
 
-export { ChatSvcEventMessageAddedFromJSON, ChatSvcEventMessageAddedFromJSONTyped, ChatSvcEventMessageAddedToJSON, instanceOfChatSvcEventMessageAdded };
+export { ChatSvcEventMessageAddedFromJSON, ChatSvcEventMessageAddedFromJSONTyped, ChatSvcEventMessageAddedToJSON, ChatSvcEventMessageAddedToJSONTyped, instanceOfChatSvcEventMessageAdded };

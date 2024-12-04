@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface PolicySvcBlocklistParameters {
 export declare function instanceOfPolicySvcBlocklistParameters(value: object): value is PolicySvcBlocklistParameters;
 export declare function PolicySvcBlocklistParametersFromJSON(json: any): PolicySvcBlocklistParameters;
 export declare function PolicySvcBlocklistParametersFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcBlocklistParameters;
-export declare function PolicySvcBlocklistParametersToJSON(value?: PolicySvcBlocklistParameters | null): any;
+export declare function PolicySvcBlocklistParametersToJSON(json: any): PolicySvcBlocklistParameters;
+export declare function PolicySvcBlocklistParametersToJSONTyped(value?: PolicySvcBlocklistParameters | null, ignoreDiscriminator?: boolean): any;

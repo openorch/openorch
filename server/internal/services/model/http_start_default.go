@@ -16,8 +16,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	sdk "github.com/singulatron/superplatform/sdk/go"
-	model "github.com/singulatron/superplatform/server/internal/services/model/types"
+	sdk "github.com/openorch/openorch/sdk/go"
+	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
 // StartDefault godoc
