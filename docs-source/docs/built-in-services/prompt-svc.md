@@ -27,8 +27,8 @@ It's able to stream back LLM responses, or it can respond syncronously if that's
 
 ## Dependencies
 
-- [Chat Svc](/docs/services/chat-svc) to save prompt responses to chat threads and messages
-- [Model Svc](/docs/services/model-svc) to get the address of the running AI models, see their status etc.
+- [Chat Svc](/docs/built-in-services/chat-svc) to save prompt responses to chat threads and messages
+- [Model Svc](/docs/built-in-services/model-svc) to get the address of the running AI models, see their status etc.
 
 ## Current Limitations
 
