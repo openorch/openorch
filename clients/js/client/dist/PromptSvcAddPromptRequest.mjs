@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,7 +36,10 @@ function PromptSvcAddPromptRequestFromJSONTyped(json, ignoreDiscriminator) {
         'threadId': json['threadId'] == null ? undefined : json['threadId'],
     };
 }
-function PromptSvcAddPromptRequestToJSON(value) {
+function PromptSvcAddPromptRequestToJSON(json) {
+    return PromptSvcAddPromptRequestToJSONTyped(json, false);
+}
+function PromptSvcAddPromptRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -51,4 +54,4 @@ function PromptSvcAddPromptRequestToJSON(value) {
     };
 }
 
-export { PromptSvcAddPromptRequestFromJSON, PromptSvcAddPromptRequestFromJSONTyped, PromptSvcAddPromptRequestToJSON, instanceOfPromptSvcAddPromptRequest };
+export { PromptSvcAddPromptRequestFromJSON, PromptSvcAddPromptRequestFromJSONTyped, PromptSvcAddPromptRequestToJSON, PromptSvcAddPromptRequestToJSONTyped, instanceOfPromptSvcAddPromptRequest };

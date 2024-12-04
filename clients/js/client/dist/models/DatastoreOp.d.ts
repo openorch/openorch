@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -25,3 +25,4 @@ export declare function instanceOfDatastoreOp(value: any): boolean;
 export declare function DatastoreOpFromJSON(json: any): DatastoreOp;
 export declare function DatastoreOpFromJSONTyped(json: any, ignoreDiscriminator: boolean): DatastoreOp;
 export declare function DatastoreOpToJSON(value?: DatastoreOp | null): any;
+export declare function DatastoreOpToJSONTyped(value: any, ignoreDiscriminator: boolean): DatastoreOp;

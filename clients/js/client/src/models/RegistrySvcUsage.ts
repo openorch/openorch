@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -62,10 +62,15 @@ export function RegistrySvcUsageFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function RegistrySvcUsageToJSON(value?: RegistrySvcUsage | null): any {
+  export function RegistrySvcUsageToJSON(json: any): RegistrySvcUsage {
+      return RegistrySvcUsageToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcUsageToJSONTyped(value?: RegistrySvcUsage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'percent': value['percent'],

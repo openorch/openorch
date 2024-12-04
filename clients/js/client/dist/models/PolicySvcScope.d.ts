@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -22,3 +22,4 @@ export declare function instanceOfPolicySvcScope(value: any): boolean;
 export declare function PolicySvcScopeFromJSON(json: any): PolicySvcScope;
 export declare function PolicySvcScopeFromJSONTyped(json: any, ignoreDiscriminator: boolean): PolicySvcScope;
 export declare function PolicySvcScopeToJSON(value?: PolicySvcScope | null): any;
+export declare function PolicySvcScopeToJSONTyped(value: any, ignoreDiscriminator: boolean): PolicySvcScope;

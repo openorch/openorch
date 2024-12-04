@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     DatastoreQueryFromJSON,
     DatastoreQueryFromJSONTyped,
     DatastoreQueryToJSON,
+    DatastoreQueryToJSONTyped,
 } from './DatastoreQuery';
 
 /**
@@ -69,10 +70,15 @@ export function DynamicSvcQueryRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function DynamicSvcQueryRequestToJSON(value?: DynamicSvcQueryRequest | null): any {
+  export function DynamicSvcQueryRequestToJSON(json: any): DynamicSvcQueryRequest {
+      return DynamicSvcQueryRequestToJSONTyped(json, false);
+  }
+
+  export function DynamicSvcQueryRequestToJSONTyped(value?: DynamicSvcQueryRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'query': DatastoreQueryToJSON(value['query']),

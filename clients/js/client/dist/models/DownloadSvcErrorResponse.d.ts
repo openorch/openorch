@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface DownloadSvcErrorResponse {
 export declare function instanceOfDownloadSvcErrorResponse(value: object): value is DownloadSvcErrorResponse;
 export declare function DownloadSvcErrorResponseFromJSON(json: any): DownloadSvcErrorResponse;
 export declare function DownloadSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DownloadSvcErrorResponse;
-export declare function DownloadSvcErrorResponseToJSON(value?: DownloadSvcErrorResponse | null): any;
+export declare function DownloadSvcErrorResponseToJSON(json: any): DownloadSvcErrorResponse;
+export declare function DownloadSvcErrorResponseToJSONTyped(value?: DownloadSvcErrorResponse | null, ignoreDiscriminator?: boolean): any;

@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -101,4 +101,5 @@ export interface RegistrySvcGPU {
 export declare function instanceOfRegistrySvcGPU(value: object): value is RegistrySvcGPU;
 export declare function RegistrySvcGPUFromJSON(json: any): RegistrySvcGPU;
 export declare function RegistrySvcGPUFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcGPU;
-export declare function RegistrySvcGPUToJSON(value?: RegistrySvcGPU | null): any;
+export declare function RegistrySvcGPUToJSON(json: any): RegistrySvcGPU;
+export declare function RegistrySvcGPUToJSONTyped(value?: RegistrySvcGPU | null, ignoreDiscriminator?: boolean): any;

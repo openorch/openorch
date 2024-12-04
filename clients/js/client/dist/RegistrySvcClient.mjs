@@ -3,7 +3,7 @@ import { RegistrySvcLanguageFromJSON, RegistrySvcLanguageToJSON } from './Regist
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function RegistrySvcClientFromJSONTyped(json, ignoreDiscriminator) {
         'url': json['url'],
     };
 }
-function RegistrySvcClientToJSON(value) {
+function RegistrySvcClientToJSON(json) {
+    return RegistrySvcClientToJSONTyped(json, false);
+}
+function RegistrySvcClientToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -45,4 +48,4 @@ function RegistrySvcClientToJSON(value) {
     };
 }
 
-export { RegistrySvcClientFromJSON, RegistrySvcClientFromJSONTyped, RegistrySvcClientToJSON, instanceOfRegistrySvcClient };
+export { RegistrySvcClientFromJSON, RegistrySvcClientFromJSONTyped, RegistrySvcClientToJSON, RegistrySvcClientToJSONTyped, instanceOfRegistrySvcClient };

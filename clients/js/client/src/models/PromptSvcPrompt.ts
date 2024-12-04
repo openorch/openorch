@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     PromptSvcPromptStatusFromJSON,
     PromptSvcPromptStatusFromJSONTyped,
     PromptSvcPromptStatusToJSON,
+    PromptSvcPromptStatusToJSONTyped,
 } from './PromptSvcPromptStatus';
 
 /**
@@ -57,7 +58,7 @@ export interface PromptSvcPrompt {
      */
     maxRetries?: number;
     /**
-     * ModelId is just the Superplatform internal ID of the model.
+     * ModelId is just the OpenOrch internal ID of the model.
      * @type {string}
      * @memberof PromptSvcPrompt
      */
@@ -155,10 +156,15 @@ export function PromptSvcPromptFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function PromptSvcPromptToJSON(value?: PromptSvcPrompt | null): any {
+  export function PromptSvcPromptToJSON(json: any): PromptSvcPrompt {
+      return PromptSvcPromptToJSONTyped(json, false);
+  }
+
+  export function PromptSvcPromptToJSONTyped(value?: PromptSvcPrompt | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'createdAt': value['createdAt'],

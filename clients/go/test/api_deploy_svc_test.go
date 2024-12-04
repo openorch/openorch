@@ -1,5 +1,5 @@
 /*
-Superplatform
+OpenOrch
 
 Testing DeploySvcAPIService
 

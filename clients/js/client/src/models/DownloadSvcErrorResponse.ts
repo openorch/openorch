@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -48,10 +48,15 @@ export function DownloadSvcErrorResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function DownloadSvcErrorResponseToJSON(value?: DownloadSvcErrorResponse | null): any {
+  export function DownloadSvcErrorResponseToJSON(json: any): DownloadSvcErrorResponse {
+      return DownloadSvcErrorResponseToJSONTyped(json, false);
+  }
+
+  export function DownloadSvcErrorResponseToJSONTyped(value?: DownloadSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'error': value['error'],

@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -77,4 +77,5 @@ export interface RegistrySvcDefinition {
 export declare function instanceOfRegistrySvcDefinition(value: object): value is RegistrySvcDefinition;
 export declare function RegistrySvcDefinitionFromJSON(json: any): RegistrySvcDefinition;
 export declare function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcDefinition;
-export declare function RegistrySvcDefinitionToJSON(value?: RegistrySvcDefinition | null): any;
+export declare function RegistrySvcDefinitionToJSON(json: any): RegistrySvcDefinition;
+export declare function RegistrySvcDefinitionToJSONTyped(value?: RegistrySvcDefinition | null, ignoreDiscriminator?: boolean): any;

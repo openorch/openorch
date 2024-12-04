@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -55,10 +55,15 @@ export function FirehoseSvcEventFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function FirehoseSvcEventToJSON(value?: FirehoseSvcEvent | null): any {
+  export function FirehoseSvcEventToJSON(json: any): FirehoseSvcEvent {
+      return FirehoseSvcEventToJSONTyped(json, false);
+  }
+
+  export function FirehoseSvcEventToJSONTyped(value?: FirehoseSvcEvent | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'data': value['data'],

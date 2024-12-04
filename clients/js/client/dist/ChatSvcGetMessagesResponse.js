@@ -6,7 +6,7 @@ var ChatSvcAsset = require('./ChatSvcAsset.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,7 +34,10 @@ function ChatSvcGetMessagesResponseFromJSONTyped(json, ignoreDiscriminator) {
         'messages': json['messages'] == null ? undefined : (json['messages'].map(ChatSvcMessage.ChatSvcMessageFromJSON)),
     };
 }
-function ChatSvcGetMessagesResponseToJSON(value) {
+function ChatSvcGetMessagesResponseToJSON(json) {
+    return ChatSvcGetMessagesResponseToJSONTyped(json, false);
+}
+function ChatSvcGetMessagesResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -47,4 +50,5 @@ function ChatSvcGetMessagesResponseToJSON(value) {
 exports.ChatSvcGetMessagesResponseFromJSON = ChatSvcGetMessagesResponseFromJSON;
 exports.ChatSvcGetMessagesResponseFromJSONTyped = ChatSvcGetMessagesResponseFromJSONTyped;
 exports.ChatSvcGetMessagesResponseToJSON = ChatSvcGetMessagesResponseToJSON;
+exports.ChatSvcGetMessagesResponseToJSONTyped = ChatSvcGetMessagesResponseToJSONTyped;
 exports.instanceOfChatSvcGetMessagesResponse = instanceOfChatSvcGetMessagesResponse;

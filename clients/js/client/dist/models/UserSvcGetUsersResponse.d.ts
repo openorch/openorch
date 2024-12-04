@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -41,4 +41,5 @@ export interface UserSvcGetUsersResponse {
 export declare function instanceOfUserSvcGetUsersResponse(value: object): value is UserSvcGetUsersResponse;
 export declare function UserSvcGetUsersResponseFromJSON(json: any): UserSvcGetUsersResponse;
 export declare function UserSvcGetUsersResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserSvcGetUsersResponse;
-export declare function UserSvcGetUsersResponseToJSON(value?: UserSvcGetUsersResponse | null): any;
+export declare function UserSvcGetUsersResponseToJSON(json: any): UserSvcGetUsersResponse;
+export declare function UserSvcGetUsersResponseToJSONTyped(value?: UserSvcGetUsersResponse | null, ignoreDiscriminator?: boolean): any;

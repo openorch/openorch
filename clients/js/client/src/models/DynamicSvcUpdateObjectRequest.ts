@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,12 +18,14 @@ import {
     DynamicSvcObjectFromJSON,
     DynamicSvcObjectFromJSONTyped,
     DynamicSvcObjectToJSON,
+    DynamicSvcObjectToJSONTyped,
 } from './DynamicSvcObject';
 import type { DatastoreFilter } from './DatastoreFilter';
 import {
     DatastoreFilterFromJSON,
     DatastoreFilterFromJSONTyped,
     DatastoreFilterToJSON,
+    DatastoreFilterToJSONTyped,
 } from './DatastoreFilter';
 
 /**
@@ -75,10 +77,15 @@ export function DynamicSvcUpdateObjectRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function DynamicSvcUpdateObjectRequestToJSON(value?: DynamicSvcUpdateObjectRequest | null): any {
+  export function DynamicSvcUpdateObjectRequestToJSON(json: any): DynamicSvcUpdateObjectRequest {
+      return DynamicSvcUpdateObjectRequestToJSONTyped(json, false);
+  }
+
+  export function DynamicSvcUpdateObjectRequestToJSONTyped(value?: DynamicSvcUpdateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'filters': value['filters'] == null ? undefined : ((value['filters'] as Array<any>).map(DatastoreFilterToJSON)),

@@ -11,21 +11,21 @@ tags:
 
 # User Svc
 
-The user service is at the heart of Superplatform, managing users, tokens, organizations, permissions and more. Each service and human on the Superplatform network has an account in the `User Svc`.
+The user service is at the heart of OpenOrch, managing users, tokens, organizations, permissions and more. Each service and human on the OpenOrch network has an account in the `User Svc`.
 
-> This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/superplatform/login).
+> This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/openorch/login).
 
 ## How It Works
 
 ### The Token
 
-The User Svc produces a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token)) upon [/user-svc/login](/docs/superplatform/login) in the `token.token` field (see the response documentation).
+The User Svc produces a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token)) upon [/user-svc/login](/docs/openorch/login) in the `token.token` field (see the response documentation).
 
-You can either use this token as a proper JWT - decode it and inspect the contents, or you can just use the token to read the user account that belongs to the token with the [/user-svc/user/by-token](/docs/superplatform/read-user-by-token) endpoint.
+You can either use this token as a proper JWT - decode it and inspect the contents, or you can just use the token to read the user account that belongs to the token with the [/user-svc/user/by-token](/docs/openorch/read-user-by-token) endpoint.
 
 ### Decoding the Token
 
-The [`/user-svc/public-key`](/docs/superplatform/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
+The [`/user-svc/public-key`](/docs/openorch/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
 
 Use the JWT libraries that are available in your programming language to do that, or use the Singularon [SDK](https://github.com/singulatron/singulatron/tree/main/sdk) if your language is supported.
 
@@ -59,11 +59,11 @@ type Claims struct {
 
 The most important thing about the User Svc is that service (machine) and user (human) accounts look and function the same.
 
-Every service you write needs to [register](/docs/superplatform/register) at startup, or log in with the credentials it saves and manages if it's already regsitered. Just like a human.
+Every service you write needs to [register](/docs/openorch/register) at startup, or log in with the credentials it saves and manages if it's already regsitered. Just like a human.
 
 You can do this in a few ways:
 
-- Use the [API](/docs/superplatform/register) directly
+- Use the [API](/docs/openorch/register) directly
 - Use a language specific [client](https://github.com/singulatron/singulatron/tree/main/clients) that was generated from the API
 - Use a language specific [SDK](https://github.com/singulatron/singulatron/tree/main/localtron/sdk)
 
@@ -97,7 +97,7 @@ func (cs *PromptService) Start() error {
 
 ### Static
 
-Static roles, such as `user-svc:admin` and `user-svc:user` defined by the `User Svc` are primarily used for simple role-based access control: in the Superplatform UI and API you can edit static roles to add or remove endpoints a user can call.
+Static roles, such as `user-svc:admin` and `user-svc:user` defined by the `User Svc` are primarily used for simple role-based access control: in the OpenOrch UI and API you can edit static roles to add or remove endpoints a user can call.
 
 > If you are looking at restricting access to endpoints in other ways, you might be interested in: [Policy Svc](/docs/services/policy-svc).
 
@@ -123,4 +123,4 @@ Each permission created must by prefixed by the slug of the account that created
 
 > Once you (your service) own a permission (by creating it, and it being prefixed by your account slug), you can add it to any role, not just roles owned by you.
 
-Example; let's say your service is `petstore-svc`. Superplatform prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.
+Example; let's say your service is `petstore-svc`. OpenOrch prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.

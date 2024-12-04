@@ -5,7 +5,7 @@ var DynamicSvcObject = require('./DynamicSvcObject.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DynamicSvcQueryResponseFromJSONTyped(json, ignoreDiscriminator) {
         'objects': json['objects'] == null ? undefined : (json['objects'].map(DynamicSvcObject.DynamicSvcObjectFromJSON)),
     };
 }
-function DynamicSvcQueryResponseToJSON(value) {
+function DynamicSvcQueryResponseToJSON(json) {
+    return DynamicSvcQueryResponseToJSONTyped(json, false);
+}
+function DynamicSvcQueryResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DynamicSvcQueryResponseToJSON(value) {
 exports.DynamicSvcQueryResponseFromJSON = DynamicSvcQueryResponseFromJSON;
 exports.DynamicSvcQueryResponseFromJSONTyped = DynamicSvcQueryResponseFromJSONTyped;
 exports.DynamicSvcQueryResponseToJSON = DynamicSvcQueryResponseToJSON;
+exports.DynamicSvcQueryResponseToJSONTyped = DynamicSvcQueryResponseToJSONTyped;
 exports.instanceOfDynamicSvcQueryResponse = instanceOfDynamicSvcQueryResponse;

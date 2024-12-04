@@ -1,4 +1,4 @@
-For comprehensive documentation, please visit https://superplatform.ai/.
+For comprehensive documentation, please visit https://openorch.org/.
 
 # CLI
 
@@ -11,7 +11,7 @@ This CLI is first and foremost aimed at administrators (as opposed to both admin
 #### List
 
 ```sh
-~/superplatform/cli$ go run main.go env list
+~/openorch/cli$ go run main.go env list
 SELECTED   NAME    URL                                DESCRIPTION
 *          local   http://127.0.0.1:58231
            prod    https://api.myprodserver.com
@@ -22,20 +22,20 @@ SELECTED   NAME    URL                                DESCRIPTION
 #### Login
 
 ```sh
-~/superplatform/cli$ go run main.go login singulatron changeme
+~/openorch/cli$ go run main.go login singulatron changeme
 ```
 
 #### Whoami
 
 ```sh
-$ ~/superplatform/cli$ go run main.go whoami
+$ ~/openorch/cli$ go run main.go whoami
 singularon
 ```
 
 ### Service Definitions
 
 ```sh
-~/superplatform/cli$ cat fixtures/definitionA.yaml
+~/openorch/cli$ cat fixtures/definitionA.yaml
 id: test-a
 image:
   name: hashicorp/http-echo

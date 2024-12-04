@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,4 +29,5 @@ export interface SecretSvcReadSecretResponse {
 export declare function instanceOfSecretSvcReadSecretResponse(value: object): value is SecretSvcReadSecretResponse;
 export declare function SecretSvcReadSecretResponseFromJSON(json: any): SecretSvcReadSecretResponse;
 export declare function SecretSvcReadSecretResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SecretSvcReadSecretResponse;
-export declare function SecretSvcReadSecretResponseToJSON(value?: SecretSvcReadSecretResponse | null): any;
+export declare function SecretSvcReadSecretResponseToJSON(json: any): SecretSvcReadSecretResponse;
+export declare function SecretSvcReadSecretResponseToJSONTyped(value?: SecretSvcReadSecretResponse | null, ignoreDiscriminator?: boolean): any;

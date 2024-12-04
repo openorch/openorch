@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface DockerSvcRunInfo {
 export declare function instanceOfDockerSvcRunInfo(value: object): value is DockerSvcRunInfo;
 export declare function DockerSvcRunInfoFromJSON(json: any): DockerSvcRunInfo;
 export declare function DockerSvcRunInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): DockerSvcRunInfo;
-export declare function DockerSvcRunInfoToJSON(value?: DockerSvcRunInfo | null): any;
+export declare function DockerSvcRunInfoToJSON(json: any): DockerSvcRunInfo;
+export declare function DockerSvcRunInfoToJSONTyped(value?: DockerSvcRunInfo | null, ignoreDiscriminator?: boolean): any;

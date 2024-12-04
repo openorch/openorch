@@ -7,7 +7,7 @@
  */
 module.exports = {
 	packagerConfig: {
-		name: 'Superplatform',
+		name: 'OpenOrch',
 		executableName: 'singulatron',
 		icon: './workspaces/electron-app/main/assets/icons/icon.png',
 	},

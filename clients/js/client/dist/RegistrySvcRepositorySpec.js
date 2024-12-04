@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -36,7 +36,10 @@ function RegistrySvcRepositorySpecFromJSONTyped(json, ignoreDiscriminator) {
         'version': json['version'] == null ? undefined : json['version'],
     };
 }
-function RegistrySvcRepositorySpecToJSON(value) {
+function RegistrySvcRepositorySpecToJSON(json) {
+    return RegistrySvcRepositorySpecToJSONTyped(json, false);
+}
+function RegistrySvcRepositorySpecToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -52,4 +55,5 @@ function RegistrySvcRepositorySpecToJSON(value) {
 exports.RegistrySvcRepositorySpecFromJSON = RegistrySvcRepositorySpecFromJSON;
 exports.RegistrySvcRepositorySpecFromJSONTyped = RegistrySvcRepositorySpecFromJSONTyped;
 exports.RegistrySvcRepositorySpecToJSON = RegistrySvcRepositorySpecToJSON;
+exports.RegistrySvcRepositorySpecToJSONTyped = RegistrySvcRepositorySpecToJSONTyped;
 exports.instanceOfRegistrySvcRepositorySpec = instanceOfRegistrySvcRepositorySpec;

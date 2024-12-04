@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,4 +35,5 @@ export interface DynamicSvcDeleteObjectRequest {
 export declare function instanceOfDynamicSvcDeleteObjectRequest(value: object): value is DynamicSvcDeleteObjectRequest;
 export declare function DynamicSvcDeleteObjectRequestFromJSON(json: any): DynamicSvcDeleteObjectRequest;
 export declare function DynamicSvcDeleteObjectRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcDeleteObjectRequest;
-export declare function DynamicSvcDeleteObjectRequestToJSON(value?: DynamicSvcDeleteObjectRequest | null): any;
+export declare function DynamicSvcDeleteObjectRequestToJSON(json: any): DynamicSvcDeleteObjectRequest;
+export declare function DynamicSvcDeleteObjectRequestToJSONTyped(value?: DynamicSvcDeleteObjectRequest | null, ignoreDiscriminator?: boolean): any;

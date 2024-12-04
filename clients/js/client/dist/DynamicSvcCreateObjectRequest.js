@@ -5,7 +5,7 @@ var DynamicSvcObjectCreateFields = require('./DynamicSvcObjectCreateFields.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DynamicSvcCreateObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
         'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFields.DynamicSvcObjectCreateFieldsFromJSON(json['object']),
     };
 }
-function DynamicSvcCreateObjectRequestToJSON(value) {
+function DynamicSvcCreateObjectRequestToJSON(json) {
+    return DynamicSvcCreateObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcCreateObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function DynamicSvcCreateObjectRequestToJSON(value) {
 exports.DynamicSvcCreateObjectRequestFromJSON = DynamicSvcCreateObjectRequestFromJSON;
 exports.DynamicSvcCreateObjectRequestFromJSONTyped = DynamicSvcCreateObjectRequestFromJSONTyped;
 exports.DynamicSvcCreateObjectRequestToJSON = DynamicSvcCreateObjectRequestToJSON;
+exports.DynamicSvcCreateObjectRequestToJSONTyped = DynamicSvcCreateObjectRequestToJSONTyped;
 exports.instanceOfDynamicSvcCreateObjectRequest = instanceOfDynamicSvcCreateObjectRequest;

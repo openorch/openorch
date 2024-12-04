@@ -4,7 +4,7 @@ import './DatastoreOp.mjs';
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function DynamicSvcDeleteObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
         'table': json['table'] == null ? undefined : json['table'],
     };
 }
-function DynamicSvcDeleteObjectRequestToJSON(value) {
+function DynamicSvcDeleteObjectRequestToJSON(json) {
+    return DynamicSvcDeleteObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcDeleteObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,4 @@ function DynamicSvcDeleteObjectRequestToJSON(value) {
     };
 }
 
-export { DynamicSvcDeleteObjectRequestFromJSON, DynamicSvcDeleteObjectRequestFromJSONTyped, DynamicSvcDeleteObjectRequestToJSON, instanceOfDynamicSvcDeleteObjectRequest };
+export { DynamicSvcDeleteObjectRequestFromJSON, DynamicSvcDeleteObjectRequestFromJSONTyped, DynamicSvcDeleteObjectRequestToJSON, DynamicSvcDeleteObjectRequestToJSONTyped, instanceOfDynamicSvcDeleteObjectRequest };

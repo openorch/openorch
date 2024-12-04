@@ -346,7 +346,7 @@ func (ns *DeployService) makeSureItRuns(
 				HostPort: definition.HostPort,
 				Options: &openapi.DockerSvcRunContainerOptions{
 					Name: openapi.PtrString(
-						fmt.Sprintf("superplatform-%v", definition.Id),
+						fmt.Sprintf("openorch-%v", definition.Id),
 					),
 				},
 			},
@@ -381,11 +381,11 @@ func (ns *DeployService) makeSureItRuns(
 
 		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Body(
 			openapi.DockerSvcRunContainerRequest{
-				Image:    fmt.Sprintf("superplatform-%v", definition.Id),
+				Image:    fmt.Sprintf("openorch-%v", definition.Id),
 				Port:     *definition.Repository.Port,
 				HostPort: definition.HostPort,
 				Options: &openapi.DockerSvcRunContainerOptions{
-					Name: openapi.PtrString(fmt.Sprintf("superplatform-%v", definition.Id)),
+					Name: openapi.PtrString(fmt.Sprintf("openorch-%v", definition.Id)),
 				},
 			},
 		).Execute()

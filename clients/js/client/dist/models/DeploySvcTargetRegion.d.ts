@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -34,4 +34,5 @@ export interface DeploySvcTargetRegion {
 export declare function instanceOfDeploySvcTargetRegion(value: object): value is DeploySvcTargetRegion;
 export declare function DeploySvcTargetRegionFromJSON(json: any): DeploySvcTargetRegion;
 export declare function DeploySvcTargetRegionFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeploySvcTargetRegion;
-export declare function DeploySvcTargetRegionToJSON(value?: DeploySvcTargetRegion | null): any;
+export declare function DeploySvcTargetRegionToJSON(json: any): DeploySvcTargetRegion;
+export declare function DeploySvcTargetRegionToJSONTyped(value?: DeploySvcTargetRegion | null, ignoreDiscriminator?: boolean): any;

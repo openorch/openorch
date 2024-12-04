@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     RegistrySvcProcessFromJSON,
     RegistrySvcProcessFromJSONTyped,
     RegistrySvcProcessToJSON,
+    RegistrySvcProcessToJSONTyped,
 } from './RegistrySvcProcess';
 
 /**
@@ -139,10 +140,15 @@ export function RegistrySvcGPUFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function RegistrySvcGPUToJSON(value?: RegistrySvcGPU | null): any {
+  export function RegistrySvcGPUToJSON(json: any): RegistrySvcGPU {
+      return RegistrySvcGPUToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcGPUToJSONTyped(value?: RegistrySvcGPU | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'busId': value['busId'],

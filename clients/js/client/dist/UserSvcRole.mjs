@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -33,7 +33,10 @@ function UserSvcRoleFromJSONTyped(json, ignoreDiscriminator) {
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
     };
 }
-function UserSvcRoleToJSON(value) {
+function UserSvcRoleToJSON(json) {
+    return UserSvcRoleToJSONTyped(json, false);
+}
+function UserSvcRoleToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -47,4 +50,4 @@ function UserSvcRoleToJSON(value) {
     };
 }
 
-export { UserSvcRoleFromJSON, UserSvcRoleFromJSONTyped, UserSvcRoleToJSON, instanceOfUserSvcRole };
+export { UserSvcRoleFromJSON, UserSvcRoleFromJSONTyped, UserSvcRoleToJSON, UserSvcRoleToJSONTyped, instanceOfUserSvcRole };

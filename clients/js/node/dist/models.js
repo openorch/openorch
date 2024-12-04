@@ -310,6 +310,20 @@ let typeMap = {
     "UserSvcUpserPermissionRequest": userSvcUpserPermissionRequest.UserSvcUpserPermissionRequest,
     "UserSvcUser": userSvcUser.UserSvcUser,
 };
+// Check if a string starts with another string without using es6 features
+function startsWith(str, match) {
+    return str.substring(0, match.length) === match;
+}
+// Check if a string ends with another string without using es6 features
+function endsWith(str, match) {
+    return str.length >= match.length && str.substring(str.length - match.length) === match;
+}
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
 class ObjectSerializer {
     static findCorrectType(data, expectedType) {
         if (data == undefined) {
@@ -356,13 +370,28 @@ class ObjectSerializer {
         else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
         }
-        else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        else if (endsWith(type, nullableSuffix)) {
+            let subType = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType);
+        }
+        else if (endsWith(type, optionalSuffix)) {
+            let subType = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType);
+        }
+        else if (startsWith(type, arrayPrefix)) {
+            let subType = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData = [];
             for (let index = 0; index < data.length; index++) {
                 let datum = data[index];
                 transformedData.push(ObjectSerializer.serialize(datum, subType));
+            }
+            return transformedData;
+        }
+        else if (startsWith(type, mapPrefix)) {
+            let subType = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(data[key], subType);
             }
             return transformedData;
         }
@@ -397,13 +426,28 @@ class ObjectSerializer {
         else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
         }
-        else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        else if (endsWith(type, nullableSuffix)) {
+            let subType = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType);
+        }
+        else if (endsWith(type, optionalSuffix)) {
+            let subType = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType);
+        }
+        else if (startsWith(type, arrayPrefix)) {
+            let subType = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData = [];
             for (let index = 0; index < data.length; index++) {
                 let datum = data[index];
                 transformedData.push(ObjectSerializer.deserialize(datum, subType));
+            }
+            return transformedData;
+        }
+        else if (startsWith(type, mapPrefix)) {
+            let subType = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(data[key], subType);
             }
             return transformedData;
         }

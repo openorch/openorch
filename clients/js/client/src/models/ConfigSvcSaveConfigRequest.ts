@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     ConfigSvcConfigFromJSON,
     ConfigSvcConfigFromJSONTyped,
     ConfigSvcConfigToJSON,
+    ConfigSvcConfigToJSONTyped,
 } from './ConfigSvcConfig';
 
 /**
@@ -55,10 +56,15 @@ export function ConfigSvcSaveConfigRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function ConfigSvcSaveConfigRequestToJSON(value?: ConfigSvcSaveConfigRequest | null): any {
+  export function ConfigSvcSaveConfigRequestToJSON(json: any): ConfigSvcSaveConfigRequest {
+      return ConfigSvcSaveConfigRequestToJSONTyped(json, false);
+  }
+
+  export function ConfigSvcSaveConfigRequestToJSONTyped(value?: ConfigSvcSaveConfigRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'config': ConfigSvcConfigToJSON(value['config']),

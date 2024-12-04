@@ -1,6 +1,6 @@
 export const environment = {
 	production: true,
-	brandName: 'Superplatform',
+	brandName: 'OpenOrch',
 	shortBrandName: 'S',
 	/** Model list is loaded from a central server.
 	 * @todo Consider making this configurable so users

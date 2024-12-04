@@ -1038,7 +1038,7 @@ definitions:
         example: 10
         type: integer
       modelId:
-        description: ModelId is just the Superplatform internal ID of the model.
+        description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
       prompt:
@@ -1114,7 +1114,7 @@ definitions:
         example: 10
         type: integer
       modelId:
-        description: ModelId is just the Superplatform internal ID of the model.
+        description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
       prompt:
@@ -1312,7 +1312,7 @@ definitions:
       deploymentId:
         description: |-
           The ID of the deployment that this instance is an instance of.
-          Only instances managed by the Superplatform have a DeploymentId.
+          Only instances managed by the OpenOrch have a DeploymentId.
           Services can self-register without a DeploymentId too.
         example: depl_deBUCtJirc
         type: string
@@ -1337,7 +1337,7 @@ definitions:
         description: Last time the instance gave a sign of life
         type: string
       nodeUrl:
-        description: URL of the Superplatform daemon
+        description: URL of the OpenOrch daemon
         example: https://myserver.com:58231
         type: string
       path:
@@ -1483,7 +1483,7 @@ definitions:
       url:
         description: |-
           URL of the daemon running on the node.
-          If not configured defaults to hostname + default Superplatform daemon port.
+          If not configured defaults to hostname + default OpenOrch daemon port.
         type: string
       usage:
         allOf:
@@ -2018,20 +2018,20 @@ definitions:
         type: string
     type: object
 externalDocs:
-  description: Superplatform API
-  url: https://superplatform.ai/docs/category/singulatron-api
+  description: OpenOrch API
+  url: https://openorch.org/docs/category/singulatron-api
 host: localhost:58231
 info:
   contact:
     email: sales@singulatron.com
     name: API Support
-    url: http://superplatform.ai/
+    url: http://openorch.org/
   description: On-premise AI platform and microservices ecosystem.
   license:
     name: AGPL v3.0
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
-  title: Superplatform
+  title: OpenOrch
   version: 0.3.0-rc.7
 paths:
   /chat-svc/events:

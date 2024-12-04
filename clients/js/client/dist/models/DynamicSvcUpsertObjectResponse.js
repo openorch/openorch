@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -29,7 +29,10 @@ export function DynamicSvcUpsertObjectResponseFromJSONTyped(json, ignoreDiscrimi
         'object': json['object'] == null ? undefined : DynamicSvcObjectFromJSON(json['object']),
     };
 }
-export function DynamicSvcUpsertObjectResponseToJSON(value) {
+export function DynamicSvcUpsertObjectResponseToJSON(json) {
+    return DynamicSvcUpsertObjectResponseToJSONTyped(json, false);
+}
+export function DynamicSvcUpsertObjectResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -57,9 +57,13 @@ function RegistrySvcLanguageFromJSONTyped(json, ignoreDiscriminator) {
 function RegistrySvcLanguageToJSON(value) {
     return value;
 }
+function RegistrySvcLanguageToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
 
 exports.RegistrySvcLanguage = RegistrySvcLanguage;
 exports.RegistrySvcLanguageFromJSON = RegistrySvcLanguageFromJSON;
 exports.RegistrySvcLanguageFromJSONTyped = RegistrySvcLanguageFromJSONTyped;
 exports.RegistrySvcLanguageToJSON = RegistrySvcLanguageToJSON;
+exports.RegistrySvcLanguageToJSONTyped = RegistrySvcLanguageToJSONTyped;
 exports.instanceOfRegistrySvcLanguage = instanceOfRegistrySvcLanguage;

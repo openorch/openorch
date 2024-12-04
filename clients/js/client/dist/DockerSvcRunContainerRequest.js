@@ -5,7 +5,7 @@ var DockerSvcRunContainerOptions = require('./DockerSvcRunContainerOptions.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -39,7 +39,10 @@ function DockerSvcRunContainerRequestFromJSONTyped(json, ignoreDiscriminator) {
         'port': json['port'],
     };
 }
-function DockerSvcRunContainerRequestToJSON(value) {
+function DockerSvcRunContainerRequestToJSON(json) {
+    return DockerSvcRunContainerRequestToJSONTyped(json, false);
+}
+function DockerSvcRunContainerRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -54,4 +57,5 @@ function DockerSvcRunContainerRequestToJSON(value) {
 exports.DockerSvcRunContainerRequestFromJSON = DockerSvcRunContainerRequestFromJSON;
 exports.DockerSvcRunContainerRequestFromJSONTyped = DockerSvcRunContainerRequestFromJSONTyped;
 exports.DockerSvcRunContainerRequestToJSON = DockerSvcRunContainerRequestToJSON;
+exports.DockerSvcRunContainerRequestToJSONTyped = DockerSvcRunContainerRequestToJSONTyped;
 exports.instanceOfDockerSvcRunContainerRequest = instanceOfDockerSvcRunContainerRequest;

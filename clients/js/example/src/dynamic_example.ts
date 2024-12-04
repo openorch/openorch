@@ -1,4 +1,4 @@
-import { Configuration, DynamicSvcApi } from "@superplatform/client";
+import { Configuration, DynamicSvcApi } from "@openorch/client";
 
 export async function dynamicTest(apiKey: string) {
   const dynamicService: DynamicSvcApi = new DynamicSvcApi(

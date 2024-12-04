@@ -11,7 +11,7 @@ require('./DeploySvcResourceLimits.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -38,7 +38,10 @@ function DeploySvcListDeploymentsResponseFromJSONTyped(json, ignoreDiscriminator
         'deployments': json['deployments'] == null ? undefined : (json['deployments'].map(DeploySvcDeployment.DeploySvcDeploymentFromJSON)),
     };
 }
-function DeploySvcListDeploymentsResponseToJSON(value) {
+function DeploySvcListDeploymentsResponseToJSON(json) {
+    return DeploySvcListDeploymentsResponseToJSONTyped(json, false);
+}
+function DeploySvcListDeploymentsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -50,4 +53,5 @@ function DeploySvcListDeploymentsResponseToJSON(value) {
 exports.DeploySvcListDeploymentsResponseFromJSON = DeploySvcListDeploymentsResponseFromJSON;
 exports.DeploySvcListDeploymentsResponseFromJSONTyped = DeploySvcListDeploymentsResponseFromJSONTyped;
 exports.DeploySvcListDeploymentsResponseToJSON = DeploySvcListDeploymentsResponseToJSON;
+exports.DeploySvcListDeploymentsResponseToJSONTyped = DeploySvcListDeploymentsResponseToJSONTyped;
 exports.instanceOfDeploySvcListDeploymentsResponse = instanceOfDeploySvcListDeploymentsResponse;

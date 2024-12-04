@@ -36,14 +36,14 @@ import (
 	"github.com/pkg/errors"
 )
 
-const superplatformFolder = ".superplatform"
+const openorchFolder = ".openorch"
 
 type Options struct {
 	// NodeOptions contains settings coming from envars
 	NodeOptions node_types.Options
 
 	// Url that will be passed down to the router when calling
-	// the Superplatform daemon from itself.
+	// the OpenOrch daemon from itself.
 	// (Inter-service calls go through the network.)
 	Url string
 
@@ -64,7 +64,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	var homeDir string
 	var err error
 	if options.Test {
-		homeDir, err = os.MkdirTemp("", "superplatform-")
+		homeDir, err = os.MkdirTemp("", "openorch-")
 		if err != nil {
 			logger.Error(
 				"Homedir creation failed",
@@ -94,12 +94,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	superplatformFolder := path.Join(homeDir, superplatformFolder)
+	openorchFolder := path.Join(homeDir, openorchFolder)
 	if options.NodeOptions.ConfigPath != "" {
-		superplatformFolder = options.NodeOptions.ConfigPath
+		openorchFolder = options.NodeOptions.ConfigPath
 	}
 
-	configService.ConfigDirectory = superplatformFolder
+	configService.ConfigDirectory = openorchFolder
 
 	if options.DatastoreFactory == nil {
 		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
@@ -170,7 +170,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	err = os.MkdirAll(superplatformFolder, 0755)
+	err = os.MkdirAll(openorchFolder, 0755)
 	if err != nil {
 		logger.Error(
 			"Config folder creation failed",
@@ -179,7 +179,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadFolder := path.Join(superplatformFolder, "downloads")
+	downloadFolder := path.Join(openorchFolder, "downloads")
 	err = os.MkdirAll(downloadFolder, 0755)
 	if err != nil {
 		logger.Error(
@@ -204,7 +204,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	downloadService.SetDefaultFolder(downloadFolder)
 	downloadService.SetStateFilePath(
-		path.Join(superplatformFolder, "downloads.json"),
+		path.Join(openorchFolder, "downloads.json"),
 	)
 
 	dockerService, err := dockerservice.NewDockerService(

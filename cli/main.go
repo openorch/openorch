@@ -20,7 +20,7 @@ import (
 func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "sup",
-		Short: "Superplatform CLI",
+		Short: "OpenOrch CLI",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return cmd.Help()

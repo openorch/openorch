@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface SourceSvcErrorResponse {
 export declare function instanceOfSourceSvcErrorResponse(value: object): value is SourceSvcErrorResponse;
 export declare function SourceSvcErrorResponseFromJSON(json: any): SourceSvcErrorResponse;
 export declare function SourceSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): SourceSvcErrorResponse;
-export declare function SourceSvcErrorResponseToJSON(value?: SourceSvcErrorResponse | null): any;
+export declare function SourceSvcErrorResponseToJSON(json: any): SourceSvcErrorResponse;
+export declare function SourceSvcErrorResponseToJSONTyped(value?: SourceSvcErrorResponse | null, ignoreDiscriminator?: boolean): any;

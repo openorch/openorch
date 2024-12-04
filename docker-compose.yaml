@@ -1,15 +1,15 @@
 # This yaml file builds the current code in this repo.
 # For production use the docker-compose.yaml found at ./docs-source/docs/start/docker-compose.yaml
-# or search for "Docker Compose" here https://superplatform.ai/
+# or search for "Docker Compose" here https://openorch.org/
 version: "3.8"
 
 volumes:
-  superplatform-data:
-    name: superplatform-data
+  openorch-data:
+    name: openorch-data
     driver: local
 
 services:
-  superplatform-frontend:
+  openorch-frontend:
     build:
       context: ./desktop
       dockerfile: ./docker/Dockerfile
@@ -20,7 +20,7 @@ services:
       # It is not an internal address, it's the address the browser will make API requests to.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
-  superplatform-backend:
+  openorch-backend:
     build:
       context: .
       dockerfile: ./server/docker/Dockerfile
@@ -30,7 +30,7 @@ services:
       # We mount the docker socket so the backend can start containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
-      - superplatform-data:/root/.superplatform
+      - openorch-data:/root/.openorch
       # environment:
       # GPU Acceleration for NVIDIA GPUs
       # Uncomment this envar for NVIDIA GPUs.

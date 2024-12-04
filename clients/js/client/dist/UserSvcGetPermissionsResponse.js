@@ -5,7 +5,7 @@ var UserSvcPermission = require('./UserSvcPermission.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -32,7 +32,10 @@ function UserSvcGetPermissionsResponseFromJSONTyped(json, ignoreDiscriminator) {
         'permissions': json['permissions'] == null ? undefined : (json['permissions'].map(UserSvcPermission.UserSvcPermissionFromJSON)),
     };
 }
-function UserSvcGetPermissionsResponseToJSON(value) {
+function UserSvcGetPermissionsResponseToJSON(json) {
+    return UserSvcGetPermissionsResponseToJSONTyped(json, false);
+}
+function UserSvcGetPermissionsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -44,4 +47,5 @@ function UserSvcGetPermissionsResponseToJSON(value) {
 exports.UserSvcGetPermissionsResponseFromJSON = UserSvcGetPermissionsResponseFromJSON;
 exports.UserSvcGetPermissionsResponseFromJSONTyped = UserSvcGetPermissionsResponseFromJSONTyped;
 exports.UserSvcGetPermissionsResponseToJSON = UserSvcGetPermissionsResponseToJSON;
+exports.UserSvcGetPermissionsResponseToJSONTyped = UserSvcGetPermissionsResponseToJSONTyped;
 exports.instanceOfUserSvcGetPermissionsResponse = instanceOfUserSvcGetPermissionsResponse;

@@ -2,11 +2,11 @@
     "swagger": "2.0",
     "info": {
         "description": "On-premise AI platform and microservices ecosystem.",
-        "title": "Superplatform",
+        "title": "OpenOrch",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
-            "url": "http://superplatform.ai/",
+            "url": "http://openorch.org/",
             "email": "sales@singulatron.com"
         },
         "license": {
@@ -5782,7 +5782,7 @@
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Superplatform internal ID of the model.",
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -5876,7 +5876,7 @@
                     "example": 10
                 },
                 "modelId": {
-                    "description": "ModelId is just the Superplatform internal ID of the model.",
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
@@ -6133,7 +6133,7 @@
             ],
             "properties": {
                 "deploymentId": {
-                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the Superplatform have a DeploymentId.\nServices can self-register without a DeploymentId too.",
+                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the OpenOrch have a DeploymentId.\nServices can self-register without a DeploymentId too.",
                     "type": "string",
                     "example": "depl_deBUCtJirc"
                 },
@@ -6162,7 +6162,7 @@
                     "type": "string"
                 },
                 "nodeUrl": {
-                    "description": "URL of the Superplatform daemon",
+                    "description": "URL of the OpenOrch daemon",
                     "type": "string",
                     "example": "https://myserver.com:58231"
                 },
@@ -6339,7 +6339,7 @@
                     "type": "string"
                 },
                 "url": {
-                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default Superplatform daemon port.",
+                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default OpenOrch daemon port.",
                     "type": "string"
                 },
                 "usage": {
@@ -7119,7 +7119,7 @@
         }
     },
     "externalDocs": {
-        "description": "Superplatform API",
-        "url": "https://superplatform.ai/docs/category/singulatron-api"
+        "description": "OpenOrch API",
+        "url": "https://openorch.org/docs/category/singulatron-api"
     }
 }

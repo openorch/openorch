@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     UserSvcUserFromJSON,
     UserSvcUserFromJSONTyped,
     UserSvcUserToJSON,
+    UserSvcUserToJSONTyped,
 } from './UserSvcUser';
 
 /**
@@ -69,10 +70,15 @@ export function UserSvcCreateUserRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function UserSvcCreateUserRequestToJSON(value?: UserSvcCreateUserRequest | null): any {
+  export function UserSvcCreateUserRequestToJSON(json: any): UserSvcCreateUserRequest {
+      return UserSvcCreateUserRequestToJSONTyped(json, false);
+  }
+
+  export function UserSvcCreateUserRequestToJSONTyped(value?: UserSvcCreateUserRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'password': value['password'],

@@ -2,11 +2,11 @@
   <img width="150px" src="https://singulatron.com/assets/logo_circled_grey.svg?v=1" />
   <div align="center">
     <span>
-      <h1>Superplatform</h1>
+      <h1>OpenOrch</h1>
     </span>
     <div>On-premise AI platform and microservices ecosystem.</div>
     <div>
-      <a href="https://superplatform.ai">superplatform.ai</a> 
+      <a href="https://openorch.org">openorch.org</a>
     </div>
   </div>
 </p>
@@ -18,11 +18,11 @@
 ![js client build](https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg)
 ![go sdk](https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg)
 
-Superplatform gives the power back to the developers in the age of AI—self host your own AI platform!
+OpenOrch gives the power back to the developers in the age of AI—self host your own AI platform!
 
 ## Starting
 
-Easiest way to run Superplatform is with Docker. [Install Docker if you don't have it](https://docs.docker.com/engine/install/).
+Easiest way to run OpenOrch is with Docker. [Install Docker if you don't have it](https://docs.docker.com/engine/install/).
 Step into repo root and:
 
 ```sh
@@ -37,7 +37,7 @@ docker compose up -d
 
 ## Using
 
-Now that the Superplatform is running you have a few options to interact with it.
+Now that the OpenOrch is running you have a few options to interact with it.
 
 ### UI
 
@@ -52,13 +52,13 @@ For brevity the below example assumes you went to the UI and downloaded a model 
 Let's do a sync prompting in JS. In your project run
 
 ```sh
-npm i -s @superplatform/client
+npm i -s @openorch/client
 ```
 
 Make sure your `package.json` contains `"type": "module"`, put the following snippet into `index.js`
 
 ```ts
-import { UserSvcApi, PromptSvcApi, Configuration } from "@superplatform/client";
+import { UserSvcApi, PromptSvcApi, Configuration } from "@openorch/client";
 
 async function testDrive() {
   let userService = new UserSvcApi();
@@ -91,7 +91,7 @@ testDrive();
 and run
 
 ```sh
-$ node index.js 
+$ node index.js
 {
   answer: ' Yes, a cat is an animal.\n' +
     '\n' +
@@ -104,32 +104,22 @@ Depending on your system it might take a while for the AI to respond.
 In case it takes long check the backend logs if it's processing, you should see something like this:
 
 ```sh
-superplatform-backend-1   | {"time":"2024-11-27T17:27:14.602762664Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":1,"totalResponses":1}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":4,"totalResponses":9}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:16.602428481Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":5,"totalResponses":17}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:17.602586968Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":24}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:18.602583176Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":31}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:19.602576641Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":38}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:20.602284446Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":46}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:21.602178149Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":53}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:22.602470024Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":6,"totalResponses":61}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:23.174054316Z","level":"INFO","msg":"Saving chat message","messageId":"msg_e3SARBJAZe"}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:23.175854857Z","level":"DEBUG","msg":"Event published","eventName":"chatMessageAdded"}
-superplatform-backend-1   | {"time":"2024-11-27T17:27:23.176260122Z","level":"DEBUG","msg":"Finished streaming LLM","error":"<nil>"}
+openorch-backend-1   | {"time":"2024-11-27T17:27:14.602762664Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":1,"totalResponses":1}
+openorch-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG","msg":"LLM is streaming","promptId":"prom_e3SA9bJV5u","responsesPerSecond":4,"totalResponses":9}
 ```
 
 ## Context
 
-Superplatform is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
+OpenOrch is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
 
 It's a server and ecosystem enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.
 
 ## Primary Use Cases
 
 - Run open-source AI models privately on your own infrastructure, ensuring that your data and operations remain fully under your control.
-- Build backendless application by using Superplatform as a database and AI prompting API. Like Firebase, but with a focus on AI.
-- Build your own backend services around Superplatform. Run these services outside or inside the Superplatform platform.
-- Superplatform is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), Superplatform seamlessly integrates other applications into its ecosystem.
+- Build backendless application by using OpenOrch as a database and AI prompting API. Like Firebase, but with a focus on AI.
+- Build your own backend services around OpenOrch. Run these services outside or inside the OpenOrch platform.
+- OpenOrch is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), OpenOrch seamlessly integrates other applications into its ecosystem.
 
 <p align="center">
   <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
@@ -148,11 +138,11 @@ It's a server and ecosystem enables you to self-host AI models, build apps that 
 
 ## Run On Your Servers
 
-See [this page](https://superplatform.ai/docs/category/running) to help you get started.
+See [this page](https://openorch.org/docs/category/running) to help you get started.
 
 ## Services
 
-See https://superplatform.ai/docs/category/superplatform-api/
+See https://openorch.org/docs/category/openorch-api/
 
 ## Run On Your Laptop/PC
 
@@ -160,4 +150,4 @@ We have temporarily discontinued the distribution of the desktop version. Please
 
 ## License
 
-Superplatform is licensed under AGPL-3.0.
+OpenOrch is licensed under AGPL-3.0.

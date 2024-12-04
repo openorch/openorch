@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,7 +18,7 @@ import type { RegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus';
 export interface RegistrySvcInstance {
     /**
      * The ID of the deployment that this instance is an instance of.
-     * Only instances managed by the Superplatform have a DeploymentId.
+     * Only instances managed by the OpenOrch have a DeploymentId.
      * Services can self-register without a DeploymentId too.
      * @type {string}
      * @memberof RegistrySvcInstance
@@ -55,7 +55,7 @@ export interface RegistrySvcInstance {
      */
     lastHeartbeat?: string;
     /**
-     * URL of the Superplatform daemon
+     * URL of the OpenOrch daemon
      * @type {string}
      * @memberof RegistrySvcInstance
      */
@@ -105,4 +105,5 @@ export interface RegistrySvcInstance {
 export declare function instanceOfRegistrySvcInstance(value: object): value is RegistrySvcInstance;
 export declare function RegistrySvcInstanceFromJSON(json: any): RegistrySvcInstance;
 export declare function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegistrySvcInstance;
-export declare function RegistrySvcInstanceToJSON(value?: RegistrySvcInstance | null): any;
+export declare function RegistrySvcInstanceToJSON(json: any): RegistrySvcInstance;
+export declare function RegistrySvcInstanceToJSONTyped(value?: RegistrySvcInstance | null, ignoreDiscriminator?: boolean): any;

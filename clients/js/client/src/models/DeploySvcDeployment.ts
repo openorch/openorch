@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,30 +18,35 @@ import {
     DeploySvcDeploymentStrategyFromJSON,
     DeploySvcDeploymentStrategyFromJSONTyped,
     DeploySvcDeploymentStrategyToJSON,
+    DeploySvcDeploymentStrategyToJSONTyped,
 } from './DeploySvcDeploymentStrategy';
 import type { DeploySvcAutoScalingConfig } from './DeploySvcAutoScalingConfig';
 import {
     DeploySvcAutoScalingConfigFromJSON,
     DeploySvcAutoScalingConfigFromJSONTyped,
     DeploySvcAutoScalingConfigToJSON,
+    DeploySvcAutoScalingConfigToJSONTyped,
 } from './DeploySvcAutoScalingConfig';
 import type { DeploySvcDeploymentStatus } from './DeploySvcDeploymentStatus';
 import {
     DeploySvcDeploymentStatusFromJSON,
     DeploySvcDeploymentStatusFromJSONTyped,
     DeploySvcDeploymentStatusToJSON,
+    DeploySvcDeploymentStatusToJSONTyped,
 } from './DeploySvcDeploymentStatus';
 import type { DeploySvcTargetRegion } from './DeploySvcTargetRegion';
 import {
     DeploySvcTargetRegionFromJSON,
     DeploySvcTargetRegionFromJSONTyped,
     DeploySvcTargetRegionToJSON,
+    DeploySvcTargetRegionToJSONTyped,
 } from './DeploySvcTargetRegion';
 import type { DeploySvcResourceLimits } from './DeploySvcResourceLimits';
 import {
     DeploySvcResourceLimitsFromJSON,
     DeploySvcResourceLimitsFromJSONTyped,
     DeploySvcResourceLimitsToJSON,
+    DeploySvcResourceLimitsToJSONTyped,
 } from './DeploySvcResourceLimits';
 
 /**
@@ -162,10 +167,15 @@ export function DeploySvcDeploymentFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function DeploySvcDeploymentToJSON(value?: DeploySvcDeployment | null): any {
+  export function DeploySvcDeploymentToJSON(json: any): DeploySvcDeployment {
+      return DeploySvcDeploymentToJSONTyped(json, false);
+  }
+
+  export function DeploySvcDeploymentToJSONTyped(value?: DeploySvcDeployment | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'autoScaling': DeploySvcAutoScalingConfigToJSON(value['autoScaling']),

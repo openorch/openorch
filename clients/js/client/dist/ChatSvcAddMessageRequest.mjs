@@ -3,7 +3,7 @@ import { ChatSvcMessageFromJSON, ChatSvcMessageToJSON } from './ChatSvcMessage.m
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function ChatSvcAddMessageRequestFromJSONTyped(json, ignoreDiscriminator) {
         'message': json['message'] == null ? undefined : ChatSvcMessageFromJSON(json['message']),
     };
 }
-function ChatSvcAddMessageRequestToJSON(value) {
+function ChatSvcAddMessageRequestToJSON(json) {
+    return ChatSvcAddMessageRequestToJSONTyped(json, false);
+}
+function ChatSvcAddMessageRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -39,4 +42,4 @@ function ChatSvcAddMessageRequestToJSON(value) {
     };
 }
 
-export { ChatSvcAddMessageRequestFromJSON, ChatSvcAddMessageRequestFromJSONTyped, ChatSvcAddMessageRequestToJSON, instanceOfChatSvcAddMessageRequest };
+export { ChatSvcAddMessageRequestFromJSON, ChatSvcAddMessageRequestFromJSONTyped, ChatSvcAddMessageRequestToJSON, ChatSvcAddMessageRequestToJSONTyped, instanceOfChatSvcAddMessageRequest };

@@ -5,7 +5,7 @@ var DownloadSvcDownloadDetails = require('./DownloadSvcDownloadDetails.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function DownloadSvcGetDownloadResponseFromJSONTyped(json, ignoreDiscriminator) 
         '_exists': json['exists'],
     };
 }
-function DownloadSvcGetDownloadResponseToJSON(value) {
+function DownloadSvcGetDownloadResponseToJSON(json) {
+    return DownloadSvcGetDownloadResponseToJSONTyped(json, false);
+}
+function DownloadSvcGetDownloadResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -48,4 +51,5 @@ function DownloadSvcGetDownloadResponseToJSON(value) {
 exports.DownloadSvcGetDownloadResponseFromJSON = DownloadSvcGetDownloadResponseFromJSON;
 exports.DownloadSvcGetDownloadResponseFromJSONTyped = DownloadSvcGetDownloadResponseFromJSONTyped;
 exports.DownloadSvcGetDownloadResponseToJSON = DownloadSvcGetDownloadResponseToJSON;
+exports.DownloadSvcGetDownloadResponseToJSONTyped = DownloadSvcGetDownloadResponseToJSONTyped;
 exports.instanceOfDownloadSvcGetDownloadResponse = instanceOfDownloadSvcGetDownloadResponse;

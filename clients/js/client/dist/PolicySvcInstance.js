@@ -9,7 +9,7 @@ require('./PolicySvcEntity.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -42,7 +42,10 @@ function PolicySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'templateId': PolicySvcTemplateId.PolicySvcTemplateIdFromJSON(json['templateId']),
     };
 }
-function PolicySvcInstanceToJSON(value) {
+function PolicySvcInstanceToJSON(json) {
+    return PolicySvcInstanceToJSONTyped(json, false);
+}
+function PolicySvcInstanceToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -58,4 +61,5 @@ function PolicySvcInstanceToJSON(value) {
 exports.PolicySvcInstanceFromJSON = PolicySvcInstanceFromJSON;
 exports.PolicySvcInstanceFromJSONTyped = PolicySvcInstanceFromJSONTyped;
 exports.PolicySvcInstanceToJSON = PolicySvcInstanceToJSON;
+exports.PolicySvcInstanceToJSONTyped = PolicySvcInstanceToJSONTyped;
 exports.instanceOfPolicySvcInstance = instanceOfPolicySvcInstance;

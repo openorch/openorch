@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,7 +28,10 @@ export function PromptSvcRemovePromptRequestFromJSONTyped(json, ignoreDiscrimina
         'promptId': json['promptId'] == null ? undefined : json['promptId'],
     };
 }
-export function PromptSvcRemovePromptRequestToJSON(value) {
+export function PromptSvcRemovePromptRequestToJSON(json) {
+    return PromptSvcRemovePromptRequestToJSONTyped(json, false);
+}
+export function PromptSvcRemovePromptRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

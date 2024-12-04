@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -40,9 +40,13 @@ function PolicySvcScopeFromJSONTyped(json, ignoreDiscriminator) {
 function PolicySvcScopeToJSON(value) {
     return value;
 }
+function PolicySvcScopeToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
 
 exports.PolicySvcScope = PolicySvcScope;
 exports.PolicySvcScopeFromJSON = PolicySvcScopeFromJSON;
 exports.PolicySvcScopeFromJSONTyped = PolicySvcScopeFromJSONTyped;
 exports.PolicySvcScopeToJSON = PolicySvcScopeToJSON;
+exports.PolicySvcScopeToJSONTyped = PolicySvcScopeToJSONTyped;
 exports.instanceOfPolicySvcScope = instanceOfPolicySvcScope;

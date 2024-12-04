@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,12 +18,14 @@ import {
     RegistrySvcGPUFromJSON,
     RegistrySvcGPUFromJSONTyped,
     RegistrySvcGPUToJSON,
+    RegistrySvcGPUToJSONTyped,
 } from './RegistrySvcGPU';
 import type { RegistrySvcResourceUsage } from './RegistrySvcResourceUsage';
 import {
     RegistrySvcResourceUsageFromJSON,
     RegistrySvcResourceUsageFromJSONTyped,
     RegistrySvcResourceUsageToJSON,
+    RegistrySvcResourceUsageToJSONTyped,
 } from './RegistrySvcResourceUsage';
 
 /**
@@ -64,7 +66,7 @@ export interface RegistrySvcNode {
     region?: string;
     /**
      * URL of the daemon running on the node.
-     * If not configured defaults to hostname + default Superplatform daemon port.
+     * If not configured defaults to hostname + default OpenOrch daemon port.
      * @type {string}
      * @memberof RegistrySvcNode
      */
@@ -106,10 +108,15 @@ export function RegistrySvcNodeFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function RegistrySvcNodeToJSON(value?: RegistrySvcNode | null): any {
+  export function RegistrySvcNodeToJSON(json: any): RegistrySvcNode {
+      return RegistrySvcNodeToJSONTyped(json, false);
+  }
+
+  export function RegistrySvcNodeToJSONTyped(value?: RegistrySvcNode | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'availabilityZone': value['availabilityZone'],

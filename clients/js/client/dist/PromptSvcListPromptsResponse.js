@@ -6,7 +6,7 @@ require('./PromptSvcPromptStatus.js');
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -35,7 +35,10 @@ function PromptSvcListPromptsResponseFromJSONTyped(json, ignoreDiscriminator) {
         'prompts': json['prompts'] == null ? undefined : (json['prompts'].map(PromptSvcPrompt.PromptSvcPromptFromJSON)),
     };
 }
-function PromptSvcListPromptsResponseToJSON(value) {
+function PromptSvcListPromptsResponseToJSON(json) {
+    return PromptSvcListPromptsResponseToJSONTyped(json, false);
+}
+function PromptSvcListPromptsResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -49,4 +52,5 @@ function PromptSvcListPromptsResponseToJSON(value) {
 exports.PromptSvcListPromptsResponseFromJSON = PromptSvcListPromptsResponseFromJSON;
 exports.PromptSvcListPromptsResponseFromJSONTyped = PromptSvcListPromptsResponseFromJSONTyped;
 exports.PromptSvcListPromptsResponseToJSON = PromptSvcListPromptsResponseToJSON;
+exports.PromptSvcListPromptsResponseToJSONTyped = PromptSvcListPromptsResponseToJSONTyped;
 exports.instanceOfPromptSvcListPromptsResponse = instanceOfPromptSvcListPromptsResponse;

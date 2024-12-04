@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -83,10 +83,15 @@ export function UserSvcPermissionFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function UserSvcPermissionToJSON(value?: UserSvcPermission | null): any {
+  export function UserSvcPermissionToJSON(json: any): UserSvcPermission {
+      return UserSvcPermissionToJSONTyped(json, false);
+  }
+
+  export function UserSvcPermissionToJSONTyped(value?: UserSvcPermission | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'createdAt': value['createdAt'],

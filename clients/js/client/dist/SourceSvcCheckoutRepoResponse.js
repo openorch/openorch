@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -30,7 +30,10 @@ function SourceSvcCheckoutRepoResponseFromJSONTyped(json, ignoreDiscriminator) {
         'dir': json['dir'] == null ? undefined : json['dir'],
     };
 }
-function SourceSvcCheckoutRepoResponseToJSON(value) {
+function SourceSvcCheckoutRepoResponseToJSON(json) {
+    return SourceSvcCheckoutRepoResponseToJSONTyped(json, false);
+}
+function SourceSvcCheckoutRepoResponseToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -42,4 +45,5 @@ function SourceSvcCheckoutRepoResponseToJSON(value) {
 exports.SourceSvcCheckoutRepoResponseFromJSON = SourceSvcCheckoutRepoResponseFromJSON;
 exports.SourceSvcCheckoutRepoResponseFromJSONTyped = SourceSvcCheckoutRepoResponseFromJSONTyped;
 exports.SourceSvcCheckoutRepoResponseToJSON = SourceSvcCheckoutRepoResponseToJSON;
+exports.SourceSvcCheckoutRepoResponseToJSONTyped = SourceSvcCheckoutRepoResponseToJSONTyped;
 exports.instanceOfSourceSvcCheckoutRepoResponse = instanceOfSourceSvcCheckoutRepoResponse;

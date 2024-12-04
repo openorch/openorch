@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -44,9 +44,13 @@ function PromptSvcPromptStatusFromJSONTyped(json, ignoreDiscriminator) {
 function PromptSvcPromptStatusToJSON(value) {
     return value;
 }
+function PromptSvcPromptStatusToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
 
 exports.PromptSvcPromptStatus = PromptSvcPromptStatus;
 exports.PromptSvcPromptStatusFromJSON = PromptSvcPromptStatusFromJSON;
 exports.PromptSvcPromptStatusFromJSONTyped = PromptSvcPromptStatusFromJSONTyped;
 exports.PromptSvcPromptStatusToJSON = PromptSvcPromptStatusToJSON;
+exports.PromptSvcPromptStatusToJSONTyped = PromptSvcPromptStatusToJSONTyped;
 exports.instanceOfPromptSvcPromptStatus = instanceOfPromptSvcPromptStatus;

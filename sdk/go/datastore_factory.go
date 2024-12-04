@@ -24,7 +24,7 @@ func NewDatastoreFactory(tablePrefix string) (func(tableName string, instance an
 
 	if dbType == "" {
 		homeDir, _ := os.UserHomeDir()
-		localStorePath := path.Join(homeDir, ".superplatform", "data")
+		localStorePath := path.Join(homeDir, ".openorch", "data")
 		err := os.MkdirAll(localStorePath, 0755)
 		if err != nil {
 			logger.Error(

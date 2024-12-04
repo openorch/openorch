@@ -1,5 +1,5 @@
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -28,4 +28,5 @@ export interface ChatSvcEventMessageAdded {
 export declare function instanceOfChatSvcEventMessageAdded(value: object): value is ChatSvcEventMessageAdded;
 export declare function ChatSvcEventMessageAddedFromJSON(json: any): ChatSvcEventMessageAdded;
 export declare function ChatSvcEventMessageAddedFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChatSvcEventMessageAdded;
-export declare function ChatSvcEventMessageAddedToJSON(value?: ChatSvcEventMessageAdded | null): any;
+export declare function ChatSvcEventMessageAddedToJSON(json: any): ChatSvcEventMessageAdded;
+export declare function ChatSvcEventMessageAddedToJSONTyped(value?: ChatSvcEventMessageAdded | null, ignoreDiscriminator?: boolean): any;

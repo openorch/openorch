@@ -13,7 +13,7 @@ import (
 
 func LoadConfig() (types.Config, error) {
 	var config types.Config
-	configDir := filepath.Join(os.Getenv("HOME"), ".superplatform")
+	configDir := filepath.Join(os.Getenv("HOME"), ".openorch")
 	configPath := filepath.Join(configDir, "cliConfig.yaml")
 
 	if _, err := os.Stat(configDir); os.IsNotExist(err) {
@@ -59,7 +59,7 @@ func LoadConfig() (types.Config, error) {
 func SaveConfig(config types.Config) error {
 	configPath := filepath.Join(
 		os.Getenv("HOME"),
-		".superplatform",
+		".openorch",
 		"cliConfig.yaml",
 	)
 

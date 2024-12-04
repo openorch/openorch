@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -38,7 +38,10 @@ function ModelSvcModelStatusFromJSONTyped(json, ignoreDiscriminator) {
         'running': json['running'],
     };
 }
-function ModelSvcModelStatusToJSON(value) {
+function ModelSvcModelStatusToJSON(json) {
+    return ModelSvcModelStatusToJSONTyped(json, false);
+}
+function ModelSvcModelStatusToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }
@@ -52,4 +55,5 @@ function ModelSvcModelStatusToJSON(value) {
 exports.ModelSvcModelStatusFromJSON = ModelSvcModelStatusFromJSON;
 exports.ModelSvcModelStatusFromJSONTyped = ModelSvcModelStatusFromJSONTyped;
 exports.ModelSvcModelStatusToJSON = ModelSvcModelStatusToJSON;
+exports.ModelSvcModelStatusToJSONTyped = ModelSvcModelStatusToJSONTyped;
 exports.instanceOfModelSvcModelStatus = instanceOfModelSvcModelStatus;

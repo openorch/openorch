@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Superplatform
+ * OpenOrch
  * On-premise AI platform and microservices ecosystem.
  *
  * The version of the OpenAPI document: 0.3.0-rc.7
@@ -18,6 +18,7 @@ import {
     UserSvcContactFromJSON,
     UserSvcContactFromJSONTyped,
     UserSvcContactToJSON,
+    UserSvcContactToJSONTyped,
 } from './UserSvcContact';
 
 /**
@@ -76,10 +77,15 @@ export function UserSvcRegisterRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function UserSvcRegisterRequestToJSON(value?: UserSvcRegisterRequest | null): any {
+  export function UserSvcRegisterRequestToJSON(json: any): UserSvcRegisterRequest {
+      return UserSvcRegisterRequestToJSONTyped(json, false);
+  }
+
+  export function UserSvcRegisterRequestToJSONTyped(value?: UserSvcRegisterRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'contact': UserSvcContactToJSON(value['contact']),

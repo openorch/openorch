@@ -36,11 +36,11 @@ type Instance struct {
 	URL string `json:"url,omitempty" example:"https://myserver.com:5981" binding:"required"`
 
 	// The ID of the deployment that this instance is an instance of.
-	// Only instances managed by the Superplatform have a DeploymentId.
+	// Only instances managed by the OpenOrch have a DeploymentId.
 	// Services can self-register without a DeploymentId too.
 	DeploymentId string `json:"deploymentId,omitempty" example:"depl_deBUCtJirc"`
 
-	// URL of the Superplatform daemon
+	// URL of the OpenOrch daemon
 	NodeURL string `json:"nodeUrl,omitempty" example:"https://myserver.com:58231"`
 
 	// Last time the instance gave a sign of life
