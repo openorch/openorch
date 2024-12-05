@@ -48,22 +48,6 @@ You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and
 
 Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
 
-
-<p align="center">
-  <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/chat.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/model-explorer.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/model-explorer.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/permissions.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/permissions.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/api.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/api.png?refresh=3" />
-  </a>
-</p>
-
 ### Clients
 
 For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
