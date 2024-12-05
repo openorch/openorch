@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150px" src="./docs-source/Orch_444.svg?v=2" />
+  <img width="150px" src="./docs-source/Orch_444.svg?v=3" />
   <div align="center">
     <span>
       <h1>OpenOrch</h1>
