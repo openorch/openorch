@@ -29,7 +29,7 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	_, _, err = cf.Client(sdk.WithToken(token)).
 		SecretSvcAPI.WriteSecret(ctx).
-		Request(openapi.SecretSvcWriteSecretRequest{
+		Body(openapi.SecretSvcWriteSecretRequest{
 			Secrets: []openapi.SecretSvcSecret{secret},
 		}).
 		Execute()
