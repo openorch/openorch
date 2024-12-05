@@ -71,7 +71,7 @@ func Save(cmd *cobra.Command, args []string) error {
 
 	_, _, err = cf.Client(sdk.WithToken(token)).
 		RegistrySvcAPI.SaveDefinition(ctx).
-		Request(openapi.RegistrySvcSaveDefinitionRequest{
+		Body(openapi.RegistrySvcSaveDefinitionRequest{
 			Definition: &definition,
 		}).
 		Execute()

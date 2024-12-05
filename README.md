@@ -48,6 +48,22 @@ You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and
 
 Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
 
+
+<p align="center">
+  <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
+    <img width="200px" src="https://singulatron.com/assets/thumbnail/chat.png?refresh=3" />
+  </a>
+  <a href="https://singulatron.com/assets/model-explorer.png?refresh=3" target="_blank">
+    <img width="200px" src="https://singulatron.com/assets/thumbnail/model-explorer.png?refresh=3" />
+  </a>
+  <a href="https://singulatron.com/assets/permissions.png?refresh=3" target="_blank">
+    <img width="200px" src="https://singulatron.com/assets/thumbnail/permissions.png?refresh=3" />
+  </a>
+  <a href="https://singulatron.com/assets/api.png?refresh=3" target="_blank">
+    <img width="200px" src="https://singulatron.com/assets/thumbnail/api.png?refresh=3" />
+  </a>
+</p>
+
 ### Clients
 
 For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
@@ -116,21 +132,6 @@ openorch-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG",
 OpenOrch is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
 
 It's a server and ecosystem enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.
-
-<p align="center">
-  <a href="https://singulatron.com/assets/chat.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/chat.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/model-explorer.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/model-explorer.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/permissions.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/permissions.png?refresh=3" />
-  </a>
-  <a href="https://singulatron.com/assets/api.png?refresh=3" target="_blank">
-    <img width="200px" src="https://singulatron.com/assets/thumbnail/api.png?refresh=3" />
-  </a>
-</p>
 
 ## Run On Your Servers
 
