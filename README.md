@@ -4,7 +4,7 @@
     <span>
       <h1>OpenOrch</h1>
     </span>
-    <div>Self-hosted AI and microservices hub. Orchestrate AI models, microservices, containers, and more.</div>
+    <div>Orchestrate AI models, microservices, containers, and more. A self-hosted AI and microservices hub.</div>
     <div>
       <a href="https://openorch.org">openorch.org</a>
     </div>
