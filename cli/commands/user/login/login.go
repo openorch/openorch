@@ -36,7 +36,7 @@ func Login(cmd *cobra.Command, args []string) error {
 
 	rsp, _, err := cf.Client().
 		UserSvcAPI.Login(cmd.Context()).
-		Request(openapi.UserSvcLoginRequest{
+		Body(openapi.UserSvcLoginRequest{
 			Slug:     &slug,
 			Password: &password,
 		}).
