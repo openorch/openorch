@@ -131,8 +131,6 @@ openorch-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG",
 
 OpenOrch is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
 
-It's a server and ecosystem enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.
-
 ## Run On Your Servers
 
 See [this page](https://openorch.org/docs/category/running) to help you get started.
