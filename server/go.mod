@@ -15,12 +15,12 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/onsi/ginkgo/v2 v2.20.2
 	github.com/onsi/gomega v1.34.2
+	github.com/openorch/openorch/clients/go v0.0.0
+	github.com/openorch/openorch/sdk/go v0.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/r3labs/sse v0.0.0-20210224172625-26fe804710bc
 	github.com/samber/lo v1.47.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
-	github.com/openorch/openorch/clients/go v0.0.0
-	github.com/openorch/openorch/sdk/go v0.0.0
 	github.com/stretchr/testify v1.10.0
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/swaggo/swag v1.16.3

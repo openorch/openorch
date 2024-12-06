@@ -306,12 +306,12 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * @summary Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * @summary Save User
      * @param userId User ID
      * @param body Save Profile Request
      */
-    saveUserProfile(userId: string, body: UserSvcSaveProfileRequest, options?: {
+    saveUser(userId: string, body: UserSvcSaveProfileRequest, options?: {
         headers: {
             [name: string]: string;
         };

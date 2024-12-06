@@ -59992,12 +59992,12 @@ class UserSvcApi {
         });
     }
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * @summary Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * @summary Save User
      * @param userId User ID
      * @param body Save Profile Request
      */
-    saveUserProfile(userId_1, body_1) {
+    saveUser(userId_1, body_1) {
         return __awaiter(this, arguments, void 0, function* (userId, body, options = { headers: {} }) {
             const localVarPath = this.basePath + '/user-svc/user/{userId}'
                 .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
@@ -60014,11 +60014,11 @@ class UserSvcApi {
             let localVarFormParams = {};
             // verify required parameter 'userId' is not null or undefined
             if (userId === null || userId === undefined) {
-                throw new Error('Required parameter userId was null or undefined when calling saveUserProfile.');
+                throw new Error('Required parameter userId was null or undefined when calling saveUser.');
             }
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling saveUserProfile.');
+                throw new Error('Required parameter body was null or undefined when calling saveUser.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {

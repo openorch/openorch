@@ -4772,10 +4772,10 @@ paths:
       consumes:
       - application/json
       description: |-
-        Save user profile information based on the provided user ID.
+        Save user information based on the provided user ID.
         It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
         For a user to edit its own profile, see saveSelf.
-      operationId: saveUserProfile
+      operationId: saveUser
       parameters:
       - description: User ID
         in: path
@@ -4809,7 +4809,7 @@ paths:
             $ref: '#/definitions/user_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Save User Profile
+      summary: Save User
       tags:
       - User Svc
   /user-svc/user/by-token:

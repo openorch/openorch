@@ -609,34 +609,34 @@ func (mr *MockUserSvcAPIMockRecorder) SaveSelfExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveSelfExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveSelfExecute), r)
 }
 
-// SaveUserProfile mocks base method.
-func (m *MockUserSvcAPI) SaveUserProfile(ctx context.Context, userId string) ApiSaveUserProfileRequest {
+// SaveUser mocks base method.
+func (m *MockUserSvcAPI) SaveUser(ctx context.Context, userId string) ApiSaveUserRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SaveUserProfile", ctx, userId)
-	ret0, _ := ret[0].(ApiSaveUserProfileRequest)
+	ret := m.ctrl.Call(m, "SaveUser", ctx, userId)
+	ret0, _ := ret[0].(ApiSaveUserRequest)
 	return ret0
 }
 
-// SaveUserProfile indicates an expected call of SaveUserProfile.
-func (mr *MockUserSvcAPIMockRecorder) SaveUserProfile(ctx, userId any) *gomock.Call {
+// SaveUser indicates an expected call of SaveUser.
+func (mr *MockUserSvcAPIMockRecorder) SaveUser(ctx, userId any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUserProfile", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveUserProfile), ctx, userId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUser", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveUser), ctx, userId)
 }
 
-// SaveUserProfileExecute mocks base method.
-func (m *MockUserSvcAPI) SaveUserProfileExecute(r ApiSaveUserProfileRequest) (map[string]any, *http.Response, error) {
+// SaveUserExecute mocks base method.
+func (m *MockUserSvcAPI) SaveUserExecute(r ApiSaveUserRequest) (map[string]any, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SaveUserProfileExecute", r)
+	ret := m.ctrl.Call(m, "SaveUserExecute", r)
 	ret0, _ := ret[0].(map[string]any)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// SaveUserProfileExecute indicates an expected call of SaveUserProfileExecute.
-func (mr *MockUserSvcAPIMockRecorder) SaveUserProfileExecute(r any) *gomock.Call {
+// SaveUserExecute indicates an expected call of SaveUserExecute.
+func (mr *MockUserSvcAPIMockRecorder) SaveUserExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUserProfileExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveUserProfileExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUserExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveUserExecute), r)
 }
 
 // SetRolePermission mocks base method.

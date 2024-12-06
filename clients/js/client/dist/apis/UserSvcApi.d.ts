@@ -65,7 +65,7 @@ export interface SaveSelfRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
 }
-export interface SaveUserProfileRequest {
+export interface SaveUserRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
 }
@@ -272,15 +272,15 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      */
     saveSelf(requestParameters: SaveSelfRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    saveUserProfileRaw(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    saveUserRaw(requestParameters: SaveUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    saveUserProfile(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    saveUser(requestParameters: SaveUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
      * Set permissions for a specified role. The caller can add permissions it owns to any role. If the caller tries to add a permission it doesn\'t own to a role, `StatusBadRequest` will be returned.
      * Set Role Permissions
