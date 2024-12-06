@@ -90,7 +90,7 @@ func (cs *PolicyService) Start() error {
 	token, err := sdk.RegisterService(
 		cs.clientFactory.Client().UserSvcAPI,
 		"policy-svc",
-		"Policy Service",
+		"Policy Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

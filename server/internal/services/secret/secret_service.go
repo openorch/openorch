@@ -94,7 +94,7 @@ func (cs *SecretService) Start() error {
 	token, err := sdk.RegisterService(
 		client.UserSvcAPI,
 		"secret-svc",
-		"Secret Service",
+		"Secret Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

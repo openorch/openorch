@@ -16,7 +16,7 @@ import {
 	ConfigSvcGetConfigResponse,
 	Configuration,
 	ConfigSvcConfig as Config,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',

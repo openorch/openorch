@@ -94,7 +94,7 @@ func (ms *ModelService) Start() error {
 	token, err := sdk.RegisterService(
 		ms.clientFactory.Client().UserSvcAPI,
 		"model-svc",
-		"Model Service",
+		"Model Svc",
 		ms.credentialStore,
 	)
 	if err != nil {

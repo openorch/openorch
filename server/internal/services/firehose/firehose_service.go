@@ -71,7 +71,7 @@ func (fs *FirehoseService) Start() error {
 	token, err := sdk.RegisterService(
 		fs.clientFactory.Client().UserSvcAPI,
 		"firehose-svc",
-		"Firehose Service",
+		"Firehose Svc",
 		fs.credentialStore,
 	)
 	if err != nil {

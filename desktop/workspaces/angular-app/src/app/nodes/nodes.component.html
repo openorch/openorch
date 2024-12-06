@@ -13,7 +13,7 @@
 	</ng-template>
 	<ng-template #mainContent>
 		<app-centered [headerHeight]="'56px'" [vertical]="true">
-			<div style="padding: 0rem 0">
+			<div style="padding: 1rem">
 				<h2 style="margin-bottom: 2rem">Nodes</h2>
 
 				<div *ngIf="error" style="color: var(--ion-color-danger)">
@@ -26,9 +26,37 @@
 							<ion-card-header>
 								<ion-card-title
 									><span style="color: #888">Node </span
-									><strong>{{ node.hostname }}</strong></ion-card-title
+									><strong>{{ node.url }}</strong></ion-card-title
 								>
 							</ion-card-header>
+							<ion-card>
+								<ion-card-content>
+									<ion-item>
+										<ion-label>CPU Usage</ion-label>
+										<ion-text
+											>{{
+												node.usage?.cpu?.percent | number: '1.2-2'
+											}}%</ion-text
+										>
+									</ion-item>
+									<ion-item>
+										<ion-label>Memory Usage</ion-label>
+										<ion-text
+											>{{
+												node.usage?.memory?.percent | number: '1.2-2'
+											}}%</ion-text
+										>
+									</ion-item>
+									<ion-item>
+										<ion-label>Disk Usage</ion-label>
+										<ion-text
+											>{{
+												node.usage?.disk?.percent | number: '1.2-2'
+											}}%</ion-text
+										>
+									</ion-item>
+								</ion-card-content>
+							</ion-card>
 							<ng-container *ngFor="let gpu of node.gpus; let i = index">
 								<ion-card class="flat-card">
 									<ion-card-header>

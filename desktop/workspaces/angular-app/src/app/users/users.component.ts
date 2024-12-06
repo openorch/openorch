@@ -30,7 +30,7 @@ import {
 	UserSvcUser,
 	DatastoreOp,
 	UserSvcGetUsersRequest,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 interface UserVisible extends UserSvcUser {
 	visible?: boolean;

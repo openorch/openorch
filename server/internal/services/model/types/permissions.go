@@ -14,27 +14,27 @@ import (
 
 var PermissionModelCreate = usertypes.Permission{
 	Id:   "model-svc:model:create",
-	Name: "Model Service - Model Create",
+	Name: "Model Svc - Model Create",
 }
 
 var PermissionModelView = usertypes.Permission{
 	Id:   "model-svc:model:view",
-	Name: "Model Service - Model View",
+	Name: "Model Svc - Model View",
 }
 
 var PermissionModelEdit = usertypes.Permission{
 	Id:   "model-svc:model:edit",
-	Name: "Model Service - Model Edit",
+	Name: "Model Svc - Model Edit",
 }
 
 var PermissionModelDelete = usertypes.Permission{
 	Id:   "model-svc:model:delete",
-	Name: "Model Service - Model Delete",
+	Name: "Model Svc - Model Delete",
 }
 
 var PermissionModelStream = usertypes.Permission{
 	Id:   "model-svc:model:stream",
-	Name: "Model Service - Model Stream",
+	Name: "Model Svc - Model Stream",
 }
 
 var ModelPermissions = []usertypes.Permission{

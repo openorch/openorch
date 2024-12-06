@@ -16,7 +16,7 @@ import { ChatService } from '../../../services/chat.service';
 import {
 	ChatSvcMessage as Message,
 	ChatSvcAsset as Asset,
-} from '@singulatron/client';
+} from '@openorch/client';
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent } from 'ngx-markdown';
