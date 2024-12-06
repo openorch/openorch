@@ -37,7 +37,7 @@ var PermissionPromptStream = usertypes.Permission{
 	Name: "Prompt Svc - Prompt Stream",
 }
 
-var PromptPermissions = []usertypes.Permission{
+var PromptAdminPermissions = []usertypes.Permission{
 	PermissionPromptCreate,
 	PermissionPromptView,
 	PermissionPromptEdit,
