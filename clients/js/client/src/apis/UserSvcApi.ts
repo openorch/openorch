@@ -158,7 +158,7 @@ export interface SaveSelfRequest {
     body: UserSvcSaveProfileRequest;
 }
 
-export interface SaveUserProfileRequest {
+export interface SaveUserRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
 }
@@ -944,21 +944,21 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    async saveUserProfileRaw(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+    async saveUserRaw(requestParameters: SaveUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['userId'] == null) {
             throw new runtime.RequiredError(
                 'userId',
-                'Required parameter "userId" was null or undefined when calling saveUserProfile().'
+                'Required parameter "userId" was null or undefined when calling saveUser().'
             );
         }
 
         if (requestParameters['body'] == null) {
             throw new runtime.RequiredError(
                 'body',
-                'Required parameter "body" was null or undefined when calling saveUserProfile().'
+                'Required parameter "body" was null or undefined when calling saveUser().'
             );
         }
 
@@ -984,11 +984,11 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    async saveUserProfile(requestParameters: SaveUserProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
-        const response = await this.saveUserProfileRaw(requestParameters, initOverrides);
+    async saveUser(requestParameters: SaveUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.saveUserRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

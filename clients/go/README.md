@@ -154,7 +154,7 @@ Class | Method | HTTP request | Description
 *UserSvcAPI* | [**Register**](docs/UserSvcAPI.md#register) | **Post** /user-svc/register | Register
 *UserSvcAPI* | [**RemoveUserFromOrganization**](docs/UserSvcAPI.md#removeuserfromorganization) | **Delete** /user-svc/organization/{organizationId}/user/{userId} | Remove a User from an Organization
 *UserSvcAPI* | [**SaveSelf**](docs/UserSvcAPI.md#saveself) | **Put** /user-svc/self | Save User Profile
-*UserSvcAPI* | [**SaveUserProfile**](docs/UserSvcAPI.md#saveuserprofile) | **Put** /user-svc/user/{userId} | Save User Profile
+*UserSvcAPI* | [**SaveUser**](docs/UserSvcAPI.md#saveuser) | **Put** /user-svc/user/{userId} | Save User
 *UserSvcAPI* | [**SetRolePermission**](docs/UserSvcAPI.md#setrolepermission) | **Put** /user-svc/role/{roleId}/permissions | Set Role Permissions
 *UserSvcAPI* | [**UpsertPermission**](docs/UserSvcAPI.md#upsertpermission) | **Put** /user-svc/permission/{permissionId} | Upsert a Permission
 

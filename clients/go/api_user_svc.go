@@ -309,21 +309,21 @@ Requires the `user-svc:role:create` permission.
 	SaveSelfExecute(r ApiSaveSelfRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
-	SaveUserProfile Save User Profile
+	SaveUser Save User
 
-	Save user profile information based on the provided user ID.
+	Save user information based on the provided user ID.
 It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
 For a user to edit its own profile, see saveSelf.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param userId User ID
-	@return ApiSaveUserProfileRequest
+	@return ApiSaveUserRequest
 	*/
-	SaveUserProfile(ctx context.Context, userId string) ApiSaveUserProfileRequest
+	SaveUser(ctx context.Context, userId string) ApiSaveUserRequest
 
-	// SaveUserProfileExecute executes the request
+	// SaveUserExecute executes the request
 	//  @return map[string]interface{}
-	SaveUserProfileExecute(r ApiSaveUserProfileRequest) (map[string]interface{}, *http.Response, error)
+	SaveUserExecute(r ApiSaveUserRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
 	SetRolePermission Set Role Permissions
@@ -3217,7 +3217,7 @@ func (a *UserSvcAPIService) SaveSelfExecute(r ApiSaveSelfRequest) (map[string]in
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSaveUserProfileRequest struct {
+type ApiSaveUserRequest struct {
 	ctx context.Context
 	ApiService UserSvcAPI
 	userId string
@@ -3225,28 +3225,28 @@ type ApiSaveUserProfileRequest struct {
 }
 
 // Save Profile Request
-func (r ApiSaveUserProfileRequest) Body(body UserSvcSaveProfileRequest) ApiSaveUserProfileRequest {
+func (r ApiSaveUserRequest) Body(body UserSvcSaveProfileRequest) ApiSaveUserRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiSaveUserProfileRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.SaveUserProfileExecute(r)
+func (r ApiSaveUserRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.SaveUserExecute(r)
 }
 
 /*
-SaveUserProfile Save User Profile
+SaveUser Save User
 
-Save user profile information based on the provided user ID.
+Save user information based on the provided user ID.
 It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
 For a user to edit its own profile, see saveSelf.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId User ID
- @return ApiSaveUserProfileRequest
+ @return ApiSaveUserRequest
 */
-func (a *UserSvcAPIService) SaveUserProfile(ctx context.Context, userId string) ApiSaveUserProfileRequest {
-	return ApiSaveUserProfileRequest{
+func (a *UserSvcAPIService) SaveUser(ctx context.Context, userId string) ApiSaveUserRequest {
+	return ApiSaveUserRequest{
 		ApiService: a,
 		ctx: ctx,
 		userId: userId,
@@ -3255,7 +3255,7 @@ func (a *UserSvcAPIService) SaveUserProfile(ctx context.Context, userId string) 
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *UserSvcAPIService) SaveUserProfileExecute(r ApiSaveUserProfileRequest) (map[string]interface{}, *http.Response, error) {
+func (a *UserSvcAPIService) SaveUserExecute(r ApiSaveUserRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -3263,7 +3263,7 @@ func (a *UserSvcAPIService) SaveUserProfileExecute(r ApiSaveUserProfileRequest) 
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.SaveUserProfile")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.SaveUser")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
