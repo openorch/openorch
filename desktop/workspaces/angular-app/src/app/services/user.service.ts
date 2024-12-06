@@ -147,12 +147,12 @@ export class UserService {
 	}
 
 	/** Save profile on behalf of a user */
-	saveProfile(name: string): Promise<object> {
+	saveProfile(id: string, name: string): Promise<object> {
 		const request: UserSvcSaveProfileRequest = {
 			name: name,
 		};
 		return this.userService.saveUserProfile({
-			userId: '@thisIsFakeYetItWorks',
+			userId: id,
 			body: request,
 		});
 	}
