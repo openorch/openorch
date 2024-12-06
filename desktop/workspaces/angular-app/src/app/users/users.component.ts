@@ -208,7 +208,7 @@ export class UsersComponent {
 
 		try {
 			let toastMessage = `Profile ${name} saved`;
-			await this.userService.saveProfile(name);
+			await this.userService.saveProfile(userId, name);
 
 			if (password) {
 				toastMessage += ' and password changed';
