@@ -22,7 +22,7 @@
 				</h2>
 				<ion-searchbar
 					(ionInput)="redirect()"
-					placeholder="Search users by name or email"
+					placeholder="Search users by name or slug"
 					[(ngModel)]="searchTerm"
 				></ion-searchbar>
 				<ion-list>
@@ -69,11 +69,12 @@
 
 								<ion-item>
 									<ion-input
-										formControlName="email"
-										label="Email"
+										formControlName="slug"
+										label="Slug"
 										labelPlacement="floating"
 										type="text"
 										required
+										[disabled]="true"
 									></ion-input>
 								</ion-item>
 

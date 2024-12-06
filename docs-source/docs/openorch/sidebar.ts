@@ -540,8 +540,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/save-user-profile",
-          label: "Save User Profile",
+          id: "openorch/save-user",
+          label: "Save User",
           className: "api-method put",
         },
         {

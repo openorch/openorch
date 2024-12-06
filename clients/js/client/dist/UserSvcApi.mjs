@@ -692,16 +692,16 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    saveUserProfileRaw(requestParameters, initOverrides) {
+    saveUserRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             if (requestParameters['userId'] == null) {
-                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling saveUserProfile().');
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling saveUser().');
             }
             if (requestParameters['body'] == null) {
-                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveUserProfile().');
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveUser().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -720,12 +720,12 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
      */
-    saveUserProfile(requestParameters, initOverrides) {
+    saveUser(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.saveUserProfileRaw(requestParameters, initOverrides);
+            const response = yield this.saveUserRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

@@ -20,9 +20,9 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-func (s *UserService) saveProfile(email, newName string) error {
+func (s *UserService) saveProfile(slug, newName string) error {
 	query := s.usersStore.Query(
-		datastore.Equals(datastore.Field("email"), email),
+		datastore.Equals(datastore.Field("slug"), slug),
 	)
 
 	userI, found, err := query.FindOne()

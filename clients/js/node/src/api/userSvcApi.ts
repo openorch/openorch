@@ -1477,12 +1477,12 @@ export class UserSvcApi {
         });
     }
     /**
-     * Save user profile information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
-     * @summary Save User Profile
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * @summary Save User
      * @param userId User ID
      * @param body Save Profile Request
      */
-    public async saveUserProfile (userId: string, body: UserSvcSaveProfileRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async saveUser (userId: string, body: UserSvcSaveProfileRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/user-svc/user/{userId}'
             .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
         let localVarQueryParameters: any = {};
@@ -1498,12 +1498,12 @@ export class UserSvcApi {
 
         // verify required parameter 'userId' is not null or undefined
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling saveUserProfile.');
+            throw new Error('Required parameter userId was null or undefined when calling saveUser.');
         }
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling saveUserProfile.');
+            throw new Error('Required parameter body was null or undefined when calling saveUser.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

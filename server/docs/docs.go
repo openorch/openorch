@@ -4158,7 +4158,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Save user profile information based on the provided user ID.\nIt is intended for admins, because it uses the ` + "`" + `user-svc:user:edit` + "`" + ` permission which only admins have.\nFor a user to edit its own profile, see saveSelf.",
+                "description": "Save user information based on the provided user ID.\nIt is intended for admins, because it uses the ` + "`" + `user-svc:user:edit` + "`" + ` permission which only admins have.\nFor a user to edit its own profile, see saveSelf.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4168,8 +4168,8 @@ const docTemplate = `{
                 "tags": [
                     "User Svc"
                 ],
-                "summary": "Save User Profile",
-                "operationId": "saveUserProfile",
+                "summary": "Save User",
+                "operationId": "saveUser",
                 "parameters": [
                     {
                         "type": "string",
