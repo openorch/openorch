@@ -7,7 +7,7 @@
  */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { UserSvcLoginResponse as LoginResponse } from '@singulatron/client';
+import { UserSvcLoginResponse as LoginResponse } from '@openorch/client';
 import { ToastController, IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';

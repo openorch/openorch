@@ -42,7 +42,7 @@ import {
 	PromptSvcAddPromptResponse,
 	PromptSvcListPromptsRequest,
 	PromptSvcListPromptsResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
@@ -103,13 +103,13 @@ export class PromptService {
 		const request: PromptSvcAddPromptRequest = prompt;
 
 		return this.promptService.addPrompt({
-			request: request,
+			body: request,
 		});
 	}
 
 	async promptRemove(promptId: string): Promise<object> {
 		return this.promptService.removePrompt({
-			request: {
+			body: {
 				promptId: promptId,
 			},
 		});
@@ -119,7 +119,7 @@ export class PromptService {
 		request: PromptSvcListPromptsRequest
 	): Promise<PromptSvcListPromptsResponse> {
 		return this.promptService.listPrompts({
-			request: request,
+			body: request,
 		});
 	}
 

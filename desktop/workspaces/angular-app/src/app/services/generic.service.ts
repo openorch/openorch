@@ -25,7 +25,7 @@ import {
 	DynamicSvcUpsertObjectResponse,
 	// DynamicSvcDeleteObjectRequest as DeleteObjectRequest,
 	// DynamicSvcDeleteObjectResponse as DeleteObjectResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',

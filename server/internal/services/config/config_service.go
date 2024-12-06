@@ -94,7 +94,7 @@ func (cs *ConfigService) Start() error {
 	token, err := sdk.RegisterService(
 		client.UserSvcAPI,
 		"config-svc",
-		"Config Service",
+		"Config Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

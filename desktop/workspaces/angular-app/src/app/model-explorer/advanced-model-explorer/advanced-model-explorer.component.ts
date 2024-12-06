@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModelService } from '../../services/model.service';
-import { ModelSvcModel as Model } from '@singulatron/client';
+import { ModelSvcModel as Model } from '@openorch/client';
 import { DownloadService } from '../../services/download.service';
 import { DownloadStatusChangeEvent } from '../../services/download.service';
 import { ConfigService } from '../../services/config.service';

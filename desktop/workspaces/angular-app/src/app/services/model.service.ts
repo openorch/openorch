@@ -15,7 +15,7 @@ import {
 	ModelSvcListResponse as GetModelsResponse,
 	Configuration,
 	ModelSvcStatusResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 import {
 	OnModelLaunch,
 	OnModelCheck,

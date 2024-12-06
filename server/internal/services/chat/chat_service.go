@@ -83,7 +83,7 @@ func (cs *ChatService) Start() error {
 	token, err := sdk.RegisterService(
 		cs.clientFactory.Client().UserSvcAPI,
 		"chat-svc",
-		"Chat Service",
+		"Chat Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

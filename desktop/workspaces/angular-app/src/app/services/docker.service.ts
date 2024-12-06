@@ -13,7 +13,7 @@ import {
 	DockerSvcApi,
 	Configuration,
 	DockerSvcGetInfoResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',

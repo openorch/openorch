@@ -7,7 +7,7 @@
  */
 import { Component } from '@angular/core';
 
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { first } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ import { CenteredComponent } from '../components/centered/centered.component';
 import { DatePipe } from '@angular/common';
 import { NodeService } from '../services/node.service';
 import { UserService } from '../services/user.service';
-import { NodeSvcNode as Node } from "@singulatron/client"
+import { RegistrySvcNode as Node } from '@openorch/client';
 
 @Component({
 	selector: 'app-nodes',
@@ -33,6 +33,7 @@ import { NodeSvcNode as Node } from "@singulatron/client"
 		FormsModule,
 		NgStyle,
 		DatePipe,
+		DecimalPipe,
 	],
 	templateUrl: './nodes.component.html',
 	styleUrl: './nodes.component.scss',
