@@ -59,7 +59,7 @@ func (fs *SourceService) Start() error {
 	token, err := sdk.RegisterService(
 		fs.clientFactory.Client().UserSvcAPI,
 		"source-svc",
-		"Source Service",
+		"Source Svc",
 		fs.credentialStore,
 	)
 	if err != nil {

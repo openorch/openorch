@@ -15,7 +15,7 @@ import {
 	Configuration,
 	DownloadSvcDownloadDetails as DownloadDetails,
 	DownloadSvcDownloadsResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 export interface DownloadStatusChangeEvent {
 	allDownloads: DownloadDetails[];
@@ -76,7 +76,7 @@ export class DownloadService {
 
 	async downloadDo(url: string) {
 		this.downloadService.download({
-			request: {
+			body: {
 				url: url,
 			},
 		});

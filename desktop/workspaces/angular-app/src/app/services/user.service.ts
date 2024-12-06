@@ -33,7 +33,7 @@ import {
 	UserSvcSetRolePermissionsRequest,
 	// UserSvcDeleteRoleResponse,
 	// UserSvcDeleteUserResponse,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
@@ -132,7 +132,7 @@ export class UserService {
 
 	login(slug: string, password: string): Promise<UserSvcLoginResponse> {
 		return this.userService.login({
-			request: { slug: slug, password: password },
+			body: { slug: slug, password: password },
 		});
 	}
 
@@ -142,7 +142,7 @@ export class UserService {
 
 	getUsers(request: UserSvcGetUsersRequest): Promise<UserSvcGetUsersResponse> {
 		return this.userService.getUsers({
-			request: request,
+			body: request,
 		});
 	}
 
@@ -169,7 +169,7 @@ export class UserService {
 			newPassword: newPassword,
 		};
 		return this.userService.changePassword({
-			request: request,
+			body: request,
 		});
 	}
 
@@ -179,7 +179,7 @@ export class UserService {
 			newPassword: newPassword,
 		};
 		this.userService.changePasswordAdmin({
-			request: request,
+			body: request,
 		});
 
 		return;
@@ -193,7 +193,7 @@ export class UserService {
 		roleIds: string[]
 	): Promise<object> {
 		return this.userService.createUser({
-			request: {
+			body: {
 				user: user,
 				password: password,
 				roleIds: roleIds,

@@ -12,13 +12,13 @@ import { ElectronAppService } from '../services/electron-app.service';
 import { combineLatest, Subscription } from 'rxjs';
 import { DownloadService } from '../services/download.service';
 import { ModelService } from '../services/model.service';
-import { ModelSvcModel as Model } from '@singulatron/client';
+import { ModelSvcModel as Model } from '@openorch/client';
 import { DockerService } from '../services/docker.service';
 import { ConfigService } from '../services/config.service';
 import {
 	DownloadSvcDownloadDetails as DownloadDetails,
 	ConfigSvcConfig as Config,
-} from '@singulatron/client';
+} from '@openorch/client';
 import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { DownloadingComponent } from '../downloading/downloading.component';

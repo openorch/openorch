@@ -79,7 +79,7 @@ func (ns *DeployService) Start() error {
 	token, err := sdk.RegisterService(
 		ns.clientFactory.Client().UserSvcAPI,
 		"deploy-svc",
-		"Deploy Service",
+		"Deploy Svc",
 		ns.credentialStore,
 	)
 	if err != nil {

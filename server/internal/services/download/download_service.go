@@ -92,7 +92,7 @@ func (dm *DownloadService) Start() error {
 	token, err := sdk.RegisterService(
 		dm.clientFactory.Client().UserSvcAPI,
 		"download-svc",
-		"Download Service",
+		"Download Svc",
 		dm.credentialStore,
 	)
 	if err != nil {

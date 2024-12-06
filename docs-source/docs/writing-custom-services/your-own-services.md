@@ -70,7 +70,7 @@ return nil, errors.New("SUPERPLATFORM_URL cannot be found")
     token, err := sdk.RegisterService(
     	client.UserSvcAPI,
     	"skeleton-svc",
-    	"Skeleton Service",
+    	"Skeleton Svc",
     	credentialStore,
     )
     if err != nil {

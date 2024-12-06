@@ -8,10 +8,10 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from './server.service';
 import {
-	NodeSvcApi,
-	NodeSvcListNodesResponse,
+	RegistrySvcApi,
+	RegistrySvcListNodesResponse,
 	Configuration,
-} from '@singulatron/client';
+} from '@openorch/client';
 import { UserService } from './user.service';
 import { first } from 'rxjs';
 
@@ -19,13 +19,13 @@ import { first } from 'rxjs';
 	providedIn: 'root',
 })
 export class NodeService {
-	private nodeService!: NodeSvcApi;
+	private nodeService!: RegistrySvcApi;
 
 	constructor(
 		private server: ServerService,
 		private userService: UserService
 	) {
-		this.nodeService = new NodeSvcApi(
+		this.nodeService = new RegistrySvcApi(
 			new Configuration({
 				basePath: this.server.addr(),
 				apiKey: this.server.token(),
@@ -37,7 +37,7 @@ export class NodeService {
 		});
 	}
 
-	async nodesList(): Promise<NodeSvcListNodesResponse> {
+	async nodesList(): Promise<RegistrySvcListNodesResponse> {
 		return this.nodeService.listNodes({});
 	}
 

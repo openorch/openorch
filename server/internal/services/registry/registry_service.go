@@ -121,7 +121,7 @@ func (ns *RegistryService) Start() error {
 	token, err := sdk.RegisterService(
 		ns.clientFactory.Client().UserSvcAPI,
 		"registry-svc",
-		"Registry Service",
+		"Registry Svc",
 		ns.credentialStore,
 	)
 	if err != nil {

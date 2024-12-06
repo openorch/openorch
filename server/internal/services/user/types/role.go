@@ -11,12 +11,12 @@ import "time"
 
 var RoleAdmin = &Role{
 	Id:   "user-svc:admin",
-	Name: "User Service - Admin Role",
+	Name: "User Svc - Admin Role",
 }
 
 var RoleUser = &Role{
 	Id:   "user-svc:user",
-	Name: "User Service - User Role",
+	Name: "User Svc - User Role",
 }
 
 type Role struct {

@@ -57,14 +57,14 @@ func (ns *RegistryService) List(
 		return
 	}
 
-	req := registry.ListNodesRequest{}
-	err = json.NewDecoder(r.Body).Decode(&req)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`Invalid JSON`))
-		return
-	}
-	defer r.Body.Close()
+	// req := registry.ListNodesRequest{}
+	// err = json.NewDecoder(r.Body).Decode(&req)
+	// if err != nil {
+	// 	w.WriteHeader(http.StatusBadRequest)
+	// 	w.Write([]byte(`Invalid JSON`))
+	// 	return
+	// }
+	// defer r.Body.Close()
 
 	nodes, err := ns.listNodes()
 	if err != nil {

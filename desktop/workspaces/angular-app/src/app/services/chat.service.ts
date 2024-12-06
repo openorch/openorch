@@ -22,7 +22,7 @@ import {
 	ChatSvcEventMessageAdded,
 	ChatSvcEventThreadAdded,
 	ChatSvcEventThreadUpdate,
-} from '@singulatron/client';
+} from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
@@ -101,14 +101,14 @@ export class ChatService {
 
 	async chatThreadAdd(thread: Thread): Promise<ChatSvcAddThreadResponse> {
 		return this.chatService.addThread({
-			request: { thread: thread },
+			body: { thread: thread },
 		});
 	}
 
 	async chatThreadUpdate(thread: Thread): Promise<object> {
 		return this.chatService.updateThread({
 			threadId: thread.id!,
-			request: { thread: thread },
+			body: { thread: thread },
 		});
 	}
 

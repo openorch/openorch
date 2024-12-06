@@ -113,7 +113,7 @@ func (cs *PromptService) Start() error {
 	token, err := sdk.RegisterService(
 		cs.clientFactory.Client().UserSvcAPI,
 		"prompt-svc",
-		"Prompt Service",
+		"Prompt Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

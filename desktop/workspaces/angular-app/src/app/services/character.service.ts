@@ -10,7 +10,7 @@ import { DynamicService } from './generic.service';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 import { first } from 'rxjs';
-import { DynamicSvcObject } from '@singulatron/client';
+import { DynamicSvcObject } from '@openorch/client';
 
 const CHARACTERS_TABLE_NAME = 'characters';
 const SELECTED_CHARACTERS_TABLE_NAME = 'selected-characters';

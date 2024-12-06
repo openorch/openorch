@@ -14,24 +14,24 @@ import (
 
 var PermissionConfigCreate = usertypes.Permission{
 	Id:   "config-svc:config:create",
-	Name: "Config Create",
+	Name: "Config Svc - Config Create",
 }
 
 // There is no view permission as configs are public facing, can be read without login even
 
 var PermissionConfigEdit = usertypes.Permission{
 	Id:   "config-svc:config:edit",
-	Name: "Config Edit",
+	Name: "Config Svc - Config Edit",
 }
 
 var PermissionConfigDelete = usertypes.Permission{
 	Id:   "config-svc:config:delete",
-	Name: "Config Delete",
+	Name: "Config Svc - Delete",
 }
 
 var PermissionConfigStream = usertypes.Permission{
 	Id:   "config-svc:config:stream",
-	Name: "Config Stream",
+	Name: "Config Svc - Config Stream",
 }
 
 var AdminPermissions = []usertypes.Permission{

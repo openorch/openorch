@@ -14,27 +14,27 @@ import (
 
 var PermissionContainerCreate = usertypes.Permission{
 	Id:   "docker-svc:container:create",
-	Name: "Docker Service - Container Create",
+	Name: "Docker Svc - Container Create",
 }
 
 var PermissionContainerView = usertypes.Permission{
 	Id:   "docker-svc:container:view",
-	Name: "Docker Service - Container View",
+	Name: "Docker Svc - Container View",
 }
 
 var PermissionContainerEdit = usertypes.Permission{
 	Id:   "docker-svc:container:edit",
-	Name: "Docker Service - Container Edit",
+	Name: "Docker Svc - Container Edit",
 }
 
 var PermissionContainerStop = usertypes.Permission{
 	Id:   "docker-svc:container:stop",
-	Name: "Docker Service - Container Stop",
+	Name: "Docker Svc - Container Stop",
 }
 
 var PermissionImageBuild = usertypes.Permission{
 	Id:   "docker-svc:image:build",
-	Name: "Docker Service - Image Build",
+	Name: "Docker Svc - Image Build",
 }
 
 var DockerPermissions = []usertypes.Permission{

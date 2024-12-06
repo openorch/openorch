@@ -159,7 +159,7 @@ func (cs *ProxyService) Start() error {
 	token, err := sdk.RegisterService(
 		client.UserSvcAPI,
 		"proxy-svc",
-		"Proxy Service",
+		"Proxy Svc",
 		cs.credentialStore,
 	)
 	if err != nil {

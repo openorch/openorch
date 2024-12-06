@@ -25,12 +25,12 @@ import { Subscription, filter } from 'rxjs';
 import { ServerService } from '../../services/server.service';
 import { ChatService } from '../../services/chat.service';
 import { PromptService } from '../../services/prompt.service';
-import { PromptSvcPrompt as Prompt } from '@singulatron/client';
+import { PromptSvcPrompt as Prompt } from '@openorch/client';
 import {
 	ChatSvcThread as Thread,
 	ChatSvcMessage as Message,
 	ChatSvcAsset as Asset,
-} from '@singulatron/client';
+} from '@openorch/client';
 import { ElectronAppService } from '../../services/electron-app.service';
 
 import { TranslatePipe } from '../../translate.pipe';

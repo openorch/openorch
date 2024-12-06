@@ -14,7 +14,7 @@ import {
 	ReactiveFormsModule,
 } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { UserSvcUser as User, UserSvcRole as Role } from '@singulatron/client';
+import { UserSvcUser as User, UserSvcRole as Role } from '@openorch/client';
 import { first } from 'rxjs';
 import { ToastController, IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '../../translate.pipe';
