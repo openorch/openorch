@@ -147,8 +147,9 @@ export class UserService {
 	}
 
 	/** Save profile on behalf of a user */
-	saveProfile(id: string, name: string): Promise<object> {
+	saveProfile(id: string, slug: string, name: string): Promise<object> {
 		const request: UserSvcSaveProfileRequest = {
+			slug: slug,
 			name: name,
 		};
 		return this.userService.saveUserProfile({

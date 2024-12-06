@@ -19,9 +19,9 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// @ID saveUserProfile
-// @Summary Save User Profile
-// @Description Save user profile information based on the provided user ID.
+// @ID saveUser
+// @Summary Save User
+// @Description Save user information based on the provided user ID.
 // @Description It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have.
 // @Description For a user to edit its own profile, see saveSelf.
 // @Tags User Svc
@@ -43,6 +43,9 @@ func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(err.Error()))
 		return
 	}
+
+	// @todo
+	// userId is ignored here, all that matters is the slug
 
 	req := user.SaveProfileRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)

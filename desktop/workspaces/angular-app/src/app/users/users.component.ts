@@ -110,7 +110,7 @@ export class UsersComponent {
 		const kv = filtersToKeyValue(
 			query.filters
 				? query.filters.filter((v) => {
-						return !v.fields?.includes('name') && v.fields?.includes('email');
+						return !v.fields?.includes('name') && v.fields?.includes('slug');
 					})
 				: []
 		);
@@ -208,7 +208,7 @@ export class UsersComponent {
 
 		try {
 			let toastMessage = `Profile ${name} saved`;
-			await this.userService.saveProfile(userId, name);
+			await this.userService.saveProfile(userId, slug, name);
 
 			if (password) {
 				toastMessage += ' and password changed';
