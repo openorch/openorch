@@ -22,7 +22,7 @@ var PermissionFirehoseStream = usertypes.Permission{
 	Name: "Firehose Svc - Event Stream",
 }
 
-var FirehosePermissions = []usertypes.Permission{
+var FirehoseAdminPermissions = []usertypes.Permission{
 	PermissionEventPublish,
 	PermissionFirehoseStream,
 }

@@ -32,7 +32,7 @@ var PermissionDownloadDelete = usertypes.Permission{
 	Name: "Download Svc - Download Delete",
 }
 
-var DownloadPermissions = []usertypes.Permission{
+var DownloadAdminPermissions = []usertypes.Permission{
 	PermissionDownloadCreate,
 	PermissionDownloadView,
 	PermissionDownloadEdit,
