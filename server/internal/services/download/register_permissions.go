@@ -25,7 +25,7 @@ func (ds *DownloadService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := ds.clientFactory.Client(sdk.WithToken(ds.token)).UserSvcAPI
 
-	for _, permission := range downloadtypes.DownloadPermissions {
+	for _, permission := range downloadtypes.DownloadAdminPermissions {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -41,9 +41,8 @@ func (ds *DownloadService) registerPermissions() error {
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
-		usertypes.RoleUser,
 	} {
-		for _, permission := range downloadtypes.DownloadPermissions {
+		for _, permission := range downloadtypes.DownloadAdminPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {

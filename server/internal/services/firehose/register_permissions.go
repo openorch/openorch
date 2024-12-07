@@ -21,7 +21,7 @@ func (p *FirehoseService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
-	for _, permission := range firehosetypes.FirehosePermissions {
+	for _, permission := range firehosetypes.FirehoseAdminPermissions {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -37,9 +37,8 @@ func (p *FirehoseService) registerPermissions() error {
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
-		usertypes.RoleUser,
 	} {
-		for _, permission := range firehosetypes.FirehosePermissions {
+		for _, permission := range firehosetypes.FirehoseAdminPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {

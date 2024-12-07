@@ -34,6 +34,8 @@ services:
     ports:
       - "58231:58231"
     volumes:
+      # We mount the hostname to have a sensible fallback node URL
+      - /etc/hostname:/etc/host_hostname:ro
       # We mount the docker socket so the backend can start   containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted

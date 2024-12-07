@@ -6,7 +6,7 @@ volumes:
     driver: local
 
 services:
-  openorch--frontend:
+  openorch-frontend:
     image: crufter/openorch--frontend:latest
     ports:
       - "3901:80"
@@ -15,13 +15,15 @@ services:
       # It is not an internal address, it's the address the   browser will make API requests to.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
-  openorch--backend:
+  openorch-backend:
     image: crufter/openorch--backend:latest
     # use this if you have an nvidia card
     # build: ./localtron/docker/DockerfileNvidia
     ports:
       - "58231:58231"
     volumes:
+      # We mount the hostname to have a sensible fallback node URL
+      - /etc/hostname:/etc/host_hostname:ro
       # We mount the docker socket so the backend can start containers
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
