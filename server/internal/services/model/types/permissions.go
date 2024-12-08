@@ -37,7 +37,7 @@ var PermissionModelStream = usertypes.Permission{
 	Name: "Model Svc - Model Stream",
 }
 
-var ModelPermissions = []usertypes.Permission{
+var ModelAdminPermissions = []usertypes.Permission{
 	PermissionModelCreate,
 	PermissionModelView,
 	PermissionModelEdit,

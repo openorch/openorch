@@ -28,7 +28,7 @@ func (s *UserService) register(
 	slug, password, name string,
 	roleIds []string,
 ) (*usertypes.AuthToken, error) {
-	logger.Info("Registering user", slog.String("name", name))
+	logger.Debug("Registering user", slog.String("name", name))
 
 	_, alreadyExists, err := s.usersStore.Query(
 		datastore.Equals(datastore.Field("slug"), slug),

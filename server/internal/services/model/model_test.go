@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
 	configservice "github.com/openorch/openorch/server/internal/services/config"
 )
@@ -37,8 +38,15 @@ func TestModel(t *testing.T) {
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
+	adminClient, _, err := test.AdminClient(options.ClientFactory)
+	require.NoError(t, err)
+
 	t.Run("get models", func(t *testing.T) {
-		getModelsRsp, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).
+		_, _, err := userClient.ModelSvcAPI.ListModels(context.Background()).
+			Execute()
+		require.Error(t, err)
+
+		getModelsRsp, _, err := adminClient.ModelSvcAPI.ListModels(context.Background()).
 			Execute()
 		require.NoError(t, err)
 
@@ -46,7 +54,11 @@ func TestModel(t *testing.T) {
 	})
 
 	t.Run("model status is not running, not ready", func(t *testing.T) {
-		statusRsp, _, err := userClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
+		_, _, err := userClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
+			Execute()
+		require.Error(t, err)
+
+		statusRsp, _, err := adminClient.ModelSvcAPI.GetModelStatus(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
 			Execute()
 		require.NoError(t, err)
 
