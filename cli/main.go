@@ -48,7 +48,7 @@ func main() {
 func addLoginCommands(rootCmd *cobra.Command) {
 	var runCmd = &cobra.Command{
 		Use:   "login [userName] [password]",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.MaximumNArgs(2),
 		Short: "Log in to the currently selected env.",
 		RunE:  login.Login,
 	}

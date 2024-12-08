@@ -24,6 +24,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
 	downloadservice "github.com/openorch/openorch/server/internal/services/download"
 	types "github.com/openorch/openorch/server/internal/services/download/types"
@@ -76,6 +77,16 @@ func TestDownloadFile(t *testing.T) {
 			Url: openapi.PtrString(fileHostServer.URL),
 		}).
 		Execute()
+	require.Error(t, err)
+
+	adminClient, _, err := test.AdminClient(options.ClientFactory)
+	require.NoError(t, err)
+
+	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
+		Body(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(fileHostServer.URL),
+		}).
+		Execute()
 	require.NoError(t, err)
 
 	timeout := time.After(5 * time.Second)
@@ -88,7 +99,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+				Execute()
+			require.Error(t, err)
+
+			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
 				Execute()
 			require.NoError(t, err)
 
@@ -150,6 +165,9 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
+	adminClient, _, err := test.AdminClient(options.ClientFactory)
+	require.NoError(t, err)
+
 	downloadURL := fileHostServer.URL + "/file"
 
 	partFilePath := filepath.Join(
@@ -167,6 +185,13 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
+	require.Error(t, err)
+
+	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
+		Body(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(downloadURL),
+		}).
+		Execute()
 	require.NoError(t, err)
 
 	timeout := time.After(5 * time.Second)
@@ -179,7 +204,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.Error(t, err)
+
+			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.NoError(t, err)
 
@@ -227,6 +256,9 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
+	adminClient, _, err := test.AdminClient(options.ClientFactory)
+	require.NoError(t, err)
+
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
 		options.HomeDir,
@@ -237,6 +269,13 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
 	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
+		Body(openapi.DownloadSvcDownloadRequest{
+			Url: openapi.PtrString(downloadURL),
+		}).
+		Execute()
+	require.Error(t, err)
+
+	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
 		Body(openapi.DownloadSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
@@ -255,7 +294,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			rsp, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+				Execute()
+			require.Error(t, err)
+
+			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.NoError(t, err)
 

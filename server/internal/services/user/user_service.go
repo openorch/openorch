@@ -14,7 +14,7 @@ package userservice
 
 import (
 	"crypto/rsa"
-	"fmt"
+	"log/slog"
 	"time"
 
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -247,7 +247,7 @@ func (s *UserService) bootstrap() error {
 
 	tok, err := s.login(slug, pw)
 	if err != nil {
-		logger.Info(fmt.Sprintf("Registering the %v service", slug))
+		logger.Debug("Registering service", slog.String("slug", slug))
 
 		usr, err := s.register(slug, pw,
 			"User Svc", []string{

@@ -97,7 +97,7 @@ func (rw *throttledResponseWriter) Write(b []byte) (int, error) {
 		errorMsg := fmt.Sprintf(`{"error": "%s"}`, errorMsgStr)
 
 		// Log the error message with the endpoint name, using the original message
-		logger.Error("Endpoint returned error",
+		logger.Debug("Endpoint returned error",
 			slog.String("endpoint", rw.endpoint),
 			slog.String("error", strings.TrimSuffix(string(b), "\n")))
 

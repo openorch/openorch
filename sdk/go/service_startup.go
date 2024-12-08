@@ -46,7 +46,7 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 	}).Execute()
 
 	if err != nil {
-		logger.Info("Registering service user", slog.String("serviceSlug", serviceSlug))
+		logger.Debug("Registering service user", slog.String("serviceSlug", serviceSlug))
 
 		_, _, err = userService.Register(ctx).Body(client.UserSvcRegisterRequest{
 			Slug:     client.PtrString(slug),
