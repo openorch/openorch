@@ -117,7 +117,7 @@ OpenOrch is a microservices platform that first came to mind back in 2013 when I
 
 ## Run On Your Servers
 
-See [this page](https://openorch.org/docs/category/running) to help you get started.
+See [this page](https://openorch.org/docs/category/running-the-daemon) to help you get started.
 
 ## Services
 
