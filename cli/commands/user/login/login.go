@@ -2,26 +2,56 @@ package login
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/openorch/openorch/cli/config"
 	"github.com/openorch/openorch/cli/types"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"golang.org/x/term"
 )
 
 // Login johnny myPass1
 func Login(cmd *cobra.Command, args []string) error {
 	conf, err := config.LoadConfig()
 	if err != nil {
-		return fmt.Errorf("Failed to load config: %w", err)
+		return errors.Wrap(err, "failed to load config")
 	}
 
-	slug := args[0]
-	password := args[1]
+	var slug, password string
+
+	switch len(args) {
+	case 0:
+		fmt.Print("Enter slug: ")
+		_, err := fmt.Scanln(&slug)
+		if err != nil {
+			return errors.Wrap(err, "failed to read slug")
+		}
+	case 1:
+		// Use provided slug
+		slug = args[0]
+	default:
+		// Both slug and password provided
+		slug = args[0]
+		password = args[1]
+	}
+
+	if password == "" {
+		// Prompt for password securely if not already provided
+		fmt.Print("Enter password: ")
+		bytePassword, err := term.ReadPassword(int(os.Stdin.Fd()))
+		if err != nil {
+			return errors.Wrap(err, "failed to read password")
+		}
+		password = strings.TrimSpace(string(bytePassword))
+		fmt.Println() // Move to the next line after password input
+	}
 
 	if conf.Environments == nil {
-		return fmt.Errorf("No environments")
+		return fmt.Errorf("no environments found")
 	}
 
 	env, ok := conf.Environments[conf.SelectedEnvironment]
