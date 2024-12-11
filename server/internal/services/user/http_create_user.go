@@ -14,6 +14,7 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	user "github.com/openorch/openorch/server/internal/services/user/types"
@@ -53,6 +54,13 @@ func (s *UserService) CreateUser(
 	}
 	defer r.Body.Close()
 
+	err = validateUser(req.User)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
 	err = s.createUser(req.User, req.Password, req.RoleIds)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -62,4 +70,24 @@ func (s *UserService) CreateUser(
 
 	bs, _ := json.Marshal(user.CreateUserResponse{})
 	w.Write(bs)
+}
+
+func validateUser(u *user.User) error {
+	if u == nil {
+		return errors.New("user is required")
+	}
+	if u.Name == "" {
+		return errors.New("name is required")
+	}
+	if u.Slug == "" {
+		return errors.New("slug is required")
+	}
+	if len(u.Contacts) == 0 {
+		return errors.New("contact is required")
+	}
+	if len(u.Contacts) > 1 {
+		return errors.New("more than one contact")
+	}
+
+	return nil
 }
