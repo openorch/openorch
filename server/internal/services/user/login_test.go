@@ -51,13 +51,13 @@ func TestRegistration(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		require.Equal(t, "singulatron", *byTokenRsp.User.Slug)
+		require.Equal(t, "openorch", *byTokenRsp.User.Slug)
 		require.True(t, nil == byTokenRsp.User.PasswordHash)
 
 		require.Equal(t, &claim.UserId, byTokenRsp.User.Id)
 
 		changePassReq := clients.UserSvcChangePasswordRequest{
-			Slug:            clients.PtrString("singulatron"),
+			Slug:            clients.PtrString("openorch"),
 			CurrentPassword: clients.PtrString("changeme"),
 			NewPassword:     clients.PtrString("yo"),
 		}
@@ -135,7 +135,7 @@ func TestOrganization(t *testing.T) {
 			require.Equal(t, 1, len(claim.RoleIds), claim.RoleIds)
 
 			loginReq := clients.UserSvcLoginRequest{
-				Slug:     clients.PtrString("singulatron"),
+				Slug:     clients.PtrString("openorch"),
 				Password: clients.PtrString("changeme"),
 			}
 			loginRsp, _, err := adminClient.UserSvcAPI.Login(context.Background()).

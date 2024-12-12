@@ -22,7 +22,7 @@ func (ns *SourceService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := ns.clientFactory.Client(sdk.WithToken(ns.token)).UserSvcAPI
 
-	for _, permission := range sourcetypes.SourcePermissions {
+	for _, permission := range sourcetypes.SourceAdminPermissions {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -39,7 +39,7 @@ func (ns *SourceService) registerPermissions() error {
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
-		for _, permission := range sourcetypes.SourcePermissions {
+		for _, permission := range sourcetypes.SourceAdminPermissions {
 
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()

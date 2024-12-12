@@ -14,7 +14,7 @@ func AdminClient(clientFactory sdk.ClientFactory) (*openapi.APIClient, string, e
 	userSvc := clientFactory.Client().UserSvcAPI
 
 	adminLoginRsp, _, err := userSvc.Login(context.Background()).Body(openapi.UserSvcLoginRequest{
-		Slug:     openapi.PtrString("singulatron"),
+		Slug:     openapi.PtrString("openorch"),
 		Password: openapi.PtrString("changeme"),
 	}).Execute()
 	if err != nil {
