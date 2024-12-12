@@ -8,6 +8,7 @@ api_deploy_svc.go
 api_docker_svc.go
 api_download_svc.go
 api_dynamic_svc.go
+api_email_svc.go
 api_firehose_svc.go
 api_model_svc.go
 api_policy_svc.go
@@ -86,6 +87,11 @@ docs/DynamicSvcQueryResponse.md
 docs/DynamicSvcUpdateObjectRequest.md
 docs/DynamicSvcUpsertObjectRequest.md
 docs/DynamicSvcUpsertObjectResponse.md
+docs/EmailSvcAPI.md
+docs/EmailSvcErrorResponse.md
+docs/EmailSvcFile.md
+docs/EmailSvcSendEmailRequest.md
+docs/EmailSvcSendEmailResponse.md
 docs/FirehoseSvcAPI.md
 docs/FirehoseSvcErrorResponse.md
 docs/FirehoseSvcEvent.md
@@ -244,6 +250,10 @@ model_dynamic_svc_query_response.go
 model_dynamic_svc_update_object_request.go
 model_dynamic_svc_upsert_object_request.go
 model_dynamic_svc_upsert_object_response.go
+model_email_svc_error_response.go
+model_email_svc_file.go
+model_email_svc_send_email_request.go
+model_email_svc_send_email_response.go
 model_firehose_svc_error_response.go
 model_firehose_svc_event.go
 model_firehose_svc_event_publish_request.go

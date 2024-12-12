@@ -24,7 +24,8 @@ func (s *Secret) GetId() string {
 }
 
 type ReadSecretRequest struct {
-	Key string `json:"key"`
+	Key  string   `json:"key"`
+	Keys []string `json:"keys"`
 }
 
 type ReadSecretResponse struct {

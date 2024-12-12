@@ -11,6 +11,7 @@
  */
 export declare class SecretSvcReadSecretRequest {
     'key'?: string;
+    'keys'?: Array<string>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

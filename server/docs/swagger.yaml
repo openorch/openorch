@@ -780,6 +780,80 @@ definitions:
       object:
         $ref: '#/definitions/dynamic_svc.Object'
     type: object
+  email_svc.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  email_svc.File:
+    properties:
+      content:
+        description: Base64-encoded content of the file
+        type: string
+      contentType:
+        description: MIME type of the file (e.g., "application/pdf")
+        type: string
+      filename:
+        description: Name of the attached file
+        type: string
+    required:
+    - content
+    - contentType
+    - filename
+    type: object
+  email_svc.SendEmailRequest:
+    properties:
+      attachments:
+        description: List of file attachments (optional)
+        items:
+          $ref: '#/definitions/email_svc.File'
+        type: array
+      bcc:
+        description: List of BCC recipient email addresses (optional)
+        items:
+          type: string
+        type: array
+      body:
+        description: Email body content (plain text or HTML)
+        type: string
+      cc:
+        description: List of CC recipient email addresses (optional)
+        items:
+          type: string
+        type: array
+      contentType:
+        description: 'Content type: "text/plain" or "text/html"'
+        type: string
+      createdAt:
+        description: Timestamp of email creation
+        type: string
+      id:
+        description: Unique identifier
+        type: string
+      subject:
+        description: Email subject line
+        type: string
+      to:
+        description: List of recipient email addresses
+        items:
+          type: string
+        type: array
+    required:
+    - body
+    - contentType
+    - createdAt
+    - subject
+    - to
+    type: object
+  email_svc.SendEmailResponse:
+    properties:
+      emailId:
+        description: Unique identifier for the sent email
+        type: string
+      status:
+        description: Status of the email send operation ("sent", "queued", etc.)
+        type: string
+    type: object
   firehose_svc.ErrorResponse:
     properties:
       error:
@@ -1610,6 +1684,10 @@ definitions:
     properties:
       key:
         type: string
+      keys:
+        items:
+          type: string
+        type: array
     type: object
   secret_svc.ReadSecretResponse:
     properties:
@@ -3118,6 +3196,43 @@ paths:
       summary: Update Objects
       tags:
       - Dynamic Svc
+  /email-svc/email:
+    post:
+      consumes:
+      - application/json
+      description: Send an email with attachments.
+      operationId: sendEmail
+      parameters:
+      - description: Send Email Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/email_svc.SendEmailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully sent the email
+          schema:
+            $ref: '#/definitions/email_svc.SendEmailResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/email_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/email_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/email_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Send an Email
+      tags:
+      - Email Svc
   /firehose-svc/event:
     post:
       consumes:

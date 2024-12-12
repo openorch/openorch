@@ -25,6 +25,12 @@ export interface SecretSvcReadSecretRequest {
      * @memberof SecretSvcReadSecretRequest
      */
     key?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SecretSvcReadSecretRequest
+     */
+    keys?: Array<string>;
 }
 
 /**
@@ -45,6 +51,7 @@ export function SecretSvcReadSecretRequestFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'key': json['key'] == null ? undefined : json['key'],
+        'keys': json['keys'] == null ? undefined : json['keys'],
     };
 }
 
@@ -60,6 +67,7 @@ export function SecretSvcReadSecretRequestFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'key': value['key'],
+        'keys': value['keys'],
     };
 }
 

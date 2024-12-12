@@ -62,6 +62,10 @@ export * from './dynamicSvcQueryResponse';
 export * from './dynamicSvcUpdateObjectRequest';
 export * from './dynamicSvcUpsertObjectRequest';
 export * from './dynamicSvcUpsertObjectResponse';
+export * from './emailSvcErrorResponse';
+export * from './emailSvcFile';
+export * from './emailSvcSendEmailRequest';
+export * from './emailSvcSendEmailResponse';
 export * from './firehoseSvcErrorResponse';
 export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
@@ -223,6 +227,10 @@ import { DynamicSvcQueryResponse } from './dynamicSvcQueryResponse';
 import { DynamicSvcUpdateObjectRequest } from './dynamicSvcUpdateObjectRequest';
 import { DynamicSvcUpsertObjectRequest } from './dynamicSvcUpsertObjectRequest';
 import { DynamicSvcUpsertObjectResponse } from './dynamicSvcUpsertObjectResponse';
+import { EmailSvcErrorResponse } from './emailSvcErrorResponse';
+import { EmailSvcFile } from './emailSvcFile';
+import { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest';
+import { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse';
 import { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse';
 import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
@@ -393,6 +401,10 @@ let typeMap: {[index: string]: any} = {
     "DynamicSvcUpdateObjectRequest": DynamicSvcUpdateObjectRequest,
     "DynamicSvcUpsertObjectRequest": DynamicSvcUpsertObjectRequest,
     "DynamicSvcUpsertObjectResponse": DynamicSvcUpsertObjectResponse,
+    "EmailSvcErrorResponse": EmailSvcErrorResponse,
+    "EmailSvcFile": EmailSvcFile,
+    "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,
+    "EmailSvcSendEmailResponse": EmailSvcSendEmailResponse,
     "FirehoseSvcErrorResponse": FirehoseSvcErrorResponse,
     "FirehoseSvcEvent": FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
