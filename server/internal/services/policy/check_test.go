@@ -40,7 +40,7 @@ func TestRateLimiting(t *testing.T) {
 
 	adminLoginRsp, _, err := client.UserSvcAPI.Login(context.Background()).
 		Body(clients.UserSvcLoginRequest{
-			Slug:     clients.PtrString("singulatron"),
+			Slug:     clients.PtrString("openorch"),
 			Password: clients.PtrString("changeme"),
 		}).
 		Execute()
