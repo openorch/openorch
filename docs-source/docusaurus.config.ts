@@ -17,7 +17,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "singulatron", // Usually your GitHub org/user name.
+  organizationName: "openorch", // Usually your GitHub org/user name.
   projectName: "openorch", // Usually your repo name.
 
   presets: [

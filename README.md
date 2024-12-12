@@ -67,7 +67,7 @@ async function testDrive() {
   let userService = new UserSvcApi();
   let loginResponse = await userService.login({
     request: {
-      slug: "singulatron",
+      slug: "openorch",
       password: "changeme",
     },
   });
