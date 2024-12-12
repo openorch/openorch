@@ -17,6 +17,6 @@ var PermissionSourceRepoCheckout = usertypes.Permission{
 	Name: "Souce Svc - Repo Checkout",
 }
 
-var SourcePermissions = []usertypes.Permission{
+var SourceAdminPermissions = []usertypes.Permission{
 	PermissionSourceRepoCheckout,
 }

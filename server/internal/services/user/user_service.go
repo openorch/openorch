@@ -213,7 +213,7 @@ func (s *UserService) bootstrap() error {
 		return nil
 	}
 
-	_, err = s.register("singulatron", "changeme", "Admin", []string{
+	_, err = s.register("openorch", "changeme", "Admin", []string{
 		usertypes.RoleAdmin.Id,
 	})
 	if err != nil {

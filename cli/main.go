@@ -47,10 +47,21 @@ func main() {
 
 func addLoginCommands(rootCmd *cobra.Command) {
 	var runCmd = &cobra.Command{
-		Use:   "login [userName] [password]",
+		Use:   "login [slug] [password]",
 		Args:  cobra.MaximumNArgs(2),
-		Short: "Log in to the currently selected env.",
-		RunE:  login.Login,
+		Short: "Log in to the currently selected environment.",
+		Long: `The 'login' command allows you to authenticate a user in the currently selected environment.
+
+If no arguments are provided, the command will prompt for the username (slug) and password securely.
+If only the username (slug) is provided, the command will securely prompt for the password.
+If both the username and password are provided as arguments, the login will proceed, but keep in mind 
+that the password will be visible in the terminal command history.`,
+		Example: `  # Login with slug and prompt for password
+  sup login johnny
+
+  # Login by providing both slug and password (not secure, avoid this)
+  sup login johnny myPass1`,
+		RunE: login.Login,
 	}
 
 	rootCmd.AddCommand(runCmd)

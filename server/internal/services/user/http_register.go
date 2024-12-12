@@ -14,6 +14,7 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	user "github.com/openorch/openorch/server/internal/services/user/types"
@@ -64,4 +65,21 @@ func (s *UserService) Register(w http.ResponseWriter, r *http.Request) {
 		Token: token,
 	})
 	w.Write(bs)
+}
+
+func validateUserRegistration(req user.RegisterRequest) error {
+	if req.Name == "" {
+		return errors.New("name missing")
+	}
+	if req.Contact.Id == "" {
+		return errors.New("email missing")
+	}
+	if req.Slug == "" {
+		req.Slug = req.Contact.Id
+	}
+	if req.Password == "" {
+		return errors.New("password missing")
+	}
+
+	return nil
 }

@@ -37,7 +37,7 @@ var PermissionImageBuild = usertypes.Permission{
 	Name: "Docker Svc - Image Build",
 }
 
-var DockerPermissions = []usertypes.Permission{
+var AdminPermissions = []usertypes.Permission{
 	PermissionContainerView,
 	PermissionContainerEdit,
 	PermissionContainerStop,

@@ -26,21 +26,8 @@ func (s *UserService) createUser(
 	password string,
 	roleIds []string,
 ) error {
-	if user.Name == "" {
-		return errors.New("username missing")
-	}
-	if len(user.Contacts) == 0 {
-		return errors.New("contact missing")
-	}
-	if len(user.Contacts) > 1 {
-		return errors.New("more than one contact")
-	}
-	if password == "" {
-		return errors.New("password missing")
-	}
-
 	_, contactExists, err := s.contactsStore.Query(
-		datastore.Equals(datastore.Field("id"), user.Contacts[0]),
+		datastore.Equals(datastore.Field("id"), user.Contacts[0].Id),
 	).FindOne()
 	if err != nil {
 		return err
