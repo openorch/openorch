@@ -42,6 +42,8 @@ func escape(columnName string) string {
 	switch columnName {
 	case "table":
 		toEscape = true
+	case "to":
+		toEscape = true
 	}
 
 	if toEscape {
