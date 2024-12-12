@@ -5,6 +5,7 @@ export { DeploySvcApi } from './DeploySvcApi.mjs';
 export { DockerSvcApi } from './DockerSvcApi.mjs';
 export { DownloadSvcApi } from './DownloadSvcApi.mjs';
 export { DynamicSvcApi } from './DynamicSvcApi.mjs';
+export { EmailSvcApi } from './EmailSvcApi.mjs';
 export { FirehoseSvcApi } from './FirehoseSvcApi.mjs';
 export { ModelSvcApi } from './ModelSvcApi.mjs';
 export { PolicySvcApi } from './PolicySvcApi.mjs';
@@ -75,6 +76,10 @@ export { DynamicSvcQueryResponseFromJSON, DynamicSvcQueryResponseFromJSONTyped, 
 export { DynamicSvcUpdateObjectRequestFromJSON, DynamicSvcUpdateObjectRequestFromJSONTyped, DynamicSvcUpdateObjectRequestToJSON, DynamicSvcUpdateObjectRequestToJSONTyped, instanceOfDynamicSvcUpdateObjectRequest } from './DynamicSvcUpdateObjectRequest.mjs';
 export { DynamicSvcUpsertObjectRequestFromJSON, DynamicSvcUpsertObjectRequestFromJSONTyped, DynamicSvcUpsertObjectRequestToJSON, DynamicSvcUpsertObjectRequestToJSONTyped, instanceOfDynamicSvcUpsertObjectRequest } from './DynamicSvcUpsertObjectRequest.mjs';
 export { DynamicSvcUpsertObjectResponseFromJSON, DynamicSvcUpsertObjectResponseFromJSONTyped, DynamicSvcUpsertObjectResponseToJSON, DynamicSvcUpsertObjectResponseToJSONTyped, instanceOfDynamicSvcUpsertObjectResponse } from './DynamicSvcUpsertObjectResponse.mjs';
+export { EmailSvcErrorResponseFromJSON, EmailSvcErrorResponseFromJSONTyped, EmailSvcErrorResponseToJSON, EmailSvcErrorResponseToJSONTyped, instanceOfEmailSvcErrorResponse } from './EmailSvcErrorResponse.mjs';
+export { EmailSvcFileFromJSON, EmailSvcFileFromJSONTyped, EmailSvcFileToJSON, EmailSvcFileToJSONTyped, instanceOfEmailSvcFile } from './EmailSvcFile.mjs';
+export { EmailSvcSendEmailRequestFromJSON, EmailSvcSendEmailRequestFromJSONTyped, EmailSvcSendEmailRequestToJSON, EmailSvcSendEmailRequestToJSONTyped, instanceOfEmailSvcSendEmailRequest } from './EmailSvcSendEmailRequest.mjs';
+export { EmailSvcSendEmailResponseFromJSON, EmailSvcSendEmailResponseFromJSONTyped, EmailSvcSendEmailResponseToJSON, EmailSvcSendEmailResponseToJSONTyped, instanceOfEmailSvcSendEmailResponse } from './EmailSvcSendEmailResponse.mjs';
 export { FirehoseSvcErrorResponseFromJSON, FirehoseSvcErrorResponseFromJSONTyped, FirehoseSvcErrorResponseToJSON, FirehoseSvcErrorResponseToJSONTyped, instanceOfFirehoseSvcErrorResponse } from './FirehoseSvcErrorResponse.mjs';
 export { FirehoseSvcEventFromJSON, FirehoseSvcEventFromJSONTyped, FirehoseSvcEventToJSON, FirehoseSvcEventToJSONTyped, instanceOfFirehoseSvcEvent } from './FirehoseSvcEvent.mjs';
 export { FirehoseSvcEventPublishRequestFromJSON, FirehoseSvcEventPublishRequestFromJSONTyped, FirehoseSvcEventPublishRequestToJSON, FirehoseSvcEventPublishRequestToJSONTyped, instanceOfFirehoseSvcEventPublishRequest } from './FirehoseSvcEventPublishRequest.mjs';

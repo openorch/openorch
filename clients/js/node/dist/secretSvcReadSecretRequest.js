@@ -22,6 +22,11 @@ SecretSvcReadSecretRequest.attributeTypeMap = [
         "name": "key",
         "baseName": "key",
         "type": "string"
+    },
+    {
+        "name": "keys",
+        "baseName": "keys",
+        "type": "Array<string>"
     }
 ];
 

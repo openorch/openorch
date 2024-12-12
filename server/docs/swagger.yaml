@@ -3196,7 +3196,7 @@ paths:
       summary: Update Objects
       tags:
       - Dynamic Svc
-  /email-svc/send:
+  /email-svc/email:
     post:
       consumes:
       - application/json
@@ -3230,7 +3230,7 @@ paths:
             $ref: '#/definitions/email_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Sends an Email
+      summary: Send an Email
       tags:
       - Email Svc
   /firehose-svc/event:

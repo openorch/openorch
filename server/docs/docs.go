@@ -1663,7 +1663,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/email-svc/send": {
+        "/email-svc/email": {
             "post": {
                 "security": [
                     {
@@ -1680,7 +1680,7 @@ const docTemplate = `{
                 "tags": [
                     "Email Svc"
                 ],
-                "summary": "Sends an Email",
+                "summary": "Send an Email",
                 "operationId": "sendEmail",
                 "parameters": [
                     {

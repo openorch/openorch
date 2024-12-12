@@ -6,6 +6,7 @@ export * from './DeploySvcApi';
 export * from './DockerSvcApi';
 export * from './DownloadSvcApi';
 export * from './DynamicSvcApi';
+export * from './EmailSvcApi';
 export * from './FirehoseSvcApi';
 export * from './ModelSvcApi';
 export * from './PolicySvcApi';

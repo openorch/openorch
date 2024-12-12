@@ -14,6 +14,7 @@ import { RequestFile } from './models';
 
 export class SecretSvcReadSecretRequest {
     'key'?: string;
+    'keys'?: Array<string>;
 
     static discriminator: string | undefined = undefined;
 
@@ -22,6 +23,11 @@ export class SecretSvcReadSecretRequest {
             "name": "key",
             "baseName": "key",
             "type": "string"
+        },
+        {
+            "name": "keys",
+            "baseName": "keys",
+            "type": "Array<string>"
         }    ];
 
     static getAttributeTypeMap() {

@@ -24,6 +24,7 @@ import (
 	dockerservice "github.com/openorch/openorch/server/internal/services/docker"
 	downloadservice "github.com/openorch/openorch/server/internal/services/download"
 	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
+	emailservice "github.com/openorch/openorch/server/internal/services/email"
 	firehoseservice "github.com/openorch/openorch/server/internal/services/firehose"
 	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	policyservice "github.com/openorch/openorch/server/internal/services/policy"
@@ -349,6 +350,19 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	if err != nil {
 		logger.Error(
 			"Proxy service creation failed",
+			slog.String("error", err.Error()),
+		)
+		os.Exit(1)
+	}
+
+	emailService, err := emailservice.NewEmailService(
+		options.ClientFactory,
+		options.Lock,
+		options.DatastoreFactory,
+	)
+	if err != nil {
+		logger.Error(
+			"Email service creation failed",
 			slog.String("error", err.Error()),
 		)
 		os.Exit(1)
@@ -710,6 +724,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
 		secretService.Write(w, r)
+	})).
+		Methods("OPTIONS", "PUT")
+
+	router.HandleFunc("/email-svc/email", appl(func(w http.ResponseWriter, r *http.Request) {
+		emailService.SendEmail(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 

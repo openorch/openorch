@@ -64,6 +64,10 @@ var dynamicSvcQueryResponse = require('./dynamicSvcQueryResponse.js');
 var dynamicSvcUpdateObjectRequest = require('./dynamicSvcUpdateObjectRequest.js');
 var dynamicSvcUpsertObjectRequest = require('./dynamicSvcUpsertObjectRequest.js');
 var dynamicSvcUpsertObjectResponse = require('./dynamicSvcUpsertObjectResponse.js');
+var emailSvcErrorResponse = require('./emailSvcErrorResponse.js');
+var emailSvcFile = require('./emailSvcFile.js');
+var emailSvcSendEmailRequest = require('./emailSvcSendEmailRequest.js');
+var emailSvcSendEmailResponse = require('./emailSvcSendEmailResponse.js');
 var firehoseSvcErrorResponse = require('./firehoseSvcErrorResponse.js');
 var firehoseSvcEvent = require('./firehoseSvcEvent.js');
 var firehoseSvcEventPublishRequest = require('./firehoseSvcEventPublishRequest.js');
@@ -199,6 +203,11 @@ Object.defineProperty(exports, 'DynamicSvcApiApiKeys', {
 	enumerable: true,
 	get: function () { return chatSvcApi.DynamicSvcApiApiKeys; }
 });
+exports.EmailSvcApi = chatSvcApi.EmailSvcApi;
+Object.defineProperty(exports, 'EmailSvcApiApiKeys', {
+	enumerable: true,
+	get: function () { return chatSvcApi.EmailSvcApiApiKeys; }
+});
 exports.FirehoseSvcApi = chatSvcApi.FirehoseSvcApi;
 Object.defineProperty(exports, 'FirehoseSvcApiApiKeys', {
 	enumerable: true,
@@ -317,6 +326,10 @@ exports.DynamicSvcQueryResponse = dynamicSvcQueryResponse.DynamicSvcQueryRespons
 exports.DynamicSvcUpdateObjectRequest = dynamicSvcUpdateObjectRequest.DynamicSvcUpdateObjectRequest;
 exports.DynamicSvcUpsertObjectRequest = dynamicSvcUpsertObjectRequest.DynamicSvcUpsertObjectRequest;
 exports.DynamicSvcUpsertObjectResponse = dynamicSvcUpsertObjectResponse.DynamicSvcUpsertObjectResponse;
+exports.EmailSvcErrorResponse = emailSvcErrorResponse.EmailSvcErrorResponse;
+exports.EmailSvcFile = emailSvcFile.EmailSvcFile;
+exports.EmailSvcSendEmailRequest = emailSvcSendEmailRequest.EmailSvcSendEmailRequest;
+exports.EmailSvcSendEmailResponse = emailSvcSendEmailResponse.EmailSvcSendEmailResponse;
 exports.FirehoseSvcErrorResponse = firehoseSvcErrorResponse.FirehoseSvcErrorResponse;
 exports.FirehoseSvcEvent = firehoseSvcEvent.FirehoseSvcEvent;
 exports.FirehoseSvcEventPublishRequest = firehoseSvcEventPublishRequest.FirehoseSvcEventPublishRequest;

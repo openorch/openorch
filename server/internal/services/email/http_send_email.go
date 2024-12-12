@@ -27,7 +27,7 @@ import (
 // @Failure 401 {object} email.ErrorResponse "Unauthorized"
 // @Failure 500 {object} email.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /email-svc/send [post]
+// @Router /email-svc/email [post]
 func (s *EmailService) SendEmail(w http.ResponseWriter, r *http.Request) {
 	// Authorization check (similar to the original code)
 	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).

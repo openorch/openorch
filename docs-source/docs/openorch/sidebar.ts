@@ -224,6 +224,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Email Svc",
+      items: [
+        {
+          type: "doc",
+          id: "openorch/send-email",
+          label: "Send an Email",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Firehose Svc",
       items: [
         {

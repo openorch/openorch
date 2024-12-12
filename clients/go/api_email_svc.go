@@ -23,7 +23,7 @@ import (
 type EmailSvcAPI interface {
 
 	/*
-	SendEmail Sends an Email
+	SendEmail Send an Email
 
 	Send an email with attachments.
 
@@ -57,7 +57,7 @@ func (r ApiSendEmailRequest) Execute() (*EmailSvcSendEmailResponse, *http.Respon
 }
 
 /*
-SendEmail Sends an Email
+SendEmail Send an Email
 
 Send an email with attachments.
 
@@ -86,7 +86,7 @@ func (a *EmailSvcAPIService) SendEmailExecute(r ApiSendEmailRequest) (*EmailSvcS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/email-svc/send"
+	localVarPath := localBasePath + "/email-svc/email"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

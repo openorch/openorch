@@ -26,6 +26,7 @@ function SecretSvcReadSecretRequestFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'key': json['key'] == null ? undefined : json['key'],
+        'keys': json['keys'] == null ? undefined : json['keys'],
     };
 }
 function SecretSvcReadSecretRequestToJSON(json) {
@@ -37,6 +38,7 @@ function SecretSvcReadSecretRequestToJSONTyped(value, ignoreDiscriminator = fals
     }
     return {
         'key': value['key'],
+        'keys': value['keys'],
     };
 }
 
