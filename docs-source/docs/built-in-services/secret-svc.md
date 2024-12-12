@@ -13,7 +13,7 @@ The Secret Svc stores sensitive or internal (non-end-user-facing) configuration.
 
 > This page is a high level overview of the `Secret Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/read-secret).
 
-## Design Choices
+## Design choices
 
 The Secret Svc, like most things in OpenOrch, is designed to be simple to reason about.
 
@@ -28,7 +28,12 @@ type Secret struct {
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
 
-## Limitations
+### Encryption at rest
 
-- Secrets are not encrypted at rest yet
-- Secrets are not encrypted at transit
+All data is encrypted using the encryption key provided by the envar `OPENORCH_ENCRYPTION_KEY` (see Todo section).
+
+The server encrypts the secret values before saving them to disk/DB. The secret values are transmitted to readers unencrypted.
+
+# Todo
+
+- Make it so the encryption key doesn't have to be exposed in an envar

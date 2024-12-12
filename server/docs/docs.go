@@ -2968,14 +2968,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/secret-svc/secret": {
+        "/secret-svc/secrets": {
             "put": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Write a secret if authorized",
+                "description": "Write secrets if authorized to do so",
                 "consumes": [
                     "application/json"
                 ],
@@ -2985,8 +2985,8 @@ const docTemplate = `{
                 "tags": [
                     "Secret Svc"
                 ],
-                "summary": "Write Secret",
-                "operationId": "writeSecret",
+                "summary": "Write Secrets",
+                "operationId": "writeSecrets",
                 "parameters": [
                     {
                         "description": "Write Secret Request",
@@ -2994,7 +2994,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretRequest"
+                            "$ref": "#/definitions/secret_svc.WriteSecretsRequest"
                         }
                     }
                 ],
@@ -3002,7 +3002,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Write Secret Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretResponse"
+                            "$ref": "#/definitions/secret_svc.WriteSecretsResponse"
                         }
                     },
                     "401": {
@@ -3025,7 +3025,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Fetch a secret by key, if authorized",
+                "description": "Read secrets by key(s) if authorized.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3035,15 +3035,15 @@ const docTemplate = `{
                 "tags": [
                     "Secret Svc"
                 ],
-                "summary": "Read Secret",
-                "operationId": "readSecret",
+                "summary": "Read Secrets",
+                "operationId": "readSecrets",
                 "parameters": [
                     {
                         "description": "Read Secret Request",
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretRequest"
+                            "$ref": "#/definitions/secret_svc.ReadSecretsRequest"
                         }
                     }
                 ],
@@ -3051,7 +3051,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Read Secret Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretResponse"
+                            "$ref": "#/definitions/secret_svc.ReadSecretsResponse"
                         }
                     },
                     "401": {
@@ -6677,7 +6677,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretRequest": {
+        "secret_svc.ReadSecretsRequest": {
             "type": "object",
             "properties": {
                 "key": {
@@ -6691,7 +6691,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretResponse": {
+        "secret_svc.ReadSecretsResponse": {
             "type": "object",
             "properties": {
                 "secrets": {
@@ -6705,6 +6705,10 @@ const docTemplate = `{
         "secret_svc.Secret": {
             "type": "object",
             "properties": {
+                "encrypted": {
+                    "description": "Whether the secret is encrypted\nAll secrets are encrypted before written to the DB.\nThis really only exists for write requests to know if the secret is already encrypted.\nIe: while most ` + "`" + `secret save [key] [value]` + "`" + ` commands are probably not encrypted,\nFile based saves, eg. ` + "`" + `secret save secretA.yaml` + "`" + ` are probably encrypted.",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "Id of the secret",
                     "type": "string"
@@ -6733,7 +6737,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.WriteSecretRequest": {
+        "secret_svc.WriteSecretsRequest": {
             "type": "object",
             "properties": {
                 "secrets": {
@@ -6744,7 +6748,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.WriteSecretResponse": {
+        "secret_svc.WriteSecretsResponse": {
             "type": "object"
         },
         "source_svc.CheckoutRepoRequest": {

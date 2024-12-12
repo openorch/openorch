@@ -20,6 +20,16 @@ import { mapValues } from '../runtime';
  */
 export interface SecretSvcSecret {
     /**
+     * Whether the secret is encrypted
+     * All secrets are encrypted before written to the DB.
+     * This really only exists for write requests to know if the secret is already encrypted.
+     * Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+     * File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+     * @type {boolean}
+     * @memberof SecretSvcSecret
+     */
+    encrypted?: boolean;
+    /**
      * Id of the secret
      * @type {string}
      * @memberof SecretSvcSecret
@@ -68,6 +78,7 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
+        'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
         'readers': json['readers'] == null ? undefined : json['readers'],
@@ -87,6 +98,7 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
+        'encrypted': value['encrypted'],
         'id': value['id'],
         'key': value['key'],
         'readers': value['readers'],

@@ -332,6 +332,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Authorizer,
 		options.Lock,
 		options.DatastoreFactory,
+		options.NodeOptions.SecretEncryptionKey,
 	)
 	if err != nil {
 		logger.Error(
@@ -717,12 +718,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
 		secretService.Read(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
 		secretService.Write(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
@@ -792,6 +793,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		err = proxyService.Start()
 		if err != nil {
 			return errors.Wrap(err, "proxy service start failed")
+		}
+		err = emailService.Start()
+		if err != nil {
+			return errors.Wrap(err, "email service start failed")
 		}
 
 		return nil

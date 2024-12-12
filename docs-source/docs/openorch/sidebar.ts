@@ -408,14 +408,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "openorch/read-secret",
-          label: "Read Secret",
+          id: "openorch/read-secrets",
+          label: "Read Secrets",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "openorch/write-secret",
-          label: "Write Secret",
+          id: "openorch/write-secrets",
+          label: "Write Secrets",
           className: "api-method put",
         },
       ],

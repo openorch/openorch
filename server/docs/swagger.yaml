@@ -1680,7 +1680,7 @@ definitions:
         format: int64
         type: integer
     type: object
-  secret_svc.ReadSecretRequest:
+  secret_svc.ReadSecretsRequest:
     properties:
       key:
         type: string
@@ -1689,7 +1689,7 @@ definitions:
           type: string
         type: array
     type: object
-  secret_svc.ReadSecretResponse:
+  secret_svc.ReadSecretsResponse:
     properties:
       secrets:
         items:
@@ -1698,6 +1698,14 @@ definitions:
     type: object
   secret_svc.Secret:
     properties:
+      encrypted:
+        description: |-
+          Whether the secret is encrypted
+          All secrets are encrypted before written to the DB.
+          This really only exists for write requests to know if the secret is already encrypted.
+          Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+          File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+        type: boolean
       id:
         description: Id of the secret
         type: string
@@ -1718,14 +1726,14 @@ definitions:
           type: string
         type: array
     type: object
-  secret_svc.WriteSecretRequest:
+  secret_svc.WriteSecretsRequest:
     properties:
       secrets:
         items:
           $ref: '#/definitions/secret_svc.Secret'
         type: array
     type: object
-  secret_svc.WriteSecretResponse:
+  secret_svc.WriteSecretsResponse:
     type: object
   source_svc.CheckoutRepoRequest:
     properties:
@@ -4054,25 +4062,25 @@ paths:
       summary: List Nodes
       tags:
       - Registry Svc
-  /secret-svc/secret:
+  /secret-svc/secrets:
     post:
       consumes:
       - application/json
-      description: Fetch a secret by key, if authorized
-      operationId: readSecret
+      description: Read secrets by key(s) if authorized.
+      operationId: readSecrets
       parameters:
       - description: Read Secret Request
         in: body
         name: body
         schema:
-          $ref: '#/definitions/secret_svc.ReadSecretRequest'
+          $ref: '#/definitions/secret_svc.ReadSecretsRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Read Secret Response
           schema:
-            $ref: '#/definitions/secret_svc.ReadSecretResponse'
+            $ref: '#/definitions/secret_svc.ReadSecretsResponse'
         "401":
           description: Unauthorized
           schema:
@@ -4083,28 +4091,28 @@ paths:
             type: string
       security:
       - BearerAuth: []
-      summary: Read Secret
+      summary: Read Secrets
       tags:
       - Secret Svc
     put:
       consumes:
       - application/json
-      description: Write a secret if authorized
-      operationId: writeSecret
+      description: Write secrets if authorized to do so
+      operationId: writeSecrets
       parameters:
       - description: Write Secret Request
         in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/secret_svc.WriteSecretRequest'
+          $ref: '#/definitions/secret_svc.WriteSecretsRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Write Secret Response
           schema:
-            $ref: '#/definitions/secret_svc.WriteSecretResponse'
+            $ref: '#/definitions/secret_svc.WriteSecretsResponse'
         "401":
           description: Unauthorized
           schema:
@@ -4115,7 +4123,7 @@ paths:
             type: string
       security:
       - BearerAuth: []
-      summary: Write Secret
+      summary: Write Secrets
       tags:
       - Secret Svc
   /source-svc/repo/checkout:

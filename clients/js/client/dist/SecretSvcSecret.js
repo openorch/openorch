@@ -27,6 +27,7 @@ function SecretSvcSecretFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
+        'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
         'readers': json['readers'] == null ? undefined : json['readers'],
@@ -42,6 +43,7 @@ function SecretSvcSecretToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
+        'encrypted': value['encrypted'],
         'id': value['id'],
         'key': value['key'],
         'readers': value['readers'],

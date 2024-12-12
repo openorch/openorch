@@ -15,9 +15,9 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { SecretSvcReadSecretRequest } from '../model/secretSvcReadSecretRequest';
-import { SecretSvcReadSecretResponse } from '../model/secretSvcReadSecretResponse';
-import { SecretSvcWriteSecretRequest } from '../model/secretSvcWriteSecretRequest';
+import { SecretSvcReadSecretsRequest } from '../model/secretSvcReadSecretsRequest';
+import { SecretSvcReadSecretsResponse } from '../model/secretSvcReadSecretsResponse';
+import { SecretSvcWriteSecretsRequest } from '../model/secretSvcWriteSecretsRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -92,12 +92,12 @@ export class SecretSvcApi {
     }
 
     /**
-     * Fetch a secret by key, if authorized
-     * @summary Read Secret
+     * Read secrets by key(s) if authorized.
+     * @summary Read Secrets
      * @param body Read Secret Request
      */
-    public async readSecret (body?: SecretSvcReadSecretRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SecretSvcReadSecretResponse;  }> {
-        const localVarPath = this.basePath + '/secret-svc/secret';
+    public async readSecrets (body?: SecretSvcReadSecretsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SecretSvcReadSecretsResponse;  }> {
+        const localVarPath = this.basePath + '/secret-svc/secrets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -120,7 +120,7 @@ export class SecretSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(body, "SecretSvcReadSecretRequest")
+            body: ObjectSerializer.serialize(body, "SecretSvcReadSecretsRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -142,13 +142,13 @@ export class SecretSvcApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SecretSvcReadSecretResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: SecretSvcReadSecretsResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "SecretSvcReadSecretResponse");
+                            body = ObjectSerializer.deserialize(body, "SecretSvcReadSecretsResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -159,12 +159,12 @@ export class SecretSvcApi {
         });
     }
     /**
-     * Write a secret if authorized
-     * @summary Write Secret
+     * Write secrets if authorized to do so
+     * @summary Write Secrets
      * @param body Write Secret Request
      */
-    public async writeSecret (body: SecretSvcWriteSecretRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/secret-svc/secret';
+    public async writeSecrets (body: SecretSvcWriteSecretsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+        const localVarPath = this.basePath + '/secret-svc/secrets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -178,7 +178,7 @@ export class SecretSvcApi {
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling writeSecret.');
+            throw new Error('Required parameter body was null or undefined when calling writeSecrets.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -192,7 +192,7 @@ export class SecretSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(body, "SecretSvcWriteSecretRequest")
+            body: ObjectSerializer.serialize(body, "SecretSvcWriteSecretsRequest")
         };
 
         let authenticationPromise = Promise.resolve();

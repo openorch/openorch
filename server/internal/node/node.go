@@ -83,6 +83,12 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 	if options.DbString == "" {
 		options.DbString = os.Getenv("OPENORCH_DB_STRING")
 	}
+	if options.SecretEncryptionKey == "" {
+		options.SecretEncryptionKey = os.Getenv("OPENORCH_ENCRYPTION_KEY")
+		if options.SecretEncryptionKey == "" {
+			options.SecretEncryptionKey = "changeMeToSomethingSecure"
+		}
+	}
 
 	diopt := &di.Options{
 		NodeOptions: options,

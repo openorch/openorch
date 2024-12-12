@@ -115,10 +115,10 @@ var registrySvcRepositorySpec = require('./registrySvcRepositorySpec.js');
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
-var secretSvcReadSecretRequest = require('./secretSvcReadSecretRequest.js');
-var secretSvcReadSecretResponse = require('./secretSvcReadSecretResponse.js');
+var secretSvcReadSecretsRequest = require('./secretSvcReadSecretsRequest.js');
+var secretSvcReadSecretsResponse = require('./secretSvcReadSecretsResponse.js');
 var secretSvcSecret = require('./secretSvcSecret.js');
-var secretSvcWriteSecretRequest = require('./secretSvcWriteSecretRequest.js');
+var secretSvcWriteSecretsRequest = require('./secretSvcWriteSecretsRequest.js');
 var sourceSvcCheckoutRepoRequest = require('./sourceSvcCheckoutRepoRequest.js');
 var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
 var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
@@ -281,10 +281,10 @@ let typeMap = {
     "RegistrySvcResourceUsage": registrySvcResourceUsage.RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": registrySvcUsage.RegistrySvcUsage,
-    "SecretSvcReadSecretRequest": secretSvcReadSecretRequest.SecretSvcReadSecretRequest,
-    "SecretSvcReadSecretResponse": secretSvcReadSecretResponse.SecretSvcReadSecretResponse,
+    "SecretSvcReadSecretsRequest": secretSvcReadSecretsRequest.SecretSvcReadSecretsRequest,
+    "SecretSvcReadSecretsResponse": secretSvcReadSecretsResponse.SecretSvcReadSecretsResponse,
     "SecretSvcSecret": secretSvcSecret.SecretSvcSecret,
-    "SecretSvcWriteSecretRequest": secretSvcWriteSecretRequest.SecretSvcWriteSecretRequest,
+    "SecretSvcWriteSecretsRequest": secretSvcWriteSecretsRequest.SecretSvcWriteSecretsRequest,
     "SourceSvcCheckoutRepoRequest": sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": sourceSvcErrorResponse.SourceSvcErrorResponse,
@@ -688,10 +688,10 @@ exports.RegistrySvcRepositorySpec = registrySvcRepositorySpec.RegistrySvcReposit
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
-exports.SecretSvcReadSecretRequest = secretSvcReadSecretRequest.SecretSvcReadSecretRequest;
-exports.SecretSvcReadSecretResponse = secretSvcReadSecretResponse.SecretSvcReadSecretResponse;
+exports.SecretSvcReadSecretsRequest = secretSvcReadSecretsRequest.SecretSvcReadSecretsRequest;
+exports.SecretSvcReadSecretsResponse = secretSvcReadSecretsResponse.SecretSvcReadSecretsResponse;
 exports.SecretSvcSecret = secretSvcSecret.SecretSvcSecret;
-exports.SecretSvcWriteSecretRequest = secretSvcWriteSecretRequest.SecretSvcWriteSecretRequest;
+exports.SecretSvcWriteSecretsRequest = secretSvcWriteSecretsRequest.SecretSvcWriteSecretsRequest;
 exports.SourceSvcCheckoutRepoRequest = sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest;
 exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
 exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;

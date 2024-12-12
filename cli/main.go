@@ -19,7 +19,7 @@ import (
 
 func main() {
 	var rootCmd = &cobra.Command{
-		Use:   "sup",
+		Use:   "oo",
 		Short: "OpenOrch CLI",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -57,10 +57,10 @@ If only the username (slug) is provided, the command will securely prompt for th
 If both the username and password are provided as arguments, the login will proceed, but keep in mind 
 that the password will be visible in the terminal command history.`,
 		Example: `  # Login with slug and prompt for password
-  sup login johnny
+  login johnny
 
   # Login by providing both slug and password (not secure, avoid this)
-  sup login johnny myPass1`,
+  login johnny myPass1`,
 		RunE: login.Login,
 	}
 

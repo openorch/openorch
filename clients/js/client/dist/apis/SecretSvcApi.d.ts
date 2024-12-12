@@ -10,35 +10,35 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { SecretSvcReadSecretRequest, SecretSvcReadSecretResponse, SecretSvcWriteSecretRequest } from '../models/index';
-export interface ReadSecretRequest {
-    body?: SecretSvcReadSecretRequest;
+import type { SecretSvcReadSecretsRequest, SecretSvcReadSecretsResponse, SecretSvcWriteSecretsRequest } from '../models/index';
+export interface ReadSecretsRequest {
+    body?: SecretSvcReadSecretsRequest;
 }
-export interface WriteSecretRequest {
-    body: SecretSvcWriteSecretRequest;
+export interface WriteSecretsRequest {
+    body: SecretSvcWriteSecretsRequest;
 }
 /**
  *
  */
 export declare class SecretSvcApi extends runtime.BaseAPI {
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    readSecretRaw(requestParameters: ReadSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcReadSecretResponse>>;
+    readSecretsRaw(requestParameters: ReadSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcReadSecretsResponse>>;
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    readSecret(requestParameters?: ReadSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcReadSecretResponse>;
+    readSecrets(requestParameters?: ReadSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcReadSecretsResponse>;
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    writeSecretRaw(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    writeSecretsRaw(requestParameters: WriteSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    writeSecret(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    writeSecrets(requestParameters: WriteSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
 }

@@ -28,8 +28,8 @@ func Save(cmd *cobra.Command, args []string) error {
 	cf := sdk.NewApiClientFactory(url)
 
 	_, _, err = cf.Client(sdk.WithToken(token)).
-		SecretSvcAPI.WriteSecret(ctx).
-		Body(openapi.SecretSvcWriteSecretRequest{
+		SecretSvcAPI.WriteSecrets(ctx).
+		Body(openapi.SecretSvcWriteSecretsRequest{
 			Secrets: []openapi.SecretSvcSecret{secret},
 		}).
 		Execute()

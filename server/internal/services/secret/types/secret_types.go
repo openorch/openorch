@@ -17,24 +17,31 @@ type Secret struct {
 	Value   string   `json:"value"`   // Secret Value
 	Readers []string `json:"readers"` // Slugs of services/users who can read the secret
 	Writers []string `json:"writers"` // Slugs of services/users who can modify the secret
+
+	// Whether the secret is encrypted
+	// All secrets are encrypted before written to the DB.
+	// This really only exists for write requests to know if the secret is already encrypted.
+	// Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+	// File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+	Encrypted bool `json:"encrypted"`
 }
 
 func (s *Secret) GetId() string {
 	return s.Id
 }
 
-type ReadSecretRequest struct {
+type ReadSecretsRequest struct {
 	Key  string   `json:"key"`
 	Keys []string `json:"keys"`
 }
 
-type ReadSecretResponse struct {
+type ReadSecretsResponse struct {
 	Secrets []*Secret `json:"secrets"`
 }
 
-type WriteSecretRequest struct {
+type WriteSecretsRequest struct {
 	Secrets []*Secret `json:"secrets"`
 }
 
-type WriteSecretResponse struct {
+type WriteSecretsResponse struct {
 }

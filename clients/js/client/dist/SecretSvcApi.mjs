@@ -1,7 +1,7 @@
 import { a as BaseAPI, _ as __awaiter, J as JSONApiResponse, b as RequiredError } from './runtime2.mjs';
-import { SecretSvcReadSecretRequestToJSON } from './SecretSvcReadSecretRequest.mjs';
-import { SecretSvcReadSecretResponseFromJSON } from './SecretSvcReadSecretResponse.mjs';
-import { SecretSvcWriteSecretRequestToJSON } from './SecretSvcWriteSecretRequest.mjs';
+import { SecretSvcReadSecretsRequestToJSON } from './SecretSvcReadSecretsRequest.mjs';
+import { SecretSvcReadSecretsResponseFromJSON } from './SecretSvcReadSecretsResponse.mjs';
+import { SecretSvcWriteSecretsRequestToJSON } from './SecretSvcWriteSecretsRequest.mjs';
 import './SecretSvcSecret.mjs';
 
 /* tslint:disable */
@@ -22,10 +22,10 @@ import './SecretSvcSecret.mjs';
  */
 class SecretSvcApi extends BaseAPI {
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    readSecretRaw(requestParameters, initOverrides) {
+    readSecretsRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const queryParameters = {};
             const headerParameters = {};
@@ -34,33 +34,33 @@ class SecretSvcApi extends BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/secret-svc/secret`,
+                path: `/secret-svc/secrets`,
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: SecretSvcReadSecretRequestToJSON(requestParameters['body']),
+                body: SecretSvcReadSecretsRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new JSONApiResponse(response, (jsonValue) => SecretSvcReadSecretResponseFromJSON(jsonValue));
+            return new JSONApiResponse(response, (jsonValue) => SecretSvcReadSecretsResponseFromJSON(jsonValue));
         });
     }
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    readSecret() {
+    readSecrets() {
         return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
-            const response = yield this.readSecretRaw(requestParameters, initOverrides);
+            const response = yield this.readSecretsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    writeSecretRaw(requestParameters, initOverrides) {
+    writeSecretsRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             if (requestParameters['body'] == null) {
-                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling writeSecret().');
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling writeSecrets().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -69,22 +69,22 @@ class SecretSvcApi extends BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/secret-svc/secret`,
+                path: `/secret-svc/secrets`,
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
-                body: SecretSvcWriteSecretRequestToJSON(requestParameters['body']),
+                body: SecretSvcWriteSecretsRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new JSONApiResponse(response);
         });
     }
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    writeSecret(requestParameters, initOverrides) {
+    writeSecrets(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.writeSecretRaw(requestParameters, initOverrides);
+            const response = yield this.writeSecretsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

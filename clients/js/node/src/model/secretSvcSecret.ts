@@ -14,6 +14,10 @@ import { RequestFile } from './models';
 
 export class SecretSvcSecret {
     /**
+    * Whether the secret is encrypted All secrets are encrypted before written to the DB. This really only exists for write requests to know if the secret is already encrypted. Ie: while most `secret save [key] [value]` commands are probably not encrypted, File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+    */
+    'encrypted'?: boolean;
+    /**
     * Id of the secret
     */
     'id'?: string;
@@ -37,6 +41,11 @@ export class SecretSvcSecret {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "encrypted",
+            "baseName": "encrypted",
+            "type": "boolean"
+        },
         {
             "name": "id",
             "baseName": "id",

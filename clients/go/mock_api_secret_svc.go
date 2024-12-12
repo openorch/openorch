@@ -39,62 +39,62 @@ func (m *MockSecretSvcAPI) EXPECT() *MockSecretSvcAPIMockRecorder {
 	return m.recorder
 }
 
-// ReadSecret mocks base method.
-func (m *MockSecretSvcAPI) ReadSecret(ctx context.Context) ApiReadSecretRequest {
+// ReadSecrets mocks base method.
+func (m *MockSecretSvcAPI) ReadSecrets(ctx context.Context) ApiReadSecretsRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ReadSecret", ctx)
-	ret0, _ := ret[0].(ApiReadSecretRequest)
+	ret := m.ctrl.Call(m, "ReadSecrets", ctx)
+	ret0, _ := ret[0].(ApiReadSecretsRequest)
 	return ret0
 }
 
-// ReadSecret indicates an expected call of ReadSecret.
-func (mr *MockSecretSvcAPIMockRecorder) ReadSecret(ctx any) *gomock.Call {
+// ReadSecrets indicates an expected call of ReadSecrets.
+func (mr *MockSecretSvcAPIMockRecorder) ReadSecrets(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadSecret", reflect.TypeOf((*MockSecretSvcAPI)(nil).ReadSecret), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadSecrets", reflect.TypeOf((*MockSecretSvcAPI)(nil).ReadSecrets), ctx)
 }
 
-// ReadSecretExecute mocks base method.
-func (m *MockSecretSvcAPI) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error) {
+// ReadSecretsExecute mocks base method.
+func (m *MockSecretSvcAPI) ReadSecretsExecute(r ApiReadSecretsRequest) (*SecretSvcReadSecretsResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ReadSecretExecute", r)
-	ret0, _ := ret[0].(*SecretSvcReadSecretResponse)
+	ret := m.ctrl.Call(m, "ReadSecretsExecute", r)
+	ret0, _ := ret[0].(*SecretSvcReadSecretsResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// ReadSecretExecute indicates an expected call of ReadSecretExecute.
-func (mr *MockSecretSvcAPIMockRecorder) ReadSecretExecute(r any) *gomock.Call {
+// ReadSecretsExecute indicates an expected call of ReadSecretsExecute.
+func (mr *MockSecretSvcAPIMockRecorder) ReadSecretsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadSecretExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).ReadSecretExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadSecretsExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).ReadSecretsExecute), r)
 }
 
-// WriteSecret mocks base method.
-func (m *MockSecretSvcAPI) WriteSecret(ctx context.Context) ApiWriteSecretRequest {
+// WriteSecrets mocks base method.
+func (m *MockSecretSvcAPI) WriteSecrets(ctx context.Context) ApiWriteSecretsRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "WriteSecret", ctx)
-	ret0, _ := ret[0].(ApiWriteSecretRequest)
+	ret := m.ctrl.Call(m, "WriteSecrets", ctx)
+	ret0, _ := ret[0].(ApiWriteSecretsRequest)
 	return ret0
 }
 
-// WriteSecret indicates an expected call of WriteSecret.
-func (mr *MockSecretSvcAPIMockRecorder) WriteSecret(ctx any) *gomock.Call {
+// WriteSecrets indicates an expected call of WriteSecrets.
+func (mr *MockSecretSvcAPIMockRecorder) WriteSecrets(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteSecret", reflect.TypeOf((*MockSecretSvcAPI)(nil).WriteSecret), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteSecrets", reflect.TypeOf((*MockSecretSvcAPI)(nil).WriteSecrets), ctx)
 }
 
-// WriteSecretExecute mocks base method.
-func (m *MockSecretSvcAPI) WriteSecretExecute(r ApiWriteSecretRequest) (map[string]any, *http.Response, error) {
+// WriteSecretsExecute mocks base method.
+func (m *MockSecretSvcAPI) WriteSecretsExecute(r ApiWriteSecretsRequest) (map[string]any, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "WriteSecretExecute", r)
+	ret := m.ctrl.Call(m, "WriteSecretsExecute", r)
 	ret0, _ := ret[0].(map[string]any)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// WriteSecretExecute indicates an expected call of WriteSecretExecute.
-func (mr *MockSecretSvcAPIMockRecorder) WriteSecretExecute(r any) *gomock.Call {
+// WriteSecretsExecute indicates an expected call of WriteSecretsExecute.
+func (mr *MockSecretSvcAPIMockRecorder) WriteSecretsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteSecretExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).WriteSecretExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WriteSecretsExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).WriteSecretsExecute), r)
 }

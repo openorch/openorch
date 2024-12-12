@@ -23,84 +23,84 @@ import (
 type SecretSvcAPI interface {
 
 	/*
-	ReadSecret Read Secret
+	ReadSecrets Read Secrets
 
-	Fetch a secret by key, if authorized
+	Read secrets by key(s) if authorized.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiReadSecretRequest
+	@return ApiReadSecretsRequest
 	*/
-	ReadSecret(ctx context.Context) ApiReadSecretRequest
+	ReadSecrets(ctx context.Context) ApiReadSecretsRequest
 
-	// ReadSecretExecute executes the request
-	//  @return SecretSvcReadSecretResponse
-	ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error)
+	// ReadSecretsExecute executes the request
+	//  @return SecretSvcReadSecretsResponse
+	ReadSecretsExecute(r ApiReadSecretsRequest) (*SecretSvcReadSecretsResponse, *http.Response, error)
 
 	/*
-	WriteSecret Write Secret
+	WriteSecrets Write Secrets
 
-	Write a secret if authorized
+	Write secrets if authorized to do so
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiWriteSecretRequest
+	@return ApiWriteSecretsRequest
 	*/
-	WriteSecret(ctx context.Context) ApiWriteSecretRequest
+	WriteSecrets(ctx context.Context) ApiWriteSecretsRequest
 
-	// WriteSecretExecute executes the request
+	// WriteSecretsExecute executes the request
 	//  @return map[string]interface{}
-	WriteSecretExecute(r ApiWriteSecretRequest) (map[string]interface{}, *http.Response, error)
+	WriteSecretsExecute(r ApiWriteSecretsRequest) (map[string]interface{}, *http.Response, error)
 }
 
 // SecretSvcAPIService SecretSvcAPI service
 type SecretSvcAPIService service
 
-type ApiReadSecretRequest struct {
+type ApiReadSecretsRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	body *SecretSvcReadSecretRequest
+	body *SecretSvcReadSecretsRequest
 }
 
 // Read Secret Request
-func (r ApiReadSecretRequest) Body(body SecretSvcReadSecretRequest) ApiReadSecretRequest {
+func (r ApiReadSecretsRequest) Body(body SecretSvcReadSecretsRequest) ApiReadSecretsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiReadSecretRequest) Execute() (*SecretSvcReadSecretResponse, *http.Response, error) {
-	return r.ApiService.ReadSecretExecute(r)
+func (r ApiReadSecretsRequest) Execute() (*SecretSvcReadSecretsResponse, *http.Response, error) {
+	return r.ApiService.ReadSecretsExecute(r)
 }
 
 /*
-ReadSecret Read Secret
+ReadSecrets Read Secrets
 
-Fetch a secret by key, if authorized
+Read secrets by key(s) if authorized.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiReadSecretRequest
+ @return ApiReadSecretsRequest
 */
-func (a *SecretSvcAPIService) ReadSecret(ctx context.Context) ApiReadSecretRequest {
-	return ApiReadSecretRequest{
+func (a *SecretSvcAPIService) ReadSecrets(ctx context.Context) ApiReadSecretsRequest {
+	return ApiReadSecretsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SecretSvcReadSecretResponse
-func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*SecretSvcReadSecretResponse, *http.Response, error) {
+//  @return SecretSvcReadSecretsResponse
+func (a *SecretSvcAPIService) ReadSecretsExecute(r ApiReadSecretsRequest) (*SecretSvcReadSecretsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SecretSvcReadSecretResponse
+		localVarReturnValue  *SecretSvcReadSecretsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.ReadSecret")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.ReadSecrets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/secret-svc/secret"
+	localVarPath := localBasePath + "/secret-svc/secrets"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -197,32 +197,32 @@ func (a *SecretSvcAPIService) ReadSecretExecute(r ApiReadSecretRequest) (*Secret
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiWriteSecretRequest struct {
+type ApiWriteSecretsRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	body *SecretSvcWriteSecretRequest
+	body *SecretSvcWriteSecretsRequest
 }
 
 // Write Secret Request
-func (r ApiWriteSecretRequest) Body(body SecretSvcWriteSecretRequest) ApiWriteSecretRequest {
+func (r ApiWriteSecretsRequest) Body(body SecretSvcWriteSecretsRequest) ApiWriteSecretsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiWriteSecretRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.WriteSecretExecute(r)
+func (r ApiWriteSecretsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.WriteSecretsExecute(r)
 }
 
 /*
-WriteSecret Write Secret
+WriteSecrets Write Secrets
 
-Write a secret if authorized
+Write secrets if authorized to do so
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiWriteSecretRequest
+ @return ApiWriteSecretsRequest
 */
-func (a *SecretSvcAPIService) WriteSecret(ctx context.Context) ApiWriteSecretRequest {
-	return ApiWriteSecretRequest{
+func (a *SecretSvcAPIService) WriteSecrets(ctx context.Context) ApiWriteSecretsRequest {
+	return ApiWriteSecretsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -230,7 +230,7 @@ func (a *SecretSvcAPIService) WriteSecret(ctx context.Context) ApiWriteSecretReq
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *SecretSvcAPIService) WriteSecretExecute(r ApiWriteSecretRequest) (map[string]interface{}, *http.Response, error) {
+func (a *SecretSvcAPIService) WriteSecretsExecute(r ApiWriteSecretsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -238,12 +238,12 @@ func (a *SecretSvcAPIService) WriteSecretExecute(r ApiWriteSecretRequest) (map[s
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.WriteSecret")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.WriteSecrets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/secret-svc/secret"
+	localVarPath := localBasePath + "/secret-svc/secrets"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

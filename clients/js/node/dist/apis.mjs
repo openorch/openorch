@@ -130,10 +130,10 @@ import './registrySvcRepositorySpec.mjs';
 import './registrySvcResourceUsage.mjs';
 import './registrySvcSaveDefinitionRequest.mjs';
 import './registrySvcUsage.mjs';
-import './secretSvcReadSecretRequest.mjs';
-import './secretSvcReadSecretResponse.mjs';
+import './secretSvcReadSecretsRequest.mjs';
+import './secretSvcReadSecretsResponse.mjs';
 import './secretSvcSecret.mjs';
-import './secretSvcWriteSecretRequest.mjs';
+import './secretSvcWriteSecretsRequest.mjs';
 import './sourceSvcCheckoutRepoRequest.mjs';
 import './sourceSvcCheckoutRepoResponse.mjs';
 import './sourceSvcErrorResponse.mjs';
@@ -58530,13 +58530,13 @@ class SecretSvcApi {
         this.interceptors.push(interceptor);
     }
     /**
-     * Fetch a secret by key, if authorized
-     * @summary Read Secret
+     * Read secrets by key(s) if authorized.
+     * @summary Read Secrets
      * @param body Read Secret Request
      */
-    readSecret(body_1) {
+    readSecrets(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/secret-svc/secret';
+            const localVarPath = this.basePath + '/secret-svc/secrets';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -58556,7 +58556,7 @@ class SecretSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "SecretSvcReadSecretRequest")
+                body: ObjectSerializer.serialize(body, "SecretSvcReadSecretsRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -58580,7 +58580,7 @@ class SecretSvcApi {
                         }
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "SecretSvcReadSecretResponse");
+                                body = ObjectSerializer.deserialize(body, "SecretSvcReadSecretsResponse");
                                 resolve({ response: response, body: body });
                             }
                             else {
@@ -58593,13 +58593,13 @@ class SecretSvcApi {
         });
     }
     /**
-     * Write a secret if authorized
-     * @summary Write Secret
+     * Write secrets if authorized to do so
+     * @summary Write Secrets
      * @param body Write Secret Request
      */
-    writeSecret(body_1) {
+    writeSecrets(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/secret-svc/secret';
+            const localVarPath = this.basePath + '/secret-svc/secrets';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -58613,7 +58613,7 @@ class SecretSvcApi {
             let localVarFormParams = {};
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling writeSecret.');
+                throw new Error('Required parameter body was null or undefined when calling writeSecrets.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -58623,7 +58623,7 @@ class SecretSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "SecretSvcWriteSecretRequest")
+                body: ObjectSerializer.serialize(body, "SecretSvcWriteSecretsRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {

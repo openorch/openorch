@@ -17,6 +17,11 @@ export class SecretSvcSecret {
 SecretSvcSecret.discriminator = undefined;
 SecretSvcSecret.attributeTypeMap = [
     {
+        "name": "encrypted",
+        "baseName": "encrypted",
+        "type": "boolean"
+    },
+    {
         "name": "id",
         "baseName": "id",
         "type": "string"

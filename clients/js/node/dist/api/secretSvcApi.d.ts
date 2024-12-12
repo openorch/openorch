@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 import http from 'http';
-import { SecretSvcReadSecretRequest } from '../model/secretSvcReadSecretRequest';
-import { SecretSvcReadSecretResponse } from '../model/secretSvcReadSecretResponse';
-import { SecretSvcWriteSecretRequest } from '../model/secretSvcWriteSecretRequest';
+import { SecretSvcReadSecretsRequest } from '../model/secretSvcReadSecretsRequest';
+import { SecretSvcReadSecretsResponse } from '../model/secretSvcReadSecretsResponse';
+import { SecretSvcWriteSecretsRequest } from '../model/secretSvcWriteSecretsRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum SecretSvcApiApiKeys {
@@ -37,24 +37,24 @@ export declare class SecretSvcApi {
     setApiKey(key: SecretSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
-     * Fetch a secret by key, if authorized
-     * @summary Read Secret
+     * Read secrets by key(s) if authorized.
+     * @summary Read Secrets
      * @param body Read Secret Request
      */
-    readSecret(body?: SecretSvcReadSecretRequest, options?: {
+    readSecrets(body?: SecretSvcReadSecretsRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: SecretSvcReadSecretResponse;
+        body: SecretSvcReadSecretsResponse;
     }>;
     /**
-     * Write a secret if authorized
-     * @summary Write Secret
+     * Write secrets if authorized to do so
+     * @summary Write Secrets
      * @param body Write Secret Request
      */
-    writeSecret(body: SecretSvcWriteSecretRequest, options?: {
+    writeSecrets(body: SecretSvcWriteSecretsRequest, options?: {
         headers: {
             [name: string]: string;
         };

@@ -15,25 +15,25 @@
 
 import * as runtime from '../runtime';
 import type {
-  SecretSvcReadSecretRequest,
-  SecretSvcReadSecretResponse,
-  SecretSvcWriteSecretRequest,
+  SecretSvcReadSecretsRequest,
+  SecretSvcReadSecretsResponse,
+  SecretSvcWriteSecretsRequest,
 } from '../models/index';
 import {
-    SecretSvcReadSecretRequestFromJSON,
-    SecretSvcReadSecretRequestToJSON,
-    SecretSvcReadSecretResponseFromJSON,
-    SecretSvcReadSecretResponseToJSON,
-    SecretSvcWriteSecretRequestFromJSON,
-    SecretSvcWriteSecretRequestToJSON,
+    SecretSvcReadSecretsRequestFromJSON,
+    SecretSvcReadSecretsRequestToJSON,
+    SecretSvcReadSecretsResponseFromJSON,
+    SecretSvcReadSecretsResponseToJSON,
+    SecretSvcWriteSecretsRequestFromJSON,
+    SecretSvcWriteSecretsRequestToJSON,
 } from '../models/index';
 
-export interface ReadSecretRequest {
-    body?: SecretSvcReadSecretRequest;
+export interface ReadSecretsRequest {
+    body?: SecretSvcReadSecretsRequest;
 }
 
-export interface WriteSecretRequest {
-    body: SecretSvcWriteSecretRequest;
+export interface WriteSecretsRequest {
+    body: SecretSvcWriteSecretsRequest;
 }
 
 /**
@@ -42,10 +42,10 @@ export interface WriteSecretRequest {
 export class SecretSvcApi extends runtime.BaseAPI {
 
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    async readSecretRaw(requestParameters: ReadSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcReadSecretResponse>> {
+    async readSecretsRaw(requestParameters: ReadSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcReadSecretsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -57,34 +57,34 @@ export class SecretSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/secret-svc/secret`,
+            path: `/secret-svc/secrets`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: SecretSvcReadSecretRequestToJSON(requestParameters['body']),
+            body: SecretSvcReadSecretsRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcReadSecretResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcReadSecretsResponseFromJSON(jsonValue));
     }
 
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Read secrets by key(s) if authorized.
+     * Read Secrets
      */
-    async readSecret(requestParameters: ReadSecretRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcReadSecretResponse> {
-        const response = await this.readSecretRaw(requestParameters, initOverrides);
+    async readSecrets(requestParameters: ReadSecretsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcReadSecretsResponse> {
+        const response = await this.readSecretsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    async writeSecretRaw(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+    async writeSecretsRaw(requestParameters: WriteSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['body'] == null) {
             throw new runtime.RequiredError(
                 'body',
-                'Required parameter "body" was null or undefined when calling writeSecret().'
+                'Required parameter "body" was null or undefined when calling writeSecrets().'
             );
         }
 
@@ -99,22 +99,22 @@ export class SecretSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/secret-svc/secret`,
+            path: `/secret-svc/secrets`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: SecretSvcWriteSecretRequestToJSON(requestParameters['body']),
+            body: SecretSvcWriteSecretsRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Write secrets if authorized to do so
+     * Write Secrets
      */
-    async writeSecret(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
-        const response = await this.writeSecretRaw(requestParameters, initOverrides);
+    async writeSecrets(requestParameters: WriteSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.writeSecretsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

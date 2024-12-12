@@ -26,5 +26,6 @@ type Options struct {
 	// shard of the db.
 	DbPrefix string
 
-	SourceControlToken string
+	SourceControlToken  string
+	SecretEncryptionKey string
 }
