@@ -1657,6 +1657,64 @@
                 }
             }
         },
+        "/email-svc/send": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Send an email with attachments.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Email Svc"
+                ],
+                "summary": "Sends an Email",
+                "operationId": "sendEmail",
+                "parameters": [
+                    {
+                        "description": "Send Email Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/email_svc.SendEmailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully sent the email",
+                        "schema": {
+                            "$ref": "#/definitions/email_svc.SendEmailResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/email_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/email_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/email_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/firehose-svc/event": {
             "post": {
                 "security": [
@@ -5392,6 +5450,109 @@
                 }
             }
         },
+        "email_svc.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "email_svc.File": {
+            "type": "object",
+            "required": [
+                "content",
+                "contentType",
+                "filename"
+            ],
+            "properties": {
+                "content": {
+                    "description": "Base64-encoded content of the file",
+                    "type": "string"
+                },
+                "contentType": {
+                    "description": "MIME type of the file (e.g., \"application/pdf\")",
+                    "type": "string"
+                },
+                "filename": {
+                    "description": "Name of the attached file",
+                    "type": "string"
+                }
+            }
+        },
+        "email_svc.SendEmailRequest": {
+            "type": "object",
+            "required": [
+                "body",
+                "contentType",
+                "createdAt",
+                "subject",
+                "to"
+            ],
+            "properties": {
+                "attachments": {
+                    "description": "List of file attachments (optional)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/email_svc.File"
+                    }
+                },
+                "bcc": {
+                    "description": "List of BCC recipient email addresses (optional)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "body": {
+                    "description": "Email body content (plain text or HTML)",
+                    "type": "string"
+                },
+                "cc": {
+                    "description": "List of CC recipient email addresses (optional)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contentType": {
+                    "description": "Content type: \"text/plain\" or \"text/html\"",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "Timestamp of email creation",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Unique identifier",
+                    "type": "string"
+                },
+                "subject": {
+                    "description": "Email subject line",
+                    "type": "string"
+                },
+                "to": {
+                    "description": "List of recipient email addresses",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "email_svc.SendEmailResponse": {
+            "type": "object",
+            "properties": {
+                "emailId": {
+                    "description": "Unique identifier for the sent email",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status of the email send operation (\"sent\", \"queued\", etc.)",
+                    "type": "string"
+                }
+            }
+        },
         "firehose_svc.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -6515,6 +6676,12 @@
             "properties": {
                 "key": {
                     "type": "string"
+                },
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },

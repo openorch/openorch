@@ -13,8 +13,8 @@ import (
 )
 
 var PermissionSendEmail = usertypes.Permission{
-	Id:   "email-svc:repo:checkout",
-	Name: "Email Svc - Repo Checkout",
+	Id:   "email-svc:email:send",
+	Name: "Email Svc - Email Send",
 }
 
 var AdminPermissions = []usertypes.Permission{

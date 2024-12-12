@@ -18,6 +18,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
+	email "github.com/openorch/openorch/server/internal/services/email/types"
 )
 
 type EmailService struct {
@@ -27,6 +28,8 @@ type EmailService struct {
 	token string
 
 	credentialStore datastore.DataStore
+	emailStore      datastore.DataStore
+	attachentStore  datastore.DataStore
 }
 
 func NewEmailService(
@@ -41,11 +44,27 @@ func NewEmailService(
 	if err != nil {
 		return nil, err
 	}
+	emailStore, err := datastoreFactory(
+		"emailSvcEmails",
+		&email.Email{},
+	)
+	if err != nil {
+		return nil, err
+	}
+	attachmentStore, err := datastoreFactory(
+		"emailSvcAttachments",
+		&email.Attachment{},
+	)
+	if err != nil {
+		return nil, err
+	}
 
 	service := &EmailService{
 		clientFactory:   clientFactory,
 		lock:            lock,
 		credentialStore: credentialStore,
+		emailStore:      emailStore,
+		attachentStore:  attachmentStore,
 	}
 
 	return service, nil
@@ -53,6 +72,7 @@ func NewEmailService(
 
 func (fs *EmailService) Start() error {
 	ctx := context.Background()
+
 	fs.lock.Acquire(ctx, "email-svc-start")
 	defer fs.lock.Release(ctx, "email-svc-start")
 
