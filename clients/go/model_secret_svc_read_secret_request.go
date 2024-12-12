@@ -21,6 +21,7 @@ var _ MappedNullable = &SecretSvcReadSecretRequest{}
 // SecretSvcReadSecretRequest struct for SecretSvcReadSecretRequest
 type SecretSvcReadSecretRequest struct {
 	Key *string `json:"key,omitempty"`
+	Keys []string `json:"keys,omitempty"`
 }
 
 // NewSecretSvcReadSecretRequest instantiates a new SecretSvcReadSecretRequest object
@@ -72,6 +73,38 @@ func (o *SecretSvcReadSecretRequest) SetKey(v string) {
 	o.Key = &v
 }
 
+// GetKeys returns the Keys field value if set, zero value otherwise.
+func (o *SecretSvcReadSecretRequest) GetKeys() []string {
+	if o == nil || IsNil(o.Keys) {
+		var ret []string
+		return ret
+	}
+	return o.Keys
+}
+
+// GetKeysOk returns a tuple with the Keys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcReadSecretRequest) GetKeysOk() ([]string, bool) {
+	if o == nil || IsNil(o.Keys) {
+		return nil, false
+	}
+	return o.Keys, true
+}
+
+// HasKeys returns a boolean if a field has been set.
+func (o *SecretSvcReadSecretRequest) HasKeys() bool {
+	if o != nil && !IsNil(o.Keys) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeys gets a reference to the given []string and assigns it to the Keys field.
+func (o *SecretSvcReadSecretRequest) SetKeys(v []string) {
+	o.Keys = v
+}
+
 func (o SecretSvcReadSecretRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +117,9 @@ func (o SecretSvcReadSecretRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
+	}
+	if !IsNil(o.Keys) {
+		toSerialize["keys"] = o.Keys
 	}
 	return toSerialize, nil
 }

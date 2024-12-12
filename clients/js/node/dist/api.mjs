@@ -1,4 +1,4 @@
-export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SecretSvcApi, SecretSvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
+export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, EmailSvcApi, EmailSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SecretSvcApi, SecretSvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
 export { ApiKeyAuth, HttpBasicAuth, HttpBearerAuth, OAuth, ObjectSerializer, VoidAuth } from './models.mjs';
 export { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest.mjs';
 export { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest.mjs';
@@ -62,6 +62,10 @@ export { DynamicSvcQueryResponse } from './dynamicSvcQueryResponse.mjs';
 export { DynamicSvcUpdateObjectRequest } from './dynamicSvcUpdateObjectRequest.mjs';
 export { DynamicSvcUpsertObjectRequest } from './dynamicSvcUpsertObjectRequest.mjs';
 export { DynamicSvcUpsertObjectResponse } from './dynamicSvcUpsertObjectResponse.mjs';
+export { EmailSvcErrorResponse } from './emailSvcErrorResponse.mjs';
+export { EmailSvcFile } from './emailSvcFile.mjs';
+export { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest.mjs';
+export { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse.mjs';
 export { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse.mjs';
 export { FirehoseSvcEvent } from './firehoseSvcEvent.mjs';
 export { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest.mjs';

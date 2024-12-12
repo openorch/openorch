@@ -14,7 +14,7 @@ import (
 
 var PermissionSourceRepoCheckout = usertypes.Permission{
 	Id:   "source-svc:repo:checkout",
-	Name: "Souce Svc - Repo Checkout",
+	Name: "Source Svc - Repo Checkout",
 }
 
 var SourceAdminPermissions = []usertypes.Permission{

@@ -265,6 +265,7 @@ func ContainsSubstring(fields []string, value any) Filter {
 	}
 }
 
+// See `OpIsInList` for more information.
 func IsInList(fields []string, values ...any) Filter {
 	return Filter{
 		Fields:     fields,

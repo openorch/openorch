@@ -88,6 +88,9 @@ func (cs *SecretService) getSecrets(
 	if req.Key != "" {
 		filters = append(filters, datastore.Equals([]string{"key"}, req.Key))
 	}
+	if req.Keys != nil {
+		filters = append(filters, datastore.IsInList([]string{"key"}, req.Keys))
+	}
 
 	secretIs, err := cs.secretStore.Query(filters...).Find()
 	if err != nil {

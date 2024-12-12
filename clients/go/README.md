@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *DynamicSvcAPI* | [**Query**](docs/DynamicSvcAPI.md#query) | **Post** /dynamic-svc/objects | Query Objects
 *DynamicSvcAPI* | [**UpdateObjects**](docs/DynamicSvcAPI.md#updateobjects) | **Post** /dynamic-svc/objects/update | Update Objects
 *DynamicSvcAPI* | [**UpsertObject**](docs/DynamicSvcAPI.md#upsertobject) | **Put** /dynamic-svc/object/{objectId} | Upsert a Generic Object
+*EmailSvcAPI* | [**SendEmail**](docs/EmailSvcAPI.md#sendemail) | **Post** /email-svc/email | Send an Email
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
 *FirehoseSvcAPI* | [**SubscribeToEvents**](docs/FirehoseSvcAPI.md#subscribetoevents) | **Get** /firehose-svc/events/subscribe | Subscribe to the Event Stream
 *ModelSvcAPI* | [**GetDefaultModelStatus**](docs/ModelSvcAPI.md#getdefaultmodelstatus) | **Get** /model-svc/default-model/status | Get Default Model Status
@@ -223,6 +224,10 @@ Class | Method | HTTP request | Description
  - [DynamicSvcUpdateObjectRequest](docs/DynamicSvcUpdateObjectRequest.md)
  - [DynamicSvcUpsertObjectRequest](docs/DynamicSvcUpsertObjectRequest.md)
  - [DynamicSvcUpsertObjectResponse](docs/DynamicSvcUpsertObjectResponse.md)
+ - [EmailSvcErrorResponse](docs/EmailSvcErrorResponse.md)
+ - [EmailSvcFile](docs/EmailSvcFile.md)
+ - [EmailSvcSendEmailRequest](docs/EmailSvcSendEmailRequest.md)
+ - [EmailSvcSendEmailResponse](docs/EmailSvcSendEmailResponse.md)
  - [FirehoseSvcErrorResponse](docs/FirehoseSvcErrorResponse.md)
  - [FirehoseSvcEvent](docs/FirehoseSvcEvent.md)
  - [FirehoseSvcEventPublishRequest](docs/FirehoseSvcEventPublishRequest.md)

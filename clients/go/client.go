@@ -62,6 +62,8 @@ type APIClient struct {
 
 	DynamicSvcAPI DynamicSvcAPI
 
+	EmailSvcAPI EmailSvcAPI
+
 	FirehoseSvcAPI FirehoseSvcAPI
 
 	ModelSvcAPI ModelSvcAPI
@@ -101,6 +103,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DockerSvcAPI = (*DockerSvcAPIService)(&c.common)
 	c.DownloadSvcAPI = (*DownloadSvcAPIService)(&c.common)
 	c.DynamicSvcAPI = (*DynamicSvcAPIService)(&c.common)
+	c.EmailSvcAPI = (*EmailSvcAPIService)(&c.common)
 	c.FirehoseSvcAPI = (*FirehoseSvcAPIService)(&c.common)
 	c.ModelSvcAPI = (*ModelSvcAPIService)(&c.common)
 	c.PolicySvcAPI = (*PolicySvcAPIService)(&c.common)

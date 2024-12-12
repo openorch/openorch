@@ -62,6 +62,10 @@ var dynamicSvcQueryResponse = require('./dynamicSvcQueryResponse.js');
 var dynamicSvcUpdateObjectRequest = require('./dynamicSvcUpdateObjectRequest.js');
 var dynamicSvcUpsertObjectRequest = require('./dynamicSvcUpsertObjectRequest.js');
 var dynamicSvcUpsertObjectResponse = require('./dynamicSvcUpsertObjectResponse.js');
+var emailSvcErrorResponse = require('./emailSvcErrorResponse.js');
+var emailSvcFile = require('./emailSvcFile.js');
+var emailSvcSendEmailRequest = require('./emailSvcSendEmailRequest.js');
+var emailSvcSendEmailResponse = require('./emailSvcSendEmailResponse.js');
 var firehoseSvcErrorResponse = require('./firehoseSvcErrorResponse.js');
 var firehoseSvcEvent = require('./firehoseSvcEvent.js');
 var firehoseSvcEventPublishRequest = require('./firehoseSvcEventPublishRequest.js');
@@ -230,6 +234,10 @@ let typeMap = {
     "DynamicSvcUpdateObjectRequest": dynamicSvcUpdateObjectRequest.DynamicSvcUpdateObjectRequest,
     "DynamicSvcUpsertObjectRequest": dynamicSvcUpsertObjectRequest.DynamicSvcUpsertObjectRequest,
     "DynamicSvcUpsertObjectResponse": dynamicSvcUpsertObjectResponse.DynamicSvcUpsertObjectResponse,
+    "EmailSvcErrorResponse": emailSvcErrorResponse.EmailSvcErrorResponse,
+    "EmailSvcFile": emailSvcFile.EmailSvcFile,
+    "EmailSvcSendEmailRequest": emailSvcSendEmailRequest.EmailSvcSendEmailRequest,
+    "EmailSvcSendEmailResponse": emailSvcSendEmailResponse.EmailSvcSendEmailResponse,
     "FirehoseSvcErrorResponse": firehoseSvcErrorResponse.FirehoseSvcErrorResponse,
     "FirehoseSvcEvent": firehoseSvcEvent.FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": firehoseSvcEventPublishRequest.FirehoseSvcEventPublishRequest,
@@ -609,6 +617,10 @@ exports.DynamicSvcQueryResponse = dynamicSvcQueryResponse.DynamicSvcQueryRespons
 exports.DynamicSvcUpdateObjectRequest = dynamicSvcUpdateObjectRequest.DynamicSvcUpdateObjectRequest;
 exports.DynamicSvcUpsertObjectRequest = dynamicSvcUpsertObjectRequest.DynamicSvcUpsertObjectRequest;
 exports.DynamicSvcUpsertObjectResponse = dynamicSvcUpsertObjectResponse.DynamicSvcUpsertObjectResponse;
+exports.EmailSvcErrorResponse = emailSvcErrorResponse.EmailSvcErrorResponse;
+exports.EmailSvcFile = emailSvcFile.EmailSvcFile;
+exports.EmailSvcSendEmailRequest = emailSvcSendEmailRequest.EmailSvcSendEmailRequest;
+exports.EmailSvcSendEmailResponse = emailSvcSendEmailResponse.EmailSvcSendEmailResponse;
 exports.FirehoseSvcErrorResponse = firehoseSvcErrorResponse.FirehoseSvcErrorResponse;
 exports.FirehoseSvcEvent = firehoseSvcEvent.FirehoseSvcEvent;
 exports.FirehoseSvcEventPublishRequest = firehoseSvcEventPublishRequest.FirehoseSvcEventPublishRequest;
