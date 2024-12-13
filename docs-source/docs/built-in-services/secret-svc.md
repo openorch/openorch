@@ -19,10 +19,10 @@ The Secret Svc, like most things in OpenOrch, is designed to be simple to reason
 
 ```go
 type Secret struct {
-	Key            string   // Identifier for the secret
-	Value          string   // Secret value
-	Readers        []string // Slugs of built-in-services/users who can read the secret
-	Writers        []string // Slugs of built-in-services/users who can modify the secret
+	Key            string   // Secret key eg. "MY_API_KEY"
+	Value          string   // Secret value eg. "nNl4X9\+@95Z"
+	Readers        []string // Slugs of services and users who can read the secret
+	Writers        []string // Slugs of services and users who can modify the secret
 }
 ```
 
