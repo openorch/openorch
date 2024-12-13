@@ -12,17 +12,23 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-var PermissionSecretRead = usertypes.Permission{
-	Id:   "secret-svc:secret:read",
-	Name: "Secret Svc - Secret Read",
+var PermissionSecretList = usertypes.Permission{
+	Id:   "secret-svc:secret:list",
+	Name: "Secret Svc - Secret List",
 }
 
-var PermissionSecretWrite = usertypes.Permission{
-	Id:   "secret-svc:secret:write",
-	Name: "Secret Svc - Secret Write",
+var PermissionSecretSave = usertypes.Permission{
+	Id:   "secret-svc:secret:save",
+	Name: "Secret Svc - Secret Save",
+}
+
+var PermissionSecretRemove = usertypes.Permission{
+	Id:   "secret-svc:secret:remove",
+	Name: "Secret Svc - Secret Rmove",
 }
 
 var AdminPermissions = []usertypes.Permission{
-	PermissionSecretRead,
-	PermissionSecretWrite,
+	PermissionSecretList,
+	PermissionSecretSave,
+	PermissionSecretRemove,
 }

@@ -10,35 +10,74 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { SecretSvcReadSecretRequest, SecretSvcReadSecretResponse, SecretSvcWriteSecretRequest } from '../models/index';
-export interface ReadSecretRequest {
-    body?: SecretSvcReadSecretRequest;
+import type { SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest } from '../models/index';
+export interface DecryptValueRequest {
+    body: SecretSvcDecryptValueRequest;
 }
-export interface WriteSecretRequest {
-    body: SecretSvcWriteSecretRequest;
+export interface EncryptValueRequest {
+    body: SecretSvcEncryptValueRequest;
+}
+export interface ListSecretsRequest {
+    body?: SecretSvcListSecretsRequest;
+}
+export interface RemoveSecretsRequest {
+    body: SecretSvcRemoveSecretsRequest;
+}
+export interface SaveSecretsRequest {
+    body: SecretSvcSaveSecretsRequest;
 }
 /**
  *
  */
 export declare class SecretSvcApi extends runtime.BaseAPI {
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
      */
-    readSecretRaw(requestParameters: ReadSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcReadSecretResponse>>;
+    decryptValueRaw(requestParameters: DecryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcDecryptValueResponse>>;
     /**
-     * Fetch a secret by key, if authorized
-     * Read Secret
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
      */
-    readSecret(requestParameters?: ReadSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcReadSecretResponse>;
+    decryptValue(requestParameters: DecryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcDecryptValueResponse>;
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
      */
-    writeSecretRaw(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    encryptValueRaw(requestParameters: EncryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcEncryptValueResponse>>;
     /**
-     * Write a secret if authorized
-     * Write Secret
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
      */
-    writeSecret(requestParameters: WriteSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    encryptValue(requestParameters: EncryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcEncryptValueResponse>;
+    /**
+     * List secrets by key(s) if authorized.
+     * List Secrets
+     */
+    listSecretsRaw(requestParameters: ListSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcListSecretsResponse>>;
+    /**
+     * List secrets by key(s) if authorized.
+     * List Secrets
+     */
+    listSecrets(requestParameters?: ListSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcListSecretsResponse>;
+    /**
+     * Remove secrets if authorized to do so
+     * Remove Secrets
+     */
+    removeSecretsRaw(requestParameters: RemoveSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Remove secrets if authorized to do so
+     * Remove Secrets
+     */
+    removeSecrets(requestParameters: RemoveSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    /**
+     * Save secrets if authorized to do so
+     * Save Secrets
+     */
+    saveSecretsRaw(requestParameters: SaveSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Save secrets if authorized to do so
+     * Save Secrets
+     */
+    saveSecrets(requestParameters: SaveSecretsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
 }

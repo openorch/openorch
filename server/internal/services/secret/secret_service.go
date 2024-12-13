@@ -36,6 +36,8 @@ type SecretService struct {
 	credentialStore  datastore.DataStore
 	secretStore      datastore.DataStore
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
+
+	encryptionKey string
 }
 
 func NewSecretService(
@@ -43,12 +45,15 @@ func NewSecretService(
 	authorizer sdk.Authorizer,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+	secretEncryptionKey string,
 ) (*SecretService, error) {
+
 	cs := &SecretService{
 		lock:             lock,
 		datastoreFactory: datastoreFactory,
 		clientFactory:    clientFactory,
 		authorizer:       authorizer,
+		encryptionKey:    secretEncryptionKey,
 	}
 
 	credentialStore, err := cs.datastoreFactory(
