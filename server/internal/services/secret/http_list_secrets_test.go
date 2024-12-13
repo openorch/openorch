@@ -114,7 +114,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ReadSecrets(ctx).
+			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
 					Key: openapi.PtrString("nonexistent"),
 				}).
@@ -134,7 +134,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ReadSecrets(ctx).
+			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
 					Key: openapi.PtrString("nonexistent"),
 				}).
@@ -143,7 +143,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
 
-			_, _, err = userClient.SecretSvcAPI.WriteSecrets(ctx).
+			_, _, err = userClient.SecretSvcAPI.SaveSecrets(ctx).
 				Body(openapi.SecretSvcSaveSecretsRequest{
 					Secrets: []openapi.SecretSvcSecret{
 						{
@@ -155,7 +155,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			readRsp, _, err = userClient.SecretSvcAPI.ReadSecrets(ctx).
+			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
 					Key: openapi.PtrString("nonexistent"),
 				}).
@@ -165,7 +165,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			userSlug = "test-user-2"
 
-			readRsp, _, err = userClient.SecretSvcAPI.ReadSecrets(ctx).
+			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
 					Key: openapi.PtrString("nonexistent"),
 				}).
@@ -189,7 +189,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 			}).Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			_, _, err = userClient.SecretSvcAPI.WriteSecrets(ctx).
+			_, _, err = userClient.SecretSvcAPI.SaveSecrets(ctx).
 				Body(openapi.SecretSvcSaveSecretsRequest{
 					Secrets: []openapi.SecretSvcSecret{
 						{
@@ -201,7 +201,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			readRsp, _, err := userClient.SecretSvcAPI.ReadSecrets(ctx).
+			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
 					Key: openapi.PtrString("enc1"),
 				}).
