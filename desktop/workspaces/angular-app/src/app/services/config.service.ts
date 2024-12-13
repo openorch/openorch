@@ -26,9 +26,10 @@ export class ConfigService {
 
 	lastConfig!: Config;
 
-	onConfigUpdateSubject = new ReplaySubject<Config>(1);
+	configSubject = new ReplaySubject<Config>(1);
+
 	/** Config emitted whenever it's loaded (on startup) or saved */
-	onConfigUpdate$ = this.onConfigUpdateSubject.asObservable();
+	config$ = this.configSubject.asObservable();
 
 	constructor(
 		private server: ServerService,
@@ -52,7 +53,7 @@ export class ConfigService {
 			switch (event.name) {
 				case 'configUpdate': {
 					const rsp = await this.configGet();
-					this.onConfigUpdateSubject.next(rsp.config!);
+					this.configSubject.next(rsp.config!);
 					break;
 				}
 			}
@@ -63,7 +64,7 @@ export class ConfigService {
 		try {
 			const rsp = await this.configGet();
 			this.lastConfig = rsp?.config || {};
-			this.onConfigUpdateSubject.next(rsp?.config as Config);
+			this.configSubject.next(rsp?.config as Config);
 		} catch (error) {
 			console.log(error);
 			console.error('Error in pollConfig', {

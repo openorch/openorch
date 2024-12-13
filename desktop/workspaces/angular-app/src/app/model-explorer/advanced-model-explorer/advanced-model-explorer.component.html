@@ -176,7 +176,7 @@
 						>
 							<ion-button
 								*ngIf="
-									(configService.onConfigUpdate$ | async)?.model
+									(configService.config$ | async)?.model
 										?.currentModelId !== model.id
 								"
 								(click)="makeModelDefault(model.id!)"
@@ -188,7 +188,7 @@
 							</ion-button>
 							<ion-button
 								*ngIf="
-									(configService.onConfigUpdate$ | async)?.model
+									(configService.config$ | async)?.model
 										?.currentModelId === model.id
 								"
 								color="secondary"
@@ -276,7 +276,7 @@
 				></ion-icon>
 				<ion-icon
 					*ngIf="
-						(configService.onConfigUpdate$ | async)?.model?.currentModelId ===
+						(configService.config$ | async)?.model?.currentModelId ===
 						model.id
 					"
 					name="play-outline"

@@ -66,7 +66,7 @@
 									>
 										<span
 											*ngIf="
-												!(configService.onConfigUpdate$ | async)
+												!(configService.config$ | async)
 													?.isRuntimeInstalled
 											"
 											style="color: white"
@@ -75,7 +75,7 @@
 										>
 										<span
 											*ngIf="
-												(configService.onConfigUpdate$ | async)
+												(configService.config$ | async)
 													?.isRuntimeInstalled
 											"
 											style="color: white"
@@ -140,7 +140,7 @@
 											<strong
 												>{{
 													selectedModelName(
-														(configService.onConfigUpdate$ | async) || {}
+														(configService.config$ | async) || {}
 													)
 												}}.</strong
 											>
@@ -157,7 +157,7 @@
 											<strong
 												>{{
 													selectedModel(
-														(configService.onConfigUpdate$ | async) || {}
+														(configService.config$ | async) || {}
 													)?.size
 												}}
 												GB</strong
@@ -189,7 +189,7 @@
 											>
 												{{ 'Download folder' | translate }}:&nbsp;
 												<span style="color: #666">{{
-													(configService.onConfigUpdate$ | async)?.download
+													(configService.config$ | async)?.download
 														?.downloadFolder
 												}}</span>
 											</div>
@@ -207,11 +207,11 @@
 									<h2>
 										<app-downloading
 											*ngIf="
-												selectedModel(configService.onConfigUpdate$ | async)
+												selectedModel(configService.config$ | async)
 													?.assets?.MODEL
 											"
 											[url]="
-												selectedModel(configService.onConfigUpdate$ | async)
+												selectedModel(configService.config$ | async)
 													?.assets?.MODEL || ''
 											"
 											(downloadStatusChange)="handleDownloadStatus($event)"
