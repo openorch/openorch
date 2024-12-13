@@ -23,6 +23,20 @@ import (
 type SecretSvcAPI interface {
 
 	/*
+	DecryptValue Decrypt a Value
+
+	Decrypt a value and return the encrypted result
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDecryptValueRequest
+	*/
+	DecryptValue(ctx context.Context) ApiDecryptValueRequest
+
+	// DecryptValueExecute executes the request
+	//  @return SecretSvcDecryptValueResponse
+	DecryptValueExecute(r ApiDecryptValueRequest) (*SecretSvcDecryptValueResponse, *http.Response, error)
+
+	/*
 	EncryptValue Encrypt a Value
 
 	Encrypt a value and return the encrypted result
@@ -37,36 +51,207 @@ type SecretSvcAPI interface {
 	EncryptValueExecute(r ApiEncryptValueRequest) (*SecretSvcEncryptValueResponse, *http.Response, error)
 
 	/*
-	ReadSecrets Read Secrets
+	ListSecrets List Secrets
 
-	Read secrets by key(s) if authorized.
+	List secrets by key(s) if authorized.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiReadSecretsRequest
+	@return ApiListSecretsRequest
 	*/
-	ReadSecrets(ctx context.Context) ApiReadSecretsRequest
+	ListSecrets(ctx context.Context) ApiListSecretsRequest
 
-	// ReadSecretsExecute executes the request
-	//  @return SecretSvcReadSecretsResponse
-	ReadSecretsExecute(r ApiReadSecretsRequest) (*SecretSvcReadSecretsResponse, *http.Response, error)
+	// ListSecretsExecute executes the request
+	//  @return SecretSvcListSecretsResponse
+	ListSecretsExecute(r ApiListSecretsRequest) (*SecretSvcListSecretsResponse, *http.Response, error)
 
 	/*
-	WriteSecrets Write Secrets
+	RemoveSecrets Remove Secrets
 
-	Write secrets if authorized to do so
+	Remove secrets if authorized to do so
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiWriteSecretsRequest
+	@return ApiRemoveSecretsRequest
 	*/
-	WriteSecrets(ctx context.Context) ApiWriteSecretsRequest
+	RemoveSecrets(ctx context.Context) ApiRemoveSecretsRequest
 
-	// WriteSecretsExecute executes the request
+	// RemoveSecretsExecute executes the request
 	//  @return map[string]interface{}
-	WriteSecretsExecute(r ApiWriteSecretsRequest) (map[string]interface{}, *http.Response, error)
+	RemoveSecretsExecute(r ApiRemoveSecretsRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	SaveSecrets Save Secrets
+
+	Save secrets if authorized to do so
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSaveSecretsRequest
+	*/
+	SaveSecrets(ctx context.Context) ApiSaveSecretsRequest
+
+	// SaveSecretsExecute executes the request
+	//  @return map[string]interface{}
+	SaveSecretsExecute(r ApiSaveSecretsRequest) (map[string]interface{}, *http.Response, error)
 }
 
 // SecretSvcAPIService SecretSvcAPI service
 type SecretSvcAPIService service
+
+type ApiDecryptValueRequest struct {
+	ctx context.Context
+	ApiService SecretSvcAPI
+	body *SecretSvcDecryptValueRequest
+}
+
+// Decrypt Value Request
+func (r ApiDecryptValueRequest) Body(body SecretSvcDecryptValueRequest) ApiDecryptValueRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiDecryptValueRequest) Execute() (*SecretSvcDecryptValueResponse, *http.Response, error) {
+	return r.ApiService.DecryptValueExecute(r)
+}
+
+/*
+DecryptValue Decrypt a Value
+
+Decrypt a value and return the encrypted result
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDecryptValueRequest
+*/
+func (a *SecretSvcAPIService) DecryptValue(ctx context.Context) ApiDecryptValueRequest {
+	return ApiDecryptValueRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return SecretSvcDecryptValueResponse
+func (a *SecretSvcAPIService) DecryptValueExecute(r ApiDecryptValueRequest) (*SecretSvcDecryptValueResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SecretSvcDecryptValueResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.DecryptValue")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/secret-svc/decrypt"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiEncryptValueRequest struct {
 	ctx context.Context
@@ -225,48 +410,48 @@ func (a *SecretSvcAPIService) EncryptValueExecute(r ApiEncryptValueRequest) (*Se
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiReadSecretsRequest struct {
+type ApiListSecretsRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	body *SecretSvcReadSecretsRequest
+	body *SecretSvcListSecretsRequest
 }
 
-// Read Secret Request
-func (r ApiReadSecretsRequest) Body(body SecretSvcReadSecretsRequest) ApiReadSecretsRequest {
+// List Secret Request
+func (r ApiListSecretsRequest) Body(body SecretSvcListSecretsRequest) ApiListSecretsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiReadSecretsRequest) Execute() (*SecretSvcReadSecretsResponse, *http.Response, error) {
-	return r.ApiService.ReadSecretsExecute(r)
+func (r ApiListSecretsRequest) Execute() (*SecretSvcListSecretsResponse, *http.Response, error) {
+	return r.ApiService.ListSecretsExecute(r)
 }
 
 /*
-ReadSecrets Read Secrets
+ListSecrets List Secrets
 
-Read secrets by key(s) if authorized.
+List secrets by key(s) if authorized.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiReadSecretsRequest
+ @return ApiListSecretsRequest
 */
-func (a *SecretSvcAPIService) ReadSecrets(ctx context.Context) ApiReadSecretsRequest {
-	return ApiReadSecretsRequest{
+func (a *SecretSvcAPIService) ListSecrets(ctx context.Context) ApiListSecretsRequest {
+	return ApiListSecretsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SecretSvcReadSecretsResponse
-func (a *SecretSvcAPIService) ReadSecretsExecute(r ApiReadSecretsRequest) (*SecretSvcReadSecretsResponse, *http.Response, error) {
+//  @return SecretSvcListSecretsResponse
+func (a *SecretSvcAPIService) ListSecretsExecute(r ApiListSecretsRequest) (*SecretSvcListSecretsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SecretSvcReadSecretsResponse
+		localVarReturnValue  *SecretSvcListSecretsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.ReadSecrets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.ListSecrets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -368,32 +553,32 @@ func (a *SecretSvcAPIService) ReadSecretsExecute(r ApiReadSecretsRequest) (*Secr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiWriteSecretsRequest struct {
+type ApiRemoveSecretsRequest struct {
 	ctx context.Context
 	ApiService SecretSvcAPI
-	body *SecretSvcWriteSecretsRequest
+	body *SecretSvcRemoveSecretsRequest
 }
 
-// Write Secret Request
-func (r ApiWriteSecretsRequest) Body(body SecretSvcWriteSecretsRequest) ApiWriteSecretsRequest {
+// Remove Secret Request
+func (r ApiRemoveSecretsRequest) Body(body SecretSvcRemoveSecretsRequest) ApiRemoveSecretsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiWriteSecretsRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.WriteSecretsExecute(r)
+func (r ApiRemoveSecretsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.RemoveSecretsExecute(r)
 }
 
 /*
-WriteSecrets Write Secrets
+RemoveSecrets Remove Secrets
 
-Write secrets if authorized to do so
+Remove secrets if authorized to do so
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiWriteSecretsRequest
+ @return ApiRemoveSecretsRequest
 */
-func (a *SecretSvcAPIService) WriteSecrets(ctx context.Context) ApiWriteSecretsRequest {
-	return ApiWriteSecretsRequest{
+func (a *SecretSvcAPIService) RemoveSecrets(ctx context.Context) ApiRemoveSecretsRequest {
+	return ApiRemoveSecretsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -401,7 +586,153 @@ func (a *SecretSvcAPIService) WriteSecrets(ctx context.Context) ApiWriteSecretsR
 
 // Execute executes the request
 //  @return map[string]interface{}
-func (a *SecretSvcAPIService) WriteSecretsExecute(r ApiWriteSecretsRequest) (map[string]interface{}, *http.Response, error) {
+func (a *SecretSvcAPIService) RemoveSecretsExecute(r ApiRemoveSecretsRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.RemoveSecrets")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/secret-svc/secrets"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSaveSecretsRequest struct {
+	ctx context.Context
+	ApiService SecretSvcAPI
+	body *SecretSvcSaveSecretsRequest
+}
+
+// Save Secret Request
+func (r ApiSaveSecretsRequest) Body(body SecretSvcSaveSecretsRequest) ApiSaveSecretsRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiSaveSecretsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.SaveSecretsExecute(r)
+}
+
+/*
+SaveSecrets Save Secrets
+
+Save secrets if authorized to do so
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSaveSecretsRequest
+*/
+func (a *SecretSvcAPIService) SaveSecrets(ctx context.Context) ApiSaveSecretsRequest {
+	return ApiSaveSecretsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *SecretSvcAPIService) SaveSecretsExecute(r ApiSaveSecretsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -409,7 +740,7 @@ func (a *SecretSvcAPIService) WriteSecretsExecute(r ApiWriteSecretsRequest) (map
 		localVarReturnValue  map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.WriteSecrets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretSvcAPIService.SaveSecrets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

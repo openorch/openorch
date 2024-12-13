@@ -1,9 +1,14 @@
 'use strict';
 
 var runtime = require('./runtime2.js');
-var SecretSvcReadSecretsRequest = require('./SecretSvcReadSecretsRequest.js');
-var SecretSvcReadSecretsResponse = require('./SecretSvcReadSecretsResponse.js');
-var SecretSvcWriteSecretsRequest = require('./SecretSvcWriteSecretsRequest.js');
+var SecretSvcDecryptValueRequest = require('./SecretSvcDecryptValueRequest.js');
+var SecretSvcDecryptValueResponse = require('./SecretSvcDecryptValueResponse.js');
+var SecretSvcEncryptValueRequest = require('./SecretSvcEncryptValueRequest.js');
+var SecretSvcEncryptValueResponse = require('./SecretSvcEncryptValueResponse.js');
+var SecretSvcListSecretsRequest = require('./SecretSvcListSecretsRequest.js');
+var SecretSvcListSecretsResponse = require('./SecretSvcListSecretsResponse.js');
+var SecretSvcRemoveSecretsRequest = require('./SecretSvcRemoveSecretsRequest.js');
+var SecretSvcSaveSecretsRequest = require('./SecretSvcSaveSecretsRequest.js');
 require('./SecretSvcSecret.js');
 
 /* tslint:disable */
@@ -24,10 +29,80 @@ require('./SecretSvcSecret.js');
  */
 class SecretSvcApi extends runtime.BaseAPI {
     /**
-     * Read secrets by key(s) if authorized.
-     * Read Secrets
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
      */
-    readSecretsRaw(requestParameters, initOverrides) {
+    decryptValueRaw(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling decryptValue().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/decrypt`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcDecryptValueRequest.SecretSvcDecryptValueRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcDecryptValueResponse.SecretSvcDecryptValueResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
+     */
+    decryptValue(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            const response = yield this.decryptValueRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
+     */
+    encryptValueRaw(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling encryptValue().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/encrypt`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcEncryptValueRequest.SecretSvcEncryptValueRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcEncryptValueResponse.SecretSvcEncryptValueResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
+     */
+    encryptValue(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            const response = yield this.encryptValueRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * List secrets by key(s) if authorized.
+     * List Secrets
+     */
+    listSecretsRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
             const queryParameters = {};
             const headerParameters = {};
@@ -40,29 +115,64 @@ class SecretSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: SecretSvcReadSecretsRequest.SecretSvcReadSecretsRequestToJSON(requestParameters['body']),
+                body: SecretSvcListSecretsRequest.SecretSvcListSecretsRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcReadSecretsResponse.SecretSvcReadSecretsResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcListSecretsResponse.SecretSvcListSecretsResponseFromJSON(jsonValue));
         });
     }
     /**
-     * Read secrets by key(s) if authorized.
-     * Read Secrets
+     * List secrets by key(s) if authorized.
+     * List Secrets
      */
-    readSecrets() {
+    listSecrets() {
         return runtime.__awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
-            const response = yield this.readSecretsRaw(requestParameters, initOverrides);
+            const response = yield this.listSecretsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
     /**
-     * Write secrets if authorized to do so
-     * Write Secrets
+     * Remove secrets if authorized to do so
+     * Remove Secrets
      */
-    writeSecretsRaw(requestParameters, initOverrides) {
+    removeSecretsRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
             if (requestParameters['body'] == null) {
-                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling writeSecrets().');
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling removeSecrets().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/secrets`,
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcRemoveSecretsRequest.SecretSvcRemoveSecretsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Remove secrets if authorized to do so
+     * Remove Secrets
+     */
+    removeSecrets(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            const response = yield this.removeSecretsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save secrets if authorized to do so
+     * Save Secrets
+     */
+    saveSecretsRaw(requestParameters, initOverrides) {
+        return runtime.__awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling saveSecrets().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -75,18 +185,18 @@ class SecretSvcApi extends runtime.BaseAPI {
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
-                body: SecretSvcWriteSecretsRequest.SecretSvcWriteSecretsRequestToJSON(requestParameters['body']),
+                body: SecretSvcSaveSecretsRequest.SecretSvcSaveSecretsRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response);
         });
     }
     /**
-     * Write secrets if authorized to do so
-     * Write Secrets
+     * Save secrets if authorized to do so
+     * Save Secrets
      */
-    writeSecrets(requestParameters, initOverrides) {
+    saveSecrets(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
-            const response = yield this.writeSecretsRaw(requestParameters, initOverrides);
+            const response = yield this.saveSecretsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

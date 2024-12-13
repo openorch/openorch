@@ -20,8 +20,8 @@ var _ MappedNullable = &SecretSvcEncryptValueResponse{}
 
 // SecretSvcEncryptValueResponse struct for SecretSvcEncryptValueResponse
 type SecretSvcEncryptValueResponse struct {
-	EncryptedValue *string `json:"encryptedValue,omitempty"`
-	EncryptedValues []string `json:"encryptedValues,omitempty"`
+	Value *string `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
 
 // NewSecretSvcEncryptValueResponse instantiates a new SecretSvcEncryptValueResponse object
@@ -41,68 +41,68 @@ func NewSecretSvcEncryptValueResponseWithDefaults() *SecretSvcEncryptValueRespon
 	return &this
 }
 
-// GetEncryptedValue returns the EncryptedValue field value if set, zero value otherwise.
-func (o *SecretSvcEncryptValueResponse) GetEncryptedValue() string {
-	if o == nil || IsNil(o.EncryptedValue) {
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *SecretSvcEncryptValueResponse) GetValue() string {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
-	return *o.EncryptedValue
+	return *o.Value
 }
 
-// GetEncryptedValueOk returns a tuple with the EncryptedValue field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SecretSvcEncryptValueResponse) GetEncryptedValueOk() (*string, bool) {
-	if o == nil || IsNil(o.EncryptedValue) {
+func (o *SecretSvcEncryptValueResponse) GetValueOk() (*string, bool) {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
-	return o.EncryptedValue, true
+	return o.Value, true
 }
 
-// HasEncryptedValue returns a boolean if a field has been set.
-func (o *SecretSvcEncryptValueResponse) HasEncryptedValue() bool {
-	if o != nil && !IsNil(o.EncryptedValue) {
+// HasValue returns a boolean if a field has been set.
+func (o *SecretSvcEncryptValueResponse) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
 	return false
 }
 
-// SetEncryptedValue gets a reference to the given string and assigns it to the EncryptedValue field.
-func (o *SecretSvcEncryptValueResponse) SetEncryptedValue(v string) {
-	o.EncryptedValue = &v
+// SetValue gets a reference to the given string and assigns it to the Value field.
+func (o *SecretSvcEncryptValueResponse) SetValue(v string) {
+	o.Value = &v
 }
 
-// GetEncryptedValues returns the EncryptedValues field value if set, zero value otherwise.
-func (o *SecretSvcEncryptValueResponse) GetEncryptedValues() []string {
-	if o == nil || IsNil(o.EncryptedValues) {
+// GetValues returns the Values field value if set, zero value otherwise.
+func (o *SecretSvcEncryptValueResponse) GetValues() []string {
+	if o == nil || IsNil(o.Values) {
 		var ret []string
 		return ret
 	}
-	return o.EncryptedValues
+	return o.Values
 }
 
-// GetEncryptedValuesOk returns a tuple with the EncryptedValues field value if set, nil otherwise
+// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SecretSvcEncryptValueResponse) GetEncryptedValuesOk() ([]string, bool) {
-	if o == nil || IsNil(o.EncryptedValues) {
+func (o *SecretSvcEncryptValueResponse) GetValuesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
-	return o.EncryptedValues, true
+	return o.Values, true
 }
 
-// HasEncryptedValues returns a boolean if a field has been set.
-func (o *SecretSvcEncryptValueResponse) HasEncryptedValues() bool {
-	if o != nil && !IsNil(o.EncryptedValues) {
+// HasValues returns a boolean if a field has been set.
+func (o *SecretSvcEncryptValueResponse) HasValues() bool {
+	if o != nil && !IsNil(o.Values) {
 		return true
 	}
 
 	return false
 }
 
-// SetEncryptedValues gets a reference to the given []string and assigns it to the EncryptedValues field.
-func (o *SecretSvcEncryptValueResponse) SetEncryptedValues(v []string) {
-	o.EncryptedValues = v
+// SetValues gets a reference to the given []string and assigns it to the Values field.
+func (o *SecretSvcEncryptValueResponse) SetValues(v []string) {
+	o.Values = v
 }
 
 func (o SecretSvcEncryptValueResponse) MarshalJSON() ([]byte, error) {
@@ -115,11 +115,11 @@ func (o SecretSvcEncryptValueResponse) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcEncryptValueResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EncryptedValue) {
-		toSerialize["encryptedValue"] = o.EncryptedValue
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
 	}
-	if !IsNil(o.EncryptedValues) {
-		toSerialize["encryptedValues"] = o.EncryptedValues
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
 	}
 	return toSerialize, nil
 }

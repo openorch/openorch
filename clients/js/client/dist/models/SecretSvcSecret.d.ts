@@ -16,6 +16,12 @@
  */
 export interface SecretSvcSecret {
     /**
+     * Slugs of services/users who can delete the secret
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    deleters?: Array<string>;
+    /**
      * Whether the secret is encrypted
      * All secrets are encrypted before written to the DB.
      * This really only exists for write requests to know if the secret is already encrypted.

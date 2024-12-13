@@ -115,10 +115,15 @@ export * from './registrySvcRepositorySpec';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
-export * from './secretSvcReadSecretsRequest';
-export * from './secretSvcReadSecretsResponse';
+export * from './secretSvcDecryptValueRequest';
+export * from './secretSvcDecryptValueResponse';
+export * from './secretSvcEncryptValueRequest';
+export * from './secretSvcEncryptValueResponse';
+export * from './secretSvcListSecretsRequest';
+export * from './secretSvcListSecretsResponse';
+export * from './secretSvcRemoveSecretsRequest';
+export * from './secretSvcSaveSecretsRequest';
 export * from './secretSvcSecret';
-export * from './secretSvcWriteSecretsRequest';
 export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
@@ -280,10 +285,15 @@ import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 import { RegistrySvcResourceUsage } from './registrySvcResourceUsage';
 import { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest';
 import { RegistrySvcUsage } from './registrySvcUsage';
-import { SecretSvcReadSecretsRequest } from './secretSvcReadSecretsRequest';
-import { SecretSvcReadSecretsResponse } from './secretSvcReadSecretsResponse';
+import { SecretSvcDecryptValueRequest } from './secretSvcDecryptValueRequest';
+import { SecretSvcDecryptValueResponse } from './secretSvcDecryptValueResponse';
+import { SecretSvcEncryptValueRequest } from './secretSvcEncryptValueRequest';
+import { SecretSvcEncryptValueResponse } from './secretSvcEncryptValueResponse';
+import { SecretSvcListSecretsRequest } from './secretSvcListSecretsRequest';
+import { SecretSvcListSecretsResponse } from './secretSvcListSecretsResponse';
+import { SecretSvcRemoveSecretsRequest } from './secretSvcRemoveSecretsRequest';
+import { SecretSvcSaveSecretsRequest } from './secretSvcSaveSecretsRequest';
 import { SecretSvcSecret } from './secretSvcSecret';
-import { SecretSvcWriteSecretsRequest } from './secretSvcWriteSecretsRequest';
 import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
@@ -448,10 +458,15 @@ let typeMap: {[index: string]: any} = {
     "RegistrySvcResourceUsage": RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": RegistrySvcUsage,
-    "SecretSvcReadSecretsRequest": SecretSvcReadSecretsRequest,
-    "SecretSvcReadSecretsResponse": SecretSvcReadSecretsResponse,
+    "SecretSvcDecryptValueRequest": SecretSvcDecryptValueRequest,
+    "SecretSvcDecryptValueResponse": SecretSvcDecryptValueResponse,
+    "SecretSvcEncryptValueRequest": SecretSvcEncryptValueRequest,
+    "SecretSvcEncryptValueResponse": SecretSvcEncryptValueResponse,
+    "SecretSvcListSecretsRequest": SecretSvcListSecretsRequest,
+    "SecretSvcListSecretsResponse": SecretSvcListSecretsResponse,
+    "SecretSvcRemoveSecretsRequest": SecretSvcRemoveSecretsRequest,
+    "SecretSvcSaveSecretsRequest": SecretSvcSaveSecretsRequest,
     "SecretSvcSecret": SecretSvcSecret,
-    "SecretSvcWriteSecretsRequest": SecretSvcWriteSecretsRequest,
     "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,

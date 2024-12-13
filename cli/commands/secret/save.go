@@ -35,8 +35,8 @@ func Save(cmd *cobra.Command, args []string) error {
 		}
 
 		_, _, err = cf.Client(sdk.WithToken(token)).
-			SecretSvcAPI.WriteSecrets(ctx).
-			Body(openapi.SecretSvcWriteSecretsRequest{
+			SecretSvcAPI.SaveSecrets(ctx).
+			Body(openapi.SecretSvcSaveSecretsRequest{
 				Secrets: []openapi.SecretSvcSecret{secret},
 			}).
 			Execute()
@@ -73,8 +73,8 @@ func Save(cmd *cobra.Command, args []string) error {
 		}
 
 		_, _, err = cf.Client(sdk.WithToken(token)).
-			SecretSvcAPI.WriteSecrets(ctx).
-			Body(openapi.SecretSvcWriteSecretsRequest{
+			SecretSvcAPI.SaveSecrets(ctx).
+			Body(openapi.SecretSvcSaveSecretsRequest{
 				Secrets: secrets,
 			}).
 			Execute()

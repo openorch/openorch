@@ -19,6 +19,11 @@ class SecretSvcSecret {
 SecretSvcSecret.discriminator = undefined;
 SecretSvcSecret.attributeTypeMap = [
     {
+        "name": "deleters",
+        "baseName": "deleters",
+        "type": "Array<string>"
+    },
+    {
         "name": "encrypted",
         "baseName": "encrypted",
         "type": "boolean"

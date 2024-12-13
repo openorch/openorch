@@ -39,7 +39,7 @@ func (cs *SecretService) Encrypt(
 	r *http.Request,
 ) {
 	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), secret.PermissionSecretWrite.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), secret.PermissionSecretList.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"model-svc"},
 		}).
@@ -72,7 +72,7 @@ func (cs *SecretService) Encrypt(
 	}
 
 	jsonData, _ := json.Marshal(secret.EncryptValueResponse{
-		EncryptedValue: encryptedValue,
+		Value: encryptedValue,
 	})
 	w.Write(jsonData)
 }

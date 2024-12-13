@@ -408,14 +408,32 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "openorch/read-secrets",
-          label: "Read Secrets",
+          id: "openorch/decrypt-value",
+          label: "Decrypt a Value",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "openorch/write-secrets",
-          label: "Write Secrets",
+          id: "openorch/encrypt-value",
+          label: "Encrypt a Value",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/remove-secrets",
+          label: "Remove Secrets",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "openorch/list-secrets",
+          label: "List Secrets",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/save-secrets",
+          label: "Save Secrets",
           className: "api-method put",
         },
       ],

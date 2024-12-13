@@ -20,6 +20,8 @@ var _ MappedNullable = &SecretSvcSecret{}
 
 // SecretSvcSecret struct for SecretSvcSecret
 type SecretSvcSecret struct {
+	// Slugs of services/users who can delete the secret
+	Deleters []string `json:"deleters,omitempty"`
 	// Whether the secret is encrypted All secrets are encrypted before written to the DB. This really only exists for write requests to know if the secret is already encrypted. Ie: while most `secret save [key] [value]` commands are probably not encrypted, File based saves, eg. `secret save secretA.yaml` are probably encrypted.
 	Encrypted *bool `json:"encrypted,omitempty"`
 	// Id of the secret
@@ -49,6 +51,38 @@ func NewSecretSvcSecret() *SecretSvcSecret {
 func NewSecretSvcSecretWithDefaults() *SecretSvcSecret {
 	this := SecretSvcSecret{}
 	return &this
+}
+
+// GetDeleters returns the Deleters field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetDeleters() []string {
+	if o == nil || IsNil(o.Deleters) {
+		var ret []string
+		return ret
+	}
+	return o.Deleters
+}
+
+// GetDeletersOk returns a tuple with the Deleters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetDeletersOk() ([]string, bool) {
+	if o == nil || IsNil(o.Deleters) {
+		return nil, false
+	}
+	return o.Deleters, true
+}
+
+// HasDeleters returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasDeleters() bool {
+	if o != nil && !IsNil(o.Deleters) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleters gets a reference to the given []string and assigns it to the Deleters field.
+func (o *SecretSvcSecret) SetDeleters(v []string) {
+	o.Deleters = v
 }
 
 // GetEncrypted returns the Encrypted field value if set, zero value otherwise.
@@ -253,6 +287,9 @@ func (o SecretSvcSecret) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcSecret) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Deleters) {
+		toSerialize["deleters"] = o.Deleters
+	}
 	if !IsNil(o.Encrypted) {
 		toSerialize["encrypted"] = o.Encrypted
 	}

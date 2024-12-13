@@ -115,10 +115,15 @@ var registrySvcRepositorySpec = require('./registrySvcRepositorySpec.js');
 var registrySvcResourceUsage = require('./registrySvcResourceUsage.js');
 var registrySvcSaveDefinitionRequest = require('./registrySvcSaveDefinitionRequest.js');
 var registrySvcUsage = require('./registrySvcUsage.js');
-var secretSvcReadSecretsRequest = require('./secretSvcReadSecretsRequest.js');
-var secretSvcReadSecretsResponse = require('./secretSvcReadSecretsResponse.js');
+var secretSvcDecryptValueRequest = require('./secretSvcDecryptValueRequest.js');
+var secretSvcDecryptValueResponse = require('./secretSvcDecryptValueResponse.js');
+var secretSvcEncryptValueRequest = require('./secretSvcEncryptValueRequest.js');
+var secretSvcEncryptValueResponse = require('./secretSvcEncryptValueResponse.js');
+var secretSvcListSecretsRequest = require('./secretSvcListSecretsRequest.js');
+var secretSvcListSecretsResponse = require('./secretSvcListSecretsResponse.js');
+var secretSvcRemoveSecretsRequest = require('./secretSvcRemoveSecretsRequest.js');
+var secretSvcSaveSecretsRequest = require('./secretSvcSaveSecretsRequest.js');
 var secretSvcSecret = require('./secretSvcSecret.js');
-var secretSvcWriteSecretsRequest = require('./secretSvcWriteSecretsRequest.js');
 var sourceSvcCheckoutRepoRequest = require('./sourceSvcCheckoutRepoRequest.js');
 var sourceSvcCheckoutRepoResponse = require('./sourceSvcCheckoutRepoResponse.js');
 var sourceSvcErrorResponse = require('./sourceSvcErrorResponse.js');
@@ -281,10 +286,15 @@ let typeMap = {
     "RegistrySvcResourceUsage": registrySvcResourceUsage.RegistrySvcResourceUsage,
     "RegistrySvcSaveDefinitionRequest": registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest,
     "RegistrySvcUsage": registrySvcUsage.RegistrySvcUsage,
-    "SecretSvcReadSecretsRequest": secretSvcReadSecretsRequest.SecretSvcReadSecretsRequest,
-    "SecretSvcReadSecretsResponse": secretSvcReadSecretsResponse.SecretSvcReadSecretsResponse,
+    "SecretSvcDecryptValueRequest": secretSvcDecryptValueRequest.SecretSvcDecryptValueRequest,
+    "SecretSvcDecryptValueResponse": secretSvcDecryptValueResponse.SecretSvcDecryptValueResponse,
+    "SecretSvcEncryptValueRequest": secretSvcEncryptValueRequest.SecretSvcEncryptValueRequest,
+    "SecretSvcEncryptValueResponse": secretSvcEncryptValueResponse.SecretSvcEncryptValueResponse,
+    "SecretSvcListSecretsRequest": secretSvcListSecretsRequest.SecretSvcListSecretsRequest,
+    "SecretSvcListSecretsResponse": secretSvcListSecretsResponse.SecretSvcListSecretsResponse,
+    "SecretSvcRemoveSecretsRequest": secretSvcRemoveSecretsRequest.SecretSvcRemoveSecretsRequest,
+    "SecretSvcSaveSecretsRequest": secretSvcSaveSecretsRequest.SecretSvcSaveSecretsRequest,
     "SecretSvcSecret": secretSvcSecret.SecretSvcSecret,
-    "SecretSvcWriteSecretsRequest": secretSvcWriteSecretsRequest.SecretSvcWriteSecretsRequest,
     "SourceSvcCheckoutRepoRequest": sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": sourceSvcErrorResponse.SourceSvcErrorResponse,
@@ -688,10 +698,15 @@ exports.RegistrySvcRepositorySpec = registrySvcRepositorySpec.RegistrySvcReposit
 exports.RegistrySvcResourceUsage = registrySvcResourceUsage.RegistrySvcResourceUsage;
 exports.RegistrySvcSaveDefinitionRequest = registrySvcSaveDefinitionRequest.RegistrySvcSaveDefinitionRequest;
 exports.RegistrySvcUsage = registrySvcUsage.RegistrySvcUsage;
-exports.SecretSvcReadSecretsRequest = secretSvcReadSecretsRequest.SecretSvcReadSecretsRequest;
-exports.SecretSvcReadSecretsResponse = secretSvcReadSecretsResponse.SecretSvcReadSecretsResponse;
+exports.SecretSvcDecryptValueRequest = secretSvcDecryptValueRequest.SecretSvcDecryptValueRequest;
+exports.SecretSvcDecryptValueResponse = secretSvcDecryptValueResponse.SecretSvcDecryptValueResponse;
+exports.SecretSvcEncryptValueRequest = secretSvcEncryptValueRequest.SecretSvcEncryptValueRequest;
+exports.SecretSvcEncryptValueResponse = secretSvcEncryptValueResponse.SecretSvcEncryptValueResponse;
+exports.SecretSvcListSecretsRequest = secretSvcListSecretsRequest.SecretSvcListSecretsRequest;
+exports.SecretSvcListSecretsResponse = secretSvcListSecretsResponse.SecretSvcListSecretsResponse;
+exports.SecretSvcRemoveSecretsRequest = secretSvcRemoveSecretsRequest.SecretSvcRemoveSecretsRequest;
+exports.SecretSvcSaveSecretsRequest = secretSvcSaveSecretsRequest.SecretSvcSaveSecretsRequest;
 exports.SecretSvcSecret = secretSvcSecret.SecretSvcSecret;
-exports.SecretSvcWriteSecretsRequest = secretSvcWriteSecretsRequest.SecretSvcWriteSecretsRequest;
 exports.SourceSvcCheckoutRepoRequest = sourceSvcCheckoutRepoRequest.SourceSvcCheckoutRepoRequest;
 exports.SourceSvcCheckoutRepoResponse = sourceSvcCheckoutRepoResponse.SourceSvcCheckoutRepoResponse;
 exports.SourceSvcErrorResponse = sourceSvcErrorResponse.SourceSvcErrorResponse;

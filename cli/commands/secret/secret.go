@@ -63,19 +63,22 @@ save ./secrets.yaml
 		RunE: Save,
 	}
 
-	var deleteCmd = &cobra.Command{
-		Use:     "delete [id]",
+	var removeCmd = &cobra.Command{
+		Use:     "remove [id]",
 		Short:   "Delete a secret",
-		Aliases: []string{"del", "rm", "remove"},
-		Args:    cobra.ExactArgs(1),
-		RunE:    Delete,
+		Aliases: []string{"rm"},
+		RunE:    Remove,
 	}
+
+	removeCmd.Flags().StringArrayP("key", "k", []string{}, "Keys of secrets to remove")
+	removeCmd.Flags().StringArrayP("id", "i", []string{}, "IDs of secrets to remove")
 
 	var show bool
 
 	var listCmd = &cobra.Command{
-		Use:   "list",
-		Short: "List secrets",
+		Use:     "list",
+		Short:   "List secrets",
+		Aliases: []string{"ls"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return List(cmd, args, show)
 		},
@@ -85,7 +88,7 @@ save ./secrets.yaml
 		BoolVar(&show, "show", false, "Show secrets unmasked")
 
 	secretCmd.AddCommand(saveCmd)
-	secretCmd.AddCommand(deleteCmd)
+	secretCmd.AddCommand(removeCmd)
 	secretCmd.AddCommand(listCmd)
 
 	rootCmd.AddCommand(secretCmd)

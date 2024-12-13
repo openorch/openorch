@@ -133,9 +133,11 @@ Class | Method | HTTP request | Description
 *RegistrySvcAPI* | [**RegisterInstance**](docs/RegistrySvcAPI.md#registerinstance) | **Put** /registry-svc/instance | Register Instance
 *RegistrySvcAPI* | [**RemoveInstance**](docs/RegistrySvcAPI.md#removeinstance) | **Delete** /registry-svc/instance/{id} | Remove Instance
 *RegistrySvcAPI* | [**SaveDefinition**](docs/RegistrySvcAPI.md#savedefinition) | **Put** /registry-svc/definition | Register a Definition
+*SecretSvcAPI* | [**DecryptValue**](docs/SecretSvcAPI.md#decryptvalue) | **Post** /secret-svc/decrypt | Decrypt a Value
 *SecretSvcAPI* | [**EncryptValue**](docs/SecretSvcAPI.md#encryptvalue) | **Post** /secret-svc/encrypt | Encrypt a Value
-*SecretSvcAPI* | [**ReadSecrets**](docs/SecretSvcAPI.md#readsecrets) | **Post** /secret-svc/secrets | Read Secrets
-*SecretSvcAPI* | [**WriteSecrets**](docs/SecretSvcAPI.md#writesecrets) | **Put** /secret-svc/secrets | Write Secrets
+*SecretSvcAPI* | [**ListSecrets**](docs/SecretSvcAPI.md#listsecrets) | **Post** /secret-svc/secrets | List Secrets
+*SecretSvcAPI* | [**RemoveSecrets**](docs/SecretSvcAPI.md#removesecrets) | **Delete** /secret-svc/secrets | Remove Secrets
+*SecretSvcAPI* | [**SaveSecrets**](docs/SecretSvcAPI.md#savesecrets) | **Put** /secret-svc/secrets | Save Secrets
 *SourceSvcAPI* | [**CheckoutRepo**](docs/SourceSvcAPI.md#checkoutrepo) | **Post** /source-svc/repo/checkout | Checkout a git repository
 *UserSvcAPI* | [**AddPermissionToRole**](docs/UserSvcAPI.md#addpermissiontorole) | **Put** /user-svc/role/{roleId}/permission/{permissionId} | Add Permission to Role
 *UserSvcAPI* | [**AddUserToOrganization**](docs/UserSvcAPI.md#addusertoorganization) | **Post** /user-svc/organization/{organizationId}/user | Add a User to an Organization
@@ -278,12 +280,15 @@ Class | Method | HTTP request | Description
  - [RegistrySvcResourceUsage](docs/RegistrySvcResourceUsage.md)
  - [RegistrySvcSaveDefinitionRequest](docs/RegistrySvcSaveDefinitionRequest.md)
  - [RegistrySvcUsage](docs/RegistrySvcUsage.md)
+ - [SecretSvcDecryptValueRequest](docs/SecretSvcDecryptValueRequest.md)
+ - [SecretSvcDecryptValueResponse](docs/SecretSvcDecryptValueResponse.md)
  - [SecretSvcEncryptValueRequest](docs/SecretSvcEncryptValueRequest.md)
  - [SecretSvcEncryptValueResponse](docs/SecretSvcEncryptValueResponse.md)
- - [SecretSvcReadSecretsRequest](docs/SecretSvcReadSecretsRequest.md)
- - [SecretSvcReadSecretsResponse](docs/SecretSvcReadSecretsResponse.md)
+ - [SecretSvcListSecretsRequest](docs/SecretSvcListSecretsRequest.md)
+ - [SecretSvcListSecretsResponse](docs/SecretSvcListSecretsResponse.md)
+ - [SecretSvcRemoveSecretsRequest](docs/SecretSvcRemoveSecretsRequest.md)
+ - [SecretSvcSaveSecretsRequest](docs/SecretSvcSaveSecretsRequest.md)
  - [SecretSvcSecret](docs/SecretSvcSecret.md)
- - [SecretSvcWriteSecretsRequest](docs/SecretSvcWriteSecretsRequest.md)
  - [SourceSvcCheckoutRepoRequest](docs/SourceSvcCheckoutRepoRequest.md)
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)

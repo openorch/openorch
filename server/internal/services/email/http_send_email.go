@@ -72,8 +72,8 @@ func (s *EmailService) SendEmail(w http.ResponseWriter, r *http.Request) {
 
 func (s *EmailService) sendgridSendEmail(req email.SendEmailRequest) error {
 	secretClient := s.clientFactory.Client(sdk.WithToken(s.token)).SecretSvcAPI
-	secretResp, _, err := secretClient.ReadSecrets(context.Background()).Body(
-		openapi.SecretSvcReadSecretsRequest{
+	secretResp, _, err := secretClient.ListSecrets(context.Background()).Body(
+		openapi.SecretSvcListSecretsRequest{
 			Keys: []string{
 				"sender-email",
 				"sender-name",

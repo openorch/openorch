@@ -2968,6 +2968,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/secret-svc/decrypt": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Decrypt a value and return the encrypted result",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Decrypt a Value",
+                "operationId": "decryptValue",
+                "parameters": [
+                    {
+                        "description": "Decrypt Value Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.DecryptValueRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Decrypt Value Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.DecryptValueResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/secret-svc/encrypt": {
             "post": {
                 "security": [
@@ -3033,7 +3091,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Write secrets if authorized to do so",
+                "description": "Save secrets if authorized to do so",
                 "consumes": [
                     "application/json"
                 ],
@@ -3043,24 +3101,24 @@ const docTemplate = `{
                 "tags": [
                     "Secret Svc"
                 ],
-                "summary": "Write Secrets",
-                "operationId": "writeSecrets",
+                "summary": "Save Secrets",
+                "operationId": "saveSecrets",
                 "parameters": [
                     {
-                        "description": "Write Secret Request",
+                        "description": "Save Secret Request",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretsRequest"
+                            "$ref": "#/definitions/secret_svc.SaveSecretsRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Write Secret Response",
+                        "description": "Save Secret Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.WriteSecretsResponse"
+                            "$ref": "#/definitions/secret_svc.SaveSecretsResponse"
                         }
                     },
                     "401": {
@@ -3083,7 +3141,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Read secrets by key(s) if authorized.",
+                "description": "List secrets by key(s) if authorized.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3093,23 +3151,73 @@ const docTemplate = `{
                 "tags": [
                     "Secret Svc"
                 ],
-                "summary": "Read Secrets",
-                "operationId": "readSecrets",
+                "summary": "List Secrets",
+                "operationId": "listSecrets",
                 "parameters": [
                     {
-                        "description": "Read Secret Request",
+                        "description": "List Secret Request",
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretsRequest"
+                            "$ref": "#/definitions/secret_svc.ListSecretsRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Secret Response",
+                        "description": "List Secret Response",
                         "schema": {
-                            "$ref": "#/definitions/secret_svc.ReadSecretsResponse"
+                            "$ref": "#/definitions/secret_svc.ListSecretsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Remove secrets if authorized to do so",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Remove Secrets",
+                "operationId": "removeSecrets",
+                "parameters": [
+                    {
+                        "description": "Remove Secret Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.RemoveSecretsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Remove Secret Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.RemoveSecretsResponse"
                         }
                     },
                     "401": {
@@ -6735,6 +6843,34 @@ const docTemplate = `{
                 }
             }
         },
+        "secret_svc.DecryptValueRequest": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "secret_svc.DecryptValueResponse": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "secret_svc.EncryptValueRequest": {
             "type": "object",
             "properties": {
@@ -6752,10 +6888,10 @@ const docTemplate = `{
         "secret_svc.EncryptValueResponse": {
             "type": "object",
             "properties": {
-                "encryptedValue": {
+                "value": {
                     "type": "string"
                 },
-                "encryptedValues": {
+                "values": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -6763,7 +6899,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretsRequest": {
+        "secret_svc.ListSecretsRequest": {
             "type": "object",
             "properties": {
                 "key": {
@@ -6777,7 +6913,7 @@ const docTemplate = `{
                 }
             }
         },
-        "secret_svc.ReadSecretsResponse": {
+        "secret_svc.ListSecretsResponse": {
             "type": "object",
             "properties": {
                 "secrets": {
@@ -6788,9 +6924,56 @@ const docTemplate = `{
                 }
             }
         },
+        "secret_svc.RemoveSecretsRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "key": {
+                    "type": "string"
+                },
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "secret_svc.RemoveSecretsResponse": {
+            "type": "object"
+        },
+        "secret_svc.SaveSecretsRequest": {
+            "type": "object",
+            "properties": {
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/secret_svc.Secret"
+                    }
+                }
+            }
+        },
+        "secret_svc.SaveSecretsResponse": {
+            "type": "object"
+        },
         "secret_svc.Secret": {
             "type": "object",
             "properties": {
+                "deleters": {
+                    "description": "Slugs of services/users who can delete the secret",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "encrypted": {
                     "description": "Whether the secret is encrypted\nAll secrets are encrypted before written to the DB.\nThis really only exists for write requests to know if the secret is already encrypted.\nIe: while most ` + "`" + `secret save [key] [value]` + "`" + ` commands are probably not encrypted,\nFile based saves, eg. ` + "`" + `secret save secretA.yaml` + "`" + ` are probably encrypted.",
                     "type": "boolean"
@@ -6822,20 +7005,6 @@ const docTemplate = `{
                     }
                 }
             }
-        },
-        "secret_svc.WriteSecretsRequest": {
-            "type": "object",
-            "properties": {
-                "secrets": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/secret_svc.Secret"
-                    }
-                }
-            }
-        },
-        "secret_svc.WriteSecretsResponse": {
-            "type": "object"
         },
         "source_svc.CheckoutRepoRequest": {
             "type": "object",

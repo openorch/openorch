@@ -10,9 +10,14 @@
  * Do not edit the class manually.
  */
 import http from 'http';
-import { SecretSvcReadSecretsRequest } from '../model/secretSvcReadSecretsRequest';
-import { SecretSvcReadSecretsResponse } from '../model/secretSvcReadSecretsResponse';
-import { SecretSvcWriteSecretsRequest } from '../model/secretSvcWriteSecretsRequest';
+import { SecretSvcDecryptValueRequest } from '../model/secretSvcDecryptValueRequest';
+import { SecretSvcDecryptValueResponse } from '../model/secretSvcDecryptValueResponse';
+import { SecretSvcEncryptValueRequest } from '../model/secretSvcEncryptValueRequest';
+import { SecretSvcEncryptValueResponse } from '../model/secretSvcEncryptValueResponse';
+import { SecretSvcListSecretsRequest } from '../model/secretSvcListSecretsRequest';
+import { SecretSvcListSecretsResponse } from '../model/secretSvcListSecretsResponse';
+import { SecretSvcRemoveSecretsRequest } from '../model/secretSvcRemoveSecretsRequest';
+import { SecretSvcSaveSecretsRequest } from '../model/secretSvcSaveSecretsRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum SecretSvcApiApiKeys {
@@ -37,24 +42,63 @@ export declare class SecretSvcApi {
     setApiKey(key: SecretSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
-     * Read secrets by key(s) if authorized.
-     * @summary Read Secrets
-     * @param body Read Secret Request
+     * Decrypt a value and return the encrypted result
+     * @summary Decrypt a Value
+     * @param body Decrypt Value Request
      */
-    readSecrets(body?: SecretSvcReadSecretsRequest, options?: {
+    decryptValue(body: SecretSvcDecryptValueRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: SecretSvcReadSecretsResponse;
+        body: SecretSvcDecryptValueResponse;
     }>;
     /**
-     * Write secrets if authorized to do so
-     * @summary Write Secrets
-     * @param body Write Secret Request
+     * Encrypt a value and return the encrypted result
+     * @summary Encrypt a Value
+     * @param body Encrypt Value Request
      */
-    writeSecrets(body: SecretSvcWriteSecretsRequest, options?: {
+    encryptValue(body: SecretSvcEncryptValueRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: SecretSvcEncryptValueResponse;
+    }>;
+    /**
+     * List secrets by key(s) if authorized.
+     * @summary List Secrets
+     * @param body List Secret Request
+     */
+    listSecrets(body?: SecretSvcListSecretsRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: SecretSvcListSecretsResponse;
+    }>;
+    /**
+     * Remove secrets if authorized to do so
+     * @summary Remove Secrets
+     * @param body Remove Secret Request
+     */
+    removeSecrets(body: SecretSvcRemoveSecretsRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
+    /**
+     * Save secrets if authorized to do so
+     * @summary Save Secrets
+     * @param body Save Secret Request
+     */
+    saveSecrets(body: SecretSvcSaveSecretsRequest, options?: {
         headers: {
             [name: string]: string;
         };

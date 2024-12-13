@@ -722,12 +722,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
-		secretService.Read(w, r)
+		secretService.ListSecrets(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
-		secretService.Write(w, r)
+		secretService.SaveSecrets(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 
@@ -735,6 +735,16 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		secretService.Encrypt(w, r)
 	})).
 		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/secret-svc/decrypt", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Decrypt(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.RemoveSecrets(w, r)
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/email-svc/email", appl(func(w http.ResponseWriter, r *http.Request) {
 		emailService.SendEmail(w, r)
