@@ -1680,6 +1680,24 @@ definitions:
         format: int64
         type: integer
     type: object
+  secret_svc.EncryptValueRequest:
+    properties:
+      value:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.EncryptValueResponse:
+    properties:
+      encryptedValue:
+        type: string
+      encryptedValues:
+        items:
+          type: string
+        type: array
+    type: object
   secret_svc.ReadSecretsRequest:
     properties:
       key:
@@ -4062,6 +4080,43 @@ paths:
       summary: List Nodes
       tags:
       - Registry Svc
+  /secret-svc/encrypt:
+    post:
+      consumes:
+      - application/json
+      description: Encrypt a value and return the encrypted result
+      operationId: encryptValue
+      parameters:
+      - description: Encrypt Value Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/secret_svc.EncryptValueRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Encrypt Value Response
+          schema:
+            $ref: '#/definitions/secret_svc.EncryptValueResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Encrypt a Value
+      tags:
+      - Secret Svc
   /secret-svc/secrets:
     post:
       consumes:

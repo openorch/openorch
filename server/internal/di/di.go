@@ -327,6 +327,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 
+	if options.NodeOptions.SecretEncryptionKey == "" {
+		options.NodeOptions.SecretEncryptionKey = "changeMeToSomethingSecureForReal"
+	}
 	secretService, err := secretservice.NewSecretService(
 		options.ClientFactory,
 		options.Authorizer,
@@ -727,6 +730,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		secretService.Write(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
+
+	router.HandleFunc("/secret-svc/encrypt", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Encrypt(w, r)
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/email-svc/email", appl(func(w http.ResponseWriter, r *http.Request) {
 		emailService.SendEmail(w, r)

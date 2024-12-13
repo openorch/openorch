@@ -86,7 +86,7 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 	if options.SecretEncryptionKey == "" {
 		options.SecretEncryptionKey = os.Getenv("OPENORCH_ENCRYPTION_KEY")
 		if options.SecretEncryptionKey == "" {
-			options.SecretEncryptionKey = "changeMeToSomethingSecure"
+			options.SecretEncryptionKey = "changeMeToSomethingSecureForReal"
 		}
 	}
 

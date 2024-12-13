@@ -28,6 +28,10 @@ type Secret struct {
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
 
+## About readers and writers
+
+At the moment only admins can read or write secrets. The system is only designed to work for service 2 service calls. In the future with readers and writers we might create a more multitenant system where even non-admins can read and write secrets.
+
 ### Encryption at rest
 
 All data is encrypted using the encryption key provided by the envar `OPENORCH_ENCRYPTION_KEY` (see Todo section).

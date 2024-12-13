@@ -39,6 +39,36 @@ func (m *MockSecretSvcAPI) EXPECT() *MockSecretSvcAPIMockRecorder {
 	return m.recorder
 }
 
+// EncryptValue mocks base method.
+func (m *MockSecretSvcAPI) EncryptValue(ctx context.Context) ApiEncryptValueRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "EncryptValue", ctx)
+	ret0, _ := ret[0].(ApiEncryptValueRequest)
+	return ret0
+}
+
+// EncryptValue indicates an expected call of EncryptValue.
+func (mr *MockSecretSvcAPIMockRecorder) EncryptValue(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EncryptValue", reflect.TypeOf((*MockSecretSvcAPI)(nil).EncryptValue), ctx)
+}
+
+// EncryptValueExecute mocks base method.
+func (m *MockSecretSvcAPI) EncryptValueExecute(r ApiEncryptValueRequest) (*SecretSvcEncryptValueResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "EncryptValueExecute", r)
+	ret0, _ := ret[0].(*SecretSvcEncryptValueResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// EncryptValueExecute indicates an expected call of EncryptValueExecute.
+func (mr *MockSecretSvcAPIMockRecorder) EncryptValueExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EncryptValueExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).EncryptValueExecute), r)
+}
+
 // ReadSecrets mocks base method.
 func (m *MockSecretSvcAPI) ReadSecrets(ctx context.Context) ApiReadSecretsRequest {
 	m.ctrl.T.Helper()

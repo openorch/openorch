@@ -2962,6 +2962,64 @@
                 }
             }
         },
+        "/secret-svc/encrypt": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Encrypt a value and return the encrypted result",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Encrypt a Value",
+                "operationId": "encryptValue",
+                "parameters": [
+                    {
+                        "description": "Encrypt Value Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.EncryptValueRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Encrypt Value Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.EncryptValueResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/secret-svc/secrets": {
             "put": {
                 "security": [
@@ -6668,6 +6726,34 @@
                     "description": "Used amount (in bytes).",
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "secret_svc.EncryptValueRequest": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "secret_svc.EncryptValueResponse": {
+            "type": "object",
+            "properties": {
+                "encryptedValue": {
+                    "type": "string"
+                },
+                "encryptedValues": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },

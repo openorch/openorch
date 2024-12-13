@@ -45,3 +45,13 @@ type WriteSecretsRequest struct {
 
 type WriteSecretsResponse struct {
 }
+
+type EncryptValueRequest struct {
+	Value  string   `json:"value"`
+	Values []string `json:"values"`
+}
+
+type EncryptValueResponse struct {
+	EncryptedValue  string   `json:"encryptedValue"`
+	EncryptedValues []string `json:"encryptedValues"`
+}
