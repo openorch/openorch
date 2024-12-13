@@ -1,7 +1,3 @@
-import { ConfigSvcAppServiceConfigFromJSON, ConfigSvcAppServiceConfigToJSON } from './ConfigSvcAppServiceConfig.mjs';
-import { ConfigSvcModelServiceConfigFromJSON, ConfigSvcModelServiceConfigToJSON } from './ConfigSvcModelServiceConfig.mjs';
-import { ConfigSvcDownloadServiceConfigFromJSON, ConfigSvcDownloadServiceConfigToJSON } from './ConfigSvcDownloadServiceConfig.mjs';
-
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -19,6 +15,8 @@ import { ConfigSvcDownloadServiceConfigFromJSON, ConfigSvcDownloadServiceConfigT
  * Check if a given object implements the ConfigSvcConfig interface.
  */
 function instanceOfConfigSvcConfig(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
     return true;
 }
 function ConfigSvcConfigFromJSON(json) {
@@ -29,11 +27,7 @@ function ConfigSvcConfigFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'app': json['app'] == null ? undefined : ConfigSvcAppServiceConfigFromJSON(json['app']),
-        'directory': json['directory'] == null ? undefined : json['directory'],
-        'download': json['download'] == null ? undefined : ConfigSvcDownloadServiceConfigFromJSON(json['download']),
-        'isRuntimeInstalled': json['isRuntimeInstalled'] == null ? undefined : json['isRuntimeInstalled'],
-        'model': json['model'] == null ? undefined : ConfigSvcModelServiceConfigFromJSON(json['model']),
+        'data': json['data'],
     };
 }
 function ConfigSvcConfigToJSON(json) {
@@ -44,11 +38,7 @@ function ConfigSvcConfigToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
-        'app': ConfigSvcAppServiceConfigToJSON(value['app']),
-        'directory': value['directory'],
-        'download': ConfigSvcDownloadServiceConfigToJSON(value['download']),
-        'isRuntimeInstalled': value['isRuntimeInstalled'],
-        'model': ConfigSvcModelServiceConfigToJSON(value['model']),
+        'data': value['data'],
     };
 }
 

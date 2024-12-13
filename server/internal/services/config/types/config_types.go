@@ -11,30 +11,8 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type DownloadServiceConfig struct {
-	DownloadFolder string `json:"downloadFolder" yaml:"downloadFolder"`
-}
-
-type ModelServiceConfig struct {
-	CurrentModelId string `json:"currentModelId" yaml:"currentModelId"`
-}
-
-type AppServiceConfig struct {
-	LoggingDisabled bool `json:"loggingDisabled" yaml:"loggingDisabled"`
-}
-
 type Config struct {
-	Download DownloadServiceConfig `json:"download" yaml:"download"`
-	Model    ModelServiceConfig    `json:"model"    yaml:"model"`
-	App      AppServiceConfig      `json:"app"      yaml:"app"`
-
-	/** This flag drives a minor UX feature:
-	 * if the user has not installed the runtime we show an INSTALL
-	 * button, but if the user has already installed the runtime we show
-	 * we show a START runtime button.
-	 * */
-	IsRuntimeInstalled bool   `json:"isRuntimeInstalled" yaml:"isRuntimeInstalled"`
-	Directory          string `json:"directory"          yaml:"directory"`
+	Data map[string]interface{} `json:"data" binding:"required"`
 }
 
 type GetConfigRequest struct {

@@ -4732,40 +4732,15 @@
                 }
             }
         },
-        "config_svc.AppServiceConfig": {
-            "type": "object",
-            "properties": {
-                "loggingDisabled": {
-                    "type": "boolean"
-                }
-            }
-        },
         "config_svc.Config": {
             "type": "object",
+            "required": [
+                "data"
+            ],
             "properties": {
-                "app": {
-                    "$ref": "#/definitions/config_svc.AppServiceConfig"
-                },
-                "directory": {
-                    "type": "string"
-                },
-                "download": {
-                    "$ref": "#/definitions/config_svc.DownloadServiceConfig"
-                },
-                "isRuntimeInstalled": {
-                    "description": "* This flag drives a minor UX feature:\n\t * if the user has not installed the runtime we show an INSTALL\n\t * button, but if the user has already installed the runtime we show\n\t * we show a START runtime button.\n\t *",
-                    "type": "boolean"
-                },
-                "model": {
-                    "$ref": "#/definitions/config_svc.ModelServiceConfig"
-                }
-            }
-        },
-        "config_svc.DownloadServiceConfig": {
-            "type": "object",
-            "properties": {
-                "downloadFolder": {
-                    "type": "string"
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
                 }
             }
         },
@@ -4774,14 +4749,6 @@
             "properties": {
                 "config": {
                     "$ref": "#/definitions/config_svc.Config"
-                }
-            }
-        },
-        "config_svc.ModelServiceConfig": {
-            "type": "object",
-            "properties": {
-                "currentModelId": {
-                    "type": "string"
                 }
             }
         },

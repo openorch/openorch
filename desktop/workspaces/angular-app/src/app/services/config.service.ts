@@ -15,7 +15,7 @@ import {
 	ConfigSvcApi,
 	ConfigSvcGetConfigResponse,
 	Configuration,
-	ConfigSvcConfig as Config,
+	ConfigSvcConfig,
 } from '@openorch/client';
 
 @Injectable({
@@ -24,9 +24,9 @@ import {
 export class ConfigService {
 	private configService!: ConfigSvcApi;
 
-	lastConfig!: Config;
+	lastConfig!: ConfigSvcConfig;
 
-	configSubject = new ReplaySubject<Config>(1);
+	configSubject = new ReplaySubject<ConfigSvcConfig>(1);
 
 	/** Config emitted whenever it's loaded (on startup) or saved */
 	config$ = this.configSubject.asObservable();
@@ -63,8 +63,10 @@ export class ConfigService {
 	async loggedInInit() {
 		try {
 			const rsp = await this.configGet();
-			this.lastConfig = rsp?.config || {};
-			this.configSubject.next(rsp?.config as Config);
+			this.lastConfig = rsp?.config || {
+				data: {},
+			};
+			this.configSubject.next(rsp?.config as ConfigSvcConfig);
 		} catch (error) {
 			console.log(error);
 			console.error('Error in pollConfig', {

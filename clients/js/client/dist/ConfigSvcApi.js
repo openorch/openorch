@@ -4,9 +4,6 @@ var runtime = require('./runtime2.js');
 var ConfigSvcGetConfigResponse = require('./ConfigSvcGetConfigResponse.js');
 var ConfigSvcSaveConfigRequest = require('./ConfigSvcSaveConfigRequest.js');
 require('./ConfigSvcConfig.js');
-require('./ConfigSvcAppServiceConfig.js');
-require('./ConfigSvcModelServiceConfig.js');
-require('./ConfigSvcDownloadServiceConfig.js');
 
 /* tslint:disable */
 /* eslint-disable */

@@ -66,8 +66,7 @@
 									>
 										<span
 											*ngIf="
-												!(configService.config$ | async)
-													?.isRuntimeInstalled
+												!(configService.config$ | async)?.isRuntimeInstalled
 											"
 											style="color: white"
 											class="sng-test-runtime-button"
@@ -75,8 +74,7 @@
 										>
 										<span
 											*ngIf="
-												(configService.config$ | async)
-													?.isRuntimeInstalled
+												(configService.config$ | async)?.isRuntimeInstalled
 											"
 											style="color: white"
 											class="sng-test-runtime-button"
@@ -156,9 +154,8 @@
 											{{ 'This operation will consume' | translate }}
 											<strong
 												>{{
-													selectedModel(
-														(configService.config$ | async) || {}
-													)?.size
+													selectedModel((configService.config$ | async) || {})
+														?.size
 												}}
 												GB</strong
 											>
@@ -189,7 +186,7 @@
 											>
 												{{ 'Download folder' | translate }}:&nbsp;
 												<span style="color: #666">{{
-													(configService.config$ | async)?.download
+													(configService.config$ | async)['download-svc']
 														?.downloadFolder
 												}}</span>
 											</div>
@@ -207,12 +204,12 @@
 									<h2>
 										<app-downloading
 											*ngIf="
-												selectedModel(configService.config$ | async)
-													?.assets?.MODEL
+												selectedModel(configService.config$ | async)?.assets
+													?.MODEL
 											"
 											[url]="
-												selectedModel(configService.config$ | async)
-													?.assets?.MODEL || ''
+												selectedModel(configService.config$ | async)?.assets
+													?.MODEL || ''
 											"
 											(downloadStatusChange)="handleDownloadStatus($event)"
 										></app-downloading>

@@ -2,9 +2,6 @@ import { a as BaseAPI, _ as __awaiter, J as JSONApiResponse, b as RequiredError 
 import { ConfigSvcGetConfigResponseFromJSON } from './ConfigSvcGetConfigResponse.mjs';
 import { ConfigSvcSaveConfigRequestToJSON } from './ConfigSvcSaveConfigRequest.mjs';
 import './ConfigSvcConfig.mjs';
-import './ConfigSvcAppServiceConfig.mjs';
-import './ConfigSvcModelServiceConfig.mjs';
-import './ConfigSvcDownloadServiceConfig.mjs';
 
 /* tslint:disable */
 /* eslint-disable */

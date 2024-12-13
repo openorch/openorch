@@ -10,8 +10,11 @@ import { ElectronIpcService } from '../services/electron-ipc.service';
 import { WindowApiConst } from 'shared-lib';
 import { ElectronAppService } from '../services/electron-app.service';
 import { combineLatest, Subscription } from 'rxjs';
-import { DownloadService } from '../services/download.service';
-import { ModelService } from '../services/model.service';
+import {
+	DownloadService,
+	DownloadSvcConfig,
+} from '../services/download.service';
+import { ModelService, ModelSvcConfig } from '../services/model.service';
 import { ModelSvcModel as Model } from '@openorch/client';
 import { DockerService } from '../services/docker.service';
 import { ConfigService } from '../services/config.service';
@@ -93,7 +96,9 @@ export class StartupComponent implements OnInit {
 	}
 
 	selectedModelName(cu: Config): string {
-		const model = this.models?.find((v) => v.id == cu?.model?.currentModelId);
+		const model = this.models?.find(
+			(v) => v.id == (cu?.data?.model as ModelSvcConfig).currentModelId
+		);
 		const displayName = [model?.name, model?.flavour, model?.version].join(' ');
 		return displayName;
 	}
@@ -102,7 +107,7 @@ export class StartupComponent implements OnInit {
 		if (!cu) {
 			return;
 		}
-		return this.models?.find((v) => v.id == cu?.model?.currentModelId);
+		return this.models?.find((v) => v.id == cu?.data?.model?.currentModelId);
 	}
 
 	ionViewWillLeave() {
@@ -192,7 +197,8 @@ export class StartupComponent implements OnInit {
 
 	async download() {
 		const config = this.configService.lastConfig;
-		const modelId = config?.model?.currentModelId;
+		const modelId = (config as unknown as ConfigData).data['model-svc']
+			.currentModelId;
 		if (!modelId) {
 			throw 'Model id is empty';
 		}
@@ -216,4 +222,11 @@ export class StartupComponent implements OnInit {
 		this.ipcService.send(WindowApiConst.INSTALL_RUNTIME_REQUEST, {});
 		this.isRuntimeInstalling = true;
 	}
+}
+
+interface ConfigData {
+	data: {
+		'model-svc': ModelSvcConfig;
+		'download-svc': DownloadSvcConfig;
+	};
 }

@@ -3,13 +3,11 @@
 set -e
 
 cd client;
-npm install
 npm run build;
 npm link;
 cd ..
 
 cd example;
-npm install
 npm link @openorch/client;
 npm run build
 cd ..

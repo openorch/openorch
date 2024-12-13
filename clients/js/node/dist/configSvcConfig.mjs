@@ -17,29 +17,9 @@ class ConfigSvcConfig {
 ConfigSvcConfig.discriminator = undefined;
 ConfigSvcConfig.attributeTypeMap = [
     {
-        "name": "app",
-        "baseName": "app",
-        "type": "ConfigSvcAppServiceConfig"
-    },
-    {
-        "name": "directory",
-        "baseName": "directory",
-        "type": "string"
-    },
-    {
-        "name": "download",
-        "baseName": "download",
-        "type": "ConfigSvcDownloadServiceConfig"
-    },
-    {
-        "name": "isRuntimeInstalled",
-        "baseName": "isRuntimeInstalled",
-        "type": "boolean"
-    },
-    {
-        "name": "model",
-        "baseName": "model",
-        "type": "ConfigSvcModelServiceConfig"
+        "name": "data",
+        "baseName": "data",
+        "type": "{ [key: string]: any; }"
     }
 ];
 

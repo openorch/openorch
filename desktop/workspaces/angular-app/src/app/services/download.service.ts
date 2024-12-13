@@ -17,6 +17,11 @@ import {
 	DownloadSvcDownloadsResponse,
 } from '@openorch/client';
 
+export interface DownloadSvcConfig {
+	downloadFolder: string;
+}
+
+
 export interface DownloadStatusChangeEvent {
 	allDownloads: DownloadDetails[];
 }
