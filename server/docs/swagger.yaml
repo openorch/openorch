@@ -1680,7 +1680,43 @@ definitions:
         format: int64
         type: integer
     type: object
-  secret_svc.ReadSecretRequest:
+  secret_svc.DecryptValueRequest:
+    properties:
+      value:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.DecryptValueResponse:
+    properties:
+      value:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.EncryptValueRequest:
+    properties:
+      value:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.EncryptValueResponse:
+    properties:
+      value:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.ListSecretsRequest:
     properties:
       key:
         type: string
@@ -1689,15 +1725,54 @@ definitions:
           type: string
         type: array
     type: object
-  secret_svc.ReadSecretResponse:
+  secret_svc.ListSecretsResponse:
     properties:
       secrets:
         items:
           $ref: '#/definitions/secret_svc.Secret'
         type: array
     type: object
+  secret_svc.RemoveSecretsRequest:
+    properties:
+      id:
+        type: string
+      ids:
+        items:
+          type: string
+        type: array
+      key:
+        type: string
+      keys:
+        items:
+          type: string
+        type: array
+    type: object
+  secret_svc.RemoveSecretsResponse:
+    type: object
+  secret_svc.SaveSecretsRequest:
+    properties:
+      secrets:
+        items:
+          $ref: '#/definitions/secret_svc.Secret'
+        type: array
+    type: object
+  secret_svc.SaveSecretsResponse:
+    type: object
   secret_svc.Secret:
     properties:
+      deleters:
+        description: Slugs of services/users who can delete the secret
+        items:
+          type: string
+        type: array
+      encrypted:
+        description: |-
+          Whether the secret is encrypted
+          All secrets are encrypted before written to the DB.
+          This really only exists for write requests to know if the secret is already encrypted.
+          Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+          File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+        type: boolean
       id:
         description: Id of the secret
         type: string
@@ -1717,15 +1792,6 @@ definitions:
         items:
           type: string
         type: array
-    type: object
-  secret_svc.WriteSecretRequest:
-    properties:
-      secrets:
-        items:
-          $ref: '#/definitions/secret_svc.Secret'
-        type: array
-    type: object
-  secret_svc.WriteSecretResponse:
     type: object
   source_svc.CheckoutRepoRequest:
     properties:
@@ -4054,25 +4120,30 @@ paths:
       summary: List Nodes
       tags:
       - Registry Svc
-  /secret-svc/secret:
+  /secret-svc/decrypt:
     post:
       consumes:
       - application/json
-      description: Fetch a secret by key, if authorized
-      operationId: readSecret
+      description: Decrypt a value and return the encrypted result
+      operationId: decryptValue
       parameters:
-      - description: Read Secret Request
+      - description: Decrypt Value Request
         in: body
         name: body
+        required: true
         schema:
-          $ref: '#/definitions/secret_svc.ReadSecretRequest'
+          $ref: '#/definitions/secret_svc.DecryptValueRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: Read Secret Response
+          description: Decrypt Value Response
           schema:
-            $ref: '#/definitions/secret_svc.ReadSecretResponse'
+            $ref: '#/definitions/secret_svc.DecryptValueResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
         "401":
           description: Unauthorized
           schema:
@@ -4083,28 +4154,129 @@ paths:
             type: string
       security:
       - BearerAuth: []
-      summary: Read Secret
+      summary: Decrypt a Value
+      tags:
+      - Secret Svc
+  /secret-svc/encrypt:
+    post:
+      consumes:
+      - application/json
+      description: Encrypt a value and return the encrypted result
+      operationId: encryptValue
+      parameters:
+      - description: Encrypt Value Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/secret_svc.EncryptValueRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Encrypt Value Response
+          schema:
+            $ref: '#/definitions/secret_svc.EncryptValueResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Encrypt a Value
+      tags:
+      - Secret Svc
+  /secret-svc/secrets:
+    delete:
+      consumes:
+      - application/json
+      description: Remove secrets if authorized to do so
+      operationId: removeSecrets
+      parameters:
+      - description: Remove Secret Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/secret_svc.RemoveSecretsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Remove Secret Response
+          schema:
+            $ref: '#/definitions/secret_svc.RemoveSecretsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Remove Secrets
+      tags:
+      - Secret Svc
+    post:
+      consumes:
+      - application/json
+      description: List secrets by key(s) if authorized.
+      operationId: listSecrets
+      parameters:
+      - description: List Secret Request
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/secret_svc.ListSecretsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Secret Response
+          schema:
+            $ref: '#/definitions/secret_svc.ListSecretsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List Secrets
       tags:
       - Secret Svc
     put:
       consumes:
       - application/json
-      description: Write a secret if authorized
-      operationId: writeSecret
+      description: Save secrets if authorized to do so
+      operationId: saveSecrets
       parameters:
-      - description: Write Secret Request
+      - description: Save Secret Request
         in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/secret_svc.WriteSecretRequest'
+          $ref: '#/definitions/secret_svc.SaveSecretsRequest'
       produces:
       - application/json
       responses:
         "200":
-          description: Write Secret Response
+          description: Save Secret Response
           schema:
-            $ref: '#/definitions/secret_svc.WriteSecretResponse'
+            $ref: '#/definitions/secret_svc.SaveSecretsResponse'
         "401":
           description: Unauthorized
           schema:
@@ -4115,7 +4287,7 @@ paths:
             type: string
       security:
       - BearerAuth: []
-      summary: Write Secret
+      summary: Save Secrets
       tags:
       - Secret Svc
   /source-svc/repo/checkout:

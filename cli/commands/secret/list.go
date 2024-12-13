@@ -29,8 +29,8 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 	cf := sdk.NewApiClientFactory(url)
 
 	rsp, _, err := cf.Client(sdk.WithToken(token)).
-		SecretSvcAPI.ReadSecret(ctx).
-		Body(openapi.SecretSvcReadSecretRequest{
+		SecretSvcAPI.ListSecrets(ctx).
+		Body(openapi.SecretSvcListSecretsRequest{
 			Key: openapi.PtrString(key),
 		}).
 		Execute()

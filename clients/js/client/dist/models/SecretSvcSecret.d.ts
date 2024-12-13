@@ -16,6 +16,22 @@
  */
 export interface SecretSvcSecret {
     /**
+     * Slugs of services/users who can delete the secret
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    deleters?: Array<string>;
+    /**
+     * Whether the secret is encrypted
+     * All secrets are encrypted before written to the DB.
+     * This really only exists for write requests to know if the secret is already encrypted.
+     * Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+     * File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+     * @type {boolean}
+     * @memberof SecretSvcSecret
+     */
+    encrypted?: boolean;
+    /**
      * Id of the secret
      * @type {string}
      * @memberof SecretSvcSecret

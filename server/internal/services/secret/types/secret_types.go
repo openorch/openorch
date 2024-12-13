@@ -12,29 +12,67 @@ type ErrorResponse struct {
 }
 
 type Secret struct {
-	Id      string   `json:"id"`      // Id of the secret
-	Key     string   `json:"key"`     // Envar or slug-like key of the secret
-	Value   string   `json:"value"`   // Secret Value
-	Readers []string `json:"readers"` // Slugs of services/users who can read the secret
-	Writers []string `json:"writers"` // Slugs of services/users who can modify the secret
+	Id       string   `json:"id"`       // Id of the secret
+	Key      string   `json:"key"`      // Envar or slug-like key of the secret
+	Value    string   `json:"value"`    // Secret Value
+	Readers  []string `json:"readers"`  // Slugs of services/users who can read the secret
+	Writers  []string `json:"writers"`  // Slugs of services/users who can modify the secret
+	Deleters []string `json:"deleters"` // Slugs of services/users who can delete the secret
+
+	// Whether the secret is encrypted
+	// All secrets are encrypted before written to the DB.
+	// This really only exists for write requests to know if the secret is already encrypted.
+	// Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+	// File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+	Encrypted bool `json:"encrypted"`
 }
 
 func (s *Secret) GetId() string {
 	return s.Id
 }
 
-type ReadSecretRequest struct {
+type ListSecretsRequest struct {
 	Key  string   `json:"key"`
 	Keys []string `json:"keys"`
 }
 
-type ReadSecretResponse struct {
+type ListSecretsResponse struct {
 	Secrets []*Secret `json:"secrets"`
 }
 
-type WriteSecretRequest struct {
+type SaveSecretsRequest struct {
 	Secrets []*Secret `json:"secrets"`
 }
 
-type WriteSecretResponse struct {
+type SaveSecretsResponse struct {
+}
+
+type EncryptValueRequest struct {
+	Value  string   `json:"value"`
+	Values []string `json:"values"`
+}
+
+type EncryptValueResponse struct {
+	Value  string   `json:"value"`
+	Values []string `json:"values"`
+}
+
+type DecryptValueRequest struct {
+	Value  string   `json:"value"`
+	Values []string `json:"values"`
+}
+
+type DecryptValueResponse struct {
+	Value  string   `json:"value"`
+	Values []string `json:"values"`
+}
+
+type RemoveSecretsRequest struct {
+	Key  string   `json:"key"`
+	Keys []string `json:"keys"`
+	Id   string   `json:"id"`
+	Ids  []string `json:"ids"`
+}
+
+type RemoveSecretsResponse struct {
 }

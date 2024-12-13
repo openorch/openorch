@@ -327,11 +327,15 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.DatastoreFactory,
 	)
 
+	if options.NodeOptions.SecretEncryptionKey == "" {
+		options.NodeOptions.SecretEncryptionKey = "changeMeToSomethingSecureForReal"
+	}
 	secretService, err := secretservice.NewSecretService(
 		options.ClientFactory,
 		options.Authorizer,
 		options.Lock,
 		options.DatastoreFactory,
+		options.NodeOptions.SecretEncryptionKey,
 	)
 	if err != nil {
 		logger.Error(
@@ -717,15 +721,30 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
-		secretService.Read(w, r)
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.ListSecrets(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/secret-svc/secret", appl(func(w http.ResponseWriter, r *http.Request) {
-		secretService.Write(w, r)
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.SaveSecrets(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
+
+	router.HandleFunc("/secret-svc/encrypt", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Encrypt(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/secret-svc/decrypt", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.Decrypt(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/secret-svc/secrets", appl(func(w http.ResponseWriter, r *http.Request) {
+		secretService.RemoveSecrets(w, r)
+	})).
+		Methods("OPTIONS", "DELETE")
 
 	router.HandleFunc("/email-svc/email", appl(func(w http.ResponseWriter, r *http.Request) {
 		emailService.SendEmail(w, r)
@@ -792,6 +811,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		err = proxyService.Start()
 		if err != nil {
 			return errors.Wrap(err, "proxy service start failed")
+		}
+		err = emailService.Start()
+		if err != nil {
+			return errors.Wrap(err, "email service start failed")
 		}
 
 		return nil

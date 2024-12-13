@@ -20,6 +20,22 @@ import { mapValues } from '../runtime';
  */
 export interface SecretSvcSecret {
     /**
+     * Slugs of services/users who can delete the secret
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    deleters?: Array<string>;
+    /**
+     * Whether the secret is encrypted
+     * All secrets are encrypted before written to the DB.
+     * This really only exists for write requests to know if the secret is already encrypted.
+     * Ie: while most `secret save [key] [value]` commands are probably not encrypted,
+     * File based saves, eg. `secret save secretA.yaml` are probably encrypted.
+     * @type {boolean}
+     * @memberof SecretSvcSecret
+     */
+    encrypted?: boolean;
+    /**
      * Id of the secret
      * @type {string}
      * @memberof SecretSvcSecret
@@ -68,6 +84,8 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
+        'deleters': json['deleters'] == null ? undefined : json['deleters'],
+        'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
         'readers': json['readers'] == null ? undefined : json['readers'],
@@ -87,6 +105,8 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
+        'deleters': value['deleters'],
+        'encrypted': value['encrypted'],
         'id': value['id'],
         'key': value['key'],
         'readers': value['readers'],
