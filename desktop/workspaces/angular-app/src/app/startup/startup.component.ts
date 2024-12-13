@@ -95,7 +95,7 @@ export class StartupComponent implements OnInit {
 		this.downloaded = data.status == 'completed';
 	}
 
-	selectedModelName(cu: Config): string {
+	selectedModelName(cu: Config | null): string {
 		const model = this.models?.find(
 			(v) => v.id == (cu?.data?.model as ModelSvcConfig).currentModelId
 		);

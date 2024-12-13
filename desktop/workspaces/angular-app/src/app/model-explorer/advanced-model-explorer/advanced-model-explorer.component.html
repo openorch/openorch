@@ -176,8 +176,8 @@
 						>
 							<ion-button
 								*ngIf="
-									(configService.config$ | async)?.model
-										?.currentModelId !== model.id
+									(configService.config$ | async)!.data['model-svc'].currentModelId !==
+									model.id
 								"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
@@ -188,8 +188,8 @@
 							</ion-button>
 							<ion-button
 								*ngIf="
-									(configService.config$ | async)?.model
-										?.currentModelId === model.id
+									(configService.config$ | async)!.data['model-svc']
+										.currentModelId === model.id
 								"
 								color="secondary"
 								(click)="makeModelDefault(model.id!)"
@@ -276,8 +276,8 @@
 				></ion-icon>
 				<ion-icon
 					*ngIf="
-						(configService.config$ | async)?.model?.currentModelId ===
-						model.id
+						(configService.config$ | async)!;
+						data: ['model-svc']?.currentModelId === model.id
 					"
 					name="play-outline"
 				></ion-icon>

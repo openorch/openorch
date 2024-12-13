@@ -136,6 +136,8 @@ definitions:
       data:
         additionalProperties: true
         type: object
+      id:
+        type: string
     required:
     - data
     type: object

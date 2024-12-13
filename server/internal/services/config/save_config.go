@@ -14,30 +14,23 @@ package configservice
 
 import (
 	"context"
-	"io/ioutil"
 	"log/slog"
-	"path"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 	types "github.com/openorch/openorch/server/internal/services/config/types"
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
 )
 
 func (cs *ConfigService) saveConfig(config types.Config) error {
-	cs.configFileMutex.Lock()
-	defer cs.configFileMutex.Unlock()
-
 	cs.config = config
 
-	data, err := yaml.Marshal(cs.config)
+	cs.config.Id = "the-config"
+
+	err := cs.configStore.Upsert(cs.config)
 	if err != nil {
-		return errors.Wrap(err, "error saving config")
-	}
-	if err := ioutil.WriteFile(path.Join(cs.ConfigDirectory, cs.ConfigFileName), data, 0644); err != nil {
-		return errors.Wrap(err, "error writing config file")
+		return errors.Wrap(err, "failed to save config")
 	}
 
 	ev := types.EventConfigUpdate{}

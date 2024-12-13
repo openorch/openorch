@@ -4747,6 +4747,9 @@ const docTemplate = `{
                 "data": {
                     "type": "object",
                     "additionalProperties": true
+                },
+                "id": {
+                    "type": "string"
                 }
             }
         },

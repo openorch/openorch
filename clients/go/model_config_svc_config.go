@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConfigSvcConfig type satisfies the MappedNullable interface at compile time
@@ -20,20 +22,19 @@ var _ MappedNullable = &ConfigSvcConfig{}
 
 // ConfigSvcConfig struct for ConfigSvcConfig
 type ConfigSvcConfig struct {
-	App *ConfigSvcAppServiceConfig `json:"app,omitempty"`
-	Directory *string `json:"directory,omitempty"`
-	Download *ConfigSvcDownloadServiceConfig `json:"download,omitempty"`
-	// * This flag drives a minor UX feature:   * if the user has not installed the runtime we show an INSTALL   * button, but if the user has already installed the runtime we show   * we show a START runtime button.   *
-	IsRuntimeInstalled *bool `json:"isRuntimeInstalled,omitempty"`
-	Model *ConfigSvcModelServiceConfig `json:"model,omitempty"`
+	Data map[string]interface{} `json:"data"`
+	Id *string `json:"id,omitempty"`
 }
+
+type _ConfigSvcConfig ConfigSvcConfig
 
 // NewConfigSvcConfig instantiates a new ConfigSvcConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSvcConfig() *ConfigSvcConfig {
+func NewConfigSvcConfig(data map[string]interface{}) *ConfigSvcConfig {
 	this := ConfigSvcConfig{}
+	this.Data = data
 	return &this
 }
 
@@ -45,164 +46,60 @@ func NewConfigSvcConfigWithDefaults() *ConfigSvcConfig {
 	return &this
 }
 
-// GetApp returns the App field value if set, zero value otherwise.
-func (o *ConfigSvcConfig) GetApp() ConfigSvcAppServiceConfig {
-	if o == nil || IsNil(o.App) {
-		var ret ConfigSvcAppServiceConfig
+// GetData returns the Data field value
+func (o *ConfigSvcConfig) GetData() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.App
+
+	return o.Data
 }
 
-// GetAppOk returns a tuple with the App field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ConfigSvcConfig) GetAppOk() (*ConfigSvcAppServiceConfig, bool) {
-	if o == nil || IsNil(o.App) {
-		return nil, false
+func (o *ConfigSvcConfig) GetDataOk() (map[string]interface{}, bool) {
+	if o == nil {
+		return map[string]interface{}{}, false
 	}
-	return o.App, true
+	return o.Data, true
 }
 
-// HasApp returns a boolean if a field has been set.
-func (o *ConfigSvcConfig) HasApp() bool {
-	if o != nil && !IsNil(o.App) {
-		return true
-	}
-
-	return false
+// SetData sets field value
+func (o *ConfigSvcConfig) SetData(v map[string]interface{}) {
+	o.Data = v
 }
 
-// SetApp gets a reference to the given ConfigSvcAppServiceConfig and assigns it to the App field.
-func (o *ConfigSvcConfig) SetApp(v ConfigSvcAppServiceConfig) {
-	o.App = &v
-}
-
-// GetDirectory returns the Directory field value if set, zero value otherwise.
-func (o *ConfigSvcConfig) GetDirectory() string {
-	if o == nil || IsNil(o.Directory) {
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ConfigSvcConfig) GetId() string {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-	return *o.Directory
+	return *o.Id
 }
 
-// GetDirectoryOk returns a tuple with the Directory field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigSvcConfig) GetDirectoryOk() (*string, bool) {
-	if o == nil || IsNil(o.Directory) {
+func (o *ConfigSvcConfig) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return o.Directory, true
+	return o.Id, true
 }
 
-// HasDirectory returns a boolean if a field has been set.
-func (o *ConfigSvcConfig) HasDirectory() bool {
-	if o != nil && !IsNil(o.Directory) {
+// HasId returns a boolean if a field has been set.
+func (o *ConfigSvcConfig) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
 	return false
 }
 
-// SetDirectory gets a reference to the given string and assigns it to the Directory field.
-func (o *ConfigSvcConfig) SetDirectory(v string) {
-	o.Directory = &v
-}
-
-// GetDownload returns the Download field value if set, zero value otherwise.
-func (o *ConfigSvcConfig) GetDownload() ConfigSvcDownloadServiceConfig {
-	if o == nil || IsNil(o.Download) {
-		var ret ConfigSvcDownloadServiceConfig
-		return ret
-	}
-	return *o.Download
-}
-
-// GetDownloadOk returns a tuple with the Download field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigSvcConfig) GetDownloadOk() (*ConfigSvcDownloadServiceConfig, bool) {
-	if o == nil || IsNil(o.Download) {
-		return nil, false
-	}
-	return o.Download, true
-}
-
-// HasDownload returns a boolean if a field has been set.
-func (o *ConfigSvcConfig) HasDownload() bool {
-	if o != nil && !IsNil(o.Download) {
-		return true
-	}
-
-	return false
-}
-
-// SetDownload gets a reference to the given ConfigSvcDownloadServiceConfig and assigns it to the Download field.
-func (o *ConfigSvcConfig) SetDownload(v ConfigSvcDownloadServiceConfig) {
-	o.Download = &v
-}
-
-// GetIsRuntimeInstalled returns the IsRuntimeInstalled field value if set, zero value otherwise.
-func (o *ConfigSvcConfig) GetIsRuntimeInstalled() bool {
-	if o == nil || IsNil(o.IsRuntimeInstalled) {
-		var ret bool
-		return ret
-	}
-	return *o.IsRuntimeInstalled
-}
-
-// GetIsRuntimeInstalledOk returns a tuple with the IsRuntimeInstalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigSvcConfig) GetIsRuntimeInstalledOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsRuntimeInstalled) {
-		return nil, false
-	}
-	return o.IsRuntimeInstalled, true
-}
-
-// HasIsRuntimeInstalled returns a boolean if a field has been set.
-func (o *ConfigSvcConfig) HasIsRuntimeInstalled() bool {
-	if o != nil && !IsNil(o.IsRuntimeInstalled) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsRuntimeInstalled gets a reference to the given bool and assigns it to the IsRuntimeInstalled field.
-func (o *ConfigSvcConfig) SetIsRuntimeInstalled(v bool) {
-	o.IsRuntimeInstalled = &v
-}
-
-// GetModel returns the Model field value if set, zero value otherwise.
-func (o *ConfigSvcConfig) GetModel() ConfigSvcModelServiceConfig {
-	if o == nil || IsNil(o.Model) {
-		var ret ConfigSvcModelServiceConfig
-		return ret
-	}
-	return *o.Model
-}
-
-// GetModelOk returns a tuple with the Model field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigSvcConfig) GetModelOk() (*ConfigSvcModelServiceConfig, bool) {
-	if o == nil || IsNil(o.Model) {
-		return nil, false
-	}
-	return o.Model, true
-}
-
-// HasModel returns a boolean if a field has been set.
-func (o *ConfigSvcConfig) HasModel() bool {
-	if o != nil && !IsNil(o.Model) {
-		return true
-	}
-
-	return false
-}
-
-// SetModel gets a reference to the given ConfigSvcModelServiceConfig and assigns it to the Model field.
-func (o *ConfigSvcConfig) SetModel(v ConfigSvcModelServiceConfig) {
-	o.Model = &v
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ConfigSvcConfig) SetId(v string) {
+	o.Id = &v
 }
 
 func (o ConfigSvcConfig) MarshalJSON() ([]byte, error) {
@@ -215,22 +112,48 @@ func (o ConfigSvcConfig) MarshalJSON() ([]byte, error) {
 
 func (o ConfigSvcConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.App) {
-		toSerialize["app"] = o.App
-	}
-	if !IsNil(o.Directory) {
-		toSerialize["directory"] = o.Directory
-	}
-	if !IsNil(o.Download) {
-		toSerialize["download"] = o.Download
-	}
-	if !IsNil(o.IsRuntimeInstalled) {
-		toSerialize["isRuntimeInstalled"] = o.IsRuntimeInstalled
-	}
-	if !IsNil(o.Model) {
-		toSerialize["model"] = o.Model
+	toSerialize["data"] = o.Data
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	return toSerialize, nil
+}
+
+func (o *ConfigSvcConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"data",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigSvcConfig := _ConfigSvcConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConfigSvcConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigSvcConfig(varConfigSvcConfig)
+
+	return err
 }
 
 type NullableConfigSvcConfig struct {

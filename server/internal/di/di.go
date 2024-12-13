@@ -100,10 +100,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		openorchFolder = options.NodeOptions.ConfigPath
 	}
 
-	configService.ConfigDirectory = openorchFolder
-
 	if options.DatastoreFactory == nil {
-		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
+		localStorePath := path.Join(homeDir, ".openorch", "data")
 		err = os.MkdirAll(localStorePath, 0755)
 		if err != nil {
 			logger.Error(

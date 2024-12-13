@@ -12,7 +12,12 @@ type ErrorResponse struct {
 }
 
 type Config struct {
+	Id   string                 `json:"id"`
 	Data map[string]interface{} `json:"data" binding:"required"`
+}
+
+func (c Config) GetId() string {
+	return c.Id
 }
 
 type GetConfigRequest struct {

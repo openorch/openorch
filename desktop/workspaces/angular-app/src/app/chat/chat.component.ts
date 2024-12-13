@@ -107,7 +107,7 @@ export class ChatComponent implements OnInit {
 		this.subscriptions.push(
 			this.configService.config$.subscribe((config) => {
 				const model = this.models?.find(
-					(m) => m.id == config?.model?.currentModelId
+					(m) => m.id == config?.data['model-svc'].currentModelId
 				);
 				if (model) {
 					this.model = model;
