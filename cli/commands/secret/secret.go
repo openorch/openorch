@@ -25,9 +25,9 @@ save API_KEY 123456789
 save ./secretA.yaml
 
 # Example contents of 'secretA.yaml':
-id: "example-id"
+id: "example-id-1"
 key: "API_KEY"
-value: "LeP8BNEzGAmvzMrebe5DIKmiDAT/Y8ZbA5u3R12DcQc="
+value: "a37/KUAr4SOYi6Xw9i9T8qo3QCk8WvnzONo47jHAkwk="
 encrypted: true
 readers:
   - "service1"
@@ -42,7 +42,7 @@ save ./secrets.yaml
 # Example contents of 'secrets.yaml'
 - id: "example-id-1"
   key: "API_KEY_1"
-  value: "LeP8BNEzGAmvzMrebe5DIKmiDAT/Y8ZbA5u3R12DcQc="
+  value: "a37/KUAr4SOYi6Xw9i9T8qo3QCk8WvnzONo47jHAkwk="
   encrypted: true
   readers:
     - "service1"
@@ -52,7 +52,7 @@ save ./secrets.yaml
     - "user2"
 - id: "example-id-2"
   key: "API_KEY_2"
-  value: "987654321"
+  value: "example2"
   encrypted: false
   readers:
     - "service3"

@@ -143,6 +143,13 @@ func (cs *SecretService) saveSecrets(
 			continue
 		}
 
+		if !s.Encrypted {
+			s.Value, err = encrypt(s.Value, cs.encryptionKey)
+			if err != nil {
+				return errors.Wrap(err, "failed to encrypt secret")
+			}
+		}
+
 		err = cs.secretStore.Upsert(s)
 		if err != nil {
 			return err
