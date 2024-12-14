@@ -12,8 +12,10 @@ type ErrorResponse struct {
 }
 
 type Config struct {
-	Id   string                 `json:"id,omitempty"`
-	Data map[string]interface{} `json:"data" binding:"required"`
+	Id        string                 `json:"id,omitempty"`
+	Namespace string                 `json:"namespace"  binding:"required" swagger:"default=default"`
+	DataJSON  string                 `json:"dataJson,omitempty"`
+	Data      map[string]interface{} `json:"data" binding:"required"`
 }
 
 func (c Config) GetId() string {
@@ -21,6 +23,7 @@ func (c Config) GetId() string {
 }
 
 type GetConfigRequest struct {
+	Namespace string `json:"namespace" swagger:"default=default"`
 }
 
 type GetConfigResponse struct {

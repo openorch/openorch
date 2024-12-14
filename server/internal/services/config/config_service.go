@@ -14,8 +14,10 @@ package configservice
 
 import (
 	"context"
+	"sync"
 
 	"github.com/pkg/errors"
+	"github.com/spyzhov/ajson"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
@@ -34,12 +36,21 @@ type ConfigService struct {
 
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 
-	config types.Config
+	configMutex  sync.Mutex
+	configAJSONs map[string]*ajson.Node
+
+	publicKey  string
+	authorizer sdk.Authorizer
 }
 
-func NewConfigService(lock lock.DistributedLock) (*ConfigService, error) {
+func NewConfigService(
+	lock lock.DistributedLock,
+	authorizer sdk.Authorizer,
+) (*ConfigService, error) {
 	cs := &ConfigService{
-		lock: lock,
+		lock:         lock,
+		configAJSONs: map[string]*ajson.Node{},
+		authorizer:   authorizer,
 	}
 
 	return cs, nil
@@ -68,6 +79,14 @@ func (cs *ConfigService) Start() error {
 		return err
 	}
 	cs.credentialStore = credentialStore
+
+	pk, _, err := cs.clientFactory.Client(sdk.WithToken(cs.token)).
+		UserSvcAPI.GetPublicKey(context.Background()).
+		Execute()
+	if err != nil {
+		return err
+	}
+	cs.publicKey = *pk.PublicKey
 
 	configStore, err := cs.datastoreFactory(
 		"configSvcConfig",
@@ -101,22 +120,31 @@ func (cs *ConfigService) Start() error {
 		return err
 	}
 
-	err = cs.loadConfig()
+	err = cs.loadConfigs()
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (cs *ConfigService) loadConfig() error {
+func (cs *ConfigService) loadConfigs() error {
+	cs.configMutex.Lock()
+	defer cs.configMutex.Unlock()
+
 	configIs, err := cs.configStore.Query().Find()
 	if err != nil {
 		return err
 	}
-	if len(configIs) == 0 {
-		cs.config = types.Config{
-			Data: map[string]interface{}{},
+
+	for _, configI := range configIs {
+		config := configI.(types.Config)
+
+		v, err := ajson.Unmarshal([]byte(config.DataJSON))
+		if err != nil {
+			return errors.Wrap(err, "failed to parse config data")
 		}
+
+		cs.configAJSONs[config.Namespace] = v
 	}
 
 	return nil

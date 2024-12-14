@@ -13,24 +13,45 @@ The Secret Svc stores sensitive or internal (non-end-user-facing) configuration.
 
 > This page is a high level overview of the `Secret Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/list-secrets).
 
+# Access Rules
+
+Any logged in user can create a secret. After a key is created access is governed by the Readers, Writers and Deleters block.
+
+Nonadmin users can only create secrets with the key prefixed by their slug, ie:
+
+```sh
+deploy-svc/EXAMPLE-KEY
+```
+
+vs
+
+```sh
+EMAIL_API_KEY
+```
+
+Obviously the `EMAIL_API_KEY` will be set up by an administrator user.
+
+This prefix rule serves two purposes:
+
+- It is clear which secret keys are "static" and originating from admin users
+- It can prevent issues where a user claims a key knowing that it might be used later and overwritten/populated by an admin with sensitive information
+
 ## Design choices
 
 The Secret Svc, like most things in OpenOrch, is designed to be simple to reason about.
 
 ```go
 type Secret struct {
+  Id             string
 	Key            string   // Secret key eg. "MY_API_KEY"
-	Value          string   // Secret value eg. "nNl4X9\+@95Z"
+	Value          string   // Secret value eg. "nNl4X9\+@95Z
 	Readers        []string // Slugs of services and users who can read the secret
 	Writers        []string // Slugs of services and users who can modify the secret
+  Deleters       []string // Slugs of services and users who can delete the secret
 }
 ```
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
-
-## About readers and writers
-
-At the moment only admins can read or write secrets. The system is only designed to work for service 2 service calls. In the future with readers and writers we might create a more multitenant system where even non-admins can read and write secrets.
 
 ### Encryption at rest
 

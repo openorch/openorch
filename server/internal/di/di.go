@@ -86,7 +86,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Lock = distlock.NewLocalDistributedLock()
 	}
 
-	configService, err := configservice.NewConfigService(options.Lock)
+	configService, err := configservice.NewConfigService(
+		options.Lock,
+		options.Authorizer,
+	)
 	if err != nil {
 		logger.Error(
 			"Config service creation failed",

@@ -13,12 +13,18 @@
 package configservice
 
 import (
+	"context"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/logger"
 	config "github.com/openorch/openorch/server/internal/services/config/types"
+	types "github.com/openorch/openorch/server/internal/services/config/types"
+	"github.com/pkg/errors"
+	"github.com/spyzhov/ajson"
 )
 
 // Save saves the configuration
@@ -64,7 +70,14 @@ func (cs *ConfigService) Save(
 	}
 	defer r.Body.Close()
 
-	err = cs.saveConfig(*req.Config)
+	isAdmin, err := cs.authorizer.IsAdminFromRequest(cs.publicKey, r)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	err = cs.saveConfig(isAdmin, *isAuthRsp.User.Slug, *req.Config)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -73,4 +86,60 @@ func (cs *ConfigService) Save(
 
 	jsonData, _ := json.Marshal(config.SaveConfigResponse{})
 	w.Write(jsonData)
+}
+
+func (cs *ConfigService) saveConfig(isAdmin bool, callerSlug string, config types.Config) error {
+	if config.Namespace == "" {
+		config.Namespace = "default"
+	}
+
+	cs.configMutex.Lock()
+	defer cs.configMutex.Unlock()
+
+	root := cs.configAJSONs[config.Namespace]
+	nodes, err := root.JSONPath("$." + callerSlug)
+	if err != nil {
+		return errors.Wrap(err, "failed to find caller in config")
+	}
+
+	var toUpdate any
+	if isAdmin {
+		toUpdate = config.Data
+	} else {
+		toUpdate = config.Data[callerSlug]
+	}
+
+	err = nodes[0].Set(toUpdate)
+	if err != nil {
+		return errors.Wrap(err, "failed to set config")
+	}
+
+	djson, err := ajson.Marshal(root)
+	if err != nil {
+		return errors.Wrap(err, "failed to marshal config")
+	}
+	config.DataJSON = string(djson)
+	config.Data = nil
+
+	err = cs.configStore.Upsert(config)
+	if err != nil {
+		return errors.Wrap(err, "failed to save config")
+	}
+
+	ev := types.EventConfigUpdate{}
+	_, err = cs.clientFactory.Client(sdk.WithToken(cs.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: nil,
+			},
+		}).
+		Execute()
+
+	if err != nil {
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
+	}
+
+	return nil
 }

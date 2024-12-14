@@ -17,6 +17,9 @@ import (
 	"net/http"
 
 	config "github.com/openorch/openorch/server/internal/services/config/types"
+	types "github.com/openorch/openorch/server/internal/services/config/types"
+	"github.com/pkg/errors"
+	"github.com/spyzhov/ajson"
 )
 
 // Get retrieves the current configuration
@@ -38,7 +41,16 @@ func (cs *ConfigService) Get(
 	// Config get should not be authorized because it is public, nonsensitive information.
 	// Think about app config, A/B tests and such.
 
-	conf, err := cs.getConfig()
+	req := &config.GetConfigRequest{}
+	err := json.NewDecoder(r.Body).Decode(req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`Invalid JSON`))
+		return
+	}
+	defer r.Body.Close()
+
+	conf, err := cs.getConfig(req.Namespace)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -46,7 +58,29 @@ func (cs *ConfigService) Get(
 	}
 
 	jsonData, _ := json.Marshal(config.GetConfigResponse{
-		Config: &conf,
+		Config: conf,
 	})
 	w.Write(jsonData)
+}
+
+func (cs *ConfigService) getConfig(namespace string) (*types.Config, error) {
+	if namespace == "" {
+		namespace = "default"
+	}
+	ajsonRoot, ok := cs.configAJSONs[namespace]
+	if !ok {
+		return nil, errors.New("config not found")
+	}
+	v, err := ajson.Marshal(ajsonRoot)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to marshal config")
+	}
+
+	ret := &types.Config{}
+	err = json.Unmarshal(v, ret.Data)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to unmarshal config")
+	}
+
+	return ret, nil
 }

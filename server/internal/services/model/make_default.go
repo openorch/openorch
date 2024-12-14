@@ -17,9 +17,10 @@ import (
 	"fmt"
 
 	"github.com/flusflas/dipper"
+	"github.com/pkg/errors"
+
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/pkg/errors"
 )
 
 func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
