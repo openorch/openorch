@@ -96,8 +96,12 @@ export class StartupComponent implements OnInit {
 	}
 
 	selectedModelName(cu: Config | null): string {
+		if (!cu) {
+			return '';
+		}
+
 		const model = this.models?.find(
-			(v) => v.id == (cu?.data?.model as ModelSvcConfig).currentModelId
+			(v) => v.id == (cu?.data['model-svc'] as ModelSvcConfig)?.currentModelId
 		);
 		const displayName = [model?.name, model?.flavour, model?.version].join(' ');
 		return displayName;

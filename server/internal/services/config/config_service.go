@@ -23,8 +23,6 @@ import (
 	types "github.com/openorch/openorch/server/internal/services/config/types"
 )
 
-const DefaultModelId = `huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf`
-
 type ConfigService struct {
 	clientFactory sdk.ClientFactory
 	token         string

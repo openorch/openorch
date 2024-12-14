@@ -17,6 +17,7 @@ import (
 	"fmt"
 	"log/slog"
 
+	"github.com/flusflas/dipper"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/logger"
@@ -51,10 +52,12 @@ func (ms *ModelService) status(
 			return nil, err
 		}
 
-		if *rsp.Config.Model.CurrentModelId == "" {
-			return nil, errors.New("no model id specified and no default model")
+		modelIdI := dipper.Get(rsp.Config.Data, "$.model-svc.currentModelId")
+		var ok bool
+		modelId, ok = modelIdI.(string)
+		if !ok {
+			modelId = DefaultModelId
 		}
-		modelId = *rsp.Config.Model.CurrentModelId
 	}
 
 	modelI, found, err := ms.modelsStore.Query(

@@ -5,12 +5,14 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/flusflas/dipper"
 	"github.com/stretchr/testify/require"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
-	configservice "github.com/openorch/openorch/server/internal/services/config"
+
+	modelservice "github.com/openorch/openorch/server/internal/services/model"
 )
 
 func TestModel(t *testing.T) {
@@ -74,8 +76,8 @@ func TestModel(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(
 			t,
-			configservice.DefaultModelId,
-			*getConfigRsp.Config.Model.CurrentModelId,
+			modelservice.DefaultModelId,
+			dipper.Get(getConfigRsp.Config.Data, "$.model-svc.currentModelId"),
 		)
 
 		_, _, err = userClient.ModelSvcAPI.MakeDefault(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
@@ -88,8 +90,8 @@ func TestModel(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(
 			t,
-			configservice.DefaultModelId,
-			*getConfigRsp.Config.Model.CurrentModelId,
+			modelservice.DefaultModelId,
+			dipper.Get(getConfigRsp.Config.Data, "$.model-svc.currentModelId"),
 		)
 	})
 }

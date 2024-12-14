@@ -63,10 +63,16 @@ export class ConfigService {
 	async loggedInInit() {
 		try {
 			const rsp = await this.configGet();
-			this.lastConfig = rsp?.config || {
-				data: {},
-			};
-			this.configSubject.next(rsp?.config as ConfigSvcConfig);
+			console.log('Config loaded', rsp);
+			if (!rsp?.config?.data) {
+				this.lastConfig = {
+					data: {},
+				};
+			} else {
+				this.lastConfig = rsp?.config;
+			}
+
+			this.configSubject.next(this.lastConfig as ConfigSvcConfig);
 		} catch (error) {
 			console.log(error);
 			console.error('Error in pollConfig', {

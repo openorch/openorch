@@ -16,8 +16,10 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/flusflas/dipper"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 )
 
 func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
@@ -37,7 +39,10 @@ func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 		return err
 	}
 
-	rsp.Config.Model.CurrentModelId = openapi.PtrString(modelId)
+	err = dipper.Set(rsp.Config.Data, "$.model-svc.currentModelId", modelId)
+	if err != nil {
+		return errors.Wrap(err, "failed to set current model id")
+	}
 
 	_, _, err = ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		ConfigSvcAPI.SaveConfig(ctx).

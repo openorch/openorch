@@ -21,6 +21,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
 
 	openapi "github.com/openorch/openorch/clients/go"
@@ -31,6 +32,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
+	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
@@ -249,7 +251,13 @@ func (p *PromptService) processPrompt(
 		if err != nil {
 			return err
 		}
-		modelId = *getConfigRsp.Config.Model.CurrentModelId
+
+		modelIdI := dipper.Get(getConfigRsp.Config.Data, "$.model-svc.currentModelId")
+		var ok bool
+		modelId, ok = modelIdI.(string)
+		if !ok {
+			modelId = modelservice.DefaultModelId
+		}
 	}
 
 	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).

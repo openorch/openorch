@@ -12,7 +12,7 @@ type ErrorResponse struct {
 }
 
 type Config struct {
-	Id   string                 `json:"id"`
+	Id   string                 `json:"id,omitempty"`
 	Data map[string]interface{} `json:"data" binding:"required"`
 }
 
