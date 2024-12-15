@@ -116,7 +116,9 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			Return(&openapi.ConfigSvcGetConfigResponse{
 				Config: &openapi.ConfigSvcConfig{
 					Data: map[string]interface{}{
-						"currentModelId": "mistral-1",
+						"model-svc": map[string]interface{}{
+							"currentModelId": "mistral-1",
+						},
 					},
 				},
 			}, nil, nil).AnyTimes()
@@ -264,7 +266,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 				if !strings.Contains(*v.Id, "mistral") {
 					continue
 				}
-				currentModelIdI := dipper.Get(crsp.Config.Data, "$.model-svc.currentModelId")
+				currentModelIdI := dipper.Get(crsp.Config.Data, "model-svc.currentModelId")
 				currentModelId, ok := currentModelIdI.(string)
 				if ok && *v.Id == currentModelId {
 					model = &v
