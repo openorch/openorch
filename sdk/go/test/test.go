@@ -65,6 +65,12 @@ func WithSlugFactory(slugFactory func() string) MockUserOption {
 	}
 }
 
+func WithIsAuthorizedFactory(isAuthorizedFactory func() bool) MockUserOption {
+	return func(o *MockUserOptions) {
+		o.IsAuthorizedFactory = isAuthorizedFactory
+	}
+}
+
 // Returns a mock User Svc with expects set up for calls that happen during the startup of the services.
 func MockUserSvc(ctx context.Context, ctrl *gomock.Controller, options ...MockUserOption) *openapi.MockUserSvcAPI {
 	opts := &MockUserOptions{}

@@ -46,8 +46,9 @@ var _ = ginkgo.Describe("Config Tests", func() {
 		universe    *mux.Router
 		starterFunc func() error
 
-		isAdmin  bool
-		userSlug string
+		isAuthorized bool
+		isAdmin      bool
+		userSlug     string
 	)
 
 	ginkgo.BeforeEach(func() {
@@ -61,6 +62,9 @@ var _ = ginkgo.Describe("Config Tests", func() {
 		mockUserSvc = test.MockUserSvc(
 			ctx,
 			ctrl,
+			test.WithIsAuthorizedFactory(func() bool {
+				return isAuthorized
+			}),
 			test.WithSlugFactory(func() string {
 				return userSlug
 			}),
@@ -136,6 +140,7 @@ var _ = ginkgo.Describe("Config Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})

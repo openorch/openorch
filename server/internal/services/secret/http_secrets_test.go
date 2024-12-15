@@ -46,8 +46,9 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		universe    *mux.Router
 		starterFunc func() error
 
-		isAdmin  bool
-		userSlug string
+		isAdmin      bool
+		isAuthorized bool
+		userSlug     string
 	)
 
 	ginkgo.BeforeEach(func() {
@@ -61,6 +62,9 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		mockUserSvc = test.MockUserSvc(
 			ctx,
 			ctrl,
+			test.WithIsAuthorizedFactory(func() bool {
+				return isAuthorized
+			}),
 			test.WithSlugFactory(func() string {
 				return userSlug
 			}),
@@ -112,6 +116,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -132,6 +137,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -155,6 +161,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = true
 			userSlug = "test-admin-user-1"
 		})
@@ -190,6 +197,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -240,6 +248,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})

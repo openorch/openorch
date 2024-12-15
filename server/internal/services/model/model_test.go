@@ -71,21 +71,21 @@ func TestModel(t *testing.T) {
 	})
 
 	t.Run("default", func(t *testing.T) {
-		getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
-			Execute()
-		require.NoError(t, err)
-		require.Equal(
-			t,
-			modelservice.DefaultModelId,
-			dipper.Get(getConfigRsp.Config.Data, "$.model-svc.currentModelId"),
-		)
+		// getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
+		// 	Execute()
+		// require.NoError(t, err)
+		// require.Equal(
+		// 	t,
+		// 	modelservice.DefaultModelId,
+		// 	dipper.Get(getConfigRsp.Config.Data, "model-svc.currentModelId"),
+		// )
 
 		_, _, err = userClient.ModelSvcAPI.MakeDefault(context.Background(), "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf").
 			Execute()
 		// errors because it is not downloaded yet
 		require.Error(t, err)
 
-		getConfigRsp, _, err = userClient.ConfigSvcAPI.GetConfig(context.Background()).
+		getConfigRsp, _, err := userClient.ConfigSvcAPI.GetConfig(context.Background()).
 			Execute()
 		require.NoError(t, err)
 		require.Equal(

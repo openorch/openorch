@@ -18,6 +18,7 @@ import (
 	"net/url"
 
 	"github.com/gorilla/mux"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
@@ -44,6 +45,7 @@ func (ms *ModelService) Status(
 
 	isAuthRsp, _, err := ms.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), model.PermissionModelView.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

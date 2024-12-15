@@ -16,7 +16,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
 
 	openapi "github.com/openorch/openorch/clients/go"
@@ -40,7 +39,11 @@ func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 		return err
 	}
 
-	err = dipper.Set(rsp.Config.Data, "$.model-svc.currentModelId", modelId)
+	_, ok := rsp.Config.Data["model-svc"].(map[string]any)
+	if !ok {
+		rsp.Config.Data["model-svc"] = map[string]any{}
+	}
+
 	if err != nil {
 		return errors.Wrap(err, "failed to set current model id")
 	}

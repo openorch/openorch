@@ -67,7 +67,9 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		lc = llm.NewMockClientI(ctrl)
 
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
-		mockUserSvc = test.MockUserSvc(ctx, ctrl)
+		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithIsAuthorizedFactory(func() bool {
+			return true
+		}))
 		mockChatSvc = openapi.NewMockChatSvcAPI(ctrl)
 		mockModelSvc = openapi.NewMockModelSvcAPI(ctrl)
 		mockConfigSvc = openapi.NewMockConfigSvcAPI(ctrl)
