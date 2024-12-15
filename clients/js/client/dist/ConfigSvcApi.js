@@ -4,9 +4,6 @@ var runtime = require('./runtime2.js');
 var ConfigSvcGetConfigResponse = require('./ConfigSvcGetConfigResponse.js');
 var ConfigSvcSaveConfigRequest = require('./ConfigSvcSaveConfigRequest.js');
 require('./ConfigSvcConfig.js');
-require('./ConfigSvcAppServiceConfig.js');
-require('./ConfigSvcModelServiceConfig.js');
-require('./ConfigSvcDownloadServiceConfig.js');
 
 /* tslint:disable */
 /* eslint-disable */
@@ -29,9 +26,12 @@ class ConfigSvcApi extends runtime.BaseAPI {
      * Fetch the current configuration from the server
      * Get Config
      */
-    getConfigRaw(initOverrides) {
+    getConfigRaw(requestParameters, initOverrides) {
         return runtime.__awaiter(this, void 0, void 0, function* () {
             const queryParameters = {};
+            if (requestParameters['namespace'] != null) {
+                queryParameters['namespace'] = requestParameters['namespace'];
+            }
             const headerParameters = {};
             if (this.configuration && this.configuration.apiKey) {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
@@ -49,9 +49,9 @@ class ConfigSvcApi extends runtime.BaseAPI {
      * Fetch the current configuration from the server
      * Get Config
      */
-    getConfig(initOverrides) {
-        return runtime.__awaiter(this, void 0, void 0, function* () {
-            const response = yield this.getConfigRaw(initOverrides);
+    getConfig() {
+        return runtime.__awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.getConfigRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

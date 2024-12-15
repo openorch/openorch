@@ -11,11 +11,8 @@ export * from './chatSvcGetThreadsResponse';
 export * from './chatSvcMessage';
 export * from './chatSvcThread';
 export * from './chatSvcUpdateThreadRequest';
-export * from './configSvcAppServiceConfig';
 export * from './configSvcConfig';
-export * from './configSvcDownloadServiceConfig';
 export * from './configSvcGetConfigResponse';
-export * from './configSvcModelServiceConfig';
 export * from './configSvcSaveConfigRequest';
 export * from './datastoreFilter';
 export * from './datastoreOp';
@@ -167,11 +164,8 @@ import { ChatSvcGetThreadsResponse } from './chatSvcGetThreadsResponse';
 import { ChatSvcMessage } from './chatSvcMessage';
 import { ChatSvcThread } from './chatSvcThread';
 import { ChatSvcUpdateThreadRequest } from './chatSvcUpdateThreadRequest';
-import { ConfigSvcAppServiceConfig } from './configSvcAppServiceConfig';
 import { ConfigSvcConfig } from './configSvcConfig';
-import { ConfigSvcDownloadServiceConfig } from './configSvcDownloadServiceConfig';
 import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
-import { ConfigSvcModelServiceConfig } from './configSvcModelServiceConfig';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
 import { DatastoreFilter } from './datastoreFilter';
 import { DatastoreOp } from './datastoreOp';
@@ -346,11 +340,8 @@ let typeMap = {
     "ChatSvcMessage": ChatSvcMessage,
     "ChatSvcThread": ChatSvcThread,
     "ChatSvcUpdateThreadRequest": ChatSvcUpdateThreadRequest,
-    "ConfigSvcAppServiceConfig": ConfigSvcAppServiceConfig,
     "ConfigSvcConfig": ConfigSvcConfig,
-    "ConfigSvcDownloadServiceConfig": ConfigSvcDownloadServiceConfig,
     "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
-    "ConfigSvcModelServiceConfig": ConfigSvcModelServiceConfig,
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
     "DatastoreFilter": DatastoreFilter,
     "DatastoreOrderBy": DatastoreOrderBy,

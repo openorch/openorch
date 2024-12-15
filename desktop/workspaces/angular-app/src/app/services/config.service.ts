@@ -15,7 +15,7 @@ import {
 	ConfigSvcApi,
 	ConfigSvcGetConfigResponse,
 	Configuration,
-	ConfigSvcConfig as Config,
+	ConfigSvcConfig,
 } from '@openorch/client';
 
 @Injectable({
@@ -24,11 +24,12 @@ import {
 export class ConfigService {
 	private configService!: ConfigSvcApi;
 
-	lastConfig!: Config;
+	lastConfig!: ConfigSvcConfig;
 
-	onConfigUpdateSubject = new ReplaySubject<Config>(1);
+	configSubject = new ReplaySubject<ConfigSvcConfig>(1);
+
 	/** Config emitted whenever it's loaded (on startup) or saved */
-	onConfigUpdate$ = this.onConfigUpdateSubject.asObservable();
+	config$ = this.configSubject.asObservable();
 
 	constructor(
 		private server: ServerService,
@@ -52,7 +53,7 @@ export class ConfigService {
 			switch (event.name) {
 				case 'configUpdate': {
 					const rsp = await this.configGet();
-					this.onConfigUpdateSubject.next(rsp.config!);
+					this.configSubject.next(rsp.config!);
 					break;
 				}
 			}
@@ -62,8 +63,16 @@ export class ConfigService {
 	async loggedInInit() {
 		try {
 			const rsp = await this.configGet();
-			this.lastConfig = rsp?.config || {};
-			this.onConfigUpdateSubject.next(rsp?.config as Config);
+			console.log('Config loaded', rsp);
+			if (!rsp?.config?.data) {
+				this.lastConfig = {
+					data: {},
+				};
+			} else {
+				this.lastConfig = rsp?.config;
+			}
+
+			this.configSubject.next(this.lastConfig as ConfigSvcConfig);
 		} catch (error) {
 			console.log(error);
 			console.error('Error in pollConfig', {

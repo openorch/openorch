@@ -13,11 +13,8 @@ var chatSvcGetThreadsResponse = require('./chatSvcGetThreadsResponse.js');
 var chatSvcMessage = require('./chatSvcMessage.js');
 var chatSvcThread = require('./chatSvcThread.js');
 var chatSvcUpdateThreadRequest = require('./chatSvcUpdateThreadRequest.js');
-var configSvcAppServiceConfig = require('./configSvcAppServiceConfig.js');
 var configSvcConfig = require('./configSvcConfig.js');
-var configSvcDownloadServiceConfig = require('./configSvcDownloadServiceConfig.js');
 var configSvcGetConfigResponse = require('./configSvcGetConfigResponse.js');
-var configSvcModelServiceConfig = require('./configSvcModelServiceConfig.js');
 var configSvcSaveConfigRequest = require('./configSvcSaveConfigRequest.js');
 var datastoreFilter = require('./datastoreFilter.js');
 var datastoreOp = require('./datastoreOp.js');
@@ -193,11 +190,8 @@ let typeMap = {
     "ChatSvcMessage": chatSvcMessage.ChatSvcMessage,
     "ChatSvcThread": chatSvcThread.ChatSvcThread,
     "ChatSvcUpdateThreadRequest": chatSvcUpdateThreadRequest.ChatSvcUpdateThreadRequest,
-    "ConfigSvcAppServiceConfig": configSvcAppServiceConfig.ConfigSvcAppServiceConfig,
     "ConfigSvcConfig": configSvcConfig.ConfigSvcConfig,
-    "ConfigSvcDownloadServiceConfig": configSvcDownloadServiceConfig.ConfigSvcDownloadServiceConfig,
     "ConfigSvcGetConfigResponse": configSvcGetConfigResponse.ConfigSvcGetConfigResponse,
-    "ConfigSvcModelServiceConfig": configSvcModelServiceConfig.ConfigSvcModelServiceConfig,
     "ConfigSvcSaveConfigRequest": configSvcSaveConfigRequest.ConfigSvcSaveConfigRequest,
     "DatastoreFilter": datastoreFilter.DatastoreFilter,
     "DatastoreOrderBy": datastoreOrderBy.DatastoreOrderBy,
@@ -569,11 +563,8 @@ exports.ChatSvcGetThreadsResponse = chatSvcGetThreadsResponse.ChatSvcGetThreadsR
 exports.ChatSvcMessage = chatSvcMessage.ChatSvcMessage;
 exports.ChatSvcThread = chatSvcThread.ChatSvcThread;
 exports.ChatSvcUpdateThreadRequest = chatSvcUpdateThreadRequest.ChatSvcUpdateThreadRequest;
-exports.ConfigSvcAppServiceConfig = configSvcAppServiceConfig.ConfigSvcAppServiceConfig;
 exports.ConfigSvcConfig = configSvcConfig.ConfigSvcConfig;
-exports.ConfigSvcDownloadServiceConfig = configSvcDownloadServiceConfig.ConfigSvcDownloadServiceConfig;
 exports.ConfigSvcGetConfigResponse = configSvcGetConfigResponse.ConfigSvcGetConfigResponse;
-exports.ConfigSvcModelServiceConfig = configSvcModelServiceConfig.ConfigSvcModelServiceConfig;
 exports.ConfigSvcSaveConfigRequest = configSvcSaveConfigRequest.ConfigSvcSaveConfigRequest;
 exports.DatastoreFilter = datastoreFilter.DatastoreFilter;
 Object.defineProperty(exports, 'DatastoreOp', {

@@ -25,5 +25,10 @@ SecretSvcListSecretsRequest.attributeTypeMap = [
         "name": "keys",
         "baseName": "keys",
         "type": "Array<string>"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
+        "type": "string"
     }
 ];

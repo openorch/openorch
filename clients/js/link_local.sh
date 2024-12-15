@@ -2,14 +2,18 @@
 
 set -e
 
+if ! command -v rollup > /dev/null; then
+  npm install -g rollup
+else
+  echo "Rollup is already installed."
+fi
+
 cd client;
-npm install
 npm run build;
 npm link;
 cd ..
 
 cd example;
-npm install
 npm link @openorch/client;
 npm run build
 cd ..

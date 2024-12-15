@@ -1,9 +1,5 @@
 'use strict';
 
-var ConfigSvcAppServiceConfig = require('./ConfigSvcAppServiceConfig.js');
-var ConfigSvcModelServiceConfig = require('./ConfigSvcModelServiceConfig.js');
-var ConfigSvcDownloadServiceConfig = require('./ConfigSvcDownloadServiceConfig.js');
-
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -21,6 +17,10 @@ var ConfigSvcDownloadServiceConfig = require('./ConfigSvcDownloadServiceConfig.j
  * Check if a given object implements the ConfigSvcConfig interface.
  */
 function instanceOfConfigSvcConfig(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
+    if (!('namespace' in value) || value['namespace'] === undefined)
+        return false;
     return true;
 }
 function ConfigSvcConfigFromJSON(json) {
@@ -31,11 +31,10 @@ function ConfigSvcConfigFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'app': json['app'] == null ? undefined : ConfigSvcAppServiceConfig.ConfigSvcAppServiceConfigFromJSON(json['app']),
-        'directory': json['directory'] == null ? undefined : json['directory'],
-        'download': json['download'] == null ? undefined : ConfigSvcDownloadServiceConfig.ConfigSvcDownloadServiceConfigFromJSON(json['download']),
-        'isRuntimeInstalled': json['isRuntimeInstalled'] == null ? undefined : json['isRuntimeInstalled'],
-        'model': json['model'] == null ? undefined : ConfigSvcModelServiceConfig.ConfigSvcModelServiceConfigFromJSON(json['model']),
+        'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'],
     };
 }
 function ConfigSvcConfigToJSON(json) {
@@ -46,11 +45,10 @@ function ConfigSvcConfigToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
-        'app': ConfigSvcAppServiceConfig.ConfigSvcAppServiceConfigToJSON(value['app']),
-        'directory': value['directory'],
-        'download': ConfigSvcDownloadServiceConfig.ConfigSvcDownloadServiceConfigToJSON(value['download']),
-        'isRuntimeInstalled': value['isRuntimeInstalled'],
-        'model': ConfigSvcModelServiceConfig.ConfigSvcModelServiceConfigToJSON(value['model']),
+        'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
     };
 }
 

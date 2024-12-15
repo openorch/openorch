@@ -9,18 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ConfigSvcAppServiceConfig } from './configSvcAppServiceConfig';
-import { ConfigSvcDownloadServiceConfig } from './configSvcDownloadServiceConfig';
-import { ConfigSvcModelServiceConfig } from './configSvcModelServiceConfig';
 export declare class ConfigSvcConfig {
-    'app'?: ConfigSvcAppServiceConfig;
-    'directory'?: string;
-    'download'?: ConfigSvcDownloadServiceConfig;
-    /**
-    * * This flag drives a minor UX feature:   * if the user has not installed the runtime we show an INSTALL   * button, but if the user has already installed the runtime we show   * we show a START runtime button.   *
-    */
-    'isRuntimeInstalled'?: boolean;
-    'model'?: ConfigSvcModelServiceConfig;
+    'data': {
+        [key: string]: any;
+    };
+    'dataJson'?: string;
+    'id'?: string;
+    'namespace': string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

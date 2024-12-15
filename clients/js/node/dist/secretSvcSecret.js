@@ -19,6 +19,21 @@ class SecretSvcSecret {
 SecretSvcSecret.discriminator = undefined;
 SecretSvcSecret.attributeTypeMap = [
     {
+        "name": "canChangeDeleters",
+        "baseName": "canChangeDeleters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "canChangeReaders",
+        "baseName": "canChangeReaders",
+        "type": "Array<string>"
+    },
+    {
+        "name": "canChangeWriters",
+        "baseName": "canChangeWriters",
+        "type": "Array<string>"
+    },
+    {
         "name": "deleters",
         "baseName": "deleters",
         "type": "Array<string>"
@@ -36,6 +51,11 @@ SecretSvcSecret.attributeTypeMap = [
     {
         "name": "key",
         "baseName": "key",
+        "type": "string"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
         "type": "string"
     },
     {

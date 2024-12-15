@@ -93,8 +93,9 @@ export class ConfigSvcApi {
     /**
      * Fetch the current configuration from the server
      * @summary Get Config
+     * @param namespace Namespace
      */
-    public async getConfig (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ConfigSvcGetConfigResponse;  }> {
+    public async getConfig (namespace?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ConfigSvcGetConfigResponse;  }> {
         const localVarPath = this.basePath + '/config-svc/config';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -106,6 +107,10 @@ export class ConfigSvcApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        if (namespace !== undefined) {
+            localVarQueryParameters['namespace'] = ObjectSerializer.serialize(namespace, "string");
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 

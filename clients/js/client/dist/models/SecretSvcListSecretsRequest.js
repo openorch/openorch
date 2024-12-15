@@ -27,6 +27,7 @@ export function SecretSvcListSecretsRequestFromJSONTyped(json, ignoreDiscriminat
     return {
         'key': json['key'] == null ? undefined : json['key'],
         'keys': json['keys'] == null ? undefined : json['keys'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
     };
 }
 export function SecretSvcListSecretsRequestToJSON(json) {
@@ -39,5 +40,6 @@ export function SecretSvcListSecretsRequestToJSONTyped(value, ignoreDiscriminato
     return {
         'key': value['key'],
         'keys': value['keys'],
+        'namespace': value['namespace'],
     };
 }

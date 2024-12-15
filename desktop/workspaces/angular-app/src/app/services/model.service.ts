@@ -21,6 +21,10 @@ import {
 	OnModelCheck,
 } from 'shared-lib/models/event-request-response';
 
+export interface ModelSvcConfig {
+	currentModelId: string;
+}
+
 @Injectable({
 	providedIn: 'root',
 })

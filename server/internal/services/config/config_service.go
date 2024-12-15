@@ -14,25 +14,16 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	"io/ioutil"
-	"log/slog"
-	"os"
-	"path"
+	"encoding/json"
 	"sync"
 
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
 	types "github.com/openorch/openorch/server/internal/services/config/types"
-
-	"github.com/openorch/openorch/sdk/go/logger"
 )
-
-const DefaultModelId = `huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf`
 
 type ConfigService struct {
 	clientFactory sdk.ClientFactory
@@ -40,26 +31,29 @@ type ConfigService struct {
 
 	lock lock.DistributedLock
 
-	ConfigDirectory string
-	ConfigFileName  string
-	config          types.Config
-	configFileMutex sync.Mutex
+	credentialStore datastore.DataStore
+	configStore     datastore.DataStore
 
-	credentialStore  datastore.DataStore
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
+
+	configMutex sync.Mutex
+	configs     map[string]map[string]any
+
+	publicKey  string
+	authorizer sdk.Authorizer
 }
 
-func NewConfigService(lock lock.DistributedLock) (*ConfigService, error) {
+func NewConfigService(
+	lock lock.DistributedLock,
+	authorizer sdk.Authorizer,
+) (*ConfigService, error) {
 	cs := &ConfigService{
-		ConfigFileName: "config.yaml",
-		lock:           lock,
+		lock:       lock,
+		configs:    map[string]map[string]any{},
+		authorizer: authorizer,
 	}
 
 	return cs, nil
-}
-
-func (cs *ConfigService) GetConfigDirectory() string {
-	return cs.ConfigDirectory
 }
 
 func (cs *ConfigService) SetClientFactory(clientFactory sdk.ClientFactory) {
@@ -76,6 +70,7 @@ func (cs *ConfigService) Start() error {
 	if cs.datastoreFactory == nil {
 		return errors.New("no datastore factory")
 	}
+
 	credentialStore, err := cs.datastoreFactory(
 		"configSvcCredentials",
 		&sdk.Credential{},
@@ -85,7 +80,25 @@ func (cs *ConfigService) Start() error {
 	}
 	cs.credentialStore = credentialStore
 
+	pk, _, err := cs.clientFactory.Client(sdk.WithToken(cs.token)).
+		UserSvcAPI.GetPublicKey(context.Background()).
+		Execute()
+	if err != nil {
+		return err
+	}
+	cs.publicKey = *pk.PublicKey
+
+	configStore, err := cs.datastoreFactory(
+		"configSvcConfig",
+		&types.Config{},
+	)
+	if err != nil {
+		return err
+	}
+	cs.configStore = configStore
+
 	ctx := context.Background()
+
 	cs.lock.Acquire(ctx, "config-svc-start")
 	defer cs.lock.Release(ctx, "config-svc-start")
 
@@ -102,60 +115,37 @@ func (cs *ConfigService) Start() error {
 	}
 	cs.token = token
 
-	if cs.ConfigDirectory == "" {
-		return fmt.Errorf("config service is missing a config directory option")
-	}
 	err = cs.registerPermissions()
 	if err != nil {
 		return err
 	}
 
-	err = cs.loadConfig()
+	err = cs.loadConfigs()
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (cs *ConfigService) loadConfig() error {
-	cs.configFileMutex.Lock()
-	defer cs.configFileMutex.Unlock()
+func (cs *ConfigService) loadConfigs() error {
+	cs.configMutex.Lock()
+	defer cs.configMutex.Unlock()
 
-	if _, err := os.Stat(cs.ConfigDirectory); os.IsNotExist(err) {
-		if err := os.MkdirAll(cs.ConfigDirectory, os.ModePerm); err != nil {
-			return errors.Wrap(err, "error creating config directory")
-		}
+	configIs, err := cs.configStore.Query().Find()
+	if err != nil {
+		return err
 	}
 
-	if _, err := os.Stat(path.Join(cs.ConfigDirectory, cs.ConfigFileName)); err == nil {
-		data, err := ioutil.ReadFile(
-			path.Join(cs.ConfigDirectory, cs.ConfigFileName),
-		)
+	for _, configI := range configIs {
+		config := configI.(types.Config)
+
+		v := map[string]any{}
+		err := json.Unmarshal([]byte(config.DataJSON), &v)
 		if err != nil {
-			return errors.Wrap(err, "failed to read config")
+			return errors.Wrap(err, "failed to parse config data")
 		}
 
-		if err := yaml.Unmarshal(data, &cs.config); err != nil {
-			return errors.Wrap(err, "failed to unmarshal config")
-		}
-	} else {
-		logger.Debug("Config file does not exist", slog.String("path", path.Join(cs.ConfigDirectory, cs.ConfigFileName)))
-		cs.config = types.Config{}
-	}
-
-	if cs.config.Download.DownloadFolder == "" {
-		cs.config.Download.DownloadFolder = path.Join(
-			cs.ConfigDirectory,
-			"downloads",
-		)
-	}
-
-	if cs.config.Model.CurrentModelId == "" {
-		cs.config.Model.CurrentModelId = DefaultModelId
-	}
-
-	if cs.config.Directory == "" {
-		cs.config.Directory = cs.ConfigDirectory
+		cs.configs[config.Namespace] = v
 	}
 
 	return nil

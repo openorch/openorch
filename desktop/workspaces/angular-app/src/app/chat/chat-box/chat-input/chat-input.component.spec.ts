@@ -23,7 +23,7 @@ describe('ChatInputComponent', () => {
 		modelServiceMock.getModels.and.returnValue(Promise.resolve([]));
 
 		const configServiceMock = {
-			onConfigUpdate$: of({ model: { currentModelId: '1' } }),
+			config$: of({ model: { currentModelId: '1' } }),
 		};
 
 		chatServiceMock = jasmine.createSpyObj('ChatService', [

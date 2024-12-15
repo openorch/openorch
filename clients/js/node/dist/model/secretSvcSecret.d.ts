@@ -11,6 +11,18 @@
  */
 export declare class SecretSvcSecret {
     /**
+    * Slugs of services/users who can change the deleters list
+    */
+    'canChangeDeleters'?: Array<string>;
+    /**
+    * Slugs of services/users who can change the readers list
+    */
+    'canChangeReaders'?: Array<string>;
+    /**
+    * Slugs of services/users who can change the writers list
+    */
+    'canChangeWriters'?: Array<string>;
+    /**
     * Slugs of services/users who can delete the secret
     */
     'deleters'?: Array<string>;
@@ -26,6 +38,10 @@ export declare class SecretSvcSecret {
     * Envar or slug-like key of the secret
     */
     'key'?: string;
+    /**
+    * Namespace of the secret
+    */
+    'namespace'?: string;
     /**
     * Slugs of services/users who can read the secret
     */

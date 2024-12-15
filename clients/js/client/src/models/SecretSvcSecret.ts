@@ -20,6 +20,24 @@ import { mapValues } from '../runtime';
  */
 export interface SecretSvcSecret {
     /**
+     * Slugs of services/users who can change the deleters list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeDeleters?: Array<string>;
+    /**
+     * Slugs of services/users who can change the readers list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeReaders?: Array<string>;
+    /**
+     * Slugs of services/users who can change the writers list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeWriters?: Array<string>;
+    /**
      * Slugs of services/users who can delete the secret
      * @type {Array<string>}
      * @memberof SecretSvcSecret
@@ -47,6 +65,12 @@ export interface SecretSvcSecret {
      * @memberof SecretSvcSecret
      */
     key?: string;
+    /**
+     * Namespace of the secret
+     * @type {string}
+     * @memberof SecretSvcSecret
+     */
+    namespace?: string;
     /**
      * Slugs of services/users who can read the secret
      * @type {Array<string>}
@@ -84,10 +108,14 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
+        'canChangeDeleters': json['canChangeDeleters'] == null ? undefined : json['canChangeDeleters'],
+        'canChangeReaders': json['canChangeReaders'] == null ? undefined : json['canChangeReaders'],
+        'canChangeWriters': json['canChangeWriters'] == null ? undefined : json['canChangeWriters'],
         'deleters': json['deleters'] == null ? undefined : json['deleters'],
         'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
         'readers': json['readers'] == null ? undefined : json['readers'],
         'value': json['value'] == null ? undefined : json['value'],
         'writers': json['writers'] == null ? undefined : json['writers'],
@@ -105,10 +133,14 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
+        'canChangeDeleters': value['canChangeDeleters'],
+        'canChangeReaders': value['canChangeReaders'],
+        'canChangeWriters': value['canChangeWriters'],
         'deleters': value['deleters'],
         'encrypted': value['encrypted'],
         'id': value['id'],
         'key': value['key'],
+        'namespace': value['namespace'],
         'readers': value['readers'],
         'value': value['value'],
         'writers': value['writers'],

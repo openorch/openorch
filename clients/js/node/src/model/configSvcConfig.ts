@@ -11,47 +11,35 @@
  */
 
 import { RequestFile } from './models';
-import { ConfigSvcAppServiceConfig } from './configSvcAppServiceConfig';
-import { ConfigSvcDownloadServiceConfig } from './configSvcDownloadServiceConfig';
-import { ConfigSvcModelServiceConfig } from './configSvcModelServiceConfig';
 
 export class ConfigSvcConfig {
-    'app'?: ConfigSvcAppServiceConfig;
-    'directory'?: string;
-    'download'?: ConfigSvcDownloadServiceConfig;
-    /**
-    * * This flag drives a minor UX feature:   * if the user has not installed the runtime we show an INSTALL   * button, but if the user has already installed the runtime we show   * we show a START runtime button.   *
-    */
-    'isRuntimeInstalled'?: boolean;
-    'model'?: ConfigSvcModelServiceConfig;
+    'data': { [key: string]: any; };
+    'dataJson'?: string;
+    'id'?: string;
+    'namespace': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "app",
-            "baseName": "app",
-            "type": "ConfigSvcAppServiceConfig"
+            "name": "data",
+            "baseName": "data",
+            "type": "{ [key: string]: any; }"
         },
         {
-            "name": "directory",
-            "baseName": "directory",
+            "name": "dataJson",
+            "baseName": "dataJson",
             "type": "string"
         },
         {
-            "name": "download",
-            "baseName": "download",
-            "type": "ConfigSvcDownloadServiceConfig"
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
         },
         {
-            "name": "isRuntimeInstalled",
-            "baseName": "isRuntimeInstalled",
-            "type": "boolean"
-        },
-        {
-            "name": "model",
-            "baseName": "model",
-            "type": "ConfigSvcModelServiceConfig"
+            "name": "namespace",
+            "baseName": "namespace",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

@@ -13,28 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ConfigSvcAppServiceConfig } from './ConfigSvcAppServiceConfig';
-import {
-    ConfigSvcAppServiceConfigFromJSON,
-    ConfigSvcAppServiceConfigFromJSONTyped,
-    ConfigSvcAppServiceConfigToJSON,
-    ConfigSvcAppServiceConfigToJSONTyped,
-} from './ConfigSvcAppServiceConfig';
-import type { ConfigSvcModelServiceConfig } from './ConfigSvcModelServiceConfig';
-import {
-    ConfigSvcModelServiceConfigFromJSON,
-    ConfigSvcModelServiceConfigFromJSONTyped,
-    ConfigSvcModelServiceConfigToJSON,
-    ConfigSvcModelServiceConfigToJSONTyped,
-} from './ConfigSvcModelServiceConfig';
-import type { ConfigSvcDownloadServiceConfig } from './ConfigSvcDownloadServiceConfig';
-import {
-    ConfigSvcDownloadServiceConfigFromJSON,
-    ConfigSvcDownloadServiceConfigFromJSONTyped,
-    ConfigSvcDownloadServiceConfigToJSON,
-    ConfigSvcDownloadServiceConfigToJSONTyped,
-} from './ConfigSvcDownloadServiceConfig';
-
 /**
  * 
  * @export
@@ -43,44 +21,36 @@ import {
 export interface ConfigSvcConfig {
     /**
      * 
-     * @type {ConfigSvcAppServiceConfig}
+     * @type {{ [key: string]: any; }}
      * @memberof ConfigSvcConfig
      */
-    app?: ConfigSvcAppServiceConfig;
+    data: { [key: string]: any; };
     /**
      * 
      * @type {string}
      * @memberof ConfigSvcConfig
      */
-    directory?: string;
+    dataJson?: string;
     /**
      * 
-     * @type {ConfigSvcDownloadServiceConfig}
+     * @type {string}
      * @memberof ConfigSvcConfig
      */
-    download?: ConfigSvcDownloadServiceConfig;
-    /**
-     * * This flag drives a minor UX feature:
-     * 	 * if the user has not installed the runtime we show an INSTALL
-     * 	 * button, but if the user has already installed the runtime we show
-     * 	 * we show a START runtime button.
-     * 	 *
-     * @type {boolean}
-     * @memberof ConfigSvcConfig
-     */
-    isRuntimeInstalled?: boolean;
+    id?: string;
     /**
      * 
-     * @type {ConfigSvcModelServiceConfig}
+     * @type {string}
      * @memberof ConfigSvcConfig
      */
-    model?: ConfigSvcModelServiceConfig;
+    namespace: string;
 }
 
 /**
  * Check if a given object implements the ConfigSvcConfig interface.
  */
 export function instanceOfConfigSvcConfig(value: object): value is ConfigSvcConfig {
+    if (!('data' in value) || value['data'] === undefined) return false;
+    if (!('namespace' in value) || value['namespace'] === undefined) return false;
     return true;
 }
 
@@ -94,11 +64,10 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'app': json['app'] == null ? undefined : ConfigSvcAppServiceConfigFromJSON(json['app']),
-        'directory': json['directory'] == null ? undefined : json['directory'],
-        'download': json['download'] == null ? undefined : ConfigSvcDownloadServiceConfigFromJSON(json['download']),
-        'isRuntimeInstalled': json['isRuntimeInstalled'] == null ? undefined : json['isRuntimeInstalled'],
-        'model': json['model'] == null ? undefined : ConfigSvcModelServiceConfigFromJSON(json['model']),
+        'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'],
     };
 }
 
@@ -113,11 +82,10 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
-        'app': ConfigSvcAppServiceConfigToJSON(value['app']),
-        'directory': value['directory'],
-        'download': ConfigSvcDownloadServiceConfigToJSON(value['download']),
-        'isRuntimeInstalled': value['isRuntimeInstalled'],
-        'model': ConfigSvcModelServiceConfigToJSON(value['model']),
+        'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
     };
 }
 

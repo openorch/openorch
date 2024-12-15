@@ -85,6 +85,11 @@ func (cs *SecretService) getSecrets(
 	req secret.ListSecretsRequest, isAdmin bool, userSlug string,
 ) ([]*secret.Secret, error) {
 	filters := []datastore.Filter{}
+	if req.Namespace == "" {
+		req.Namespace = "default"
+	}
+	filters = append(filters, datastore.Equals([]string{"namespace"}, req.Namespace))
+
 	if req.Key != "" {
 		filters = append(filters, datastore.Equals([]string{"key"}, req.Key))
 	}

@@ -27,6 +27,12 @@ export interface SecretSvcListSecretsRequest {
      * @memberof SecretSvcListSecretsRequest
      */
     keys?: Array<string>;
+    /**
+     *
+     * @type {string}
+     * @memberof SecretSvcListSecretsRequest
+     */
+    namespace?: string;
 }
 /**
  * Check if a given object implements the SecretSvcListSecretsRequest interface.

@@ -24,10 +24,10 @@ var PermissionSecretSave = usertypes.Permission{
 
 var PermissionSecretRemove = usertypes.Permission{
 	Id:   "secret-svc:secret:remove",
-	Name: "Secret Svc - Secret Rmove",
+	Name: "Secret Svc - Secret Remove",
 }
 
-var AdminPermissions = []usertypes.Permission{
+var Permissions = []usertypes.Permission{
 	PermissionSecretList,
 	PermissionSecretSave,
 	PermissionSecretRemove,

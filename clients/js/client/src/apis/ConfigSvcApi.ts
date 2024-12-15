@@ -25,6 +25,10 @@ import {
     ConfigSvcSaveConfigRequestToJSON,
 } from '../models/index';
 
+export interface GetConfigRequest {
+    namespace?: string;
+}
+
 export interface SaveConfigRequest {
     body: ConfigSvcSaveConfigRequest;
 }
@@ -38,8 +42,12 @@ export class ConfigSvcApi extends runtime.BaseAPI {
      * Fetch the current configuration from the server
      * Get Config
      */
-    async getConfigRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ConfigSvcGetConfigResponse>> {
+    async getConfigRaw(requestParameters: GetConfigRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ConfigSvcGetConfigResponse>> {
         const queryParameters: any = {};
+
+        if (requestParameters['namespace'] != null) {
+            queryParameters['namespace'] = requestParameters['namespace'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -61,8 +69,8 @@ export class ConfigSvcApi extends runtime.BaseAPI {
      * Fetch the current configuration from the server
      * Get Config
      */
-    async getConfig(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ConfigSvcGetConfigResponse> {
-        const response = await this.getConfigRaw(initOverrides);
+    async getConfig(requestParameters: GetConfigRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ConfigSvcGetConfigResponse> {
+        const response = await this.getConfigRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

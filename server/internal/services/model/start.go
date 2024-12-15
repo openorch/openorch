@@ -23,6 +23,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
 
 	openapi "github.com/openorch/openorch/clients/go"
@@ -48,11 +49,12 @@ func (ms *ModelService) start(modelId string) error {
 	}
 
 	if modelId == "" {
-		conf := getConfigResponse.Config
-		if conf.Model.CurrentModelId == nil {
-			return errors.New("no model id specified and no default model")
+		modelIdI := dipper.Get(getConfigResponse.Config.Data, "$.model-svc.currentModelId")
+		var ok bool
+		modelId, ok = modelIdI.(string)
+		if !ok {
+			modelId = DefaultModelId
 		}
-		modelId = *conf.Model.CurrentModelId
 	}
 
 	modelI, found, err := ms.modelsStore.Query(

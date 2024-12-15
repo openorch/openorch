@@ -26,6 +26,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/go-connections/nat"
+	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
 
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -256,9 +257,10 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 				return nil, nil, err
 			}
 
-			configFolderPath := *getConfigResponse.Config.Directory
-			if configFolderPath == "" {
-				return nil, nil, errors.New("config folder not found")
+			configFolderPathI := dipper.Get(getConfigResponse.Config.Data, "$.config-svc.configFolderPath")
+			configFolderPath, ok := configFolderPathI.(string)
+			if !ok {
+				return nil, nil, errors.New("config folder path not found")
 			}
 
 			singulatronVolumeName = configFolderPath

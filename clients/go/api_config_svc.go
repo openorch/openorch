@@ -57,6 +57,13 @@ type ConfigSvcAPIService service
 type ApiGetConfigRequest struct {
 	ctx context.Context
 	ApiService ConfigSvcAPI
+	namespace *string
+}
+
+// Namespace
+func (r ApiGetConfigRequest) Namespace(namespace string) ApiGetConfigRequest {
+	r.namespace = &namespace
+	return r
 }
 
 func (r ApiGetConfigRequest) Execute() (*ConfigSvcGetConfigResponse, *http.Response, error) {
@@ -99,6 +106,9 @@ func (a *ConfigSvcAPIService) GetConfigExecute(r ApiGetConfigRequest) (*ConfigSv
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.namespace != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "namespace", r.namespace, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

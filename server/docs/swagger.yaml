@@ -131,42 +131,25 @@ definitions:
       thread:
         $ref: '#/definitions/chat_svc.Thread'
     type: object
-  config_svc.AppServiceConfig:
-    properties:
-      loggingDisabled:
-        type: boolean
-    type: object
   config_svc.Config:
     properties:
-      app:
-        $ref: '#/definitions/config_svc.AppServiceConfig'
-      directory:
+      data:
+        additionalProperties: true
+        type: object
+      dataJson:
         type: string
-      download:
-        $ref: '#/definitions/config_svc.DownloadServiceConfig'
-      isRuntimeInstalled:
-        description: "* This flag drives a minor UX feature:\n\t * if the user has
-          not installed the runtime we show an INSTALL\n\t * button, but if the user
-          has already installed the runtime we show\n\t * we show a START runtime
-          button.\n\t *"
-        type: boolean
-      model:
-        $ref: '#/definitions/config_svc.ModelServiceConfig'
-    type: object
-  config_svc.DownloadServiceConfig:
-    properties:
-      downloadFolder:
+      id:
         type: string
+      namespace:
+        type: string
+    required:
+    - data
+    - namespace
     type: object
   config_svc.GetConfigResponse:
     properties:
       config:
         $ref: '#/definitions/config_svc.Config'
-    type: object
-  config_svc.ModelServiceConfig:
-    properties:
-      currentModelId:
-        type: string
     type: object
   config_svc.SaveConfigRequest:
     properties:
@@ -1724,6 +1707,8 @@ definitions:
         items:
           type: string
         type: array
+      namespace:
+        type: string
     type: object
   secret_svc.ListSecretsResponse:
     properties:
@@ -1760,6 +1745,21 @@ definitions:
     type: object
   secret_svc.Secret:
     properties:
+      canChangeDeleters:
+        description: Slugs of services/users who can change the deleters list
+        items:
+          type: string
+        type: array
+      canChangeReaders:
+        description: Slugs of services/users who can change the readers list
+        items:
+          type: string
+        type: array
+      canChangeWriters:
+        description: Slugs of services/users who can change the writers list
+        items:
+          type: string
+        type: array
       deleters:
         description: Slugs of services/users who can delete the secret
         items:
@@ -1778,6 +1778,9 @@ definitions:
         type: string
       key:
         description: Envar or slug-like key of the secret
+        type: string
+      namespace:
+        description: Namespace of the secret
         type: string
       readers:
         description: Slugs of services/users who can read the secret
@@ -2505,6 +2508,11 @@ paths:
       - application/json
       description: Fetch the current configuration from the server
       operationId: getConfig
+      parameters:
+      - description: Namespace
+        in: query
+        name: namespace
+        type: string
       produces:
       - application/json
       responses:

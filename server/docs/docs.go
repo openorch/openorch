@@ -535,6 +535,14 @@ const docTemplate = `{
                 ],
                 "summary": "Get Config",
                 "operationId": "getConfig",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Namespace",
+                        "name": "namespace",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Current configuration retrieved successfully",
@@ -4738,39 +4746,24 @@ const docTemplate = `{
                 }
             }
         },
-        "config_svc.AppServiceConfig": {
-            "type": "object",
-            "properties": {
-                "loggingDisabled": {
-                    "type": "boolean"
-                }
-            }
-        },
         "config_svc.Config": {
             "type": "object",
+            "required": [
+                "data",
+                "namespace"
+            ],
             "properties": {
-                "app": {
-                    "$ref": "#/definitions/config_svc.AppServiceConfig"
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
                 },
-                "directory": {
+                "dataJson": {
                     "type": "string"
                 },
-                "download": {
-                    "$ref": "#/definitions/config_svc.DownloadServiceConfig"
+                "id": {
+                    "type": "string"
                 },
-                "isRuntimeInstalled": {
-                    "description": "* This flag drives a minor UX feature:\n\t * if the user has not installed the runtime we show an INSTALL\n\t * button, but if the user has already installed the runtime we show\n\t * we show a START runtime button.\n\t *",
-                    "type": "boolean"
-                },
-                "model": {
-                    "$ref": "#/definitions/config_svc.ModelServiceConfig"
-                }
-            }
-        },
-        "config_svc.DownloadServiceConfig": {
-            "type": "object",
-            "properties": {
-                "downloadFolder": {
+                "namespace": {
                     "type": "string"
                 }
             }
@@ -4780,14 +4773,6 @@ const docTemplate = `{
             "properties": {
                 "config": {
                     "$ref": "#/definitions/config_svc.Config"
-                }
-            }
-        },
-        "config_svc.ModelServiceConfig": {
-            "type": "object",
-            "properties": {
-                "currentModelId": {
-                    "type": "string"
                 }
             }
         },
@@ -6910,6 +6895,9 @@ const docTemplate = `{
                     "items": {
                         "type": "string"
                     }
+                },
+                "namespace": {
+                    "type": "string"
                 }
             }
         },
@@ -6967,6 +6955,27 @@ const docTemplate = `{
         "secret_svc.Secret": {
             "type": "object",
             "properties": {
+                "canChangeDeleters": {
+                    "description": "Slugs of services/users who can change the deleters list",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "canChangeReaders": {
+                    "description": "Slugs of services/users who can change the readers list",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "canChangeWriters": {
+                    "description": "Slugs of services/users who can change the writers list",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "deleters": {
                     "description": "Slugs of services/users who can delete the secret",
                     "type": "array",
@@ -6984,6 +6993,10 @@ const docTemplate = `{
                 },
                 "key": {
                     "description": "Envar or slug-like key of the secret",
+                    "type": "string"
+                },
+                "namespace": {
+                    "description": "Namespace of the secret",
                     "type": "string"
                 },
                 "readers": {

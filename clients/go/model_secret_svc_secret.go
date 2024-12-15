@@ -20,6 +20,12 @@ var _ MappedNullable = &SecretSvcSecret{}
 
 // SecretSvcSecret struct for SecretSvcSecret
 type SecretSvcSecret struct {
+	// Slugs of services/users who can change the deleters list
+	CanChangeDeleters []string `json:"canChangeDeleters,omitempty"`
+	// Slugs of services/users who can change the readers list
+	CanChangeReaders []string `json:"canChangeReaders,omitempty"`
+	// Slugs of services/users who can change the writers list
+	CanChangeWriters []string `json:"canChangeWriters,omitempty"`
 	// Slugs of services/users who can delete the secret
 	Deleters []string `json:"deleters,omitempty"`
 	// Whether the secret is encrypted All secrets are encrypted before written to the DB. This really only exists for write requests to know if the secret is already encrypted. Ie: while most `secret save [key] [value]` commands are probably not encrypted, File based saves, eg. `secret save secretA.yaml` are probably encrypted.
@@ -28,6 +34,8 @@ type SecretSvcSecret struct {
 	Id *string `json:"id,omitempty"`
 	// Envar or slug-like key of the secret
 	Key *string `json:"key,omitempty"`
+	// Namespace of the secret
+	Namespace *string `json:"namespace,omitempty"`
 	// Slugs of services/users who can read the secret
 	Readers []string `json:"readers,omitempty"`
 	// Secret Value
@@ -51,6 +59,102 @@ func NewSecretSvcSecret() *SecretSvcSecret {
 func NewSecretSvcSecretWithDefaults() *SecretSvcSecret {
 	this := SecretSvcSecret{}
 	return &this
+}
+
+// GetCanChangeDeleters returns the CanChangeDeleters field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetCanChangeDeleters() []string {
+	if o == nil || IsNil(o.CanChangeDeleters) {
+		var ret []string
+		return ret
+	}
+	return o.CanChangeDeleters
+}
+
+// GetCanChangeDeletersOk returns a tuple with the CanChangeDeleters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetCanChangeDeletersOk() ([]string, bool) {
+	if o == nil || IsNil(o.CanChangeDeleters) {
+		return nil, false
+	}
+	return o.CanChangeDeleters, true
+}
+
+// HasCanChangeDeleters returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasCanChangeDeleters() bool {
+	if o != nil && !IsNil(o.CanChangeDeleters) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanChangeDeleters gets a reference to the given []string and assigns it to the CanChangeDeleters field.
+func (o *SecretSvcSecret) SetCanChangeDeleters(v []string) {
+	o.CanChangeDeleters = v
+}
+
+// GetCanChangeReaders returns the CanChangeReaders field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetCanChangeReaders() []string {
+	if o == nil || IsNil(o.CanChangeReaders) {
+		var ret []string
+		return ret
+	}
+	return o.CanChangeReaders
+}
+
+// GetCanChangeReadersOk returns a tuple with the CanChangeReaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetCanChangeReadersOk() ([]string, bool) {
+	if o == nil || IsNil(o.CanChangeReaders) {
+		return nil, false
+	}
+	return o.CanChangeReaders, true
+}
+
+// HasCanChangeReaders returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasCanChangeReaders() bool {
+	if o != nil && !IsNil(o.CanChangeReaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanChangeReaders gets a reference to the given []string and assigns it to the CanChangeReaders field.
+func (o *SecretSvcSecret) SetCanChangeReaders(v []string) {
+	o.CanChangeReaders = v
+}
+
+// GetCanChangeWriters returns the CanChangeWriters field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetCanChangeWriters() []string {
+	if o == nil || IsNil(o.CanChangeWriters) {
+		var ret []string
+		return ret
+	}
+	return o.CanChangeWriters
+}
+
+// GetCanChangeWritersOk returns a tuple with the CanChangeWriters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetCanChangeWritersOk() ([]string, bool) {
+	if o == nil || IsNil(o.CanChangeWriters) {
+		return nil, false
+	}
+	return o.CanChangeWriters, true
+}
+
+// HasCanChangeWriters returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasCanChangeWriters() bool {
+	if o != nil && !IsNil(o.CanChangeWriters) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanChangeWriters gets a reference to the given []string and assigns it to the CanChangeWriters field.
+func (o *SecretSvcSecret) SetCanChangeWriters(v []string) {
+	o.CanChangeWriters = v
 }
 
 // GetDeleters returns the Deleters field value if set, zero value otherwise.
@@ -181,6 +285,38 @@ func (o *SecretSvcSecret) SetKey(v string) {
 	o.Key = &v
 }
 
+// GetNamespace returns the Namespace field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetNamespace() string {
+	if o == nil || IsNil(o.Namespace) {
+		var ret string
+		return ret
+	}
+	return *o.Namespace
+}
+
+// GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetNamespaceOk() (*string, bool) {
+	if o == nil || IsNil(o.Namespace) {
+		return nil, false
+	}
+	return o.Namespace, true
+}
+
+// HasNamespace returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasNamespace() bool {
+	if o != nil && !IsNil(o.Namespace) {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespace gets a reference to the given string and assigns it to the Namespace field.
+func (o *SecretSvcSecret) SetNamespace(v string) {
+	o.Namespace = &v
+}
+
 // GetReaders returns the Readers field value if set, zero value otherwise.
 func (o *SecretSvcSecret) GetReaders() []string {
 	if o == nil || IsNil(o.Readers) {
@@ -287,6 +423,15 @@ func (o SecretSvcSecret) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcSecret) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CanChangeDeleters) {
+		toSerialize["canChangeDeleters"] = o.CanChangeDeleters
+	}
+	if !IsNil(o.CanChangeReaders) {
+		toSerialize["canChangeReaders"] = o.CanChangeReaders
+	}
+	if !IsNil(o.CanChangeWriters) {
+		toSerialize["canChangeWriters"] = o.CanChangeWriters
+	}
 	if !IsNil(o.Deleters) {
 		toSerialize["deleters"] = o.Deleters
 	}
@@ -298,6 +443,9 @@ func (o SecretSvcSecret) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
+	}
+	if !IsNil(o.Namespace) {
+		toSerialize["namespace"] = o.Namespace
 	}
 	if !IsNil(o.Readers) {
 		toSerialize["readers"] = o.Readers

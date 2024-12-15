@@ -1,9 +1,6 @@
 'use strict';
 
 var ConfigSvcConfig = require('./ConfigSvcConfig.js');
-require('./ConfigSvcAppServiceConfig.js');
-require('./ConfigSvcModelServiceConfig.js');
-require('./ConfigSvcDownloadServiceConfig.js');
 
 /* tslint:disable */
 /* eslint-disable */

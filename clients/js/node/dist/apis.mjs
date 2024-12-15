@@ -28,11 +28,8 @@ import './chatSvcGetThreadsResponse.mjs';
 import './chatSvcMessage.mjs';
 import './chatSvcThread.mjs';
 import './chatSvcUpdateThreadRequest.mjs';
-import './configSvcAppServiceConfig.mjs';
 import './configSvcConfig.mjs';
-import './configSvcDownloadServiceConfig.mjs';
 import './configSvcGetConfigResponse.mjs';
-import './configSvcModelServiceConfig.mjs';
 import './configSvcSaveConfigRequest.mjs';
 import './datastoreFilter.mjs';
 import './datastoreOp.mjs';
@@ -54836,9 +54833,10 @@ class ConfigSvcApi {
     /**
      * Fetch the current configuration from the server
      * @summary Get Config
+     * @param namespace Namespace
      */
-    getConfig() {
-        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+    getConfig(namespace_1) {
+        return __awaiter(this, arguments, void 0, function* (namespace, options = { headers: {} }) {
             const localVarPath = this.basePath + '/config-svc/config';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
@@ -54851,6 +54849,9 @@ class ConfigSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
+            if (namespace !== undefined) {
+                localVarQueryParameters['namespace'] = ObjectSerializer.serialize(namespace, "string");
+            }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
                 method: 'GET',
