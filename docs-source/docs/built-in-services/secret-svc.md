@@ -13,11 +13,17 @@ The Secret Svc stores sensitive or internal (non-end-user-facing) configuration.
 
 > This page is a high level overview of the `Secret Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/list-secrets).
 
-# Access Rules
+## Access Rules
 
-Any logged in user can create a secret. After a key is created access is governed by the Readers, Writers and Deleters block.
+### Read
 
-Nonadmin users can only create secrets with the key prefixed by their slug, ie:
+Any logged in user who is amongst a `Secret`'s `Readers` can read a secret.
+
+### Write
+
+#### Create
+
+Any logged in user can create a secret. Non-admin users can only create secrets with the key prefixed by their slug, ie:
 
 ```sh
 deploy-svc/EXAMPLE-KEY
@@ -35,6 +41,10 @@ This prefix rule serves two purposes:
 
 - It is clear which secret keys are "static" and originating from admin users
 - It can prevent issues where a user claims a key knowing that it might be used later and overwritten/populated by an admin with sensitive information
+
+#### Update
+
+After a key is created further write access is governed by the `Writers` block.
 
 ## Design choices
 

@@ -43,9 +43,7 @@ func (cs *SecretService) SaveSecrets(
 ) {
 	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), secret.PermissionSecretSave.Id).
-		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc"},
-		}).
+		Body(openapi.UserSvcIsAuthorizedRequest{}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -100,7 +98,14 @@ func (cs *SecretService) saveSecrets(
 	defer cs.lock.Release(ctx, "secret-svc-save")
 
 	for _, s := range ss {
-		secretI, found, err := cs.secretStore.Query(datastore.Equals([]string{"key"}, s.Key)).
+		if s.Namespace == "" {
+			s.Namespace = "default"
+		}
+
+		secretI, found, err := cs.secretStore.Query(
+			datastore.Equals([]string{"namespace"}, s.Namespace),
+			datastore.Equals([]string{"key"}, s.Key),
+		).
 			FindOne()
 		if err != nil {
 			return err
@@ -135,7 +140,7 @@ func (cs *SecretService) saveSecrets(
 
 		secret := secretI.(*secret.Secret)
 
-		// When secret is found, it can only be modified by authorized users
+		// When a secret is found, it can only be modified by authorized users
 		canSave := isAdmin
 		if !canSave {
 			for _, writer := range secret.Writers {

@@ -19,7 +19,6 @@ import (
 	config "github.com/openorch/openorch/server/internal/services/config/types"
 	types "github.com/openorch/openorch/server/internal/services/config/types"
 	"github.com/pkg/errors"
-	"github.com/spyzhov/ajson"
 )
 
 // Get retrieves the current configuration
@@ -29,6 +28,7 @@ import (
 // @Tags Config Svc
 // @Accept json
 // @Produce json
+// @Param namespace query string false "Namespace"
 // @Success 200 {object} config.GetConfigResponse "Current configuration retrieved successfully"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
@@ -41,16 +41,13 @@ func (cs *ConfigService) Get(
 	// Config get should not be authorized because it is public, nonsensitive information.
 	// Think about app config, A/B tests and such.
 
-	req := &config.GetConfigRequest{}
-	err := json.NewDecoder(r.Body).Decode(req)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`Invalid JSON`))
-		return
+	q := r.URL.Query()
+	namespace := q.Get("namespace")
+	if namespace == "" {
+		namespace = "default"
 	}
-	defer r.Body.Close()
 
-	conf, err := cs.getConfig(req.Namespace)
+	conf, err := cs.getConfig(namespace)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -67,17 +64,19 @@ func (cs *ConfigService) getConfig(namespace string) (*types.Config, error) {
 	if namespace == "" {
 		namespace = "default"
 	}
-	ajsonRoot, ok := cs.configAJSONs[namespace]
+	data, ok := cs.configs[namespace]
 	if !ok {
-		return nil, errors.New("config not found")
+		return &types.Config{
+			Data: map[string]interface{}{},
+		}, nil
 	}
-	v, err := ajson.Marshal(ajsonRoot)
+	v, err := json.Marshal(data)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to marshal config")
 	}
 
 	ret := &types.Config{}
-	err = json.Unmarshal(v, ret.Data)
+	err = json.Unmarshal(v, &ret.Data)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to unmarshal config")
 	}

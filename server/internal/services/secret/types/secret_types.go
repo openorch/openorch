@@ -12,12 +12,18 @@ type ErrorResponse struct {
 }
 
 type Secret struct {
-	Id       string   `json:"id"`       // Id of the secret
-	Key      string   `json:"key"`      // Envar or slug-like key of the secret
-	Value    string   `json:"value"`    // Secret Value
+	Id        string `json:"id"`        // Id of the secret
+	Namespace string `json:"namespace"` // Namespace of the secret
+	Key       string `json:"key"`       // Envar or slug-like key of the secret
+	Value     string `json:"value"`     // Secret Value
+
 	Readers  []string `json:"readers"`  // Slugs of services/users who can read the secret
 	Writers  []string `json:"writers"`  // Slugs of services/users who can modify the secret
 	Deleters []string `json:"deleters"` // Slugs of services/users who can delete the secret
+
+	CanChangeReaders  []string `json:"canChangeReaders"`  // Slugs of services/users who can change the readers list
+	CanChangeWriters  []string `json:"canChangeWriters"`  // Slugs of services/users who can change the writers list
+	CanChangeDeleters []string `json:"canChangeDeleters"` // Slugs of services/users who can change the deleters list
 
 	// Whether the secret is encrypted
 	// All secrets are encrypted before written to the DB.
@@ -32,8 +38,9 @@ func (s *Secret) GetId() string {
 }
 
 type ListSecretsRequest struct {
-	Key  string   `json:"key"`
-	Keys []string `json:"keys"`
+	Namespace string   `json:"namespace"`
+	Key       string   `json:"key"`
+	Keys      []string `json:"keys"`
 }
 
 type ListSecretsResponse struct {

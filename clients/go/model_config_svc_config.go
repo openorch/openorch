@@ -23,7 +23,9 @@ var _ MappedNullable = &ConfigSvcConfig{}
 // ConfigSvcConfig struct for ConfigSvcConfig
 type ConfigSvcConfig struct {
 	Data map[string]interface{} `json:"data"`
+	DataJson *string `json:"dataJson,omitempty"`
 	Id *string `json:"id,omitempty"`
+	Namespace string `json:"namespace"`
 }
 
 type _ConfigSvcConfig ConfigSvcConfig
@@ -32,9 +34,10 @@ type _ConfigSvcConfig ConfigSvcConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSvcConfig(data map[string]interface{}) *ConfigSvcConfig {
+func NewConfigSvcConfig(data map[string]interface{}, namespace string) *ConfigSvcConfig {
 	this := ConfigSvcConfig{}
 	this.Data = data
+	this.Namespace = namespace
 	return &this
 }
 
@@ -70,6 +73,38 @@ func (o *ConfigSvcConfig) SetData(v map[string]interface{}) {
 	o.Data = v
 }
 
+// GetDataJson returns the DataJson field value if set, zero value otherwise.
+func (o *ConfigSvcConfig) GetDataJson() string {
+	if o == nil || IsNil(o.DataJson) {
+		var ret string
+		return ret
+	}
+	return *o.DataJson
+}
+
+// GetDataJsonOk returns a tuple with the DataJson field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigSvcConfig) GetDataJsonOk() (*string, bool) {
+	if o == nil || IsNil(o.DataJson) {
+		return nil, false
+	}
+	return o.DataJson, true
+}
+
+// HasDataJson returns a boolean if a field has been set.
+func (o *ConfigSvcConfig) HasDataJson() bool {
+	if o != nil && !IsNil(o.DataJson) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataJson gets a reference to the given string and assigns it to the DataJson field.
+func (o *ConfigSvcConfig) SetDataJson(v string) {
+	o.DataJson = &v
+}
+
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ConfigSvcConfig) GetId() string {
 	if o == nil || IsNil(o.Id) {
@@ -102,6 +137,30 @@ func (o *ConfigSvcConfig) SetId(v string) {
 	o.Id = &v
 }
 
+// GetNamespace returns the Namespace field value
+func (o *ConfigSvcConfig) GetNamespace() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Namespace
+}
+
+// GetNamespaceOk returns a tuple with the Namespace field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSvcConfig) GetNamespaceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Namespace, true
+}
+
+// SetNamespace sets field value
+func (o *ConfigSvcConfig) SetNamespace(v string) {
+	o.Namespace = v
+}
+
 func (o ConfigSvcConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -113,9 +172,13 @@ func (o ConfigSvcConfig) MarshalJSON() ([]byte, error) {
 func (o ConfigSvcConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["data"] = o.Data
+	if !IsNil(o.DataJson) {
+		toSerialize["dataJson"] = o.DataJson
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	toSerialize["namespace"] = o.Namespace
 	return toSerialize, nil
 }
 
@@ -125,6 +188,7 @@ func (o *ConfigSvcConfig) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"data",
+		"namespace",
 	}
 
 	allProperties := make(map[string]interface{})

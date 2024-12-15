@@ -41,6 +41,7 @@ var _ = ginkgo.Describe("Config Tests", func() {
 
 		mockClientFactory *sdk.MockClientFactory
 		mockUserSvc       *openapi.MockUserSvcAPI
+		mockFirehoseSvc   *openapi.MockFirehoseSvcAPI
 
 		universe    *mux.Router
 		starterFunc func() error
@@ -69,13 +70,25 @@ var _ = ginkgo.Describe("Config Tests", func() {
 			IsAdminFromRequest(gomock.Any(), gomock.Any()).
 			Return(isAdmin, nil).AnyTimes()
 
+		mockFirehoseSvc = openapi.NewMockFirehoseSvcAPI(ctrl)
+
+		mockFirehoseSvc.EXPECT().
+			PublishEvent(gomock.Any()).
+			Return(openapi.ApiPublishEventRequest{
+				ApiService: mockFirehoseSvc,
+			}).AnyTimes()
+		mockFirehoseSvc.EXPECT().
+			PublishEventExecute(gomock.Any()).
+			Return(nil, nil).AnyTimes()
+
 		mockClientFactory.EXPECT().
 			Client(gomock.Any()).
 			Return(&openapi.APIClient{
-				UserSvcAPI: mockUserSvc,
-				SecretSvcAPI: sdk.NewApiClientFactory(server.URL).
+				UserSvcAPI:     mockUserSvc,
+				FirehoseSvcAPI: mockFirehoseSvc,
+				ConfigSvcAPI: sdk.NewApiClientFactory(server.URL).
 					Client().
-					SecretSvcAPI,
+					ConfigSvcAPI,
 			}).
 			AnyTimes()
 
@@ -108,20 +121,14 @@ var _ = ginkgo.Describe("Config Tests", func() {
 	ginkgo.Context("get", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
-
-			isAdmin = false
-			userSlug = "test-user-1"
 		})
 
-		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
-				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
-				}).
+		ginkgo.It("publicly readable", func() {
+			readRsp, _, err := userClient.ConfigSvcAPI.GetConfig(ctx).
 				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
+			gomega.Expect(len(readRsp.Config.Data)).To(gomega.Equal(0))
 		})
 	})
 
@@ -134,44 +141,24 @@ var _ = ginkgo.Describe("Config Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
-				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
-				}).
-				Execute()
-
-			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
-
-			_, _, err = userClient.SecretSvcAPI.SaveSecrets(ctx).
-				Body(openapi.SecretSvcSaveSecretsRequest{
-					Secrets: []openapi.SecretSvcSecret{
-						{
-							Key:   openapi.PtrString("nonexistent"),
-							Value: openapi.PtrString("value"),
-						}},
+			_, _, err := userClient.ConfigSvcAPI.SaveConfig(ctx).
+				Body(openapi.ConfigSvcSaveConfigRequest{
+					Config: &openapi.ConfigSvcConfig{
+						Data: map[string]interface{}{
+							userSlug:       "test",
+							"someOtherKey": "someOtherValue",
+						},
+					},
 				}).
 				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
-				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
-				}).
+			readRsp, _, err := userClient.ConfigSvcAPI.GetConfig(ctx).
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(1))
-
-			userSlug = "test-user-2"
-
-			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
-				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
-				}).
-				Execute()
-			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(0))
+			gomega.Expect(readRsp.Config.Data[userSlug]).To(gomega.Equal("test"))
+			gomega.Expect(readRsp.Config.Data["someOtherKey"]).To(gomega.BeNil())
 		})
 	})
 })

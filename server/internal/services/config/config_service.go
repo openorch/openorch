@@ -14,10 +14,10 @@ package configservice
 
 import (
 	"context"
+	"encoding/json"
 	"sync"
 
 	"github.com/pkg/errors"
-	"github.com/spyzhov/ajson"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
@@ -36,8 +36,8 @@ type ConfigService struct {
 
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 
-	configMutex  sync.Mutex
-	configAJSONs map[string]*ajson.Node
+	configMutex sync.Mutex
+	configs     map[string]map[string]any
 
 	publicKey  string
 	authorizer sdk.Authorizer
@@ -48,9 +48,9 @@ func NewConfigService(
 	authorizer sdk.Authorizer,
 ) (*ConfigService, error) {
 	cs := &ConfigService{
-		lock:         lock,
-		configAJSONs: map[string]*ajson.Node{},
-		authorizer:   authorizer,
+		lock:       lock,
+		configs:    map[string]map[string]any{},
+		authorizer: authorizer,
 	}
 
 	return cs, nil
@@ -139,12 +139,13 @@ func (cs *ConfigService) loadConfigs() error {
 	for _, configI := range configIs {
 		config := configI.(types.Config)
 
-		v, err := ajson.Unmarshal([]byte(config.DataJSON))
+		v := map[string]any{}
+		err := json.Unmarshal([]byte(config.DataJSON), &v)
 		if err != nil {
 			return errors.Wrap(err, "failed to parse config data")
 		}
 
-		cs.configAJSONs[config.Namespace] = v
+		cs.configs[config.Namespace] = v
 	}
 
 	return nil

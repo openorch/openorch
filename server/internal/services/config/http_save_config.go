@@ -24,7 +24,6 @@ import (
 	config "github.com/openorch/openorch/server/internal/services/config/types"
 	types "github.com/openorch/openorch/server/internal/services/config/types"
 	"github.com/pkg/errors"
-	"github.com/spyzhov/ajson"
 )
 
 // Save saves the configuration
@@ -88,40 +87,36 @@ func (cs *ConfigService) Save(
 	w.Write(jsonData)
 }
 
-func (cs *ConfigService) saveConfig(isAdmin bool, callerSlug string, config types.Config) error {
-	if config.Namespace == "" {
-		config.Namespace = "default"
+func (cs *ConfigService) saveConfig(isAdmin bool, callerSlug string, newConfig types.Config) error {
+	if newConfig.Namespace == "" {
+		newConfig.Namespace = "default"
 	}
 
 	cs.configMutex.Lock()
 	defer cs.configMutex.Unlock()
 
-	root := cs.configAJSONs[config.Namespace]
-	nodes, err := root.JSONPath("$." + callerSlug)
-	if err != nil {
-		return errors.Wrap(err, "failed to find caller in config")
+	oldConfigData := cs.configs[newConfig.Namespace]
+	if oldConfigData == nil {
+		oldConfigData = map[string]interface{}{}
+		cs.configs[newConfig.Namespace] = oldConfigData
 	}
 
-	var toUpdate any
 	if isAdmin {
-		toUpdate = config.Data
+		oldConfigData = newConfig.Data
 	} else {
-		toUpdate = config.Data[callerSlug]
+		oldConfigData[callerSlug] = newConfig.Data[callerSlug]
 	}
 
-	err = nodes[0].Set(toUpdate)
-	if err != nil {
-		return errors.Wrap(err, "failed to set config")
-	}
+	newConfig.Data = oldConfigData
 
-	djson, err := ajson.Marshal(root)
+	newJson, err := json.Marshal(newConfig.Data)
 	if err != nil {
 		return errors.Wrap(err, "failed to marshal config")
 	}
-	config.DataJSON = string(djson)
-	config.Data = nil
+	newConfig.DataJSON = string(newJson)
+	newConfig.Data = nil
 
-	err = cs.configStore.Upsert(config)
+	err = cs.configStore.Upsert(newConfig)
 	if err != nil {
 		return errors.Wrap(err, "failed to save config")
 	}
