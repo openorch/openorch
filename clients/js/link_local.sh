@@ -2,6 +2,12 @@
 
 set -e
 
+if ! command -v rollup > /dev/null; then
+  npm install -g rollup
+else
+  echo "Rollup is already installed."
+fi
+
 cd client;
 npm run build;
 npm link;
