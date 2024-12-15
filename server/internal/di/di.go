@@ -86,7 +86,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Lock = distlock.NewLocalDistributedLock()
 	}
 
-	configService, err := configservice.NewConfigService(options.Lock)
+	configService, err := configservice.NewConfigService(
+		options.Lock,
+		options.Authorizer,
+	)
 	if err != nil {
 		logger.Error(
 			"Config service creation failed",
@@ -100,10 +103,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		openorchFolder = options.NodeOptions.ConfigPath
 	}
 
-	configService.ConfigDirectory = openorchFolder
-
 	if options.DatastoreFactory == nil {
-		localStorePath := path.Join(configService.GetConfigDirectory(), "data")
+		localStorePath := path.Join(homeDir, ".openorch", "data")
 		err = os.MkdirAll(localStorePath, 0755)
 		if err != nil {
 			logger.Error(

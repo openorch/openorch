@@ -69,10 +69,10 @@ describe('AdvancedModelExplorerComponent', () => {
 			'downloadDo',
 		]);
 		const configServiceSpy = jasmine.createSpyObj('ConfigService', [
-			'onConfigUpdate$',
+			'config$',
 		]);
 
-		(configServiceSpy.onConfigUpdate$ as jasmine.Spy).and.returnValue(
+		(configServiceSpy.config$ as jasmine.Spy).and.returnValue(
 			of({ model: { currentModelId: '1' } })
 		);
 

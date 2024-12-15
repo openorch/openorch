@@ -12,6 +12,25 @@ The Config Svc stores public, non-sensitive and end-user-facing data.
 
 > This page is a high level overview of the `Config Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/get-config).
 
+## Access Rules
+
+### Read
+
+All configs are publicly readable even without a user account.
+
+### Write
+
+Any logged in user can write to the config, but only to the key that matches their slug, ie. if a user's slug is `jane-doe`:
+
+```
+{
+  "jane-doe": {"janesConfig": 5},
+  "someOtherKey": "hi"
+}
+```
+
+Only the key `jane-doe` will be written to the `Config`, all other keys (such as `someOtherKey`) will be ignored.
+
 ## Related
 
 - [Secret Svc](/docs/built-in-services/secret-svc) to store sensitive data like internal configuration and secrets

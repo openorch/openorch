@@ -11,13 +11,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ConfigSvcAppServiceConfigFromJSON, ConfigSvcAppServiceConfigToJSON, } from './ConfigSvcAppServiceConfig';
-import { ConfigSvcModelServiceConfigFromJSON, ConfigSvcModelServiceConfigToJSON, } from './ConfigSvcModelServiceConfig';
-import { ConfigSvcDownloadServiceConfigFromJSON, ConfigSvcDownloadServiceConfigToJSON, } from './ConfigSvcDownloadServiceConfig';
 /**
  * Check if a given object implements the ConfigSvcConfig interface.
  */
 export function instanceOfConfigSvcConfig(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
+    if (!('namespace' in value) || value['namespace'] === undefined)
+        return false;
     return true;
 }
 export function ConfigSvcConfigFromJSON(json) {
@@ -28,11 +29,10 @@ export function ConfigSvcConfigFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'app': json['app'] == null ? undefined : ConfigSvcAppServiceConfigFromJSON(json['app']),
-        'directory': json['directory'] == null ? undefined : json['directory'],
-        'download': json['download'] == null ? undefined : ConfigSvcDownloadServiceConfigFromJSON(json['download']),
-        'isRuntimeInstalled': json['isRuntimeInstalled'] == null ? undefined : json['isRuntimeInstalled'],
-        'model': json['model'] == null ? undefined : ConfigSvcModelServiceConfigFromJSON(json['model']),
+        'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'],
     };
 }
 export function ConfigSvcConfigToJSON(json) {
@@ -43,10 +43,9 @@ export function ConfigSvcConfigToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
-        'app': ConfigSvcAppServiceConfigToJSON(value['app']),
-        'directory': value['directory'],
-        'download': ConfigSvcDownloadServiceConfigToJSON(value['download']),
-        'isRuntimeInstalled': value['isRuntimeInstalled'],
-        'model': ConfigSvcModelServiceConfigToJSON(value['model']),
+        'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
     };
 }

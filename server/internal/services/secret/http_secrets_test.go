@@ -14,6 +14,7 @@ package secretservice_test
 
 import (
 	"context"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -45,8 +46,9 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		universe    *mux.Router
 		starterFunc func() error
 
-		isAdmin  bool
-		userSlug string
+		isAdmin      bool
+		isAuthorized bool
+		userSlug     string
 	)
 
 	ginkgo.BeforeEach(func() {
@@ -60,6 +62,9 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		mockUserSvc = test.MockUserSvc(
 			ctx,
 			ctrl,
+			test.WithIsAuthorizedFactory(func() bool {
+				return isAuthorized
+			}),
 			test.WithSlugFactory(func() string {
 				return userSlug
 			}),
@@ -67,7 +72,9 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		mockAuthorizer := sdk.NewMockAuthorizer(ctrl)
 		mockAuthorizer.EXPECT().
 			IsAdminFromRequest(gomock.Any(), gomock.Any()).
-			Return(isAdmin, nil).AnyTimes()
+			DoAndReturn(func(_ string, _ *http.Request) (bool, error) {
+				return isAdmin, nil
+			}).AnyTimes()
 
 		mockClientFactory.EXPECT().
 			Client(gomock.Any()).
@@ -105,10 +112,11 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ctrl.Finish()
 	})
 
-	ginkgo.Context("read nonexistent", func() {
+	ginkgo.Context("read non-existent", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -125,10 +133,71 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 	})
 
-	ginkgo.Context("write first", func() {
+	ginkgo.Context("as a user trying to claim non-prefixed", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
+			isAdmin = false
+			userSlug = "test-user-1"
+		})
+
+		ginkgo.It("fails", func() {
+			_, _, err := userClient.SecretSvcAPI.SaveSecrets(ctx).
+				Body(openapi.SecretSvcSaveSecretsRequest{
+					Secrets: []openapi.SecretSvcSecret{
+						{
+							Key:   openapi.PtrString("non-prefixed"),
+							Value: openapi.PtrString("value"),
+						}},
+				}).
+				Execute()
+
+			gomega.Expect(err).To(gomega.HaveOccurred())
+		})
+	})
+
+	ginkgo.Context("as an admin trying to claim non-prefixed", func() {
+		ginkgo.BeforeEach(func() {
+			userClient = mockClientFactory.Client()
+
+			isAuthorized = true
+			isAdmin = true
+			userSlug = "test-admin-user-1"
+		})
+
+		ginkgo.It("passes", func() {
+			_, _, err := userClient.SecretSvcAPI.SaveSecrets(ctx).
+				Body(openapi.SecretSvcSaveSecretsRequest{
+					Secrets: []openapi.SecretSvcSecret{
+						{
+							Key:   openapi.PtrString("non-prefixed"),
+							Value: openapi.PtrString("value"),
+						}},
+				}).
+				Execute()
+
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
+				Body(openapi.SecretSvcListSecretsRequest{
+					Key: openapi.PtrString("non-prefixed"),
+				}).
+				Execute()
+
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(1))
+			gomega.Expect(readRsp.Secrets[0].Readers[0]).To(gomega.Equal("test-admin-user-1"))
+			gomega.Expect(readRsp.Secrets[0].Writers[0]).To(gomega.Equal("test-admin-user-1"))
+			gomega.Expect(readRsp.Secrets[0].Deleters[0]).To(gomega.Equal("test-admin-user-1"))
+		})
+	})
+
+	ginkgo.Context("user 1 can write and read, but user 2 will not have access", func() {
+		ginkgo.BeforeEach(func() {
+			userClient = mockClientFactory.Client()
+
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -136,7 +205,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		ginkgo.It("works", func() {
 			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
+					Key: openapi.PtrString("test-user-1/non-existent"),
 				}).
 				Execute()
 
@@ -147,7 +216,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 				Body(openapi.SecretSvcSaveSecretsRequest{
 					Secrets: []openapi.SecretSvcSecret{
 						{
-							Key:   openapi.PtrString("nonexistent"),
+							Key:   openapi.PtrString("test-user-1/non-existent"),
 							Value: openapi.PtrString("value"),
 						}},
 				}).
@@ -157,7 +226,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
+					Key: openapi.PtrString("test-user-1/non-existent"),
 				}).
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
@@ -167,7 +236,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			readRsp, _, err = userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("nonexistent"),
+					Key: openapi.PtrString("test-user-1/non-existent"),
 				}).
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
@@ -175,10 +244,11 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 	})
 
-	ginkgo.Context("write encrypted", func() {
+	ginkgo.Context("as a user writing already encrypted values", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
+			isAuthorized = true
 			isAdmin = false
 			userSlug = "test-user-1"
 		})
@@ -193,7 +263,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 				Body(openapi.SecretSvcSaveSecretsRequest{
 					Secrets: []openapi.SecretSvcSecret{
 						{
-							Key:       openapi.PtrString("enc1"),
+							Key:       openapi.PtrString("test-user-1/enc1"),
 							Value:     rsp.Value,
 							Encrypted: openapi.PtrBool(true),
 						}},
@@ -203,7 +273,7 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
 				Body(openapi.SecretSvcListSecretsRequest{
-					Key: openapi.PtrString("enc1"),
+					Key: openapi.PtrString("test-user-1/enc1"),
 				}).
 				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())

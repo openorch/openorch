@@ -73,9 +73,9 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		this.cd.markForCheck();
 
 		this.subscriptions.push(
-			this.configService.onConfigUpdate$.subscribe(async (config) => {
+			this.configService.config$.subscribe(async (config) => {
 				this.model = this.models?.find(
-					(m) => m.id == config?.model?.currentModelId
+					(m) => m.id == config?.data['model-svc']?.currentModelId
 				);
 			})
 		);

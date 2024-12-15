@@ -34,11 +34,8 @@ docs/ChatSvcMessage.md
 docs/ChatSvcThread.md
 docs/ChatSvcUpdateThreadRequest.md
 docs/ConfigSvcAPI.md
-docs/ConfigSvcAppServiceConfig.md
 docs/ConfigSvcConfig.md
-docs/ConfigSvcDownloadServiceConfig.md
 docs/ConfigSvcGetConfigResponse.md
-docs/ConfigSvcModelServiceConfig.md
 docs/ConfigSvcSaveConfigRequest.md
 docs/DatastoreFilter.md
 docs/DatastoreOp.md
@@ -206,11 +203,8 @@ model_chat_svc_get_threads_response.go
 model_chat_svc_message.go
 model_chat_svc_thread.go
 model_chat_svc_update_thread_request.go
-model_config_svc_app_service_config.go
 model_config_svc_config.go
-model_config_svc_download_service_config.go
 model_config_svc_get_config_response.go
-model_config_svc_model_service_config.go
 model_config_svc_save_config_request.go
 model_datastore_filter.go
 model_datastore_op.go

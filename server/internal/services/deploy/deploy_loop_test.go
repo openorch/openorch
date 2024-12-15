@@ -48,7 +48,9 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		server = httptest.NewServer(hs)
 
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
-		mockUserSvc = test.MockUserSvc(ctx, ctrl)
+		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithIsAuthorizedFactory(func() bool {
+			return true
+		}))
 		mockRegistrySvc = openapi.NewMockRegistrySvcAPI(ctrl)
 		mockDockerSvc = openapi.NewMockDockerSvcAPI(ctrl)
 

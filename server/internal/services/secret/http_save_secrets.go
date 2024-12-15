@@ -16,6 +16,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -42,9 +43,7 @@ func (cs *SecretService) SaveSecrets(
 ) {
 	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), secret.PermissionSecretSave.Id).
-		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc"},
-		}).
+		Body(openapi.UserSvcIsAuthorizedRequest{}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -99,14 +98,24 @@ func (cs *SecretService) saveSecrets(
 	defer cs.lock.Release(ctx, "secret-svc-save")
 
 	for _, s := range ss {
-		secretI, found, err := cs.secretStore.Query(datastore.Equals([]string{"key"}, s.Key)).
+		if s.Namespace == "" {
+			s.Namespace = "default"
+		}
+
+		secretI, found, err := cs.secretStore.Query(
+			datastore.Equals([]string{"namespace"}, s.Namespace),
+			datastore.Equals([]string{"key"}, s.Key),
+		).
 			FindOne()
 		if err != nil {
 			return err
 		}
 		if !found {
-			// when secret is not found, it can be "claimed"/created
-			// without authorization
+			// When secret key does not exist, it can be "claimed" by any authorized user
+			// but non admins can only claim keys prefixed with their user slug
+			if !isAdmin && !strings.HasPrefix(s.Key, userSlug) {
+				return errors.New("users can only claim secrets prefixed with their user slug")
+			}
 			if s.Id == "" {
 				s.Id = sdk.Id("secr")
 			}
@@ -115,6 +124,9 @@ func (cs *SecretService) saveSecrets(
 			}
 			if s.Readers == nil {
 				s.Readers = []string{userSlug}
+			}
+			if s.Deleters == nil {
+				s.Deleters = []string{userSlug}
 			}
 			if !s.Encrypted {
 				s.Value, err = encrypt(s.Value, cs.encryptionKey)
@@ -128,7 +140,7 @@ func (cs *SecretService) saveSecrets(
 
 		secret := secretI.(*secret.Secret)
 
-		// when secret is found, it can only be modified by authorized users
+		// When a secret is found, it can only be modified by authorized users
 		canSave := isAdmin
 		if !canSave {
 			for _, writer := range secret.Writers {

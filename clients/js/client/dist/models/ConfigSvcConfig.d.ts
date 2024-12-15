@@ -9,9 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { ConfigSvcAppServiceConfig } from './ConfigSvcAppServiceConfig';
-import type { ConfigSvcModelServiceConfig } from './ConfigSvcModelServiceConfig';
-import type { ConfigSvcDownloadServiceConfig } from './ConfigSvcDownloadServiceConfig';
 /**
  *
  * @export
@@ -20,38 +17,30 @@ import type { ConfigSvcDownloadServiceConfig } from './ConfigSvcDownloadServiceC
 export interface ConfigSvcConfig {
     /**
      *
-     * @type {ConfigSvcAppServiceConfig}
+     * @type {{ [key: string]: any; }}
      * @memberof ConfigSvcConfig
      */
-    app?: ConfigSvcAppServiceConfig;
+    data: {
+        [key: string]: any;
+    };
     /**
      *
      * @type {string}
      * @memberof ConfigSvcConfig
      */
-    directory?: string;
+    dataJson?: string;
     /**
      *
-     * @type {ConfigSvcDownloadServiceConfig}
+     * @type {string}
      * @memberof ConfigSvcConfig
      */
-    download?: ConfigSvcDownloadServiceConfig;
-    /**
-     * * This flag drives a minor UX feature:
-     * 	 * if the user has not installed the runtime we show an INSTALL
-     * 	 * button, but if the user has already installed the runtime we show
-     * 	 * we show a START runtime button.
-     * 	 *
-     * @type {boolean}
-     * @memberof ConfigSvcConfig
-     */
-    isRuntimeInstalled?: boolean;
+    id?: string;
     /**
      *
-     * @type {ConfigSvcModelServiceConfig}
+     * @type {string}
      * @memberof ConfigSvcConfig
      */
-    model?: ConfigSvcModelServiceConfig;
+    namespace: string;
 }
 /**
  * Check if a given object implements the ConfigSvcConfig interface.

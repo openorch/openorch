@@ -19,6 +19,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/flusflas/dipper"
 	"github.com/gorilla/mux"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
@@ -66,7 +67,9 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		lc = llm.NewMockClientI(ctrl)
 
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
-		mockUserSvc = test.MockUserSvc(ctx, ctrl)
+		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithIsAuthorizedFactory(func() bool {
+			return true
+		}))
 		mockChatSvc = openapi.NewMockChatSvcAPI(ctrl)
 		mockModelSvc = openapi.NewMockModelSvcAPI(ctrl)
 		mockConfigSvc = openapi.NewMockConfigSvcAPI(ctrl)
@@ -112,8 +115,10 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			GetConfigExecute(gomock.Any()).
 			Return(&openapi.ConfigSvcGetConfigResponse{
 				Config: &openapi.ConfigSvcConfig{
-					Model: &openapi.ConfigSvcModelServiceConfig{
-						CurrentModelId: openapi.PtrString("mistral-1"),
+					Data: map[string]interface{}{
+						"model-svc": map[string]interface{}{
+							"currentModelId": "mistral-1",
+						},
 					},
 				},
 			}, nil, nil).AnyTimes()
@@ -261,7 +266,9 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 				if !strings.Contains(*v.Id, "mistral") {
 					continue
 				}
-				if *v.Id == *crsp.Config.Model.CurrentModelId {
+				currentModelIdI := dipper.Get(crsp.Config.Data, "model-svc.currentModelId")
+				currentModelId, ok := currentModelIdI.(string)
+				if ok && *v.Id == currentModelId {
 					model = &v
 				}
 			}

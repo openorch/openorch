@@ -46,8 +46,9 @@ func MakeClients(clientFactory sdk.ClientFactory, num int) ([]*openapi.APIClient
 }
 
 type MockUserOptions struct {
-	IdFactory   func() string
-	SlugFactory func() string
+	IdFactory           func() string
+	SlugFactory         func() string
+	IsAuthorizedFactory func() bool
 }
 
 type MockUserOption func(*MockUserOptions)
@@ -61,6 +62,12 @@ func WithIdFactory(idFactory func() string) MockUserOption {
 func WithSlugFactory(slugFactory func() string) MockUserOption {
 	return func(o *MockUserOptions) {
 		o.SlugFactory = slugFactory
+	}
+}
+
+func WithIsAuthorizedFactory(isAuthorizedFactory func() bool) MockUserOption {
+	return func(o *MockUserOptions) {
+		o.IsAuthorizedFactory = isAuthorizedFactory
 	}
 }
 
@@ -108,17 +115,23 @@ func MockUserSvc(ctx context.Context, ctrl *gomock.Controller, options ...MockUs
 	mockUserSvc.EXPECT().AddPermissionToRoleExecute(gomock.Any()).Return(expectedUserSvcAddPermissionToRoleResponse, nil, nil).AnyTimes()
 	mockUserSvc.EXPECT().IsAuthorized(gomock.Any(), gomock.Any()).Return(mockIsAuthorizedRequest).AnyTimes()
 	mockUserSvc.EXPECT().IsAuthorizedExecute(gomock.Any()).DoAndReturn(func(req openapi.ApiIsAuthorizedRequest) (*openapi.UserSvcIsAuthorizedResponse, *http.Response, error) {
+		var isAuthorized bool
+		if opts.IsAuthorizedFactory != nil {
+			isAuthorized = opts.IsAuthorizedFactory()
+		}
+
 		var id string
 		if opts.IdFactory != nil {
 			id = opts.IdFactory()
 		}
+
 		var slug string
 		if opts.SlugFactory != nil {
 			slug = opts.SlugFactory()
 		}
 
 		return &openapi.UserSvcIsAuthorizedResponse{
-			Authorized: openapi.PtrBool(true),
+			Authorized: openapi.PtrBool(isAuthorized), // Dynamically evaluate
 			User: &openapi.UserSvcUser{
 				Id:   openapi.PtrString(id),   // Dynamically evaluate
 				Slug: openapi.PtrString(slug), // Dynamically evaluate

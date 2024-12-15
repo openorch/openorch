@@ -16,6 +16,24 @@
  */
 export interface SecretSvcSecret {
     /**
+     * Slugs of services/users who can change the deleters list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeDeleters?: Array<string>;
+    /**
+     * Slugs of services/users who can change the readers list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeReaders?: Array<string>;
+    /**
+     * Slugs of services/users who can change the writers list
+     * @type {Array<string>}
+     * @memberof SecretSvcSecret
+     */
+    canChangeWriters?: Array<string>;
+    /**
      * Slugs of services/users who can delete the secret
      * @type {Array<string>}
      * @memberof SecretSvcSecret
@@ -43,6 +61,12 @@ export interface SecretSvcSecret {
      * @memberof SecretSvcSecret
      */
     key?: string;
+    /**
+     * Namespace of the secret
+     * @type {string}
+     * @memberof SecretSvcSecret
+     */
+    namespace?: string;
     /**
      * Slugs of services/users who can read the secret
      * @type {Array<string>}

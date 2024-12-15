@@ -152,7 +152,7 @@ export class UserService {
 			slug: slug,
 			name: name,
 		};
-		return this.userService.saveUserProfile({
+		return this.userService.saveUser({
 			userId: id,
 			body: request,
 		});

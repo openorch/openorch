@@ -1,7 +1,4 @@
 import { ConfigSvcConfigFromJSON, ConfigSvcConfigToJSON } from './ConfigSvcConfig.mjs';
-import './ConfigSvcAppServiceConfig.mjs';
-import './ConfigSvcModelServiceConfig.mjs';
-import './ConfigSvcDownloadServiceConfig.mjs';
 
 /* tslint:disable */
 /* eslint-disable */
