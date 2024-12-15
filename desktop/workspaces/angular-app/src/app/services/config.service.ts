@@ -64,13 +64,11 @@ export class ConfigService {
 		try {
 			const rsp = await this.configGet();
 			console.log('Config loaded', rsp);
-			if (!rsp?.config?.data) {
-				this.lastConfig = {
-					data: {},
-				};
-			} else {
-				this.lastConfig = rsp?.config;
-			}
+			this.lastConfig = rsp?.config?.data
+				? rsp?.config
+				: {
+						data: {},
+					};
 
 			this.configSubject.next(this.lastConfig as ConfigSvcConfig);
 		} catch (error) {

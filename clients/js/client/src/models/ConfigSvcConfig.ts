@@ -42,7 +42,7 @@ export interface ConfigSvcConfig {
      * @type {string}
      * @memberof ConfigSvcConfig
      */
-    namespace: string;
+    namespace?: string;
 }
 
 /**
@@ -50,7 +50,6 @@ export interface ConfigSvcConfig {
  */
 export function instanceOfConfigSvcConfig(value: object): value is ConfigSvcConfig {
     if (!('data' in value) || value['data'] === undefined) return false;
-    if (!('namespace' in value) || value['namespace'] === undefined) return false;
     return true;
 }
 
@@ -67,7 +66,7 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
         'data': json['data'],
         'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
         'id': json['id'] == null ? undefined : json['id'],
-        'namespace': json['namespace'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
     };
 }
 

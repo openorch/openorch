@@ -13,7 +13,7 @@ type ErrorResponse struct {
 
 type Config struct {
 	Id        string                 `json:"id,omitempty"`
-	Namespace string                 `json:"namespace"  binding:"required" swagger:"default=default"`
+	Namespace string                 `json:"namespace" swagger:"default=default"`
 	DataJSON  string                 `json:"dataJson,omitempty"`
 	Data      map[string]interface{} `json:"data" binding:"required"`
 }

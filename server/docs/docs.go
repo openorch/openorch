@@ -4749,8 +4749,7 @@ const docTemplate = `{
         "config_svc.Config": {
             "type": "object",
             "required": [
-                "data",
-                "namespace"
+                "data"
             ],
             "properties": {
                 "data": {

@@ -144,7 +144,6 @@ definitions:
         type: string
     required:
     - data
-    - namespace
     type: object
   config_svc.GetConfigResponse:
     properties:

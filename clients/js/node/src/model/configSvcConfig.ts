@@ -16,7 +16,7 @@ export class ConfigSvcConfig {
     'data': { [key: string]: any; };
     'dataJson'?: string;
     'id'?: string;
-    'namespace': string;
+    'namespace'?: string;
 
     static discriminator: string | undefined = undefined;
 

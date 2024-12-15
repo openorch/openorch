@@ -40,7 +40,7 @@ export interface ConfigSvcConfig {
      * @type {string}
      * @memberof ConfigSvcConfig
      */
-    namespace: string;
+    namespace?: string;
 }
 /**
  * Check if a given object implements the ConfigSvcConfig interface.
