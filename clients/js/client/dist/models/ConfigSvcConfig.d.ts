@@ -23,6 +23,24 @@ export interface ConfigSvcConfig {
     data: {
         [key: string]: any;
     };
+    /**
+     *
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    dataJson?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    id?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    namespace: string;
 }
 /**
  * Check if a given object implements the ConfigSvcConfig interface.

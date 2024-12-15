@@ -25,6 +25,24 @@ export interface ConfigSvcConfig {
      * @memberof ConfigSvcConfig
      */
     data: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    dataJson?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfigSvcConfig
+     */
+    namespace: string;
 }
 
 /**
@@ -32,6 +50,7 @@ export interface ConfigSvcConfig {
  */
 export function instanceOfConfigSvcConfig(value: object): value is ConfigSvcConfig {
     if (!('data' in value) || value['data'] === undefined) return false;
+    if (!('namespace' in value) || value['namespace'] === undefined) return false;
     return true;
 }
 
@@ -46,6 +65,9 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'],
     };
 }
 
@@ -61,6 +83,9 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
     };
 }
 

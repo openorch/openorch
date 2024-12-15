@@ -25,10 +25,14 @@ function SecretSvcSecretFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
+        'canChangeDeleters': json['canChangeDeleters'] == null ? undefined : json['canChangeDeleters'],
+        'canChangeReaders': json['canChangeReaders'] == null ? undefined : json['canChangeReaders'],
+        'canChangeWriters': json['canChangeWriters'] == null ? undefined : json['canChangeWriters'],
         'deleters': json['deleters'] == null ? undefined : json['deleters'],
         'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
         'key': json['key'] == null ? undefined : json['key'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
         'readers': json['readers'] == null ? undefined : json['readers'],
         'value': json['value'] == null ? undefined : json['value'],
         'writers': json['writers'] == null ? undefined : json['writers'],
@@ -42,10 +46,14 @@ function SecretSvcSecretToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
+        'canChangeDeleters': value['canChangeDeleters'],
+        'canChangeReaders': value['canChangeReaders'],
+        'canChangeWriters': value['canChangeWriters'],
         'deleters': value['deleters'],
         'encrypted': value['encrypted'],
         'id': value['id'],
         'key': value['key'],
+        'namespace': value['namespace'],
         'readers': value['readers'],
         'value': value['value'],
         'writers': value['writers'],

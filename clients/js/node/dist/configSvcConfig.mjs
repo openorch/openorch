@@ -20,6 +20,21 @@ ConfigSvcConfig.attributeTypeMap = [
         "name": "data",
         "baseName": "data",
         "type": "{ [key: string]: any; }"
+    },
+    {
+        "name": "dataJson",
+        "baseName": "dataJson",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
+        "type": "string"
     }
 ];
 

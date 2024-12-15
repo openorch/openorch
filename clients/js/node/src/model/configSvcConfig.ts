@@ -14,6 +14,9 @@ import { RequestFile } from './models';
 
 export class ConfigSvcConfig {
     'data': { [key: string]: any; };
+    'dataJson'?: string;
+    'id'?: string;
+    'namespace': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -22,6 +25,21 @@ export class ConfigSvcConfig {
             "name": "data",
             "baseName": "data",
             "type": "{ [key: string]: any; }"
+        },
+        {
+            "name": "dataJson",
+            "baseName": "dataJson",
+            "type": "string"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "namespace",
+            "baseName": "namespace",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

@@ -19,6 +19,8 @@
 function instanceOfConfigSvcConfig(value) {
     if (!('data' in value) || value['data'] === undefined)
         return false;
+    if (!('namespace' in value) || value['namespace'] === undefined)
+        return false;
     return true;
 }
 function ConfigSvcConfigFromJSON(json) {
@@ -30,6 +32,9 @@ function ConfigSvcConfigFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'],
     };
 }
 function ConfigSvcConfigToJSON(json) {
@@ -41,6 +46,9 @@ function ConfigSvcConfigToJSONTyped(value, ignoreDiscriminator = false) {
     }
     return {
         'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
     };
 }
 

@@ -38,8 +38,9 @@ export declare class ConfigSvcApi {
     /**
      * Fetch the current configuration from the server
      * @summary Get Config
+     * @param namespace Namespace
      */
-    getConfig(options?: {
+    getConfig(namespace?: string, options?: {
         headers: {
             [name: string]: string;
         };
