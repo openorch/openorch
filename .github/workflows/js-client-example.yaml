@@ -30,8 +30,8 @@ jobs:
 
       - name: Run
         run: |
-          npm link @openorch/client
           npm install
+          npm link @openorch/client
           npm run build
 
           HOST="127.0.0.1"
