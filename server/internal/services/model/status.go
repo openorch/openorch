@@ -52,7 +52,7 @@ func (ms *ModelService) status(
 			return nil, err
 		}
 
-		modelIdI := dipper.Get(rsp.Config.Data, "$.model-svc.currentModelId")
+		modelIdI := dipper.Get(rsp.Config.Data, "model-svc.currentModelId")
 		var ok bool
 		modelId, ok = modelIdI.(string)
 		if !ok {

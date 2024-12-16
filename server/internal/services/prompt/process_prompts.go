@@ -252,7 +252,7 @@ func (p *PromptService) processPrompt(
 			return err
 		}
 
-		modelIdI := dipper.Get(getConfigRsp.Config.Data, "$.model-svc.currentModelId")
+		modelIdI := dipper.Get(getConfigRsp.Config.Data, "model-svc.currentModelId")
 		var ok bool
 		modelId, ok = modelIdI.(string)
 		if !ok {
