@@ -21,6 +21,7 @@ jobs:
       - name: Link local packages
         run: |
           bash link_local.sh
+          npm install
         working-directory: ./clients/js
 
       - name: Start docker containers
