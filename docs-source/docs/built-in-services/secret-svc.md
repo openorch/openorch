@@ -1,5 +1,5 @@
 ---
-sidebar_position: 100
+sidebar_position: 20
 tags:
   - secret-svc
   - secrets
@@ -13,7 +13,7 @@ The Secret Svc stores sensitive or internal (non-end-user-facing) configuration.
 
 > This page is a high level overview of the `Secret Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/list-secrets).
 
-## Access Rules
+## Access rules
 
 ### Read
 
@@ -29,13 +29,13 @@ Any logged in user can create a secret. Non-admin users can only create secrets 
 deploy-svc/EXAMPLE-KEY
 ```
 
-vs
+vs non-prefixed keys such as
 
 ```sh
 EMAIL_API_KEY
 ```
 
-Obviously the `EMAIL_API_KEY` will be set up by an administrator user.
+Non-prefixed keys like `EMAIL_API_KEY` can only be created by admin users.
 
 This prefix rule serves two purposes:
 
@@ -46,20 +46,45 @@ This prefix rule serves two purposes:
 
 After a key is created further write access is governed by the `Writers` block.
 
+## Entities
+
+### Secret
+
+```yaml
+id: "secr_eG8IvKwB0A"
+key: "MY_API_KEY"
+value: "nNl4X9+@95Z"
+
+# Slugs of services and users who can read the secret
+readers:
+  - "alice"
+  - "bob"
+
+# Slugs of services and users who can modify the secret
+writers:
+  - "alice"
+  - "bob"
+
+# Slugs of services and users who can delete the secret
+deleters:
+  - "service-admin"
+
+# Slugs of services and users who can change the "readers" list
+canChangeReaders:
+  - "alice"
+
+# Slugs of services and users who can change the "writers" list
+canChangeWriters:
+  - "alice"
+
+# Slugs of services and users who can change the "deleters" list
+canChangeDeleters:
+  - "alice"
+```
+
 ## Design choices
 
 The Secret Svc, like most things in OpenOrch, is designed to be simple to reason about.
-
-```go
-type Secret struct {
-  Id             string
-	Key            string   // Secret key eg. "MY_API_KEY"
-	Value          string   // Secret value eg. "nNl4X9\+@95Z
-	Readers        []string // Slugs of services and users who can read the secret
-	Writers        []string // Slugs of services and users who can modify the secret
-  Deleters       []string // Slugs of services and users who can delete the secret
-}
-```
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
 
