@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.7
+API version: 0.3.0-rc.8
 Contact: sales@singulatron.com
 */
 
@@ -25,7 +25,7 @@ type ConfigSvcConfig struct {
 	Data map[string]interface{} `json:"data"`
 	DataJson *string `json:"dataJson,omitempty"`
 	Id *string `json:"id,omitempty"`
-	Namespace string `json:"namespace"`
+	Namespace *string `json:"namespace,omitempty"`
 }
 
 type _ConfigSvcConfig ConfigSvcConfig
@@ -34,10 +34,9 @@ type _ConfigSvcConfig ConfigSvcConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSvcConfig(data map[string]interface{}, namespace string) *ConfigSvcConfig {
+func NewConfigSvcConfig(data map[string]interface{}) *ConfigSvcConfig {
 	this := ConfigSvcConfig{}
 	this.Data = data
-	this.Namespace = namespace
 	return &this
 }
 
@@ -137,28 +136,36 @@ func (o *ConfigSvcConfig) SetId(v string) {
 	o.Id = &v
 }
 
-// GetNamespace returns the Namespace field value
+// GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *ConfigSvcConfig) GetNamespace() string {
-	if o == nil {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
-
-	return o.Namespace
+	return *o.Namespace
 }
 
-// GetNamespaceOk returns a tuple with the Namespace field value
+// GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigSvcConfig) GetNamespaceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
-	return &o.Namespace, true
+	return o.Namespace, true
 }
 
-// SetNamespace sets field value
+// HasNamespace returns a boolean if a field has been set.
+func (o *ConfigSvcConfig) HasNamespace() bool {
+	if o != nil && !IsNil(o.Namespace) {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespace gets a reference to the given string and assigns it to the Namespace field.
 func (o *ConfigSvcConfig) SetNamespace(v string) {
-	o.Namespace = v
+	o.Namespace = &v
 }
 
 func (o ConfigSvcConfig) MarshalJSON() ([]byte, error) {
@@ -178,7 +185,9 @@ func (o ConfigSvcConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	toSerialize["namespace"] = o.Namespace
+	if !IsNil(o.Namespace) {
+		toSerialize["namespace"] = o.Namespace
+	}
 	return toSerialize, nil
 }
 
@@ -188,7 +197,6 @@ func (o *ConfigSvcConfig) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"data",
-		"namespace",
 	}
 
 	allProperties := make(map[string]interface{})

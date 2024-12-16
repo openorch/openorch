@@ -49,7 +49,7 @@ func (ms *ModelService) start(modelId string) error {
 	}
 
 	if modelId == "" {
-		modelIdI := dipper.Get(getConfigResponse.Config.Data, "$.model-svc.currentModelId")
+		modelIdI := dipper.Get(getConfigResponse.Config.Data, "model-svc.currentModelId")
 		var ok bool
 		modelId, ok = modelIdI.(string)
 		if !ok {

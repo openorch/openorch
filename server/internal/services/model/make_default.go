@@ -16,8 +16,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/pkg/errors"
-
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 )
@@ -44,9 +42,9 @@ func (ms *ModelService) makeDefault(ctx context.Context, modelId string) error {
 		rsp.Config.Data["model-svc"] = map[string]any{}
 	}
 
-	if err != nil {
-		return errors.Wrap(err, "failed to set current model id")
-	}
+	m := rsp.Config.Data["model-svc"].(map[string]any)
+
+	m["currentModelId"] = modelId
 
 	_, _, err = ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		ConfigSvcAPI.SaveConfig(ctx).

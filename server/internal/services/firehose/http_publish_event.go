@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	firehose "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
@@ -33,6 +34,15 @@ func (p *FirehoseService) Publish(w http.ResponseWriter,
 
 	isAuthRsp, _, err := p.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), firehose.PermissionEventPublish.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{
+				"config-svc",
+				"download-svc",
+				"prompt-svc",
+				"chat-svc",
+				"model-svc",
+			},
+		}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
