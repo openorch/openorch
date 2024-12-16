@@ -20,9 +20,9 @@ jobs:
 
       - name: Link local packages
         run: |
-          bash link_local.sh
+          npm link
           npm install
-        working-directory: ./clients/js
+        working-directory: ./clients/js/client
 
       - name: Start docker containers
         run: |
@@ -30,6 +30,10 @@ jobs:
 
       - name: Run
         run: |
+          npm link @openorch/client
+          npm install
+          npm run build
+
           HOST="127.0.0.1"
           PORT=58231
 
