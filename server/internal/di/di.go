@@ -86,6 +86,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.Lock = distlock.NewLocalDistributedLock()
 	}
 
+	if options.Authorizer == nil {
+		options.Authorizer = sdk.AuthorizerImpl{}
+	}
+
 	configService, err := configservice.NewConfigService(
 		options.Lock,
 		options.Authorizer,
@@ -120,10 +124,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 				path.Join(localStorePath, tableName),
 			)
 		}
-	}
-
-	if options.Authorizer == nil {
-		options.Authorizer = sdk.AuthorizerImpl{}
 	}
 
 	if options.Url == "" {
