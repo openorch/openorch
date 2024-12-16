@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.7
+API version: 0.3.0-rc.8
 Contact: sales@singulatron.com
 */
 

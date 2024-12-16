@@ -1,12 +1,8 @@
 #!/bin/bash
 
-set -e
+# This is just a quick script intended for local use
 
-if ! command -v rollup > /dev/null; then
-  npm install -g rollup
-else
-  echo "Rollup is already installed."
-fi
+set -e
 
 cd client;
 npm run build;

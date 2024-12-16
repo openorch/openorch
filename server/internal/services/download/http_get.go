@@ -45,7 +45,7 @@ func (ds *DownloadService) Get(
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc"},
+			SlugsGranted: []string{"docker-svc", "model-svc"},
 		}).
 		Execute()
 	if err != nil {

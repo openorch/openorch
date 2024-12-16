@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.7"
+        "version": "0.3.0-rc.8"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -4743,8 +4743,7 @@
         "config_svc.Config": {
             "type": "object",
             "required": [
-                "data",
-                "namespace"
+                "data"
             ],
             "properties": {
                 "data": {
