@@ -48,9 +48,9 @@ type SkeletonService struct {
 }
 
 func NewService() (*SkeletonService, error) {
-	spUrl := os.Getenv("SUPERPLATFORM_URL")
+	spUrl := os.Getenv("OPENORCH_URL")
 	if spUrl == "" {
-		return nil, errors.New("SUPERPLATFORM_URL cannot be found")
+		return nil, errors.New("OPENORCH_URL cannot be found")
 	}
 
 	selfUrl := os.Getenv("SELF_URL")
@@ -100,7 +100,7 @@ func (skeleton *SkeletonService) Hello(w http.ResponseWriter, r *http.Request) {
 Just make sure you run it with the appropriate envars:
 
 ```sh
-SUPERPLATFORM_URL=http://127.0.0.1:58231 SELF_URL=http://127.0.0.1:9311 go run main.go
+OPENORCH_URL=http://127.0.0.1:58231 SELF_URL=http://127.0.0.1:9311 go run main.go
 ````
 
 Once it's running you will be able to call the Superplatform daemon proxy and that will proxy to your skeleton service:

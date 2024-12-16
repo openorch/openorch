@@ -1,5 +1,5 @@
 ---
-sidebar_position: 90
+sidebar_position: 50
 tags:
   - deploy-svc
   - deploy
@@ -11,9 +11,48 @@ tags:
 
 The deploy service is responsible of launching containers on whatever infrastructure the OpenOrch is running on (eg. [Docker Svc](/docs/built-in-services/docker-svc)) and registering them into the [Registry Svc](/docs/built-in-services/docker-svc).
 
-It registers services it launches since services are not expected to self register. This is to support services that are not using the OpenOrch SDK to build themselves—in other words, OpenOrch is designed to be able to run non-OpenOrch services too.
-
 > This page is a high level overview of the `Deploy Svc`. For more details, please see the [Deploy Svc API documentation](/docs/openorch/save-deployment).
+
+## Types of services
+
+On OpenOrch, services generally fall into the following categories:
+
+- Services deployed by the `Deploy Svc`: These can include services built with the OpenOrch SDK or standard containers (e.g., NGINX) that are not OpenOrch-specific.
+- Services built with the OpenOrch SDK but deployed through other methods; for example, using Docker Compose or Kubernetes. These services self-register into the `Registry Svc`.
+
+## Entities
+
+### Deployment
+
+```yaml
+id: depl_dbOdi5eLQK
+definitionId: def_deBXZMpxrQ
+name: user-service-v2
+description: Handles user service requests
+replicas: 3
+strategy:
+  type: RollingUpdate
+  maxUnavailable: 1
+  maxSurge: 2
+resources:
+  cpu: "500m"
+  memory: "256Mi"
+  vram: "24GB"
+autoScaling:
+  minReplicas: 2
+  maxReplicas: 10
+  cpuThreshold: 80
+targetRegions:
+  - cluster: us-west1
+    zone: us-west1-b
+  - cluster: local-docker
+status: OK
+details: Deployment is in progress
+envars:
+  ENVIRONMENT: production
+  LOG_LEVEL: debug
+  FEATURE_FLAG_X: "true"
+```
 
 ## Dependencies
 
