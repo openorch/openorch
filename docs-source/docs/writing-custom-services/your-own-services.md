@@ -15,88 +15,86 @@ Below is an example Go service that does the following things:
 package main
 
 import (
-"context"
-"fmt"
-"log"
-"net/http"
-"os"
+	"context"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
 
-    "github.com/pkg/errors"
-    openapi "github.com/openorch/openorch/clients/go"
-    sdk "github.com/openorch/openorch/sdk/go"
-
+	openapi "github.com/openorch/openorch/clients/go"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 )
 
 func main() {
-skeletonService, err := NewService()
-if err != nil {
-log.Fatalf("Failed to initialize skeleton service: %v", err)
-}
+	skeletonService, err := NewService()
+	if err != nil {
+		log.Fatalf("Failed to initialize skeleton service: %v", err)
+	}
 
-    router := http.NewServeMux()
+	router := http.NewServeMux()
 
-    router.HandleFunc("/skeleton-svc/hello", func(w http.ResponseWriter, r *http.Request) {
-    	skeletonService.Hello(w, r)
-    })
+	router.HandleFunc("/skeleton-svc/hello", func(w http.ResponseWriter, r *http.Request) {
+		skeletonService.Hello(w, r)
+	})
 
-    log.Println("Server started on :9311")
-    log.Fatal(http.ListenAndServe(":9311", router))
+	log.Println("Server started on :9311")
+	log.Fatal(http.ListenAndServe(":9311", router))
 
 }
 
 type SkeletonService struct {
-token string
+	token string
 }
 
-func NewService() (\*SkeletonService, error) {
-spUrl := os.Getenv("SUPERPLATFORM_URL")
-if spUrl == "" {
-return nil, errors.New("SUPERPLATFORM_URL cannot be found")
-}
+func NewService() (*SkeletonService, error) {
+	spUrl := os.Getenv("SUPERPLATFORM_URL")
+	if spUrl == "" {
+		return nil, errors.New("SUPERPLATFORM_URL cannot be found")
+	}
 
-    selfUrl := os.Getenv("SELF_URL")
+	selfUrl := os.Getenv("SELF_URL")
 
-    dsf, err := sdk.NewDatastoreFactory("")
-    if err != nil {
-    	return nil, errors.Wrap(err, "cannot create datastore factory")
-    }
+	dsf, err := sdk.NewDatastoreFactory("")
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot create datastore factory")
+	}
 
-    credentialStore, err := dsf("skeletonSvcCredentials", &sdk.Credential{})
-    if err != nil {
-    	return nil, errors.Wrap(err, "cannot create credential store")
-    }
+	credentialStore, err := dsf("skeletonSvcCredentials", &sdk.Credential{})
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot create credential store")
+	}
 
-    client := sdk.NewApiClientFactory(spUrl).Client()
-    token, err := sdk.RegisterService(
-    	client.UserSvcAPI,
-    	"skeleton-svc",
-    	"Skeleton Svc",
-    	credentialStore,
-    )
-    if err != nil {
-    	return nil, errors.Wrap(err, "cannot register service")
-    }
+	client := sdk.NewApiClientFactory(spUrl).Client()
+	token, err := sdk.RegisterService(
+		client.UserSvcAPI,
+		"skeleton-svc",
+		"Skeleton Svc",
+		credentialStore,
+	)
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot register service")
+	}
 
-    client = sdk.NewApiClientFactory(spUrl).Client(sdk.WithToken(token))
-    _, _, err = client.RegistrySvcAPI.RegisterInstance(context.Background()).Body(openapi.RegistrySvcRegisterInstanceRequest{
-    	Url: selfUrl,
-    }).Execute()
-    if err != nil {
-    	return nil, errors.Wrap(err, "cannot register instance")
-    }
+	client = sdk.NewApiClientFactory(spUrl).Client(sdk.WithToken(token))
+	_, _, err = client.RegistrySvcAPI.RegisterInstance(context.Background()).Body(openapi.RegistrySvcRegisterInstanceRequest{
+		Url: selfUrl,
+	}).Execute()
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot register instance")
+	}
 
-    repo := &SkeletonService{
-    	token: token,
-    }
+	repo := &SkeletonService{
+		token: token,
+	}
 
-    return repo, nil
+	return repo, nil
 
 }
 
 func (skeleton *SkeletonService) Hello(w http.ResponseWriter, r *http.Request) {
-fmt.Fprintf(w, `{"hello": "world"}`)
+	fmt.Fprintf(w, `{"hello": "world"}`)
 }
-
 ````
 
 Just make sure you run it with the appropriate envars:
