@@ -44,7 +44,7 @@ Now that the OpenOrch is running you have a few options to interact with it.
 
 ### UI
 
-You can go to `http://127.0.0.1:3901` and log in with username `singulatron` and password `changeme` and start using it just like you would use ChatGPT.
+You can go to `http://127.0.0.1:3901` and log in with username `openorch` and password `changeme` and start using it just like you would use ChatGPT.
 
 Click on the big "AI" button and download a model first. Don't worry, this model will be persisted across restarts (see volumes in the docker-compose.yaml).
 
