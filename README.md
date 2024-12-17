@@ -117,11 +117,12 @@ OpenOrch is a microservices platform that first came to mind back in 2013 when I
 
 ## Run On Your Servers
 
-See [this page](https://openorch.org/docs/category/running-the-daemon) to help you get started.
+See https://openorch.org/docs/category/running-the-daemon to help you get started.
 
 ## Services
 
-See https://openorch.org/docs/category/openorch-api/
+For articles about the built-in services see https://openorch.org/docs/category/built-in-services.  
+For API docs see https://openorch.org/docs/category/openorch-api.
 
 ## Run On Your Laptop/PC
 
