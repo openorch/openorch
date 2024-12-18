@@ -93,6 +93,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	configService, err := configservice.NewConfigService(
 		options.Lock,
 		options.Authorizer,
+		options.HomeDir,
 	)
 	if err != nil {
 		logger.Error(

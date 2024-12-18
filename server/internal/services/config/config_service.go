@@ -41,16 +41,19 @@ type ConfigService struct {
 
 	publicKey  string
 	authorizer sdk.Authorizer
+	homeDir    string
 }
 
 func NewConfigService(
 	lock lock.DistributedLock,
 	authorizer sdk.Authorizer,
+	homeDir string,
 ) (*ConfigService, error) {
 	cs := &ConfigService{
 		lock:       lock,
 		configs:    map[string]map[string]any{},
 		authorizer: authorizer,
+		homeDir:    homeDir,
 	}
 
 	return cs, nil

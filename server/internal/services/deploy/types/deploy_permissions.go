@@ -32,7 +32,7 @@ var PermissionDeploymentDelete = usertypes.Permission{
 	Name: "Deploy Svc - Deployment Delete",
 }
 
-var DeployAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []usertypes.Permission{
 	PermissionDeploymentCreate,
 	PermissionDeploymentEdit,
 	PermissionDeploymentView,

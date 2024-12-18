@@ -28,17 +28,8 @@
 
 	.text-container {
 		flex-grow: 1;
-		margin-top: 1.25rem;
 		margin-left: 2rem;
-	}
-
-	.title {
-		margin: 0;
-	}
-
-	.subtitle {
-		margin-top: 0;
-		color: #888;
+		margin-top: 1.25rem;
 	}
 }
 
@@ -47,9 +38,7 @@
 		flex-direction: column;
 		align-items: center;
 
-
 		.text-container {
-			text-align: center;
 			margin-left: 0;
 		}
 	}
@@ -61,44 +50,14 @@
 	gap: 1rem;
 
 	.menu-buttons {
-		color: #444;
-		font-size: large;
 		white-space: normal;
-		width: 14rem;
-		height: 12rem;
 		margin-bottom: 1em;
+		color: var(--ion-color-tertiary);
 	}
 
 	ion-button {
 		flex: 1 1 12rem;
 		max-width: 14rem;
 		margin-bottom: 1rem;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.buttons-container {
-		.menu-buttons {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-
-			height: 12rem;
-			width: 14rem;
-			margin-right: 0;
-		}
-	}
-}
-
-@media (max-width: 480px) {
-	.buttons-container {
-		width: 100%;
-
-		.menu-buttons {
-			margin: 0 auto;
-			width: 100%;
-			box-sizing: border-box;
-		}
 	}
 }
