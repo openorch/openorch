@@ -753,9 +753,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "PUT")
 
-	router.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	router.PathPrefix("/").HandlerFunc(appl(func(w http.ResponseWriter, r *http.Request) {
 		proxyService.Route(w, r)
-	})
+	}))
 
 	return router, func() error {
 		err = configService.Start()
