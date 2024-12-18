@@ -128,6 +128,8 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(k, v[0])
 	}
 
+	logger.Debug("Proxy request returned", slog.Int("statusCode", resp.StatusCode))
+
 	w.WriteHeader(resp.StatusCode)
 	io.Copy(w, resp.Body)
 }
