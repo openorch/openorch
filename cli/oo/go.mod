@@ -2,15 +2,10 @@ module github.com/openorch/openorch/cli/oo
 
 go 1.23
 
-replace (
-	// github.com/openorch/openorch/clients/go => ../../clients/go
-	// github.com/openorch/openorch/sdk/go => ../../sdk/go
-)
-
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/openorch/openorch/clients/go v0.0.0-20241204104942-d2837b21586b
-	github.com/openorch/openorch/sdk/go v0.0.0-00010101000000-000000000000
+	github.com/openorch/openorch/clients/go v0.0.0-20241218114710-e9c31a19f430
+	github.com/openorch/openorch/sdk/go v0.0.0-20241218114710-e9c31a19f430
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
