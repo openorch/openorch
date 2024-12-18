@@ -24,7 +24,7 @@ export interface Environment {
 export interface ServerServiceConfig {
 	env: Environment;
 }
-export const LOCALTRON_SERVICE_CONFIG =
+export const OPENORCH_SERVICE_CONFIG =
 	new InjectionToken<ServerServiceConfig>('ServerServiceConfig');
 
 @Injectable({
@@ -35,7 +35,7 @@ export class ServerService {
 
 	constructor(
 		private cs: CookieService,
-		@Inject(LOCALTRON_SERVICE_CONFIG) config: ServerServiceConfig
+		@Inject(OPENORCH_SERVICE_CONFIG) config: ServerServiceConfig
 	) {
 		this.config = config;
 	}

@@ -25,7 +25,7 @@ import {
 	HttpClient,
 } from '@angular/common/http';
 import {
-	LOCALTRON_SERVICE_CONFIG,
+	OPENORCH_SERVICE_CONFIG,
 	ServerService,
 } from './app/services/server.service';
 import { MobileService } from './app/services/mobile.service';
@@ -62,7 +62,7 @@ import { FooterService } from './app/services/footer.service';
 			MarkdownModule.forRoot()
 		),
 		{
-			provide: LOCALTRON_SERVICE_CONFIG,
+			provide: OPENORCH_SERVICE_CONFIG,
 			useValue: { env: environment },
 		},
 		ServerService,

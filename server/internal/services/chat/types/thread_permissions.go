@@ -14,27 +14,27 @@ import (
 
 var PermissionThreadCreate = usertypes.Permission{
 	Id:   "chat-svc:thread:create",
-	Name: "Thread Create",
+	Name: "Chat Svc - Thread Create",
 }
 
 var PermissionThreadView = usertypes.Permission{
 	Id:   "chat-svc:thread:view",
-	Name: "Thread View",
+	Name: "Chat Svc - Thread View",
 }
 
 var PermissionThreadEdit = usertypes.Permission{
 	Id:   "chat-svc:thread:edit",
-	Name: "Thread Edit",
+	Name: "Chat Svc - Thread Edit",
 }
 
 var PermissionThreadDelete = usertypes.Permission{
 	Id:   "chat-svc:thread:delete",
-	Name: "Thread Delete",
+	Name: "Chat Svc - Thread Delete",
 }
 
 var PermissionThreadStream = usertypes.Permission{
 	Id:   "chat-svc:thread:stream",
-	Name: "Thread Stream",
+	Name: "Chat Svc - Thread Stream",
 }
 
 var ThreadPermissions = []usertypes.Permission{

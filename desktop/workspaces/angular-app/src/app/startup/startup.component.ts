@@ -111,7 +111,9 @@ export class StartupComponent implements OnInit {
 		if (!cu) {
 			return;
 		}
-		return this.models?.find((v) => v.id == cu?.data?.model?.currentModelId);
+		return this.models?.find(
+			(v) => v.id == (cu?.data['model-svc'] as ModelSvcConfig)?.currentModelId
+		);
 	}
 
 	ionViewWillLeave() {
