@@ -1,4 +1,4 @@
-name: CLI build
+name: CLI OO build
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         with:
           go-version: "^1.23.2"
 
-      - name: Build CLI
+      - name: Build OO CLI
         run: |
           go build
-        working-directory: ./cli
+        working-directory: ./cli/oo

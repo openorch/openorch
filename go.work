@@ -8,4 +8,4 @@ use ./clients/go
 
 use ./sdk/go
 
-use ./cli
+use ./cli/oo
