@@ -132,7 +132,7 @@ var _ = ginkgo.Describe("Config Tests", func() {
 				Execute()
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
-			gomega.Expect(len(readRsp.Config.Data)).To(gomega.Equal(0))
+			gomega.Expect(len(readRsp.Config.Data)).To(gomega.Equal(3))
 		})
 	})
 
