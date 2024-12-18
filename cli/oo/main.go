@@ -5,16 +5,16 @@ import (
 
 	"github.com/spf13/cobra"
 
-	call "github.com/openorch/openorch/cli/commands/call"
-	definition "github.com/openorch/openorch/cli/commands/definition"
-	deployment "github.com/openorch/openorch/cli/commands/deployment"
-	"github.com/openorch/openorch/cli/commands/env"
-	instance "github.com/openorch/openorch/cli/commands/instance"
-	"github.com/openorch/openorch/cli/commands/node"
-	secret "github.com/openorch/openorch/cli/commands/secret"
-	"github.com/openorch/openorch/cli/commands/user/login"
-	"github.com/openorch/openorch/cli/commands/user/token"
-	"github.com/openorch/openorch/cli/commands/user/whoami"
+	call "github.com/openorch/openorch/cli/oo/commands/call"
+	definition "github.com/openorch/openorch/cli/oo/commands/definition"
+	deployment "github.com/openorch/openorch/cli/oo/commands/deployment"
+	"github.com/openorch/openorch/cli/oo/commands/env"
+	instance "github.com/openorch/openorch/cli/oo/commands/instance"
+	"github.com/openorch/openorch/cli/oo/commands/node"
+	secret "github.com/openorch/openorch/cli/oo/commands/secret"
+	"github.com/openorch/openorch/cli/oo/commands/user/login"
+	"github.com/openorch/openorch/cli/oo/commands/user/token"
+	"github.com/openorch/openorch/cli/oo/commands/user/whoami"
 )
 
 func main() {

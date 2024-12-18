@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	"github.com/openorch/openorch/cli/types"
+	"github.com/openorch/openorch/cli/oo/types"
 )
 
 func GetSelectedEnv() (*types.Environment, error) {

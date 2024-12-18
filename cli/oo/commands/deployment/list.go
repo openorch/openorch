@@ -6,7 +6,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/oo/config"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

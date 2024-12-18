@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/oo/config"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

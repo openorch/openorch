@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/ghodss/yaml"
-	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/oo/config"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/pkg/errors"

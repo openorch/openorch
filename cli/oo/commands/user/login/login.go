@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/openorch/openorch/cli/config"
-	"github.com/openorch/openorch/cli/types"
+	"github.com/openorch/openorch/cli/oo/config"
+	"github.com/openorch/openorch/cli/oo/types"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/pkg/errors"
