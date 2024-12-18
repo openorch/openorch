@@ -7,7 +7,7 @@ import (
 func AddInstanceCommands(rootCmd *cobra.Command) {
 	var instanceCmd = &cobra.Command{
 		Use:     "instance",
-		Aliases: []string{"inst", "instances"},
+		Aliases: []string{"i", "instances"},
 		Short:   "Manage service instances",
 	}
 

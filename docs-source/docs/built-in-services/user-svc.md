@@ -13,13 +13,13 @@ tags:
 
 The user service is at the heart of OpenOrch, managing users, tokens, organizations, permissions and more. Each service and human on an OpenOrch network has an account in the `User Svc`.
 
-> This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/superplatform/login).
+> This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/openorch/login).
 
 ## How it works
 
 The most important thing about the User Svc is that service (machine) and user (human) accounts look and function the same.
 
-Every service you write needs to [register](/docs/superplatform/register) at startup, or [log in](/docs/superplatform/login) with the credentials it saves and manages if it's already regsitered. Just like a human.
+Every service you write needs to [register](/docs/openorch/register) at startup, or [log in](/docs/openorch/login) with the credentials it saves and manages if it's already regsitered. Just like a human.
 
 A service account is not an admin account, it's a simple user level account. You might wonder how service-to-service calls work then.
 
@@ -39,13 +39,13 @@ Let's say you have a Cassandra network that spans multiple Availability Zones/Re
 
 ### The token
 
-The User Svc produces a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token)) upon [/user-svc/login](/docs/superplatform/login) in the `token.token` field (see the response documentation).
+The User Svc produces a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token)) upon [/user-svc/login](/docs/openorch/login) in the `token.token` field (see the response documentation).
 
-You can either use this token as a proper JWT - decode it and inspect the contents, or you can just use the token to read the user account that belongs to the token with the [/user-svc/user/by-token](/docs/superplatform/read-user-by-token) endpoint.
+You can either use this token as a proper JWT - decode it and inspect the contents, or you can just use the token to read the user account that belongs to the token with the [/user-svc/user/by-token](/docs/openorch/read-user-by-token) endpoint.
 
 ### Decoding the token
 
-The [`/user-svc/public-key`](/docs/superplatform/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
+The [`/user-svc/public-key`](/docs/openorch/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
 
 Use the JWT libraries that are available in your programming language to do that, or use the Singularon [SDK](https://github.com/singulatron/singulatron/tree/main/sdk) if your language is supported.
 
