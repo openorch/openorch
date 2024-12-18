@@ -5,7 +5,7 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/oo/config"
 	"github.com/spf13/cobra"
 )
 

@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/openorch/openorch/cli/config"
+	"github.com/openorch/openorch/cli/oo/config"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"

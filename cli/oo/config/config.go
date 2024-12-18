@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	types "github.com/openorch/openorch/cli/types"
+	types "github.com/openorch/openorch/cli/oo/types"
 
 	"gopkg.in/yaml.v2"
 )
