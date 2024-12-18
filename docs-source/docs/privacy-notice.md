@@ -16,10 +16,6 @@ There are a few dependencies that are so huge that they are not bundled with Ope
 
 ## Things OpenOrch downloads
 
-### Model List
-
-There is a small list of hardcoded models in OpenOrch, but the rest of the model list is downloaded from `https://api.commonagi.com`, a server owned by the authors of the OpenOrch.
-
 ### Model Files
 
 The model weights themselves are downloaded from `https://huggingface.co`.

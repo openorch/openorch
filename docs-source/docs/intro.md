@@ -6,32 +6,22 @@ tags:
 
 # Welcome to OpenOrch
 
-## What is it?
+OpenOrch is a daemon that transforms your servers into a powerful development environment. It can run AI models, containers, and microservices. Think of it as a blend of (an extremely simplistic, early-stage) Kubernetes and a language agnostic backend framework for building applications on top—designed for fixed-resource setups and straightforward self-hosting.
 
-OpenOrch enables you to self-host AI models, build apps that leverage those models in any language, and utilize a microservices-based communal backend designed to support a diverse range of projects.
-
-## It lets you:
-
-### Run AI Models [x]
-
-Run open-source AI models privately on your own infrastructure, ensuring that your data and operations remain fully under your control.
-
-### Quickly Build Backendless AI Apps [x]
-
-Build backendless application by using OpenOrch as a database and AI prompting API.
-
-### Develop Microservices-Based AI Applications [ ]
-
-OpenOrch itself is built on a microservices architecture. The platform's built-in services communicate with each other through the same APIs that you'll use to build apps on top of OpenOrch.
-
-### Deploy Third-Party AI Apps Easily [ ]
-
-OpenOrch is designed to make deploying third-party AI applications straightforward. With its focus on virtualization and containers (primarily Docker) and a microservices, API-first approach (using OpenAPI), OpenOrch seamlessly integrates other applications into its ecosystem.
+Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data.
 
 ## Running
 
-To run OpenOrch on your servers, or even to lauch on your own laptop, see [Start](./category/running-the-daemon/).
+The first step is to run the daemon. For details about that, see [Running the Daemon](./category/running-the-daemon/).
 
-## Privacy Notice
+## Built-ins
+
+For a quick overview about what the system is capable, read through the [Built-in Service Docs](./category/built-in-services).
+
+## Building on top
+
+To build and run your own services on OpenOrch, see [Your First Service](./writing-custom-services/your-first-service)
+
+## Privacy notice
 
 Privacy is of prime importance to us. To learn more about the privcy aspects of this software, visit the [Privacy Notice](./privacy-notice) page.
