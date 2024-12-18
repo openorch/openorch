@@ -1,4 +1,4 @@
-module github.com/openorch/openorch/cli
+module github.com/openorch/openorch/cli/oo
 
 go 1.23
 
