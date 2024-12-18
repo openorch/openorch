@@ -22,7 +22,7 @@ import {
 	HttpClient,
 } from '@angular/common/http';
 import {
-	LOCALTRON_SERVICE_CONFIG,
+	OPENORCH_SERVICE_CONFIG,
 	ServerService,
 } from './app/services/server.service';
 import { MobileService } from './app/services/mobile.service';
@@ -63,7 +63,7 @@ async function start() {
 				MarkdownModule.forRoot()
 			),
 			{
-				provide: LOCALTRON_SERVICE_CONFIG,
+				provide: OPENORCH_SERVICE_CONFIG,
 				useValue: { env: environment },
 			},
 			ServerService,

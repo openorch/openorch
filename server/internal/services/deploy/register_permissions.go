@@ -34,7 +34,7 @@ func (ns *DeployService) registerPermissions() error {
 	userSvc := ns.clientFactory.Client(sdk.WithToken(ns.token)).UserSvcAPI
 
 	for _, permission := range app(
-		deploytypes.DeployAdminPermissions,
+		deploytypes.AdminPermissions,
 	) {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
@@ -53,7 +53,7 @@ func (ns *DeployService) registerPermissions() error {
 		usertypes.RoleAdmin,
 	} {
 		for _, permission := range app(
-			deploytypes.DeployAdminPermissions,
+			deploytypes.AdminPermissions,
 		) {
 
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).

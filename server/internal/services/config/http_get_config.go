@@ -15,9 +15,11 @@ package configservice
 import (
 	"encoding/json"
 	"net/http"
+	"path"
 
 	config "github.com/openorch/openorch/server/internal/services/config/types"
 	types "github.com/openorch/openorch/server/internal/services/config/types"
+	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	"github.com/pkg/errors"
 )
 
@@ -66,9 +68,11 @@ func (cs *ConfigService) getConfig(namespace string) (*types.Config, error) {
 	}
 	data, ok := cs.configs[namespace]
 	if !ok {
-		return &types.Config{
+		conf := &types.Config{
 			Data: map[string]interface{}{},
-		}, nil
+		}
+		cs.mod(conf)
+		return conf, nil
 	}
 	v, err := json.Marshal(data)
 	if err != nil {
@@ -81,5 +85,34 @@ func (cs *ConfigService) getConfig(namespace string) (*types.Config, error) {
 		return nil, errors.Wrap(err, "failed to unmarshal config")
 	}
 
+	cs.mod(ret)
+
 	return ret, nil
+}
+
+func (cs ConfigService) mod(ret *types.Config) {
+	if ret.Data == nil {
+		ret.Data = map[string]interface{}{}
+	}
+
+	if ret.Data["download-svc"] == nil {
+		ret.Data["download-svc"] = map[string]interface{}{
+			"downloadFolder": path.Join(
+				cs.homeDir,
+				"downloads",
+			),
+		}
+	}
+
+	if ret.Data["model-svc"] == nil {
+		ret.Data["model-svc"] = map[string]interface{}{
+			"currentModelId": modelservice.DefaultModelId,
+		}
+	}
+
+	if ret.Data["config-svc"] == nil {
+		ret.Data["config-svc"] = map[string]interface{}{
+			"directory": cs.homeDir,
+		}
+	}
 }
