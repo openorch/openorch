@@ -3,8 +3,8 @@ module github.com/openorch/openorch/cli
 go 1.23
 
 replace (
-	github.com/openorch/openorch/clients/go => ../clients/go
-	github.com/openorch/openorch/sdk/go => ../sdk/go
+	github.com/openorch/openorch/clients/go => ../../clients/go
+	github.com/openorch/openorch/sdk/go => ../../sdk/go
 )
 
 require (
