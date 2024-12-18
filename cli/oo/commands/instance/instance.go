@@ -19,10 +19,11 @@ func AddInstanceCommands(rootCmd *cobra.Command) {
 	}
 
 	var deleteCmd = &cobra.Command{
-		Use:   "remove [instanceId]",
-		Short: "Remove service instance",
-		Args:  cobra.ExactArgs(1),
-		RunE:  Remove,
+		Use:     "remove [instanceId]",
+		Aliases: []string{"rm"},
+		Short:   "Remove service instance",
+		Args:    cobra.ExactArgs(1),
+		RunE:    Remove,
 	}
 
 	instanceCmd.AddCommand(listCmd)

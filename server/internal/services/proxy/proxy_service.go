@@ -15,6 +15,7 @@ package proxyservice
 import (
 	"context"
 	"io"
+	"log/slog"
 	"net/http"
 	"strings"
 
@@ -25,6 +26,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
+	"github.com/openorch/openorch/sdk/go/logger"
 )
 
 type ProxyService struct {
@@ -66,6 +68,8 @@ func NewProxyService(
 }
 
 func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
+	logger.Debug("Proxying", slog.String("path", r.URL.Path))
+
 	// @todo cache?
 
 	serviceSlug := getServiceSlug(r)
@@ -73,7 +77,7 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 	rsp, _, err := cs.clientFactory.Client(sdk.WithToken(cs.token)).RegistrySvcAPI.ListInstances(context.Background()).Slug(serviceSlug).Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		w.Write([]byte(errors.Wrap(err, "error listing instances").Error()))
 		return
 	}
 
@@ -104,7 +108,7 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 	req, err := http.NewRequest(r.Method, uri, r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		w.Write([]byte(errors.Wrap(err, "error creating proxy request").Error()))
 		return
 	}
 
@@ -114,7 +118,7 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 	resp, err := client.Do(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		w.Write([]byte(errors.Wrap(err, "error proxying request").Error()))
 		return
 	}
 
