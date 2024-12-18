@@ -6,8 +6,9 @@ import (
 
 func AddEnvCommands(rootCmd *cobra.Command) {
 	var envCmd = &cobra.Command{
-		Use:   "env",
-		Short: "Manage environments",
+		Use:     "env",
+		Aliases: []string{"e", "environment"},
+		Short:   "Manage environments",
 	}
 
 	var envAddCmd = &cobra.Command{
@@ -33,14 +34,15 @@ func AddEnvCommands(rootCmd *cobra.Command) {
 	}
 
 	var envCurrentCmd = &cobra.Command{
-		Use:   "current",
-		Short: "Display current environment",
-		RunE:  Current,
+		Use:     "current",
+		Aliases: []string{"c"},
+		Short:   "Display current environment",
+		RunE:    Current,
 	}
 
 	var envSelectCmd = &cobra.Command{
 		Use:     "select [name]",
-		Aliases: []string{"sel", "switch", "use"},
+		Aliases: []string{"s"},
 		Short:   "Select an environment",
 		RunE:    Select,
 	}

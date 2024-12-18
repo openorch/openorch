@@ -6,6 +6,14 @@ tags:
 
 # Your first service
 
+While OpenOrch itself is written in Go, services that run on OpenOrch can be written in any language.
+A service only needs a few things to fully function:
+
+- Must register a user account. This is just like a human user account (for more info about this, see the [User Svc](/docs/built-in-services/user-svc))
+- Must register its instance in the registry so OpenOrch knows how where to proxy the requests to.
+
+## A Go example
+
 Below is an example Go service that does the following things:
 
 - Registers a user for itself with the slug `skeleton-svc`
@@ -95,29 +103,42 @@ func NewService() (*SkeletonService, error) {
 func (skeleton *SkeletonService) Hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `{"hello": "world"}`)
 }
-````
+```
 
 Just make sure you run it with the appropriate envars:
 
 ```sh
 OPENORCH_URL=http://127.0.0.1:58231 SELF_URL=http://127.0.0.1:9311 go run main.go
-````
+```
 
 Once it's running you will be able to call the Superplatform daemon proxy and that will proxy to your skeleton service:
 
 ```sh
+# 127.0.0.1:58231 here is the address of the OpenOrch daemon
 $ curl 127.0.0.1:58231/skeleton-svc/hello
 {"hello": "world"}
 ```
 
-This is obviously so you don't have to expose your skeleton service to the outside world, only your Superplatform.
+This is so you don't have to expose your skeleton service to the outside world, only your Superplatform.
+
+Let's recap how the proxying works:
+
+- Service registers an account, acquires the `skeleton-svc` slug.
+- Service calls the OpenOrch [Regustry Svc](/docs/built-in-services/registry-svc) to tell the system an instance of the Skeleton service is available under the URL `http://127.0.0.1:9311`
+- When you curl the OpenOrch daemon with a path like `127.0.0.1:58231/skeleton-svc/hello`, the first section of the path will be a user account slug. The daemon checks what instances are owned by that slug and routes the request to one of the instances.
+
+```sh
+$ oo instance ls
+ID                URL                     STATUS    OWNER SLUG       LAST HEARTBEAT
+inst_eHFTNvAlk9   http://127.0.0.1:9311   Healthy   skeleton-svc     10s ago
+```
 
 ## Things to understand
 
 ### Instance registration
 
-Like most other things on the platform, service instances become owned by a slug. When the skeleton service calls RegisterInstance, the host will be associated with the `skeleton-svc` slug.
+Like most other things on the platform, service instances become owned by a user account slug. When the skeleton service calls RegisterInstance, the host will be associated with the `skeleton-svc` slug.
 
-Updates to this host won't be possible unless the caller is the skeleton service. The service becomes the owner of that host.
+Updates to this host won't be possible unless the caller is the skeleton service (or the caller is an admin). The service becomes the owner of that URL essentially.
 
-This is the same ownership model like in other parts of the system.
+This is the same ownership model like in other parts of the OpenOrch system.
