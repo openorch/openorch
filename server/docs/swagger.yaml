@@ -1420,6 +1420,13 @@ definitions:
         - $ref: '#/definitions/registry_svc.InstanceStatus'
         description: Status
         example: Healthy
+      tags:
+        example:
+        - tag1
+        - tag2
+        items:
+          type: string
+        type: array
       url:
         description: Full address URL of the instance.
         example: https://myserver.com:5981

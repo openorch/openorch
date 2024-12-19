@@ -6512,6 +6512,16 @@ const docTemplate = `{
                     ],
                     "example": "Healthy"
                 },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "tag1",
+                        "tag2"
+                    ]
+                },
                 "url": {
                     "description": "Full address URL of the instance.",
                     "type": "string",

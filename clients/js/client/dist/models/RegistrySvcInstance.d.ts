@@ -93,6 +93,12 @@ export interface RegistrySvcInstance {
      */
     status: RegistrySvcInstanceStatus;
     /**
+     *
+     * @type {Array<string>}
+     * @memberof RegistrySvcInstance
+     */
+    tags?: Array<string>;
+    /**
      * Full address URL of the instance.
      * @type {string}
      * @memberof RegistrySvcInstance

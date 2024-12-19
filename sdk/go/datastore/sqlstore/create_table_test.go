@@ -19,5 +19,5 @@ func TestSchema(t *testing.T) {
 	}
 	_, err := s.createTable(Schema1{}, db, "schema")
 	require.NoError(t, err)
-	require.Equal(t, "CREATE TABLE IF NOT EXISTS schema; ALTER TABLE schema ADD COLUMN IF NOT EXISTS id TEXT; ALTER TABLE schema ADD COLUMN IF NOT EXISTS namespace TEXT;", db.queries[0])
+	require.Equal(t, "CREATE TABLE IF NOT EXISTS schema (); ALTER TABLE schema ADD COLUMN IF NOT EXISTS id TEXT; ALTER TABLE schema ADD COLUMN IF NOT EXISTS namespace TEXT;", db.queries[0])
 }
