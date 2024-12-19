@@ -4,7 +4,11 @@ import (
 	"fmt"
 
 	"github.com/openorch/openorch/cli/oo/config"
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+
+	"gopkg.in/yaml.v2"
 )
 
 // Whoami
@@ -41,7 +45,34 @@ func Whoami(cmd *cobra.Command, args []string) error {
 		)
 	}
 
-	fmt.Println(usr.Slug)
+	cf := sdk.NewApiClientFactory(env.URL)
+
+	publicKeyRsp, _, err := cf.Client().UserSvcAPI.GetPublicKey(cmd.Context()).Execute()
+	if err != nil {
+		return errors.Wrap(err, "failed to get public key")
+	}
+
+	claims, err := sdk.AuthorizerImpl{}.DecodeJWT(*publicKeyRsp.PublicKey, usr.Token)
+	if err != nil {
+		return errors.Wrap(err, "failed to decode JWT")
+	}
+
+	userInfo := UserInfo{
+		Id:    claims.UserId,
+		Slug:  claims.Slug,
+		Roles: claims.RoleIds,
+	}
+
+	enc := yaml.NewEncoder(cmd.OutOrStdout())
+	if err := enc.Encode(userInfo); err != nil {
+		return errors.Wrap(err, "failed to encode user info")
+	}
 
 	return nil
+}
+
+type UserInfo struct {
+	Slug  string   `json:"slug"`
+	Id    string   `json:"id"`
+	Roles []string `json:"roles"`
 }

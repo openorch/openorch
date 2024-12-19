@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/openorch/openorch/cli/oo/config"
 	"github.com/pkg/errors"
@@ -15,8 +16,19 @@ import (
 func Put(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 
+	flagStart := 0
+	for i, arg := range args {
+		if strings.HasPrefix(arg, "--") {
+			flagStart = i
+			break
+		}
+		if i == len(args)-1 {
+			flagStart = len(args)
+		}
+	}
+
 	payload := make(map[string]interface{})
-	for _, arg := range args {
+	for _, arg := range args[flagStart:] {
 		if err := parseFlagToMap(payload, arg); err != nil {
 			return err
 		}
@@ -32,10 +44,16 @@ func Put(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "cannot get environment URL and token")
 	}
 
+	fullUrl := fmt.Sprintf(
+		"%s%s",
+		url,
+		strings.Join(args[0:flagStart], "/"),
+	)
+
 	request, err := http.NewRequestWithContext(
 		ctx,
 		http.MethodPost,
-		url,
+		fullUrl,
 		bytes.NewBuffer(jsonData),
 	)
 	if err != nil {

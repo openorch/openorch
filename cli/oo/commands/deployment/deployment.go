@@ -17,9 +17,9 @@ func AddDeploymentCommands(rootCmd *cobra.Command) {
 	}
 
 	var deleteCmd = &cobra.Command{
-		Use:     "delete [id]",
-		Short:   "Delete a deployment",
-		Aliases: []string{"del", "rm", "remove"},
+		Use:     "remove [id]",
+		Short:   "Remove a deployment",
+		Aliases: []string{"rm"},
 		Args:    cobra.ExactArgs(1),
 		RunE:    Delete,
 	}

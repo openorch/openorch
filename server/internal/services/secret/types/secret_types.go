@@ -55,23 +55,23 @@ type SaveSecretsResponse struct {
 }
 
 type EncryptValueRequest struct {
-	Value  string   `json:"value"`
-	Values []string `json:"values"`
+	Value  string   `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
 
 type EncryptValueResponse struct {
-	Value  string   `json:"value"`
-	Values []string `json:"values"`
+	Value  string   `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
 
 type DecryptValueRequest struct {
-	Value  string   `json:"value"`
-	Values []string `json:"values"`
+	Value  string   `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
 
 type DecryptValueResponse struct {
-	Value  string   `json:"value"`
-	Values []string `json:"values"`
+	Value  string   `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
 
 type RemoveSecretsRequest struct {
