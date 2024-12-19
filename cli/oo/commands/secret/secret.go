@@ -5,7 +5,7 @@ import "github.com/spf13/cobra"
 func AddSecretCommands(rootCmd *cobra.Command) {
 	var secretCmd = &cobra.Command{
 		Use:     "secret",
-		Aliases: []string{"sec", "secr", "secrets"},
+		Aliases: []string{"s", "secrets"},
 		Short:   "Manage secrets",
 	}
 

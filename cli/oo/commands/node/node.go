@@ -10,9 +10,9 @@ func AddNodeCommands(rootCmd *cobra.Command) {
 	}
 
 	var deleteCmd = &cobra.Command{
-		Use:     "delete [url]",
-		Short:   "Delete a node by URL",
-		Aliases: []string{"del", "rm", "remove"},
+		Use:     "remove [url]",
+		Short:   "Remove a node by URL",
+		Aliases: []string{"rm"},
 		Args:    cobra.ExactArgs(1),
 		RunE:    Delete,
 	}
