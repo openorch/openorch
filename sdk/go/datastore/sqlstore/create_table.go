@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-func (s *SQLStore) createTable(instance any, db *DebugDB, tableName string) (map[string]reflect.Type, error) {
+func (s *SQLStore) createTable(instance any, db DB, tableName string) (map[string]reflect.Type, error) {
 	typeMap := map[string]reflect.Type{}
 
 	typ := reflect.TypeOf(instance)
@@ -22,7 +22,7 @@ func (s *SQLStore) createTable(instance any, db *DebugDB, tableName string) (map
 		typ = typ.Elem()
 	}
 
-	var fields []string
+	fieldNameToType := map[string]string{}
 
 	// Recursive function to process struct fields (including embedded fields)
 	var processFields func(reflect.Type)
@@ -53,7 +53,7 @@ func (s *SQLStore) createTable(instance any, db *DebugDB, tableName string) (map
 			// Map field type to SQL type
 			fieldType := s.sqlType(field.Type)
 
-			fields = append(fields, fmt.Sprintf("%s %s", fieldName, fieldType))
+			fieldNameToType[fieldName] = fieldType
 		}
 	}
 
@@ -63,7 +63,10 @@ func (s *SQLStore) createTable(instance any, db *DebugDB, tableName string) (map
 	if tableName == "" {
 		tableName = strings.ToLower(typ.Name())
 	}
-	createQuery := fmt.Sprintf("CREATE TABLE IF NOT EXISTS %s (%s);", tableName, strings.Join(fields, ", "))
+	createQuery := fmt.Sprintf("CREATE TABLE IF NOT EXISTS %s;", tableName)
+	for fieldName, fieldType := range fieldNameToType {
+		createQuery += fmt.Sprintf(" ALTER TABLE %s ADD COLUMN IF NOT EXISTS %s %s;", tableName, fieldName, fieldType)
+	}
 
 	_, err := db.Exec(createQuery)
 	if err != nil {
