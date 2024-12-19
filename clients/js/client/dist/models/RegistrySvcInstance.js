@@ -44,6 +44,7 @@ export function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
         'slug': json['slug'] == null ? undefined : json['slug'],
         'status': RegistrySvcInstanceStatusFromJSON(json['status']),
+        'tags': json['tags'] == null ? undefined : json['tags'],
         'url': json['url'],
     };
 }
@@ -67,6 +68,7 @@ export function RegistrySvcInstanceToJSONTyped(value, ignoreDiscriminator = fals
         'scheme': value['scheme'],
         'slug': value['slug'],
         'status': RegistrySvcInstanceStatusToJSON(value['status']),
+        'tags': value['tags'],
         'url': value['url'],
     };
 }

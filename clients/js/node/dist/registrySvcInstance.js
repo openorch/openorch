@@ -79,6 +79,11 @@ RegistrySvcInstance.attributeTypeMap = [
         "type": "RegistrySvcInstanceStatus"
     },
     {
+        "name": "tags",
+        "baseName": "tags",
+        "type": "Array<string>"
+    },
+    {
         "name": "url",
         "baseName": "url",
         "type": "string"

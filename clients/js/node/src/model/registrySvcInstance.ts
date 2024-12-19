@@ -62,6 +62,7 @@ export class RegistrySvcInstance {
     * Status
     */
     'status': RegistrySvcInstanceStatus;
+    'tags'?: Array<string>;
     /**
     * Full address URL of the instance.
     */
@@ -129,6 +130,11 @@ export class RegistrySvcInstance {
             "name": "status",
             "baseName": "status",
             "type": "RegistrySvcInstanceStatus"
+        },
+        {
+            "name": "tags",
+            "baseName": "tags",
+            "type": "Array<string>"
         },
         {
             "name": "url",

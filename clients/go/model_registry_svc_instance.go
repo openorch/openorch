@@ -46,6 +46,7 @@ type RegistrySvcInstance struct {
 	Slug *string `json:"slug,omitempty"`
 	// Status
 	Status RegistrySvcInstanceStatus `json:"status"`
+	Tags []string `json:"tags,omitempty"`
 	// Full address URL of the instance.
 	Url string `json:"url"`
 }
@@ -440,6 +441,38 @@ func (o *RegistrySvcInstance) SetStatus(v RegistrySvcInstanceStatus) {
 	o.Status = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *RegistrySvcInstance) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcInstance) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *RegistrySvcInstance) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *RegistrySvcInstance) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetUrl returns the Url field value
 func (o *RegistrySvcInstance) GetUrl() string {
 	if o == nil {
@@ -506,6 +539,9 @@ func (o RegistrySvcInstance) ToMap() (map[string]interface{}, error) {
 		toSerialize["slug"] = o.Slug
 	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
 	toSerialize["url"] = o.Url
 	return toSerialize, nil
 }
