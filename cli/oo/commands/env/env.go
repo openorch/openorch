@@ -7,7 +7,7 @@ import (
 func AddEnvCommands(rootCmd *cobra.Command) {
 	var envCmd = &cobra.Command{
 		Use:     "env",
-		Aliases: []string{"e", "environment"},
+		Aliases: []string{"e", "environment", "environments"},
 		Short:   "Manage environments",
 	}
 

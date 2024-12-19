@@ -16,9 +16,9 @@ import (
 func Get(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 
-	if len(args) < 2 {
+	if len(args) < 1 {
 		return fmt.Errorf(
-			"insufficient arguments: service and endpoint are required",
+			"path is missing",
 		)
 	}
 
@@ -28,10 +28,9 @@ func Get(cmd *cobra.Command, args []string) error {
 	}
 
 	fullUrl := fmt.Sprintf(
-		"%s/%s-svc/%s",
+		"%s%s",
 		uri,
-		args[0],
-		strings.Join(args[1:], "/"),
+		strings.Join(args, "/"),
 	)
 
 	queryParams := make(map[string]string)

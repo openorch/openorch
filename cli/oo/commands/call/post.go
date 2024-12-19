@@ -46,10 +46,9 @@ func Post(cmd *cobra.Command, args []string) error {
 	}
 
 	fullUrl := fmt.Sprintf(
-		"%s/%s-svc/%s",
+		"%s%s",
 		url,
-		args[0],
-		strings.Join(args[1:flagStart], "/"),
+		strings.Join(args[0:flagStart], "/"),
 	)
 	request, err := http.NewRequestWithContext(
 		ctx,
