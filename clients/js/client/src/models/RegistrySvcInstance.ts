@@ -104,6 +104,12 @@ export interface RegistrySvcInstance {
      */
     status: RegistrySvcInstanceStatus;
     /**
+     * 
+     * @type {Array<string>}
+     * @memberof RegistrySvcInstance
+     */
+    tags?: Array<string>;
+    /**
      * Full address URL of the instance.
      * @type {string}
      * @memberof RegistrySvcInstance
@@ -145,6 +151,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
         'scheme': json['scheme'] == null ? undefined : json['scheme'],
         'slug': json['slug'] == null ? undefined : json['slug'],
         'status': RegistrySvcInstanceStatusFromJSON(json['status']),
+        'tags': json['tags'] == null ? undefined : json['tags'],
         'url': json['url'],
     };
 }
@@ -172,6 +179,7 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
         'scheme': value['scheme'],
         'slug': value['slug'],
         'status': RegistrySvcInstanceStatusToJSON(value['status']),
+        'tags': value['tags'],
         'url': value['url'],
     };
 }

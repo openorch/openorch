@@ -73,6 +73,8 @@ type Instance struct {
 	// Services that want to be proxied by their slug are advised to self register
 	// their instance at startup.
 	Slug string `json:"slug,omitempty" example:"my-svc"`
+
+	Tags []string `json:"tags,omitempty" example:"tag1,tag2"`
 }
 
 func (s *Instance) GetId() string {

@@ -43,14 +43,14 @@ const (
 )
 
 type SQLStore struct {
-	DB *sql.DB
+	DB DB
 
 	// an instance of the object for the type information
 	instance         any
-	db               *DebugDB
+	db               DB
 	mu               sync.RWMutex
 	inTransaction    bool
-	tx               *DebugTx
+	tx               Tx
 	placeholderStyle PlaceholderStyle
 	driverName       string
 	tableName        string
@@ -69,7 +69,9 @@ func NewSQLStore(instance any, driverName string, db *sql.DB, tableName string, 
 	}
 
 	sstore := &SQLStore{
-		DB:               db,
+		DB: &DebugDB{
+			DB: db,
+		},
 		instance:         instance,
 		driverName:       driverName,
 		tableName:        tableName,
@@ -77,7 +79,7 @@ func NewSQLStore(instance any, driverName string, db *sql.DB, tableName string, 
 		db:               NewDebugDB(db, tableName),
 		fieldTypes:       map[string]reflect.Type{},
 	}
-	sstore.db.Debug = debug
+	sstore.db.SetDebug(debug)
 
 	typeMap, err := sstore.createTable(instance, sstore.db, tableName)
 	if err != nil {
@@ -116,7 +118,7 @@ func createNewElement(instance interface{}) interface{} {
 }
 
 func (s *SQLStore) SetDebug(debug bool) {
-	s.db.Debug = true
+	s.db.SetDebug(true)
 }
 
 func (s *SQLStore) Close() error {
@@ -734,9 +736,9 @@ func (q *SQLQueryBuilder) buildSelectQuery() (string, []interface{}, error) {
 		for _, selectField := range q.selectFields {
 			selectFields = append(selectFields, q.store.fieldName(selectField))
 		}
-		query = fmt.Sprintf("SELECT %s FROM %s", strings.Join(selectFields, ", "), q.store.db.tableName)
+		query = fmt.Sprintf("SELECT %s FROM %s", strings.Join(selectFields, ", "), q.store.db.Tablename())
 	} else {
-		query = fmt.Sprintf("SELECT * FROM %s", strings.ToLower(q.store.db.tableName))
+		query = fmt.Sprintf("SELECT * FROM %s", strings.ToLower(q.store.db.Tablename()))
 	}
 
 	if len(filters) > 0 {

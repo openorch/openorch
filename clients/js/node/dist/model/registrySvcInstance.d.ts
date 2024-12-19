@@ -59,6 +59,7 @@ export declare class RegistrySvcInstance {
     * Status
     */
     'status': RegistrySvcInstanceStatus;
+    'tags'?: Array<string>;
     /**
     * Full address URL of the instance.
     */
