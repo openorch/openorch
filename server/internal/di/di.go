@@ -294,7 +294,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	registryService, err := registryservice.NewRegistryService(
-		options.NodeOptions.Address,
+		options.Url,
 		options.NodeOptions.Az,
 		options.NodeOptions.Region,
 		options.ClientFactory,

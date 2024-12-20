@@ -260,7 +260,8 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 			configFolderPathI := dipper.Get(getConfigResponse.Config.Data, "$.config-svc.configFolderPath")
 			configFolderPath, ok := configFolderPathI.(string)
 			if !ok {
-				return nil, nil, errors.New("config folder path not found")
+				homeDir, _ := os.UserHomeDir()
+				configFolderPath = path.Join(homeDir, ".openorch")
 			}
 
 			singulatronVolumeName = configFolderPath

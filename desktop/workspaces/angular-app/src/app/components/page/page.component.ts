@@ -20,7 +20,6 @@ import {
 import { Subscription } from 'rxjs';
 import { CommonModule, NgFor } from '@angular/common';
 import { IonicModule, IonMenu } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
 import { NgStyle, NgIf, NgClass } from '@angular/common';
 import { MobileService } from '../../services/mobile.service';
 import { FooterService } from '../../services/footer.service';
@@ -35,7 +34,6 @@ import { Router, NavigationStart } from '@angular/router';
 	imports: [
 		IonicModule,
 		CommonModule,
-		RouterLink,
 		NgStyle,
 		NgIf,
 		NgFor,
