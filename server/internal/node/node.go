@@ -57,7 +57,7 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 		options.GpuPlatform = os.Getenv("OPENORCH_GPU_PLATFORM")
 	}
 	if options.Address == "" {
-		options.Address = os.Getenv("OPENORCH_ADDRESS")
+		options.Address = os.Getenv("OPENORCH_NODE_URL")
 	}
 	if options.Az == "" {
 		options.Az = os.Getenv("OPENORCH_AZ")
