@@ -112,7 +112,7 @@ openorch-backend-1   | {"time":"2024-11-27T17:27:15.602328634Z","level":"DEBUG",
 
 ## CLI
 
-Install `oo` to get started:
+Install `oo` to get started (at the moment you need Go to install it):
 
 ```sh
 go install github.com/openorch/openorch/cli/oo@latest
