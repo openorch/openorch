@@ -5,7 +5,7 @@ import "github.com/spf13/cobra"
 func AddNodeCommands(rootCmd *cobra.Command) {
 	var nodeCmd = &cobra.Command{
 		Use:     "node",
-		Aliases: []string{"nodes"},
+		Aliases: []string{"n", "nodes"},
 		Short:   "Manage nodes",
 	}
 
@@ -18,9 +18,10 @@ func AddNodeCommands(rootCmd *cobra.Command) {
 	}
 
 	var listCmd = &cobra.Command{
-		Use:   "list",
-		Short: "List nodes",
-		RunE:  List,
+		Use:     "list",
+		Aliases: []string{"ls"},
+		Short:   "List nodes",
+		RunE:    List,
 	}
 
 	nodeCmd.AddCommand(deleteCmd)

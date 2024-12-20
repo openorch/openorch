@@ -79,6 +79,6 @@ OPENORCH_DB_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydataba
 
 Naturally, you should change the details of the connection string to reflect your environment.
 
-## `SINGULARON_LOCAL_STORAGE_PATH`
+## `OPENORCH_NODE_URL`
 
-By default the local file storage will place files into `~/.openorch/data`, but this flag (and other config options) can override that.
+Internally addressable URL of the node. The nodes should be able to reach each other through this URL. Each URL represents a listening OpenOrch daemon.

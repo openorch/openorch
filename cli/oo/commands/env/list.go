@@ -24,7 +24,7 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "SELECTED\tNAME\tURL\tDESCRIPTION")
+	fmt.Fprintln(writer, "ENV NAME\tSELECTED\tURL\tDESCRIPTION")
 
 	for name, env := range conf.Environments {
 		selected := ""
@@ -35,8 +35,8 @@ func List(cmd *cobra.Command, args []string) error {
 		fmt.Fprintf(
 			writer,
 			"%s\t%s\t%s\t%s\t\n",
-			selected,
 			name,
+			selected,
 			env.URL,
 			env.Description,
 		)

@@ -32,7 +32,7 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tURL\tSTATUS\tOWNER SLUG\tLAST HEARTBEAT")
+	fmt.Fprintln(writer, "INSTANCE ID\tURL\tSTATUS\tOWNER SLUG\tLAST HEARTBEAT")
 
 	for _, instance := range rsp.Instances {
 		heartbeat := ""
