@@ -10,7 +10,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgFor, NgIf} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PromptService } from '../services/prompt.service';
@@ -40,7 +40,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 		NgFor,
 		NgIf,
 		FormsModule,
-		NgStyle,
 		PromptComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

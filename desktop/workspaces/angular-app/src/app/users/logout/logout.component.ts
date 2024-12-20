@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '../../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgFor, NgIf } from '@angular/common';
 import { CenteredComponent } from '../../components/centered/centered.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { PageComponent } from '../../components/page/page.component';
@@ -26,10 +25,8 @@ import { UserService } from '../../services/user.service';
 		IconMenuComponent,
 		CenteredComponent,
 		IonicModule,
-		NgFor,
 		FormsModule,
 		ReactiveFormsModule,
-		NgIf,
 		TranslateModule,
 		TranslatePipe,
 	],

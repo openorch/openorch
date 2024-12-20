@@ -12,7 +12,7 @@
 import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 export declare class RegistrySvcInstance {
     /**
-    * The ID of the deployment that this instance is an instance of. Only instances managed by the OpenOrch have a DeploymentId. Services can self-register without a DeploymentId too.
+    * The ID of the deployment that this instance is an instance of. Only instances deployed by OpenOrch have a DeploymentId. Services can be deployed through other means (Docker Compose, K8s, anything), in that case they self-register and will not have a DeploymentId.
     */
     'deploymentId'?: string;
     /**
@@ -36,7 +36,7 @@ export declare class RegistrySvcInstance {
     */
     'lastHeartbeat'?: string;
     /**
-    * URL of the OpenOrch daemon
+    * NodeURL is the URL of the OpenOrch daemon the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch daemon URL when registering its instance
     */
     'nodeUrl'?: string;
     /**
@@ -52,13 +52,16 @@ export declare class RegistrySvcInstance {
     */
     'scheme'?: string;
     /**
-    * Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup.
+    * Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup. Keep in mind, instances might be deployed by OpenOrch yet they still won\'t be OpenOrch services and they won\'t have slugs. Think NGINX, MySQL, etc.
     */
     'slug'?: string;
     /**
     * Status
     */
     'status': RegistrySvcInstanceStatus;
+    /**
+    * Tags are used to filter instances
+    */
     'tags'?: Array<string>;
     /**
     * Full address URL of the instance.
