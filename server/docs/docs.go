@@ -6450,7 +6450,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "deploymentId": {
-                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances managed by the OpenOrch have a DeploymentId.\nServices can self-register without a DeploymentId too.",
+                    "description": "The ID of the deployment that this instance is an instance of.\nOnly instances deployed by OpenOrch have a DeploymentId.\nServices can be deployed through other means (Docker Compose, K8s, anything),\nin that case they self-register and will not have a DeploymentId.",
                     "type": "string",
                     "example": "depl_deBUCtJirc"
                 },
@@ -6479,7 +6479,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "nodeUrl": {
-                    "description": "URL of the OpenOrch daemon",
+                    "description": "NodeURL is the URL of the OpenOrch daemon the instance is running on.\nTo have a NodeURL the instance must either:\n- Be deployed by OpenOrch\n- Declare the OpenOrch daemon URL when registering its instance",
                     "type": "string",
                     "example": "https://myserver.com:58231"
                 },
@@ -6499,7 +6499,7 @@ const docTemplate = `{
                     "example": "https"
                 },
                 "slug": {
-                    "description": "Slug of the account that owns this instance\nServices that want to be proxied by their slug are advised to self register\ntheir instance at startup.",
+                    "description": "Slug of the account that owns this instance\nServices that want to be proxied by their slug are advised to self register\ntheir instance at startup.\nKeep in mind, instances might be deployed by OpenOrch yet they still won't be OpenOrch services\nand they won't have slugs. Think NGINX, MySQL, etc.",
                     "type": "string",
                     "example": "my-svc"
                 },
@@ -6513,6 +6513,7 @@ const docTemplate = `{
                     "example": "Healthy"
                 },
                 "tags": {
+                    "description": "Tags are used to filter instances",
                     "type": "array",
                     "items": {
                         "type": "string"

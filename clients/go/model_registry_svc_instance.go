@@ -22,7 +22,7 @@ var _ MappedNullable = &RegistrySvcInstance{}
 
 // RegistrySvcInstance struct for RegistrySvcInstance
 type RegistrySvcInstance struct {
-	// The ID of the deployment that this instance is an instance of. Only instances managed by the OpenOrch have a DeploymentId. Services can self-register without a DeploymentId too.
+	// The ID of the deployment that this instance is an instance of. Only instances deployed by OpenOrch have a DeploymentId. Services can be deployed through other means (Docker Compose, K8s, anything), in that case they self-register and will not have a DeploymentId.
 	DeploymentId *string `json:"deploymentId,omitempty"`
 	// Details
 	Details *string `json:"details,omitempty"`
@@ -34,7 +34,7 @@ type RegistrySvcInstance struct {
 	Ip *string `json:"ip,omitempty"`
 	// Last time the instance gave a sign of life
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
-	// URL of the OpenOrch daemon
+	// NodeURL is the URL of the OpenOrch daemon the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch daemon URL when registering its instance
 	NodeUrl *string `json:"nodeUrl,omitempty"`
 	// Path of the instance address. Optional (e.g., \"/api\")
 	Path *string `json:"path,omitempty"`
@@ -42,10 +42,11 @@ type RegistrySvcInstance struct {
 	Port *int32 `json:"port,omitempty"`
 	// Scheme of the instance address. Required if URL is not provided.
 	Scheme *string `json:"scheme,omitempty"`
-	// Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup.
+	// Slug of the account that owns this instance Services that want to be proxied by their slug are advised to self register their instance at startup. Keep in mind, instances might be deployed by OpenOrch yet they still won't be OpenOrch services and they won't have slugs. Think NGINX, MySQL, etc.
 	Slug *string `json:"slug,omitempty"`
 	// Status
 	Status RegistrySvcInstanceStatus `json:"status"`
+	// Tags are used to filter instances
 	Tags []string `json:"tags,omitempty"`
 	// Full address URL of the instance.
 	Url string `json:"url"`
