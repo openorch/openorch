@@ -130,7 +130,7 @@ local      *          http://127.0.0.1:58231
 $ oo login openorch changeme
 
 $ oo whoami
-slug: singulatron
+slug: openorch
 id: usr_e9WSQYiJc9
 roles:
 - user-svc:admin
