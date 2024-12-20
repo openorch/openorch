@@ -35,7 +35,13 @@ func (p *PromptService) addPrompt(
 	userId string,
 ) (*prompttypes.AddPromptResponse, error) {
 	prompt := &prompttypes.Prompt{
-		PromptCreateFields: promptReq.PromptCreateFields,
+		Id:         promptReq.Id,
+		Prompt:     promptReq.Prompt,
+		Sync:       promptReq.Sync,
+		ThreadId:   promptReq.ThreadId,
+		Template:   promptReq.Template,
+		ModelId:    promptReq.ModelId,
+		MaxRetries: promptReq.MaxRetries,
 	}
 
 	prompt.Status = prompttypes.PromptStatusScheduled
