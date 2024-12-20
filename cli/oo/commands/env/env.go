@@ -13,7 +13,7 @@ func AddEnvCommands(rootCmd *cobra.Command) {
 
 	var envAddCmd = &cobra.Command{
 		Use:   "add [name] [url] [description]",
-		Short: "Add a new environment",
+		Short: "Add a new environment. Idempotent, can be used to update an existing environment.",
 		Args:  cobra.RangeArgs(2, 3),
 		RunE:  Add,
 	}

@@ -32,22 +32,22 @@ func List(cmd *cobra.Command, args []string) error {
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
 	defer writer.Flush()
 
-	fmt.Fprintln(writer, "ID\tURL\tLAST HEARTBEAT")
+	fmt.Fprintln(writer, "NODE ID\tURL\tLAST HEARTBEAT")
 
 	for _, node := range rsp.Nodes {
-		const layout = "2006-01-02T15:04:05.999999999-07:00"
-		ago := ""
+		heartbeat := ""
 		if node.LastHeartbeat != nil {
-			t, err := time.Parse(layout, *node.LastHeartbeat)
-			if err != nil {
-				return err
+			heartbeat = *node.LastHeartbeat
+			parsedTime, err := time.Parse(time.RFC3339Nano, heartbeat)
+			if err == nil {
+				heartbeat = time.Since(parsedTime).
+					Truncate(time.Second).
+					String() +
+					" ago"
 			}
-
-			duration := time.Since(t)
-			ago = roundDuration(duration)
-
 		}
-		fmt.Fprintf(writer, "%s\t%s\t%s\n", node.Id, node.Url, ago)
+
+		fmt.Fprintf(writer, "%s\t%s\t%s\n", node.Id, node.Url, heartbeat)
 	}
 
 	return nil
