@@ -26,8 +26,7 @@ import {
 } from '@openorch/client';
 import { ConfigService } from '../services/config.service';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
-import { CenteredComponent } from '../components/centered/centered.component';
-import { NgFor, NgIf, AsyncPipe, NgStyle } from '@angular/common';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
@@ -42,10 +41,8 @@ import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 		IonicModule,
 		NgFor,
 		NgIf,
-		CenteredComponent,
 		ChatBoxComponent,
 		AsyncPipe,
-		NgStyle,
 		IconMenuComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

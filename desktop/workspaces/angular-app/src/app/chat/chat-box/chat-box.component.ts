@@ -33,7 +33,6 @@ import {
 } from '@openorch/client';
 import { ElectronAppService } from '../../services/electron-app.service';
 
-import { TranslatePipe } from '../../translate.pipe';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './message/message.component';
 import { NgFor, NgIf, AsyncPipe, NgStyle } from '@angular/common';
@@ -60,7 +59,6 @@ const defaultThreadName = 'New chat';
 		MessageComponent,
 		NgIf,
 		FormsModule,
-		TranslatePipe,
 		ChatInputComponent,
 		AsyncPipe,
 		NgStyle,

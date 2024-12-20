@@ -7,7 +7,7 @@
  */
 import { Component } from '@angular/core';
 
-import { DecimalPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf} from '@angular/common';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { first } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,6 @@ import { IonicModule } from '@ionic/angular';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 import { CenteredComponent } from '../components/centered/centered.component';
-import { DatePipe } from '@angular/common';
 import { NodeService } from '../services/node.service';
 import { UserService } from '../services/user.service';
 import { RegistrySvcNode as Node } from '@openorch/client';
@@ -31,8 +30,6 @@ import { RegistrySvcNode as Node } from '@openorch/client';
 		NgFor,
 		NgIf,
 		FormsModule,
-		NgStyle,
-		DatePipe,
 		DecimalPipe,
 	],
 	templateUrl: './nodes.component.html',

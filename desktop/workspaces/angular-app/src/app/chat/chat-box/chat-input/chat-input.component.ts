@@ -21,7 +21,6 @@ import {
 import { IonicModule } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { TranslatePipe } from '../../../translate.pipe';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
 	CharacterService,
@@ -42,7 +41,7 @@ export interface SendOutput {
 @Component({
 	selector: 'app-chat-input',
 	standalone: true,
-	imports: [IonicModule, NgIf, FormsModule, TranslatePipe],
+	imports: [IonicModule, FormsModule, TranslatePipe],
 	templateUrl: './chat-input.component.html',
 	styleUrls: ['./chat-input.component.scss'],
 	encapsulation: ViewEncapsulation.None,

@@ -26,7 +26,7 @@ func List(cmd *cobra.Command, args []string) error {
 		RegistrySvcAPI.ListInstances(ctx).
 		Execute()
 	if err != nil {
-		return fmt.Errorf("Failed to save service instance: '%v'", err)
+		return fmt.Errorf("Failed to list instances: '%v'", err)
 	}
 
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
