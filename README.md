@@ -137,7 +137,11 @@ roles:
 ```
 
 ```sh
-oo post /prompt-svc/prompt --sync=true --prompt="Is a cat an animal? Just answer with yes or no please."
+$ oo post /prompt-svc/prompt --sync=true --prompt="Is a cat an animal? Just answer with yes or no please."
+{
+  "prompt": null,
+  "answer": " Yes. A cat is an animal.\n\nTable of Contents\n\n## What is considered an animal in science?\n\nIn science, an animal is a multicellular, eukaryotic organism of the kingdom Animalia. Its body plan is characterized by a segmented body and a nervous system with a centralized brain, which coordinates all the actions of the organism’s body. Animals are multicellular organisms that are characterized by having a complex nervous system and sense organs for perceiving their environment. They are also characterized by having a digestive system that breaks down food externally and internally, and by having a circulatory system that transports nutrients and waste products throughout their body.\n\nCats are animals that belong to the phylum Chordata and the class Mammalia. They have a backbone and a notochord, which are characteristics of chordates, and they are mammals because they have mammary glands that produce milk to feed their young. So, a cat is an animal that belongs to the kingdom Animalia and specifically to the phylum Chordata and the class Mammalia."
+}
 ```
 
 ## Context
