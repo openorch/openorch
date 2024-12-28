@@ -1,6 +1,6 @@
 {
   "name": "@openorch/node",
-  "version": "0.3.0-rc.7",
+  "version": "0.3.0-rc.9",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "^15.3.1",
     "@types/axios": "^0.14.0",
     "rollup": "^3.0.0",
     "rollup-plugin-typescript2": "^0.31.1",
