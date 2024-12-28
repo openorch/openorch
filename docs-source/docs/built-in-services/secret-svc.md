@@ -88,11 +88,31 @@ The Secret Svc, like most things in OpenOrch, is designed to be simple to reason
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
 
-### Encryption at rest
+### Encryption at rest and transit
 
 All data is encrypted using the encryption key provided by the envar `OPENORCH_ENCRYPTION_KEY` (see Todo section).
 
 The server encrypts the secret values before saving them to disk/DB. The secret values are transmitted to readers unencrypted.
+
+### Tips
+
+#### Encrypt
+
+The encrypt command helps you create encrypted YAML files that can be safely stored in source control and integrated into Infrastructure-as-Code (IaC) or GitOps workflows. This ensures sensitive data is protected while enabling automated deployment processes.
+
+```sh
+$ oo secret encrypt my-api-key secretval
+encrypted: true
+id: secr_eO1ujSYshq
+key: my-api-key
+value: 916u0rBKR6v4n/Mm/jyLdNAiTc22deti4krKdW1yqf4=
+```
+
+Save the output to a file and, in your continuous delivery pipeline, apply it:
+
+```sh
+$ oo secret save my-api-key.yaml
+```
 
 # Todo
 
