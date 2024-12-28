@@ -14,7 +14,7 @@ import (
 	"golang.org/x/term"
 )
 
-// Login johnny myPass1
+// Login [slug] [password]
 func Login(cmd *cobra.Command, args []string) error {
 	conf, err := config.LoadConfig()
 	if err != nil {
