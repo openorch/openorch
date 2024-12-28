@@ -7567,7 +7567,7 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "BearerAuth": {
-            "description": "Type \"Bearer\" followed by a space and token acquired from the User sService Login endpoint.",
+            "description": "Type \"Bearer\" followed by a space and token acquired from the User Svc Login endpoint.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -7575,13 +7575,13 @@ const docTemplate = `{
     },
     "externalDocs": {
         "description": "OpenOrch API",
-        "url": "https://openorch.org/docs/category/singulatron-api"
+        "url": "https://openorch.org/docs/category/openorch-api"
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.8",
+	Version:          "0.3.0-rc.9",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

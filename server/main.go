@@ -29,7 +29,7 @@ import (
 var port = router.GetPort()
 
 // @title           OpenOrch
-// @version         0.3.0-rc.8
+// @version         0.3.0-rc.9
 // @description     On-premise AI platform and microservices ecosystem.
 // @termsOfService  http://swagger.io/terms/
 
@@ -46,10 +46,10 @@ var port = router.GetPort()
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
-// @description Type "Bearer" followed by a space and token acquired from the User sService Login endpoint.
+// @description Type "Bearer" followed by a space and token acquired from the User Svc Login endpoint.
 
 // @externalDocs.description  OpenOrch API
-// @externalDocs.url          https://openorch.org/docs/category/singulatron-api
+// @externalDocs.url          https://openorch.org/docs/category/openorch-api
 func main() {
 	nodeInfo, err := node.Start(node_types.Options{})
 	if err != nil {

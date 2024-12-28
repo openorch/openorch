@@ -1,169 +1,10594 @@
-export { B as BASE_PATH, a as BaseAPI, e as BlobApiResponse, c as COLLECTION_FORMATS, C as Configuration, D as DefaultConfig, F as FetchError, J as JSONApiResponse, b as RequiredError, R as ResponseError, T as TextApiResponse, V as VoidApiResponse, d as canConsumeForm, m as mapValues, q as querystring } from './runtime2.mjs';
-export { ChatSvcApi } from './ChatSvcApi.mjs';
-export { ConfigSvcApi } from './ConfigSvcApi.mjs';
-export { DeploySvcApi } from './DeploySvcApi.mjs';
-export { DockerSvcApi } from './DockerSvcApi.mjs';
-export { DownloadSvcApi } from './DownloadSvcApi.mjs';
-export { DynamicSvcApi } from './DynamicSvcApi.mjs';
-export { EmailSvcApi } from './EmailSvcApi.mjs';
-export { FirehoseSvcApi } from './FirehoseSvcApi.mjs';
-export { ModelSvcApi } from './ModelSvcApi.mjs';
-export { PolicySvcApi } from './PolicySvcApi.mjs';
-export { PromptSvcApi } from './PromptSvcApi.mjs';
-export { RegistrySvcApi } from './RegistrySvcApi.mjs';
-export { SecretSvcApi } from './SecretSvcApi.mjs';
-export { SourceSvcApi } from './SourceSvcApi.mjs';
-export { UserSvcApi } from './UserSvcApi.mjs';
-export { ChatSvcAddMessageRequestFromJSON, ChatSvcAddMessageRequestFromJSONTyped, ChatSvcAddMessageRequestToJSON, ChatSvcAddMessageRequestToJSONTyped, instanceOfChatSvcAddMessageRequest } from './ChatSvcAddMessageRequest.mjs';
-export { ChatSvcAddThreadRequestFromJSON, ChatSvcAddThreadRequestFromJSONTyped, ChatSvcAddThreadRequestToJSON, ChatSvcAddThreadRequestToJSONTyped, instanceOfChatSvcAddThreadRequest } from './ChatSvcAddThreadRequest.mjs';
-export { ChatSvcAddThreadResponseFromJSON, ChatSvcAddThreadResponseFromJSONTyped, ChatSvcAddThreadResponseToJSON, ChatSvcAddThreadResponseToJSONTyped, instanceOfChatSvcAddThreadResponse } from './ChatSvcAddThreadResponse.mjs';
-export { ChatSvcAssetFromJSON, ChatSvcAssetFromJSONTyped, ChatSvcAssetToJSON, ChatSvcAssetToJSONTyped, instanceOfChatSvcAsset } from './ChatSvcAsset.mjs';
-export { ChatSvcEventMessageAddedFromJSON, ChatSvcEventMessageAddedFromJSONTyped, ChatSvcEventMessageAddedToJSON, ChatSvcEventMessageAddedToJSONTyped, instanceOfChatSvcEventMessageAdded } from './ChatSvcEventMessageAdded.mjs';
-export { ChatSvcEventThreadAddedFromJSON, ChatSvcEventThreadAddedFromJSONTyped, ChatSvcEventThreadAddedToJSON, ChatSvcEventThreadAddedToJSONTyped, instanceOfChatSvcEventThreadAdded } from './ChatSvcEventThreadAdded.mjs';
-export { ChatSvcEventThreadUpdateFromJSON, ChatSvcEventThreadUpdateFromJSONTyped, ChatSvcEventThreadUpdateToJSON, ChatSvcEventThreadUpdateToJSONTyped, instanceOfChatSvcEventThreadUpdate } from './ChatSvcEventThreadUpdate.mjs';
-export { ChatSvcGetMessagesResponseFromJSON, ChatSvcGetMessagesResponseFromJSONTyped, ChatSvcGetMessagesResponseToJSON, ChatSvcGetMessagesResponseToJSONTyped, instanceOfChatSvcGetMessagesResponse } from './ChatSvcGetMessagesResponse.mjs';
-export { ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadResponseFromJSONTyped, ChatSvcGetThreadResponseToJSON, ChatSvcGetThreadResponseToJSONTyped, instanceOfChatSvcGetThreadResponse } from './ChatSvcGetThreadResponse.mjs';
-export { ChatSvcGetThreadsResponseFromJSON, ChatSvcGetThreadsResponseFromJSONTyped, ChatSvcGetThreadsResponseToJSON, ChatSvcGetThreadsResponseToJSONTyped, instanceOfChatSvcGetThreadsResponse } from './ChatSvcGetThreadsResponse.mjs';
-export { ChatSvcMessageFromJSON, ChatSvcMessageFromJSONTyped, ChatSvcMessageToJSON, ChatSvcMessageToJSONTyped, instanceOfChatSvcMessage } from './ChatSvcMessage.mjs';
-export { ChatSvcThreadFromJSON, ChatSvcThreadFromJSONTyped, ChatSvcThreadToJSON, ChatSvcThreadToJSONTyped, instanceOfChatSvcThread } from './ChatSvcThread.mjs';
-export { ChatSvcUpdateThreadRequestFromJSON, ChatSvcUpdateThreadRequestFromJSONTyped, ChatSvcUpdateThreadRequestToJSON, ChatSvcUpdateThreadRequestToJSONTyped, instanceOfChatSvcUpdateThreadRequest } from './ChatSvcUpdateThreadRequest.mjs';
-export { ConfigSvcConfigFromJSON, ConfigSvcConfigFromJSONTyped, ConfigSvcConfigToJSON, ConfigSvcConfigToJSONTyped, instanceOfConfigSvcConfig } from './ConfigSvcConfig.mjs';
-export { ConfigSvcGetConfigResponseFromJSON, ConfigSvcGetConfigResponseFromJSONTyped, ConfigSvcGetConfigResponseToJSON, ConfigSvcGetConfigResponseToJSONTyped, instanceOfConfigSvcGetConfigResponse } from './ConfigSvcGetConfigResponse.mjs';
-export { ConfigSvcSaveConfigRequestFromJSON, ConfigSvcSaveConfigRequestFromJSONTyped, ConfigSvcSaveConfigRequestToJSON, ConfigSvcSaveConfigRequestToJSONTyped, instanceOfConfigSvcSaveConfigRequest } from './ConfigSvcSaveConfigRequest.mjs';
-export { DatastoreFilterFromJSON, DatastoreFilterFromJSONTyped, DatastoreFilterToJSON, DatastoreFilterToJSONTyped, instanceOfDatastoreFilter } from './DatastoreFilter.mjs';
-export { DatastoreOp, DatastoreOpFromJSON, DatastoreOpFromJSONTyped, DatastoreOpToJSON, DatastoreOpToJSONTyped, instanceOfDatastoreOp } from './DatastoreOp.mjs';
-export { DatastoreOrderByFromJSON, DatastoreOrderByFromJSONTyped, DatastoreOrderByToJSON, DatastoreOrderByToJSONTyped, instanceOfDatastoreOrderBy } from './DatastoreOrderBy.mjs';
-export { DatastoreQueryFromJSON, DatastoreQueryFromJSONTyped, DatastoreQueryToJSON, DatastoreQueryToJSONTyped, instanceOfDatastoreQuery } from './DatastoreQuery.mjs';
-export { DeploySvcAutoScalingConfigFromJSON, DeploySvcAutoScalingConfigFromJSONTyped, DeploySvcAutoScalingConfigToJSON, DeploySvcAutoScalingConfigToJSONTyped, instanceOfDeploySvcAutoScalingConfig } from './DeploySvcAutoScalingConfig.mjs';
-export { DeploySvcDeleteDeploymentRequestFromJSON, DeploySvcDeleteDeploymentRequestFromJSONTyped, DeploySvcDeleteDeploymentRequestToJSON, DeploySvcDeleteDeploymentRequestToJSONTyped, instanceOfDeploySvcDeleteDeploymentRequest } from './DeploySvcDeleteDeploymentRequest.mjs';
-export { DeploySvcDeploymentFromJSON, DeploySvcDeploymentFromJSONTyped, DeploySvcDeploymentToJSON, DeploySvcDeploymentToJSONTyped, instanceOfDeploySvcDeployment } from './DeploySvcDeployment.mjs';
-export { DeploySvcDeploymentStatus, DeploySvcDeploymentStatusFromJSON, DeploySvcDeploymentStatusFromJSONTyped, DeploySvcDeploymentStatusToJSON, DeploySvcDeploymentStatusToJSONTyped, instanceOfDeploySvcDeploymentStatus } from './DeploySvcDeploymentStatus.mjs';
-export { DeploySvcDeploymentStrategyFromJSON, DeploySvcDeploymentStrategyFromJSONTyped, DeploySvcDeploymentStrategyToJSON, DeploySvcDeploymentStrategyToJSONTyped, instanceOfDeploySvcDeploymentStrategy } from './DeploySvcDeploymentStrategy.mjs';
-export { DeploySvcErrorResponseFromJSON, DeploySvcErrorResponseFromJSONTyped, DeploySvcErrorResponseToJSON, DeploySvcErrorResponseToJSONTyped, instanceOfDeploySvcErrorResponse } from './DeploySvcErrorResponse.mjs';
-export { DeploySvcListDeploymentsResponseFromJSON, DeploySvcListDeploymentsResponseFromJSONTyped, DeploySvcListDeploymentsResponseToJSON, DeploySvcListDeploymentsResponseToJSONTyped, instanceOfDeploySvcListDeploymentsResponse } from './DeploySvcListDeploymentsResponse.mjs';
-export { DeploySvcResourceLimitsFromJSON, DeploySvcResourceLimitsFromJSONTyped, DeploySvcResourceLimitsToJSON, DeploySvcResourceLimitsToJSONTyped, instanceOfDeploySvcResourceLimits } from './DeploySvcResourceLimits.mjs';
-export { DeploySvcSaveDeploymentRequestFromJSON, DeploySvcSaveDeploymentRequestFromJSONTyped, DeploySvcSaveDeploymentRequestToJSON, DeploySvcSaveDeploymentRequestToJSONTyped, instanceOfDeploySvcSaveDeploymentRequest } from './DeploySvcSaveDeploymentRequest.mjs';
-export { DeploySvcStrategyType, DeploySvcStrategyTypeFromJSON, DeploySvcStrategyTypeFromJSONTyped, DeploySvcStrategyTypeToJSON, DeploySvcStrategyTypeToJSONTyped, instanceOfDeploySvcStrategyType } from './DeploySvcStrategyType.mjs';
-export { DeploySvcTargetRegionFromJSON, DeploySvcTargetRegionFromJSONTyped, DeploySvcTargetRegionToJSON, DeploySvcTargetRegionToJSONTyped, instanceOfDeploySvcTargetRegion } from './DeploySvcTargetRegion.mjs';
-export { DockerSvcBuildImageRequestFromJSON, DockerSvcBuildImageRequestFromJSONTyped, DockerSvcBuildImageRequestToJSON, DockerSvcBuildImageRequestToJSONTyped, instanceOfDockerSvcBuildImageRequest } from './DockerSvcBuildImageRequest.mjs';
-export { DockerSvcContainerIsRunningResponseFromJSON, DockerSvcContainerIsRunningResponseFromJSONTyped, DockerSvcContainerIsRunningResponseToJSON, DockerSvcContainerIsRunningResponseToJSONTyped, instanceOfDockerSvcContainerIsRunningResponse } from './DockerSvcContainerIsRunningResponse.mjs';
-export { DockerSvcDockerInfoFromJSON, DockerSvcDockerInfoFromJSONTyped, DockerSvcDockerInfoToJSON, DockerSvcDockerInfoToJSONTyped, instanceOfDockerSvcDockerInfo } from './DockerSvcDockerInfo.mjs';
-export { DockerSvcErrorResponseFromJSON, DockerSvcErrorResponseFromJSONTyped, DockerSvcErrorResponseToJSON, DockerSvcErrorResponseToJSONTyped, instanceOfDockerSvcErrorResponse } from './DockerSvcErrorResponse.mjs';
-export { DockerSvcGetContainerSummaryResponseFromJSON, DockerSvcGetContainerSummaryResponseFromJSONTyped, DockerSvcGetContainerSummaryResponseToJSON, DockerSvcGetContainerSummaryResponseToJSONTyped, instanceOfDockerSvcGetContainerSummaryResponse } from './DockerSvcGetContainerSummaryResponse.mjs';
-export { DockerSvcGetDockerHostResponseFromJSON, DockerSvcGetDockerHostResponseFromJSONTyped, DockerSvcGetDockerHostResponseToJSON, DockerSvcGetDockerHostResponseToJSONTyped, instanceOfDockerSvcGetDockerHostResponse } from './DockerSvcGetDockerHostResponse.mjs';
-export { DockerSvcGetInfoResponseFromJSON, DockerSvcGetInfoResponseFromJSONTyped, DockerSvcGetInfoResponseToJSON, DockerSvcGetInfoResponseToJSONTyped, instanceOfDockerSvcGetInfoResponse } from './DockerSvcGetInfoResponse.mjs';
-export { DockerSvcRunContainerOptionsFromJSON, DockerSvcRunContainerOptionsFromJSONTyped, DockerSvcRunContainerOptionsToJSON, DockerSvcRunContainerOptionsToJSONTyped, instanceOfDockerSvcRunContainerOptions } from './DockerSvcRunContainerOptions.mjs';
-export { DockerSvcRunContainerRequestFromJSON, DockerSvcRunContainerRequestFromJSONTyped, DockerSvcRunContainerRequestToJSON, DockerSvcRunContainerRequestToJSONTyped, instanceOfDockerSvcRunContainerRequest } from './DockerSvcRunContainerRequest.mjs';
-export { DockerSvcRunContainerResponseFromJSON, DockerSvcRunContainerResponseFromJSONTyped, DockerSvcRunContainerResponseToJSON, DockerSvcRunContainerResponseToJSONTyped, instanceOfDockerSvcRunContainerResponse } from './DockerSvcRunContainerResponse.mjs';
-export { DockerSvcRunInfoFromJSON, DockerSvcRunInfoFromJSONTyped, DockerSvcRunInfoToJSON, DockerSvcRunInfoToJSONTyped, instanceOfDockerSvcRunInfo } from './DockerSvcRunInfo.mjs';
-export { DockerSvcStopContainerRequestFromJSON, DockerSvcStopContainerRequestFromJSONTyped, DockerSvcStopContainerRequestToJSON, DockerSvcStopContainerRequestToJSONTyped, instanceOfDockerSvcStopContainerRequest } from './DockerSvcStopContainerRequest.mjs';
-export { DownloadSvcDownloadDetailsFromJSON, DownloadSvcDownloadDetailsFromJSONTyped, DownloadSvcDownloadDetailsToJSON, DownloadSvcDownloadDetailsToJSONTyped, instanceOfDownloadSvcDownloadDetails } from './DownloadSvcDownloadDetails.mjs';
-export { DownloadSvcDownloadRequestFromJSON, DownloadSvcDownloadRequestFromJSONTyped, DownloadSvcDownloadRequestToJSON, DownloadSvcDownloadRequestToJSONTyped, instanceOfDownloadSvcDownloadRequest } from './DownloadSvcDownloadRequest.mjs';
-export { DownloadSvcDownloadsResponseFromJSON, DownloadSvcDownloadsResponseFromJSONTyped, DownloadSvcDownloadsResponseToJSON, DownloadSvcDownloadsResponseToJSONTyped, instanceOfDownloadSvcDownloadsResponse } from './DownloadSvcDownloadsResponse.mjs';
-export { DownloadSvcErrorResponseFromJSON, DownloadSvcErrorResponseFromJSONTyped, DownloadSvcErrorResponseToJSON, DownloadSvcErrorResponseToJSONTyped, instanceOfDownloadSvcErrorResponse } from './DownloadSvcErrorResponse.mjs';
-export { DownloadSvcGetDownloadResponseFromJSON, DownloadSvcGetDownloadResponseFromJSONTyped, DownloadSvcGetDownloadResponseToJSON, DownloadSvcGetDownloadResponseToJSONTyped, instanceOfDownloadSvcGetDownloadResponse } from './DownloadSvcGetDownloadResponse.mjs';
-export { DynamicSvcCreateObjectRequestFromJSON, DynamicSvcCreateObjectRequestFromJSONTyped, DynamicSvcCreateObjectRequestToJSON, DynamicSvcCreateObjectRequestToJSONTyped, instanceOfDynamicSvcCreateObjectRequest } from './DynamicSvcCreateObjectRequest.mjs';
-export { DynamicSvcCreateObjectResponseFromJSON, DynamicSvcCreateObjectResponseFromJSONTyped, DynamicSvcCreateObjectResponseToJSON, DynamicSvcCreateObjectResponseToJSONTyped, instanceOfDynamicSvcCreateObjectResponse } from './DynamicSvcCreateObjectResponse.mjs';
-export { DynamicSvcDeleteObjectRequestFromJSON, DynamicSvcDeleteObjectRequestFromJSONTyped, DynamicSvcDeleteObjectRequestToJSON, DynamicSvcDeleteObjectRequestToJSONTyped, instanceOfDynamicSvcDeleteObjectRequest } from './DynamicSvcDeleteObjectRequest.mjs';
-export { DynamicSvcErrorResponseFromJSON, DynamicSvcErrorResponseFromJSONTyped, DynamicSvcErrorResponseToJSON, DynamicSvcErrorResponseToJSONTyped, instanceOfDynamicSvcErrorResponse } from './DynamicSvcErrorResponse.mjs';
-export { DynamicSvcObjectFromJSON, DynamicSvcObjectFromJSONTyped, DynamicSvcObjectToJSON, DynamicSvcObjectToJSONTyped, instanceOfDynamicSvcObject } from './DynamicSvcObject.mjs';
-export { DynamicSvcObjectCreateFieldsFromJSON, DynamicSvcObjectCreateFieldsFromJSONTyped, DynamicSvcObjectCreateFieldsToJSON, DynamicSvcObjectCreateFieldsToJSONTyped, instanceOfDynamicSvcObjectCreateFields } from './DynamicSvcObjectCreateFields.mjs';
-export { DynamicSvcQueryRequestFromJSON, DynamicSvcQueryRequestFromJSONTyped, DynamicSvcQueryRequestToJSON, DynamicSvcQueryRequestToJSONTyped, instanceOfDynamicSvcQueryRequest } from './DynamicSvcQueryRequest.mjs';
-export { DynamicSvcQueryResponseFromJSON, DynamicSvcQueryResponseFromJSONTyped, DynamicSvcQueryResponseToJSON, DynamicSvcQueryResponseToJSONTyped, instanceOfDynamicSvcQueryResponse } from './DynamicSvcQueryResponse.mjs';
-export { DynamicSvcUpdateObjectRequestFromJSON, DynamicSvcUpdateObjectRequestFromJSONTyped, DynamicSvcUpdateObjectRequestToJSON, DynamicSvcUpdateObjectRequestToJSONTyped, instanceOfDynamicSvcUpdateObjectRequest } from './DynamicSvcUpdateObjectRequest.mjs';
-export { DynamicSvcUpsertObjectRequestFromJSON, DynamicSvcUpsertObjectRequestFromJSONTyped, DynamicSvcUpsertObjectRequestToJSON, DynamicSvcUpsertObjectRequestToJSONTyped, instanceOfDynamicSvcUpsertObjectRequest } from './DynamicSvcUpsertObjectRequest.mjs';
-export { DynamicSvcUpsertObjectResponseFromJSON, DynamicSvcUpsertObjectResponseFromJSONTyped, DynamicSvcUpsertObjectResponseToJSON, DynamicSvcUpsertObjectResponseToJSONTyped, instanceOfDynamicSvcUpsertObjectResponse } from './DynamicSvcUpsertObjectResponse.mjs';
-export { EmailSvcErrorResponseFromJSON, EmailSvcErrorResponseFromJSONTyped, EmailSvcErrorResponseToJSON, EmailSvcErrorResponseToJSONTyped, instanceOfEmailSvcErrorResponse } from './EmailSvcErrorResponse.mjs';
-export { EmailSvcFileFromJSON, EmailSvcFileFromJSONTyped, EmailSvcFileToJSON, EmailSvcFileToJSONTyped, instanceOfEmailSvcFile } from './EmailSvcFile.mjs';
-export { EmailSvcSendEmailRequestFromJSON, EmailSvcSendEmailRequestFromJSONTyped, EmailSvcSendEmailRequestToJSON, EmailSvcSendEmailRequestToJSONTyped, instanceOfEmailSvcSendEmailRequest } from './EmailSvcSendEmailRequest.mjs';
-export { EmailSvcSendEmailResponseFromJSON, EmailSvcSendEmailResponseFromJSONTyped, EmailSvcSendEmailResponseToJSON, EmailSvcSendEmailResponseToJSONTyped, instanceOfEmailSvcSendEmailResponse } from './EmailSvcSendEmailResponse.mjs';
-export { FirehoseSvcErrorResponseFromJSON, FirehoseSvcErrorResponseFromJSONTyped, FirehoseSvcErrorResponseToJSON, FirehoseSvcErrorResponseToJSONTyped, instanceOfFirehoseSvcErrorResponse } from './FirehoseSvcErrorResponse.mjs';
-export { FirehoseSvcEventFromJSON, FirehoseSvcEventFromJSONTyped, FirehoseSvcEventToJSON, FirehoseSvcEventToJSONTyped, instanceOfFirehoseSvcEvent } from './FirehoseSvcEvent.mjs';
-export { FirehoseSvcEventPublishRequestFromJSON, FirehoseSvcEventPublishRequestFromJSONTyped, FirehoseSvcEventPublishRequestToJSON, FirehoseSvcEventPublishRequestToJSONTyped, instanceOfFirehoseSvcEventPublishRequest } from './FirehoseSvcEventPublishRequest.mjs';
-export { ModelSvcArchitecturesFromJSON, ModelSvcArchitecturesFromJSONTyped, ModelSvcArchitecturesToJSON, ModelSvcArchitecturesToJSONTyped, instanceOfModelSvcArchitectures } from './ModelSvcArchitectures.mjs';
-export { ModelSvcContainerFromJSON, ModelSvcContainerFromJSONTyped, ModelSvcContainerToJSON, ModelSvcContainerToJSONTyped, instanceOfModelSvcContainer } from './ModelSvcContainer.mjs';
-export { ModelSvcErrorResponseFromJSON, ModelSvcErrorResponseFromJSONTyped, ModelSvcErrorResponseToJSON, ModelSvcErrorResponseToJSONTyped, instanceOfModelSvcErrorResponse } from './ModelSvcErrorResponse.mjs';
-export { ModelSvcGetModelResponseFromJSON, ModelSvcGetModelResponseFromJSONTyped, ModelSvcGetModelResponseToJSON, ModelSvcGetModelResponseToJSONTyped, instanceOfModelSvcGetModelResponse } from './ModelSvcGetModelResponse.mjs';
-export { ModelSvcListResponseFromJSON, ModelSvcListResponseFromJSONTyped, ModelSvcListResponseToJSON, ModelSvcListResponseToJSONTyped, instanceOfModelSvcListResponse } from './ModelSvcListResponse.mjs';
-export { ModelSvcModelFromJSON, ModelSvcModelFromJSONTyped, ModelSvcModelToJSON, ModelSvcModelToJSONTyped, instanceOfModelSvcModel } from './ModelSvcModel.mjs';
-export { ModelSvcModelStatusFromJSON, ModelSvcModelStatusFromJSONTyped, ModelSvcModelStatusToJSON, ModelSvcModelStatusToJSONTyped, instanceOfModelSvcModelStatus } from './ModelSvcModelStatus.mjs';
-export { ModelSvcPlatformFromJSON, ModelSvcPlatformFromJSONTyped, ModelSvcPlatformToJSON, ModelSvcPlatformToJSONTyped, instanceOfModelSvcPlatform } from './ModelSvcPlatform.mjs';
-export { ModelSvcStatusResponseFromJSON, ModelSvcStatusResponseFromJSONTyped, ModelSvcStatusResponseToJSON, ModelSvcStatusResponseToJSONTyped, instanceOfModelSvcStatusResponse } from './ModelSvcStatusResponse.mjs';
-export { PolicySvcBlocklistParametersFromJSON, PolicySvcBlocklistParametersFromJSONTyped, PolicySvcBlocklistParametersToJSON, PolicySvcBlocklistParametersToJSONTyped, instanceOfPolicySvcBlocklistParameters } from './PolicySvcBlocklistParameters.mjs';
-export { PolicySvcCheckRequestFromJSON, PolicySvcCheckRequestFromJSONTyped, PolicySvcCheckRequestToJSON, PolicySvcCheckRequestToJSONTyped, instanceOfPolicySvcCheckRequest } from './PolicySvcCheckRequest.mjs';
-export { PolicySvcCheckResponseFromJSON, PolicySvcCheckResponseFromJSONTyped, PolicySvcCheckResponseToJSON, PolicySvcCheckResponseToJSONTyped, instanceOfPolicySvcCheckResponse } from './PolicySvcCheckResponse.mjs';
-export { PolicySvcEntity, PolicySvcEntityFromJSON, PolicySvcEntityFromJSONTyped, PolicySvcEntityToJSON, PolicySvcEntityToJSONTyped, instanceOfPolicySvcEntity } from './PolicySvcEntity.mjs';
-export { PolicySvcErrorResponseFromJSON, PolicySvcErrorResponseFromJSONTyped, PolicySvcErrorResponseToJSON, PolicySvcErrorResponseToJSONTyped, instanceOfPolicySvcErrorResponse } from './PolicySvcErrorResponse.mjs';
-export { PolicySvcInstanceFromJSON, PolicySvcInstanceFromJSONTyped, PolicySvcInstanceToJSON, PolicySvcInstanceToJSONTyped, instanceOfPolicySvcInstance } from './PolicySvcInstance.mjs';
-export { PolicySvcRateLimitParametersFromJSON, PolicySvcRateLimitParametersFromJSONTyped, PolicySvcRateLimitParametersToJSON, PolicySvcRateLimitParametersToJSONTyped, instanceOfPolicySvcRateLimitParameters } from './PolicySvcRateLimitParameters.mjs';
-export { PolicySvcScope, PolicySvcScopeFromJSON, PolicySvcScopeFromJSONTyped, PolicySvcScopeToJSON, PolicySvcScopeToJSONTyped, instanceOfPolicySvcScope } from './PolicySvcScope.mjs';
-export { PolicySvcTemplateId, PolicySvcTemplateIdFromJSON, PolicySvcTemplateIdFromJSONTyped, PolicySvcTemplateIdToJSON, PolicySvcTemplateIdToJSONTyped, instanceOfPolicySvcTemplateId } from './PolicySvcTemplateId.mjs';
-export { PolicySvcUpsertInstanceRequestFromJSON, PolicySvcUpsertInstanceRequestFromJSONTyped, PolicySvcUpsertInstanceRequestToJSON, PolicySvcUpsertInstanceRequestToJSONTyped, instanceOfPolicySvcUpsertInstanceRequest } from './PolicySvcUpsertInstanceRequest.mjs';
-export { PromptSvcAddPromptRequestFromJSON, PromptSvcAddPromptRequestFromJSONTyped, PromptSvcAddPromptRequestToJSON, PromptSvcAddPromptRequestToJSONTyped, instanceOfPromptSvcAddPromptRequest } from './PromptSvcAddPromptRequest.mjs';
-export { PromptSvcAddPromptResponseFromJSON, PromptSvcAddPromptResponseFromJSONTyped, PromptSvcAddPromptResponseToJSON, PromptSvcAddPromptResponseToJSONTyped, instanceOfPromptSvcAddPromptResponse } from './PromptSvcAddPromptResponse.mjs';
-export { PromptSvcErrorResponseFromJSON, PromptSvcErrorResponseFromJSONTyped, PromptSvcErrorResponseToJSON, PromptSvcErrorResponseToJSONTyped, instanceOfPromptSvcErrorResponse } from './PromptSvcErrorResponse.mjs';
-export { PromptSvcListPromptsRequestFromJSON, PromptSvcListPromptsRequestFromJSONTyped, PromptSvcListPromptsRequestToJSON, PromptSvcListPromptsRequestToJSONTyped, instanceOfPromptSvcListPromptsRequest } from './PromptSvcListPromptsRequest.mjs';
-export { PromptSvcListPromptsResponseFromJSON, PromptSvcListPromptsResponseFromJSONTyped, PromptSvcListPromptsResponseToJSON, PromptSvcListPromptsResponseToJSONTyped, instanceOfPromptSvcListPromptsResponse } from './PromptSvcListPromptsResponse.mjs';
-export { PromptSvcPromptFromJSON, PromptSvcPromptFromJSONTyped, PromptSvcPromptToJSON, PromptSvcPromptToJSONTyped, instanceOfPromptSvcPrompt } from './PromptSvcPrompt.mjs';
-export { PromptSvcPromptStatus, PromptSvcPromptStatusFromJSON, PromptSvcPromptStatusFromJSONTyped, PromptSvcPromptStatusToJSON, PromptSvcPromptStatusToJSONTyped, instanceOfPromptSvcPromptStatus } from './PromptSvcPromptStatus.mjs';
-export { PromptSvcRemovePromptRequestFromJSON, PromptSvcRemovePromptRequestFromJSONTyped, PromptSvcRemovePromptRequestToJSON, PromptSvcRemovePromptRequestToJSONTyped, instanceOfPromptSvcRemovePromptRequest } from './PromptSvcRemovePromptRequest.mjs';
-export { RegistrySvcAPISpecFromJSON, RegistrySvcAPISpecFromJSONTyped, RegistrySvcAPISpecToJSON, RegistrySvcAPISpecToJSONTyped, instanceOfRegistrySvcAPISpec } from './RegistrySvcAPISpec.mjs';
-export { RegistrySvcClientFromJSON, RegistrySvcClientFromJSONTyped, RegistrySvcClientToJSON, RegistrySvcClientToJSONTyped, instanceOfRegistrySvcClient } from './RegistrySvcClient.mjs';
-export { RegistrySvcDefinitionFromJSON, RegistrySvcDefinitionFromJSONTyped, RegistrySvcDefinitionToJSON, RegistrySvcDefinitionToJSONTyped, instanceOfRegistrySvcDefinition } from './RegistrySvcDefinition.mjs';
-export { RegistrySvcErrorResponseFromJSON, RegistrySvcErrorResponseFromJSONTyped, RegistrySvcErrorResponseToJSON, RegistrySvcErrorResponseToJSONTyped, instanceOfRegistrySvcErrorResponse } from './RegistrySvcErrorResponse.mjs';
-export { RegistrySvcGPUFromJSON, RegistrySvcGPUFromJSONTyped, RegistrySvcGPUToJSON, RegistrySvcGPUToJSONTyped, instanceOfRegistrySvcGPU } from './RegistrySvcGPU.mjs';
-export { RegistrySvcImageSpecFromJSON, RegistrySvcImageSpecFromJSONTyped, RegistrySvcImageSpecToJSON, RegistrySvcImageSpecToJSONTyped, instanceOfRegistrySvcImageSpec } from './RegistrySvcImageSpec.mjs';
-export { RegistrySvcInstanceFromJSON, RegistrySvcInstanceFromJSONTyped, RegistrySvcInstanceToJSON, RegistrySvcInstanceToJSONTyped, instanceOfRegistrySvcInstance } from './RegistrySvcInstance.mjs';
-export { RegistrySvcInstanceStatus, RegistrySvcInstanceStatusFromJSON, RegistrySvcInstanceStatusFromJSONTyped, RegistrySvcInstanceStatusToJSON, RegistrySvcInstanceStatusToJSONTyped, instanceOfRegistrySvcInstanceStatus } from './RegistrySvcInstanceStatus.mjs';
-export { RegistrySvcLanguage, RegistrySvcLanguageFromJSON, RegistrySvcLanguageFromJSONTyped, RegistrySvcLanguageToJSON, RegistrySvcLanguageToJSONTyped, instanceOfRegistrySvcLanguage } from './RegistrySvcLanguage.mjs';
-export { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListDefinitionsResponseFromJSONTyped, RegistrySvcListDefinitionsResponseToJSON, RegistrySvcListDefinitionsResponseToJSONTyped, instanceOfRegistrySvcListDefinitionsResponse } from './RegistrySvcListDefinitionsResponse.mjs';
-export { RegistrySvcListInstancesResponseFromJSON, RegistrySvcListInstancesResponseFromJSONTyped, RegistrySvcListInstancesResponseToJSON, RegistrySvcListInstancesResponseToJSONTyped, instanceOfRegistrySvcListInstancesResponse } from './RegistrySvcListInstancesResponse.mjs';
-export { RegistrySvcListNodesResponseFromJSON, RegistrySvcListNodesResponseFromJSONTyped, RegistrySvcListNodesResponseToJSON, RegistrySvcListNodesResponseToJSONTyped, instanceOfRegistrySvcListNodesResponse } from './RegistrySvcListNodesResponse.mjs';
-export { RegistrySvcNodeFromJSON, RegistrySvcNodeFromJSONTyped, RegistrySvcNodeToJSON, RegistrySvcNodeToJSONTyped, instanceOfRegistrySvcNode } from './RegistrySvcNode.mjs';
-export { RegistrySvcProcessFromJSON, RegistrySvcProcessFromJSONTyped, RegistrySvcProcessToJSON, RegistrySvcProcessToJSONTyped, instanceOfRegistrySvcProcess } from './RegistrySvcProcess.mjs';
-export { RegistrySvcRegisterInstanceRequestFromJSON, RegistrySvcRegisterInstanceRequestFromJSONTyped, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcRegisterInstanceRequestToJSONTyped, instanceOfRegistrySvcRegisterInstanceRequest } from './RegistrySvcRegisterInstanceRequest.mjs';
-export { RegistrySvcRepositorySpecFromJSON, RegistrySvcRepositorySpecFromJSONTyped, RegistrySvcRepositorySpecToJSON, RegistrySvcRepositorySpecToJSONTyped, instanceOfRegistrySvcRepositorySpec } from './RegistrySvcRepositorySpec.mjs';
-export { RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, RegistrySvcResourceUsageToJSONTyped, instanceOfRegistrySvcResourceUsage } from './RegistrySvcResourceUsage.mjs';
-export { RegistrySvcSaveDefinitionRequestFromJSON, RegistrySvcSaveDefinitionRequestFromJSONTyped, RegistrySvcSaveDefinitionRequestToJSON, RegistrySvcSaveDefinitionRequestToJSONTyped, instanceOfRegistrySvcSaveDefinitionRequest } from './RegistrySvcSaveDefinitionRequest.mjs';
-export { RegistrySvcUsageFromJSON, RegistrySvcUsageFromJSONTyped, RegistrySvcUsageToJSON, RegistrySvcUsageToJSONTyped, instanceOfRegistrySvcUsage } from './RegistrySvcUsage.mjs';
-export { SecretSvcDecryptValueRequestFromJSON, SecretSvcDecryptValueRequestFromJSONTyped, SecretSvcDecryptValueRequestToJSON, SecretSvcDecryptValueRequestToJSONTyped, instanceOfSecretSvcDecryptValueRequest } from './SecretSvcDecryptValueRequest.mjs';
-export { SecretSvcDecryptValueResponseFromJSON, SecretSvcDecryptValueResponseFromJSONTyped, SecretSvcDecryptValueResponseToJSON, SecretSvcDecryptValueResponseToJSONTyped, instanceOfSecretSvcDecryptValueResponse } from './SecretSvcDecryptValueResponse.mjs';
-export { SecretSvcEncryptValueRequestFromJSON, SecretSvcEncryptValueRequestFromJSONTyped, SecretSvcEncryptValueRequestToJSON, SecretSvcEncryptValueRequestToJSONTyped, instanceOfSecretSvcEncryptValueRequest } from './SecretSvcEncryptValueRequest.mjs';
-export { SecretSvcEncryptValueResponseFromJSON, SecretSvcEncryptValueResponseFromJSONTyped, SecretSvcEncryptValueResponseToJSON, SecretSvcEncryptValueResponseToJSONTyped, instanceOfSecretSvcEncryptValueResponse } from './SecretSvcEncryptValueResponse.mjs';
-export { SecretSvcListSecretsRequestFromJSON, SecretSvcListSecretsRequestFromJSONTyped, SecretSvcListSecretsRequestToJSON, SecretSvcListSecretsRequestToJSONTyped, instanceOfSecretSvcListSecretsRequest } from './SecretSvcListSecretsRequest.mjs';
-export { SecretSvcListSecretsResponseFromJSON, SecretSvcListSecretsResponseFromJSONTyped, SecretSvcListSecretsResponseToJSON, SecretSvcListSecretsResponseToJSONTyped, instanceOfSecretSvcListSecretsResponse } from './SecretSvcListSecretsResponse.mjs';
-export { SecretSvcRemoveSecretsRequestFromJSON, SecretSvcRemoveSecretsRequestFromJSONTyped, SecretSvcRemoveSecretsRequestToJSON, SecretSvcRemoveSecretsRequestToJSONTyped, instanceOfSecretSvcRemoveSecretsRequest } from './SecretSvcRemoveSecretsRequest.mjs';
-export { SecretSvcSaveSecretsRequestFromJSON, SecretSvcSaveSecretsRequestFromJSONTyped, SecretSvcSaveSecretsRequestToJSON, SecretSvcSaveSecretsRequestToJSONTyped, instanceOfSecretSvcSaveSecretsRequest } from './SecretSvcSaveSecretsRequest.mjs';
-export { SecretSvcSecretFromJSON, SecretSvcSecretFromJSONTyped, SecretSvcSecretToJSON, SecretSvcSecretToJSONTyped, instanceOfSecretSvcSecret } from './SecretSvcSecret.mjs';
-export { SourceSvcCheckoutRepoRequestFromJSON, SourceSvcCheckoutRepoRequestFromJSONTyped, SourceSvcCheckoutRepoRequestToJSON, SourceSvcCheckoutRepoRequestToJSONTyped, instanceOfSourceSvcCheckoutRepoRequest } from './SourceSvcCheckoutRepoRequest.mjs';
-export { SourceSvcCheckoutRepoResponseFromJSON, SourceSvcCheckoutRepoResponseFromJSONTyped, SourceSvcCheckoutRepoResponseToJSON, SourceSvcCheckoutRepoResponseToJSONTyped, instanceOfSourceSvcCheckoutRepoResponse } from './SourceSvcCheckoutRepoResponse.mjs';
-export { SourceSvcErrorResponseFromJSON, SourceSvcErrorResponseFromJSONTyped, SourceSvcErrorResponseToJSON, SourceSvcErrorResponseToJSONTyped, instanceOfSourceSvcErrorResponse } from './SourceSvcErrorResponse.mjs';
-export { UserSvcAddUserToOrganizationRequestFromJSON, UserSvcAddUserToOrganizationRequestFromJSONTyped, UserSvcAddUserToOrganizationRequestToJSON, UserSvcAddUserToOrganizationRequestToJSONTyped, instanceOfUserSvcAddUserToOrganizationRequest } from './UserSvcAddUserToOrganizationRequest.mjs';
-export { UserSvcAuthTokenFromJSON, UserSvcAuthTokenFromJSONTyped, UserSvcAuthTokenToJSON, UserSvcAuthTokenToJSONTyped, instanceOfUserSvcAuthToken } from './UserSvcAuthToken.mjs';
-export { UserSvcChangePasswordAdminRequestFromJSON, UserSvcChangePasswordAdminRequestFromJSONTyped, UserSvcChangePasswordAdminRequestToJSON, UserSvcChangePasswordAdminRequestToJSONTyped, instanceOfUserSvcChangePasswordAdminRequest } from './UserSvcChangePasswordAdminRequest.mjs';
-export { UserSvcChangePasswordRequestFromJSON, UserSvcChangePasswordRequestFromJSONTyped, UserSvcChangePasswordRequestToJSON, UserSvcChangePasswordRequestToJSONTyped, instanceOfUserSvcChangePasswordRequest } from './UserSvcChangePasswordRequest.mjs';
-export { UserSvcContactFromJSON, UserSvcContactFromJSONTyped, UserSvcContactToJSON, UserSvcContactToJSONTyped, instanceOfUserSvcContact } from './UserSvcContact.mjs';
-export { UserSvcCreateOrganizationRequestFromJSON, UserSvcCreateOrganizationRequestFromJSONTyped, UserSvcCreateOrganizationRequestToJSON, UserSvcCreateOrganizationRequestToJSONTyped, instanceOfUserSvcCreateOrganizationRequest } from './UserSvcCreateOrganizationRequest.mjs';
-export { UserSvcCreateRoleRequestFromJSON, UserSvcCreateRoleRequestFromJSONTyped, UserSvcCreateRoleRequestToJSON, UserSvcCreateRoleRequestToJSONTyped, instanceOfUserSvcCreateRoleRequest } from './UserSvcCreateRoleRequest.mjs';
-export { UserSvcCreateRoleResponseFromJSON, UserSvcCreateRoleResponseFromJSONTyped, UserSvcCreateRoleResponseToJSON, UserSvcCreateRoleResponseToJSONTyped, instanceOfUserSvcCreateRoleResponse } from './UserSvcCreateRoleResponse.mjs';
-export { UserSvcCreateUserRequestFromJSON, UserSvcCreateUserRequestFromJSONTyped, UserSvcCreateUserRequestToJSON, UserSvcCreateUserRequestToJSONTyped, instanceOfUserSvcCreateUserRequest } from './UserSvcCreateUserRequest.mjs';
-export { UserSvcErrorResponseFromJSON, UserSvcErrorResponseFromJSONTyped, UserSvcErrorResponseToJSON, UserSvcErrorResponseToJSONTyped, instanceOfUserSvcErrorResponse } from './UserSvcErrorResponse.mjs';
-export { UserSvcGetPermissionsResponseFromJSON, UserSvcGetPermissionsResponseFromJSONTyped, UserSvcGetPermissionsResponseToJSON, UserSvcGetPermissionsResponseToJSONTyped, instanceOfUserSvcGetPermissionsResponse } from './UserSvcGetPermissionsResponse.mjs';
-export { UserSvcGetPublicKeyResponseFromJSON, UserSvcGetPublicKeyResponseFromJSONTyped, UserSvcGetPublicKeyResponseToJSON, UserSvcGetPublicKeyResponseToJSONTyped, instanceOfUserSvcGetPublicKeyResponse } from './UserSvcGetPublicKeyResponse.mjs';
-export { UserSvcGetRolesResponseFromJSON, UserSvcGetRolesResponseFromJSONTyped, UserSvcGetRolesResponseToJSON, UserSvcGetRolesResponseToJSONTyped, instanceOfUserSvcGetRolesResponse } from './UserSvcGetRolesResponse.mjs';
-export { UserSvcGetUsersRequestFromJSON, UserSvcGetUsersRequestFromJSONTyped, UserSvcGetUsersRequestToJSON, UserSvcGetUsersRequestToJSONTyped, instanceOfUserSvcGetUsersRequest } from './UserSvcGetUsersRequest.mjs';
-export { UserSvcGetUsersResponseFromJSON, UserSvcGetUsersResponseFromJSONTyped, UserSvcGetUsersResponseToJSON, UserSvcGetUsersResponseToJSONTyped, instanceOfUserSvcGetUsersResponse } from './UserSvcGetUsersResponse.mjs';
-export { UserSvcIsAuthorizedRequestFromJSON, UserSvcIsAuthorizedRequestFromJSONTyped, UserSvcIsAuthorizedRequestToJSON, UserSvcIsAuthorizedRequestToJSONTyped, instanceOfUserSvcIsAuthorizedRequest } from './UserSvcIsAuthorizedRequest.mjs';
-export { UserSvcIsAuthorizedResponseFromJSON, UserSvcIsAuthorizedResponseFromJSONTyped, UserSvcIsAuthorizedResponseToJSON, UserSvcIsAuthorizedResponseToJSONTyped, instanceOfUserSvcIsAuthorizedResponse } from './UserSvcIsAuthorizedResponse.mjs';
-export { UserSvcLoginRequestFromJSON, UserSvcLoginRequestFromJSONTyped, UserSvcLoginRequestToJSON, UserSvcLoginRequestToJSONTyped, instanceOfUserSvcLoginRequest } from './UserSvcLoginRequest.mjs';
-export { UserSvcLoginResponseFromJSON, UserSvcLoginResponseFromJSONTyped, UserSvcLoginResponseToJSON, UserSvcLoginResponseToJSONTyped, instanceOfUserSvcLoginResponse } from './UserSvcLoginResponse.mjs';
-export { UserSvcOrganizationFromJSON, UserSvcOrganizationFromJSONTyped, UserSvcOrganizationToJSON, UserSvcOrganizationToJSONTyped, instanceOfUserSvcOrganization } from './UserSvcOrganization.mjs';
-export { UserSvcPermissionFromJSON, UserSvcPermissionFromJSONTyped, UserSvcPermissionToJSON, UserSvcPermissionToJSONTyped, instanceOfUserSvcPermission } from './UserSvcPermission.mjs';
-export { UserSvcReadUserByTokenResponseFromJSON, UserSvcReadUserByTokenResponseFromJSONTyped, UserSvcReadUserByTokenResponseToJSON, UserSvcReadUserByTokenResponseToJSONTyped, instanceOfUserSvcReadUserByTokenResponse } from './UserSvcReadUserByTokenResponse.mjs';
-export { UserSvcRegisterRequestFromJSON, UserSvcRegisterRequestFromJSONTyped, UserSvcRegisterRequestToJSON, UserSvcRegisterRequestToJSONTyped, instanceOfUserSvcRegisterRequest } from './UserSvcRegisterRequest.mjs';
-export { UserSvcRegisterResponseFromJSON, UserSvcRegisterResponseFromJSONTyped, UserSvcRegisterResponseToJSON, UserSvcRegisterResponseToJSONTyped, instanceOfUserSvcRegisterResponse } from './UserSvcRegisterResponse.mjs';
-export { UserSvcRoleFromJSON, UserSvcRoleFromJSONTyped, UserSvcRoleToJSON, UserSvcRoleToJSONTyped, instanceOfUserSvcRole } from './UserSvcRole.mjs';
-export { UserSvcSaveProfileRequestFromJSON, UserSvcSaveProfileRequestFromJSONTyped, UserSvcSaveProfileRequestToJSON, UserSvcSaveProfileRequestToJSONTyped, instanceOfUserSvcSaveProfileRequest } from './UserSvcSaveProfileRequest.mjs';
-export { UserSvcSetRolePermissionsRequestFromJSON, UserSvcSetRolePermissionsRequestFromJSONTyped, UserSvcSetRolePermissionsRequestToJSON, UserSvcSetRolePermissionsRequestToJSONTyped, instanceOfUserSvcSetRolePermissionsRequest } from './UserSvcSetRolePermissionsRequest.mjs';
-export { UserSvcUpserPermissionRequestFromJSON, UserSvcUpserPermissionRequestFromJSONTyped, UserSvcUpserPermissionRequestToJSON, UserSvcUpserPermissionRequestToJSONTyped, instanceOfUserSvcUpserPermissionRequest } from './UserSvcUpserPermissionRequest.mjs';
-export { UserSvcUserFromJSON, UserSvcUserFromJSONTyped, UserSvcUserToJSON, UserSvcUserToJSONTyped, instanceOfUserSvcUser } from './UserSvcUser.mjs';
+import { __awaiter } from 'tslib';
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+const BASE_PATH = "http://localhost:58231".replace(/\/+$/, "");
+class Configuration {
+    constructor(configuration = {}) {
+        this.configuration = configuration;
+    }
+    set config(configuration) {
+        this.configuration = configuration;
+    }
+    get basePath() {
+        return this.configuration.basePath != null ? this.configuration.basePath : BASE_PATH;
+    }
+    get fetchApi() {
+        return this.configuration.fetchApi;
+    }
+    get middleware() {
+        return this.configuration.middleware || [];
+    }
+    get queryParamsStringify() {
+        return this.configuration.queryParamsStringify || querystring;
+    }
+    get username() {
+        return this.configuration.username;
+    }
+    get password() {
+        return this.configuration.password;
+    }
+    get apiKey() {
+        const apiKey = this.configuration.apiKey;
+        if (apiKey) {
+            return typeof apiKey === 'function' ? apiKey : () => apiKey;
+        }
+        return undefined;
+    }
+    get accessToken() {
+        const accessToken = this.configuration.accessToken;
+        if (accessToken) {
+            return typeof accessToken === 'function' ? accessToken : () => __awaiter(this, void 0, void 0, function* () { return accessToken; });
+        }
+        return undefined;
+    }
+    get headers() {
+        return this.configuration.headers;
+    }
+    get credentials() {
+        return this.configuration.credentials;
+    }
+}
+const DefaultConfig = new Configuration();
+/**
+ * This is the base class for all generated API classes.
+ */
+class BaseAPI {
+    constructor(configuration = DefaultConfig) {
+        this.configuration = configuration;
+        this.fetchApi = (url, init) => __awaiter(this, void 0, void 0, function* () {
+            let fetchParams = { url, init };
+            for (const middleware of this.middleware) {
+                if (middleware.pre) {
+                    fetchParams = (yield middleware.pre(Object.assign({ fetch: this.fetchApi }, fetchParams))) || fetchParams;
+                }
+            }
+            let response = undefined;
+            try {
+                response = yield (this.configuration.fetchApi || fetch)(fetchParams.url, fetchParams.init);
+            }
+            catch (e) {
+                for (const middleware of this.middleware) {
+                    if (middleware.onError) {
+                        response = (yield middleware.onError({
+                            fetch: this.fetchApi,
+                            url: fetchParams.url,
+                            init: fetchParams.init,
+                            error: e,
+                            response: response ? response.clone() : undefined,
+                        })) || response;
+                    }
+                }
+                if (response === undefined) {
+                    if (e instanceof Error) {
+                        throw new FetchError(e, 'The request failed and the interceptors did not return an alternative response');
+                    }
+                    else {
+                        throw e;
+                    }
+                }
+            }
+            for (const middleware of this.middleware) {
+                if (middleware.post) {
+                    response = (yield middleware.post({
+                        fetch: this.fetchApi,
+                        url: fetchParams.url,
+                        init: fetchParams.init,
+                        response: response.clone(),
+                    })) || response;
+                }
+            }
+            return response;
+        });
+        this.middleware = configuration.middleware;
+    }
+    withMiddleware(...middlewares) {
+        const next = this.clone();
+        next.middleware = next.middleware.concat(...middlewares);
+        return next;
+    }
+    withPreMiddleware(...preMiddlewares) {
+        const middlewares = preMiddlewares.map((pre) => ({ pre }));
+        return this.withMiddleware(...middlewares);
+    }
+    withPostMiddleware(...postMiddlewares) {
+        const middlewares = postMiddlewares.map((post) => ({ post }));
+        return this.withMiddleware(...middlewares);
+    }
+    /**
+     * Check if the given MIME is a JSON MIME.
+     * JSON MIME examples:
+     *   application/json
+     *   application/json; charset=UTF8
+     *   APPLICATION/JSON
+     *   application/vnd.company+json
+     * @param mime - MIME (Multipurpose Internet Mail Extensions)
+     * @return True if the given MIME is JSON, false otherwise.
+     */
+    isJsonMime(mime) {
+        if (!mime) {
+            return false;
+        }
+        return BaseAPI.jsonRegex.test(mime);
+    }
+    request(context, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { url, init } = yield this.createFetchParams(context, initOverrides);
+            const response = yield this.fetchApi(url, init);
+            if (response && (response.status >= 200 && response.status < 300)) {
+                return response;
+            }
+            throw new ResponseError(response, 'Response returned an error code');
+        });
+    }
+    createFetchParams(context, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let url = this.configuration.basePath + context.path;
+            if (context.query !== undefined && Object.keys(context.query).length !== 0) {
+                // only add the querystring to the URL if there are query parameters.
+                // this is done to avoid urls ending with a "?" character which buggy webservers
+                // do not handle correctly sometimes.
+                url += '?' + this.configuration.queryParamsStringify(context.query);
+            }
+            const headers = Object.assign({}, this.configuration.headers, context.headers);
+            Object.keys(headers).forEach(key => headers[key] === undefined ? delete headers[key] : {});
+            const initOverrideFn = typeof initOverrides === "function"
+                ? initOverrides
+                : () => __awaiter(this, void 0, void 0, function* () { return initOverrides; });
+            const initParams = {
+                method: context.method,
+                headers,
+                body: context.body,
+                credentials: this.configuration.credentials,
+            };
+            const overriddenInit = Object.assign(Object.assign({}, initParams), (yield initOverrideFn({
+                init: initParams,
+                context,
+            })));
+            let body;
+            if (isFormData(overriddenInit.body)
+                || (overriddenInit.body instanceof URLSearchParams)
+                || isBlob(overriddenInit.body)) {
+                body = overriddenInit.body;
+            }
+            else if (this.isJsonMime(headers['Content-Type'])) {
+                body = JSON.stringify(overriddenInit.body);
+            }
+            else {
+                body = overriddenInit.body;
+            }
+            const init = Object.assign(Object.assign({}, overriddenInit), { body });
+            return { url, init };
+        });
+    }
+    /**
+     * Create a shallow clone of `this` by constructing a new instance
+     * and then shallow cloning data members.
+     */
+    clone() {
+        const constructor = this.constructor;
+        const next = new constructor(this.configuration);
+        next.middleware = this.middleware.slice();
+        return next;
+    }
+}
+BaseAPI.jsonRegex = new RegExp('^(:?application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(:?;.*)?$', 'i');
+function isBlob(value) {
+    return typeof Blob !== 'undefined' && value instanceof Blob;
+}
+function isFormData(value) {
+    return typeof FormData !== "undefined" && value instanceof FormData;
+}
+class ResponseError extends Error {
+    constructor(response, msg) {
+        super(msg);
+        this.response = response;
+        this.name = "ResponseError";
+    }
+}
+class FetchError extends Error {
+    constructor(cause, msg) {
+        super(msg);
+        this.cause = cause;
+        this.name = "FetchError";
+    }
+}
+class RequiredError extends Error {
+    constructor(field, msg) {
+        super(msg);
+        this.field = field;
+        this.name = "RequiredError";
+    }
+}
+const COLLECTION_FORMATS = {
+    csv: ",",
+    ssv: " ",
+    tsv: "\t",
+    pipes: "|",
+};
+function querystring(params, prefix = '') {
+    return Object.keys(params)
+        .map(key => querystringSingleKey(key, params[key], prefix))
+        .filter(part => part.length > 0)
+        .join('&');
+}
+function querystringSingleKey(key, value, keyPrefix = '') {
+    const fullKey = keyPrefix + (keyPrefix.length ? `[${key}]` : key);
+    if (value instanceof Array) {
+        const multiValue = value.map(singleValue => encodeURIComponent(String(singleValue)))
+            .join(`&${encodeURIComponent(fullKey)}=`);
+        return `${encodeURIComponent(fullKey)}=${multiValue}`;
+    }
+    if (value instanceof Set) {
+        const valueAsArray = Array.from(value);
+        return querystringSingleKey(key, valueAsArray, keyPrefix);
+    }
+    if (value instanceof Date) {
+        return `${encodeURIComponent(fullKey)}=${encodeURIComponent(value.toISOString())}`;
+    }
+    if (value instanceof Object) {
+        return querystring(value, fullKey);
+    }
+    return `${encodeURIComponent(fullKey)}=${encodeURIComponent(String(value))}`;
+}
+function mapValues(data, fn) {
+    return Object.keys(data).reduce((acc, key) => (Object.assign(Object.assign({}, acc), { [key]: fn(data[key]) })), {});
+}
+function canConsumeForm(consumes) {
+    for (const consume of consumes) {
+        if ('multipart/form-data' === consume.contentType) {
+            return true;
+        }
+    }
+    return false;
+}
+class JSONApiResponse {
+    constructor(raw, transformer = (jsonValue) => jsonValue) {
+        this.raw = raw;
+        this.transformer = transformer;
+    }
+    value() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.transformer(yield this.raw.json());
+        });
+    }
+}
+class VoidApiResponse {
+    constructor(raw) {
+        this.raw = raw;
+    }
+    value() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return undefined;
+        });
+    }
+}
+class BlobApiResponse {
+    constructor(raw) {
+        this.raw = raw;
+    }
+    value() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.raw.blob();
+        });
+    }
+    ;
+}
+class TextApiResponse {
+    constructor(raw) {
+        this.raw = raw;
+    }
+    value() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.raw.text();
+        });
+    }
+    ;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcMessage interface.
+ */
+function instanceOfChatSvcMessage(value) {
+    return true;
+}
+function ChatSvcMessageFromJSON(json) {
+    return ChatSvcMessageFromJSONTyped(json);
+}
+function ChatSvcMessageFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'assetIds': json['assetIds'] == null ? undefined : json['assetIds'],
+        'content': json['content'] == null ? undefined : json['content'],
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'userId': json['userId'] == null ? undefined : json['userId'],
+    };
+}
+function ChatSvcMessageToJSON(json) {
+    return ChatSvcMessageToJSONTyped(json, false);
+}
+function ChatSvcMessageToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'assetIds': value['assetIds'],
+        'content': value['content'],
+        'createdAt': value['createdAt'],
+        'id': value['id'],
+        'threadId': value['threadId'],
+        'updatedAt': value['updatedAt'],
+        'userId': value['userId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcAddMessageRequest interface.
+ */
+function instanceOfChatSvcAddMessageRequest(value) {
+    return true;
+}
+function ChatSvcAddMessageRequestFromJSON(json) {
+    return ChatSvcAddMessageRequestFromJSONTyped(json);
+}
+function ChatSvcAddMessageRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'message': json['message'] == null ? undefined : ChatSvcMessageFromJSON(json['message']),
+    };
+}
+function ChatSvcAddMessageRequestToJSON(json) {
+    return ChatSvcAddMessageRequestToJSONTyped(json, false);
+}
+function ChatSvcAddMessageRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'message': ChatSvcMessageToJSON(value['message']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcThread interface.
+ */
+function instanceOfChatSvcThread(value) {
+    return true;
+}
+function ChatSvcThreadFromJSON(json) {
+    return ChatSvcThreadFromJSONTyped(json);
+}
+function ChatSvcThreadFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'title': json['title'] == null ? undefined : json['title'],
+        'topicIds': json['topicIds'] == null ? undefined : json['topicIds'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'userIds': json['userIds'] == null ? undefined : json['userIds'],
+    };
+}
+function ChatSvcThreadToJSON(json) {
+    return ChatSvcThreadToJSONTyped(json, false);
+}
+function ChatSvcThreadToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'id': value['id'],
+        'title': value['title'],
+        'topicIds': value['topicIds'],
+        'updatedAt': value['updatedAt'],
+        'userIds': value['userIds'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcAddThreadRequest interface.
+ */
+function instanceOfChatSvcAddThreadRequest(value) {
+    return true;
+}
+function ChatSvcAddThreadRequestFromJSON(json) {
+    return ChatSvcAddThreadRequestFromJSONTyped(json);
+}
+function ChatSvcAddThreadRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'thread': json['thread'] == null ? undefined : ChatSvcThreadFromJSON(json['thread']),
+    };
+}
+function ChatSvcAddThreadRequestToJSON(json) {
+    return ChatSvcAddThreadRequestToJSONTyped(json, false);
+}
+function ChatSvcAddThreadRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'thread': ChatSvcThreadToJSON(value['thread']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcAddThreadResponse interface.
+ */
+function instanceOfChatSvcAddThreadResponse(value) {
+    return true;
+}
+function ChatSvcAddThreadResponseFromJSON(json) {
+    return ChatSvcAddThreadResponseFromJSONTyped(json);
+}
+function ChatSvcAddThreadResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'thread': json['thread'] == null ? undefined : ChatSvcThreadFromJSON(json['thread']),
+    };
+}
+function ChatSvcAddThreadResponseToJSON(json) {
+    return ChatSvcAddThreadResponseToJSONTyped(json, false);
+}
+function ChatSvcAddThreadResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'thread': ChatSvcThreadToJSON(value['thread']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcAsset interface.
+ */
+function instanceOfChatSvcAsset(value) {
+    return true;
+}
+function ChatSvcAssetFromJSON(json) {
+    return ChatSvcAssetFromJSONTyped(json);
+}
+function ChatSvcAssetFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'content': json['content'] == null ? undefined : json['content'],
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'type': json['type'] == null ? undefined : json['type'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'url': json['url'] == null ? undefined : json['url'],
+    };
+}
+function ChatSvcAssetToJSON(json) {
+    return ChatSvcAssetToJSONTyped(json, false);
+}
+function ChatSvcAssetToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'content': value['content'],
+        'createdAt': value['createdAt'],
+        'description': value['description'],
+        'id': value['id'],
+        'type': value['type'],
+        'updatedAt': value['updatedAt'],
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcEventMessageAdded interface.
+ */
+function instanceOfChatSvcEventMessageAdded(value) {
+    return true;
+}
+function ChatSvcEventMessageAddedFromJSON(json) {
+    return ChatSvcEventMessageAddedFromJSONTyped(json);
+}
+function ChatSvcEventMessageAddedFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+    };
+}
+function ChatSvcEventMessageAddedToJSON(json) {
+    return ChatSvcEventMessageAddedToJSONTyped(json, false);
+}
+function ChatSvcEventMessageAddedToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'threadId': value['threadId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcEventThreadAdded interface.
+ */
+function instanceOfChatSvcEventThreadAdded(value) {
+    return true;
+}
+function ChatSvcEventThreadAddedFromJSON(json) {
+    return ChatSvcEventThreadAddedFromJSONTyped(json);
+}
+function ChatSvcEventThreadAddedFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+    };
+}
+function ChatSvcEventThreadAddedToJSON(json) {
+    return ChatSvcEventThreadAddedToJSONTyped(json, false);
+}
+function ChatSvcEventThreadAddedToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'threadId': value['threadId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcEventThreadUpdate interface.
+ */
+function instanceOfChatSvcEventThreadUpdate(value) {
+    return true;
+}
+function ChatSvcEventThreadUpdateFromJSON(json) {
+    return ChatSvcEventThreadUpdateFromJSONTyped(json);
+}
+function ChatSvcEventThreadUpdateFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+    };
+}
+function ChatSvcEventThreadUpdateToJSON(json) {
+    return ChatSvcEventThreadUpdateToJSONTyped(json, false);
+}
+function ChatSvcEventThreadUpdateToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'threadId': value['threadId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcGetMessagesResponse interface.
+ */
+function instanceOfChatSvcGetMessagesResponse(value) {
+    return true;
+}
+function ChatSvcGetMessagesResponseFromJSON(json) {
+    return ChatSvcGetMessagesResponseFromJSONTyped(json);
+}
+function ChatSvcGetMessagesResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'assets': json['assets'] == null ? undefined : (json['assets'].map(ChatSvcAssetFromJSON)),
+        'messages': json['messages'] == null ? undefined : (json['messages'].map(ChatSvcMessageFromJSON)),
+    };
+}
+function ChatSvcGetMessagesResponseToJSON(json) {
+    return ChatSvcGetMessagesResponseToJSONTyped(json, false);
+}
+function ChatSvcGetMessagesResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'assets': value['assets'] == null ? undefined : (value['assets'].map(ChatSvcAssetToJSON)),
+        'messages': value['messages'] == null ? undefined : (value['messages'].map(ChatSvcMessageToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcGetThreadResponse interface.
+ */
+function instanceOfChatSvcGetThreadResponse(value) {
+    return true;
+}
+function ChatSvcGetThreadResponseFromJSON(json) {
+    return ChatSvcGetThreadResponseFromJSONTyped(json);
+}
+function ChatSvcGetThreadResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        '_exists': json['exists'] == null ? undefined : json['exists'],
+        'thread': json['thread'] == null ? undefined : ChatSvcThreadFromJSON(json['thread']),
+    };
+}
+function ChatSvcGetThreadResponseToJSON(json) {
+    return ChatSvcGetThreadResponseToJSONTyped(json, false);
+}
+function ChatSvcGetThreadResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'exists': value['_exists'],
+        'thread': ChatSvcThreadToJSON(value['thread']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcGetThreadsResponse interface.
+ */
+function instanceOfChatSvcGetThreadsResponse(value) {
+    return true;
+}
+function ChatSvcGetThreadsResponseFromJSON(json) {
+    return ChatSvcGetThreadsResponseFromJSONTyped(json);
+}
+function ChatSvcGetThreadsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'threads': json['threads'] == null ? undefined : (json['threads'].map(ChatSvcThreadFromJSON)),
+    };
+}
+function ChatSvcGetThreadsResponseToJSON(json) {
+    return ChatSvcGetThreadsResponseToJSONTyped(json, false);
+}
+function ChatSvcGetThreadsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'threads': value['threads'] == null ? undefined : (value['threads'].map(ChatSvcThreadToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ChatSvcUpdateThreadRequest interface.
+ */
+function instanceOfChatSvcUpdateThreadRequest(value) {
+    return true;
+}
+function ChatSvcUpdateThreadRequestFromJSON(json) {
+    return ChatSvcUpdateThreadRequestFromJSONTyped(json);
+}
+function ChatSvcUpdateThreadRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'thread': json['thread'] == null ? undefined : ChatSvcThreadFromJSON(json['thread']),
+    };
+}
+function ChatSvcUpdateThreadRequestToJSON(json) {
+    return ChatSvcUpdateThreadRequestToJSONTyped(json, false);
+}
+function ChatSvcUpdateThreadRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'thread': ChatSvcThreadToJSON(value['thread']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ConfigSvcConfig interface.
+ */
+function instanceOfConfigSvcConfig(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
+    return true;
+}
+function ConfigSvcConfigFromJSON(json) {
+    return ConfigSvcConfigFromJSONTyped(json);
+}
+function ConfigSvcConfigFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'data': json['data'],
+        'dataJson': json['dataJson'] == null ? undefined : json['dataJson'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
+    };
+}
+function ConfigSvcConfigToJSON(json) {
+    return ConfigSvcConfigToJSONTyped(json, false);
+}
+function ConfigSvcConfigToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'data': value['data'],
+        'dataJson': value['dataJson'],
+        'id': value['id'],
+        'namespace': value['namespace'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ConfigSvcGetConfigResponse interface.
+ */
+function instanceOfConfigSvcGetConfigResponse(value) {
+    return true;
+}
+function ConfigSvcGetConfigResponseFromJSON(json) {
+    return ConfigSvcGetConfigResponseFromJSONTyped(json);
+}
+function ConfigSvcGetConfigResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'config': json['config'] == null ? undefined : ConfigSvcConfigFromJSON(json['config']),
+    };
+}
+function ConfigSvcGetConfigResponseToJSON(json) {
+    return ConfigSvcGetConfigResponseToJSONTyped(json, false);
+}
+function ConfigSvcGetConfigResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'config': ConfigSvcConfigToJSON(value['config']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ConfigSvcSaveConfigRequest interface.
+ */
+function instanceOfConfigSvcSaveConfigRequest(value) {
+    return true;
+}
+function ConfigSvcSaveConfigRequestFromJSON(json) {
+    return ConfigSvcSaveConfigRequestFromJSONTyped(json);
+}
+function ConfigSvcSaveConfigRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'config': json['config'] == null ? undefined : ConfigSvcConfigFromJSON(json['config']),
+    };
+}
+function ConfigSvcSaveConfigRequestToJSON(json) {
+    return ConfigSvcSaveConfigRequestToJSONTyped(json, false);
+}
+function ConfigSvcSaveConfigRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'config': ConfigSvcConfigToJSON(value['config']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const DatastoreOp = {
+    OpEquals: 'equals',
+    OpContainsSubstring: 'containsSubstring',
+    OpStartsWith: 'startsWith',
+    OpIntersects: 'intersects',
+    OpIsInList: 'isInList'
+};
+function instanceOfDatastoreOp(value) {
+    for (const key in DatastoreOp) {
+        if (Object.prototype.hasOwnProperty.call(DatastoreOp, key)) {
+            if (DatastoreOp[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function DatastoreOpFromJSON(json) {
+    return DatastoreOpFromJSONTyped(json);
+}
+function DatastoreOpFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function DatastoreOpToJSON(value) {
+    return value;
+}
+function DatastoreOpToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DatastoreFilter interface.
+ */
+function instanceOfDatastoreFilter(value) {
+    return true;
+}
+function DatastoreFilterFromJSON(json) {
+    return DatastoreFilterFromJSONTyped(json);
+}
+function DatastoreFilterFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'fields': json['fields'] == null ? undefined : json['fields'],
+        'jsonValues': json['jsonValues'] == null ? undefined : json['jsonValues'],
+        'op': json['op'] == null ? undefined : DatastoreOpFromJSON(json['op']),
+    };
+}
+function DatastoreFilterToJSON(json) {
+    return DatastoreFilterToJSONTyped(json, false);
+}
+function DatastoreFilterToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'fields': value['fields'],
+        'jsonValues': value['jsonValues'],
+        'op': DatastoreOpToJSON(value['op']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DatastoreOrderBy interface.
+ */
+function instanceOfDatastoreOrderBy(value) {
+    return true;
+}
+function DatastoreOrderByFromJSON(json) {
+    return DatastoreOrderByFromJSONTyped(json);
+}
+function DatastoreOrderByFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'desc': json['desc'] == null ? undefined : json['desc'],
+        'field': json['field'] == null ? undefined : json['field'],
+        'randomize': json['randomize'] == null ? undefined : json['randomize'],
+    };
+}
+function DatastoreOrderByToJSON(json) {
+    return DatastoreOrderByToJSONTyped(json, false);
+}
+function DatastoreOrderByToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'desc': value['desc'],
+        'field': value['field'],
+        'randomize': value['randomize'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DatastoreQuery interface.
+ */
+function instanceOfDatastoreQuery(value) {
+    return true;
+}
+function DatastoreQueryFromJSON(json) {
+    return DatastoreQueryFromJSONTyped(json);
+}
+function DatastoreQueryFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'count': json['count'] == null ? undefined : json['count'],
+        'filters': json['filters'] == null ? undefined : (json['filters'].map(DatastoreFilterFromJSON)),
+        'jsonAfter': json['jsonAfter'] == null ? undefined : json['jsonAfter'],
+        'limit': json['limit'] == null ? undefined : json['limit'],
+        'orderBys': json['orderBys'] == null ? undefined : (json['orderBys'].map(DatastoreOrderByFromJSON)),
+    };
+}
+function DatastoreQueryToJSON(json) {
+    return DatastoreQueryToJSONTyped(json, false);
+}
+function DatastoreQueryToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'count': value['count'],
+        'filters': value['filters'] == null ? undefined : (value['filters'].map(DatastoreFilterToJSON)),
+        'jsonAfter': value['jsonAfter'],
+        'limit': value['limit'],
+        'orderBys': value['orderBys'] == null ? undefined : (value['orderBys'].map(DatastoreOrderByToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcAutoScalingConfig interface.
+ */
+function instanceOfDeploySvcAutoScalingConfig(value) {
+    return true;
+}
+function DeploySvcAutoScalingConfigFromJSON(json) {
+    return DeploySvcAutoScalingConfigFromJSONTyped(json);
+}
+function DeploySvcAutoScalingConfigFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cpuThreshold': json['cpuThreshold'] == null ? undefined : json['cpuThreshold'],
+        'maxReplicas': json['maxReplicas'] == null ? undefined : json['maxReplicas'],
+        'minReplicas': json['minReplicas'] == null ? undefined : json['minReplicas'],
+    };
+}
+function DeploySvcAutoScalingConfigToJSON(json) {
+    return DeploySvcAutoScalingConfigToJSONTyped(json, false);
+}
+function DeploySvcAutoScalingConfigToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cpuThreshold': value['cpuThreshold'],
+        'maxReplicas': value['maxReplicas'],
+        'minReplicas': value['minReplicas'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcDeleteDeploymentRequest interface.
+ */
+function instanceOfDeploySvcDeleteDeploymentRequest(value) {
+    if (!('deploymentId' in value) || value['deploymentId'] === undefined)
+        return false;
+    return true;
+}
+function DeploySvcDeleteDeploymentRequestFromJSON(json) {
+    return DeploySvcDeleteDeploymentRequestFromJSONTyped(json);
+}
+function DeploySvcDeleteDeploymentRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'deploymentId': json['deploymentId'],
+    };
+}
+function DeploySvcDeleteDeploymentRequestToJSON(json) {
+    return DeploySvcDeleteDeploymentRequestToJSONTyped(json, false);
+}
+function DeploySvcDeleteDeploymentRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'deploymentId': value['deploymentId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const DeploySvcStrategyType = {
+    StrategyRollingUpdate: 'RollingUpdate',
+    StrategyRecreate: 'Recreate'
+};
+function instanceOfDeploySvcStrategyType(value) {
+    for (const key in DeploySvcStrategyType) {
+        if (Object.prototype.hasOwnProperty.call(DeploySvcStrategyType, key)) {
+            if (DeploySvcStrategyType[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function DeploySvcStrategyTypeFromJSON(json) {
+    return DeploySvcStrategyTypeFromJSONTyped(json);
+}
+function DeploySvcStrategyTypeFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function DeploySvcStrategyTypeToJSON(value) {
+    return value;
+}
+function DeploySvcStrategyTypeToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcDeploymentStrategy interface.
+ */
+function instanceOfDeploySvcDeploymentStrategy(value) {
+    return true;
+}
+function DeploySvcDeploymentStrategyFromJSON(json) {
+    return DeploySvcDeploymentStrategyFromJSONTyped(json);
+}
+function DeploySvcDeploymentStrategyFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'maxSurge': json['maxSurge'] == null ? undefined : json['maxSurge'],
+        'maxUnavailable': json['maxUnavailable'] == null ? undefined : json['maxUnavailable'],
+        'type': json['type'] == null ? undefined : DeploySvcStrategyTypeFromJSON(json['type']),
+    };
+}
+function DeploySvcDeploymentStrategyToJSON(json) {
+    return DeploySvcDeploymentStrategyToJSONTyped(json, false);
+}
+function DeploySvcDeploymentStrategyToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'maxSurge': value['maxSurge'],
+        'maxUnavailable': value['maxUnavailable'],
+        'type': DeploySvcStrategyTypeToJSON(value['type']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const DeploySvcDeploymentStatus = {
+    DeploymentStatusOK: 'OK',
+    DeploymentStatusError: 'Error',
+    DeploymentStatusPending: 'Pending',
+    DeploymentStatusFailed: 'Failed',
+    DeploymentStatusDeploying: 'Deploying'
+};
+function instanceOfDeploySvcDeploymentStatus(value) {
+    for (const key in DeploySvcDeploymentStatus) {
+        if (Object.prototype.hasOwnProperty.call(DeploySvcDeploymentStatus, key)) {
+            if (DeploySvcDeploymentStatus[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function DeploySvcDeploymentStatusFromJSON(json) {
+    return DeploySvcDeploymentStatusFromJSONTyped(json);
+}
+function DeploySvcDeploymentStatusFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function DeploySvcDeploymentStatusToJSON(value) {
+    return value;
+}
+function DeploySvcDeploymentStatusToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcTargetRegion interface.
+ */
+function instanceOfDeploySvcTargetRegion(value) {
+    return true;
+}
+function DeploySvcTargetRegionFromJSON(json) {
+    return DeploySvcTargetRegionFromJSONTyped(json);
+}
+function DeploySvcTargetRegionFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cluster': json['cluster'] == null ? undefined : json['cluster'],
+        'zone': json['zone'] == null ? undefined : json['zone'],
+    };
+}
+function DeploySvcTargetRegionToJSON(json) {
+    return DeploySvcTargetRegionToJSONTyped(json, false);
+}
+function DeploySvcTargetRegionToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cluster': value['cluster'],
+        'zone': value['zone'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcResourceLimits interface.
+ */
+function instanceOfDeploySvcResourceLimits(value) {
+    return true;
+}
+function DeploySvcResourceLimitsFromJSON(json) {
+    return DeploySvcResourceLimitsFromJSONTyped(json);
+}
+function DeploySvcResourceLimitsFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cpu': json['cpu'] == null ? undefined : json['cpu'],
+        'memory': json['memory'] == null ? undefined : json['memory'],
+        'vram': json['vram'] == null ? undefined : json['vram'],
+    };
+}
+function DeploySvcResourceLimitsToJSON(json) {
+    return DeploySvcResourceLimitsToJSONTyped(json, false);
+}
+function DeploySvcResourceLimitsToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cpu': value['cpu'],
+        'memory': value['memory'],
+        'vram': value['vram'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcDeployment interface.
+ */
+function instanceOfDeploySvcDeployment(value) {
+    if (!('definitionId' in value) || value['definitionId'] === undefined)
+        return false;
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    return true;
+}
+function DeploySvcDeploymentFromJSON(json) {
+    return DeploySvcDeploymentFromJSONTyped(json);
+}
+function DeploySvcDeploymentFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'autoScaling': json['autoScaling'] == null ? undefined : DeploySvcAutoScalingConfigFromJSON(json['autoScaling']),
+        'definitionId': json['definitionId'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'details': json['details'] == null ? undefined : json['details'],
+        'envars': json['envars'] == null ? undefined : json['envars'],
+        'id': json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'replicas': json['replicas'] == null ? undefined : json['replicas'],
+        'resources': json['resources'] == null ? undefined : DeploySvcResourceLimitsFromJSON(json['resources']),
+        'status': json['status'] == null ? undefined : DeploySvcDeploymentStatusFromJSON(json['status']),
+        'strategy': json['strategy'] == null ? undefined : DeploySvcDeploymentStrategyFromJSON(json['strategy']),
+        'targetRegions': json['targetRegions'] == null ? undefined : (json['targetRegions'].map(DeploySvcTargetRegionFromJSON)),
+    };
+}
+function DeploySvcDeploymentToJSON(json) {
+    return DeploySvcDeploymentToJSONTyped(json, false);
+}
+function DeploySvcDeploymentToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'autoScaling': DeploySvcAutoScalingConfigToJSON(value['autoScaling']),
+        'definitionId': value['definitionId'],
+        'description': value['description'],
+        'details': value['details'],
+        'envars': value['envars'],
+        'id': value['id'],
+        'name': value['name'],
+        'replicas': value['replicas'],
+        'resources': DeploySvcResourceLimitsToJSON(value['resources']),
+        'status': DeploySvcDeploymentStatusToJSON(value['status']),
+        'strategy': DeploySvcDeploymentStrategyToJSON(value['strategy']),
+        'targetRegions': value['targetRegions'] == null ? undefined : (value['targetRegions'].map(DeploySvcTargetRegionToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcErrorResponse interface.
+ */
+function instanceOfDeploySvcErrorResponse(value) {
+    return true;
+}
+function DeploySvcErrorResponseFromJSON(json) {
+    return DeploySvcErrorResponseFromJSONTyped(json);
+}
+function DeploySvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function DeploySvcErrorResponseToJSON(json) {
+    return DeploySvcErrorResponseToJSONTyped(json, false);
+}
+function DeploySvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcListDeploymentsResponse interface.
+ */
+function instanceOfDeploySvcListDeploymentsResponse(value) {
+    return true;
+}
+function DeploySvcListDeploymentsResponseFromJSON(json) {
+    return DeploySvcListDeploymentsResponseFromJSONTyped(json);
+}
+function DeploySvcListDeploymentsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'deployments': json['deployments'] == null ? undefined : (json['deployments'].map(DeploySvcDeploymentFromJSON)),
+    };
+}
+function DeploySvcListDeploymentsResponseToJSON(json) {
+    return DeploySvcListDeploymentsResponseToJSONTyped(json, false);
+}
+function DeploySvcListDeploymentsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'deployments': value['deployments'] == null ? undefined : (value['deployments'].map(DeploySvcDeploymentToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DeploySvcSaveDeploymentRequest interface.
+ */
+function instanceOfDeploySvcSaveDeploymentRequest(value) {
+    return true;
+}
+function DeploySvcSaveDeploymentRequestFromJSON(json) {
+    return DeploySvcSaveDeploymentRequestFromJSONTyped(json);
+}
+function DeploySvcSaveDeploymentRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'deployment': json['deployment'] == null ? undefined : DeploySvcDeploymentFromJSON(json['deployment']),
+    };
+}
+function DeploySvcSaveDeploymentRequestToJSON(json) {
+    return DeploySvcSaveDeploymentRequestToJSONTyped(json, false);
+}
+function DeploySvcSaveDeploymentRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'deployment': DeploySvcDeploymentToJSON(value['deployment']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcBuildImageRequest interface.
+ */
+function instanceOfDockerSvcBuildImageRequest(value) {
+    if (!('contextPath' in value) || value['contextPath'] === undefined)
+        return false;
+    if (!('name' in value) || value['name'] === undefined)
+        return false;
+    return true;
+}
+function DockerSvcBuildImageRequestFromJSON(json) {
+    return DockerSvcBuildImageRequestFromJSONTyped(json);
+}
+function DockerSvcBuildImageRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'contextPath': json['contextPath'],
+        'dockerfilePath': json['dockerfilePath'] == null ? undefined : json['dockerfilePath'],
+        'name': json['name'],
+    };
+}
+function DockerSvcBuildImageRequestToJSON(json) {
+    return DockerSvcBuildImageRequestToJSONTyped(json, false);
+}
+function DockerSvcBuildImageRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'contextPath': value['contextPath'],
+        'dockerfilePath': value['dockerfilePath'],
+        'name': value['name'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcContainerIsRunningResponse interface.
+ */
+function instanceOfDockerSvcContainerIsRunningResponse(value) {
+    if (!('isRunning' in value) || value['isRunning'] === undefined)
+        return false;
+    return true;
+}
+function DockerSvcContainerIsRunningResponseFromJSON(json) {
+    return DockerSvcContainerIsRunningResponseFromJSONTyped(json);
+}
+function DockerSvcContainerIsRunningResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'isRunning': json['isRunning'],
+    };
+}
+function DockerSvcContainerIsRunningResponseToJSON(json) {
+    return DockerSvcContainerIsRunningResponseToJSONTyped(json, false);
+}
+function DockerSvcContainerIsRunningResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'isRunning': value['isRunning'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcDockerInfo interface.
+ */
+function instanceOfDockerSvcDockerInfo(value) {
+    return true;
+}
+function DockerSvcDockerInfoFromJSON(json) {
+    return DockerSvcDockerInfoFromJSONTyped(json);
+}
+function DockerSvcDockerInfoFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'dockerDaemonAddress': json['dockerDaemonAddress'] == null ? undefined : json['dockerDaemonAddress'],
+        'error': json['error'] == null ? undefined : json['error'],
+        'hasDocker': json['hasDocker'] == null ? undefined : json['hasDocker'],
+    };
+}
+function DockerSvcDockerInfoToJSON(json) {
+    return DockerSvcDockerInfoToJSONTyped(json, false);
+}
+function DockerSvcDockerInfoToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'dockerDaemonAddress': value['dockerDaemonAddress'],
+        'error': value['error'],
+        'hasDocker': value['hasDocker'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcErrorResponse interface.
+ */
+function instanceOfDockerSvcErrorResponse(value) {
+    return true;
+}
+function DockerSvcErrorResponseFromJSON(json) {
+    return DockerSvcErrorResponseFromJSONTyped(json);
+}
+function DockerSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function DockerSvcErrorResponseToJSON(json) {
+    return DockerSvcErrorResponseToJSONTyped(json, false);
+}
+function DockerSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcGetContainerSummaryResponse interface.
+ */
+function instanceOfDockerSvcGetContainerSummaryResponse(value) {
+    if (!('logs' in value) || value['logs'] === undefined)
+        return false;
+    if (!('status' in value) || value['status'] === undefined)
+        return false;
+    if (!('summary' in value) || value['summary'] === undefined)
+        return false;
+    return true;
+}
+function DockerSvcGetContainerSummaryResponseFromJSON(json) {
+    return DockerSvcGetContainerSummaryResponseFromJSONTyped(json);
+}
+function DockerSvcGetContainerSummaryResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'logs': json['logs'],
+        'status': json['status'],
+        'summary': json['summary'],
+    };
+}
+function DockerSvcGetContainerSummaryResponseToJSON(json) {
+    return DockerSvcGetContainerSummaryResponseToJSONTyped(json, false);
+}
+function DockerSvcGetContainerSummaryResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'logs': value['logs'],
+        'status': value['status'],
+        'summary': value['summary'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcGetDockerHostResponse interface.
+ */
+function instanceOfDockerSvcGetDockerHostResponse(value) {
+    if (!('host' in value) || value['host'] === undefined)
+        return false;
+    return true;
+}
+function DockerSvcGetDockerHostResponseFromJSON(json) {
+    return DockerSvcGetDockerHostResponseFromJSONTyped(json);
+}
+function DockerSvcGetDockerHostResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'host': json['host'],
+    };
+}
+function DockerSvcGetDockerHostResponseToJSON(json) {
+    return DockerSvcGetDockerHostResponseToJSONTyped(json, false);
+}
+function DockerSvcGetDockerHostResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'host': value['host'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcGetInfoResponse interface.
+ */
+function instanceOfDockerSvcGetInfoResponse(value) {
+    return true;
+}
+function DockerSvcGetInfoResponseFromJSON(json) {
+    return DockerSvcGetInfoResponseFromJSONTyped(json);
+}
+function DockerSvcGetInfoResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'info': json['info'] == null ? undefined : DockerSvcDockerInfoFromJSON(json['info']),
+    };
+}
+function DockerSvcGetInfoResponseToJSON(json) {
+    return DockerSvcGetInfoResponseToJSONTyped(json, false);
+}
+function DockerSvcGetInfoResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'info': DockerSvcDockerInfoToJSON(value['info']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcRunContainerOptions interface.
+ */
+function instanceOfDockerSvcRunContainerOptions(value) {
+    return true;
+}
+function DockerSvcRunContainerOptionsFromJSON(json) {
+    return DockerSvcRunContainerOptionsFromJSONTyped(json);
+}
+function DockerSvcRunContainerOptionsFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'assets': json['assets'] == null ? undefined : json['assets'],
+        'envs': json['envs'] == null ? undefined : json['envs'],
+        'gpuEnabled': json['gpuEnabled'] == null ? undefined : json['gpuEnabled'],
+        'hash': json['hash'] == null ? undefined : json['hash'],
+        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'labels': json['labels'] == null ? undefined : json['labels'],
+        'name': json['name'] == null ? undefined : json['name'],
+    };
+}
+function DockerSvcRunContainerOptionsToJSON(json) {
+    return DockerSvcRunContainerOptionsToJSONTyped(json, false);
+}
+function DockerSvcRunContainerOptionsToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'assets': value['assets'],
+        'envs': value['envs'],
+        'gpuEnabled': value['gpuEnabled'],
+        'hash': value['hash'],
+        'keeps': value['keeps'],
+        'labels': value['labels'],
+        'name': value['name'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcRunContainerRequest interface.
+ */
+function instanceOfDockerSvcRunContainerRequest(value) {
+    if (!('image' in value) || value['image'] === undefined)
+        return false;
+    if (!('port' in value) || value['port'] === undefined)
+        return false;
+    return true;
+}
+function DockerSvcRunContainerRequestFromJSON(json) {
+    return DockerSvcRunContainerRequestFromJSONTyped(json);
+}
+function DockerSvcRunContainerRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
+        'image': json['image'],
+        'options': json['options'] == null ? undefined : DockerSvcRunContainerOptionsFromJSON(json['options']),
+        'port': json['port'],
+    };
+}
+function DockerSvcRunContainerRequestToJSON(json) {
+    return DockerSvcRunContainerRequestToJSONTyped(json, false);
+}
+function DockerSvcRunContainerRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'hostPort': value['hostPort'],
+        'image': value['image'],
+        'options': DockerSvcRunContainerOptionsToJSON(value['options']),
+        'port': value['port'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcRunInfo interface.
+ */
+function instanceOfDockerSvcRunInfo(value) {
+    return true;
+}
+function DockerSvcRunInfoFromJSON(json) {
+    return DockerSvcRunInfoFromJSONTyped(json);
+}
+function DockerSvcRunInfoFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'newContainerStarted': json['newContainerStarted'] == null ? undefined : json['newContainerStarted'],
+        'portNumber': json['portNumber'] == null ? undefined : json['portNumber'],
+    };
+}
+function DockerSvcRunInfoToJSON(json) {
+    return DockerSvcRunInfoToJSONTyped(json, false);
+}
+function DockerSvcRunInfoToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'newContainerStarted': value['newContainerStarted'],
+        'portNumber': value['portNumber'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcRunContainerResponse interface.
+ */
+function instanceOfDockerSvcRunContainerResponse(value) {
+    return true;
+}
+function DockerSvcRunContainerResponseFromJSON(json) {
+    return DockerSvcRunContainerResponseFromJSONTyped(json);
+}
+function DockerSvcRunContainerResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'info': json['info'] == null ? undefined : DockerSvcRunInfoFromJSON(json['info']),
+    };
+}
+function DockerSvcRunContainerResponseToJSON(json) {
+    return DockerSvcRunContainerResponseToJSONTyped(json, false);
+}
+function DockerSvcRunContainerResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'info': DockerSvcRunInfoToJSON(value['info']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DockerSvcStopContainerRequest interface.
+ */
+function instanceOfDockerSvcStopContainerRequest(value) {
+    return true;
+}
+function DockerSvcStopContainerRequestFromJSON(json) {
+    return DockerSvcStopContainerRequestFromJSONTyped(json);
+}
+function DockerSvcStopContainerRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+    };
+}
+function DockerSvcStopContainerRequestToJSON(json) {
+    return DockerSvcStopContainerRequestToJSONTyped(json, false);
+}
+function DockerSvcStopContainerRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'id': value['id'],
+        'name': value['name'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DownloadSvcDownloadDetails interface.
+ */
+function instanceOfDownloadSvcDownloadDetails(value) {
+    return true;
+}
+function DownloadSvcDownloadDetailsFromJSON(json) {
+    return DownloadSvcDownloadDetailsFromJSONTyped(json);
+}
+function DownloadSvcDownloadDetailsFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cancelled': json['cancelled'] == null ? undefined : json['cancelled'],
+        'dir': json['dir'] == null ? undefined : json['dir'],
+        'downloadedBytes': json['downloadedBytes'] == null ? undefined : json['downloadedBytes'],
+        'error': json['error'] == null ? undefined : json['error'],
+        'fileName': json['fileName'] == null ? undefined : json['fileName'],
+        'filePath': json['filePath'] == null ? undefined : json['filePath'],
+        'fullFileSize': json['fullFileSize'] == null ? undefined : json['fullFileSize'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'paused': json['paused'] == null ? undefined : json['paused'],
+        'progress': json['progress'] == null ? undefined : json['progress'],
+        'status': json['status'] == null ? undefined : json['status'],
+        'url': json['url'] == null ? undefined : json['url'],
+    };
+}
+function DownloadSvcDownloadDetailsToJSON(json) {
+    return DownloadSvcDownloadDetailsToJSONTyped(json, false);
+}
+function DownloadSvcDownloadDetailsToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cancelled': value['cancelled'],
+        'dir': value['dir'],
+        'downloadedBytes': value['downloadedBytes'],
+        'error': value['error'],
+        'fileName': value['fileName'],
+        'filePath': value['filePath'],
+        'fullFileSize': value['fullFileSize'],
+        'id': value['id'],
+        'paused': value['paused'],
+        'progress': value['progress'],
+        'status': value['status'],
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DownloadSvcDownloadRequest interface.
+ */
+function instanceOfDownloadSvcDownloadRequest(value) {
+    return true;
+}
+function DownloadSvcDownloadRequestFromJSON(json) {
+    return DownloadSvcDownloadRequestFromJSONTyped(json);
+}
+function DownloadSvcDownloadRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'folderPath': json['folderPath'] == null ? undefined : json['folderPath'],
+        'url': json['url'] == null ? undefined : json['url'],
+    };
+}
+function DownloadSvcDownloadRequestToJSON(json) {
+    return DownloadSvcDownloadRequestToJSONTyped(json, false);
+}
+function DownloadSvcDownloadRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'folderPath': value['folderPath'],
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DownloadSvcDownloadsResponse interface.
+ */
+function instanceOfDownloadSvcDownloadsResponse(value) {
+    return true;
+}
+function DownloadSvcDownloadsResponseFromJSON(json) {
+    return DownloadSvcDownloadsResponseFromJSONTyped(json);
+}
+function DownloadSvcDownloadsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'downloads': json['downloads'] == null ? undefined : (json['downloads'].map(DownloadSvcDownloadDetailsFromJSON)),
+    };
+}
+function DownloadSvcDownloadsResponseToJSON(json) {
+    return DownloadSvcDownloadsResponseToJSONTyped(json, false);
+}
+function DownloadSvcDownloadsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'downloads': value['downloads'] == null ? undefined : (value['downloads'].map(DownloadSvcDownloadDetailsToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DownloadSvcErrorResponse interface.
+ */
+function instanceOfDownloadSvcErrorResponse(value) {
+    return true;
+}
+function DownloadSvcErrorResponseFromJSON(json) {
+    return DownloadSvcErrorResponseFromJSONTyped(json);
+}
+function DownloadSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function DownloadSvcErrorResponseToJSON(json) {
+    return DownloadSvcErrorResponseToJSONTyped(json, false);
+}
+function DownloadSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DownloadSvcGetDownloadResponse interface.
+ */
+function instanceOfDownloadSvcGetDownloadResponse(value) {
+    if (!('_exists' in value) || value['_exists'] === undefined)
+        return false;
+    return true;
+}
+function DownloadSvcGetDownloadResponseFromJSON(json) {
+    return DownloadSvcGetDownloadResponseFromJSONTyped(json);
+}
+function DownloadSvcGetDownloadResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'download': json['download'] == null ? undefined : DownloadSvcDownloadDetailsFromJSON(json['download']),
+        '_exists': json['exists'],
+    };
+}
+function DownloadSvcGetDownloadResponseToJSON(json) {
+    return DownloadSvcGetDownloadResponseToJSONTyped(json, false);
+}
+function DownloadSvcGetDownloadResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'download': DownloadSvcDownloadDetailsToJSON(value['download']),
+        'exists': value['_exists'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcObjectCreateFields interface.
+ */
+function instanceOfDynamicSvcObjectCreateFields(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
+    if (!('table' in value) || value['table'] === undefined)
+        return false;
+    return true;
+}
+function DynamicSvcObjectCreateFieldsFromJSON(json) {
+    return DynamicSvcObjectCreateFieldsFromJSONTyped(json);
+}
+function DynamicSvcObjectCreateFieldsFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'authors': json['authors'] == null ? undefined : json['authors'],
+        'data': json['data'],
+        'deleters': json['deleters'] == null ? undefined : json['deleters'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'readers': json['readers'] == null ? undefined : json['readers'],
+        'table': json['table'],
+        'writers': json['writers'] == null ? undefined : json['writers'],
+    };
+}
+function DynamicSvcObjectCreateFieldsToJSON(json) {
+    return DynamicSvcObjectCreateFieldsToJSONTyped(json, false);
+}
+function DynamicSvcObjectCreateFieldsToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'authors': value['authors'],
+        'data': value['data'],
+        'deleters': value['deleters'],
+        'id': value['id'],
+        'readers': value['readers'],
+        'table': value['table'],
+        'writers': value['writers'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcCreateObjectRequest interface.
+ */
+function instanceOfDynamicSvcCreateObjectRequest(value) {
+    return true;
+}
+function DynamicSvcCreateObjectRequestFromJSON(json) {
+    return DynamicSvcCreateObjectRequestFromJSONTyped(json);
+}
+function DynamicSvcCreateObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFieldsFromJSON(json['object']),
+    };
+}
+function DynamicSvcCreateObjectRequestToJSON(json) {
+    return DynamicSvcCreateObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcCreateObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'object': DynamicSvcObjectCreateFieldsToJSON(value['object']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcObject interface.
+ */
+function instanceOfDynamicSvcObject(value) {
+    if (!('data' in value) || value['data'] === undefined)
+        return false;
+    if (!('table' in value) || value['table'] === undefined)
+        return false;
+    return true;
+}
+function DynamicSvcObjectFromJSON(json) {
+    return DynamicSvcObjectFromJSONTyped(json);
+}
+function DynamicSvcObjectFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'authors': json['authors'] == null ? undefined : json['authors'],
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'data': json['data'],
+        'deleters': json['deleters'] == null ? undefined : json['deleters'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'readers': json['readers'] == null ? undefined : json['readers'],
+        'table': json['table'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'writers': json['writers'] == null ? undefined : json['writers'],
+    };
+}
+function DynamicSvcObjectToJSON(json) {
+    return DynamicSvcObjectToJSONTyped(json, false);
+}
+function DynamicSvcObjectToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'authors': value['authors'],
+        'createdAt': value['createdAt'],
+        'data': value['data'],
+        'deleters': value['deleters'],
+        'id': value['id'],
+        'readers': value['readers'],
+        'table': value['table'],
+        'updatedAt': value['updatedAt'],
+        'writers': value['writers'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcCreateObjectResponse interface.
+ */
+function instanceOfDynamicSvcCreateObjectResponse(value) {
+    return true;
+}
+function DynamicSvcCreateObjectResponseFromJSON(json) {
+    return DynamicSvcCreateObjectResponseFromJSONTyped(json);
+}
+function DynamicSvcCreateObjectResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'object': json['object'] == null ? undefined : DynamicSvcObjectFromJSON(json['object']),
+    };
+}
+function DynamicSvcCreateObjectResponseToJSON(json) {
+    return DynamicSvcCreateObjectResponseToJSONTyped(json, false);
+}
+function DynamicSvcCreateObjectResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'object': DynamicSvcObjectToJSON(value['object']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcDeleteObjectRequest interface.
+ */
+function instanceOfDynamicSvcDeleteObjectRequest(value) {
+    return true;
+}
+function DynamicSvcDeleteObjectRequestFromJSON(json) {
+    return DynamicSvcDeleteObjectRequestFromJSONTyped(json);
+}
+function DynamicSvcDeleteObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'filters': json['filters'] == null ? undefined : (json['filters'].map(DatastoreFilterFromJSON)),
+        'table': json['table'] == null ? undefined : json['table'],
+    };
+}
+function DynamicSvcDeleteObjectRequestToJSON(json) {
+    return DynamicSvcDeleteObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcDeleteObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'filters': value['filters'] == null ? undefined : (value['filters'].map(DatastoreFilterToJSON)),
+        'table': value['table'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcErrorResponse interface.
+ */
+function instanceOfDynamicSvcErrorResponse(value) {
+    return true;
+}
+function DynamicSvcErrorResponseFromJSON(json) {
+    return DynamicSvcErrorResponseFromJSONTyped(json);
+}
+function DynamicSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function DynamicSvcErrorResponseToJSON(json) {
+    return DynamicSvcErrorResponseToJSONTyped(json, false);
+}
+function DynamicSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcQueryRequest interface.
+ */
+function instanceOfDynamicSvcQueryRequest(value) {
+    return true;
+}
+function DynamicSvcQueryRequestFromJSON(json) {
+    return DynamicSvcQueryRequestFromJSONTyped(json);
+}
+function DynamicSvcQueryRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'query': json['query'] == null ? undefined : DatastoreQueryFromJSON(json['query']),
+        'readers': json['readers'] == null ? undefined : json['readers'],
+        'table': json['table'] == null ? undefined : json['table'],
+    };
+}
+function DynamicSvcQueryRequestToJSON(json) {
+    return DynamicSvcQueryRequestToJSONTyped(json, false);
+}
+function DynamicSvcQueryRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'query': DatastoreQueryToJSON(value['query']),
+        'readers': value['readers'],
+        'table': value['table'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcQueryResponse interface.
+ */
+function instanceOfDynamicSvcQueryResponse(value) {
+    return true;
+}
+function DynamicSvcQueryResponseFromJSON(json) {
+    return DynamicSvcQueryResponseFromJSONTyped(json);
+}
+function DynamicSvcQueryResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'objects': json['objects'] == null ? undefined : (json['objects'].map(DynamicSvcObjectFromJSON)),
+    };
+}
+function DynamicSvcQueryResponseToJSON(json) {
+    return DynamicSvcQueryResponseToJSONTyped(json, false);
+}
+function DynamicSvcQueryResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'objects': value['objects'] == null ? undefined : (value['objects'].map(DynamicSvcObjectToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcUpdateObjectRequest interface.
+ */
+function instanceOfDynamicSvcUpdateObjectRequest(value) {
+    return true;
+}
+function DynamicSvcUpdateObjectRequestFromJSON(json) {
+    return DynamicSvcUpdateObjectRequestFromJSONTyped(json);
+}
+function DynamicSvcUpdateObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'filters': json['filters'] == null ? undefined : (json['filters'].map(DatastoreFilterFromJSON)),
+        'object': json['object'] == null ? undefined : DynamicSvcObjectFromJSON(json['object']),
+        'table': json['table'] == null ? undefined : json['table'],
+    };
+}
+function DynamicSvcUpdateObjectRequestToJSON(json) {
+    return DynamicSvcUpdateObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcUpdateObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'filters': value['filters'] == null ? undefined : (value['filters'].map(DatastoreFilterToJSON)),
+        'object': DynamicSvcObjectToJSON(value['object']),
+        'table': value['table'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcUpsertObjectRequest interface.
+ */
+function instanceOfDynamicSvcUpsertObjectRequest(value) {
+    return true;
+}
+function DynamicSvcUpsertObjectRequestFromJSON(json) {
+    return DynamicSvcUpsertObjectRequestFromJSONTyped(json);
+}
+function DynamicSvcUpsertObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFieldsFromJSON(json['object']),
+    };
+}
+function DynamicSvcUpsertObjectRequestToJSON(json) {
+    return DynamicSvcUpsertObjectRequestToJSONTyped(json, false);
+}
+function DynamicSvcUpsertObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'object': DynamicSvcObjectCreateFieldsToJSON(value['object']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the DynamicSvcUpsertObjectResponse interface.
+ */
+function instanceOfDynamicSvcUpsertObjectResponse(value) {
+    return true;
+}
+function DynamicSvcUpsertObjectResponseFromJSON(json) {
+    return DynamicSvcUpsertObjectResponseFromJSONTyped(json);
+}
+function DynamicSvcUpsertObjectResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'object': json['object'] == null ? undefined : DynamicSvcObjectFromJSON(json['object']),
+    };
+}
+function DynamicSvcUpsertObjectResponseToJSON(json) {
+    return DynamicSvcUpsertObjectResponseToJSONTyped(json, false);
+}
+function DynamicSvcUpsertObjectResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'object': DynamicSvcObjectToJSON(value['object']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the EmailSvcErrorResponse interface.
+ */
+function instanceOfEmailSvcErrorResponse(value) {
+    return true;
+}
+function EmailSvcErrorResponseFromJSON(json) {
+    return EmailSvcErrorResponseFromJSONTyped(json);
+}
+function EmailSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function EmailSvcErrorResponseToJSON(json) {
+    return EmailSvcErrorResponseToJSONTyped(json, false);
+}
+function EmailSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the EmailSvcFile interface.
+ */
+function instanceOfEmailSvcFile(value) {
+    if (!('content' in value) || value['content'] === undefined)
+        return false;
+    if (!('contentType' in value) || value['contentType'] === undefined)
+        return false;
+    if (!('filename' in value) || value['filename'] === undefined)
+        return false;
+    return true;
+}
+function EmailSvcFileFromJSON(json) {
+    return EmailSvcFileFromJSONTyped(json);
+}
+function EmailSvcFileFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'content': json['content'],
+        'contentType': json['contentType'],
+        'filename': json['filename'],
+    };
+}
+function EmailSvcFileToJSON(json) {
+    return EmailSvcFileToJSONTyped(json, false);
+}
+function EmailSvcFileToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'content': value['content'],
+        'contentType': value['contentType'],
+        'filename': value['filename'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the EmailSvcSendEmailRequest interface.
+ */
+function instanceOfEmailSvcSendEmailRequest(value) {
+    if (!('body' in value) || value['body'] === undefined)
+        return false;
+    if (!('contentType' in value) || value['contentType'] === undefined)
+        return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined)
+        return false;
+    if (!('subject' in value) || value['subject'] === undefined)
+        return false;
+    if (!('to' in value) || value['to'] === undefined)
+        return false;
+    return true;
+}
+function EmailSvcSendEmailRequestFromJSON(json) {
+    return EmailSvcSendEmailRequestFromJSONTyped(json);
+}
+function EmailSvcSendEmailRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'attachments': json['attachments'] == null ? undefined : (json['attachments'].map(EmailSvcFileFromJSON)),
+        'bcc': json['bcc'] == null ? undefined : json['bcc'],
+        'body': json['body'],
+        'cc': json['cc'] == null ? undefined : json['cc'],
+        'contentType': json['contentType'],
+        'createdAt': json['createdAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'subject': json['subject'],
+        'to': json['to'],
+    };
+}
+function EmailSvcSendEmailRequestToJSON(json) {
+    return EmailSvcSendEmailRequestToJSONTyped(json, false);
+}
+function EmailSvcSendEmailRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'attachments': value['attachments'] == null ? undefined : (value['attachments'].map(EmailSvcFileToJSON)),
+        'bcc': value['bcc'],
+        'body': value['body'],
+        'cc': value['cc'],
+        'contentType': value['contentType'],
+        'createdAt': value['createdAt'],
+        'id': value['id'],
+        'subject': value['subject'],
+        'to': value['to'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the EmailSvcSendEmailResponse interface.
+ */
+function instanceOfEmailSvcSendEmailResponse(value) {
+    return true;
+}
+function EmailSvcSendEmailResponseFromJSON(json) {
+    return EmailSvcSendEmailResponseFromJSONTyped(json);
+}
+function EmailSvcSendEmailResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'emailId': json['emailId'] == null ? undefined : json['emailId'],
+        'status': json['status'] == null ? undefined : json['status'],
+    };
+}
+function EmailSvcSendEmailResponseToJSON(json) {
+    return EmailSvcSendEmailResponseToJSONTyped(json, false);
+}
+function EmailSvcSendEmailResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'emailId': value['emailId'],
+        'status': value['status'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the FirehoseSvcErrorResponse interface.
+ */
+function instanceOfFirehoseSvcErrorResponse(value) {
+    return true;
+}
+function FirehoseSvcErrorResponseFromJSON(json) {
+    return FirehoseSvcErrorResponseFromJSONTyped(json);
+}
+function FirehoseSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function FirehoseSvcErrorResponseToJSON(json) {
+    return FirehoseSvcErrorResponseToJSONTyped(json, false);
+}
+function FirehoseSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the FirehoseSvcEvent interface.
+ */
+function instanceOfFirehoseSvcEvent(value) {
+    return true;
+}
+function FirehoseSvcEventFromJSON(json) {
+    return FirehoseSvcEventFromJSONTyped(json);
+}
+function FirehoseSvcEventFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'data': json['data'] == null ? undefined : json['data'],
+        'name': json['name'] == null ? undefined : json['name'],
+    };
+}
+function FirehoseSvcEventToJSON(json) {
+    return FirehoseSvcEventToJSONTyped(json, false);
+}
+function FirehoseSvcEventToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'data': value['data'],
+        'name': value['name'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the FirehoseSvcEventPublishRequest interface.
+ */
+function instanceOfFirehoseSvcEventPublishRequest(value) {
+    return true;
+}
+function FirehoseSvcEventPublishRequestFromJSON(json) {
+    return FirehoseSvcEventPublishRequestFromJSONTyped(json);
+}
+function FirehoseSvcEventPublishRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'event': json['event'] == null ? undefined : FirehoseSvcEventFromJSON(json['event']),
+    };
+}
+function FirehoseSvcEventPublishRequestToJSON(json) {
+    return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
+}
+function FirehoseSvcEventPublishRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'event': FirehoseSvcEventToJSON(value['event']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcContainer interface.
+ */
+function instanceOfModelSvcContainer(value) {
+    return true;
+}
+function ModelSvcContainerFromJSON(json) {
+    return ModelSvcContainerFromJSONTyped(json);
+}
+function ModelSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'envars': json['envars'] == null ? undefined : json['envars'],
+        'image': json['image'] == null ? undefined : json['image'],
+        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'port': json['port'] == null ? undefined : json['port'],
+    };
+}
+function ModelSvcContainerToJSON(json) {
+    return ModelSvcContainerToJSONTyped(json, false);
+}
+function ModelSvcContainerToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'envars': value['envars'],
+        'image': value['image'],
+        'keeps': value['keeps'],
+        'port': value['port'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcArchitectures interface.
+ */
+function instanceOfModelSvcArchitectures(value) {
+    return true;
+}
+function ModelSvcArchitecturesFromJSON(json) {
+    return ModelSvcArchitecturesFromJSONTyped(json);
+}
+function ModelSvcArchitecturesFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cuda': json['cuda'] == null ? undefined : ModelSvcContainerFromJSON(json['cuda']),
+        '_default': json['default'] == null ? undefined : ModelSvcContainerFromJSON(json['default']),
+    };
+}
+function ModelSvcArchitecturesToJSON(json) {
+    return ModelSvcArchitecturesToJSONTyped(json, false);
+}
+function ModelSvcArchitecturesToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cuda': ModelSvcContainerToJSON(value['cuda']),
+        'default': ModelSvcContainerToJSON(value['_default']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcErrorResponse interface.
+ */
+function instanceOfModelSvcErrorResponse(value) {
+    return true;
+}
+function ModelSvcErrorResponseFromJSON(json) {
+    return ModelSvcErrorResponseFromJSONTyped(json);
+}
+function ModelSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function ModelSvcErrorResponseToJSON(json) {
+    return ModelSvcErrorResponseToJSONTyped(json, false);
+}
+function ModelSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcModel interface.
+ */
+function instanceOfModelSvcModel(value) {
+    return true;
+}
+function ModelSvcModelFromJSON(json) {
+    return ModelSvcModelFromJSONTyped(json);
+}
+function ModelSvcModelFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'assets': json['assets'] == null ? undefined : json['assets'],
+        'bits': json['bits'] == null ? undefined : json['bits'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'extension': json['extension'] == null ? undefined : json['extension'],
+        'flavour': json['flavour'] == null ? undefined : json['flavour'],
+        'fullName': json['fullName'] == null ? undefined : json['fullName'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'maxBits': json['maxBits'] == null ? undefined : json['maxBits'],
+        'maxRam': json['maxRam'] == null ? undefined : json['maxRam'],
+        'mirrors': json['mirrors'] == null ? undefined : json['mirrors'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'parameters': json['parameters'] == null ? undefined : json['parameters'],
+        'platformId': json['platformId'] == null ? undefined : json['platformId'],
+        'promptTemplate': json['promptTemplate'] == null ? undefined : json['promptTemplate'],
+        'quality': json['quality'] == null ? undefined : json['quality'],
+        'quantComment': json['quantComment'] == null ? undefined : json['quantComment'],
+        'size': json['size'] == null ? undefined : json['size'],
+        'tags': json['tags'] == null ? undefined : json['tags'],
+        'uncensored': json['uncensored'] == null ? undefined : json['uncensored'],
+        'version': json['version'] == null ? undefined : json['version'],
+    };
+}
+function ModelSvcModelToJSON(json) {
+    return ModelSvcModelToJSONTyped(json, false);
+}
+function ModelSvcModelToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'assets': value['assets'],
+        'bits': value['bits'],
+        'description': value['description'],
+        'extension': value['extension'],
+        'flavour': value['flavour'],
+        'fullName': value['fullName'],
+        'id': value['id'],
+        'maxBits': value['maxBits'],
+        'maxRam': value['maxRam'],
+        'mirrors': value['mirrors'],
+        'name': value['name'],
+        'parameters': value['parameters'],
+        'platformId': value['platformId'],
+        'promptTemplate': value['promptTemplate'],
+        'quality': value['quality'],
+        'quantComment': value['quantComment'],
+        'size': value['size'],
+        'tags': value['tags'],
+        'uncensored': value['uncensored'],
+        'version': value['version'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcPlatform interface.
+ */
+function instanceOfModelSvcPlatform(value) {
+    return true;
+}
+function ModelSvcPlatformFromJSON(json) {
+    return ModelSvcPlatformFromJSONTyped(json);
+}
+function ModelSvcPlatformFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'architectures': json['architectures'] == null ? undefined : ModelSvcArchitecturesFromJSON(json['architectures']),
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'version': json['version'] == null ? undefined : json['version'],
+    };
+}
+function ModelSvcPlatformToJSON(json) {
+    return ModelSvcPlatformToJSONTyped(json, false);
+}
+function ModelSvcPlatformToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'architectures': ModelSvcArchitecturesToJSON(value['architectures']),
+        'id': value['id'],
+        'name': value['name'],
+        'version': value['version'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcGetModelResponse interface.
+ */
+function instanceOfModelSvcGetModelResponse(value) {
+    if (!('_exists' in value) || value['_exists'] === undefined)
+        return false;
+    if (!('model' in value) || value['model'] === undefined)
+        return false;
+    if (!('platform' in value) || value['platform'] === undefined)
+        return false;
+    return true;
+}
+function ModelSvcGetModelResponseFromJSON(json) {
+    return ModelSvcGetModelResponseFromJSONTyped(json);
+}
+function ModelSvcGetModelResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        '_exists': json['exists'],
+        'model': ModelSvcModelFromJSON(json['model']),
+        'platform': ModelSvcPlatformFromJSON(json['platform']),
+    };
+}
+function ModelSvcGetModelResponseToJSON(json) {
+    return ModelSvcGetModelResponseToJSONTyped(json, false);
+}
+function ModelSvcGetModelResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'exists': value['_exists'],
+        'model': ModelSvcModelToJSON(value['model']),
+        'platform': ModelSvcPlatformToJSON(value['platform']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcListResponse interface.
+ */
+function instanceOfModelSvcListResponse(value) {
+    return true;
+}
+function ModelSvcListResponseFromJSON(json) {
+    return ModelSvcListResponseFromJSONTyped(json);
+}
+function ModelSvcListResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'models': json['models'] == null ? undefined : (json['models'].map(ModelSvcModelFromJSON)),
+    };
+}
+function ModelSvcListResponseToJSON(json) {
+    return ModelSvcListResponseToJSONTyped(json, false);
+}
+function ModelSvcListResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'models': value['models'] == null ? undefined : (value['models'].map(ModelSvcModelToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcModelStatus interface.
+ */
+function instanceOfModelSvcModelStatus(value) {
+    if (!('address' in value) || value['address'] === undefined)
+        return false;
+    if (!('assetsReady' in value) || value['assetsReady'] === undefined)
+        return false;
+    if (!('running' in value) || value['running'] === undefined)
+        return false;
+    return true;
+}
+function ModelSvcModelStatusFromJSON(json) {
+    return ModelSvcModelStatusFromJSONTyped(json);
+}
+function ModelSvcModelStatusFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'address': json['address'],
+        'assetsReady': json['assetsReady'],
+        'running': json['running'],
+    };
+}
+function ModelSvcModelStatusToJSON(json) {
+    return ModelSvcModelStatusToJSONTyped(json, false);
+}
+function ModelSvcModelStatusToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'address': value['address'],
+        'assetsReady': value['assetsReady'],
+        'running': value['running'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the ModelSvcStatusResponse interface.
+ */
+function instanceOfModelSvcStatusResponse(value) {
+    return true;
+}
+function ModelSvcStatusResponseFromJSON(json) {
+    return ModelSvcStatusResponseFromJSONTyped(json);
+}
+function ModelSvcStatusResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'status': json['status'] == null ? undefined : ModelSvcModelStatusFromJSON(json['status']),
+    };
+}
+function ModelSvcStatusResponseToJSON(json) {
+    return ModelSvcStatusResponseToJSONTyped(json, false);
+}
+function ModelSvcStatusResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'status': ModelSvcModelStatusToJSON(value['status']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcBlocklistParameters interface.
+ */
+function instanceOfPolicySvcBlocklistParameters(value) {
+    return true;
+}
+function PolicySvcBlocklistParametersFromJSON(json) {
+    return PolicySvcBlocklistParametersFromJSONTyped(json);
+}
+function PolicySvcBlocklistParametersFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'blockedIPs': json['blockedIPs'] == null ? undefined : json['blockedIPs'],
+    };
+}
+function PolicySvcBlocklistParametersToJSON(json) {
+    return PolicySvcBlocklistParametersToJSONTyped(json, false);
+}
+function PolicySvcBlocklistParametersToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'blockedIPs': value['blockedIPs'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcCheckRequest interface.
+ */
+function instanceOfPolicySvcCheckRequest(value) {
+    return true;
+}
+function PolicySvcCheckRequestFromJSON(json) {
+    return PolicySvcCheckRequestFromJSONTyped(json);
+}
+function PolicySvcCheckRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'endpoint': json['endpoint'] == null ? undefined : json['endpoint'],
+        'ip': json['ip'] == null ? undefined : json['ip'],
+        'method': json['method'] == null ? undefined : json['method'],
+        'userId': json['userId'] == null ? undefined : json['userId'],
+    };
+}
+function PolicySvcCheckRequestToJSON(json) {
+    return PolicySvcCheckRequestToJSONTyped(json, false);
+}
+function PolicySvcCheckRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'endpoint': value['endpoint'],
+        'ip': value['ip'],
+        'method': value['method'],
+        'userId': value['userId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcCheckResponse interface.
+ */
+function instanceOfPolicySvcCheckResponse(value) {
+    if (!('allowed' in value) || value['allowed'] === undefined)
+        return false;
+    return true;
+}
+function PolicySvcCheckResponseFromJSON(json) {
+    return PolicySvcCheckResponseFromJSONTyped(json);
+}
+function PolicySvcCheckResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'allowed': json['allowed'],
+    };
+}
+function PolicySvcCheckResponseToJSON(json) {
+    return PolicySvcCheckResponseToJSONTyped(json, false);
+}
+function PolicySvcCheckResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'allowed': value['allowed'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const PolicySvcEntity = {
+    EntityUserID: 'userId',
+    EntityIP: 'ip'
+};
+function instanceOfPolicySvcEntity(value) {
+    for (const key in PolicySvcEntity) {
+        if (Object.prototype.hasOwnProperty.call(PolicySvcEntity, key)) {
+            if (PolicySvcEntity[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function PolicySvcEntityFromJSON(json) {
+    return PolicySvcEntityFromJSONTyped(json);
+}
+function PolicySvcEntityFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function PolicySvcEntityToJSON(value) {
+    return value;
+}
+function PolicySvcEntityToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcErrorResponse interface.
+ */
+function instanceOfPolicySvcErrorResponse(value) {
+    return true;
+}
+function PolicySvcErrorResponseFromJSON(json) {
+    return PolicySvcErrorResponseFromJSONTyped(json);
+}
+function PolicySvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function PolicySvcErrorResponseToJSON(json) {
+    return PolicySvcErrorResponseToJSONTyped(json, false);
+}
+function PolicySvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const PolicySvcScope = {
+    ScopeEndpoint: 'endpoint',
+    ScopeGlobal: 'global'
+};
+function instanceOfPolicySvcScope(value) {
+    for (const key in PolicySvcScope) {
+        if (Object.prototype.hasOwnProperty.call(PolicySvcScope, key)) {
+            if (PolicySvcScope[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function PolicySvcScopeFromJSON(json) {
+    return PolicySvcScopeFromJSONTyped(json);
+}
+function PolicySvcScopeFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function PolicySvcScopeToJSON(value) {
+    return value;
+}
+function PolicySvcScopeToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcRateLimitParameters interface.
+ */
+function instanceOfPolicySvcRateLimitParameters(value) {
+    return true;
+}
+function PolicySvcRateLimitParametersFromJSON(json) {
+    return PolicySvcRateLimitParametersFromJSONTyped(json);
+}
+function PolicySvcRateLimitParametersFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'entity': json['entity'] == null ? undefined : PolicySvcEntityFromJSON(json['entity']),
+        'maxRequests': json['maxRequests'] == null ? undefined : json['maxRequests'],
+        'scope': json['scope'] == null ? undefined : PolicySvcScopeFromJSON(json['scope']),
+        'timeWindow': json['timeWindow'] == null ? undefined : json['timeWindow'],
+    };
+}
+function PolicySvcRateLimitParametersToJSON(json) {
+    return PolicySvcRateLimitParametersToJSONTyped(json, false);
+}
+function PolicySvcRateLimitParametersToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'entity': PolicySvcEntityToJSON(value['entity']),
+        'maxRequests': value['maxRequests'],
+        'scope': PolicySvcScopeToJSON(value['scope']),
+        'timeWindow': value['timeWindow'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const PolicySvcTemplateId = {
+    TemplateIdRateLimit: 'rate-limit',
+    TemplateIdBlocklist: 'blocklist'
+};
+function instanceOfPolicySvcTemplateId(value) {
+    for (const key in PolicySvcTemplateId) {
+        if (Object.prototype.hasOwnProperty.call(PolicySvcTemplateId, key)) {
+            if (PolicySvcTemplateId[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function PolicySvcTemplateIdFromJSON(json) {
+    return PolicySvcTemplateIdFromJSONTyped(json);
+}
+function PolicySvcTemplateIdFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function PolicySvcTemplateIdToJSON(value) {
+    return value;
+}
+function PolicySvcTemplateIdToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcInstance interface.
+ */
+function instanceOfPolicySvcInstance(value) {
+    if (!('templateId' in value) || value['templateId'] === undefined)
+        return false;
+    return true;
+}
+function PolicySvcInstanceFromJSON(json) {
+    return PolicySvcInstanceFromJSONTyped(json);
+}
+function PolicySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'blocklistParameters': json['blocklistParameters'] == null ? undefined : PolicySvcBlocklistParametersFromJSON(json['blocklistParameters']),
+        'endpoint': json['endpoint'] == null ? undefined : json['endpoint'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'rateLimitParameters': json['rateLimitParameters'] == null ? undefined : PolicySvcRateLimitParametersFromJSON(json['rateLimitParameters']),
+        'templateId': PolicySvcTemplateIdFromJSON(json['templateId']),
+    };
+}
+function PolicySvcInstanceToJSON(json) {
+    return PolicySvcInstanceToJSONTyped(json, false);
+}
+function PolicySvcInstanceToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'blocklistParameters': PolicySvcBlocklistParametersToJSON(value['blocklistParameters']),
+        'endpoint': value['endpoint'],
+        'id': value['id'],
+        'rateLimitParameters': PolicySvcRateLimitParametersToJSON(value['rateLimitParameters']),
+        'templateId': PolicySvcTemplateIdToJSON(value['templateId']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PolicySvcUpsertInstanceRequest interface.
+ */
+function instanceOfPolicySvcUpsertInstanceRequest(value) {
+    return true;
+}
+function PolicySvcUpsertInstanceRequestFromJSON(json) {
+    return PolicySvcUpsertInstanceRequestFromJSONTyped(json);
+}
+function PolicySvcUpsertInstanceRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'instance': json['instance'] == null ? undefined : PolicySvcInstanceFromJSON(json['instance']),
+    };
+}
+function PolicySvcUpsertInstanceRequestToJSON(json) {
+    return PolicySvcUpsertInstanceRequestToJSONTyped(json, false);
+}
+function PolicySvcUpsertInstanceRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'instance': PolicySvcInstanceToJSON(value['instance']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcAddPromptRequest interface.
+ */
+function instanceOfPromptSvcAddPromptRequest(value) {
+    if (!('prompt' in value) || value['prompt'] === undefined)
+        return false;
+    return true;
+}
+function PromptSvcAddPromptRequestFromJSON(json) {
+    return PromptSvcAddPromptRequestFromJSONTyped(json);
+}
+function PromptSvcAddPromptRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'id': json['id'] == null ? undefined : json['id'],
+        'maxRetries': json['maxRetries'] == null ? undefined : json['maxRetries'],
+        'modelId': json['modelId'] == null ? undefined : json['modelId'],
+        'prompt': json['prompt'],
+        'sync': json['sync'] == null ? undefined : json['sync'],
+        'template': json['template'] == null ? undefined : json['template'],
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+    };
+}
+function PromptSvcAddPromptRequestToJSON(json) {
+    return PromptSvcAddPromptRequestToJSONTyped(json, false);
+}
+function PromptSvcAddPromptRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'id': value['id'],
+        'maxRetries': value['maxRetries'],
+        'modelId': value['modelId'],
+        'prompt': value['prompt'],
+        'sync': value['sync'],
+        'template': value['template'],
+        'threadId': value['threadId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const PromptSvcPromptStatus = {
+    PromptStatusScheduled: 'scheduled',
+    PromptStatusRunning: 'running',
+    PromptStatusCompleted: 'completed',
+    PromptStatusErrored: 'errored',
+    PromptStatusAbandoned: 'abandoned',
+    PromptStatusCanceled: 'canceled'
+};
+function instanceOfPromptSvcPromptStatus(value) {
+    for (const key in PromptSvcPromptStatus) {
+        if (Object.prototype.hasOwnProperty.call(PromptSvcPromptStatus, key)) {
+            if (PromptSvcPromptStatus[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function PromptSvcPromptStatusFromJSON(json) {
+    return PromptSvcPromptStatusFromJSONTyped(json);
+}
+function PromptSvcPromptStatusFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function PromptSvcPromptStatusToJSON(value) {
+    return value;
+}
+function PromptSvcPromptStatusToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcPrompt interface.
+ */
+function instanceOfPromptSvcPrompt(value) {
+    if (!('prompt' in value) || value['prompt'] === undefined)
+        return false;
+    return true;
+}
+function PromptSvcPromptFromJSON(json) {
+    return PromptSvcPromptFromJSONTyped(json);
+}
+function PromptSvcPromptFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'error': json['error'] == null ? undefined : json['error'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'lastRun': json['lastRun'] == null ? undefined : json['lastRun'],
+        'maxRetries': json['maxRetries'] == null ? undefined : json['maxRetries'],
+        'modelId': json['modelId'] == null ? undefined : json['modelId'],
+        'prompt': json['prompt'],
+        'runCount': json['runCount'] == null ? undefined : json['runCount'],
+        'status': json['status'] == null ? undefined : PromptSvcPromptStatusFromJSON(json['status']),
+        'sync': json['sync'] == null ? undefined : json['sync'],
+        'template': json['template'] == null ? undefined : json['template'],
+        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'userId': json['userId'] == null ? undefined : json['userId'],
+    };
+}
+function PromptSvcPromptToJSON(json) {
+    return PromptSvcPromptToJSONTyped(json, false);
+}
+function PromptSvcPromptToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'error': value['error'],
+        'id': value['id'],
+        'lastRun': value['lastRun'],
+        'maxRetries': value['maxRetries'],
+        'modelId': value['modelId'],
+        'prompt': value['prompt'],
+        'runCount': value['runCount'],
+        'status': PromptSvcPromptStatusToJSON(value['status']),
+        'sync': value['sync'],
+        'template': value['template'],
+        'threadId': value['threadId'],
+        'updatedAt': value['updatedAt'],
+        'userId': value['userId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcAddPromptResponse interface.
+ */
+function instanceOfPromptSvcAddPromptResponse(value) {
+    return true;
+}
+function PromptSvcAddPromptResponseFromJSON(json) {
+    return PromptSvcAddPromptResponseFromJSONTyped(json);
+}
+function PromptSvcAddPromptResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'answer': json['answer'] == null ? undefined : json['answer'],
+        'prompt': json['prompt'] == null ? undefined : PromptSvcPromptFromJSON(json['prompt']),
+    };
+}
+function PromptSvcAddPromptResponseToJSON(json) {
+    return PromptSvcAddPromptResponseToJSONTyped(json, false);
+}
+function PromptSvcAddPromptResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'answer': value['answer'],
+        'prompt': PromptSvcPromptToJSON(value['prompt']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcErrorResponse interface.
+ */
+function instanceOfPromptSvcErrorResponse(value) {
+    return true;
+}
+function PromptSvcErrorResponseFromJSON(json) {
+    return PromptSvcErrorResponseFromJSONTyped(json);
+}
+function PromptSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function PromptSvcErrorResponseToJSON(json) {
+    return PromptSvcErrorResponseToJSONTyped(json, false);
+}
+function PromptSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcListPromptsRequest interface.
+ */
+function instanceOfPromptSvcListPromptsRequest(value) {
+    return true;
+}
+function PromptSvcListPromptsRequestFromJSON(json) {
+    return PromptSvcListPromptsRequestFromJSONTyped(json);
+}
+function PromptSvcListPromptsRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'query': json['query'] == null ? undefined : DatastoreQueryFromJSON(json['query']),
+    };
+}
+function PromptSvcListPromptsRequestToJSON(json) {
+    return PromptSvcListPromptsRequestToJSONTyped(json, false);
+}
+function PromptSvcListPromptsRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'query': DatastoreQueryToJSON(value['query']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcListPromptsResponse interface.
+ */
+function instanceOfPromptSvcListPromptsResponse(value) {
+    return true;
+}
+function PromptSvcListPromptsResponseFromJSON(json) {
+    return PromptSvcListPromptsResponseFromJSONTyped(json);
+}
+function PromptSvcListPromptsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'after': json['after'] == null ? undefined : json['after'],
+        'count': json['count'] == null ? undefined : json['count'],
+        'prompts': json['prompts'] == null ? undefined : (json['prompts'].map(PromptSvcPromptFromJSON)),
+    };
+}
+function PromptSvcListPromptsResponseToJSON(json) {
+    return PromptSvcListPromptsResponseToJSONTyped(json, false);
+}
+function PromptSvcListPromptsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'after': value['after'],
+        'count': value['count'],
+        'prompts': value['prompts'] == null ? undefined : (value['prompts'].map(PromptSvcPromptToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the PromptSvcRemovePromptRequest interface.
+ */
+function instanceOfPromptSvcRemovePromptRequest(value) {
+    return true;
+}
+function PromptSvcRemovePromptRequestFromJSON(json) {
+    return PromptSvcRemovePromptRequestFromJSONTyped(json);
+}
+function PromptSvcRemovePromptRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'promptId': json['promptId'] == null ? undefined : json['promptId'],
+    };
+}
+function PromptSvcRemovePromptRequestToJSON(json) {
+    return PromptSvcRemovePromptRequestToJSONTyped(json, false);
+}
+function PromptSvcRemovePromptRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'promptId': value['promptId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcAPISpec interface.
+ */
+function instanceOfRegistrySvcAPISpec(value) {
+    return true;
+}
+function RegistrySvcAPISpecFromJSON(json) {
+    return RegistrySvcAPISpecFromJSONTyped(json);
+}
+function RegistrySvcAPISpecFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'metadata': json['metadata'] == null ? undefined : json['metadata'],
+        'protocolType': json['protocolType'] == null ? undefined : json['protocolType'],
+        'url': json['url'] == null ? undefined : json['url'],
+        'version': json['version'] == null ? undefined : json['version'],
+    };
+}
+function RegistrySvcAPISpecToJSON(json) {
+    return RegistrySvcAPISpecToJSONTyped(json, false);
+}
+function RegistrySvcAPISpecToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'metadata': value['metadata'],
+        'protocolType': value['protocolType'],
+        'url': value['url'],
+        'version': value['version'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const RegistrySvcLanguage = {
+    JavaScript: 'JavaScript',
+    Python: 'Python',
+    Java: 'Java',
+    CSharp: 'C#',
+    CPlusPlus: 'C++',
+    Ruby: 'Ruby',
+    Go: 'Go',
+    Swift: 'Swift',
+    PHP: 'PHP',
+    TypeScript: 'TypeScript',
+    Kotlin: 'Kotlin',
+    Scala: 'Scala',
+    Perl: 'Perl',
+    Rust: 'Rust',
+    Haskell: 'Haskell',
+    Clojure: 'Clojure',
+    Elixir: 'Elixir',
+    ObjectiveC: 'Objective-C',
+    FSharp: 'F#'
+};
+function instanceOfRegistrySvcLanguage(value) {
+    for (const key in RegistrySvcLanguage) {
+        if (Object.prototype.hasOwnProperty.call(RegistrySvcLanguage, key)) {
+            if (RegistrySvcLanguage[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function RegistrySvcLanguageFromJSON(json) {
+    return RegistrySvcLanguageFromJSONTyped(json);
+}
+function RegistrySvcLanguageFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function RegistrySvcLanguageToJSON(value) {
+    return value;
+}
+function RegistrySvcLanguageToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcClient interface.
+ */
+function instanceOfRegistrySvcClient(value) {
+    if (!('language' in value) || value['language'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcClientFromJSON(json) {
+    return RegistrySvcClientFromJSONTyped(json);
+}
+function RegistrySvcClientFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'language': RegistrySvcLanguageFromJSON(json['language']),
+        'url': json['url'],
+    };
+}
+function RegistrySvcClientToJSON(json) {
+    return RegistrySvcClientToJSONTyped(json, false);
+}
+function RegistrySvcClientToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'language': RegistrySvcLanguageToJSON(value['language']),
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcImageSpec interface.
+ */
+function instanceOfRegistrySvcImageSpec(value) {
+    if (!('name' in value) || value['name'] === undefined)
+        return false;
+    if (!('port' in value) || value['port'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcImageSpecFromJSON(json) {
+    return RegistrySvcImageSpecFromJSONTyped(json);
+}
+function RegistrySvcImageSpecFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'name': json['name'],
+        'port': json['port'],
+    };
+}
+function RegistrySvcImageSpecToJSON(json) {
+    return RegistrySvcImageSpecToJSONTyped(json, false);
+}
+function RegistrySvcImageSpecToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'name': value['name'],
+        'port': value['port'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcRepositorySpec interface.
+ */
+function instanceOfRegistrySvcRepositorySpec(value) {
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcRepositorySpecFromJSON(json) {
+    return RegistrySvcRepositorySpecFromJSONTyped(json);
+}
+function RegistrySvcRepositorySpecFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'buildContext': json['buildContext'] == null ? undefined : json['buildContext'],
+        'containerFile': json['containerFile'] == null ? undefined : json['containerFile'],
+        'port': json['port'] == null ? undefined : json['port'],
+        'url': json['url'],
+        'version': json['version'] == null ? undefined : json['version'],
+    };
+}
+function RegistrySvcRepositorySpecToJSON(json) {
+    return RegistrySvcRepositorySpecToJSONTyped(json, false);
+}
+function RegistrySvcRepositorySpecToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'buildContext': value['buildContext'],
+        'containerFile': value['containerFile'],
+        'port': value['port'],
+        'url': value['url'],
+        'version': value['version'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcDefinition interface.
+ */
+function instanceOfRegistrySvcDefinition(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcDefinitionFromJSON(json) {
+    return RegistrySvcDefinitionFromJSONTyped(json);
+}
+function RegistrySvcDefinitionFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'apiSpecs': json['apiSpecs'] == null ? undefined : (json['apiSpecs'].map(RegistrySvcAPISpecFromJSON)),
+        'clients': json['clients'] == null ? undefined : (json['clients'].map(RegistrySvcClientFromJSON)),
+        'envars': json['envars'] == null ? undefined : json['envars'],
+        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
+        'id': json['id'],
+        'image': json['image'] == null ? undefined : RegistrySvcImageSpecFromJSON(json['image']),
+        'repository': json['repository'] == null ? undefined : RegistrySvcRepositorySpecFromJSON(json['repository']),
+    };
+}
+function RegistrySvcDefinitionToJSON(json) {
+    return RegistrySvcDefinitionToJSONTyped(json, false);
+}
+function RegistrySvcDefinitionToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'apiSpecs': value['apiSpecs'] == null ? undefined : (value['apiSpecs'].map(RegistrySvcAPISpecToJSON)),
+        'clients': value['clients'] == null ? undefined : (value['clients'].map(RegistrySvcClientToJSON)),
+        'envars': value['envars'],
+        'hostPort': value['hostPort'],
+        'id': value['id'],
+        'image': RegistrySvcImageSpecToJSON(value['image']),
+        'repository': RegistrySvcRepositorySpecToJSON(value['repository']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcErrorResponse interface.
+ */
+function instanceOfRegistrySvcErrorResponse(value) {
+    return true;
+}
+function RegistrySvcErrorResponseFromJSON(json) {
+    return RegistrySvcErrorResponseFromJSONTyped(json);
+}
+function RegistrySvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function RegistrySvcErrorResponseToJSON(json) {
+    return RegistrySvcErrorResponseToJSONTyped(json, false);
+}
+function RegistrySvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcProcess interface.
+ */
+function instanceOfRegistrySvcProcess(value) {
+    return true;
+}
+function RegistrySvcProcessFromJSON(json) {
+    return RegistrySvcProcessFromJSONTyped(json);
+}
+function RegistrySvcProcessFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'memoryUsage': json['memoryUsage'] == null ? undefined : json['memoryUsage'],
+        'pid': json['pid'] == null ? undefined : json['pid'],
+        'processName': json['processName'] == null ? undefined : json['processName'],
+    };
+}
+function RegistrySvcProcessToJSON(json) {
+    return RegistrySvcProcessToJSONTyped(json, false);
+}
+function RegistrySvcProcessToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'memoryUsage': value['memoryUsage'],
+        'pid': value['pid'],
+        'processName': value['processName'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcGPU interface.
+ */
+function instanceOfRegistrySvcGPU(value) {
+    return true;
+}
+function RegistrySvcGPUFromJSON(json) {
+    return RegistrySvcGPUFromJSONTyped(json);
+}
+function RegistrySvcGPUFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'busId': json['busId'] == null ? undefined : json['busId'],
+        'computeMode': json['computeMode'] == null ? undefined : json['computeMode'],
+        'gpuUtilization': json['gpuUtilization'] == null ? undefined : json['gpuUtilization'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'intraNodeId': json['intraNodeId'] == null ? undefined : json['intraNodeId'],
+        'memoryTotal': json['memoryTotal'] == null ? undefined : json['memoryTotal'],
+        'memoryUsage': json['memoryUsage'] == null ? undefined : json['memoryUsage'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'performanceState': json['performanceState'] == null ? undefined : json['performanceState'],
+        'powerCap': json['powerCap'] == null ? undefined : json['powerCap'],
+        'powerUsage': json['powerUsage'] == null ? undefined : json['powerUsage'],
+        'processDetails': json['processDetails'] == null ? undefined : (json['processDetails'].map(RegistrySvcProcessFromJSON)),
+        'temperature': json['temperature'] == null ? undefined : json['temperature'],
+    };
+}
+function RegistrySvcGPUToJSON(json) {
+    return RegistrySvcGPUToJSONTyped(json, false);
+}
+function RegistrySvcGPUToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'busId': value['busId'],
+        'computeMode': value['computeMode'],
+        'gpuUtilization': value['gpuUtilization'],
+        'id': value['id'],
+        'intraNodeId': value['intraNodeId'],
+        'memoryTotal': value['memoryTotal'],
+        'memoryUsage': value['memoryUsage'],
+        'name': value['name'],
+        'performanceState': value['performanceState'],
+        'powerCap': value['powerCap'],
+        'powerUsage': value['powerUsage'],
+        'processDetails': value['processDetails'] == null ? undefined : (value['processDetails'].map(RegistrySvcProcessToJSON)),
+        'temperature': value['temperature'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ * @export
+ */
+const RegistrySvcInstanceStatus = {
+    InstanceStatusUnknown: 'Unknown',
+    InstanceStatusHealthy: 'Healthy',
+    InstanceStatusDegraded: 'Degraded',
+    InstanceStatusUnreachable: 'Unreachable',
+    InstanceStatusError: 'Error'
+};
+function instanceOfRegistrySvcInstanceStatus(value) {
+    for (const key in RegistrySvcInstanceStatus) {
+        if (Object.prototype.hasOwnProperty.call(RegistrySvcInstanceStatus, key)) {
+            if (RegistrySvcInstanceStatus[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function RegistrySvcInstanceStatusFromJSON(json) {
+    return RegistrySvcInstanceStatusFromJSONTyped(json);
+}
+function RegistrySvcInstanceStatusFromJSONTyped(json, ignoreDiscriminator) {
+    return json;
+}
+function RegistrySvcInstanceStatusToJSON(value) {
+    return value;
+}
+function RegistrySvcInstanceStatusToJSONTyped(value, ignoreDiscriminator) {
+    return value;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcInstance interface.
+ */
+function instanceOfRegistrySvcInstance(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('status' in value) || value['status'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcInstanceFromJSON(json) {
+    return RegistrySvcInstanceFromJSONTyped(json);
+}
+function RegistrySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'deploymentId': json['deploymentId'] == null ? undefined : json['deploymentId'],
+        'details': json['details'] == null ? undefined : json['details'],
+        'host': json['host'] == null ? undefined : json['host'],
+        'id': json['id'],
+        'ip': json['ip'] == null ? undefined : json['ip'],
+        'lastHeartbeat': json['lastHeartbeat'] == null ? undefined : json['lastHeartbeat'],
+        'nodeUrl': json['nodeUrl'] == null ? undefined : json['nodeUrl'],
+        'path': json['path'] == null ? undefined : json['path'],
+        'port': json['port'] == null ? undefined : json['port'],
+        'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+        'status': RegistrySvcInstanceStatusFromJSON(json['status']),
+        'tags': json['tags'] == null ? undefined : json['tags'],
+        'url': json['url'],
+    };
+}
+function RegistrySvcInstanceToJSON(json) {
+    return RegistrySvcInstanceToJSONTyped(json, false);
+}
+function RegistrySvcInstanceToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'deploymentId': value['deploymentId'],
+        'details': value['details'],
+        'host': value['host'],
+        'id': value['id'],
+        'ip': value['ip'],
+        'lastHeartbeat': value['lastHeartbeat'],
+        'nodeUrl': value['nodeUrl'],
+        'path': value['path'],
+        'port': value['port'],
+        'scheme': value['scheme'],
+        'slug': value['slug'],
+        'status': RegistrySvcInstanceStatusToJSON(value['status']),
+        'tags': value['tags'],
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcListDefinitionsResponse interface.
+ */
+function instanceOfRegistrySvcListDefinitionsResponse(value) {
+    return true;
+}
+function RegistrySvcListDefinitionsResponseFromJSON(json) {
+    return RegistrySvcListDefinitionsResponseFromJSONTyped(json);
+}
+function RegistrySvcListDefinitionsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'definitions': json['definitions'] == null ? undefined : (json['definitions'].map(RegistrySvcDefinitionFromJSON)),
+    };
+}
+function RegistrySvcListDefinitionsResponseToJSON(json) {
+    return RegistrySvcListDefinitionsResponseToJSONTyped(json, false);
+}
+function RegistrySvcListDefinitionsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'definitions': value['definitions'] == null ? undefined : (value['definitions'].map(RegistrySvcDefinitionToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcListInstancesResponse interface.
+ */
+function instanceOfRegistrySvcListInstancesResponse(value) {
+    return true;
+}
+function RegistrySvcListInstancesResponseFromJSON(json) {
+    return RegistrySvcListInstancesResponseFromJSONTyped(json);
+}
+function RegistrySvcListInstancesResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'instances': json['instances'] == null ? undefined : (json['instances'].map(RegistrySvcInstanceFromJSON)),
+    };
+}
+function RegistrySvcListInstancesResponseToJSON(json) {
+    return RegistrySvcListInstancesResponseToJSONTyped(json, false);
+}
+function RegistrySvcListInstancesResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'instances': value['instances'] == null ? undefined : (value['instances'].map(RegistrySvcInstanceToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcUsage interface.
+ */
+function instanceOfRegistrySvcUsage(value) {
+    return true;
+}
+function RegistrySvcUsageFromJSON(json) {
+    return RegistrySvcUsageFromJSONTyped(json);
+}
+function RegistrySvcUsageFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'percent': json['percent'] == null ? undefined : json['percent'],
+        'total': json['total'] == null ? undefined : json['total'],
+        'used': json['used'] == null ? undefined : json['used'],
+    };
+}
+function RegistrySvcUsageToJSON(json) {
+    return RegistrySvcUsageToJSONTyped(json, false);
+}
+function RegistrySvcUsageToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'percent': value['percent'],
+        'total': value['total'],
+        'used': value['used'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcResourceUsage interface.
+ */
+function instanceOfRegistrySvcResourceUsage(value) {
+    return true;
+}
+function RegistrySvcResourceUsageFromJSON(json) {
+    return RegistrySvcResourceUsageFromJSONTyped(json);
+}
+function RegistrySvcResourceUsageFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'cpu': json['cpu'] == null ? undefined : RegistrySvcUsageFromJSON(json['cpu']),
+        'disk': json['disk'] == null ? undefined : RegistrySvcUsageFromJSON(json['disk']),
+        'memory': json['memory'] == null ? undefined : RegistrySvcUsageFromJSON(json['memory']),
+    };
+}
+function RegistrySvcResourceUsageToJSON(json) {
+    return RegistrySvcResourceUsageToJSONTyped(json, false);
+}
+function RegistrySvcResourceUsageToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'cpu': RegistrySvcUsageToJSON(value['cpu']),
+        'disk': RegistrySvcUsageToJSON(value['disk']),
+        'memory': RegistrySvcUsageToJSON(value['memory']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcNode interface.
+ */
+function instanceOfRegistrySvcNode(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcNodeFromJSON(json) {
+    return RegistrySvcNodeFromJSONTyped(json);
+}
+function RegistrySvcNodeFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'availabilityZone': json['availabilityZone'] == null ? undefined : json['availabilityZone'],
+        'gpus': json['gpus'] == null ? undefined : (json['gpus'].map(RegistrySvcGPUFromJSON)),
+        'id': json['id'],
+        'lastHeartbeat': json['lastHeartbeat'] == null ? undefined : json['lastHeartbeat'],
+        'region': json['region'] == null ? undefined : json['region'],
+        'url': json['url'],
+        'usage': json['usage'] == null ? undefined : RegistrySvcResourceUsageFromJSON(json['usage']),
+    };
+}
+function RegistrySvcNodeToJSON(json) {
+    return RegistrySvcNodeToJSONTyped(json, false);
+}
+function RegistrySvcNodeToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'availabilityZone': value['availabilityZone'],
+        'gpus': value['gpus'] == null ? undefined : (value['gpus'].map(RegistrySvcGPUToJSON)),
+        'id': value['id'],
+        'lastHeartbeat': value['lastHeartbeat'],
+        'region': value['region'],
+        'url': value['url'],
+        'usage': RegistrySvcResourceUsageToJSON(value['usage']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcListNodesResponse interface.
+ */
+function instanceOfRegistrySvcListNodesResponse(value) {
+    return true;
+}
+function RegistrySvcListNodesResponseFromJSON(json) {
+    return RegistrySvcListNodesResponseFromJSONTyped(json);
+}
+function RegistrySvcListNodesResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'nodes': json['nodes'] == null ? undefined : (json['nodes'].map(RegistrySvcNodeFromJSON)),
+    };
+}
+function RegistrySvcListNodesResponseToJSON(json) {
+    return RegistrySvcListNodesResponseToJSONTyped(json, false);
+}
+function RegistrySvcListNodesResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'nodes': value['nodes'] == null ? undefined : (value['nodes'].map(RegistrySvcNodeToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcRegisterInstanceRequest interface.
+ */
+function instanceOfRegistrySvcRegisterInstanceRequest(value) {
+    if (!('deploymentId' in value) || value['deploymentId'] === undefined)
+        return false;
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
+    return true;
+}
+function RegistrySvcRegisterInstanceRequestFromJSON(json) {
+    return RegistrySvcRegisterInstanceRequestFromJSONTyped(json);
+}
+function RegistrySvcRegisterInstanceRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'deploymentId': json['deploymentId'],
+        'host': json['host'] == null ? undefined : json['host'],
+        'id': json['id'],
+        'ip': json['ip'] == null ? undefined : json['ip'],
+        'path': json['path'] == null ? undefined : json['path'],
+        'port': json['port'] == null ? undefined : json['port'],
+        'scheme': json['scheme'] == null ? undefined : json['scheme'],
+        'url': json['url'],
+    };
+}
+function RegistrySvcRegisterInstanceRequestToJSON(json) {
+    return RegistrySvcRegisterInstanceRequestToJSONTyped(json, false);
+}
+function RegistrySvcRegisterInstanceRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'deploymentId': value['deploymentId'],
+        'host': value['host'],
+        'id': value['id'],
+        'ip': value['ip'],
+        'path': value['path'],
+        'port': value['port'],
+        'scheme': value['scheme'],
+        'url': value['url'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the RegistrySvcSaveDefinitionRequest interface.
+ */
+function instanceOfRegistrySvcSaveDefinitionRequest(value) {
+    return true;
+}
+function RegistrySvcSaveDefinitionRequestFromJSON(json) {
+    return RegistrySvcSaveDefinitionRequestFromJSONTyped(json);
+}
+function RegistrySvcSaveDefinitionRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'definition': json['definition'] == null ? undefined : RegistrySvcDefinitionFromJSON(json['definition']),
+    };
+}
+function RegistrySvcSaveDefinitionRequestToJSON(json) {
+    return RegistrySvcSaveDefinitionRequestToJSONTyped(json, false);
+}
+function RegistrySvcSaveDefinitionRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'definition': RegistrySvcDefinitionToJSON(value['definition']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcDecryptValueRequest interface.
+ */
+function instanceOfSecretSvcDecryptValueRequest(value) {
+    return true;
+}
+function SecretSvcDecryptValueRequestFromJSON(json) {
+    return SecretSvcDecryptValueRequestFromJSONTyped(json);
+}
+function SecretSvcDecryptValueRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'value': json['value'] == null ? undefined : json['value'],
+        'values': json['values'] == null ? undefined : json['values'],
+    };
+}
+function SecretSvcDecryptValueRequestToJSON(json) {
+    return SecretSvcDecryptValueRequestToJSONTyped(json, false);
+}
+function SecretSvcDecryptValueRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'value': value['value'],
+        'values': value['values'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcDecryptValueResponse interface.
+ */
+function instanceOfSecretSvcDecryptValueResponse(value) {
+    return true;
+}
+function SecretSvcDecryptValueResponseFromJSON(json) {
+    return SecretSvcDecryptValueResponseFromJSONTyped(json);
+}
+function SecretSvcDecryptValueResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'value': json['value'] == null ? undefined : json['value'],
+        'values': json['values'] == null ? undefined : json['values'],
+    };
+}
+function SecretSvcDecryptValueResponseToJSON(json) {
+    return SecretSvcDecryptValueResponseToJSONTyped(json, false);
+}
+function SecretSvcDecryptValueResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'value': value['value'],
+        'values': value['values'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcEncryptValueRequest interface.
+ */
+function instanceOfSecretSvcEncryptValueRequest(value) {
+    return true;
+}
+function SecretSvcEncryptValueRequestFromJSON(json) {
+    return SecretSvcEncryptValueRequestFromJSONTyped(json);
+}
+function SecretSvcEncryptValueRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'value': json['value'] == null ? undefined : json['value'],
+        'values': json['values'] == null ? undefined : json['values'],
+    };
+}
+function SecretSvcEncryptValueRequestToJSON(json) {
+    return SecretSvcEncryptValueRequestToJSONTyped(json, false);
+}
+function SecretSvcEncryptValueRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'value': value['value'],
+        'values': value['values'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcEncryptValueResponse interface.
+ */
+function instanceOfSecretSvcEncryptValueResponse(value) {
+    return true;
+}
+function SecretSvcEncryptValueResponseFromJSON(json) {
+    return SecretSvcEncryptValueResponseFromJSONTyped(json);
+}
+function SecretSvcEncryptValueResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'value': json['value'] == null ? undefined : json['value'],
+        'values': json['values'] == null ? undefined : json['values'],
+    };
+}
+function SecretSvcEncryptValueResponseToJSON(json) {
+    return SecretSvcEncryptValueResponseToJSONTyped(json, false);
+}
+function SecretSvcEncryptValueResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'value': value['value'],
+        'values': value['values'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcListSecretsRequest interface.
+ */
+function instanceOfSecretSvcListSecretsRequest(value) {
+    return true;
+}
+function SecretSvcListSecretsRequestFromJSON(json) {
+    return SecretSvcListSecretsRequestFromJSONTyped(json);
+}
+function SecretSvcListSecretsRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'key': json['key'] == null ? undefined : json['key'],
+        'keys': json['keys'] == null ? undefined : json['keys'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
+    };
+}
+function SecretSvcListSecretsRequestToJSON(json) {
+    return SecretSvcListSecretsRequestToJSONTyped(json, false);
+}
+function SecretSvcListSecretsRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'key': value['key'],
+        'keys': value['keys'],
+        'namespace': value['namespace'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcSecret interface.
+ */
+function instanceOfSecretSvcSecret(value) {
+    return true;
+}
+function SecretSvcSecretFromJSON(json) {
+    return SecretSvcSecretFromJSONTyped(json);
+}
+function SecretSvcSecretFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'canChangeDeleters': json['canChangeDeleters'] == null ? undefined : json['canChangeDeleters'],
+        'canChangeReaders': json['canChangeReaders'] == null ? undefined : json['canChangeReaders'],
+        'canChangeWriters': json['canChangeWriters'] == null ? undefined : json['canChangeWriters'],
+        'deleters': json['deleters'] == null ? undefined : json['deleters'],
+        'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'key': json['key'] == null ? undefined : json['key'],
+        'namespace': json['namespace'] == null ? undefined : json['namespace'],
+        'readers': json['readers'] == null ? undefined : json['readers'],
+        'value': json['value'] == null ? undefined : json['value'],
+        'writers': json['writers'] == null ? undefined : json['writers'],
+    };
+}
+function SecretSvcSecretToJSON(json) {
+    return SecretSvcSecretToJSONTyped(json, false);
+}
+function SecretSvcSecretToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'canChangeDeleters': value['canChangeDeleters'],
+        'canChangeReaders': value['canChangeReaders'],
+        'canChangeWriters': value['canChangeWriters'],
+        'deleters': value['deleters'],
+        'encrypted': value['encrypted'],
+        'id': value['id'],
+        'key': value['key'],
+        'namespace': value['namespace'],
+        'readers': value['readers'],
+        'value': value['value'],
+        'writers': value['writers'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcListSecretsResponse interface.
+ */
+function instanceOfSecretSvcListSecretsResponse(value) {
+    return true;
+}
+function SecretSvcListSecretsResponseFromJSON(json) {
+    return SecretSvcListSecretsResponseFromJSONTyped(json);
+}
+function SecretSvcListSecretsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecretFromJSON)),
+    };
+}
+function SecretSvcListSecretsResponseToJSON(json) {
+    return SecretSvcListSecretsResponseToJSONTyped(json, false);
+}
+function SecretSvcListSecretsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'secrets': value['secrets'] == null ? undefined : (value['secrets'].map(SecretSvcSecretToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcRemoveSecretsRequest interface.
+ */
+function instanceOfSecretSvcRemoveSecretsRequest(value) {
+    return true;
+}
+function SecretSvcRemoveSecretsRequestFromJSON(json) {
+    return SecretSvcRemoveSecretsRequestFromJSONTyped(json);
+}
+function SecretSvcRemoveSecretsRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'id': json['id'] == null ? undefined : json['id'],
+        'ids': json['ids'] == null ? undefined : json['ids'],
+        'key': json['key'] == null ? undefined : json['key'],
+        'keys': json['keys'] == null ? undefined : json['keys'],
+    };
+}
+function SecretSvcRemoveSecretsRequestToJSON(json) {
+    return SecretSvcRemoveSecretsRequestToJSONTyped(json, false);
+}
+function SecretSvcRemoveSecretsRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'id': value['id'],
+        'ids': value['ids'],
+        'key': value['key'],
+        'keys': value['keys'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SecretSvcSaveSecretsRequest interface.
+ */
+function instanceOfSecretSvcSaveSecretsRequest(value) {
+    return true;
+}
+function SecretSvcSaveSecretsRequestFromJSON(json) {
+    return SecretSvcSaveSecretsRequestFromJSONTyped(json);
+}
+function SecretSvcSaveSecretsRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'secrets': json['secrets'] == null ? undefined : (json['secrets'].map(SecretSvcSecretFromJSON)),
+    };
+}
+function SecretSvcSaveSecretsRequestToJSON(json) {
+    return SecretSvcSaveSecretsRequestToJSONTyped(json, false);
+}
+function SecretSvcSaveSecretsRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'secrets': value['secrets'] == null ? undefined : (value['secrets'].map(SecretSvcSecretToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SourceSvcCheckoutRepoRequest interface.
+ */
+function instanceOfSourceSvcCheckoutRepoRequest(value) {
+    return true;
+}
+function SourceSvcCheckoutRepoRequestFromJSON(json) {
+    return SourceSvcCheckoutRepoRequestFromJSONTyped(json);
+}
+function SourceSvcCheckoutRepoRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'password': json['password'] == null ? undefined : json['password'],
+        'sshKey': json['ssh_key'] == null ? undefined : json['ssh_key'],
+        'sshKeyPwd': json['ssh_key_pwd'] == null ? undefined : json['ssh_key_pwd'],
+        'token': json['token'] == null ? undefined : json['token'],
+        'url': json['url'] == null ? undefined : json['url'],
+        'username': json['username'] == null ? undefined : json['username'],
+        'version': json['version'] == null ? undefined : json['version'],
+    };
+}
+function SourceSvcCheckoutRepoRequestToJSON(json) {
+    return SourceSvcCheckoutRepoRequestToJSONTyped(json, false);
+}
+function SourceSvcCheckoutRepoRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'password': value['password'],
+        'ssh_key': value['sshKey'],
+        'ssh_key_pwd': value['sshKeyPwd'],
+        'token': value['token'],
+        'url': value['url'],
+        'username': value['username'],
+        'version': value['version'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SourceSvcCheckoutRepoResponse interface.
+ */
+function instanceOfSourceSvcCheckoutRepoResponse(value) {
+    return true;
+}
+function SourceSvcCheckoutRepoResponseFromJSON(json) {
+    return SourceSvcCheckoutRepoResponseFromJSONTyped(json);
+}
+function SourceSvcCheckoutRepoResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'dir': json['dir'] == null ? undefined : json['dir'],
+    };
+}
+function SourceSvcCheckoutRepoResponseToJSON(json) {
+    return SourceSvcCheckoutRepoResponseToJSONTyped(json, false);
+}
+function SourceSvcCheckoutRepoResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'dir': value['dir'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the SourceSvcErrorResponse interface.
+ */
+function instanceOfSourceSvcErrorResponse(value) {
+    return true;
+}
+function SourceSvcErrorResponseFromJSON(json) {
+    return SourceSvcErrorResponseFromJSONTyped(json);
+}
+function SourceSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function SourceSvcErrorResponseToJSON(json) {
+    return SourceSvcErrorResponseToJSONTyped(json, false);
+}
+function SourceSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcAddUserToOrganizationRequest interface.
+ */
+function instanceOfUserSvcAddUserToOrganizationRequest(value) {
+    return true;
+}
+function UserSvcAddUserToOrganizationRequestFromJSON(json) {
+    return UserSvcAddUserToOrganizationRequestFromJSONTyped(json);
+}
+function UserSvcAddUserToOrganizationRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'userId': json['userId'] == null ? undefined : json['userId'],
+    };
+}
+function UserSvcAddUserToOrganizationRequestToJSON(json) {
+    return UserSvcAddUserToOrganizationRequestToJSONTyped(json, false);
+}
+function UserSvcAddUserToOrganizationRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'userId': value['userId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcAuthToken interface.
+ */
+function instanceOfUserSvcAuthToken(value) {
+    return true;
+}
+function UserSvcAuthTokenFromJSON(json) {
+    return UserSvcAuthTokenFromJSONTyped(json);
+}
+function UserSvcAuthTokenFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'token': json['token'] == null ? undefined : json['token'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'userId': json['userId'] == null ? undefined : json['userId'],
+    };
+}
+function UserSvcAuthTokenToJSON(json) {
+    return UserSvcAuthTokenToJSONTyped(json, false);
+}
+function UserSvcAuthTokenToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'deletedAt': value['deletedAt'],
+        'id': value['id'],
+        'token': value['token'],
+        'updatedAt': value['updatedAt'],
+        'userId': value['userId'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcChangePasswordAdminRequest interface.
+ */
+function instanceOfUserSvcChangePasswordAdminRequest(value) {
+    return true;
+}
+function UserSvcChangePasswordAdminRequestFromJSON(json) {
+    return UserSvcChangePasswordAdminRequestFromJSONTyped(json);
+}
+function UserSvcChangePasswordAdminRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'newPassword': json['newPassword'] == null ? undefined : json['newPassword'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcChangePasswordAdminRequestToJSON(json) {
+    return UserSvcChangePasswordAdminRequestToJSONTyped(json, false);
+}
+function UserSvcChangePasswordAdminRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'newPassword': value['newPassword'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcChangePasswordRequest interface.
+ */
+function instanceOfUserSvcChangePasswordRequest(value) {
+    return true;
+}
+function UserSvcChangePasswordRequestFromJSON(json) {
+    return UserSvcChangePasswordRequestFromJSONTyped(json);
+}
+function UserSvcChangePasswordRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'currentPassword': json['currentPassword'] == null ? undefined : json['currentPassword'],
+        'newPassword': json['newPassword'] == null ? undefined : json['newPassword'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcChangePasswordRequestToJSON(json) {
+    return UserSvcChangePasswordRequestToJSONTyped(json, false);
+}
+function UserSvcChangePasswordRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'currentPassword': value['currentPassword'],
+        'newPassword': value['newPassword'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcContact interface.
+ */
+function instanceOfUserSvcContact(value) {
+    return true;
+}
+function UserSvcContactFromJSON(json) {
+    return UserSvcContactFromJSONTyped(json);
+}
+function UserSvcContactFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'isPrimary': json['isPrimary'] == null ? undefined : json['isPrimary'],
+        'platform': json['platform'] == null ? undefined : json['platform'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+        'userId': json['userId'] == null ? undefined : json['userId'],
+        'value': json['value'] == null ? undefined : json['value'],
+        'verified': json['verified'] == null ? undefined : json['verified'],
+    };
+}
+function UserSvcContactToJSON(json) {
+    return UserSvcContactToJSONTyped(json, false);
+}
+function UserSvcContactToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'deletedAt': value['deletedAt'],
+        'id': value['id'],
+        'isPrimary': value['isPrimary'],
+        'platform': value['platform'],
+        'updatedAt': value['updatedAt'],
+        'userId': value['userId'],
+        'value': value['value'],
+        'verified': value['verified'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcCreateOrganizationRequest interface.
+ */
+function instanceOfUserSvcCreateOrganizationRequest(value) {
+    return true;
+}
+function UserSvcCreateOrganizationRequestFromJSON(json) {
+    return UserSvcCreateOrganizationRequestFromJSONTyped(json);
+}
+function UserSvcCreateOrganizationRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcCreateOrganizationRequestToJSON(json) {
+    return UserSvcCreateOrganizationRequestToJSONTyped(json, false);
+}
+function UserSvcCreateOrganizationRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'id': value['id'],
+        'name': value['name'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcCreateRoleRequest interface.
+ */
+function instanceOfUserSvcCreateRoleRequest(value) {
+    return true;
+}
+function UserSvcCreateRoleRequestFromJSON(json) {
+    return UserSvcCreateRoleRequestFromJSONTyped(json);
+}
+function UserSvcCreateRoleRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'description': json['description'] == null ? undefined : json['description'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
+    };
+}
+function UserSvcCreateRoleRequestToJSON(json) {
+    return UserSvcCreateRoleRequestToJSONTyped(json, false);
+}
+function UserSvcCreateRoleRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'description': value['description'],
+        'name': value['name'],
+        'permissionIds': value['permissionIds'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcRole interface.
+ */
+function instanceOfUserSvcRole(value) {
+    return true;
+}
+function UserSvcRoleFromJSON(json) {
+    return UserSvcRoleFromJSONTyped(json);
+}
+function UserSvcRoleFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'ownerId': json['ownerId'] == null ? undefined : json['ownerId'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+    };
+}
+function UserSvcRoleToJSON(json) {
+    return UserSvcRoleToJSONTyped(json, false);
+}
+function UserSvcRoleToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'description': value['description'],
+        'id': value['id'],
+        'name': value['name'],
+        'ownerId': value['ownerId'],
+        'updatedAt': value['updatedAt'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcCreateRoleResponse interface.
+ */
+function instanceOfUserSvcCreateRoleResponse(value) {
+    return true;
+}
+function UserSvcCreateRoleResponseFromJSON(json) {
+    return UserSvcCreateRoleResponseFromJSONTyped(json);
+}
+function UserSvcCreateRoleResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'role': json['role'] == null ? undefined : UserSvcRoleFromJSON(json['role']),
+    };
+}
+function UserSvcCreateRoleResponseToJSON(json) {
+    return UserSvcCreateRoleResponseToJSONTyped(json, false);
+}
+function UserSvcCreateRoleResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'role': UserSvcRoleToJSON(value['role']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcUser interface.
+ */
+function instanceOfUserSvcUser(value) {
+    return true;
+}
+function UserSvcUserFromJSON(json) {
+    return UserSvcUserFromJSONTyped(json);
+}
+function UserSvcUserFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'contacts': json['contacts'] == null ? undefined : (json['contacts'].map(UserSvcContactFromJSON)),
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'passwordHash': json['passwordHash'] == null ? undefined : json['passwordHash'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+    };
+}
+function UserSvcUserToJSON(json) {
+    return UserSvcUserToJSONTyped(json, false);
+}
+function UserSvcUserToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'contacts': value['contacts'] == null ? undefined : (value['contacts'].map(UserSvcContactToJSON)),
+        'createdAt': value['createdAt'],
+        'deletedAt': value['deletedAt'],
+        'id': value['id'],
+        'name': value['name'],
+        'passwordHash': value['passwordHash'],
+        'slug': value['slug'],
+        'updatedAt': value['updatedAt'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcCreateUserRequest interface.
+ */
+function instanceOfUserSvcCreateUserRequest(value) {
+    return true;
+}
+function UserSvcCreateUserRequestFromJSON(json) {
+    return UserSvcCreateUserRequestFromJSONTyped(json);
+}
+function UserSvcCreateUserRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'password': json['password'] == null ? undefined : json['password'],
+        'roleIds': json['roleIds'] == null ? undefined : json['roleIds'],
+        'user': json['user'] == null ? undefined : UserSvcUserFromJSON(json['user']),
+    };
+}
+function UserSvcCreateUserRequestToJSON(json) {
+    return UserSvcCreateUserRequestToJSONTyped(json, false);
+}
+function UserSvcCreateUserRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'password': value['password'],
+        'roleIds': value['roleIds'],
+        'user': UserSvcUserToJSON(value['user']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcErrorResponse interface.
+ */
+function instanceOfUserSvcErrorResponse(value) {
+    return true;
+}
+function UserSvcErrorResponseFromJSON(json) {
+    return UserSvcErrorResponseFromJSONTyped(json);
+}
+function UserSvcErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'error': json['error'] == null ? undefined : json['error'],
+    };
+}
+function UserSvcErrorResponseToJSON(json) {
+    return UserSvcErrorResponseToJSONTyped(json, false);
+}
+function UserSvcErrorResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'error': value['error'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcPermission interface.
+ */
+function instanceOfUserSvcPermission(value) {
+    return true;
+}
+function UserSvcPermissionFromJSON(json) {
+    return UserSvcPermissionFromJSONTyped(json);
+}
+function UserSvcPermissionFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'ownerId': json['ownerId'] == null ? undefined : json['ownerId'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+    };
+}
+function UserSvcPermissionToJSON(json) {
+    return UserSvcPermissionToJSONTyped(json, false);
+}
+function UserSvcPermissionToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'description': value['description'],
+        'id': value['id'],
+        'name': value['name'],
+        'ownerId': value['ownerId'],
+        'updatedAt': value['updatedAt'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcGetPermissionsResponse interface.
+ */
+function instanceOfUserSvcGetPermissionsResponse(value) {
+    return true;
+}
+function UserSvcGetPermissionsResponseFromJSON(json) {
+    return UserSvcGetPermissionsResponseFromJSONTyped(json);
+}
+function UserSvcGetPermissionsResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'permissions': json['permissions'] == null ? undefined : (json['permissions'].map(UserSvcPermissionFromJSON)),
+    };
+}
+function UserSvcGetPermissionsResponseToJSON(json) {
+    return UserSvcGetPermissionsResponseToJSONTyped(json, false);
+}
+function UserSvcGetPermissionsResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'permissions': value['permissions'] == null ? undefined : (value['permissions'].map(UserSvcPermissionToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcGetPublicKeyResponse interface.
+ */
+function instanceOfUserSvcGetPublicKeyResponse(value) {
+    return true;
+}
+function UserSvcGetPublicKeyResponseFromJSON(json) {
+    return UserSvcGetPublicKeyResponseFromJSONTyped(json);
+}
+function UserSvcGetPublicKeyResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'publicKey': json['publicKey'] == null ? undefined : json['publicKey'],
+    };
+}
+function UserSvcGetPublicKeyResponseToJSON(json) {
+    return UserSvcGetPublicKeyResponseToJSONTyped(json, false);
+}
+function UserSvcGetPublicKeyResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'publicKey': value['publicKey'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcGetRolesResponse interface.
+ */
+function instanceOfUserSvcGetRolesResponse(value) {
+    return true;
+}
+function UserSvcGetRolesResponseFromJSON(json) {
+    return UserSvcGetRolesResponseFromJSONTyped(json);
+}
+function UserSvcGetRolesResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'roles': json['roles'] == null ? undefined : (json['roles'].map(UserSvcRoleFromJSON)),
+    };
+}
+function UserSvcGetRolesResponseToJSON(json) {
+    return UserSvcGetRolesResponseToJSONTyped(json, false);
+}
+function UserSvcGetRolesResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'roles': value['roles'] == null ? undefined : (value['roles'].map(UserSvcRoleToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcGetUsersRequest interface.
+ */
+function instanceOfUserSvcGetUsersRequest(value) {
+    return true;
+}
+function UserSvcGetUsersRequestFromJSON(json) {
+    return UserSvcGetUsersRequestFromJSONTyped(json);
+}
+function UserSvcGetUsersRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'query': json['query'] == null ? undefined : DatastoreQueryFromJSON(json['query']),
+    };
+}
+function UserSvcGetUsersRequestToJSON(json) {
+    return UserSvcGetUsersRequestToJSONTyped(json, false);
+}
+function UserSvcGetUsersRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'query': DatastoreQueryToJSON(value['query']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcGetUsersResponse interface.
+ */
+function instanceOfUserSvcGetUsersResponse(value) {
+    return true;
+}
+function UserSvcGetUsersResponseFromJSON(json) {
+    return UserSvcGetUsersResponseFromJSONTyped(json);
+}
+function UserSvcGetUsersResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'after': json['after'] == null ? undefined : json['after'],
+        'count': json['count'] == null ? undefined : json['count'],
+        'users': json['users'] == null ? undefined : (json['users'].map(UserSvcUserFromJSON)),
+    };
+}
+function UserSvcGetUsersResponseToJSON(json) {
+    return UserSvcGetUsersResponseToJSONTyped(json, false);
+}
+function UserSvcGetUsersResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'after': value['after'],
+        'count': value['count'],
+        'users': value['users'] == null ? undefined : (value['users'].map(UserSvcUserToJSON)),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcIsAuthorizedRequest interface.
+ */
+function instanceOfUserSvcIsAuthorizedRequest(value) {
+    return true;
+}
+function UserSvcIsAuthorizedRequestFromJSON(json) {
+    return UserSvcIsAuthorizedRequestFromJSONTyped(json);
+}
+function UserSvcIsAuthorizedRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'contactsGranted': json['contactsGranted'] == null ? undefined : json['contactsGranted'],
+        'slugsGranted': json['slugsGranted'] == null ? undefined : json['slugsGranted'],
+    };
+}
+function UserSvcIsAuthorizedRequestToJSON(json) {
+    return UserSvcIsAuthorizedRequestToJSONTyped(json, false);
+}
+function UserSvcIsAuthorizedRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'contactsGranted': value['contactsGranted'],
+        'slugsGranted': value['slugsGranted'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcIsAuthorizedResponse interface.
+ */
+function instanceOfUserSvcIsAuthorizedResponse(value) {
+    return true;
+}
+function UserSvcIsAuthorizedResponseFromJSON(json) {
+    return UserSvcIsAuthorizedResponseFromJSONTyped(json);
+}
+function UserSvcIsAuthorizedResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'authorized': json['authorized'] == null ? undefined : json['authorized'],
+        'user': json['user'] == null ? undefined : UserSvcUserFromJSON(json['user']),
+    };
+}
+function UserSvcIsAuthorizedResponseToJSON(json) {
+    return UserSvcIsAuthorizedResponseToJSONTyped(json, false);
+}
+function UserSvcIsAuthorizedResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'authorized': value['authorized'],
+        'user': UserSvcUserToJSON(value['user']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcLoginRequest interface.
+ */
+function instanceOfUserSvcLoginRequest(value) {
+    return true;
+}
+function UserSvcLoginRequestFromJSON(json) {
+    return UserSvcLoginRequestFromJSONTyped(json);
+}
+function UserSvcLoginRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'contact': json['contact'] == null ? undefined : json['contact'],
+        'password': json['password'] == null ? undefined : json['password'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcLoginRequestToJSON(json) {
+    return UserSvcLoginRequestToJSONTyped(json, false);
+}
+function UserSvcLoginRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'contact': value['contact'],
+        'password': value['password'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcLoginResponse interface.
+ */
+function instanceOfUserSvcLoginResponse(value) {
+    return true;
+}
+function UserSvcLoginResponseFromJSON(json) {
+    return UserSvcLoginResponseFromJSONTyped(json);
+}
+function UserSvcLoginResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'token': json['token'] == null ? undefined : UserSvcAuthTokenFromJSON(json['token']),
+    };
+}
+function UserSvcLoginResponseToJSON(json) {
+    return UserSvcLoginResponseToJSONTyped(json, false);
+}
+function UserSvcLoginResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'token': UserSvcAuthTokenToJSON(value['token']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcOrganization interface.
+ */
+function instanceOfUserSvcOrganization(value) {
+    return true;
+}
+function UserSvcOrganizationFromJSON(json) {
+    return UserSvcOrganizationFromJSONTyped(json);
+}
+function UserSvcOrganizationFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
+    };
+}
+function UserSvcOrganizationToJSON(json) {
+    return UserSvcOrganizationToJSONTyped(json, false);
+}
+function UserSvcOrganizationToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'createdAt': value['createdAt'],
+        'deletedAt': value['deletedAt'],
+        'id': value['id'],
+        'name': value['name'],
+        'slug': value['slug'],
+        'updatedAt': value['updatedAt'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcReadUserByTokenResponse interface.
+ */
+function instanceOfUserSvcReadUserByTokenResponse(value) {
+    return true;
+}
+function UserSvcReadUserByTokenResponseFromJSON(json) {
+    return UserSvcReadUserByTokenResponseFromJSONTyped(json);
+}
+function UserSvcReadUserByTokenResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'activeOrganizationId': json['activeOrganizationId'] == null ? undefined : json['activeOrganizationId'],
+        'organizations': json['organizations'] == null ? undefined : (json['organizations'].map(UserSvcOrganizationFromJSON)),
+        'user': json['user'] == null ? undefined : UserSvcUserFromJSON(json['user']),
+    };
+}
+function UserSvcReadUserByTokenResponseToJSON(json) {
+    return UserSvcReadUserByTokenResponseToJSONTyped(json, false);
+}
+function UserSvcReadUserByTokenResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'activeOrganizationId': value['activeOrganizationId'],
+        'organizations': value['organizations'] == null ? undefined : (value['organizations'].map(UserSvcOrganizationToJSON)),
+        'user': UserSvcUserToJSON(value['user']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcRegisterRequest interface.
+ */
+function instanceOfUserSvcRegisterRequest(value) {
+    return true;
+}
+function UserSvcRegisterRequestFromJSON(json) {
+    return UserSvcRegisterRequestFromJSONTyped(json);
+}
+function UserSvcRegisterRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'contact': json['contact'] == null ? undefined : UserSvcContactFromJSON(json['contact']),
+        'name': json['name'] == null ? undefined : json['name'],
+        'password': json['password'] == null ? undefined : json['password'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcRegisterRequestToJSON(json) {
+    return UserSvcRegisterRequestToJSONTyped(json, false);
+}
+function UserSvcRegisterRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'contact': UserSvcContactToJSON(value['contact']),
+        'name': value['name'],
+        'password': value['password'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcRegisterResponse interface.
+ */
+function instanceOfUserSvcRegisterResponse(value) {
+    return true;
+}
+function UserSvcRegisterResponseFromJSON(json) {
+    return UserSvcRegisterResponseFromJSONTyped(json);
+}
+function UserSvcRegisterResponseFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'token': json['token'] == null ? undefined : UserSvcAuthTokenFromJSON(json['token']),
+    };
+}
+function UserSvcRegisterResponseToJSON(json) {
+    return UserSvcRegisterResponseToJSONTyped(json, false);
+}
+function UserSvcRegisterResponseToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'token': UserSvcAuthTokenToJSON(value['token']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcSaveProfileRequest interface.
+ */
+function instanceOfUserSvcSaveProfileRequest(value) {
+    return true;
+}
+function UserSvcSaveProfileRequestFromJSON(json) {
+    return UserSvcSaveProfileRequestFromJSONTyped(json);
+}
+function UserSvcSaveProfileRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'name': json['name'] == null ? undefined : json['name'],
+        'slug': json['slug'] == null ? undefined : json['slug'],
+    };
+}
+function UserSvcSaveProfileRequestToJSON(json) {
+    return UserSvcSaveProfileRequestToJSONTyped(json, false);
+}
+function UserSvcSaveProfileRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'name': value['name'],
+        'slug': value['slug'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcSetRolePermissionsRequest interface.
+ */
+function instanceOfUserSvcSetRolePermissionsRequest(value) {
+    return true;
+}
+function UserSvcSetRolePermissionsRequestFromJSON(json) {
+    return UserSvcSetRolePermissionsRequestFromJSONTyped(json);
+}
+function UserSvcSetRolePermissionsRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
+    };
+}
+function UserSvcSetRolePermissionsRequestToJSON(json) {
+    return UserSvcSetRolePermissionsRequestToJSONTyped(json, false);
+}
+function UserSvcSetRolePermissionsRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'permissionIds': value['permissionIds'],
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ * Check if a given object implements the UserSvcUpserPermissionRequest interface.
+ */
+function instanceOfUserSvcUpserPermissionRequest(value) {
+    return true;
+}
+function UserSvcUpserPermissionRequestFromJSON(json) {
+    return UserSvcUpserPermissionRequestFromJSONTyped(json);
+}
+function UserSvcUpserPermissionRequestFromJSONTyped(json, ignoreDiscriminator) {
+    if (json == null) {
+        return json;
+    }
+    return {
+        'permission': json['permission'] == null ? undefined : UserSvcPermissionFromJSON(json['permission']),
+    };
+}
+function UserSvcUpserPermissionRequestToJSON(json) {
+    return UserSvcUpserPermissionRequestToJSONTyped(json, false);
+}
+function UserSvcUpserPermissionRequestToJSONTyped(value, ignoreDiscriminator = false) {
+    if (value == null) {
+        return value;
+    }
+    return {
+        'permission': UserSvcPermissionToJSON(value['permission']),
+    };
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class ChatSvcApi extends BaseAPI {
+    /**
+     * Add a new message to a specific thread.
+     * Add Message
+     */
+    addMessageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling addMessage().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling addMessage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread/{threadId}/message`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: ChatSvcAddMessageRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Add a new message to a specific thread.
+     * Add Message
+     */
+    addMessage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.addMessageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Create a new chat thread and add the requesting user to it. Requires the `chat-svc:thread:create` permission.
+     * Add Thread
+     */
+    addThreadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling addThread().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: ChatSvcAddThreadRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcAddThreadResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Create a new chat thread and add the requesting user to it. Requires the `chat-svc:thread:create` permission.
+     * Add Thread
+     */
+    addThread(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.addThreadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Delete a specific message from a chat thread by its ID
+     * Delete a Message
+     */
+    deleteMessageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['messageId'] == null) {
+                throw new RequiredError('messageId', 'Required parameter "messageId" was null or undefined when calling deleteMessage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/message/{messageId}`.replace(`{${"messageId"}}`, encodeURIComponent(String(requestParameters['messageId']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a specific message from a chat thread by its ID
+     * Delete a Message
+     */
+    deleteMessage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.deleteMessageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Delete a specific chat thread by its ID
+     * Delete a Thread
+     */
+    deleteThreadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling deleteThread().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread/{threadId}`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a specific chat thread by its ID
+     * Delete a Thread
+     */
+    deleteThread(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.deleteThreadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Events is a dummy endpoint to display documentation about the events that this service emits.
+     * Events
+     */
+    eventsRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            const response = yield this.request({
+                path: `/chat-svc/events`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcEventThreadUpdateFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Events is a dummy endpoint to display documentation about the events that this service emits.
+     * Events
+     */
+    events(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.eventsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetch messages (and associated assets) for a specific chat thread.
+     * List Messages
+     */
+    getMessagesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling getMessages().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread/{threadId}/messages`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcGetMessagesResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch messages (and associated assets) for a specific chat thread.
+     * List Messages
+     */
+    getMessages(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getMessagesRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetch information about a specific chat thread by its ID
+     * Get Thread
+     */
+    getThreadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling getThread().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread/{threadId}`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcGetThreadResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch information about a specific chat thread by its ID
+     * Get Thread
+     */
+    getThread(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getThreadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetch all chat threads associated with a specific user
+     * Get Threads
+     */
+    getThreadsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/threads`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcGetThreadsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch all chat threads associated with a specific user
+     * Get Threads
+     */
+    getThreads() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.getThreadsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Modify the details of a specific chat thread
+     * Update Thread
+     */
+    updateThreadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling updateThread().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling updateThread().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/thread/{threadId}`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: ChatSvcUpdateThreadRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ChatSvcAddThreadResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Modify the details of a specific chat thread
+     * Update Thread
+     */
+    updateThread(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.updateThreadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class ConfigSvcApi extends BaseAPI {
+    /**
+     * Fetch the current configuration from the server
+     * Get Config
+     */
+    getConfigRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            if (requestParameters['namespace'] != null) {
+                queryParameters['namespace'] = requestParameters['namespace'];
+            }
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/config-svc/config`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ConfigSvcGetConfigResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch the current configuration from the server
+     * Get Config
+     */
+    getConfig() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.getConfigRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save the provided configuration to the server
+     * Save Config
+     */
+    saveConfigRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveConfig().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/config-svc/config`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: ConfigSvcSaveConfigRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save the provided configuration to the server
+     * Save Config
+     */
+    saveConfig(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveConfigRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class DeploySvcApi extends BaseAPI {
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeploymentRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/deploy-svc/deployment`,
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DeploySvcDeleteDeploymentRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a deployment.
+     * Delete Deployment
+     */
+    deleteDeployment() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.deleteDeploymentRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve a list of deployments.
+     * List Deployments
+     */
+    listDeploymentsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/deploy-svc/deployments`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DeploySvcListDeploymentsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve a list of deployments.
+     * List Deployments
+     */
+    listDeployments() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.listDeploymentsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save a deployment.
+     * Save Deployment
+     */
+    saveDeploymentRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/deploy-svc/deployment`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DeploySvcSaveDeploymentRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save a deployment.
+     * Save Deployment
+     */
+    saveDeployment() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.saveDeploymentRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class DockerSvcApi extends BaseAPI {
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling buildImage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/image`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcBuildImageRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Build an Image
+     */
+    buildImage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.buildImageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Check if a Docker container is running, identified by hash or name.
+     * Check If a Container Is Running
+     */
+    containerIsRunningRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            if (requestParameters['hash'] != null) {
+                queryParameters['hash'] = requestParameters['hash'];
+            }
+            if (requestParameters['name'] != null) {
+                queryParameters['name'] = requestParameters['name'];
+            }
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container/is-running`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DockerSvcContainerIsRunningResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Check if a Docker container is running, identified by hash or name.
+     * Check If a Container Is Running
+     */
+    containerIsRunning() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.containerIsRunningRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
+     * Get Container Summary
+     */
+    containerSummaryRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            if (requestParameters['hash'] != null) {
+                queryParameters['hash'] = requestParameters['hash'];
+            }
+            if (requestParameters['name'] != null) {
+                queryParameters['name'] = requestParameters['name'];
+            }
+            if (requestParameters['lines'] != null) {
+                queryParameters['lines'] = requestParameters['lines'];
+            }
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container/summary`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DockerSvcGetContainerSummaryResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
+     * Get Container Summary
+     */
+    containerSummary() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.containerSummaryRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve information about the Docker host
+     * Get Docker Host
+     */
+    getHostRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/host`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DockerSvcGetDockerHostResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve information about the Docker host
+     * Get Docker Host
+     */
+    getHost(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getHostRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve detailed information about the Docker service
+     * Get Docker Service Information
+     */
+    getInfoRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/info`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DockerSvcGetInfoResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve detailed information about the Docker service
+     * Get Docker Service Information
+     */
+    getInfo(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getInfoRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
+     */
+    runContainerRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling runContainer().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcRunContainerRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DockerSvcRunContainerResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Run a Container
+     */
+    runContainer(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.runContainerRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainerRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling stopContainer().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/docker-svc/container/stop`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DockerSvcStopContainerRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stop a Container
+     */
+    stopContainer(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.stopContainerRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class DownloadSvcApi extends BaseAPI {
+    /**
+     * Start a download for a specified URL.  Requires the `download-svc:download:create` permission.
+     * Download a File
+     */
+    downloadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling download().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/download-svc/download`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DownloadSvcDownloadRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Start a download for a specified URL.  Requires the `download-svc:download:create` permission.
+     * Download a File
+     */
+    download(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.downloadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Get a download by ID.  Requires the `download-svc:download:view` permission.
+     * Get a Download
+     */
+    getDownloadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['downloadId'] == null) {
+                throw new RequiredError('downloadId', 'Required parameter "downloadId" was null or undefined when calling getDownload().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/download-svc/download/{downloadId}`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DownloadSvcGetDownloadResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Get a download by ID.  Requires the `download-svc:download:view` permission.
+     * Get a Download
+     */
+    getDownload(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getDownloadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetch a list of all download details.  Requires the `download-svc:download:view` permission.
+     * List Downloads
+     */
+    listDownloadsRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/download-svc/downloads`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DownloadSvcDownloadsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch a list of all download details.  Requires the `download-svc:download:view` permission.
+     * List Downloads
+     */
+    listDownloads(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.listDownloadsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Pause a download that is currently in progress.  Requires the `download-svc:download:edit` permission.
+     * Pause a Download
+     */
+    pauseRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['downloadId'] == null) {
+                throw new RequiredError('downloadId', 'Required parameter "downloadId" was null or undefined when calling pause().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/download-svc/download/{downloadId}/pause`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Pause a download that is currently in progress.  Requires the `download-svc:download:edit` permission.
+     * Pause a Download
+     */
+    pause(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.pauseRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class DynamicSvcApi extends BaseAPI {
+    /**
+     * Creates a new object with the provided details. Requires authorization and user authentication.
+     * Create a Generic Object
+     */
+    createObjectRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling createObject().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/dynamic-svc/object`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DynamicSvcCreateObjectRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DynamicSvcCreateObjectResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Creates a new object with the provided details. Requires authorization and user authentication.
+     * Create a Generic Object
+     */
+    createObject(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.createObjectRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+     * Delete a Generic Object
+     */
+    deleteObjectsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling deleteObjects().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/dynamic-svc/objects/delete`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DynamicSvcDeleteObjectRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+     * Delete a Generic Object
+     */
+    deleteObjects(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.deleteObjectsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
+     * Query Objects
+     */
+    queryRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/dynamic-svc/objects`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DynamicSvcQueryRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DynamicSvcQueryResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
+     * Query Objects
+     */
+    query() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.queryRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update Objects
+     */
+    updateObjectsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling updateObjects().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/dynamic-svc/objects/update`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DynamicSvcUpdateObjectRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update Objects
+     */
+    updateObjects(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.updateObjectsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
+     * Upsert a Generic Object
+     */
+    upsertObjectRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['objectId'] == null) {
+                throw new RequiredError('objectId', 'Required parameter "objectId" was null or undefined when calling upsertObject().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling upsertObject().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/dynamic-svc/object/{objectId}`.replace(`{${"objectId"}}`, encodeURIComponent(String(requestParameters['objectId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DynamicSvcUpsertObjectRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => DynamicSvcUpsertObjectResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
+     * Upsert a Generic Object
+     */
+    upsertObject(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.upsertObjectRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class EmailSvcApi extends BaseAPI {
+    /**
+     * Send an email with attachments.
+     * Send an Email
+     */
+    sendEmailRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling sendEmail().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/email-svc/email`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: EmailSvcSendEmailRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => EmailSvcSendEmailResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Send an email with attachments.
+     * Send an Email
+     */
+    sendEmail(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.sendEmailRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class FirehoseSvcApi extends BaseAPI {
+    /**
+     * Publishes an event to the firehose service after authorization check
+     * Publish an Event
+     */
+    publishEventRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['event'] == null) {
+                throw new RequiredError('event', 'Required parameter "event" was null or undefined when calling publishEvent().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/firehose-svc/event`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: FirehoseSvcEventPublishRequestToJSON(requestParameters['event']),
+            }, initOverrides);
+            return new VoidApiResponse(response);
+        });
+    }
+    /**
+     * Publishes an event to the firehose service after authorization check
+     * Publish an Event
+     */
+    publishEvent(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.publishEventRaw(requestParameters, initOverrides);
+        });
+    }
+    /**
+     * Establish a subscription to the firehose events and accept a real time stream of them.
+     * Subscribe to the Event Stream
+     */
+    subscribeToEventsRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/firehose-svc/events/subscribe`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            if (this.isJsonMime(response.headers.get('content-type'))) {
+                return new JSONApiResponse(response);
+            }
+            else {
+                return new TextApiResponse(response);
+            }
+        });
+    }
+    /**
+     * Establish a subscription to the firehose events and accept a real time stream of them.
+     * Subscribe to the Event Stream
+     */
+    subscribeToEvents(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.subscribeToEventsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class ModelSvcApi extends BaseAPI {
+    /**
+     * Retrieves the status of the default model.  Requires the `model-svc:model:view` permission.
+     * Get Default Model Status
+     */
+    getDefaultModelStatusRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/default-model/status`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ModelSvcStatusResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves the status of the default model.  Requires the `model-svc:model:view` permission.
+     * Get Default Model Status
+     */
+    getDefaultModelStatus(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getDefaultModelStatusRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieves the details of a model by its ID.  the Requires `model.view` permission.
+     * Get a Model
+     */
+    getModelRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['modelId'] == null) {
+                throw new RequiredError('modelId', 'Required parameter "modelId" was null or undefined when calling getModel().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/model/{modelId}`.replace(`{${"modelId"}}`, encodeURIComponent(String(requestParameters['modelId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ModelSvcGetModelResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves the details of a model by its ID.  the Requires `model.view` permission.
+     * Get a Model
+     */
+    getModel(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getModelRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieves the status of a model by ID.  Requires the `model-svc:model:view` permission.
+     * Get Model Status
+     */
+    getModelStatusRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['modelId'] == null) {
+                throw new RequiredError('modelId', 'Required parameter "modelId" was null or undefined when calling getModelStatus().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/model/{modelId}/status`.replace(`{${"modelId"}}`, encodeURIComponent(String(requestParameters['modelId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ModelSvcStatusResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves the status of a model by ID.  Requires the `model-svc:model:view` permission.
+     * Get Model Status
+     */
+    getModelStatus(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getModelStatusRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieves a list of models.  Requires `model-svc:model:view` permission.
+     * List Models
+     */
+    listModelsRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/models`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => ModelSvcListResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves a list of models.  Requires `model-svc:model:view` permission.
+     * List Models
+     */
+    listModels(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.listModelsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Sets a model as the default model — when prompts are sent without a Model ID, the default model is used.
+     * Make a Model Default
+     */
+    makeDefaultRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['modelId'] == null) {
+                throw new RequiredError('modelId', 'Required parameter "modelId" was null or undefined when calling makeDefault().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/model/{modelId}/make-default`.replace(`{${"modelId"}}`, encodeURIComponent(String(requestParameters['modelId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Sets a model as the default model — when prompts are sent without a Model ID, the default model is used.
+     * Make a Model Default
+     */
+    makeDefault(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.makeDefaultRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Starts The Default Model.  Requires the `model-svc:model:create` permission.
+     * Start the Default Model
+     */
+    startDefaultModelRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/default-model/start`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Starts The Default Model.  Requires the `model-svc:model:create` permission.
+     * Start the Default Model
+     */
+    startDefaultModel(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.startDefaultModelRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Starts a model by ID
+     * Start a Model
+     */
+    startModelRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['modelId'] == null) {
+                throw new RequiredError('modelId', 'Required parameter "modelId" was null or undefined when calling startModel().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/model-svc/model/{modelId}/start`.replace(`{${"modelId"}}`, encodeURIComponent(String(requestParameters['modelId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Starts a model by ID
+     * Start a Model
+     */
+    startModel(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.startModelRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class PolicySvcApi extends BaseAPI {
+    /**
+     * Check records a resource access and returns if the access is allowed.
+     * Check
+     */
+    checkRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling check().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/policy-svc/check`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: PolicySvcCheckRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => PolicySvcCheckResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Check records a resource access and returns if the access is allowed.
+     * Check
+     */
+    check(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.checkRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows user to upsert a new policy instance based on a template.
+     * Upsert an Instance
+     */
+    upsertInstanceRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['instanceId'] == null) {
+                throw new RequiredError('instanceId', 'Required parameter "instanceId" was null or undefined when calling upsertInstance().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling upsertInstance().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/policy-svc/instance/{instanceId}`.replace(`{${"instanceId"}}`, encodeURIComponent(String(requestParameters['instanceId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: PolicySvcUpsertInstanceRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows user to upsert a new policy instance based on a template.
+     * Upsert an Instance
+     */
+    upsertInstance(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.upsertInstanceRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class PromptSvcApi extends BaseAPI {
+    /**
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Add Prompt
+     */
+    addPromptRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling addPrompt().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/prompt-svc/prompt`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: PromptSvcAddPromptRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => PromptSvcAddPromptResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Add Prompt
+     */
+    addPrompt(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.addPromptRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * List prompts that satisfy a query.
+     * List Prompts
+     */
+    listPromptsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/prompt-svc/prompts`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: PromptSvcListPromptsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => PromptSvcListPromptsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * List prompts that satisfy a query.
+     * List Prompts
+     */
+    listPrompts() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.listPromptsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Remove a prompt by ID.
+     * Remove Prompt
+     */
+    removePromptRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling removePrompt().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/prompt-svc/remove`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: PromptSvcRemovePromptRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Remove a prompt by ID.
+     * Remove Prompt
+     */
+    removePrompt(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.removePromptRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+     * Subscribe to Prompt Responses by Thread
+     */
+    subscribeToPromptResponsesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['threadId'] == null) {
+                throw new RequiredError('threadId', 'Required parameter "threadId" was null or undefined when calling subscribeToPromptResponses().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/prompt-svc/prompts/{threadId}/responses/subscribe`.replace(`{${"threadId"}}`, encodeURIComponent(String(requestParameters['threadId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            if (this.isJsonMime(response.headers.get('content-type'))) {
+                return new JSONApiResponse(response);
+            }
+            else {
+                return new TextApiResponse(response);
+            }
+        });
+    }
+    /**
+     * Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+     * Subscribe to Prompt Responses by Thread
+     */
+    subscribeToPromptResponses(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.subscribeToPromptResponsesRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class RegistrySvcApi extends BaseAPI {
+    /**
+     * Deletes a registered definition by ID.
+     * Delete Definition
+     */
+    deleteDefinitionRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['id'] == null) {
+                throw new RequiredError('id', 'Required parameter "id" was null or undefined when calling deleteDefinition().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/definition/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new VoidApiResponse(response);
+        });
+    }
+    /**
+     * Deletes a registered definition by ID.
+     * Delete Definition
+     */
+    deleteDefinition(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.deleteDefinitionRaw(requestParameters, initOverrides);
+        });
+    }
+    /**
+     * Deletes a registered node by node URL. This endpoint is useful when a node is no longer available but it\'s still present in the database.
+     * Delete Node
+     */
+    deleteNodeRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['url'] == null) {
+                throw new RequiredError('url', 'Required parameter "url" was null or undefined when calling deleteNode().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/node/{url}`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new VoidApiResponse(response);
+        });
+    }
+    /**
+     * Deletes a registered node by node URL. This endpoint is useful when a node is no longer available but it\'s still present in the database.
+     * Delete Node
+     */
+    deleteNode(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.deleteNodeRaw(requestParameters, initOverrides);
+        });
+    }
+    /**
+     * Retrieves a list of all definitions or filters them by specific criteria.
+     * List Definitions
+     */
+    listDefinitionsRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/definitions`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => RegistrySvcListDefinitionsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves a list of all definitions or filters them by specific criteria.
+     * List Definitions
+     */
+    listDefinitions(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.listDefinitionsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieves a list of all instances or filters them by specific criteria (e.g., host, IP).
+     * List Service Instances
+     */
+    listInstancesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            if (requestParameters['scheme'] != null) {
+                queryParameters['scheme'] = requestParameters['scheme'];
+            }
+            if (requestParameters['ip'] != null) {
+                queryParameters['ip'] = requestParameters['ip'];
+            }
+            if (requestParameters['deploymentId'] != null) {
+                queryParameters['deploymentId'] = requestParameters['deploymentId'];
+            }
+            if (requestParameters['host'] != null) {
+                queryParameters['host'] = requestParameters['host'];
+            }
+            if (requestParameters['ip2'] != null) {
+                queryParameters['ip'] = requestParameters['ip2'];
+            }
+            if (requestParameters['id'] != null) {
+                queryParameters['id'] = requestParameters['id'];
+            }
+            if (requestParameters['slug'] != null) {
+                queryParameters['slug'] = requestParameters['slug'];
+            }
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/instances`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => RegistrySvcListInstancesResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieves a list of all instances or filters them by specific criteria (e.g., host, IP).
+     * List Service Instances
+     */
+    listInstances() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.listInstancesRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve a list of nodes.
+     * List Nodes
+     */
+    listNodesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/nodes`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => RegistrySvcListNodesResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve a list of nodes.
+     * List Nodes
+     */
+    listNodes() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.listNodesRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Registers an instance. Idempoent.
+     * Register Instance
+     */
+    registerInstanceRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling registerInstance().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/instance`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: RegistrySvcRegisterInstanceRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Registers an instance. Idempoent.
+     * Register Instance
+     */
+    registerInstance(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.registerInstanceRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Removes a registered instance by ID.
+     * Remove Instance
+     */
+    removeInstanceRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['id'] == null) {
+                throw new RequiredError('id', 'Required parameter "id" was null or undefined when calling removeInstance().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/instance/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new VoidApiResponse(response);
+        });
+    }
+    /**
+     * Removes a registered instance by ID.
+     * Remove Instance
+     */
+    removeInstance(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.removeInstanceRaw(requestParameters, initOverrides);
+        });
+    }
+    /**
+     * Registers a new definition, associating an definition address with a slug acquired from the bearer token.
+     * Register a Definition
+     */
+    saveDefinitionRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveDefinition().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/definition`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: RegistrySvcSaveDefinitionRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Registers a new definition, associating an definition address with a slug acquired from the bearer token.
+     * Register a Definition
+     */
+    saveDefinition(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveDefinitionRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class SecretSvcApi extends BaseAPI {
+    /**
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
+     */
+    decryptValueRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling decryptValue().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/decrypt`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcDecryptValueRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => SecretSvcDecryptValueResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Decrypt a value and return the encrypted result
+     * Decrypt a Value
+     */
+    decryptValue(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.decryptValueRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
+     */
+    encryptValueRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling encryptValue().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/encrypt`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcEncryptValueRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => SecretSvcEncryptValueResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Encrypt a value and return the encrypted result
+     * Encrypt a Value
+     */
+    encryptValue(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.encryptValueRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * List secrets by key(s) if authorized.
+     * List Secrets
+     */
+    listSecretsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/secrets`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcListSecretsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => SecretSvcListSecretsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * List secrets by key(s) if authorized.
+     * List Secrets
+     */
+    listSecrets() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.listSecretsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Remove secrets if authorized to do so
+     * Remove Secrets
+     */
+    removeSecretsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling removeSecrets().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/secrets`,
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcRemoveSecretsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Remove secrets if authorized to do so
+     * Remove Secrets
+     */
+    removeSecrets(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.removeSecretsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save secrets if authorized to do so
+     * Save Secrets
+     */
+    saveSecretsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveSecrets().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/secrets`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SecretSvcSaveSecretsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save secrets if authorized to do so
+     * Save Secrets
+     */
+    saveSecrets(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveSecretsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class SourceSvcApi extends BaseAPI {
+    /**
+     * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
+     * Checkout a git repository
+     */
+    checkoutRepoRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling checkoutRepo().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/source-svc/repo/checkout`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: SourceSvcCheckoutRepoRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => SourceSvcCheckoutRepoResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
+     * Checkout a git repository
+     */
+    checkoutRepo(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.checkoutRepoRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+/**
+ *
+ */
+class UserSvcApi extends BaseAPI {
+    /**
+     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
+     * Add Permission to Role
+     */
+    addPermissionToRoleRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['roleId'] == null) {
+                throw new RequiredError('roleId', 'Required parameter "roleId" was null or undefined when calling addPermissionToRole().');
+            }
+            if (requestParameters['permissionId'] == null) {
+                throw new RequiredError('permissionId', 'Required parameter "permissionId" was null or undefined when calling addPermissionToRole().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/role/{roleId}/permission/{permissionId}`.replace(`{${"roleId"}}`, encodeURIComponent(String(requestParameters['roleId']))).replace(`{${"permissionId"}}`, encodeURIComponent(String(requestParameters['permissionId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
+     * Add Permission to Role
+     */
+    addPermissionToRole(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.addPermissionToRoleRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * Add a User to an Organization
+     */
+    addUserToOrganizationRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['organizationId'] == null) {
+                throw new RequiredError('organizationId', 'Required parameter "organizationId" was null or undefined when calling addUserToOrganization().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling addUserToOrganization().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/organization/{organizationId}/user`.replace(`{${"organizationId"}}`, encodeURIComponent(String(requestParameters['organizationId']))),
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcAddUserToOrganizationRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * Add a User to an Organization
+     */
+    addUserToOrganization(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.addUserToOrganizationRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows an authenticated user to change their own password.
+     * Change User Password
+     */
+    changePasswordRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling changePassword().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/change-password`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcChangePasswordRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows an authenticated user to change their own password.
+     * Change User Password
+     */
+    changePassword(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.changePasswordRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows an administrator to change a user\'s password.
+     * Change User Password (Admin)
+     */
+    changePasswordAdminRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling changePasswordAdmin().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/change-password-admin`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcChangePasswordAdminRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows an administrator to change a user\'s password.
+     * Change User Password (Admin)
+     */
+    changePasswordAdmin(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.changePasswordAdminRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * Create an Organization
+     */
+    createOrganizationRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling createOrganization().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/organization`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcCreateOrganizationRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * Create an Organization
+     */
+    createOrganization(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.createOrganizationRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * Create a New Role
+     */
+    createRoleRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling createRole().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/role`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcCreateRoleRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcCreateRoleResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * Create a New Role
+     */
+    createRole(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.createRoleRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows an authenticated administrator to create a new user with specified details.
+     * Create a New User
+     */
+    createUserRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling createUser().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/user`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcCreateUserRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows an authenticated administrator to create a new user with specified details.
+     * Create a New User
+     */
+    createUser(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.createUserRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Delete a role based on the role ID.
+     * Delete a Role
+     */
+    deleteRoleRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['roleId'] == null) {
+                throw new RequiredError('roleId', 'Required parameter "roleId" was null or undefined when calling deleteRole().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/role/{roleId}`.replace(`{${"roleId"}}`, encodeURIComponent(String(requestParameters['roleId']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a role based on the role ID.
+     * Delete a Role
+     */
+    deleteRole(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.deleteRoleRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Delete a user based on the user ID.
+     * Delete a User
+     */
+    deleteUserRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['userId'] == null) {
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling deleteUser().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/user/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Delete a user based on the user ID.
+     * Delete a User
+     */
+    deleteUser(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.deleteUserRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve permissions associated with a specific role ID.
+     * Get Permissions by Role
+     */
+    getPermissionsByRoleRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['roleId'] == null) {
+                throw new RequiredError('roleId', 'Required parameter "roleId" was null or undefined when calling getPermissionsByRole().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/role/{roleId}/permissions`.replace(`{${"roleId"}}`, encodeURIComponent(String(requestParameters['roleId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcGetPermissionsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve permissions associated with a specific role ID.
+     * Get Permissions by Role
+     */
+    getPermissionsByRole(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getPermissionsByRoleRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Get the public key to descrypt the JWT.
+     * Get Public Key
+     */
+    getPublicKeyRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            const response = yield this.request({
+                path: `/user-svc/public-key`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcGetPublicKeyResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Get the public key to descrypt the JWT.
+     * Get Public Key
+     */
+    getPublicKey(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getPublicKeyRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve all roles from the user service.
+     * Get all Roles
+     */
+    getRolesRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/roles`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcGetRolesResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve all roles from the user service.
+     * Get all Roles
+     */
+    getRoles(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getRolesRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetches a list of users with optional query filters and pagination.
+     * List Users
+     */
+    getUsersRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/users`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcGetUsersRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcGetUsersResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetches a list of users with optional query filters and pagination.
+     * List Users
+     */
+    getUsers() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.getUsersRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Check if a user is authorized for a specific permission.
+     * Is Authorized
+     */
+    isAuthorizedRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['permissionId'] == null) {
+                throw new RequiredError('permissionId', 'Required parameter "permissionId" was null or undefined when calling isAuthorized().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/permission/{permissionId}/is-authorized`.replace(`{${"permissionId"}}`, encodeURIComponent(String(requestParameters['permissionId']))),
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcIsAuthorizedRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcIsAuthorizedResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Check if a user is authorized for a specific permission.
+     * Is Authorized
+     */
+    isAuthorized(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.isAuthorizedRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Authenticates a user and returns a token.
+     * Login
+     */
+    loginRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling login().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            const response = yield this.request({
+                path: `/user-svc/login`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcLoginRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcLoginResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Authenticates a user and returns a token.
+     * Login
+     */
+    login(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.loginRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve user information based on an authentication token.
+     * Read User by Token
+     */
+    readUserByTokenRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/user/by-token`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcReadUserByTokenResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve user information based on an authentication token.
+     * Read User by Token
+     */
+    readUserByToken(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.readUserByTokenRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Register a new user with a name, email, and password.
+     * Register
+     */
+    registerRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling register().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            const response = yield this.request({
+                path: `/user-svc/register`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcRegisterRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response, (jsonValue) => UserSvcRegisterResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Register a new user with a name, email, and password.
+     * Register
+     */
+    register(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.registerRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * Remove a User from an Organization
+     */
+    removeUserFromOrganizationRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['organizationId'] == null) {
+                throw new RequiredError('organizationId', 'Required parameter "organizationId" was null or undefined when calling removeUserFromOrganization().');
+            }
+            if (requestParameters['userId'] == null) {
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling removeUserFromOrganization().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/organization/{organizationId}/user/{userId}`.replace(`{${"organizationId"}}`, encodeURIComponent(String(requestParameters['organizationId']))).replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+                method: 'DELETE',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * Remove a User from an Organization
+     */
+    removeUserFromOrganization(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.removeUserFromOrganizationRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelfRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['userId'] == null) {
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling saveSelf().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveSelf().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/self`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcSaveProfileRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save user\'s own profile information.
+     * Save User Profile
+     */
+    saveSelf(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveSelfRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
+     */
+    saveUserRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['userId'] == null) {
+                throw new RequiredError('userId', 'Required parameter "userId" was null or undefined when calling saveUser().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling saveUser().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/user/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcSaveProfileRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * Save User
+     */
+    saveUser(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.saveUserRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Set permissions for a specified role. The caller can add permissions it owns to any role. If the caller tries to add a permission it doesn\'t own to a role, `StatusBadRequest` will be returned.
+     * Set Role Permissions
+     */
+    setRolePermissionRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['roleId'] == null) {
+                throw new RequiredError('roleId', 'Required parameter "roleId" was null or undefined when calling setRolePermission().');
+            }
+            if (requestParameters['body'] == null) {
+                throw new RequiredError('body', 'Required parameter "body" was null or undefined when calling setRolePermission().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/role/{roleId}/permissions`.replace(`{${"roleId"}}`, encodeURIComponent(String(requestParameters['roleId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcSetRolePermissionsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Set permissions for a specified role. The caller can add permissions it owns to any role. If the caller tries to add a permission it doesn\'t own to a role, `StatusBadRequest` will be returned.
+     * Set Role Permissions
+     */
+    setRolePermission(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.setRolePermissionRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Upsert a Permission
+     */
+    upsertPermissionRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['permissionId'] == null) {
+                throw new RequiredError('permissionId', 'Required parameter "permissionId" was null or undefined when calling upsertPermission().');
+            }
+            if (requestParameters['requestBody'] == null) {
+                throw new RequiredError('requestBody', 'Required parameter "requestBody" was null or undefined when calling upsertPermission().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/permission/{permissionId}`.replace(`{${"permissionId"}}`, encodeURIComponent(String(requestParameters['permissionId']))),
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcUpserPermissionRequestToJSON(requestParameters['requestBody']),
+            }, initOverrides);
+            return new JSONApiResponse(response);
+        });
+    }
+    /**
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Upsert a Permission
+     */
+    upsertPermission(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.upsertPermissionRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+}
+
+export { BASE_PATH, BaseAPI, BlobApiResponse, COLLECTION_FORMATS, ChatSvcAddMessageRequestFromJSON, ChatSvcAddMessageRequestFromJSONTyped, ChatSvcAddMessageRequestToJSON, ChatSvcAddMessageRequestToJSONTyped, ChatSvcAddThreadRequestFromJSON, ChatSvcAddThreadRequestFromJSONTyped, ChatSvcAddThreadRequestToJSON, ChatSvcAddThreadRequestToJSONTyped, ChatSvcAddThreadResponseFromJSON, ChatSvcAddThreadResponseFromJSONTyped, ChatSvcAddThreadResponseToJSON, ChatSvcAddThreadResponseToJSONTyped, ChatSvcApi, ChatSvcAssetFromJSON, ChatSvcAssetFromJSONTyped, ChatSvcAssetToJSON, ChatSvcAssetToJSONTyped, ChatSvcEventMessageAddedFromJSON, ChatSvcEventMessageAddedFromJSONTyped, ChatSvcEventMessageAddedToJSON, ChatSvcEventMessageAddedToJSONTyped, ChatSvcEventThreadAddedFromJSON, ChatSvcEventThreadAddedFromJSONTyped, ChatSvcEventThreadAddedToJSON, ChatSvcEventThreadAddedToJSONTyped, ChatSvcEventThreadUpdateFromJSON, ChatSvcEventThreadUpdateFromJSONTyped, ChatSvcEventThreadUpdateToJSON, ChatSvcEventThreadUpdateToJSONTyped, ChatSvcGetMessagesResponseFromJSON, ChatSvcGetMessagesResponseFromJSONTyped, ChatSvcGetMessagesResponseToJSON, ChatSvcGetMessagesResponseToJSONTyped, ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadResponseFromJSONTyped, ChatSvcGetThreadResponseToJSON, ChatSvcGetThreadResponseToJSONTyped, ChatSvcGetThreadsResponseFromJSON, ChatSvcGetThreadsResponseFromJSONTyped, ChatSvcGetThreadsResponseToJSON, ChatSvcGetThreadsResponseToJSONTyped, ChatSvcMessageFromJSON, ChatSvcMessageFromJSONTyped, ChatSvcMessageToJSON, ChatSvcMessageToJSONTyped, ChatSvcThreadFromJSON, ChatSvcThreadFromJSONTyped, ChatSvcThreadToJSON, ChatSvcThreadToJSONTyped, ChatSvcUpdateThreadRequestFromJSON, ChatSvcUpdateThreadRequestFromJSONTyped, ChatSvcUpdateThreadRequestToJSON, ChatSvcUpdateThreadRequestToJSONTyped, ConfigSvcApi, ConfigSvcConfigFromJSON, ConfigSvcConfigFromJSONTyped, ConfigSvcConfigToJSON, ConfigSvcConfigToJSONTyped, ConfigSvcGetConfigResponseFromJSON, ConfigSvcGetConfigResponseFromJSONTyped, ConfigSvcGetConfigResponseToJSON, ConfigSvcGetConfigResponseToJSONTyped, ConfigSvcSaveConfigRequestFromJSON, ConfigSvcSaveConfigRequestFromJSONTyped, ConfigSvcSaveConfigRequestToJSON, ConfigSvcSaveConfigRequestToJSONTyped, Configuration, DatastoreFilterFromJSON, DatastoreFilterFromJSONTyped, DatastoreFilterToJSON, DatastoreFilterToJSONTyped, DatastoreOp, DatastoreOpFromJSON, DatastoreOpFromJSONTyped, DatastoreOpToJSON, DatastoreOpToJSONTyped, DatastoreOrderByFromJSON, DatastoreOrderByFromJSONTyped, DatastoreOrderByToJSON, DatastoreOrderByToJSONTyped, DatastoreQueryFromJSON, DatastoreQueryFromJSONTyped, DatastoreQueryToJSON, DatastoreQueryToJSONTyped, DefaultConfig, DeploySvcApi, DeploySvcAutoScalingConfigFromJSON, DeploySvcAutoScalingConfigFromJSONTyped, DeploySvcAutoScalingConfigToJSON, DeploySvcAutoScalingConfigToJSONTyped, DeploySvcDeleteDeploymentRequestFromJSON, DeploySvcDeleteDeploymentRequestFromJSONTyped, DeploySvcDeleteDeploymentRequestToJSON, DeploySvcDeleteDeploymentRequestToJSONTyped, DeploySvcDeploymentFromJSON, DeploySvcDeploymentFromJSONTyped, DeploySvcDeploymentStatus, DeploySvcDeploymentStatusFromJSON, DeploySvcDeploymentStatusFromJSONTyped, DeploySvcDeploymentStatusToJSON, DeploySvcDeploymentStatusToJSONTyped, DeploySvcDeploymentStrategyFromJSON, DeploySvcDeploymentStrategyFromJSONTyped, DeploySvcDeploymentStrategyToJSON, DeploySvcDeploymentStrategyToJSONTyped, DeploySvcDeploymentToJSON, DeploySvcDeploymentToJSONTyped, DeploySvcErrorResponseFromJSON, DeploySvcErrorResponseFromJSONTyped, DeploySvcErrorResponseToJSON, DeploySvcErrorResponseToJSONTyped, DeploySvcListDeploymentsResponseFromJSON, DeploySvcListDeploymentsResponseFromJSONTyped, DeploySvcListDeploymentsResponseToJSON, DeploySvcListDeploymentsResponseToJSONTyped, DeploySvcResourceLimitsFromJSON, DeploySvcResourceLimitsFromJSONTyped, DeploySvcResourceLimitsToJSON, DeploySvcResourceLimitsToJSONTyped, DeploySvcSaveDeploymentRequestFromJSON, DeploySvcSaveDeploymentRequestFromJSONTyped, DeploySvcSaveDeploymentRequestToJSON, DeploySvcSaveDeploymentRequestToJSONTyped, DeploySvcStrategyType, DeploySvcStrategyTypeFromJSON, DeploySvcStrategyTypeFromJSONTyped, DeploySvcStrategyTypeToJSON, DeploySvcStrategyTypeToJSONTyped, DeploySvcTargetRegionFromJSON, DeploySvcTargetRegionFromJSONTyped, DeploySvcTargetRegionToJSON, DeploySvcTargetRegionToJSONTyped, DockerSvcApi, DockerSvcBuildImageRequestFromJSON, DockerSvcBuildImageRequestFromJSONTyped, DockerSvcBuildImageRequestToJSON, DockerSvcBuildImageRequestToJSONTyped, DockerSvcContainerIsRunningResponseFromJSON, DockerSvcContainerIsRunningResponseFromJSONTyped, DockerSvcContainerIsRunningResponseToJSON, DockerSvcContainerIsRunningResponseToJSONTyped, DockerSvcDockerInfoFromJSON, DockerSvcDockerInfoFromJSONTyped, DockerSvcDockerInfoToJSON, DockerSvcDockerInfoToJSONTyped, DockerSvcErrorResponseFromJSON, DockerSvcErrorResponseFromJSONTyped, DockerSvcErrorResponseToJSON, DockerSvcErrorResponseToJSONTyped, DockerSvcGetContainerSummaryResponseFromJSON, DockerSvcGetContainerSummaryResponseFromJSONTyped, DockerSvcGetContainerSummaryResponseToJSON, DockerSvcGetContainerSummaryResponseToJSONTyped, DockerSvcGetDockerHostResponseFromJSON, DockerSvcGetDockerHostResponseFromJSONTyped, DockerSvcGetDockerHostResponseToJSON, DockerSvcGetDockerHostResponseToJSONTyped, DockerSvcGetInfoResponseFromJSON, DockerSvcGetInfoResponseFromJSONTyped, DockerSvcGetInfoResponseToJSON, DockerSvcGetInfoResponseToJSONTyped, DockerSvcRunContainerOptionsFromJSON, DockerSvcRunContainerOptionsFromJSONTyped, DockerSvcRunContainerOptionsToJSON, DockerSvcRunContainerOptionsToJSONTyped, DockerSvcRunContainerRequestFromJSON, DockerSvcRunContainerRequestFromJSONTyped, DockerSvcRunContainerRequestToJSON, DockerSvcRunContainerRequestToJSONTyped, DockerSvcRunContainerResponseFromJSON, DockerSvcRunContainerResponseFromJSONTyped, DockerSvcRunContainerResponseToJSON, DockerSvcRunContainerResponseToJSONTyped, DockerSvcRunInfoFromJSON, DockerSvcRunInfoFromJSONTyped, DockerSvcRunInfoToJSON, DockerSvcRunInfoToJSONTyped, DockerSvcStopContainerRequestFromJSON, DockerSvcStopContainerRequestFromJSONTyped, DockerSvcStopContainerRequestToJSON, DockerSvcStopContainerRequestToJSONTyped, DownloadSvcApi, DownloadSvcDownloadDetailsFromJSON, DownloadSvcDownloadDetailsFromJSONTyped, DownloadSvcDownloadDetailsToJSON, DownloadSvcDownloadDetailsToJSONTyped, DownloadSvcDownloadRequestFromJSON, DownloadSvcDownloadRequestFromJSONTyped, DownloadSvcDownloadRequestToJSON, DownloadSvcDownloadRequestToJSONTyped, DownloadSvcDownloadsResponseFromJSON, DownloadSvcDownloadsResponseFromJSONTyped, DownloadSvcDownloadsResponseToJSON, DownloadSvcDownloadsResponseToJSONTyped, DownloadSvcErrorResponseFromJSON, DownloadSvcErrorResponseFromJSONTyped, DownloadSvcErrorResponseToJSON, DownloadSvcErrorResponseToJSONTyped, DownloadSvcGetDownloadResponseFromJSON, DownloadSvcGetDownloadResponseFromJSONTyped, DownloadSvcGetDownloadResponseToJSON, DownloadSvcGetDownloadResponseToJSONTyped, DynamicSvcApi, DynamicSvcCreateObjectRequestFromJSON, DynamicSvcCreateObjectRequestFromJSONTyped, DynamicSvcCreateObjectRequestToJSON, DynamicSvcCreateObjectRequestToJSONTyped, DynamicSvcCreateObjectResponseFromJSON, DynamicSvcCreateObjectResponseFromJSONTyped, DynamicSvcCreateObjectResponseToJSON, DynamicSvcCreateObjectResponseToJSONTyped, DynamicSvcDeleteObjectRequestFromJSON, DynamicSvcDeleteObjectRequestFromJSONTyped, DynamicSvcDeleteObjectRequestToJSON, DynamicSvcDeleteObjectRequestToJSONTyped, DynamicSvcErrorResponseFromJSON, DynamicSvcErrorResponseFromJSONTyped, DynamicSvcErrorResponseToJSON, DynamicSvcErrorResponseToJSONTyped, DynamicSvcObjectCreateFieldsFromJSON, DynamicSvcObjectCreateFieldsFromJSONTyped, DynamicSvcObjectCreateFieldsToJSON, DynamicSvcObjectCreateFieldsToJSONTyped, DynamicSvcObjectFromJSON, DynamicSvcObjectFromJSONTyped, DynamicSvcObjectToJSON, DynamicSvcObjectToJSONTyped, DynamicSvcQueryRequestFromJSON, DynamicSvcQueryRequestFromJSONTyped, DynamicSvcQueryRequestToJSON, DynamicSvcQueryRequestToJSONTyped, DynamicSvcQueryResponseFromJSON, DynamicSvcQueryResponseFromJSONTyped, DynamicSvcQueryResponseToJSON, DynamicSvcQueryResponseToJSONTyped, DynamicSvcUpdateObjectRequestFromJSON, DynamicSvcUpdateObjectRequestFromJSONTyped, DynamicSvcUpdateObjectRequestToJSON, DynamicSvcUpdateObjectRequestToJSONTyped, DynamicSvcUpsertObjectRequestFromJSON, DynamicSvcUpsertObjectRequestFromJSONTyped, DynamicSvcUpsertObjectRequestToJSON, DynamicSvcUpsertObjectRequestToJSONTyped, DynamicSvcUpsertObjectResponseFromJSON, DynamicSvcUpsertObjectResponseFromJSONTyped, DynamicSvcUpsertObjectResponseToJSON, DynamicSvcUpsertObjectResponseToJSONTyped, EmailSvcApi, EmailSvcErrorResponseFromJSON, EmailSvcErrorResponseFromJSONTyped, EmailSvcErrorResponseToJSON, EmailSvcErrorResponseToJSONTyped, EmailSvcFileFromJSON, EmailSvcFileFromJSONTyped, EmailSvcFileToJSON, EmailSvcFileToJSONTyped, EmailSvcSendEmailRequestFromJSON, EmailSvcSendEmailRequestFromJSONTyped, EmailSvcSendEmailRequestToJSON, EmailSvcSendEmailRequestToJSONTyped, EmailSvcSendEmailResponseFromJSON, EmailSvcSendEmailResponseFromJSONTyped, EmailSvcSendEmailResponseToJSON, EmailSvcSendEmailResponseToJSONTyped, FetchError, FirehoseSvcApi, FirehoseSvcErrorResponseFromJSON, FirehoseSvcErrorResponseFromJSONTyped, FirehoseSvcErrorResponseToJSON, FirehoseSvcErrorResponseToJSONTyped, FirehoseSvcEventFromJSON, FirehoseSvcEventFromJSONTyped, FirehoseSvcEventPublishRequestFromJSON, FirehoseSvcEventPublishRequestFromJSONTyped, FirehoseSvcEventPublishRequestToJSON, FirehoseSvcEventPublishRequestToJSONTyped, FirehoseSvcEventToJSON, FirehoseSvcEventToJSONTyped, JSONApiResponse, ModelSvcApi, ModelSvcArchitecturesFromJSON, ModelSvcArchitecturesFromJSONTyped, ModelSvcArchitecturesToJSON, ModelSvcArchitecturesToJSONTyped, ModelSvcContainerFromJSON, ModelSvcContainerFromJSONTyped, ModelSvcContainerToJSON, ModelSvcContainerToJSONTyped, ModelSvcErrorResponseFromJSON, ModelSvcErrorResponseFromJSONTyped, ModelSvcErrorResponseToJSON, ModelSvcErrorResponseToJSONTyped, ModelSvcGetModelResponseFromJSON, ModelSvcGetModelResponseFromJSONTyped, ModelSvcGetModelResponseToJSON, ModelSvcGetModelResponseToJSONTyped, ModelSvcListResponseFromJSON, ModelSvcListResponseFromJSONTyped, ModelSvcListResponseToJSON, ModelSvcListResponseToJSONTyped, ModelSvcModelFromJSON, ModelSvcModelFromJSONTyped, ModelSvcModelStatusFromJSON, ModelSvcModelStatusFromJSONTyped, ModelSvcModelStatusToJSON, ModelSvcModelStatusToJSONTyped, ModelSvcModelToJSON, ModelSvcModelToJSONTyped, ModelSvcPlatformFromJSON, ModelSvcPlatformFromJSONTyped, ModelSvcPlatformToJSON, ModelSvcPlatformToJSONTyped, ModelSvcStatusResponseFromJSON, ModelSvcStatusResponseFromJSONTyped, ModelSvcStatusResponseToJSON, ModelSvcStatusResponseToJSONTyped, PolicySvcApi, PolicySvcBlocklistParametersFromJSON, PolicySvcBlocklistParametersFromJSONTyped, PolicySvcBlocklistParametersToJSON, PolicySvcBlocklistParametersToJSONTyped, PolicySvcCheckRequestFromJSON, PolicySvcCheckRequestFromJSONTyped, PolicySvcCheckRequestToJSON, PolicySvcCheckRequestToJSONTyped, PolicySvcCheckResponseFromJSON, PolicySvcCheckResponseFromJSONTyped, PolicySvcCheckResponseToJSON, PolicySvcCheckResponseToJSONTyped, PolicySvcEntity, PolicySvcEntityFromJSON, PolicySvcEntityFromJSONTyped, PolicySvcEntityToJSON, PolicySvcEntityToJSONTyped, PolicySvcErrorResponseFromJSON, PolicySvcErrorResponseFromJSONTyped, PolicySvcErrorResponseToJSON, PolicySvcErrorResponseToJSONTyped, PolicySvcInstanceFromJSON, PolicySvcInstanceFromJSONTyped, PolicySvcInstanceToJSON, PolicySvcInstanceToJSONTyped, PolicySvcRateLimitParametersFromJSON, PolicySvcRateLimitParametersFromJSONTyped, PolicySvcRateLimitParametersToJSON, PolicySvcRateLimitParametersToJSONTyped, PolicySvcScope, PolicySvcScopeFromJSON, PolicySvcScopeFromJSONTyped, PolicySvcScopeToJSON, PolicySvcScopeToJSONTyped, PolicySvcTemplateId, PolicySvcTemplateIdFromJSON, PolicySvcTemplateIdFromJSONTyped, PolicySvcTemplateIdToJSON, PolicySvcTemplateIdToJSONTyped, PolicySvcUpsertInstanceRequestFromJSON, PolicySvcUpsertInstanceRequestFromJSONTyped, PolicySvcUpsertInstanceRequestToJSON, PolicySvcUpsertInstanceRequestToJSONTyped, PromptSvcAddPromptRequestFromJSON, PromptSvcAddPromptRequestFromJSONTyped, PromptSvcAddPromptRequestToJSON, PromptSvcAddPromptRequestToJSONTyped, PromptSvcAddPromptResponseFromJSON, PromptSvcAddPromptResponseFromJSONTyped, PromptSvcAddPromptResponseToJSON, PromptSvcAddPromptResponseToJSONTyped, PromptSvcApi, PromptSvcErrorResponseFromJSON, PromptSvcErrorResponseFromJSONTyped, PromptSvcErrorResponseToJSON, PromptSvcErrorResponseToJSONTyped, PromptSvcListPromptsRequestFromJSON, PromptSvcListPromptsRequestFromJSONTyped, PromptSvcListPromptsRequestToJSON, PromptSvcListPromptsRequestToJSONTyped, PromptSvcListPromptsResponseFromJSON, PromptSvcListPromptsResponseFromJSONTyped, PromptSvcListPromptsResponseToJSON, PromptSvcListPromptsResponseToJSONTyped, PromptSvcPromptFromJSON, PromptSvcPromptFromJSONTyped, PromptSvcPromptStatus, PromptSvcPromptStatusFromJSON, PromptSvcPromptStatusFromJSONTyped, PromptSvcPromptStatusToJSON, PromptSvcPromptStatusToJSONTyped, PromptSvcPromptToJSON, PromptSvcPromptToJSONTyped, PromptSvcRemovePromptRequestFromJSON, PromptSvcRemovePromptRequestFromJSONTyped, PromptSvcRemovePromptRequestToJSON, PromptSvcRemovePromptRequestToJSONTyped, RegistrySvcAPISpecFromJSON, RegistrySvcAPISpecFromJSONTyped, RegistrySvcAPISpecToJSON, RegistrySvcAPISpecToJSONTyped, RegistrySvcApi, RegistrySvcClientFromJSON, RegistrySvcClientFromJSONTyped, RegistrySvcClientToJSON, RegistrySvcClientToJSONTyped, RegistrySvcDefinitionFromJSON, RegistrySvcDefinitionFromJSONTyped, RegistrySvcDefinitionToJSON, RegistrySvcDefinitionToJSONTyped, RegistrySvcErrorResponseFromJSON, RegistrySvcErrorResponseFromJSONTyped, RegistrySvcErrorResponseToJSON, RegistrySvcErrorResponseToJSONTyped, RegistrySvcGPUFromJSON, RegistrySvcGPUFromJSONTyped, RegistrySvcGPUToJSON, RegistrySvcGPUToJSONTyped, RegistrySvcImageSpecFromJSON, RegistrySvcImageSpecFromJSONTyped, RegistrySvcImageSpecToJSON, RegistrySvcImageSpecToJSONTyped, RegistrySvcInstanceFromJSON, RegistrySvcInstanceFromJSONTyped, RegistrySvcInstanceStatus, RegistrySvcInstanceStatusFromJSON, RegistrySvcInstanceStatusFromJSONTyped, RegistrySvcInstanceStatusToJSON, RegistrySvcInstanceStatusToJSONTyped, RegistrySvcInstanceToJSON, RegistrySvcInstanceToJSONTyped, RegistrySvcLanguage, RegistrySvcLanguageFromJSON, RegistrySvcLanguageFromJSONTyped, RegistrySvcLanguageToJSON, RegistrySvcLanguageToJSONTyped, RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListDefinitionsResponseFromJSONTyped, RegistrySvcListDefinitionsResponseToJSON, RegistrySvcListDefinitionsResponseToJSONTyped, RegistrySvcListInstancesResponseFromJSON, RegistrySvcListInstancesResponseFromJSONTyped, RegistrySvcListInstancesResponseToJSON, RegistrySvcListInstancesResponseToJSONTyped, RegistrySvcListNodesResponseFromJSON, RegistrySvcListNodesResponseFromJSONTyped, RegistrySvcListNodesResponseToJSON, RegistrySvcListNodesResponseToJSONTyped, RegistrySvcNodeFromJSON, RegistrySvcNodeFromJSONTyped, RegistrySvcNodeToJSON, RegistrySvcNodeToJSONTyped, RegistrySvcProcessFromJSON, RegistrySvcProcessFromJSONTyped, RegistrySvcProcessToJSON, RegistrySvcProcessToJSONTyped, RegistrySvcRegisterInstanceRequestFromJSON, RegistrySvcRegisterInstanceRequestFromJSONTyped, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcRegisterInstanceRequestToJSONTyped, RegistrySvcRepositorySpecFromJSON, RegistrySvcRepositorySpecFromJSONTyped, RegistrySvcRepositorySpecToJSON, RegistrySvcRepositorySpecToJSONTyped, RegistrySvcResourceUsageFromJSON, RegistrySvcResourceUsageFromJSONTyped, RegistrySvcResourceUsageToJSON, RegistrySvcResourceUsageToJSONTyped, RegistrySvcSaveDefinitionRequestFromJSON, RegistrySvcSaveDefinitionRequestFromJSONTyped, RegistrySvcSaveDefinitionRequestToJSON, RegistrySvcSaveDefinitionRequestToJSONTyped, RegistrySvcUsageFromJSON, RegistrySvcUsageFromJSONTyped, RegistrySvcUsageToJSON, RegistrySvcUsageToJSONTyped, RequiredError, ResponseError, SecretSvcApi, SecretSvcDecryptValueRequestFromJSON, SecretSvcDecryptValueRequestFromJSONTyped, SecretSvcDecryptValueRequestToJSON, SecretSvcDecryptValueRequestToJSONTyped, SecretSvcDecryptValueResponseFromJSON, SecretSvcDecryptValueResponseFromJSONTyped, SecretSvcDecryptValueResponseToJSON, SecretSvcDecryptValueResponseToJSONTyped, SecretSvcEncryptValueRequestFromJSON, SecretSvcEncryptValueRequestFromJSONTyped, SecretSvcEncryptValueRequestToJSON, SecretSvcEncryptValueRequestToJSONTyped, SecretSvcEncryptValueResponseFromJSON, SecretSvcEncryptValueResponseFromJSONTyped, SecretSvcEncryptValueResponseToJSON, SecretSvcEncryptValueResponseToJSONTyped, SecretSvcListSecretsRequestFromJSON, SecretSvcListSecretsRequestFromJSONTyped, SecretSvcListSecretsRequestToJSON, SecretSvcListSecretsRequestToJSONTyped, SecretSvcListSecretsResponseFromJSON, SecretSvcListSecretsResponseFromJSONTyped, SecretSvcListSecretsResponseToJSON, SecretSvcListSecretsResponseToJSONTyped, SecretSvcRemoveSecretsRequestFromJSON, SecretSvcRemoveSecretsRequestFromJSONTyped, SecretSvcRemoveSecretsRequestToJSON, SecretSvcRemoveSecretsRequestToJSONTyped, SecretSvcSaveSecretsRequestFromJSON, SecretSvcSaveSecretsRequestFromJSONTyped, SecretSvcSaveSecretsRequestToJSON, SecretSvcSaveSecretsRequestToJSONTyped, SecretSvcSecretFromJSON, SecretSvcSecretFromJSONTyped, SecretSvcSecretToJSON, SecretSvcSecretToJSONTyped, SourceSvcApi, SourceSvcCheckoutRepoRequestFromJSON, SourceSvcCheckoutRepoRequestFromJSONTyped, SourceSvcCheckoutRepoRequestToJSON, SourceSvcCheckoutRepoRequestToJSONTyped, SourceSvcCheckoutRepoResponseFromJSON, SourceSvcCheckoutRepoResponseFromJSONTyped, SourceSvcCheckoutRepoResponseToJSON, SourceSvcCheckoutRepoResponseToJSONTyped, SourceSvcErrorResponseFromJSON, SourceSvcErrorResponseFromJSONTyped, SourceSvcErrorResponseToJSON, SourceSvcErrorResponseToJSONTyped, TextApiResponse, UserSvcAddUserToOrganizationRequestFromJSON, UserSvcAddUserToOrganizationRequestFromJSONTyped, UserSvcAddUserToOrganizationRequestToJSON, UserSvcAddUserToOrganizationRequestToJSONTyped, UserSvcApi, UserSvcAuthTokenFromJSON, UserSvcAuthTokenFromJSONTyped, UserSvcAuthTokenToJSON, UserSvcAuthTokenToJSONTyped, UserSvcChangePasswordAdminRequestFromJSON, UserSvcChangePasswordAdminRequestFromJSONTyped, UserSvcChangePasswordAdminRequestToJSON, UserSvcChangePasswordAdminRequestToJSONTyped, UserSvcChangePasswordRequestFromJSON, UserSvcChangePasswordRequestFromJSONTyped, UserSvcChangePasswordRequestToJSON, UserSvcChangePasswordRequestToJSONTyped, UserSvcContactFromJSON, UserSvcContactFromJSONTyped, UserSvcContactToJSON, UserSvcContactToJSONTyped, UserSvcCreateOrganizationRequestFromJSON, UserSvcCreateOrganizationRequestFromJSONTyped, UserSvcCreateOrganizationRequestToJSON, UserSvcCreateOrganizationRequestToJSONTyped, UserSvcCreateRoleRequestFromJSON, UserSvcCreateRoleRequestFromJSONTyped, UserSvcCreateRoleRequestToJSON, UserSvcCreateRoleRequestToJSONTyped, UserSvcCreateRoleResponseFromJSON, UserSvcCreateRoleResponseFromJSONTyped, UserSvcCreateRoleResponseToJSON, UserSvcCreateRoleResponseToJSONTyped, UserSvcCreateUserRequestFromJSON, UserSvcCreateUserRequestFromJSONTyped, UserSvcCreateUserRequestToJSON, UserSvcCreateUserRequestToJSONTyped, UserSvcErrorResponseFromJSON, UserSvcErrorResponseFromJSONTyped, UserSvcErrorResponseToJSON, UserSvcErrorResponseToJSONTyped, UserSvcGetPermissionsResponseFromJSON, UserSvcGetPermissionsResponseFromJSONTyped, UserSvcGetPermissionsResponseToJSON, UserSvcGetPermissionsResponseToJSONTyped, UserSvcGetPublicKeyResponseFromJSON, UserSvcGetPublicKeyResponseFromJSONTyped, UserSvcGetPublicKeyResponseToJSON, UserSvcGetPublicKeyResponseToJSONTyped, UserSvcGetRolesResponseFromJSON, UserSvcGetRolesResponseFromJSONTyped, UserSvcGetRolesResponseToJSON, UserSvcGetRolesResponseToJSONTyped, UserSvcGetUsersRequestFromJSON, UserSvcGetUsersRequestFromJSONTyped, UserSvcGetUsersRequestToJSON, UserSvcGetUsersRequestToJSONTyped, UserSvcGetUsersResponseFromJSON, UserSvcGetUsersResponseFromJSONTyped, UserSvcGetUsersResponseToJSON, UserSvcGetUsersResponseToJSONTyped, UserSvcIsAuthorizedRequestFromJSON, UserSvcIsAuthorizedRequestFromJSONTyped, UserSvcIsAuthorizedRequestToJSON, UserSvcIsAuthorizedRequestToJSONTyped, UserSvcIsAuthorizedResponseFromJSON, UserSvcIsAuthorizedResponseFromJSONTyped, UserSvcIsAuthorizedResponseToJSON, UserSvcIsAuthorizedResponseToJSONTyped, UserSvcLoginRequestFromJSON, UserSvcLoginRequestFromJSONTyped, UserSvcLoginRequestToJSON, UserSvcLoginRequestToJSONTyped, UserSvcLoginResponseFromJSON, UserSvcLoginResponseFromJSONTyped, UserSvcLoginResponseToJSON, UserSvcLoginResponseToJSONTyped, UserSvcOrganizationFromJSON, UserSvcOrganizationFromJSONTyped, UserSvcOrganizationToJSON, UserSvcOrganizationToJSONTyped, UserSvcPermissionFromJSON, UserSvcPermissionFromJSONTyped, UserSvcPermissionToJSON, UserSvcPermissionToJSONTyped, UserSvcReadUserByTokenResponseFromJSON, UserSvcReadUserByTokenResponseFromJSONTyped, UserSvcReadUserByTokenResponseToJSON, UserSvcReadUserByTokenResponseToJSONTyped, UserSvcRegisterRequestFromJSON, UserSvcRegisterRequestFromJSONTyped, UserSvcRegisterRequestToJSON, UserSvcRegisterRequestToJSONTyped, UserSvcRegisterResponseFromJSON, UserSvcRegisterResponseFromJSONTyped, UserSvcRegisterResponseToJSON, UserSvcRegisterResponseToJSONTyped, UserSvcRoleFromJSON, UserSvcRoleFromJSONTyped, UserSvcRoleToJSON, UserSvcRoleToJSONTyped, UserSvcSaveProfileRequestFromJSON, UserSvcSaveProfileRequestFromJSONTyped, UserSvcSaveProfileRequestToJSON, UserSvcSaveProfileRequestToJSONTyped, UserSvcSetRolePermissionsRequestFromJSON, UserSvcSetRolePermissionsRequestFromJSONTyped, UserSvcSetRolePermissionsRequestToJSON, UserSvcSetRolePermissionsRequestToJSONTyped, UserSvcUpserPermissionRequestFromJSON, UserSvcUpserPermissionRequestFromJSONTyped, UserSvcUpserPermissionRequestToJSON, UserSvcUpserPermissionRequestToJSONTyped, UserSvcUserFromJSON, UserSvcUserFromJSONTyped, UserSvcUserToJSON, UserSvcUserToJSONTyped, VoidApiResponse, canConsumeForm, instanceOfChatSvcAddMessageRequest, instanceOfChatSvcAddThreadRequest, instanceOfChatSvcAddThreadResponse, instanceOfChatSvcAsset, instanceOfChatSvcEventMessageAdded, instanceOfChatSvcEventThreadAdded, instanceOfChatSvcEventThreadUpdate, instanceOfChatSvcGetMessagesResponse, instanceOfChatSvcGetThreadResponse, instanceOfChatSvcGetThreadsResponse, instanceOfChatSvcMessage, instanceOfChatSvcThread, instanceOfChatSvcUpdateThreadRequest, instanceOfConfigSvcConfig, instanceOfConfigSvcGetConfigResponse, instanceOfConfigSvcSaveConfigRequest, instanceOfDatastoreFilter, instanceOfDatastoreOp, instanceOfDatastoreOrderBy, instanceOfDatastoreQuery, instanceOfDeploySvcAutoScalingConfig, instanceOfDeploySvcDeleteDeploymentRequest, instanceOfDeploySvcDeployment, instanceOfDeploySvcDeploymentStatus, instanceOfDeploySvcDeploymentStrategy, instanceOfDeploySvcErrorResponse, instanceOfDeploySvcListDeploymentsResponse, instanceOfDeploySvcResourceLimits, instanceOfDeploySvcSaveDeploymentRequest, instanceOfDeploySvcStrategyType, instanceOfDeploySvcTargetRegion, instanceOfDockerSvcBuildImageRequest, instanceOfDockerSvcContainerIsRunningResponse, instanceOfDockerSvcDockerInfo, instanceOfDockerSvcErrorResponse, instanceOfDockerSvcGetContainerSummaryResponse, instanceOfDockerSvcGetDockerHostResponse, instanceOfDockerSvcGetInfoResponse, instanceOfDockerSvcRunContainerOptions, instanceOfDockerSvcRunContainerRequest, instanceOfDockerSvcRunContainerResponse, instanceOfDockerSvcRunInfo, instanceOfDockerSvcStopContainerRequest, instanceOfDownloadSvcDownloadDetails, instanceOfDownloadSvcDownloadRequest, instanceOfDownloadSvcDownloadsResponse, instanceOfDownloadSvcErrorResponse, instanceOfDownloadSvcGetDownloadResponse, instanceOfDynamicSvcCreateObjectRequest, instanceOfDynamicSvcCreateObjectResponse, instanceOfDynamicSvcDeleteObjectRequest, instanceOfDynamicSvcErrorResponse, instanceOfDynamicSvcObject, instanceOfDynamicSvcObjectCreateFields, instanceOfDynamicSvcQueryRequest, instanceOfDynamicSvcQueryResponse, instanceOfDynamicSvcUpdateObjectRequest, instanceOfDynamicSvcUpsertObjectRequest, instanceOfDynamicSvcUpsertObjectResponse, instanceOfEmailSvcErrorResponse, instanceOfEmailSvcFile, instanceOfEmailSvcSendEmailRequest, instanceOfEmailSvcSendEmailResponse, instanceOfFirehoseSvcErrorResponse, instanceOfFirehoseSvcEvent, instanceOfFirehoseSvcEventPublishRequest, instanceOfModelSvcArchitectures, instanceOfModelSvcContainer, instanceOfModelSvcErrorResponse, instanceOfModelSvcGetModelResponse, instanceOfModelSvcListResponse, instanceOfModelSvcModel, instanceOfModelSvcModelStatus, instanceOfModelSvcPlatform, instanceOfModelSvcStatusResponse, instanceOfPolicySvcBlocklistParameters, instanceOfPolicySvcCheckRequest, instanceOfPolicySvcCheckResponse, instanceOfPolicySvcEntity, instanceOfPolicySvcErrorResponse, instanceOfPolicySvcInstance, instanceOfPolicySvcRateLimitParameters, instanceOfPolicySvcScope, instanceOfPolicySvcTemplateId, instanceOfPolicySvcUpsertInstanceRequest, instanceOfPromptSvcAddPromptRequest, instanceOfPromptSvcAddPromptResponse, instanceOfPromptSvcErrorResponse, instanceOfPromptSvcListPromptsRequest, instanceOfPromptSvcListPromptsResponse, instanceOfPromptSvcPrompt, instanceOfPromptSvcPromptStatus, instanceOfPromptSvcRemovePromptRequest, instanceOfRegistrySvcAPISpec, instanceOfRegistrySvcClient, instanceOfRegistrySvcDefinition, instanceOfRegistrySvcErrorResponse, instanceOfRegistrySvcGPU, instanceOfRegistrySvcImageSpec, instanceOfRegistrySvcInstance, instanceOfRegistrySvcInstanceStatus, instanceOfRegistrySvcLanguage, instanceOfRegistrySvcListDefinitionsResponse, instanceOfRegistrySvcListInstancesResponse, instanceOfRegistrySvcListNodesResponse, instanceOfRegistrySvcNode, instanceOfRegistrySvcProcess, instanceOfRegistrySvcRegisterInstanceRequest, instanceOfRegistrySvcRepositorySpec, instanceOfRegistrySvcResourceUsage, instanceOfRegistrySvcSaveDefinitionRequest, instanceOfRegistrySvcUsage, instanceOfSecretSvcDecryptValueRequest, instanceOfSecretSvcDecryptValueResponse, instanceOfSecretSvcEncryptValueRequest, instanceOfSecretSvcEncryptValueResponse, instanceOfSecretSvcListSecretsRequest, instanceOfSecretSvcListSecretsResponse, instanceOfSecretSvcRemoveSecretsRequest, instanceOfSecretSvcSaveSecretsRequest, instanceOfSecretSvcSecret, instanceOfSourceSvcCheckoutRepoRequest, instanceOfSourceSvcCheckoutRepoResponse, instanceOfSourceSvcErrorResponse, instanceOfUserSvcAddUserToOrganizationRequest, instanceOfUserSvcAuthToken, instanceOfUserSvcChangePasswordAdminRequest, instanceOfUserSvcChangePasswordRequest, instanceOfUserSvcContact, instanceOfUserSvcCreateOrganizationRequest, instanceOfUserSvcCreateRoleRequest, instanceOfUserSvcCreateRoleResponse, instanceOfUserSvcCreateUserRequest, instanceOfUserSvcErrorResponse, instanceOfUserSvcGetPermissionsResponse, instanceOfUserSvcGetPublicKeyResponse, instanceOfUserSvcGetRolesResponse, instanceOfUserSvcGetUsersRequest, instanceOfUserSvcGetUsersResponse, instanceOfUserSvcIsAuthorizedRequest, instanceOfUserSvcIsAuthorizedResponse, instanceOfUserSvcLoginRequest, instanceOfUserSvcLoginResponse, instanceOfUserSvcOrganization, instanceOfUserSvcPermission, instanceOfUserSvcReadUserByTokenResponse, instanceOfUserSvcRegisterRequest, instanceOfUserSvcRegisterResponse, instanceOfUserSvcRole, instanceOfUserSvcSaveProfileRequest, instanceOfUserSvcSetRolePermissionsRequest, instanceOfUserSvcUpserPermissionRequest, instanceOfUserSvcUser, mapValues, querystring };
