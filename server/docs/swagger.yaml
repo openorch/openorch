@@ -2180,7 +2180,7 @@ definitions:
     type: object
 externalDocs:
   description: OpenOrch API
-  url: https://openorch.org/docs/category/singulatron-api
+  url: https://openorch.org/docs/category/openorch-api
 host: localhost:58231
 info:
   contact:
@@ -2193,7 +2193,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.8
+  version: 0.3.0-rc.9
 paths:
   /chat-svc/events:
     get:
@@ -5186,7 +5186,7 @@ paths:
 securityDefinitions:
   BearerAuth:
     description: Type "Bearer" followed by a space and token acquired from the User
-      sService Login endpoint.
+      Svc Login endpoint.
     in: header
     name: Authorization
     type: apiKey

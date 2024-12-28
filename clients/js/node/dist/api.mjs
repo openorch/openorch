@@ -1,171 +1,12207 @@
-export { APIS, ChatSvcApi, ChatSvcApiApiKeys, ConfigSvcApi, ConfigSvcApiApiKeys, DeploySvcApi, DeploySvcApiApiKeys, DockerSvcApi, DockerSvcApiApiKeys, DownloadSvcApi, DownloadSvcApiApiKeys, DynamicSvcApi, DynamicSvcApiApiKeys, EmailSvcApi, EmailSvcApiApiKeys, FirehoseSvcApi, FirehoseSvcApiApiKeys, HttpError, ModelSvcApi, ModelSvcApiApiKeys, PolicySvcApi, PolicySvcApiApiKeys, PromptSvcApi, PromptSvcApiApiKeys, RegistrySvcApi, RegistrySvcApiApiKeys, SecretSvcApi, SecretSvcApiApiKeys, SourceSvcApi, SourceSvcApiApiKeys, UserSvcApi, UserSvcApiApiKeys } from './apis.mjs';
-export { ApiKeyAuth, HttpBasicAuth, HttpBearerAuth, OAuth, ObjectSerializer, VoidAuth } from './models.mjs';
-export { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest.mjs';
-export { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest.mjs';
-export { ChatSvcAddThreadResponse } from './chatSvcAddThreadResponse.mjs';
-export { ChatSvcAsset } from './chatSvcAsset.mjs';
-export { ChatSvcEventMessageAdded } from './chatSvcEventMessageAdded.mjs';
-export { ChatSvcEventThreadAdded } from './chatSvcEventThreadAdded.mjs';
-export { ChatSvcEventThreadUpdate } from './chatSvcEventThreadUpdate.mjs';
-export { ChatSvcGetMessagesResponse } from './chatSvcGetMessagesResponse.mjs';
-export { ChatSvcGetThreadResponse } from './chatSvcGetThreadResponse.mjs';
-export { ChatSvcGetThreadsResponse } from './chatSvcGetThreadsResponse.mjs';
-export { ChatSvcMessage } from './chatSvcMessage.mjs';
-export { ChatSvcThread } from './chatSvcThread.mjs';
-export { ChatSvcUpdateThreadRequest } from './chatSvcUpdateThreadRequest.mjs';
-export { ConfigSvcConfig } from './configSvcConfig.mjs';
-export { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse.mjs';
-export { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest.mjs';
-export { DatastoreFilter } from './datastoreFilter.mjs';
-export { DatastoreOp } from './datastoreOp.mjs';
-export { DatastoreOrderBy } from './datastoreOrderBy.mjs';
-export { DatastoreQuery } from './datastoreQuery.mjs';
-export { DeploySvcAutoScalingConfig } from './deploySvcAutoScalingConfig.mjs';
-export { DeploySvcDeleteDeploymentRequest } from './deploySvcDeleteDeploymentRequest.mjs';
-export { DeploySvcDeployment } from './deploySvcDeployment.mjs';
-export { DeploySvcDeploymentStatus } from './deploySvcDeploymentStatus.mjs';
-export { DeploySvcDeploymentStrategy } from './deploySvcDeploymentStrategy.mjs';
-export { DeploySvcErrorResponse } from './deploySvcErrorResponse.mjs';
-export { DeploySvcListDeploymentsResponse } from './deploySvcListDeploymentsResponse.mjs';
-export { DeploySvcResourceLimits } from './deploySvcResourceLimits.mjs';
-export { DeploySvcSaveDeploymentRequest } from './deploySvcSaveDeploymentRequest.mjs';
-export { DeploySvcStrategyType } from './deploySvcStrategyType.mjs';
-export { DeploySvcTargetRegion } from './deploySvcTargetRegion.mjs';
-export { DockerSvcBuildImageRequest } from './dockerSvcBuildImageRequest.mjs';
-export { DockerSvcContainerIsRunningResponse } from './dockerSvcContainerIsRunningResponse.mjs';
-export { DockerSvcDockerInfo } from './dockerSvcDockerInfo.mjs';
-export { DockerSvcErrorResponse } from './dockerSvcErrorResponse.mjs';
-export { DockerSvcGetContainerSummaryResponse } from './dockerSvcGetContainerSummaryResponse.mjs';
-export { DockerSvcGetDockerHostResponse } from './dockerSvcGetDockerHostResponse.mjs';
-export { DockerSvcGetInfoResponse } from './dockerSvcGetInfoResponse.mjs';
-export { DockerSvcRunContainerOptions } from './dockerSvcRunContainerOptions.mjs';
-export { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest.mjs';
-export { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse.mjs';
-export { DockerSvcRunInfo } from './dockerSvcRunInfo.mjs';
-export { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest.mjs';
-export { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails.mjs';
-export { DownloadSvcDownloadRequest } from './downloadSvcDownloadRequest.mjs';
-export { DownloadSvcDownloadsResponse } from './downloadSvcDownloadsResponse.mjs';
-export { DownloadSvcErrorResponse } from './downloadSvcErrorResponse.mjs';
-export { DownloadSvcGetDownloadResponse } from './downloadSvcGetDownloadResponse.mjs';
-export { DynamicSvcCreateObjectRequest } from './dynamicSvcCreateObjectRequest.mjs';
-export { DynamicSvcCreateObjectResponse } from './dynamicSvcCreateObjectResponse.mjs';
-export { DynamicSvcDeleteObjectRequest } from './dynamicSvcDeleteObjectRequest.mjs';
-export { DynamicSvcErrorResponse } from './dynamicSvcErrorResponse.mjs';
-export { DynamicSvcObject } from './dynamicSvcObject.mjs';
-export { DynamicSvcObjectCreateFields } from './dynamicSvcObjectCreateFields.mjs';
-export { DynamicSvcQueryRequest } from './dynamicSvcQueryRequest.mjs';
-export { DynamicSvcQueryResponse } from './dynamicSvcQueryResponse.mjs';
-export { DynamicSvcUpdateObjectRequest } from './dynamicSvcUpdateObjectRequest.mjs';
-export { DynamicSvcUpsertObjectRequest } from './dynamicSvcUpsertObjectRequest.mjs';
-export { DynamicSvcUpsertObjectResponse } from './dynamicSvcUpsertObjectResponse.mjs';
-export { EmailSvcErrorResponse } from './emailSvcErrorResponse.mjs';
-export { EmailSvcFile } from './emailSvcFile.mjs';
-export { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest.mjs';
-export { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse.mjs';
-export { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse.mjs';
-export { FirehoseSvcEvent } from './firehoseSvcEvent.mjs';
-export { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest.mjs';
-export { ModelSvcArchitectures } from './modelSvcArchitectures.mjs';
-export { ModelSvcContainer } from './modelSvcContainer.mjs';
-export { ModelSvcErrorResponse } from './modelSvcErrorResponse.mjs';
-export { ModelSvcGetModelResponse } from './modelSvcGetModelResponse.mjs';
-export { ModelSvcListResponse } from './modelSvcListResponse.mjs';
-export { ModelSvcModel } from './modelSvcModel.mjs';
-export { ModelSvcModelStatus } from './modelSvcModelStatus.mjs';
-export { ModelSvcPlatform } from './modelSvcPlatform.mjs';
-export { ModelSvcStatusResponse } from './modelSvcStatusResponse.mjs';
-export { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters.mjs';
-export { PolicySvcCheckRequest } from './policySvcCheckRequest.mjs';
-export { PolicySvcCheckResponse } from './policySvcCheckResponse.mjs';
-export { PolicySvcEntity } from './policySvcEntity.mjs';
-export { PolicySvcErrorResponse } from './policySvcErrorResponse.mjs';
-export { PolicySvcInstance } from './policySvcInstance.mjs';
-export { PolicySvcRateLimitParameters } from './policySvcRateLimitParameters.mjs';
-export { PolicySvcScope } from './policySvcScope.mjs';
-export { PolicySvcTemplateId } from './policySvcTemplateId.mjs';
-export { PolicySvcUpsertInstanceRequest } from './policySvcUpsertInstanceRequest.mjs';
-export { PromptSvcAddPromptRequest } from './promptSvcAddPromptRequest.mjs';
-export { PromptSvcAddPromptResponse } from './promptSvcAddPromptResponse.mjs';
-export { PromptSvcErrorResponse } from './promptSvcErrorResponse.mjs';
-export { PromptSvcListPromptsRequest } from './promptSvcListPromptsRequest.mjs';
-export { PromptSvcListPromptsResponse } from './promptSvcListPromptsResponse.mjs';
-export { PromptSvcPrompt } from './promptSvcPrompt.mjs';
-export { PromptSvcPromptStatus } from './promptSvcPromptStatus.mjs';
-export { PromptSvcRemovePromptRequest } from './promptSvcRemovePromptRequest.mjs';
-export { RegistrySvcAPISpec } from './registrySvcAPISpec.mjs';
-export { RegistrySvcClient } from './registrySvcClient.mjs';
-export { RegistrySvcDefinition } from './registrySvcDefinition.mjs';
-export { RegistrySvcErrorResponse } from './registrySvcErrorResponse.mjs';
-export { RegistrySvcGPU } from './registrySvcGPU.mjs';
-export { RegistrySvcImageSpec } from './registrySvcImageSpec.mjs';
-export { RegistrySvcInstance } from './registrySvcInstance.mjs';
-export { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus.mjs';
-export { RegistrySvcLanguage } from './registrySvcLanguage.mjs';
-export { RegistrySvcListDefinitionsResponse } from './registrySvcListDefinitionsResponse.mjs';
-export { RegistrySvcListInstancesResponse } from './registrySvcListInstancesResponse.mjs';
-export { RegistrySvcListNodesResponse } from './registrySvcListNodesResponse.mjs';
-export { RegistrySvcNode } from './registrySvcNode.mjs';
-export { RegistrySvcProcess } from './registrySvcProcess.mjs';
-export { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanceRequest.mjs';
-export { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec.mjs';
-export { RegistrySvcResourceUsage } from './registrySvcResourceUsage.mjs';
-export { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest.mjs';
-export { RegistrySvcUsage } from './registrySvcUsage.mjs';
-export { SecretSvcDecryptValueRequest } from './secretSvcDecryptValueRequest.mjs';
-export { SecretSvcDecryptValueResponse } from './secretSvcDecryptValueResponse.mjs';
-export { SecretSvcEncryptValueRequest } from './secretSvcEncryptValueRequest.mjs';
-export { SecretSvcEncryptValueResponse } from './secretSvcEncryptValueResponse.mjs';
-export { SecretSvcListSecretsRequest } from './secretSvcListSecretsRequest.mjs';
-export { SecretSvcListSecretsResponse } from './secretSvcListSecretsResponse.mjs';
-export { SecretSvcRemoveSecretsRequest } from './secretSvcRemoveSecretsRequest.mjs';
-export { SecretSvcSaveSecretsRequest } from './secretSvcSaveSecretsRequest.mjs';
-export { SecretSvcSecret } from './secretSvcSecret.mjs';
-export { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest.mjs';
-export { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse.mjs';
-export { SourceSvcErrorResponse } from './sourceSvcErrorResponse.mjs';
-export { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest.mjs';
-export { UserSvcAuthToken } from './userSvcAuthToken.mjs';
-export { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest.mjs';
-export { UserSvcChangePasswordRequest } from './userSvcChangePasswordRequest.mjs';
-export { UserSvcContact } from './userSvcContact.mjs';
-export { UserSvcCreateOrganizationRequest } from './userSvcCreateOrganizationRequest.mjs';
-export { UserSvcCreateRoleRequest } from './userSvcCreateRoleRequest.mjs';
-export { UserSvcCreateRoleResponse } from './userSvcCreateRoleResponse.mjs';
-export { UserSvcCreateUserRequest } from './userSvcCreateUserRequest.mjs';
-export { UserSvcErrorResponse } from './userSvcErrorResponse.mjs';
-export { UserSvcGetPermissionsResponse } from './userSvcGetPermissionsResponse.mjs';
-export { UserSvcGetPublicKeyResponse } from './userSvcGetPublicKeyResponse.mjs';
-export { UserSvcGetRolesResponse } from './userSvcGetRolesResponse.mjs';
-export { UserSvcGetUsersRequest } from './userSvcGetUsersRequest.mjs';
-export { UserSvcGetUsersResponse } from './userSvcGetUsersResponse.mjs';
-export { UserSvcIsAuthorizedRequest } from './userSvcIsAuthorizedRequest.mjs';
-export { UserSvcIsAuthorizedResponse } from './userSvcIsAuthorizedResponse.mjs';
-export { UserSvcLoginRequest } from './userSvcLoginRequest.mjs';
-export { UserSvcLoginResponse } from './userSvcLoginResponse.mjs';
-export { UserSvcOrganization } from './userSvcOrganization.mjs';
-export { UserSvcPermission } from './userSvcPermission.mjs';
-export { UserSvcReadUserByTokenResponse } from './userSvcReadUserByTokenResponse.mjs';
-export { UserSvcRegisterRequest } from './userSvcRegisterRequest.mjs';
-export { UserSvcRegisterResponse } from './userSvcRegisterResponse.mjs';
-export { UserSvcRole } from './userSvcRole.mjs';
-export { UserSvcSaveProfileRequest } from './userSvcSaveProfileRequest.mjs';
-export { UserSvcSetRolePermissionsRequest } from './userSvcSetRolePermissionsRequest.mjs';
-export { UserSvcUpserPermissionRequest } from './userSvcUpserPermissionRequest.mjs';
-export { UserSvcUser } from './userSvcUser.mjs';
-import 'net';
-import 'url';
-import 'util';
-import 'punycode';
-import 'crypto';
-import 'buffer';
-import 'http';
-import 'https';
-import 'stream';
-import 'zlib';
-import 'querystring';
-import 'assert';
-import 'path';
-import 'tls';
-import 'fs';
-import 'events';
+import { __awaiter } from 'tslib';
+import localVarRequest from 'request';
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcAddMessageRequest {
+    static getAttributeTypeMap() {
+        return ChatSvcAddMessageRequest.attributeTypeMap;
+    }
+}
+ChatSvcAddMessageRequest.discriminator = undefined;
+ChatSvcAddMessageRequest.attributeTypeMap = [
+    {
+        "name": "message",
+        "baseName": "message",
+        "type": "ChatSvcMessage"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcAddThreadRequest {
+    static getAttributeTypeMap() {
+        return ChatSvcAddThreadRequest.attributeTypeMap;
+    }
+}
+ChatSvcAddThreadRequest.discriminator = undefined;
+ChatSvcAddThreadRequest.attributeTypeMap = [
+    {
+        "name": "thread",
+        "baseName": "thread",
+        "type": "ChatSvcThread"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcAddThreadResponse {
+    static getAttributeTypeMap() {
+        return ChatSvcAddThreadResponse.attributeTypeMap;
+    }
+}
+ChatSvcAddThreadResponse.discriminator = undefined;
+ChatSvcAddThreadResponse.attributeTypeMap = [
+    {
+        "name": "thread",
+        "baseName": "thread",
+        "type": "ChatSvcThread"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcAsset {
+    static getAttributeTypeMap() {
+        return ChatSvcAsset.attributeTypeMap;
+    }
+}
+ChatSvcAsset.discriminator = undefined;
+ChatSvcAsset.attributeTypeMap = [
+    {
+        "name": "content",
+        "baseName": "content",
+        "type": "string"
+    },
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "type",
+        "baseName": "type",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcEventMessageAdded {
+    static getAttributeTypeMap() {
+        return ChatSvcEventMessageAdded.attributeTypeMap;
+    }
+}
+ChatSvcEventMessageAdded.discriminator = undefined;
+ChatSvcEventMessageAdded.attributeTypeMap = [
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcEventThreadAdded {
+    static getAttributeTypeMap() {
+        return ChatSvcEventThreadAdded.attributeTypeMap;
+    }
+}
+ChatSvcEventThreadAdded.discriminator = undefined;
+ChatSvcEventThreadAdded.attributeTypeMap = [
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcEventThreadUpdate {
+    static getAttributeTypeMap() {
+        return ChatSvcEventThreadUpdate.attributeTypeMap;
+    }
+}
+ChatSvcEventThreadUpdate.discriminator = undefined;
+ChatSvcEventThreadUpdate.attributeTypeMap = [
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcGetMessagesResponse {
+    static getAttributeTypeMap() {
+        return ChatSvcGetMessagesResponse.attributeTypeMap;
+    }
+}
+ChatSvcGetMessagesResponse.discriminator = undefined;
+ChatSvcGetMessagesResponse.attributeTypeMap = [
+    {
+        "name": "assets",
+        "baseName": "assets",
+        "type": "Array<ChatSvcAsset>"
+    },
+    {
+        "name": "messages",
+        "baseName": "messages",
+        "type": "Array<ChatSvcMessage>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcGetThreadResponse {
+    static getAttributeTypeMap() {
+        return ChatSvcGetThreadResponse.attributeTypeMap;
+    }
+}
+ChatSvcGetThreadResponse.discriminator = undefined;
+ChatSvcGetThreadResponse.attributeTypeMap = [
+    {
+        "name": "exists",
+        "baseName": "exists",
+        "type": "boolean"
+    },
+    {
+        "name": "thread",
+        "baseName": "thread",
+        "type": "ChatSvcThread"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcGetThreadsResponse {
+    static getAttributeTypeMap() {
+        return ChatSvcGetThreadsResponse.attributeTypeMap;
+    }
+}
+ChatSvcGetThreadsResponse.discriminator = undefined;
+ChatSvcGetThreadsResponse.attributeTypeMap = [
+    {
+        "name": "threads",
+        "baseName": "threads",
+        "type": "Array<ChatSvcThread>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcMessage {
+    static getAttributeTypeMap() {
+        return ChatSvcMessage.attributeTypeMap;
+    }
+}
+ChatSvcMessage.discriminator = undefined;
+ChatSvcMessage.attributeTypeMap = [
+    {
+        "name": "assetIds",
+        "baseName": "assetIds",
+        "type": "Array<string>"
+    },
+    {
+        "name": "content",
+        "baseName": "content",
+        "type": "string"
+    },
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcThread {
+    static getAttributeTypeMap() {
+        return ChatSvcThread.attributeTypeMap;
+    }
+}
+ChatSvcThread.discriminator = undefined;
+ChatSvcThread.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "title",
+        "baseName": "title",
+        "type": "string"
+    },
+    {
+        "name": "topicIds",
+        "baseName": "topicIds",
+        "type": "Array<string>"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "userIds",
+        "baseName": "userIds",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ChatSvcUpdateThreadRequest {
+    static getAttributeTypeMap() {
+        return ChatSvcUpdateThreadRequest.attributeTypeMap;
+    }
+}
+ChatSvcUpdateThreadRequest.discriminator = undefined;
+ChatSvcUpdateThreadRequest.attributeTypeMap = [
+    {
+        "name": "thread",
+        "baseName": "thread",
+        "type": "ChatSvcThread"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ConfigSvcConfig {
+    static getAttributeTypeMap() {
+        return ConfigSvcConfig.attributeTypeMap;
+    }
+}
+ConfigSvcConfig.discriminator = undefined;
+ConfigSvcConfig.attributeTypeMap = [
+    {
+        "name": "data",
+        "baseName": "data",
+        "type": "{ [key: string]: any; }"
+    },
+    {
+        "name": "dataJson",
+        "baseName": "dataJson",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ConfigSvcGetConfigResponse {
+    static getAttributeTypeMap() {
+        return ConfigSvcGetConfigResponse.attributeTypeMap;
+    }
+}
+ConfigSvcGetConfigResponse.discriminator = undefined;
+ConfigSvcGetConfigResponse.attributeTypeMap = [
+    {
+        "name": "config",
+        "baseName": "config",
+        "type": "ConfigSvcConfig"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ConfigSvcSaveConfigRequest {
+    static getAttributeTypeMap() {
+        return ConfigSvcSaveConfigRequest.attributeTypeMap;
+    }
+}
+ConfigSvcSaveConfigRequest.discriminator = undefined;
+ConfigSvcSaveConfigRequest.attributeTypeMap = [
+    {
+        "name": "config",
+        "baseName": "config",
+        "type": "ConfigSvcConfig"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DatastoreFilter {
+    static getAttributeTypeMap() {
+        return DatastoreFilter.attributeTypeMap;
+    }
+}
+DatastoreFilter.discriminator = undefined;
+DatastoreFilter.attributeTypeMap = [
+    {
+        "name": "fields",
+        "baseName": "fields",
+        "type": "Array<string>"
+    },
+    {
+        "name": "jsonValues",
+        "baseName": "jsonValues",
+        "type": "string"
+    },
+    {
+        "name": "op",
+        "baseName": "op",
+        "type": "DatastoreOp"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var DatastoreOp;
+(function (DatastoreOp) {
+    DatastoreOp[DatastoreOp["OpEquals"] = 'equals'] = "OpEquals";
+    DatastoreOp[DatastoreOp["OpContainsSubstring"] = 'containsSubstring'] = "OpContainsSubstring";
+    DatastoreOp[DatastoreOp["OpStartsWith"] = 'startsWith'] = "OpStartsWith";
+    DatastoreOp[DatastoreOp["OpIntersects"] = 'intersects'] = "OpIntersects";
+    DatastoreOp[DatastoreOp["OpIsInList"] = 'isInList'] = "OpIsInList";
+})(DatastoreOp || (DatastoreOp = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DatastoreOrderBy {
+    static getAttributeTypeMap() {
+        return DatastoreOrderBy.attributeTypeMap;
+    }
+}
+DatastoreOrderBy.discriminator = undefined;
+DatastoreOrderBy.attributeTypeMap = [
+    {
+        "name": "desc",
+        "baseName": "desc",
+        "type": "boolean"
+    },
+    {
+        "name": "field",
+        "baseName": "field",
+        "type": "string"
+    },
+    {
+        "name": "randomize",
+        "baseName": "randomize",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DatastoreQuery {
+    static getAttributeTypeMap() {
+        return DatastoreQuery.attributeTypeMap;
+    }
+}
+DatastoreQuery.discriminator = undefined;
+DatastoreQuery.attributeTypeMap = [
+    {
+        "name": "count",
+        "baseName": "count",
+        "type": "boolean"
+    },
+    {
+        "name": "filters",
+        "baseName": "filters",
+        "type": "Array<DatastoreFilter>"
+    },
+    {
+        "name": "jsonAfter",
+        "baseName": "jsonAfter",
+        "type": "string"
+    },
+    {
+        "name": "limit",
+        "baseName": "limit",
+        "type": "number"
+    },
+    {
+        "name": "orderBys",
+        "baseName": "orderBys",
+        "type": "Array<DatastoreOrderBy>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcAutoScalingConfig {
+    static getAttributeTypeMap() {
+        return DeploySvcAutoScalingConfig.attributeTypeMap;
+    }
+}
+DeploySvcAutoScalingConfig.discriminator = undefined;
+DeploySvcAutoScalingConfig.attributeTypeMap = [
+    {
+        "name": "cpuThreshold",
+        "baseName": "cpuThreshold",
+        "type": "number"
+    },
+    {
+        "name": "maxReplicas",
+        "baseName": "maxReplicas",
+        "type": "number"
+    },
+    {
+        "name": "minReplicas",
+        "baseName": "minReplicas",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcDeleteDeploymentRequest {
+    static getAttributeTypeMap() {
+        return DeploySvcDeleteDeploymentRequest.attributeTypeMap;
+    }
+}
+DeploySvcDeleteDeploymentRequest.discriminator = undefined;
+DeploySvcDeleteDeploymentRequest.attributeTypeMap = [
+    {
+        "name": "deploymentId",
+        "baseName": "deploymentId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcDeployment {
+    static getAttributeTypeMap() {
+        return DeploySvcDeployment.attributeTypeMap;
+    }
+}
+DeploySvcDeployment.discriminator = undefined;
+DeploySvcDeployment.attributeTypeMap = [
+    {
+        "name": "autoScaling",
+        "baseName": "autoScaling",
+        "type": "DeploySvcAutoScalingConfig"
+    },
+    {
+        "name": "definitionId",
+        "baseName": "definitionId",
+        "type": "string"
+    },
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "details",
+        "baseName": "details",
+        "type": "string"
+    },
+    {
+        "name": "envars",
+        "baseName": "envars",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "replicas",
+        "baseName": "replicas",
+        "type": "number"
+    },
+    {
+        "name": "resources",
+        "baseName": "resources",
+        "type": "DeploySvcResourceLimits"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "DeploySvcDeploymentStatus"
+    },
+    {
+        "name": "strategy",
+        "baseName": "strategy",
+        "type": "DeploySvcDeploymentStrategy"
+    },
+    {
+        "name": "targetRegions",
+        "baseName": "targetRegions",
+        "type": "Array<DeploySvcTargetRegion>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var DeploySvcDeploymentStatus;
+(function (DeploySvcDeploymentStatus) {
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusOK"] = 'OK'] = "DeploymentStatusOK";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusError"] = 'Error'] = "DeploymentStatusError";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusPending"] = 'Pending'] = "DeploymentStatusPending";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusFailed"] = 'Failed'] = "DeploymentStatusFailed";
+    DeploySvcDeploymentStatus[DeploySvcDeploymentStatus["DeploymentStatusDeploying"] = 'Deploying'] = "DeploymentStatusDeploying";
+})(DeploySvcDeploymentStatus || (DeploySvcDeploymentStatus = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcDeploymentStrategy {
+    static getAttributeTypeMap() {
+        return DeploySvcDeploymentStrategy.attributeTypeMap;
+    }
+}
+DeploySvcDeploymentStrategy.discriminator = undefined;
+DeploySvcDeploymentStrategy.attributeTypeMap = [
+    {
+        "name": "maxSurge",
+        "baseName": "maxSurge",
+        "type": "number"
+    },
+    {
+        "name": "maxUnavailable",
+        "baseName": "maxUnavailable",
+        "type": "number"
+    },
+    {
+        "name": "type",
+        "baseName": "type",
+        "type": "DeploySvcStrategyType"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcErrorResponse {
+    static getAttributeTypeMap() {
+        return DeploySvcErrorResponse.attributeTypeMap;
+    }
+}
+DeploySvcErrorResponse.discriminator = undefined;
+DeploySvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcListDeploymentsResponse {
+    static getAttributeTypeMap() {
+        return DeploySvcListDeploymentsResponse.attributeTypeMap;
+    }
+}
+DeploySvcListDeploymentsResponse.discriminator = undefined;
+DeploySvcListDeploymentsResponse.attributeTypeMap = [
+    {
+        "name": "deployments",
+        "baseName": "deployments",
+        "type": "Array<DeploySvcDeployment>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcResourceLimits {
+    static getAttributeTypeMap() {
+        return DeploySvcResourceLimits.attributeTypeMap;
+    }
+}
+DeploySvcResourceLimits.discriminator = undefined;
+DeploySvcResourceLimits.attributeTypeMap = [
+    {
+        "name": "cpu",
+        "baseName": "cpu",
+        "type": "string"
+    },
+    {
+        "name": "memory",
+        "baseName": "memory",
+        "type": "string"
+    },
+    {
+        "name": "vram",
+        "baseName": "vram",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcSaveDeploymentRequest {
+    static getAttributeTypeMap() {
+        return DeploySvcSaveDeploymentRequest.attributeTypeMap;
+    }
+}
+DeploySvcSaveDeploymentRequest.discriminator = undefined;
+DeploySvcSaveDeploymentRequest.attributeTypeMap = [
+    {
+        "name": "deployment",
+        "baseName": "deployment",
+        "type": "DeploySvcDeployment"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var DeploySvcStrategyType;
+(function (DeploySvcStrategyType) {
+    DeploySvcStrategyType[DeploySvcStrategyType["StrategyRollingUpdate"] = 'RollingUpdate'] = "StrategyRollingUpdate";
+    DeploySvcStrategyType[DeploySvcStrategyType["StrategyRecreate"] = 'Recreate'] = "StrategyRecreate";
+})(DeploySvcStrategyType || (DeploySvcStrategyType = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DeploySvcTargetRegion {
+    static getAttributeTypeMap() {
+        return DeploySvcTargetRegion.attributeTypeMap;
+    }
+}
+DeploySvcTargetRegion.discriminator = undefined;
+DeploySvcTargetRegion.attributeTypeMap = [
+    {
+        "name": "cluster",
+        "baseName": "cluster",
+        "type": "string"
+    },
+    {
+        "name": "zone",
+        "baseName": "zone",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcBuildImageRequest {
+    static getAttributeTypeMap() {
+        return DockerSvcBuildImageRequest.attributeTypeMap;
+    }
+}
+DockerSvcBuildImageRequest.discriminator = undefined;
+DockerSvcBuildImageRequest.attributeTypeMap = [
+    {
+        "name": "contextPath",
+        "baseName": "contextPath",
+        "type": "string"
+    },
+    {
+        "name": "dockerfilePath",
+        "baseName": "dockerfilePath",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcContainerIsRunningResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcContainerIsRunningResponse.attributeTypeMap;
+    }
+}
+DockerSvcContainerIsRunningResponse.discriminator = undefined;
+DockerSvcContainerIsRunningResponse.attributeTypeMap = [
+    {
+        "name": "isRunning",
+        "baseName": "isRunning",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcDockerInfo {
+    static getAttributeTypeMap() {
+        return DockerSvcDockerInfo.attributeTypeMap;
+    }
+}
+DockerSvcDockerInfo.discriminator = undefined;
+DockerSvcDockerInfo.attributeTypeMap = [
+    {
+        "name": "dockerDaemonAddress",
+        "baseName": "dockerDaemonAddress",
+        "type": "string"
+    },
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    },
+    {
+        "name": "hasDocker",
+        "baseName": "hasDocker",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcErrorResponse.attributeTypeMap;
+    }
+}
+DockerSvcErrorResponse.discriminator = undefined;
+DockerSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcGetContainerSummaryResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcGetContainerSummaryResponse.attributeTypeMap;
+    }
+}
+DockerSvcGetContainerSummaryResponse.discriminator = undefined;
+DockerSvcGetContainerSummaryResponse.attributeTypeMap = [
+    {
+        "name": "logs",
+        "baseName": "logs",
+        "type": "string"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "string"
+    },
+    {
+        "name": "summary",
+        "baseName": "summary",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcGetDockerHostResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcGetDockerHostResponse.attributeTypeMap;
+    }
+}
+DockerSvcGetDockerHostResponse.discriminator = undefined;
+DockerSvcGetDockerHostResponse.attributeTypeMap = [
+    {
+        "name": "host",
+        "baseName": "host",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcGetInfoResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcGetInfoResponse.attributeTypeMap;
+    }
+}
+DockerSvcGetInfoResponse.discriminator = undefined;
+DockerSvcGetInfoResponse.attributeTypeMap = [
+    {
+        "name": "info",
+        "baseName": "info",
+        "type": "DockerSvcDockerInfo"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcRunContainerOptions {
+    static getAttributeTypeMap() {
+        return DockerSvcRunContainerOptions.attributeTypeMap;
+    }
+}
+DockerSvcRunContainerOptions.discriminator = undefined;
+DockerSvcRunContainerOptions.attributeTypeMap = [
+    {
+        "name": "assets",
+        "baseName": "assets",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "envs",
+        "baseName": "envs",
+        "type": "Array<string>"
+    },
+    {
+        "name": "gpuEnabled",
+        "baseName": "gpuEnabled",
+        "type": "boolean"
+    },
+    {
+        "name": "hash",
+        "baseName": "hash",
+        "type": "string"
+    },
+    {
+        "name": "keeps",
+        "baseName": "keeps",
+        "type": "Array<string>"
+    },
+    {
+        "name": "labels",
+        "baseName": "labels",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcRunContainerRequest {
+    static getAttributeTypeMap() {
+        return DockerSvcRunContainerRequest.attributeTypeMap;
+    }
+}
+DockerSvcRunContainerRequest.discriminator = undefined;
+DockerSvcRunContainerRequest.attributeTypeMap = [
+    {
+        "name": "hostPort",
+        "baseName": "hostPort",
+        "type": "number"
+    },
+    {
+        "name": "image",
+        "baseName": "image",
+        "type": "string"
+    },
+    {
+        "name": "options",
+        "baseName": "options",
+        "type": "DockerSvcRunContainerOptions"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcRunContainerResponse {
+    static getAttributeTypeMap() {
+        return DockerSvcRunContainerResponse.attributeTypeMap;
+    }
+}
+DockerSvcRunContainerResponse.discriminator = undefined;
+DockerSvcRunContainerResponse.attributeTypeMap = [
+    {
+        "name": "info",
+        "baseName": "info",
+        "type": "DockerSvcRunInfo"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcRunInfo {
+    static getAttributeTypeMap() {
+        return DockerSvcRunInfo.attributeTypeMap;
+    }
+}
+DockerSvcRunInfo.discriminator = undefined;
+DockerSvcRunInfo.attributeTypeMap = [
+    {
+        "name": "newContainerStarted",
+        "baseName": "newContainerStarted",
+        "type": "boolean"
+    },
+    {
+        "name": "portNumber",
+        "baseName": "portNumber",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DockerSvcStopContainerRequest {
+    static getAttributeTypeMap() {
+        return DockerSvcStopContainerRequest.attributeTypeMap;
+    }
+}
+DockerSvcStopContainerRequest.discriminator = undefined;
+DockerSvcStopContainerRequest.attributeTypeMap = [
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DownloadSvcDownloadDetails {
+    static getAttributeTypeMap() {
+        return DownloadSvcDownloadDetails.attributeTypeMap;
+    }
+}
+DownloadSvcDownloadDetails.discriminator = undefined;
+DownloadSvcDownloadDetails.attributeTypeMap = [
+    {
+        "name": "cancelled",
+        "baseName": "cancelled",
+        "type": "boolean"
+    },
+    {
+        "name": "dir",
+        "baseName": "dir",
+        "type": "string"
+    },
+    {
+        "name": "downloadedBytes",
+        "baseName": "downloadedBytes",
+        "type": "number"
+    },
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    },
+    {
+        "name": "fileName",
+        "baseName": "fileName",
+        "type": "string"
+    },
+    {
+        "name": "filePath",
+        "baseName": "filePath",
+        "type": "string"
+    },
+    {
+        "name": "fullFileSize",
+        "baseName": "fullFileSize",
+        "type": "number"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "paused",
+        "baseName": "paused",
+        "type": "boolean"
+    },
+    {
+        "name": "progress",
+        "baseName": "progress",
+        "type": "number"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DownloadSvcDownloadRequest {
+    static getAttributeTypeMap() {
+        return DownloadSvcDownloadRequest.attributeTypeMap;
+    }
+}
+DownloadSvcDownloadRequest.discriminator = undefined;
+DownloadSvcDownloadRequest.attributeTypeMap = [
+    {
+        "name": "folderPath",
+        "baseName": "folderPath",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DownloadSvcDownloadsResponse {
+    static getAttributeTypeMap() {
+        return DownloadSvcDownloadsResponse.attributeTypeMap;
+    }
+}
+DownloadSvcDownloadsResponse.discriminator = undefined;
+DownloadSvcDownloadsResponse.attributeTypeMap = [
+    {
+        "name": "downloads",
+        "baseName": "downloads",
+        "type": "Array<DownloadSvcDownloadDetails>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DownloadSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return DownloadSvcErrorResponse.attributeTypeMap;
+    }
+}
+DownloadSvcErrorResponse.discriminator = undefined;
+DownloadSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DownloadSvcGetDownloadResponse {
+    static getAttributeTypeMap() {
+        return DownloadSvcGetDownloadResponse.attributeTypeMap;
+    }
+}
+DownloadSvcGetDownloadResponse.discriminator = undefined;
+DownloadSvcGetDownloadResponse.attributeTypeMap = [
+    {
+        "name": "download",
+        "baseName": "download",
+        "type": "DownloadSvcDownloadDetails"
+    },
+    {
+        "name": "exists",
+        "baseName": "exists",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcCreateObjectRequest {
+    static getAttributeTypeMap() {
+        return DynamicSvcCreateObjectRequest.attributeTypeMap;
+    }
+}
+DynamicSvcCreateObjectRequest.discriminator = undefined;
+DynamicSvcCreateObjectRequest.attributeTypeMap = [
+    {
+        "name": "object",
+        "baseName": "object",
+        "type": "DynamicSvcObjectCreateFields"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcCreateObjectResponse {
+    static getAttributeTypeMap() {
+        return DynamicSvcCreateObjectResponse.attributeTypeMap;
+    }
+}
+DynamicSvcCreateObjectResponse.discriminator = undefined;
+DynamicSvcCreateObjectResponse.attributeTypeMap = [
+    {
+        "name": "object",
+        "baseName": "object",
+        "type": "DynamicSvcObject"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcDeleteObjectRequest {
+    static getAttributeTypeMap() {
+        return DynamicSvcDeleteObjectRequest.attributeTypeMap;
+    }
+}
+DynamicSvcDeleteObjectRequest.discriminator = undefined;
+DynamicSvcDeleteObjectRequest.attributeTypeMap = [
+    {
+        "name": "filters",
+        "baseName": "filters",
+        "type": "Array<DatastoreFilter>"
+    },
+    {
+        "name": "table",
+        "baseName": "table",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return DynamicSvcErrorResponse.attributeTypeMap;
+    }
+}
+DynamicSvcErrorResponse.discriminator = undefined;
+DynamicSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcObject {
+    static getAttributeTypeMap() {
+        return DynamicSvcObject.attributeTypeMap;
+    }
+}
+DynamicSvcObject.discriminator = undefined;
+DynamicSvcObject.attributeTypeMap = [
+    {
+        "name": "authors",
+        "baseName": "authors",
+        "type": "Array<string>"
+    },
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "data",
+        "baseName": "data",
+        "type": "{ [key: string]: any; }"
+    },
+    {
+        "name": "deleters",
+        "baseName": "deleters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "readers",
+        "baseName": "readers",
+        "type": "Array<string>"
+    },
+    {
+        "name": "table",
+        "baseName": "table",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "writers",
+        "baseName": "writers",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcObjectCreateFields {
+    static getAttributeTypeMap() {
+        return DynamicSvcObjectCreateFields.attributeTypeMap;
+    }
+}
+DynamicSvcObjectCreateFields.discriminator = undefined;
+DynamicSvcObjectCreateFields.attributeTypeMap = [
+    {
+        "name": "authors",
+        "baseName": "authors",
+        "type": "Array<string>"
+    },
+    {
+        "name": "data",
+        "baseName": "data",
+        "type": "{ [key: string]: any; }"
+    },
+    {
+        "name": "deleters",
+        "baseName": "deleters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "readers",
+        "baseName": "readers",
+        "type": "Array<string>"
+    },
+    {
+        "name": "table",
+        "baseName": "table",
+        "type": "string"
+    },
+    {
+        "name": "writers",
+        "baseName": "writers",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcQueryRequest {
+    static getAttributeTypeMap() {
+        return DynamicSvcQueryRequest.attributeTypeMap;
+    }
+}
+DynamicSvcQueryRequest.discriminator = undefined;
+DynamicSvcQueryRequest.attributeTypeMap = [
+    {
+        "name": "query",
+        "baseName": "query",
+        "type": "DatastoreQuery"
+    },
+    {
+        "name": "readers",
+        "baseName": "readers",
+        "type": "Array<string>"
+    },
+    {
+        "name": "table",
+        "baseName": "table",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcQueryResponse {
+    static getAttributeTypeMap() {
+        return DynamicSvcQueryResponse.attributeTypeMap;
+    }
+}
+DynamicSvcQueryResponse.discriminator = undefined;
+DynamicSvcQueryResponse.attributeTypeMap = [
+    {
+        "name": "objects",
+        "baseName": "objects",
+        "type": "Array<DynamicSvcObject>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcUpdateObjectRequest {
+    static getAttributeTypeMap() {
+        return DynamicSvcUpdateObjectRequest.attributeTypeMap;
+    }
+}
+DynamicSvcUpdateObjectRequest.discriminator = undefined;
+DynamicSvcUpdateObjectRequest.attributeTypeMap = [
+    {
+        "name": "filters",
+        "baseName": "filters",
+        "type": "Array<DatastoreFilter>"
+    },
+    {
+        "name": "object",
+        "baseName": "object",
+        "type": "DynamicSvcObject"
+    },
+    {
+        "name": "table",
+        "baseName": "table",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcUpsertObjectRequest {
+    static getAttributeTypeMap() {
+        return DynamicSvcUpsertObjectRequest.attributeTypeMap;
+    }
+}
+DynamicSvcUpsertObjectRequest.discriminator = undefined;
+DynamicSvcUpsertObjectRequest.attributeTypeMap = [
+    {
+        "name": "object",
+        "baseName": "object",
+        "type": "DynamicSvcObjectCreateFields"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class DynamicSvcUpsertObjectResponse {
+    static getAttributeTypeMap() {
+        return DynamicSvcUpsertObjectResponse.attributeTypeMap;
+    }
+}
+DynamicSvcUpsertObjectResponse.discriminator = undefined;
+DynamicSvcUpsertObjectResponse.attributeTypeMap = [
+    {
+        "name": "object",
+        "baseName": "object",
+        "type": "DynamicSvcObject"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class EmailSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return EmailSvcErrorResponse.attributeTypeMap;
+    }
+}
+EmailSvcErrorResponse.discriminator = undefined;
+EmailSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class EmailSvcFile {
+    static getAttributeTypeMap() {
+        return EmailSvcFile.attributeTypeMap;
+    }
+}
+EmailSvcFile.discriminator = undefined;
+EmailSvcFile.attributeTypeMap = [
+    {
+        "name": "content",
+        "baseName": "content",
+        "type": "string"
+    },
+    {
+        "name": "contentType",
+        "baseName": "contentType",
+        "type": "string"
+    },
+    {
+        "name": "filename",
+        "baseName": "filename",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class EmailSvcSendEmailRequest {
+    static getAttributeTypeMap() {
+        return EmailSvcSendEmailRequest.attributeTypeMap;
+    }
+}
+EmailSvcSendEmailRequest.discriminator = undefined;
+EmailSvcSendEmailRequest.attributeTypeMap = [
+    {
+        "name": "attachments",
+        "baseName": "attachments",
+        "type": "Array<EmailSvcFile>"
+    },
+    {
+        "name": "bcc",
+        "baseName": "bcc",
+        "type": "Array<string>"
+    },
+    {
+        "name": "body",
+        "baseName": "body",
+        "type": "string"
+    },
+    {
+        "name": "cc",
+        "baseName": "cc",
+        "type": "Array<string>"
+    },
+    {
+        "name": "contentType",
+        "baseName": "contentType",
+        "type": "string"
+    },
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "subject",
+        "baseName": "subject",
+        "type": "string"
+    },
+    {
+        "name": "to",
+        "baseName": "to",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class EmailSvcSendEmailResponse {
+    static getAttributeTypeMap() {
+        return EmailSvcSendEmailResponse.attributeTypeMap;
+    }
+}
+EmailSvcSendEmailResponse.discriminator = undefined;
+EmailSvcSendEmailResponse.attributeTypeMap = [
+    {
+        "name": "emailId",
+        "baseName": "emailId",
+        "type": "string"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class FirehoseSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return FirehoseSvcErrorResponse.attributeTypeMap;
+    }
+}
+FirehoseSvcErrorResponse.discriminator = undefined;
+FirehoseSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class FirehoseSvcEvent {
+    static getAttributeTypeMap() {
+        return FirehoseSvcEvent.attributeTypeMap;
+    }
+}
+FirehoseSvcEvent.discriminator = undefined;
+FirehoseSvcEvent.attributeTypeMap = [
+    {
+        "name": "data",
+        "baseName": "data",
+        "type": "object"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class FirehoseSvcEventPublishRequest {
+    static getAttributeTypeMap() {
+        return FirehoseSvcEventPublishRequest.attributeTypeMap;
+    }
+}
+FirehoseSvcEventPublishRequest.discriminator = undefined;
+FirehoseSvcEventPublishRequest.attributeTypeMap = [
+    {
+        "name": "event",
+        "baseName": "event",
+        "type": "FirehoseSvcEvent"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcArchitectures {
+    static getAttributeTypeMap() {
+        return ModelSvcArchitectures.attributeTypeMap;
+    }
+}
+ModelSvcArchitectures.discriminator = undefined;
+ModelSvcArchitectures.attributeTypeMap = [
+    {
+        "name": "cuda",
+        "baseName": "cuda",
+        "type": "ModelSvcContainer"
+    },
+    {
+        "name": "_default",
+        "baseName": "default",
+        "type": "ModelSvcContainer"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcContainer {
+    static getAttributeTypeMap() {
+        return ModelSvcContainer.attributeTypeMap;
+    }
+}
+ModelSvcContainer.discriminator = undefined;
+ModelSvcContainer.attributeTypeMap = [
+    {
+        "name": "envars",
+        "baseName": "envars",
+        "type": "Array<string>"
+    },
+    {
+        "name": "image",
+        "baseName": "image",
+        "type": "string"
+    },
+    {
+        "name": "keeps",
+        "baseName": "keeps",
+        "type": "Array<string>"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return ModelSvcErrorResponse.attributeTypeMap;
+    }
+}
+ModelSvcErrorResponse.discriminator = undefined;
+ModelSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcGetModelResponse {
+    static getAttributeTypeMap() {
+        return ModelSvcGetModelResponse.attributeTypeMap;
+    }
+}
+ModelSvcGetModelResponse.discriminator = undefined;
+ModelSvcGetModelResponse.attributeTypeMap = [
+    {
+        "name": "exists",
+        "baseName": "exists",
+        "type": "boolean"
+    },
+    {
+        "name": "model",
+        "baseName": "model",
+        "type": "ModelSvcModel"
+    },
+    {
+        "name": "platform",
+        "baseName": "platform",
+        "type": "ModelSvcPlatform"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcListResponse {
+    static getAttributeTypeMap() {
+        return ModelSvcListResponse.attributeTypeMap;
+    }
+}
+ModelSvcListResponse.discriminator = undefined;
+ModelSvcListResponse.attributeTypeMap = [
+    {
+        "name": "models",
+        "baseName": "models",
+        "type": "Array<ModelSvcModel>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcModel {
+    static getAttributeTypeMap() {
+        return ModelSvcModel.attributeTypeMap;
+    }
+}
+ModelSvcModel.discriminator = undefined;
+ModelSvcModel.attributeTypeMap = [
+    {
+        "name": "assets",
+        "baseName": "assets",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "bits",
+        "baseName": "bits",
+        "type": "number"
+    },
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "extension",
+        "baseName": "extension",
+        "type": "string"
+    },
+    {
+        "name": "flavour",
+        "baseName": "flavour",
+        "type": "string"
+    },
+    {
+        "name": "fullName",
+        "baseName": "fullName",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "maxBits",
+        "baseName": "maxBits",
+        "type": "number"
+    },
+    {
+        "name": "maxRam",
+        "baseName": "maxRam",
+        "type": "number"
+    },
+    {
+        "name": "mirrors",
+        "baseName": "mirrors",
+        "type": "Array<string>"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "parameters",
+        "baseName": "parameters",
+        "type": "string"
+    },
+    {
+        "name": "platformId",
+        "baseName": "platformId",
+        "type": "string"
+    },
+    {
+        "name": "promptTemplate",
+        "baseName": "promptTemplate",
+        "type": "string"
+    },
+    {
+        "name": "quality",
+        "baseName": "quality",
+        "type": "string"
+    },
+    {
+        "name": "quantComment",
+        "baseName": "quantComment",
+        "type": "string"
+    },
+    {
+        "name": "size",
+        "baseName": "size",
+        "type": "number"
+    },
+    {
+        "name": "tags",
+        "baseName": "tags",
+        "type": "Array<string>"
+    },
+    {
+        "name": "uncensored",
+        "baseName": "uncensored",
+        "type": "boolean"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcModelStatus {
+    static getAttributeTypeMap() {
+        return ModelSvcModelStatus.attributeTypeMap;
+    }
+}
+ModelSvcModelStatus.discriminator = undefined;
+ModelSvcModelStatus.attributeTypeMap = [
+    {
+        "name": "address",
+        "baseName": "address",
+        "type": "string"
+    },
+    {
+        "name": "assetsReady",
+        "baseName": "assetsReady",
+        "type": "boolean"
+    },
+    {
+        "name": "running",
+        "baseName": "running",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcPlatform {
+    static getAttributeTypeMap() {
+        return ModelSvcPlatform.attributeTypeMap;
+    }
+}
+ModelSvcPlatform.discriminator = undefined;
+ModelSvcPlatform.attributeTypeMap = [
+    {
+        "name": "architectures",
+        "baseName": "architectures",
+        "type": "ModelSvcArchitectures"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class ModelSvcStatusResponse {
+    static getAttributeTypeMap() {
+        return ModelSvcStatusResponse.attributeTypeMap;
+    }
+}
+ModelSvcStatusResponse.discriminator = undefined;
+ModelSvcStatusResponse.attributeTypeMap = [
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "ModelSvcModelStatus"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcBlocklistParameters {
+    static getAttributeTypeMap() {
+        return PolicySvcBlocklistParameters.attributeTypeMap;
+    }
+}
+PolicySvcBlocklistParameters.discriminator = undefined;
+PolicySvcBlocklistParameters.attributeTypeMap = [
+    {
+        "name": "blockedIPs",
+        "baseName": "blockedIPs",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcCheckRequest {
+    static getAttributeTypeMap() {
+        return PolicySvcCheckRequest.attributeTypeMap;
+    }
+}
+PolicySvcCheckRequest.discriminator = undefined;
+PolicySvcCheckRequest.attributeTypeMap = [
+    {
+        "name": "endpoint",
+        "baseName": "endpoint",
+        "type": "string"
+    },
+    {
+        "name": "ip",
+        "baseName": "ip",
+        "type": "string"
+    },
+    {
+        "name": "method",
+        "baseName": "method",
+        "type": "string"
+    },
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcCheckResponse {
+    static getAttributeTypeMap() {
+        return PolicySvcCheckResponse.attributeTypeMap;
+    }
+}
+PolicySvcCheckResponse.discriminator = undefined;
+PolicySvcCheckResponse.attributeTypeMap = [
+    {
+        "name": "allowed",
+        "baseName": "allowed",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var PolicySvcEntity;
+(function (PolicySvcEntity) {
+    PolicySvcEntity[PolicySvcEntity["EntityUserID"] = 'userId'] = "EntityUserID";
+    PolicySvcEntity[PolicySvcEntity["EntityIP"] = 'ip'] = "EntityIP";
+})(PolicySvcEntity || (PolicySvcEntity = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcErrorResponse {
+    static getAttributeTypeMap() {
+        return PolicySvcErrorResponse.attributeTypeMap;
+    }
+}
+PolicySvcErrorResponse.discriminator = undefined;
+PolicySvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcInstance {
+    static getAttributeTypeMap() {
+        return PolicySvcInstance.attributeTypeMap;
+    }
+}
+PolicySvcInstance.discriminator = undefined;
+PolicySvcInstance.attributeTypeMap = [
+    {
+        "name": "blocklistParameters",
+        "baseName": "blocklistParameters",
+        "type": "PolicySvcBlocklistParameters"
+    },
+    {
+        "name": "endpoint",
+        "baseName": "endpoint",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "rateLimitParameters",
+        "baseName": "rateLimitParameters",
+        "type": "PolicySvcRateLimitParameters"
+    },
+    {
+        "name": "templateId",
+        "baseName": "templateId",
+        "type": "PolicySvcTemplateId"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcRateLimitParameters {
+    static getAttributeTypeMap() {
+        return PolicySvcRateLimitParameters.attributeTypeMap;
+    }
+}
+PolicySvcRateLimitParameters.discriminator = undefined;
+PolicySvcRateLimitParameters.attributeTypeMap = [
+    {
+        "name": "entity",
+        "baseName": "entity",
+        "type": "PolicySvcEntity"
+    },
+    {
+        "name": "maxRequests",
+        "baseName": "maxRequests",
+        "type": "number"
+    },
+    {
+        "name": "scope",
+        "baseName": "scope",
+        "type": "PolicySvcScope"
+    },
+    {
+        "name": "timeWindow",
+        "baseName": "timeWindow",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var PolicySvcScope;
+(function (PolicySvcScope) {
+    PolicySvcScope[PolicySvcScope["ScopeEndpoint"] = 'endpoint'] = "ScopeEndpoint";
+    PolicySvcScope[PolicySvcScope["ScopeGlobal"] = 'global'] = "ScopeGlobal";
+})(PolicySvcScope || (PolicySvcScope = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var PolicySvcTemplateId;
+(function (PolicySvcTemplateId) {
+    PolicySvcTemplateId[PolicySvcTemplateId["TemplateIdRateLimit"] = 'rate-limit'] = "TemplateIdRateLimit";
+    PolicySvcTemplateId[PolicySvcTemplateId["TemplateIdBlocklist"] = 'blocklist'] = "TemplateIdBlocklist";
+})(PolicySvcTemplateId || (PolicySvcTemplateId = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PolicySvcUpsertInstanceRequest {
+    static getAttributeTypeMap() {
+        return PolicySvcUpsertInstanceRequest.attributeTypeMap;
+    }
+}
+PolicySvcUpsertInstanceRequest.discriminator = undefined;
+PolicySvcUpsertInstanceRequest.attributeTypeMap = [
+    {
+        "name": "instance",
+        "baseName": "instance",
+        "type": "PolicySvcInstance"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcAddPromptRequest {
+    static getAttributeTypeMap() {
+        return PromptSvcAddPromptRequest.attributeTypeMap;
+    }
+}
+PromptSvcAddPromptRequest.discriminator = undefined;
+PromptSvcAddPromptRequest.attributeTypeMap = [
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "maxRetries",
+        "baseName": "maxRetries",
+        "type": "number"
+    },
+    {
+        "name": "modelId",
+        "baseName": "modelId",
+        "type": "string"
+    },
+    {
+        "name": "prompt",
+        "baseName": "prompt",
+        "type": "string"
+    },
+    {
+        "name": "sync",
+        "baseName": "sync",
+        "type": "boolean"
+    },
+    {
+        "name": "template",
+        "baseName": "template",
+        "type": "string"
+    },
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcAddPromptResponse {
+    static getAttributeTypeMap() {
+        return PromptSvcAddPromptResponse.attributeTypeMap;
+    }
+}
+PromptSvcAddPromptResponse.discriminator = undefined;
+PromptSvcAddPromptResponse.attributeTypeMap = [
+    {
+        "name": "answer",
+        "baseName": "answer",
+        "type": "string"
+    },
+    {
+        "name": "prompt",
+        "baseName": "prompt",
+        "type": "PromptSvcPrompt"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return PromptSvcErrorResponse.attributeTypeMap;
+    }
+}
+PromptSvcErrorResponse.discriminator = undefined;
+PromptSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcListPromptsRequest {
+    static getAttributeTypeMap() {
+        return PromptSvcListPromptsRequest.attributeTypeMap;
+    }
+}
+PromptSvcListPromptsRequest.discriminator = undefined;
+PromptSvcListPromptsRequest.attributeTypeMap = [
+    {
+        "name": "query",
+        "baseName": "query",
+        "type": "DatastoreQuery"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcListPromptsResponse {
+    static getAttributeTypeMap() {
+        return PromptSvcListPromptsResponse.attributeTypeMap;
+    }
+}
+PromptSvcListPromptsResponse.discriminator = undefined;
+PromptSvcListPromptsResponse.attributeTypeMap = [
+    {
+        "name": "after",
+        "baseName": "after",
+        "type": "object"
+    },
+    {
+        "name": "count",
+        "baseName": "count",
+        "type": "number"
+    },
+    {
+        "name": "prompts",
+        "baseName": "prompts",
+        "type": "Array<PromptSvcPrompt>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcPrompt {
+    static getAttributeTypeMap() {
+        return PromptSvcPrompt.attributeTypeMap;
+    }
+}
+PromptSvcPrompt.discriminator = undefined;
+PromptSvcPrompt.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "lastRun",
+        "baseName": "lastRun",
+        "type": "string"
+    },
+    {
+        "name": "maxRetries",
+        "baseName": "maxRetries",
+        "type": "number"
+    },
+    {
+        "name": "modelId",
+        "baseName": "modelId",
+        "type": "string"
+    },
+    {
+        "name": "prompt",
+        "baseName": "prompt",
+        "type": "string"
+    },
+    {
+        "name": "runCount",
+        "baseName": "runCount",
+        "type": "number"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "PromptSvcPromptStatus"
+    },
+    {
+        "name": "sync",
+        "baseName": "sync",
+        "type": "boolean"
+    },
+    {
+        "name": "template",
+        "baseName": "template",
+        "type": "string"
+    },
+    {
+        "name": "threadId",
+        "baseName": "threadId",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var PromptSvcPromptStatus;
+(function (PromptSvcPromptStatus) {
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusScheduled"] = 'scheduled'] = "PromptStatusScheduled";
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusRunning"] = 'running'] = "PromptStatusRunning";
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusCompleted"] = 'completed'] = "PromptStatusCompleted";
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusErrored"] = 'errored'] = "PromptStatusErrored";
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusAbandoned"] = 'abandoned'] = "PromptStatusAbandoned";
+    PromptSvcPromptStatus[PromptSvcPromptStatus["PromptStatusCanceled"] = 'canceled'] = "PromptStatusCanceled";
+})(PromptSvcPromptStatus || (PromptSvcPromptStatus = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class PromptSvcRemovePromptRequest {
+    static getAttributeTypeMap() {
+        return PromptSvcRemovePromptRequest.attributeTypeMap;
+    }
+}
+PromptSvcRemovePromptRequest.discriminator = undefined;
+PromptSvcRemovePromptRequest.attributeTypeMap = [
+    {
+        "name": "promptId",
+        "baseName": "promptId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcAPISpec {
+    static getAttributeTypeMap() {
+        return RegistrySvcAPISpec.attributeTypeMap;
+    }
+}
+RegistrySvcAPISpec.discriminator = undefined;
+RegistrySvcAPISpec.attributeTypeMap = [
+    {
+        "name": "metadata",
+        "baseName": "metadata",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "protocolType",
+        "baseName": "protocolType",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcClient {
+    static getAttributeTypeMap() {
+        return RegistrySvcClient.attributeTypeMap;
+    }
+}
+RegistrySvcClient.discriminator = undefined;
+RegistrySvcClient.attributeTypeMap = [
+    {
+        "name": "language",
+        "baseName": "language",
+        "type": "RegistrySvcLanguage"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcDefinition {
+    static getAttributeTypeMap() {
+        return RegistrySvcDefinition.attributeTypeMap;
+    }
+}
+RegistrySvcDefinition.discriminator = undefined;
+RegistrySvcDefinition.attributeTypeMap = [
+    {
+        "name": "apiSpecs",
+        "baseName": "apiSpecs",
+        "type": "Array<RegistrySvcAPISpec>"
+    },
+    {
+        "name": "clients",
+        "baseName": "clients",
+        "type": "Array<RegistrySvcClient>"
+    },
+    {
+        "name": "envars",
+        "baseName": "envars",
+        "type": "{ [key: string]: string; }"
+    },
+    {
+        "name": "hostPort",
+        "baseName": "hostPort",
+        "type": "number"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "image",
+        "baseName": "image",
+        "type": "RegistrySvcImageSpec"
+    },
+    {
+        "name": "repository",
+        "baseName": "repository",
+        "type": "RegistrySvcRepositorySpec"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcErrorResponse {
+    static getAttributeTypeMap() {
+        return RegistrySvcErrorResponse.attributeTypeMap;
+    }
+}
+RegistrySvcErrorResponse.discriminator = undefined;
+RegistrySvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcGPU {
+    static getAttributeTypeMap() {
+        return RegistrySvcGPU.attributeTypeMap;
+    }
+}
+RegistrySvcGPU.discriminator = undefined;
+RegistrySvcGPU.attributeTypeMap = [
+    {
+        "name": "busId",
+        "baseName": "busId",
+        "type": "string"
+    },
+    {
+        "name": "computeMode",
+        "baseName": "computeMode",
+        "type": "string"
+    },
+    {
+        "name": "gpuUtilization",
+        "baseName": "gpuUtilization",
+        "type": "number"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "intraNodeId",
+        "baseName": "intraNodeId",
+        "type": "number"
+    },
+    {
+        "name": "memoryTotal",
+        "baseName": "memoryTotal",
+        "type": "number"
+    },
+    {
+        "name": "memoryUsage",
+        "baseName": "memoryUsage",
+        "type": "number"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "performanceState",
+        "baseName": "performanceState",
+        "type": "string"
+    },
+    {
+        "name": "powerCap",
+        "baseName": "powerCap",
+        "type": "number"
+    },
+    {
+        "name": "powerUsage",
+        "baseName": "powerUsage",
+        "type": "number"
+    },
+    {
+        "name": "processDetails",
+        "baseName": "processDetails",
+        "type": "Array<RegistrySvcProcess>"
+    },
+    {
+        "name": "temperature",
+        "baseName": "temperature",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcImageSpec {
+    static getAttributeTypeMap() {
+        return RegistrySvcImageSpec.attributeTypeMap;
+    }
+}
+RegistrySvcImageSpec.discriminator = undefined;
+RegistrySvcImageSpec.attributeTypeMap = [
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcInstance {
+    static getAttributeTypeMap() {
+        return RegistrySvcInstance.attributeTypeMap;
+    }
+}
+RegistrySvcInstance.discriminator = undefined;
+RegistrySvcInstance.attributeTypeMap = [
+    {
+        "name": "deploymentId",
+        "baseName": "deploymentId",
+        "type": "string"
+    },
+    {
+        "name": "details",
+        "baseName": "details",
+        "type": "string"
+    },
+    {
+        "name": "host",
+        "baseName": "host",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "ip",
+        "baseName": "ip",
+        "type": "string"
+    },
+    {
+        "name": "lastHeartbeat",
+        "baseName": "lastHeartbeat",
+        "type": "string"
+    },
+    {
+        "name": "nodeUrl",
+        "baseName": "nodeUrl",
+        "type": "string"
+    },
+    {
+        "name": "path",
+        "baseName": "path",
+        "type": "string"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    },
+    {
+        "name": "scheme",
+        "baseName": "scheme",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    },
+    {
+        "name": "status",
+        "baseName": "status",
+        "type": "RegistrySvcInstanceStatus"
+    },
+    {
+        "name": "tags",
+        "baseName": "tags",
+        "type": "Array<string>"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var RegistrySvcInstanceStatus;
+(function (RegistrySvcInstanceStatus) {
+    RegistrySvcInstanceStatus[RegistrySvcInstanceStatus["InstanceStatusUnknown"] = 'Unknown'] = "InstanceStatusUnknown";
+    RegistrySvcInstanceStatus[RegistrySvcInstanceStatus["InstanceStatusHealthy"] = 'Healthy'] = "InstanceStatusHealthy";
+    RegistrySvcInstanceStatus[RegistrySvcInstanceStatus["InstanceStatusDegraded"] = 'Degraded'] = "InstanceStatusDegraded";
+    RegistrySvcInstanceStatus[RegistrySvcInstanceStatus["InstanceStatusUnreachable"] = 'Unreachable'] = "InstanceStatusUnreachable";
+    RegistrySvcInstanceStatus[RegistrySvcInstanceStatus["InstanceStatusError"] = 'Error'] = "InstanceStatusError";
+})(RegistrySvcInstanceStatus || (RegistrySvcInstanceStatus = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+var RegistrySvcLanguage;
+(function (RegistrySvcLanguage) {
+    RegistrySvcLanguage[RegistrySvcLanguage["JavaScript"] = 'JavaScript'] = "JavaScript";
+    RegistrySvcLanguage[RegistrySvcLanguage["Python"] = 'Python'] = "Python";
+    RegistrySvcLanguage[RegistrySvcLanguage["Java"] = 'Java'] = "Java";
+    RegistrySvcLanguage[RegistrySvcLanguage["CSharp"] = 'C#'] = "CSharp";
+    RegistrySvcLanguage[RegistrySvcLanguage["CPlusPlus"] = 'C++'] = "CPlusPlus";
+    RegistrySvcLanguage[RegistrySvcLanguage["Ruby"] = 'Ruby'] = "Ruby";
+    RegistrySvcLanguage[RegistrySvcLanguage["Go"] = 'Go'] = "Go";
+    RegistrySvcLanguage[RegistrySvcLanguage["Swift"] = 'Swift'] = "Swift";
+    RegistrySvcLanguage[RegistrySvcLanguage["PHP"] = 'PHP'] = "PHP";
+    RegistrySvcLanguage[RegistrySvcLanguage["TypeScript"] = 'TypeScript'] = "TypeScript";
+    RegistrySvcLanguage[RegistrySvcLanguage["Kotlin"] = 'Kotlin'] = "Kotlin";
+    RegistrySvcLanguage[RegistrySvcLanguage["Scala"] = 'Scala'] = "Scala";
+    RegistrySvcLanguage[RegistrySvcLanguage["Perl"] = 'Perl'] = "Perl";
+    RegistrySvcLanguage[RegistrySvcLanguage["Rust"] = 'Rust'] = "Rust";
+    RegistrySvcLanguage[RegistrySvcLanguage["Haskell"] = 'Haskell'] = "Haskell";
+    RegistrySvcLanguage[RegistrySvcLanguage["Clojure"] = 'Clojure'] = "Clojure";
+    RegistrySvcLanguage[RegistrySvcLanguage["Elixir"] = 'Elixir'] = "Elixir";
+    RegistrySvcLanguage[RegistrySvcLanguage["ObjectiveC"] = 'Objective-C'] = "ObjectiveC";
+    RegistrySvcLanguage[RegistrySvcLanguage["FSharp"] = 'F#'] = "FSharp";
+})(RegistrySvcLanguage || (RegistrySvcLanguage = {}));
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcListDefinitionsResponse {
+    static getAttributeTypeMap() {
+        return RegistrySvcListDefinitionsResponse.attributeTypeMap;
+    }
+}
+RegistrySvcListDefinitionsResponse.discriminator = undefined;
+RegistrySvcListDefinitionsResponse.attributeTypeMap = [
+    {
+        "name": "definitions",
+        "baseName": "definitions",
+        "type": "Array<RegistrySvcDefinition>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcListInstancesResponse {
+    static getAttributeTypeMap() {
+        return RegistrySvcListInstancesResponse.attributeTypeMap;
+    }
+}
+RegistrySvcListInstancesResponse.discriminator = undefined;
+RegistrySvcListInstancesResponse.attributeTypeMap = [
+    {
+        "name": "instances",
+        "baseName": "instances",
+        "type": "Array<RegistrySvcInstance>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcListNodesResponse {
+    static getAttributeTypeMap() {
+        return RegistrySvcListNodesResponse.attributeTypeMap;
+    }
+}
+RegistrySvcListNodesResponse.discriminator = undefined;
+RegistrySvcListNodesResponse.attributeTypeMap = [
+    {
+        "name": "nodes",
+        "baseName": "nodes",
+        "type": "Array<RegistrySvcNode>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcNode {
+    static getAttributeTypeMap() {
+        return RegistrySvcNode.attributeTypeMap;
+    }
+}
+RegistrySvcNode.discriminator = undefined;
+RegistrySvcNode.attributeTypeMap = [
+    {
+        "name": "availabilityZone",
+        "baseName": "availabilityZone",
+        "type": "string"
+    },
+    {
+        "name": "gpus",
+        "baseName": "gpus",
+        "type": "Array<RegistrySvcGPU>"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "lastHeartbeat",
+        "baseName": "lastHeartbeat",
+        "type": "string"
+    },
+    {
+        "name": "region",
+        "baseName": "region",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    },
+    {
+        "name": "usage",
+        "baseName": "usage",
+        "type": "RegistrySvcResourceUsage"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcProcess {
+    static getAttributeTypeMap() {
+        return RegistrySvcProcess.attributeTypeMap;
+    }
+}
+RegistrySvcProcess.discriminator = undefined;
+RegistrySvcProcess.attributeTypeMap = [
+    {
+        "name": "memoryUsage",
+        "baseName": "memoryUsage",
+        "type": "number"
+    },
+    {
+        "name": "pid",
+        "baseName": "pid",
+        "type": "number"
+    },
+    {
+        "name": "processName",
+        "baseName": "processName",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcRegisterInstanceRequest {
+    static getAttributeTypeMap() {
+        return RegistrySvcRegisterInstanceRequest.attributeTypeMap;
+    }
+}
+RegistrySvcRegisterInstanceRequest.discriminator = undefined;
+RegistrySvcRegisterInstanceRequest.attributeTypeMap = [
+    {
+        "name": "deploymentId",
+        "baseName": "deploymentId",
+        "type": "string"
+    },
+    {
+        "name": "host",
+        "baseName": "host",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "ip",
+        "baseName": "ip",
+        "type": "string"
+    },
+    {
+        "name": "path",
+        "baseName": "path",
+        "type": "string"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    },
+    {
+        "name": "scheme",
+        "baseName": "scheme",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcRepositorySpec {
+    static getAttributeTypeMap() {
+        return RegistrySvcRepositorySpec.attributeTypeMap;
+    }
+}
+RegistrySvcRepositorySpec.discriminator = undefined;
+RegistrySvcRepositorySpec.attributeTypeMap = [
+    {
+        "name": "buildContext",
+        "baseName": "buildContext",
+        "type": "string"
+    },
+    {
+        "name": "containerFile",
+        "baseName": "containerFile",
+        "type": "string"
+    },
+    {
+        "name": "port",
+        "baseName": "port",
+        "type": "number"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcResourceUsage {
+    static getAttributeTypeMap() {
+        return RegistrySvcResourceUsage.attributeTypeMap;
+    }
+}
+RegistrySvcResourceUsage.discriminator = undefined;
+RegistrySvcResourceUsage.attributeTypeMap = [
+    {
+        "name": "cpu",
+        "baseName": "cpu",
+        "type": "RegistrySvcUsage"
+    },
+    {
+        "name": "disk",
+        "baseName": "disk",
+        "type": "RegistrySvcUsage"
+    },
+    {
+        "name": "memory",
+        "baseName": "memory",
+        "type": "RegistrySvcUsage"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcSaveDefinitionRequest {
+    static getAttributeTypeMap() {
+        return RegistrySvcSaveDefinitionRequest.attributeTypeMap;
+    }
+}
+RegistrySvcSaveDefinitionRequest.discriminator = undefined;
+RegistrySvcSaveDefinitionRequest.attributeTypeMap = [
+    {
+        "name": "definition",
+        "baseName": "definition",
+        "type": "RegistrySvcDefinition"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class RegistrySvcUsage {
+    static getAttributeTypeMap() {
+        return RegistrySvcUsage.attributeTypeMap;
+    }
+}
+RegistrySvcUsage.discriminator = undefined;
+RegistrySvcUsage.attributeTypeMap = [
+    {
+        "name": "percent",
+        "baseName": "percent",
+        "type": "number"
+    },
+    {
+        "name": "total",
+        "baseName": "total",
+        "type": "number"
+    },
+    {
+        "name": "used",
+        "baseName": "used",
+        "type": "number"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcDecryptValueRequest {
+    static getAttributeTypeMap() {
+        return SecretSvcDecryptValueRequest.attributeTypeMap;
+    }
+}
+SecretSvcDecryptValueRequest.discriminator = undefined;
+SecretSvcDecryptValueRequest.attributeTypeMap = [
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "values",
+        "baseName": "values",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcDecryptValueResponse {
+    static getAttributeTypeMap() {
+        return SecretSvcDecryptValueResponse.attributeTypeMap;
+    }
+}
+SecretSvcDecryptValueResponse.discriminator = undefined;
+SecretSvcDecryptValueResponse.attributeTypeMap = [
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "values",
+        "baseName": "values",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcEncryptValueRequest {
+    static getAttributeTypeMap() {
+        return SecretSvcEncryptValueRequest.attributeTypeMap;
+    }
+}
+SecretSvcEncryptValueRequest.discriminator = undefined;
+SecretSvcEncryptValueRequest.attributeTypeMap = [
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "values",
+        "baseName": "values",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcEncryptValueResponse {
+    static getAttributeTypeMap() {
+        return SecretSvcEncryptValueResponse.attributeTypeMap;
+    }
+}
+SecretSvcEncryptValueResponse.discriminator = undefined;
+SecretSvcEncryptValueResponse.attributeTypeMap = [
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "values",
+        "baseName": "values",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcListSecretsRequest {
+    static getAttributeTypeMap() {
+        return SecretSvcListSecretsRequest.attributeTypeMap;
+    }
+}
+SecretSvcListSecretsRequest.discriminator = undefined;
+SecretSvcListSecretsRequest.attributeTypeMap = [
+    {
+        "name": "key",
+        "baseName": "key",
+        "type": "string"
+    },
+    {
+        "name": "keys",
+        "baseName": "keys",
+        "type": "Array<string>"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcListSecretsResponse {
+    static getAttributeTypeMap() {
+        return SecretSvcListSecretsResponse.attributeTypeMap;
+    }
+}
+SecretSvcListSecretsResponse.discriminator = undefined;
+SecretSvcListSecretsResponse.attributeTypeMap = [
+    {
+        "name": "secrets",
+        "baseName": "secrets",
+        "type": "Array<SecretSvcSecret>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcRemoveSecretsRequest {
+    static getAttributeTypeMap() {
+        return SecretSvcRemoveSecretsRequest.attributeTypeMap;
+    }
+}
+SecretSvcRemoveSecretsRequest.discriminator = undefined;
+SecretSvcRemoveSecretsRequest.attributeTypeMap = [
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "ids",
+        "baseName": "ids",
+        "type": "Array<string>"
+    },
+    {
+        "name": "key",
+        "baseName": "key",
+        "type": "string"
+    },
+    {
+        "name": "keys",
+        "baseName": "keys",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcSaveSecretsRequest {
+    static getAttributeTypeMap() {
+        return SecretSvcSaveSecretsRequest.attributeTypeMap;
+    }
+}
+SecretSvcSaveSecretsRequest.discriminator = undefined;
+SecretSvcSaveSecretsRequest.attributeTypeMap = [
+    {
+        "name": "secrets",
+        "baseName": "secrets",
+        "type": "Array<SecretSvcSecret>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SecretSvcSecret {
+    static getAttributeTypeMap() {
+        return SecretSvcSecret.attributeTypeMap;
+    }
+}
+SecretSvcSecret.discriminator = undefined;
+SecretSvcSecret.attributeTypeMap = [
+    {
+        "name": "canChangeDeleters",
+        "baseName": "canChangeDeleters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "canChangeReaders",
+        "baseName": "canChangeReaders",
+        "type": "Array<string>"
+    },
+    {
+        "name": "canChangeWriters",
+        "baseName": "canChangeWriters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "deleters",
+        "baseName": "deleters",
+        "type": "Array<string>"
+    },
+    {
+        "name": "encrypted",
+        "baseName": "encrypted",
+        "type": "boolean"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "key",
+        "baseName": "key",
+        "type": "string"
+    },
+    {
+        "name": "namespace",
+        "baseName": "namespace",
+        "type": "string"
+    },
+    {
+        "name": "readers",
+        "baseName": "readers",
+        "type": "Array<string>"
+    },
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "writers",
+        "baseName": "writers",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SourceSvcCheckoutRepoRequest {
+    static getAttributeTypeMap() {
+        return SourceSvcCheckoutRepoRequest.attributeTypeMap;
+    }
+}
+SourceSvcCheckoutRepoRequest.discriminator = undefined;
+SourceSvcCheckoutRepoRequest.attributeTypeMap = [
+    {
+        "name": "password",
+        "baseName": "password",
+        "type": "string"
+    },
+    {
+        "name": "sshKey",
+        "baseName": "ssh_key",
+        "type": "string"
+    },
+    {
+        "name": "sshKeyPwd",
+        "baseName": "ssh_key_pwd",
+        "type": "string"
+    },
+    {
+        "name": "token",
+        "baseName": "token",
+        "type": "string"
+    },
+    {
+        "name": "url",
+        "baseName": "url",
+        "type": "string"
+    },
+    {
+        "name": "username",
+        "baseName": "username",
+        "type": "string"
+    },
+    {
+        "name": "version",
+        "baseName": "version",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SourceSvcCheckoutRepoResponse {
+    static getAttributeTypeMap() {
+        return SourceSvcCheckoutRepoResponse.attributeTypeMap;
+    }
+}
+SourceSvcCheckoutRepoResponse.discriminator = undefined;
+SourceSvcCheckoutRepoResponse.attributeTypeMap = [
+    {
+        "name": "dir",
+        "baseName": "dir",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class SourceSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return SourceSvcErrorResponse.attributeTypeMap;
+    }
+}
+SourceSvcErrorResponse.discriminator = undefined;
+SourceSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcAddUserToOrganizationRequest {
+    static getAttributeTypeMap() {
+        return UserSvcAddUserToOrganizationRequest.attributeTypeMap;
+    }
+}
+UserSvcAddUserToOrganizationRequest.discriminator = undefined;
+UserSvcAddUserToOrganizationRequest.attributeTypeMap = [
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcAuthToken {
+    static getAttributeTypeMap() {
+        return UserSvcAuthToken.attributeTypeMap;
+    }
+}
+UserSvcAuthToken.discriminator = undefined;
+UserSvcAuthToken.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "deletedAt",
+        "baseName": "deletedAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "token",
+        "baseName": "token",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcChangePasswordAdminRequest {
+    static getAttributeTypeMap() {
+        return UserSvcChangePasswordAdminRequest.attributeTypeMap;
+    }
+}
+UserSvcChangePasswordAdminRequest.discriminator = undefined;
+UserSvcChangePasswordAdminRequest.attributeTypeMap = [
+    {
+        "name": "newPassword",
+        "baseName": "newPassword",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcChangePasswordRequest {
+    static getAttributeTypeMap() {
+        return UserSvcChangePasswordRequest.attributeTypeMap;
+    }
+}
+UserSvcChangePasswordRequest.discriminator = undefined;
+UserSvcChangePasswordRequest.attributeTypeMap = [
+    {
+        "name": "currentPassword",
+        "baseName": "currentPassword",
+        "type": "string"
+    },
+    {
+        "name": "newPassword",
+        "baseName": "newPassword",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcContact {
+    static getAttributeTypeMap() {
+        return UserSvcContact.attributeTypeMap;
+    }
+}
+UserSvcContact.discriminator = undefined;
+UserSvcContact.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "deletedAt",
+        "baseName": "deletedAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "isPrimary",
+        "baseName": "isPrimary",
+        "type": "boolean"
+    },
+    {
+        "name": "platform",
+        "baseName": "platform",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    },
+    {
+        "name": "userId",
+        "baseName": "userId",
+        "type": "string"
+    },
+    {
+        "name": "value",
+        "baseName": "value",
+        "type": "string"
+    },
+    {
+        "name": "verified",
+        "baseName": "verified",
+        "type": "boolean"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcCreateOrganizationRequest {
+    static getAttributeTypeMap() {
+        return UserSvcCreateOrganizationRequest.attributeTypeMap;
+    }
+}
+UserSvcCreateOrganizationRequest.discriminator = undefined;
+UserSvcCreateOrganizationRequest.attributeTypeMap = [
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcCreateRoleRequest {
+    static getAttributeTypeMap() {
+        return UserSvcCreateRoleRequest.attributeTypeMap;
+    }
+}
+UserSvcCreateRoleRequest.discriminator = undefined;
+UserSvcCreateRoleRequest.attributeTypeMap = [
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "permissionIds",
+        "baseName": "permissionIds",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcCreateRoleResponse {
+    static getAttributeTypeMap() {
+        return UserSvcCreateRoleResponse.attributeTypeMap;
+    }
+}
+UserSvcCreateRoleResponse.discriminator = undefined;
+UserSvcCreateRoleResponse.attributeTypeMap = [
+    {
+        "name": "role",
+        "baseName": "role",
+        "type": "UserSvcRole"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcCreateUserRequest {
+    static getAttributeTypeMap() {
+        return UserSvcCreateUserRequest.attributeTypeMap;
+    }
+}
+UserSvcCreateUserRequest.discriminator = undefined;
+UserSvcCreateUserRequest.attributeTypeMap = [
+    {
+        "name": "password",
+        "baseName": "password",
+        "type": "string"
+    },
+    {
+        "name": "roleIds",
+        "baseName": "roleIds",
+        "type": "Array<string>"
+    },
+    {
+        "name": "user",
+        "baseName": "user",
+        "type": "UserSvcUser"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcErrorResponse {
+    static getAttributeTypeMap() {
+        return UserSvcErrorResponse.attributeTypeMap;
+    }
+}
+UserSvcErrorResponse.discriminator = undefined;
+UserSvcErrorResponse.attributeTypeMap = [
+    {
+        "name": "error",
+        "baseName": "error",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcGetPermissionsResponse {
+    static getAttributeTypeMap() {
+        return UserSvcGetPermissionsResponse.attributeTypeMap;
+    }
+}
+UserSvcGetPermissionsResponse.discriminator = undefined;
+UserSvcGetPermissionsResponse.attributeTypeMap = [
+    {
+        "name": "permissions",
+        "baseName": "permissions",
+        "type": "Array<UserSvcPermission>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcGetPublicKeyResponse {
+    static getAttributeTypeMap() {
+        return UserSvcGetPublicKeyResponse.attributeTypeMap;
+    }
+}
+UserSvcGetPublicKeyResponse.discriminator = undefined;
+UserSvcGetPublicKeyResponse.attributeTypeMap = [
+    {
+        "name": "publicKey",
+        "baseName": "publicKey",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcGetRolesResponse {
+    static getAttributeTypeMap() {
+        return UserSvcGetRolesResponse.attributeTypeMap;
+    }
+}
+UserSvcGetRolesResponse.discriminator = undefined;
+UserSvcGetRolesResponse.attributeTypeMap = [
+    {
+        "name": "roles",
+        "baseName": "roles",
+        "type": "Array<UserSvcRole>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcGetUsersRequest {
+    static getAttributeTypeMap() {
+        return UserSvcGetUsersRequest.attributeTypeMap;
+    }
+}
+UserSvcGetUsersRequest.discriminator = undefined;
+UserSvcGetUsersRequest.attributeTypeMap = [
+    {
+        "name": "query",
+        "baseName": "query",
+        "type": "DatastoreQuery"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcGetUsersResponse {
+    static getAttributeTypeMap() {
+        return UserSvcGetUsersResponse.attributeTypeMap;
+    }
+}
+UserSvcGetUsersResponse.discriminator = undefined;
+UserSvcGetUsersResponse.attributeTypeMap = [
+    {
+        "name": "after",
+        "baseName": "after",
+        "type": "string"
+    },
+    {
+        "name": "count",
+        "baseName": "count",
+        "type": "number"
+    },
+    {
+        "name": "users",
+        "baseName": "users",
+        "type": "Array<UserSvcUser>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcIsAuthorizedRequest {
+    static getAttributeTypeMap() {
+        return UserSvcIsAuthorizedRequest.attributeTypeMap;
+    }
+}
+UserSvcIsAuthorizedRequest.discriminator = undefined;
+UserSvcIsAuthorizedRequest.attributeTypeMap = [
+    {
+        "name": "contactsGranted",
+        "baseName": "contactsGranted",
+        "type": "Array<string>"
+    },
+    {
+        "name": "slugsGranted",
+        "baseName": "slugsGranted",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcIsAuthorizedResponse {
+    static getAttributeTypeMap() {
+        return UserSvcIsAuthorizedResponse.attributeTypeMap;
+    }
+}
+UserSvcIsAuthorizedResponse.discriminator = undefined;
+UserSvcIsAuthorizedResponse.attributeTypeMap = [
+    {
+        "name": "authorized",
+        "baseName": "authorized",
+        "type": "boolean"
+    },
+    {
+        "name": "user",
+        "baseName": "user",
+        "type": "UserSvcUser"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcLoginRequest {
+    static getAttributeTypeMap() {
+        return UserSvcLoginRequest.attributeTypeMap;
+    }
+}
+UserSvcLoginRequest.discriminator = undefined;
+UserSvcLoginRequest.attributeTypeMap = [
+    {
+        "name": "contact",
+        "baseName": "contact",
+        "type": "string"
+    },
+    {
+        "name": "password",
+        "baseName": "password",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcLoginResponse {
+    static getAttributeTypeMap() {
+        return UserSvcLoginResponse.attributeTypeMap;
+    }
+}
+UserSvcLoginResponse.discriminator = undefined;
+UserSvcLoginResponse.attributeTypeMap = [
+    {
+        "name": "token",
+        "baseName": "token",
+        "type": "UserSvcAuthToken"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcOrganization {
+    static getAttributeTypeMap() {
+        return UserSvcOrganization.attributeTypeMap;
+    }
+}
+UserSvcOrganization.discriminator = undefined;
+UserSvcOrganization.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "deletedAt",
+        "baseName": "deletedAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcPermission {
+    static getAttributeTypeMap() {
+        return UserSvcPermission.attributeTypeMap;
+    }
+}
+UserSvcPermission.discriminator = undefined;
+UserSvcPermission.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "ownerId",
+        "baseName": "ownerId",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcReadUserByTokenResponse {
+    static getAttributeTypeMap() {
+        return UserSvcReadUserByTokenResponse.attributeTypeMap;
+    }
+}
+UserSvcReadUserByTokenResponse.discriminator = undefined;
+UserSvcReadUserByTokenResponse.attributeTypeMap = [
+    {
+        "name": "activeOrganizationId",
+        "baseName": "activeOrganizationId",
+        "type": "string"
+    },
+    {
+        "name": "organizations",
+        "baseName": "organizations",
+        "type": "Array<UserSvcOrganization>"
+    },
+    {
+        "name": "user",
+        "baseName": "user",
+        "type": "UserSvcUser"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcRegisterRequest {
+    static getAttributeTypeMap() {
+        return UserSvcRegisterRequest.attributeTypeMap;
+    }
+}
+UserSvcRegisterRequest.discriminator = undefined;
+UserSvcRegisterRequest.attributeTypeMap = [
+    {
+        "name": "contact",
+        "baseName": "contact",
+        "type": "UserSvcContact"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "password",
+        "baseName": "password",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcRegisterResponse {
+    static getAttributeTypeMap() {
+        return UserSvcRegisterResponse.attributeTypeMap;
+    }
+}
+UserSvcRegisterResponse.discriminator = undefined;
+UserSvcRegisterResponse.attributeTypeMap = [
+    {
+        "name": "token",
+        "baseName": "token",
+        "type": "UserSvcAuthToken"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcRole {
+    static getAttributeTypeMap() {
+        return UserSvcRole.attributeTypeMap;
+    }
+}
+UserSvcRole.discriminator = undefined;
+UserSvcRole.attributeTypeMap = [
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "description",
+        "baseName": "description",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "ownerId",
+        "baseName": "ownerId",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcSaveProfileRequest {
+    static getAttributeTypeMap() {
+        return UserSvcSaveProfileRequest.attributeTypeMap;
+    }
+}
+UserSvcSaveProfileRequest.discriminator = undefined;
+UserSvcSaveProfileRequest.attributeTypeMap = [
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcSetRolePermissionsRequest {
+    static getAttributeTypeMap() {
+        return UserSvcSetRolePermissionsRequest.attributeTypeMap;
+    }
+}
+UserSvcSetRolePermissionsRequest.discriminator = undefined;
+UserSvcSetRolePermissionsRequest.attributeTypeMap = [
+    {
+        "name": "permissionIds",
+        "baseName": "permissionIds",
+        "type": "Array<string>"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcUpserPermissionRequest {
+    static getAttributeTypeMap() {
+        return UserSvcUpserPermissionRequest.attributeTypeMap;
+    }
+}
+UserSvcUpserPermissionRequest.discriminator = undefined;
+UserSvcUpserPermissionRequest.attributeTypeMap = [
+    {
+        "name": "permission",
+        "baseName": "permission",
+        "type": "UserSvcPermission"
+    }
+];
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+class UserSvcUser {
+    static getAttributeTypeMap() {
+        return UserSvcUser.attributeTypeMap;
+    }
+}
+UserSvcUser.discriminator = undefined;
+UserSvcUser.attributeTypeMap = [
+    {
+        "name": "contacts",
+        "baseName": "contacts",
+        "type": "Array<UserSvcContact>"
+    },
+    {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
+        "name": "deletedAt",
+        "baseName": "deletedAt",
+        "type": "string"
+    },
+    {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
+    },
+    {
+        "name": "passwordHash",
+        "baseName": "passwordHash",
+        "type": "string"
+    },
+    {
+        "name": "slug",
+        "baseName": "slug",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "string"
+    }
+];
+
+/* tslint:disable:no-unused-variable */
+let primitives = [
+    "string",
+    "boolean",
+    "double",
+    "integer",
+    "long",
+    "float",
+    "number",
+    "any"
+];
+let enumsMap = {
+    "DatastoreOp": DatastoreOp,
+    "DeploySvcDeploymentStatus": DeploySvcDeploymentStatus,
+    "DeploySvcStrategyType": DeploySvcStrategyType,
+    "PolicySvcEntity": PolicySvcEntity,
+    "PolicySvcScope": PolicySvcScope,
+    "PolicySvcTemplateId": PolicySvcTemplateId,
+    "PromptSvcPromptStatus": PromptSvcPromptStatus,
+    "RegistrySvcInstanceStatus": RegistrySvcInstanceStatus,
+    "RegistrySvcLanguage": RegistrySvcLanguage,
+};
+let typeMap = {
+    "ChatSvcAddMessageRequest": ChatSvcAddMessageRequest,
+    "ChatSvcAddThreadRequest": ChatSvcAddThreadRequest,
+    "ChatSvcAddThreadResponse": ChatSvcAddThreadResponse,
+    "ChatSvcAsset": ChatSvcAsset,
+    "ChatSvcEventMessageAdded": ChatSvcEventMessageAdded,
+    "ChatSvcEventThreadAdded": ChatSvcEventThreadAdded,
+    "ChatSvcEventThreadUpdate": ChatSvcEventThreadUpdate,
+    "ChatSvcGetMessagesResponse": ChatSvcGetMessagesResponse,
+    "ChatSvcGetThreadResponse": ChatSvcGetThreadResponse,
+    "ChatSvcGetThreadsResponse": ChatSvcGetThreadsResponse,
+    "ChatSvcMessage": ChatSvcMessage,
+    "ChatSvcThread": ChatSvcThread,
+    "ChatSvcUpdateThreadRequest": ChatSvcUpdateThreadRequest,
+    "ConfigSvcConfig": ConfigSvcConfig,
+    "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
+    "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
+    "DatastoreFilter": DatastoreFilter,
+    "DatastoreOrderBy": DatastoreOrderBy,
+    "DatastoreQuery": DatastoreQuery,
+    "DeploySvcAutoScalingConfig": DeploySvcAutoScalingConfig,
+    "DeploySvcDeleteDeploymentRequest": DeploySvcDeleteDeploymentRequest,
+    "DeploySvcDeployment": DeploySvcDeployment,
+    "DeploySvcDeploymentStrategy": DeploySvcDeploymentStrategy,
+    "DeploySvcErrorResponse": DeploySvcErrorResponse,
+    "DeploySvcListDeploymentsResponse": DeploySvcListDeploymentsResponse,
+    "DeploySvcResourceLimits": DeploySvcResourceLimits,
+    "DeploySvcSaveDeploymentRequest": DeploySvcSaveDeploymentRequest,
+    "DeploySvcTargetRegion": DeploySvcTargetRegion,
+    "DockerSvcBuildImageRequest": DockerSvcBuildImageRequest,
+    "DockerSvcContainerIsRunningResponse": DockerSvcContainerIsRunningResponse,
+    "DockerSvcDockerInfo": DockerSvcDockerInfo,
+    "DockerSvcErrorResponse": DockerSvcErrorResponse,
+    "DockerSvcGetContainerSummaryResponse": DockerSvcGetContainerSummaryResponse,
+    "DockerSvcGetDockerHostResponse": DockerSvcGetDockerHostResponse,
+    "DockerSvcGetInfoResponse": DockerSvcGetInfoResponse,
+    "DockerSvcRunContainerOptions": DockerSvcRunContainerOptions,
+    "DockerSvcRunContainerRequest": DockerSvcRunContainerRequest,
+    "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
+    "DockerSvcRunInfo": DockerSvcRunInfo,
+    "DockerSvcStopContainerRequest": DockerSvcStopContainerRequest,
+    "DownloadSvcDownloadDetails": DownloadSvcDownloadDetails,
+    "DownloadSvcDownloadRequest": DownloadSvcDownloadRequest,
+    "DownloadSvcDownloadsResponse": DownloadSvcDownloadsResponse,
+    "DownloadSvcErrorResponse": DownloadSvcErrorResponse,
+    "DownloadSvcGetDownloadResponse": DownloadSvcGetDownloadResponse,
+    "DynamicSvcCreateObjectRequest": DynamicSvcCreateObjectRequest,
+    "DynamicSvcCreateObjectResponse": DynamicSvcCreateObjectResponse,
+    "DynamicSvcDeleteObjectRequest": DynamicSvcDeleteObjectRequest,
+    "DynamicSvcErrorResponse": DynamicSvcErrorResponse,
+    "DynamicSvcObject": DynamicSvcObject,
+    "DynamicSvcObjectCreateFields": DynamicSvcObjectCreateFields,
+    "DynamicSvcQueryRequest": DynamicSvcQueryRequest,
+    "DynamicSvcQueryResponse": DynamicSvcQueryResponse,
+    "DynamicSvcUpdateObjectRequest": DynamicSvcUpdateObjectRequest,
+    "DynamicSvcUpsertObjectRequest": DynamicSvcUpsertObjectRequest,
+    "DynamicSvcUpsertObjectResponse": DynamicSvcUpsertObjectResponse,
+    "EmailSvcErrorResponse": EmailSvcErrorResponse,
+    "EmailSvcFile": EmailSvcFile,
+    "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,
+    "EmailSvcSendEmailResponse": EmailSvcSendEmailResponse,
+    "FirehoseSvcErrorResponse": FirehoseSvcErrorResponse,
+    "FirehoseSvcEvent": FirehoseSvcEvent,
+    "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
+    "ModelSvcArchitectures": ModelSvcArchitectures,
+    "ModelSvcContainer": ModelSvcContainer,
+    "ModelSvcErrorResponse": ModelSvcErrorResponse,
+    "ModelSvcGetModelResponse": ModelSvcGetModelResponse,
+    "ModelSvcListResponse": ModelSvcListResponse,
+    "ModelSvcModel": ModelSvcModel,
+    "ModelSvcModelStatus": ModelSvcModelStatus,
+    "ModelSvcPlatform": ModelSvcPlatform,
+    "ModelSvcStatusResponse": ModelSvcStatusResponse,
+    "PolicySvcBlocklistParameters": PolicySvcBlocklistParameters,
+    "PolicySvcCheckRequest": PolicySvcCheckRequest,
+    "PolicySvcCheckResponse": PolicySvcCheckResponse,
+    "PolicySvcErrorResponse": PolicySvcErrorResponse,
+    "PolicySvcInstance": PolicySvcInstance,
+    "PolicySvcRateLimitParameters": PolicySvcRateLimitParameters,
+    "PolicySvcUpsertInstanceRequest": PolicySvcUpsertInstanceRequest,
+    "PromptSvcAddPromptRequest": PromptSvcAddPromptRequest,
+    "PromptSvcAddPromptResponse": PromptSvcAddPromptResponse,
+    "PromptSvcErrorResponse": PromptSvcErrorResponse,
+    "PromptSvcListPromptsRequest": PromptSvcListPromptsRequest,
+    "PromptSvcListPromptsResponse": PromptSvcListPromptsResponse,
+    "PromptSvcPrompt": PromptSvcPrompt,
+    "PromptSvcRemovePromptRequest": PromptSvcRemovePromptRequest,
+    "RegistrySvcAPISpec": RegistrySvcAPISpec,
+    "RegistrySvcClient": RegistrySvcClient,
+    "RegistrySvcDefinition": RegistrySvcDefinition,
+    "RegistrySvcErrorResponse": RegistrySvcErrorResponse,
+    "RegistrySvcGPU": RegistrySvcGPU,
+    "RegistrySvcImageSpec": RegistrySvcImageSpec,
+    "RegistrySvcInstance": RegistrySvcInstance,
+    "RegistrySvcListDefinitionsResponse": RegistrySvcListDefinitionsResponse,
+    "RegistrySvcListInstancesResponse": RegistrySvcListInstancesResponse,
+    "RegistrySvcListNodesResponse": RegistrySvcListNodesResponse,
+    "RegistrySvcNode": RegistrySvcNode,
+    "RegistrySvcProcess": RegistrySvcProcess,
+    "RegistrySvcRegisterInstanceRequest": RegistrySvcRegisterInstanceRequest,
+    "RegistrySvcRepositorySpec": RegistrySvcRepositorySpec,
+    "RegistrySvcResourceUsage": RegistrySvcResourceUsage,
+    "RegistrySvcSaveDefinitionRequest": RegistrySvcSaveDefinitionRequest,
+    "RegistrySvcUsage": RegistrySvcUsage,
+    "SecretSvcDecryptValueRequest": SecretSvcDecryptValueRequest,
+    "SecretSvcDecryptValueResponse": SecretSvcDecryptValueResponse,
+    "SecretSvcEncryptValueRequest": SecretSvcEncryptValueRequest,
+    "SecretSvcEncryptValueResponse": SecretSvcEncryptValueResponse,
+    "SecretSvcListSecretsRequest": SecretSvcListSecretsRequest,
+    "SecretSvcListSecretsResponse": SecretSvcListSecretsResponse,
+    "SecretSvcRemoveSecretsRequest": SecretSvcRemoveSecretsRequest,
+    "SecretSvcSaveSecretsRequest": SecretSvcSaveSecretsRequest,
+    "SecretSvcSecret": SecretSvcSecret,
+    "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
+    "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
+    "SourceSvcErrorResponse": SourceSvcErrorResponse,
+    "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
+    "UserSvcAuthToken": UserSvcAuthToken,
+    "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,
+    "UserSvcChangePasswordRequest": UserSvcChangePasswordRequest,
+    "UserSvcContact": UserSvcContact,
+    "UserSvcCreateOrganizationRequest": UserSvcCreateOrganizationRequest,
+    "UserSvcCreateRoleRequest": UserSvcCreateRoleRequest,
+    "UserSvcCreateRoleResponse": UserSvcCreateRoleResponse,
+    "UserSvcCreateUserRequest": UserSvcCreateUserRequest,
+    "UserSvcErrorResponse": UserSvcErrorResponse,
+    "UserSvcGetPermissionsResponse": UserSvcGetPermissionsResponse,
+    "UserSvcGetPublicKeyResponse": UserSvcGetPublicKeyResponse,
+    "UserSvcGetRolesResponse": UserSvcGetRolesResponse,
+    "UserSvcGetUsersRequest": UserSvcGetUsersRequest,
+    "UserSvcGetUsersResponse": UserSvcGetUsersResponse,
+    "UserSvcIsAuthorizedRequest": UserSvcIsAuthorizedRequest,
+    "UserSvcIsAuthorizedResponse": UserSvcIsAuthorizedResponse,
+    "UserSvcLoginRequest": UserSvcLoginRequest,
+    "UserSvcLoginResponse": UserSvcLoginResponse,
+    "UserSvcOrganization": UserSvcOrganization,
+    "UserSvcPermission": UserSvcPermission,
+    "UserSvcReadUserByTokenResponse": UserSvcReadUserByTokenResponse,
+    "UserSvcRegisterRequest": UserSvcRegisterRequest,
+    "UserSvcRegisterResponse": UserSvcRegisterResponse,
+    "UserSvcRole": UserSvcRole,
+    "UserSvcSaveProfileRequest": UserSvcSaveProfileRequest,
+    "UserSvcSetRolePermissionsRequest": UserSvcSetRolePermissionsRequest,
+    "UserSvcUpserPermissionRequest": UserSvcUpserPermissionRequest,
+    "UserSvcUser": UserSvcUser,
+};
+// Check if a string starts with another string without using es6 features
+function startsWith(str, match) {
+    return str.substring(0, match.length) === match;
+}
+// Check if a string ends with another string without using es6 features
+function endsWith(str, match) {
+    return str.length >= match.length && str.substring(str.length - match.length) === match;
+}
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
+class ObjectSerializer {
+    static findCorrectType(data, expectedType) {
+        if (data == undefined) {
+            return expectedType;
+        }
+        else if (primitives.indexOf(expectedType.toLowerCase()) !== -1) {
+            return expectedType;
+        }
+        else if (expectedType === "Date") {
+            return expectedType;
+        }
+        else {
+            if (enumsMap[expectedType]) {
+                return expectedType;
+            }
+            if (!typeMap[expectedType]) {
+                return expectedType; // w/e we don't know the type
+            }
+            // Check the discriminator
+            let discriminatorProperty = typeMap[expectedType].discriminator;
+            if (discriminatorProperty == null) {
+                return expectedType; // the type does not have a discriminator. use it.
+            }
+            else {
+                if (data[discriminatorProperty]) {
+                    var discriminatorType = data[discriminatorProperty];
+                    if (typeMap[discriminatorType]) {
+                        return discriminatorType; // use the type given in the discriminator
+                    }
+                    else {
+                        return expectedType; // discriminator did not map to a type
+                    }
+                }
+                else {
+                    return expectedType; // discriminator was not present (or an empty string)
+                }
+            }
+        }
+    }
+    static serialize(data, type) {
+        if (data == undefined) {
+            return data;
+        }
+        else if (primitives.indexOf(type.toLowerCase()) !== -1) {
+            return data;
+        }
+        else if (endsWith(type, nullableSuffix)) {
+            let subType = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType);
+        }
+        else if (endsWith(type, optionalSuffix)) {
+            let subType = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType);
+        }
+        else if (startsWith(type, arrayPrefix)) {
+            let subType = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
+            let transformedData = [];
+            for (let index = 0; index < data.length; index++) {
+                let datum = data[index];
+                transformedData.push(ObjectSerializer.serialize(datum, subType));
+            }
+            return transformedData;
+        }
+        else if (startsWith(type, mapPrefix)) {
+            let subType = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(data[key], subType);
+            }
+            return transformedData;
+        }
+        else if (type === "Date") {
+            return data.toISOString();
+        }
+        else {
+            if (enumsMap[type]) {
+                return data;
+            }
+            if (!typeMap[type]) { // in case we dont know the type
+                return data;
+            }
+            // Get the actual type of this object
+            type = this.findCorrectType(data, type);
+            // get the map for the correct type.
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            let instance = {};
+            for (let index = 0; index < attributeTypes.length; index++) {
+                let attributeType = attributeTypes[index];
+                instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
+            }
+            return instance;
+        }
+    }
+    static deserialize(data, type) {
+        // polymorphism may change the actual type.
+        type = ObjectSerializer.findCorrectType(data, type);
+        if (data == undefined) {
+            return data;
+        }
+        else if (primitives.indexOf(type.toLowerCase()) !== -1) {
+            return data;
+        }
+        else if (endsWith(type, nullableSuffix)) {
+            let subType = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType);
+        }
+        else if (endsWith(type, optionalSuffix)) {
+            let subType = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType);
+        }
+        else if (startsWith(type, arrayPrefix)) {
+            let subType = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
+            let transformedData = [];
+            for (let index = 0; index < data.length; index++) {
+                let datum = data[index];
+                transformedData.push(ObjectSerializer.deserialize(datum, subType));
+            }
+            return transformedData;
+        }
+        else if (startsWith(type, mapPrefix)) {
+            let subType = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(data[key], subType);
+            }
+            return transformedData;
+        }
+        else if (type === "Date") {
+            return new Date(data);
+        }
+        else {
+            if (enumsMap[type]) { // is Enum
+                return data;
+            }
+            if (!typeMap[type]) { // dont know the type
+                return data;
+            }
+            let instance = new typeMap[type]();
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            for (let index = 0; index < attributeTypes.length; index++) {
+                let attributeType = attributeTypes[index];
+                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
+            }
+            return instance;
+        }
+    }
+}
+class HttpBasicAuth {
+    constructor() {
+        this.username = '';
+        this.password = '';
+    }
+    applyToRequest(requestOptions) {
+        requestOptions.auth = {
+            username: this.username, password: this.password
+        };
+    }
+}
+class HttpBearerAuth {
+    constructor() {
+        this.accessToken = '';
+    }
+    applyToRequest(requestOptions) {
+        if (requestOptions && requestOptions.headers) {
+            const accessToken = typeof this.accessToken === 'function'
+                ? this.accessToken()
+                : this.accessToken;
+            requestOptions.headers["Authorization"] = "Bearer " + accessToken;
+        }
+    }
+}
+class ApiKeyAuth {
+    constructor(location, paramName) {
+        this.location = location;
+        this.paramName = paramName;
+        this.apiKey = '';
+    }
+    applyToRequest(requestOptions) {
+        if (this.location == "query") {
+            requestOptions.qs[this.paramName] = this.apiKey;
+        }
+        else if (this.location == "header" && requestOptions && requestOptions.headers) {
+            requestOptions.headers[this.paramName] = this.apiKey;
+        }
+        else if (this.location == 'cookie' && requestOptions && requestOptions.headers) {
+            if (requestOptions.headers['Cookie']) {
+                requestOptions.headers['Cookie'] += '; ' + this.paramName + '=' + encodeURIComponent(this.apiKey);
+            }
+            else {
+                requestOptions.headers['Cookie'] = this.paramName + '=' + encodeURIComponent(this.apiKey);
+            }
+        }
+    }
+}
+class OAuth {
+    constructor() {
+        this.accessToken = '';
+    }
+    applyToRequest(requestOptions) {
+        if (requestOptions && requestOptions.headers) {
+            requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
+        }
+    }
+}
+class VoidAuth {
+    constructor() {
+        this.username = '';
+        this.password = '';
+    }
+    applyToRequest(_) {
+        // Do nothing
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$e = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var ChatSvcApiApiKeys;
+(function (ChatSvcApiApiKeys) {
+    ChatSvcApiApiKeys[ChatSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(ChatSvcApiApiKeys || (ChatSvcApiApiKeys = {}));
+class ChatSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$e;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[ChatSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Add a new message to a specific thread.
+     * @summary Add Message
+     * @param threadId Thread ID
+     * @param body Add Message Request
+     */
+    addMessage(threadId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread/{threadId}/message'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling addMessage.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling addMessage.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "ChatSvcAddMessageRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Create a new chat thread and add the requesting user to it. Requires the `chat-svc:thread:create` permission.
+     * @summary Add Thread
+     * @param body Add Thread Request
+     */
+    addThread(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling addThread.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "ChatSvcAddThreadRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcAddThreadResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Delete a specific message from a chat thread by its ID
+     * @summary Delete a Message
+     * @param messageId Message ID
+     */
+    deleteMessage(messageId_1) {
+        return __awaiter(this, arguments, void 0, function* (messageId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/message/{messageId}'
+                .replace('{' + 'messageId' + '}', encodeURIComponent(String(messageId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'messageId' is not null or undefined
+            if (messageId === null || messageId === undefined) {
+                throw new Error('Required parameter messageId was null or undefined when calling deleteMessage.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Delete a specific chat thread by its ID
+     * @summary Delete a Thread
+     * @param threadId Thread ID
+     */
+    deleteThread(threadId_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread/{threadId}'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling deleteThread.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Events is a dummy endpoint to display documentation about the events that this service emits.
+     * @summary Events
+     */
+    events() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/events';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcEventThreadUpdate");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Fetch messages (and associated assets) for a specific chat thread.
+     * @summary List Messages
+     * @param threadId Thread ID
+     */
+    getMessages(threadId_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread/{threadId}/messages'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling getMessages.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcGetMessagesResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Fetch information about a specific chat thread by its ID
+     * @summary Get Thread
+     * @param threadId Thread ID
+     */
+    getThread(threadId_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread/{threadId}'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling getThread.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcGetThreadResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Fetch all chat threads associated with a specific user
+     * @summary Get Threads
+     * @param body Get Threads Request
+     */
+    getThreads(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/threads';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "object")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcGetThreadsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Modify the details of a specific chat thread
+     * @summary Update Thread
+     * @param threadId Thread ID
+     * @param body Update Thread Request
+     */
+    updateThread(threadId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/chat-svc/thread/{threadId}'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling updateThread.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling updateThread.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "ChatSvcUpdateThreadRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ChatSvcAddThreadResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$d = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var ConfigSvcApiApiKeys;
+(function (ConfigSvcApiApiKeys) {
+    ConfigSvcApiApiKeys[ConfigSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(ConfigSvcApiApiKeys || (ConfigSvcApiApiKeys = {}));
+class ConfigSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$d;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[ConfigSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Fetch the current configuration from the server
+     * @summary Get Config
+     * @param namespace Namespace
+     */
+    getConfig(namespace_1) {
+        return __awaiter(this, arguments, void 0, function* (namespace, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/config-svc/config';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            if (namespace !== undefined) {
+                localVarQueryParameters['namespace'] = ObjectSerializer.serialize(namespace, "string");
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ConfigSvcGetConfigResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Save the provided configuration to the server
+     * @summary Save Config
+     * @param body Save Config Request
+     */
+    saveConfig(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/config-svc/config';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling saveConfig.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "ConfigSvcSaveConfigRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$c = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var DeploySvcApiApiKeys;
+(function (DeploySvcApiApiKeys) {
+    DeploySvcApiApiKeys[DeploySvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(DeploySvcApiApiKeys || (DeploySvcApiApiKeys = {}));
+class DeploySvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$c;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[DeploySvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Delete a deployment.
+     * @summary Delete Deployment
+     * @param body Delete Deploys Request
+     */
+    deleteDeployment(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/deploy-svc/deployment';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DeploySvcDeleteDeploymentRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve a list of deployments.
+     * @summary List Deployments
+     * @param body List Deploys Request
+     */
+    listDeployments(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/deploy-svc/deployments';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "object")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DeploySvcListDeploymentsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Save a deployment.
+     * @summary Save Deployment
+     * @param body Save Deploys Request
+     */
+    saveDeployment(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/deploy-svc/deployment';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DeploySvcSaveDeploymentRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$b = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var DockerSvcApiApiKeys;
+(function (DockerSvcApiApiKeys) {
+    DockerSvcApiApiKeys[DockerSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(DockerSvcApiApiKeys || (DockerSvcApiApiKeys = {}));
+class DockerSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$b;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[DockerSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * @summary Build an Image
+     * @param body Build Image Request
+     */
+    buildImage(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/image';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling buildImage.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DockerSvcBuildImageRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Check if a Docker container is running, identified by hash or name.
+     * @summary Check If a Container Is Running
+     * @param hash Container Hash
+     * @param name Container Name
+     */
+    containerIsRunning(hash_1, name_1) {
+        return __awaiter(this, arguments, void 0, function* (hash, name, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/is-running';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            if (hash !== undefined) {
+                localVarQueryParameters['hash'] = ObjectSerializer.serialize(hash, "string");
+            }
+            if (name !== undefined) {
+                localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DockerSvcContainerIsRunningResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.
+     * @summary Get Container Summary
+     * @param hash Container Hash
+     * @param name Container Name
+     * @param lines Number of Lines
+     */
+    containerSummary(hash_1, name_1, lines_1) {
+        return __awaiter(this, arguments, void 0, function* (hash, name, lines, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/summary';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            if (hash !== undefined) {
+                localVarQueryParameters['hash'] = ObjectSerializer.serialize(hash, "string");
+            }
+            if (name !== undefined) {
+                localVarQueryParameters['name'] = ObjectSerializer.serialize(name, "string");
+            }
+            if (lines !== undefined) {
+                localVarQueryParameters['lines'] = ObjectSerializer.serialize(lines, "number");
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DockerSvcGetContainerSummaryResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve information about the Docker host
+     * @summary Get Docker Host
+     */
+    getHost() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/host';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DockerSvcGetDockerHostResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve detailed information about the Docker service
+     * @summary Get Docker Service Information
+     */
+    getInfo() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/info';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DockerSvcGetInfoResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * @summary Run a Container
+     * @param body Run Container Request
+     */
+    runContainer(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling runContainer.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DockerSvcRunContainerRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DockerSvcRunContainerResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * @summary Stop a Container
+     * @param body Stop Container Request
+     */
+    stopContainer(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/docker-svc/container/stop';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling stopContainer.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DockerSvcStopContainerRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$a = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var DownloadSvcApiApiKeys;
+(function (DownloadSvcApiApiKeys) {
+    DownloadSvcApiApiKeys[DownloadSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(DownloadSvcApiApiKeys || (DownloadSvcApiApiKeys = {}));
+class DownloadSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$a;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[DownloadSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Start a download for a specified URL.  Requires the `download-svc:download:create` permission.
+     * @summary Download a File
+     * @param body Download Request
+     */
+    download(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/download-svc/download';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling download.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DownloadSvcDownloadRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Get a download by ID.  Requires the `download-svc:download:view` permission.
+     * @summary Get a Download
+     * @param downloadId Download ID
+     */
+    getDownload(downloadId_1) {
+        return __awaiter(this, arguments, void 0, function* (downloadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/download-svc/download/{downloadId}'
+                .replace('{' + 'downloadId' + '}', encodeURIComponent(String(downloadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'downloadId' is not null or undefined
+            if (downloadId === null || downloadId === undefined) {
+                throw new Error('Required parameter downloadId was null or undefined when calling getDownload.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DownloadSvcGetDownloadResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Fetch a list of all download details.  Requires the `download-svc:download:view` permission.
+     * @summary List Downloads
+     */
+    listDownloads() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/download-svc/downloads';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DownloadSvcDownloadsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Pause a download that is currently in progress.  Requires the `download-svc:download:edit` permission.
+     * @summary Pause a Download
+     * @param downloadId Download ID
+     */
+    pause(downloadId_1) {
+        return __awaiter(this, arguments, void 0, function* (downloadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/download-svc/download/{downloadId}/pause'
+                .replace('{' + 'downloadId' + '}', encodeURIComponent(String(downloadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'downloadId' is not null or undefined
+            if (downloadId === null || downloadId === undefined) {
+                throw new Error('Required parameter downloadId was null or undefined when calling pause.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$9 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var DynamicSvcApiApiKeys;
+(function (DynamicSvcApiApiKeys) {
+    DynamicSvcApiApiKeys[DynamicSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(DynamicSvcApiApiKeys || (DynamicSvcApiApiKeys = {}));
+class DynamicSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$9;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[DynamicSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Creates a new object with the provided details. Requires authorization and user authentication.
+     * @summary Create a Generic Object
+     * @param body Create request payload
+     */
+    createObject(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/dynamic-svc/object';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling createObject.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcCreateObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcCreateObjectResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+     * @summary Delete a Generic Object
+     * @param body Delete request payload
+     */
+    deleteObjects(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/dynamic-svc/objects/delete';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling deleteObjects.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcDeleteObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
+     * @summary Query Objects
+     * @param body Query Request
+     */
+    query(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/dynamic-svc/objects';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcQueryRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcQueryResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * @summary Update Objects
+     * @param body Update request payload
+     */
+    updateObjects(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/dynamic-svc/objects/update';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling updateObjects.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcUpdateObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
+     * @summary Upsert a Generic Object
+     * @param objectId Object ID
+     * @param body Upsert request payload
+     */
+    upsertObject(objectId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (objectId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/dynamic-svc/object/{objectId}'
+                .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'objectId' is not null or undefined
+            if (objectId === null || objectId === undefined) {
+                throw new Error('Required parameter objectId was null or undefined when calling upsertObject.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling upsertObject.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcUpsertObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcUpsertObjectResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$8 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var EmailSvcApiApiKeys;
+(function (EmailSvcApiApiKeys) {
+    EmailSvcApiApiKeys[EmailSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(EmailSvcApiApiKeys || (EmailSvcApiApiKeys = {}));
+class EmailSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$8;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[EmailSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Send an email with attachments.
+     * @summary Send an Email
+     * @param body Send Email Request
+     */
+    sendEmail(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/email-svc/email';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling sendEmail.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "EmailSvcSendEmailRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "EmailSvcSendEmailResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$7 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var FirehoseSvcApiApiKeys;
+(function (FirehoseSvcApiApiKeys) {
+    FirehoseSvcApiApiKeys[FirehoseSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(FirehoseSvcApiApiKeys || (FirehoseSvcApiApiKeys = {}));
+class FirehoseSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$7;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[FirehoseSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Publishes an event to the firehose service after authorization check
+     * @summary Publish an Event
+     * @param event Event to publish
+     */
+    publishEvent(event_1) {
+        return __awaiter(this, arguments, void 0, function* (event, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/firehose-svc/event';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'event' is not null or undefined
+            if (event === null || event === undefined) {
+                throw new Error('Required parameter event was null or undefined when calling publishEvent.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(event, "FirehoseSvcEventPublishRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Establish a subscription to the firehose events and accept a real time stream of them.
+     * @summary Subscribe to the Event Stream
+     */
+    subscribeToEvents() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/firehose-svc/events/subscribe';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['text/event-stream'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "string");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$6 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var ModelSvcApiApiKeys;
+(function (ModelSvcApiApiKeys) {
+    ModelSvcApiApiKeys[ModelSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(ModelSvcApiApiKeys || (ModelSvcApiApiKeys = {}));
+class ModelSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$6;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[ModelSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Retrieves the status of the default model.  Requires the `model-svc:model:view` permission.
+     * @summary Get Default Model Status
+     */
+    getDefaultModelStatus() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/default-model/status';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ModelSvcStatusResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves the details of a model by its ID.  the Requires `model.view` permission.
+     * @summary Get a Model
+     * @param modelId Model ID
+     */
+    getModel(modelId_1) {
+        return __awaiter(this, arguments, void 0, function* (modelId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/model/{modelId}'
+                .replace('{' + 'modelId' + '}', encodeURIComponent(String(modelId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'modelId' is not null or undefined
+            if (modelId === null || modelId === undefined) {
+                throw new Error('Required parameter modelId was null or undefined when calling getModel.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ModelSvcGetModelResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves the status of a model by ID.  Requires the `model-svc:model:view` permission.
+     * @summary Get Model Status
+     * @param modelId Model ID
+     */
+    getModelStatus(modelId_1) {
+        return __awaiter(this, arguments, void 0, function* (modelId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/model/{modelId}/status'
+                .replace('{' + 'modelId' + '}', encodeURIComponent(String(modelId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'modelId' is not null or undefined
+            if (modelId === null || modelId === undefined) {
+                throw new Error('Required parameter modelId was null or undefined when calling getModelStatus.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ModelSvcStatusResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves a list of models.  Requires `model-svc:model:view` permission.
+     * @summary List Models
+     */
+    listModels() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/models';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "ModelSvcListResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Sets a model as the default model — when prompts are sent without a Model ID, the default model is used.
+     * @summary Make a Model Default
+     * @param modelId Model ID
+     */
+    makeDefault(modelId_1) {
+        return __awaiter(this, arguments, void 0, function* (modelId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/model/{modelId}/make-default'
+                .replace('{' + 'modelId' + '}', encodeURIComponent(String(modelId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'modelId' is not null or undefined
+            if (modelId === null || modelId === undefined) {
+                throw new Error('Required parameter modelId was null or undefined when calling makeDefault.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Starts The Default Model.  Requires the `model-svc:model:create` permission.
+     * @summary Start the Default Model
+     */
+    startDefaultModel() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/default-model/start';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Starts a model by ID
+     * @summary Start a Model
+     * @param modelId Model ID
+     */
+    startModel(modelId_1) {
+        return __awaiter(this, arguments, void 0, function* (modelId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/model-svc/model/{modelId}/start'
+                .replace('{' + 'modelId' + '}', encodeURIComponent(String(modelId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'modelId' is not null or undefined
+            if (modelId === null || modelId === undefined) {
+                throw new Error('Required parameter modelId was null or undefined when calling startModel.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$5 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var PolicySvcApiApiKeys;
+(function (PolicySvcApiApiKeys) {
+    PolicySvcApiApiKeys[PolicySvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(PolicySvcApiApiKeys || (PolicySvcApiApiKeys = {}));
+class PolicySvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$5;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[PolicySvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Check records a resource access and returns if the access is allowed.
+     * @summary Check
+     * @param body Check Request
+     */
+    check(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/policy-svc/check';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling check.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "PolicySvcCheckRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "PolicySvcCheckResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows user to upsert a new policy instance based on a template.
+     * @summary Upsert an Instance
+     * @param instanceId Instance ID
+     * @param body Upsert Instance Request
+     */
+    upsertInstance(instanceId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (instanceId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/policy-svc/instance/{instanceId}'
+                .replace('{' + 'instanceId' + '}', encodeURIComponent(String(instanceId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'instanceId' is not null or undefined
+            if (instanceId === null || instanceId === undefined) {
+                throw new Error('Required parameter instanceId was null or undefined when calling upsertInstance.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling upsertInstance.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "PolicySvcUpsertInstanceRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$4 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var PromptSvcApiApiKeys;
+(function (PromptSvcApiApiKeys) {
+    PromptSvcApiApiKeys[PromptSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(PromptSvcApiApiKeys || (PromptSvcApiApiKeys = {}));
+class PromptSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$4;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[PromptSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * @summary Add Prompt
+     * @param body Add Prompt Request
+     */
+    addPrompt(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/prompt-svc/prompt';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling addPrompt.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "PromptSvcAddPromptRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "PromptSvcAddPromptResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * List prompts that satisfy a query.
+     * @summary List Prompts
+     * @param body List Prompts Request
+     */
+    listPrompts(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/prompt-svc/prompts';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "PromptSvcListPromptsRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "PromptSvcListPromptsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Remove a prompt by ID.
+     * @summary Remove Prompt
+     * @param body Remove Prompt Request
+     */
+    removePrompt(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/prompt-svc/remove';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling removePrompt.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "PromptSvcRemovePromptRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+     * @summary Subscribe to Prompt Responses by Thread
+     * @param threadId Thread ID
+     */
+    subscribeToPromptResponses(threadId_1) {
+        return __awaiter(this, arguments, void 0, function* (threadId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/prompt-svc/prompts/{threadId}/responses/subscribe'
+                .replace('{' + 'threadId' + '}', encodeURIComponent(String(threadId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['*/*'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'threadId' is not null or undefined
+            if (threadId === null || threadId === undefined) {
+                throw new Error('Required parameter threadId was null or undefined when calling subscribeToPromptResponses.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "string");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$3 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var RegistrySvcApiApiKeys;
+(function (RegistrySvcApiApiKeys) {
+    RegistrySvcApiApiKeys[RegistrySvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(RegistrySvcApiApiKeys || (RegistrySvcApiApiKeys = {}));
+class RegistrySvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$3;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[RegistrySvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Deletes a registered definition by ID.
+     * @summary Delete Definition
+     * @param id Definition ID
+     */
+    deleteDefinition(id_1) {
+        return __awaiter(this, arguments, void 0, function* (id, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/definition/{id}'
+                .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new Error('Required parameter id was null or undefined when calling deleteDefinition.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Deletes a registered node by node URL. This endpoint is useful when a node is no longer available but it\'s still present in the database.
+     * @summary Delete Node
+     * @param url Node URL
+     */
+    deleteNode(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/node/{url}'
+                .replace('{' + 'url' + '}', encodeURIComponent(String(url)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'url' is not null or undefined
+            if (url === null || url === undefined) {
+                throw new Error('Required parameter url was null or undefined when calling deleteNode.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves a list of all definitions or filters them by specific criteria.
+     * @summary List Definitions
+     */
+    listDefinitions() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/definitions';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "RegistrySvcListDefinitionsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves a list of all instances or filters them by specific criteria (e.g., host, IP).
+     * @summary List Service Instances
+     * @param scheme Scheme to filter by
+     * @param ip IP to filter by
+     * @param deploymentId Deployment ID to filter by
+     * @param host Host to filter by
+     * @param ip2 IP to filter by
+     * @param id Id to filter by
+     * @param slug Slug to filter by
+     */
+    listInstances(scheme_1, ip_1, deploymentId_1, host_1, ip2_1, id_1, slug_1) {
+        return __awaiter(this, arguments, void 0, function* (scheme, ip, deploymentId, host, ip2, id, slug, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/instances';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            if (scheme !== undefined) {
+                localVarQueryParameters['scheme'] = ObjectSerializer.serialize(scheme, "string");
+            }
+            if (ip !== undefined) {
+                localVarQueryParameters['ip'] = ObjectSerializer.serialize(ip, "string");
+            }
+            if (deploymentId !== undefined) {
+                localVarQueryParameters['deploymentId'] = ObjectSerializer.serialize(deploymentId, "string");
+            }
+            if (host !== undefined) {
+                localVarQueryParameters['host'] = ObjectSerializer.serialize(host, "string");
+            }
+            if (ip2 !== undefined) {
+                localVarQueryParameters['ip'] = ObjectSerializer.serialize(ip2, "string");
+            }
+            if (id !== undefined) {
+                localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "string");
+            }
+            if (slug !== undefined) {
+                localVarQueryParameters['slug'] = ObjectSerializer.serialize(slug, "string");
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "RegistrySvcListInstancesResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve a list of nodes.
+     * @summary List Nodes
+     * @param body List Registrys Request
+     */
+    listNodes(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/nodes';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "object")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "RegistrySvcListNodesResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Registers an instance. Idempoent.
+     * @summary Register Instance
+     * @param body Register Instance Request
+     */
+    registerInstance(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/instance';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling registerInstance.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "RegistrySvcRegisterInstanceRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Removes a registered instance by ID.
+     * @summary Remove Instance
+     * @param id Instance ID
+     */
+    removeInstance(id_1) {
+        return __awaiter(this, arguments, void 0, function* (id, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/instance/{id}'
+                .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new Error('Required parameter id was null or undefined when calling removeInstance.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Registers a new definition, associating an definition address with a slug acquired from the bearer token.
+     * @summary Register a Definition
+     * @param body Register Service Definition Request
+     */
+    saveDefinition(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/registry-svc/definition';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling saveDefinition.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "RegistrySvcSaveDefinitionRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$2 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var SecretSvcApiApiKeys;
+(function (SecretSvcApiApiKeys) {
+    SecretSvcApiApiKeys[SecretSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(SecretSvcApiApiKeys || (SecretSvcApiApiKeys = {}));
+class SecretSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$2;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[SecretSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Decrypt a value and return the encrypted result
+     * @summary Decrypt a Value
+     * @param body Decrypt Value Request
+     */
+    decryptValue(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/secret-svc/decrypt';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling decryptValue.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SecretSvcDecryptValueRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "SecretSvcDecryptValueResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Encrypt a value and return the encrypted result
+     * @summary Encrypt a Value
+     * @param body Encrypt Value Request
+     */
+    encryptValue(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/secret-svc/encrypt';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling encryptValue.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SecretSvcEncryptValueRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "SecretSvcEncryptValueResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * List secrets by key(s) if authorized.
+     * @summary List Secrets
+     * @param body List Secret Request
+     */
+    listSecrets(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/secret-svc/secrets';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SecretSvcListSecretsRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "SecretSvcListSecretsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Remove secrets if authorized to do so
+     * @summary Remove Secrets
+     * @param body Remove Secret Request
+     */
+    removeSecrets(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/secret-svc/secrets';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling removeSecrets.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SecretSvcRemoveSecretsRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Save secrets if authorized to do so
+     * @summary Save Secrets
+     * @param body Save Secret Request
+     */
+    saveSecrets(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/secret-svc/secrets';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling saveSecrets.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SecretSvcSaveSecretsRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$1 = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var SourceSvcApiApiKeys;
+(function (SourceSvcApiApiKeys) {
+    SourceSvcApiApiKeys[SourceSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(SourceSvcApiApiKeys || (SourceSvcApiApiKeys = {}));
+class SourceSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$1;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[SourceSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Checkout a git repository over https or ssh at a specific version into a temporary directory. Performs a shallow clone with minimal history for faster checkout.
+     * @summary Checkout a git repository
+     * @param body Checkout Repo Request
+     */
+    checkoutRepo(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/source-svc/repo/checkout';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling checkoutRepo.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "SourceSvcCheckoutRepoRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "SourceSvcCheckoutRepoResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * On-premise AI platform and microservices ecosystem.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.9
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
+var UserSvcApiApiKeys;
+(function (UserSvcApiApiKeys) {
+    UserSvcApiApiKeys[UserSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(UserSvcApiApiKeys || (UserSvcApiApiKeys = {}));
+class UserSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[UserSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
+     * @summary Add Permission to Role
+     * @param roleId Role ID
+     * @param permissionId Permission ID
+     */
+    addPermissionToRole(roleId_1, permissionId_1) {
+        return __awaiter(this, arguments, void 0, function* (roleId, permissionId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/role/{roleId}/permission/{permissionId}'
+                .replace('{' + 'roleId' + '}', encodeURIComponent(String(roleId)))
+                .replace('{' + 'permissionId' + '}', encodeURIComponent(String(permissionId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'roleId' is not null or undefined
+            if (roleId === null || roleId === undefined) {
+                throw new Error('Required parameter roleId was null or undefined when calling addPermissionToRole.');
+            }
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new Error('Required parameter permissionId was null or undefined when calling addPermissionToRole.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * @summary Add a User to an Organization
+     * @param organizationId Organization ID
+     * @param body Add User to Organization Request
+     */
+    addUserToOrganization(organizationId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (organizationId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/organization/{organizationId}/user'
+                .replace('{' + 'organizationId' + '}', encodeURIComponent(String(organizationId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'organizationId' is not null or undefined
+            if (organizationId === null || organizationId === undefined) {
+                throw new Error('Required parameter organizationId was null or undefined when calling addUserToOrganization.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling addUserToOrganization.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcAddUserToOrganizationRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows an authenticated user to change their own password.
+     * @summary Change User Password
+     * @param body Change Password Request
+     */
+    changePassword(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/change-password';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling changePassword.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcChangePasswordRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows an administrator to change a user\'s password.
+     * @summary Change User Password (Admin)
+     * @param body Change Password Request
+     */
+    changePasswordAdmin(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/change-password-admin';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling changePasswordAdmin.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcChangePasswordAdminRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * @summary Create an Organization
+     * @param body Create User Request
+     */
+    createOrganization(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/organization';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling createOrganization.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcCreateOrganizationRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * @summary Create a New Role
+     * @param body Create Role Request
+     */
+    createRole(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/role';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling createRole.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcCreateRoleRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcCreateRoleResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows an authenticated administrator to create a new user with specified details.
+     * @summary Create a New User
+     * @param body Create User Request
+     */
+    createUser(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/user';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling createUser.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcCreateUserRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Delete a role based on the role ID.
+     * @summary Delete a Role
+     * @param roleId Role ID
+     */
+    deleteRole(roleId_1) {
+        return __awaiter(this, arguments, void 0, function* (roleId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/role/{roleId}'
+                .replace('{' + 'roleId' + '}', encodeURIComponent(String(roleId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'roleId' is not null or undefined
+            if (roleId === null || roleId === undefined) {
+                throw new Error('Required parameter roleId was null or undefined when calling deleteRole.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Delete a user based on the user ID.
+     * @summary Delete a User
+     * @param userId User ID
+     */
+    deleteUser(userId_1) {
+        return __awaiter(this, arguments, void 0, function* (userId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/user/{userId}'
+                .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new Error('Required parameter userId was null or undefined when calling deleteUser.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve permissions associated with a specific role ID.
+     * @summary Get Permissions by Role
+     * @param roleId Role ID
+     */
+    getPermissionsByRole(roleId_1) {
+        return __awaiter(this, arguments, void 0, function* (roleId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/role/{roleId}/permissions'
+                .replace('{' + 'roleId' + '}', encodeURIComponent(String(roleId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'roleId' is not null or undefined
+            if (roleId === null || roleId === undefined) {
+                throw new Error('Required parameter roleId was null or undefined when calling getPermissionsByRole.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcGetPermissionsResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Get the public key to descrypt the JWT.
+     * @summary Get Public Key
+     */
+    getPublicKey() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/public-key';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcGetPublicKeyResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve all roles from the user service.
+     * @summary Get all Roles
+     */
+    getRoles() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/roles';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcGetRolesResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Fetches a list of users with optional query filters and pagination.
+     * @summary List Users
+     * @param body Get Users Request
+     */
+    getUsers(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/users';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcGetUsersRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcGetUsersResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Check if a user is authorized for a specific permission.
+     * @summary Is Authorized
+     * @param permissionId Permission ID
+     * @param body Is Authorized Request
+     */
+    isAuthorized(permissionId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (permissionId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/permission/{permissionId}/is-authorized'
+                .replace('{' + 'permissionId' + '}', encodeURIComponent(String(permissionId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new Error('Required parameter permissionId was null or undefined when calling isAuthorized.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcIsAuthorizedRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcIsAuthorizedResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Authenticates a user and returns a token.
+     * @summary Login
+     * @param body Login Request
+     */
+    login(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/login';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling login.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcLoginRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcLoginResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieve user information based on an authentication token.
+     * @summary Read User by Token
+     */
+    readUserByToken() {
+        return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/user/by-token';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcReadUserByTokenResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Register a new user with a name, email, and password.
+     * @summary Register
+     * @param body Register Request
+     */
+    register(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/register';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling register.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcRegisterRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "UserSvcRegisterResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * @summary Remove a User from an Organization
+     * @param organizationId Organization ID
+     * @param userId User ID
+     * @param body Add User to Organization Request
+     */
+    removeUserFromOrganization(organizationId_1, userId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (organizationId, userId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/organization/{organizationId}/user/{userId}'
+                .replace('{' + 'organizationId' + '}', encodeURIComponent(String(organizationId)))
+                .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'organizationId' is not null or undefined
+            if (organizationId === null || organizationId === undefined) {
+                throw new Error('Required parameter organizationId was null or undefined when calling removeUserFromOrganization.');
+            }
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new Error('Required parameter userId was null or undefined when calling removeUserFromOrganization.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'DELETE',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "object")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Save user\'s own profile information.
+     * @summary Save User Profile
+     * @param userId User ID
+     * @param body Save Profile Request
+     */
+    saveSelf(userId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (userId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/self'
+                .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new Error('Required parameter userId was null or undefined when calling saveSelf.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling saveSelf.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcSaveProfileRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Save user information based on the provided user ID. It is intended for admins, because it uses the `user-svc:user:edit` permission which only admins have. For a user to edit its own profile, see saveSelf.
+     * @summary Save User
+     * @param userId User ID
+     * @param body Save Profile Request
+     */
+    saveUser(userId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (userId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/user/{userId}'
+                .replace('{' + 'userId' + '}', encodeURIComponent(String(userId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new Error('Required parameter userId was null or undefined when calling saveUser.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling saveUser.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcSaveProfileRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Set permissions for a specified role. The caller can add permissions it owns to any role. If the caller tries to add a permission it doesn\'t own to a role, `StatusBadRequest` will be returned.
+     * @summary Set Role Permissions
+     * @param roleId Role ID
+     * @param body Set Role Permissions Request
+     */
+    setRolePermission(roleId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (roleId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/role/{roleId}/permissions'
+                .replace('{' + 'roleId' + '}', encodeURIComponent(String(roleId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'roleId' is not null or undefined
+            if (roleId === null || roleId === undefined) {
+                throw new Error('Required parameter roleId was null or undefined when calling setRolePermission.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling setRolePermission.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "UserSvcSetRolePermissionsRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * @summary Upsert a Permission
+     * @param permissionId Permission ID
+     * @param requestBody Permission Details
+     */
+    upsertPermission(permissionId_1, requestBody_1) {
+        return __awaiter(this, arguments, void 0, function* (permissionId, requestBody, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/user-svc/permission/{permissionId}'
+                .replace('{' + 'permissionId' + '}', encodeURIComponent(String(permissionId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'permissionId' is not null or undefined
+            if (permissionId === null || permissionId === undefined) {
+                throw new Error('Required parameter permissionId was null or undefined when calling upsertPermission.');
+            }
+            // verify required parameter 'requestBody' is not null or undefined
+            if (requestBody === null || requestBody === undefined) {
+                throw new Error('Required parameter requestBody was null or undefined when calling upsertPermission.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(requestBody, "UserSvcUpserPermissionRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+class HttpError extends Error {
+    constructor(response, body, statusCode) {
+        super('HTTP request failed');
+        this.response = response;
+        this.body = body;
+        this.statusCode = statusCode;
+        this.name = 'HttpError';
+    }
+}
+const APIS = [ChatSvcApi, ConfigSvcApi, DeploySvcApi, DockerSvcApi, DownloadSvcApi, DynamicSvcApi, EmailSvcApi, FirehoseSvcApi, ModelSvcApi, PolicySvcApi, PromptSvcApi, RegistrySvcApi, SecretSvcApi, SourceSvcApi, UserSvcApi];
+
+export { APIS, ApiKeyAuth, ChatSvcAddMessageRequest, ChatSvcAddThreadRequest, ChatSvcAddThreadResponse, ChatSvcApi, ChatSvcApiApiKeys, ChatSvcAsset, ChatSvcEventMessageAdded, ChatSvcEventThreadAdded, ChatSvcEventThreadUpdate, ChatSvcGetMessagesResponse, ChatSvcGetThreadResponse, ChatSvcGetThreadsResponse, ChatSvcMessage, ChatSvcThread, ChatSvcUpdateThreadRequest, ConfigSvcApi, ConfigSvcApiApiKeys, ConfigSvcConfig, ConfigSvcGetConfigResponse, ConfigSvcSaveConfigRequest, DatastoreFilter, DatastoreOp, DatastoreOrderBy, DatastoreQuery, DeploySvcApi, DeploySvcApiApiKeys, DeploySvcAutoScalingConfig, DeploySvcDeleteDeploymentRequest, DeploySvcDeployment, DeploySvcDeploymentStatus, DeploySvcDeploymentStrategy, DeploySvcErrorResponse, DeploySvcListDeploymentsResponse, DeploySvcResourceLimits, DeploySvcSaveDeploymentRequest, DeploySvcStrategyType, DeploySvcTargetRegion, DockerSvcApi, DockerSvcApiApiKeys, DockerSvcBuildImageRequest, DockerSvcContainerIsRunningResponse, DockerSvcDockerInfo, DockerSvcErrorResponse, DockerSvcGetContainerSummaryResponse, DockerSvcGetDockerHostResponse, DockerSvcGetInfoResponse, DockerSvcRunContainerOptions, DockerSvcRunContainerRequest, DockerSvcRunContainerResponse, DockerSvcRunInfo, DockerSvcStopContainerRequest, DownloadSvcApi, DownloadSvcApiApiKeys, DownloadSvcDownloadDetails, DownloadSvcDownloadRequest, DownloadSvcDownloadsResponse, DownloadSvcErrorResponse, DownloadSvcGetDownloadResponse, DynamicSvcApi, DynamicSvcApiApiKeys, DynamicSvcCreateObjectRequest, DynamicSvcCreateObjectResponse, DynamicSvcDeleteObjectRequest, DynamicSvcErrorResponse, DynamicSvcObject, DynamicSvcObjectCreateFields, DynamicSvcQueryRequest, DynamicSvcQueryResponse, DynamicSvcUpdateObjectRequest, DynamicSvcUpsertObjectRequest, DynamicSvcUpsertObjectResponse, EmailSvcApi, EmailSvcApiApiKeys, EmailSvcErrorResponse, EmailSvcFile, EmailSvcSendEmailRequest, EmailSvcSendEmailResponse, FirehoseSvcApi, FirehoseSvcApiApiKeys, FirehoseSvcErrorResponse, FirehoseSvcEvent, FirehoseSvcEventPublishRequest, HttpBasicAuth, HttpBearerAuth, HttpError, ModelSvcApi, ModelSvcApiApiKeys, ModelSvcArchitectures, ModelSvcContainer, ModelSvcErrorResponse, ModelSvcGetModelResponse, ModelSvcListResponse, ModelSvcModel, ModelSvcModelStatus, ModelSvcPlatform, ModelSvcStatusResponse, OAuth, ObjectSerializer, PolicySvcApi, PolicySvcApiApiKeys, PolicySvcBlocklistParameters, PolicySvcCheckRequest, PolicySvcCheckResponse, PolicySvcEntity, PolicySvcErrorResponse, PolicySvcInstance, PolicySvcRateLimitParameters, PolicySvcScope, PolicySvcTemplateId, PolicySvcUpsertInstanceRequest, PromptSvcAddPromptRequest, PromptSvcAddPromptResponse, PromptSvcApi, PromptSvcApiApiKeys, PromptSvcErrorResponse, PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcPrompt, PromptSvcPromptStatus, PromptSvcRemovePromptRequest, RegistrySvcAPISpec, RegistrySvcApi, RegistrySvcApiApiKeys, RegistrySvcClient, RegistrySvcDefinition, RegistrySvcErrorResponse, RegistrySvcGPU, RegistrySvcImageSpec, RegistrySvcInstance, RegistrySvcInstanceStatus, RegistrySvcLanguage, RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesResponse, RegistrySvcNode, RegistrySvcProcess, RegistrySvcRegisterInstanceRequest, RegistrySvcRepositorySpec, RegistrySvcResourceUsage, RegistrySvcSaveDefinitionRequest, RegistrySvcUsage, SecretSvcApi, SecretSvcApiApiKeys, SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest, SecretSvcSecret, SourceSvcApi, SourceSvcApiApiKeys, SourceSvcCheckoutRepoRequest, SourceSvcCheckoutRepoResponse, SourceSvcErrorResponse, UserSvcAddUserToOrganizationRequest, UserSvcApi, UserSvcApiApiKeys, UserSvcAuthToken, UserSvcChangePasswordAdminRequest, UserSvcChangePasswordRequest, UserSvcContact, UserSvcCreateOrganizationRequest, UserSvcCreateRoleRequest, UserSvcCreateRoleResponse, UserSvcCreateUserRequest, UserSvcErrorResponse, UserSvcGetPermissionsResponse, UserSvcGetPublicKeyResponse, UserSvcGetRolesResponse, UserSvcGetUsersRequest, UserSvcGetUsersResponse, UserSvcIsAuthorizedRequest, UserSvcIsAuthorizedResponse, UserSvcLoginRequest, UserSvcLoginResponse, UserSvcOrganization, UserSvcPermission, UserSvcReadUserByTokenResponse, UserSvcRegisterRequest, UserSvcRegisterResponse, UserSvcRole, UserSvcSaveProfileRequest, UserSvcSetRolePermissionsRequest, UserSvcUpserPermissionRequest, UserSvcUser, VoidAuth };

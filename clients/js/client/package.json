@@ -1,6 +1,6 @@
 {
   "name": "@openorch/client",
-  "version": "0.3.0-rc.8",
+  "version": "0.3.0-rc.9",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -25,6 +25,7 @@
   "license": "AGPL-3.0-only",
   "description": "JS/TS client for OpenOrch. Works both from the browser and from Node.js",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@types/axios": "^0.14.0",
     "rollup": "^3.0.0",
     "rollup-plugin-typescript2": "^0.31.1",

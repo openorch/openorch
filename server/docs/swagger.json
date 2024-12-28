@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.8"
+        "version": "0.3.0-rc.9"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -7561,7 +7561,7 @@
     },
     "securityDefinitions": {
         "BearerAuth": {
-            "description": "Type \"Bearer\" followed by a space and token acquired from the User sService Login endpoint.",
+            "description": "Type \"Bearer\" followed by a space and token acquired from the User Svc Login endpoint.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -7569,6 +7569,6 @@
     },
     "externalDocs": {
         "description": "OpenOrch API",
-        "url": "https://openorch.org/docs/category/singulatron-api"
+        "url": "https://openorch.org/docs/category/openorch-api"
     }
 }
