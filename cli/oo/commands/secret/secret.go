@@ -63,6 +63,26 @@ save ./secrets.yaml
 		RunE: Save,
 	}
 
+	var encryptCmd = &cobra.Command{
+		Use:   "encrypt [key] [value]",
+		Args:  cobra.MinimumNArgs(1),
+		Short: "Encrypt a key-value secret",
+		Long: `Encrypt a key-value secret and generate a YAML structure with the encrypted value.
+The resulting YAML can be safely committed to source control.
+
+If no value is provided, you will be securely prompted to enter it.
+This prevents sensitive data from being exposed in terminal history.`,
+
+		Example: `# Encrypt with key and value (for automation)
+encrypt api-key my-api-key-1234
+
+# Interactive encryption (value will not appear in terminal)
+encrypt api-key
+Enter secret value:`,
+
+		RunE: Encrypt,
+	}
+
 	var removeCmd = &cobra.Command{
 		Use:     "remove [id]",
 		Short:   "Delete a secret",
@@ -90,6 +110,7 @@ save ./secrets.yaml
 	secretCmd.AddCommand(saveCmd)
 	secretCmd.AddCommand(removeCmd)
 	secretCmd.AddCommand(listCmd)
+	secretCmd.AddCommand(encryptCmd)
 
 	rootCmd.AddCommand(secretCmd)
 }
