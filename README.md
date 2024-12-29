@@ -146,7 +146,7 @@ $ oo post /prompt-svc/prompt --sync=true --prompt="Is a cat an animal? Just answ
 
 ## Context
 
-OpenOrch is a microservices platform that first came to mind back in 2013 when I was working for an Uber competitor called Hailo. I shelved the idea, thinking someone else would eventually build it. Now, with the AI boom and all the AI apps we’re about to roll out, I’ve realized I’ll have to build it myself since no one else has.
+OpenOrch is a microservices platform that started taking shape in 2013 while I was at Hailo, an Uber competitor. The idea stuck with me and kept evolving over the years – including during my time at [Micro](https://github.com/micro/micro), a microservices framework company. I assumed someone else would eventually build it, but with the AI boom and the wave of AI apps we’re rolling out, I’ve realized it’s time to build it myself.
 
 ## Run On Your Servers
 
