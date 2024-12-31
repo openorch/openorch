@@ -3092,6 +3092,53 @@ const docTemplate = `{
                 }
             }
         },
+        "/secret-svc/is-secure": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns true if the encryption key is sufficiently secure.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret Svc"
+                ],
+                "summary": "Check Security Status",
+                "operationId": "isSecure",
+                "responses": {
+                    "200": {
+                        "description": "Encrypt Value Response",
+                        "schema": {
+                            "$ref": "#/definitions/secret_svc.IsSecureResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/secret-svc/secrets": {
             "put": {
                 "security": [
@@ -6891,6 +6938,14 @@ const docTemplate = `{
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "secret_svc.IsSecureResponse": {
+            "type": "object",
+            "properties": {
+                "isSecure": {
+                    "type": "boolean"
                 }
             }
         },

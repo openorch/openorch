@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { SecretSvcDecryptValueRequestToJSON, SecretSvcDecryptValueResponseFromJSON, SecretSvcEncryptValueRequestToJSON, SecretSvcEncryptValueResponseFromJSON, SecretSvcListSecretsRequestToJSON, SecretSvcListSecretsResponseFromJSON, SecretSvcRemoveSecretsRequestToJSON, SecretSvcSaveSecretsRequestToJSON, } from '../models/index';
+import { SecretSvcDecryptValueRequestToJSON, SecretSvcDecryptValueResponseFromJSON, SecretSvcEncryptValueRequestToJSON, SecretSvcEncryptValueResponseFromJSON, SecretSvcIsSecureResponseFromJSON, SecretSvcListSecretsRequestToJSON, SecretSvcListSecretsResponseFromJSON, SecretSvcRemoveSecretsRequestToJSON, SecretSvcSaveSecretsRequestToJSON, } from '../models/index';
 /**
  *
  */
@@ -93,6 +93,36 @@ export class SecretSvcApi extends runtime.BaseAPI {
     encryptValue(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.encryptValueRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    isSecureRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/secret-svc/is-secure`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcIsSecureResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    isSecure(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.isSecureRaw(initOverrides);
             return yield response.value();
         });
     }

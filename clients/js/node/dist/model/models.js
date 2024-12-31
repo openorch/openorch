@@ -114,6 +114,7 @@ export * from './secretSvcDecryptValueRequest';
 export * from './secretSvcDecryptValueResponse';
 export * from './secretSvcEncryptValueRequest';
 export * from './secretSvcEncryptValueResponse';
+export * from './secretSvcIsSecureResponse';
 export * from './secretSvcListSecretsRequest';
 export * from './secretSvcListSecretsResponse';
 export * from './secretSvcRemoveSecretsRequest';
@@ -267,6 +268,7 @@ import { SecretSvcDecryptValueRequest } from './secretSvcDecryptValueRequest';
 import { SecretSvcDecryptValueResponse } from './secretSvcDecryptValueResponse';
 import { SecretSvcEncryptValueRequest } from './secretSvcEncryptValueRequest';
 import { SecretSvcEncryptValueResponse } from './secretSvcEncryptValueResponse';
+import { SecretSvcIsSecureResponse } from './secretSvcIsSecureResponse';
 import { SecretSvcListSecretsRequest } from './secretSvcListSecretsRequest';
 import { SecretSvcListSecretsResponse } from './secretSvcListSecretsResponse';
 import { SecretSvcRemoveSecretsRequest } from './secretSvcRemoveSecretsRequest';
@@ -434,6 +436,7 @@ let typeMap = {
     "SecretSvcDecryptValueResponse": SecretSvcDecryptValueResponse,
     "SecretSvcEncryptValueRequest": SecretSvcEncryptValueRequest,
     "SecretSvcEncryptValueResponse": SecretSvcEncryptValueResponse,
+    "SecretSvcIsSecureResponse": SecretSvcIsSecureResponse,
     "SecretSvcListSecretsRequest": SecretSvcListSecretsRequest,
     "SecretSvcListSecretsResponse": SecretSvcListSecretsResponse,
     "SecretSvcRemoveSecretsRequest": SecretSvcRemoveSecretsRequest,

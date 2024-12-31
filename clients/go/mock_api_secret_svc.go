@@ -99,6 +99,36 @@ func (mr *MockSecretSvcAPIMockRecorder) EncryptValueExecute(r any) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EncryptValueExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).EncryptValueExecute), r)
 }
 
+// IsSecure mocks base method.
+func (m *MockSecretSvcAPI) IsSecure(ctx context.Context) ApiIsSecureRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsSecure", ctx)
+	ret0, _ := ret[0].(ApiIsSecureRequest)
+	return ret0
+}
+
+// IsSecure indicates an expected call of IsSecure.
+func (mr *MockSecretSvcAPIMockRecorder) IsSecure(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsSecure", reflect.TypeOf((*MockSecretSvcAPI)(nil).IsSecure), ctx)
+}
+
+// IsSecureExecute mocks base method.
+func (m *MockSecretSvcAPI) IsSecureExecute(r ApiIsSecureRequest) (*SecretSvcIsSecureResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsSecureExecute", r)
+	ret0, _ := ret[0].(*SecretSvcIsSecureResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// IsSecureExecute indicates an expected call of IsSecureExecute.
+func (mr *MockSecretSvcAPIMockRecorder) IsSecureExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsSecureExecute", reflect.TypeOf((*MockSecretSvcAPI)(nil).IsSecureExecute), r)
+}
+
 // ListSecrets mocks base method.
 func (m *MockSecretSvcAPI) ListSecrets(ctx context.Context) ApiListSecretsRequest {
 	m.ctrl.T.Helper()

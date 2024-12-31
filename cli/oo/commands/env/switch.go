@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Select [name]
+// Select [envShortName]
 func Select(cmd *cobra.Command, args []string) error {
 	conf, err := config.LoadConfig()
 	if err != nil {
@@ -18,10 +18,9 @@ func Select(cmd *cobra.Command, args []string) error {
 
 	_, ok := conf.Environments[shortName]
 	if !ok {
-		return fmt.Errorf("environment %q not found", shortName)
+		return fmt.Errorf("env %v does not exist", shortName)
 	}
 
 	conf.SelectedEnvironment = shortName
-
 	return config.SaveConfig(conf)
 }

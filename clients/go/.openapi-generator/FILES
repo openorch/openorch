@@ -148,6 +148,7 @@ docs/SecretSvcDecryptValueRequest.md
 docs/SecretSvcDecryptValueResponse.md
 docs/SecretSvcEncryptValueRequest.md
 docs/SecretSvcEncryptValueResponse.md
+docs/SecretSvcIsSecureResponse.md
 docs/SecretSvcListSecretsRequest.md
 docs/SecretSvcListSecretsResponse.md
 docs/SecretSvcRemoveSecretsRequest.md
@@ -306,6 +307,7 @@ model_secret_svc_decrypt_value_request.go
 model_secret_svc_decrypt_value_response.go
 model_secret_svc_encrypt_value_request.go
 model_secret_svc_encrypt_value_response.go
+model_secret_svc_is_secure_response.go
 model_secret_svc_list_secrets_request.go
 model_secret_svc_list_secrets_response.go
 model_secret_svc_remove_secrets_request.go

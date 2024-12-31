@@ -420,6 +420,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/is-secure",
+          label: "Check Security Status",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "openorch/remove-secrets",
           label: "Remove Secrets",
           className: "api-method delete",

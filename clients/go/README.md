@@ -135,6 +135,7 @@ Class | Method | HTTP request | Description
 *RegistrySvcAPI* | [**SaveDefinition**](docs/RegistrySvcAPI.md#savedefinition) | **Put** /registry-svc/definition | Register a Definition
 *SecretSvcAPI* | [**DecryptValue**](docs/SecretSvcAPI.md#decryptvalue) | **Post** /secret-svc/decrypt | Decrypt a Value
 *SecretSvcAPI* | [**EncryptValue**](docs/SecretSvcAPI.md#encryptvalue) | **Post** /secret-svc/encrypt | Encrypt a Value
+*SecretSvcAPI* | [**IsSecure**](docs/SecretSvcAPI.md#issecure) | **Get** /secret-svc/is-secure | Check Security Status
 *SecretSvcAPI* | [**ListSecrets**](docs/SecretSvcAPI.md#listsecrets) | **Post** /secret-svc/secrets | List Secrets
 *SecretSvcAPI* | [**RemoveSecrets**](docs/SecretSvcAPI.md#removesecrets) | **Delete** /secret-svc/secrets | Remove Secrets
 *SecretSvcAPI* | [**SaveSecrets**](docs/SecretSvcAPI.md#savesecrets) | **Put** /secret-svc/secrets | Save Secrets
@@ -281,6 +282,7 @@ Class | Method | HTTP request | Description
  - [SecretSvcDecryptValueResponse](docs/SecretSvcDecryptValueResponse.md)
  - [SecretSvcEncryptValueRequest](docs/SecretSvcEncryptValueRequest.md)
  - [SecretSvcEncryptValueResponse](docs/SecretSvcEncryptValueResponse.md)
+ - [SecretSvcIsSecureResponse](docs/SecretSvcIsSecureResponse.md)
  - [SecretSvcListSecretsRequest](docs/SecretSvcListSecretsRequest.md)
  - [SecretSvcListSecretsResponse](docs/SecretSvcListSecretsResponse.md)
  - [SecretSvcRemoveSecretsRequest](docs/SecretSvcRemoveSecretsRequest.md)

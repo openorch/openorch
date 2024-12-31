@@ -105,6 +105,15 @@ Enter secret value:`,
 		},
 	}
 
+	var isSecureCmd = &cobra.Command{
+		Use:     "is-secure",
+		Short:   "Tells if the secret service is secure (ie. encryption key is set etc.)",
+		Aliases: []string{"is"},
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return IsSecure(cmd, args)
+		},
+	}
+
 	listCmd.Flags().
 		BoolVar(&show, "show", false, "Show secrets unmasked")
 
@@ -112,6 +121,7 @@ Enter secret value:`,
 	secretCmd.AddCommand(removeCmd)
 	secretCmd.AddCommand(listCmd)
 	secretCmd.AddCommand(encryptCmd)
+	secretCmd.AddCommand(isSecureCmd)
 
 	rootCmd.AddCommand(secretCmd)
 }
