@@ -64,9 +64,10 @@ save ./secrets.yaml
 	}
 
 	var encryptCmd = &cobra.Command{
-		Use:   "encrypt [key] [value]",
-		Args:  cobra.MinimumNArgs(1),
-		Short: "Encrypt a key-value secret",
+		Use:     "encrypt [key] [value]",
+		Aliases: []string{"e"},
+		Args:    cobra.MinimumNArgs(1),
+		Short:   "Encrypt a key-value secret",
 		Long: `Encrypt a key-value secret and generate a YAML structure with the encrypted value.
 The resulting YAML can be safely committed to source control.
 
