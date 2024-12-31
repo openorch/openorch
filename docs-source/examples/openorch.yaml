@@ -1717,6 +1717,8 @@ definitions:
     properties:
       isSecure:
         type: boolean
+    required:
+    - isSecure
     type: object
   secret_svc.ListSecretsRequest:
     properties:

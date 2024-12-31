@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SecretSvcIsSecureResponse type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &SecretSvcIsSecureResponse{}
 
 // SecretSvcIsSecureResponse struct for SecretSvcIsSecureResponse
 type SecretSvcIsSecureResponse struct {
-	IsSecure *bool `json:"isSecure,omitempty"`
+	IsSecure bool `json:"isSecure"`
 }
+
+type _SecretSvcIsSecureResponse SecretSvcIsSecureResponse
 
 // NewSecretSvcIsSecureResponse instantiates a new SecretSvcIsSecureResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSecretSvcIsSecureResponse() *SecretSvcIsSecureResponse {
+func NewSecretSvcIsSecureResponse(isSecure bool) *SecretSvcIsSecureResponse {
 	this := SecretSvcIsSecureResponse{}
+	this.IsSecure = isSecure
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewSecretSvcIsSecureResponseWithDefaults() *SecretSvcIsSecureResponse {
 	return &this
 }
 
-// GetIsSecure returns the IsSecure field value if set, zero value otherwise.
+// GetIsSecure returns the IsSecure field value
 func (o *SecretSvcIsSecureResponse) GetIsSecure() bool {
-	if o == nil || IsNil(o.IsSecure) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsSecure
+
+	return o.IsSecure
 }
 
-// GetIsSecureOk returns a tuple with the IsSecure field value if set, nil otherwise
+// GetIsSecureOk returns a tuple with the IsSecure field value
 // and a boolean to check if the value has been set.
 func (o *SecretSvcIsSecureResponse) GetIsSecureOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsSecure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsSecure, true
+	return &o.IsSecure, true
 }
 
-// HasIsSecure returns a boolean if a field has been set.
-func (o *SecretSvcIsSecureResponse) HasIsSecure() bool {
-	if o != nil && !IsNil(o.IsSecure) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsSecure gets a reference to the given bool and assigns it to the IsSecure field.
+// SetIsSecure sets field value
 func (o *SecretSvcIsSecureResponse) SetIsSecure(v bool) {
-	o.IsSecure = &v
+	o.IsSecure = v
 }
 
 func (o SecretSvcIsSecureResponse) MarshalJSON() ([]byte, error) {
@@ -82,10 +79,45 @@ func (o SecretSvcIsSecureResponse) MarshalJSON() ([]byte, error) {
 
 func (o SecretSvcIsSecureResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IsSecure) {
-		toSerialize["isSecure"] = o.IsSecure
-	}
+	toSerialize["isSecure"] = o.IsSecure
 	return toSerialize, nil
+}
+
+func (o *SecretSvcIsSecureResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"isSecure",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSecretSvcIsSecureResponse := _SecretSvcIsSecureResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSecretSvcIsSecureResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SecretSvcIsSecureResponse(varSecretSvcIsSecureResponse)
+
+	return err
 }
 
 type NullableSecretSvcIsSecureResponse struct {
