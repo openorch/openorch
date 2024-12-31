@@ -747,8 +747,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		secretService.RemoveSecrets(w, r)
 	})).
 		Methods("OPTIONS", "DELETE")
+
 	router.HandleFunc("/secret-svc/is-secure", appl(func(w http.ResponseWriter, r *http.Request) {
-		secretService.RemoveSecrets(w, r)
+		secretService.Secure(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 
