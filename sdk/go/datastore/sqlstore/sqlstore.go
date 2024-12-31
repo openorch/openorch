@@ -757,7 +757,7 @@ func (q *SQLQueryBuilder) buildSelectQuery() (string, []interface{}, error) {
 			// Optionally, use struct tags to get the column names (if present)
 			columnName := field.Name // default to the field name
 			if jsonTag := field.Tag.Get("json"); jsonTag != "" {
-				columnName = jsonTag
+				columnName = strings.Split(jsonTag, ",")[0]
 			}
 			columns = append(columns, columnName)
 		}
