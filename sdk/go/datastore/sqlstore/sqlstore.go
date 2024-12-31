@@ -18,6 +18,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/lib/pq"
 	_ "github.com/lib/pq"
@@ -551,6 +552,7 @@ func (q *SQLQueryBuilder) Find() ([]datastore.Row, error) {
 
 		err := rows.Scan(fields...)
 		if err != nil {
+			spew.Dump(fields, rows, err)
 			return nil, errors.Wrap(err, "error scanning")
 		}
 
