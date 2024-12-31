@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest } from '../models/index';
+import type { SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcIsSecureResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest } from '../models/index';
 export interface DecryptValueRequest {
     body: SecretSvcDecryptValueRequest;
 }
@@ -50,6 +50,16 @@ export declare class SecretSvcApi extends runtime.BaseAPI {
      * Encrypt a Value
      */
     encryptValue(requestParameters: EncryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcEncryptValueResponse>;
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    isSecureRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcIsSecureResponse>>;
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    isSecure(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcIsSecureResponse>;
     /**
      * List secrets by key(s) if authorized.
      * List Secrets

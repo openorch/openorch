@@ -14,6 +14,7 @@ import { SecretSvcDecryptValueRequest } from '../model/secretSvcDecryptValueRequ
 import { SecretSvcDecryptValueResponse } from '../model/secretSvcDecryptValueResponse';
 import { SecretSvcEncryptValueRequest } from '../model/secretSvcEncryptValueRequest';
 import { SecretSvcEncryptValueResponse } from '../model/secretSvcEncryptValueResponse';
+import { SecretSvcIsSecureResponse } from '../model/secretSvcIsSecureResponse';
 import { SecretSvcListSecretsRequest } from '../model/secretSvcListSecretsRequest';
 import { SecretSvcListSecretsResponse } from '../model/secretSvcListSecretsResponse';
 import { SecretSvcRemoveSecretsRequest } from '../model/secretSvcRemoveSecretsRequest';
@@ -66,6 +67,18 @@ export declare class SecretSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: SecretSvcEncryptValueResponse;
+    }>;
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * @summary Check Security Status
+     */
+    isSecure(options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: SecretSvcIsSecureResponse;
     }>;
     /**
      * List secrets by key(s) if authorized.

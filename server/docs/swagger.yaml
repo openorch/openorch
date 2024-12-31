@@ -1713,6 +1713,11 @@ definitions:
           type: string
         type: array
     type: object
+  secret_svc.IsSecureResponse:
+    properties:
+      isSecure:
+        type: boolean
+    type: object
   secret_svc.ListSecretsRequest:
     properties:
       key:
@@ -4214,6 +4219,36 @@ paths:
       security:
       - BearerAuth: []
       summary: Encrypt a Value
+      tags:
+      - Secret Svc
+  /secret-svc/is-secure:
+    get:
+      consumes:
+      - application/json
+      description: Returns true if the encryption key is sufficiently secure.
+      operationId: isSecure
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Encrypt Value Response
+          schema:
+            $ref: '#/definitions/secret_svc.IsSecureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Check Security Status
       tags:
       - Secret Svc
   /secret-svc/secrets:

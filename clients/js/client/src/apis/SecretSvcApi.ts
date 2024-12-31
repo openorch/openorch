@@ -19,6 +19,7 @@ import type {
   SecretSvcDecryptValueResponse,
   SecretSvcEncryptValueRequest,
   SecretSvcEncryptValueResponse,
+  SecretSvcIsSecureResponse,
   SecretSvcListSecretsRequest,
   SecretSvcListSecretsResponse,
   SecretSvcRemoveSecretsRequest,
@@ -33,6 +34,8 @@ import {
     SecretSvcEncryptValueRequestToJSON,
     SecretSvcEncryptValueResponseFromJSON,
     SecretSvcEncryptValueResponseToJSON,
+    SecretSvcIsSecureResponseFromJSON,
+    SecretSvcIsSecureResponseToJSON,
     SecretSvcListSecretsRequestFromJSON,
     SecretSvcListSecretsRequestToJSON,
     SecretSvcListSecretsResponseFromJSON,
@@ -149,6 +152,38 @@ export class SecretSvcApi extends runtime.BaseAPI {
      */
     async encryptValue(requestParameters: EncryptValueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcEncryptValueResponse> {
         const response = await this.encryptValueRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    async isSecureRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SecretSvcIsSecureResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/secret-svc/is-secure`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SecretSvcIsSecureResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns true if the encryption key is sufficiently secure.
+     * Check Security Status
+     */
+    async isSecure(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SecretSvcIsSecureResponse> {
+        const response = await this.isSecureRaw(initOverrides);
         return await response.value();
     }
 
