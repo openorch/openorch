@@ -1,0 +1,315 @@
+---
+id: is-secure
+title: "Check Security Status"
+description: "Returns true if the encryption key is sufficiently secure."
+sidebar_label: "Check Security Status"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVMFu2zgQ/RVizrLkNi2w1anpIiiCFkgRN3txfaDpscSGIpkZyl5V0L8vRrId120Pi1wkgZyZ9+bNG/WwQTZkY7LBQwn3mFryrBK1qOxWpRoVekPdGKAesVOWFbfbrTUWfXKdYjQtYQ4ZhIikJe52AyVYXow3kAEhx+AZGcoeXs/n8voZ92bCUP9o16K6P8RDBib4hD5Jho7RWTMCFN9Z0npgU2Oj5SuSwCc7gZzAyx5SFxFKWIfgUHsYhux4FNbf0SQYBjl78zteH/RG3eNTi5z+D5lDfU5kfXWq/+rX+g9et6kOZH/g5qUAb3/XwK1PSF47tUDaIakbokAvQxoyGGduUwflsocPqAnpuk01lMvVsMog6YqhXMICDWFSi52BVQYNpjqIMyoUMaOWBCh4DJrxzhSWZ3z0DI98eURoyUlk4YLRrg6cyrd/vb56BYJ1pLIQxtPwzwld6vG1i6i+HUK+gdoG58IeN2rdKa04aoNK+41K4RG90uaptYQbtaXQjMvwwEjSkPocKusV+k0M1iexv5X6NeoNisBeN6Lb9WG8o7xwcp6O9hN2oxet3wbhKRPRZpwINtpKx6wd8nu2vmqdThR8bkJzVvvLrVq0MQYSPSeR6pRiWRQhog9k6jxQVcCQXahw52eRsLGM6vpWRafTNlAzNt5YQ0HEtwZZoQncccJGGnTWoGxl2Z8YfPzyWe2u8vlP+FwWxX6/zyvfjviHPC50Fd3sKp/ndWqcsEpIDd9tFxPcM33e66pCym0oxpBClLPJSchdRH9HpoYMxCBTQ/P8Kp/PyOTvpGwMnBrtz4j+XaN5VIuDV9Qi6dQyXMjSP2/Fy36EhyEn/DcV0WnrhdSoT3+w/RKebS/WORl/lYEYXCL6fq0ZH8gNgxw/tUiycKsMdpqsXosay9WQHT0nm/KInYzFGIziiZ38Tke7Xaz4cL6PH2++Qgb6sC/PDpVi2fFDqh+vfHdW+9LhEwV5DtkfUvp+8v8wnOKnqz9mnNZqihZFV8Mw/Af4qVJX
+sidebar_class_name: "get api-method"
+info_path: docs/openorch/openorch
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Check Security Status"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/secret-svc/is-secure"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns true if the encryption key is sufficiently secure.
+
+<div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Encrypt Value Response
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"isSecure"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"isSecure\": true\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"400"}
+        value={"400"}
+      >
+        <div>
+          
+          
+          Bad Request
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"401"}
+        value={"401"}
+      >
+        <div>
+          
+          
+          Unauthorized
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem><TabItem
+        label={"500"}
+        value={"500"}
+      >
+        <div>
+          
+          
+          Internal Server Error
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <div
+                        style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                      >
+                        
+                        
+                        string
+                        
+                        
+                      </div>
+                    </ul>
+                  </details>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

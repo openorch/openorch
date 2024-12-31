@@ -114,6 +114,7 @@ export * from './SecretSvcDecryptValueRequest';
 export * from './SecretSvcDecryptValueResponse';
 export * from './SecretSvcEncryptValueRequest';
 export * from './SecretSvcEncryptValueResponse';
+export * from './SecretSvcIsSecureResponse';
 export * from './SecretSvcListSecretsRequest';
 export * from './SecretSvcListSecretsResponse';
 export * from './SecretSvcRemoveSecretsRequest';
