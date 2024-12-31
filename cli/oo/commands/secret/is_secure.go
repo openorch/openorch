@@ -5,6 +5,7 @@ import (
 
 	"github.com/openorch/openorch/cli/oo/config"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +15,7 @@ func IsSecure(cmd *cobra.Command, args []string) error {
 
 	url, token, err := config.GetSelectedUrlAndToken()
 	if err != nil {
-		return fmt.Errorf("Cannot get env url: '%v'", err)
+		return errors.Wrap(err, "cannot get env url")
 	}
 
 	cf := sdk.NewApiClientFactory(url)
@@ -23,10 +24,14 @@ func IsSecure(cmd *cobra.Command, args []string) error {
 		SecretSvcAPI.IsSecure(ctx).
 		Execute()
 	if err != nil {
-		return fmt.Errorf("Failed to list secrets: '%v'", err)
+		return errors.Wrap(err, "failed to list secrets")
 	}
 
-	fmt.Print(rsp.IsSecure)
+	if !rsp.IsSecure {
+		return errors.New("secret svc is not secure: it is using the default encryption key from the open-source codebase")
+	}
+
+	fmt.Println("Service is secure.")
 
 	return nil
 }
