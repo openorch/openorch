@@ -20,7 +20,7 @@ export interface SecretSvcIsSecureResponse {
      * @type {boolean}
      * @memberof SecretSvcIsSecureResponse
      */
-    isSecure?: boolean;
+    isSecure: boolean;
 }
 /**
  * Check if a given object implements the SecretSvcIsSecureResponse interface.

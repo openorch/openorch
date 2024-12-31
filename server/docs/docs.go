@@ -6943,6 +6943,9 @@ const docTemplate = `{
         },
         "secret_svc.IsSecureResponse": {
             "type": "object",
+            "required": [
+                "isSecure"
+            ],
             "properties": {
                 "isSecure": {
                     "type": "boolean"
