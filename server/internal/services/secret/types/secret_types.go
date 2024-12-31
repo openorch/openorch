@@ -85,5 +85,5 @@ type RemoveSecretsResponse struct {
 }
 
 type IsSecureResponse struct {
-	IsSecure bool `json:"isSecure"`
+	IsSecure bool `json:"isSecure" binding:"required"`
 }

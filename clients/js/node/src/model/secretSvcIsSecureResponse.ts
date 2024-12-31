@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 
 export class SecretSvcIsSecureResponse {
-    'isSecure'?: boolean;
+    'isSecure': boolean;
 
     static discriminator: string | undefined = undefined;
 

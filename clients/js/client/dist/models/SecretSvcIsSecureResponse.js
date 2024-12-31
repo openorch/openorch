@@ -15,6 +15,8 @@
  * Check if a given object implements the SecretSvcIsSecureResponse interface.
  */
 export function instanceOfSecretSvcIsSecureResponse(value) {
+    if (!('isSecure' in value) || value['isSecure'] === undefined)
+        return false;
     return true;
 }
 export function SecretSvcIsSecureResponseFromJSON(json) {
@@ -25,7 +27,7 @@ export function SecretSvcIsSecureResponseFromJSONTyped(json, ignoreDiscriminator
         return json;
     }
     return {
-        'isSecure': json['isSecure'] == null ? undefined : json['isSecure'],
+        'isSecure': json['isSecure'],
     };
 }
 export function SecretSvcIsSecureResponseToJSON(json) {

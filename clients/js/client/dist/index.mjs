@@ -5822,6 +5822,8 @@ function SecretSvcEncryptValueResponseToJSONTyped(value, ignoreDiscriminator = f
  * Check if a given object implements the SecretSvcIsSecureResponse interface.
  */
 function instanceOfSecretSvcIsSecureResponse(value) {
+    if (!('isSecure' in value) || value['isSecure'] === undefined)
+        return false;
     return true;
 }
 function SecretSvcIsSecureResponseFromJSON(json) {
@@ -5832,7 +5834,7 @@ function SecretSvcIsSecureResponseFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'isSecure': json['isSecure'] == null ? undefined : json['isSecure'],
+        'isSecure': json['isSecure'],
     };
 }
 function SecretSvcIsSecureResponseToJSON(json) {

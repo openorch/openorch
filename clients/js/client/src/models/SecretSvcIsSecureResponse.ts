@@ -24,13 +24,14 @@ export interface SecretSvcIsSecureResponse {
      * @type {boolean}
      * @memberof SecretSvcIsSecureResponse
      */
-    isSecure?: boolean;
+    isSecure: boolean;
 }
 
 /**
  * Check if a given object implements the SecretSvcIsSecureResponse interface.
  */
 export function instanceOfSecretSvcIsSecureResponse(value: object): value is SecretSvcIsSecureResponse {
+    if (!('isSecure' in value) || value['isSecure'] === undefined) return false;
     return true;
 }
 
@@ -44,7 +45,7 @@ export function SecretSvcIsSecureResponseFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'isSecure': json['isSecure'] == null ? undefined : json['isSecure'],
+        'isSecure': json['isSecure'],
     };
 }
 

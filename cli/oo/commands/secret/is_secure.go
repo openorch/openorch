@@ -26,7 +26,7 @@ func IsSecure(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Failed to list secrets: '%v'", err)
 	}
 
-	fmt.Print(*rsp.IsSecure)
+	fmt.Print(rsp.IsSecure)
 
 	return nil
 }
