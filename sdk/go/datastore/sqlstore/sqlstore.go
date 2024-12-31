@@ -738,9 +738,31 @@ func (q *SQLQueryBuilder) buildSelectQuery() (string, []interface{}, error) {
 		for _, selectField := range q.selectFields {
 			selectFields = append(selectFields, q.store.fieldName(selectField))
 		}
+		// @todo I suspect there is a massive bug here and select fields doesn't even work at all
 		query = fmt.Sprintf("SELECT %s FROM %s", strings.Join(selectFields, ", "), q.store.db.Tablename())
 	} else {
-		query = fmt.Sprintf("SELECT * FROM %s", strings.ToLower(q.store.db.Tablename()))
+		instanceType := reflect.TypeOf(q.store.instance)
+
+		if instanceType.Kind() == reflect.Pointer {
+			instanceType = instanceType.Elem()
+		}
+		if instanceType.Kind() != reflect.Struct {
+			return "", nil, errors.New("q.store.instance must be a struct or pointer to a struct")
+		}
+
+		// Build the column list dynamically using reflection
+		var columns []string
+		for i := 0; i < instanceType.NumField(); i++ {
+			field := instanceType.Field(i)
+			// Optionally, use struct tags to get the column names (if present)
+			columnName := field.Name // default to the field name
+			if jsonTag := field.Tag.Get("json"); jsonTag != "" {
+				columnName = jsonTag
+			}
+			columns = append(columns, columnName)
+		}
+
+		query = fmt.Sprintf("SELECT %s FROM %s", strings.Join(columns, ", "), strings.ToLower(q.store.db.Tablename()))
 	}
 
 	if len(filters) > 0 {
