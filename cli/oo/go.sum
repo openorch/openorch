@@ -17,10 +17,10 @@ github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
 github.com/lib/pq v1.10.9/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
-github.com/openorch/openorch/clients/go v0.0.0-20241231141542-ca0ce4b916e9 h1:M44YUxdGUm8uVfCdWyHWtBuYCEoYZ0PD8uHmUlTT3xY=
-github.com/openorch/openorch/clients/go v0.0.0-20241231141542-ca0ce4b916e9/go.mod h1:GnbX8wH8nyQcytEY6iOuc2b4M9QH/BsgFvNQBgBQ9qI=
-github.com/openorch/openorch/sdk/go v0.0.0-20241231141542-ca0ce4b916e9 h1:82p7Wgk5Luj8ZpFfahFEXsl0X5Bke/REmAruNpKbDMw=
-github.com/openorch/openorch/sdk/go v0.0.0-20241231141542-ca0ce4b916e9/go.mod h1:rjN4Sfxx70Ul0ENBKwbJyodTzam+LOoFLQld5t/Eiv0=
+github.com/openorch/openorch/clients/go v0.0.0-20250101203310-05dca0d8bb1c h1:4zg57sDSDl8Zdi1QTmwLv5ThNgEsEHdjPHr5TzT+yt0=
+github.com/openorch/openorch/clients/go v0.0.0-20250101203310-05dca0d8bb1c/go.mod h1:GyNvlpAs3TZKG8a5lTkoBW2u6Y43J63Wx282BeIiqOU=
+github.com/openorch/openorch/sdk/go v0.0.0-20250101203310-05dca0d8bb1c h1:7j0lnpwwE47pSGN9FCCCMoR/b6XIZtLIZ/cHYdhtMs0=
+github.com/openorch/openorch/sdk/go v0.0.0-20250101203310-05dca0d8bb1c/go.mod h1:rjN4Sfxx70Ul0ENBKwbJyodTzam+LOoFLQld5t/Eiv0=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
