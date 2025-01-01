@@ -207,6 +207,7 @@ func (cs SecretService) checkSum(s *secret.Secret) error {
 			h := blake2b.Sum256([]byte(val))
 			hash = hex.EncodeToString(h[:])
 
+		case secret.ChecksumAlgorithmUnspecified:
 		case secret.ChecksumAlgorithmCRC32:
 			fallthrough
 		default:

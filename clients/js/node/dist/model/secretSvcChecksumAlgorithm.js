@@ -11,6 +11,7 @@
  */
 export var SecretSvcChecksumAlgorithm;
 (function (SecretSvcChecksumAlgorithm) {
+    SecretSvcChecksumAlgorithm[SecretSvcChecksumAlgorithm["ChecksumAlgorithmUnspecified"] = ''] = "ChecksumAlgorithmUnspecified";
     SecretSvcChecksumAlgorithm[SecretSvcChecksumAlgorithm["ChecksumAlgorithmCRC32"] = 'CRC32'] = "ChecksumAlgorithmCRC32";
     SecretSvcChecksumAlgorithm[SecretSvcChecksumAlgorithm["ChecksumAlgorithmBlake2s"] = 'BLAKE2s'] = "ChecksumAlgorithmBlake2s";
     SecretSvcChecksumAlgorithm[SecretSvcChecksumAlgorithm["ChecksumAlgorithmSha256"] = 'SHA-256'] = "ChecksumAlgorithmSha256";

@@ -14,10 +14,11 @@ type ErrorResponse struct {
 type ChecksumAlgorithm string
 
 const (
-	ChecksumAlgorithmCRC32   ChecksumAlgorithm = "CRC32"
-	ChecksumAlgorithmBlake2s ChecksumAlgorithm = "BLAKE2s"
-	ChecksumAlgorithmSha256  ChecksumAlgorithm = "SHA-256"
-	ChecksumAlgorithmSha512  ChecksumAlgorithm = "SHA-512"
+	ChecksumAlgorithmUnspecified ChecksumAlgorithm = ""
+	ChecksumAlgorithmCRC32       ChecksumAlgorithm = "CRC32"
+	ChecksumAlgorithmBlake2s     ChecksumAlgorithm = "BLAKE2s"
+	ChecksumAlgorithmSha256      ChecksumAlgorithm = "SHA-256"
+	ChecksumAlgorithmSha512      ChecksumAlgorithm = "SHA-512"
 )
 
 type Secret struct {
@@ -41,8 +42,8 @@ type Secret struct {
 	// File based saves, eg. `secret save secretA.yaml` are probably encrypted.
 	Encrypted bool `json:"encrypted"`
 
-	Checksum          string            `json:"checksum"`                            // Checksum of the secret value
-	ChecksumAlgorithm ChecksumAlgorithm `json:"checksumAlgorithm" example:"SHA-256"` // Algorithm used for the checksum (e.g., "SHA-256")
+	Checksum          string            `json:"checksum"`                          // Checksum of the secret value
+	ChecksumAlgorithm ChecksumAlgorithm `json:"checksumAlgorithm" example:"CRC32"` // Algorithm used for the checksum (e.g., "CRC32")
 }
 
 func (s *Secret) GetId() string {

@@ -31,7 +31,7 @@ export class SecretSvcSecret {
     */
     'checksum'?: string;
     /**
-    * Algorithm used for the checksum (e.g., \"SHA-256\")
+    * Algorithm used for the checksum (e.g., \"CRC32\")
     */
     'checksumAlgorithm'?: SecretSvcChecksumAlgorithm;
     /**

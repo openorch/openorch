@@ -28,7 +28,7 @@ type SecretSvcSecret struct {
 	CanChangeWriters []string `json:"canChangeWriters,omitempty"`
 	// Checksum of the secret value
 	Checksum *string `json:"checksum,omitempty"`
-	// Algorithm used for the checksum (e.g., \"SHA-256\")
+	// Algorithm used for the checksum (e.g., \"CRC32\")
 	ChecksumAlgorithm *SecretSvcChecksumAlgorithm `json:"checksumAlgorithm,omitempty"`
 	// Slugs of services/users who can delete the secret
 	Deleters []string `json:"deleters,omitempty"`

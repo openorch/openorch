@@ -13,6 +13,7 @@
 import { RequestFile } from './models';
 
 export enum SecretSvcChecksumAlgorithm {
+    ChecksumAlgorithmUnspecified = <any> '',
     ChecksumAlgorithmCRC32 = <any> 'CRC32',
     ChecksumAlgorithmBlake2s = <any> 'BLAKE2s',
     ChecksumAlgorithmSha256 = <any> 'SHA-256',

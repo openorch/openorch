@@ -5647,6 +5647,7 @@ function RegistrySvcSaveDefinitionRequestToJSONTyped(value, ignoreDiscriminator 
  * @export
  */
 const SecretSvcChecksumAlgorithm = {
+    ChecksumAlgorithmUnspecified: '',
     ChecksumAlgorithmCRC32: 'CRC32',
     ChecksumAlgorithmBlake2s: 'BLAKE2s',
     ChecksumAlgorithmSha256: 'SHA-256',

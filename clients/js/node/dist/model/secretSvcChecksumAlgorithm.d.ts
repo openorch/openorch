@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 export declare enum SecretSvcChecksumAlgorithm {
+    ChecksumAlgorithmUnspecified,
     ChecksumAlgorithmCRC32,
     ChecksumAlgorithmBlake2s,
     ChecksumAlgorithmSha256,

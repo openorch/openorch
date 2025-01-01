@@ -1679,12 +1679,14 @@ definitions:
     type: object
   secret_svc.ChecksumAlgorithm:
     enum:
+    - ""
     - CRC32
     - BLAKE2s
     - SHA-256
     - SHA-512
     type: string
     x-enum-varnames:
+    - ChecksumAlgorithmUnspecified
     - ChecksumAlgorithmCRC32
     - ChecksumAlgorithmBlake2s
     - ChecksumAlgorithmSha256
@@ -1799,8 +1801,8 @@ definitions:
       checksumAlgorithm:
         allOf:
         - $ref: '#/definitions/secret_svc.ChecksumAlgorithm'
-        description: Algorithm used for the checksum (e.g., "SHA-256")
-        example: SHA-256
+        description: Algorithm used for the checksum (e.g., "CRC32")
+        example: CRC32
       deleters:
         description: Slugs of services/users who can delete the secret
         items:

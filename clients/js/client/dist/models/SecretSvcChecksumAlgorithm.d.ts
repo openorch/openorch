@@ -14,6 +14,7 @@
  * @export
  */
 export declare const SecretSvcChecksumAlgorithm: {
+    readonly ChecksumAlgorithmUnspecified: "";
     readonly ChecksumAlgorithmCRC32: "CRC32";
     readonly ChecksumAlgorithmBlake2s: "BLAKE2s";
     readonly ChecksumAlgorithmSha256: "SHA-256";

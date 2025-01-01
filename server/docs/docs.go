@@ -6888,12 +6888,14 @@ const docTemplate = `{
         "secret_svc.ChecksumAlgorithm": {
             "type": "string",
             "enum": [
+                "",
                 "CRC32",
                 "BLAKE2s",
                 "SHA-256",
                 "SHA-512"
             ],
             "x-enum-varnames": [
+                "ChecksumAlgorithmUnspecified",
                 "ChecksumAlgorithmCRC32",
                 "ChecksumAlgorithmBlake2s",
                 "ChecksumAlgorithmSha256",
@@ -7064,13 +7066,13 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "checksumAlgorithm": {
-                    "description": "Algorithm used for the checksum (e.g., \"SHA-256\")",
+                    "description": "Algorithm used for the checksum (e.g., \"CRC32\")",
                     "allOf": [
                         {
                             "$ref": "#/definitions/secret_svc.ChecksumAlgorithm"
                         }
                     ],
-                    "example": "SHA-256"
+                    "example": "CRC32"
                 },
                 "deleters": {
                     "description": "Slugs of services/users who can delete the secret",
