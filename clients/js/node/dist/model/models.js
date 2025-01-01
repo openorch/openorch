@@ -110,6 +110,7 @@ export * from './registrySvcRepositorySpec';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
+export * from './secretSvcChecksumAlgorithm';
 export * from './secretSvcDecryptValueRequest';
 export * from './secretSvcDecryptValueResponse';
 export * from './secretSvcEncryptValueRequest';
@@ -264,6 +265,7 @@ import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 import { RegistrySvcResourceUsage } from './registrySvcResourceUsage';
 import { RegistrySvcSaveDefinitionRequest } from './registrySvcSaveDefinitionRequest';
 import { RegistrySvcUsage } from './registrySvcUsage';
+import { SecretSvcChecksumAlgorithm } from './secretSvcChecksumAlgorithm';
 import { SecretSvcDecryptValueRequest } from './secretSvcDecryptValueRequest';
 import { SecretSvcDecryptValueResponse } from './secretSvcDecryptValueResponse';
 import { SecretSvcEncryptValueRequest } from './secretSvcEncryptValueRequest';
@@ -327,6 +329,7 @@ let enumsMap = {
     "PromptSvcPromptStatus": PromptSvcPromptStatus,
     "RegistrySvcInstanceStatus": RegistrySvcInstanceStatus,
     "RegistrySvcLanguage": RegistrySvcLanguage,
+    "SecretSvcChecksumAlgorithm": SecretSvcChecksumAlgorithm,
 };
 let typeMap = {
     "ChatSvcAddMessageRequest": ChatSvcAddMessageRequest,

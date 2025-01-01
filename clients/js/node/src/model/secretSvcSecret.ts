@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { SecretSvcChecksumAlgorithm } from './secretSvcChecksumAlgorithm';
 
 export class SecretSvcSecret {
     /**
@@ -25,6 +26,14 @@ export class SecretSvcSecret {
     * Slugs of services/users who can change the writers list
     */
     'canChangeWriters'?: Array<string>;
+    /**
+    * Checksum of the secret value
+    */
+    'checksum'?: string;
+    /**
+    * Algorithm used for the checksum (e.g., \"CRC32\")
+    */
+    'checksumAlgorithm'?: SecretSvcChecksumAlgorithm;
     /**
     * Slugs of services/users who can delete the secret
     */
@@ -77,6 +86,16 @@ export class SecretSvcSecret {
             "type": "Array<string>"
         },
         {
+            "name": "checksum",
+            "baseName": "checksum",
+            "type": "string"
+        },
+        {
+            "name": "checksumAlgorithm",
+            "baseName": "checksumAlgorithm",
+            "type": "SecretSvcChecksumAlgorithm"
+        },
+        {
             "name": "deleters",
             "baseName": "deleters",
             "type": "Array<string>"
@@ -122,3 +141,5 @@ export class SecretSvcSecret {
     }
 }
 
+export namespace SecretSvcSecret {
+}

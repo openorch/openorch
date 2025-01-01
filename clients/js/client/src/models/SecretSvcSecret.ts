@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { SecretSvcChecksumAlgorithm } from './SecretSvcChecksumAlgorithm';
+import {
+    SecretSvcChecksumAlgorithmFromJSON,
+    SecretSvcChecksumAlgorithmFromJSONTyped,
+    SecretSvcChecksumAlgorithmToJSON,
+    SecretSvcChecksumAlgorithmToJSONTyped,
+} from './SecretSvcChecksumAlgorithm';
+
 /**
  * 
  * @export
@@ -37,6 +45,18 @@ export interface SecretSvcSecret {
      * @memberof SecretSvcSecret
      */
     canChangeWriters?: Array<string>;
+    /**
+     * Checksum of the secret value
+     * @type {string}
+     * @memberof SecretSvcSecret
+     */
+    checksum?: string;
+    /**
+     * Algorithm used for the checksum (e.g., "CRC32")
+     * @type {SecretSvcChecksumAlgorithm}
+     * @memberof SecretSvcSecret
+     */
+    checksumAlgorithm?: SecretSvcChecksumAlgorithm;
     /**
      * Slugs of services/users who can delete the secret
      * @type {Array<string>}
@@ -91,6 +111,8 @@ export interface SecretSvcSecret {
     writers?: Array<string>;
 }
 
+
+
 /**
  * Check if a given object implements the SecretSvcSecret interface.
  */
@@ -111,6 +133,8 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
         'canChangeDeleters': json['canChangeDeleters'] == null ? undefined : json['canChangeDeleters'],
         'canChangeReaders': json['canChangeReaders'] == null ? undefined : json['canChangeReaders'],
         'canChangeWriters': json['canChangeWriters'] == null ? undefined : json['canChangeWriters'],
+        'checksum': json['checksum'] == null ? undefined : json['checksum'],
+        'checksumAlgorithm': json['checksumAlgorithm'] == null ? undefined : SecretSvcChecksumAlgorithmFromJSON(json['checksumAlgorithm']),
         'deleters': json['deleters'] == null ? undefined : json['deleters'],
         'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -136,6 +160,8 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
         'canChangeDeleters': value['canChangeDeleters'],
         'canChangeReaders': value['canChangeReaders'],
         'canChangeWriters': value['canChangeWriters'],
+        'checksum': value['checksum'],
+        'checksumAlgorithm': SecretSvcChecksumAlgorithmToJSON(value['checksumAlgorithm']),
         'deleters': value['deleters'],
         'encrypted': value['encrypted'],
         'id': value['id'],

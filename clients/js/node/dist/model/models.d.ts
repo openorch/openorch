@@ -111,6 +111,7 @@ export * from './registrySvcRepositorySpec';
 export * from './registrySvcResourceUsage';
 export * from './registrySvcSaveDefinitionRequest';
 export * from './registrySvcUsage';
+export * from './secretSvcChecksumAlgorithm';
 export * from './secretSvcDecryptValueRequest';
 export * from './secretSvcDecryptValueResponse';
 export * from './secretSvcEncryptValueRequest';

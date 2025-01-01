@@ -32,6 +32,16 @@ SecretSvcSecret.attributeTypeMap = [
         "type": "Array<string>"
     },
     {
+        "name": "checksum",
+        "baseName": "checksum",
+        "type": "string"
+    },
+    {
+        "name": "checksumAlgorithm",
+        "baseName": "checksumAlgorithm",
+        "type": "SecretSvcChecksumAlgorithm"
+    },
+    {
         "name": "deleters",
         "baseName": "deleters",
         "type": "Array<string>"
