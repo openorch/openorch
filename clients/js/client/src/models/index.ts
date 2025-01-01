@@ -112,6 +112,7 @@ export * from './RegistrySvcRepositorySpec';
 export * from './RegistrySvcResourceUsage';
 export * from './RegistrySvcSaveDefinitionRequest';
 export * from './RegistrySvcUsage';
+export * from './SecretSvcChecksumAlgorithm';
 export * from './SecretSvcDecryptValueRequest';
 export * from './SecretSvcDecryptValueResponse';
 export * from './SecretSvcEncryptValueRequest';

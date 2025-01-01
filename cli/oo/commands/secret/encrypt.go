@@ -1,7 +1,9 @@
 package secret
 
 import (
+	"encoding/hex"
 	"fmt"
+	"hash/crc32"
 	"os"
 	"strings"
 
@@ -41,8 +43,19 @@ func Encrypt(cmd *cobra.Command, args []string) error {
 	ctx := cmd.Context()
 
 	cf := sdk.NewApiClientFactory(url)
-	rsp, _, err := cf.Client(sdk.WithToken(token)).
-		SecretSvcAPI.EncryptValue(ctx).
+	secretApi := cf.Client(sdk.WithToken(token)).SecretSvcAPI
+
+	isSecureRsp, _, err := secretApi.IsSecure(ctx).Execute()
+
+	// this will mess up the yaml structure but that is intentional
+	var returnErr error
+	if err != nil {
+		returnErr = fmt.Errorf("warning: cannot identify if the server is secure: %s", err)
+	} else if !isSecureRsp.IsSecure {
+		returnErr = fmt.Errorf("warning: secret service is not secure")
+	}
+
+	rsp, _, err := secretApi.EncryptValue(ctx).
 		Body(openapi.SecretSvcEncryptValueRequest{
 			Value: openapi.PtrString(value),
 		}).
@@ -51,11 +64,18 @@ func Encrypt(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "failed to encrypt value")
 	}
 
+	h := crc32.ChecksumIEEE([]byte(value))
+	hash := hex.EncodeToString([]byte{
+		byte(h >> 24), byte(h >> 16), byte(h >> 8), byte(h),
+	})
+
 	secret := openapi.SecretSvcSecret{
-		Id:        openapi.PtrString(sdk.Id("secr")),
-		Key:       openapi.PtrString(key),
-		Encrypted: openapi.PtrBool(true),
-		Value:     rsp.Value,
+		Id:                openapi.PtrString(sdk.Id("secr")),
+		Key:               openapi.PtrString(key),
+		Encrypted:         openapi.PtrBool(true),
+		Value:             rsp.Value,
+		Checksum:          openapi.PtrString(hash),
+		ChecksumAlgorithm: openapi.ChecksumAlgorithmCRC32.Ptr(),
 	}
 
 	bs, err := yaml.Marshal(secret)
@@ -65,5 +85,5 @@ func Encrypt(cmd *cobra.Command, args []string) error {
 
 	fmt.Print(string(bs))
 
-	return nil
+	return returnErr
 }

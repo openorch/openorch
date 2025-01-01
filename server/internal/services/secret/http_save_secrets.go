@@ -14,7 +14,12 @@ package secretservice
 
 import (
 	"context"
+	"crypto/sha256"
+	"crypto/sha512"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
+	"hash/crc32"
 	"net/http"
 	"strings"
 
@@ -23,6 +28,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/datastore"
 	secret "github.com/openorch/openorch/server/internal/services/secret/types"
 	"github.com/pkg/errors"
+	"golang.org/x/crypto/blake2b"
 )
 
 // @Id saveSecrets
@@ -134,6 +140,10 @@ func (cs *SecretService) saveSecrets(
 					return errors.Wrap(err, "failed to encrypt secret")
 				}
 			}
+			err = cs.checkSum(s)
+			if err != nil {
+				return errors.Wrap(err, "checksum failed")
+			}
 
 			return cs.secretStore.Upsert(s)
 		}
@@ -162,9 +172,53 @@ func (cs *SecretService) saveSecrets(
 			}
 		}
 
+		err = cs.checkSum(s)
+		if err != nil {
+			return errors.Wrap(err, "checksum failed")
+		}
+
 		err = cs.secretStore.Upsert(s)
 		if err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func (cs SecretService) checkSum(s *secret.Secret) error {
+	if s.Encrypted && s.Checksum != "" {
+		val, err := decrypt(s.Value, cs.encryptionKey)
+		if err != nil {
+			return errors.Wrap(err, "failed to decrypt to compare checksum")
+		}
+
+		hash := ""
+		switch s.ChecksumAlgorithm {
+		case secret.ChecksumAlgorithmSha256:
+			h := sha256.Sum256([]byte(val))
+			hash = hex.EncodeToString(h[:])
+
+		case secret.ChecksumAlgorithmSha512:
+			h := sha512.Sum512([]byte(val))
+			hash = hex.EncodeToString(h[:])
+
+		case secret.ChecksumAlgorithmBlake2s:
+			h := blake2b.Sum256([]byte(val))
+			hash = hex.EncodeToString(h[:])
+
+		case secret.ChecksumAlgorithmUnspecified:
+		case secret.ChecksumAlgorithmCRC32:
+			fallthrough
+		default:
+			h := crc32.ChecksumIEEE([]byte(val))
+			hash = hex.EncodeToString([]byte{
+				byte(h >> 24), byte(h >> 16), byte(h >> 8), byte(h),
+			})
+		}
+
+		if hash != s.Checksum {
+			return fmt.Errorf("checksum incorrect")
 		}
 	}
 

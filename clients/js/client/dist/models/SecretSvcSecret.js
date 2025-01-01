@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { SecretSvcChecksumAlgorithmFromJSON, SecretSvcChecksumAlgorithmToJSON, } from './SecretSvcChecksumAlgorithm';
 /**
  * Check if a given object implements the SecretSvcSecret interface.
  */
@@ -28,6 +29,8 @@ export function SecretSvcSecretFromJSONTyped(json, ignoreDiscriminator) {
         'canChangeDeleters': json['canChangeDeleters'] == null ? undefined : json['canChangeDeleters'],
         'canChangeReaders': json['canChangeReaders'] == null ? undefined : json['canChangeReaders'],
         'canChangeWriters': json['canChangeWriters'] == null ? undefined : json['canChangeWriters'],
+        'checksum': json['checksum'] == null ? undefined : json['checksum'],
+        'checksumAlgorithm': json['checksumAlgorithm'] == null ? undefined : SecretSvcChecksumAlgorithmFromJSON(json['checksumAlgorithm']),
         'deleters': json['deleters'] == null ? undefined : json['deleters'],
         'encrypted': json['encrypted'] == null ? undefined : json['encrypted'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -49,6 +52,8 @@ export function SecretSvcSecretToJSONTyped(value, ignoreDiscriminator = false) {
         'canChangeDeleters': value['canChangeDeleters'],
         'canChangeReaders': value['canChangeReaders'],
         'canChangeWriters': value['canChangeWriters'],
+        'checksum': value['checksum'],
+        'checksumAlgorithm': SecretSvcChecksumAlgorithmToJSON(value['checksumAlgorithm']),
         'deleters': value['deleters'],
         'encrypted': value['encrypted'],
         'id': value['id'],

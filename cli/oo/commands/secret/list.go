@@ -9,6 +9,7 @@ import (
 	"github.com/openorch/openorch/cli/oo/config"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +24,7 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 
 	url, token, err := config.GetSelectedUrlAndToken()
 	if err != nil {
-		return fmt.Errorf("Cannot get env url: '%v'", err)
+		return errors.Wrap(err, "cannot get env url")
 	}
 
 	cf := sdk.NewApiClientFactory(url)
@@ -35,7 +36,7 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 		}).
 		Execute()
 	if err != nil {
-		return fmt.Errorf("Failed to list secrets: '%v'", err)
+		return errors.Wrap(err, "failed to list secrets")
 	}
 
 	writer := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
