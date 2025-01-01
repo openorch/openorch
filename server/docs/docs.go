@@ -6885,6 +6885,15 @@ const docTemplate = `{
                 }
             }
         },
+        "secret_svc.ChecksumAlgorithm": {
+            "type": "string",
+            "enum": [
+                "SHA-256"
+            ],
+            "x-enum-varnames": [
+                "ChecksumAlgorithmSha256"
+            ]
+        },
         "secret_svc.DecryptValueRequest": {
             "type": "object",
             "properties": {
@@ -7043,6 +7052,19 @@ const docTemplate = `{
                     "items": {
                         "type": "string"
                     }
+                },
+                "checksum": {
+                    "description": "Checksum of the secret value",
+                    "type": "string"
+                },
+                "checksumAlgorithm": {
+                    "description": "Algorithm used for the checksum (e.g., \"SHA-256\")",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/secret_svc.ChecksumAlgorithm"
+                        }
+                    ],
+                    "example": "SHA-256"
                 },
                 "deleters": {
                     "description": "Slugs of services/users who can delete the secret",

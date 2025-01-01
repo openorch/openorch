@@ -144,6 +144,7 @@ docs/RegistrySvcResourceUsage.md
 docs/RegistrySvcSaveDefinitionRequest.md
 docs/RegistrySvcUsage.md
 docs/SecretSvcAPI.md
+docs/SecretSvcChecksumAlgorithm.md
 docs/SecretSvcDecryptValueRequest.md
 docs/SecretSvcDecryptValueResponse.md
 docs/SecretSvcEncryptValueRequest.md
@@ -303,6 +304,7 @@ model_registry_svc_repository_spec.go
 model_registry_svc_resource_usage.go
 model_registry_svc_save_definition_request.go
 model_registry_svc_usage.go
+model_secret_svc_checksum_algorithm.go
 model_secret_svc_decrypt_value_request.go
 model_secret_svc_decrypt_value_response.go
 model_secret_svc_encrypt_value_request.go

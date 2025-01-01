@@ -26,6 +26,10 @@ type SecretSvcSecret struct {
 	CanChangeReaders []string `json:"canChangeReaders,omitempty"`
 	// Slugs of services/users who can change the writers list
 	CanChangeWriters []string `json:"canChangeWriters,omitempty"`
+	// Checksum of the secret value
+	Checksum *string `json:"checksum,omitempty"`
+	// Algorithm used for the checksum (e.g., \"SHA-256\")
+	ChecksumAlgorithm *SecretSvcChecksumAlgorithm `json:"checksumAlgorithm,omitempty"`
 	// Slugs of services/users who can delete the secret
 	Deleters []string `json:"deleters,omitempty"`
 	// Whether the secret is encrypted All secrets are encrypted before written to the DB. This really only exists for write requests to know if the secret is already encrypted. Ie: while most `secret save [key] [value]` commands are probably not encrypted, File based saves, eg. `secret save secretA.yaml` are probably encrypted.
@@ -155,6 +159,70 @@ func (o *SecretSvcSecret) HasCanChangeWriters() bool {
 // SetCanChangeWriters gets a reference to the given []string and assigns it to the CanChangeWriters field.
 func (o *SecretSvcSecret) SetCanChangeWriters(v []string) {
 	o.CanChangeWriters = v
+}
+
+// GetChecksum returns the Checksum field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetChecksum() string {
+	if o == nil || IsNil(o.Checksum) {
+		var ret string
+		return ret
+	}
+	return *o.Checksum
+}
+
+// GetChecksumOk returns a tuple with the Checksum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetChecksumOk() (*string, bool) {
+	if o == nil || IsNil(o.Checksum) {
+		return nil, false
+	}
+	return o.Checksum, true
+}
+
+// HasChecksum returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasChecksum() bool {
+	if o != nil && !IsNil(o.Checksum) {
+		return true
+	}
+
+	return false
+}
+
+// SetChecksum gets a reference to the given string and assigns it to the Checksum field.
+func (o *SecretSvcSecret) SetChecksum(v string) {
+	o.Checksum = &v
+}
+
+// GetChecksumAlgorithm returns the ChecksumAlgorithm field value if set, zero value otherwise.
+func (o *SecretSvcSecret) GetChecksumAlgorithm() SecretSvcChecksumAlgorithm {
+	if o == nil || IsNil(o.ChecksumAlgorithm) {
+		var ret SecretSvcChecksumAlgorithm
+		return ret
+	}
+	return *o.ChecksumAlgorithm
+}
+
+// GetChecksumAlgorithmOk returns a tuple with the ChecksumAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SecretSvcSecret) GetChecksumAlgorithmOk() (*SecretSvcChecksumAlgorithm, bool) {
+	if o == nil || IsNil(o.ChecksumAlgorithm) {
+		return nil, false
+	}
+	return o.ChecksumAlgorithm, true
+}
+
+// HasChecksumAlgorithm returns a boolean if a field has been set.
+func (o *SecretSvcSecret) HasChecksumAlgorithm() bool {
+	if o != nil && !IsNil(o.ChecksumAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetChecksumAlgorithm gets a reference to the given SecretSvcChecksumAlgorithm and assigns it to the ChecksumAlgorithm field.
+func (o *SecretSvcSecret) SetChecksumAlgorithm(v SecretSvcChecksumAlgorithm) {
+	o.ChecksumAlgorithm = &v
 }
 
 // GetDeleters returns the Deleters field value if set, zero value otherwise.
@@ -431,6 +499,12 @@ func (o SecretSvcSecret) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CanChangeWriters) {
 		toSerialize["canChangeWriters"] = o.CanChangeWriters
+	}
+	if !IsNil(o.Checksum) {
+		toSerialize["checksum"] = o.Checksum
+	}
+	if !IsNil(o.ChecksumAlgorithm) {
+		toSerialize["checksumAlgorithm"] = o.ChecksumAlgorithm
 	}
 	if !IsNil(o.Deleters) {
 		toSerialize["deleters"] = o.Deleters

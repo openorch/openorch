@@ -278,6 +278,7 @@ Class | Method | HTTP request | Description
  - [RegistrySvcResourceUsage](docs/RegistrySvcResourceUsage.md)
  - [RegistrySvcSaveDefinitionRequest](docs/RegistrySvcSaveDefinitionRequest.md)
  - [RegistrySvcUsage](docs/RegistrySvcUsage.md)
+ - [SecretSvcChecksumAlgorithm](docs/SecretSvcChecksumAlgorithm.md)
  - [SecretSvcDecryptValueRequest](docs/SecretSvcDecryptValueRequest.md)
  - [SecretSvcDecryptValueResponse](docs/SecretSvcDecryptValueResponse.md)
  - [SecretSvcEncryptValueRequest](docs/SecretSvcEncryptValueRequest.md)

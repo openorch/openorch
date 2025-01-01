@@ -11,6 +11,12 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
+type ChecksumAlgorithm string
+
+const (
+	ChecksumAlgorithmSha256 ChecksumAlgorithm = "SHA-256"
+)
+
 type Secret struct {
 	Id        string `json:"id"`        // Id of the secret
 	Namespace string `json:"namespace"` // Namespace of the secret
@@ -31,6 +37,9 @@ type Secret struct {
 	// Ie: while most `secret save [key] [value]` commands are probably not encrypted,
 	// File based saves, eg. `secret save secretA.yaml` are probably encrypted.
 	Encrypted bool `json:"encrypted"`
+
+	Checksum          string            `json:"checksum"`                            // Checksum of the secret value
+	ChecksumAlgorithm ChecksumAlgorithm `json:"checksumAlgorithm" example:"SHA-256"` // Algorithm used for the checksum (e.g., "SHA-256")
 }
 
 func (s *Secret) GetId() string {

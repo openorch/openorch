@@ -14,7 +14,10 @@ package secretservice
 
 import (
 	"context"
+	"crypto/sha512"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -134,6 +137,10 @@ func (cs *SecretService) saveSecrets(
 					return errors.Wrap(err, "failed to encrypt secret")
 				}
 			}
+			err = cs.checkSum(s)
+			if err != nil {
+				return errors.Wrap(err, "checksum failed")
+			}
 
 			return cs.secretStore.Upsert(s)
 		}
@@ -162,9 +169,38 @@ func (cs *SecretService) saveSecrets(
 			}
 		}
 
+		err = cs.checkSum(s)
+		if err != nil {
+			return errors.Wrap(err, "checksum failed")
+		}
+
 		err = cs.secretStore.Upsert(s)
 		if err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func (cs SecretService) checkSum(s *secret.Secret) error {
+	if s.Encrypted && s.Checksum != "" {
+		val, err := decrypt(s.Value, cs.encryptionKey)
+		if err != nil {
+			return errors.Wrap(err, "failed to decrypt to compare checksum")
+		}
+
+		hash := ""
+		switch s.ChecksumAlgorithm {
+		case secret.ChecksumAlgorithmSha256:
+			fallthrough
+		default:
+			h := sha512.Sum512([]byte(val))
+			hash = hex.EncodeToString(h[:])
+		}
+
+		if hash != s.Checksum {
+			return fmt.Errorf("checksum incorrect")
 		}
 	}
 
