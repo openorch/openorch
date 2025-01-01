@@ -14,7 +14,10 @@ type ErrorResponse struct {
 type ChecksumAlgorithm string
 
 const (
-	ChecksumAlgorithmSha256 ChecksumAlgorithm = "SHA-256"
+	ChecksumAlgorithmCRC32   ChecksumAlgorithm = "CRC32"
+	ChecksumAlgorithmBlake2s ChecksumAlgorithm = "BLAKE2s"
+	ChecksumAlgorithmSha256  ChecksumAlgorithm = "SHA-256"
+	ChecksumAlgorithmSha512  ChecksumAlgorithm = "SHA-512"
 )
 
 type Secret struct {

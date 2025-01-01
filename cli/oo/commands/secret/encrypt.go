@@ -1,7 +1,9 @@
 package secret
 
 import (
+	"encoding/hex"
 	"fmt"
+	"hash/crc32"
 	"os"
 	"strings"
 
@@ -62,11 +64,18 @@ func Encrypt(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "failed to encrypt value")
 	}
 
+	h := crc32.ChecksumIEEE([]byte(value))
+	hash := hex.EncodeToString([]byte{
+		byte(h >> 24), byte(h >> 16), byte(h >> 8), byte(h),
+	})
+
 	secret := openapi.SecretSvcSecret{
-		Id:        openapi.PtrString(sdk.Id("secr")),
-		Key:       openapi.PtrString(key),
-		Encrypted: openapi.PtrBool(true),
-		Value:     rsp.Value,
+		Id:                openapi.PtrString(sdk.Id("secr")),
+		Key:               openapi.PtrString(key),
+		Encrypted:         openapi.PtrBool(true),
+		Value:             rsp.Value,
+		Checksum:          openapi.PtrString(hash),
+		ChecksumAlgorithm: openapi.ChecksumAlgorithmCRC32.Ptr(),
 	}
 
 	bs, err := yaml.Marshal(secret)

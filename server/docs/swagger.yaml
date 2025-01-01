@@ -1679,10 +1679,16 @@ definitions:
     type: object
   secret_svc.ChecksumAlgorithm:
     enum:
+    - CRC32
+    - BLAKE2s
     - SHA-256
+    - SHA-512
     type: string
     x-enum-varnames:
+    - ChecksumAlgorithmCRC32
+    - ChecksumAlgorithmBlake2s
     - ChecksumAlgorithmSha256
+    - ChecksumAlgorithmSha512
   secret_svc.DecryptValueRequest:
     properties:
       value:

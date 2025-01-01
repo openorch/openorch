@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { SecretSvcChecksumAlgorithm } from './secretSvcChecksumAlgorithm';
 export declare class SecretSvcSecret {
     /**
     * Slugs of services/users who can change the deleters list
@@ -22,6 +23,14 @@ export declare class SecretSvcSecret {
     * Slugs of services/users who can change the writers list
     */
     'canChangeWriters'?: Array<string>;
+    /**
+    * Checksum of the secret value
+    */
+    'checksum'?: string;
+    /**
+    * Algorithm used for the checksum (e.g., \"SHA-256\")
+    */
+    'checksumAlgorithm'?: SecretSvcChecksumAlgorithm;
     /**
     * Slugs of services/users who can delete the secret
     */
@@ -65,4 +74,6 @@ export declare class SecretSvcSecret {
         baseName: string;
         type: string;
     }[];
+}
+export declare namespace SecretSvcSecret {
 }

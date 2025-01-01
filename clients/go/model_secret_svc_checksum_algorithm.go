@@ -21,12 +21,18 @@ type SecretSvcChecksumAlgorithm string
 
 // List of secret_svc.ChecksumAlgorithm
 const (
+	ChecksumAlgorithmCRC32 SecretSvcChecksumAlgorithm = "CRC32"
+	ChecksumAlgorithmBlake2s SecretSvcChecksumAlgorithm = "BLAKE2s"
 	ChecksumAlgorithmSha256 SecretSvcChecksumAlgorithm = "SHA-256"
+	ChecksumAlgorithmSha512 SecretSvcChecksumAlgorithm = "SHA-512"
 )
 
 // All allowed values of SecretSvcChecksumAlgorithm enum
 var AllowedSecretSvcChecksumAlgorithmEnumValues = []SecretSvcChecksumAlgorithm{
+	"CRC32",
+	"BLAKE2s",
 	"SHA-256",
+	"SHA-512",
 }
 
 func (v *SecretSvcChecksumAlgorithm) UnmarshalJSON(src []byte) error {

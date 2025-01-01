@@ -6888,10 +6888,16 @@ const docTemplate = `{
         "secret_svc.ChecksumAlgorithm": {
             "type": "string",
             "enum": [
-                "SHA-256"
+                "CRC32",
+                "BLAKE2s",
+                "SHA-256",
+                "SHA-512"
             ],
             "x-enum-varnames": [
-                "ChecksumAlgorithmSha256"
+                "ChecksumAlgorithmCRC32",
+                "ChecksumAlgorithmBlake2s",
+                "ChecksumAlgorithmSha256",
+                "ChecksumAlgorithmSha512"
             ]
         },
         "secret_svc.DecryptValueRequest": {
