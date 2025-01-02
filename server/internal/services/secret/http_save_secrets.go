@@ -125,14 +125,28 @@ func (cs *SecretService) saveSecrets(
 			if s.Id == "" {
 				s.Id = sdk.Id("secr")
 			}
-			if s.Writers == nil {
-				s.Writers = []string{userSlug}
-			}
-			if s.Readers == nil {
-				s.Readers = []string{userSlug}
-			}
-			if s.Deleters == nil {
-				s.Deleters = []string{userSlug}
+
+			// Admin slugs don't need to be saved the writers, readers and deleters blocks
+			// as they can read write and anything.
+			if !isAdmin {
+				if s.Writers == nil {
+					s.Writers = []string{userSlug}
+				}
+				if s.Readers == nil {
+					s.Readers = []string{userSlug}
+				}
+				if s.Deleters == nil {
+					s.Deleters = []string{userSlug}
+				}
+				if s.CanChangeReaders == nil {
+					s.CanChangeReaders = []string{userSlug}
+				}
+				if s.CanChangeWriters == nil {
+					s.CanChangeWriters = []string{userSlug}
+				}
+				if s.CanChangeDeleters == nil {
+					s.CanChangeDeleters = []string{userSlug}
+				}
 			}
 			if !s.Encrypted {
 				s.Value, err = encrypt(s.Value, cs.encryptionKey)
@@ -207,8 +221,7 @@ func (cs SecretService) checkSum(s *secret.Secret) error {
 			h := blake2b.Sum256([]byte(val))
 			hash = hex.EncodeToString(h[:])
 
-		case secret.ChecksumAlgorithmUnspecified:
-		case secret.ChecksumAlgorithmCRC32:
+		case secret.ChecksumAlgorithmUnspecified, secret.ChecksumAlgorithmCRC32:
 			fallthrough
 		default:
 			h := crc32.ChecksumIEEE([]byte(val))

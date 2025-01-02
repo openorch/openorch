@@ -101,11 +101,13 @@ The server encrypts the secret values before saving them to disk/DB. The secret 
 The encrypt command helps you create encrypted YAML files that can be safely stored in source control and integrated into Infrastructure-as-Code (IaC) or GitOps workflows. This ensures sensitive data is protected while enabling automated deployment processes.
 
 ```sh
-$ oo secret encrypt my-api-key secretval
+$ oo secret encrypt example-key example-value
+checksum: 45a3b25f
+checksumAlgorithm: CRC32
 encrypted: true
-id: secr_eO1ujSYshq
-key: my-api-key
-value: 916u0rBKR6v4n/Mm/jyLdNAiTc22deti4krKdW1yqf4=
+id: secr_eR6LbYOBK2
+key: example-key
+value: 62bQMQf5wPMrAsJ7+bcZpKBMtA7Ap7DF6xZaioq9jU0=
 ```
 
 Save the output to a file and, in your continuous delivery pipeline, apply it:
@@ -114,6 +116,17 @@ Save the output to a file and, in your continuous delivery pipeline, apply it:
 $ oo secret save my-api-key.yaml
 ```
 
-# Todo
+##### Checksum
 
-- Make it so the encryption key doesn't have to be exposed in an envar
+Checksums are optional and serve to verify the integrity of encrypted values. When an already encrypted value is saved in the Secret Svc, the service decodes it and uses the checksum to ensure the value remains intact.
+
+#### Is Secure
+
+After setting up your daemon it's a good idea to check if the Secret Svc is secure:
+
+```sh
+$ oo secret is-secure
+Service is secure.
+```
+
+This will return successfully if the encryption key has been changed from the default value and all necessary setup steps have been completed.
