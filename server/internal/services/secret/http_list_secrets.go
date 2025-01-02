@@ -94,7 +94,11 @@ func (cs *SecretService) getSecrets(
 		filters = append(filters, datastore.Equals([]string{"key"}, req.Key))
 	}
 	if req.Keys != nil {
-		filters = append(filters, datastore.IsInList([]string{"key"}, req.Keys))
+		keys := []any{}
+		for _, v := range req.Keys {
+			keys = append(keys, v)
+		}
+		filters = append(filters, datastore.IsInList([]string{"key"}, keys...))
 	}
 
 	secretIs, err := cs.secretStore.Query(filters...).Find()

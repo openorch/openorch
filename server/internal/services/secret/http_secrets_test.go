@@ -284,4 +284,47 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 			gomega.Expect(*readRsp.Secrets[0].Value).To(gomega.Equal("value"))
 		})
 	})
+
+	ginkgo.Context("list multiple", func() {
+		ginkgo.BeforeEach(func() {
+			userClient = mockClientFactory.Client()
+
+			isAuthorized = true
+			isAdmin = true
+			userSlug = "test-admin-user-1"
+		})
+
+		ginkgo.It("works", func() {
+			_, _, err := userClient.SecretSvcAPI.SaveSecrets(ctx).
+				Body(openapi.SecretSvcSaveSecretsRequest{
+					Secrets: []openapi.SecretSvcSecret{
+						{
+							Key:   openapi.PtrString("a"),
+							Value: openapi.PtrString("value"),
+						}},
+				}).
+				Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			_, _, err = userClient.SecretSvcAPI.SaveSecrets(ctx).
+				Body(openapi.SecretSvcSaveSecretsRequest{
+					Secrets: []openapi.SecretSvcSecret{
+						{
+							Key:   openapi.PtrString("b"),
+							Value: openapi.PtrString("value"),
+						}},
+				}).
+				Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+
+			readRsp, _, err := userClient.SecretSvcAPI.ListSecrets(ctx).
+				Body(openapi.SecretSvcListSecretsRequest{
+					Keys: []string{"a", "b"},
+				}).
+				Execute()
+			gomega.Expect(err).NotTo(gomega.HaveOccurred())
+			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(2))
+			gomega.Expect(*readRsp.Secrets[0].Value).To(gomega.Equal("value"))
+		})
+	})
 })
