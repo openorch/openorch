@@ -121,7 +121,13 @@ func extractSecretsFromFile(filePath string) ([]openapi.SecretSvcSecret, error) 
 		// If unmarshalling to list fails, attempt unmarshalling as single secret
 		var singleSecret openapi.SecretSvcSecret
 		if err := yaml.Unmarshal(data, &singleSecret); err != nil {
-			return nil, errors.Wrap(err, fmt.Sprintf("failed to parse secrets file at '%v' as single or multiple secrets", filePath))
+			return nil, errors.Wrap(
+				err,
+				fmt.Sprintf(
+					"failed to parse secrets file at '%v' as single or multiple secrets",
+					filePath,
+				),
+			)
 		}
 		secrets = append(secrets, singleSecret)
 	}
