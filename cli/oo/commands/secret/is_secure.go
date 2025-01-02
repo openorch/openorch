@@ -28,7 +28,9 @@ func IsSecure(cmd *cobra.Command, args []string) error {
 	}
 
 	if !rsp.IsSecure {
-		return errors.New("secret svc is not secure: it is using the default encryption key from the open-source codebase")
+		return errors.New(
+			"secret svc is not secure: it is using the default encryption key from the open-source codebase",
+		)
 	}
 
 	fmt.Println("Service is secure.")

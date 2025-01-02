@@ -108,7 +108,7 @@ func (cs *SecretService) removeSecrets(
 	for _, id := range req.Ids {
 		ids = append(ids, id)
 	}
-	
+
 	if req.Id != "" {
 		ids = append(ids, req.Id)
 	}

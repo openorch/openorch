@@ -255,9 +255,11 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 		})
 
 		ginkgo.It("works", func() {
-			rsp, _, err := userClient.SecretSvcAPI.EncryptValue(ctx).Body(openapi.SecretSvcEncryptValueRequest{
-				Value: openapi.PtrString("value"),
-			}).Execute()
+			rsp, _, err := userClient.SecretSvcAPI.EncryptValue(ctx).
+				Body(openapi.SecretSvcEncryptValueRequest{
+					Value: openapi.PtrString("value"),
+				}).
+				Execute()
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
 			_, _, err = userClient.SecretSvcAPI.SaveSecrets(ctx).
