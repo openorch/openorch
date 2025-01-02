@@ -116,6 +116,10 @@ Save the output to a file and, in your continuous delivery pipeline, apply it:
 $ oo secret save my-api-key.yaml
 ```
 
+##### Checksum
+
+Checksums are optional and serve to verify the integrity of encrypted values. When an already encrypted value is saved in the Secret Svc, the service decodes it and uses the checksum to ensure the value remains intact.
+
 #### Is Secure
 
 After setting up your daemon it's a good idea to check if the Secret Svc is secure:
