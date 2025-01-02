@@ -74,7 +74,10 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 
 	serviceSlug := getServiceSlug(r)
 
-	rsp, _, err := cs.clientFactory.Client(sdk.WithToken(cs.token)).RegistrySvcAPI.ListInstances(context.Background()).Slug(serviceSlug).Execute()
+	rsp, _, err := cs.clientFactory.Client(sdk.WithToken(cs.token)).
+		RegistrySvcAPI.ListInstances(context.Background()).
+		Slug(serviceSlug).
+		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(errors.Wrap(err, "error listing instances").Error()))
