@@ -98,7 +98,7 @@ func (rs *RegistryService) registerInstance(
 
 	if callerSlug != "deploy-svc" && callerSlug != instance.Slug {
 		return fmt.Errorf(
-			"caller slug '%s' does not match instance slug '%s'. perhaps a misconfigured service already took this URL. if you are an admin you can fix that by calling 'oo instance remvove %v'",
+			"caller slug '%s' does not match instance slug '%s'. perhaps a misconfigured service already took this URL. if you are an admin you can fix that by calling 'oo instance remove %v'",
 			callerSlug,
 			instance.Slug,
 			instance.Id,
