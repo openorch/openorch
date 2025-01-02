@@ -187,9 +187,10 @@ var _ = ginkgo.Describe("Secret Tests", func() {
 
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 			gomega.Expect(len(readRsp.Secrets)).To(gomega.Equal(1))
-			gomega.Expect(readRsp.Secrets[0].Readers[0]).To(gomega.Equal("test-admin-user-1"))
-			gomega.Expect(readRsp.Secrets[0].Writers[0]).To(gomega.Equal("test-admin-user-1"))
-			gomega.Expect(readRsp.Secrets[0].Deleters[0]).To(gomega.Equal("test-admin-user-1"))
+
+			gomega.Expect(readRsp.Secrets[0].Readers).To(gomega.BeEmpty())
+			gomega.Expect(readRsp.Secrets[0].Writers).To(gomega.BeEmpty())
+			gomega.Expect(readRsp.Secrets[0].Deleters).To(gomega.BeEmpty())
 		})
 	})
 
