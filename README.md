@@ -20,7 +20,7 @@
 OpenOrch is a daemon that transforms your servers into a powerful development environment. It can run AI models, containers, and microservices.
 Think of it as a blend of (an extremely simplistic, early-stage) Kubernetes and a language agnostic backend framework for building applications on top—designed for fixed-resource setups and straightforward self-hosting.
 
-Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data. It can be thought of as many things: a microservices framework, React for the backend, Angular for the backend, Kubernetes for AI and microservices, an AI platform, a backend platform, a PaaS, local AI cluster management, self-hosted AI orchestration, on-premise AI deployment, etc.
+Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data. It can be thought of as many things: a microservices framework, an AI platform, a backend platform, a PaaS, local AI cluster management, self-hosted AI orchestration, on-premise AI deployment, etc.
 
 ## Starting
 
