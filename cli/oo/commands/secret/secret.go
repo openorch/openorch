@@ -107,7 +107,7 @@ Enter secret value:`,
 
 	var isSecureCmd = &cobra.Command{
 		Use:     "is-secure",
-		Short:   "Tells if the secret service is secure (ie. encryption key is set etc.)",
+		Short:   "Tells if the secret service is secure (ie. encryption key is set, etc.)",
 		Aliases: []string{"is"},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return IsSecure(cmd, args)
@@ -116,6 +116,9 @@ Enter secret value:`,
 
 	listCmd.Flags().
 		BoolVar(&show, "show", false, "Show secrets unmasked")
+
+	listCmd.Flags().
+		StringP("namespace", "n", "", "Namespace to filter on. If not provided all namespaces are shown.")
 
 	secretCmd.AddCommand(saveCmd)
 	secretCmd.AddCommand(removeCmd)
