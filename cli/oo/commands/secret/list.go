@@ -29,11 +29,17 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 
 	cf := sdk.NewApiClientFactory(url)
 
+	req := openapi.SecretSvcListSecretsRequest{
+		Key: openapi.PtrString(key),
+	}
+	namespaceFlag, _ := cmd.Flags().GetString("namespace")
+	if namespaceFlag != "" {
+		req.Namespace = openapi.PtrString(namespaceFlag)
+	}
+
 	rsp, _, err := cf.Client(sdk.WithToken(token)).
 		SecretSvcAPI.ListSecrets(ctx).
-		Body(openapi.SecretSvcListSecretsRequest{
-			Key: openapi.PtrString(key),
-		}).
+		Body(req).
 		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to list secrets")
@@ -44,7 +50,7 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 
 	fmt.Fprintln(
 		writer,
-		"ID\tKEY\tLENGTH\tVALUE",
+		"SECRET ID\tKEY\tNAMESPACE\tLENGTH\tVALUE",
 	)
 
 	for _, secret := range rsp.Secrets {
@@ -55,11 +61,17 @@ func List(cmd *cobra.Command, args []string, show bool) error {
 			value = *secret.Value
 		}
 
+		namespace := ""
+		if secret.Namespace != nil {
+			namespace = *secret.Namespace
+		}
+
 		fmt.Fprintf(
 			writer,
-			"%s\t%s\t%d\t%s\n",
+			"%s\t%s\t%s\t%d\t%s\n",
 			*secret.Id,
 			*secret.Key,
+			namespace,
 			length,
 			value,
 		)
