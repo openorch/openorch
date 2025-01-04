@@ -29,13 +29,13 @@ import (
 	types "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-type DownloadService struct {
+type FileService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
 	dlock lock.DistributedLock
 
-	downloads map[string]*types.Download
+	downloads map[string]*types.InternalDownload
 	lock      sync.Mutex
 
 	StateFilePath string
@@ -52,7 +52,7 @@ func NewFileService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
-) (*DownloadService, error) {
+) (*FileService, error) {
 	home, _ := os.UserHomeDir()
 
 	credentialStore, err := datastoreFactory(
@@ -63,28 +63,28 @@ func NewFileService(
 		return nil, err
 	}
 
-	ret := &DownloadService{
+	ret := &FileService{
 		clientFactory: clientFactory,
 
 		credentialStore: credentialStore,
 		dlock:           lock,
 
 		StateFilePath: path.Join(home, "downloads.json"),
-		downloads:     make(map[string]*types.Download),
+		downloads:     make(map[string]*types.InternalDownload),
 	}
 
 	return ret, nil
 }
 
-func (dm *DownloadService) SetDefaultFolder(s string) {
+func (dm *FileService) SetDefaultFolder(s string) {
 	dm.DefaultFolder = s
 }
 
-func (dm *DownloadService) SetStateFilePath(s string) {
+func (dm *FileService) SetStateFilePath(s string) {
 	dm.StateFilePath = s
 }
 
-func (dm *DownloadService) Start() error {
+func (dm *FileService) Start() error {
 	ctx := context.Background()
 	dm.dlock.Acquire(ctx, "file-svc-start")
 	defer dm.dlock.Release(ctx, "file-svc-start")
@@ -124,7 +124,7 @@ func (dm *DownloadService) Start() error {
 	return err
 }
 
-func (dm *DownloadService) loadState() error {
+func (dm *FileService) loadState() error {
 	dm.lock.Lock()
 	defer dm.lock.Unlock()
 
@@ -149,17 +149,17 @@ func (dm *DownloadService) loadState() error {
 	return json.Unmarshal(data, &dm.downloads)
 }
 
-func (ds *DownloadService) markChanged() {
+func (ds *FileService) markChanged() {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()
 	ds.hasChanged = true
 }
 
-func (ds *DownloadService) markChangedWithoutLock() {
+func (ds *FileService) markChangedWithoutLock() {
 	ds.hasChanged = true
 }
 
-func (ds *DownloadService) saveState() error {
+func (ds *FileService) saveState() error {
 	ds.lock.Lock()
 	data, err := json.MarshalIndent(ds.downloads, "", "  ")
 	if err != nil {
@@ -189,7 +189,7 @@ func (ds *DownloadService) saveState() error {
 	return nil
 }
 
-func (ds *DownloadService) periodicSaveState() {
+func (ds *FileService) periodicSaveState() {
 	for {
 		time.Sleep(1 * time.Second) // Control the throttle rate here
 		ds.lock.Lock()
@@ -207,7 +207,7 @@ func (ds *DownloadService) periodicSaveState() {
 	}
 }
 
-func (dm *DownloadService) getDownload(url string) (*types.Download, bool) {
+func (dm *FileService) getDownload(url string) (*types.InternalDownload, bool) {
 	dm.lock.Lock()
 	defer dm.lock.Unlock()
 

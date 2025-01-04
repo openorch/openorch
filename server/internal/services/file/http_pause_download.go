@@ -19,7 +19,7 @@ import (
 
 	"github.com/gorilla/mux"
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/file/types"
+	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 // @ID pauseDownload
@@ -37,13 +37,13 @@ import (
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download/{downloadId}/pause [put]
-func (ds *DownloadService) Pause(
+func (ds *FileService) Pause(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadEdit.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

@@ -31,7 +31,7 @@ import (
 Starts or resumes a download.
 Can resume downloads not found in the JSON statefile.
 */
-func (dm *DownloadService) download(url, downloadDir string) error {
+func (dm *FileService) download(url, downloadDir string) error {
 	if downloadDir == "" {
 		downloadDir = dm.DefaultFolder
 	}
@@ -52,7 +52,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 	}
 
 	var (
-		download *types.Download
+		download *types.InternalDownload
 		exists   bool
 	)
 
@@ -64,7 +64,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 
 		if !exists {
 			if fullFileExists {
-				download = &types.Download{
+				download = &types.InternalDownload{
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusCompleted,
@@ -74,7 +74,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 				dm.downloads[url] = download
 			} else if partialFileExists {
 
-				download = &types.Download{
+				download = &types.InternalDownload{
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusInProgress,
@@ -82,7 +82,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 				}
 				dm.downloads[url] = download
 			} else {
-				download = &types.Download{
+				download = &types.InternalDownload{
 					URL:      url,
 					FilePath: safeFullFilePath,
 					Status:   types.DownloadStatusInProgress,
@@ -129,7 +129,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 	return nil
 }
 
-func (dm *DownloadService) downloadFile(d *types.Download) error {
+func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 	if d.Status == types.DownloadStatusCompleted {
 		return nil
 	}

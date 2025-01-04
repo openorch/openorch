@@ -21,7 +21,7 @@ import (
 /*
 Pauses a download.
 */
-func (ds *DownloadService) pause(url string) error {
+func (ds *FileService) pause(url string) error {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()
 

@@ -18,11 +18,11 @@ import (
 	types "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-func (ds *DownloadService) list() ([]types.DownloadDetails, error) {
+func (ds *FileService) list() ([]types.Download, error) {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()
 
-	var downloadDetailsList []types.DownloadDetails
+	var downloadDetailsList []types.Download
 	for id, download := range ds.downloads {
 		downloadDetail := downloadToDownloadDetails(id, download)
 		downloadDetailsList = append(downloadDetailsList, *downloadDetail)
@@ -33,8 +33,8 @@ func (ds *DownloadService) list() ([]types.DownloadDetails, error) {
 
 func downloadToDownloadDetails(
 	id string,
-	download *types.Download,
-) *types.DownloadDetails {
+	download *types.InternalDownload,
+) *types.Download {
 	if download == nil {
 		return nil
 	}
@@ -64,7 +64,7 @@ func downloadToDownloadDetails(
 	var paused, cancelled *bool
 	var errorString *string
 
-	downloadDetail := types.DownloadDetails{
+	downloadDetail := types.Download{
 		Id:              id,
 		URL:             download.URL,
 		FileName:        fileName,

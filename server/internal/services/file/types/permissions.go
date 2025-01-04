@@ -32,9 +32,15 @@ var PermissionDownloadDelete = usertypes.Permission{
 	Name: "File Svc - Download Delete",
 }
 
+var PermissionUploadCreate = usertypes.Permission{
+	Id:   "file-svc:upload:create",
+	Name: "File Svc - Upload Create",
+}
+
 var DownloadAdminPermissions = []usertypes.Permission{
 	PermissionDownloadCreate,
 	PermissionDownloadView,
 	PermissionDownloadEdit,
 	PermissionDownloadDelete,
+	PermissionUploadCreate,
 }

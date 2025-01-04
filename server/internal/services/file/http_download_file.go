@@ -36,7 +36,7 @@ import (
 // @Failure 500 {object} file.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download [put]
-func (ds *DownloadService) Download(
+func (ds *FileService) Download(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
