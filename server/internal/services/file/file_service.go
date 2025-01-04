@@ -56,7 +56,7 @@ func NewFileService(
 	home, _ := os.UserHomeDir()
 
 	credentialStore, err := datastoreFactory(
-		"downloadSvcCredentials",
+		"fileSvcCredentials",
 		&sdk.Credential{},
 	)
 	if err != nil {

@@ -73,7 +73,7 @@ func (ms *ModelService) status(
 
 	for _, assetUrl := range model.Assets {
 		rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
-			DownloadSvcAPI.GetDownload(context.Background(), assetUrl).
+			FileSvcAPI.GetDownload(context.Background(), assetUrl).
 			Execute()
 		if err != nil {
 			return nil, err

@@ -11,13 +11,13 @@ import { FirehoseService } from './firehose.service';
 import { ReplaySubject, first } from 'rxjs';
 import { UserService } from './user.service';
 import {
-	DownloadSvcApi,
+	FileSvcApi,
 	Configuration,
-	DownloadSvcDownloadDetails as DownloadDetails,
-	DownloadSvcDownloadsResponse,
+	FileSvcDownloadDetails as DownloadDetails,
+	FileSvcDownloadsResponse,
 } from '@openorch/client';
 
-export interface DownloadSvcConfig {
+export interface FileSvcConfig {
 	downloadFolder: string;
 }
 
@@ -30,7 +30,7 @@ export interface DownloadStatusChangeEvent {
 	providedIn: 'root',
 })
 export class DownloadService {
-	downloadService!: DownloadSvcApi;
+	downloadService!: FileSvcApi;
 
 	onFileDownloadStatusSubject = new ReplaySubject<DownloadStatusChangeEvent>(1);
 	onFileDownloadStatus$ = this.onFileDownloadStatusSubject.asObservable();
@@ -42,7 +42,7 @@ export class DownloadService {
 	) {
 		this.init();
 		this.userService.user$.pipe(first()).subscribe(() => {
-			this.downloadService = new DownloadSvcApi(
+			this.downloadService = new FileSvcApi(
 				new Configuration({
 					basePath: this.server.addr(),
 					apiKey: this.server.token(),
@@ -93,7 +93,7 @@ export class DownloadService {
 		});
 	}
 
-	async downloadList(): Promise<DownloadSvcDownloadsResponse> {
+	async downloadList(): Promise<FileSvcDownloadsResponse> {
 		return this.downloadService.listDownloads();
 	}
 }

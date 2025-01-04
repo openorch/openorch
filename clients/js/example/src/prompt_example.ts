@@ -2,7 +2,7 @@ import {
   Configuration,
   PromptSvcApi,
   ModelSvcApi,
-  DownloadSvcApi,
+  FileSvcApi,
 } from "@openorch/client";
 
 const tinyLamaModelId = `huggingface/TheBloke/tinyllama-1.1b-chat-v1.0.Q4_K_S.gguf`;
@@ -21,13 +21,13 @@ export async function promptTest(apiKey: string) {
     })
   );
 
-  const downloadSvc: DownloadSvcApi = new DownloadSvcApi(
+  const fileSvc: FileSvcApi = new FileSvcApi(
     new Configuration({
       apiKey: apiKey,
     })
   );
 
-  await downloadSvc.download({
+  await fileSvc.downloadFile({
     body: {
       url: tinyLamaAssetURL,
     },
@@ -35,7 +35,7 @@ export async function promptTest(apiKey: string) {
 
   let exists = false;
   while (!exists) {
-    const dlResponse = await downloadSvc.getDownload({
+    const dlResponse = await fileSvc.getDownload({
       downloadId: tinyLamaAssetURL,
     });
 

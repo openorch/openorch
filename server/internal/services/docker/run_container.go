@@ -194,7 +194,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	for envarName, assetURL := range assets {
 
 		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			DownloadSvcAPI.GetDownload(context.Background(), assetURL).
+			FileSvcAPI.GetDownload(context.Background(), assetURL).
 			Execute()
 		if err != nil {
 			return nil, nil, err

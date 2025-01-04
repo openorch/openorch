@@ -72,8 +72,8 @@ func TestDownloadFile(t *testing.T) {
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
-	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(fileHostServer.URL),
 		}).
 		Execute()
@@ -82,8 +82,8 @@ func TestDownloadFile(t *testing.T) {
 	adminClient, _, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
-	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(fileHostServer.URL),
 		}).
 		Execute()
@@ -99,11 +99,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+			_, _, err := userClient.FileSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
 				Execute()
 			require.Error(t, err)
 
-			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+			rsp, _, err := adminClient.FileSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
 				Execute()
 			require.NoError(t, err)
 
@@ -180,15 +180,15 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 		t.Fatalf("Failed to create part file: %s", err)
 	}
 
-	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
 	require.Error(t, err)
 
-	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
@@ -204,11 +204,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			_, _, err := userClient.FileSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.Error(t, err)
 
-			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			rsp, _, err := adminClient.FileSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.NoError(t, err)
 
@@ -268,15 +268,15 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	)
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
-	_, _, err = userClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
 	require.Error(t, err)
 
-	_, _, err = adminClient.DownloadSvcAPI.Download(context.Background()).
-		Body(openapi.DownloadSvcDownloadRequest{
+	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
+		Body(openapi.FileSvcDownloadRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
@@ -286,7 +286,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	ticker := time.NewTicker(5 * time.Millisecond)
 	defer ticker.Stop()
 
-	var d *openapi.DownloadSvcDownloadDetails
+	var d *openapi.FileSvcDownloadDetails
 
 outer:
 	for {
@@ -294,11 +294,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			_, _, err := userClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			_, _, err := userClient.FileSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.Error(t, err)
 
-			rsp, _, err := adminClient.DownloadSvcAPI.GetDownload(context.Background(), downloadURL).
+			rsp, _, err := adminClient.FileSvcAPI.GetDownload(context.Background(), downloadURL).
 				Execute()
 			require.NoError(t, err)
 
