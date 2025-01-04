@@ -37,7 +37,7 @@ func (p *FirehoseService) Publish(w http.ResponseWriter,
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{
 				"config-svc",
-				"download-svc",
+				"file-svc",
 				"prompt-svc",
 				"chat-svc",
 				"model-svc",

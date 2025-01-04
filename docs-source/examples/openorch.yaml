@@ -464,7 +464,7 @@ definitions:
         description: |-
           Assets maps environment variable names to file URLs.
           Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
-          These files are downloaded by the Download Svc and mounted in the container.
+          These files are downloaded by the File Svc and mounted in the container.
           The environment variable `MODEL` will point to the local file path in the container.
         type: object
       envs:
@@ -539,63 +539,6 @@ definitions:
         type: string
     type: object
   docker_svc.StopContainerResponse:
-    type: object
-  download_svc.DownloadDetails:
-    properties:
-      cancelled:
-        type: boolean
-      dir:
-        type: string
-      downloadedBytes:
-        format: int64
-        type: integer
-      error:
-        type: string
-      fileName:
-        type: string
-      filePath:
-        type: string
-      fullFileSize:
-        format: int64
-        type: integer
-      id:
-        type: string
-      paused:
-        type: boolean
-      progress:
-        type: number
-      status:
-        type: string
-      url:
-        type: string
-    type: object
-  download_svc.DownloadRequest:
-    properties:
-      folderPath:
-        type: string
-      url:
-        type: string
-    type: object
-  download_svc.DownloadsResponse:
-    properties:
-      downloads:
-        items:
-          $ref: '#/definitions/download_svc.DownloadDetails'
-        type: array
-    type: object
-  download_svc.ErrorResponse:
-    properties:
-      error:
-        type: string
-    type: object
-  download_svc.GetDownloadResponse:
-    properties:
-      download:
-        $ref: '#/definitions/download_svc.DownloadDetails'
-      exists:
-        type: boolean
-    required:
-    - exists
     type: object
   dynamic_svc.CreateObjectRequest:
     properties:
@@ -835,6 +778,63 @@ definitions:
       status:
         description: Status of the email send operation ("sent", "queued", etc.)
         type: string
+    type: object
+  file_svc.DownloadDetails:
+    properties:
+      cancelled:
+        type: boolean
+      dir:
+        type: string
+      downloadedBytes:
+        format: int64
+        type: integer
+      error:
+        type: string
+      fileName:
+        type: string
+      filePath:
+        type: string
+      fullFileSize:
+        format: int64
+        type: integer
+      id:
+        type: string
+      paused:
+        type: boolean
+      progress:
+        type: number
+      status:
+        type: string
+      url:
+        type: string
+    type: object
+  file_svc.DownloadRequest:
+    properties:
+      folderPath:
+        type: string
+      url:
+        type: string
+    type: object
+  file_svc.DownloadsResponse:
+    properties:
+      downloads:
+        items:
+          $ref: '#/definitions/file_svc.DownloadDetails'
+        type: array
+    type: object
+  file_svc.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  file_svc.GetDownloadResponse:
+    properties:
+      download:
+        $ref: '#/definitions/file_svc.DownloadDetails'
+      exists:
+        type: boolean
+    required:
+    - exists
     type: object
   firehose_svc.ErrorResponse:
     properties:
@@ -2970,151 +2970,6 @@ paths:
       summary: Get Docker Service Information
       tags:
       - Docker Svc
-  /download-svc/download:
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Start a download for a specified URL.
-
-        Requires the `download-svc:download:create` permission.
-      operationId: download
-      parameters:
-      - description: Download Request
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/download_svc.DownloadRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Download initiated successfully
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Invalid JSON
-          schema:
-            $ref: '#/definitions/download_svc.ErrorResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/download_svc.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/download_svc.ErrorResponse'
-      security:
-      - BearerAuth: []
-      summary: Download a File
-      tags:
-      - Download Svc
-  /download-svc/download/{downloadId}:
-    get:
-      consumes:
-      - application/json
-      description: |-
-        Get a download by ID.
-
-        Requires the `download-svc:download:view` permission.
-      operationId: getDownload
-      parameters:
-      - description: Download ID
-        in: path
-        name: downloadId
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/download_svc.GetDownloadResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            type: string
-        "500":
-          description: Internal Server Error
-          schema:
-            type: string
-      security:
-      - BearerAuth: []
-      summary: Get a Download
-      tags:
-      - Download Svc
-  /download-svc/download/{downloadId}/pause:
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Pause a download that is currently in progress.
-
-        Requires the `download-svc:download:edit` permission.
-      operationId: pause
-      parameters:
-      - description: Download ID
-        in: path
-        name: downloadId
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success response
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Invalid JSON
-          schema:
-            type: string
-        "401":
-          description: Unauthorized
-          schema:
-            type: string
-        "500":
-          description: Internal Server Error
-          schema:
-            type: string
-      security:
-      - BearerAuth: []
-      summary: Pause a Download
-      tags:
-      - Download Svc
-  /download-svc/downloads:
-    post:
-      consumes:
-      - application/json
-      description: |-
-        Fetch a list of all download details.
-
-        Requires the `download-svc:download:view` permission.
-      operationId: listDownloads
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: List of downloads
-          schema:
-            $ref: '#/definitions/download_svc.DownloadsResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            type: string
-        "500":
-          description: Internal Server Error
-          schema:
-            type: string
-      security:
-      - BearerAuth: []
-      summary: List Downloads
-      tags:
-      - Download Svc
   /dynamic-svc/object:
     post:
       consumes:
@@ -3350,6 +3205,151 @@ paths:
       summary: Send an Email
       tags:
       - Email Svc
+  /file-svc/download:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Start or resume the download for a specified URL.
+
+        Requires the `file-svc:download:create` permission.
+      operationId: downloadFile
+      parameters:
+      - description: Download Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/file_svc.DownloadRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Download initiated successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Download a File
+      tags:
+      - File Svc
+  /file-svc/download/{downloadId}:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Get a download by ID.
+
+        Requires the `file-svc:download:view` permission.
+      operationId: getDownload
+      parameters:
+      - description: Download ID
+        in: path
+        name: downloadId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/file_svc.GetDownloadResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get a Download
+      tags:
+      - File Svc
+  /file-svc/download/{downloadId}/pause:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Pause a download that is currently in progress.
+
+        Requires the `file-svc:download:edit` permission.
+      operationId: pauseDownload
+      parameters:
+      - description: Download ID
+        in: path
+        name: downloadId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success response
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid JSON
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Pause a Download
+      tags:
+      - File Svc
+  /file-svc/downloads:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Fetch a list of all download details.
+
+        Requires the `file-svc:download:view` permission.
+      operationId: listDownloads
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of downloads
+          schema:
+            $ref: '#/definitions/file_svc.DownloadsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List Downloads
+      tags:
+      - File Svc
   /firehose-svc/event:
     post:
       consumes:

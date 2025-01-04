@@ -6,12 +6,12 @@ export * from './deploySvcApi';
 import { DeploySvcApi } from './deploySvcApi';
 export * from './dockerSvcApi';
 import { DockerSvcApi } from './dockerSvcApi';
-export * from './downloadSvcApi';
-import { DownloadSvcApi } from './downloadSvcApi';
 export * from './dynamicSvcApi';
 import { DynamicSvcApi } from './dynamicSvcApi';
 export * from './emailSvcApi';
 import { EmailSvcApi } from './emailSvcApi';
+export * from './fileSvcApi';
+import { FileSvcApi } from './fileSvcApi';
 export * from './firehoseSvcApi';
 import { FirehoseSvcApi } from './firehoseSvcApi';
 export * from './modelSvcApi';
@@ -39,4 +39,4 @@ export class HttpError extends Error {
 
 export { RequestFile } from '../model/models';
 
-export const APIS = [ChatSvcApi, ConfigSvcApi, DeploySvcApi, DockerSvcApi, DownloadSvcApi, DynamicSvcApi, EmailSvcApi, FirehoseSvcApi, ModelSvcApi, PolicySvcApi, PromptSvcApi, RegistrySvcApi, SecretSvcApi, SourceSvcApi, UserSvcApi];
+export const APIS = [ChatSvcApi, ConfigSvcApi, DeploySvcApi, DockerSvcApi, DynamicSvcApi, EmailSvcApi, FileSvcApi, FirehoseSvcApi, ModelSvcApi, PolicySvcApi, PromptSvcApi, RegistrySvcApi, SecretSvcApi, SourceSvcApi, UserSvcApi];

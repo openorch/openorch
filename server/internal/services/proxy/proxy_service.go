@@ -97,7 +97,7 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if len(rsp.Instances) == 0 {
+	if len(healtyInstances) == 0 {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("not healthy instance found"))
 		return
@@ -137,6 +137,8 @@ func (cs *ProxyService) Route(w http.ResponseWriter, r *http.Request) {
 	io.Copy(w, resp.Body)
 }
 
+// gets service slug from http request path
+// eg. /my-svc/my-endpoint -> my-svc
 func getServiceSlug(r *http.Request) string {
 	cleanedPath := strings.Trim(r.URL.Path, "/")
 	parts := strings.Split(cleanedPath, "/")

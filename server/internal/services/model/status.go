@@ -21,7 +21,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/logger"
-	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	"github.com/pkg/errors"
 )
@@ -73,7 +73,7 @@ func (ms *ModelService) status(
 
 	for _, assetUrl := range model.Assets {
 		rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
-			DownloadSvcAPI.GetDownload(context.Background(), assetUrl).
+			FileSvcAPI.GetDownload(context.Background(), assetUrl).
 			Execute()
 		if err != nil {
 			return nil, err

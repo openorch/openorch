@@ -10,16 +10,13 @@ import { ElectronIpcService } from '../services/electron-ipc.service';
 import { WindowApiConst } from 'shared-lib';
 import { ElectronAppService } from '../services/electron-app.service';
 import { combineLatest, Subscription } from 'rxjs';
-import {
-	DownloadService,
-	DownloadSvcConfig,
-} from '../services/download.service';
+import { DownloadService, FileSvcConfig } from '../services/download.service';
 import { ModelService, ModelSvcConfig } from '../services/model.service';
 import { ModelSvcModel as Model } from '@openorch/client';
 import { DockerService } from '../services/docker.service';
 import { ConfigService } from '../services/config.service';
 import {
-	DownloadSvcDownloadDetails as DownloadDetails,
+	FileSvcDownloadDetails as DownloadDetails,
 	ConfigSvcConfig as Config,
 } from '@openorch/client';
 import { TranslatePipe } from '../translate.pipe';
@@ -233,6 +230,6 @@ export class StartupComponent implements OnInit {
 interface ConfigData {
 	data: {
 		'model-svc': ModelSvcConfig;
-		'download-svc': DownloadSvcConfig;
+		'file-svc': FileSvcConfig;
 	};
 }
