@@ -43,11 +43,6 @@ export * from './dockerSvcRunContainerRequest';
 export * from './dockerSvcRunContainerResponse';
 export * from './dockerSvcRunInfo';
 export * from './dockerSvcStopContainerRequest';
-export * from './downloadSvcDownloadDetails';
-export * from './downloadSvcDownloadRequest';
-export * from './downloadSvcDownloadsResponse';
-export * from './downloadSvcErrorResponse';
-export * from './downloadSvcGetDownloadResponse';
 export * from './dynamicSvcCreateObjectRequest';
 export * from './dynamicSvcCreateObjectResponse';
 export * from './dynamicSvcDeleteObjectRequest';
@@ -63,6 +58,11 @@ export * from './emailSvcErrorResponse';
 export * from './emailSvcFile';
 export * from './emailSvcSendEmailRequest';
 export * from './emailSvcSendEmailResponse';
+export * from './fileSvcDownloadDetails';
+export * from './fileSvcDownloadRequest';
+export * from './fileSvcDownloadsResponse';
+export * from './fileSvcErrorResponse';
+export * from './fileSvcGetDownloadResponse';
 export * from './firehoseSvcErrorResponse';
 export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
@@ -212,11 +212,6 @@ import { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest';
 import { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse';
 import { DockerSvcRunInfo } from './dockerSvcRunInfo';
 import { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest';
-import { DownloadSvcDownloadDetails } from './downloadSvcDownloadDetails';
-import { DownloadSvcDownloadRequest } from './downloadSvcDownloadRequest';
-import { DownloadSvcDownloadsResponse } from './downloadSvcDownloadsResponse';
-import { DownloadSvcErrorResponse } from './downloadSvcErrorResponse';
-import { DownloadSvcGetDownloadResponse } from './downloadSvcGetDownloadResponse';
 import { DynamicSvcCreateObjectRequest } from './dynamicSvcCreateObjectRequest';
 import { DynamicSvcCreateObjectResponse } from './dynamicSvcCreateObjectResponse';
 import { DynamicSvcDeleteObjectRequest } from './dynamicSvcDeleteObjectRequest';
@@ -232,6 +227,11 @@ import { EmailSvcErrorResponse } from './emailSvcErrorResponse';
 import { EmailSvcFile } from './emailSvcFile';
 import { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest';
 import { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse';
+import { FileSvcDownloadDetails } from './fileSvcDownloadDetails';
+import { FileSvcDownloadRequest } from './fileSvcDownloadRequest';
+import { FileSvcDownloadsResponse } from './fileSvcDownloadsResponse';
+import { FileSvcErrorResponse } from './fileSvcErrorResponse';
+import { FileSvcGetDownloadResponse } from './fileSvcGetDownloadResponse';
 import { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse';
 import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
@@ -391,11 +391,6 @@ let typeMap: {[index: string]: any} = {
     "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
     "DockerSvcRunInfo": DockerSvcRunInfo,
     "DockerSvcStopContainerRequest": DockerSvcStopContainerRequest,
-    "DownloadSvcDownloadDetails": DownloadSvcDownloadDetails,
-    "DownloadSvcDownloadRequest": DownloadSvcDownloadRequest,
-    "DownloadSvcDownloadsResponse": DownloadSvcDownloadsResponse,
-    "DownloadSvcErrorResponse": DownloadSvcErrorResponse,
-    "DownloadSvcGetDownloadResponse": DownloadSvcGetDownloadResponse,
     "DynamicSvcCreateObjectRequest": DynamicSvcCreateObjectRequest,
     "DynamicSvcCreateObjectResponse": DynamicSvcCreateObjectResponse,
     "DynamicSvcDeleteObjectRequest": DynamicSvcDeleteObjectRequest,
@@ -411,6 +406,11 @@ let typeMap: {[index: string]: any} = {
     "EmailSvcFile": EmailSvcFile,
     "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,
     "EmailSvcSendEmailResponse": EmailSvcSendEmailResponse,
+    "FileSvcDownloadDetails": FileSvcDownloadDetails,
+    "FileSvcDownloadRequest": FileSvcDownloadRequest,
+    "FileSvcDownloadsResponse": FileSvcDownloadsResponse,
+    "FileSvcErrorResponse": FileSvcErrorResponse,
+    "FileSvcGetDownloadResponse": FileSvcGetDownloadResponse,
     "FirehoseSvcErrorResponse": FirehoseSvcErrorResponse,
     "FirehoseSvcEvent": FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,

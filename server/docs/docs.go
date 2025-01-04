@@ -1168,213 +1168,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/download": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Start a download for a specified URL.\n\nRequires the ` + "`" + `file-svc:download:create` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "File Svc"
-                ],
-                "summary": "Download a File",
-                "operationId": "download",
-                "parameters": [
-                    {
-                        "description": "Download Request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.DownloadRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Download initiated successfully",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/file-svc/download/{downloadId}": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Get a download by ID.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "File Svc"
-                ],
-                "summary": "Get a Download",
-                "operationId": "getDownload",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.GetDownloadResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/file-svc/download/{downloadId}/pause": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Pause a download that is currently in progress.\n\nRequires the ` + "`" + `file-svc:download:edit` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "File Svc"
-                ],
-                "summary": "Pause a Download",
-                "operationId": "pause",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success response",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/file-svc/downloads": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "File Svc"
-                ],
-                "summary": "List Downloads",
-                "operationId": "listDownloads",
-                "responses": {
-                    "200": {
-                        "description": "List of downloads",
-                        "schema": {
-                            "$ref": "#/definitions/file_svc.DownloadsResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/dynamic-svc/object": {
             "post": {
                 "security": [
@@ -1724,6 +1517,213 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/email_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/download": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Start or resume the download for a specified URL.\n\nRequires the ` + "`" + `file-svc:download:create` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Download a File",
+                "operationId": "downloadFile",
+                "parameters": [
+                    {
+                        "description": "Download Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.DownloadRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Download initiated successfully",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/download/{downloadId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get a download by ID.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Get a Download",
+                "operationId": "getDownload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Download ID",
+                        "name": "downloadId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.GetDownloadResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/download/{downloadId}/pause": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Pause a download that is currently in progress.\n\nRequires the ` + "`" + `file-svc:download:edit` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Pause a Download",
+                "operationId": "pauseDownload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Download ID",
+                        "name": "downloadId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/downloads": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "List Downloads",
+                "operationId": "listDownloads",
+                "responses": {
+                    "200": {
+                        "description": "List of downloads",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.DownloadsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -5355,93 +5355,6 @@ const docTemplate = `{
         "docker_svc.StopContainerResponse": {
             "type": "object"
         },
-        "file_svc.DownloadDetails": {
-            "type": "object",
-            "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "dir": {
-                    "type": "string"
-                },
-                "downloadedBytes": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "error": {
-                    "type": "string"
-                },
-                "fileName": {
-                    "type": "string"
-                },
-                "filePath": {
-                    "type": "string"
-                },
-                "fullFileSize": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "paused": {
-                    "type": "boolean"
-                },
-                "progress": {
-                    "type": "number"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            }
-        },
-        "file_svc.DownloadRequest": {
-            "type": "object",
-            "properties": {
-                "folderPath": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            }
-        },
-        "file_svc.DownloadsResponse": {
-            "type": "object",
-            "properties": {
-                "downloads": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/file_svc.DownloadDetails"
-                    }
-                }
-            }
-        },
-        "file_svc.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            }
-        },
-        "file_svc.GetDownloadResponse": {
-            "type": "object",
-            "required": [
-                "exists"
-            ],
-            "properties": {
-                "download": {
-                    "$ref": "#/definitions/file_svc.DownloadDetails"
-                },
-                "exists": {
-                    "type": "boolean"
-                }
-            }
-        },
         "dynamic_svc.CreateObjectRequest": {
             "type": "object",
             "properties": {
@@ -5753,6 +5666,93 @@ const docTemplate = `{
                 "status": {
                     "description": "Status of the email send operation (\"sent\", \"queued\", etc.)",
                     "type": "string"
+                }
+            }
+        },
+        "file_svc.DownloadDetails": {
+            "type": "object",
+            "properties": {
+                "cancelled": {
+                    "type": "boolean"
+                },
+                "dir": {
+                    "type": "string"
+                },
+                "downloadedBytes": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "filePath": {
+                    "type": "string"
+                },
+                "fullFileSize": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "paused": {
+                    "type": "boolean"
+                },
+                "progress": {
+                    "type": "number"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.DownloadRequest": {
+            "type": "object",
+            "properties": {
+                "folderPath": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.DownloadsResponse": {
+            "type": "object",
+            "properties": {
+                "downloads": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/file_svc.DownloadDetails"
+                    }
+                }
+            }
+        },
+        "file_svc.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.GetDownloadResponse": {
+            "type": "object",
+            "required": [
+                "exists"
+            ],
+            "properties": {
+                "download": {
+                    "$ref": "#/definitions/file_svc.DownloadDetails"
+                },
+                "exists": {
+                    "type": "boolean"
                 }
             }
         },

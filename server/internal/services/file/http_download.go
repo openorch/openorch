@@ -21,7 +21,6 @@ import (
 	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// Do initiates a download request
 // @ID downloadFile
 // @Summary Download a File
 // @Description Start or resume the download for a specified URL.

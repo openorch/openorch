@@ -22,7 +22,6 @@ import (
 	download "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// Pause pauses an ongoing download
 // @ID pauseDownload
 // @Summary Pause a Download
 // @Description Pause a download that is currently in progress.

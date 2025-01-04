@@ -158,36 +158,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Download Svc",
-      items: [
-        {
-          type: "doc",
-          id: "openorch/download",
-          label: "Download a File",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "openorch/get-download",
-          label: "Get a Download",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "openorch/pause",
-          label: "Pause a Download",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "openorch/list-downloads",
-          label: "List Downloads",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Dynamic Svc",
       items: [
         {
@@ -230,6 +200,36 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "openorch/send-email",
           label: "Send an Email",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "File Svc",
+      items: [
+        {
+          type: "doc",
+          id: "openorch/download-file",
+          label: "Download a File",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "openorch/get-download",
+          label: "Get a Download",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "openorch/pause-download",
+          label: "Pause a Download",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "openorch/list-downloads",
+          label: "List Downloads",
           className: "api-method post",
         },
       ],

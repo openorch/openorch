@@ -20,7 +20,6 @@ import (
 	download "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// List retrieves a list of download details
 // @ID listDownloads
 // @Summary List Downloads
 // @Description Fetch a list of all download details.

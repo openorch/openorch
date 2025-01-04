@@ -48,7 +48,7 @@ type DownloadService struct {
 	credentialStore datastore.DataStore
 }
 
-func NewDownloadService(
+func NewFileService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),

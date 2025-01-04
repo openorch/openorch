@@ -192,7 +192,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadService, err := fileservice.NewDownloadService(
+	fileService, err := fileservice.NewFileService(
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
@@ -205,8 +205,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadService.SetDefaultFolder(downloadFolder)
-	downloadService.SetStateFilePath(
+	fileService.SetDefaultFolder(downloadFolder)
+	fileService.SetStateFilePath(
 		path.Join(openorchFolder, "downloads.json"),
 	)
 
@@ -401,21 +401,21 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/file-svc/download", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Do(w, r)
+		fileService.Download(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/file-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Pause(w, r)
+		fileService.Pause(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/file-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Get(w, r)
+		fileService.Get(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/file-svc/downloads", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.List(w, r)
+		fileService.List(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 
@@ -767,7 +767,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		if err != nil {
 			return errors.Wrap(err, "config service start failed")
 		}
-		err = downloadService.Start()
+		err = fileService.Start()
 		if err != nil {
 			return errors.Wrap(err, "download service start failed")
 		}
