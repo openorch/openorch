@@ -1168,14 +1168,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/download-svc/download": {
+        "/file-svc/download": {
             "put": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Start a download for a specified URL.\n\nRequires the ` + "`" + `download-svc:download:create` + "`" + ` permission.",
+                "description": "Start a download for a specified URL.\n\nRequires the ` + "`" + `file-svc:download:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1183,7 +1183,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Download Svc"
+                    "File Svc"
                 ],
                 "summary": "Download a File",
                 "operationId": "download",
@@ -1194,7 +1194,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/download_svc.DownloadRequest"
+                            "$ref": "#/definitions/file_svc.DownloadRequest"
                         }
                     }
                 ],
@@ -1209,32 +1209,32 @@ const docTemplate = `{
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/download_svc.ErrorResponse"
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/download_svc.ErrorResponse"
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/download_svc.ErrorResponse"
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     }
                 }
             }
         },
-        "/download-svc/download/{downloadId}": {
+        "/file-svc/download/{downloadId}": {
             "get": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get a download by ID.\n\nRequires the ` + "`" + `download-svc:download:view` + "`" + ` permission.",
+                "description": "Get a download by ID.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1242,7 +1242,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Download Svc"
+                    "File Svc"
                 ],
                 "summary": "Get a Download",
                 "operationId": "getDownload",
@@ -1259,7 +1259,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/download_svc.GetDownloadResponse"
+                            "$ref": "#/definitions/file_svc.GetDownloadResponse"
                         }
                     },
                     "401": {
@@ -1277,14 +1277,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/download-svc/download/{downloadId}/pause": {
+        "/file-svc/download/{downloadId}/pause": {
             "put": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Pause a download that is currently in progress.\n\nRequires the ` + "`" + `download-svc:download:edit` + "`" + ` permission.",
+                "description": "Pause a download that is currently in progress.\n\nRequires the ` + "`" + `file-svc:download:edit` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1292,7 +1292,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Download Svc"
+                    "File Svc"
                 ],
                 "summary": "Pause a Download",
                 "operationId": "pause",
@@ -1334,14 +1334,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/download-svc/downloads": {
+        "/file-svc/downloads": {
             "post": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `download-svc:download:view` + "`" + ` permission.",
+                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1349,7 +1349,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Download Svc"
+                    "File Svc"
                 ],
                 "summary": "List Downloads",
                 "operationId": "listDownloads",
@@ -1357,7 +1357,7 @@ const docTemplate = `{
                     "200": {
                         "description": "List of downloads",
                         "schema": {
-                            "$ref": "#/definitions/download_svc.DownloadsResponse"
+                            "$ref": "#/definitions/file_svc.DownloadsResponse"
                         }
                     },
                     "401": {
@@ -5247,7 +5247,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "assets": {
-                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the Download Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
+                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -5355,7 +5355,7 @@ const docTemplate = `{
         "docker_svc.StopContainerResponse": {
             "type": "object"
         },
-        "download_svc.DownloadDetails": {
+        "file_svc.DownloadDetails": {
             "type": "object",
             "properties": {
                 "cancelled": {
@@ -5398,7 +5398,7 @@ const docTemplate = `{
                 }
             }
         },
-        "download_svc.DownloadRequest": {
+        "file_svc.DownloadRequest": {
             "type": "object",
             "properties": {
                 "folderPath": {
@@ -5409,18 +5409,18 @@ const docTemplate = `{
                 }
             }
         },
-        "download_svc.DownloadsResponse": {
+        "file_svc.DownloadsResponse": {
             "type": "object",
             "properties": {
                 "downloads": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/download_svc.DownloadDetails"
+                        "$ref": "#/definitions/file_svc.DownloadDetails"
                     }
                 }
             }
         },
-        "download_svc.ErrorResponse": {
+        "file_svc.ErrorResponse": {
             "type": "object",
             "properties": {
                 "error": {
@@ -5428,14 +5428,14 @@ const docTemplate = `{
                 }
             }
         },
-        "download_svc.GetDownloadResponse": {
+        "file_svc.GetDownloadResponse": {
             "type": "object",
             "required": [
                 "exists"
             ],
             "properties": {
                 "download": {
-                    "$ref": "#/definitions/download_svc.DownloadDetails"
+                    "$ref": "#/definitions/file_svc.DownloadDetails"
                 },
                 "exists": {
                     "type": "boolean"

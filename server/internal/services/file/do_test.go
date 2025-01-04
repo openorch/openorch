@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice_test
+package fileservice_test
 
 import (
 	"context"
@@ -26,8 +26,8 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
-	downloadservice "github.com/openorch/openorch/server/internal/services/download"
-	types "github.com/openorch/openorch/server/internal/services/download/types"
+	fileservice "github.com/openorch/openorch/server/internal/services/file"
+	types "github.com/openorch/openorch/server/internal/services/file/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -118,7 +118,7 @@ outer:
 		options.HomeDir,
 		".openorch",
 		"downloads",
-		downloadservice.EncodeURLtoFileName(fileHostServer.URL),
+		fileservice.EncodeURLtoFileName(fileHostServer.URL),
 	)
 	data, err := os.ReadFile(expectedFilePath)
 	require.NoError(t, err)
@@ -174,7 +174,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 		options.HomeDir,
 		".openorch",
 		"downloads",
-		downloadservice.EncodeURLtoFileName(downloadURL)+".part",
+		fileservice.EncodeURLtoFileName(downloadURL)+".part",
 	)
 	if err := os.WriteFile(partFilePath, []byte("Hello"), 0644); err != nil {
 		t.Fatalf("Failed to create part file: %s", err)
@@ -223,7 +223,7 @@ outer:
 		options.HomeDir,
 		".openorch",
 		"downloads",
-		downloadservice.EncodeURLtoFileName(downloadURL),
+		fileservice.EncodeURLtoFileName(downloadURL),
 	)
 	data, err := os.ReadFile(expectedFilePath)
 	require.NoError(t, err)
@@ -264,7 +264,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 		options.HomeDir,
 		".openorch",
 		"downloads",
-		downloadservice.EncodeURLtoFileName(downloadURL),
+		fileservice.EncodeURLtoFileName(downloadURL),
 	)
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 

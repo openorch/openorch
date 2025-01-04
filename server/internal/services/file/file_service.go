@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"context"
@@ -26,7 +26,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
 	"github.com/openorch/openorch/sdk/go/logger"
-	types "github.com/openorch/openorch/server/internal/services/download/types"
+	types "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 type DownloadService struct {
@@ -86,13 +86,13 @@ func (dm *DownloadService) SetStateFilePath(s string) {
 
 func (dm *DownloadService) Start() error {
 	ctx := context.Background()
-	dm.dlock.Acquire(ctx, "download-svc-start")
-	defer dm.dlock.Release(ctx, "download-svc-start")
+	dm.dlock.Acquire(ctx, "file-svc-start")
+	defer dm.dlock.Release(ctx, "file-svc-start")
 
 	token, err := sdk.RegisterService(
 		dm.clientFactory.Client().UserSvcAPI,
-		"download-svc",
-		"Download Svc",
+		"file-svc",
+		"File Svc",
 		dm.credentialStore,
 	)
 	if err != nil {
@@ -112,7 +112,7 @@ func (dm *DownloadService) Start() error {
 
 	for _, download := range dm.downloads {
 		if download.Status == types.DownloadStatusInProgress {
-			err = dm.do(download.URL, path.Dir(download.FilePath))
+			err = dm.download(download.URL, path.Dir(download.FilePath))
 			if err != nil {
 				return err
 			}

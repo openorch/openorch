@@ -10,12 +10,12 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"path/filepath"
 
-	types "github.com/openorch/openorch/server/internal/services/download/types"
+	types "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 func (ds *DownloadService) list() ([]types.DownloadDetails, error) {

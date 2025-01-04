@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"encoding/json"
@@ -18,32 +18,32 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/download/types"
+	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 // Do initiates a download request
-// @ID download
+// @ID downloadFile
 // @Summary Download a File
-// @Description Start a download for a specified URL.
+// @Description Start or resume the download for a specified URL.
 // @Description
-// @Description Requires the `download-svc:download:create` permission.
-// @Tags Download Svc
+// @Description Requires the `file-svc:download:create` permission.
+// @Tags File Svc
 // @Accept json
 // @Produce json
-// @Param body body download.DownloadRequest true "Download Request"
+// @Param body body file.DownloadRequest true "Download Request"
 // @Success 200 {object} map[string]any "Download initiated successfully"
-// @Failure 400 {object} download.ErrorResponse "Invalid JSON"
-// @Failure 401 {object} download.ErrorResponse "Unauthorized"
-// @Failure 500 {object} download.ErrorResponse "Internal Server Error"
+// @Failure 400 {object} file.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} file.ErrorResponse "Unauthorized"
+// @Failure 500 {object} file.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /download-svc/download [put]
-func (ds *DownloadService) Do(
+// @Router /file-svc/download [put]
+func (ds *DownloadService) Download(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"model-svc"},
 		}).
@@ -59,7 +59,7 @@ func (ds *DownloadService) Do(
 		return
 	}
 
-	req := download.DownloadRequest{}
+	req := file.DownloadRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -68,7 +68,7 @@ func (ds *DownloadService) Do(
 	}
 	defer r.Body.Close()
 
-	err = ds.do(req.URL, req.FolderPath)
+	err = ds.download(req.URL, req.FolderPath)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

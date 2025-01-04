@@ -10,14 +10,14 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"context"
 
 	client "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 

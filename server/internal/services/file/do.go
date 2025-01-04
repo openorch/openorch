@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ import (
 	"strings"
 
 	"github.com/openorch/openorch/sdk/go/logger"
-	types "github.com/openorch/openorch/server/internal/services/download/types"
+	types "github.com/openorch/openorch/server/internal/services/file/types"
 	"github.com/pkg/errors"
 )
 
@@ -31,7 +31,7 @@ import (
 Starts or resumes a download.
 Can resume downloads not found in the JSON statefile.
 */
-func (dm *DownloadService) do(url, downloadDir string) error {
+func (dm *DownloadService) download(url, downloadDir string) error {
 	if downloadDir == "" {
 		downloadDir = dm.DefaultFolder
 	}

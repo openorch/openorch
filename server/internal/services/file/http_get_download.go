@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"encoding/json"
@@ -18,33 +18,35 @@ import (
 	"net/url"
 
 	"github.com/gorilla/mux"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/download/types"
+	download "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// Pause pauses an ongoing download
-// @ID pause
-// @Summary Pause a Download
-// @Description Pause a download that is currently in progress.
+// @ID getDownload
+// @Summary Get a Download
+// @Description Get a download by ID.
 // @Description
-// @Description Requires the `download-svc:download:edit` permission.
-// @Tags Download Svc
+// @Description Requires the `file-svc:download:view` permission.
+// @Tags File Svc
 // @Accept json
 // @Produce json
 // @Param downloadId path string true "Download ID"
-// @Success 200 {object} map[string]any "Success response"
-// @Failure 400 {string} string "Invalid JSON"
+// @Success 200 {object} download.GetDownloadResponse
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /download-svc/download/{downloadId}/pause [put]
-func (ds *DownloadService) Pause(
+// @Router /file-svc/download/{downloadId} [get]
+func (ds *DownloadService) Get(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadView.Id).
+		Body(openapi.UserSvcIsAuthorizedRequest{
+			SlugsGranted: []string{"docker-svc", "model-svc"},
+		}).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -57,20 +59,19 @@ func (ds *DownloadService) Pause(
 		return
 	}
 
-	downloadId, err := url.PathUnescape(mux.Vars(r)["downloadId"])
+	vars := mux.Vars(r)
+	did, err := url.PathUnescape(vars["downloadId"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Download ID in path is not URL encoded"))
-		return
-	}
-
-	err = ds.pause(downloadId)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(map[string]any{})
+	dl, exists := ds.getDownload(did)
+
+	jsonData, _ := json.Marshal(download.GetDownloadResponse{
+		Exists:   exists,
+		Download: downloadToDownloadDetails(did, dl),
+	})
 	w.Write(jsonData)
 }

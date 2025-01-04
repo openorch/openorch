@@ -21,7 +21,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/logger"
-	downloadtypes "github.com/openorch/openorch/server/internal/services/download/types"
+	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	"github.com/pkg/errors"
 )

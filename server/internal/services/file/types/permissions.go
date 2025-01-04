@@ -6,30 +6,30 @@
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package download_svc
+package file_svc
 
 import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 var PermissionDownloadCreate = usertypes.Permission{
-	Id:   "download-svc:download:create",
-	Name: "Download Svc - Download Create",
+	Id:   "file-svc:download:create",
+	Name: "File Svc - Download Create",
 }
 
 var PermissionDownloadView = usertypes.Permission{
-	Id:   "download-svc:download:view",
-	Name: "Download Svc - Download View",
+	Id:   "file-svc:download:view",
+	Name: "File Svc - Download View",
 }
 
 var PermissionDownloadEdit = usertypes.Permission{
-	Id:   "download-svc:download:edit",
-	Name: "Download Svc - Download Edit",
+	Id:   "file-svc:download:edit",
+	Name: "File Svc - Download Edit",
 }
 
 var PermissionDownloadDelete = usertypes.Permission{
-	Id:   "download-svc:download:delete",
-	Name: "Download Svc - Download Delete",
+	Id:   "file-svc:download:delete",
+	Name: "File Svc - Download Delete",
 }
 
 var DownloadAdminPermissions = []usertypes.Permission{

@@ -28,7 +28,7 @@ type DownloadSvcAPI interface {
 
 	Start a download for a specified URL.
 
-Requires the `download-svc:download:create` permission.
+Requires the `file-svc:download:create` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDownloadRequest
@@ -44,7 +44,7 @@ Requires the `download-svc:download:create` permission.
 
 	Get a download by ID.
 
-Requires the `download-svc:download:view` permission.
+Requires the `file-svc:download:view` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param downloadId Download ID
@@ -61,7 +61,7 @@ Requires the `download-svc:download:view` permission.
 
 	Fetch a list of all download details.
 
-Requires the `download-svc:download:view` permission.
+Requires the `file-svc:download:view` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListDownloadsRequest
@@ -77,7 +77,7 @@ Requires the `download-svc:download:view` permission.
 
 	Pause a download that is currently in progress.
 
-Requires the `download-svc:download:edit` permission.
+Requires the `file-svc:download:edit` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param downloadId Download ID
@@ -114,7 +114,7 @@ Download Download a File
 
 Start a download for a specified URL.
 
-Requires the `download-svc:download:create` permission.
+Requires the `file-svc:download:create` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDownloadRequest
@@ -141,7 +141,7 @@ func (a *DownloadSvcAPIService) DownloadExecute(r ApiDownloadRequest) (map[strin
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/download-svc/download"
+	localVarPath := localBasePath + "/file-svc/download"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -267,7 +267,7 @@ GetDownload Get a Download
 
 Get a download by ID.
 
-Requires the `download-svc:download:view` permission.
+Requires the `file-svc:download:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param downloadId Download ID
@@ -296,7 +296,7 @@ func (a *DownloadSvcAPIService) GetDownloadExecute(r ApiGetDownloadRequest) (*Do
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/download-svc/download/{downloadId}"
+	localVarPath := localBasePath + "/file-svc/download/{downloadId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"downloadId"+"}", url.PathEscape(parameterValueToString(r.downloadId, "downloadId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -406,7 +406,7 @@ ListDownloads List Downloads
 
 Fetch a list of all download details.
 
-Requires the `download-svc:download:view` permission.
+Requires the `file-svc:download:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListDownloadsRequest
@@ -433,7 +433,7 @@ func (a *DownloadSvcAPIService) ListDownloadsExecute(r ApiListDownloadsRequest) 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/download-svc/downloads"
+	localVarPath := localBasePath + "/file-svc/downloads"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -543,7 +543,7 @@ Pause Pause a Download
 
 Pause a download that is currently in progress.
 
-Requires the `download-svc:download:edit` permission.
+Requires the `file-svc:download:edit` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param downloadId Download ID
@@ -572,7 +572,7 @@ func (a *DownloadSvcAPIService) PauseExecute(r ApiPauseRequest) (map[string]inte
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/download-svc/download/{downloadId}/pause"
+	localVarPath := localBasePath + "/file-svc/download/{downloadId}/pause"
 	localVarPath = strings.Replace(localVarPath, "{"+"downloadId"+"}", url.PathEscape(parameterValueToString(r.downloadId, "downloadId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

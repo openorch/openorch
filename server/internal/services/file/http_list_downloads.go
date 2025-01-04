@@ -10,14 +10,14 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package downloadservice
+package fileservice
 
 import (
 	"encoding/json"
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/download/types"
+	download "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 // List retrieves a list of download details
@@ -25,15 +25,15 @@ import (
 // @Summary List Downloads
 // @Description Fetch a list of all download details.
 // @Description
-// @Description Requires the `download-svc:download:view` permission.
-// @Tags Download Svc
+// @Description Requires the `file-svc:download:view` permission.
+// @Tags File Svc
 // @Accept json
 // @Produce json
 // @Success 200 {object} download.DownloadsResponse "List of downloads"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /download-svc/downloads [post]
+// @Router /file-svc/downloads [post]
 func (ds *DownloadService) List(
 	w http.ResponseWriter,
 	r *http.Request,
