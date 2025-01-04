@@ -21,7 +21,6 @@ export interface FileSvcConfig {
 	downloadFolder: string;
 }
 
-
 export interface DownloadStatusChangeEvent {
 	allDownloads: DownloadDetails[];
 }
@@ -80,7 +79,7 @@ export class DownloadService {
 	}
 
 	async downloadDo(url: string) {
-		this.downloadService.download({
+		this.downloadService.downloadFile({
 			body: {
 				url: url,
 			},
@@ -88,7 +87,7 @@ export class DownloadService {
 	}
 
 	async downloadPause(url: string) {
-		this.downloadService.pause({
+		this.downloadService.pauseDownload({
 			downloadId: url,
 		});
 	}
