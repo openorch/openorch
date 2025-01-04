@@ -1,3 +1,4 @@
 docs/** -diff
 clients*/dist/** -diff
 clients/go/**/*.go -diff
+*.mdx linguist-detectable=false
