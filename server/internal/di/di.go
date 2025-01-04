@@ -22,9 +22,9 @@ import (
 	configservice "github.com/openorch/openorch/server/internal/services/config"
 	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
 	dockerservice "github.com/openorch/openorch/server/internal/services/docker"
-	downloadservice "github.com/openorch/openorch/server/internal/services/download"
 	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
 	emailservice "github.com/openorch/openorch/server/internal/services/email"
+	fileservice "github.com/openorch/openorch/server/internal/services/file"
 	firehoseservice "github.com/openorch/openorch/server/internal/services/firehose"
 	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	policyservice "github.com/openorch/openorch/server/internal/services/policy"
@@ -192,7 +192,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadService, err := downloadservice.NewDownloadService(
+	fileService, err := fileservice.NewFileService(
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
@@ -205,8 +205,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadService.SetDefaultFolder(downloadFolder)
-	downloadService.SetStateFilePath(
+	fileService.SetDefaultFolder(downloadFolder)
+	fileService.SetStateFilePath(
 		path.Join(openorchFolder, "downloads.json"),
 	)
 
@@ -400,22 +400,22 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/download-svc/download", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Do(w, r)
+	router.HandleFunc("/file-svc/download", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.Download(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 
-	router.HandleFunc("/download-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Pause(w, r)
+	router.HandleFunc("/file-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.Pause(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/download-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.Get(w, r)
+	router.HandleFunc("/file-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.Get(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 
-	router.HandleFunc("/download-svc/downloads", appl(func(w http.ResponseWriter, r *http.Request) {
-		downloadService.List(w, r)
+	router.HandleFunc("/file-svc/downloads", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.List(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 
@@ -767,7 +767,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		if err != nil {
 			return errors.Wrap(err, "config service start failed")
 		}
-		err = downloadService.Start()
+		err = fileService.Start()
 		if err != nil {
 			return errors.Wrap(err, "download service start failed")
 		}

@@ -189,12 +189,12 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	envarNameToFilePath := map[string]string{}
 
 	// We translate URLs in the assets map into local file paths
-	// by asking the Download Svc where did it download the file(s).
+	// by asking the File Svc where did it download the file(s).
 
 	for envarName, assetURL := range assets {
 
 		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			DownloadSvcAPI.GetDownload(context.Background(), assetURL).
+			FileSvcAPI.GetDownload(context.Background(), assetURL).
 			Execute()
 		if err != nil {
 			return nil, nil, err

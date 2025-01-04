@@ -15,8 +15,8 @@ For simplicity the Docker Svc is only concerned with the node it resides on. In 
 
 ## Used By
 
-- [Model Svc](/docs/built-in-services/download-svc) to launch containers running AI models.
-- [Deploy Svc](/docs/built-in-services/download-svc) to launch containers to deploy service instances.
+- [Model Svc](/docs/built-in-services/file-svc) to launch containers running AI models.
+- [Deploy Svc](/docs/built-in-services/file-svc) to launch containers to deploy service instances.
 
 > This page is a high level overview of the `Docker Svc`. For more details, please see the [Docker Svc API documentation](/docs/openorch/run-container).
 
@@ -26,7 +26,7 @@ For simplicity the Docker Svc is only concerned with the node it resides on. In 
 
 ## Dependencies
 
-- [Download Svc](/docs/built-in-services/download-svc) to get the local file path of the model from the asset URL
+- [Download Svc](/docs/built-in-services/file-svc) to get the local file path of the model from the asset URL
 
 ## Current Limitations
 

@@ -100,16 +100,16 @@ Class | Method | HTTP request | Description
 *DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /docker-svc/info | Get Docker Service Information
 *DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /docker-svc/container | Run a Container
 *DockerSvcAPI* | [**StopContainer**](docs/DockerSvcAPI.md#stopcontainer) | **Put** /docker-svc/container/stop | Stop a Container
-*DownloadSvcAPI* | [**Download**](docs/DownloadSvcAPI.md#download) | **Put** /download-svc/download | Download a File
-*DownloadSvcAPI* | [**GetDownload**](docs/DownloadSvcAPI.md#getdownload) | **Get** /download-svc/download/{downloadId} | Get a Download
-*DownloadSvcAPI* | [**ListDownloads**](docs/DownloadSvcAPI.md#listdownloads) | **Post** /download-svc/downloads | List Downloads
-*DownloadSvcAPI* | [**Pause**](docs/DownloadSvcAPI.md#pause) | **Put** /download-svc/download/{downloadId}/pause | Pause a Download
 *DynamicSvcAPI* | [**CreateObject**](docs/DynamicSvcAPI.md#createobject) | **Post** /dynamic-svc/object | Create a Generic Object
 *DynamicSvcAPI* | [**DeleteObjects**](docs/DynamicSvcAPI.md#deleteobjects) | **Post** /dynamic-svc/objects/delete | Delete a Generic Object
 *DynamicSvcAPI* | [**Query**](docs/DynamicSvcAPI.md#query) | **Post** /dynamic-svc/objects | Query Objects
 *DynamicSvcAPI* | [**UpdateObjects**](docs/DynamicSvcAPI.md#updateobjects) | **Post** /dynamic-svc/objects/update | Update Objects
 *DynamicSvcAPI* | [**UpsertObject**](docs/DynamicSvcAPI.md#upsertobject) | **Put** /dynamic-svc/object/{objectId} | Upsert a Generic Object
 *EmailSvcAPI* | [**SendEmail**](docs/EmailSvcAPI.md#sendemail) | **Post** /email-svc/email | Send an Email
+*FileSvcAPI* | [**DownloadFile**](docs/FileSvcAPI.md#downloadfile) | **Put** /file-svc/download | Download a File
+*FileSvcAPI* | [**GetDownload**](docs/FileSvcAPI.md#getdownload) | **Get** /file-svc/download/{downloadId} | Get a Download
+*FileSvcAPI* | [**ListDownloads**](docs/FileSvcAPI.md#listdownloads) | **Post** /file-svc/downloads | List Downloads
+*FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{downloadId}/pause | Pause a Download
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
 *FirehoseSvcAPI* | [**SubscribeToEvents**](docs/FirehoseSvcAPI.md#subscribetoevents) | **Get** /firehose-svc/events/subscribe | Subscribe to the Event Stream
 *ModelSvcAPI* | [**GetDefaultModelStatus**](docs/ModelSvcAPI.md#getdefaultmodelstatus) | **Get** /model-svc/default-model/status | Get Default Model Status
@@ -209,11 +209,6 @@ Class | Method | HTTP request | Description
  - [DockerSvcRunContainerResponse](docs/DockerSvcRunContainerResponse.md)
  - [DockerSvcRunInfo](docs/DockerSvcRunInfo.md)
  - [DockerSvcStopContainerRequest](docs/DockerSvcStopContainerRequest.md)
- - [DownloadSvcDownloadDetails](docs/DownloadSvcDownloadDetails.md)
- - [DownloadSvcDownloadRequest](docs/DownloadSvcDownloadRequest.md)
- - [DownloadSvcDownloadsResponse](docs/DownloadSvcDownloadsResponse.md)
- - [DownloadSvcErrorResponse](docs/DownloadSvcErrorResponse.md)
- - [DownloadSvcGetDownloadResponse](docs/DownloadSvcGetDownloadResponse.md)
  - [DynamicSvcCreateObjectRequest](docs/DynamicSvcCreateObjectRequest.md)
  - [DynamicSvcCreateObjectResponse](docs/DynamicSvcCreateObjectResponse.md)
  - [DynamicSvcDeleteObjectRequest](docs/DynamicSvcDeleteObjectRequest.md)
@@ -229,6 +224,11 @@ Class | Method | HTTP request | Description
  - [EmailSvcFile](docs/EmailSvcFile.md)
  - [EmailSvcSendEmailRequest](docs/EmailSvcSendEmailRequest.md)
  - [EmailSvcSendEmailResponse](docs/EmailSvcSendEmailResponse.md)
+ - [FileSvcDownloadDetails](docs/FileSvcDownloadDetails.md)
+ - [FileSvcDownloadRequest](docs/FileSvcDownloadRequest.md)
+ - [FileSvcDownloadsResponse](docs/FileSvcDownloadsResponse.md)
+ - [FileSvcErrorResponse](docs/FileSvcErrorResponse.md)
+ - [FileSvcGetDownloadResponse](docs/FileSvcGetDownloadResponse.md)
  - [FirehoseSvcErrorResponse](docs/FirehoseSvcErrorResponse.md)
  - [FirehoseSvcEvent](docs/FirehoseSvcEvent.md)
  - [FirehoseSvcEventPublishRequest](docs/FirehoseSvcEventPublishRequest.md)
