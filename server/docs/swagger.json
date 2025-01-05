@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.9"
+        "version": "0.3.0-rc.10"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -1689,7 +1689,7 @@
                         "BearerAuth": []
                     }
                 ],
-                "description": "Fetch a list of all download details.\n\nRequires the `file-svc:download:view` permission.",
+                "description": "List download details.\n\nRequires the `file-svc:download:view` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1700,7 +1700,7 @@
                     "File Svc"
                 ],
                 "summary": "List Downloads",
-                "operationId": "listDownloads",
+                "operationId": "listFileDownloads",
                 "responses": {
                     "200": {
                         "description": "List of downloads",
@@ -1718,6 +1718,63 @@
                         "description": "Internal Server Error",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/upload": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Uploads a file to the server and stores it at the specified path.\n\nRequires the `file-svc:upload:create` permission.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Upload a File",
+                "operationId": "uploadFile",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "File to upload",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File uploaded successfully",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     }
                 }
@@ -5663,7 +5720,7 @@
                 }
             }
         },
-        "file_svc.DownloadDetails": {
+        "file_svc.Download": {
             "type": "object",
             "properties": {
                 "cancelled": {
@@ -5723,7 +5780,7 @@
                 "downloads": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/file_svc.DownloadDetails"
+                        "$ref": "#/definitions/file_svc.Download"
                     }
                 }
             }
@@ -5743,7 +5800,7 @@
             ],
             "properties": {
                 "download": {
-                    "$ref": "#/definitions/file_svc.DownloadDetails"
+                    "$ref": "#/definitions/file_svc.Download"
                 },
                 "exists": {
                     "type": "boolean"

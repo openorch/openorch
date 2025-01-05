@@ -1695,7 +1695,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "description": "List download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1706,7 +1706,7 @@ const docTemplate = `{
                     "File Svc"
                 ],
                 "summary": "List Downloads",
-                "operationId": "listDownloads",
+                "operationId": "listFileDownloads",
                 "responses": {
                     "200": {
                         "description": "List of downloads",
@@ -1724,6 +1724,63 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/upload": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Uploads a file to the server and stores it at the specified path.\n\nRequires the ` + "`" + `file-svc:upload:create` + "`" + ` permission.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Upload a File",
+                "operationId": "uploadFile",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "File to upload",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File uploaded successfully",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     }
                 }
@@ -5669,7 +5726,7 @@ const docTemplate = `{
                 }
             }
         },
-        "file_svc.DownloadDetails": {
+        "file_svc.Download": {
             "type": "object",
             "properties": {
                 "cancelled": {
@@ -5729,7 +5786,7 @@ const docTemplate = `{
                 "downloads": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/file_svc.DownloadDetails"
+                        "$ref": "#/definitions/file_svc.Download"
                     }
                 }
             }
@@ -5749,7 +5806,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "download": {
-                    "$ref": "#/definitions/file_svc.DownloadDetails"
+                    "$ref": "#/definitions/file_svc.Download"
                 },
                 "exists": {
                     "type": "boolean"
@@ -7669,7 +7726,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.9",
+	Version:          "0.3.0-rc.10",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

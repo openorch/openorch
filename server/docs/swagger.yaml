@@ -779,7 +779,7 @@ definitions:
         description: Status of the email send operation ("sent", "queued", etc.)
         type: string
     type: object
-  file_svc.DownloadDetails:
+  file_svc.Download:
     properties:
       cancelled:
         type: boolean
@@ -819,7 +819,7 @@ definitions:
     properties:
       downloads:
         items:
-          $ref: '#/definitions/file_svc.DownloadDetails'
+          $ref: '#/definitions/file_svc.Download'
         type: array
     type: object
   file_svc.ErrorResponse:
@@ -830,7 +830,7 @@ definitions:
   file_svc.GetDownloadResponse:
     properties:
       download:
-        $ref: '#/definitions/file_svc.DownloadDetails'
+        $ref: '#/definitions/file_svc.Download'
       exists:
         type: boolean
     required:
@@ -2222,7 +2222,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.9
+  version: 0.3.0-rc.10
 paths:
   /chat-svc/events:
     get:
@@ -3326,10 +3326,10 @@ paths:
       consumes:
       - application/json
       description: |-
-        Fetch a list of all download details.
+        List download details.
 
         Requires the `file-svc:download:view` permission.
-      operationId: listDownloads
+      operationId: listFileDownloads
       produces:
       - application/json
       responses:
@@ -3348,6 +3348,46 @@ paths:
       security:
       - BearerAuth: []
       summary: List Downloads
+      tags:
+      - File Svc
+  /file-svc/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: |-
+        Uploads a file to the server and stores it at the specified path.
+
+        Requires the `file-svc:upload:create` permission.
+      operationId: uploadFile
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: File uploaded successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Upload a File
       tags:
       - File Svc
   /firehose-svc/event:

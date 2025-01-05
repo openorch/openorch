@@ -37,12 +37,12 @@ import (
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download/{downloadId} [get]
-func (ds *FileService) Get(
+func (fs *FileService) GetDownload(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+	isAuthRsp, _, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"docker-svc", "model-svc"},
@@ -67,7 +67,7 @@ func (ds *FileService) Get(
 		return
 	}
 
-	dl, exists := ds.getDownload(did)
+	dl, exists := fs.getDownload(did)
 
 	jsonData, _ := json.Marshal(file.GetDownloadResponse{
 		Exists:   exists,

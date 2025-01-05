@@ -37,7 +37,7 @@ import (
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download/{downloadId}/pause [put]
-func (ds *FileService) Pause(
+func (ds *FileService) PauseDownload(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {

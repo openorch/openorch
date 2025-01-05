@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.9
+API version: 0.3.0-rc.10
 Contact: sales@singulatron.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &FileSvcDownloadsResponse{}
 
 // FileSvcDownloadsResponse struct for FileSvcDownloadsResponse
 type FileSvcDownloadsResponse struct {
-	Downloads []FileSvcDownloadDetails `json:"downloads,omitempty"`
+	Downloads []FileSvcDownload `json:"downloads,omitempty"`
 }
 
 // NewFileSvcDownloadsResponse instantiates a new FileSvcDownloadsResponse object
@@ -41,9 +41,9 @@ func NewFileSvcDownloadsResponseWithDefaults() *FileSvcDownloadsResponse {
 }
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
-func (o *FileSvcDownloadsResponse) GetDownloads() []FileSvcDownloadDetails {
+func (o *FileSvcDownloadsResponse) GetDownloads() []FileSvcDownload {
 	if o == nil || IsNil(o.Downloads) {
-		var ret []FileSvcDownloadDetails
+		var ret []FileSvcDownload
 		return ret
 	}
 	return o.Downloads
@@ -51,7 +51,7 @@ func (o *FileSvcDownloadsResponse) GetDownloads() []FileSvcDownloadDetails {
 
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadsResponse) GetDownloadsOk() ([]FileSvcDownloadDetails, bool) {
+func (o *FileSvcDownloadsResponse) GetDownloadsOk() ([]FileSvcDownload, bool) {
 	if o == nil || IsNil(o.Downloads) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *FileSvcDownloadsResponse) HasDownloads() bool {
 	return false
 }
 
-// SetDownloads gets a reference to the given []FileSvcDownloadDetails and assigns it to the Downloads field.
-func (o *FileSvcDownloadsResponse) SetDownloads(v []FileSvcDownloadDetails) {
+// SetDownloads gets a reference to the given []FileSvcDownload and assigns it to the Downloads field.
+func (o *FileSvcDownloadsResponse) SetDownloads(v []FileSvcDownload) {
 	o.Downloads = v
 }
 

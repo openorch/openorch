@@ -18,9 +18,7 @@ import (
 	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-/*
-Pauses a download.
-*/
+// pause a download
 func (ds *FileService) pause(url string) error {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()

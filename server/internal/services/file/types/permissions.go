@@ -37,7 +37,7 @@ var PermissionUploadCreate = usertypes.Permission{
 	Name: "File Svc - Upload Create",
 }
 
-var DownloadAdminPermissions = []usertypes.Permission{
+var FileAdminPermissions = []usertypes.Permission{
 	PermissionDownloadCreate,
 	PermissionDownloadView,
 	PermissionDownloadEdit,

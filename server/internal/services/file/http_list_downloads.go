@@ -33,7 +33,7 @@ import (
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/downloads [post]
-func (ds *FileService) List(
+func (ds *FileService) ListDownloads(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {

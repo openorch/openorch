@@ -33,7 +33,8 @@ type FileService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
-	dlock lock.DistributedLock
+	dlock        lock.DistributedLock
+	uploadFolder string
 
 	downloads map[string]*types.InternalDownload
 	lock      sync.Mutex
@@ -52,13 +53,18 @@ func NewFileService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+	homeDir string,
 ) (*FileService, error) {
-	home, _ := os.UserHomeDir()
-
 	credentialStore, err := datastoreFactory(
 		"fileSvcCredentials",
 		&sdk.Credential{},
 	)
+	if err != nil {
+		return nil, err
+	}
+
+	uploadFolder := path.Join(homeDir, "uploads")
+	err = os.MkdirAll(uploadFolder, 0700)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +75,8 @@ func NewFileService(
 		credentialStore: credentialStore,
 		dlock:           lock,
 
-		StateFilePath: path.Join(home, "downloads.json"),
+		uploadFolder:  uploadFolder,
+		StateFilePath: path.Join(homeDir, "downloads.json"),
 		downloads:     make(map[string]*types.InternalDownload),
 	}
 

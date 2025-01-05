@@ -99,34 +99,34 @@ func (mr *MockFileSvcAPIMockRecorder) GetDownloadExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDownloadExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).GetDownloadExecute), r)
 }
 
-// ListDownloads mocks base method.
-func (m *MockFileSvcAPI) ListDownloads(ctx context.Context) ApiListDownloadsRequest {
+// ListFileDownloads mocks base method.
+func (m *MockFileSvcAPI) ListFileDownloads(ctx context.Context) ApiListFileDownloadsRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListDownloads", ctx)
-	ret0, _ := ret[0].(ApiListDownloadsRequest)
+	ret := m.ctrl.Call(m, "ListFileDownloads", ctx)
+	ret0, _ := ret[0].(ApiListFileDownloadsRequest)
 	return ret0
 }
 
-// ListDownloads indicates an expected call of ListDownloads.
-func (mr *MockFileSvcAPIMockRecorder) ListDownloads(ctx any) *gomock.Call {
+// ListFileDownloads indicates an expected call of ListFileDownloads.
+func (mr *MockFileSvcAPIMockRecorder) ListFileDownloads(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDownloads", reflect.TypeOf((*MockFileSvcAPI)(nil).ListDownloads), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFileDownloads", reflect.TypeOf((*MockFileSvcAPI)(nil).ListFileDownloads), ctx)
 }
 
-// ListDownloadsExecute mocks base method.
-func (m *MockFileSvcAPI) ListDownloadsExecute(r ApiListDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
+// ListFileDownloadsExecute mocks base method.
+func (m *MockFileSvcAPI) ListFileDownloadsExecute(r ApiListFileDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListDownloadsExecute", r)
+	ret := m.ctrl.Call(m, "ListFileDownloadsExecute", r)
 	ret0, _ := ret[0].(*FileSvcDownloadsResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// ListDownloadsExecute indicates an expected call of ListDownloadsExecute.
-func (mr *MockFileSvcAPIMockRecorder) ListDownloadsExecute(r any) *gomock.Call {
+// ListFileDownloadsExecute indicates an expected call of ListFileDownloadsExecute.
+func (mr *MockFileSvcAPIMockRecorder) ListFileDownloadsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDownloadsExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).ListDownloadsExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFileDownloadsExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).ListFileDownloadsExecute), r)
 }
 
 // PauseDownload mocks base method.
@@ -157,4 +157,34 @@ func (m *MockFileSvcAPI) PauseDownloadExecute(r ApiPauseDownloadRequest) (map[st
 func (mr *MockFileSvcAPIMockRecorder) PauseDownloadExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PauseDownloadExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).PauseDownloadExecute), r)
+}
+
+// UploadFile mocks base method.
+func (m *MockFileSvcAPI) UploadFile(ctx context.Context) ApiUploadFileRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UploadFile", ctx)
+	ret0, _ := ret[0].(ApiUploadFileRequest)
+	return ret0
+}
+
+// UploadFile indicates an expected call of UploadFile.
+func (mr *MockFileSvcAPIMockRecorder) UploadFile(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UploadFile", reflect.TypeOf((*MockFileSvcAPI)(nil).UploadFile), ctx)
+}
+
+// UploadFileExecute mocks base method.
+func (m *MockFileSvcAPI) UploadFileExecute(r ApiUploadFileRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UploadFileExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// UploadFileExecute indicates an expected call of UploadFileExecute.
+func (mr *MockFileSvcAPIMockRecorder) UploadFileExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UploadFileExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).UploadFileExecute), r)
 }

@@ -20,7 +20,7 @@ var (
 	DownloadStatusErrored    DownloadStatus = "errored"
 )
 
-// Download is the internal type for downloads
+// Download is the internal type for downloads.
 type InternalDownload struct {
 	URL            string         `json:"url"`
 	FilePath       string         `json:"filePath"`

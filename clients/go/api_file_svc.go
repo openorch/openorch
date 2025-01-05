@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.9
+API version: 0.3.0-rc.10
 Contact: sales@singulatron.com
 */
 
@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"os"
 )
 
 
@@ -57,20 +58,20 @@ Requires the `file-svc:download:view` permission.
 	GetDownloadExecute(r ApiGetDownloadRequest) (*FileSvcGetDownloadResponse, *http.Response, error)
 
 	/*
-	ListDownloads List Downloads
+	ListFileDownloads List Downloads
 
-	Fetch a list of all download details.
+	List download details.
 
 Requires the `file-svc:download:view` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListDownloadsRequest
+	@return ApiListFileDownloadsRequest
 	*/
-	ListDownloads(ctx context.Context) ApiListDownloadsRequest
+	ListFileDownloads(ctx context.Context) ApiListFileDownloadsRequest
 
-	// ListDownloadsExecute executes the request
+	// ListFileDownloadsExecute executes the request
 	//  @return FileSvcDownloadsResponse
-	ListDownloadsExecute(r ApiListDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error)
+	ListFileDownloadsExecute(r ApiListFileDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error)
 
 	/*
 	PauseDownload Pause a Download
@@ -88,6 +89,22 @@ Requires the `file-svc:download:edit` permission.
 	// PauseDownloadExecute executes the request
 	//  @return map[string]interface{}
 	PauseDownloadExecute(r ApiPauseDownloadRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	UploadFile Upload a File
+
+	Uploads a file to the server and stores it at the specified path.
+
+Requires the `file-svc:upload:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUploadFileRequest
+	*/
+	UploadFile(ctx context.Context) ApiUploadFileRequest
+
+	// UploadFileExecute executes the request
+	//  @return map[string]interface{}
+	UploadFileExecute(r ApiUploadFileRequest) (map[string]interface{}, *http.Response, error)
 }
 
 // FileSvcAPIService FileSvcAPI service
@@ -392,27 +409,27 @@ func (a *FileSvcAPIService) GetDownloadExecute(r ApiGetDownloadRequest) (*FileSv
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListDownloadsRequest struct {
+type ApiListFileDownloadsRequest struct {
 	ctx context.Context
 	ApiService FileSvcAPI
 }
 
-func (r ApiListDownloadsRequest) Execute() (*FileSvcDownloadsResponse, *http.Response, error) {
-	return r.ApiService.ListDownloadsExecute(r)
+func (r ApiListFileDownloadsRequest) Execute() (*FileSvcDownloadsResponse, *http.Response, error) {
+	return r.ApiService.ListFileDownloadsExecute(r)
 }
 
 /*
-ListDownloads List Downloads
+ListFileDownloads List Downloads
 
-Fetch a list of all download details.
+List download details.
 
 Requires the `file-svc:download:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListDownloadsRequest
+ @return ApiListFileDownloadsRequest
 */
-func (a *FileSvcAPIService) ListDownloads(ctx context.Context) ApiListDownloadsRequest {
-	return ApiListDownloadsRequest{
+func (a *FileSvcAPIService) ListFileDownloads(ctx context.Context) ApiListFileDownloadsRequest {
+	return ApiListFileDownloadsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -420,7 +437,7 @@ func (a *FileSvcAPIService) ListDownloads(ctx context.Context) ApiListDownloadsR
 
 // Execute executes the request
 //  @return FileSvcDownloadsResponse
-func (a *FileSvcAPIService) ListDownloadsExecute(r ApiListDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
+func (a *FileSvcAPIService) ListFileDownloadsExecute(r ApiListFileDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -428,7 +445,7 @@ func (a *FileSvcAPIService) ListDownloadsExecute(r ApiListDownloadsRequest) (*Fi
 		localVarReturnValue  *FileSvcDownloadsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.ListDownloads")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.ListFileDownloads")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -656,6 +673,178 @@ func (a *FileSvcAPIService) PauseDownloadExecute(r ApiPauseDownloadRequest) (map
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUploadFileRequest struct {
+	ctx context.Context
+	ApiService FileSvcAPI
+	file *os.File
+}
+
+// File to upload
+func (r ApiUploadFileRequest) File(file *os.File) ApiUploadFileRequest {
+	r.file = file
+	return r
+}
+
+func (r ApiUploadFileRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.UploadFileExecute(r)
+}
+
+/*
+UploadFile Upload a File
+
+Uploads a file to the server and stores it at the specified path.
+
+Requires the `file-svc:upload:create` permission.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUploadFileRequest
+*/
+func (a *FileSvcAPIService) UploadFile(ctx context.Context) ApiUploadFileRequest {
+	return ApiUploadFileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *FileSvcAPIService) UploadFileExecute(r ApiUploadFileRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.UploadFile")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/file-svc/upload"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.file == nil {
+		return localVarReturnValue, nil, reportError("file is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	var fileLocalVarFormFileName string
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
+
+	fileLocalVarFormFileName = "file"
+	fileLocalVarFile := r.file
+
+	if fileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(fileLocalVarFile)
+
+		fileLocalVarFileBytes = fbs
+		fileLocalVarFileName = fileLocalVarFile.Name()
+		fileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v FileSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v FileSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v FileSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
