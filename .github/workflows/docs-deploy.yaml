@@ -27,6 +27,7 @@ jobs:
         run: |
           go install github.com/swaggo/swag/cmd/swag@latest
           yarn install
+          chmod +x gen.sh
           ./gen.sh
         working-directory: ./docs-source
 
