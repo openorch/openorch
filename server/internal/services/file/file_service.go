@@ -35,8 +35,6 @@ type FileService struct {
 
 	lock sync.Mutex
 
-	hasChanged bool
-
 	downloadStore datastore.DataStore
 	uploadStore   datastore.DataStore
 

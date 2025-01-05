@@ -22,7 +22,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
@@ -256,8 +255,6 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 
 	adminClient, _, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
-
-	spew.Dump("homedir", options.HomeDir)
 
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
