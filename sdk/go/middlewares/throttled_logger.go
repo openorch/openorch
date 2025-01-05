@@ -97,9 +97,12 @@ func (rw *throttledResponseWriter) Write(b []byte) (int, error) {
 		errorMsg := fmt.Sprintf(`{"error": "%s"}`, errorMsgStr)
 
 		// Log the error message with the endpoint name, using the original message
-		logger.Debug("Endpoint returned error",
-			slog.String("endpoint", rw.endpoint),
-			slog.String("error", strings.TrimSuffix(string(b), "\n")))
+		// Log for 500+ errors and selected 4xx errors
+		if rw.statusCode >= 500 || rw.statusCode == 403 || rw.statusCode == 429 {
+			logger.Debug("Endpoint returned error",
+				slog.String("endpoint", rw.endpoint),
+				slog.String("error", strings.TrimSuffix(string(b), "\n")))
+		}
 
 		return rw.ResponseWriter.Write([]byte(errorMsg))
 	}

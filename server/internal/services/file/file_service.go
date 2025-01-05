@@ -35,8 +35,7 @@ type FileService struct {
 
 	lock sync.Mutex
 
-	DefaultFolder string
-	hasChanged    bool
+	hasChanged bool
 
 	downloadStore datastore.DataStore
 	uploadStore   datastore.DataStore
@@ -68,14 +67,14 @@ func NewFileService(
 	}
 
 	downloadFolder := path.Join(homeDir, "downloads")
-	err = os.MkdirAll(uploadFolder, 0700)
+	err = os.MkdirAll(downloadFolder, 0700)
 	if err != nil {
 		return nil, err
 	}
 
 	downloadStore, err := datastoreFactory(
 		"fileSvcDownloads",
-		&sdk.Credential{},
+		&types.InternalDownload{},
 	)
 	if err != nil {
 		return nil, err
@@ -83,7 +82,7 @@ func NewFileService(
 
 	uploadStore, err := datastoreFactory(
 		"fileSvcUploads",
-		&types.InternalDownload{},
+		&types.Upload{},
 	)
 	if err != nil {
 		return nil, err
@@ -164,5 +163,5 @@ func (dm *FileService) getDownload(url string) (*types.InternalDownload, bool) {
 		return nil, false
 	}
 
-	return downloadIs[0].(*types.InternalDownload), false
+	return downloadIs[0].(*types.InternalDownload), true
 }

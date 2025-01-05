@@ -22,6 +22,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
@@ -62,6 +63,8 @@ func TestDownloadFile(t *testing.T) {
 
 	err = starterFunc()
 	require.NoError(t, err)
+
+	spew.Dump("homedir", options.HomeDir)
 
 	token, err := sdk.RegisterUser(
 		options.ClientFactory.Client().UserSvcAPI,

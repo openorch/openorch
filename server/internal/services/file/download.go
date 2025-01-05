@@ -34,7 +34,7 @@ Can resume downloads not found in the JSON statefile.
 */
 func (dm *FileService) download(url, downloadDir string) error {
 	if downloadDir == "" {
-		downloadDir = dm.DefaultFolder
+		downloadDir = dm.downloadFolder
 	}
 
 	safeFileName := EncodeURLtoFileName(url)
@@ -58,9 +58,6 @@ func (dm *FileService) download(url, downloadDir string) error {
 	)
 
 	f := func() error {
-		dm.lock.Lock()
-		defer dm.lock.Unlock()
-
 		download, exists = dm.getDownload(url)
 
 		if !exists {
@@ -105,6 +102,7 @@ func (dm *FileService) download(url, downloadDir string) error {
 
 		return nil
 	}
+
 	err = f()
 	if err != nil {
 		return nil
@@ -140,6 +138,7 @@ func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 		// this should never happen as Do sets this to inProgress
 		return fmt.Errorf("cannot download file with status paused")
 	}
+
 	out, err := os.OpenFile(
 		d.FilePath+".part",
 		os.O_CREATE|os.O_WRONLY|os.O_APPEND,
