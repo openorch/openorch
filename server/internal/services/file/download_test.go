@@ -64,8 +64,6 @@ func TestDownloadFile(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	spew.Dump("homedir", options.HomeDir)
-
 	token, err := sdk.RegisterUser(
 		options.ClientFactory.Client().UserSvcAPI,
 		"someuser",
@@ -258,6 +256,8 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 
 	adminClient, _, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
+
+	spew.Dump("homedir", options.HomeDir)
 
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
