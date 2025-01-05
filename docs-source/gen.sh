@@ -14,6 +14,8 @@ SWAGGER_FILE="$OPENORCH_DIR/docs/swagger.yaml"
 EXAMPLES_DIR="$DOCS_SOURCE_DIR/examples"
 CNAME_FILE="$DOCS_SOURCE_DIR/CNAME"
 
+mkdir -p $DOCS_DIR
+
 # Error handler
 trap 'echo "Error occurred in script at line $LINENO"; exit 1' ERR
 
