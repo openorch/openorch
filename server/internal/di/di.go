@@ -56,9 +56,14 @@ type Options struct {
 
 	LLMClient        llm.ClientI
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
-	HomeDir          string
-	ClientFactory    sdk.ClientFactory
-	Authorizer       sdk.Authorizer
+
+	// HomeDir is the OpenOrch config/data/uploads/downloads directory.
+	// For tests it's something like /tmp/openorch-2698538720/
+	// For live it's /home/youruser/.openorch
+	HomeDir string
+
+	ClientFactory sdk.ClientFactory
+	Authorizer    sdk.Authorizer
 }
 
 func BigBang(options *Options) (*mux.Router, func() error, error) {
@@ -79,7 +84,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 			logger.Error("Homedir creation failed", slog.String("error", err.Error()))
 			os.Exit(1)
 		}
+		homeDir = path.Join(homeDir, openorchFolder)
 	}
+
 	options.HomeDir = homeDir
 
 	if options.Lock == nil {
@@ -103,13 +110,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	openorchFolder := path.Join(homeDir, openorchFolder)
 	if options.NodeOptions.ConfigPath != "" {
-		openorchFolder = options.NodeOptions.ConfigPath
+		options.HomeDir = options.NodeOptions.ConfigPath
 	}
 
 	if options.DatastoreFactory == nil {
-		localStorePath := path.Join(homeDir, ".openorch", "data")
+		localStorePath := path.Join(homeDir, "data")
 		err = os.MkdirAll(localStorePath, 0755)
 		if err != nil {
 			logger.Error(
@@ -173,20 +179,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	err = os.MkdirAll(openorchFolder, 0755)
+	err = os.MkdirAll(options.HomeDir, 0755)
 	if err != nil {
 		logger.Error(
 			"Config folder creation failed",
-			slog.String("error", err.Error()),
-		)
-		os.Exit(1)
-	}
-
-	downloadFolder := path.Join(openorchFolder, "downloads")
-	err = os.MkdirAll(downloadFolder, 0755)
-	if err != nil {
-		logger.Error(
-			"Downloads folder creation failed",
 			slog.String("error", err.Error()),
 		)
 		os.Exit(1)
@@ -196,6 +192,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
+		options.HomeDir,
 	)
 	if err != nil {
 		logger.Error(
@@ -204,11 +201,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		)
 		os.Exit(1)
 	}
-
-	fileService.SetDefaultFolder(downloadFolder)
-	fileService.SetStateFilePath(
-		path.Join(openorchFolder, "downloads.json"),
-	)
 
 	dockerService, err := dockerservice.NewDockerService(
 		options.NodeOptions.VolumeName,
@@ -406,18 +398,23 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/file-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
-		fileService.Pause(w, r)
+		fileService.PauseDownload(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/file-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		fileService.Get(w, r)
+		fileService.GetDownload(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/file-svc/downloads", appl(func(w http.ResponseWriter, r *http.Request) {
-		fileService.List(w, r)
+		fileService.ListDownloads(w, r)
 	})).
 		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/file-svc/upload", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.UploadFile(w, r)
+	})).
+		Methods("OPTIONS", "PUT")
 
 	router.HandleFunc("/docker-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Info(w, r)

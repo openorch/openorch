@@ -22,6 +22,7 @@ import (
 	"strconv"
 	"strings"
 
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 	types "github.com/openorch/openorch/server/internal/services/file/types"
 	"github.com/pkg/errors"
@@ -31,9 +32,9 @@ import (
 Starts or resumes a download.
 Can resume downloads not found in the JSON statefile.
 */
-func (dm *DownloadService) download(url, downloadDir string) error {
+func (dm *FileService) download(url, downloadDir string) error {
 	if downloadDir == "" {
-		downloadDir = dm.DefaultFolder
+		downloadDir = dm.downloadFolder
 	}
 
 	safeFileName := EncodeURLtoFileName(url)
@@ -52,42 +53,38 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 	}
 
 	var (
-		download *types.Download
+		download *types.InternalDownload
 		exists   bool
 	)
 
 	f := func() error {
-		dm.lock.Lock()
-		defer dm.lock.Unlock()
-
-		download, exists = dm.downloads[url]
+		download, exists = dm.getDownload(url)
 
 		if !exists {
 			if fullFileExists {
-				download = &types.Download{
+				download = &types.InternalDownload{
+					Id:             sdk.Id("upl"),
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusCompleted,
 					TotalSize:      fullSize,
 					DownloadedSize: fullSize,
 				}
-				dm.downloads[url] = download
 			} else if partialFileExists {
-
-				download = &types.Download{
+				download = &types.InternalDownload{
+					Id:             sdk.Id("upl"),
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusInProgress,
 					DownloadedSize: partialSize,
 				}
-				dm.downloads[url] = download
 			} else {
-				download = &types.Download{
+				download = &types.InternalDownload{
+					Id:       sdk.Id("upl"),
 					URL:      url,
 					FilePath: safeFullFilePath,
 					Status:   types.DownloadStatusInProgress,
 				}
-				dm.downloads[url] = download
 			}
 		} else {
 			// This corrects a potential mismatch between the file size value
@@ -105,12 +102,16 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 
 		return nil
 	}
+
 	err = f()
 	if err != nil {
 		return nil
 	}
 
-	dm.markChanged()
+	err = dm.downloadStore.Upsert(download)
+	if err != nil {
+		return errors.Wrap(err, "failed to upsert download")
+	}
 
 	if dm.SyncDownloads {
 		return dm.downloadFile(download)
@@ -129,7 +130,7 @@ func (dm *DownloadService) download(url, downloadDir string) error {
 	return nil
 }
 
-func (dm *DownloadService) downloadFile(d *types.Download) error {
+func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 	if d.Status == types.DownloadStatusCompleted {
 		return nil
 	}
@@ -137,6 +138,7 @@ func (dm *DownloadService) downloadFile(d *types.Download) error {
 		// this should never happen as Do sets this to inProgress
 		return fmt.Errorf("cannot download file with status paused")
 	}
+
 	out, err := os.OpenFile(
 		d.FilePath+".part",
 		os.O_CREATE|os.O_WRONLY|os.O_APPEND,
@@ -185,7 +187,10 @@ func (dm *DownloadService) downloadFile(d *types.Download) error {
 				if d.TotalSize == 0 && totalSize != 0 {
 					d.TotalSize = totalSize
 				}
-				dm.markChanged()
+				err = dm.downloadStore.Upsert(d)
+				if err != nil {
+					return errors.Wrap(err, "failed to upsert download")
+				}
 			}
 			if err == io.EOF {
 				break
@@ -202,7 +207,10 @@ func (dm *DownloadService) downloadFile(d *types.Download) error {
 		}
 
 		d.Status = types.DownloadStatusCompleted
-		dm.markChanged()
+		err = dm.downloadStore.Upsert(d)
+		if err != nil {
+			return errors.Wrap(err, "failed to upsert download")
+		}
 	} else {
 		fmt.Printf("Failed to download: %s, status code: %d\n", d.URL, resp.StatusCode)
 	}

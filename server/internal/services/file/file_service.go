@@ -14,33 +14,29 @@ package fileservice
 
 import (
 	"context"
-	"encoding/json"
-	"log/slog"
 	"os"
 	"path"
 	"sync"
-	"time"
 
-	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
-	"github.com/openorch/openorch/sdk/go/logger"
 	types "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-type DownloadService struct {
+type FileService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
 	dlock lock.DistributedLock
 
-	downloads map[string]*types.Download
-	lock      sync.Mutex
+	uploadFolder   string
+	downloadFolder string
 
-	StateFilePath string
-	DefaultFolder string
-	hasChanged    bool
+	lock sync.Mutex
+
+	downloadStore datastore.DataStore
+	uploadStore   datastore.DataStore
 
 	// for testing purposes
 	SyncDownloads bool
@@ -52,9 +48,8 @@ func NewFileService(
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
-) (*DownloadService, error) {
-	home, _ := os.UserHomeDir()
-
+	homeDir string,
+) (*FileService, error) {
 	credentialStore, err := datastoreFactory(
 		"fileSvcCredentials",
 		&sdk.Credential{},
@@ -63,28 +58,51 @@ func NewFileService(
 		return nil, err
 	}
 
-	ret := &DownloadService{
+	uploadFolder := path.Join(homeDir, "uploads")
+	err = os.MkdirAll(uploadFolder, 0700)
+	if err != nil {
+		return nil, err
+	}
+
+	downloadFolder := path.Join(homeDir, "downloads")
+	err = os.MkdirAll(downloadFolder, 0700)
+	if err != nil {
+		return nil, err
+	}
+
+	downloadStore, err := datastoreFactory(
+		"fileSvcDownloads",
+		&types.InternalDownload{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	uploadStore, err := datastoreFactory(
+		"fileSvcUploads",
+		&types.Upload{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	ret := &FileService{
 		clientFactory: clientFactory,
 
 		credentialStore: credentialStore,
 		dlock:           lock,
 
-		StateFilePath: path.Join(home, "downloads.json"),
-		downloads:     make(map[string]*types.Download),
+		uploadFolder:   uploadFolder,
+		downloadFolder: downloadFolder,
+
+		downloadStore: downloadStore,
+		uploadStore:   uploadStore,
 	}
 
 	return ret, nil
 }
 
-func (dm *DownloadService) SetDefaultFolder(s string) {
-	dm.DefaultFolder = s
-}
-
-func (dm *DownloadService) SetStateFilePath(s string) {
-	dm.StateFilePath = s
-}
-
-func (dm *DownloadService) Start() error {
+func (dm *FileService) Start() error {
 	ctx := context.Background()
 	dm.dlock.Acquire(ctx, "file-svc-start")
 	defer dm.dlock.Release(ctx, "file-svc-start")
@@ -105,12 +123,17 @@ func (dm *DownloadService) Start() error {
 		return err
 	}
 
-	err = dm.loadState()
+	downloads, err := dm.downloadStore.Query(
+		datastore.Equals([]string{"status"},
+			types.DownloadStatusInProgress,
+		)).Find()
 	if err != nil {
-		return err
+		return nil
 	}
 
-	for _, download := range dm.downloads {
+	for _, downloadI := range downloads {
+		download := downloadI.(*types.InternalDownload)
+
 		if download.Status == types.DownloadStatusInProgress {
 			err = dm.download(download.URL, path.Dir(download.FilePath))
 			if err != nil {
@@ -119,98 +142,24 @@ func (dm *DownloadService) Start() error {
 		}
 	}
 
-	go dm.periodicSaveState()
-
 	return err
 }
 
-func (dm *DownloadService) loadState() error {
+func (dm *FileService) getDownload(url string) (*types.InternalDownload, bool) {
 	dm.lock.Lock()
 	defer dm.lock.Unlock()
 
-	_, err := os.Stat(dm.StateFilePath)
-	if os.IsNotExist(err) {
-		err = os.MkdirAll(path.Dir(dm.StateFilePath), 0755)
-		if err != nil {
-			return err
-		}
-		err = os.WriteFile(dm.StateFilePath, []byte("{}"), 0755)
-		if err != nil {
-			return err
-		}
-	} else if err != nil {
-		return err
-	}
-
-	data, err := os.ReadFile(dm.StateFilePath)
+	downloadIs, err := dm.downloadStore.Query(
+		datastore.Equals([]string{"url"},
+			url,
+		)).Find()
 	if err != nil {
-		return err
-	}
-	return json.Unmarshal(data, &dm.downloads)
-}
-
-func (ds *DownloadService) markChanged() {
-	ds.lock.Lock()
-	defer ds.lock.Unlock()
-	ds.hasChanged = true
-}
-
-func (ds *DownloadService) markChangedWithoutLock() {
-	ds.hasChanged = true
-}
-
-func (ds *DownloadService) saveState() error {
-	ds.lock.Lock()
-	data, err := json.MarshalIndent(ds.downloads, "", "  ")
-	if err != nil {
-		ds.lock.Unlock()
-		return err
-	}
-	ds.hasChanged = false
-	ds.lock.Unlock()
-
-	_, err = ds.clientFactory.Client(sdk.WithToken(ds.token)).
-		FirehoseSvcAPI.PublishEvent(context.Background()).
-		Event(openapi.FirehoseSvcEventPublishRequest{
-			Event: &openapi.FirehoseSvcEvent{
-				Name: openapi.PtrString(types.EventDownloadStatusChangeName),
-			},
-		}).
-		Execute()
-	if err != nil {
-		logger.Error("Failed to publish firehose event", slog.Any("error", err))
+		return nil, false
 	}
 
-	err = os.WriteFile(ds.StateFilePath, data, 0666)
-	if err != nil {
-		return err
+	if len(downloadIs) == 0 {
+		return nil, false
 	}
 
-	return nil
-}
-
-func (ds *DownloadService) periodicSaveState() {
-	for {
-		time.Sleep(1 * time.Second) // Control the throttle rate here
-		ds.lock.Lock()
-		if ds.hasChanged {
-			ds.lock.Unlock()
-			if err := ds.saveState(); err != nil {
-				logger.Error(
-					"Failed to save state",
-					slog.String("error", err.Error()),
-				)
-			}
-		} else {
-			ds.lock.Unlock()
-		}
-	}
-}
-
-func (dm *DownloadService) getDownload(url string) (*types.Download, bool) {
-	dm.lock.Lock()
-	defer dm.lock.Unlock()
-
-	v, ok := dm.downloads[url]
-	return v, ok
+	return downloadIs[0].(*types.InternalDownload), true
 }

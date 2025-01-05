@@ -21,11 +21,11 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-func (ds *DownloadService) registerPermissions() error {
+func (ds *FileService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := ds.clientFactory.Client(sdk.WithToken(ds.token)).UserSvcAPI
 
-	for _, permission := range downloadtypes.DownloadAdminPermissions {
+	for _, permission := range downloadtypes.FileAdminPermissions {
 		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
 			RequestBody(client.UserSvcUpserPermissionRequest{
 				Permission: &client.UserSvcPermission{
@@ -42,7 +42,7 @@ func (ds *DownloadService) registerPermissions() error {
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
-		for _, permission := range downloadtypes.DownloadAdminPermissions {
+		for _, permission := range downloadtypes.FileAdminPermissions {
 			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
 				Execute()
 			if err != nil {

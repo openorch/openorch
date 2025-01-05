@@ -20,8 +20,9 @@ var (
 	DownloadStatusErrored    DownloadStatus = "errored"
 )
 
-/* Download is the backend type for downloads */
-type Download struct {
+// Download is the internal type for downloads.
+type InternalDownload struct {
+	Id             string         `json:"id"`
 	URL            string         `json:"url"`
 	FilePath       string         `json:"filePath"`
 	DownloadedSize int64          `json:"downloadedSize"`
@@ -29,8 +30,14 @@ type Download struct {
 	Status         DownloadStatus `json:"status"`
 }
 
-/* DownloadDetails is sent to the frontend */
-type DownloadDetails struct {
+func (d InternalDownload) GetId() string {
+	return d.Id
+}
+
+// Download represents the metadata and status of a file being downloaded.
+// It tracks the progress, size, and state of the download, allowing for
+// pause, resume, and cancellation operations.
+type Download struct {
 	Id              string   `json:"id"`
 	URL             string   `json:"url"`
 	FileName        string   `json:"fileName"`
@@ -46,7 +53,7 @@ type DownloadDetails struct {
 }
 
 type OnFileDownloadStatus struct {
-	AllDownloads []DownloadDetails `json:"allDownloads"`
+	AllDownloads []Download `json:"allDownloads"`
 }
 
 type DownloadRequest struct {
@@ -60,8 +67,8 @@ type GetDownloadRequest struct {
 }
 
 type GetDownloadResponse struct {
-	Exists   bool             `json:"exists"   binding:"required"`
-	Download *DownloadDetails `json:"download"`
+	Exists   bool      `json:"exists"   binding:"required"`
+	Download *Download `json:"download"`
 }
 
 type DownloadResponse struct{}
@@ -69,7 +76,7 @@ type DownloadResponse struct{}
 type DownloadsRequest struct{}
 
 type DownloadsResponse struct {
-	Downloads []DownloadDetails `json:"downloads"`
+	Downloads []Download `json:"downloads"`
 }
 
 //

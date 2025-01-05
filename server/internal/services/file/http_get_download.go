@@ -20,7 +20,7 @@ import (
 	"github.com/gorilla/mux"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/file/types"
+	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
 // @ID getDownload
@@ -32,18 +32,18 @@ import (
 // @Accept json
 // @Produce json
 // @Param downloadId path string true "Download ID"
-// @Success 200 {object} download.GetDownloadResponse
+// @Success 200 {object} file.GetDownloadResponse
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download/{downloadId} [get]
-func (ds *DownloadService) Get(
+func (fs *FileService) GetDownload(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadView.Id).
+	isAuthRsp, _, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"docker-svc", "model-svc"},
 		}).
@@ -67,11 +67,11 @@ func (ds *DownloadService) Get(
 		return
 	}
 
-	dl, exists := ds.getDownload(did)
+	dl, exists := fs.getDownload(did)
 
-	jsonData, _ := json.Marshal(download.GetDownloadResponse{
+	jsonData, _ := json.Marshal(file.GetDownloadResponse{
 		Exists:   exists,
-		Download: downloadToDownloadDetails(did, dl),
+		Download: downloadToDownloadDetails(dl),
 	})
 	w.Write(jsonData)
 }

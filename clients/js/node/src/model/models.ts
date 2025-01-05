@@ -58,11 +58,14 @@ export * from './emailSvcErrorResponse';
 export * from './emailSvcFile';
 export * from './emailSvcSendEmailRequest';
 export * from './emailSvcSendEmailResponse';
-export * from './fileSvcDownloadDetails';
+export * from './fileSvcDownload';
 export * from './fileSvcDownloadRequest';
 export * from './fileSvcDownloadsResponse';
 export * from './fileSvcErrorResponse';
 export * from './fileSvcGetDownloadResponse';
+export * from './fileSvcUpload';
+export * from './fileSvcUploadFileResponse';
+export * from './fileSvcUploadsResponse';
 export * from './firehoseSvcErrorResponse';
 export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
@@ -126,6 +129,7 @@ export * from './secretSvcSecret';
 export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
+export * from './uploadFileRequest';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAuthToken';
 export * from './userSvcChangePasswordAdminRequest';
@@ -227,11 +231,14 @@ import { EmailSvcErrorResponse } from './emailSvcErrorResponse';
 import { EmailSvcFile } from './emailSvcFile';
 import { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest';
 import { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse';
-import { FileSvcDownloadDetails } from './fileSvcDownloadDetails';
+import { FileSvcDownload } from './fileSvcDownload';
 import { FileSvcDownloadRequest } from './fileSvcDownloadRequest';
 import { FileSvcDownloadsResponse } from './fileSvcDownloadsResponse';
 import { FileSvcErrorResponse } from './fileSvcErrorResponse';
 import { FileSvcGetDownloadResponse } from './fileSvcGetDownloadResponse';
+import { FileSvcUpload } from './fileSvcUpload';
+import { FileSvcUploadFileResponse } from './fileSvcUploadFileResponse';
+import { FileSvcUploadsResponse } from './fileSvcUploadsResponse';
 import { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse';
 import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
@@ -295,6 +302,7 @@ import { SecretSvcSecret } from './secretSvcSecret';
 import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
+import { UploadFileRequest } from './uploadFileRequest';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
 import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
@@ -406,11 +414,14 @@ let typeMap: {[index: string]: any} = {
     "EmailSvcFile": EmailSvcFile,
     "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,
     "EmailSvcSendEmailResponse": EmailSvcSendEmailResponse,
-    "FileSvcDownloadDetails": FileSvcDownloadDetails,
+    "FileSvcDownload": FileSvcDownload,
     "FileSvcDownloadRequest": FileSvcDownloadRequest,
     "FileSvcDownloadsResponse": FileSvcDownloadsResponse,
     "FileSvcErrorResponse": FileSvcErrorResponse,
     "FileSvcGetDownloadResponse": FileSvcGetDownloadResponse,
+    "FileSvcUpload": FileSvcUpload,
+    "FileSvcUploadFileResponse": FileSvcUploadFileResponse,
+    "FileSvcUploadsResponse": FileSvcUploadsResponse,
     "FirehoseSvcErrorResponse": FirehoseSvcErrorResponse,
     "FirehoseSvcEvent": FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
@@ -467,6 +478,7 @@ let typeMap: {[index: string]: any} = {
     "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,
+    "UploadFileRequest": UploadFileRequest,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,

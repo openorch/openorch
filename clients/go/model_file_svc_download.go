@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.9
+API version: 0.3.0-rc.10
 Contact: sales@singulatron.com
 */
 
@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the FileSvcDownloadDetails type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &FileSvcDownloadDetails{}
+// checks if the FileSvcDownload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FileSvcDownload{}
 
-// FileSvcDownloadDetails struct for FileSvcDownloadDetails
-type FileSvcDownloadDetails struct {
+// FileSvcDownload struct for FileSvcDownload
+type FileSvcDownload struct {
 	Cancelled *bool `json:"cancelled,omitempty"`
 	Dir *string `json:"dir,omitempty"`
 	DownloadedBytes *int64 `json:"downloadedBytes,omitempty"`
@@ -34,25 +34,25 @@ type FileSvcDownloadDetails struct {
 	Url *string `json:"url,omitempty"`
 }
 
-// NewFileSvcDownloadDetails instantiates a new FileSvcDownloadDetails object
+// NewFileSvcDownload instantiates a new FileSvcDownload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileSvcDownloadDetails() *FileSvcDownloadDetails {
-	this := FileSvcDownloadDetails{}
+func NewFileSvcDownload() *FileSvcDownload {
+	this := FileSvcDownload{}
 	return &this
 }
 
-// NewFileSvcDownloadDetailsWithDefaults instantiates a new FileSvcDownloadDetails object
+// NewFileSvcDownloadWithDefaults instantiates a new FileSvcDownload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFileSvcDownloadDetailsWithDefaults() *FileSvcDownloadDetails {
-	this := FileSvcDownloadDetails{}
+func NewFileSvcDownloadWithDefaults() *FileSvcDownload {
+	this := FileSvcDownload{}
 	return &this
 }
 
 // GetCancelled returns the Cancelled field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetCancelled() bool {
+func (o *FileSvcDownload) GetCancelled() bool {
 	if o == nil || IsNil(o.Cancelled) {
 		var ret bool
 		return ret
@@ -62,7 +62,7 @@ func (o *FileSvcDownloadDetails) GetCancelled() bool {
 
 // GetCancelledOk returns a tuple with the Cancelled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetCancelledOk() (*bool, bool) {
+func (o *FileSvcDownload) GetCancelledOk() (*bool, bool) {
 	if o == nil || IsNil(o.Cancelled) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *FileSvcDownloadDetails) GetCancelledOk() (*bool, bool) {
 }
 
 // HasCancelled returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasCancelled() bool {
+func (o *FileSvcDownload) HasCancelled() bool {
 	if o != nil && !IsNil(o.Cancelled) {
 		return true
 	}
@@ -79,12 +79,12 @@ func (o *FileSvcDownloadDetails) HasCancelled() bool {
 }
 
 // SetCancelled gets a reference to the given bool and assigns it to the Cancelled field.
-func (o *FileSvcDownloadDetails) SetCancelled(v bool) {
+func (o *FileSvcDownload) SetCancelled(v bool) {
 	o.Cancelled = &v
 }
 
 // GetDir returns the Dir field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetDir() string {
+func (o *FileSvcDownload) GetDir() string {
 	if o == nil || IsNil(o.Dir) {
 		var ret string
 		return ret
@@ -94,7 +94,7 @@ func (o *FileSvcDownloadDetails) GetDir() string {
 
 // GetDirOk returns a tuple with the Dir field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetDirOk() (*string, bool) {
+func (o *FileSvcDownload) GetDirOk() (*string, bool) {
 	if o == nil || IsNil(o.Dir) {
 		return nil, false
 	}
@@ -102,7 +102,7 @@ func (o *FileSvcDownloadDetails) GetDirOk() (*string, bool) {
 }
 
 // HasDir returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasDir() bool {
+func (o *FileSvcDownload) HasDir() bool {
 	if o != nil && !IsNil(o.Dir) {
 		return true
 	}
@@ -111,12 +111,12 @@ func (o *FileSvcDownloadDetails) HasDir() bool {
 }
 
 // SetDir gets a reference to the given string and assigns it to the Dir field.
-func (o *FileSvcDownloadDetails) SetDir(v string) {
+func (o *FileSvcDownload) SetDir(v string) {
 	o.Dir = &v
 }
 
 // GetDownloadedBytes returns the DownloadedBytes field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetDownloadedBytes() int64 {
+func (o *FileSvcDownload) GetDownloadedBytes() int64 {
 	if o == nil || IsNil(o.DownloadedBytes) {
 		var ret int64
 		return ret
@@ -126,7 +126,7 @@ func (o *FileSvcDownloadDetails) GetDownloadedBytes() int64 {
 
 // GetDownloadedBytesOk returns a tuple with the DownloadedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetDownloadedBytesOk() (*int64, bool) {
+func (o *FileSvcDownload) GetDownloadedBytesOk() (*int64, bool) {
 	if o == nil || IsNil(o.DownloadedBytes) {
 		return nil, false
 	}
@@ -134,7 +134,7 @@ func (o *FileSvcDownloadDetails) GetDownloadedBytesOk() (*int64, bool) {
 }
 
 // HasDownloadedBytes returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasDownloadedBytes() bool {
+func (o *FileSvcDownload) HasDownloadedBytes() bool {
 	if o != nil && !IsNil(o.DownloadedBytes) {
 		return true
 	}
@@ -143,12 +143,12 @@ func (o *FileSvcDownloadDetails) HasDownloadedBytes() bool {
 }
 
 // SetDownloadedBytes gets a reference to the given int64 and assigns it to the DownloadedBytes field.
-func (o *FileSvcDownloadDetails) SetDownloadedBytes(v int64) {
+func (o *FileSvcDownload) SetDownloadedBytes(v int64) {
 	o.DownloadedBytes = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetError() string {
+func (o *FileSvcDownload) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -158,7 +158,7 @@ func (o *FileSvcDownloadDetails) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetErrorOk() (*string, bool) {
+func (o *FileSvcDownload) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -166,7 +166,7 @@ func (o *FileSvcDownloadDetails) GetErrorOk() (*string, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasError() bool {
+func (o *FileSvcDownload) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -175,12 +175,12 @@ func (o *FileSvcDownloadDetails) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *FileSvcDownloadDetails) SetError(v string) {
+func (o *FileSvcDownload) SetError(v string) {
 	o.Error = &v
 }
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetFileName() string {
+func (o *FileSvcDownload) GetFileName() string {
 	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
@@ -190,7 +190,7 @@ func (o *FileSvcDownloadDetails) GetFileName() string {
 
 // GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetFileNameOk() (*string, bool) {
+func (o *FileSvcDownload) GetFileNameOk() (*string, bool) {
 	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
@@ -198,7 +198,7 @@ func (o *FileSvcDownloadDetails) GetFileNameOk() (*string, bool) {
 }
 
 // HasFileName returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasFileName() bool {
+func (o *FileSvcDownload) HasFileName() bool {
 	if o != nil && !IsNil(o.FileName) {
 		return true
 	}
@@ -207,12 +207,12 @@ func (o *FileSvcDownloadDetails) HasFileName() bool {
 }
 
 // SetFileName gets a reference to the given string and assigns it to the FileName field.
-func (o *FileSvcDownloadDetails) SetFileName(v string) {
+func (o *FileSvcDownload) SetFileName(v string) {
 	o.FileName = &v
 }
 
 // GetFilePath returns the FilePath field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetFilePath() string {
+func (o *FileSvcDownload) GetFilePath() string {
 	if o == nil || IsNil(o.FilePath) {
 		var ret string
 		return ret
@@ -222,7 +222,7 @@ func (o *FileSvcDownloadDetails) GetFilePath() string {
 
 // GetFilePathOk returns a tuple with the FilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetFilePathOk() (*string, bool) {
+func (o *FileSvcDownload) GetFilePathOk() (*string, bool) {
 	if o == nil || IsNil(o.FilePath) {
 		return nil, false
 	}
@@ -230,7 +230,7 @@ func (o *FileSvcDownloadDetails) GetFilePathOk() (*string, bool) {
 }
 
 // HasFilePath returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasFilePath() bool {
+func (o *FileSvcDownload) HasFilePath() bool {
 	if o != nil && !IsNil(o.FilePath) {
 		return true
 	}
@@ -239,12 +239,12 @@ func (o *FileSvcDownloadDetails) HasFilePath() bool {
 }
 
 // SetFilePath gets a reference to the given string and assigns it to the FilePath field.
-func (o *FileSvcDownloadDetails) SetFilePath(v string) {
+func (o *FileSvcDownload) SetFilePath(v string) {
 	o.FilePath = &v
 }
 
 // GetFullFileSize returns the FullFileSize field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetFullFileSize() int64 {
+func (o *FileSvcDownload) GetFullFileSize() int64 {
 	if o == nil || IsNil(o.FullFileSize) {
 		var ret int64
 		return ret
@@ -254,7 +254,7 @@ func (o *FileSvcDownloadDetails) GetFullFileSize() int64 {
 
 // GetFullFileSizeOk returns a tuple with the FullFileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetFullFileSizeOk() (*int64, bool) {
+func (o *FileSvcDownload) GetFullFileSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.FullFileSize) {
 		return nil, false
 	}
@@ -262,7 +262,7 @@ func (o *FileSvcDownloadDetails) GetFullFileSizeOk() (*int64, bool) {
 }
 
 // HasFullFileSize returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasFullFileSize() bool {
+func (o *FileSvcDownload) HasFullFileSize() bool {
 	if o != nil && !IsNil(o.FullFileSize) {
 		return true
 	}
@@ -271,12 +271,12 @@ func (o *FileSvcDownloadDetails) HasFullFileSize() bool {
 }
 
 // SetFullFileSize gets a reference to the given int64 and assigns it to the FullFileSize field.
-func (o *FileSvcDownloadDetails) SetFullFileSize(v int64) {
+func (o *FileSvcDownload) SetFullFileSize(v int64) {
 	o.FullFileSize = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetId() string {
+func (o *FileSvcDownload) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -286,7 +286,7 @@ func (o *FileSvcDownloadDetails) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetIdOk() (*string, bool) {
+func (o *FileSvcDownload) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -294,7 +294,7 @@ func (o *FileSvcDownloadDetails) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasId() bool {
+func (o *FileSvcDownload) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -303,12 +303,12 @@ func (o *FileSvcDownloadDetails) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *FileSvcDownloadDetails) SetId(v string) {
+func (o *FileSvcDownload) SetId(v string) {
 	o.Id = &v
 }
 
 // GetPaused returns the Paused field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetPaused() bool {
+func (o *FileSvcDownload) GetPaused() bool {
 	if o == nil || IsNil(o.Paused) {
 		var ret bool
 		return ret
@@ -318,7 +318,7 @@ func (o *FileSvcDownloadDetails) GetPaused() bool {
 
 // GetPausedOk returns a tuple with the Paused field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetPausedOk() (*bool, bool) {
+func (o *FileSvcDownload) GetPausedOk() (*bool, bool) {
 	if o == nil || IsNil(o.Paused) {
 		return nil, false
 	}
@@ -326,7 +326,7 @@ func (o *FileSvcDownloadDetails) GetPausedOk() (*bool, bool) {
 }
 
 // HasPaused returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasPaused() bool {
+func (o *FileSvcDownload) HasPaused() bool {
 	if o != nil && !IsNil(o.Paused) {
 		return true
 	}
@@ -335,12 +335,12 @@ func (o *FileSvcDownloadDetails) HasPaused() bool {
 }
 
 // SetPaused gets a reference to the given bool and assigns it to the Paused field.
-func (o *FileSvcDownloadDetails) SetPaused(v bool) {
+func (o *FileSvcDownload) SetPaused(v bool) {
 	o.Paused = &v
 }
 
 // GetProgress returns the Progress field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetProgress() float32 {
+func (o *FileSvcDownload) GetProgress() float32 {
 	if o == nil || IsNil(o.Progress) {
 		var ret float32
 		return ret
@@ -350,7 +350,7 @@ func (o *FileSvcDownloadDetails) GetProgress() float32 {
 
 // GetProgressOk returns a tuple with the Progress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetProgressOk() (*float32, bool) {
+func (o *FileSvcDownload) GetProgressOk() (*float32, bool) {
 	if o == nil || IsNil(o.Progress) {
 		return nil, false
 	}
@@ -358,7 +358,7 @@ func (o *FileSvcDownloadDetails) GetProgressOk() (*float32, bool) {
 }
 
 // HasProgress returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasProgress() bool {
+func (o *FileSvcDownload) HasProgress() bool {
 	if o != nil && !IsNil(o.Progress) {
 		return true
 	}
@@ -367,12 +367,12 @@ func (o *FileSvcDownloadDetails) HasProgress() bool {
 }
 
 // SetProgress gets a reference to the given float32 and assigns it to the Progress field.
-func (o *FileSvcDownloadDetails) SetProgress(v float32) {
+func (o *FileSvcDownload) SetProgress(v float32) {
 	o.Progress = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetStatus() string {
+func (o *FileSvcDownload) GetStatus() string {
 	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
@@ -382,7 +382,7 @@ func (o *FileSvcDownloadDetails) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetStatusOk() (*string, bool) {
+func (o *FileSvcDownload) GetStatusOk() (*string, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -390,7 +390,7 @@ func (o *FileSvcDownloadDetails) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasStatus() bool {
+func (o *FileSvcDownload) HasStatus() bool {
 	if o != nil && !IsNil(o.Status) {
 		return true
 	}
@@ -399,12 +399,12 @@ func (o *FileSvcDownloadDetails) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *FileSvcDownloadDetails) SetStatus(v string) {
+func (o *FileSvcDownload) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *FileSvcDownloadDetails) GetUrl() string {
+func (o *FileSvcDownload) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
@@ -414,7 +414,7 @@ func (o *FileSvcDownloadDetails) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownloadDetails) GetUrlOk() (*string, bool) {
+func (o *FileSvcDownload) GetUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -422,7 +422,7 @@ func (o *FileSvcDownloadDetails) GetUrlOk() (*string, bool) {
 }
 
 // HasUrl returns a boolean if a field has been set.
-func (o *FileSvcDownloadDetails) HasUrl() bool {
+func (o *FileSvcDownload) HasUrl() bool {
 	if o != nil && !IsNil(o.Url) {
 		return true
 	}
@@ -431,11 +431,11 @@ func (o *FileSvcDownloadDetails) HasUrl() bool {
 }
 
 // SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *FileSvcDownloadDetails) SetUrl(v string) {
+func (o *FileSvcDownload) SetUrl(v string) {
 	o.Url = &v
 }
 
-func (o FileSvcDownloadDetails) MarshalJSON() ([]byte, error) {
+func (o FileSvcDownload) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -443,7 +443,7 @@ func (o FileSvcDownloadDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FileSvcDownloadDetails) ToMap() (map[string]interface{}, error) {
+func (o FileSvcDownload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Cancelled) {
 		toSerialize["cancelled"] = o.Cancelled
@@ -484,38 +484,38 @@ func (o FileSvcDownloadDetails) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableFileSvcDownloadDetails struct {
-	value *FileSvcDownloadDetails
+type NullableFileSvcDownload struct {
+	value *FileSvcDownload
 	isSet bool
 }
 
-func (v NullableFileSvcDownloadDetails) Get() *FileSvcDownloadDetails {
+func (v NullableFileSvcDownload) Get() *FileSvcDownload {
 	return v.value
 }
 
-func (v *NullableFileSvcDownloadDetails) Set(val *FileSvcDownloadDetails) {
+func (v *NullableFileSvcDownload) Set(val *FileSvcDownload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFileSvcDownloadDetails) IsSet() bool {
+func (v NullableFileSvcDownload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFileSvcDownloadDetails) Unset() {
+func (v *NullableFileSvcDownload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFileSvcDownloadDetails(val *FileSvcDownloadDetails) *NullableFileSvcDownloadDetails {
-	return &NullableFileSvcDownloadDetails{value: val, isSet: true}
+func NewNullableFileSvcDownload(val *FileSvcDownload) *NullableFileSvcDownload {
+	return &NullableFileSvcDownload{value: val, isSet: true}
 }
 
-func (v NullableFileSvcDownloadDetails) MarshalJSON() ([]byte, error) {
+func (v NullableFileSvcDownload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFileSvcDownloadDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableFileSvcDownload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

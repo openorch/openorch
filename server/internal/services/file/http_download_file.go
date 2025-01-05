@@ -36,19 +36,19 @@ import (
 // @Failure 500 {object} file.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/download [put]
-func (ds *DownloadService) Download(
+func (ds *FileService) Download(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+	isAuthRsp, isAuthHttpRsp, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"model-svc"},
 		}).
 		Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(isAuthHttpRsp.StatusCode)
 		w.Write([]byte(err.Error()))
 		return
 	}

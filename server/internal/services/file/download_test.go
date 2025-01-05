@@ -116,7 +116,6 @@ outer:
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".openorch",
 		"downloads",
 		fileservice.EncodeURLtoFileName(fileHostServer.URL),
 	)
@@ -172,7 +171,6 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 
 	partFilePath := filepath.Join(
 		options.HomeDir,
-		".openorch",
 		"downloads",
 		fileservice.EncodeURLtoFileName(downloadURL)+".part",
 	)
@@ -221,7 +219,6 @@ outer:
 
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
-		".openorch",
 		"downloads",
 		fileservice.EncodeURLtoFileName(downloadURL),
 	)
@@ -262,7 +259,6 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	downloadURL := "full-file"
 	fullFilePath := filepath.Join(
 		options.HomeDir,
-		".openorch",
 		"downloads",
 		fileservice.EncodeURLtoFileName(downloadURL),
 	)
@@ -286,7 +282,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	ticker := time.NewTicker(5 * time.Millisecond)
 	defer ticker.Stop()
 
-	var d *openapi.FileSvcDownloadDetails
+	var d *openapi.FileSvcDownload
 
 outer:
 	for {
