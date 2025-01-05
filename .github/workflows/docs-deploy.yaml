@@ -31,9 +31,6 @@ jobs:
           ./gen.sh
         working-directory: ./docs-source
 
-      - name: Add .nojekyll
-        run: touch ./docs/.nojekyll
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
