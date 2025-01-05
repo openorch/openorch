@@ -37,10 +37,16 @@ var PermissionUploadCreate = usertypes.Permission{
 	Name: "File Svc - Upload Create",
 }
 
+var PermissionUploadView = usertypes.Permission{
+	Id:   "file-svc:upload:view",
+	Name: "File Svc - Upload View",
+}
+
 var FileAdminPermissions = []usertypes.Permission{
 	PermissionDownloadCreate,
 	PermissionDownloadView,
 	PermissionDownloadEdit,
 	PermissionDownloadDelete,
 	PermissionUploadCreate,
+	PermissionUploadView,
 }

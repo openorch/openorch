@@ -188,16 +188,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	downloadFolder := path.Join(options.HomeDir, "downloads")
-	err = os.MkdirAll(downloadFolder, 0755)
-	if err != nil {
-		logger.Error(
-			"Downloads folder creation failed",
-			slog.String("error", err.Error()),
-		)
-		os.Exit(1)
-	}
-
 	fileService, err := fileservice.NewFileService(
 		options.ClientFactory,
 		options.Lock,
@@ -211,11 +201,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		)
 		os.Exit(1)
 	}
-
-	fileService.SetDefaultFolder(downloadFolder)
-	fileService.SetStateFilePath(
-		path.Join(options.HomeDir, "downloads.json"),
-	)
 
 	dockerService, err := dockerservice.NewDockerService(
 		options.NodeOptions.VolumeName,

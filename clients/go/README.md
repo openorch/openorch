@@ -110,7 +110,7 @@ Class | Method | HTTP request | Description
 *FileSvcAPI* | [**GetDownload**](docs/FileSvcAPI.md#getdownload) | **Get** /file-svc/download/{downloadId} | Get a Download
 *FileSvcAPI* | [**ListFileDownloads**](docs/FileSvcAPI.md#listfiledownloads) | **Post** /file-svc/downloads | List Downloads
 *FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{downloadId}/pause | Pause a Download
-*FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Post** /file-svc/upload | Upload a File
+*FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Put** /file-svc/upload | Upload a File
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
 *FirehoseSvcAPI* | [**SubscribeToEvents**](docs/FirehoseSvcAPI.md#subscribetoevents) | **Get** /firehose-svc/events/subscribe | Subscribe to the Event Stream
 *ModelSvcAPI* | [**GetDefaultModelStatus**](docs/ModelSvcAPI.md#getdefaultmodelstatus) | **Get** /model-svc/default-model/status | Get Default Model Status

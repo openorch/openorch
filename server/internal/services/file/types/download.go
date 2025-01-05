@@ -22,11 +22,16 @@ var (
 
 // Download is the internal type for downloads.
 type InternalDownload struct {
+	Id             string         `json:"id"`
 	URL            string         `json:"url"`
 	FilePath       string         `json:"filePath"`
 	DownloadedSize int64          `json:"downloadedSize"`
 	TotalSize      int64          `json:"totalSize"`
 	Status         DownloadStatus `json:"status"`
+}
+
+func (d InternalDownload) GetId() string {
+	return d.Id
 }
 
 // Download represents the metadata and status of a file being downloaded.

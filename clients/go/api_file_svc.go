@@ -93,7 +93,9 @@ Requires the `file-svc:download:edit` permission.
 	/*
 	UploadFile Upload a File
 
-	Uploads a file to the server and stores it at the specified path.
+	Uploads a file to the server.
+Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
 
 Requires the `file-svc:upload:create` permission.
 
@@ -715,7 +717,9 @@ func (r ApiUploadFileRequest) Execute() (map[string]interface{}, *http.Response,
 /*
 UploadFile Upload a File
 
-Uploads a file to the server and stores it at the specified path.
+Uploads a file to the server.
+Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
 
 Requires the `file-svc:upload:create` permission.
 
@@ -733,7 +737,7 @@ func (a *FileSvcAPIService) UploadFile(ctx context.Context) ApiUploadFileRequest
 //  @return map[string]interface{}
 func (a *FileSvcAPIService) UploadFileExecute(r ApiUploadFileRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  map[string]interface{}

@@ -16,15 +16,22 @@ import (
 	"path/filepath"
 
 	types "github.com/openorch/openorch/server/internal/services/file/types"
+	"github.com/pkg/errors"
 )
 
 func (ds *FileService) list() ([]types.Download, error) {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()
 
+	downloadIs, err := ds.downloadStore.Query().Find()
+	if err != nil {
+		return nil, errors.Wrap(err, "error listing downloads")
+	}
+
 	var downloadDetailsList []types.Download
-	for id, download := range ds.downloads {
-		downloadDetail := downloadToDownloadDetails(id, download)
+	for _, downloadI := range downloadIs {
+		download := downloadI.(*types.InternalDownload)
+		downloadDetail := downloadToDownloadDetails(download)
 		downloadDetailsList = append(downloadDetailsList, *downloadDetail)
 	}
 
@@ -32,7 +39,6 @@ func (ds *FileService) list() ([]types.Download, error) {
 }
 
 func downloadToDownloadDetails(
-	id string,
 	download *types.InternalDownload,
 ) *types.Download {
 	if download == nil {
@@ -65,7 +71,7 @@ func downloadToDownloadDetails(
 	var errorString *string
 
 	downloadDetail := types.Download{
-		Id:              id,
+		Id:              download.Id,
 		URL:             download.URL,
 		FileName:        fileName,
 		Dir:             dir,

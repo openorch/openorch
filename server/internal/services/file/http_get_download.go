@@ -71,7 +71,7 @@ func (fs *FileService) GetDownload(
 
 	jsonData, _ := json.Marshal(file.GetDownloadResponse{
 		Exists:   exists,
-		Download: downloadToDownloadDetails(did, dl),
+		Download: downloadToDownloadDetails(dl),
 	})
 	w.Write(jsonData)
 }

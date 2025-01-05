@@ -22,6 +22,7 @@ import (
 	"strconv"
 	"strings"
 
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 	types "github.com/openorch/openorch/server/internal/services/file/types"
 	"github.com/pkg/errors"
@@ -60,34 +61,33 @@ func (dm *FileService) download(url, downloadDir string) error {
 		dm.lock.Lock()
 		defer dm.lock.Unlock()
 
-		download, exists = dm.downloads[url]
+		download, exists = dm.getDownload(url)
 
 		if !exists {
 			if fullFileExists {
 				download = &types.InternalDownload{
+					Id:             sdk.Id("upl"),
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusCompleted,
 					TotalSize:      fullSize,
 					DownloadedSize: fullSize,
 				}
-				dm.downloads[url] = download
 			} else if partialFileExists {
-
 				download = &types.InternalDownload{
+					Id:             sdk.Id("upl"),
 					URL:            url,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusInProgress,
 					DownloadedSize: partialSize,
 				}
-				dm.downloads[url] = download
 			} else {
 				download = &types.InternalDownload{
+					Id:       sdk.Id("upl"),
 					URL:      url,
 					FilePath: safeFullFilePath,
 					Status:   types.DownloadStatusInProgress,
 				}
-				dm.downloads[url] = download
 			}
 		} else {
 			// This corrects a potential mismatch between the file size value
@@ -110,7 +110,10 @@ func (dm *FileService) download(url, downloadDir string) error {
 		return nil
 	}
 
-	dm.markChanged()
+	err = dm.downloadStore.Upsert(download)
+	if err != nil {
+		return errors.Wrap(err, "failed to upsert download")
+	}
 
 	if dm.SyncDownloads {
 		return dm.downloadFile(download)
@@ -185,7 +188,10 @@ func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 				if d.TotalSize == 0 && totalSize != 0 {
 					d.TotalSize = totalSize
 				}
-				dm.markChanged()
+				err = dm.downloadStore.Upsert(d)
+				if err != nil {
+					return errors.Wrap(err, "failed to upsert download")
+				}
 			}
 			if err == io.EOF {
 				break
@@ -202,7 +208,10 @@ func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 		}
 
 		d.Status = types.DownloadStatusCompleted
-		dm.markChanged()
+		err = dm.downloadStore.Upsert(d)
+		if err != nil {
+			return errors.Wrap(err, "failed to upsert download")
+		}
 	} else {
 		fmt.Printf("Failed to download: %s, status code: %d\n", d.URL, resp.StatusCode)
 	}

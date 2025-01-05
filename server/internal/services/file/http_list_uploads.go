@@ -6,30 +6,28 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// @ID uploadFile
-// @Summary Upload a File
-// @Description Uploads a file to the server.
-// @Description Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
-// @Description Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+// @ID listUploads
+// @Summary List Uploads
+// @Description List the uploaded files.
 // @Description
-// @Description Requires the `file-svc:upload:create` permission.
+// @Description Requires the `file-svc:upload:view` permission.
 // @Tags File Svc
-// @Accept multipart/form-data
+// @Accept json
 // @Produce json
 // @Param file formData file true "File to upload"
-// @Success 200 {object} map[string]any "File uploaded successfully"
-// @Failure 400 {object} file.ErrorResponse "Invalid request"
-// @Failure 401 {object} file.ErrorResponse "Unauthorized"
-// @Failure 500 {object} file.ErrorResponse "Internal Server Error"
+// @Success 200 {object} file.UploadsResponse "List of uploads"
+// @Failure 401 {string} string "Unauthorized"
+// @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /file-svc/upload [put]
-func (fs *FileService) UploadFile(
+// @Router /file-svc/uploads [post]
+func (fs *FileService) ListUploads(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -96,4 +94,10 @@ func (fs *FileService) UploadFile(
 
 	jsonData, _ := json.Marshal(map[string]any{})
 	w.Write(jsonData)
+}
+
+func sanitizeFilename(name string) string {
+	name = filepath.Clean(name)
+	name = filepath.Base(name)
+	return strings.ReplaceAll(name, "..", "_")
 }
