@@ -16,22 +16,25 @@ import (
 	"fmt"
 
 	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
+	"github.com/pkg/errors"
 )
 
-/*
-Pauses a download.
-*/
-func (ds *DownloadService) pause(url string) error {
+// pause a download
+func (ds *FileService) pause(url string) error {
 	ds.lock.Lock()
 	defer ds.lock.Unlock()
 
-	d, exists := ds.downloads[url]
+	d, exists := ds.getDownload(url)
 	if !exists {
 		return fmt.Errorf("url '%v' is not being downloaded", url)
 	}
 
 	d.Status = downloadtypes.DownloadStatusPaused
-	ds.markChangedWithoutLock()
+
+	err := ds.downloadStore.Upsert(d)
+	if err != nil {
+		return errors.Wrap(err, "failed to upsert download")
+	}
 
 	return nil
 }

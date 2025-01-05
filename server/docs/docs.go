@@ -1695,7 +1695,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Fetch a list of all download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "description": "List download details.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1706,12 +1706,118 @@ const docTemplate = `{
                     "File Svc"
                 ],
                 "summary": "List Downloads",
-                "operationId": "listDownloads",
+                "operationId": "listFileDownloads",
                 "responses": {
                     "200": {
                         "description": "List of downloads",
                         "schema": {
                             "$ref": "#/definitions/file_svc.DownloadsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/upload": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Uploads a file to the server.\nCurrently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341\nOnce that is fixed we should have an ` + "`" + `PUT /file-svc/uploads` + "`" + `/uploadFiles (note the plural) endpoints.\n\nRequires the ` + "`" + `file-svc:upload:create` + "`" + ` permission.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Upload a File",
+                "operationId": "uploadFile",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "File to upload",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File uploaded successfully",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.UploadFileResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/uploads": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List the uploaded files.\n\nRequires the ` + "`" + `file-svc:upload:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "List Uploads",
+                "operationId": "listUploads",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "File to upload",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of uploads",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.UploadsResponse"
                         }
                     },
                     "401": {
@@ -5669,7 +5775,7 @@ const docTemplate = `{
                 }
             }
         },
-        "file_svc.DownloadDetails": {
+        "file_svc.Download": {
             "type": "object",
             "properties": {
                 "cancelled": {
@@ -5729,7 +5835,7 @@ const docTemplate = `{
                 "downloads": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/file_svc.DownloadDetails"
+                        "$ref": "#/definitions/file_svc.Download"
                     }
                 }
             }
@@ -5749,10 +5855,53 @@ const docTemplate = `{
             ],
             "properties": {
                 "download": {
-                    "$ref": "#/definitions/file_svc.DownloadDetails"
+                    "$ref": "#/definitions/file_svc.Download"
                 },
                 "exists": {
                     "type": "boolean"
+                }
+            }
+        },
+        "file_svc.Upload": {
+            "type": "object",
+            "properties": {
+                "fileName": {
+                    "type": "string"
+                },
+                "filePath": {
+                    "type": "string"
+                },
+                "fullFileSize": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nodeId": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.UploadFileResponse": {
+            "type": "object",
+            "properties": {
+                "upload": {
+                    "$ref": "#/definitions/file_svc.Upload"
+                }
+            }
+        },
+        "file_svc.UploadsResponse": {
+            "type": "object",
+            "properties": {
+                "uploads": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/file_svc.Upload"
+                    }
                 }
             }
         },
@@ -7669,7 +7818,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.9",
+	Version:          "0.3.0-rc.10",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

@@ -17,29 +17,29 @@ import (
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
-	download "github.com/openorch/openorch/server/internal/services/file/types"
+	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// @ID listDownloads
+// @ID listFileDownloads
 // @Summary List Downloads
-// @Description Fetch a list of all download details.
+// @Description List download details.
 // @Description
 // @Description Requires the `file-svc:download:view` permission.
 // @Tags File Svc
 // @Accept json
 // @Produce json
-// @Success 200 {object} download.DownloadsResponse "List of downloads"
+// @Success 200 {object} file.DownloadsResponse "List of downloads"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
 // @Router /file-svc/downloads [post]
-func (ds *DownloadService) List(
+func (ds *FileService) ListDownloads(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), download.PermissionDownloadView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -59,7 +59,7 @@ func (ds *DownloadService) List(
 		return
 	}
 
-	jsonData, _ := json.Marshal(download.DownloadsResponse{
+	jsonData, _ := json.Marshal(file.DownloadsResponse{
 		Downloads: details,
 	})
 	w.Write(jsonData)
