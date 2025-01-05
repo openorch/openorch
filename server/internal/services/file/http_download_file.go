@@ -41,14 +41,14 @@ func (ds *FileService) Download(
 	r *http.Request,
 ) {
 
-	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+	isAuthRsp, isAuthHttpRsp, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{"model-svc"},
 		}).
 		Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(isAuthHttpRsp.StatusCode)
 		w.Write([]byte(err.Error()))
 		return
 	}

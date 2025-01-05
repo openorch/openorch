@@ -43,15 +43,18 @@ func (s *UserService) Login(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	token, err := s.login(req.Slug, req.Password)
-	if err != nil && err.Error() == "unauthorized" {
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(`Invalid password`))
-		return
-	}
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
+		switch err.Error() {
+		case "unauthorized":
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Write([]byte(`Invalid password`))
+		case "slug not found":
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(`Slug not found`))
+		default:
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+		}
 	}
 
 	bs, _ := json.Marshal(user.LoginResponse{

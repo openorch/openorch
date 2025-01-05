@@ -101,6 +101,7 @@ func (rw *throttledResponseWriter) Write(b []byte) (int, error) {
 		if rw.statusCode >= 500 || rw.statusCode == 403 || rw.statusCode == 429 {
 			logger.Debug("Endpoint returned error",
 				slog.String("endpoint", rw.endpoint),
+				slog.Int("statusCode", rw.statusCode),
 				slog.String("error", strings.TrimSuffix(string(b), "\n")))
 		}
 

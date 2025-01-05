@@ -33,7 +33,7 @@ func (fs *FileService) UploadFile(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	isAuthRsp, _, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
+	isAuthRsp, isAuthHttpRsp, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionUploadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			SlugsGranted: []string{},
@@ -41,7 +41,7 @@ func (fs *FileService) UploadFile(
 		Execute()
 
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(isAuthHttpRsp.StatusCode)
 		w.Write([]byte(err.Error()))
 		return
 	}
