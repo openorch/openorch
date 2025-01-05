@@ -16,8 +16,12 @@ type Upload struct {
 	FullFileSize     *int64 `json:"fullFileSize"        format:"int64"`
 }
 
+type UploadFileResponse struct {
+	Upload Upload `json:"upload,omitempty"`
+}
+
 type UploadsRequest struct{}
 
 type UploadsResponse struct {
-	Uploads []Download `json:"uploads"`
+	Upload []Upload `json:"uploads,omitempty"`
 }

@@ -836,6 +836,34 @@ definitions:
     required:
     - exists
     type: object
+  file_svc.Upload:
+    properties:
+      fileName:
+        type: string
+      filePath:
+        type: string
+      fullFileSize:
+        format: int64
+        type: integer
+      id:
+        type: string
+      nodeId:
+        type: string
+      userId:
+        type: string
+    type: object
+  file_svc.UploadFileResponse:
+    properties:
+      upload:
+        $ref: '#/definitions/file_svc.Upload'
+    type: object
+  file_svc.UploadsResponse:
+    properties:
+      uploads:
+        items:
+          $ref: '#/definitions/file_svc.Upload'
+        type: array
+    type: object
   firehose_svc.ErrorResponse:
     properties:
       error:
@@ -3373,8 +3401,7 @@ paths:
         "200":
           description: File uploaded successfully
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/file_svc.UploadFileResponse'
         "400":
           description: Invalid request
           schema:
@@ -3390,6 +3417,41 @@ paths:
       security:
       - BearerAuth: []
       summary: Upload a File
+      tags:
+      - File Svc
+  /file-svc/uploads:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        List the uploaded files.
+
+        Requires the `file-svc:upload:view` permission.
+      operationId: listUploads
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of uploads
+          schema:
+            $ref: '#/definitions/file_svc.UploadsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: List Uploads
       tags:
       - File Svc
   /firehose-svc/event:

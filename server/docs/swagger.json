@@ -1755,8 +1755,7 @@
                     "200": {
                         "description": "File uploaded successfully",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": true
+                            "$ref": "#/definitions/file_svc.UploadFileResponse"
                         }
                     },
                     "400": {
@@ -1775,6 +1774,56 @@
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/uploads": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List the uploaded files.\n\nRequires the `file-svc:upload:view` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "List Uploads",
+                "operationId": "listUploads",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "File to upload",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of uploads",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.UploadsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -5804,6 +5853,49 @@
                 },
                 "exists": {
                     "type": "boolean"
+                }
+            }
+        },
+        "file_svc.Upload": {
+            "type": "object",
+            "properties": {
+                "fileName": {
+                    "type": "string"
+                },
+                "filePath": {
+                    "type": "string"
+                },
+                "fullFileSize": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nodeId": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.UploadFileResponse": {
+            "type": "object",
+            "properties": {
+                "upload": {
+                    "$ref": "#/definitions/file_svc.Upload"
+                }
+            }
+        },
+        "file_svc.UploadsResponse": {
+            "type": "object",
+            "properties": {
+                "uploads": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/file_svc.Upload"
+                    }
                 }
             }
         },

@@ -23,7 +23,7 @@ import (
 // @Accept multipart/form-data
 // @Produce json
 // @Param file formData file true "File to upload"
-// @Success 200 {object} map[string]any "File uploaded successfully"
+// @Success 200 {object} file.UploadFileResponse "File uploaded successfully"
 // @Failure 400 {object} file.ErrorResponse "Invalid request"
 // @Failure 401 {object} file.ErrorResponse "Unauthorized"
 // @Failure 500 {object} file.ErrorResponse "Internal Server Error"

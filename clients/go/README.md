@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *FileSvcAPI* | [**DownloadFile**](docs/FileSvcAPI.md#downloadfile) | **Put** /file-svc/download | Download a File
 *FileSvcAPI* | [**GetDownload**](docs/FileSvcAPI.md#getdownload) | **Get** /file-svc/download/{downloadId} | Get a Download
 *FileSvcAPI* | [**ListFileDownloads**](docs/FileSvcAPI.md#listfiledownloads) | **Post** /file-svc/downloads | List Downloads
+*FileSvcAPI* | [**ListUploads**](docs/FileSvcAPI.md#listuploads) | **Post** /file-svc/uploads | List Uploads
 *FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{downloadId}/pause | Pause a Download
 *FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Put** /file-svc/upload | Upload a File
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
@@ -230,6 +231,9 @@ Class | Method | HTTP request | Description
  - [FileSvcDownloadsResponse](docs/FileSvcDownloadsResponse.md)
  - [FileSvcErrorResponse](docs/FileSvcErrorResponse.md)
  - [FileSvcGetDownloadResponse](docs/FileSvcGetDownloadResponse.md)
+ - [FileSvcUpload](docs/FileSvcUpload.md)
+ - [FileSvcUploadFileResponse](docs/FileSvcUploadFileResponse.md)
+ - [FileSvcUploadsResponse](docs/FileSvcUploadsResponse.md)
  - [FirehoseSvcErrorResponse](docs/FirehoseSvcErrorResponse.md)
  - [FirehoseSvcEvent](docs/FirehoseSvcEvent.md)
  - [FirehoseSvcEventPublishRequest](docs/FirehoseSvcEventPublishRequest.md)
@@ -293,6 +297,7 @@ Class | Method | HTTP request | Description
  - [SourceSvcCheckoutRepoRequest](docs/SourceSvcCheckoutRepoRequest.md)
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
+ - [UploadFileRequest](docs/UploadFileRequest.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)
  - [UserSvcAuthToken](docs/UserSvcAuthToken.md)
  - [UserSvcChangePasswordAdminRequest](docs/UserSvcChangePasswordAdminRequest.md)

@@ -129,6 +129,36 @@ func (mr *MockFileSvcAPIMockRecorder) ListFileDownloadsExecute(r any) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFileDownloadsExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).ListFileDownloadsExecute), r)
 }
 
+// ListUploads mocks base method.
+func (m *MockFileSvcAPI) ListUploads(ctx context.Context) ApiListUploadsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListUploads", ctx)
+	ret0, _ := ret[0].(ApiListUploadsRequest)
+	return ret0
+}
+
+// ListUploads indicates an expected call of ListUploads.
+func (mr *MockFileSvcAPIMockRecorder) ListUploads(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUploads", reflect.TypeOf((*MockFileSvcAPI)(nil).ListUploads), ctx)
+}
+
+// ListUploadsExecute mocks base method.
+func (m *MockFileSvcAPI) ListUploadsExecute(r ApiListUploadsRequest) (*FileSvcUploadsResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListUploadsExecute", r)
+	ret0, _ := ret[0].(*FileSvcUploadsResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ListUploadsExecute indicates an expected call of ListUploadsExecute.
+func (mr *MockFileSvcAPIMockRecorder) ListUploadsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUploadsExecute", reflect.TypeOf((*MockFileSvcAPI)(nil).ListUploadsExecute), r)
+}
+
 // PauseDownload mocks base method.
 func (m *MockFileSvcAPI) PauseDownload(ctx context.Context, downloadId string) ApiPauseDownloadRequest {
 	m.ctrl.T.Helper()
@@ -174,10 +204,10 @@ func (mr *MockFileSvcAPIMockRecorder) UploadFile(ctx any) *gomock.Call {
 }
 
 // UploadFileExecute mocks base method.
-func (m *MockFileSvcAPI) UploadFileExecute(r ApiUploadFileRequest) (map[string]any, *http.Response, error) {
+func (m *MockFileSvcAPI) UploadFileExecute(r ApiUploadFileRequest) (*FileSvcUploadFileResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UploadFileExecute", r)
-	ret0, _ := ret[0].(map[string]any)
+	ret0, _ := ret[0].(*FileSvcUploadFileResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
