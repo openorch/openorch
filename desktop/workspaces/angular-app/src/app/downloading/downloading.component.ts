@@ -8,7 +8,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription, throttleTime } from 'rxjs';
 import { DownloadService } from '../services/download.service';
-import { FileSvcDownloadDetails as DownloadDetails } from '@openorch/client';
+import { FileSvcDownload as Download } from '@openorch/client';
 import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
@@ -23,9 +23,9 @@ import { NgIf, DecimalPipe } from '@angular/common';
 })
 export class DownloadingComponent {
 	@Input() url!: string;
-	@Output() downloadStatusChange = new EventEmitter<DownloadDetails>();
+	@Output() downloadStatusChange = new EventEmitter<Download>();
 
-	details!: DownloadDetails;
+	details!: Download;
 
 	constructor(private downloadService: DownloadService) {}
 

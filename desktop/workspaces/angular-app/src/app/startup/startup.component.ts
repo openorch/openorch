@@ -16,7 +16,7 @@ import { ModelSvcModel as Model } from '@openorch/client';
 import { DockerService } from '../services/docker.service';
 import { ConfigService } from '../services/config.service';
 import {
-	FileSvcDownloadDetails as DownloadDetails,
+	FileSvcDownload as Download,
 	ConfigSvcConfig as Config,
 } from '@openorch/client';
 import { TranslatePipe } from '../translate.pipe';
@@ -87,7 +87,7 @@ export class StartupComponent implements OnInit {
 		public modelService: ModelService
 	) {}
 
-	handleDownloadStatus(data: DownloadDetails) {
+	handleDownloadStatus(data: Download) {
 		this.isDownloading = data.status == 'inProgress' || data.status == 'paused';
 		this.downloaded = data.status == 'completed';
 	}

@@ -13,7 +13,7 @@ import { UserService } from './user.service';
 import {
 	FileSvcApi,
 	Configuration,
-	FileSvcDownloadDetails as DownloadDetails,
+	FileSvcDownload as Download,
 	FileSvcDownloadsResponse,
 } from '@openorch/client';
 
@@ -22,7 +22,7 @@ export interface FileSvcConfig {
 }
 
 export interface DownloadStatusChangeEvent {
-	allDownloads: DownloadDetails[];
+	allDownloads: Download[];
 }
 
 @Injectable({
@@ -69,7 +69,7 @@ export class DownloadService {
 		try {
 			const rsp = await this.downloadList();
 			this.onFileDownloadStatusSubject.next({
-				allDownloads: rsp?.downloads as DownloadDetails[],
+				allDownloads: rsp?.downloads as Download[],
 			});
 		} catch (error) {
 			console.error('Error in pollFileDownloadStatus', {
