@@ -21,18 +21,6 @@ import { mapValues } from '../runtime';
 export interface FileSvcDownload {
     /**
      * 
-     * @type {boolean}
-     * @memberof FileSvcDownload
-     */
-    cancelled?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof FileSvcDownload
-     */
-    dir?: string;
-    /**
-     * 
      * @type {number}
      * @memberof FileSvcDownload
      */
@@ -67,12 +55,6 @@ export interface FileSvcDownload {
      * @memberof FileSvcDownload
      */
     id?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof FileSvcDownload
-     */
-    paused?: boolean;
     /**
      * 
      * @type {number}
@@ -110,15 +92,12 @@ export function FileSvcDownloadFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'cancelled': json['cancelled'] == null ? undefined : json['cancelled'],
-        'dir': json['dir'] == null ? undefined : json['dir'],
         'downloadedBytes': json['downloadedBytes'] == null ? undefined : json['downloadedBytes'],
         'error': json['error'] == null ? undefined : json['error'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
         'fullFileSize': json['fullFileSize'] == null ? undefined : json['fullFileSize'],
         'id': json['id'] == null ? undefined : json['id'],
-        'paused': json['paused'] == null ? undefined : json['paused'],
         'progress': json['progress'] == null ? undefined : json['progress'],
         'status': json['status'] == null ? undefined : json['status'],
         'url': json['url'] == null ? undefined : json['url'],
@@ -136,15 +115,12 @@ export function FileSvcDownloadFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
-        'cancelled': value['cancelled'],
-        'dir': value['dir'],
         'downloadedBytes': value['downloadedBytes'],
         'error': value['error'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
         'fullFileSize': value['fullFileSize'],
         'id': value['id'],
-        'paused': value['paused'],
         'progress': value['progress'],
         'status': value['status'],
         'url': value['url'],

@@ -17,16 +17,6 @@ export class FileSvcDownload {
 FileSvcDownload.discriminator = undefined;
 FileSvcDownload.attributeTypeMap = [
     {
-        "name": "cancelled",
-        "baseName": "cancelled",
-        "type": "boolean"
-    },
-    {
-        "name": "dir",
-        "baseName": "dir",
-        "type": "string"
-    },
-    {
         "name": "downloadedBytes",
         "baseName": "downloadedBytes",
         "type": "number"
@@ -55,11 +45,6 @@ FileSvcDownload.attributeTypeMap = [
         "name": "id",
         "baseName": "id",
         "type": "string"
-    },
-    {
-        "name": "paused",
-        "baseName": "paused",
-        "type": "boolean"
     },
     {
         "name": "progress",

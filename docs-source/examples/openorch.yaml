@@ -781,10 +781,6 @@ definitions:
     type: object
   file_svc.Download:
     properties:
-      cancelled:
-        type: boolean
-      dir:
-        type: string
       downloadedBytes:
         format: int64
         type: integer
@@ -799,8 +795,6 @@ definitions:
         type: integer
       id:
         type: string
-      paused:
-        type: boolean
       progress:
         type: number
       status:

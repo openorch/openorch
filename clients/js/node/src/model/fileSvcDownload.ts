@@ -13,15 +13,12 @@
 import { RequestFile } from './models';
 
 export class FileSvcDownload {
-    'cancelled'?: boolean;
-    'dir'?: string;
     'downloadedBytes'?: number;
     'error'?: string;
     'fileName'?: string;
     'filePath'?: string;
     'fullFileSize'?: number;
     'id'?: string;
-    'paused'?: boolean;
     'progress'?: number;
     'status'?: string;
     'url'?: string;
@@ -29,16 +26,6 @@ export class FileSvcDownload {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "cancelled",
-            "baseName": "cancelled",
-            "type": "boolean"
-        },
-        {
-            "name": "dir",
-            "baseName": "dir",
-            "type": "string"
-        },
         {
             "name": "downloadedBytes",
             "baseName": "downloadedBytes",
@@ -68,11 +55,6 @@ export class FileSvcDownload {
             "name": "id",
             "baseName": "id",
             "type": "string"
-        },
-        {
-            "name": "paused",
-            "baseName": "paused",
-            "type": "boolean"
         },
         {
             "name": "progress",

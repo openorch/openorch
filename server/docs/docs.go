@@ -5778,12 +5778,6 @@ const docTemplate = `{
         "file_svc.Download": {
             "type": "object",
             "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "dir": {
-                    "type": "string"
-                },
                 "downloadedBytes": {
                     "type": "integer",
                     "format": "int64"
@@ -5803,9 +5797,6 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "string"
-                },
-                "paused": {
-                    "type": "boolean"
                 },
                 "progress": {
                     "type": "number"

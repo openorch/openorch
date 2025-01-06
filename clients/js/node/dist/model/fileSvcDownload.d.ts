@@ -10,15 +10,12 @@
  * Do not edit the class manually.
  */
 export declare class FileSvcDownload {
-    'cancelled'?: boolean;
-    'dir'?: string;
     'downloadedBytes'?: number;
     'error'?: string;
     'fileName'?: string;
     'filePath'?: string;
     'fullFileSize'?: number;
     'id'?: string;
-    'paused'?: boolean;
     'progress'?: number;
     'status'?: string;
     'url'?: string;

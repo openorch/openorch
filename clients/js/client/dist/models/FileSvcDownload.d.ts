@@ -17,18 +17,6 @@
 export interface FileSvcDownload {
     /**
      *
-     * @type {boolean}
-     * @memberof FileSvcDownload
-     */
-    cancelled?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof FileSvcDownload
-     */
-    dir?: string;
-    /**
-     *
      * @type {number}
      * @memberof FileSvcDownload
      */
@@ -63,12 +51,6 @@ export interface FileSvcDownload {
      * @memberof FileSvcDownload
      */
     id?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof FileSvcDownload
-     */
-    paused?: boolean;
     /**
      *
      * @type {number}
