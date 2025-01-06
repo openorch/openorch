@@ -87,9 +87,21 @@ func (fs *FileService) UploadFile(
 		}
 		defer dstFile.Close()
 
-		_, err = io.Copy(dstFile, uploadedFile)
+		written, err := io.Copy(dstFile, uploadedFile)
 		if err != nil {
 			handleError(err, http.StatusInternalServerError, "Failed to save file")
+			return
+		}
+
+		err = fs.uploadStore.Upsert(file.Upload{
+			Id:               sdk.Id("upl"),
+			OriginalFileName: header.Filename,
+			FilePath:         destinationFilePath,
+			UserId:           *isAuthRsp.GetUser().Id,
+			FullFileSize:     written,
+		})
+		if err != nil {
+			handleError(err, http.StatusInternalServerError, "Failed to save upload record")
 			return
 		}
 	}

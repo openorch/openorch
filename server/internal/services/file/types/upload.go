@@ -17,6 +17,10 @@ type Upload struct {
 	FullFileSize     int64  `json:"fullFileSize" format:"int64"`
 }
 
+func (u Upload) GetId() string {
+	return u.Id
+}
+
 type UploadFileResponse struct {
 	Upload Upload `json:"upload,omitempty"`
 }
