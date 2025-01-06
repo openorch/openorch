@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { FileSvcDownloadRequest, FileSvcDownloadsResponse, FileSvcGetDownloadResponse, FileSvcUploadFileResponse, FileSvcUploadsResponse, UploadFileRequest } from '../models/index';
+import type { FileSvcDownloadRequest, FileSvcDownloadsResponse, FileSvcGetDownloadResponse, FileSvcListUploadsRequest, FileSvcListUploadsResponse, FileSvcUploadFileResponse } from '../models/index';
 export interface DownloadFileRequest {
     body: FileSvcDownloadRequest;
 }
@@ -18,10 +18,13 @@ export interface GetDownloadRequest {
     downloadId: string;
 }
 export interface ListUploadsRequest {
-    uploadFileRequest: UploadFileRequest;
+    body?: FileSvcListUploadsRequest;
 }
 export interface PauseDownloadRequest {
     downloadId: string;
+}
+export interface UploadFileRequest {
+    file: Blob;
 }
 /**
  *
@@ -55,22 +58,22 @@ export declare class FileSvcApi extends runtime.BaseAPI {
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    listFileDownloadsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcDownloadsResponse>>;
+    listDownloadsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcDownloadsResponse>>;
     /**
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    listFileDownloads(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcDownloadsResponse>;
+    listDownloads(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcDownloadsResponse>;
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * List Uploads
      */
-    listUploadsRaw(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcUploadsResponse>>;
+    listUploadsRaw(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcListUploadsResponse>>;
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * List Uploads
      */
-    listUploads(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcUploadsResponse>;
+    listUploads(requestParameters?: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcListUploadsResponse>;
     /**
      * Pause a download that is currently in progress.  Requires the `file-svc:download:edit` permission.
      * Pause a Download
@@ -86,12 +89,12 @@ export declare class FileSvcApi extends runtime.BaseAPI {
         [key: string]: any;
     }>;
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     uploadFileRaw(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcUploadFileResponse>>;
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     uploadFile(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcUploadFileResponse>;

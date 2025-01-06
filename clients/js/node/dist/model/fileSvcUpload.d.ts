@@ -10,11 +10,13 @@
  * Do not edit the class manually.
  */
 export declare class FileSvcUpload {
+    'createdAt'?: string;
     'fileName'?: string;
     'filePath'?: string;
-    'fullFileSize'?: number;
+    'fileSize'?: number;
     'id'?: string;
     'nodeId'?: string;
+    'updatedAt'?: string;
     'userId'?: string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{

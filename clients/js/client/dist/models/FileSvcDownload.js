@@ -25,14 +25,16 @@ export function FileSvcDownloadFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'downloadedBytes': json['downloadedBytes'] == null ? undefined : json['downloadedBytes'],
         'error': json['error'] == null ? undefined : json['error'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fullFileSize': json['fullFileSize'] == null ? undefined : json['fullFileSize'],
+        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'progress': json['progress'] == null ? undefined : json['progress'],
         'status': json['status'] == null ? undefined : json['status'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
         'url': json['url'] == null ? undefined : json['url'],
     };
 }
@@ -44,14 +46,16 @@ export function FileSvcDownloadToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
+        'createdAt': value['createdAt'],
         'downloadedBytes': value['downloadedBytes'],
         'error': value['error'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
-        'fullFileSize': value['fullFileSize'],
+        'fileSize': value['fileSize'],
         'id': value['id'],
         'progress': value['progress'],
         'status': value['status'],
+        'updatedAt': value['updatedAt'],
         'url': value['url'],
     };
 }

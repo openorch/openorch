@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class UploadFileRequest {
+export class FileSvcListUploadsResponse {
     static getAttributeTypeMap() {
-        return UploadFileRequest.attributeTypeMap;
+        return FileSvcListUploadsResponse.attributeTypeMap;
     }
 }
-UploadFileRequest.discriminator = undefined;
-UploadFileRequest.attributeTypeMap = [
+FileSvcListUploadsResponse.discriminator = undefined;
+FileSvcListUploadsResponse.attributeTypeMap = [
     {
-        "name": "file",
-        "baseName": "file",
-        "type": "RequestFile"
+        "name": "uploads",
+        "baseName": "uploads",
+        "type": "Array<FileSvcUpload>"
     }
 ];

@@ -13,19 +13,32 @@
 import { RequestFile } from './models';
 
 export class FileSvcDownload {
+    'createdAt'?: string;
+    /**
+    * DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
+    */
     'downloadedBytes'?: number;
     'error'?: string;
     'fileName'?: string;
     'filePath'?: string;
-    'fullFileSize'?: number;
+    /**
+    * FileSize is the full final downloaded file size.
+    */
+    'fileSize'?: number;
     'id'?: string;
     'progress'?: number;
     'status'?: string;
+    'updatedAt'?: string;
     'url'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "string"
+        },
         {
             "name": "downloadedBytes",
             "baseName": "downloadedBytes",
@@ -47,8 +60,8 @@ export class FileSvcDownload {
             "type": "string"
         },
         {
-            "name": "fullFileSize",
-            "baseName": "fullFileSize",
+            "name": "fileSize",
+            "baseName": "fileSize",
             "type": "number"
         },
         {
@@ -64,6 +77,11 @@ export class FileSvcDownload {
         {
             "name": "status",
             "baseName": "status",
+            "type": "string"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
             "type": "string"
         },
         {

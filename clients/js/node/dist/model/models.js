@@ -61,9 +61,10 @@ export * from './fileSvcDownloadRequest';
 export * from './fileSvcDownloadsResponse';
 export * from './fileSvcErrorResponse';
 export * from './fileSvcGetDownloadResponse';
+export * from './fileSvcListUploadsRequest';
+export * from './fileSvcListUploadsResponse';
 export * from './fileSvcUpload';
 export * from './fileSvcUploadFileResponse';
-export * from './fileSvcUploadsResponse';
 export * from './firehoseSvcErrorResponse';
 export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
@@ -127,7 +128,6 @@ export * from './secretSvcSecret';
 export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
-export * from './uploadFileRequest';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAuthToken';
 export * from './userSvcChangePasswordAdminRequest';
@@ -220,9 +220,10 @@ import { FileSvcDownloadRequest } from './fileSvcDownloadRequest';
 import { FileSvcDownloadsResponse } from './fileSvcDownloadsResponse';
 import { FileSvcErrorResponse } from './fileSvcErrorResponse';
 import { FileSvcGetDownloadResponse } from './fileSvcGetDownloadResponse';
+import { FileSvcListUploadsRequest } from './fileSvcListUploadsRequest';
+import { FileSvcListUploadsResponse } from './fileSvcListUploadsResponse';
 import { FileSvcUpload } from './fileSvcUpload';
 import { FileSvcUploadFileResponse } from './fileSvcUploadFileResponse';
-import { FileSvcUploadsResponse } from './fileSvcUploadsResponse';
 import { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse';
 import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
@@ -286,7 +287,6 @@ import { SecretSvcSecret } from './secretSvcSecret';
 import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
-import { UploadFileRequest } from './uploadFileRequest';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
 import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
@@ -400,9 +400,10 @@ let typeMap = {
     "FileSvcDownloadsResponse": FileSvcDownloadsResponse,
     "FileSvcErrorResponse": FileSvcErrorResponse,
     "FileSvcGetDownloadResponse": FileSvcGetDownloadResponse,
+    "FileSvcListUploadsRequest": FileSvcListUploadsRequest,
+    "FileSvcListUploadsResponse": FileSvcListUploadsResponse,
     "FileSvcUpload": FileSvcUpload,
     "FileSvcUploadFileResponse": FileSvcUploadFileResponse,
-    "FileSvcUploadsResponse": FileSvcUploadsResponse,
     "FirehoseSvcErrorResponse": FirehoseSvcErrorResponse,
     "FirehoseSvcEvent": FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
@@ -459,7 +460,6 @@ let typeMap = {
     "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,
-    "UploadFileRequest": UploadFileRequest,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,

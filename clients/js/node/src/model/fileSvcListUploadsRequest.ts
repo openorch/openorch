@@ -12,23 +12,35 @@
 
 import { RequestFile } from './models';
 
-export class UploadFileRequest {
+export class FileSvcListUploadsRequest {
     /**
-    * File to upload
+    * After time value
     */
-    'file': RequestFile;
+    'after'?: string;
+    'limit'?: number;
+    'userId'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "file",
-            "baseName": "file",
-            "type": "RequestFile"
+            "name": "after",
+            "baseName": "after",
+            "type": "string"
+        },
+        {
+            "name": "limit",
+            "baseName": "limit",
+            "type": "number"
+        },
+        {
+            "name": "userId",
+            "baseName": "userId",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return UploadFileRequest.attributeTypeMap;
+        return FileSvcListUploadsRequest.attributeTypeMap;
     }
 }
 

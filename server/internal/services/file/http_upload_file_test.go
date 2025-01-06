@@ -53,7 +53,9 @@ func TestUploadFile(t *testing.T) {
 	adminClient, _, err := test.AdminClient(options.ClientFactory)
 	require.NoError(t, err)
 
-	_, _, err = userClient.FileSvcAPI.UploadFile(context.Background()).
+	ctx := context.Background()
+
+	_, _, err = userClient.FileSvcAPI.UploadFile(ctx).
 		File(file).
 		Execute()
 	require.Error(t, err)
@@ -63,7 +65,7 @@ func TestUploadFile(t *testing.T) {
 	file2, cleanup2 := createTestFile(t, "Test file content")
 	defer cleanup2()
 
-	_, _, err = adminClient.FileSvcAPI.UploadFile(context.Background()).
+	_, _, err = adminClient.FileSvcAPI.UploadFile(ctx).
 		File(file2).
 		Execute()
 	require.NoError(t, err)
@@ -89,5 +91,11 @@ outer:
 			}
 		}
 	}
+
 	require.True(t, uploaded, "File was not uploaded successfully")
+
+	rsp, _, err := adminClient.FileSvcAPI.ListUploads(ctx).Execute()
+	require.NoError(t, err)
+	require.Equal(t, 1, len(rsp.Uploads))
+	require.Equal(t, 17, rsp.Uploads[0].FileSize)
 }

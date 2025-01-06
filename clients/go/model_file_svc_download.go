@@ -20,14 +20,18 @@ var _ MappedNullable = &FileSvcDownload{}
 
 // FileSvcDownload struct for FileSvcDownload
 type FileSvcDownload struct {
+	CreatedAt *string `json:"createdAt,omitempty"`
+	// DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
 	DownloadedBytes *int64 `json:"downloadedBytes,omitempty"`
 	Error *string `json:"error,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	FilePath *string `json:"filePath,omitempty"`
-	FullFileSize *int64 `json:"fullFileSize,omitempty"`
+	// FileSize is the full final downloaded file size.
+	FileSize *int64 `json:"fileSize,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Progress *float32 `json:"progress,omitempty"`
 	Status *string `json:"status,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
 
@@ -46,6 +50,38 @@ func NewFileSvcDownload() *FileSvcDownload {
 func NewFileSvcDownloadWithDefaults() *FileSvcDownload {
 	this := FileSvcDownload{}
 	return &this
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *FileSvcDownload) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileSvcDownload) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *FileSvcDownload) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *FileSvcDownload) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetDownloadedBytes returns the DownloadedBytes field value if set, zero value otherwise.
@@ -176,36 +212,36 @@ func (o *FileSvcDownload) SetFilePath(v string) {
 	o.FilePath = &v
 }
 
-// GetFullFileSize returns the FullFileSize field value if set, zero value otherwise.
-func (o *FileSvcDownload) GetFullFileSize() int64 {
-	if o == nil || IsNil(o.FullFileSize) {
+// GetFileSize returns the FileSize field value if set, zero value otherwise.
+func (o *FileSvcDownload) GetFileSize() int64 {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
-	return *o.FullFileSize
+	return *o.FileSize
 }
 
-// GetFullFileSizeOk returns a tuple with the FullFileSize field value if set, nil otherwise
+// GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileSvcDownload) GetFullFileSizeOk() (*int64, bool) {
-	if o == nil || IsNil(o.FullFileSize) {
+func (o *FileSvcDownload) GetFileSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
-	return o.FullFileSize, true
+	return o.FileSize, true
 }
 
-// HasFullFileSize returns a boolean if a field has been set.
-func (o *FileSvcDownload) HasFullFileSize() bool {
-	if o != nil && !IsNil(o.FullFileSize) {
+// HasFileSize returns a boolean if a field has been set.
+func (o *FileSvcDownload) HasFileSize() bool {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
 	return false
 }
 
-// SetFullFileSize gets a reference to the given int64 and assigns it to the FullFileSize field.
-func (o *FileSvcDownload) SetFullFileSize(v int64) {
-	o.FullFileSize = &v
+// SetFileSize gets a reference to the given int64 and assigns it to the FileSize field.
+func (o *FileSvcDownload) SetFileSize(v int64) {
+	o.FileSize = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -304,6 +340,38 @@ func (o *FileSvcDownload) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *FileSvcDownload) GetUpdatedAt() string {
+	if o == nil || IsNil(o.UpdatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileSvcDownload) GetUpdatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *FileSvcDownload) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
+func (o *FileSvcDownload) SetUpdatedAt(v string) {
+	o.UpdatedAt = &v
+}
+
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *FileSvcDownload) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
@@ -346,6 +414,9 @@ func (o FileSvcDownload) MarshalJSON() ([]byte, error) {
 
 func (o FileSvcDownload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
 	if !IsNil(o.DownloadedBytes) {
 		toSerialize["downloadedBytes"] = o.DownloadedBytes
 	}
@@ -358,8 +429,8 @@ func (o FileSvcDownload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FilePath) {
 		toSerialize["filePath"] = o.FilePath
 	}
-	if !IsNil(o.FullFileSize) {
-		toSerialize["fullFileSize"] = o.FullFileSize
+	if !IsNil(o.FileSize) {
+		toSerialize["fileSize"] = o.FileSize
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -369,6 +440,9 @@ func (o FileSvcDownload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url

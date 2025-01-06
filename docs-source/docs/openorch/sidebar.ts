@@ -228,7 +228,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/list-file-downloads",
+          id: "openorch/list-downloads",
           label: "List Downloads",
           className: "api-method post",
         },

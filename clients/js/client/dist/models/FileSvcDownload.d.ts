@@ -17,6 +17,12 @@
 export interface FileSvcDownload {
     /**
      *
+     * @type {string}
+     * @memberof FileSvcDownload
+     */
+    createdAt?: string;
+    /**
+     * DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
      * @type {number}
      * @memberof FileSvcDownload
      */
@@ -40,11 +46,11 @@ export interface FileSvcDownload {
      */
     filePath?: string;
     /**
-     *
+     * FileSize is the full final downloaded file size.
      * @type {number}
      * @memberof FileSvcDownload
      */
-    fullFileSize?: number;
+    fileSize?: number;
     /**
      *
      * @type {string}
@@ -63,6 +69,12 @@ export interface FileSvcDownload {
      * @memberof FileSvcDownload
      */
     status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof FileSvcDownload
+     */
+    updatedAt?: string;
     /**
      *
      * @type {string}

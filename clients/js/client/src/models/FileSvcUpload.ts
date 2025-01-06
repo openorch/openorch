@@ -24,6 +24,12 @@ export interface FileSvcUpload {
      * @type {string}
      * @memberof FileSvcUpload
      */
+    createdAt?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
     fileName?: string;
     /**
      * 
@@ -36,7 +42,7 @@ export interface FileSvcUpload {
      * @type {number}
      * @memberof FileSvcUpload
      */
-    fullFileSize?: number;
+    fileSize?: number;
     /**
      * 
      * @type {string}
@@ -49,6 +55,12 @@ export interface FileSvcUpload {
      * @memberof FileSvcUpload
      */
     nodeId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
+    updatedAt?: string;
     /**
      * 
      * @type {string}
@@ -74,11 +86,13 @@ export function FileSvcUploadFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fullFileSize': json['fullFileSize'] == null ? undefined : json['fullFileSize'],
+        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
         'userId': json['userId'] == null ? undefined : json['userId'],
     };
 }
@@ -94,11 +108,13 @@ export function FileSvcUploadFromJSONTyped(json: any, ignoreDiscriminator: boole
 
     return {
         
+        'createdAt': value['createdAt'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
-        'fullFileSize': value['fullFileSize'],
+        'fileSize': value['fileSize'],
         'id': value['id'],
         'nodeId': value['nodeId'],
+        'updatedAt': value['updatedAt'],
         'userId': value['userId'],
     };
 }

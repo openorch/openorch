@@ -67,8 +67,8 @@ func downloadToDownloadDetails(
 		FileName:        fileName,
 		Progress:        progress,
 		DownloadedBytes: download.DownloadedSize,
-		FullFileSize:    fullFileSize,
-		Status:          string(download.Status),
+		FileSize:        fullFileSize,
+		Status:          download.Status,
 		FilePath:        download.FilePath,
 	}
 

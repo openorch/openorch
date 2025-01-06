@@ -13,7 +13,7 @@
 import { RequestFile } from './models';
 import { FileSvcUpload } from './fileSvcUpload';
 
-export class FileSvcUploadsResponse {
+export class FileSvcListUploadsResponse {
     'uploads'?: Array<FileSvcUpload>;
 
     static discriminator: string | undefined = undefined;
@@ -26,7 +26,7 @@ export class FileSvcUploadsResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return FileSvcUploadsResponse.attributeTypeMap;
+        return FileSvcListUploadsResponse.attributeTypeMap;
     }
 }
 

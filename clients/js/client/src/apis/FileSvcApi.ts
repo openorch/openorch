@@ -19,9 +19,9 @@ import type {
   FileSvcDownloadsResponse,
   FileSvcErrorResponse,
   FileSvcGetDownloadResponse,
+  FileSvcListUploadsRequest,
+  FileSvcListUploadsResponse,
   FileSvcUploadFileResponse,
-  FileSvcUploadsResponse,
-  UploadFileRequest,
 } from '../models/index';
 import {
     FileSvcDownloadRequestFromJSON,
@@ -32,12 +32,12 @@ import {
     FileSvcErrorResponseToJSON,
     FileSvcGetDownloadResponseFromJSON,
     FileSvcGetDownloadResponseToJSON,
+    FileSvcListUploadsRequestFromJSON,
+    FileSvcListUploadsRequestToJSON,
+    FileSvcListUploadsResponseFromJSON,
+    FileSvcListUploadsResponseToJSON,
     FileSvcUploadFileResponseFromJSON,
     FileSvcUploadFileResponseToJSON,
-    FileSvcUploadsResponseFromJSON,
-    FileSvcUploadsResponseToJSON,
-    UploadFileRequestFromJSON,
-    UploadFileRequestToJSON,
 } from '../models/index';
 
 export interface DownloadFileRequest {
@@ -49,13 +49,16 @@ export interface GetDownloadRequest {
 }
 
 export interface ListUploadsRequest {
-    uploadFileRequest: UploadFileRequest;
+    body?: FileSvcListUploadsRequest;
 }
 
 export interface PauseDownloadRequest {
     downloadId: string;
 }
 
+export interface UploadFileRequest {
+    file: Blob;
+}
 
 /**
  * 
@@ -147,7 +150,7 @@ export class FileSvcApi extends runtime.BaseAPI {
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    async listFileDownloadsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcDownloadsResponse>> {
+    async listDownloadsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcDownloadsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -170,8 +173,8 @@ export class FileSvcApi extends runtime.BaseAPI {
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    async listFileDownloads(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcDownloadsResponse> {
-        const response = await this.listFileDownloadsRaw(initOverrides);
+    async listDownloads(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcDownloadsResponse> {
+        const response = await this.listDownloadsRaw(initOverrides);
         return await response.value();
     }
 
@@ -179,14 +182,7 @@ export class FileSvcApi extends runtime.BaseAPI {
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * List Uploads
      */
-    async listUploadsRaw(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcUploadsResponse>> {
-        if (requestParameters['uploadFileRequest'] == null) {
-            throw new runtime.RequiredError(
-                'uploadFileRequest',
-                'Required parameter "uploadFileRequest" was null or undefined when calling listUploads().'
-            );
-        }
-
+    async listUploadsRaw(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcListUploadsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -202,17 +198,17 @@ export class FileSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UploadFileRequestToJSON(requestParameters['uploadFileRequest']),
+            body: FileSvcListUploadsRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FileSvcUploadsResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => FileSvcListUploadsResponseFromJSON(jsonValue));
     }
 
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * List Uploads
      */
-    async listUploads(requestParameters: ListUploadsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcUploadsResponse> {
+    async listUploads(requestParameters: ListUploadsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcListUploadsResponse> {
         const response = await this.listUploadsRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -257,7 +253,7 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     async uploadFileRaw(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcUploadFileResponse>> {
@@ -308,7 +304,7 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     async uploadFile(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcUploadFileResponse> {

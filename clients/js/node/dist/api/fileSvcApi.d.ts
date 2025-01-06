@@ -13,9 +13,9 @@ import http from 'http';
 import { FileSvcDownloadRequest } from '../model/fileSvcDownloadRequest';
 import { FileSvcDownloadsResponse } from '../model/fileSvcDownloadsResponse';
 import { FileSvcGetDownloadResponse } from '../model/fileSvcGetDownloadResponse';
+import { FileSvcListUploadsRequest } from '../model/fileSvcListUploadsRequest';
+import { FileSvcListUploadsResponse } from '../model/fileSvcListUploadsResponse';
 import { FileSvcUploadFileResponse } from '../model/fileSvcUploadFileResponse';
-import { FileSvcUploadsResponse } from '../model/fileSvcUploadsResponse';
-import { UploadFileRequest } from '../model/uploadFileRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 import { RequestFile } from './apis';
@@ -72,7 +72,7 @@ export declare class FileSvcApi {
      * List download details.  Requires the `file-svc:download:view` permission.
      * @summary List Downloads
      */
-    listFileDownloads(options?: {
+    listDownloads(options?: {
         headers: {
             [name: string]: string;
         };
@@ -83,15 +83,15 @@ export declare class FileSvcApi {
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * @summary List Uploads
-     * @param uploadFileRequest
+     * @param body List Uploads Request
      */
-    listUploads(uploadFileRequest: UploadFileRequest, options?: {
+    listUploads(body?: FileSvcListUploadsRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: FileSvcUploadsResponse;
+        body: FileSvcListUploadsResponse;
     }>;
     /**
      * Pause a download that is currently in progress.  Requires the `file-svc:download:edit` permission.
@@ -109,7 +109,7 @@ export declare class FileSvcApi {
         };
     }>;
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * @summary Upload a File
      * @param file File to upload
      */

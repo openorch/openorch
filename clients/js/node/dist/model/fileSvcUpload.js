@@ -17,6 +17,11 @@ export class FileSvcUpload {
 FileSvcUpload.discriminator = undefined;
 FileSvcUpload.attributeTypeMap = [
     {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
         "name": "fileName",
         "baseName": "fileName",
         "type": "string"
@@ -27,8 +32,8 @@ FileSvcUpload.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "fullFileSize",
-        "baseName": "fullFileSize",
+        "name": "fileSize",
+        "baseName": "fileSize",
         "type": "number"
     },
     {
@@ -39,6 +44,11 @@ FileSvcUpload.attributeTypeMap = [
     {
         "name": "nodeId",
         "baseName": "nodeId",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
         "type": "string"
     },
     {

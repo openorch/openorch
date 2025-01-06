@@ -10,14 +10,22 @@
  * Do not edit the class manually.
  */
 export declare class FileSvcDownload {
+    'createdAt'?: string;
+    /**
+    * DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
+    */
     'downloadedBytes'?: number;
     'error'?: string;
     'fileName'?: string;
     'filePath'?: string;
-    'fullFileSize'?: number;
+    /**
+    * FileSize is the full final downloaded file size.
+    */
+    'fileSize'?: number;
     'id'?: string;
     'progress'?: number;
     'status'?: string;
+    'updatedAt'?: string;
     'url'?: string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{

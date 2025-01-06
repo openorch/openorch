@@ -9,9 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { FileSvcUpload } from './fileSvcUpload';
-export declare class FileSvcUploadsResponse {
-    'uploads'?: Array<FileSvcUpload>;
+export declare class FileSvcListUploadsRequest {
+    /**
+    * After time value
+    */
+    'after'?: string;
+    'limit'?: number;
+    'userId'?: string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

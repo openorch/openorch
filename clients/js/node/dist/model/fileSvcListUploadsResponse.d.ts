@@ -9,12 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RequestFile } from './models';
-export declare class UploadFileRequest {
-    /**
-    * File to upload
-    */
-    'file': RequestFile;
+import { FileSvcUpload } from './fileSvcUpload';
+export declare class FileSvcListUploadsResponse {
+    'uploads'?: Array<FileSvcUpload>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

@@ -21,6 +21,12 @@ import { mapValues } from '../runtime';
 export interface FileSvcDownload {
     /**
      * 
+     * @type {string}
+     * @memberof FileSvcDownload
+     */
+    createdAt?: string;
+    /**
+     * DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
      * @type {number}
      * @memberof FileSvcDownload
      */
@@ -44,11 +50,11 @@ export interface FileSvcDownload {
      */
     filePath?: string;
     /**
-     * 
+     * FileSize is the full final downloaded file size.
      * @type {number}
      * @memberof FileSvcDownload
      */
-    fullFileSize?: number;
+    fileSize?: number;
     /**
      * 
      * @type {string}
@@ -67,6 +73,12 @@ export interface FileSvcDownload {
      * @memberof FileSvcDownload
      */
     status?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileSvcDownload
+     */
+    updatedAt?: string;
     /**
      * 
      * @type {string}
@@ -92,14 +104,16 @@ export function FileSvcDownloadFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
+        'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'downloadedBytes': json['downloadedBytes'] == null ? undefined : json['downloadedBytes'],
         'error': json['error'] == null ? undefined : json['error'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fullFileSize': json['fullFileSize'] == null ? undefined : json['fullFileSize'],
+        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'progress': json['progress'] == null ? undefined : json['progress'],
         'status': json['status'] == null ? undefined : json['status'],
+        'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
         'url': json['url'] == null ? undefined : json['url'],
     };
 }
@@ -115,14 +129,16 @@ export function FileSvcDownloadFromJSONTyped(json: any, ignoreDiscriminator: boo
 
     return {
         
+        'createdAt': value['createdAt'],
         'downloadedBytes': value['downloadedBytes'],
         'error': value['error'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
-        'fullFileSize': value['fullFileSize'],
+        'fileSize': value['fileSize'],
         'id': value['id'],
         'progress': value['progress'],
         'status': value['status'],
+        'updatedAt': value['updatedAt'],
         'url': value['url'],
     };
 }

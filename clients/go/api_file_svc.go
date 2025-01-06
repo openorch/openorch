@@ -58,20 +58,20 @@ Requires the `file-svc:download:view` permission.
 	GetDownloadExecute(r ApiGetDownloadRequest) (*FileSvcGetDownloadResponse, *http.Response, error)
 
 	/*
-	ListFileDownloads List Downloads
+	ListDownloads List Downloads
 
 	List download details.
 
 Requires the `file-svc:download:view` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListFileDownloadsRequest
+	@return ApiListDownloadsRequest
 	*/
-	ListFileDownloads(ctx context.Context) ApiListFileDownloadsRequest
+	ListDownloads(ctx context.Context) ApiListDownloadsRequest
 
-	// ListFileDownloadsExecute executes the request
+	// ListDownloadsExecute executes the request
 	//  @return FileSvcDownloadsResponse
-	ListFileDownloadsExecute(r ApiListFileDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error)
+	ListDownloadsExecute(r ApiListDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error)
 
 	/*
 	ListUploads List Uploads
@@ -86,8 +86,8 @@ Requires the `file-svc:upload:view` permission.
 	ListUploads(ctx context.Context) ApiListUploadsRequest
 
 	// ListUploadsExecute executes the request
-	//  @return FileSvcUploadsResponse
-	ListUploadsExecute(r ApiListUploadsRequest) (*FileSvcUploadsResponse, *http.Response, error)
+	//  @return FileSvcListUploadsResponse
+	ListUploadsExecute(r ApiListUploadsRequest) (*FileSvcListUploadsResponse, *http.Response, error)
 
 	/*
 	PauseDownload Pause a Download
@@ -110,8 +110,9 @@ Requires the `file-svc:download:edit` permission.
 	UploadFile Upload a File
 
 	Uploads a file to the server.
-Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+In reality the endpoint "unofficially" supports multiple files. YMMV.
 
 Requires the `file-svc:upload:create` permission.
 
@@ -427,27 +428,27 @@ func (a *FileSvcAPIService) GetDownloadExecute(r ApiGetDownloadRequest) (*FileSv
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListFileDownloadsRequest struct {
+type ApiListDownloadsRequest struct {
 	ctx context.Context
 	ApiService FileSvcAPI
 }
 
-func (r ApiListFileDownloadsRequest) Execute() (*FileSvcDownloadsResponse, *http.Response, error) {
-	return r.ApiService.ListFileDownloadsExecute(r)
+func (r ApiListDownloadsRequest) Execute() (*FileSvcDownloadsResponse, *http.Response, error) {
+	return r.ApiService.ListDownloadsExecute(r)
 }
 
 /*
-ListFileDownloads List Downloads
+ListDownloads List Downloads
 
 List download details.
 
 Requires the `file-svc:download:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFileDownloadsRequest
+ @return ApiListDownloadsRequest
 */
-func (a *FileSvcAPIService) ListFileDownloads(ctx context.Context) ApiListFileDownloadsRequest {
-	return ApiListFileDownloadsRequest{
+func (a *FileSvcAPIService) ListDownloads(ctx context.Context) ApiListDownloadsRequest {
+	return ApiListDownloadsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -455,7 +456,7 @@ func (a *FileSvcAPIService) ListFileDownloads(ctx context.Context) ApiListFileDo
 
 // Execute executes the request
 //  @return FileSvcDownloadsResponse
-func (a *FileSvcAPIService) ListFileDownloadsExecute(r ApiListFileDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
+func (a *FileSvcAPIService) ListDownloadsExecute(r ApiListDownloadsRequest) (*FileSvcDownloadsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -463,7 +464,7 @@ func (a *FileSvcAPIService) ListFileDownloadsExecute(r ApiListFileDownloadsReque
 		localVarReturnValue  *FileSvcDownloadsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.ListFileDownloads")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.ListDownloads")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -566,15 +567,16 @@ func (a *FileSvcAPIService) ListFileDownloadsExecute(r ApiListFileDownloadsReque
 type ApiListUploadsRequest struct {
 	ctx context.Context
 	ApiService FileSvcAPI
-	uploadFileRequest *UploadFileRequest
+	body *FileSvcListUploadsRequest
 }
 
-func (r ApiListUploadsRequest) UploadFileRequest(uploadFileRequest UploadFileRequest) ApiListUploadsRequest {
-	r.uploadFileRequest = &uploadFileRequest
+// List Uploads Request
+func (r ApiListUploadsRequest) Body(body FileSvcListUploadsRequest) ApiListUploadsRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiListUploadsRequest) Execute() (*FileSvcUploadsResponse, *http.Response, error) {
+func (r ApiListUploadsRequest) Execute() (*FileSvcListUploadsResponse, *http.Response, error) {
 	return r.ApiService.ListUploadsExecute(r)
 }
 
@@ -596,13 +598,13 @@ func (a *FileSvcAPIService) ListUploads(ctx context.Context) ApiListUploadsReque
 }
 
 // Execute executes the request
-//  @return FileSvcUploadsResponse
-func (a *FileSvcAPIService) ListUploadsExecute(r ApiListUploadsRequest) (*FileSvcUploadsResponse, *http.Response, error) {
+//  @return FileSvcListUploadsResponse
+func (a *FileSvcAPIService) ListUploadsExecute(r ApiListUploadsRequest) (*FileSvcListUploadsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *FileSvcUploadsResponse
+		localVarReturnValue  *FileSvcListUploadsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FileSvcAPIService.ListUploads")
@@ -615,9 +617,6 @@ func (a *FileSvcAPIService) ListUploadsExecute(r ApiListUploadsRequest) (*FileSv
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.uploadFileRequest == nil {
-		return localVarReturnValue, nil, reportError("uploadFileRequest is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -637,7 +636,7 @@ func (a *FileSvcAPIService) ListUploadsExecute(r ApiListUploadsRequest) (*FileSv
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.uploadFileRequest
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -881,8 +880,9 @@ func (r ApiUploadFileRequest) Execute() (*FileSvcUploadFileResponse, *http.Respo
 UploadFile Upload a File
 
 Uploads a file to the server.
-Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+In reality the endpoint "unofficially" supports multiple files. YMMV.
 
 Requires the `file-svc:upload:create` permission.
 

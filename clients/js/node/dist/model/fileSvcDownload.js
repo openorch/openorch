@@ -17,6 +17,11 @@ export class FileSvcDownload {
 FileSvcDownload.discriminator = undefined;
 FileSvcDownload.attributeTypeMap = [
     {
+        "name": "createdAt",
+        "baseName": "createdAt",
+        "type": "string"
+    },
+    {
         "name": "downloadedBytes",
         "baseName": "downloadedBytes",
         "type": "number"
@@ -37,8 +42,8 @@ FileSvcDownload.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "fullFileSize",
-        "baseName": "fullFileSize",
+        "name": "fileSize",
+        "baseName": "fileSize",
         "type": "number"
     },
     {
@@ -54,6 +59,11 @@ FileSvcDownload.attributeTypeMap = [
     {
         "name": "status",
         "baseName": "status",
+        "type": "string"
+    },
+    {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
         "type": "string"
     },
     {

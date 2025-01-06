@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -15,8 +16,9 @@ import (
 // @ID uploadFile
 // @Summary Upload a File
 // @Description Uploads a file to the server.
-// @Description Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+// @Description Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
 // @Description Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+// @Description In reality the endpoint "unofficially" supports multiple files. YMMV.
 // @Description
 // @Description Requires the `file-svc:upload:create` permission.
 // @Tags File Svc
@@ -96,7 +98,8 @@ func (fs *FileService) UploadFile(
 			OriginalFileName: part.FileName(),
 			FilePath:         destinationFilePath,
 			UserId:           *isAuthRsp.GetUser().Id,
-			FullFileSize:     written,
+			FileSize:         written,
+			CreatedAt:        time.Now(),
 		})
 		if err != nil {
 			handleError(err, http.StatusInternalServerError, "Failed to save upload record")

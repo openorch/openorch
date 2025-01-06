@@ -20,6 +20,12 @@ export interface FileSvcUpload {
      * @type {string}
      * @memberof FileSvcUpload
      */
+    createdAt?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
     fileName?: string;
     /**
      *
@@ -32,7 +38,7 @@ export interface FileSvcUpload {
      * @type {number}
      * @memberof FileSvcUpload
      */
-    fullFileSize?: number;
+    fileSize?: number;
     /**
      *
      * @type {string}
@@ -45,6 +51,12 @@ export interface FileSvcUpload {
      * @memberof FileSvcUpload
      */
     nodeId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
+    updatedAt?: string;
     /**
      *
      * @type {string}

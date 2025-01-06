@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { FileSvcDownloadRequestToJSON, FileSvcDownloadsResponseFromJSON, FileSvcGetDownloadResponseFromJSON, FileSvcUploadFileResponseFromJSON, FileSvcUploadsResponseFromJSON, UploadFileRequestToJSON, } from '../models/index';
+import { FileSvcDownloadRequestToJSON, FileSvcDownloadsResponseFromJSON, FileSvcGetDownloadResponseFromJSON, FileSvcListUploadsRequestToJSON, FileSvcListUploadsResponseFromJSON, FileSvcUploadFileResponseFromJSON, } from '../models/index';
 /**
  *
  */
@@ -98,7 +98,7 @@ export class FileSvcApi extends runtime.BaseAPI {
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    listFileDownloadsRaw(initOverrides) {
+    listDownloadsRaw(initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const queryParameters = {};
             const headerParameters = {};
@@ -118,9 +118,9 @@ export class FileSvcApi extends runtime.BaseAPI {
      * List download details.  Requires the `file-svc:download:view` permission.
      * List Downloads
      */
-    listFileDownloads(initOverrides) {
+    listDownloads(initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.listFileDownloadsRaw(initOverrides);
+            const response = yield this.listDownloadsRaw(initOverrides);
             return yield response.value();
         });
     }
@@ -130,9 +130,6 @@ export class FileSvcApi extends runtime.BaseAPI {
      */
     listUploadsRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['uploadFileRequest'] == null) {
-                throw new runtime.RequiredError('uploadFileRequest', 'Required parameter "uploadFileRequest" was null or undefined when calling listUploads().');
-            }
             const queryParameters = {};
             const headerParameters = {};
             headerParameters['Content-Type'] = 'application/json';
@@ -144,17 +141,17 @@ export class FileSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: UploadFileRequestToJSON(requestParameters['uploadFileRequest']),
+                body: FileSvcListUploadsRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => FileSvcUploadsResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => FileSvcListUploadsResponseFromJSON(jsonValue));
         });
     }
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * List Uploads
      */
-    listUploads(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
+    listUploads() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
             const response = yield this.listUploadsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
@@ -193,7 +190,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     uploadFileRaw(requestParameters, initOverrides) {
@@ -235,7 +232,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File
      */
     uploadFile(requestParameters, initOverrides) {

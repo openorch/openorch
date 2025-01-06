@@ -19,9 +19,9 @@ import { FileSvcDownloadRequest } from '../model/fileSvcDownloadRequest';
 import { FileSvcDownloadsResponse } from '../model/fileSvcDownloadsResponse';
 import { FileSvcErrorResponse } from '../model/fileSvcErrorResponse';
 import { FileSvcGetDownloadResponse } from '../model/fileSvcGetDownloadResponse';
+import { FileSvcListUploadsRequest } from '../model/fileSvcListUploadsRequest';
+import { FileSvcListUploadsResponse } from '../model/fileSvcListUploadsResponse';
 import { FileSvcUploadFileResponse } from '../model/fileSvcUploadFileResponse';
-import { FileSvcUploadsResponse } from '../model/fileSvcUploadsResponse';
-import { UploadFileRequest } from '../model/uploadFileRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -243,7 +243,7 @@ export class FileSvcApi {
      * List download details.  Requires the `file-svc:download:view` permission.
      * @summary List Downloads
      */
-    public async listFileDownloads (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileSvcDownloadsResponse;  }> {
+    public async listDownloads (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileSvcDownloadsResponse;  }> {
         const localVarPath = this.basePath + '/file-svc/downloads';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -307,9 +307,9 @@ export class FileSvcApi {
     /**
      * List the uploaded files.  Requires the `file-svc:upload:view` permission.
      * @summary List Uploads
-     * @param uploadFileRequest 
+     * @param body List Uploads Request
      */
-    public async listUploads (uploadFileRequest: UploadFileRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileSvcUploadsResponse;  }> {
+    public async listUploads (body?: FileSvcListUploadsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: FileSvcListUploadsResponse;  }> {
         const localVarPath = this.basePath + '/file-svc/uploads';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -322,11 +322,6 @@ export class FileSvcApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'uploadFileRequest' is not null or undefined
-        if (uploadFileRequest === null || uploadFileRequest === undefined) {
-            throw new Error('Required parameter uploadFileRequest was null or undefined when calling listUploads.');
-        }
-
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -338,7 +333,7 @@ export class FileSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(uploadFileRequest, "UploadFileRequest")
+            body: ObjectSerializer.serialize(body, "FileSvcListUploadsRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -360,13 +355,13 @@ export class FileSvcApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: FileSvcUploadsResponse;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: FileSvcListUploadsResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "FileSvcUploadsResponse");
+                            body = ObjectSerializer.deserialize(body, "FileSvcListUploadsResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
@@ -449,7 +444,7 @@ export class FileSvcApi {
         });
     }
     /**
-     * Uploads a file to the server. Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.  Requires the `file-svc:upload:create` permission.
+     * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * @summary Upload a File
      * @param file File to upload
      */
