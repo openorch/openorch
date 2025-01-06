@@ -56,29 +56,27 @@ func (fs *FileService) UploadFile(
 		w.Write([]byte(message + ": " + err.Error()))
 	}
 
-	err = r.ParseMultipartForm(10 << 20)
+	reader, err := r.MultipartReader()
 	if err != nil {
 		handleError(err, http.StatusBadRequest, "Invalid request")
 		return
 	}
 
-	fileHeader, fileHeaderOk := r.MultipartForm.File["file"]
-
-	if !fileHeaderOk || len(fileHeader) == 0 {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`File is required`))
-		return
-	}
-
-	for _, header := range fileHeader {
-		uploadedFile, err := header.Open()
+	for {
+		part, err := reader.NextPart()
+		if err == io.EOF {
+			break
+		}
 		if err != nil {
-			handleError(err, http.StatusInternalServerError, "Failed to open file")
+			handleError(err, http.StatusInternalServerError, "Failed to read multipart data")
 			return
 		}
-		defer uploadedFile.Close()
 
-		cleanFilename := sanitizeFilename(header.Filename)
+		if part.FileName() == "" {
+			continue
+		}
+
+		cleanFilename := sanitizeFilename(part.FileName())
 		destinationFilePath := filepath.Join(fs.uploadFolder, cleanFilename)
 		dstFile, err := os.Create(destinationFilePath)
 		if err != nil {
@@ -87,7 +85,7 @@ func (fs *FileService) UploadFile(
 		}
 		defer dstFile.Close()
 
-		written, err := io.Copy(dstFile, uploadedFile)
+		written, err := io.Copy(dstFile, part)
 		if err != nil {
 			handleError(err, http.StatusInternalServerError, "Failed to save file")
 			return
@@ -95,7 +93,7 @@ func (fs *FileService) UploadFile(
 
 		err = fs.uploadStore.Upsert(file.Upload{
 			Id:               sdk.Id("upl"),
-			OriginalFileName: header.Filename,
+			OriginalFileName: part.FileName(),
 			FilePath:         destinationFilePath,
 			UserId:           *isAuthRsp.GetUser().Id,
 			FullFileSize:     written,
