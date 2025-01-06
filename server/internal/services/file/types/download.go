@@ -34,26 +34,17 @@ func (d InternalDownload) GetId() string {
 	return d.Id
 }
 
-// Download represents the metadata and status of a file being downloaded.
-// It tracks the progress, size, and state of the download, allowing for
-// pause, resume, and cancellation operations.
+// Download record
 type Download struct {
-	Id              string   `json:"id"`
-	URL             string   `json:"url"`
-	FileName        string   `json:"fileName"`
-	Dir             *string  `json:"dir,omitempty"`
-	Progress        *float64 `json:"progress,omitempty"`
-	DownloadedBytes int64    `json:"downloadedBytes"     format:"int64"`
-	FullFileSize    *int64   `json:"fullFileSize"        format:"int64"`
-	Status          string   `json:"status"`
-	FilePath        *string  `json:"filePath,omitempty"`
-	Paused          *bool    `json:"paused,omitempty"`
-	Cancelled       *bool    `json:"cancelled,omitempty"`
-	Error           *string  `json:"error,omitempty"`
-}
-
-type OnFileDownloadStatus struct {
-	AllDownloads []Download `json:"allDownloads"`
+	Id              string  `json:"id"`
+	URL             string  `json:"url"`
+	FileName        string  `json:"fileName"`
+	Progress        float64 `json:"progress,omitempty"`
+	DownloadedBytes int64   `json:"downloadedBytes" format:"int64"`
+	FullFileSize    int64   `json:"fullFileSize,omitempty" format:"int64"`
+	Status          string  `json:"status"`
+	FilePath        string  `json:"filePath,omitempty"`
+	Error           string  `json:"error,omitempty"`
 }
 
 type DownloadRequest struct {

@@ -46,43 +46,30 @@ func downloadToDownloadDetails(
 	}
 	fileName := filepath.Base(download.FilePath)
 
-	var progress *float64
+	var progress float64
 	if download.TotalSize > 0 {
 		computedProgress := float64(
 			(download.DownloadedSize * 100),
 		) / float64(
 			download.TotalSize,
 		)
-		progress = &computedProgress
+		progress = computedProgress
 	}
 
-	var fullFileSize *int64
+	var fullFileSize int64
 	if download.TotalSize > 0 {
-		fullFileSize = &download.TotalSize
+		fullFileSize = download.TotalSize
 	}
-
-	var dir *string
-	if download.FilePath != "" {
-		directory := filepath.Dir(download.FilePath)
-		dir = &directory
-	}
-
-	var paused, cancelled *bool
-	var errorString *string
 
 	downloadDetail := types.Download{
 		Id:              download.Id,
 		URL:             download.URL,
 		FileName:        fileName,
-		Dir:             dir,
 		Progress:        progress,
 		DownloadedBytes: download.DownloadedSize,
 		FullFileSize:    fullFileSize,
 		Status:          string(download.Status),
-		FilePath:        &download.FilePath,
-		Paused:          paused,
-		Cancelled:       cancelled,
-		Error:           errorString,
+		FilePath:        download.FilePath,
 	}
 
 	return &downloadDetail

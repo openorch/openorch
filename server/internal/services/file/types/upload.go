@@ -7,13 +7,14 @@
  */
 package file_svc
 
+// Upload record
 type Upload struct {
 	Id               string `json:"id"`
 	NodeId           string `json:"nodeId"`
 	FilePath         string `json:"filePath"`
 	OriginalFileName string `json:"fileName"`
 	UserId           string `json:"userId,omitempty"`
-	FullFileSize     *int64 `json:"fullFileSize"        format:"int64"`
+	FullFileSize     int64  `json:"fullFileSize" format:"int64"`
 }
 
 type UploadFileResponse struct {
