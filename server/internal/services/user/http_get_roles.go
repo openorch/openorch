@@ -16,7 +16,9 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // GetRoles handles the retrieval of all roles.
@@ -53,4 +55,21 @@ func (s *UserService) GetRoles(
 		Roles: roles,
 	})
 	w.Write(bs)
+}
+
+func (s *UserService) getRoles() ([]*usertypes.Role, error) {
+	rolesI, err := s.rolesStore.Query().
+		OrderBy(datastore.OrderByField("name", false)).
+		Find()
+
+	if err != nil {
+		return nil, err
+	}
+
+	roles := []*usertypes.Role{}
+	for _, roleI := range rolesI {
+		roles = append(roles, roleI.(*usertypes.Role))
+	}
+
+	return roles, err
 }

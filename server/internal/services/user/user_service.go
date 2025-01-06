@@ -287,7 +287,7 @@ func (s *UserService) bootstrap() error {
 }
 
 func (s *UserService) registerRoles() error {
-	err := s.UpsertRole(
+	err := s.upsertRole(
 		s.serviceUserId,
 		usertypes.RoleAdmin.Id,
 		usertypes.RoleAdmin.Name,
@@ -298,7 +298,7 @@ func (s *UserService) registerRoles() error {
 		return err
 	}
 
-	err = s.UpsertRole(
+	err = s.upsertRole(
 		s.serviceUserId,
 		usertypes.RoleUser.Id,
 		usertypes.RoleUser.Name,

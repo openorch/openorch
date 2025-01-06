@@ -18,6 +18,7 @@ import (
 
 	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // GetUsers retrieves a list of users based on query parameters
@@ -81,4 +82,48 @@ func (s *UserService) GetUsers(
 		Count: count,
 	})
 	w.Write(bs)
+}
+
+func (s *UserService) getUsers(
+	options *usertypes.GetUsersOptions,
+) ([]*usertypes.User, int64, error) {
+	q := s.usersStore.Query(
+		options.Query.Filters...,
+	).Limit(options.Query.Limit)
+
+	if len(options.Query.OrderBys) > 0 {
+		q = q.OrderBy(options.Query.OrderBys...)
+	} else {
+		q = q.OrderBy(datastore.OrderByField("createdAt", true))
+	}
+
+	if options.Query.JSONAfter != "" {
+		v := []any{}
+		err := json.Unmarshal([]byte(options.Query.JSONAfter), &v)
+		if err != nil {
+			return nil, 0, err
+		}
+		q = q.After(v...)
+	}
+
+	res, err := q.Find()
+	if err != nil {
+		return nil, 0, err
+	}
+
+	var count int64
+	if options.Query.Count {
+		var err error
+		count, err = q.Count()
+		if err != nil {
+			return nil, 0, err
+		}
+	}
+
+	users := []*usertypes.User{}
+	for _, v := range res {
+		users = append(users, v.(*usertypes.User))
+	}
+
+	return users, count, nil
 }

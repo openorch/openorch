@@ -14,8 +14,12 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
+	"time"
 
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
@@ -69,4 +73,113 @@ func (s *UserService) CreateOrganization(
 
 	bs, _ := json.Marshal(user.CreateOrganizationResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) createOrganization(
+	userId, orgId, name, slug string,
+) error {
+	_, exists, err := s.contactsStore.Query(
+		datastore.Equals(datastore.Field("slug"), slug),
+	).FindOne()
+	if err != nil {
+		return err
+	}
+
+	if exists {
+		return errors.New("organization already exists")
+	}
+
+	org := &user.Organization{
+		Id:   orgId,
+		Name: name,
+		Slug: slug,
+	}
+
+	count, err := s.organizationUserLinksStore.Query(
+		datastore.Equals(
+			datastore.Field("userId"),
+			userId,
+		),
+	).Count()
+	if err != nil {
+		return err
+	}
+
+	link := &user.OrganizationUserLink{
+		Id:             fmt.Sprintf("%v:%v", org.Id, userId),
+		UserId:         userId,
+		OrganizationId: org.Id,
+		Active:         count == 0, // make the first org active
+	}
+
+	err = s.organizationUserLinksStore.Create(link)
+	if err != nil {
+		return err
+	}
+
+	err = s.organizationsStore.Create(org)
+	if err != nil {
+		return err
+	}
+
+	return s.addDynamicRoleToUser(
+		userId,
+		fmt.Sprintf("user-svc:org:{%v}:admin", org.Id),
+	)
+}
+
+func (s *UserService) addStaticRoleToUser(userId, roleId string) error {
+	roleQ := s.rolesStore.Query(
+		datastore.Id(roleId),
+	)
+	roleI, found, err := roleQ.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return fmt.Errorf("cannot find role %v", roleId)
+	}
+	role := roleI.(*user.Role)
+
+	userQ := s.usersStore.Query(
+		datastore.Id(userId),
+	)
+	userI, found, err := userQ.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return fmt.Errorf("cannot find user %v", userId)
+	}
+	u := userI.(*user.User)
+
+	return s.userRoleLinksStore.Upsert(&user.UserRoleLink{
+		Id:        fmt.Sprintf("%v:%v", u.Id, role.Id),
+		CreatedAt: time.Now(),
+
+		RoleId: roleId,
+		UserId: userId,
+	})
+}
+
+func (s *UserService) addDynamicRoleToUser(userId, roleId string) error {
+	userQ := s.usersStore.Query(
+		datastore.Id(userId),
+	)
+	userI, found, err := userQ.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return fmt.Errorf("cannot find user %v", userId)
+	}
+	u := userI.(*user.User)
+
+	return s.userRoleLinksStore.Upsert(&user.UserRoleLink{
+		Id:        fmt.Sprintf("%v:%v", u.Id, roleId),
+		CreatedAt: time.Now(),
+
+		RoleId: roleId,
+		UserId: userId,
+	})
 }

@@ -14,9 +14,12 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strings"
 
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
@@ -80,4 +83,40 @@ func (s *UserService) CreateRole(w http.ResponseWriter, r *http.Request) {
 		Role: role,
 	})
 	w.Write(bs)
+}
+
+func (s *UserService) createRole(
+	ownerId, name, description string,
+	permissionIds []string,
+) (*user.Role, error) {
+	permissions, err := s.permissionsStore.Query(
+		datastore.Equals(datastore.Field("id"), permissionIds),
+	).Find()
+	if err != nil {
+		return nil, err
+	}
+	if len(permissions) < len(permissionIds) {
+		return nil, errors.New("nonexistent permissions")
+	}
+
+	role := &user.Role{
+		Id:          sdk.Id("rol"),
+		Name:        name,
+		Description: description,
+		OwnerId:     ownerId,
+	}
+
+	err = s.rolesStore.Upsert(role)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, permissionId := range permissionIds {
+		err = s.addPermissionToRole(ownerId, role.Id, permissionId)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return role, nil
 }

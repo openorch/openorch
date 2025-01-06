@@ -14,10 +14,12 @@ package userservice
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
@@ -85,4 +87,40 @@ func (s *UserService) UpsertPermission(
 
 	bs, _ := json.Marshal(user.CreateUserResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) upsertPermission(
+	userId, id, name, description string,
+) (*user.Permission, error) {
+	query := s.permissionsStore.Query(
+		datastore.Equals(datastore.Field("id"), id),
+	)
+
+	permI, found, err := query.FindOne()
+	if err != nil {
+		return nil, err
+	}
+
+	if found {
+		perm := permI.(*user.Permission)
+		if perm.OwnerId != userId {
+			return nil, fmt.Errorf("cannot update unowned permission")
+		}
+
+		perm.Name = name
+		perm.Description = description
+		query.Update(perm)
+		return perm, nil
+	}
+
+	permission := &user.Permission{
+		Id:          id,
+		Name:        name,
+		Description: description,
+		OwnerId:     userId,
+	}
+
+	s.permissionsStore.Create(permission)
+
+	return permission, nil
 }

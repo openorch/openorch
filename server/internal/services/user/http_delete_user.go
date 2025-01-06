@@ -14,10 +14,14 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // DeleteUser handles the deletion of a user by user ID.
@@ -66,4 +70,53 @@ func (s *UserService) DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 	bs, _ := json.Marshal(user.DeleteUserResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) deleteUser(userId string) error {
+	if userId == "" {
+		return errors.New("no user id")
+	}
+	q := s.usersStore.Query(
+		datastore.Id(userId),
+	)
+	_, found, err := q.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return errors.New("user not found")
+	}
+
+	isAdminUser, err := s.isAdmin(userId)
+	if err != nil {
+		return err
+	}
+
+	if isAdminUser {
+		adminUsers, err := s.userRoleLinksStore.Query(
+			datastore.Equals(datastore.Field("roleId"), usertypes.RoleAdmin.Id),
+		).Find()
+		if err != nil {
+			return err
+		}
+		if len(adminUsers) == 0 {
+			return errors.New("cannot detect number of admin users")
+		}
+		if len(adminUsers) == 1 {
+			return errors.New("Cannot delete last admin user")
+		}
+	}
+
+	return q.Delete()
+}
+
+func (s *UserService) isAdmin(userId string) (bool, error) {
+	_, isAdminUser, err := s.userRoleLinksStore.Query(
+		datastore.Id(fmt.Sprintf("%v:%v", userId, usertypes.RoleAdmin.Id)),
+	).FindOne()
+	if err != nil {
+		return false, err
+	}
+
+	return isAdminUser, nil
 }
