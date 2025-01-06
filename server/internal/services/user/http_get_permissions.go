@@ -20,7 +20,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// GetPermissions handles the retrieval of permissions based on the role ID.
 // @ID getPermissionsByRole
 // @Summary Get Permissions by Role
 // @Description Retrieve permissions associated with a specific role ID.

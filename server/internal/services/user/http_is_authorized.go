@@ -83,14 +83,14 @@ func (s *UserService) IsAuthorized(
 }
 
 func (s *UserService) isAuthorized(r *http.Request, permissionId string,
-	GrantedSlugs, contactsGranted []string) (*user.User, error) {
+	grantedSlugs, contactsGranted []string) (*user.User, error) {
 	usr, err := s.getUserFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
 	slugGrant := false
-	for _, v := range GrantedSlugs {
+	for _, v := range grantedSlugs {
 		if usr.Slug == v {
 			slugGrant = true
 		}
@@ -125,6 +125,20 @@ func (s *UserService) isAuthorized(r *http.Request, permissionId string,
 			return usr, nil
 		}
 
+	}
+
+	// check grants
+
+	_, exists, err := s.grantsStore.Query(
+		datastore.Equals([]string{"permissionId"}, permissionId),
+		datastore.IsInList([]string{"slugs"}, usr.Slug),
+	).FindOne()
+	if err != nil {
+		return nil, err
+	}
+
+	if exists {
+		return usr, nil
 	}
 
 	return nil, errors.New("unauthorized")

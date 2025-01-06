@@ -23,7 +23,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// CreateOrganization allows a user to create a new organization
 // @ID createOrganization
 // @Summary Create an Organization
 // @Description Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.

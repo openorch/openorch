@@ -24,7 +24,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// DeleteUser handles the deletion of a user by user ID.
 // @ID deleteUser
 // @Summary Delete a User
 // @Description Delete a user based on the user ID.

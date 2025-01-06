@@ -23,7 +23,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// ChangePassword allows a user to update their own password
 // @ID changePassword
 // @Summary Change User Password
 // @Description Allows an authenticated user to change their own password.

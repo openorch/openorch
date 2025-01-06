@@ -21,7 +21,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// GetUsers retrieves a list of users based on query parameters
 // @ID getUsers
 // @Summary List Users
 // @Description Fetches a list of users with optional query filters and pagination.

@@ -22,7 +22,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// AddUserToOrganization allows an authorized user to add another user to a specific organization.
 // @ID addUserToOrganization
 // @Summary Add a User to an Organization
 // @Description Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.

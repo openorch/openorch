@@ -3670,6 +3670,103 @@ const docTemplate = `{
                 }
             }
         },
+        "/user-svc/grants": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Save grants.\n\nGrants define which slugs are assigned specific permissions, overriding the default configuration.\n\nRequires the ` + "`" + `user-svc:grant:create` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "Save Grants",
+                "operationId": "saveGrants",
+                "parameters": [
+                    {
+                        "description": "Save Grants Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SaveGrantsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Grant saved successfully",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SaveGrantsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List grants.\n\nGrants define which slugs are assigned specific permissions, overriding the default configuration.\n\nRequires the ` + "`" + `user-svc:grant:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "List Grants",
+                "operationId": "listGrants",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ListGrantsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user-svc/login": {
             "post": {
                 "description": "Authenticates a user and returns a token.",
@@ -3942,7 +4039,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Creates or updates a permission.\n\u003cb\u003eThe permission ID must be prefixed by the callers username (email).\u003c/b\u003e\nEg. if the owner's email/username is ` + "`" + `petstore-svc` + "`" + ` the permission should look like ` + "`" + `petstore-svc:pet:edit` + "`" + `.\n\nRequires the ` + "`" + `user-svc:permission:create` + "`" + ` permission.",
+                "description": "Creates or updates a permission.\n\u003cb\u003eThe permission ID must be prefixed by the callers slug.\u003c/b\u003e\nEg. if the owner's slug is ` + "`" + `petstore-svc` + "`" + ` the permission should look like ` + "`" + `petstore-svc:pet:edit` + "`" + `.\n\nRequires the ` + "`" + `user-svc:permission:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -7677,6 +7774,24 @@ const docTemplate = `{
                 }
             }
         },
+        "user_svc.Grant": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "permissionId": {
+                    "type": "string"
+                },
+                "slugs": {
+                    "description": "Slugs who are granted the PermissionId",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "user_svc.IsAuthorizedRequest": {
             "type": "object",
             "properties": {
@@ -7702,6 +7817,17 @@ const docTemplate = `{
                 },
                 "user": {
                     "$ref": "#/definitions/user_svc.User"
+                }
+            }
+        },
+        "user_svc.ListGrantsResponse": {
+            "type": "object",
+            "properties": {
+                "grants": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user_svc.Grant"
+                    }
                 }
             }
         },
@@ -7850,6 +7976,20 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "user_svc.SaveGrantsRequest": {
+            "type": "object",
+            "properties": {
+                "grants": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user_svc.Grant"
+                    }
+                }
+            }
+        },
+        "user_svc.SaveGrantsResponse": {
+            "type": "object"
         },
         "user_svc.SaveProfileRequest": {
             "type": "object",

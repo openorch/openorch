@@ -24,7 +24,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// DeleteRole handles the deletion of a role by role ID.
 // @ID deleteRole
 // @Summary Delete a Role
 // @Description Delete a role based on the role ID.

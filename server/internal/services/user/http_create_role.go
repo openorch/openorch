@@ -23,7 +23,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// CreateRole creates a new role
 // @ID createRole
 // @Summary Create a New Role
 // @Description Create a new role.

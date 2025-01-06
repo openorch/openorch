@@ -651,6 +651,14 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		userService.GetPublicKey(w, r)
 	})).
 		Methods("OPTIONS", "GET")
+	router.HandleFunc("/user-svc/grants", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.SaveGrants(w, r)
+	})).
+		Methods("OPTIONS", "PUT")
+	router.HandleFunc("/user-svc/grants", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.ListGrants(w, r)
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/dynamic-svc/object", appl(func(w http.ResponseWriter, r *http.Request) {
 		dynamicService.Create(w, r)

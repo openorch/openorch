@@ -24,7 +24,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// Login handles user authentication
 // @ID login
 // @Summary Login
 // @Description Authenticates a user and returns a token.

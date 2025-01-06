@@ -22,7 +22,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// RemoveUserFromOrganization allows an authorized user to add another user to a specific organization.
 // @ID removeUserFromOrganization
 // @Summary Remove a User from an Organization
 // @Description Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.

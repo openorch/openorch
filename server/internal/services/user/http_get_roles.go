@@ -21,7 +21,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// GetRoles handles the retrieval of all roles.
 // @ID getRoles
 // @Summary Get all Roles
 // @Description Retrieve all roles from the user service.

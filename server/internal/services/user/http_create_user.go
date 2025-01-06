@@ -20,7 +20,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// CreateUser allows an administrator to create a new user
 // @ID createUser
 // @Summary Create a New User
 // @Description Allows an authenticated administrator to create a new user with specified details.
