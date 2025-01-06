@@ -2,6 +2,7 @@ package fileservice_test
 
 import (
 	"context"
+	"io/ioutil"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
@@ -65,10 +66,11 @@ func TestUploadFile(t *testing.T) {
 	file2, cleanup2 := createTestFile(t, "Test file content")
 	defer cleanup2()
 
-	_, _, err = adminClient.FileSvcAPI.UploadFile(ctx).
+	uplRsp, _, err := adminClient.FileSvcAPI.UploadFile(ctx).
 		File(file2).
 		Execute()
 	require.NoError(t, err)
+	require.Equal(t, int64(17), uplRsp.Upload.FileSize)
 
 	timeout := time.After(5 * time.Second)
 	ticker := time.NewTicker(50 * time.Millisecond)
@@ -97,5 +99,13 @@ outer:
 	rsp, _, err := adminClient.FileSvcAPI.ListUploads(ctx).Execute()
 	require.NoError(t, err)
 	require.Equal(t, 1, len(rsp.Uploads))
-	require.Equal(t, 17, rsp.Uploads[0].FileSize)
+	require.Equal(t, int64(17), rsp.Uploads[0].FileSize)
+
+	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeUpload(ctx, *rsp.Uploads[0].Id).Execute()
+	require.NoError(t, err)
+	bs, err := ioutil.ReadAll(fileRsp)
+	require.NoError(t, err)
+	require.Equal(t, "Test file content", string(bs))
+	require.Equal(t, "text/plain; charset=utf-8", fileHttpRsp.Header.Get("Content-Type"))
+
 }

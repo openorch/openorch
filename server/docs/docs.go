@@ -1581,14 +1581,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/download/{downloadId}": {
+        "/file-svc/download/{url}": {
             "get": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get a download by ID.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "description": "Get a download by URL.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1603,8 +1603,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
+                        "description": "url",
+                        "name": "url",
                         "in": "path",
                         "required": true
                     }
@@ -1631,7 +1631,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/download/{downloadId}/pause": {
+        "/file-svc/download/{url}/pause": {
             "put": {
                 "security": [
                     {
@@ -1653,8 +1653,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
+                        "description": "Download URL",
+                        "name": "url",
                         "in": "path",
                         "required": true
                     }
@@ -1724,6 +1724,110 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/serve/download/{url}": {
+            "get": {
+                "description": "Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.",
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Serve a File from a URL",
+                "operationId": "serveDownload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "URL",
+                        "name": "url",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File served successfully",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid download URL",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/serve/upload/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Serves a previously uploaded file based on its ID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Serve an Uploaded File",
+                "operationId": "serveUpload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Upload ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File served successfully",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing upload ID",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
                         }
                     }
                 }
@@ -5890,6 +5994,9 @@ const docTemplate = `{
         },
         "file_svc.Upload": {
             "type": "object",
+            "required": [
+                "fileSize"
+            ],
             "properties": {
                 "createdAt": {
                     "type": "string"

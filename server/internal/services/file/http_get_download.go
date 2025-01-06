@@ -25,18 +25,18 @@ import (
 
 // @ID getDownload
 // @Summary Get a Download
-// @Description Get a download by ID.
+// @Description Get a download by URL.
 // @Description
 // @Description Requires the `file-svc:download:view` permission.
 // @Tags File Svc
 // @Accept json
 // @Produce json
-// @Param downloadId path string true "Download ID"
+// @Param url path string true "url"
 // @Success 200 {object} file.GetDownloadResponse
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /file-svc/download/{downloadId} [get]
+// @Router /file-svc/download/{url} [get]
 func (fs *FileService) GetDownload(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -60,14 +60,14 @@ func (fs *FileService) GetDownload(
 	}
 
 	vars := mux.Vars(r)
-	did, err := url.PathUnescape(vars["downloadId"])
+	ur, err := url.PathUnescape(vars["url"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	dl, exists := fs.getDownload(did)
+	dl, exists := fs.getDownload(ur)
 
 	jsonData, _ := json.Marshal(file.GetDownloadResponse{
 		Exists:   exists,

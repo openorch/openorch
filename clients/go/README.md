@@ -107,10 +107,12 @@ Class | Method | HTTP request | Description
 *DynamicSvcAPI* | [**UpsertObject**](docs/DynamicSvcAPI.md#upsertobject) | **Put** /dynamic-svc/object/{objectId} | Upsert a Generic Object
 *EmailSvcAPI* | [**SendEmail**](docs/EmailSvcAPI.md#sendemail) | **Post** /email-svc/email | Send an Email
 *FileSvcAPI* | [**DownloadFile**](docs/FileSvcAPI.md#downloadfile) | **Put** /file-svc/download | Download a File
-*FileSvcAPI* | [**GetDownload**](docs/FileSvcAPI.md#getdownload) | **Get** /file-svc/download/{downloadId} | Get a Download
+*FileSvcAPI* | [**GetDownload**](docs/FileSvcAPI.md#getdownload) | **Get** /file-svc/download/{url} | Get a Download
 *FileSvcAPI* | [**ListDownloads**](docs/FileSvcAPI.md#listdownloads) | **Post** /file-svc/downloads | List Downloads
 *FileSvcAPI* | [**ListUploads**](docs/FileSvcAPI.md#listuploads) | **Post** /file-svc/uploads | List Uploads
-*FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{downloadId}/pause | Pause a Download
+*FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{url}/pause | Pause a Download
+*FileSvcAPI* | [**ServeDownload**](docs/FileSvcAPI.md#servedownload) | **Get** /file-svc/serve/download/{url} | Serve a File from a URL
+*FileSvcAPI* | [**ServeUpload**](docs/FileSvcAPI.md#serveupload) | **Get** /file-svc/serve/upload/{id} | Serve an Uploaded File
 *FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Put** /file-svc/upload | Upload a File
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
 *FirehoseSvcAPI* | [**SubscribeToEvents**](docs/FirehoseSvcAPI.md#subscribetoevents) | **Get** /firehose-svc/events/subscribe | Subscribe to the Event Stream

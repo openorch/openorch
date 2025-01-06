@@ -64,6 +64,7 @@ func (fs *FileService) UploadFile(
 		return
 	}
 
+	var uploadRecord file.Upload
 	for {
 		part, err := reader.NextPart()
 		if err == io.EOF {
@@ -93,20 +94,24 @@ func (fs *FileService) UploadFile(
 			return
 		}
 
-		err = fs.uploadStore.Upsert(file.Upload{
+		// @todo this is fairly weird that we process multiple files but only a single one is returned
+		uploadRecord = file.Upload{
 			Id:               sdk.Id("upl"),
 			OriginalFileName: part.FileName(),
 			FilePath:         destinationFilePath,
 			UserId:           *isAuthRsp.GetUser().Id,
 			FileSize:         written,
 			CreatedAt:        time.Now(),
-		})
+		}
+		err = fs.uploadStore.Upsert(uploadRecord)
 		if err != nil {
 			handleError(err, http.StatusInternalServerError, "Failed to save upload record")
 			return
 		}
 	}
 
-	jsonData, _ := json.Marshal(map[string]any{})
+	jsonData, _ := json.Marshal(file.UploadFileResponse{
+		Upload: uploadRecord,
+	})
 	w.Write(jsonData)
 }

@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the FileSvcUpload type satisfies the MappedNullable interface at compile time
@@ -23,19 +25,22 @@ type FileSvcUpload struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	FilePath *string `json:"filePath,omitempty"`
-	FileSize *int64 `json:"fileSize,omitempty"`
+	FileSize int64 `json:"fileSize"`
 	Id *string `json:"id,omitempty"`
 	NodeId *string `json:"nodeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	UserId *string `json:"userId,omitempty"`
 }
 
+type _FileSvcUpload FileSvcUpload
+
 // NewFileSvcUpload instantiates a new FileSvcUpload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileSvcUpload() *FileSvcUpload {
+func NewFileSvcUpload(fileSize int64) *FileSvcUpload {
 	this := FileSvcUpload{}
+	this.FileSize = fileSize
 	return &this
 }
 
@@ -143,36 +148,28 @@ func (o *FileSvcUpload) SetFilePath(v string) {
 	o.FilePath = &v
 }
 
-// GetFileSize returns the FileSize field value if set, zero value otherwise.
+// GetFileSize returns the FileSize field value
 func (o *FileSvcUpload) GetFileSize() int64 {
-	if o == nil || IsNil(o.FileSize) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.FileSize
+
+	return o.FileSize
 }
 
-// GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
+// GetFileSizeOk returns a tuple with the FileSize field value
 // and a boolean to check if the value has been set.
 func (o *FileSvcUpload) GetFileSizeOk() (*int64, bool) {
-	if o == nil || IsNil(o.FileSize) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FileSize, true
+	return &o.FileSize, true
 }
 
-// HasFileSize returns a boolean if a field has been set.
-func (o *FileSvcUpload) HasFileSize() bool {
-	if o != nil && !IsNil(o.FileSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetFileSize gets a reference to the given int64 and assigns it to the FileSize field.
+// SetFileSize sets field value
 func (o *FileSvcUpload) SetFileSize(v int64) {
-	o.FileSize = &v
+	o.FileSize = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -322,9 +319,7 @@ func (o FileSvcUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FilePath) {
 		toSerialize["filePath"] = o.FilePath
 	}
-	if !IsNil(o.FileSize) {
-		toSerialize["fileSize"] = o.FileSize
-	}
+	toSerialize["fileSize"] = o.FileSize
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -338,6 +333,43 @@ func (o FileSvcUpload) ToMap() (map[string]interface{}, error) {
 		toSerialize["userId"] = o.UserId
 	}
 	return toSerialize, nil
+}
+
+func (o *FileSvcUpload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fileSize",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileSvcUpload := _FileSvcUpload{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFileSvcUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileSvcUpload(varFileSvcUpload)
+
+	return err
 }
 
 type NullableFileSvcUpload struct {

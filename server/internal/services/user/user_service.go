@@ -14,12 +14,10 @@ package userservice
 
 import (
 	"crypto/rsa"
-	"log/slog"
 	"time"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
-	"github.com/openorch/openorch/sdk/go/logger"
 
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
@@ -247,7 +245,7 @@ func (s *UserService) bootstrap() error {
 
 	tok, err := s.login(slug, pw)
 	if err != nil {
-		logger.Debug("Registering service", slog.String("slug", slug))
+		// logger.Debug("Registering service", slog.String("slug", slug))
 
 		usr, err := s.register(slug, pw,
 			"User Svc", []string{
