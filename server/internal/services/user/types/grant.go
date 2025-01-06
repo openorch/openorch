@@ -24,14 +24,17 @@ func (g Grant) GetId() string {
 	return g.Id
 }
 
-type ListGrantsRequest struct{}
+type ListGrantsRequest struct {
+	PermissionId string `json:"permissionId,omitempty"`
+	Slug         string `json:"slug,omitempty"`
+}
 
 type ListGrantsResponse struct {
-	Grants []Grant `json:"grants,omitempty"`
+	Grants []*Grant `json:"grants,omitempty"`
 }
 
 type SaveGrantsRequest struct {
-	Grants []Grant `json:"grants,omitempty"`
+	Grants []*Grant `json:"grants,omitempty"`
 }
 
 type SaveGrantsResponse struct{}

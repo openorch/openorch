@@ -144,10 +144,25 @@ var PermissionOrganizationRemoveUser = Permission{
 	Name: "User Svc - Organization Remove User",
 }
 
+var PermissionGrantCreate = Permission{
+	Id:   "user-svc:grant:create",
+	Name: "User Svc - Create Grant",
+}
+
+var PermissionGrantView = Permission{
+	Id:   "user-svc:grant:view",
+	Name: "User Svc - View Grant",
+}
+
 var UserPermissions = []Permission{
+	// Anyone can create and edit their own permissions
+	// given they start wiht their slug
 	PermissionPermissionCreate,
 	PermissionPermissionEdit,
 	PermissionPermissionAssign,
+
+	// Anyone can create their own organizations and manage users there.
+	// Organization
 	PermissionOrganizationCreate,
 	PermissionOrganizationAddUser,
 	PermissionOrganizationRemoveUser,
@@ -169,4 +184,6 @@ var AdminPermissions = []Permission{
 	PermissionOrganizationCreate,
 	PermissionOrganizationAddUser,
 	PermissionOrganizationRemoveUser,
+	PermissionGrantView,
+	PermissionGrantCreate,
 }

@@ -25,8 +25,8 @@ import (
 // @ID upsertPermission
 // @Summary Upsert a Permission
 // @Description Creates or updates a permission.
-// @Description <b>The permission ID must be prefixed by the callers username (email).</b>
-// @Description Eg. if the owner's email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+// @Description <b>The permission ID must be prefixed by the callers slug.</b>
+// @Description Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
 // @Descripion The user account who creates the permission will become the owner of that permission, and only the owner will be able to edit the permission.
 // @Description
 // @Description Requires the `user-svc:permission:create` permission.
