@@ -234,6 +234,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/serve-download",
+          label: "Serve a File from a URL",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "openorch/serve-upload",
+          label: "Serve an Uploaded File",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "openorch/upload-file",
           label: "Upload a File",
           className: "api-method put",

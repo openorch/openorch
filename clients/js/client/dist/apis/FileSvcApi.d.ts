@@ -15,13 +15,19 @@ export interface DownloadFileRequest {
     body: FileSvcDownloadRequest;
 }
 export interface GetDownloadRequest {
-    downloadId: string;
+    url: string;
 }
 export interface ListUploadsRequest {
     body?: FileSvcListUploadsRequest;
 }
 export interface PauseDownloadRequest {
-    downloadId: string;
+    url: string;
+}
+export interface ServeDownloadRequest {
+    url: string;
+}
+export interface ServeUploadRequest {
+    id: string;
 }
 export interface UploadFileRequest {
     file: Blob;
@@ -45,12 +51,12 @@ export declare class FileSvcApi extends runtime.BaseAPI {
         [key: string]: any;
     }>;
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     getDownloadRaw(requestParameters: GetDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcGetDownloadResponse>>;
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     getDownload(requestParameters: GetDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcGetDownloadResponse>;
@@ -88,6 +94,26 @@ export declare class FileSvcApi extends runtime.BaseAPI {
     pauseDownload(requestParameters: PauseDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{
         [key: string]: any;
     }>;
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    serveDownloadRaw(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    serveDownload(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    serveUploadRaw(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    serveUpload(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
     /**
      * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.
      * Upload a File

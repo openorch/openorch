@@ -56,11 +56,11 @@ export declare class FileSvcApi {
         };
     }>;
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * @summary Get a Download
-     * @param downloadId Download ID
+     * @param url url
      */
-    getDownload(downloadId: string, options?: {
+    getDownload(url: string, options?: {
         headers: {
             [name: string]: string;
         };
@@ -96,9 +96,9 @@ export declare class FileSvcApi {
     /**
      * Pause a download that is currently in progress.  Requires the `file-svc:download:edit` permission.
      * @summary Pause a Download
-     * @param downloadId Download ID
+     * @param url Download URL
      */
-    pauseDownload(downloadId: string, options?: {
+    pauseDownload(url: string, options?: {
         headers: {
             [name: string]: string;
         };
@@ -107,6 +107,32 @@ export declare class FileSvcApi {
         body: {
             [key: string]: any;
         };
+    }>;
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * @summary Serve a File from a URL
+     * @param url URL
+     */
+    serveDownload(url: string, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: Buffer;
+    }>;
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * @summary Serve an Uploaded File
+     * @param id Upload ID
+     */
+    serveUpload(id: string, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: Buffer;
     }>;
     /**
      * Uploads a file to the server. Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341 Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints. In reality the endpoint \"unofficially\" supports multiple files. YMMV.  Requires the `file-svc:upload:create` permission.

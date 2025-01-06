@@ -38,7 +38,7 @@ export interface FileSvcUpload {
      * @type {number}
      * @memberof FileSvcUpload
      */
-    fileSize?: number;
+    fileSize: number;
     /**
      *
      * @type {string}

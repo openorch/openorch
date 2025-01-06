@@ -3459,8 +3459,6 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/file_svc.ErrorResponse'
-      security:
-      - BearerAuth: []
       summary: Serve an Uploaded File
       tags:
       - File Svc

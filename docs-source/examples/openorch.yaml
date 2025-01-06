@@ -873,6 +873,8 @@ definitions:
         type: string
       userId:
         type: string
+    required:
+    - fileSize
     type: object
   file_svc.UploadFileResponse:
     properties:
@@ -3289,19 +3291,19 @@ paths:
       summary: Download a File
       tags:
       - File Svc
-  /file-svc/download/{downloadId}:
+  /file-svc/download/{url}:
     get:
       consumes:
       - application/json
       description: |-
-        Get a download by ID.
+        Get a download by URL.
 
         Requires the `file-svc:download:view` permission.
       operationId: getDownload
       parameters:
-      - description: Download ID
+      - description: url
         in: path
-        name: downloadId
+        name: url
         required: true
         type: string
       produces:
@@ -3324,7 +3326,7 @@ paths:
       summary: Get a Download
       tags:
       - File Svc
-  /file-svc/download/{downloadId}/pause:
+  /file-svc/download/{url}/pause:
     put:
       consumes:
       - application/json
@@ -3334,9 +3336,9 @@ paths:
         Requires the `file-svc:download:edit` permission.
       operationId: pauseDownload
       parameters:
-      - description: Download ID
+      - description: Download URL
         in: path
-        name: downloadId
+        name: url
         required: true
         type: string
       produces:
@@ -3391,6 +3393,73 @@ paths:
       security:
       - BearerAuth: []
       summary: List Downloads
+      tags:
+      - File Svc
+  /file-svc/serve/download/{url}:
+    get:
+      description: Initiates or resumes the download for a specified URL and serves
+        the file with the appropriate Content-Type.
+      operationId: serveDownload
+      parameters:
+      - description: URL
+        in: path
+        name: url
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File served successfully
+          schema:
+            type: file
+        "400":
+          description: Invalid download URL
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      summary: Serve a File from a URL
+      tags:
+      - File Svc
+  /file-svc/serve/upload/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Serves a previously uploaded file based on its ID.
+      operationId: serveUpload
+      parameters:
+      - description: Upload ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File served successfully
+          schema:
+            type: file
+        "400":
+          description: Missing upload ID
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      summary: Serve an Uploaded File
       tags:
       - File Svc
   /file-svc/upload:

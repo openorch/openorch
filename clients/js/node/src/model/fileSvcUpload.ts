@@ -16,7 +16,7 @@ export class FileSvcUpload {
     'createdAt'?: string;
     'fileName'?: string;
     'filePath'?: string;
-    'fileSize'?: number;
+    'fileSize': number;
     'id'?: string;
     'nodeId'?: string;
     'updatedAt'?: string;

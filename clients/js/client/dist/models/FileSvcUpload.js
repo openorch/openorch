@@ -15,6 +15,8 @@
  * Check if a given object implements the FileSvcUpload interface.
  */
 export function instanceOfFileSvcUpload(value) {
+    if (!('fileSize' in value) || value['fileSize'] === undefined)
+        return false;
     return true;
 }
 export function FileSvcUploadFromJSON(json) {
@@ -28,7 +30,7 @@ export function FileSvcUploadFromJSONTyped(json, ignoreDiscriminator) {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
+        'fileSize': json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],

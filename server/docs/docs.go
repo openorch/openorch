@@ -1779,11 +1779,6 @@ const docTemplate = `{
         },
         "/file-svc/serve/upload/{id}": {
             "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
                 "description": "Serves a previously uploaded file based on its ID.",
                 "consumes": [
                     "application/json"

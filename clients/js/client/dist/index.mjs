@@ -3304,6 +3304,8 @@ function FileSvcListUploadsRequestToJSONTyped(value, ignoreDiscriminator = false
  * Check if a given object implements the FileSvcUpload interface.
  */
 function instanceOfFileSvcUpload(value) {
+    if (!('fileSize' in value) || value['fileSize'] === undefined)
+        return false;
     return true;
 }
 function FileSvcUploadFromJSON(json) {
@@ -3317,7 +3319,7 @@ function FileSvcUploadFromJSONTyped(json, ignoreDiscriminator) {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
+        'fileSize': json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
@@ -8875,13 +8877,13 @@ class FileSvcApi extends BaseAPI {
         });
     }
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     getDownloadRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['downloadId'] == null) {
-                throw new RequiredError('downloadId', 'Required parameter "downloadId" was null or undefined when calling getDownload().');
+            if (requestParameters['url'] == null) {
+                throw new RequiredError('url', 'Required parameter "url" was null or undefined when calling getDownload().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -8889,7 +8891,7 @@ class FileSvcApi extends BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/file-svc/download/{downloadId}`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+                path: `/file-svc/download/{url}`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -8898,7 +8900,7 @@ class FileSvcApi extends BaseAPI {
         });
     }
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     getDownload(requestParameters, initOverrides) {
@@ -8975,8 +8977,8 @@ class FileSvcApi extends BaseAPI {
      */
     pauseDownloadRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['downloadId'] == null) {
-                throw new RequiredError('downloadId', 'Required parameter "downloadId" was null or undefined when calling pauseDownload().');
+            if (requestParameters['url'] == null) {
+                throw new RequiredError('url', 'Required parameter "url" was null or undefined when calling pauseDownload().');
             }
             const queryParameters = {};
             const headerParameters = {};
@@ -8984,7 +8986,7 @@ class FileSvcApi extends BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/file-svc/download/{downloadId}/pause`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+                path: `/file-svc/download/{url}/pause`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
@@ -8999,6 +9001,66 @@ class FileSvcApi extends BaseAPI {
     pauseDownload(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.pauseDownloadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    serveDownloadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['url'] == null) {
+                throw new RequiredError('url', 'Required parameter "url" was null or undefined when calling serveDownload().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            const response = yield this.request({
+                path: `/file-svc/serve/download/{url}`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new BlobApiResponse(response);
+        });
+    }
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    serveDownload(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.serveDownloadRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    serveUploadRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['id'] == null) {
+                throw new RequiredError('id', 'Required parameter "id" was null or undefined when calling serveUpload().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            const response = yield this.request({
+                path: `/file-svc/serve/upload/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new BlobApiResponse(response);
+        });
+    }
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    serveUpload(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.serveUploadRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

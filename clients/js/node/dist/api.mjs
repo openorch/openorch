@@ -8256,14 +8256,14 @@ class FileSvcApi {
         });
     }
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * @summary Get a Download
-     * @param downloadId Download ID
+     * @param url url
      */
-    getDownload(downloadId_1) {
-        return __awaiter(this, arguments, void 0, function* (downloadId, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/file-svc/download/{downloadId}'
-                .replace('{' + 'downloadId' + '}', encodeURIComponent(String(downloadId)));
+    getDownload(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/file-svc/download/{url}'
+                .replace('{' + 'url' + '}', encodeURIComponent(String(url)));
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -8275,9 +8275,9 @@ class FileSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
-            // verify required parameter 'downloadId' is not null or undefined
-            if (downloadId === null || downloadId === undefined) {
-                throw new Error('Required parameter downloadId was null or undefined when calling getDownload.');
+            // verify required parameter 'url' is not null or undefined
+            if (url === null || url === undefined) {
+                throw new Error('Required parameter url was null or undefined when calling getDownload.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -8449,12 +8449,12 @@ class FileSvcApi {
     /**
      * Pause a download that is currently in progress.  Requires the `file-svc:download:edit` permission.
      * @summary Pause a Download
-     * @param downloadId Download ID
+     * @param url Download URL
      */
-    pauseDownload(downloadId_1) {
-        return __awaiter(this, arguments, void 0, function* (downloadId, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/file-svc/download/{downloadId}/pause'
-                .replace('{' + 'downloadId' + '}', encodeURIComponent(String(downloadId)));
+    pauseDownload(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/file-svc/download/{url}/pause'
+                .replace('{' + 'url' + '}', encodeURIComponent(String(url)));
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -8466,9 +8466,9 @@ class FileSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
-            // verify required parameter 'downloadId' is not null or undefined
-            if (downloadId === null || downloadId === undefined) {
-                throw new Error('Required parameter downloadId was null or undefined when calling pauseDownload.');
+            // verify required parameter 'url' is not null or undefined
+            if (url === null || url === undefined) {
+                throw new Error('Required parameter url was null or undefined when calling pauseDownload.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarRequestOptions = {
@@ -8502,6 +8502,134 @@ class FileSvcApi {
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                                 body = ObjectSerializer.deserialize(body, "{ [key: string]: any; }");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * @summary Serve a File from a URL
+     * @param url URL
+     */
+    serveDownload(url_1) {
+        return __awaiter(this, arguments, void 0, function* (url, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/file-svc/serve/download/{url}'
+                .replace('{' + 'url' + '}', encodeURIComponent(String(url)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/octet-stream'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'url' is not null or undefined
+            if (url === null || url === undefined) {
+                throw new Error('Required parameter url was null or undefined when calling serveDownload.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                encoding: null,
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "Buffer");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * @summary Serve an Uploaded File
+     * @param id Upload ID
+     */
+    serveUpload(id_1) {
+        return __awaiter(this, arguments, void 0, function* (id, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/file-svc/serve/upload/{id}'
+                .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/octet-stream'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new Error('Required parameter id was null or undefined when calling serveUpload.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'GET',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                encoding: null,
+            };
+            let authenticationPromise = Promise.resolve();
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "Buffer");
                                 resolve({ response: response, body: body });
                             }
                             else {

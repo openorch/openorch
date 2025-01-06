@@ -45,7 +45,7 @@ export interface DownloadFileRequest {
 }
 
 export interface GetDownloadRequest {
-    downloadId: string;
+    url: string;
 }
 
 export interface ListUploadsRequest {
@@ -53,7 +53,15 @@ export interface ListUploadsRequest {
 }
 
 export interface PauseDownloadRequest {
-    downloadId: string;
+    url: string;
+}
+
+export interface ServeDownloadRequest {
+    url: string;
+}
+
+export interface ServeUploadRequest {
+    id: string;
 }
 
 export interface UploadFileRequest {
@@ -108,14 +116,14 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     async getDownloadRaw(requestParameters: GetDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileSvcGetDownloadResponse>> {
-        if (requestParameters['downloadId'] == null) {
+        if (requestParameters['url'] == null) {
             throw new runtime.RequiredError(
-                'downloadId',
-                'Required parameter "downloadId" was null or undefined when calling getDownload().'
+                'url',
+                'Required parameter "url" was null or undefined when calling getDownload().'
             );
         }
 
@@ -128,7 +136,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/file-svc/download/{downloadId}`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+            path: `/file-svc/download/{url}`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -138,7 +146,7 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get a download by ID.  Requires the `file-svc:download:view` permission.
+     * Get a download by URL.  Requires the `file-svc:download:view` permission.
      * Get a Download
      */
     async getDownload(requestParameters: GetDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileSvcGetDownloadResponse> {
@@ -218,10 +226,10 @@ export class FileSvcApi extends runtime.BaseAPI {
      * Pause a Download
      */
     async pauseDownloadRaw(requestParameters: PauseDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
-        if (requestParameters['downloadId'] == null) {
+        if (requestParameters['url'] == null) {
             throw new runtime.RequiredError(
-                'downloadId',
-                'Required parameter "downloadId" was null or undefined when calling pauseDownload().'
+                'url',
+                'Required parameter "url" was null or undefined when calling pauseDownload().'
             );
         }
 
@@ -234,7 +242,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/file-svc/download/{downloadId}/pause`.replace(`{${"downloadId"}}`, encodeURIComponent(String(requestParameters['downloadId']))),
+            path: `/file-svc/download/{url}/pause`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -249,6 +257,76 @@ export class FileSvcApi extends runtime.BaseAPI {
      */
     async pauseDownload(requestParameters: PauseDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
         const response = await this.pauseDownloadRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    async serveDownloadRaw(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters['url'] == null) {
+            throw new runtime.RequiredError(
+                'url',
+                'Required parameter "url" was null or undefined when calling serveDownload().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/file-svc/serve/download/{url}`.replace(`{${"url"}}`, encodeURIComponent(String(requestParameters['url']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+     * Serve a File from a URL
+     */
+    async serveDownload(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.serveDownloadRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    async serveUploadRaw(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling serveUpload().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/file-svc/serve/upload/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Serves a previously uploaded file based on its ID.
+     * Serve an Uploaded File
+     */
+    async serveUpload(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.serveUploadRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

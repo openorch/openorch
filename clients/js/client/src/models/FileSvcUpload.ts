@@ -42,7 +42,7 @@ export interface FileSvcUpload {
      * @type {number}
      * @memberof FileSvcUpload
      */
-    fileSize?: number;
+    fileSize: number;
     /**
      * 
      * @type {string}
@@ -73,6 +73,7 @@ export interface FileSvcUpload {
  * Check if a given object implements the FileSvcUpload interface.
  */
 export function instanceOfFileSvcUpload(value: object): value is FileSvcUpload {
+    if (!('fileSize' in value) || value['fileSize'] === undefined) return false;
     return true;
 }
 
@@ -89,7 +90,7 @@ export function FileSvcUploadFromJSONTyped(json: any, ignoreDiscriminator: boole
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
-        'fileSize': json['fileSize'] == null ? undefined : json['fileSize'],
+        'fileSize': json['fileSize'],
         'id': json['id'] == null ? undefined : json['id'],
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
