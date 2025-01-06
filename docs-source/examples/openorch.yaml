@@ -2267,7 +2267,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.10
+  version: 0.3.0-rc.11
 paths:
   /chat-svc/events:
     get:
