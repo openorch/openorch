@@ -781,11 +781,11 @@ definitions:
     type: object
   file_svc.Download:
     properties:
-      cancelled:
-        type: boolean
-      dir:
+      createdAt:
         type: string
       downloadedBytes:
+        description: DownloadedBytes exists to show the download progress in terms
+          of the number of bytes already downloaded.
         format: int64
         type: integer
       error:
@@ -794,16 +794,17 @@ definitions:
         type: string
       filePath:
         type: string
-      fullFileSize:
+      fileSize:
+        description: FileSize is the full final downloaded file size.
         format: int64
         type: integer
       id:
         type: string
-      paused:
-        type: boolean
       progress:
         type: number
       status:
+        type: string
+      updatedAt:
         type: string
       url:
         type: string
@@ -836,33 +837,49 @@ definitions:
     required:
     - exists
     type: object
+  file_svc.ListUploadsRequest:
+    properties:
+      after:
+        description: After time value
+        type: string
+      limit:
+        type: integer
+      userId:
+        type: string
+    type: object
+  file_svc.ListUploadsResponse:
+    properties:
+      uploads:
+        items:
+          $ref: '#/definitions/file_svc.Upload'
+        type: array
+    type: object
   file_svc.Upload:
     properties:
+      createdAt:
+        type: string
       fileName:
         type: string
       filePath:
         type: string
-      fullFileSize:
+      fileSize:
         format: int64
         type: integer
       id:
         type: string
       nodeId:
         type: string
+      updatedAt:
+        type: string
       userId:
         type: string
+    required:
+    - fileSize
     type: object
   file_svc.UploadFileResponse:
     properties:
       upload:
         $ref: '#/definitions/file_svc.Upload'
-    type: object
-  file_svc.UploadsResponse:
-    properties:
-      uploads:
-        items:
-          $ref: '#/definitions/file_svc.Upload'
-        type: array
     type: object
   firehose_svc.ErrorResponse:
     properties:
@@ -2250,7 +2267,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.10
+  version: 0.3.0-rc.11
 paths:
   /chat-svc/events:
     get:
@@ -3274,19 +3291,19 @@ paths:
       summary: Download a File
       tags:
       - File Svc
-  /file-svc/download/{downloadId}:
+  /file-svc/download/{url}:
     get:
       consumes:
       - application/json
       description: |-
-        Get a download by ID.
+        Get a download by URL.
 
         Requires the `file-svc:download:view` permission.
       operationId: getDownload
       parameters:
-      - description: Download ID
+      - description: url
         in: path
-        name: downloadId
+        name: url
         required: true
         type: string
       produces:
@@ -3309,7 +3326,7 @@ paths:
       summary: Get a Download
       tags:
       - File Svc
-  /file-svc/download/{downloadId}/pause:
+  /file-svc/download/{url}/pause:
     put:
       consumes:
       - application/json
@@ -3319,9 +3336,9 @@ paths:
         Requires the `file-svc:download:edit` permission.
       operationId: pauseDownload
       parameters:
-      - description: Download ID
+      - description: Download URL
         in: path
-        name: downloadId
+        name: url
         required: true
         type: string
       produces:
@@ -3357,7 +3374,7 @@ paths:
         List download details.
 
         Requires the `file-svc:download:view` permission.
-      operationId: listFileDownloads
+      operationId: listDownloads
       produces:
       - application/json
       responses:
@@ -3378,14 +3395,82 @@ paths:
       summary: List Downloads
       tags:
       - File Svc
+  /file-svc/serve/download/{url}:
+    get:
+      description: Initiates or resumes the download for a specified URL and serves
+        the file with the appropriate Content-Type.
+      operationId: serveDownload
+      parameters:
+      - description: URL
+        in: path
+        name: url
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File served successfully
+          schema:
+            type: file
+        "400":
+          description: Invalid download URL
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      summary: Serve a File from a URL
+      tags:
+      - File Svc
+  /file-svc/serve/upload/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Serves a previously uploaded file based on its ID.
+      operationId: serveUpload
+      parameters:
+      - description: Upload ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File served successfully
+          schema:
+            type: file
+        "400":
+          description: Missing upload ID
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "404":
+          description: File not found
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/file_svc.ErrorResponse'
+      summary: Serve an Uploaded File
+      tags:
+      - File Svc
   /file-svc/upload:
     put:
       consumes:
       - multipart/form-data
       description: |-
         Uploads a file to the server.
-        Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+        Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
         Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+        In reality the endpoint "unofficially" supports multiple files. YMMV.
 
         Requires the `file-svc:upload:create` permission.
       operationId: uploadFile
@@ -3429,18 +3514,18 @@ paths:
         Requires the `file-svc:upload:view` permission.
       operationId: listUploads
       parameters:
-      - description: File to upload
-        in: formData
-        name: file
-        required: true
-        type: file
+      - description: List Uploads Request
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/file_svc.ListUploadsRequest'
       produces:
       - application/json
       responses:
         "200":
           description: List of uploads
           schema:
-            $ref: '#/definitions/file_svc.UploadsResponse'
+            $ref: '#/definitions/file_svc.ListUploadsResponse'
         "401":
           description: Unauthorized
           schema:

@@ -20,7 +20,7 @@ import (
 	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
-// @ID listFileDownloads
+// @ID listDownloads
 // @Summary List Downloads
 // @Description List download details.
 // @Description

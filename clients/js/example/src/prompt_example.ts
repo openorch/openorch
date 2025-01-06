@@ -36,7 +36,7 @@ export async function promptTest(apiKey: string) {
   let exists = false;
   while (!exists) {
     const dlResponse = await fileSvc.getDownload({
-      downloadId: tinyLamaAssetURL,
+      url: tinyLamaAssetURL,
     });
 
     console.log(dlResponse);

@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.10
+API version: 0.3.0-rc.11
 Contact: sales@singulatron.com
 */
 
@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the FileSvcUpload type satisfies the MappedNullable interface at compile time
@@ -20,20 +22,25 @@ var _ MappedNullable = &FileSvcUpload{}
 
 // FileSvcUpload struct for FileSvcUpload
 type FileSvcUpload struct {
+	CreatedAt *string `json:"createdAt,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	FilePath *string `json:"filePath,omitempty"`
-	FullFileSize *int64 `json:"fullFileSize,omitempty"`
+	FileSize int64 `json:"fileSize"`
 	Id *string `json:"id,omitempty"`
 	NodeId *string `json:"nodeId,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 	UserId *string `json:"userId,omitempty"`
 }
+
+type _FileSvcUpload FileSvcUpload
 
 // NewFileSvcUpload instantiates a new FileSvcUpload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileSvcUpload() *FileSvcUpload {
+func NewFileSvcUpload(fileSize int64) *FileSvcUpload {
 	this := FileSvcUpload{}
+	this.FileSize = fileSize
 	return &this
 }
 
@@ -43,6 +50,38 @@ func NewFileSvcUpload() *FileSvcUpload {
 func NewFileSvcUploadWithDefaults() *FileSvcUpload {
 	this := FileSvcUpload{}
 	return &this
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *FileSvcUpload) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileSvcUpload) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *FileSvcUpload) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *FileSvcUpload) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
@@ -109,36 +148,28 @@ func (o *FileSvcUpload) SetFilePath(v string) {
 	o.FilePath = &v
 }
 
-// GetFullFileSize returns the FullFileSize field value if set, zero value otherwise.
-func (o *FileSvcUpload) GetFullFileSize() int64 {
-	if o == nil || IsNil(o.FullFileSize) {
+// GetFileSize returns the FileSize field value
+func (o *FileSvcUpload) GetFileSize() int64 {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.FullFileSize
+
+	return o.FileSize
 }
 
-// GetFullFileSizeOk returns a tuple with the FullFileSize field value if set, nil otherwise
+// GetFileSizeOk returns a tuple with the FileSize field value
 // and a boolean to check if the value has been set.
-func (o *FileSvcUpload) GetFullFileSizeOk() (*int64, bool) {
-	if o == nil || IsNil(o.FullFileSize) {
+func (o *FileSvcUpload) GetFileSizeOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FullFileSize, true
+	return &o.FileSize, true
 }
 
-// HasFullFileSize returns a boolean if a field has been set.
-func (o *FileSvcUpload) HasFullFileSize() bool {
-	if o != nil && !IsNil(o.FullFileSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetFullFileSize gets a reference to the given int64 and assigns it to the FullFileSize field.
-func (o *FileSvcUpload) SetFullFileSize(v int64) {
-	o.FullFileSize = &v
+// SetFileSize sets field value
+func (o *FileSvcUpload) SetFileSize(v int64) {
+	o.FileSize = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -205,6 +236,38 @@ func (o *FileSvcUpload) SetNodeId(v string) {
 	o.NodeId = &v
 }
 
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *FileSvcUpload) GetUpdatedAt() string {
+	if o == nil || IsNil(o.UpdatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileSvcUpload) GetUpdatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *FileSvcUpload) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
+func (o *FileSvcUpload) SetUpdatedAt(v string) {
+	o.UpdatedAt = &v
+}
+
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *FileSvcUpload) GetUserId() string {
 	if o == nil || IsNil(o.UserId) {
@@ -247,25 +310,66 @@ func (o FileSvcUpload) MarshalJSON() ([]byte, error) {
 
 func (o FileSvcUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
 	if !IsNil(o.FileName) {
 		toSerialize["fileName"] = o.FileName
 	}
 	if !IsNil(o.FilePath) {
 		toSerialize["filePath"] = o.FilePath
 	}
-	if !IsNil(o.FullFileSize) {
-		toSerialize["fullFileSize"] = o.FullFileSize
-	}
+	toSerialize["fileSize"] = o.FileSize
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.NodeId) {
 		toSerialize["nodeId"] = o.NodeId
 	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
 	if !IsNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
 	return toSerialize, nil
+}
+
+func (o *FileSvcUpload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fileSize",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileSvcUpload := _FileSvcUpload{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFileSvcUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileSvcUpload(varFileSvcUpload)
+
+	return err
 }
 
 type NullableFileSvcUpload struct {

@@ -397,11 +397,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "PUT")
 
-	router.HandleFunc("/file-svc/download/{downloadId}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/file-svc/download/{url}/pause", appl(func(w http.ResponseWriter, r *http.Request) {
 		fileService.PauseDownload(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/file-svc/download/{downloadId}", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/file-svc/download/{url}", appl(func(w http.ResponseWriter, r *http.Request) {
 		fileService.GetDownload(w, r)
 	})).
 		Methods("OPTIONS", "GET")
@@ -415,6 +415,21 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		fileService.UploadFile(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
+
+	router.HandleFunc("/file-svc/uploads", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.ListUploads(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+
+	router.HandleFunc("/file-svc/serve/upload/{id}", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.ServeUpload(w, r)
+	})).
+		Methods("OPTIONS", "GET")
+
+	router.HandleFunc("/file-svc/serve/download/{url}", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.ServeDownload(w, r)
+	})).
+		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/docker-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Info(w, r)

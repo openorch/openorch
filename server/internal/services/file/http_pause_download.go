@@ -30,13 +30,13 @@ import (
 // @Tags File Svc
 // @Accept json
 // @Produce json
-// @Param downloadId path string true "Download ID"
+// @Param url path string true "Download URL"
 // @Success 200 {object} map[string]any "Success response"
 // @Failure 400 {string} string "Invalid JSON"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /file-svc/download/{downloadId}/pause [put]
+// @Router /file-svc/download/{url}/pause [put]
 func (ds *FileService) PauseDownload(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -56,14 +56,14 @@ func (ds *FileService) PauseDownload(
 		return
 	}
 
-	downloadId, err := url.PathUnescape(mux.Vars(r)["downloadId"])
+	ur, err := url.PathUnescape(mux.Vars(r)["url"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Download ID in path is not URL encoded"))
 		return
 	}
 
-	err = ds.pause(downloadId)
+	err = ds.pause(ur)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
