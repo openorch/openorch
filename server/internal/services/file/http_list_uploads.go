@@ -2,14 +2,13 @@ package fileservice
 
 import (
 	"encoding/json"
-	"io"
 	"net/http"
-	"os"
 	"path/filepath"
 	"strings"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	file "github.com/openorch/openorch/server/internal/services/file/types"
 )
 
@@ -21,8 +20,8 @@ import (
 // @Tags File Svc
 // @Accept json
 // @Produce json
-// @Param file formData file true "File to upload"
-// @Success 200 {object} file.UploadsResponse "List of uploads"
+// @Param body body file.ListUploadsRequest false "List Uploads Request"
+// @Success 200 {object} file.ListUploadsResponse "List of uploads"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
@@ -49,50 +48,33 @@ func (fs *FileService) ListUploads(
 		return
 	}
 
-	handleError := func(err error, statusCode int, message string) {
-		w.WriteHeader(statusCode)
-		w.Write([]byte(message + ": " + err.Error()))
-	}
-
-	err = r.ParseMultipartForm(10 << 20)
+	req := &file.ListUploadsRequest{}
+	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
-		handleError(err, http.StatusBadRequest, "Invalid request")
-		return
-	}
-
-	fileHeader, fileHeaderOk := r.MultipartForm.File["file"]
-
-	if !fileHeaderOk || len(fileHeader) == 0 {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`File is required`))
+		w.Write([]byte(`Invalid JSON`))
+		return
+	}
+	defer r.Body.Close()
+
+	filters := []datastore.Filter{}
+	if req.UserId != "" {
+		filters = append(filters, datastore.Equals([]string{"userId"}, req.UserId))
+	}
+	uploadIs, err := fs.uploadStore.Query(filters...).Find()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(`Cannot query uploads`))
 		return
 	}
 
-	for _, header := range fileHeader {
-		uploadedFile, err := header.Open()
-		if err != nil {
-			handleError(err, http.StatusInternalServerError, "Failed to open file")
-			return
-		}
-		defer uploadedFile.Close()
-
-		cleanFilename := sanitizeFilename(header.Filename)
-		destinationFilePath := filepath.Join(fs.uploadFolder, cleanFilename)
-		dstFile, err := os.Create(destinationFilePath)
-		if err != nil {
-			handleError(err, http.StatusInternalServerError, "Failed to create destination file")
-			return
-		}
-		defer dstFile.Close()
-
-		_, err = io.Copy(dstFile, uploadedFile)
-		if err != nil {
-			handleError(err, http.StatusInternalServerError, "Failed to save file")
-			return
-		}
+	rsp := file.ListUploadsResponse{}
+	for _, uploadI := range uploadIs {
+		upload := uploadI.(*file.Upload)
+		rsp.Uploads = append(rsp.Uploads, *upload)
 	}
 
-	jsonData, _ := json.Marshal(map[string]any{})
+	jsonData, _ := json.Marshal(rsp)
 	w.Write(jsonData)
 }
 

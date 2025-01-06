@@ -7,21 +7,37 @@
  */
 package file_svc
 
+import "time"
+
+// Upload record
 type Upload struct {
-	Id               string `json:"id"`
+	Id        string    `json:"id"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+
 	NodeId           string `json:"nodeId"`
 	FilePath         string `json:"filePath"`
 	OriginalFileName string `json:"fileName"`
 	UserId           string `json:"userId,omitempty"`
-	FullFileSize     *int64 `json:"fullFileSize"        format:"int64"`
+	FileSize         int64  `json:"fileSize" binding:"required" format:"int64"`
+}
+
+func (u Upload) GetId() string {
+	return u.Id
 }
 
 type UploadFileResponse struct {
 	Upload Upload `json:"upload,omitempty"`
 }
 
-type UploadsRequest struct{}
+type ListUploadsRequest struct {
+	UserId string `json:"userId,omitempty"`
+	Limit  int    `json:"limit,omitempty"`
 
-type UploadsResponse struct {
-	Upload []Upload `json:"uploads,omitempty"`
+	// After time value
+	After string `json:"after,omitempty"`
+}
+
+type ListUploadsResponse struct {
+	Uploads []Upload `json:"uploads,omitempty"`
 }

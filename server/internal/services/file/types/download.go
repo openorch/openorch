@@ -7,6 +7,8 @@
  */
 package file_svc
 
+import "time"
+
 type ErrorResponse struct {
 	Error string `json:"error"`
 }
@@ -34,26 +36,25 @@ func (d InternalDownload) GetId() string {
 	return d.Id
 }
 
-// Download represents the metadata and status of a file being downloaded.
-// It tracks the progress, size, and state of the download, allowing for
-// pause, resume, and cancellation operations.
+// Download record
 type Download struct {
-	Id              string   `json:"id"`
-	URL             string   `json:"url"`
-	FileName        string   `json:"fileName"`
-	Dir             *string  `json:"dir,omitempty"`
-	Progress        *float64 `json:"progress,omitempty"`
-	DownloadedBytes int64    `json:"downloadedBytes"     format:"int64"`
-	FullFileSize    *int64   `json:"fullFileSize"        format:"int64"`
-	Status          string   `json:"status"`
-	FilePath        *string  `json:"filePath,omitempty"`
-	Paused          *bool    `json:"paused,omitempty"`
-	Cancelled       *bool    `json:"cancelled,omitempty"`
-	Error           *string  `json:"error,omitempty"`
-}
+	Id        string    `json:"id"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 
-type OnFileDownloadStatus struct {
-	AllDownloads []Download `json:"allDownloads"`
+	URL      string  `json:"url"`
+	FileName string  `json:"fileName"`
+	Progress float64 `json:"progress,omitempty"`
+
+	// DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.
+	DownloadedBytes int64 `json:"downloadedBytes" format:"int64"`
+
+	// FileSize is the full final downloaded file size.
+	FileSize int64          `json:"fileSize,omitempty" format:"int64"`
+	Status   DownloadStatus `json:"status"`
+
+	FilePath string `json:"filePath,omitempty"`
+	Error    string `json:"error,omitempty"`
 }
 
 type DownloadRequest struct {
@@ -67,7 +68,7 @@ type GetDownloadRequest struct {
 }
 
 type GetDownloadResponse struct {
-	Exists   bool      `json:"exists"   binding:"required"`
+	Exists   bool      `json:"exists" binding:"required"`
 	Download *Download `json:"download"`
 }
 

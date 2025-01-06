@@ -27,8 +27,8 @@ jobs:
         run: |
           go install github.com/swaggo/swag/cmd/swag@latest
           yarn install
-          # bash gen.sh
-          npm run build
+          chmod +x gen.sh
+          ./gen.sh
         working-directory: ./docs-source
 
       # - name: Check for uncommitted changes

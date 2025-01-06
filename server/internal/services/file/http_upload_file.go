@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -15,8 +16,9 @@ import (
 // @ID uploadFile
 // @Summary Upload a File
 // @Description Uploads a file to the server.
-// @Description Currently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
+// @Description Currently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341
 // @Description Once that is fixed we should have an `PUT /file-svc/uploads`/uploadFiles (note the plural) endpoints.
+// @Description In reality the endpoint "unofficially" supports multiple files. YMMV.
 // @Description
 // @Description Requires the `file-svc:upload:create` permission.
 // @Tags File Svc
@@ -56,29 +58,28 @@ func (fs *FileService) UploadFile(
 		w.Write([]byte(message + ": " + err.Error()))
 	}
 
-	err = r.ParseMultipartForm(10 << 20)
+	reader, err := r.MultipartReader()
 	if err != nil {
 		handleError(err, http.StatusBadRequest, "Invalid request")
 		return
 	}
 
-	fileHeader, fileHeaderOk := r.MultipartForm.File["file"]
-
-	if !fileHeaderOk || len(fileHeader) == 0 {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`File is required`))
-		return
-	}
-
-	for _, header := range fileHeader {
-		uploadedFile, err := header.Open()
+	var uploadRecord file.Upload
+	for {
+		part, err := reader.NextPart()
+		if err == io.EOF {
+			break
+		}
 		if err != nil {
-			handleError(err, http.StatusInternalServerError, "Failed to open file")
+			handleError(err, http.StatusInternalServerError, "Failed to read multipart data")
 			return
 		}
-		defer uploadedFile.Close()
 
-		cleanFilename := sanitizeFilename(header.Filename)
+		if part.FileName() == "" {
+			continue
+		}
+
+		cleanFilename := sanitizeFilename(part.FileName())
 		destinationFilePath := filepath.Join(fs.uploadFolder, cleanFilename)
 		dstFile, err := os.Create(destinationFilePath)
 		if err != nil {
@@ -87,13 +88,30 @@ func (fs *FileService) UploadFile(
 		}
 		defer dstFile.Close()
 
-		_, err = io.Copy(dstFile, uploadedFile)
+		written, err := io.Copy(dstFile, part)
 		if err != nil {
 			handleError(err, http.StatusInternalServerError, "Failed to save file")
 			return
 		}
+
+		// @todo this is fairly weird that we process multiple files but only a single one is returned
+		uploadRecord = file.Upload{
+			Id:               sdk.Id("upl"),
+			OriginalFileName: part.FileName(),
+			FilePath:         destinationFilePath,
+			UserId:           *isAuthRsp.GetUser().Id,
+			FileSize:         written,
+			CreatedAt:        time.Now(),
+		}
+		err = fs.uploadStore.Upsert(uploadRecord)
+		if err != nil {
+			handleError(err, http.StatusInternalServerError, "Failed to save upload record")
+			return
+		}
 	}
 
-	jsonData, _ := json.Marshal(map[string]any{})
+	jsonData, _ := json.Marshal(file.UploadFileResponse{
+		Upload: uploadRecord,
+	})
 	w.Write(jsonData)
 }

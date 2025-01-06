@@ -44,7 +44,7 @@ npm run build
 echo "Installing dependencies and building in client directory"
 cd "$JS_CLIENT_DIR/client"
 # Fixing a bug here
-sed -i '/export interface UploadFileRequest {/{N;N;/file: Blob;.*}/d}' src/apis/FileSvcApi.ts
+# sed -i '/export interface UploadFileRequest {/{N;N;/file: Blob;.*}/d}' src/apis/FileSvcApi.ts
 npm install
 npm run build
 

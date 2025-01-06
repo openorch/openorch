@@ -1581,14 +1581,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/download/{downloadId}": {
+        "/file-svc/download/{url}": {
             "get": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get a download by ID.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
+                "description": "Get a download by URL.\n\nRequires the ` + "`" + `file-svc:download:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1603,8 +1603,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
+                        "description": "url",
+                        "name": "url",
                         "in": "path",
                         "required": true
                     }
@@ -1631,7 +1631,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/download/{downloadId}/pause": {
+        "/file-svc/download/{url}/pause": {
             "put": {
                 "security": [
                     {
@@ -1653,8 +1653,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Download ID",
-                        "name": "downloadId",
+                        "description": "Download URL",
+                        "name": "url",
                         "in": "path",
                         "required": true
                     }
@@ -1706,7 +1706,7 @@ const docTemplate = `{
                     "File Svc"
                 ],
                 "summary": "List Downloads",
-                "operationId": "listFileDownloads",
+                "operationId": "listDownloads",
                 "responses": {
                     "200": {
                         "description": "List of downloads",
@@ -1729,6 +1729,105 @@ const docTemplate = `{
                 }
             }
         },
+        "/file-svc/serve/download/{url}": {
+            "get": {
+                "description": "Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.",
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Serve a File from a URL",
+                "operationId": "serveDownload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "URL",
+                        "name": "url",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File served successfully",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid download URL",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/file-svc/serve/upload/{id}": {
+            "get": {
+                "description": "Serves a previously uploaded file based on its ID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "File Svc"
+                ],
+                "summary": "Serve an Uploaded File",
+                "operationId": "serveUpload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Upload ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File served successfully",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Missing upload ID",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/file-svc/upload": {
             "put": {
                 "security": [
@@ -1736,7 +1835,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Uploads a file to the server.\nCurrently only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341\nOnce that is fixed we should have an ` + "`" + `PUT /file-svc/uploads` + "`" + `/uploadFiles (note the plural) endpoints.\n\nRequires the ` + "`" + `file-svc:upload:create` + "`" + ` permission.",
+                "description": "Uploads a file to the server.\nCurrently if using the clients only one file can be uploaded at a time due to this bug https://github.com/OpenAPITools/openapi-generator/issues/11341\nOnce that is fixed we should have an ` + "`" + `PUT /file-svc/uploads` + "`" + `/uploadFiles (note the plural) endpoints.\nIn reality the endpoint \"unofficially\" supports multiple files. YMMV.\n\nRequires the ` + "`" + `file-svc:upload:create` + "`" + ` permission.",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -1806,18 +1905,19 @@ const docTemplate = `{
                 "operationId": "listUploads",
                 "parameters": [
                     {
-                        "type": "file",
-                        "description": "File to upload",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
+                        "description": "List Uploads Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/file_svc.ListUploadsRequest"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "List of uploads",
                         "schema": {
-                            "$ref": "#/definitions/file_svc.UploadsResponse"
+                            "$ref": "#/definitions/file_svc.ListUploadsResponse"
                         }
                     },
                     "401": {
@@ -5778,13 +5878,11 @@ const docTemplate = `{
         "file_svc.Download": {
             "type": "object",
             "properties": {
-                "cancelled": {
-                    "type": "boolean"
-                },
-                "dir": {
+                "createdAt": {
                     "type": "string"
                 },
                 "downloadedBytes": {
+                    "description": "DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.",
                     "type": "integer",
                     "format": "int64"
                 },
@@ -5797,20 +5895,21 @@ const docTemplate = `{
                 "filePath": {
                     "type": "string"
                 },
-                "fullFileSize": {
+                "fileSize": {
+                    "description": "FileSize is the full final downloaded file size.",
                     "type": "integer",
                     "format": "int64"
                 },
                 "id": {
                     "type": "string"
                 },
-                "paused": {
-                    "type": "boolean"
-                },
                 "progress": {
                     "type": "number"
                 },
                 "status": {
+                    "type": "string"
+                },
+                "updatedAt": {
                     "type": "string"
                 },
                 "url": {
@@ -5862,16 +5961,48 @@ const docTemplate = `{
                 }
             }
         },
-        "file_svc.Upload": {
+        "file_svc.ListUploadsRequest": {
             "type": "object",
             "properties": {
+                "after": {
+                    "description": "After time value",
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "file_svc.ListUploadsResponse": {
+            "type": "object",
+            "properties": {
+                "uploads": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/file_svc.Upload"
+                    }
+                }
+            }
+        },
+        "file_svc.Upload": {
+            "type": "object",
+            "required": [
+                "fileSize"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
                 "fileName": {
                     "type": "string"
                 },
                 "filePath": {
                     "type": "string"
                 },
-                "fullFileSize": {
+                "fileSize": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -5879,6 +6010,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "nodeId": {
+                    "type": "string"
+                },
+                "updatedAt": {
                     "type": "string"
                 },
                 "userId": {
@@ -5891,17 +6025,6 @@ const docTemplate = `{
             "properties": {
                 "upload": {
                     "$ref": "#/definitions/file_svc.Upload"
-                }
-            }
-        },
-        "file_svc.UploadsResponse": {
-            "type": "object",
-            "properties": {
-                "uploads": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/file_svc.Upload"
-                    }
                 }
             }
         },
@@ -7818,7 +7941,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.10",
+	Version:          "0.3.0-rc.11",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
