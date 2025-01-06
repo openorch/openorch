@@ -24,7 +24,6 @@ import (
 // @Failure 400 {object} file.ErrorResponse "Missing upload ID"
 // @Failure 404 {object} file.ErrorResponse "File not found"
 // @Failure 500 {object} file.ErrorResponse "Internal Server Error"
-// @Security BearerAuth
 // @Router /file-svc/serve/upload/{id} [get]
 func (fs *FileService) ServeUpload(
 	w http.ResponseWriter,
@@ -40,7 +39,6 @@ func (fs *FileService) ServeUpload(
 
 	uploadI, found, err := fs.uploadStore.Query(datastore.Id(fileId)).FindOne()
 	if !found {
-
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("File not found"))
 		return

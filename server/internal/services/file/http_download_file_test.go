@@ -15,6 +15,7 @@ package fileservice_test
 import (
 	"context"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -72,9 +73,11 @@ func TestDownloadFile(t *testing.T) {
 	require.NoError(t, err)
 	userClient := options.ClientFactory.Client(sdk.WithToken(token))
 
+	downloadUrl := fileHostServer.URL + "/somefile.txt"
+
 	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
 		Body(openapi.FileSvcDownloadRequest{
-			Url: openapi.PtrString(fileHostServer.URL),
+			Url: openapi.PtrString(downloadUrl),
 		}).
 		Execute()
 	require.Error(t, err)
@@ -84,7 +87,7 @@ func TestDownloadFile(t *testing.T) {
 
 	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
 		Body(openapi.FileSvcDownloadRequest{
-			Url: openapi.PtrString(fileHostServer.URL),
+			Url: openapi.PtrString(downloadUrl),
 		}).
 		Execute()
 	require.NoError(t, err)
@@ -99,11 +102,11 @@ outer:
 		case <-timeout:
 			t.Fatal("Timeout reached while waiting for download to complete")
 		case <-ticker.C:
-			_, _, err := userClient.FileSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+			_, _, err := userClient.FileSvcAPI.GetDownload(context.Background(), downloadUrl).
 				Execute()
 			require.Error(t, err)
 
-			rsp, _, err := adminClient.FileSvcAPI.GetDownload(context.Background(), fileHostServer.URL).
+			rsp, _, err := adminClient.FileSvcAPI.GetDownload(context.Background(), downloadUrl).
 				Execute()
 			require.NoError(t, err)
 
@@ -117,11 +120,18 @@ outer:
 	expectedFilePath := filepath.Join(
 		options.HomeDir,
 		"downloads",
-		fileservice.EncodeURLtoFileName(fileHostServer.URL),
+		fileservice.EncodeURLtoFileName(downloadUrl),
 	)
 	data, err := os.ReadFile(expectedFilePath)
 	require.NoError(t, err)
 	require.Equal(t, "Hello world", string(data))
+
+	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeDownload(context.Background(), downloadUrl).Execute()
+	require.NoError(t, err)
+	bs, err := ioutil.ReadAll(fileRsp)
+	require.NoError(t, err)
+	require.Equal(t, "Hello world", string(bs))
+	require.Equal(t, "text/plain; charset=utf-8", fileHttpRsp.Header.Get("Content-Type"))
 }
 
 func TestDownloadFileWithPartFile(t *testing.T) {

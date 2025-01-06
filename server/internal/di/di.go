@@ -426,6 +426,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "GET")
 
+	router.HandleFunc("/file-svc/serve/download/{url}", appl(func(w http.ResponseWriter, r *http.Request) {
+		fileService.ServeDownload(w, r)
+	})).
+		Methods("OPTIONS", "GET")
+
 	router.HandleFunc("/docker-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Info(w, r)
 	})).
