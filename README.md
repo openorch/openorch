@@ -10,7 +10,7 @@
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg" alt="js client build" style="max-width: 100%;"></a>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg" alt="go sdk" style="max-width: 100%;"></a>
     </span>
-    <div style="margin-top: 2rem">Language agnostic backend platform. Orchestrate AI models,  containers, microservices, and more. A self-hosted AI and microservices hub.</div>
+    <div style="margin-top: 2rem">Orchestrate AI models,  containers, microservices, and more. A language agnostic development platform.</div>
     <div>
       <a href="https://openorch.org">openorch.org</a>
     </div>
