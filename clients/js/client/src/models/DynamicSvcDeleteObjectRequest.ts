@@ -63,11 +63,11 @@ export function DynamicSvcDeleteObjectRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function DynamicSvcDeleteObjectRequestToJSON(json: any): DynamicSvcDeleteObjectRequest {
-      return DynamicSvcDeleteObjectRequestToJSONTyped(json, false);
-  }
+export function DynamicSvcDeleteObjectRequestToJSON(json: any): DynamicSvcDeleteObjectRequest {
+    return DynamicSvcDeleteObjectRequestToJSONTyped(json, false);
+}
 
-  export function DynamicSvcDeleteObjectRequestToJSONTyped(value?: DynamicSvcDeleteObjectRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcDeleteObjectRequestToJSONTyped(value?: DynamicSvcDeleteObjectRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

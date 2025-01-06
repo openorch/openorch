@@ -56,11 +56,11 @@ export function UserSvcUpserPermissionRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function UserSvcUpserPermissionRequestToJSON(json: any): UserSvcUpserPermissionRequest {
-      return UserSvcUpserPermissionRequestToJSONTyped(json, false);
-  }
+export function UserSvcUpserPermissionRequestToJSON(json: any): UserSvcUpserPermissionRequest {
+    return UserSvcUpserPermissionRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcUpserPermissionRequestToJSONTyped(value?: UserSvcUpserPermissionRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcUpserPermissionRequestToJSONTyped(value?: UserSvcUpserPermissionRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

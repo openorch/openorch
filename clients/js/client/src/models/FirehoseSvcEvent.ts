@@ -55,11 +55,11 @@ export function FirehoseSvcEventFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function FirehoseSvcEventToJSON(json: any): FirehoseSvcEvent {
-      return FirehoseSvcEventToJSONTyped(json, false);
-  }
+export function FirehoseSvcEventToJSON(json: any): FirehoseSvcEvent {
+    return FirehoseSvcEventToJSONTyped(json, false);
+}
 
-  export function FirehoseSvcEventToJSONTyped(value?: FirehoseSvcEvent | null, ignoreDiscriminator: boolean = false): any {
+export function FirehoseSvcEventToJSONTyped(value?: FirehoseSvcEvent | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

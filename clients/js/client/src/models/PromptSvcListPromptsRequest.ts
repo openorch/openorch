@@ -56,11 +56,11 @@ export function PromptSvcListPromptsRequestFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-  export function PromptSvcListPromptsRequestToJSON(json: any): PromptSvcListPromptsRequest {
-      return PromptSvcListPromptsRequestToJSONTyped(json, false);
-  }
+export function PromptSvcListPromptsRequestToJSON(json: any): PromptSvcListPromptsRequest {
+    return PromptSvcListPromptsRequestToJSONTyped(json, false);
+}
 
-  export function PromptSvcListPromptsRequestToJSONTyped(value?: PromptSvcListPromptsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function PromptSvcListPromptsRequestToJSONTyped(value?: PromptSvcListPromptsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

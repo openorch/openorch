@@ -62,11 +62,11 @@ export function RegistrySvcUsageFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function RegistrySvcUsageToJSON(json: any): RegistrySvcUsage {
-      return RegistrySvcUsageToJSONTyped(json, false);
-  }
+export function RegistrySvcUsageToJSON(json: any): RegistrySvcUsage {
+    return RegistrySvcUsageToJSONTyped(json, false);
+}
 
-  export function RegistrySvcUsageToJSONTyped(value?: RegistrySvcUsage | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcUsageToJSONTyped(value?: RegistrySvcUsage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -70,11 +70,11 @@ export function RegistrySvcResourceUsageFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function RegistrySvcResourceUsageToJSON(json: any): RegistrySvcResourceUsage {
-      return RegistrySvcResourceUsageToJSONTyped(json, false);
-  }
+export function RegistrySvcResourceUsageToJSON(json: any): RegistrySvcResourceUsage {
+    return RegistrySvcResourceUsageToJSONTyped(json, false);
+}
 
-  export function RegistrySvcResourceUsageToJSONTyped(value?: RegistrySvcResourceUsage | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcResourceUsageToJSONTyped(value?: RegistrySvcResourceUsage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

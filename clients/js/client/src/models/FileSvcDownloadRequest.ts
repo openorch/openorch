@@ -55,11 +55,11 @@ export function FileSvcDownloadRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function FileSvcDownloadRequestToJSON(json: any): FileSvcDownloadRequest {
-      return FileSvcDownloadRequestToJSONTyped(json, false);
-  }
+export function FileSvcDownloadRequestToJSON(json: any): FileSvcDownloadRequest {
+    return FileSvcDownloadRequestToJSONTyped(json, false);
+}
 
-  export function FileSvcDownloadRequestToJSONTyped(value?: FileSvcDownloadRequest | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcDownloadRequestToJSONTyped(value?: FileSvcDownloadRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

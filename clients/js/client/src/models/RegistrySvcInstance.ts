@@ -162,11 +162,11 @@ export function RegistrySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function RegistrySvcInstanceToJSON(json: any): RegistrySvcInstance {
-      return RegistrySvcInstanceToJSONTyped(json, false);
-  }
+export function RegistrySvcInstanceToJSON(json: any): RegistrySvcInstance {
+    return RegistrySvcInstanceToJSONTyped(json, false);
+}
 
-  export function RegistrySvcInstanceToJSONTyped(value?: RegistrySvcInstance | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcInstanceToJSONTyped(value?: RegistrySvcInstance | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

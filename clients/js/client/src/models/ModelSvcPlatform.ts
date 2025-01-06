@@ -77,11 +77,11 @@ export function ModelSvcPlatformFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function ModelSvcPlatformToJSON(json: any): ModelSvcPlatform {
-      return ModelSvcPlatformToJSONTyped(json, false);
-  }
+export function ModelSvcPlatformToJSON(json: any): ModelSvcPlatform {
+    return ModelSvcPlatformToJSONTyped(json, false);
+}
 
-  export function ModelSvcPlatformToJSONTyped(value?: ModelSvcPlatform | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcPlatformToJSONTyped(value?: ModelSvcPlatform | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

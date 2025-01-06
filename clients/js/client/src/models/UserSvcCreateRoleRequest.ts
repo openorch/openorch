@@ -62,11 +62,11 @@ export function UserSvcCreateRoleRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function UserSvcCreateRoleRequestToJSON(json: any): UserSvcCreateRoleRequest {
-      return UserSvcCreateRoleRequestToJSONTyped(json, false);
-  }
+export function UserSvcCreateRoleRequestToJSON(json: any): UserSvcCreateRoleRequest {
+    return UserSvcCreateRoleRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcCreateRoleRequestToJSONTyped(value?: UserSvcCreateRoleRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcCreateRoleRequestToJSONTyped(value?: UserSvcCreateRoleRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

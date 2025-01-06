@@ -62,11 +62,11 @@ export function DeploySvcAutoScalingConfigFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function DeploySvcAutoScalingConfigToJSON(json: any): DeploySvcAutoScalingConfig {
-      return DeploySvcAutoScalingConfigToJSONTyped(json, false);
-  }
+export function DeploySvcAutoScalingConfigToJSON(json: any): DeploySvcAutoScalingConfig {
+    return DeploySvcAutoScalingConfigToJSONTyped(json, false);
+}
 
-  export function DeploySvcAutoScalingConfigToJSONTyped(value?: DeploySvcAutoScalingConfig | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcAutoScalingConfigToJSONTyped(value?: DeploySvcAutoScalingConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

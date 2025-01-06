@@ -35,7 +35,7 @@ func (p *FirehoseService) Publish(w http.ResponseWriter,
 	isAuthRsp, _, err := p.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), firehose.PermissionEventPublish.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{
+			GrantedSlugs: []string{
 				"config-svc",
 				"file-svc",
 				"prompt-svc",

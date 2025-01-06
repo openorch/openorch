@@ -7686,7 +7686,7 @@ const docTemplate = `{
                         "type": "string"
                     }
                 },
-                "slugsGranted": {
+                "grantedSlugs": {
                     "type": "array",
                     "items": {
                         "type": "string"

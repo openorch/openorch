@@ -56,11 +56,11 @@ export function DeploySvcListDeploymentsResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function DeploySvcListDeploymentsResponseToJSON(json: any): DeploySvcListDeploymentsResponse {
-      return DeploySvcListDeploymentsResponseToJSONTyped(json, false);
-  }
+export function DeploySvcListDeploymentsResponseToJSON(json: any): DeploySvcListDeploymentsResponse {
+    return DeploySvcListDeploymentsResponseToJSONTyped(json, false);
+}
 
-  export function DeploySvcListDeploymentsResponseToJSONTyped(value?: DeploySvcListDeploymentsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcListDeploymentsResponseToJSONTyped(value?: DeploySvcListDeploymentsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

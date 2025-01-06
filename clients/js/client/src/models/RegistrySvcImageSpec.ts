@@ -57,11 +57,11 @@ export function RegistrySvcImageSpecFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-  export function RegistrySvcImageSpecToJSON(json: any): RegistrySvcImageSpec {
-      return RegistrySvcImageSpecToJSONTyped(json, false);
-  }
+export function RegistrySvcImageSpecToJSON(json: any): RegistrySvcImageSpec {
+    return RegistrySvcImageSpecToJSONTyped(json, false);
+}
 
-  export function RegistrySvcImageSpecToJSONTyped(value?: RegistrySvcImageSpec | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcImageSpecToJSONTyped(value?: RegistrySvcImageSpec | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

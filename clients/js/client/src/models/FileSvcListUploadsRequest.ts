@@ -62,11 +62,11 @@ export function FileSvcListUploadsRequestFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-  export function FileSvcListUploadsRequestToJSON(json: any): FileSvcListUploadsRequest {
-      return FileSvcListUploadsRequestToJSONTyped(json, false);
-  }
+export function FileSvcListUploadsRequestToJSON(json: any): FileSvcListUploadsRequest {
+    return FileSvcListUploadsRequestToJSONTyped(json, false);
+}
 
-  export function FileSvcListUploadsRequestToJSONTyped(value?: FileSvcListUploadsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcListUploadsRequestToJSONTyped(value?: FileSvcListUploadsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

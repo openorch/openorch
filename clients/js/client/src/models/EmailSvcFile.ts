@@ -65,11 +65,11 @@ export function EmailSvcFileFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-  export function EmailSvcFileToJSON(json: any): EmailSvcFile {
-      return EmailSvcFileToJSONTyped(json, false);
-  }
+export function EmailSvcFileToJSON(json: any): EmailSvcFile {
+    return EmailSvcFileToJSONTyped(json, false);
+}
 
-  export function EmailSvcFileToJSONTyped(value?: EmailSvcFile | null, ignoreDiscriminator: boolean = false): any {
+export function EmailSvcFileToJSONTyped(value?: EmailSvcFile | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

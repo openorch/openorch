@@ -62,11 +62,11 @@ export function RegistrySvcProcessFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-  export function RegistrySvcProcessToJSON(json: any): RegistrySvcProcess {
-      return RegistrySvcProcessToJSONTyped(json, false);
-  }
+export function RegistrySvcProcessToJSON(json: any): RegistrySvcProcess {
+    return RegistrySvcProcessToJSONTyped(json, false);
+}
 
-  export function RegistrySvcProcessToJSONTyped(value?: RegistrySvcProcess | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcProcessToJSONTyped(value?: RegistrySvcProcess | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

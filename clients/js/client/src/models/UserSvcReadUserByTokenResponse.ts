@@ -77,11 +77,11 @@ export function UserSvcReadUserByTokenResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-  export function UserSvcReadUserByTokenResponseToJSON(json: any): UserSvcReadUserByTokenResponse {
-      return UserSvcReadUserByTokenResponseToJSONTyped(json, false);
-  }
+export function UserSvcReadUserByTokenResponseToJSON(json: any): UserSvcReadUserByTokenResponse {
+    return UserSvcReadUserByTokenResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcReadUserByTokenResponseToJSONTyped(value?: UserSvcReadUserByTokenResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcReadUserByTokenResponseToJSONTyped(value?: UserSvcReadUserByTokenResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

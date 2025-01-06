@@ -70,11 +70,11 @@ export function PromptSvcListPromptsResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function PromptSvcListPromptsResponseToJSON(json: any): PromptSvcListPromptsResponse {
-      return PromptSvcListPromptsResponseToJSONTyped(json, false);
-  }
+export function PromptSvcListPromptsResponseToJSON(json: any): PromptSvcListPromptsResponse {
+    return PromptSvcListPromptsResponseToJSONTyped(json, false);
+}
 
-  export function PromptSvcListPromptsResponseToJSONTyped(value?: PromptSvcListPromptsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function PromptSvcListPromptsResponseToJSONTyped(value?: PromptSvcListPromptsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

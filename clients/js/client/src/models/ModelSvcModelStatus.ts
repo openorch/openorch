@@ -67,11 +67,11 @@ export function ModelSvcModelStatusFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function ModelSvcModelStatusToJSON(json: any): ModelSvcModelStatus {
-      return ModelSvcModelStatusToJSONTyped(json, false);
-  }
+export function ModelSvcModelStatusToJSON(json: any): ModelSvcModelStatus {
+    return ModelSvcModelStatusToJSONTyped(json, false);
+}
 
-  export function ModelSvcModelStatusToJSONTyped(value?: ModelSvcModelStatus | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcModelStatusToJSONTyped(value?: ModelSvcModelStatus | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

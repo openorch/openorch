@@ -56,11 +56,11 @@ export function DeploySvcSaveDeploymentRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-  export function DeploySvcSaveDeploymentRequestToJSON(json: any): DeploySvcSaveDeploymentRequest {
-      return DeploySvcSaveDeploymentRequestToJSONTyped(json, false);
-  }
+export function DeploySvcSaveDeploymentRequestToJSON(json: any): DeploySvcSaveDeploymentRequest {
+    return DeploySvcSaveDeploymentRequestToJSONTyped(json, false);
+}
 
-  export function DeploySvcSaveDeploymentRequestToJSONTyped(value?: DeploySvcSaveDeploymentRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcSaveDeploymentRequestToJSONTyped(value?: DeploySvcSaveDeploymentRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

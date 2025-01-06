@@ -62,11 +62,11 @@ export function UserSvcLoginRequestFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function UserSvcLoginRequestToJSON(json: any): UserSvcLoginRequest {
-      return UserSvcLoginRequestToJSONTyped(json, false);
-  }
+export function UserSvcLoginRequestToJSON(json: any): UserSvcLoginRequest {
+    return UserSvcLoginRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcLoginRequestToJSONTyped(value?: UserSvcLoginRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcLoginRequestToJSONTyped(value?: UserSvcLoginRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

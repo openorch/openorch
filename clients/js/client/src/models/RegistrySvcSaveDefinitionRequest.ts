@@ -56,11 +56,11 @@ export function RegistrySvcSaveDefinitionRequestFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function RegistrySvcSaveDefinitionRequestToJSON(json: any): RegistrySvcSaveDefinitionRequest {
-      return RegistrySvcSaveDefinitionRequestToJSONTyped(json, false);
-  }
+export function RegistrySvcSaveDefinitionRequestToJSON(json: any): RegistrySvcSaveDefinitionRequest {
+    return RegistrySvcSaveDefinitionRequestToJSONTyped(json, false);
+}
 
-  export function RegistrySvcSaveDefinitionRequestToJSONTyped(value?: RegistrySvcSaveDefinitionRequest | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcSaveDefinitionRequestToJSONTyped(value?: RegistrySvcSaveDefinitionRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

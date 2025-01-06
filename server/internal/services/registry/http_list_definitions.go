@@ -30,7 +30,7 @@ func (rs *RegistryService) ListDefinitions(
 	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionDefinitionView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"deploy-svc"},
+			GrantedSlugs: []string{"deploy-svc"},
 		}).
 		Execute()
 	if err != nil {

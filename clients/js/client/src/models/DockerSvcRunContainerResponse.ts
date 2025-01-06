@@ -56,11 +56,11 @@ export function DockerSvcRunContainerResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function DockerSvcRunContainerResponseToJSON(json: any): DockerSvcRunContainerResponse {
-      return DockerSvcRunContainerResponseToJSONTyped(json, false);
-  }
+export function DockerSvcRunContainerResponseToJSON(json: any): DockerSvcRunContainerResponse {
+    return DockerSvcRunContainerResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcRunContainerResponseToJSONTyped(value?: DockerSvcRunContainerResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcRunContainerResponseToJSONTyped(value?: DockerSvcRunContainerResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

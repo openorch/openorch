@@ -46,7 +46,7 @@ func (ms *ModelService) Status(
 	isAuthRsp, _, err := ms.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), model.PermissionModelView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"prompt-svc"},
+			GrantedSlugs: []string{"prompt-svc"},
 		}).
 		Execute()
 	if err != nil {

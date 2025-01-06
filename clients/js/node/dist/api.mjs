@@ -5048,8 +5048,8 @@ UserSvcIsAuthorizedRequest.attributeTypeMap = [
         "type": "Array<string>"
     },
     {
-        "name": "slugsGranted",
-        "baseName": "slugsGranted",
+        "name": "grantedSlugs",
+        "baseName": "grantedSlugs",
         "type": "Array<string>"
     }
 ];

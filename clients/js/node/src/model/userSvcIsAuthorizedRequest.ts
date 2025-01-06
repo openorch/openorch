@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 
 export class UserSvcIsAuthorizedRequest {
     'contactsGranted'?: Array<string>;
-    'slugsGranted'?: Array<string>;
+    'grantedSlugs'?: Array<string>;
 
     static discriminator: string | undefined = undefined;
 
@@ -25,8 +25,8 @@ export class UserSvcIsAuthorizedRequest {
             "type": "Array<string>"
         },
         {
-            "name": "slugsGranted",
-            "baseName": "slugsGranted",
+            "name": "grantedSlugs",
+            "baseName": "grantedSlugs",
             "type": "Array<string>"
         }    ];
 

@@ -55,11 +55,11 @@ export function DockerSvcRunInfoFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function DockerSvcRunInfoToJSON(json: any): DockerSvcRunInfo {
-      return DockerSvcRunInfoToJSONTyped(json, false);
-  }
+export function DockerSvcRunInfoToJSON(json: any): DockerSvcRunInfo {
+    return DockerSvcRunInfoToJSONTyped(json, false);
+}
 
-  export function DockerSvcRunInfoToJSONTyped(value?: DockerSvcRunInfo | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcRunInfoToJSONTyped(value?: DockerSvcRunInfo | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -70,11 +70,11 @@ export function ChatSvcGetMessagesResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function ChatSvcGetMessagesResponseToJSON(json: any): ChatSvcGetMessagesResponse {
-      return ChatSvcGetMessagesResponseToJSONTyped(json, false);
-  }
+export function ChatSvcGetMessagesResponseToJSON(json: any): ChatSvcGetMessagesResponse {
+    return ChatSvcGetMessagesResponseToJSONTyped(json, false);
+}
 
-  export function ChatSvcGetMessagesResponseToJSONTyped(value?: ChatSvcGetMessagesResponse | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcGetMessagesResponseToJSONTyped(value?: ChatSvcGetMessagesResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

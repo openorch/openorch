@@ -114,11 +114,11 @@ export function DynamicSvcObjectFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function DynamicSvcObjectToJSON(json: any): DynamicSvcObject {
-      return DynamicSvcObjectToJSONTyped(json, false);
-  }
+export function DynamicSvcObjectToJSON(json: any): DynamicSvcObject {
+    return DynamicSvcObjectToJSONTyped(json, false);
+}
 
-  export function DynamicSvcObjectToJSONTyped(value?: DynamicSvcObject | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcObjectToJSONTyped(value?: DynamicSvcObject | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

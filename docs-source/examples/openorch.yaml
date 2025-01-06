@@ -2092,7 +2092,7 @@ definitions:
         items:
           type: string
         type: array
-      slugsGranted:
+      grantedSlugs:
         items:
           type: string
         type: array

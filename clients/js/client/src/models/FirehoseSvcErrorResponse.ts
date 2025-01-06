@@ -48,11 +48,11 @@ export function FirehoseSvcErrorResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function FirehoseSvcErrorResponseToJSON(json: any): FirehoseSvcErrorResponse {
-      return FirehoseSvcErrorResponseToJSONTyped(json, false);
-  }
+export function FirehoseSvcErrorResponseToJSON(json: any): FirehoseSvcErrorResponse {
+    return FirehoseSvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function FirehoseSvcErrorResponseToJSONTyped(value?: FirehoseSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function FirehoseSvcErrorResponseToJSONTyped(value?: FirehoseSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

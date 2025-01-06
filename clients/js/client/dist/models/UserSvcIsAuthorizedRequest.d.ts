@@ -26,7 +26,7 @@ export interface UserSvcIsAuthorizedRequest {
      * @type {Array<string>}
      * @memberof UserSvcIsAuthorizedRequest
      */
-    slugsGranted?: Array<string>;
+    grantedSlugs?: Array<string>;
 }
 /**
  * Check if a given object implements the UserSvcIsAuthorizedRequest interface.

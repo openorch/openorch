@@ -67,11 +67,11 @@ export function RegistrySvcClientFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function RegistrySvcClientToJSON(json: any): RegistrySvcClient {
-      return RegistrySvcClientToJSONTyped(json, false);
-  }
+export function RegistrySvcClientToJSON(json: any): RegistrySvcClient {
+    return RegistrySvcClientToJSONTyped(json, false);
+}
 
-  export function RegistrySvcClientToJSONTyped(value?: RegistrySvcClient | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcClientToJSONTyped(value?: RegistrySvcClient | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

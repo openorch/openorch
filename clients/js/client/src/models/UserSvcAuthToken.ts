@@ -83,11 +83,11 @@ export function UserSvcAuthTokenFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function UserSvcAuthTokenToJSON(json: any): UserSvcAuthToken {
-      return UserSvcAuthTokenToJSONTyped(json, false);
-  }
+export function UserSvcAuthTokenToJSON(json: any): UserSvcAuthToken {
+    return UserSvcAuthTokenToJSONTyped(json, false);
+}
 
-  export function UserSvcAuthTokenToJSONTyped(value?: UserSvcAuthToken | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcAuthTokenToJSONTyped(value?: UserSvcAuthToken | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

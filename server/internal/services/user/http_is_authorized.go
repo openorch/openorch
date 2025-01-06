@@ -67,7 +67,7 @@ func (s *UserService) IsAuthorized(
 		req = &user.IsAuthorizedRequest{}
 	}
 
-	usr, err := s.isAuthorized(r, permissionId, req.SlugsGranted, nil)
+	usr, err := s.isAuthorized(r, permissionId, req.GrantedSlugs, nil)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte("Unauthorized"))
@@ -83,14 +83,14 @@ func (s *UserService) IsAuthorized(
 }
 
 func (s *UserService) isAuthorized(r *http.Request, permissionId string,
-	slugsGranted, contactsGranted []string) (*user.User, error) {
+	GrantedSlugs, contactsGranted []string) (*user.User, error) {
 	usr, err := s.getUserFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
 	slugGrant := false
-	for _, v := range slugsGranted {
+	for _, v := range GrantedSlugs {
 		if usr.Slug == v {
 			slugGrant = true
 		}

@@ -69,11 +69,11 @@ export function RegistrySvcAPISpecFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-  export function RegistrySvcAPISpecToJSON(json: any): RegistrySvcAPISpec {
-      return RegistrySvcAPISpecToJSONTyped(json, false);
-  }
+export function RegistrySvcAPISpecToJSON(json: any): RegistrySvcAPISpec {
+    return RegistrySvcAPISpecToJSONTyped(json, false);
+}
 
-  export function RegistrySvcAPISpecToJSONTyped(value?: RegistrySvcAPISpec | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcAPISpecToJSONTyped(value?: RegistrySvcAPISpec | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

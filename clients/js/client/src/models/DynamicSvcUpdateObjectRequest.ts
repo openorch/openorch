@@ -77,11 +77,11 @@ export function DynamicSvcUpdateObjectRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function DynamicSvcUpdateObjectRequestToJSON(json: any): DynamicSvcUpdateObjectRequest {
-      return DynamicSvcUpdateObjectRequestToJSONTyped(json, false);
-  }
+export function DynamicSvcUpdateObjectRequestToJSON(json: any): DynamicSvcUpdateObjectRequest {
+    return DynamicSvcUpdateObjectRequestToJSONTyped(json, false);
+}
 
-  export function DynamicSvcUpdateObjectRequestToJSONTyped(value?: DynamicSvcUpdateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcUpdateObjectRequestToJSONTyped(value?: DynamicSvcUpdateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

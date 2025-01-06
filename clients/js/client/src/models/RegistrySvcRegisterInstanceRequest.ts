@@ -100,11 +100,11 @@ export function RegistrySvcRegisterInstanceRequestFromJSONTyped(json: any, ignor
     };
 }
 
-  export function RegistrySvcRegisterInstanceRequestToJSON(json: any): RegistrySvcRegisterInstanceRequest {
-      return RegistrySvcRegisterInstanceRequestToJSONTyped(json, false);
-  }
+export function RegistrySvcRegisterInstanceRequestToJSON(json: any): RegistrySvcRegisterInstanceRequest {
+    return RegistrySvcRegisterInstanceRequestToJSONTyped(json, false);
+}
 
-  export function RegistrySvcRegisterInstanceRequestToJSONTyped(value?: RegistrySvcRegisterInstanceRequest | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcRegisterInstanceRequestToJSONTyped(value?: RegistrySvcRegisterInstanceRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

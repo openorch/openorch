@@ -56,11 +56,11 @@ export function UserSvcGetPermissionsResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function UserSvcGetPermissionsResponseToJSON(json: any): UserSvcGetPermissionsResponse {
-      return UserSvcGetPermissionsResponseToJSONTyped(json, false);
-  }
+export function UserSvcGetPermissionsResponseToJSON(json: any): UserSvcGetPermissionsResponse {
+    return UserSvcGetPermissionsResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcGetPermissionsResponseToJSONTyped(value?: UserSvcGetPermissionsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcGetPermissionsResponseToJSONTyped(value?: UserSvcGetPermissionsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

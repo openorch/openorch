@@ -56,11 +56,11 @@ export function DynamicSvcCreateObjectRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function DynamicSvcCreateObjectRequestToJSON(json: any): DynamicSvcCreateObjectRequest {
-      return DynamicSvcCreateObjectRequestToJSONTyped(json, false);
-  }
+export function DynamicSvcCreateObjectRequestToJSON(json: any): DynamicSvcCreateObjectRequest {
+    return DynamicSvcCreateObjectRequestToJSONTyped(json, false);
+}
 
-  export function DynamicSvcCreateObjectRequestToJSONTyped(value?: DynamicSvcCreateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcCreateObjectRequestToJSONTyped(value?: DynamicSvcCreateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

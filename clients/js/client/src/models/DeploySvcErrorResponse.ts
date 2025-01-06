@@ -48,11 +48,11 @@ export function DeploySvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function DeploySvcErrorResponseToJSON(json: any): DeploySvcErrorResponse {
-      return DeploySvcErrorResponseToJSONTyped(json, false);
-  }
+export function DeploySvcErrorResponseToJSON(json: any): DeploySvcErrorResponse {
+    return DeploySvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function DeploySvcErrorResponseToJSONTyped(value?: DeploySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcErrorResponseToJSONTyped(value?: DeploySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

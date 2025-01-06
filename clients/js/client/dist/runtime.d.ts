@@ -123,6 +123,7 @@ export interface RequestOpts {
     body?: HTTPBody;
 }
 export declare function querystring(params: HTTPQuery, prefix?: string): string;
+export declare function exists(json: any, key: string): boolean;
 export declare function mapValues(data: any, fn: (item: any) => any): {};
 export declare function canConsumeForm(consumes: Consume[]): boolean;
 export interface Consume {

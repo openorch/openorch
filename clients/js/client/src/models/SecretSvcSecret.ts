@@ -146,11 +146,11 @@ export function SecretSvcSecretFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function SecretSvcSecretToJSON(json: any): SecretSvcSecret {
-      return SecretSvcSecretToJSONTyped(json, false);
-  }
+export function SecretSvcSecretToJSON(json: any): SecretSvcSecret {
+    return SecretSvcSecretToJSONTyped(json, false);
+}
 
-  export function SecretSvcSecretToJSONTyped(value?: SecretSvcSecret | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcSecretToJSONTyped(value?: SecretSvcSecret | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

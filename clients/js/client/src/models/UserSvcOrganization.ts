@@ -83,11 +83,11 @@ export function UserSvcOrganizationFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function UserSvcOrganizationToJSON(json: any): UserSvcOrganization {
-      return UserSvcOrganizationToJSONTyped(json, false);
-  }
+export function UserSvcOrganizationToJSON(json: any): UserSvcOrganization {
+    return UserSvcOrganizationToJSONTyped(json, false);
+}
 
-  export function UserSvcOrganizationToJSONTyped(value?: UserSvcOrganization | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcOrganizationToJSONTyped(value?: UserSvcOrganization | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

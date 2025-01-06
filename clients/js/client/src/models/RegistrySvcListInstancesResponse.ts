@@ -56,11 +56,11 @@ export function RegistrySvcListInstancesResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function RegistrySvcListInstancesResponseToJSON(json: any): RegistrySvcListInstancesResponse {
-      return RegistrySvcListInstancesResponseToJSONTyped(json, false);
-  }
+export function RegistrySvcListInstancesResponseToJSON(json: any): RegistrySvcListInstancesResponse {
+    return RegistrySvcListInstancesResponseToJSONTyped(json, false);
+}
 
-  export function RegistrySvcListInstancesResponseToJSONTyped(value?: RegistrySvcListInstancesResponse | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcListInstancesResponseToJSONTyped(value?: RegistrySvcListInstancesResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

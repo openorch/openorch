@@ -33,7 +33,7 @@ func (s *EmailService) SendEmail(w http.ResponseWriter, r *http.Request) {
 	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(context.Background(), email.PermissionSendEmail.Id).Body(
 		openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"user-svc"},
+			GrantedSlugs: []string{"user-svc"},
 		}).
 		Execute()
 	if err != nil {

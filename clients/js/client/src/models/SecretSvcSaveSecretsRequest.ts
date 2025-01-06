@@ -56,11 +56,11 @@ export function SecretSvcSaveSecretsRequestFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-  export function SecretSvcSaveSecretsRequestToJSON(json: any): SecretSvcSaveSecretsRequest {
-      return SecretSvcSaveSecretsRequestToJSONTyped(json, false);
-  }
+export function SecretSvcSaveSecretsRequestToJSON(json: any): SecretSvcSaveSecretsRequest {
+    return SecretSvcSaveSecretsRequestToJSONTyped(json, false);
+}
 
-  export function SecretSvcSaveSecretsRequestToJSONTyped(value?: SecretSvcSaveSecretsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcSaveSecretsRequestToJSONTyped(value?: SecretSvcSaveSecretsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

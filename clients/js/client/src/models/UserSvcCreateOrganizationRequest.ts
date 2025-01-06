@@ -62,11 +62,11 @@ export function UserSvcCreateOrganizationRequestFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function UserSvcCreateOrganizationRequestToJSON(json: any): UserSvcCreateOrganizationRequest {
-      return UserSvcCreateOrganizationRequestToJSONTyped(json, false);
-  }
+export function UserSvcCreateOrganizationRequestToJSON(json: any): UserSvcCreateOrganizationRequest {
+    return UserSvcCreateOrganizationRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcCreateOrganizationRequestToJSONTyped(value?: UserSvcCreateOrganizationRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcCreateOrganizationRequestToJSONTyped(value?: UserSvcCreateOrganizationRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

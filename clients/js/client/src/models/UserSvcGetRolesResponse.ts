@@ -56,11 +56,11 @@ export function UserSvcGetRolesResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-  export function UserSvcGetRolesResponseToJSON(json: any): UserSvcGetRolesResponse {
-      return UserSvcGetRolesResponseToJSONTyped(json, false);
-  }
+export function UserSvcGetRolesResponseToJSON(json: any): UserSvcGetRolesResponse {
+    return UserSvcGetRolesResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcGetRolesResponseToJSONTyped(value?: UserSvcGetRolesResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcGetRolesResponseToJSONTyped(value?: UserSvcGetRolesResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

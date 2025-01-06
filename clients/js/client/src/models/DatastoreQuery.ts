@@ -97,11 +97,11 @@ export function DatastoreQueryFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function DatastoreQueryToJSON(json: any): DatastoreQuery {
-      return DatastoreQueryToJSONTyped(json, false);
-  }
+export function DatastoreQueryToJSON(json: any): DatastoreQuery {
+    return DatastoreQueryToJSONTyped(json, false);
+}
 
-  export function DatastoreQueryToJSONTyped(value?: DatastoreQuery | null, ignoreDiscriminator: boolean = false): any {
+export function DatastoreQueryToJSONTyped(value?: DatastoreQuery | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -55,11 +55,11 @@ export function DeploySvcTargetRegionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function DeploySvcTargetRegionToJSON(json: any): DeploySvcTargetRegion {
-      return DeploySvcTargetRegionToJSONTyped(json, false);
-  }
+export function DeploySvcTargetRegionToJSON(json: any): DeploySvcTargetRegion {
+    return DeploySvcTargetRegionToJSONTyped(json, false);
+}
 
-  export function DeploySvcTargetRegionToJSONTyped(value?: DeploySvcTargetRegion | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcTargetRegionToJSONTyped(value?: DeploySvcTargetRegion | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

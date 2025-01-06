@@ -79,11 +79,11 @@ export function DockerSvcRunContainerRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function DockerSvcRunContainerRequestToJSON(json: any): DockerSvcRunContainerRequest {
-      return DockerSvcRunContainerRequestToJSONTyped(json, false);
-  }
+export function DockerSvcRunContainerRequestToJSON(json: any): DockerSvcRunContainerRequest {
+    return DockerSvcRunContainerRequestToJSONTyped(json, false);
+}
 
-  export function DockerSvcRunContainerRequestToJSONTyped(value?: DockerSvcRunContainerRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcRunContainerRequestToJSONTyped(value?: DockerSvcRunContainerRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -74,11 +74,11 @@ export function DatastoreFilterFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function DatastoreFilterToJSON(json: any): DatastoreFilter {
-      return DatastoreFilterToJSONTyped(json, false);
-  }
+export function DatastoreFilterToJSON(json: any): DatastoreFilter {
+    return DatastoreFilterToJSONTyped(json, false);
+}
 
-  export function DatastoreFilterToJSONTyped(value?: DatastoreFilter | null, ignoreDiscriminator: boolean = false): any {
+export function DatastoreFilterToJSONTyped(value?: DatastoreFilter | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -118,11 +118,11 @@ export function FileSvcDownloadFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function FileSvcDownloadToJSON(json: any): FileSvcDownload {
-      return FileSvcDownloadToJSONTyped(json, false);
-  }
+export function FileSvcDownloadToJSON(json: any): FileSvcDownload {
+    return FileSvcDownloadToJSONTyped(json, false);
+}
 
-  export function FileSvcDownloadToJSONTyped(value?: FileSvcDownload | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcDownloadToJSONTyped(value?: FileSvcDownload | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

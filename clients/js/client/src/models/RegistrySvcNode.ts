@@ -108,11 +108,11 @@ export function RegistrySvcNodeFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function RegistrySvcNodeToJSON(json: any): RegistrySvcNode {
-      return RegistrySvcNodeToJSONTyped(json, false);
-  }
+export function RegistrySvcNodeToJSON(json: any): RegistrySvcNode {
+    return RegistrySvcNodeToJSONTyped(json, false);
+}
 
-  export function RegistrySvcNodeToJSONTyped(value?: RegistrySvcNode | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcNodeToJSONTyped(value?: RegistrySvcNode | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

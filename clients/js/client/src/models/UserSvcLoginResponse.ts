@@ -56,11 +56,11 @@ export function UserSvcLoginResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-  export function UserSvcLoginResponseToJSON(json: any): UserSvcLoginResponse {
-      return UserSvcLoginResponseToJSONTyped(json, false);
-  }
+export function UserSvcLoginResponseToJSON(json: any): UserSvcLoginResponse {
+    return UserSvcLoginResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcLoginResponseToJSONTyped(value?: UserSvcLoginResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcLoginResponseToJSONTyped(value?: UserSvcLoginResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

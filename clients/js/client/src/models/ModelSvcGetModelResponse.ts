@@ -80,11 +80,11 @@ export function ModelSvcGetModelResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function ModelSvcGetModelResponseToJSON(json: any): ModelSvcGetModelResponse {
-      return ModelSvcGetModelResponseToJSONTyped(json, false);
-  }
+export function ModelSvcGetModelResponseToJSON(json: any): ModelSvcGetModelResponse {
+    return ModelSvcGetModelResponseToJSONTyped(json, false);
+}
 
-  export function ModelSvcGetModelResponseToJSONTyped(value?: ModelSvcGetModelResponse | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcGetModelResponseToJSONTyped(value?: ModelSvcGetModelResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -48,11 +48,11 @@ export function DockerSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function DockerSvcErrorResponseToJSON(json: any): DockerSvcErrorResponse {
-      return DockerSvcErrorResponseToJSONTyped(json, false);
-  }
+export function DockerSvcErrorResponseToJSON(json: any): DockerSvcErrorResponse {
+    return DockerSvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcErrorResponseToJSONTyped(value?: DockerSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcErrorResponseToJSONTyped(value?: DockerSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

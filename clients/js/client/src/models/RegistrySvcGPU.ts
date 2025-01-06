@@ -140,11 +140,11 @@ export function RegistrySvcGPUFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function RegistrySvcGPUToJSON(json: any): RegistrySvcGPU {
-      return RegistrySvcGPUToJSONTyped(json, false);
-  }
+export function RegistrySvcGPUToJSON(json: any): RegistrySvcGPU {
+    return RegistrySvcGPUToJSONTyped(json, false);
+}
 
-  export function RegistrySvcGPUToJSONTyped(value?: RegistrySvcGPU | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcGPUToJSONTyped(value?: RegistrySvcGPU | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -84,11 +84,11 @@ export function ChatSvcThreadFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-  export function ChatSvcThreadToJSON(json: any): ChatSvcThread {
-      return ChatSvcThreadToJSONTyped(json, false);
-  }
+export function ChatSvcThreadToJSON(json: any): ChatSvcThread {
+    return ChatSvcThreadToJSONTyped(json, false);
+}
 
-  export function ChatSvcThreadToJSONTyped(value?: ChatSvcThread | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcThreadToJSONTyped(value?: ChatSvcThread | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

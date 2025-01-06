@@ -167,11 +167,11 @@ export function DeploySvcDeploymentFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function DeploySvcDeploymentToJSON(json: any): DeploySvcDeployment {
-      return DeploySvcDeploymentToJSONTyped(json, false);
-  }
+export function DeploySvcDeploymentToJSON(json: any): DeploySvcDeployment {
+    return DeploySvcDeploymentToJSONTyped(json, false);
+}
 
-  export function DeploySvcDeploymentToJSONTyped(value?: DeploySvcDeployment | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcDeploymentToJSONTyped(value?: DeploySvcDeployment | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

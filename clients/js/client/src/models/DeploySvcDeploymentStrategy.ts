@@ -72,11 +72,11 @@ export function DeploySvcDeploymentStrategyFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-  export function DeploySvcDeploymentStrategyToJSON(json: any): DeploySvcDeploymentStrategy {
-      return DeploySvcDeploymentStrategyToJSONTyped(json, false);
-  }
+export function DeploySvcDeploymentStrategyToJSON(json: any): DeploySvcDeploymentStrategy {
+    return DeploySvcDeploymentStrategyToJSONTyped(json, false);
+}
 
-  export function DeploySvcDeploymentStrategyToJSONTyped(value?: DeploySvcDeploymentStrategy | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcDeploymentStrategyToJSONTyped(value?: DeploySvcDeploymentStrategy | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

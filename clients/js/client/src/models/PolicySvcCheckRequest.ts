@@ -69,11 +69,11 @@ export function PolicySvcCheckRequestFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function PolicySvcCheckRequestToJSON(json: any): PolicySvcCheckRequest {
-      return PolicySvcCheckRequestToJSONTyped(json, false);
-  }
+export function PolicySvcCheckRequestToJSON(json: any): PolicySvcCheckRequest {
+    return PolicySvcCheckRequestToJSONTyped(json, false);
+}
 
-  export function PolicySvcCheckRequestToJSONTyped(value?: PolicySvcCheckRequest | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcCheckRequestToJSONTyped(value?: PolicySvcCheckRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

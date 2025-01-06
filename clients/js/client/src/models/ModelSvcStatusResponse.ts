@@ -56,11 +56,11 @@ export function ModelSvcStatusResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function ModelSvcStatusResponseToJSON(json: any): ModelSvcStatusResponse {
-      return ModelSvcStatusResponseToJSONTyped(json, false);
-  }
+export function ModelSvcStatusResponseToJSON(json: any): ModelSvcStatusResponse {
+    return ModelSvcStatusResponseToJSONTyped(json, false);
+}
 
-  export function ModelSvcStatusResponseToJSONTyped(value?: ModelSvcStatusResponse | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcStatusResponseToJSONTyped(value?: ModelSvcStatusResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

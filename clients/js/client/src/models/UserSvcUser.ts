@@ -105,11 +105,11 @@ export function UserSvcUserFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-  export function UserSvcUserToJSON(json: any): UserSvcUser {
-      return UserSvcUserToJSONTyped(json, false);
-  }
+export function UserSvcUserToJSON(json: any): UserSvcUser {
+    return UserSvcUserToJSONTyped(json, false);
+}
 
-  export function UserSvcUserToJSONTyped(value?: UserSvcUser | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcUserToJSONTyped(value?: UserSvcUser | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -70,11 +70,11 @@ export function ConfigSvcConfigFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-  export function ConfigSvcConfigToJSON(json: any): ConfigSvcConfig {
-      return ConfigSvcConfigToJSONTyped(json, false);
-  }
+export function ConfigSvcConfigToJSON(json: any): ConfigSvcConfig {
+    return ConfigSvcConfigToJSONTyped(json, false);
+}
 
-  export function ConfigSvcConfigToJSONTyped(value?: ConfigSvcConfig | null, ignoreDiscriminator: boolean = false): any {
+export function ConfigSvcConfigToJSONTyped(value?: ConfigSvcConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

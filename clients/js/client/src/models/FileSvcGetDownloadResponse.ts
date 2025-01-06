@@ -64,11 +64,11 @@ export function FileSvcGetDownloadResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function FileSvcGetDownloadResponseToJSON(json: any): FileSvcGetDownloadResponse {
-      return FileSvcGetDownloadResponseToJSONTyped(json, false);
-  }
+export function FileSvcGetDownloadResponseToJSON(json: any): FileSvcGetDownloadResponse {
+    return FileSvcGetDownloadResponseToJSONTyped(json, false);
+}
 
-  export function FileSvcGetDownloadResponseToJSONTyped(value?: FileSvcGetDownloadResponse | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcGetDownloadResponseToJSONTyped(value?: FileSvcGetDownloadResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

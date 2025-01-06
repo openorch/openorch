@@ -70,11 +70,11 @@ export function UserSvcCreateUserRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function UserSvcCreateUserRequestToJSON(json: any): UserSvcCreateUserRequest {
-      return UserSvcCreateUserRequestToJSONTyped(json, false);
-  }
+export function UserSvcCreateUserRequestToJSON(json: any): UserSvcCreateUserRequest {
+    return UserSvcCreateUserRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcCreateUserRequestToJSONTyped(value?: UserSvcCreateUserRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcCreateUserRequestToJSONTyped(value?: UserSvcCreateUserRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

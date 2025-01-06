@@ -56,11 +56,11 @@ export function FileSvcListUploadsResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function FileSvcListUploadsResponseToJSON(json: any): FileSvcListUploadsResponse {
-      return FileSvcListUploadsResponseToJSONTyped(json, false);
-  }
+export function FileSvcListUploadsResponseToJSON(json: any): FileSvcListUploadsResponse {
+    return FileSvcListUploadsResponseToJSONTyped(json, false);
+}
 
-  export function FileSvcListUploadsResponseToJSONTyped(value?: FileSvcListUploadsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcListUploadsResponseToJSONTyped(value?: FileSvcListUploadsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

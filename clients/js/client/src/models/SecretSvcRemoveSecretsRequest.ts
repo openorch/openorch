@@ -69,11 +69,11 @@ export function SecretSvcRemoveSecretsRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function SecretSvcRemoveSecretsRequestToJSON(json: any): SecretSvcRemoveSecretsRequest {
-      return SecretSvcRemoveSecretsRequestToJSONTyped(json, false);
-  }
+export function SecretSvcRemoveSecretsRequestToJSON(json: any): SecretSvcRemoveSecretsRequest {
+    return SecretSvcRemoveSecretsRequestToJSONTyped(json, false);
+}
 
-  export function SecretSvcRemoveSecretsRequestToJSONTyped(value?: SecretSvcRemoveSecretsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcRemoveSecretsRequestToJSONTyped(value?: SecretSvcRemoveSecretsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
