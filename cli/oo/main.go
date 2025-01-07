@@ -9,6 +9,7 @@ import (
 	definition "github.com/openorch/openorch/cli/oo/commands/definition"
 	deployment "github.com/openorch/openorch/cli/oo/commands/deployment"
 	"github.com/openorch/openorch/cli/oo/commands/env"
+	"github.com/openorch/openorch/cli/oo/commands/grant"
 	instance "github.com/openorch/openorch/cli/oo/commands/instance"
 	"github.com/openorch/openorch/cli/oo/commands/node"
 	secret "github.com/openorch/openorch/cli/oo/commands/secret"
@@ -39,6 +40,7 @@ func main() {
 	deployment.AddDeploymentCommands(rootCmd)
 	node.AddNodeCommands(rootCmd)
 	secret.AddSecretCommands(rootCmd)
+	grant.AddGrantCommands(rootCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)

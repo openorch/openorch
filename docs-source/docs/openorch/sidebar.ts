@@ -498,6 +498,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/list-grants",
+          label: "List Grants",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/save-grants",
+          label: "Save Grants",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
           id: "openorch/login",
           label: "Login",
           className: "api-method post",

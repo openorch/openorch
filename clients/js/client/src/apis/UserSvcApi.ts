@@ -30,11 +30,14 @@ import type {
   UserSvcGetUsersResponse,
   UserSvcIsAuthorizedRequest,
   UserSvcIsAuthorizedResponse,
+  UserSvcListGrantsRequest,
+  UserSvcListGrantsResponse,
   UserSvcLoginRequest,
   UserSvcLoginResponse,
   UserSvcReadUserByTokenResponse,
   UserSvcRegisterRequest,
   UserSvcRegisterResponse,
+  UserSvcSaveGrantsRequest,
   UserSvcSaveProfileRequest,
   UserSvcSetRolePermissionsRequest,
   UserSvcUpserPermissionRequest,
@@ -70,6 +73,10 @@ import {
     UserSvcIsAuthorizedRequestToJSON,
     UserSvcIsAuthorizedResponseFromJSON,
     UserSvcIsAuthorizedResponseToJSON,
+    UserSvcListGrantsRequestFromJSON,
+    UserSvcListGrantsRequestToJSON,
+    UserSvcListGrantsResponseFromJSON,
+    UserSvcListGrantsResponseToJSON,
     UserSvcLoginRequestFromJSON,
     UserSvcLoginRequestToJSON,
     UserSvcLoginResponseFromJSON,
@@ -80,6 +87,8 @@ import {
     UserSvcRegisterRequestToJSON,
     UserSvcRegisterResponseFromJSON,
     UserSvcRegisterResponseToJSON,
+    UserSvcSaveGrantsRequestFromJSON,
+    UserSvcSaveGrantsRequestToJSON,
     UserSvcSaveProfileRequestFromJSON,
     UserSvcSaveProfileRequestToJSON,
     UserSvcSetRolePermissionsRequestFromJSON,
@@ -139,6 +148,10 @@ export interface IsAuthorizedRequest {
     body?: UserSvcIsAuthorizedRequest;
 }
 
+export interface ListGrantsRequest {
+    body: UserSvcListGrantsRequest;
+}
+
 export interface LoginRequest {
     body: UserSvcLoginRequest;
 }
@@ -151,6 +164,10 @@ export interface RemoveUserFromOrganizationRequest {
     organizationId: string;
     userId: string;
     body?: object;
+}
+
+export interface SaveGrantsRequest {
+    body: UserSvcSaveGrantsRequest;
 }
 
 export interface SaveSelfRequest {
@@ -738,6 +755,48 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
+     * List grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:view` permission.
+     * List Grants
+     */
+    async listGrantsRaw(requestParameters: ListGrantsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserSvcListGrantsResponse>> {
+        if (requestParameters['body'] == null) {
+            throw new runtime.RequiredError(
+                'body',
+                'Required parameter "body" was null or undefined when calling listGrants().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/user-svc/grants`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserSvcListGrantsRequestToJSON(requestParameters['body']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserSvcListGrantsResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * List grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:view` permission.
+     * List Grants
+     */
+    async listGrants(requestParameters: ListGrantsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserSvcListGrantsResponse> {
+        const response = await this.listGrantsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Authenticates a user and returns a token.
      * Login
      */
@@ -895,6 +954,48 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
+     * Save grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:create` permission.
+     * Save Grants
+     */
+    async saveGrantsRaw(requestParameters: SaveGrantsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
+        if (requestParameters['body'] == null) {
+            throw new runtime.RequiredError(
+                'body',
+                'Required parameter "body" was null or undefined when calling saveGrants().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/user-svc/grants`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserSvcSaveGrantsRequestToJSON(requestParameters['body']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse<any>(response);
+    }
+
+    /**
+     * Save grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:create` permission.
+     * Save Grants
+     */
+    async saveGrants(requestParameters: SaveGrantsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
+        const response = await this.saveGrantsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Save user\'s own profile information.
      * Save User Profile
      */
@@ -1042,7 +1143,7 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
      * Upsert a Permission
      */
     async upsertPermissionRaw(requestParameters: UpsertPermissionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -1082,7 +1183,7 @@ export class UserSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
      * Upsert a Permission
      */
     async upsertPermission(requestParameters: UpsertPermissionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {

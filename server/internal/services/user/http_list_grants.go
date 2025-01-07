@@ -31,6 +31,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
+// @Param body body user.ListGrantsRequest true "List Grants Request"
 // @Success 200 {object} user.ListGrantsResponse
 // @Failure 401 {object} user.ErrorResponse "Unauthorized"
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
