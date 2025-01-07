@@ -45,7 +45,7 @@ func (dm *DockerService) Summary(
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionContainerView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc"},
+			GrantedSlugs: []string{"model-svc"},
 		}).
 		Execute()
 	if err != nil {

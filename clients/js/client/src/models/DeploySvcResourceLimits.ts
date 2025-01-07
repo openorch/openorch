@@ -62,11 +62,11 @@ export function DeploySvcResourceLimitsFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-  export function DeploySvcResourceLimitsToJSON(json: any): DeploySvcResourceLimits {
-      return DeploySvcResourceLimitsToJSONTyped(json, false);
-  }
+export function DeploySvcResourceLimitsToJSON(json: any): DeploySvcResourceLimits {
+    return DeploySvcResourceLimitsToJSONTyped(json, false);
+}
 
-  export function DeploySvcResourceLimitsToJSONTyped(value?: DeploySvcResourceLimits | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcResourceLimitsToJSONTyped(value?: DeploySvcResourceLimits | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

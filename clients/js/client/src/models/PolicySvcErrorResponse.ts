@@ -48,11 +48,11 @@ export function PolicySvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function PolicySvcErrorResponseToJSON(json: any): PolicySvcErrorResponse {
-      return PolicySvcErrorResponseToJSONTyped(json, false);
-  }
+export function PolicySvcErrorResponseToJSON(json: any): PolicySvcErrorResponse {
+    return PolicySvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function PolicySvcErrorResponseToJSONTyped(value?: PolicySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcErrorResponseToJSONTyped(value?: PolicySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

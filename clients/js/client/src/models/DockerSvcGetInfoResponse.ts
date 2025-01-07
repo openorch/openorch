@@ -56,11 +56,11 @@ export function DockerSvcGetInfoResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function DockerSvcGetInfoResponseToJSON(json: any): DockerSvcGetInfoResponse {
-      return DockerSvcGetInfoResponseToJSONTyped(json, false);
-  }
+export function DockerSvcGetInfoResponseToJSON(json: any): DockerSvcGetInfoResponse {
+    return DockerSvcGetInfoResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcGetInfoResponseToJSONTyped(value?: DockerSvcGetInfoResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcGetInfoResponseToJSONTyped(value?: DockerSvcGetInfoResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

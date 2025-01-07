@@ -55,11 +55,11 @@ export function DockerSvcStopContainerRequestFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function DockerSvcStopContainerRequestToJSON(json: any): DockerSvcStopContainerRequest {
-      return DockerSvcStopContainerRequestToJSONTyped(json, false);
-  }
+export function DockerSvcStopContainerRequestToJSON(json: any): DockerSvcStopContainerRequest {
+    return DockerSvcStopContainerRequestToJSONTyped(json, false);
+}
 
-  export function DockerSvcStopContainerRequestToJSONTyped(value?: DockerSvcStopContainerRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcStopContainerRequestToJSONTyped(value?: DockerSvcStopContainerRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

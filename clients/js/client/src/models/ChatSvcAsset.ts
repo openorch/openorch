@@ -90,11 +90,11 @@ export function ChatSvcAssetFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-  export function ChatSvcAssetToJSON(json: any): ChatSvcAsset {
-      return ChatSvcAssetToJSONTyped(json, false);
-  }
+export function ChatSvcAssetToJSON(json: any): ChatSvcAsset {
+    return ChatSvcAssetToJSONTyped(json, false);
+}
 
-  export function ChatSvcAssetToJSONTyped(value?: ChatSvcAsset | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcAssetToJSONTyped(value?: ChatSvcAsset | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

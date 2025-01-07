@@ -98,11 +98,11 @@ export function FileSvcUploadFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-  export function FileSvcUploadToJSON(json: any): FileSvcUpload {
-      return FileSvcUploadToJSONTyped(json, false);
-  }
+export function FileSvcUploadToJSON(json: any): FileSvcUpload {
+    return FileSvcUploadToJSONTyped(json, false);
+}
 
-  export function FileSvcUploadToJSONTyped(value?: FileSvcUpload | null, ignoreDiscriminator: boolean = false): any {
+export function FileSvcUploadToJSONTyped(value?: FileSvcUpload | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

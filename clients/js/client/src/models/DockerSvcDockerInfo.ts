@@ -62,11 +62,11 @@ export function DockerSvcDockerInfoFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-  export function DockerSvcDockerInfoToJSON(json: any): DockerSvcDockerInfo {
-      return DockerSvcDockerInfoToJSONTyped(json, false);
-  }
+export function DockerSvcDockerInfoToJSON(json: any): DockerSvcDockerInfo {
+    return DockerSvcDockerInfoToJSONTyped(json, false);
+}
 
-  export function DockerSvcDockerInfoToJSONTyped(value?: DockerSvcDockerInfo | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcDockerInfoToJSONTyped(value?: DockerSvcDockerInfo | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

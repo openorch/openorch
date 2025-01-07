@@ -14,12 +14,15 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
+	"time"
 
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// ChangePassword allows a user to update their own password
 // @ID changePassword
 // @Summary Change User Password
 // @Description Allows an authenticated user to change their own password.
@@ -60,4 +63,57 @@ func (s *UserService) ChangePassword(w http.ResponseWriter, r *http.Request) {
 
 	bs, _ := json.Marshal(user.ChangePasswordResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) changePassword(
+	slug, currentPassword, newPassword string,
+) error {
+	q := s.usersStore.Query(
+		datastore.Equals(datastore.Field("slug"), slug),
+	)
+	userI, found, err := q.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return errors.New("user not found")
+	}
+	user := userI.(*usertypes.User)
+
+	if !checkPasswordHash(currentPassword, user.PasswordHash) {
+		return errors.New("current password is incorrect")
+	}
+
+	newPasswordHash, err := hashPassword(newPassword)
+	if err != nil {
+		return err
+	}
+	user.PasswordHash = newPasswordHash
+	user.UpdatedAt = time.Now()
+
+	return q.Update(user)
+}
+
+func (s *UserService) changePasswordAdmin(slug, newPassword string) error {
+	q := s.usersStore.Query(
+		datastore.Equals(datastore.Field("slug"), slug),
+	)
+	userI, found, err := q.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return errors.New("user not found")
+	}
+	user := userI.(*usertypes.User)
+
+	newPasswordHash, err := hashPassword(newPassword)
+	if err != nil {
+		return err
+	}
+
+	user.PasswordHash = newPasswordHash
+	user.UpdatedAt = time.Now()
+
+	return q.Update(user)
 }

@@ -40,7 +40,7 @@ func (s *SourceService) CheckoutRepo(w http.ResponseWriter,
 	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(context.Background(), source.PermissionSourceRepoCheckout.Id).Body(
 		openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"deploy-svc"},
+			GrantedSlugs: []string{"deploy-svc"},
 		}).
 		Execute()
 	if err != nil {

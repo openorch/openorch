@@ -48,11 +48,11 @@ export function DynamicSvcErrorResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-  export function DynamicSvcErrorResponseToJSON(json: any): DynamicSvcErrorResponse {
-      return DynamicSvcErrorResponseToJSONTyped(json, false);
-  }
+export function DynamicSvcErrorResponseToJSON(json: any): DynamicSvcErrorResponse {
+    return DynamicSvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function DynamicSvcErrorResponseToJSONTyped(value?: DynamicSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcErrorResponseToJSONTyped(value?: DynamicSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

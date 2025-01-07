@@ -70,11 +70,11 @@ export function DynamicSvcQueryRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function DynamicSvcQueryRequestToJSON(json: any): DynamicSvcQueryRequest {
-      return DynamicSvcQueryRequestToJSONTyped(json, false);
-  }
+export function DynamicSvcQueryRequestToJSON(json: any): DynamicSvcQueryRequest {
+    return DynamicSvcQueryRequestToJSONTyped(json, false);
+}
 
-  export function DynamicSvcQueryRequestToJSONTyped(value?: DynamicSvcQueryRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcQueryRequestToJSONTyped(value?: DynamicSvcQueryRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

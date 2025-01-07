@@ -67,7 +67,7 @@ func (s *UserService) IsAuthorized(
 		req = &user.IsAuthorizedRequest{}
 	}
 
-	usr, err := s.isAuthorized(r, permissionId, req.SlugsGranted, nil)
+	usr, err := s.isAuthorized(r, permissionId, req.GrantedSlugs, nil)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte("Unauthorized"))
@@ -83,14 +83,14 @@ func (s *UserService) IsAuthorized(
 }
 
 func (s *UserService) isAuthorized(r *http.Request, permissionId string,
-	slugsGranted, contactsGranted []string) (*user.User, error) {
+	grantedSlugs, contactsGranted []string) (*user.User, error) {
 	usr, err := s.getUserFromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
 	slugGrant := false
-	for _, v := range slugsGranted {
+	for _, v := range grantedSlugs {
 		if usr.Slug == v {
 			slugGrant = true
 		}
@@ -125,6 +125,40 @@ func (s *UserService) isAuthorized(r *http.Request, permissionId string,
 			return usr, nil
 		}
 
+	}
+
+	// check grants
+
+	// @todo investigate why this doesn't work
+	//
+	// _, exists, err := s.grantsStore.Query(
+	// 	datastore.Equals([]string{"permissionId"}, permissionId),
+	// 	datastore.IsInList([]string{"slugs"}, usr.Slug),
+	// ).FindOne()
+
+	grantIs, err := s.grantsStore.Query(
+		datastore.Equals([]string{"permissionId"}, permissionId),
+	).Find()
+	if err != nil {
+		return nil, err
+	}
+
+	exists := false
+	for _, grantI := range grantIs {
+		if exists {
+			break
+		}
+		grant := grantI.(*user.Grant)
+		for _, slug := range grant.Slugs {
+			if slug == usr.Slug {
+				exists = true
+				break
+			}
+		}
+	}
+
+	if exists {
+		return usr, nil
 	}
 
 	return nil, errors.New("unauthorized")

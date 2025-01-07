@@ -48,11 +48,11 @@ export function UserSvcAddUserToOrganizationRequestFromJSONTyped(json: any, igno
     };
 }
 
-  export function UserSvcAddUserToOrganizationRequestToJSON(json: any): UserSvcAddUserToOrganizationRequest {
-      return UserSvcAddUserToOrganizationRequestToJSONTyped(json, false);
-  }
+export function UserSvcAddUserToOrganizationRequestToJSON(json: any): UserSvcAddUserToOrganizationRequest {
+    return UserSvcAddUserToOrganizationRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcAddUserToOrganizationRequestToJSONTyped(value?: UserSvcAddUserToOrganizationRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcAddUserToOrganizationRequestToJSONTyped(value?: UserSvcAddUserToOrganizationRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

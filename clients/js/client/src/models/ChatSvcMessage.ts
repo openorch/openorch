@@ -91,11 +91,11 @@ export function ChatSvcMessageFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function ChatSvcMessageToJSON(json: any): ChatSvcMessage {
-      return ChatSvcMessageToJSONTyped(json, false);
-  }
+export function ChatSvcMessageToJSON(json: any): ChatSvcMessage {
+    return ChatSvcMessageToJSONTyped(json, false);
+}
 
-  export function ChatSvcMessageToJSONTyped(value?: ChatSvcMessage | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcMessageToJSONTyped(value?: ChatSvcMessage | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

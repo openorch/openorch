@@ -56,11 +56,11 @@ export function ConfigSvcSaveConfigRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function ConfigSvcSaveConfigRequestToJSON(json: any): ConfigSvcSaveConfigRequest {
-      return ConfigSvcSaveConfigRequestToJSONTyped(json, false);
-  }
+export function ConfigSvcSaveConfigRequestToJSON(json: any): ConfigSvcSaveConfigRequest {
+    return ConfigSvcSaveConfigRequestToJSONTyped(json, false);
+}
 
-  export function ConfigSvcSaveConfigRequestToJSONTyped(value?: ConfigSvcSaveConfigRequest | null, ignoreDiscriminator: boolean = false): any {
+export function ConfigSvcSaveConfigRequestToJSONTyped(value?: ConfigSvcSaveConfigRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

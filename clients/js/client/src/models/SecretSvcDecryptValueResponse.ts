@@ -55,11 +55,11 @@ export function SecretSvcDecryptValueResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function SecretSvcDecryptValueResponseToJSON(json: any): SecretSvcDecryptValueResponse {
-      return SecretSvcDecryptValueResponseToJSONTyped(json, false);
-  }
+export function SecretSvcDecryptValueResponseToJSON(json: any): SecretSvcDecryptValueResponse {
+    return SecretSvcDecryptValueResponseToJSONTyped(json, false);
+}
 
-  export function SecretSvcDecryptValueResponseToJSONTyped(value?: SecretSvcDecryptValueResponse | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcDecryptValueResponseToJSONTyped(value?: SecretSvcDecryptValueResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -86,11 +86,11 @@ export function PolicySvcRateLimitParametersFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function PolicySvcRateLimitParametersToJSON(json: any): PolicySvcRateLimitParameters {
-      return PolicySvcRateLimitParametersToJSONTyped(json, false);
-  }
+export function PolicySvcRateLimitParametersToJSON(json: any): PolicySvcRateLimitParameters {
+    return PolicySvcRateLimitParametersToJSONTyped(json, false);
+}
 
-  export function PolicySvcRateLimitParametersToJSONTyped(value?: PolicySvcRateLimitParameters | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcRateLimitParametersToJSONTyped(value?: PolicySvcRateLimitParameters | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

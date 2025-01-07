@@ -90,11 +90,11 @@ export function SourceSvcCheckoutRepoRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function SourceSvcCheckoutRepoRequestToJSON(json: any): SourceSvcCheckoutRepoRequest {
-      return SourceSvcCheckoutRepoRequestToJSONTyped(json, false);
-  }
+export function SourceSvcCheckoutRepoRequestToJSON(json: any): SourceSvcCheckoutRepoRequest {
+    return SourceSvcCheckoutRepoRequestToJSONTyped(json, false);
+}
 
-  export function SourceSvcCheckoutRepoRequestToJSONTyped(value?: SourceSvcCheckoutRepoRequest | null, ignoreDiscriminator: boolean = false): any {
+export function SourceSvcCheckoutRepoRequestToJSONTyped(value?: SourceSvcCheckoutRepoRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

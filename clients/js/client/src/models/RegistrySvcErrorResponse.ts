@@ -48,11 +48,11 @@ export function RegistrySvcErrorResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function RegistrySvcErrorResponseToJSON(json: any): RegistrySvcErrorResponse {
-      return RegistrySvcErrorResponseToJSONTyped(json, false);
-  }
+export function RegistrySvcErrorResponseToJSON(json: any): RegistrySvcErrorResponse {
+    return RegistrySvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function RegistrySvcErrorResponseToJSONTyped(value?: RegistrySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcErrorResponseToJSONTyped(value?: RegistrySvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

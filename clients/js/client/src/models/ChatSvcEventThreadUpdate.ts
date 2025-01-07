@@ -48,11 +48,11 @@ export function ChatSvcEventThreadUpdateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function ChatSvcEventThreadUpdateToJSON(json: any): ChatSvcEventThreadUpdate {
-      return ChatSvcEventThreadUpdateToJSONTyped(json, false);
-  }
+export function ChatSvcEventThreadUpdateToJSON(json: any): ChatSvcEventThreadUpdate {
+    return ChatSvcEventThreadUpdateToJSONTyped(json, false);
+}
 
-  export function ChatSvcEventThreadUpdateToJSONTyped(value?: ChatSvcEventThreadUpdate | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcEventThreadUpdateToJSONTyped(value?: ChatSvcEventThreadUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

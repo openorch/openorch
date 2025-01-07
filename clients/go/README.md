@@ -158,10 +158,12 @@ Class | Method | HTTP request | Description
 *UserSvcAPI* | [**GetRoles**](docs/UserSvcAPI.md#getroles) | **Get** /user-svc/roles | Get all Roles
 *UserSvcAPI* | [**GetUsers**](docs/UserSvcAPI.md#getusers) | **Post** /user-svc/users | List Users
 *UserSvcAPI* | [**IsAuthorized**](docs/UserSvcAPI.md#isauthorized) | **Post** /user-svc/permission/{permissionId}/is-authorized | Is Authorized
+*UserSvcAPI* | [**ListGrants**](docs/UserSvcAPI.md#listgrants) | **Post** /user-svc/grants | List Grants
 *UserSvcAPI* | [**Login**](docs/UserSvcAPI.md#login) | **Post** /user-svc/login | Login
 *UserSvcAPI* | [**ReadUserByToken**](docs/UserSvcAPI.md#readuserbytoken) | **Post** /user-svc/user/by-token | Read User by Token
 *UserSvcAPI* | [**Register**](docs/UserSvcAPI.md#register) | **Post** /user-svc/register | Register
 *UserSvcAPI* | [**RemoveUserFromOrganization**](docs/UserSvcAPI.md#removeuserfromorganization) | **Delete** /user-svc/organization/{organizationId}/user/{userId} | Remove a User from an Organization
+*UserSvcAPI* | [**SaveGrants**](docs/UserSvcAPI.md#savegrants) | **Put** /user-svc/grants | Save Grants
 *UserSvcAPI* | [**SaveSelf**](docs/UserSvcAPI.md#saveself) | **Put** /user-svc/self | Save User Profile
 *UserSvcAPI* | [**SaveUser**](docs/UserSvcAPI.md#saveuser) | **Put** /user-svc/user/{userId} | Save User
 *UserSvcAPI* | [**SetRolePermission**](docs/UserSvcAPI.md#setrolepermission) | **Put** /user-svc/role/{roleId}/permissions | Set Role Permissions
@@ -315,8 +317,10 @@ Class | Method | HTTP request | Description
  - [UserSvcGetRolesResponse](docs/UserSvcGetRolesResponse.md)
  - [UserSvcGetUsersRequest](docs/UserSvcGetUsersRequest.md)
  - [UserSvcGetUsersResponse](docs/UserSvcGetUsersResponse.md)
+ - [UserSvcGrant](docs/UserSvcGrant.md)
  - [UserSvcIsAuthorizedRequest](docs/UserSvcIsAuthorizedRequest.md)
  - [UserSvcIsAuthorizedResponse](docs/UserSvcIsAuthorizedResponse.md)
+ - [UserSvcListGrantsResponse](docs/UserSvcListGrantsResponse.md)
  - [UserSvcLoginRequest](docs/UserSvcLoginRequest.md)
  - [UserSvcLoginResponse](docs/UserSvcLoginResponse.md)
  - [UserSvcOrganization](docs/UserSvcOrganization.md)
@@ -325,6 +329,7 @@ Class | Method | HTTP request | Description
  - [UserSvcRegisterRequest](docs/UserSvcRegisterRequest.md)
  - [UserSvcRegisterResponse](docs/UserSvcRegisterResponse.md)
  - [UserSvcRole](docs/UserSvcRole.md)
+ - [UserSvcSaveGrantsRequest](docs/UserSvcSaveGrantsRequest.md)
  - [UserSvcSaveProfileRequest](docs/UserSvcSaveProfileRequest.md)
  - [UserSvcSetRolePermissionsRequest](docs/UserSvcSetRolePermissionsRequest.md)
  - [UserSvcUpserPermissionRequest](docs/UserSvcUpserPermissionRequest.md)

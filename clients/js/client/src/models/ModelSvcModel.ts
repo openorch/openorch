@@ -181,11 +181,11 @@ export function ModelSvcModelFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-  export function ModelSvcModelToJSON(json: any): ModelSvcModel {
-      return ModelSvcModelToJSONTyped(json, false);
-  }
+export function ModelSvcModelToJSON(json: any): ModelSvcModel {
+    return ModelSvcModelToJSONTyped(json, false);
+}
 
-  export function ModelSvcModelToJSONTyped(value?: ModelSvcModel | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcModelToJSONTyped(value?: ModelSvcModel | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

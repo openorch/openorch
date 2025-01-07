@@ -48,11 +48,11 @@ export function PolicySvcBlocklistParametersFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function PolicySvcBlocklistParametersToJSON(json: any): PolicySvcBlocklistParameters {
-      return PolicySvcBlocklistParametersToJSONTyped(json, false);
-  }
+export function PolicySvcBlocklistParametersToJSON(json: any): PolicySvcBlocklistParameters {
+    return PolicySvcBlocklistParametersToJSONTyped(json, false);
+}
 
-  export function PolicySvcBlocklistParametersToJSONTyped(value?: PolicySvcBlocklistParameters | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcBlocklistParametersToJSONTyped(value?: PolicySvcBlocklistParameters | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -49,11 +49,11 @@ export function SecretSvcIsSecureResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-  export function SecretSvcIsSecureResponseToJSON(json: any): SecretSvcIsSecureResponse {
-      return SecretSvcIsSecureResponseToJSONTyped(json, false);
-  }
+export function SecretSvcIsSecureResponseToJSON(json: any): SecretSvcIsSecureResponse {
+    return SecretSvcIsSecureResponseToJSONTyped(json, false);
+}
 
-  export function SecretSvcIsSecureResponseToJSONTyped(value?: SecretSvcIsSecureResponse | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcIsSecureResponseToJSONTyped(value?: SecretSvcIsSecureResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

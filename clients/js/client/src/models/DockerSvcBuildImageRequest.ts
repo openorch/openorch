@@ -64,11 +64,11 @@ export function DockerSvcBuildImageRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function DockerSvcBuildImageRequestToJSON(json: any): DockerSvcBuildImageRequest {
-      return DockerSvcBuildImageRequestToJSONTyped(json, false);
-  }
+export function DockerSvcBuildImageRequestToJSON(json: any): DockerSvcBuildImageRequest {
+    return DockerSvcBuildImageRequestToJSONTyped(json, false);
+}
 
-  export function DockerSvcBuildImageRequestToJSONTyped(value?: DockerSvcBuildImageRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcBuildImageRequestToJSONTyped(value?: DockerSvcBuildImageRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

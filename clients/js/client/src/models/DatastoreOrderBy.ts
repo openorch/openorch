@@ -62,11 +62,11 @@ export function DatastoreOrderByFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-  export function DatastoreOrderByToJSON(json: any): DatastoreOrderBy {
-      return DatastoreOrderByToJSONTyped(json, false);
-  }
+export function DatastoreOrderByToJSON(json: any): DatastoreOrderBy {
+    return DatastoreOrderByToJSONTyped(json, false);
+}
 
-  export function DatastoreOrderByToJSONTyped(value?: DatastoreOrderBy | null, ignoreDiscriminator: boolean = false): any {
+export function DatastoreOrderByToJSONTyped(value?: DatastoreOrderBy | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -62,11 +62,11 @@ export function UserSvcChangePasswordRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function UserSvcChangePasswordRequestToJSON(json: any): UserSvcChangePasswordRequest {
-      return UserSvcChangePasswordRequestToJSONTyped(json, false);
-  }
+export function UserSvcChangePasswordRequestToJSON(json: any): UserSvcChangePasswordRequest {
+    return UserSvcChangePasswordRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcChangePasswordRequestToJSONTyped(value?: UserSvcChangePasswordRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcChangePasswordRequestToJSONTyped(value?: UserSvcChangePasswordRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -30,7 +30,7 @@ export interface UserSvcIsAuthorizedRequest {
      * @type {Array<string>}
      * @memberof UserSvcIsAuthorizedRequest
      */
-    slugsGranted?: Array<string>;
+    grantedSlugs?: Array<string>;
 }
 
 /**
@@ -51,15 +51,15 @@ export function UserSvcIsAuthorizedRequestFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'contactsGranted': json['contactsGranted'] == null ? undefined : json['contactsGranted'],
-        'slugsGranted': json['slugsGranted'] == null ? undefined : json['slugsGranted'],
+        'grantedSlugs': json['grantedSlugs'] == null ? undefined : json['grantedSlugs'],
     };
 }
 
-  export function UserSvcIsAuthorizedRequestToJSON(json: any): UserSvcIsAuthorizedRequest {
-      return UserSvcIsAuthorizedRequestToJSONTyped(json, false);
-  }
+export function UserSvcIsAuthorizedRequestToJSON(json: any): UserSvcIsAuthorizedRequest {
+    return UserSvcIsAuthorizedRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcIsAuthorizedRequestToJSONTyped(value?: UserSvcIsAuthorizedRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcIsAuthorizedRequestToJSONTyped(value?: UserSvcIsAuthorizedRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -67,7 +67,7 @@ export function UserSvcIsAuthorizedRequestFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'contactsGranted': value['contactsGranted'],
-        'slugsGranted': value['slugsGranted'],
+        'grantedSlugs': value['grantedSlugs'],
     };
 }
 

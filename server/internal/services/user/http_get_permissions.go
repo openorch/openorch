@@ -16,10 +16,10 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// GetPermissions handles the retrieval of permissions based on the role ID.
 // @ID getPermissionsByRole
 // @Summary Get Permissions by Role
 // @Description Retrieve permissions associated with a specific role ID.
@@ -55,4 +55,27 @@ func (s *UserService) GetPermissions(
 		Permissions: permissions,
 	})
 	w.Write(bs)
+}
+
+func (s *UserService) getPermissions() ([]*user.Permission, error) {
+	permissionsI, err := s.permissionsStore.Query().
+		OrderBy(datastore.OrderByField("name", false)).
+		Find()
+
+	if err != nil {
+		return nil, err
+	}
+
+	permissions := []*user.Permission{}
+	for _, permissionI := range permissionsI {
+		permissions = append(permissions, permissionI.(*user.Permission))
+	}
+
+	return permissions, nil
+}
+
+func (s *UserService) deletePermission(permissionId string) error {
+	return s.permissionsStore.Query(
+		datastore.Id(permissionId),
+	).Delete()
 }

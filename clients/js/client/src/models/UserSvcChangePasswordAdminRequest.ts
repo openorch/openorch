@@ -55,11 +55,11 @@ export function UserSvcChangePasswordAdminRequestFromJSONTyped(json: any, ignore
     };
 }
 
-  export function UserSvcChangePasswordAdminRequestToJSON(json: any): UserSvcChangePasswordAdminRequest {
-      return UserSvcChangePasswordAdminRequestToJSONTyped(json, false);
-  }
+export function UserSvcChangePasswordAdminRequestToJSON(json: any): UserSvcChangePasswordAdminRequest {
+    return UserSvcChangePasswordAdminRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcChangePasswordAdminRequestToJSONTyped(value?: UserSvcChangePasswordAdminRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcChangePasswordAdminRequestToJSONTyped(value?: UserSvcChangePasswordAdminRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

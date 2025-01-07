@@ -111,11 +111,11 @@ export function UserSvcContactFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-  export function UserSvcContactToJSON(json: any): UserSvcContact {
-      return UserSvcContactToJSONTyped(json, false);
-  }
+export function UserSvcContactToJSON(json: any): UserSvcContact {
+    return UserSvcContactToJSONTyped(json, false);
+}
 
-  export function UserSvcContactToJSONTyped(value?: UserSvcContact | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcContactToJSONTyped(value?: UserSvcContact | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

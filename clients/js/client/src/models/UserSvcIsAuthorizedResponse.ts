@@ -63,11 +63,11 @@ export function UserSvcIsAuthorizedResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-  export function UserSvcIsAuthorizedResponseToJSON(json: any): UserSvcIsAuthorizedResponse {
-      return UserSvcIsAuthorizedResponseToJSONTyped(json, false);
-  }
+export function UserSvcIsAuthorizedResponseToJSON(json: any): UserSvcIsAuthorizedResponse {
+    return UserSvcIsAuthorizedResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcIsAuthorizedResponseToJSONTyped(value?: UserSvcIsAuthorizedResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcIsAuthorizedResponseToJSONTyped(value?: UserSvcIsAuthorizedResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -46,7 +46,7 @@ func (dm *DockerService) StopContainer(
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionContainerStop.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc", "deploy-svc"},
+			GrantedSlugs: []string{"model-svc", "deploy-svc"},
 		}).
 		Execute()
 	if err != nil {

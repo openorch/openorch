@@ -56,11 +56,11 @@ export function ChatSvcUpdateThreadRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-  export function ChatSvcUpdateThreadRequestToJSON(json: any): ChatSvcUpdateThreadRequest {
-      return ChatSvcUpdateThreadRequestToJSONTyped(json, false);
-  }
+export function ChatSvcUpdateThreadRequestToJSON(json: any): ChatSvcUpdateThreadRequest {
+    return ChatSvcUpdateThreadRequestToJSONTyped(json, false);
+}
 
-  export function ChatSvcUpdateThreadRequestToJSONTyped(value?: ChatSvcUpdateThreadRequest | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcUpdateThreadRequestToJSONTyped(value?: ChatSvcUpdateThreadRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

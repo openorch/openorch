@@ -56,11 +56,11 @@ export function UserSvcGetUsersRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function UserSvcGetUsersRequestToJSON(json: any): UserSvcGetUsersRequest {
-      return UserSvcGetUsersRequestToJSONTyped(json, false);
-  }
+export function UserSvcGetUsersRequestToJSON(json: any): UserSvcGetUsersRequest {
+    return UserSvcGetUsersRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcGetUsersRequestToJSONTyped(value?: UserSvcGetUsersRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcGetUsersRequestToJSONTyped(value?: UserSvcGetUsersRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

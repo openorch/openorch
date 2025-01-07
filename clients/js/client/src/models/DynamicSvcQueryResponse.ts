@@ -56,11 +56,11 @@ export function DynamicSvcQueryResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-  export function DynamicSvcQueryResponseToJSON(json: any): DynamicSvcQueryResponse {
-      return DynamicSvcQueryResponseToJSONTyped(json, false);
-  }
+export function DynamicSvcQueryResponseToJSON(json: any): DynamicSvcQueryResponse {
+    return DynamicSvcQueryResponseToJSONTyped(json, false);
+}
 
-  export function DynamicSvcQueryResponseToJSONTyped(value?: DynamicSvcQueryResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcQueryResponseToJSONTyped(value?: DynamicSvcQueryResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

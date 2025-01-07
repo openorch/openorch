@@ -20,7 +20,7 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-func (s *UserService) UpsertRole(
+func (s *UserService) upsertRole(
 	userId, id, name, description string,
 	permissionIds []string,
 ) error {

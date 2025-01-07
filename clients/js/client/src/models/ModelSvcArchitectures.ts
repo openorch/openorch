@@ -63,11 +63,11 @@ export function ModelSvcArchitecturesFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function ModelSvcArchitecturesToJSON(json: any): ModelSvcArchitectures {
-      return ModelSvcArchitecturesToJSONTyped(json, false);
-  }
+export function ModelSvcArchitecturesToJSON(json: any): ModelSvcArchitectures {
+    return ModelSvcArchitecturesToJSONTyped(json, false);
+}
 
-  export function ModelSvcArchitecturesToJSONTyped(value?: ModelSvcArchitectures | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcArchitecturesToJSONTyped(value?: ModelSvcArchitectures | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

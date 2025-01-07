@@ -48,11 +48,11 @@ export function ChatSvcEventMessageAddedFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function ChatSvcEventMessageAddedToJSON(json: any): ChatSvcEventMessageAdded {
-      return ChatSvcEventMessageAddedToJSONTyped(json, false);
-  }
+export function ChatSvcEventMessageAddedToJSON(json: any): ChatSvcEventMessageAdded {
+    return ChatSvcEventMessageAddedToJSONTyped(json, false);
+}
 
-  export function ChatSvcEventMessageAddedToJSONTyped(value?: ChatSvcEventMessageAdded | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcEventMessageAddedToJSONTyped(value?: ChatSvcEventMessageAdded | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

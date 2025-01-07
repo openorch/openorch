@@ -55,11 +55,11 @@ export function UserSvcSaveProfileRequestFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-  export function UserSvcSaveProfileRequestToJSON(json: any): UserSvcSaveProfileRequest {
-      return UserSvcSaveProfileRequestToJSONTyped(json, false);
-  }
+export function UserSvcSaveProfileRequestToJSON(json: any): UserSvcSaveProfileRequest {
+    return UserSvcSaveProfileRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcSaveProfileRequestToJSONTyped(value?: UserSvcSaveProfileRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcSaveProfileRequestToJSONTyped(value?: UserSvcSaveProfileRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

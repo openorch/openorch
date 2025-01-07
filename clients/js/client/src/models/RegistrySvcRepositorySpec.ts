@@ -78,11 +78,11 @@ export function RegistrySvcRepositorySpecFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-  export function RegistrySvcRepositorySpecToJSON(json: any): RegistrySvcRepositorySpec {
-      return RegistrySvcRepositorySpecToJSONTyped(json, false);
-  }
+export function RegistrySvcRepositorySpecToJSON(json: any): RegistrySvcRepositorySpec {
+    return RegistrySvcRepositorySpecToJSONTyped(json, false);
+}
 
-  export function RegistrySvcRepositorySpecToJSONTyped(value?: RegistrySvcRepositorySpec | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcRepositorySpecToJSONTyped(value?: RegistrySvcRepositorySpec | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

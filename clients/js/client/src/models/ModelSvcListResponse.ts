@@ -56,11 +56,11 @@ export function ModelSvcListResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-  export function ModelSvcListResponseToJSON(json: any): ModelSvcListResponse {
-      return ModelSvcListResponseToJSONTyped(json, false);
-  }
+export function ModelSvcListResponseToJSON(json: any): ModelSvcListResponse {
+    return ModelSvcListResponseToJSONTyped(json, false);
+}
 
-  export function ModelSvcListResponseToJSONTyped(value?: ModelSvcListResponse | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcListResponseToJSONTyped(value?: ModelSvcListResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

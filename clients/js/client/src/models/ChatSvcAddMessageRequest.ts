@@ -56,11 +56,11 @@ export function ChatSvcAddMessageRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function ChatSvcAddMessageRequestToJSON(json: any): ChatSvcAddMessageRequest {
-      return ChatSvcAddMessageRequestToJSONTyped(json, false);
-  }
+export function ChatSvcAddMessageRequestToJSON(json: any): ChatSvcAddMessageRequest {
+    return ChatSvcAddMessageRequestToJSONTyped(json, false);
+}
 
-  export function ChatSvcAddMessageRequestToJSONTyped(value?: ChatSvcAddMessageRequest | null, ignoreDiscriminator: boolean = false): any {
+export function ChatSvcAddMessageRequestToJSONTyped(value?: ChatSvcAddMessageRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

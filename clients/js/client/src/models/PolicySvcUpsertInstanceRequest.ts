@@ -56,11 +56,11 @@ export function PolicySvcUpsertInstanceRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-  export function PolicySvcUpsertInstanceRequestToJSON(json: any): PolicySvcUpsertInstanceRequest {
-      return PolicySvcUpsertInstanceRequestToJSONTyped(json, false);
-  }
+export function PolicySvcUpsertInstanceRequestToJSON(json: any): PolicySvcUpsertInstanceRequest {
+    return PolicySvcUpsertInstanceRequestToJSONTyped(json, false);
+}
 
-  export function PolicySvcUpsertInstanceRequestToJSONTyped(value?: PolicySvcUpsertInstanceRequest | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcUpsertInstanceRequestToJSONTyped(value?: PolicySvcUpsertInstanceRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -14,10 +14,13 @@ package userservice
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 // SetRolePermissions sets the permissions for a specified role
@@ -67,4 +70,50 @@ func (s *UserService) SetRolePermissions(
 
 	bs, _ := json.Marshal(user.SetRolePermissionsResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) overwriteRolePermissions(
+	userId, roleId string,
+	permissionIds []string,
+) error {
+	q := s.rolesStore.Query(
+		datastore.Id(roleId),
+	)
+	roleI, found, err := q.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return fmt.Errorf("cannot find role %v", roleId)
+	}
+	role := roleI.(*usertypes.Role)
+	if role.OwnerId != userId {
+		return fmt.Errorf("cannot add permission to unowned role")
+	}
+
+	perms, err := s.permissionsStore.Query(
+		datastore.Equals(datastore.Field("id"), permissionIds),
+	).Find()
+	if err != nil {
+		return err
+	}
+	if len(perms) < len(permissionIds) {
+		return fmt.Errorf("cannot find some permissions")
+	}
+
+	err = s.userRoleLinksStore.Query(
+		datastore.Equals(datastore.Field("roleId"), roleId),
+	).Delete()
+	if err != nil {
+		return err
+	}
+
+	for _, permissionId := range permissionIds {
+		err = s.addPermissionToRole(userId, roleId, permissionId)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

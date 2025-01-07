@@ -48,11 +48,11 @@ export function PromptSvcRemovePromptRequestFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function PromptSvcRemovePromptRequestToJSON(json: any): PromptSvcRemovePromptRequest {
-      return PromptSvcRemovePromptRequestToJSONTyped(json, false);
-  }
+export function PromptSvcRemovePromptRequestToJSON(json: any): PromptSvcRemovePromptRequest {
+    return PromptSvcRemovePromptRequestToJSONTyped(json, false);
+}
 
-  export function PromptSvcRemovePromptRequestToJSONTyped(value?: PromptSvcRemovePromptRequest | null, ignoreDiscriminator: boolean = false): any {
+export function PromptSvcRemovePromptRequestToJSONTyped(value?: PromptSvcRemovePromptRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

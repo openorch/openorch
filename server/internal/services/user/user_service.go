@@ -39,6 +39,7 @@ type UserService struct {
 	organizationUserLinksStore datastore.DataStore
 	userRoleLinksStore         datastore.DataStore
 	permissionRoleLinksStore   datastore.DataStore
+	grantsStore                datastore.DataStore
 
 	privateKey    *rsa.PrivateKey
 	publicKeyPem  string
@@ -54,10 +55,12 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	rolesStore, err := datastoreFactory("userSvcRoles", &usertypes.Role{})
 	if err != nil {
 		return nil, err
 	}
+
 	authTokensStore, err := datastoreFactory(
 		"userSvcAuthTokens",
 		&usertypes.AuthToken{},
@@ -65,6 +68,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	permissionsStore, err := datastoreFactory(
 		"userSvcPermissions",
 		&usertypes.Permission{},
@@ -72,6 +76,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	credentialsStore, err := datastoreFactory(
 		"userSvcCredetentials",
 		&sdk.Credential{},
@@ -79,6 +84,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	keyPairsStore, err := datastoreFactory(
 		"userSvcKeyPairs",
 		&usertypes.KeyPair{},
@@ -86,6 +92,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	contactsStore, err := datastoreFactory(
 		"userSvcContacts",
 		&usertypes.Contact{},
@@ -93,6 +100,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	organizationsStore, err := datastoreFactory(
 		"userSvcOrganizations",
 		&usertypes.Organization{},
@@ -100,6 +108,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	organizationUserLinksStore, err := datastoreFactory(
 		"userSvcOrganizationUserLinks",
 		&usertypes.OrganizationUserLink{},
@@ -107,6 +116,7 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	userRoleLinksStore, err := datastoreFactory(
 		"userSvcRoleLinks",
 		&usertypes.UserRoleLink{},
@@ -114,9 +124,18 @@ func NewUserService(
 	if err != nil {
 		return nil, err
 	}
+
 	permissionRoleLinksStore, err := datastoreFactory(
 		"userSvcPermissionRoleLinks",
 		&usertypes.PermissionRoleLink{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	grantsStore, err := datastoreFactory(
+		"userSvcGrants",
+		&usertypes.Grant{},
 	)
 	if err != nil {
 		return nil, err
@@ -136,6 +155,7 @@ func NewUserService(
 		organizationUserLinksStore: organizationUserLinksStore,
 		userRoleLinksStore:         userRoleLinksStore,
 		permissionRoleLinksStore:   permissionRoleLinksStore,
+		grantsStore:                grantsStore,
 	}
 
 	err = service.registerRoles()
@@ -267,7 +287,7 @@ func (s *UserService) bootstrap() error {
 }
 
 func (s *UserService) registerRoles() error {
-	err := s.UpsertRole(
+	err := s.upsertRole(
 		s.serviceUserId,
 		usertypes.RoleAdmin.Id,
 		usertypes.RoleAdmin.Name,
@@ -278,7 +298,7 @@ func (s *UserService) registerRoles() error {
 		return err
 	}
 
-	err = s.UpsertRole(
+	err = s.upsertRole(
 		s.serviceUserId,
 		usertypes.RoleUser.Id,
 		usertypes.RoleUser.Name,

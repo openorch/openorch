@@ -49,11 +49,11 @@ export function DockerSvcGetDockerHostResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-  export function DockerSvcGetDockerHostResponseToJSON(json: any): DockerSvcGetDockerHostResponse {
-      return DockerSvcGetDockerHostResponseToJSONTyped(json, false);
-  }
+export function DockerSvcGetDockerHostResponseToJSON(json: any): DockerSvcGetDockerHostResponse {
+    return DockerSvcGetDockerHostResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcGetDockerHostResponseToJSONTyped(value?: DockerSvcGetDockerHostResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcGetDockerHostResponseToJSONTyped(value?: DockerSvcGetDockerHostResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

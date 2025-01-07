@@ -77,11 +77,11 @@ export function UserSvcRegisterRequestFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function UserSvcRegisterRequestToJSON(json: any): UserSvcRegisterRequest {
-      return UserSvcRegisterRequestToJSONTyped(json, false);
-  }
+export function UserSvcRegisterRequestToJSON(json: any): UserSvcRegisterRequest {
+    return UserSvcRegisterRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcRegisterRequestToJSONTyped(value?: UserSvcRegisterRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcRegisterRequestToJSONTyped(value?: UserSvcRegisterRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

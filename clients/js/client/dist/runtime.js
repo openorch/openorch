@@ -270,6 +270,10 @@ function querystringSingleKey(key, value, keyPrefix = '') {
     }
     return `${encodeURIComponent(fullKey)}=${encodeURIComponent(String(value))}`;
 }
+export function exists(json, key) {
+    const value = json[key];
+    return value !== null && value !== undefined;
+}
 export function mapValues(data, fn) {
     return Object.keys(data).reduce((acc, key) => (Object.assign(Object.assign({}, acc), { [key]: fn(data[key]) })), {});
 }

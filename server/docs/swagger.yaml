@@ -2086,13 +2086,25 @@ definitions:
           $ref: '#/definitions/user_svc.User'
         type: array
     type: object
+  user_svc.Grant:
+    properties:
+      id:
+        type: string
+      permissionId:
+        type: string
+      slugs:
+        description: Slugs who are granted the PermissionId
+        items:
+          type: string
+        type: array
+    type: object
   user_svc.IsAuthorizedRequest:
     properties:
       contactsGranted:
         items:
           type: string
         type: array
-      slugsGranted:
+      grantedSlugs:
         items:
           type: string
         type: array
@@ -2103,6 +2115,13 @@ definitions:
         type: boolean
       user:
         $ref: '#/definitions/user_svc.User'
+    type: object
+  user_svc.ListGrantsResponse:
+    properties:
+      grants:
+        items:
+          $ref: '#/definitions/user_svc.Grant'
+        type: array
     type: object
   user_svc.LoginRequest:
     properties:
@@ -2201,6 +2220,15 @@ definitions:
         type: string
       updatedAt:
         type: string
+    type: object
+  user_svc.SaveGrantsRequest:
+    properties:
+      grants:
+        items:
+          $ref: '#/definitions/user_svc.Grant'
+        type: array
+    type: object
+  user_svc.SaveGrantsResponse:
     type: object
   user_svc.SaveProfileRequest:
     properties:
@@ -4673,6 +4701,78 @@ paths:
       summary: Change User Password (Admin)
       tags:
       - User Svc
+  /user-svc/grants:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        List grants.
+
+        Grants define which slugs are assigned specific permissions, overriding the default configuration.
+
+        Requires the `user-svc:grant:view` permission.
+      operationId: listGrants
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user_svc.ListGrantsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Grants
+      tags:
+      - User Svc
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Save grants.
+
+        Grants define which slugs are assigned specific permissions, overriding the default configuration.
+
+        Requires the `user-svc:grant:create` permission.
+      operationId: saveGrants
+      parameters:
+      - description: Save Grants Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user_svc.SaveGrantsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Grant saved successfully
+          schema:
+            $ref: '#/definitions/user_svc.SaveGrantsResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Save Grants
+      tags:
+      - User Svc
   /user-svc/login:
     post:
       consumes:
@@ -4856,8 +4956,8 @@ paths:
       - application/json
       description: |-
         Creates or updates a permission.
-        <b>The permission ID must be prefixed by the callers username (email).</b>
-        Eg. if the owner's email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+        <b>The permission ID must be prefixed by the callers slug.</b>
+        Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
 
         Requires the `user-svc:permission:create` permission.
       operationId: upsertPermission

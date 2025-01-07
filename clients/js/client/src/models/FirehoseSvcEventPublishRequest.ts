@@ -56,11 +56,11 @@ export function FirehoseSvcEventPublishRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-  export function FirehoseSvcEventPublishRequestToJSON(json: any): FirehoseSvcEventPublishRequest {
-      return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
-  }
+export function FirehoseSvcEventPublishRequestToJSON(json: any): FirehoseSvcEventPublishRequest {
+    return FirehoseSvcEventPublishRequestToJSONTyped(json, false);
+}
 
-  export function FirehoseSvcEventPublishRequestToJSONTyped(value?: FirehoseSvcEventPublishRequest | null, ignoreDiscriminator: boolean = false): any {
+export function FirehoseSvcEventPublishRequestToJSONTyped(value?: FirehoseSvcEventPublishRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

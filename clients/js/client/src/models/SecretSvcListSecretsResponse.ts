@@ -56,11 +56,11 @@ export function SecretSvcListSecretsResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function SecretSvcListSecretsResponseToJSON(json: any): SecretSvcListSecretsResponse {
-      return SecretSvcListSecretsResponseToJSONTyped(json, false);
-  }
+export function SecretSvcListSecretsResponseToJSON(json: any): SecretSvcListSecretsResponse {
+    return SecretSvcListSecretsResponseToJSONTyped(json, false);
+}
 
-  export function SecretSvcListSecretsResponseToJSONTyped(value?: SecretSvcListSecretsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function SecretSvcListSecretsResponseToJSONTyped(value?: SecretSvcListSecretsResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

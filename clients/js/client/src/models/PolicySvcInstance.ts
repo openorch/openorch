@@ -101,11 +101,11 @@ export function PolicySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function PolicySvcInstanceToJSON(json: any): PolicySvcInstance {
-      return PolicySvcInstanceToJSONTyped(json, false);
-  }
+export function PolicySvcInstanceToJSON(json: any): PolicySvcInstance {
+    return PolicySvcInstanceToJSONTyped(json, false);
+}
 
-  export function PolicySvcInstanceToJSONTyped(value?: PolicySvcInstance | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcInstanceToJSONTyped(value?: PolicySvcInstance | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

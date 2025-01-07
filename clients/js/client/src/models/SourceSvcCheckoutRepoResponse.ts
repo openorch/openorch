@@ -48,11 +48,11 @@ export function SourceSvcCheckoutRepoResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-  export function SourceSvcCheckoutRepoResponseToJSON(json: any): SourceSvcCheckoutRepoResponse {
-      return SourceSvcCheckoutRepoResponseToJSONTyped(json, false);
-  }
+export function SourceSvcCheckoutRepoResponseToJSON(json: any): SourceSvcCheckoutRepoResponse {
+    return SourceSvcCheckoutRepoResponseToJSONTyped(json, false);
+}
 
-  export function SourceSvcCheckoutRepoResponseToJSONTyped(value?: SourceSvcCheckoutRepoResponse | null, ignoreDiscriminator: boolean = false): any {
+export function SourceSvcCheckoutRepoResponseToJSONTyped(value?: SourceSvcCheckoutRepoResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

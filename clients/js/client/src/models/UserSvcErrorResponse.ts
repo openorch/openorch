@@ -48,11 +48,11 @@ export function UserSvcErrorResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-  export function UserSvcErrorResponseToJSON(json: any): UserSvcErrorResponse {
-      return UserSvcErrorResponseToJSONTyped(json, false);
-  }
+export function UserSvcErrorResponseToJSON(json: any): UserSvcErrorResponse {
+    return UserSvcErrorResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcErrorResponseToJSONTyped(value?: UserSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcErrorResponseToJSONTyped(value?: UserSvcErrorResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

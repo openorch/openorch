@@ -65,11 +65,11 @@ export function DockerSvcGetContainerSummaryResponseFromJSONTyped(json: any, ign
     };
 }
 
-  export function DockerSvcGetContainerSummaryResponseToJSON(json: any): DockerSvcGetContainerSummaryResponse {
-      return DockerSvcGetContainerSummaryResponseToJSONTyped(json, false);
-  }
+export function DockerSvcGetContainerSummaryResponseToJSON(json: any): DockerSvcGetContainerSummaryResponse {
+    return DockerSvcGetContainerSummaryResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcGetContainerSummaryResponseToJSONTyped(value?: DockerSvcGetContainerSummaryResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcGetContainerSummaryResponseToJSONTyped(value?: DockerSvcGetContainerSummaryResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -21,7 +21,7 @@ var _ MappedNullable = &UserSvcIsAuthorizedRequest{}
 // UserSvcIsAuthorizedRequest struct for UserSvcIsAuthorizedRequest
 type UserSvcIsAuthorizedRequest struct {
 	ContactsGranted []string `json:"contactsGranted,omitempty"`
-	SlugsGranted []string `json:"slugsGranted,omitempty"`
+	GrantedSlugs []string `json:"grantedSlugs,omitempty"`
 }
 
 // NewUserSvcIsAuthorizedRequest instantiates a new UserSvcIsAuthorizedRequest object
@@ -73,36 +73,36 @@ func (o *UserSvcIsAuthorizedRequest) SetContactsGranted(v []string) {
 	o.ContactsGranted = v
 }
 
-// GetSlugsGranted returns the SlugsGranted field value if set, zero value otherwise.
-func (o *UserSvcIsAuthorizedRequest) GetSlugsGranted() []string {
-	if o == nil || IsNil(o.SlugsGranted) {
+// GetGrantedSlugs returns the GrantedSlugs field value if set, zero value otherwise.
+func (o *UserSvcIsAuthorizedRequest) GetGrantedSlugs() []string {
+	if o == nil || IsNil(o.GrantedSlugs) {
 		var ret []string
 		return ret
 	}
-	return o.SlugsGranted
+	return o.GrantedSlugs
 }
 
-// GetSlugsGrantedOk returns a tuple with the SlugsGranted field value if set, nil otherwise
+// GetGrantedSlugsOk returns a tuple with the GrantedSlugs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserSvcIsAuthorizedRequest) GetSlugsGrantedOk() ([]string, bool) {
-	if o == nil || IsNil(o.SlugsGranted) {
+func (o *UserSvcIsAuthorizedRequest) GetGrantedSlugsOk() ([]string, bool) {
+	if o == nil || IsNil(o.GrantedSlugs) {
 		return nil, false
 	}
-	return o.SlugsGranted, true
+	return o.GrantedSlugs, true
 }
 
-// HasSlugsGranted returns a boolean if a field has been set.
-func (o *UserSvcIsAuthorizedRequest) HasSlugsGranted() bool {
-	if o != nil && !IsNil(o.SlugsGranted) {
+// HasGrantedSlugs returns a boolean if a field has been set.
+func (o *UserSvcIsAuthorizedRequest) HasGrantedSlugs() bool {
+	if o != nil && !IsNil(o.GrantedSlugs) {
 		return true
 	}
 
 	return false
 }
 
-// SetSlugsGranted gets a reference to the given []string and assigns it to the SlugsGranted field.
-func (o *UserSvcIsAuthorizedRequest) SetSlugsGranted(v []string) {
-	o.SlugsGranted = v
+// SetGrantedSlugs gets a reference to the given []string and assigns it to the GrantedSlugs field.
+func (o *UserSvcIsAuthorizedRequest) SetGrantedSlugs(v []string) {
+	o.GrantedSlugs = v
 }
 
 func (o UserSvcIsAuthorizedRequest) MarshalJSON() ([]byte, error) {
@@ -118,8 +118,8 @@ func (o UserSvcIsAuthorizedRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ContactsGranted) {
 		toSerialize["contactsGranted"] = o.ContactsGranted
 	}
-	if !IsNil(o.SlugsGranted) {
-		toSerialize["slugsGranted"] = o.SlugsGranted
+	if !IsNil(o.GrantedSlugs) {
+		toSerialize["grantedSlugs"] = o.GrantedSlugs
 	}
 	return toSerialize, nil
 }

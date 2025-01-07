@@ -94,11 +94,11 @@ export function DockerSvcRunContainerOptionsFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function DockerSvcRunContainerOptionsToJSON(json: any): DockerSvcRunContainerOptions {
-      return DockerSvcRunContainerOptionsToJSONTyped(json, false);
-  }
+export function DockerSvcRunContainerOptionsToJSON(json: any): DockerSvcRunContainerOptions {
+    return DockerSvcRunContainerOptionsToJSONTyped(json, false);
+}
 
-  export function DockerSvcRunContainerOptionsToJSONTyped(value?: DockerSvcRunContainerOptions | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcRunContainerOptionsToJSONTyped(value?: DockerSvcRunContainerOptions | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

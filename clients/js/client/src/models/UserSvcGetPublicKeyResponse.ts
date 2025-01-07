@@ -48,11 +48,11 @@ export function UserSvcGetPublicKeyResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-  export function UserSvcGetPublicKeyResponseToJSON(json: any): UserSvcGetPublicKeyResponse {
-      return UserSvcGetPublicKeyResponseToJSONTyped(json, false);
-  }
+export function UserSvcGetPublicKeyResponseToJSON(json: any): UserSvcGetPublicKeyResponse {
+    return UserSvcGetPublicKeyResponseToJSONTyped(json, false);
+}
 
-  export function UserSvcGetPublicKeyResponseToJSONTyped(value?: UserSvcGetPublicKeyResponse | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcGetPublicKeyResponseToJSONTyped(value?: UserSvcGetPublicKeyResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

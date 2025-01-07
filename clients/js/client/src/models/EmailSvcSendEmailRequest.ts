@@ -117,11 +117,11 @@ export function EmailSvcSendEmailRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-  export function EmailSvcSendEmailRequestToJSON(json: any): EmailSvcSendEmailRequest {
-      return EmailSvcSendEmailRequestToJSONTyped(json, false);
-  }
+export function EmailSvcSendEmailRequestToJSON(json: any): EmailSvcSendEmailRequest {
+    return EmailSvcSendEmailRequestToJSONTyped(json, false);
+}
 
-  export function EmailSvcSendEmailRequestToJSONTyped(value?: EmailSvcSendEmailRequest | null, ignoreDiscriminator: boolean = false): any {
+export function EmailSvcSendEmailRequestToJSONTyped(value?: EmailSvcSendEmailRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

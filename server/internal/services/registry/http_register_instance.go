@@ -34,7 +34,7 @@ func (rs *RegistryService) RegisterInstance(
 	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionInstanceEdit.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"deploy-svc"},
+			GrantedSlugs: []string{"deploy-svc"},
 		}).
 		Execute()
 	if err != nil {

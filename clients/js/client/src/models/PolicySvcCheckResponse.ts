@@ -49,11 +49,11 @@ export function PolicySvcCheckResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-  export function PolicySvcCheckResponseToJSON(json: any): PolicySvcCheckResponse {
-      return PolicySvcCheckResponseToJSONTyped(json, false);
-  }
+export function PolicySvcCheckResponseToJSON(json: any): PolicySvcCheckResponse {
+    return PolicySvcCheckResponseToJSONTyped(json, false);
+}
 
-  export function PolicySvcCheckResponseToJSONTyped(value?: PolicySvcCheckResponse | null, ignoreDiscriminator: boolean = false): any {
+export function PolicySvcCheckResponseToJSONTyped(value?: PolicySvcCheckResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

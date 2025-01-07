@@ -70,11 +70,11 @@ export function ModelSvcContainerFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function ModelSvcContainerToJSON(json: any): ModelSvcContainer {
-      return ModelSvcContainerToJSONTyped(json, false);
-  }
+export function ModelSvcContainerToJSON(json: any): ModelSvcContainer {
+    return ModelSvcContainerToJSONTyped(json, false);
+}
 
-  export function ModelSvcContainerToJSONTyped(value?: ModelSvcContainer | null, ignoreDiscriminator: boolean = false): any {
+export function ModelSvcContainerToJSONTyped(value?: ModelSvcContainer | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

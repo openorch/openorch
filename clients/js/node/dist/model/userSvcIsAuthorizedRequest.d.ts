@@ -11,7 +11,7 @@
  */
 export declare class UserSvcIsAuthorizedRequest {
     'contactsGranted'?: Array<string>;
-    'slugsGranted'?: Array<string>;
+    'grantedSlugs'?: Array<string>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

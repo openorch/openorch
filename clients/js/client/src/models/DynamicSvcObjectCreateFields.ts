@@ -100,11 +100,11 @@ export function DynamicSvcObjectCreateFieldsFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-  export function DynamicSvcObjectCreateFieldsToJSON(json: any): DynamicSvcObjectCreateFields {
-      return DynamicSvcObjectCreateFieldsToJSONTyped(json, false);
-  }
+export function DynamicSvcObjectCreateFieldsToJSON(json: any): DynamicSvcObjectCreateFields {
+    return DynamicSvcObjectCreateFieldsToJSONTyped(json, false);
+}
 
-  export function DynamicSvcObjectCreateFieldsToJSONTyped(value?: DynamicSvcObjectCreateFields | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcObjectCreateFieldsToJSONTyped(value?: DynamicSvcObjectCreateFields | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

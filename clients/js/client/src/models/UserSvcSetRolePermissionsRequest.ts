@@ -48,11 +48,11 @@ export function UserSvcSetRolePermissionsRequestFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function UserSvcSetRolePermissionsRequestToJSON(json: any): UserSvcSetRolePermissionsRequest {
-      return UserSvcSetRolePermissionsRequestToJSONTyped(json, false);
-  }
+export function UserSvcSetRolePermissionsRequestToJSON(json: any): UserSvcSetRolePermissionsRequest {
+    return UserSvcSetRolePermissionsRequestToJSONTyped(json, false);
+}
 
-  export function UserSvcSetRolePermissionsRequestToJSONTyped(value?: UserSvcSetRolePermissionsRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcSetRolePermissionsRequestToJSONTyped(value?: UserSvcSetRolePermissionsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

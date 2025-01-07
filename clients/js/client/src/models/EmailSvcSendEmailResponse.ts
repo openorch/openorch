@@ -55,11 +55,11 @@ export function EmailSvcSendEmailResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-  export function EmailSvcSendEmailResponseToJSON(json: any): EmailSvcSendEmailResponse {
-      return EmailSvcSendEmailResponseToJSONTyped(json, false);
-  }
+export function EmailSvcSendEmailResponseToJSON(json: any): EmailSvcSendEmailResponse {
+    return EmailSvcSendEmailResponseToJSONTyped(json, false);
+}
 
-  export function EmailSvcSendEmailResponseToJSONTyped(value?: EmailSvcSendEmailResponse | null, ignoreDiscriminator: boolean = false): any {
+export function EmailSvcSendEmailResponseToJSONTyped(value?: EmailSvcSendEmailResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -127,11 +127,11 @@ export function RegistrySvcDefinitionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-  export function RegistrySvcDefinitionToJSON(json: any): RegistrySvcDefinition {
-      return RegistrySvcDefinitionToJSONTyped(json, false);
-  }
+export function RegistrySvcDefinitionToJSON(json: any): RegistrySvcDefinition {
+    return RegistrySvcDefinitionToJSONTyped(json, false);
+}
 
-  export function RegistrySvcDefinitionToJSONTyped(value?: RegistrySvcDefinition | null, ignoreDiscriminator: boolean = false): any {
+export function RegistrySvcDefinitionToJSONTyped(value?: RegistrySvcDefinition | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

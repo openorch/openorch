@@ -83,11 +83,11 @@ export function UserSvcRoleFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-  export function UserSvcRoleToJSON(json: any): UserSvcRole {
-      return UserSvcRoleToJSONTyped(json, false);
-  }
+export function UserSvcRoleToJSON(json: any): UserSvcRole {
+    return UserSvcRoleToJSONTyped(json, false);
+}
 
-  export function UserSvcRoleToJSONTyped(value?: UserSvcRole | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcRoleToJSONTyped(value?: UserSvcRole | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -83,11 +83,11 @@ export function UserSvcPermissionFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-  export function UserSvcPermissionToJSON(json: any): UserSvcPermission {
-      return UserSvcPermissionToJSONTyped(json, false);
-  }
+export function UserSvcPermissionToJSON(json: any): UserSvcPermission {
+    return UserSvcPermissionToJSONTyped(json, false);
+}
 
-  export function UserSvcPermissionToJSONTyped(value?: UserSvcPermission | null, ignoreDiscriminator: boolean = false): any {
+export function UserSvcPermissionToJSONTyped(value?: UserSvcPermission | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

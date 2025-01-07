@@ -14,13 +14,16 @@ package userservice
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// DeleteRole handles the deletion of a role by role ID.
 // @ID deleteRole
 // @Summary Delete a Role
 // @Description Delete a role based on the role ID.
@@ -54,4 +57,43 @@ func (s *UserService) DeleteRole(w http.ResponseWriter, r *http.Request) {
 
 	bs, _ := json.Marshal(user.DeleteRoleResponse{})
 	w.Write(bs)
+}
+
+func (s *UserService) deleteRole(roleId string) error {
+	q := s.rolesStore.Query(
+		datastore.Id(roleId),
+	)
+	roleI, found, err := q.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return errors.New("user not found")
+	}
+	role := roleI.(*usertypes.Role)
+
+	if role.Id == usertypes.RoleAdmin.Id {
+		return errors.New("cannot delete default role")
+	}
+
+	return q.Delete()
+}
+
+func (s *UserService) removeRole(userId string, roleId string) error {
+	query := s.usersStore.Query(
+		datastore.Equals(datastore.Field("id"), userId),
+	)
+	userI, found, err := query.FindOne()
+	if err != nil {
+		return err
+	}
+	if !found {
+		return errors.New("user not found")
+	}
+	user := userI.(*usertypes.User)
+
+	return s.userRoleLinksStore.Query(
+		datastore.Id(fmt.Sprintf("%v:%v", user.Id, roleId)),
+	).Delete()
+
 }

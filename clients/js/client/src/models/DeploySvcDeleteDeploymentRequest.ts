@@ -49,11 +49,11 @@ export function DeploySvcDeleteDeploymentRequestFromJSONTyped(json: any, ignoreD
     };
 }
 
-  export function DeploySvcDeleteDeploymentRequestToJSON(json: any): DeploySvcDeleteDeploymentRequest {
-      return DeploySvcDeleteDeploymentRequestToJSONTyped(json, false);
-  }
+export function DeploySvcDeleteDeploymentRequestToJSON(json: any): DeploySvcDeleteDeploymentRequest {
+    return DeploySvcDeleteDeploymentRequestToJSONTyped(json, false);
+}
 
-  export function DeploySvcDeleteDeploymentRequestToJSONTyped(value?: DeploySvcDeleteDeploymentRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DeploySvcDeleteDeploymentRequestToJSONTyped(value?: DeploySvcDeleteDeploymentRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -459,6 +459,36 @@ func (mr *MockUserSvcAPIMockRecorder) IsAuthorizedExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsAuthorizedExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).IsAuthorizedExecute), r)
 }
 
+// ListGrants mocks base method.
+func (m *MockUserSvcAPI) ListGrants(ctx context.Context) ApiListGrantsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListGrants", ctx)
+	ret0, _ := ret[0].(ApiListGrantsRequest)
+	return ret0
+}
+
+// ListGrants indicates an expected call of ListGrants.
+func (mr *MockUserSvcAPIMockRecorder) ListGrants(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListGrants", reflect.TypeOf((*MockUserSvcAPI)(nil).ListGrants), ctx)
+}
+
+// ListGrantsExecute mocks base method.
+func (m *MockUserSvcAPI) ListGrantsExecute(r ApiListGrantsRequest) (*UserSvcListGrantsResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListGrantsExecute", r)
+	ret0, _ := ret[0].(*UserSvcListGrantsResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ListGrantsExecute indicates an expected call of ListGrantsExecute.
+func (mr *MockUserSvcAPIMockRecorder) ListGrantsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListGrantsExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).ListGrantsExecute), r)
+}
+
 // Login mocks base method.
 func (m *MockUserSvcAPI) Login(ctx context.Context) ApiLoginRequest {
 	m.ctrl.T.Helper()
@@ -577,6 +607,36 @@ func (m *MockUserSvcAPI) RemoveUserFromOrganizationExecute(r ApiRemoveUserFromOr
 func (mr *MockUserSvcAPIMockRecorder) RemoveUserFromOrganizationExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveUserFromOrganizationExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).RemoveUserFromOrganizationExecute), r)
+}
+
+// SaveGrants mocks base method.
+func (m *MockUserSvcAPI) SaveGrants(ctx context.Context) ApiSaveGrantsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveGrants", ctx)
+	ret0, _ := ret[0].(ApiSaveGrantsRequest)
+	return ret0
+}
+
+// SaveGrants indicates an expected call of SaveGrants.
+func (mr *MockUserSvcAPIMockRecorder) SaveGrants(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveGrants", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveGrants), ctx)
+}
+
+// SaveGrantsExecute mocks base method.
+func (m *MockUserSvcAPI) SaveGrantsExecute(r ApiSaveGrantsRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveGrantsExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SaveGrantsExecute indicates an expected call of SaveGrantsExecute.
+func (mr *MockUserSvcAPIMockRecorder) SaveGrantsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveGrantsExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveGrantsExecute), r)
 }
 
 // SaveSelf mocks base method.

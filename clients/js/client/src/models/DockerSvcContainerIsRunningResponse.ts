@@ -49,11 +49,11 @@ export function DockerSvcContainerIsRunningResponseFromJSONTyped(json: any, igno
     };
 }
 
-  export function DockerSvcContainerIsRunningResponseToJSON(json: any): DockerSvcContainerIsRunningResponse {
-      return DockerSvcContainerIsRunningResponseToJSONTyped(json, false);
-  }
+export function DockerSvcContainerIsRunningResponseToJSON(json: any): DockerSvcContainerIsRunningResponse {
+    return DockerSvcContainerIsRunningResponseToJSONTyped(json, false);
+}
 
-  export function DockerSvcContainerIsRunningResponseToJSONTyped(value?: DockerSvcContainerIsRunningResponse | null, ignoreDiscriminator: boolean = false): any {
+export function DockerSvcContainerIsRunningResponseToJSONTyped(value?: DockerSvcContainerIsRunningResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

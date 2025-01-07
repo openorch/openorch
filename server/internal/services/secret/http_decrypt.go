@@ -41,7 +41,7 @@ func (cs *SecretService) Decrypt(
 	isAuthRsp, _, err := cs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), secret.PermissionSecretSave.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			SlugsGranted: []string{"model-svc"},
+			GrantedSlugs: []string{"model-svc"},
 		}).
 		Execute()
 	if err != nil {

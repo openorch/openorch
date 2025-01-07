@@ -15,11 +15,15 @@ package userservice
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
+	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	"github.com/pkg/errors"
+	"golang.org/x/crypto/bcrypt"
 )
 
-// Login handles user authentication
 // @ID login
 // @Summary Login
 // @Description Authenticates a user and returns a token.
@@ -61,4 +65,67 @@ func (s *UserService) Login(w http.ResponseWriter, r *http.Request) {
 		Token: token,
 	})
 	w.Write(bs)
+}
+
+func (s *UserService) login(
+	slug, password string,
+) (*user.AuthToken, error) {
+	userI, found, err := s.usersStore.Query(
+		datastore.Equals(datastore.Field("slug"), slug),
+	).FindOne()
+	if err != nil {
+		return nil, err
+	}
+	if !found {
+		return nil, errors.New("slug not found")
+	}
+	u := userI.(*user.User)
+
+	if !checkPasswordHash(password, u.PasswordHash) {
+		return nil, errors.New("unauthorized")
+	}
+
+	token, err := s.generateAuthToken(u)
+	if err != nil {
+		return nil, err
+	}
+
+	err = s.authTokensStore.Create(token)
+	if err != nil {
+		return nil, errors.Wrap(err, "error creating token")
+	}
+
+	return token, nil
+}
+
+func checkPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+
+func (s *UserService) generateAuthToken(
+	u *user.User,
+) (*user.AuthToken, error) {
+	roleLinks, err := s.userRoleLinksStore.Query(
+		datastore.Equals(datastore.Field("userId"), u.Id),
+	).Find()
+	if err != nil {
+		return nil, err
+	}
+	roleIds := []string{}
+	for _, roleLink := range roleLinks {
+		roleIds = append(roleIds, roleLink.(*user.UserRoleLink).RoleId)
+	}
+
+	token, err := generateJWT(u, roleIds, s.privateKey)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user.AuthToken{
+		Id:        sdk.Id("tok"),
+		UserId:    u.Id,
+		Token:     token,
+		CreatedAt: time.Now(),
+	}, nil
 }
