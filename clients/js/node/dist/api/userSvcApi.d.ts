@@ -24,11 +24,14 @@ import { UserSvcGetUsersRequest } from '../model/userSvcGetUsersRequest';
 import { UserSvcGetUsersResponse } from '../model/userSvcGetUsersResponse';
 import { UserSvcIsAuthorizedRequest } from '../model/userSvcIsAuthorizedRequest';
 import { UserSvcIsAuthorizedResponse } from '../model/userSvcIsAuthorizedResponse';
+import { UserSvcListGrantsRequest } from '../model/userSvcListGrantsRequest';
+import { UserSvcListGrantsResponse } from '../model/userSvcListGrantsResponse';
 import { UserSvcLoginRequest } from '../model/userSvcLoginRequest';
 import { UserSvcLoginResponse } from '../model/userSvcLoginResponse';
 import { UserSvcReadUserByTokenResponse } from '../model/userSvcReadUserByTokenResponse';
 import { UserSvcRegisterRequest } from '../model/userSvcRegisterRequest';
 import { UserSvcRegisterResponse } from '../model/userSvcRegisterResponse';
+import { UserSvcSaveGrantsRequest } from '../model/userSvcSaveGrantsRequest';
 import { UserSvcSaveProfileRequest } from '../model/userSvcSaveProfileRequest';
 import { UserSvcSetRolePermissionsRequest } from '../model/userSvcSetRolePermissionsRequest';
 import { UserSvcUpserPermissionRequest } from '../model/userSvcUpserPermissionRequest';
@@ -239,6 +242,19 @@ export declare class UserSvcApi {
         body: UserSvcIsAuthorizedResponse;
     }>;
     /**
+     * List grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:view` permission.
+     * @summary List Grants
+     * @param body List Grants Request
+     */
+    listGrants(body: UserSvcListGrantsRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: UserSvcListGrantsResponse;
+    }>;
+    /**
      * Authenticates a user and returns a token.
      * @summary Login
      * @param body Login Request
@@ -292,6 +308,19 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
+     * Save grants.  Grants define which slugs are assigned specific permissions, overriding the default configuration.  Requires the `user-svc:grant:create` permission.
+     * @summary Save Grants
+     * @param body Save Grants Request
+     */
+    saveGrants(body: UserSvcSaveGrantsRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
+    /**
      * Save user\'s own profile information.
      * @summary Save User Profile
      * @param userId User ID
@@ -334,7 +363,7 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s email/username is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
      * @summary Upsert a Permission
      * @param permissionId Permission ID
      * @param requestBody Permission Details
