@@ -10,17 +10,16 @@
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg" alt="js client build" style="max-width: 100%;"></a>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg" alt="go sdk" style="max-width: 100%;"></a>
     </span>
-    <div style="margin-top: 2rem">Orchestrate AI models,  containers, microservices, and more. A language agnostic development platform.</div>
+    <div style="margin-top: 2rem">Build smarter. Orchestrate faster. A unified platform for AI, microservices, and beyond.</div>
     <div>
       <a href="https://openorch.org">openorch.org</a>
     </div>
   </div>
 </p>
 
-OpenOrch is a daemon that transforms your servers into a powerful development environment. It can run AI models, containers, and microservices.
-Think of it as a blend of (an extremely simplistic, early-stage) Kubernetes and a language agnostic backend framework for building applications on top—designed for fixed-resource setups and straightforward self-hosting.
+OpenOrch is, at its core, a microservices development platform—a shared backend designed to supercharge your development process. But it doesn’t stop there. OpenOrch is also an orchestrator, a reverse proxy, an ORM, an AI platform, a user management tool, and much more. It brings together a suite of essential tools to streamline your backend development, enabling you to build and deploy powerful applications with ease.
 
-Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data. It can be thought of as many things: a microservices framework, an AI platform, a backend platform, a PaaS, local AI cluster management, self-hosted AI orchestration, on-premise AI deployment, etc.
+Whether you’re managing AI models, creating microservices, or handling user authentication, OpenOrch provides a unified, developer-friendly foundation that adapts to your needs. By eliminating the need to reimplement common functionalities like file uploads and reducing reliance on complex infrastructure components such as secret and configuration management, OpenOrch simplifies setups and accelerates development processes—letting you focus on building, not managing.
 
 ## Starting
 
