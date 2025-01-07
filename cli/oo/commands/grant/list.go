@@ -45,7 +45,7 @@ func List(cmd *cobra.Command, args []string) error {
 	for _, grant := range rsp.Grants {
 		fmt.Fprintf(
 			writer,
-			"%s\t%s\t%s",
+			"%s\t%s\t%s\n",
 			*grant.Id,
 			*grant.PermissionId,
 			strings.Join(grant.Slugs, ", "),
