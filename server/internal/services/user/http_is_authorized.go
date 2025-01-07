@@ -129,12 +129,32 @@ func (s *UserService) isAuthorized(r *http.Request, permissionId string,
 
 	// check grants
 
-	_, exists, err := s.grantsStore.Query(
+	// @todo investigate why this doesn't work
+	//
+	// _, exists, err := s.grantsStore.Query(
+	// 	datastore.Equals([]string{"permissionId"}, permissionId),
+	// 	datastore.IsInList([]string{"slugs"}, usr.Slug),
+	// ).FindOne()
+
+	grantIs, err := s.grantsStore.Query(
 		datastore.Equals([]string{"permissionId"}, permissionId),
-		datastore.IsInList([]string{"slugs"}, usr.Slug),
-	).FindOne()
+	).Find()
 	if err != nil {
 		return nil, err
+	}
+
+	exists := false
+	for _, grantI := range grantIs {
+		if exists {
+			break
+		}
+		grant := grantI.(*user.Grant)
+		for _, slug := range grant.Slugs {
+			if slug == usr.Slug {
+				exists = true
+				break
+			}
+		}
 	}
 
 	if exists {
