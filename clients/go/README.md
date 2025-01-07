@@ -320,6 +320,7 @@ Class | Method | HTTP request | Description
  - [UserSvcGrant](docs/UserSvcGrant.md)
  - [UserSvcIsAuthorizedRequest](docs/UserSvcIsAuthorizedRequest.md)
  - [UserSvcIsAuthorizedResponse](docs/UserSvcIsAuthorizedResponse.md)
+ - [UserSvcListGrantsRequest](docs/UserSvcListGrantsRequest.md)
  - [UserSvcListGrantsResponse](docs/UserSvcListGrantsResponse.md)
  - [UserSvcLoginRequest](docs/UserSvcLoginRequest.md)
  - [UserSvcLoginResponse](docs/UserSvcLoginResponse.md)

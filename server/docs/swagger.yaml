@@ -2116,6 +2116,13 @@ definitions:
       user:
         $ref: '#/definitions/user_svc.User'
     type: object
+  user_svc.ListGrantsRequest:
+    properties:
+      permissionId:
+        type: string
+      slug:
+        type: string
+    type: object
   user_svc.ListGrantsResponse:
     properties:
       grants:
@@ -4712,6 +4719,13 @@ paths:
 
         Requires the `user-svc:grant:view` permission.
       operationId: listGrants
+      parameters:
+      - description: List Grants Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user_svc.ListGrantsRequest'
       produces:
       - application/json
       responses:

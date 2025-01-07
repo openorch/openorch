@@ -3745,6 +3745,17 @@ const docTemplate = `{
                 ],
                 "summary": "List Grants",
                 "operationId": "listGrants",
+                "parameters": [
+                    {
+                        "description": "List Grants Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ListGrantsRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -7817,6 +7828,17 @@ const docTemplate = `{
                 },
                 "user": {
                     "$ref": "#/definitions/user_svc.User"
+                }
+            }
+        },
+        "user_svc.ListGrantsRequest": {
+            "type": "object",
+            "properties": {
+                "permissionId": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
                 }
             }
         },
