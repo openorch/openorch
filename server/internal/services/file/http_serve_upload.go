@@ -1,6 +1,8 @@
 package fileservice
 
 import (
+	"context"
+	"fmt"
 	"io"
 	"mime"
 	"net/http"
@@ -9,8 +11,10 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	file "github.com/openorch/openorch/server/internal/services/file/types"
+	"github.com/pkg/errors"
 )
 
 // @ID serveUpload
@@ -54,7 +58,14 @@ func (fs *FileService) ServeUpload(
 	}
 
 	uploadReplicas := toUploads(uploadReplicaIs)
-	if fs.isLocal(uploadReplicas) {
+	isLocal, err := fs.isLocal(r.Context(), uploadReplicas)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	if isLocal {
 		fs.serveLocal(uploadReplicas, w, r)
 	} else {
 		fs.serveRemote(uploadReplicas, w, r)
@@ -66,7 +77,12 @@ func (fs *FileService) serveLocal(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	upload := fs.pickLocal(uploadReplicas)
+	upload, err := fs.pickLocal(r.Context(), uploadReplicas)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
 
 	fileInfo, err := os.Stat(upload.FilePath)
 	if err != nil || fileInfo.IsDir() {
@@ -104,7 +120,8 @@ func (fs *FileService) serveRemote(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-
+	w.WriteHeader(http.StatusNotImplemented)
+	w.Write([]byte("not implemented"))
 }
 
 func toUploads(uploadIs []datastore.Row) []*file.Upload {
@@ -116,22 +133,46 @@ func toUploads(uploadIs []datastore.Row) []*file.Upload {
 	return ret
 }
 
-func (fs *FileService) isLocal(uploads []*file.Upload) bool {
-	for _, upload := range uploads {
-		if upload.NodeId == fs.nodeId {
-			return true
+func (fs *FileService) isLocal(ctx context.Context, uploads []*file.Upload) (bool, error) {
+	if fs.nodeId == "" {
+		err := fs.getNodeId(ctx)
+		if err != nil {
+			return false, errors.Wrap(err, "cannot get node id")
 		}
 	}
 
-	return false
+	for _, upload := range uploads {
+		if upload.NodeId == fs.nodeId {
+			return true, nil
+		}
+	}
+
+	return false, nil
 }
 
-func (fs *FileService) pickLocal(uploads []*file.Upload) *file.Upload {
-	for _, upload := range uploads {
-		if upload.NodeId == fs.nodeId {
-			return upload
+func (fs *FileService) pickLocal(ctx context.Context, uploads []*file.Upload) (*file.Upload, error) {
+	if fs.nodeId == "" {
+		err := fs.getNodeId(ctx)
+		if err != nil {
+			return nil, errors.Wrap(err, "cannot get node id")
 		}
 	}
 
+	for _, upload := range uploads {
+		if upload.NodeId == fs.nodeId {
+			return upload, nil
+		}
+	}
+
+	return nil, fmt.Errorf("upload not found")
+}
+
+func (fs *FileService) getNodeId(ctx context.Context) error {
+	nodeRsp, _, err := fs.clientFactory.Client(sdk.WithToken(fs.token)).RegistrySvcAPI.SelfNode(ctx).Execute()
+	if err != nil {
+		return err
+	}
+
+	fs.nodeId = nodeRsp.Node.Id
 	return nil
 }

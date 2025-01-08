@@ -101,8 +101,9 @@ outer:
 	require.Equal(t, 1, len(rsp.Uploads))
 	require.Equal(t, int64(17), rsp.Uploads[0].FileSize)
 
-	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeUpload(ctx, *rsp.Uploads[0].Id).Execute()
+	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeUpload(ctx, *rsp.Uploads[0].FileId).Execute()
 	require.NoError(t, err)
+	require.Equal(t, true, fileRsp != nil)
 	bs, err := ioutil.ReadAll(fileRsp)
 	require.NoError(t, err)
 	require.Equal(t, "Test file content", string(bs))

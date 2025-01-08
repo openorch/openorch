@@ -94,6 +94,14 @@ func (fs *FileService) UploadFile(
 			return
 		}
 
+		if fs.nodeId == "" {
+			err := fs.getNodeId(r.Context())
+			if err != nil {
+				handleError(err, http.StatusInternalServerError, "Failed to get node ID")
+				return
+			}
+		}
+
 		// @todo this is fairly weird that we process multiple files but only a single one is returned
 		uploadRecord = file.Upload{
 			Id:               sdk.Id("upl"),

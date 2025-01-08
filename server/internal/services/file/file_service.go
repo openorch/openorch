@@ -144,13 +144,6 @@ func (dm *FileService) Start() error {
 		}
 	}
 
-	nodeRsp, _, err := dm.clientFactory.Client(sdk.WithToken(dm.token)).RegistrySvcAPI.SelfNode(ctx).Execute()
-	if err != nil {
-		return err
-	}
-
-	dm.nodeId = nodeRsp.Node.Id
-
 	return err
 }
 

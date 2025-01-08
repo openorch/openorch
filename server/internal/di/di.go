@@ -67,6 +67,10 @@ type Options struct {
 }
 
 func BigBang(options *Options) (*mux.Router, func() error, error) {
+	if options.NodeOptions == nil {
+		options.NodeOptions = &node_types.Options{}
+	}
+
 	var homeDir string
 	var err error
 	if options.Test {
