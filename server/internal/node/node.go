@@ -21,6 +21,7 @@ import (
 	"runtime/debug"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/datastore/sqlstore"
 	pglock "github.com/openorch/openorch/sdk/go/lock/pg"
@@ -34,9 +35,10 @@ import (
 )
 
 type NodeInfo struct {
-	Options     *di.Options
-	Router      *mux.Router
-	StarterFunc func() error
+	Options       *di.Options
+	Router        *mux.Router
+	StarterFunc   func() error
+	ClientFactory sdk.ClientFactory
 }
 
 // Start wraps the dependency injection universe creation
@@ -57,7 +59,10 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 		options.GpuPlatform = os.Getenv("OPENORCH_GPU_PLATFORM")
 	}
 	if options.Address == "" {
-		options.Address = os.Getenv("OPENORCH_NODE_URL")
+		options.Address = os.Getenv("OPENORCH_URL")
+	}
+	if options.NodeId == "" {
+		options.Address = os.Getenv("OPENORCH_NODE_ID")
 	}
 	if options.Az == "" {
 		options.Az = os.Getenv("OPENORCH_AZ")

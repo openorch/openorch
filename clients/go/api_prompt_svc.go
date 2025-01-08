@@ -28,6 +28,8 @@ type PromptSvcAPI interface {
 
 	Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
 
+Requires the `prompt-svc:prompt:create` permission.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiAddPromptRequest
 	*/
@@ -104,6 +106,8 @@ func (r ApiAddPromptRequest) Execute() (*PromptSvcAddPromptResponse, *http.Respo
 AddPrompt Add Prompt
 
 Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+
+Requires the `prompt-svc:prompt:create` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAddPromptRequest

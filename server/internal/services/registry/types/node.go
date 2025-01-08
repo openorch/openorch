@@ -35,7 +35,7 @@ type Node struct {
 }
 
 func (n Node) GetId() string {
-	return n.URL
+	return n.Id
 }
 
 // Usage represents the usage metrics for a resource.
@@ -79,4 +79,10 @@ type ListNodesRequest struct {
 
 type ListNodesResponse struct {
 	Nodes []*Node `json:"nodes"`
+}
+
+type NodeSelfRequest struct{}
+
+type NodeSelfResponse struct {
+	Node Node `json:"node" binding:"required"`
 }

@@ -61,8 +61,8 @@ func (d *DockerService) nameIsRunning(name string) (bool, error) {
 		if container.State != "running" {
 			continue
 		}
-		for _, name := range container.Names {
-			if name == name {
+		for _, n := range container.Names {
+			if n == name {
 				return true, nil
 			}
 		}

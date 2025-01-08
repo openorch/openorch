@@ -25,6 +25,8 @@ import (
 // @ID addPrompt
 // @Summary Add Prompt
 // @Description Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+// @Description
+// @Description Requires the `prompt-svc:prompt:create` permission.
 // @Tags Prompt Svc
 // @Accept json
 // @Produce json

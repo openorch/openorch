@@ -1,10 +1,27 @@
 ---
 sidebar_position: 3
 tags:
-  - test
+  - configuration
+  - envars
+  - backend
+  - daemon
+  - setup
 ---
 
 # Backend Environment Variables
+
+## `OPENORCH_URL`
+
+The OPENORCH_URL is the internally addressable (non-public-facing) URL of an OpenOrch daemon. It should point to the local OpenOrch instance on each physical node. Ideally, every node should have its own OpenOrch instance.
+
+This local address serves two purposes:
+
+- It acts as the "self address" for the OpenOrch daemon when calling built-in services (though it can default to 127.0.0.1).
+- It is also used by custom services when registering themselves, among other tasks.
+
+## `OPENORCH_NODE_ID`
+
+For information about this, please refer to the [Registry Svc Node section](/docs/built-in-services/registry-svc#node)
 
 ## `OPENORCH_GPU_PLATFORM`
 
@@ -78,7 +95,3 @@ OPENORCH_DB_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydataba
 ```
 
 Naturally, you should change the details of the connection string to reflect your environment.
-
-## `OPENORCH_NODE_URL`
-
-Internally addressable URL of the node. The nodes should be able to reach each other through this URL. Each URL represents a listening OpenOrch daemon.

@@ -858,6 +858,9 @@ definitions:
     properties:
       createdAt:
         type: string
+      fileId:
+        description: Logical file ID spanning all replicas
+        type: string
       fileName:
         type: string
       filePath:
@@ -866,8 +869,10 @@ definitions:
         format: int64
         type: integer
       id:
+        description: Unique ID for this replica
         type: string
       nodeId:
+        description: ID of the node storing this replica
         type: string
       updatedAt:
         type: string
@@ -1608,6 +1613,15 @@ definitions:
     required:
     - id
     - url
+    type: object
+  registry_svc.NodeSelfRequest:
+    type: object
+  registry_svc.NodeSelfResponse:
+    properties:
+      node:
+        $ref: '#/definitions/registry_svc.Node'
+    required:
+    - node
     type: object
   registry_svc.Process:
     properties:
@@ -3432,11 +3446,11 @@ paths:
       - File Svc
   /file-svc/serve/download/{url}:
     get:
-      description: Initiates or resumes the download for a specified URL and serves
-        the file with the appropriate Content-Type.
+      description: Serves a previously downloaded file based on its URL.
       operationId: serveDownload
       parameters:
-      - description: URL
+      - description: URL of the file. Even after downloading, the file is still referenced
+          by its original internet URL.
         in: path
         name: url
         required: true
@@ -3460,19 +3474,21 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/file_svc.ErrorResponse'
-      summary: Serve a File from a URL
+      summary: Serve a Downloaded file.
       tags:
       - File Svc
-  /file-svc/serve/upload/{id}:
+  /file-svc/serve/upload/{fileId}:
     get:
       consumes:
       - application/json
-      description: Serves a previously uploaded file based on its ID.
+      description: |-
+        Serves a previously uploaded file based on its File ID.
+        Please keep in mind that the ID and the FileID of an Upload is two different fields.
       operationId: serveUpload
       parameters:
       - description: Upload ID
         in: path
-        name: id
+        name: fileId
         required: true
         type: string
       produces:
@@ -3950,8 +3966,10 @@ paths:
     post:
       consumes:
       - application/json
-      description: Adds a new prompt to the prompt queue and either waits for the
-        response (if `sync` is set to true), or returns immediately.
+      description: |-
+        Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+
+        Requires the `prompt-svc:prompt:create` permission.
       operationId: addPrompt
       parameters:
       - description: Add Prompt Request
@@ -4357,6 +4375,42 @@ paths:
       security:
       - BearerAuth: []
       summary: Delete Node
+      tags:
+      - Registry Svc
+  /registry-svc/node/self:
+    get:
+      consumes:
+      - application/json
+      description: Show the local node.
+      operationId: selfNode
+      parameters:
+      - description: List Registrys Request
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/registry_svc.NodeSelfRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/registry_svc.NodeSelfResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/registry_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/registry_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/registry_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: View Self Node
       tags:
       - Registry Svc
   /registry-svc/nodes:

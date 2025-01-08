@@ -140,6 +140,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	if options.ClientFactory == nil {
 		options.ClientFactory = sdk.NewApiClientFactory(options.Url)
 	}
+	// so ugly
+	options.NodeOptions.ClientFactory = options.ClientFactory
 
 	configService.SetDatastoreFactory(options.DatastoreFactory)
 
@@ -292,6 +294,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.ClientFactory,
 		options.Lock,
 		options.DatastoreFactory,
+		options.NodeOptions.NodeId,
 	)
 	if err != nil {
 		logger.Error(
@@ -421,7 +424,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/file-svc/serve/upload/{id}", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/file-svc/serve/upload/{fileId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		fileService.ServeUpload(w, r)
 	})).
 		Methods("OPTIONS", "GET")
@@ -681,11 +684,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "PUT")
 
-	router.HandleFunc("/registry-svc/nodes", appl(func(w http.ResponseWriter, r *http.Request) {
-		registryService.List(w, r)
-	})).
-		Methods("OPTIONS", "POST")
-
 	router.HandleFunc("/policy-svc/check", appl(func(w http.ResponseWriter, r *http.Request) {
 		policyService.Check(w, r)
 	})).
@@ -695,6 +693,16 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		policyService.UpsertInstance(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
+
+	router.HandleFunc("/registry-svc/node/self", appl(func(w http.ResponseWriter, r *http.Request) {
+		registryService.NodeSelf(w, r)
+	})).
+		Methods("OPTIONS", "GET")
+
+	router.HandleFunc("/registry-svc/nodes", appl(func(w http.ResponseWriter, r *http.Request) {
+		registryService.List(w, r)
+	})).
+		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/registry-svc/instances", appl(func(w http.ResponseWriter, r *http.Request) {
 		registryService.ListInstances(w, r)
@@ -787,10 +795,6 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		if err != nil {
 			return errors.Wrap(err, "config service start failed")
 		}
-		err = fileService.Start()
-		if err != nil {
-			return errors.Wrap(err, "download service start failed")
-		}
 		err = firehoseService.Start()
 		if err != nil {
 			return errors.Wrap(err, "firehose service start failed")
@@ -822,6 +826,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		err = registryService.Start()
 		if err != nil {
 			return errors.Wrap(err, "registry service start failed")
+		}
+		err = fileService.Start()
+		if err != nil {
+			return errors.Wrap(err, "file service start failed")
 		}
 		err = deployService.Start()
 		if err != nil {

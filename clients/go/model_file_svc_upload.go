@@ -23,10 +23,14 @@ var _ MappedNullable = &FileSvcUpload{}
 // FileSvcUpload struct for FileSvcUpload
 type FileSvcUpload struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// Logical file ID spanning all replicas
+	FileId *string `json:"fileId,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	FilePath *string `json:"filePath,omitempty"`
 	FileSize int64 `json:"fileSize"`
+	// Unique ID for this replica
 	Id *string `json:"id,omitempty"`
+	// ID of the node storing this replica
 	NodeId *string `json:"nodeId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	UserId *string `json:"userId,omitempty"`
@@ -82,6 +86,38 @@ func (o *FileSvcUpload) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *FileSvcUpload) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetFileId returns the FileId field value if set, zero value otherwise.
+func (o *FileSvcUpload) GetFileId() string {
+	if o == nil || IsNil(o.FileId) {
+		var ret string
+		return ret
+	}
+	return *o.FileId
+}
+
+// GetFileIdOk returns a tuple with the FileId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileSvcUpload) GetFileIdOk() (*string, bool) {
+	if o == nil || IsNil(o.FileId) {
+		return nil, false
+	}
+	return o.FileId, true
+}
+
+// HasFileId returns a boolean if a field has been set.
+func (o *FileSvcUpload) HasFileId() bool {
+	if o != nil && !IsNil(o.FileId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileId gets a reference to the given string and assigns it to the FileId field.
+func (o *FileSvcUpload) SetFileId(v string) {
+	o.FileId = &v
 }
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
@@ -312,6 +348,9 @@ func (o FileSvcUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.FileId) {
+		toSerialize["fileId"] = o.FileId
 	}
 	if !IsNil(o.FileName) {
 		toSerialize["fileName"] = o.FileName

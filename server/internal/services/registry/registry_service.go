@@ -40,6 +40,7 @@ type RegistryService struct {
 	nodeStore       datastore.DataStore
 
 	triggerChan chan struct{}
+	nodeId      string
 }
 
 func NewRegistryService(
@@ -48,8 +49,9 @@ func NewRegistryService(
 	region string,
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
-	datastoreFactory func(tableName string, instance any,
-	) (datastore.DataStore, error)) (*RegistryService, error) {
+	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+	nodeId string,
+) (*RegistryService, error) {
 
 	nodeUrl := address
 
@@ -103,6 +105,7 @@ func NewRegistryService(
 		nodeStore:        nodeStore,
 		AvailabilityZone: az,
 		Region:           region,
+		nodeId:           nodeId,
 
 		triggerChan: make(chan struct{}),
 	}
@@ -111,6 +114,8 @@ func NewRegistryService(
 }
 
 func (ns *RegistryService) Start() error {
+	ns.heartbeatCycle()
+
 	go ns.nodeHeartbeat()
 	go ns.instanceScan()
 

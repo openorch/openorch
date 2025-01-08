@@ -10,11 +10,7 @@ tags:
 
 # Registry Svc
 
-The registry service is designed to maintain a database of services, service instances and nodes.
-
-Its responsibilities include gathering information about:
-
-- Nodes: each OpenOrch server registers itself as a node, which roughly correlates to a physical machine
+The registry service is designed to maintain a database of service definitions, service instances and nodes.
 
 > This page is a high level overview of the `Registry Svc`. For more details, please see the [Registry Svc API documentation](/docs/openorch/register-instance).
 
@@ -70,9 +66,34 @@ Definitions become instances through the [Deployment entity of the Deploy Servic
 
 ### Node
 
-A `Node` is a physical or virtual machine that runs a OpenOrch daemon. The daemon can then lauch service instances or other processes such as containers on these machines.
+A `Node` is a physical or virtual machine that runs a OpenOrch daemon.
+Maintaining a list of nodes is important so the daemon can efficiently distribute workload across the nodes. It's the basis for all distributed features.
 
-Maintaining a list of nodes is important so the daemon can efficiently distribute workload across the nodes.
+This is how a well configured node should look like:
+
+```sh
+$ oo nodes lis
+NODE ID    URL                                  LAST HEARTBEAT
+myNodeId   http://myNetworkInternalHost:58231   8s ago
+```
+
+For well configured nodes, the following must be present
+
+- Each node should have a unique URL (eg. 127.0.0.1 for all nodes is not unique...)
+- Each node URL should be addressable by every node including themselves
+- A node ID should be defined to avoid the more error prone ID generation
+
+Here is how a suboptimally configured node looks like:
+
+```sh
+$ oo nodes lis
+NODE ID           URL                         LAST HEARTBEAT
+node_eIfnt9CGJV   http://127.0.0.1:58231      8s ago
+```
+
+For single node setups that can work, but not if you plan to use distributed features.
+
+To configure the nodes, please see the `OPENORCH_URL` and `OPENORCH_NODE_ID` envars [here](/docs/running-the-daemon/backend-environment-variables)
 
 ## How It Works
 

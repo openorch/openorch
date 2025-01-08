@@ -235,7 +235,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "openorch/serve-download",
-          label: "Serve a File from a URL",
+          label: "Serve a Downloaded file.",
           className: "api-method get",
         },
         {
@@ -417,6 +417,12 @@ const sidebar: SidebarsConfig = {
           id: "openorch/delete-node",
           label: "Delete Node",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "openorch/self-node",
+          label: "View Self Node",
+          className: "api-method get",
         },
         {
           type: "doc",
