@@ -41,7 +41,7 @@ const openorchFolder = ".openorch"
 
 type Options struct {
 	// NodeOptions contains settings coming from envars
-	NodeOptions node_types.Options
+	NodeOptions *node_types.Options
 
 	// Url that will be passed down to the router when calling
 	// the OpenOrch daemon from itself.

@@ -44,7 +44,8 @@ type NodeInfo struct {
 // Start wraps the dependency injection universe creation
 // so getting envars happens outside of that. The two could probably be merged.
 // Node options are a set of node specific configuration options and secrets required for bootstrapping.
-func Start(options node_types.Options) (*NodeInfo, error) {
+func Start(options *node_types.Options) (*NodeInfo, error) {
+
 	defer func() {
 		if r := recover(); r != nil {
 			logger.Error("Panic in node.Start()",
@@ -62,7 +63,7 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 		options.Address = os.Getenv("OPENORCH_URL")
 	}
 	if options.NodeId == "" {
-		options.Address = os.Getenv("OPENORCH_NODE_ID")
+		options.NodeId = os.Getenv("OPENORCH_NODE_ID")
 	}
 	if options.Az == "" {
 		options.Az = os.Getenv("OPENORCH_AZ")

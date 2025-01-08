@@ -103,7 +103,7 @@ func NewSQLStore(instance any, driverName string, db *sql.DB, tableName string, 
 		fieldName,
 		fieldName,
 	))
-	if err != nil {
+	if err != nil && !strings.Contains(err.Error(), "already exists") {
 		logger.Debug("Error adding constraint", slog.Any("error", err))
 	}
 

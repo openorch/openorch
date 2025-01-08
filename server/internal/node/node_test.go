@@ -24,7 +24,7 @@ func TestStart(t *testing.T) {
 
 	dbprefix := sdk.Id("node_start")
 
-	options1 := node_types.Options{
+	options1 := &node_types.Options{
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server1.URL,
@@ -44,7 +44,7 @@ func TestStart(t *testing.T) {
 	server2 := httptest.NewServer(hs1)
 	defer server1.Close()
 
-	options2 := node_types.Options{
+	options2 := &node_types.Options{
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server2.URL,

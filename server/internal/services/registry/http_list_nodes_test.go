@@ -26,17 +26,19 @@ func TestNodeId(t *testing.T) {
 
 	dbprefix := sdk.Id("node_id")
 
-	opt1 := node_types.Options{
+	opt1 := &node_types.Options{
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server.URL,
 	}
+
 	nodeInfo1, err := node.Start(opt1)
 	require.NoError(t, err)
 
 	hs.UpdateHandler(nodeInfo1.Router)
 	require.NoError(t, nodeInfo1.StarterFunc())
 
+	require.Equal(t, true, opt1.ClientFactory != nil)
 	adminClient, _, err := test.AdminClient(opt1.ClientFactory)
 	require.NoError(t, err)
 
@@ -49,10 +51,12 @@ func TestNodeId(t *testing.T) {
 	hs2 := &di.HandlerSwitcher{}
 	server2 := httptest.NewServer(hs2)
 	defer server2.Close()
-	opt2 := node_types.Options{
+
+	opt2 := &node_types.Options{
 		NodeId:   "abc",
 		Db:       "postgres",
 		DbPrefix: dbprefix,
+		Address:  server2.URL,
 	}
 	nodeInfo2, err := node.Start(opt2)
 	hs2.UpdateHandler(nodeInfo2.Router)
@@ -65,6 +69,23 @@ func TestNodeId(t *testing.T) {
 	require.NoError(t, err)
 
 	require.Equal(t, 2, len(nodesRsp2.Nodes), nodesRsp2.Nodes)
-	require.Equal(t, nodesRsp2.Nodes[0].Url, server2.URL)
-	require.Equal(t, "abc", nodesRsp2.Nodes[0].Id)
+
+	found := false
+	for _, node := range nodesRsp2.Nodes {
+		if node.Url == server2.URL {
+			found = true
+			break
+		}
+	}
+	require.True(t, found, "URL not found in node list")
+
+	found = false
+	for _, node := range nodesRsp2.Nodes {
+		if node.Url == server2.URL && node.Id == "abc" {
+			found = true
+			break
+		}
+	}
+	require.True(t, found, "Node with URL and ID 'abc' not found")
+
 }
