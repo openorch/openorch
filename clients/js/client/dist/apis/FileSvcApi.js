@@ -190,8 +190,8 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     serveDownloadRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -210,8 +210,8 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     serveDownload(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -220,18 +220,18 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     serveUploadRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['id'] == null) {
-                throw new runtime.RequiredError('id', 'Required parameter "id" was null or undefined when calling serveUpload().');
+            if (requestParameters['fileId'] == null) {
+                throw new runtime.RequiredError('fileId', 'Required parameter "fileId" was null or undefined when calling serveUpload().');
             }
             const queryParameters = {};
             const headerParameters = {};
             const response = yield this.request({
-                path: `/file-svc/serve/upload/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+                path: `/file-svc/serve/upload/{fileId}`.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -240,7 +240,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     serveUpload(requestParameters, initOverrides) {

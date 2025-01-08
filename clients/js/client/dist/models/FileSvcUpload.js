@@ -28,6 +28,7 @@ export function FileSvcUploadFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'fileId': json['fileId'] == null ? undefined : json['fileId'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
         'fileSize': json['fileSize'],
@@ -46,6 +47,7 @@ export function FileSvcUploadToJSONTyped(value, ignoreDiscriminator = false) {
     }
     return {
         'createdAt': value['createdAt'],
+        'fileId': value['fileId'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
         'fileSize': value['fileSize'],

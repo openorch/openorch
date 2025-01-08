@@ -109,9 +109,9 @@ export declare class FileSvcApi {
         };
     }>;
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * @summary Serve a File from a URL
-     * @param url URL
+     * Serves a previously downloaded file based on its URL.
+     * @summary Serve a Downloaded file.
+     * @param url URL of the file. Even after downloading, the file is still referenced by its original internet URL.
      */
     serveDownload(url: string, options?: {
         headers: {
@@ -122,11 +122,11 @@ export declare class FileSvcApi {
         body: Buffer;
     }>;
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * @summary Serve an Uploaded File
-     * @param id Upload ID
+     * @param fileId Upload ID
      */
-    serveUpload(id: string, options?: {
+    serveUpload(fileId: string, options?: {
         headers: {
             [name: string]: string;
         };

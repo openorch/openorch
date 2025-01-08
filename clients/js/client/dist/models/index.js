@@ -110,6 +110,7 @@ export * from './RegistrySvcListDefinitionsResponse';
 export * from './RegistrySvcListInstancesResponse';
 export * from './RegistrySvcListNodesResponse';
 export * from './RegistrySvcNode';
+export * from './RegistrySvcNodeSelfResponse';
 export * from './RegistrySvcProcess';
 export * from './RegistrySvcRegisterInstanceRequest';
 export * from './RegistrySvcRepositorySpec';

@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListInstancesResponseFromJSON, RegistrySvcListNodesResponseFromJSON, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcSaveDefinitionRequestToJSON, } from '../models/index';
+import { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListInstancesResponseFromJSON, RegistrySvcListNodesResponseFromJSON, RegistrySvcNodeSelfResponseFromJSON, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcSaveDefinitionRequestToJSON, } from '../models/index';
 /**
  *
  */
@@ -302,6 +302,38 @@ export class RegistrySvcApi extends runtime.BaseAPI {
     saveDefinition(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.saveDefinitionRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    selfNodeRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/registry-svc/node/self`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => RegistrySvcNodeSelfResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    selfNode() {
+        return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
+            const response = yield this.selfNodeRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

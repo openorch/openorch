@@ -9,25 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export declare class FileSvcUpload {
-    'createdAt'?: string;
-    /**
-    * Logical file ID spanning all replicas
-    */
-    'fileId'?: string;
-    'fileName'?: string;
-    'filePath'?: string;
-    'fileSize': number;
-    /**
-    * Unique ID for this replica
-    */
-    'id'?: string;
-    /**
-    * ID of the node storing this replica
-    */
-    'nodeId'?: string;
-    'updatedAt'?: string;
-    'userId'?: string;
+import { RegistrySvcNode } from './registrySvcNode';
+export declare class RegistrySvcNodeSelfResponse {
+    'node': RegistrySvcNode;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

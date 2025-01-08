@@ -13,6 +13,7 @@ import http from 'http';
 import { RegistrySvcListDefinitionsResponse } from '../model/registrySvcListDefinitionsResponse';
 import { RegistrySvcListInstancesResponse } from '../model/registrySvcListInstancesResponse';
 import { RegistrySvcListNodesResponse } from '../model/registrySvcListNodesResponse';
+import { RegistrySvcNodeSelfResponse } from '../model/registrySvcNodeSelfResponse';
 import { RegistrySvcRegisterInstanceRequest } from '../model/registrySvcRegisterInstanceRequest';
 import { RegistrySvcSaveDefinitionRequest } from '../model/registrySvcSaveDefinitionRequest';
 import { Authentication, Interceptor } from '../model/models';
@@ -146,5 +147,18 @@ export declare class RegistrySvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: object;
+    }>;
+    /**
+     * Show the local node.
+     * @summary View Self Node
+     * @param body List Registrys Request
+     */
+    selfNode(body?: object, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: RegistrySvcNodeSelfResponse;
     }>;
 }

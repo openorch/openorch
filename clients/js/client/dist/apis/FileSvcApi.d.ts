@@ -27,7 +27,7 @@ export interface ServeDownloadRequest {
     url: string;
 }
 export interface ServeUploadRequest {
-    id: string;
+    fileId: string;
 }
 export interface UploadFileRequest {
     file: Blob;
@@ -95,22 +95,22 @@ export declare class FileSvcApi extends runtime.BaseAPI {
         [key: string]: any;
     }>;
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     serveDownloadRaw(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     serveDownload(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     serveUploadRaw(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     serveUpload(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;

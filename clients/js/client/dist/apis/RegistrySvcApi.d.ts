@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesResponse, RegistrySvcRegisterInstanceRequest, RegistrySvcSaveDefinitionRequest } from '../models/index';
+import type { RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesResponse, RegistrySvcNodeSelfResponse, RegistrySvcRegisterInstanceRequest, RegistrySvcSaveDefinitionRequest } from '../models/index';
 export interface DeleteDefinitionRequest {
     id: string;
 }
@@ -37,6 +37,9 @@ export interface RemoveInstanceRequest {
 }
 export interface SaveDefinitionRequest {
     body: RegistrySvcSaveDefinitionRequest;
+}
+export interface SelfNodeRequest {
+    body?: object;
 }
 /**
  *
@@ -122,4 +125,14 @@ export declare class RegistrySvcApi extends runtime.BaseAPI {
      * Register a Definition
      */
     saveDefinition(requestParameters: SaveDefinitionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    selfNodeRaw(requestParameters: SelfNodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RegistrySvcNodeSelfResponse>>;
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    selfNode(requestParameters?: SelfNodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RegistrySvcNodeSelfResponse>;
 }

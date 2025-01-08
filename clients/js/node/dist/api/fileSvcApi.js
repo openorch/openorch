@@ -421,9 +421,9 @@ export class FileSvcApi {
         });
     }
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * @summary Serve a File from a URL
-     * @param url URL
+     * Serves a previously downloaded file based on its URL.
+     * @summary Serve a Downloaded file.
+     * @param url URL of the file. Even after downloading, the file is still referenced by its original internet URL.
      */
     serveDownload(url_1) {
         return __awaiter(this, arguments, void 0, function* (url, options = { headers: {} }) {
@@ -489,14 +489,14 @@ export class FileSvcApi {
         });
     }
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * @summary Serve an Uploaded File
-     * @param id Upload ID
+     * @param fileId Upload ID
      */
-    serveUpload(id_1) {
-        return __awaiter(this, arguments, void 0, function* (id, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/file-svc/serve/upload/{id}'
-                .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+    serveUpload(fileId_1) {
+        return __awaiter(this, arguments, void 0, function* (fileId, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/file-svc/serve/upload/{fileId}'
+                .replace('{' + 'fileId' + '}', encodeURIComponent(String(fileId)));
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/octet-stream'];
@@ -508,9 +508,9 @@ export class FileSvcApi {
                 localVarHeaderParams.Accept = produces.join(',');
             }
             let localVarFormParams = {};
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling serveUpload.');
+            // verify required parameter 'fileId' is not null or undefined
+            if (fileId === null || fileId === undefined) {
+                throw new Error('Required parameter fileId was null or undefined when calling serveUpload.');
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;

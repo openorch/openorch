@@ -28,12 +28,12 @@ export interface SubscribeToPromptResponsesRequest {
  */
 export declare class PromptSvcApi extends runtime.BaseAPI {
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
      * Add Prompt
      */
     addPromptRaw(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PromptSvcAddPromptResponse>>;
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
      * Add Prompt
      */
     addPrompt(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcAddPromptResponse>;

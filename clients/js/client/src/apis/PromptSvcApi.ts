@@ -59,7 +59,7 @@ export interface SubscribeToPromptResponsesRequest {
 export class PromptSvcApi extends runtime.BaseAPI {
 
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
      * Add Prompt
      */
     async addPromptRaw(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PromptSvcAddPromptResponse>> {
@@ -92,7 +92,7 @@ export class PromptSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
      * Add Prompt
      */
     async addPrompt(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcAddPromptResponse> {
