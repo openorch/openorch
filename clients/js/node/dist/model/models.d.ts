@@ -107,6 +107,7 @@ export * from './registrySvcInstanceStatus';
 export * from './registrySvcLanguage';
 export * from './registrySvcListDefinitionsResponse';
 export * from './registrySvcListInstancesResponse';
+export * from './registrySvcListNodesRequest';
 export * from './registrySvcListNodesResponse';
 export * from './registrySvcNode';
 export * from './registrySvcNodeSelfResponse';

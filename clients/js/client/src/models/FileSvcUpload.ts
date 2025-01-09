@@ -32,13 +32,13 @@ export interface FileSvcUpload {
      */
     fileId?: string;
     /**
-     * 
+     * Filename is the original name of the file
      * @type {string}
      * @memberof FileSvcUpload
      */
     fileName?: string;
     /**
-     * 
+     * FilePath is the full node local path of the file
      * @type {string}
      * @memberof FileSvcUpload
      */

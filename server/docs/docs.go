@@ -6166,9 +6166,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "fileName": {
+                    "description": "Filename is the original name of the file",
                     "type": "string"
                 },
                 "filePath": {
+                    "description": "FilePath is the full node local path of the file",
                     "type": "string"
                 },
                 "fileSize": {

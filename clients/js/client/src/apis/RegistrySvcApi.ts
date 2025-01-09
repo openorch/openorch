@@ -18,6 +18,7 @@ import type {
   RegistrySvcErrorResponse,
   RegistrySvcListDefinitionsResponse,
   RegistrySvcListInstancesResponse,
+  RegistrySvcListNodesRequest,
   RegistrySvcListNodesResponse,
   RegistrySvcNodeSelfResponse,
   RegistrySvcRegisterInstanceRequest,
@@ -30,6 +31,8 @@ import {
     RegistrySvcListDefinitionsResponseToJSON,
     RegistrySvcListInstancesResponseFromJSON,
     RegistrySvcListInstancesResponseToJSON,
+    RegistrySvcListNodesRequestFromJSON,
+    RegistrySvcListNodesRequestToJSON,
     RegistrySvcListNodesResponseFromJSON,
     RegistrySvcListNodesResponseToJSON,
     RegistrySvcNodeSelfResponseFromJSON,
@@ -59,7 +62,7 @@ export interface ListInstancesRequest {
 }
 
 export interface ListNodesRequest {
-    body?: object;
+    body?: RegistrySvcListNodesRequest;
 }
 
 export interface RegisterInstanceRequest {
@@ -271,7 +274,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: RegistrySvcListNodesRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RegistrySvcListNodesResponseFromJSON(jsonValue));

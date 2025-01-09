@@ -25,7 +25,9 @@ type FileSvcUpload struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// Logical file ID spanning all replicas
 	FileId *string `json:"fileId,omitempty"`
+	// Filename is the original name of the file
 	FileName *string `json:"fileName,omitempty"`
+	// FilePath is the full node local path of the file
 	FilePath *string `json:"filePath,omitempty"`
 	FileSize int64 `json:"fileSize"`
 	// Unique ID for this replica

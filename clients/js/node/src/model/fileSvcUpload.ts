@@ -18,7 +18,13 @@ export class FileSvcUpload {
     * Logical file ID spanning all replicas
     */
     'fileId'?: string;
+    /**
+    * Filename is the original name of the file
+    */
     'fileName'?: string;
+    /**
+    * FilePath is the full node local path of the file
+    */
     'filePath'?: string;
     'fileSize': number;
     /**

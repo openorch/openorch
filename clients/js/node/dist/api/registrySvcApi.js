@@ -401,7 +401,7 @@ export class RegistrySvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "object")
+                body: ObjectSerializer.serialize(body, "RegistrySvcListNodesRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {

@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListInstancesResponseFromJSON, RegistrySvcListNodesResponseFromJSON, RegistrySvcNodeSelfResponseFromJSON, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcSaveDefinitionRequestToJSON, } from '../models/index';
+import { RegistrySvcListDefinitionsResponseFromJSON, RegistrySvcListInstancesResponseFromJSON, RegistrySvcListNodesRequestToJSON, RegistrySvcListNodesResponseFromJSON, RegistrySvcNodeSelfResponseFromJSON, RegistrySvcRegisterInstanceRequestToJSON, RegistrySvcSaveDefinitionRequestToJSON, } from '../models/index';
 /**
  *
  */
@@ -188,7 +188,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: requestParameters['body'],
+                body: RegistrySvcListNodesRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response, (jsonValue) => RegistrySvcListNodesResponseFromJSON(jsonValue));
         });

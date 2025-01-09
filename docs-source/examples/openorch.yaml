@@ -862,8 +862,10 @@ definitions:
         description: Logical file ID spanning all replicas
         type: string
       fileName:
+        description: Filename is the original name of the file
         type: string
       filePath:
+        description: FilePath is the full node local path of the file
         type: string
       fileSize:
         format: int64
@@ -1573,6 +1575,12 @@ definitions:
         type: array
     type: object
   registry_svc.ListNodesRequest:
+    properties:
+      ids:
+        description: Node IDs to filter on
+        items:
+          type: string
+        type: array
     type: object
   registry_svc.ListNodesResponse:
     properties:

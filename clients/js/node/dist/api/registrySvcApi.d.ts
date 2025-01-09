@@ -12,6 +12,7 @@
 import http from 'http';
 import { RegistrySvcListDefinitionsResponse } from '../model/registrySvcListDefinitionsResponse';
 import { RegistrySvcListInstancesResponse } from '../model/registrySvcListInstancesResponse';
+import { RegistrySvcListNodesRequest } from '../model/registrySvcListNodesRequest';
 import { RegistrySvcListNodesResponse } from '../model/registrySvcListNodesResponse';
 import { RegistrySvcNodeSelfResponse } from '../model/registrySvcNodeSelfResponse';
 import { RegistrySvcRegisterInstanceRequest } from '../model/registrySvcRegisterInstanceRequest';
@@ -101,7 +102,7 @@ export declare class RegistrySvcApi {
      * @summary List Nodes
      * @param body List Registrys Request
      */
-    listNodes(body?: object, options?: {
+    listNodes(body?: RegistrySvcListNodesRequest, options?: {
         headers: {
             [name: string]: string;
         };

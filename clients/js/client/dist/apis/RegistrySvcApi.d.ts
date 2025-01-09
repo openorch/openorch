@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesResponse, RegistrySvcNodeSelfResponse, RegistrySvcRegisterInstanceRequest, RegistrySvcSaveDefinitionRequest } from '../models/index';
+import type { RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesRequest, RegistrySvcListNodesResponse, RegistrySvcNodeSelfResponse, RegistrySvcRegisterInstanceRequest, RegistrySvcSaveDefinitionRequest } from '../models/index';
 export interface DeleteDefinitionRequest {
     id: string;
 }
@@ -27,7 +27,7 @@ export interface ListInstancesRequest {
     slug?: string;
 }
 export interface ListNodesRequest {
-    body?: object;
+    body?: RegistrySvcListNodesRequest;
 }
 export interface RegisterInstanceRequest {
     body: RegistrySvcRegisterInstanceRequest;
