@@ -75,6 +75,8 @@ type Process struct {
 }
 
 type ListNodesRequest struct {
+	// Node IDs to filter on
+	Ids []string `json:"ids"`
 }
 
 type ListNodesResponse struct {

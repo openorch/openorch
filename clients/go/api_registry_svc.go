@@ -792,11 +792,11 @@ func (a *RegistrySvcAPIService) ListInstancesExecute(r ApiListInstancesRequest) 
 type ApiListNodesRequest struct {
 	ctx context.Context
 	ApiService RegistrySvcAPI
-	body *map[string]interface{}
+	body *RegistrySvcListNodesRequest
 }
 
 // List Registrys Request
-func (r ApiListNodesRequest) Body(body map[string]interface{}) ApiListNodesRequest {
+func (r ApiListNodesRequest) Body(body RegistrySvcListNodesRequest) ApiListNodesRequest {
 	r.body = &body
 	return r
 }

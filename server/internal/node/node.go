@@ -98,7 +98,7 @@ func Start(options *node_types.Options) (*NodeInfo, error) {
 
 	diopt := &di.Options{
 		NodeOptions: options,
-		Test:        false,
+		Test:        options.Test,
 		Url:         options.Address,
 	}
 

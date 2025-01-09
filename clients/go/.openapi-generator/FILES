@@ -139,6 +139,7 @@ docs/RegistrySvcInstanceStatus.md
 docs/RegistrySvcLanguage.md
 docs/RegistrySvcListDefinitionsResponse.md
 docs/RegistrySvcListInstancesResponse.md
+docs/RegistrySvcListNodesRequest.md
 docs/RegistrySvcListNodesResponse.md
 docs/RegistrySvcNode.md
 docs/RegistrySvcNodeSelfResponse.md
@@ -309,6 +310,7 @@ model_registry_svc_instance_status.go
 model_registry_svc_language.go
 model_registry_svc_list_definitions_response.go
 model_registry_svc_list_instances_response.go
+model_registry_svc_list_nodes_request.go
 model_registry_svc_list_nodes_response.go
 model_registry_svc_node.go
 model_registry_svc_node_self_response.go

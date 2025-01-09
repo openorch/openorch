@@ -1573,6 +1573,12 @@ definitions:
         type: array
     type: object
   registry_svc.ListNodesRequest:
+    properties:
+      ids:
+        description: Node IDs to filter on
+        items:
+          type: string
+        type: array
     type: object
   registry_svc.ListNodesResponse:
     properties:

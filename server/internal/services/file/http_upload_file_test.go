@@ -108,5 +108,4 @@ outer:
 	require.NoError(t, err)
 	require.Equal(t, "Test file content", string(bs))
 	require.Equal(t, "text/plain; charset=utf-8", fileHttpRsp.Header.Get("Content-Type"))
-
 }

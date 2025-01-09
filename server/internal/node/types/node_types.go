@@ -41,4 +41,6 @@ type Options struct {
 
 	// so ugly, only temporary
 	ClientFactory sdk.ClientFactory
+
+	Test bool
 }

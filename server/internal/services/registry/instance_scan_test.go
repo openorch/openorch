@@ -71,7 +71,6 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 
 		adminClient, _, err = test.AdminClient(mockClientFactory)
 		gomega.Expect(err).NotTo(gomega.HaveOccurred())
-
 	})
 
 	ginkgo.JustBeforeEach(func() {

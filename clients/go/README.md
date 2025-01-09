@@ -281,6 +281,7 @@ Class | Method | HTTP request | Description
  - [RegistrySvcLanguage](docs/RegistrySvcLanguage.md)
  - [RegistrySvcListDefinitionsResponse](docs/RegistrySvcListDefinitionsResponse.md)
  - [RegistrySvcListInstancesResponse](docs/RegistrySvcListInstancesResponse.md)
+ - [RegistrySvcListNodesRequest](docs/RegistrySvcListNodesRequest.md)
  - [RegistrySvcListNodesResponse](docs/RegistrySvcListNodesResponse.md)
  - [RegistrySvcNode](docs/RegistrySvcNode.md)
  - [RegistrySvcNodeSelfResponse](docs/RegistrySvcNodeSelfResponse.md)

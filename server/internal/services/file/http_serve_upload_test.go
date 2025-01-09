@@ -1,23 +1,29 @@
 //go:build dist
 // +build dist
 
-package registryservice_test
+package fileservice_test
 
 import (
 	"context"
+	"io/ioutil"
+
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
 	"github.com/openorch/openorch/server/internal/node"
+
 	node_types "github.com/openorch/openorch/server/internal/node/types"
 	"github.com/stretchr/testify/require"
 )
 
-func TestNodeId(t *testing.T) {
+func TestServeUploadProxy(t *testing.T) {
+	file, cleanup := createTestFile(t, "Test file things")
+	defer cleanup()
+
 	ctx := context.Background()
 
 	hs := &di.HandlerSwitcher{}
@@ -27,6 +33,8 @@ func TestNodeId(t *testing.T) {
 	dbprefix := sdk.Id("node_id")
 
 	opt1 := &node_types.Options{
+		Test:     true,
+		NodeId:   "node1",
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server.URL,
@@ -42,12 +50,11 @@ func TestNodeId(t *testing.T) {
 	adminClient, _, err := test.AdminClient(opt1.ClientFactory)
 	require.NoError(t, err)
 
-	t.Run("first node appears in node list", func(t *testing.T) {
-		nodesRsp, _, err := adminClient.RegistrySvcAPI.ListNodes(ctx).Execute()
+	t.Run("upload to node1 works", func(t *testing.T) {
+		_, _, err = adminClient.FileSvcAPI.UploadFile(ctx).
+			File(file).
+			Execute()
 		require.NoError(t, err)
-		require.Equal(t, 1, len(nodesRsp.Nodes))
-		require.Equal(t, nodesRsp.Nodes[0].Url, server.URL)
-		require.Equal(t, true, strings.Contains(nodesRsp.Nodes[0].Id, "node_"))
 	})
 
 	hs2 := &di.HandlerSwitcher{}
@@ -55,7 +62,8 @@ func TestNodeId(t *testing.T) {
 	defer server2.Close()
 
 	opt2 := &node_types.Options{
-		NodeId:   "abc",
+		Test:     true,
+		NodeId:   "node2",
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server2.URL,
@@ -67,28 +75,30 @@ func TestNodeId(t *testing.T) {
 	adminClient2, _, err := test.AdminClient(opt2.ClientFactory)
 	require.NoError(t, err)
 
-	t.Run("second node appears in node list", func(t *testing.T) {
-		nodesRsp2, _, err := adminClient2.RegistrySvcAPI.ListNodes(ctx).Execute()
+	var fileId string
+
+	t.Run("upload serve from node2 works", func(t *testing.T) {
+		// listing can be done from either node as the list comes from a DB
+		rsp, _, err := adminClient.FileSvcAPI.ListUploads(ctx).Execute()
 		require.NoError(t, err)
+		require.Equal(t, 1, len(rsp.Uploads))
+		require.Equal(t, int64(16), rsp.Uploads[0].FileSize)
 
-		require.Equal(t, 2, len(nodesRsp2.Nodes), nodesRsp2.Nodes)
+		fileId = *rsp.Uploads[0].FileId
 
-		found := false
-		for _, node := range nodesRsp2.Nodes {
-			if node.Url == server2.URL {
-				found = true
-				break
-			}
-		}
-		require.True(t, found, "URL not found in node list")
+		fileRsp, fileHttpRsp, err := adminClient2.FileSvcAPI.ServeUpload(ctx, fileId).Execute()
+		require.NoError(t, err)
+		require.Equal(t, true, fileRsp != nil)
+		bs, err := ioutil.ReadAll(fileRsp)
+		require.NoError(t, err)
+		require.Equal(t, "Test file things", string(bs))
+		require.Equal(t, "text/plain; charset=utf-8", fileHttpRsp.Header.Get("Content-Type"))
+	})
 
-		found = false
-		for _, node := range nodesRsp2.Nodes {
-			if node.Url == server2.URL && node.Id == "abc" {
-				found = true
-				break
-			}
-		}
-		require.True(t, found, "Node with URL and ID 'abc' not found")
+	t.Run("upload serve should fail if node is down", func(t *testing.T) {
+		server.Close()
+
+		_, _, err := adminClient2.FileSvcAPI.ServeUpload(ctx, fileId).Execute()
+		require.Error(t, err)
 	})
 }

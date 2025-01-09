@@ -104,14 +104,14 @@ func (fs *FileService) UploadFile(
 
 		// @todo this is fairly weird that we process multiple files but only a single one is returned
 		uploadRecord = file.Upload{
-			Id:               sdk.Id("upl"),
-			FileId:           sdk.Id("file"),
-			NodeId:           fs.nodeId,
-			OriginalFileName: part.FileName(),
-			FilePath:         destinationFilePath,
-			UserId:           *isAuthRsp.GetUser().Id,
-			FileSize:         written,
-			CreatedAt:        time.Now(),
+			Id:        sdk.Id("upl"),
+			FileId:    sdk.Id("file"),
+			NodeId:    fs.nodeId,
+			FileName:  part.FileName(),
+			FilePath:  destinationFilePath,
+			UserId:    *isAuthRsp.GetUser().Id,
+			FileSize:  written,
+			CreatedAt: time.Now(),
 		}
 		err = fs.uploadStore.Upsert(uploadRecord)
 		if err != nil {

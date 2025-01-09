@@ -60,16 +60,16 @@ func (ns *RegistryService) List(
 		return
 	}
 
-	// req := registry.ListNodesRequest{}
-	// err = json.NewDecoder(r.Body).Decode(&req)
-	// if err != nil {
-	// 	w.WriteHeader(http.StatusBadRequest)
-	// 	w.Write([]byte(`Invalid JSON`))
-	// 	return
-	// }
-	// defer r.Body.Close()
+	req := &registry.ListNodesRequest{}
+	err = json.NewDecoder(r.Body).Decode(req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`Invalid JSON`))
+		return
+	}
+	defer r.Body.Close()
 
-	nodes, err := ns.listNodes()
+	nodes, err := ns.listNodes(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -84,7 +84,7 @@ func (ns *RegistryService) List(
 	w.Write(bs)
 }
 
-func (ns *RegistryService) listNodes() ([]*registry.Node, error) {
+func (ns *RegistryService) listNodes(req *registry.ListNodesRequest) ([]*registry.Node, error) {
 	nodeIs, err := ns.nodeStore.Query().Find()
 	if err != nil {
 		return nil, err
@@ -93,7 +93,21 @@ func (ns *RegistryService) listNodes() ([]*registry.Node, error) {
 	ret := []*registry.Node{}
 
 	for _, nodeI := range nodeIs {
-		ret = append(ret, nodeI.(*registry.Node))
+		node := nodeI.(*registry.Node)
+
+		match := len(req.Ids) == 0
+
+		if len(req.Ids) != 0 {
+			for _, id := range req.Ids {
+				if id == node.Id {
+					match = true
+				}
+			}
+		}
+
+		if match {
+			ret = append(ret, node)
+		}
 	}
 
 	return ret, err

@@ -157,7 +157,7 @@ func (ns *RegistryService) ParseNvidiaSmiOutput(
 		}
 
 		gpu := registry.GPU{
-			Id:               fmt.Sprintf("%v:%v", ns.URL, strconv.Itoa(i)),
+			Id:               fmt.Sprintf("%v:%v", ns.nodeId, strconv.Itoa(i)),
 			IntraNodeId:      i,
 			Name:             record[0],
 			BusId:            record[8],

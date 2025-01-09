@@ -10,7 +10,9 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/gorilla/mux"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	file "github.com/openorch/openorch/server/internal/services/file/types"
@@ -91,12 +93,12 @@ func (fs *FileService) serveLocal(
 		return
 	}
 
-	contentType := mime.TypeByExtension(filepath.Ext(upload.OriginalFileName))
+	contentType := mime.TypeByExtension(filepath.Ext(upload.FileName))
 	if contentType == "" {
 		contentType = "application/octet-stream"
 	}
 	w.Header().Set("Content-Type", contentType)
-	w.Header().Set("Content-Disposition", "attachment; filename=\""+sanitizeFilename(upload.OriginalFileName)+"\"")
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+sanitizeFilename(upload.FileName)+"\"")
 	w.Header().Set("Content-Length", strconv.FormatInt(fileInfo.Size(), 10))
 
 	srcFile, err := os.Open(upload.FilePath)
@@ -120,8 +122,67 @@ func (fs *FileService) serveRemote(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
-	w.WriteHeader(http.StatusNotImplemented)
-	w.Write([]byte("not implemented"))
+	uploads, err := fs.pickRemotes(r.Context(), uploadReplicas)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	nodeIds := []string{}
+	for _, upload := range uploads {
+		nodeIds = append(nodeIds, upload.NodeId)
+	}
+
+	nodesRsp, _, err := fs.clientFactory.
+		Client(sdk.WithToken(fs.token)).
+		RegistrySvcAPI.ListNodes(r.Context()).
+		Body(
+			openapi.RegistrySvcListNodesRequest{
+				Ids: nodeIds,
+			},
+		).Execute()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	nodes := nodesRsp.Nodes
+
+	if len(nodes) == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("not found"))
+		return
+	}
+
+	node := nodes[0]
+
+	// todo it would be probably better to stream this ourselves here but for now it will do
+	file, fileHttpRsp, err := fs.clientFactory.
+		Client(sdk.WithAddress(node.Url), sdk.WithToken(fs.token)).
+		FileSvcAPI.
+		ServeUpload(r.Context(), uploads[0].FileId).
+		Execute()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	defer file.Close()
+
+	spew.Dump("upload folder", fs.uploadFolder)
+
+	w.Header().Set("Content-Type", fileHttpRsp.Header.Get("Content-Type"))
+	w.Header().Set("Content-Disposition", fileHttpRsp.Header.Get("Content-Disposition"))
+	w.Header().Set("Content-Length", fileHttpRsp.Header.Get("Content-Length"))
+
+	_, err = io.Copy(w, file)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Failed to write file to response"))
+		return
+	}
 }
 
 func toUploads(uploadIs []datastore.Row) []*file.Upload {
@@ -167,8 +228,29 @@ func (fs *FileService) pickLocal(ctx context.Context, uploads []*file.Upload) (*
 	return nil, fmt.Errorf("upload not found")
 }
 
+func (fs *FileService) pickRemotes(ctx context.Context, uploads []*file.Upload) ([]*file.Upload, error) {
+	if fs.nodeId == "" {
+		err := fs.getNodeId(ctx)
+		if err != nil {
+			return nil, errors.Wrap(err, "cannot get node id")
+		}
+	}
+
+	ret := []*file.Upload{}
+	for _, upload := range uploads {
+		if upload.NodeId != fs.nodeId {
+			ret = append(ret, upload)
+		}
+	}
+
+	return ret, nil
+}
+
 func (fs *FileService) getNodeId(ctx context.Context) error {
-	nodeRsp, _, err := fs.clientFactory.Client(sdk.WithToken(fs.token)).RegistrySvcAPI.SelfNode(ctx).Execute()
+	nodeRsp, _, err := fs.clientFactory.
+		Client(sdk.WithToken(fs.token)).
+		RegistrySvcAPI.SelfNode(ctx).
+		Execute()
 	if err != nil {
 		return err
 	}

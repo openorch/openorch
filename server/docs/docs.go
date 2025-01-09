@@ -7112,7 +7112,16 @@ const docTemplate = `{
             }
         },
         "registry_svc.ListNodesRequest": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "description": "Node IDs to filter on",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
         },
         "registry_svc.ListNodesResponse": {
             "type": "object",
