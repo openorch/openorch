@@ -41,7 +41,7 @@ func (a *ChatService) DeleteThread(
 ) {
 
 	isAuthRsp, _, err := a.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), chattypes.PermissionThreadCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *chattypes.PermissionThreadCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

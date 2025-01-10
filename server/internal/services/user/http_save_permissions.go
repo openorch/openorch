@@ -33,8 +33,7 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param permissionId path string true "Permission ID"
-// @Param requestBody body user.SavePermissionsRequest true "Permission Details"
+// @Param body body user.SavePermissionsRequest true "Permission Details"
 // @Success 200 {object} user.SavePermissionsResponse
 // @Failure 400 {string} string "Bad Request: Invalid JSON or Bad Namespace"
 // @Failure 401 {string} string "Unauthorized"

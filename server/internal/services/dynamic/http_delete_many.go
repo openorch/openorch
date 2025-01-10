@@ -40,7 +40,7 @@ func (g *DynamicService) Delete(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericDelete.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionGenericDelete.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

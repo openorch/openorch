@@ -640,17 +640,17 @@ func (mr *MockUserSvcAPIMockRecorder) SaveGrantsExecute(r any) *gomock.Call {
 }
 
 // SavePermissions mocks base method.
-func (m *MockUserSvcAPI) SavePermissions(ctx context.Context, permissionId string) ApiSavePermissionsRequest {
+func (m *MockUserSvcAPI) SavePermissions(ctx context.Context) ApiSavePermissionsRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SavePermissions", ctx, permissionId)
+	ret := m.ctrl.Call(m, "SavePermissions", ctx)
 	ret0, _ := ret[0].(ApiSavePermissionsRequest)
 	return ret0
 }
 
 // SavePermissions indicates an expected call of SavePermissions.
-func (mr *MockUserSvcAPIMockRecorder) SavePermissions(ctx, permissionId any) *gomock.Call {
+func (mr *MockUserSvcAPIMockRecorder) SavePermissions(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SavePermissions", reflect.TypeOf((*MockUserSvcAPI)(nil).SavePermissions), ctx, permissionId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SavePermissions", reflect.TypeOf((*MockUserSvcAPI)(nil).SavePermissions), ctx)
 }
 
 // SavePermissionsExecute mocks base method.

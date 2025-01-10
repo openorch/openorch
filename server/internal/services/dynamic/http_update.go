@@ -40,7 +40,7 @@ func (g *DynamicService) Update(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionGenericEdit.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

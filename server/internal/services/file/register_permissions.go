@@ -15,40 +15,43 @@ package fileservice
 import (
 	"context"
 
-	client "github.com/openorch/openorch/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	downloadtypes "github.com/openorch/openorch/server/internal/services/file/types"
+	filetypes "github.com/openorch/openorch/server/internal/services/file/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-func (ds *FileService) registerPermissions() error {
+func (fs *FileService) registerPermissions() error {
 	ctx := context.Background()
-	userSvc := ds.clientFactory.Client(sdk.WithToken(ds.token)).UserSvcAPI
+	userSvc := fs.clientFactory.Client(sdk.WithToken(fs.token)).UserSvcAPI
 
-	for _, permission := range downloadtypes.FileAdminPermissions {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
-			RequestBody(client.UserSvcUpserPermissionRequest{
-				Permission: &client.UserSvcPermission{
-					Name:        client.PtrString(permission.Name),
-					Description: client.PtrString(permission.Description),
-				},
-			}).
-			Execute()
-		if err != nil {
-			return err
-		}
+	_, _, err := userSvc.SavePermissions(ctx).
+		Body(openapi.UserSvcSavePermissionsRequest{
+			Permissions: filetypes.AdminPermissions,
+		}).
+		Execute()
+	if err != nil {
+		return err
 	}
+
+	req := openapi.UserSvcAssignPermissionsRequest{}
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
-		for _, permission := range downloadtypes.FileAdminPermissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
-				Execute()
-			if err != nil {
-				return err
-			}
+		for _, permission := range filetypes.AdminPermissions {
+			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
+				RoleId:       openapi.PtrString(role.Id),
+				PermissionId: permission.Id,
+			})
 		}
+	}
+
+	_, _, err = userSvc.AssignPermissions(ctx).
+		Body(req).
+		Execute()
+	if err != nil {
+		return err
 	}
 
 	return nil

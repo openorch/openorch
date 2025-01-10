@@ -21,34 +21,33 @@ func (p *DockerService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
-	links := openapi.UserSvcAssignPermissionsRequest{}
-
-	for _, permission := range dockertypes.AdminPermissions {
-		_, _, err := userSvc.SavePermissions(ctx, permission.Id).
-			RequestBody(openapi.UserSvcSavePermissionsRequest{
-				Permissions: []openapi.UserSvcPermission{
-					{
-						Name:        openapi.PtrString(permission.Name),
-						Description: openapi.PtrString(permission.Description),
-					},
-				},
-			}).
-			Execute()
-		if err != nil {
-			return err
-		}
+	_, _, err := userSvc.SavePermissions(ctx).
+		Body(openapi.UserSvcSavePermissionsRequest{
+			Permissions: dockertypes.AdminPermissions,
+		}).
+		Execute()
+	if err != nil {
+		return err
 	}
+
+	req := openapi.UserSvcAssignPermissionsRequest{}
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
 		for _, permission := range dockertypes.AdminPermissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
-				Execute()
-			if err != nil {
-				return err
-			}
+			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
+				RoleId:       openapi.PtrString(role.Id),
+				PermissionId: permission.Id,
+			})
 		}
+	}
+
+	_, _, err = userSvc.AssignPermissions(ctx).
+		Body(req).
+		Execute()
+	if err != nil {
+		return err
 	}
 
 	return nil

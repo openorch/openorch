@@ -41,7 +41,7 @@ func (a *ChatService) GetThread(
 ) {
 
 	isAuthRsp, _, err := a.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), chat.PermissionThreadCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *chat.PermissionThreadCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

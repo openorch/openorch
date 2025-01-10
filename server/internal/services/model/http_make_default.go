@@ -42,7 +42,7 @@ func (ms *ModelService) MakeDefault(
 ) {
 
 	isAuthRsp, _, err := ms.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), model.PermissionModelEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *model.PermissionModelEdit.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

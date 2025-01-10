@@ -9,35 +9,35 @@
 package chat_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionThreadCreate = usertypes.Permission{
-	Id:   "chat-svc:thread:create",
-	Name: "Chat Svc - Thread Create",
+var PermissionThreadCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:thread:create"),
+	Name: openapi.PtrString("Chat Svc - Thread Create"),
 }
 
-var PermissionThreadView = usertypes.Permission{
-	Id:   "chat-svc:thread:view",
-	Name: "Chat Svc - Thread View",
+var PermissionThreadView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:thread:view"),
+	Name: openapi.PtrString("Chat Svc - Thread View"),
 }
 
-var PermissionThreadEdit = usertypes.Permission{
-	Id:   "chat-svc:thread:edit",
-	Name: "Chat Svc - Thread Edit",
+var PermissionThreadEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:thread:edit"),
+	Name: openapi.PtrString("Chat Svc - Thread Edit"),
 }
 
-var PermissionThreadDelete = usertypes.Permission{
-	Id:   "chat-svc:thread:delete",
-	Name: "Chat Svc - Thread Delete",
+var PermissionThreadDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:thread:delete"),
+	Name: openapi.PtrString("Chat Svc - Thread Delete"),
 }
 
-var PermissionThreadStream = usertypes.Permission{
-	Id:   "chat-svc:thread:stream",
-	Name: "Chat Svc - Thread Stream",
+var PermissionThreadStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:thread:stream"),
+	Name: openapi.PtrString("Chat Svc - Thread Stream"),
 }
 
-var ThreadPermissions = []usertypes.Permission{
+var ThreadPermissions = []openapi.UserSvcPermission{
 	PermissionThreadCreate,
 	PermissionThreadView,
 	PermissionThreadEdit,

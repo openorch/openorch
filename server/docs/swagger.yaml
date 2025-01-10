@@ -5100,14 +5100,9 @@ paths:
         Requires the `user-svc:permission:create` permission.
       operationId: savePermissions
       parameters:
-      - description: Permission ID
-        in: path
-        name: permissionId
-        required: true
-        type: string
       - description: Permission Details
         in: body
-        name: requestBody
+        name: body
         required: true
         schema:
           $ref: '#/definitions/user_svc.SavePermissionsRequest'

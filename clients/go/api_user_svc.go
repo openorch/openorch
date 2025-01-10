@@ -337,10 +337,9 @@ Eg. if the owner's slug is `petstore-svc` the permission should look like `petst
 Requires the `user-svc:permission:create` permission.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param permissionId Permission ID
 	@return ApiSavePermissionsRequest
 	*/
-	SavePermissions(ctx context.Context, permissionId string) ApiSavePermissionsRequest
+	SavePermissions(ctx context.Context) ApiSavePermissionsRequest
 
 	// SavePermissionsExecute executes the request
 	//  @return UserSvcSavePermissionsResponse
@@ -3408,13 +3407,12 @@ func (a *UserSvcAPIService) SaveGrantsExecute(r ApiSaveGrantsRequest) (map[strin
 type ApiSavePermissionsRequest struct {
 	ctx context.Context
 	ApiService UserSvcAPI
-	permissionId string
-	requestBody *UserSvcSavePermissionsRequest
+	body *UserSvcSavePermissionsRequest
 }
 
 // Permission Details
-func (r ApiSavePermissionsRequest) RequestBody(requestBody UserSvcSavePermissionsRequest) ApiSavePermissionsRequest {
-	r.requestBody = &requestBody
+func (r ApiSavePermissionsRequest) Body(body UserSvcSavePermissionsRequest) ApiSavePermissionsRequest {
+	r.body = &body
 	return r
 }
 
@@ -3432,14 +3430,12 @@ Eg. if the owner's slug is `petstore-svc` the permission should look like `petst
 Requires the `user-svc:permission:create` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param permissionId Permission ID
  @return ApiSavePermissionsRequest
 */
-func (a *UserSvcAPIService) SavePermissions(ctx context.Context, permissionId string) ApiSavePermissionsRequest {
+func (a *UserSvcAPIService) SavePermissions(ctx context.Context) ApiSavePermissionsRequest {
 	return ApiSavePermissionsRequest{
 		ApiService: a,
 		ctx: ctx,
-		permissionId: permissionId,
 	}
 }
 
@@ -3459,13 +3455,12 @@ func (a *UserSvcAPIService) SavePermissionsExecute(r ApiSavePermissionsRequest) 
 	}
 
 	localVarPath := localBasePath + "/user-svc/permissions"
-	localVarPath = strings.Replace(localVarPath, "{"+"permissionId"+"}", url.PathEscape(parameterValueToString(r.permissionId, "permissionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3486,7 +3481,7 @@ func (a *UserSvcAPIService) SavePermissionsExecute(r ApiSavePermissionsRequest) 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

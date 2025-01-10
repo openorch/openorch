@@ -31,7 +31,7 @@ func (fs *FileService) ListUploads(
 	r *http.Request,
 ) {
 	isAuthRsp, _, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionUploadCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *file.PermissionUploadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{},
 		}).

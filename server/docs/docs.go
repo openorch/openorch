@@ -4179,15 +4179,8 @@ const docTemplate = `{
                 "operationId": "savePermissions",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Permission ID",
-                        "name": "permissionId",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
                         "description": "Permission Details",
-                        "name": "requestBody",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
