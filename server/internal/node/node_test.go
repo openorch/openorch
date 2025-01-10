@@ -10,6 +10,7 @@ import (
 	"testing"
 	"time"
 
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
@@ -83,7 +84,7 @@ func TestStart(t *testing.T) {
 		require.NoError(t, err)
 
 		rsp, _, err := adminClient.RegistrySvcAPI.ListNodes(context.Background()).
-			Body(nil).
+			Body(openapi.RegistrySvcListNodesRequest{}).
 			Execute()
 		require.NoError(t, err)
 
