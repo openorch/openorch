@@ -145,8 +145,8 @@ Class | Method | HTTP request | Description
 *SecretSvcAPI* | [**RemoveSecrets**](docs/SecretSvcAPI.md#removesecrets) | **Delete** /secret-svc/secrets | Remove Secrets
 *SecretSvcAPI* | [**SaveSecrets**](docs/SecretSvcAPI.md#savesecrets) | **Put** /secret-svc/secrets | Save Secrets
 *SourceSvcAPI* | [**CheckoutRepo**](docs/SourceSvcAPI.md#checkoutrepo) | **Post** /source-svc/repo/checkout | Checkout a git repository
-*UserSvcAPI* | [**AddPermissionToRole**](docs/UserSvcAPI.md#addpermissiontorole) | **Put** /user-svc/role/{roleId}/permission/{permissionId} | Add Permission to Role
 *UserSvcAPI* | [**AddUserToOrganization**](docs/UserSvcAPI.md#addusertoorganization) | **Post** /user-svc/organization/{organizationId}/user | Add a User to an Organization
+*UserSvcAPI* | [**AssignPermissions**](docs/UserSvcAPI.md#assignpermissions) | **Put** /user-svc/roles/permissions | Assign Permissions
 *UserSvcAPI* | [**ChangePassword**](docs/UserSvcAPI.md#changepassword) | **Post** /user-svc/change-password | Change User Password
 *UserSvcAPI* | [**ChangePasswordAdmin**](docs/UserSvcAPI.md#changepasswordadmin) | **Post** /user-svc/change-password-admin | Change User Password (Admin)
 *UserSvcAPI* | [**CreateOrganization**](docs/UserSvcAPI.md#createorganization) | **Post** /user-svc/organization | Create an Organization
@@ -165,10 +165,10 @@ Class | Method | HTTP request | Description
 *UserSvcAPI* | [**Register**](docs/UserSvcAPI.md#register) | **Post** /user-svc/register | Register
 *UserSvcAPI* | [**RemoveUserFromOrganization**](docs/UserSvcAPI.md#removeuserfromorganization) | **Delete** /user-svc/organization/{organizationId}/user/{userId} | Remove a User from an Organization
 *UserSvcAPI* | [**SaveGrants**](docs/UserSvcAPI.md#savegrants) | **Put** /user-svc/grants | Save Grants
+*UserSvcAPI* | [**SavePermissions**](docs/UserSvcAPI.md#savepermissions) | **Put** /user-svc/permissions | Save Permissions
 *UserSvcAPI* | [**SaveSelf**](docs/UserSvcAPI.md#saveself) | **Put** /user-svc/self | Save User Profile
 *UserSvcAPI* | [**SaveUser**](docs/UserSvcAPI.md#saveuser) | **Put** /user-svc/user/{userId} | Save User
 *UserSvcAPI* | [**SetRolePermission**](docs/UserSvcAPI.md#setrolepermission) | **Put** /user-svc/role/{roleId}/permissions | Set Role Permissions
-*UserSvcAPI* | [**UpsertPermission**](docs/UserSvcAPI.md#upsertpermission) | **Put** /user-svc/permission/{permissionId} | Upsert a Permission
 
 
 ## Documentation For Models
@@ -306,6 +306,7 @@ Class | Method | HTTP request | Description
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)
+ - [UserSvcAssignPermissionsRequest](docs/UserSvcAssignPermissionsRequest.md)
  - [UserSvcAuthToken](docs/UserSvcAuthToken.md)
  - [UserSvcChangePasswordAdminRequest](docs/UserSvcChangePasswordAdminRequest.md)
  - [UserSvcChangePasswordRequest](docs/UserSvcChangePasswordRequest.md)
@@ -329,14 +330,16 @@ Class | Method | HTTP request | Description
  - [UserSvcLoginResponse](docs/UserSvcLoginResponse.md)
  - [UserSvcOrganization](docs/UserSvcOrganization.md)
  - [UserSvcPermission](docs/UserSvcPermission.md)
+ - [UserSvcPermissionLink](docs/UserSvcPermissionLink.md)
  - [UserSvcReadUserByTokenResponse](docs/UserSvcReadUserByTokenResponse.md)
  - [UserSvcRegisterRequest](docs/UserSvcRegisterRequest.md)
  - [UserSvcRegisterResponse](docs/UserSvcRegisterResponse.md)
  - [UserSvcRole](docs/UserSvcRole.md)
  - [UserSvcSaveGrantsRequest](docs/UserSvcSaveGrantsRequest.md)
+ - [UserSvcSavePermissionsRequest](docs/UserSvcSavePermissionsRequest.md)
+ - [UserSvcSavePermissionsResponse](docs/UserSvcSavePermissionsResponse.md)
  - [UserSvcSaveProfileRequest](docs/UserSvcSaveProfileRequest.md)
  - [UserSvcSetRolePermissionsRequest](docs/UserSvcSetRolePermissionsRequest.md)
- - [UserSvcUpserPermissionRequest](docs/UserSvcUpserPermissionRequest.md)
  - [UserSvcUser](docs/UserSvcUser.md)
 
 

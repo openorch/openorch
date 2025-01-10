@@ -650,8 +650,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		userService.SetRolePermissions(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/user-svc/permission/{permissionId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		userService.UpsertPermission(w, r)
+	router.HandleFunc("/user-svc/permissions", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.SavePermissions(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/register", appl(func(w http.ResponseWriter, r *http.Request) {

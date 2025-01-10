@@ -11,7 +11,7 @@ package dockerservice
 import (
 	"context"
 
-	client "github.com/openorch/openorch/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
@@ -21,12 +21,16 @@ func (p *DockerService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
+	links := openapi.UserSvcAssignPermissionsRequest{}
+
 	for _, permission := range dockertypes.AdminPermissions {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
-			RequestBody(client.UserSvcUpserPermissionRequest{
-				Permission: &client.UserSvcPermission{
-					Name:        client.PtrString(permission.Name),
-					Description: client.PtrString(permission.Description),
+		_, _, err := userSvc.SavePermissions(ctx, permission.Id).
+			RequestBody(openapi.UserSvcSavePermissionsRequest{
+				Permissions: []openapi.UserSvcPermission{
+					{
+						Name:        openapi.PtrString(permission.Name),
+						Description: openapi.PtrString(permission.Description),
+					},
 				},
 			}).
 			Execute()

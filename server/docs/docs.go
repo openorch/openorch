@@ -4100,71 +4100,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/user-svc/permission/{permissionId}": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Creates or updates a permission.\n\u003cb\u003eThe permission ID must be prefixed by the callers slug.\u003c/b\u003e\nEg. if the owner's slug is ` + "`" + `petstore-svc` + "`" + ` the permission should look like ` + "`" + `petstore-svc:pet:edit` + "`" + `.\n\nRequires the ` + "`" + `user-svc:permission:create` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Svc"
-                ],
-                "summary": "Upsert a Permission",
-                "operationId": "upsertPermission",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Permission ID",
-                        "name": "permissionId",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Permission Details",
-                        "name": "requestBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.UpserPermissionRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.CreateUserResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request: Invalid JSON or Bad Namespace",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/user-svc/permission/{permissionId}/is-authorized": {
             "post": {
                 "security": [
@@ -4218,6 +4153,71 @@ const docTemplate = `{
                         "description": "Unauthorized",
                         "schema": {
                             "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-svc/permissions": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates or updates a list of permissions.\n\u003cb\u003eThe permission ID must be prefixed by the callers slug.\u003c/b\u003e\nEg. if the owner's slug is ` + "`" + `petstore-svc` + "`" + ` the permission should look like ` + "`" + `petstore-svc:pet:edit` + "`" + `.\n\nRequires the ` + "`" + `user-svc:permission:create` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "Save Permissions",
+                "operationId": "savePermissions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Permission ID",
+                        "name": "permissionId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Permission Details",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SavePermissionsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.SavePermissionsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request: Invalid JSON or Bad Namespace",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -4420,63 +4420,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/user-svc/role/{roleId}/permission/{permissionId}": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Adds a specific permission to a role identified by roleId.\n\nRequires the ` + "`" + `user-svc:permission:assign` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Svc"
-                ],
-                "summary": "Add Permission to Role",
-                "operationId": "addPermissionToRole",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Role ID",
-                        "name": "roleId",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Permission ID",
-                        "name": "permissionId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.CreateUserResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
         "/user-svc/role/{roleId}/permissions": {
             "get": {
                 "security": [
@@ -4632,6 +4575,58 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-svc/roles/permissions": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Assign permissions to roles.\n\nRequires the ` + "`" + `user-svc:permission:assign` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "Assign Permissions",
+                "operationId": "assignPermissions",
+                "parameters": [
+                    {
+                        "description": "Assign Permissions Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.AssignPermissionsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Assign Permissions successfully",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.AssignPermissionsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
                         }
                     }
                 }
@@ -7646,6 +7641,20 @@ const docTemplate = `{
         "user_svc.AddUserToOrganizationResponse": {
             "type": "object"
         },
+        "user_svc.AssignPermissionsRequest": {
+            "type": "object",
+            "properties": {
+                "permissionLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user_svc.PermissionLink"
+                    }
+                }
+            }
+        },
+        "user_svc.AssignPermissionsResponse": {
+            "type": "object"
+        },
         "user_svc.AuthToken": {
             "type": "object",
             "properties": {
@@ -8016,6 +8025,17 @@ const docTemplate = `{
                 }
             }
         },
+        "user_svc.PermissionLink": {
+            "type": "object",
+            "properties": {
+                "permissionId": {
+                    "type": "string"
+                },
+                "roleId": {
+                    "type": "string"
+                }
+            }
+        },
         "user_svc.ReadUserByTokenResponse": {
             "type": "object",
             "properties": {
@@ -8101,6 +8121,28 @@ const docTemplate = `{
         "user_svc.SaveGrantsResponse": {
             "type": "object"
         },
+        "user_svc.SavePermissionsRequest": {
+            "type": "object",
+            "properties": {
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user_svc.Permission"
+                    }
+                }
+            }
+        },
+        "user_svc.SavePermissionsResponse": {
+            "type": "object",
+            "properties": {
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user_svc.Permission"
+                    }
+                }
+            }
+        },
         "user_svc.SaveProfileRequest": {
             "type": "object",
             "properties": {
@@ -8128,14 +8170,6 @@ const docTemplate = `{
         },
         "user_svc.SetRolePermissionsResponse": {
             "type": "object"
-        },
-        "user_svc.UpserPermissionRequest": {
-            "type": "object",
-            "properties": {
-                "permission": {
-                    "$ref": "#/definitions/user_svc.Permission"
-                }
-            }
         },
         "user_svc.User": {
             "type": "object",

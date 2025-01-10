@@ -55,19 +55,24 @@ type GetPermissionsResponse struct {
 	Permissions []*Permission `json:"permissions"`
 }
 
-type UpserPermissionRequest struct {
-	Permission *Permission `json:"permission"`
+type SavePermissionsRequest struct {
+	Permissions []*Permission `json:"permissions"`
 }
 
-type UpserPermissionResponse struct {
+type SavePermissionsResponse struct {
+	Permissions []*Permission `json:"permissions"`
 }
 
-type AddPermissionToRoleRequest struct {
+type PermissionLink struct {
 	RoleId       string `json:"roleId"`
 	PermissionId string `json:"permissionId"`
 }
 
-type AddPermissionToRoleResponse struct{}
+type AssignPermissionsRequest struct {
+	PermissionLinks []*PermissionLink `json:"permissionLinks"`
+}
+
+type AssignPermissionsResponse struct{}
 
 var PermissionUserCreate = Permission{
 	Id:   "user-svc:user:create",
@@ -154,36 +159,36 @@ var PermissionGrantView = Permission{
 	Name: "User Svc - View Grant",
 }
 
-var UserPermissions = []Permission{
+var UserPermissions = []*Permission{
 	// Anyone can create and edit their own permissions
 	// given they start wiht their slug
-	PermissionPermissionCreate,
-	PermissionPermissionEdit,
-	PermissionPermissionAssign,
+	&PermissionPermissionCreate,
+	&PermissionPermissionEdit,
+	&PermissionPermissionAssign,
 
 	// Anyone can create their own organizations and manage users there.
 	// Organization
-	PermissionOrganizationCreate,
-	PermissionOrganizationAddUser,
-	PermissionOrganizationRemoveUser,
+	&PermissionOrganizationCreate,
+	&PermissionOrganizationAddUser,
+	&PermissionOrganizationRemoveUser,
 }
 
-var AdminPermissions = []Permission{
-	PermissionUserCreate,
-	PermissionUserView,
-	PermissionUserEdit,
-	PermissionUserDelete,
-	PermissionUserPasswordChange,
-	PermissionRoleCreate,
-	PermissionRoleEdit,
-	PermissionRoleView,
-	PermissionRoleDelete,
-	PermissionPermissionCreate,
-	PermissionPermissionEdit,
-	PermissionPermissionAssign,
-	PermissionOrganizationCreate,
-	PermissionOrganizationAddUser,
-	PermissionOrganizationRemoveUser,
-	PermissionGrantView,
-	PermissionGrantCreate,
+var AdminPermissions = []*Permission{
+	&PermissionUserCreate,
+	&PermissionUserView,
+	&PermissionUserEdit,
+	&PermissionUserDelete,
+	&PermissionUserPasswordChange,
+	&PermissionRoleCreate,
+	&PermissionRoleEdit,
+	&PermissionRoleView,
+	&PermissionRoleDelete,
+	&PermissionPermissionCreate,
+	&PermissionPermissionEdit,
+	&PermissionPermissionAssign,
+	&PermissionOrganizationCreate,
+	&PermissionOrganizationAddUser,
+	&PermissionOrganizationRemoveUser,
+	&PermissionGrantView,
+	&PermissionGrantCreate,
 }
