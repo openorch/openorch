@@ -13,7 +13,7 @@
 package policy_svc
 
 import (
-	user "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
 type ErrorResponse struct {
@@ -109,52 +109,52 @@ type CheckResponse struct {
 }
 
 var (
-	PermissionTemplateView = user.Permission{
-		Id:   "policy-svc:template:view",
-		Name: "Policy Svc - Template View",
+	PermissionTemplateView = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:template:view"),
+		Name: openapi.PtrString("Policy Svc - Template View"),
 	}
 
-	PermissionTemplateCreate = user.Permission{
-		Id:   "policy-svc:template:create",
-		Name: "Policy Svc - Template Create",
+	PermissionTemplateCreate = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:template:create"),
+		Name: openapi.PtrString("Policy Svc - Template Create"),
 	}
 
-	PermissionTemplateEdit = user.Permission{
-		Id:   "policy-svc:template:edit",
-		Name: "Policy Svc - Template Edit",
+	PermissionTemplateEdit = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:template:edit"),
+		Name: openapi.PtrString("Policy Svc - Template Edit"),
 	}
 
-	PermissionTemplateDelete = user.Permission{
-		Id:   "policy-svc:template:delete",
-		Name: "Policy Svc - Template Delete",
+	PermissionTemplateDelete = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:template:delete"),
+		Name: openapi.PtrString("Policy Svc - Template Delete"),
 	}
 
-	PermissionInstanceView = user.Permission{
-		Id:   "policy-svc:instance:view",
-		Name: "Policy Svc - Instance View",
+	PermissionInstanceView = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:instance:view"),
+		Name: openapi.PtrString("Policy Svc - Instance View"),
 	}
 
-	PermissionInstanceCreate = user.Permission{
-		Id:   "policy-svc:instance:create",
-		Name: "Policy Svc - Instance Create",
+	PermissionInstanceCreate = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:instance:create"),
+		Name: openapi.PtrString("Policy Svc - Instance Create"),
 	}
 
-	PermissionInstanceEdit = user.Permission{
-		Id:   "policy-svc:instance:edit",
-		Name: "Policy Svc - Instance Edit",
+	PermissionInstanceEdit = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:instance:edit"),
+		Name: openapi.PtrString("Policy Svc - Instance Edit"),
 	}
 
-	PermissionInstanceDelete = user.Permission{
-		Id:   "policy-svc:instance:delete",
-		Name: "Policy Svc - Instance Delete",
+	PermissionInstanceDelete = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:instance:delete"),
+		Name: openapi.PtrString("Policy Svc - Instance Delete"),
 	}
 
-	PermissionCheckView = user.Permission{
-		Id:   "policy-svc:check:view",
-		Name: "Policy Svc - Check View",
+	PermissionCheckView = openapi.UserSvcPermission{
+		Id:   openapi.PtrString("policy-svc:check:view"),
+		Name: openapi.PtrString("Policy Svc - Check View"),
 	}
 
-	AdminPermissions = []user.Permission{
+	AdminPermissions = []openapi.UserSvcPermission{
 		PermissionTemplateView,
 		PermissionTemplateCreate,
 		PermissionTemplateEdit,
@@ -165,7 +165,7 @@ var (
 		PermissionInstanceDelete,
 	}
 
-	UserPermissions = []user.Permission{
+	UserPermissions = []openapi.UserSvcPermission{
 		PermissionCheckView,
 	}
 )

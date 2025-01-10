@@ -11,7 +11,6 @@ import (
 	"golang.org/x/time/rate"
 )
 
-// Check records a resource access and returns if the access is allowed.
 // @ID check
 // @Summary Check
 // @Description Check records a resource access and returns if the access is allowed.

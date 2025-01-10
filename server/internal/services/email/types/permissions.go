@@ -9,14 +9,14 @@
 package email_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionSendEmail = usertypes.Permission{
-	Id:   "email-svc:email:send",
-	Name: "Email Svc - Email Send",
+var PermissionSendEmail = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("email-svc:email:send"),
+	Name: openapi.PtrString("Email Svc - Email Send"),
 }
 
-var AdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionSendEmail,
 }

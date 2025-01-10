@@ -9,35 +9,35 @@
 package model_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionModelCreate = usertypes.Permission{
-	Id:   "model-svc:model:create",
-	Name: "Model Svc - Model Create",
+var PermissionModelCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:model:create"),
+	Name: openapi.PtrString("Model Svc - Model Create"),
 }
 
-var PermissionModelView = usertypes.Permission{
-	Id:   "model-svc:model:view",
-	Name: "Model Svc - Model View",
+var PermissionModelView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:model:view"),
+	Name: openapi.PtrString("Model Svc - Model View"),
 }
 
-var PermissionModelEdit = usertypes.Permission{
-	Id:   "model-svc:model:edit",
-	Name: "Model Svc - Model Edit",
+var PermissionModelEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:model:edit"),
+	Name: openapi.PtrString("Model Svc - Model Edit"),
 }
 
-var PermissionModelDelete = usertypes.Permission{
-	Id:   "model-svc:model:delete",
-	Name: "Model Svc - Model Delete",
+var PermissionModelDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:model:delete"),
+	Name: openapi.PtrString("Model Svc - Model Delete"),
 }
 
-var PermissionModelStream = usertypes.Permission{
-	Id:   "model-svc:model:stream",
-	Name: "Model Svc - Model Stream",
+var PermissionModelStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:model:stream"),
+	Name: openapi.PtrString("Model Svc - Model Stream"),
 }
 
-var ModelAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionModelCreate,
 	PermissionModelView,
 	PermissionModelEdit,
