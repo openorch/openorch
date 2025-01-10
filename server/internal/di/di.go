@@ -43,18 +43,21 @@ type Options struct {
 	// NodeOptions contains settings coming from envars
 	NodeOptions *node_types.Options
 
-	// Url that will be passed down to the router when calling
-	// the OpenOrch daemon from itself.
-	// (Inter-service calls go through the network.)
+	// URL of the local OpenOrch daemon instance
 	Url string
 
 	// Test mode if true will cause the localstore to
 	// save data into random temporary folders.
 	Test bool
 
+	// Lock is a distributed lock. Use this when you want to synronize
+	// across service instances/nodes.
+	// eg: leader election
 	Lock lock.DistributedLock
 
-	LLMClient        llm.ClientI
+	LLMClient llm.ClientI
+
+	// DatastoreFactory can create database tables
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
 
 	// HomeDir is the OpenOrch config/data/uploads/downloads directory.
@@ -62,8 +65,13 @@ type Options struct {
 	// For live it's /home/youruser/.openorch
 	HomeDir string
 
+	// ClientFactory is used for service to service communication
+	// ie. this is how services call each other
 	ClientFactory sdk.ClientFactory
-	Authorizer    sdk.Authorizer
+
+	// Authorizer is a helper interface that contains
+	// auth related utility functions
+	Authorizer sdk.Authorizer
 }
 
 func BigBang(options *Options) (*mux.Router, func() error, error) {
