@@ -15,11 +15,11 @@ import (
 )
 
 // @ID serveDownload
-// @Summary Serve a File from a URL
-// @Description Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+// @Summary Serve a Downloaded file.
+// @Description Serves a previously downloaded file based on its URL.
 // @Tags File Svc
 // @Produce application/octet-stream
-// @Param url path string true "URL"
+// @Param url path string true "URL of the file. Even after downloading, the file is still referenced by its original internet URL."
 // @Success 200 {file} binary "File served successfully"
 // @Failure 400 {object} file.ErrorResponse "Invalid download URL"
 // @Failure 404 {object} file.ErrorResponse "File not found"

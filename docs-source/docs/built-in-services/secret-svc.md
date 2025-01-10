@@ -102,6 +102,9 @@ The encrypt command helps you create encrypted YAML files that can be safely sto
 
 ```sh
 $ oo secret encrypt example-key example-value
+```
+
+```yaml
 checksum: 45a3b25f
 checksumAlgorithm: CRC32
 encrypted: true

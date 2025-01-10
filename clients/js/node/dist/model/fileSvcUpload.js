@@ -22,6 +22,11 @@ FileSvcUpload.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "fileId",
+        "baseName": "fileId",
+        "type": "string"
+    },
+    {
         "name": "fileName",
         "baseName": "fileName",
         "type": "string"

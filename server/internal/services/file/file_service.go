@@ -42,6 +42,8 @@ type FileService struct {
 	SyncDownloads bool
 
 	credentialStore datastore.DataStore
+
+	nodeId string
 }
 
 func NewFileService(

@@ -18,7 +18,9 @@ import type {
   RegistrySvcErrorResponse,
   RegistrySvcListDefinitionsResponse,
   RegistrySvcListInstancesResponse,
+  RegistrySvcListNodesRequest,
   RegistrySvcListNodesResponse,
+  RegistrySvcNodeSelfResponse,
   RegistrySvcRegisterInstanceRequest,
   RegistrySvcSaveDefinitionRequest,
 } from '../models/index';
@@ -29,8 +31,12 @@ import {
     RegistrySvcListDefinitionsResponseToJSON,
     RegistrySvcListInstancesResponseFromJSON,
     RegistrySvcListInstancesResponseToJSON,
+    RegistrySvcListNodesRequestFromJSON,
+    RegistrySvcListNodesRequestToJSON,
     RegistrySvcListNodesResponseFromJSON,
     RegistrySvcListNodesResponseToJSON,
+    RegistrySvcNodeSelfResponseFromJSON,
+    RegistrySvcNodeSelfResponseToJSON,
     RegistrySvcRegisterInstanceRequestFromJSON,
     RegistrySvcRegisterInstanceRequestToJSON,
     RegistrySvcSaveDefinitionRequestFromJSON,
@@ -56,7 +62,7 @@ export interface ListInstancesRequest {
 }
 
 export interface ListNodesRequest {
-    body?: object;
+    body?: RegistrySvcListNodesRequest;
 }
 
 export interface RegisterInstanceRequest {
@@ -69,6 +75,10 @@ export interface RemoveInstanceRequest {
 
 export interface SaveDefinitionRequest {
     body: RegistrySvcSaveDefinitionRequest;
+}
+
+export interface SelfNodeRequest {
+    body?: object;
 }
 
 /**
@@ -264,7 +274,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters['body'] as any,
+            body: RegistrySvcListNodesRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RegistrySvcListNodesResponseFromJSON(jsonValue));
@@ -398,6 +408,41 @@ export class RegistrySvcApi extends runtime.BaseAPI {
      */
     async saveDefinition(requestParameters: SaveDefinitionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.saveDefinitionRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    async selfNodeRaw(requestParameters: SelfNodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RegistrySvcNodeSelfResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/registry-svc/node/self`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['body'] as any,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RegistrySvcNodeSelfResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Show the local node.
+     * View Self Node
+     */
+    async selfNode(requestParameters: SelfNodeRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RegistrySvcNodeSelfResponse> {
+        const response = await this.selfNodeRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

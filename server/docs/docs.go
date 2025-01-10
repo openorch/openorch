@@ -1731,19 +1731,19 @@ const docTemplate = `{
         },
         "/file-svc/serve/download/{url}": {
             "get": {
-                "description": "Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.",
+                "description": "Serves a previously downloaded file based on its URL.",
                 "produces": [
                     "application/octet-stream"
                 ],
                 "tags": [
                     "File Svc"
                 ],
-                "summary": "Serve a File from a URL",
+                "summary": "Serve a Downloaded file.",
                 "operationId": "serveDownload",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "URL",
+                        "description": "URL of the file. Even after downloading, the file is still referenced by its original internet URL.",
                         "name": "url",
                         "in": "path",
                         "required": true
@@ -1777,9 +1777,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/file-svc/serve/upload/{id}": {
+        "/file-svc/serve/upload/{fileId}": {
             "get": {
-                "description": "Serves a previously uploaded file based on its ID.",
+                "description": "Serves a previously uploaded file based on its File ID.\nPlease keep in mind that the ID and the FileID of an Upload is two different fields.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1795,7 +1795,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Upload ID",
-                        "name": "id",
+                        "name": "fileId",
                         "in": "path",
                         "required": true
                     }
@@ -2496,7 +2496,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Adds a new prompt to the prompt queue and either waits for the response (if ` + "`" + `sync` + "`" + ` is set to true), or returns immediately.",
+                "description": "Adds a new prompt to the prompt queue and either waits for the response (if ` + "`" + `sync` + "`" + ` is set to true), or returns immediately.\n\nRequires the ` + "`" + `prompt-svc:prompt:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -3053,6 +3053,63 @@ const docTemplate = `{
                     },
                     "400": {
                         "description": "Invalid filters",
+                        "schema": {
+                            "$ref": "#/definitions/registry_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/registry_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/registry-svc/node/self": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Show the local node.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Registry Svc"
+                ],
+                "summary": "View Self Node",
+                "operationId": "selfNode",
+                "parameters": [
+                    {
+                        "description": "List Registrys Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/registry_svc.NodeSelfRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/registry_svc.NodeSelfResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/registry_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "schema": {
                             "$ref": "#/definitions/registry_svc.ErrorResponse"
                         }
@@ -6104,10 +6161,16 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "string"
                 },
+                "fileId": {
+                    "description": "Logical file ID spanning all replicas",
+                    "type": "string"
+                },
                 "fileName": {
+                    "description": "Filename is the original name of the file",
                     "type": "string"
                 },
                 "filePath": {
+                    "description": "FilePath is the full node local path of the file",
                     "type": "string"
                 },
                 "fileSize": {
@@ -6115,9 +6178,11 @@ const docTemplate = `{
                     "format": "int64"
                 },
                 "id": {
+                    "description": "Unique ID for this replica",
                     "type": "string"
                 },
                 "nodeId": {
+                    "description": "ID of the node storing this replica",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -7049,7 +7114,16 @@ const docTemplate = `{
             }
         },
         "registry_svc.ListNodesRequest": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "description": "Node IDs to filter on",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
         },
         "registry_svc.ListNodesResponse": {
             "type": "object",
@@ -7104,6 +7178,20 @@ const docTemplate = `{
                             "$ref": "#/definitions/registry_svc.ResourceUsage"
                         }
                     ]
+                }
+            }
+        },
+        "registry_svc.NodeSelfRequest": {
+            "type": "object"
+        },
+        "registry_svc.NodeSelfResponse": {
+            "type": "object",
+            "required": [
+                "node"
+            ],
+            "properties": {
+                "node": {
+                    "$ref": "#/definitions/registry_svc.Node"
                 }
             }
         },

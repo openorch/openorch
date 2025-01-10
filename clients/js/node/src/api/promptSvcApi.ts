@@ -95,7 +95,7 @@ export class PromptSvcApi {
     }
 
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
      * @summary Add Prompt
      * @param body Add Prompt Request
      */

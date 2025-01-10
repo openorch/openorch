@@ -7,11 +7,17 @@
  */
 package node_types
 
+import sdk "github.com/openorch/openorch/sdk/go"
+
 type Options struct {
 	Port        int
 	GpuPlatform string
+
 	// OpenOrch Server Address
-	Address    string
+	// Crucial for distributed features.
+	// Please see the documentation for the envar OPENORCH_URL
+	Address string
+
 	Az         string
 	Region     string
 	LLMHost    string
@@ -21,6 +27,10 @@ type Options struct {
 	DbDriver   string
 	DbString   string
 
+	// Crucial for distributed features.
+	// Please see the documentation for the envar OPENORCH_NODE_ID
+	NodeId string
+
 	// DbPrefix allows us to have isolated envs for different test cases
 	// but still make multiple nodes in those test cases use the same
 	// shard of the db.
@@ -28,4 +38,9 @@ type Options struct {
 
 	SourceControlToken  string
 	SecretEncryptionKey string
+
+	// so ugly, only temporary
+	ClientFactory sdk.ClientFactory
+
+	Test bool
 }

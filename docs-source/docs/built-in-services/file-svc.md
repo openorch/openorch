@@ -5,6 +5,11 @@ tags:
   - file
   - containers
   - services
+  - uploads
+  - downloads
+  - file serve
+  - file serving
+  - file proxy
 ---
 
 # File Svc
@@ -15,11 +20,20 @@ The File Service handles file-related operations, including downloading files fr
 
 ## Responsibilities
 
-- Download files from the internet and cache them to enable faster local access.
+- Download and cache files from the internet for faster access.
 - Accept and store file uploads.
-- Serve cached files (downloaded from the internet).
-- Serve uploaded files.
+- Serve files from both cached downloads and uploaded sources.
 
-## Current Limitations
+## Use cases
 
-- Serving files doesn't exist yet, services that depend on the File Svc (such as the [Docker Svc](/docs/built-in-services/docker-svc)) only work when they run on the same node as the File Svc. This obviously doesn't work in a distributed setting.
+### Internal file transfer
+
+Upload a file from a local node and retrieve it later using the "serve upload" endpoint.
+
+### Application file uploads
+
+Enable users or services to upload files, such as profile pictures or media attachments.
+
+### Component dependencies
+
+Download external files (e.g., AI models) via URL and provide them to system components as needed.

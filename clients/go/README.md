@@ -111,8 +111,8 @@ Class | Method | HTTP request | Description
 *FileSvcAPI* | [**ListDownloads**](docs/FileSvcAPI.md#listdownloads) | **Post** /file-svc/downloads | List Downloads
 *FileSvcAPI* | [**ListUploads**](docs/FileSvcAPI.md#listuploads) | **Post** /file-svc/uploads | List Uploads
 *FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{url}/pause | Pause a Download
-*FileSvcAPI* | [**ServeDownload**](docs/FileSvcAPI.md#servedownload) | **Get** /file-svc/serve/download/{url} | Serve a File from a URL
-*FileSvcAPI* | [**ServeUpload**](docs/FileSvcAPI.md#serveupload) | **Get** /file-svc/serve/upload/{id} | Serve an Uploaded File
+*FileSvcAPI* | [**ServeDownload**](docs/FileSvcAPI.md#servedownload) | **Get** /file-svc/serve/download/{url} | Serve a Downloaded file.
+*FileSvcAPI* | [**ServeUpload**](docs/FileSvcAPI.md#serveupload) | **Get** /file-svc/serve/upload/{fileId} | Serve an Uploaded File
 *FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Put** /file-svc/upload | Upload a File
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
 *FirehoseSvcAPI* | [**SubscribeToEvents**](docs/FirehoseSvcAPI.md#subscribetoevents) | **Get** /firehose-svc/events/subscribe | Subscribe to the Event Stream
@@ -137,6 +137,7 @@ Class | Method | HTTP request | Description
 *RegistrySvcAPI* | [**RegisterInstance**](docs/RegistrySvcAPI.md#registerinstance) | **Put** /registry-svc/instance | Register Instance
 *RegistrySvcAPI* | [**RemoveInstance**](docs/RegistrySvcAPI.md#removeinstance) | **Delete** /registry-svc/instance/{id} | Remove Instance
 *RegistrySvcAPI* | [**SaveDefinition**](docs/RegistrySvcAPI.md#savedefinition) | **Put** /registry-svc/definition | Register a Definition
+*RegistrySvcAPI* | [**SelfNode**](docs/RegistrySvcAPI.md#selfnode) | **Get** /registry-svc/node/self | View Self Node
 *SecretSvcAPI* | [**DecryptValue**](docs/SecretSvcAPI.md#decryptvalue) | **Post** /secret-svc/decrypt | Decrypt a Value
 *SecretSvcAPI* | [**EncryptValue**](docs/SecretSvcAPI.md#encryptvalue) | **Post** /secret-svc/encrypt | Encrypt a Value
 *SecretSvcAPI* | [**IsSecure**](docs/SecretSvcAPI.md#issecure) | **Get** /secret-svc/is-secure | Check Security Status
@@ -280,8 +281,10 @@ Class | Method | HTTP request | Description
  - [RegistrySvcLanguage](docs/RegistrySvcLanguage.md)
  - [RegistrySvcListDefinitionsResponse](docs/RegistrySvcListDefinitionsResponse.md)
  - [RegistrySvcListInstancesResponse](docs/RegistrySvcListInstancesResponse.md)
+ - [RegistrySvcListNodesRequest](docs/RegistrySvcListNodesRequest.md)
  - [RegistrySvcListNodesResponse](docs/RegistrySvcListNodesResponse.md)
  - [RegistrySvcNode](docs/RegistrySvcNode.md)
+ - [RegistrySvcNodeSelfResponse](docs/RegistrySvcNodeSelfResponse.md)
  - [RegistrySvcProcess](docs/RegistrySvcProcess.md)
  - [RegistrySvcRegisterInstanceRequest](docs/RegistrySvcRegisterInstanceRequest.md)
  - [RegistrySvcRepositorySpec](docs/RegistrySvcRepositorySpec.md)

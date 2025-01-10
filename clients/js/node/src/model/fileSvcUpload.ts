@@ -14,10 +14,26 @@ import { RequestFile } from './models';
 
 export class FileSvcUpload {
     'createdAt'?: string;
+    /**
+    * Logical file ID spanning all replicas
+    */
+    'fileId'?: string;
+    /**
+    * Filename is the original name of the file
+    */
     'fileName'?: string;
+    /**
+    * FilePath is the full node local path of the file
+    */
     'filePath'?: string;
     'fileSize': number;
+    /**
+    * Unique ID for this replica
+    */
     'id'?: string;
+    /**
+    * ID of the node storing this replica
+    */
     'nodeId'?: string;
     'updatedAt'?: string;
     'userId'?: string;
@@ -28,6 +44,11 @@ export class FileSvcUpload {
         {
             "name": "createdAt",
             "baseName": "createdAt",
+            "type": "string"
+        },
+        {
+            "name": "fileId",
+            "baseName": "fileId",
             "type": "string"
         },
         {

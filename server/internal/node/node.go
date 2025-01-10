@@ -21,6 +21,7 @@ import (
 	"runtime/debug"
 
 	"github.com/gorilla/mux"
+	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/datastore/sqlstore"
 	pglock "github.com/openorch/openorch/sdk/go/lock/pg"
@@ -34,15 +35,17 @@ import (
 )
 
 type NodeInfo struct {
-	Options     *di.Options
-	Router      *mux.Router
-	StarterFunc func() error
+	Options       *di.Options
+	Router        *mux.Router
+	StarterFunc   func() error
+	ClientFactory sdk.ClientFactory
 }
 
 // Start wraps the dependency injection universe creation
 // so getting envars happens outside of that. The two could probably be merged.
 // Node options are a set of node specific configuration options and secrets required for bootstrapping.
-func Start(options node_types.Options) (*NodeInfo, error) {
+func Start(options *node_types.Options) (*NodeInfo, error) {
+
 	defer func() {
 		if r := recover(); r != nil {
 			logger.Error("Panic in node.Start()",
@@ -57,7 +60,10 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 		options.GpuPlatform = os.Getenv("OPENORCH_GPU_PLATFORM")
 	}
 	if options.Address == "" {
-		options.Address = os.Getenv("OPENORCH_NODE_URL")
+		options.Address = os.Getenv("OPENORCH_URL")
+	}
+	if options.NodeId == "" {
+		options.NodeId = os.Getenv("OPENORCH_NODE_ID")
 	}
 	if options.Az == "" {
 		options.Az = os.Getenv("OPENORCH_AZ")
@@ -92,7 +98,7 @@ func Start(options node_types.Options) (*NodeInfo, error) {
 
 	diopt := &di.Options{
 		NodeOptions: options,
-		Test:        false,
+		Test:        options.Test,
 		Url:         options.Address,
 	}
 

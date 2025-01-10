@@ -10,6 +10,7 @@ import (
 	"testing"
 	"time"
 
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
@@ -24,7 +25,7 @@ func TestStart(t *testing.T) {
 
 	dbprefix := sdk.Id("node_start")
 
-	options1 := node_types.Options{
+	options1 := &node_types.Options{
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server1.URL,
@@ -44,7 +45,7 @@ func TestStart(t *testing.T) {
 	server2 := httptest.NewServer(hs1)
 	defer server1.Close()
 
-	options2 := node_types.Options{
+	options2 := &node_types.Options{
 		Db:       "postgres",
 		DbPrefix: dbprefix,
 		Address:  server2.URL,
@@ -83,7 +84,7 @@ func TestStart(t *testing.T) {
 		require.NoError(t, err)
 
 		rsp, _, err := adminClient.RegistrySvcAPI.ListNodes(context.Background()).
-			Body(nil).
+			Body(openapi.RegistrySvcListNodesRequest{}).
 			Execute()
 		require.NoError(t, err)
 

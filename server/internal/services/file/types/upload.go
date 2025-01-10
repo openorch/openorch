@@ -9,17 +9,31 @@ package file_svc
 
 import "time"
 
-// Upload record
+// Upload represents a single instance of a file upload in the system.
+// A single file upload can result in multiple Upload records due to replication
+// across different nodes or instances. Each record corresponds to a specific
+// replica of the file on a particular node.
 type Upload struct {
-	Id        string    `json:"id"`
+	// Unique ID for this replica
+	Id string `json:"id"`
+
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 
-	NodeId           string `json:"nodeId"`
-	FilePath         string `json:"filePath"`
-	OriginalFileName string `json:"fileName"`
-	UserId           string `json:"userId,omitempty"`
-	FileSize         int64  `json:"fileSize" binding:"required" format:"int64"`
+	// ID of the node storing this replica
+	NodeId string `json:"nodeId"`
+
+	// Logical file ID spanning all replicas
+	FileId string `json:"fileId"`
+
+	// FilePath is the full node local path of the file
+	FilePath string `json:"filePath"`
+
+	// Filename is the original name of the file
+	FileName string `json:"fileName"`
+
+	UserId   string `json:"userId,omitempty"`
+	FileSize int64  `json:"fileSize" binding:"required" format:"int64"`
 }
 
 func (u Upload) GetId() string {

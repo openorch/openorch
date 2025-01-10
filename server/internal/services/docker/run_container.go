@@ -206,6 +206,8 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 			)
 		}
 
+		// @todo use the DownloadServe endpoint to fetch the file
+		// into the current node
 		assetPath := *rsp.Download.FilePath
 		assetPath = transformWinPaths(assetPath)
 

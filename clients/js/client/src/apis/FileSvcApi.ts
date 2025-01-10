@@ -61,7 +61,7 @@ export interface ServeDownloadRequest {
 }
 
 export interface ServeUploadRequest {
-    id: string;
+    fileId: string;
 }
 
 export interface UploadFileRequest {
@@ -261,8 +261,8 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     async serveDownloadRaw(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters['url'] == null) {
@@ -287,8 +287,8 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
-     * Serve a File from a URL
+     * Serves a previously downloaded file based on its URL.
+     * Serve a Downloaded file.
      */
     async serveDownload(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
         const response = await this.serveDownloadRaw(requestParameters, initOverrides);
@@ -296,14 +296,14 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     async serveUploadRaw(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
-        if (requestParameters['id'] == null) {
+        if (requestParameters['fileId'] == null) {
             throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling serveUpload().'
+                'fileId',
+                'Required parameter "fileId" was null or undefined when calling serveUpload().'
             );
         }
 
@@ -312,7 +312,7 @@ export class FileSvcApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/file-svc/serve/upload/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            path: `/file-svc/serve/upload/{fileId}`.replace(`{${"fileId"}}`, encodeURIComponent(String(requestParameters['fileId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -322,7 +322,7 @@ export class FileSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Serves a previously uploaded file based on its ID.
+     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
      * Serve an Uploaded File
      */
     async serveUpload(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {

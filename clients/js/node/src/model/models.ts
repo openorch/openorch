@@ -108,8 +108,10 @@ export * from './registrySvcInstanceStatus';
 export * from './registrySvcLanguage';
 export * from './registrySvcListDefinitionsResponse';
 export * from './registrySvcListInstancesResponse';
+export * from './registrySvcListNodesRequest';
 export * from './registrySvcListNodesResponse';
 export * from './registrySvcNode';
+export * from './registrySvcNodeSelfResponse';
 export * from './registrySvcProcess';
 export * from './registrySvcRegisterInstanceRequest';
 export * from './registrySvcRepositorySpec';
@@ -285,8 +287,10 @@ import { RegistrySvcInstanceStatus } from './registrySvcInstanceStatus';
 import { RegistrySvcLanguage } from './registrySvcLanguage';
 import { RegistrySvcListDefinitionsResponse } from './registrySvcListDefinitionsResponse';
 import { RegistrySvcListInstancesResponse } from './registrySvcListInstancesResponse';
+import { RegistrySvcListNodesRequest } from './registrySvcListNodesRequest';
 import { RegistrySvcListNodesResponse } from './registrySvcListNodesResponse';
 import { RegistrySvcNode } from './registrySvcNode';
+import { RegistrySvcNodeSelfResponse } from './registrySvcNodeSelfResponse';
 import { RegistrySvcProcess } from './registrySvcProcess';
 import { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanceRequest';
 import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
@@ -466,8 +470,10 @@ let typeMap: {[index: string]: any} = {
     "RegistrySvcInstance": RegistrySvcInstance,
     "RegistrySvcListDefinitionsResponse": RegistrySvcListDefinitionsResponse,
     "RegistrySvcListInstancesResponse": RegistrySvcListInstancesResponse,
+    "RegistrySvcListNodesRequest": RegistrySvcListNodesRequest,
     "RegistrySvcListNodesResponse": RegistrySvcListNodesResponse,
     "RegistrySvcNode": RegistrySvcNode,
+    "RegistrySvcNodeSelfResponse": RegistrySvcNodeSelfResponse,
     "RegistrySvcProcess": RegistrySvcProcess,
     "RegistrySvcRegisterInstanceRequest": RegistrySvcRegisterInstanceRequest,
     "RegistrySvcRepositorySpec": RegistrySvcRepositorySpec,

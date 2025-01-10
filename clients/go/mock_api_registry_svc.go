@@ -275,3 +275,33 @@ func (mr *MockRegistrySvcAPIMockRecorder) SaveDefinitionExecute(r any) *gomock.C
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveDefinitionExecute", reflect.TypeOf((*MockRegistrySvcAPI)(nil).SaveDefinitionExecute), r)
 }
+
+// SelfNode mocks base method.
+func (m *MockRegistrySvcAPI) SelfNode(ctx context.Context) ApiSelfNodeRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SelfNode", ctx)
+	ret0, _ := ret[0].(ApiSelfNodeRequest)
+	return ret0
+}
+
+// SelfNode indicates an expected call of SelfNode.
+func (mr *MockRegistrySvcAPIMockRecorder) SelfNode(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SelfNode", reflect.TypeOf((*MockRegistrySvcAPI)(nil).SelfNode), ctx)
+}
+
+// SelfNodeExecute mocks base method.
+func (m *MockRegistrySvcAPI) SelfNodeExecute(r ApiSelfNodeRequest) (*RegistrySvcNodeSelfResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SelfNodeExecute", r)
+	ret0, _ := ret[0].(*RegistrySvcNodeSelfResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SelfNodeExecute indicates an expected call of SelfNodeExecute.
+func (mr *MockRegistrySvcAPIMockRecorder) SelfNodeExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SelfNodeExecute", reflect.TypeOf((*MockRegistrySvcAPI)(nil).SelfNodeExecute), r)
+}

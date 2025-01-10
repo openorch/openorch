@@ -7,6 +7,8 @@ tags:
   - authentication
   - authorization
   - service
+  - service to service calls
+  - s2s calls
 ---
 
 # User Svc
@@ -19,15 +21,36 @@ The user service is at the heart of OpenOrch, managing users, tokens, organizati
 
 The most important thing about the User Svc is that service (machine) and user (human) accounts look and function the same.
 
-Every service you write needs to [register](/docs/openorch/register) at startup, or [log in](/docs/openorch/login) with the credentials it saves and manages if it's already regsitered. Just like a human.
+Every service you write needs to [register](/docs/openorch/register) at startup, or [log in](/docs/openorch/login) with the credentials it saves and manages if it's already registered. Just like a human.
 
 A service account is not an admin account, it's a simple user level account. You might wonder how service-to-service calls work then.
 
-### Service-to-service calls
+### Service to service calls
 
-Service to service calls are made possible by simply whitelisting service slugs.
+Most endpoints on OpenOrch can only be called by administrators by default.
 
-At the moment this is only a static whitelist, but to whitelist your own custom services to be able to call built-in services a dynamic mechanism will be introduced.
+Let's take prompting. If you want to let your users prompt AIs you might write a wrapper service called `User Prompter Svc` with the slug `user-prompter-svc`.
+
+If we look at the [Add Prompt endpoint API docs](/docs/openorch/add-prompt), we can see that it mentions
+
+```
+Requires the `prompt-svc:prompt:create` permission.
+```
+
+To enable your service to call the Add Prompt endpoint, we need to create a grant with your service slug and the permission mentioned above:
+
+```yaml
+id: "user-prompter-grant"
+permissionId: "prompt-svc:prompt:create"
+slugs:
+  - "user-prompter-svc"
+```
+
+You can apply these grants with an administrator account in your CI workflow with the `oo` CLI:
+
+```sh
+oo grant save user-prompter-grant.yaml
+```
 
 ### Services with multiple nodes
 

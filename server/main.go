@@ -51,7 +51,7 @@ var port = router.GetPort()
 // @externalDocs.description  OpenOrch API
 // @externalDocs.url          https://openorch.org/docs/category/openorch-api
 func main() {
-	nodeInfo, err := node.Start(node_types.Options{})
+	nodeInfo, err := node.Start(&node_types.Options{})
 	if err != nil {
 		logger.Error("Cannot start node", slog.Any("error", err))
 		os.Exit(1)

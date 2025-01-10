@@ -61,22 +61,25 @@ func (ns *RegistryService) nodeHeartbeat() {
 }
 
 func (ns *RegistryService) heartbeatCycle() error {
-	nodes, err := ns.nodeStore.Query(datastore.Equals([]string{"url"}, ns.URL)).
-		Find()
-	if err != nil {
-		return errors.Wrap(err, "Failed to query nodes")
-	}
+	nodeId := ns.nodeId
+	if nodeId == "" {
+		nodes, err := ns.nodeStore.Query(datastore.Equals([]string{"url"}, ns.URL)).
+			Find()
+		if err != nil {
+			return errors.Wrap(err, "Failed to query nodes")
+		}
 
-	var id string
-
-	if len(nodes) > 0 {
-		id = nodes[0].(*registry.Node).Id
-	} else {
-		id = sdk.Id("node")
+		if len(nodes) > 0 {
+			nodeId = nodes[0].(*registry.Node).Id
+			ns.nodeId = nodeId
+		} else {
+			nodeId = sdk.Id("node")
+			ns.nodeId = nodeId
+		}
 	}
 
 	node := registry.Node{
-		Id:               id,
+		Id:               nodeId,
 		URL:              ns.URL,
 		AvailabilityZone: ns.AvailabilityZone,
 		Region:           ns.Region,

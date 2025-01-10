@@ -26,20 +26,17 @@ jobs:
           docker rm -f mypostgres
           docker run --name mypostgres -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=mydatabase -p 5432:5432 -d postgres
 
-          # Run non dist tests with localstore backend
+          # Run non-distributed tests with localstore backend
           go test ./... -v -tags='!dist' -timeout=30s
 
-          # We rerun nondist tests with an SQL backend
+          # We rerun non-distributed tests with an SQL backend
           OPENORCH_DB=postgres \
             OPENORCH_DB_DEBUG=true \
             OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -tags='!dist' -timeout=30s
 
-          # Run dist test with SQL (localstore makes no sense in a dist setting)
-          OPENORCH_DB=postgres \
-            OPENORCH_DB_DEBUG=true \
-            OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
-            go test ./... -tags=dist -timeout=30s
+          # Run distributed test with SQL (localstore makes no sense in a distributed setting)
+          go test ./... -tags=dist -timeout=30s
         working-directory: server
 
       - name: Test OpenAPI annotations

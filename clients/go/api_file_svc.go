@@ -107,12 +107,12 @@ Requires the `file-svc:download:edit` permission.
 	PauseDownloadExecute(r ApiPauseDownloadRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
-	ServeDownload Serve a File from a URL
+	ServeDownload Serve a Downloaded file.
 
-	Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+	Serves a previously downloaded file based on its URL.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param url URL
+	@param url URL of the file. Even after downloading, the file is still referenced by its original internet URL.
 	@return ApiServeDownloadRequest
 	*/
 	ServeDownload(ctx context.Context, url string) ApiServeDownloadRequest
@@ -124,13 +124,14 @@ Requires the `file-svc:download:edit` permission.
 	/*
 	ServeUpload Serve an Uploaded File
 
-	Serves a previously uploaded file based on its ID.
+	Serves a previously uploaded file based on its File ID.
+Please keep in mind that the ID and the FileID of an Upload is two different fields.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Upload ID
+	@param fileId Upload ID
 	@return ApiServeUploadRequest
 	*/
-	ServeUpload(ctx context.Context, id string) ApiServeUploadRequest
+	ServeUpload(ctx context.Context, fileId string) ApiServeUploadRequest
 
 	// ServeUploadExecute executes the request
 	//  @return *os.File
@@ -901,12 +902,12 @@ func (r ApiServeDownloadRequest) Execute() (*os.File, *http.Response, error) {
 }
 
 /*
-ServeDownload Serve a File from a URL
+ServeDownload Serve a Downloaded file.
 
-Initiates or resumes the download for a specified URL and serves the file with the appropriate Content-Type.
+Serves a previously downloaded file based on its URL.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param url URL
+ @param url URL of the file. Even after downloading, the file is still referenced by its original internet URL.
  @return ApiServeDownloadRequest
 */
 func (a *FileSvcAPIService) ServeDownload(ctx context.Context, url string) ApiServeDownloadRequest {
@@ -1028,7 +1029,7 @@ func (a *FileSvcAPIService) ServeDownloadExecute(r ApiServeDownloadRequest) (*os
 type ApiServeUploadRequest struct {
 	ctx context.Context
 	ApiService FileSvcAPI
-	id string
+	fileId string
 }
 
 func (r ApiServeUploadRequest) Execute() (*os.File, *http.Response, error) {
@@ -1038,17 +1039,18 @@ func (r ApiServeUploadRequest) Execute() (*os.File, *http.Response, error) {
 /*
 ServeUpload Serve an Uploaded File
 
-Serves a previously uploaded file based on its ID.
+Serves a previously uploaded file based on its File ID.
+Please keep in mind that the ID and the FileID of an Upload is two different fields.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Upload ID
+ @param fileId Upload ID
  @return ApiServeUploadRequest
 */
-func (a *FileSvcAPIService) ServeUpload(ctx context.Context, id string) ApiServeUploadRequest {
+func (a *FileSvcAPIService) ServeUpload(ctx context.Context, fileId string) ApiServeUploadRequest {
 	return ApiServeUploadRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
+		fileId: fileId,
 	}
 }
 
@@ -1067,8 +1069,8 @@ func (a *FileSvcAPIService) ServeUploadExecute(r ApiServeUploadRequest) (*os.Fil
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/file-svc/serve/upload/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath := localBasePath + "/file-svc/serve/upload/{fileId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"fileId"+"}", url.PathEscape(parameterValueToString(r.fileId, "fileId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

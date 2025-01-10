@@ -26,13 +26,19 @@ export interface FileSvcUpload {
      */
     createdAt?: string;
     /**
-     * 
+     * Logical file ID spanning all replicas
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
+    fileId?: string;
+    /**
+     * Filename is the original name of the file
      * @type {string}
      * @memberof FileSvcUpload
      */
     fileName?: string;
     /**
-     * 
+     * FilePath is the full node local path of the file
      * @type {string}
      * @memberof FileSvcUpload
      */
@@ -44,13 +50,13 @@ export interface FileSvcUpload {
      */
     fileSize: number;
     /**
-     * 
+     * Unique ID for this replica
      * @type {string}
      * @memberof FileSvcUpload
      */
     id?: string;
     /**
-     * 
+     * ID of the node storing this replica
      * @type {string}
      * @memberof FileSvcUpload
      */
@@ -88,6 +94,7 @@ export function FileSvcUploadFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'fileId': json['fileId'] == null ? undefined : json['fileId'],
         'fileName': json['fileName'] == null ? undefined : json['fileName'],
         'filePath': json['filePath'] == null ? undefined : json['filePath'],
         'fileSize': json['fileSize'],
@@ -110,6 +117,7 @@ export function FileSvcUploadToJSONTyped(value?: FileSvcUpload | null, ignoreDis
     return {
         
         'createdAt': value['createdAt'],
+        'fileId': value['fileId'],
         'fileName': value['fileName'],
         'filePath': value['filePath'],
         'fileSize': value['fileSize'],

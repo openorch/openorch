@@ -22,13 +22,19 @@ export interface FileSvcUpload {
      */
     createdAt?: string;
     /**
-     *
+     * Logical file ID spanning all replicas
+     * @type {string}
+     * @memberof FileSvcUpload
+     */
+    fileId?: string;
+    /**
+     * Filename is the original name of the file
      * @type {string}
      * @memberof FileSvcUpload
      */
     fileName?: string;
     /**
-     *
+     * FilePath is the full node local path of the file
      * @type {string}
      * @memberof FileSvcUpload
      */
@@ -40,13 +46,13 @@ export interface FileSvcUpload {
      */
     fileSize: number;
     /**
-     *
+     * Unique ID for this replica
      * @type {string}
      * @memberof FileSvcUpload
      */
     id?: string;
     /**
-     *
+     * ID of the node storing this replica
      * @type {string}
      * @memberof FileSvcUpload
      */
