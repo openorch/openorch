@@ -9,35 +9,35 @@
 package registry_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionInstanceCreate = usertypes.Permission{
-	Id:   "registry-svc:instance:create",
-	Name: "Registry Svc - Instance Create",
+var PermissionInstanceCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:instance:create"),
+	Name: openapi.PtrString("Registry Svc - Instance Create"),
 }
 
-var PermissionInstanceView = usertypes.Permission{
-	Id:   "registry-svc:instance:view",
-	Name: "Registry Svc - Instance View",
+var PermissionInstanceView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:instance:view"),
+	Name: openapi.PtrString("Registry Svc - Instance View"),
 }
 
-var PermissionInstanceEdit = usertypes.Permission{
-	Id:   "registry-svc:instance:edit",
-	Name: "Registry Svc - Instance Edit",
+var PermissionInstanceEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:instance:edit"),
+	Name: openapi.PtrString("Registry Svc - Instance Edit"),
 }
 
-var PermissionInstanceDelete = usertypes.Permission{
-	Id:   "registry-svc:instance:delete",
-	Name: "Registry Svc - Instance Delete",
+var PermissionInstanceDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:instance:delete"),
+	Name: openapi.PtrString("Registry Svc - Instance Delete"),
 }
 
-var InstanceUserPermissions = []usertypes.Permission{
+var InstanceUserPermissions = []openapi.UserSvcPermission{
 	PermissionInstanceView,
 	PermissionInstanceEdit,
 }
 
-var InstanceAdminPermissions = []usertypes.Permission{
+var InstanceAdminPermissions = []openapi.UserSvcPermission{
 	PermissionInstanceView,
 	PermissionInstanceCreate,
 	PermissionInstanceDelete,

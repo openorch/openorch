@@ -9,34 +9,34 @@
 package registry_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionDefinitionCreate = usertypes.Permission{
-	Id:   "registry-svc:definition:create",
-	Name: "Registry Svc - Definition Create",
+var PermissionDefinitionCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:definition:create"),
+	Name: openapi.PtrString("Registry Svc - Definition Create"),
 }
 
-var PermissionDefinitionView = usertypes.Permission{
-	Id:   "registry-svc:definition:view",
-	Name: "Registry Svc - Definition View",
+var PermissionDefinitionView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:definition:view"),
+	Name: openapi.PtrString("Registry Svc - Definition View"),
 }
 
-var PermissionDefinitionEdit = usertypes.Permission{
-	Id:   "registry-svc:definition:edit",
-	Name: "Registry Svc - Definition Edit",
+var PermissionDefinitionEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:definition:edit"),
+	Name: openapi.PtrString("Registry Svc - Definition Edit"),
 }
 
-var PermissionDefinitionDelete = usertypes.Permission{
-	Id:   "registry-svc:definition:delete",
-	Name: "Registry Svc - Definition Delete",
+var PermissionDefinitionDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:definition:delete"),
+	Name: openapi.PtrString("Registry Svc - Definition Delete"),
 }
 
-var DefinitionUserPermissions = []usertypes.Permission{
+var DefinitionUserPermissions = []openapi.UserSvcPermission{
 	PermissionDefinitionView,
 }
 
-var DefinitionAdminPermissions = []usertypes.Permission{
+var DefinitionAdminPermissions = []openapi.UserSvcPermission{
 	PermissionDefinitionCreate,
 	PermissionDefinitionView,
 	PermissionDefinitionEdit,

@@ -13,7 +13,6 @@
 package registryservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
@@ -41,7 +40,7 @@ func (ns *RegistryService) List(
 ) {
 
 	isAuthRsp, _, err := ns.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionNodeView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *registry.PermissionNodeView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{
 				"deploy-svc",
