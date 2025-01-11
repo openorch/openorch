@@ -84,7 +84,7 @@ func (s *UserService) changePassword(
 		return errors.New("current password is incorrect")
 	}
 
-	newPasswordHash, err := hashPassword(newPassword)
+	newPasswordHash, err := s.hashPassword(newPassword)
 	if err != nil {
 		return err
 	}
@@ -107,7 +107,7 @@ func (s *UserService) changePasswordAdmin(slug, newPassword string) error {
 	}
 	user := userI.(*usertypes.User)
 
-	newPasswordHash, err := hashPassword(newPassword)
+	newPasswordHash, err := s.hashPassword(newPassword)
 	if err != nil {
 		return err
 	}

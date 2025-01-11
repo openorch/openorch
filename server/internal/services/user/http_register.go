@@ -102,7 +102,7 @@ func (s *UserService) register(
 		return nil, errors.New("slug already exists")
 	}
 
-	passwordHash, err := hashPassword(password)
+	passwordHash, err := s.hashPassword(password)
 	if err != nil {
 		return nil, err
 	}
@@ -136,10 +136,15 @@ func (s *UserService) register(
 	return token, s.authTokensStore.Create(token)
 }
 
-func hashPassword(password string) (string, error) {
+func (s *UserService) hashPassword(password string) (string, error) {
+	cost := bcrypt.DefaultCost
+	if s.isTest {
+		cost = bcrypt.MinCost
+	}
+
 	bytes, err := bcrypt.GenerateFromPassword(
 		[]byte(password),
-		bcrypt.DefaultCost,
+		cost,
 	)
 	if err != nil {
 		return "", err
