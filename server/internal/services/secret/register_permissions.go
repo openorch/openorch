@@ -11,7 +11,7 @@ package secretservice
 import (
 	"context"
 
-	client "github.com/openorch/openorch/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	secrettypes "github.com/openorch/openorch/server/internal/services/secret/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
@@ -21,31 +21,33 @@ func (p *SecretService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
-	for _, permission := range secrettypes.Permissions {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
-			RequestBody(client.UserSvcUpserPermissionRequest{
-				Permission: &client.UserSvcPermission{
-					Name:        client.PtrString(permission.Name),
-					Description: client.PtrString(permission.Description),
-				},
-			}).
-			Execute()
-		if err != nil {
-			return err
-		}
+	_, _, err := userSvc.SavePermissions(ctx).
+		Body(openapi.UserSvcSavePermissionsRequest{
+			Permissions: dockertypes.AdminPermissions,
+		}).
+		Execute()
+	if err != nil {
+		return err
 	}
+
+	req := openapi.UserSvcAssignPermissionsRequest{}
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
-		usertypes.RoleUser,
 	} {
-		for _, permission := range secrettypes.Permissions {
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
-				Execute()
-			if err != nil {
-				return err
-			}
+		for _, permission := range dockertypes.AdminPermissions {
+			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
+				RoleId:       openapi.PtrString(role.Id),
+				PermissionId: permission.Id,
+			})
 		}
+	}
+
+	_, _, err = userSvc.AssignPermissions(ctx).
+		Body(req).
+		Execute()
+	if err != nil {
+		return err
 	}
 
 	return nil
