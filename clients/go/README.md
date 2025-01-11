@@ -232,7 +232,7 @@ Class | Method | HTTP request | Description
  - [EmailSvcSendEmailRequest](docs/EmailSvcSendEmailRequest.md)
  - [EmailSvcSendEmailResponse](docs/EmailSvcSendEmailResponse.md)
  - [FileSvcDownload](docs/FileSvcDownload.md)
- - [FileSvcDownloadRequest](docs/FileSvcDownloadRequest.md)
+ - [FileSvcDownloadFileRequest](docs/FileSvcDownloadFileRequest.md)
  - [FileSvcDownloadsResponse](docs/FileSvcDownloadsResponse.md)
  - [FileSvcErrorResponse](docs/FileSvcErrorResponse.md)
  - [FileSvcGetDownloadResponse](docs/FileSvcGetDownloadResponse.md)

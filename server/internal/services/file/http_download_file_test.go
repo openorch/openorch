@@ -76,7 +76,7 @@ func TestDownloadFile(t *testing.T) {
 	downloadUrl := fileHostServer.URL + "/somefile.txt"
 
 	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadUrl),
 		}).
 		Execute()
@@ -86,7 +86,7 @@ func TestDownloadFile(t *testing.T) {
 	require.NoError(t, err)
 
 	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadUrl),
 		}).
 		Execute()
@@ -189,14 +189,14 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	}
 
 	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
 	require.Error(t, err)
 
 	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
@@ -275,14 +275,14 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	require.NoError(t, os.WriteFile(fullFilePath, []byte("Hello world"), 0644))
 
 	_, _, err = userClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()
 	require.Error(t, err)
 
 	_, _, err = adminClient.FileSvcAPI.DownloadFile(context.Background()).
-		Body(openapi.FileSvcDownloadRequest{
+		Body(openapi.FileSvcDownloadFileRequest{
 			Url: openapi.PtrString(downloadURL),
 		}).
 		Execute()

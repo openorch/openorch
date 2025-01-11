@@ -85,7 +85,7 @@ docs/EmailSvcSendEmailRequest.md
 docs/EmailSvcSendEmailResponse.md
 docs/FileSvcAPI.md
 docs/FileSvcDownload.md
-docs/FileSvcDownloadRequest.md
+docs/FileSvcDownloadFileRequest.md
 docs/FileSvcDownloadsResponse.md
 docs/FileSvcErrorResponse.md
 docs/FileSvcGetDownloadResponse.md
@@ -264,7 +264,7 @@ model_email_svc_file.go
 model_email_svc_send_email_request.go
 model_email_svc_send_email_response.go
 model_file_svc_download.go
-model_file_svc_download_request.go
+model_file_svc_download_file_request.go
 model_file_svc_downloads_response.go
 model_file_svc_error_response.go
 model_file_svc_get_download_response.go

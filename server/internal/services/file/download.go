@@ -13,6 +13,7 @@
 package fileservice
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"log/slog"
@@ -32,9 +33,14 @@ import (
 Starts or resumes a download.
 Can resume downloads not found in the JSON statefile.
 */
-func (dm *FileService) download(url, downloadDir string) error {
+func (dm *FileService) download(ctx context.Context, url, downloadDir string) error {
 	if downloadDir == "" {
 		downloadDir = dm.downloadFolder
+	}
+
+	err := dm.getNodeId(ctx)
+	if err != nil {
+		return errors.Wrap(err, "cannot get node id")
 	}
 
 	safeFileName := EncodeURLtoFileName(url)
@@ -65,6 +71,7 @@ func (dm *FileService) download(url, downloadDir string) error {
 				download = &types.InternalDownload{
 					Id:             sdk.Id("upl"),
 					URL:            url,
+					NodeId:         dm.nodeId,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusCompleted,
 					TotalSize:      fullSize,
@@ -74,6 +81,7 @@ func (dm *FileService) download(url, downloadDir string) error {
 				download = &types.InternalDownload{
 					Id:             sdk.Id("upl"),
 					URL:            url,
+					NodeId:         dm.nodeId,
 					FilePath:       safeFullFilePath,
 					Status:         types.DownloadStatusInProgress,
 					DownloadedSize: partialSize,
@@ -82,6 +90,7 @@ func (dm *FileService) download(url, downloadDir string) error {
 				download = &types.InternalDownload{
 					Id:       sdk.Id("upl"),
 					URL:      url,
+					NodeId:   dm.nodeId,
 					FilePath: safeFullFilePath,
 					Status:   types.DownloadStatusInProgress,
 				}
