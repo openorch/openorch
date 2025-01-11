@@ -34,6 +34,7 @@ func (p *DynamicService) registerPermissions() error {
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
+		usertypes.RoleUser,
 	} {
 		for _, permission := range dynamictypes.Permissions {
 			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
