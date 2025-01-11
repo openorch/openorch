@@ -6072,6 +6072,9 @@ const docTemplate = `{
         },
         "file_svc.DownloadFileRequest": {
             "type": "object",
+            "required": [
+                "url"
+            ],
             "properties": {
                 "folderPath": {
                     "type": "string"

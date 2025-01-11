@@ -42,13 +42,13 @@ func TestServeDownloadProxy(t *testing.T) {
 	server := httptest.NewServer(hs)
 	defer server.Close()
 
-	dbprefix := sdk.Id("node_id")
+	dbPrefix := sdk.Id("node_id_")
 
 	opt1 := &node_types.Options{
 		Test:     true,
 		NodeId:   "node1",
 		Db:       "postgres",
-		DbPrefix: dbprefix,
+		DbPrefix: dbPrefix,
 		Address:  server.URL,
 	}
 
@@ -81,7 +81,7 @@ func TestServeDownloadProxy(t *testing.T) {
 		Test:     true,
 		NodeId:   "node2",
 		Db:       "postgres",
-		DbPrefix: dbprefix,
+		DbPrefix: dbPrefix,
 		Address:  server2.URL,
 	}
 	nodeInfo2, err := node.Start(opt2)
@@ -96,7 +96,7 @@ func TestServeDownloadProxy(t *testing.T) {
 		rsp, _, err := adminClient.FileSvcAPI.ListDownloads(ctx).Execute()
 		require.NoError(t, err)
 		require.Equal(t, 1, len(rsp.Downloads))
-		require.Equal(t, int64(16), rsp.Downloads[0].FileSize)
+		require.Equal(t, int64(11), *rsp.Downloads[0].FileSize)
 
 		require.Equal(t, downloadUrl, *rsp.Downloads[0].Url)
 
@@ -105,7 +105,7 @@ func TestServeDownloadProxy(t *testing.T) {
 		require.Equal(t, true, fileRsp != nil)
 		bs, err := ioutil.ReadAll(fileRsp)
 		require.NoError(t, err)
-		require.Equal(t, "Test file things", string(bs))
+		require.Equal(t, "Hello world", string(bs))
 		require.Equal(t, "text/plain; charset=utf-8", fileHttpRsp.Header.Get("Content-Type"))
 	})
 

@@ -26,7 +26,7 @@ var (
 type InternalDownload struct {
 	Id             string         `json:"id"`
 	URL            string         `json:"url"`
-	NodeId         string         `json:"url"`
+	NodeId         string         `json:"nodeId"`
 	FilePath       string         `json:"filePath"`
 	DownloadedSize int64          `json:"downloadedSize"`
 	TotalSize      int64          `json:"totalSize"`
@@ -59,7 +59,7 @@ type Download struct {
 }
 
 type DownloadFileRequest struct {
-	URL        string `json:"url"`
+	URL        string `json:"url" binding:"required"`
 	FolderPath string `json:"folderPath,omitempty"`
 	// FileName   *string `json:"fileName,omitempty"`
 }

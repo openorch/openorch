@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the FileSvcDownloadFileRequest type satisfies the MappedNullable interface at compile time
@@ -21,15 +23,18 @@ var _ MappedNullable = &FileSvcDownloadFileRequest{}
 // FileSvcDownloadFileRequest struct for FileSvcDownloadFileRequest
 type FileSvcDownloadFileRequest struct {
 	FolderPath *string `json:"folderPath,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Url string `json:"url"`
 }
+
+type _FileSvcDownloadFileRequest FileSvcDownloadFileRequest
 
 // NewFileSvcDownloadFileRequest instantiates a new FileSvcDownloadFileRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileSvcDownloadFileRequest() *FileSvcDownloadFileRequest {
+func NewFileSvcDownloadFileRequest(url string) *FileSvcDownloadFileRequest {
 	this := FileSvcDownloadFileRequest{}
+	this.Url = url
 	return &this
 }
 
@@ -73,36 +78,28 @@ func (o *FileSvcDownloadFileRequest) SetFolderPath(v string) {
 	o.FolderPath = &v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
 func (o *FileSvcDownloadFileRequest) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *FileSvcDownloadFileRequest) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *FileSvcDownloadFileRequest) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *FileSvcDownloadFileRequest) SetUrl(v string) {
-	o.Url = &v
+	o.Url = v
 }
 
 func (o FileSvcDownloadFileRequest) MarshalJSON() ([]byte, error) {
@@ -118,10 +115,45 @@ func (o FileSvcDownloadFileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FolderPath) {
 		toSerialize["folderPath"] = o.FolderPath
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
+	toSerialize["url"] = o.Url
 	return toSerialize, nil
+}
+
+func (o *FileSvcDownloadFileRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileSvcDownloadFileRequest := _FileSvcDownloadFileRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFileSvcDownloadFileRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileSvcDownloadFileRequest(varFileSvcDownloadFileRequest)
+
+	return err
 }
 
 type NullableFileSvcDownloadFileRequest struct {
