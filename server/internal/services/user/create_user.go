@@ -37,7 +37,7 @@ func (s *UserService) createUser(
 		return errors.New("contact already exists")
 	}
 
-	passwordHash, err := hashPassword(password)
+	passwordHash, err := s.hashPassword(password)
 	if err != nil {
 		return err
 	}
