@@ -16,6 +16,7 @@ import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { UserSvcAddUserToOrganizationRequest } from '../model/userSvcAddUserToOrganizationRequest';
+import { UserSvcAssignPermissionsRequest } from '../model/userSvcAssignPermissionsRequest';
 import { UserSvcChangePasswordAdminRequest } from '../model/userSvcChangePasswordAdminRequest';
 import { UserSvcChangePasswordRequest } from '../model/userSvcChangePasswordRequest';
 import { UserSvcCreateOrganizationRequest } from '../model/userSvcCreateOrganizationRequest';
@@ -38,9 +39,10 @@ import { UserSvcReadUserByTokenResponse } from '../model/userSvcReadUserByTokenR
 import { UserSvcRegisterRequest } from '../model/userSvcRegisterRequest';
 import { UserSvcRegisterResponse } from '../model/userSvcRegisterResponse';
 import { UserSvcSaveGrantsRequest } from '../model/userSvcSaveGrantsRequest';
+import { UserSvcSavePermissionsRequest } from '../model/userSvcSavePermissionsRequest';
+import { UserSvcSavePermissionsResponse } from '../model/userSvcSavePermissionsResponse';
 import { UserSvcSaveProfileRequest } from '../model/userSvcSaveProfileRequest';
 import { UserSvcSetRolePermissionsRequest } from '../model/userSvcSetRolePermissionsRequest';
-import { UserSvcUpserPermissionRequest } from '../model/userSvcUpserPermissionRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -115,85 +117,6 @@ export class UserSvcApi {
     }
 
     /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * @summary Add Permission to Role
-     * @param roleId Role ID
-     * @param permissionId Permission ID
-     */
-    public async addPermissionToRole (roleId: string, permissionId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/user-svc/role/{roleId}/permission/{permissionId}'
-            .replace('{' + 'roleId' + '}', encodeURIComponent(String(roleId)))
-            .replace('{' + 'permissionId' + '}', encodeURIComponent(String(permissionId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'roleId' is not null or undefined
-        if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling addPermissionToRole.');
-        }
-
-        // verify required parameter 'permissionId' is not null or undefined
-        if (permissionId === null || permissionId === undefined) {
-            throw new Error('Required parameter permissionId was null or undefined when calling addPermissionToRole.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.BearerAuth.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "object");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
      * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
      * @summary Add a User to an Organization
      * @param organizationId Organization ID
@@ -235,6 +158,78 @@ export class UserSvcApi {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(body, "UserSvcAddUserToOrganizationRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.BearerAuth.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "object");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * @summary Assign Permissions
+     * @param body Assign Permissions Request
+     */
+    public async assignPermissions (body: UserSvcAssignPermissionsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+        const localVarPath = this.basePath + '/user-svc/roles/permissions';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'body' is not null or undefined
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling assignPermissions.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(body, "UserSvcAssignPermissionsRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -1545,6 +1540,78 @@ export class UserSvcApi {
         });
     }
     /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * @summary Save Permissions
+     * @param body Permission Details
+     */
+    public async savePermissions (body: UserSvcSavePermissionsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UserSvcSavePermissionsResponse;  }> {
+        const localVarPath = this.basePath + '/user-svc/permissions';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'body' is not null or undefined
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling savePermissions.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(body, "UserSvcSavePermissionsRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.BearerAuth.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: UserSvcSavePermissionsResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "UserSvcSavePermissionsResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * Save user\'s own profile information.
      * @summary Save User Profile
      * @param userId User ID
@@ -1744,85 +1811,6 @@ export class UserSvcApi {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(body, "UserSvcSetRolePermissionsRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.BearerAuth.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "object");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * @summary Upsert a Permission
-     * @param permissionId Permission ID
-     * @param requestBody Permission Details
-     */
-    public async upsertPermission (permissionId: string, requestBody: UserSvcUpserPermissionRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/user-svc/permission/{permissionId}'
-            .replace('{' + 'permissionId' + '}', encodeURIComponent(String(permissionId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'permissionId' is not null or undefined
-        if (permissionId === null || permissionId === undefined) {
-            throw new Error('Required parameter permissionId was null or undefined when calling upsertPermission.');
-        }
-
-        // verify required parameter 'requestBody' is not null or undefined
-        if (requestBody === null || requestBody === undefined) {
-            throw new Error('Required parameter requestBody was null or undefined when calling upsertPermission.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(requestBody, "UserSvcUpserPermissionRequest")
         };
 
         let authenticationPromise = Promise.resolve();

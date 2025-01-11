@@ -21,47 +21,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { UserSvcAddUserToOrganizationRequestToJSON, UserSvcChangePasswordAdminRequestToJSON, UserSvcChangePasswordRequestToJSON, UserSvcCreateOrganizationRequestToJSON, UserSvcCreateRoleRequestToJSON, UserSvcCreateRoleResponseFromJSON, UserSvcCreateUserRequestToJSON, UserSvcGetPermissionsResponseFromJSON, UserSvcGetPublicKeyResponseFromJSON, UserSvcGetRolesResponseFromJSON, UserSvcGetUsersRequestToJSON, UserSvcGetUsersResponseFromJSON, UserSvcIsAuthorizedRequestToJSON, UserSvcIsAuthorizedResponseFromJSON, UserSvcListGrantsRequestToJSON, UserSvcListGrantsResponseFromJSON, UserSvcLoginRequestToJSON, UserSvcLoginResponseFromJSON, UserSvcReadUserByTokenResponseFromJSON, UserSvcRegisterRequestToJSON, UserSvcRegisterResponseFromJSON, UserSvcSaveGrantsRequestToJSON, UserSvcSaveProfileRequestToJSON, UserSvcSetRolePermissionsRequestToJSON, UserSvcUpserPermissionRequestToJSON, } from '../models/index';
+import { UserSvcAddUserToOrganizationRequestToJSON, UserSvcAssignPermissionsRequestToJSON, UserSvcChangePasswordAdminRequestToJSON, UserSvcChangePasswordRequestToJSON, UserSvcCreateOrganizationRequestToJSON, UserSvcCreateRoleRequestToJSON, UserSvcCreateRoleResponseFromJSON, UserSvcCreateUserRequestToJSON, UserSvcGetPermissionsResponseFromJSON, UserSvcGetPublicKeyResponseFromJSON, UserSvcGetRolesResponseFromJSON, UserSvcGetUsersRequestToJSON, UserSvcGetUsersResponseFromJSON, UserSvcIsAuthorizedRequestToJSON, UserSvcIsAuthorizedResponseFromJSON, UserSvcListGrantsRequestToJSON, UserSvcListGrantsResponseFromJSON, UserSvcLoginRequestToJSON, UserSvcLoginResponseFromJSON, UserSvcReadUserByTokenResponseFromJSON, UserSvcRegisterRequestToJSON, UserSvcRegisterResponseFromJSON, UserSvcSaveGrantsRequestToJSON, UserSvcSavePermissionsRequestToJSON, UserSvcSavePermissionsResponseFromJSON, UserSvcSaveProfileRequestToJSON, UserSvcSetRolePermissionsRequestToJSON, } from '../models/index';
 /**
  *
  */
 export class UserSvcApi extends runtime.BaseAPI {
-    /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * Add Permission to Role
-     */
-    addPermissionToRoleRaw(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['roleId'] == null) {
-                throw new runtime.RequiredError('roleId', 'Required parameter "roleId" was null or undefined when calling addPermissionToRole().');
-            }
-            if (requestParameters['permissionId'] == null) {
-                throw new runtime.RequiredError('permissionId', 'Required parameter "permissionId" was null or undefined when calling addPermissionToRole().');
-            }
-            const queryParameters = {};
-            const headerParameters = {};
-            if (this.configuration && this.configuration.apiKey) {
-                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
-            }
-            const response = yield this.request({
-                path: `/user-svc/role/{roleId}/permission/{permissionId}`.replace(`{${"roleId"}}`, encodeURIComponent(String(requestParameters['roleId']))).replace(`{${"permissionId"}}`, encodeURIComponent(String(requestParameters['permissionId']))),
-                method: 'PUT',
-                headers: headerParameters,
-                query: queryParameters,
-            }, initOverrides);
-            return new runtime.JSONApiResponse(response);
-        });
-    }
-    /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * Add Permission to Role
-     */
-    addPermissionToRole(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.addPermissionToRoleRaw(requestParameters, initOverrides);
-            return yield response.value();
-        });
-    }
     /**
      * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
      * Add a User to an Organization
@@ -97,6 +61,41 @@ export class UserSvcApi extends runtime.BaseAPI {
     addUserToOrganization(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.addUserToOrganizationRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * Assign Permissions
+     */
+    assignPermissionsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling assignPermissions().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/roles/permissions`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcAssignPermissionsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response);
+        });
+    }
+    /**
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * Assign Permissions
+     */
+    assignPermissions(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.assignPermissionsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
@@ -701,6 +700,41 @@ export class UserSvcApi extends runtime.BaseAPI {
         });
     }
     /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Save Permissions
+     */
+    savePermissionsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling savePermissions().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/user-svc/permissions`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: UserSvcSavePermissionsRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => UserSvcSavePermissionsResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Save Permissions
+     */
+    savePermissions(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.savePermissionsRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
      * Save user\'s own profile information.
      * Save User Profile
      */
@@ -811,44 +845,6 @@ export class UserSvcApi extends runtime.BaseAPI {
     setRolePermission(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.setRolePermissionRaw(requestParameters, initOverrides);
-            return yield response.value();
-        });
-    }
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * Upsert a Permission
-     */
-    upsertPermissionRaw(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (requestParameters['permissionId'] == null) {
-                throw new runtime.RequiredError('permissionId', 'Required parameter "permissionId" was null or undefined when calling upsertPermission().');
-            }
-            if (requestParameters['requestBody'] == null) {
-                throw new runtime.RequiredError('requestBody', 'Required parameter "requestBody" was null or undefined when calling upsertPermission().');
-            }
-            const queryParameters = {};
-            const headerParameters = {};
-            headerParameters['Content-Type'] = 'application/json';
-            if (this.configuration && this.configuration.apiKey) {
-                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
-            }
-            const response = yield this.request({
-                path: `/user-svc/permission/{permissionId}`.replace(`{${"permissionId"}}`, encodeURIComponent(String(requestParameters['permissionId']))),
-                method: 'PUT',
-                headers: headerParameters,
-                query: queryParameters,
-                body: UserSvcUpserPermissionRequestToJSON(requestParameters['requestBody']),
-            }, initOverrides);
-            return new runtime.JSONApiResponse(response);
-        });
-    }
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * Upsert a Permission
-     */
-    upsertPermission(requestParameters, initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.upsertPermissionRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

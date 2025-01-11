@@ -12,27 +12,29 @@
  * Do not edit the class manually.
  */
 /**
- * Check if a given object implements the FileSvcDownloadRequest interface.
+ * Check if a given object implements the FileSvcDownloadFileRequest interface.
  */
-export function instanceOfFileSvcDownloadRequest(value) {
+export function instanceOfFileSvcDownloadFileRequest(value) {
+    if (!('url' in value) || value['url'] === undefined)
+        return false;
     return true;
 }
-export function FileSvcDownloadRequestFromJSON(json) {
-    return FileSvcDownloadRequestFromJSONTyped(json, false);
+export function FileSvcDownloadFileRequestFromJSON(json) {
+    return FileSvcDownloadFileRequestFromJSONTyped(json, false);
 }
-export function FileSvcDownloadRequestFromJSONTyped(json, ignoreDiscriminator) {
+export function FileSvcDownloadFileRequestFromJSONTyped(json, ignoreDiscriminator) {
     if (json == null) {
         return json;
     }
     return {
         'folderPath': json['folderPath'] == null ? undefined : json['folderPath'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'url': json['url'],
     };
 }
-export function FileSvcDownloadRequestToJSON(json) {
-    return FileSvcDownloadRequestToJSONTyped(json, false);
+export function FileSvcDownloadFileRequestToJSON(json) {
+    return FileSvcDownloadFileRequestToJSONTyped(json, false);
 }
-export function FileSvcDownloadRequestToJSONTyped(value, ignoreDiscriminator = false) {
+export function FileSvcDownloadFileRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

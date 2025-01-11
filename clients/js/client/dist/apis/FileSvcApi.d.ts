@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { FileSvcDownloadRequest, FileSvcDownloadsResponse, FileSvcGetDownloadResponse, FileSvcListUploadsRequest, FileSvcListUploadsResponse, FileSvcUploadFileResponse } from '../models/index';
+import type { FileSvcDownloadFileRequest, FileSvcDownloadsResponse, FileSvcGetDownloadResponse, FileSvcListUploadsRequest, FileSvcListUploadsResponse, FileSvcUploadFileResponse } from '../models/index';
 export interface DownloadFileRequest {
-    body: FileSvcDownloadRequest;
+    body: FileSvcDownloadFileRequest;
 }
 export interface GetDownloadRequest {
     url: string;

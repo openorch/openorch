@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  FileSvcDownloadRequest,
+  FileSvcDownloadFileRequest,
   FileSvcDownloadsResponse,
   FileSvcErrorResponse,
   FileSvcGetDownloadResponse,
@@ -24,8 +24,8 @@ import type {
   FileSvcUploadFileResponse,
 } from '../models/index';
 import {
-    FileSvcDownloadRequestFromJSON,
-    FileSvcDownloadRequestToJSON,
+    FileSvcDownloadFileRequestFromJSON,
+    FileSvcDownloadFileRequestToJSON,
     FileSvcDownloadsResponseFromJSON,
     FileSvcDownloadsResponseToJSON,
     FileSvcErrorResponseFromJSON,
@@ -41,7 +41,7 @@ import {
 } from '../models/index';
 
 export interface DownloadFileRequest {
-    body: FileSvcDownloadRequest;
+    body: FileSvcDownloadFileRequest;
 }
 
 export interface GetDownloadRequest {
@@ -100,7 +100,7 @@ export class FileSvcApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: FileSvcDownloadRequestToJSON(requestParameters['body']),
+            body: FileSvcDownloadFileRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);

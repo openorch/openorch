@@ -809,12 +809,14 @@ definitions:
       url:
         type: string
     type: object
-  file_svc.DownloadRequest:
+  file_svc.DownloadFileRequest:
     properties:
       folderPath:
         type: string
       url:
         type: string
+    required:
+    - url
     type: object
   file_svc.DownloadsResponse:
     properties:
@@ -1948,6 +1950,15 @@ definitions:
     type: object
   user_svc.AddUserToOrganizationResponse:
     type: object
+  user_svc.AssignPermissionsRequest:
+    properties:
+      permissionLinks:
+        items:
+          $ref: '#/definitions/user_svc.PermissionLink'
+        type: array
+    type: object
+  user_svc.AssignPermissionsResponse:
+    type: object
   user_svc.AuthToken:
     properties:
       createdAt:
@@ -2204,6 +2215,13 @@ definitions:
       updatedAt:
         type: string
     type: object
+  user_svc.PermissionLink:
+    properties:
+      permissionId:
+        type: string
+      roleId:
+        type: string
+    type: object
   user_svc.ReadUserByTokenResponse:
     properties:
       activeOrganizationId:
@@ -2259,6 +2277,20 @@ definitions:
     type: object
   user_svc.SaveGrantsResponse:
     type: object
+  user_svc.SavePermissionsRequest:
+    properties:
+      permissions:
+        items:
+          $ref: '#/definitions/user_svc.Permission'
+        type: array
+    type: object
+  user_svc.SavePermissionsResponse:
+    properties:
+      permissions:
+        items:
+          $ref: '#/definitions/user_svc.Permission'
+        type: array
+    type: object
   user_svc.SaveProfileRequest:
     properties:
       name:
@@ -2276,11 +2308,6 @@ definitions:
         type: array
     type: object
   user_svc.SetRolePermissionsResponse:
-    type: object
-  user_svc.UpserPermissionRequest:
-    properties:
-      permission:
-        $ref: '#/definitions/user_svc.Permission'
     type: object
   user_svc.User:
     properties:
@@ -3322,7 +3349,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/file_svc.DownloadRequest'
+          $ref: '#/definitions/file_svc.DownloadFileRequest'
       produces:
       - application/json
       responses:
@@ -5026,53 +5053,6 @@ paths:
       summary: Remove a User from an Organization
       tags:
       - User Svc
-  /user-svc/permission/{permissionId}:
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Creates or updates a permission.
-        <b>The permission ID must be prefixed by the callers slug.</b>
-        Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
-
-        Requires the `user-svc:permission:create` permission.
-      operationId: upsertPermission
-      parameters:
-      - description: Permission ID
-        in: path
-        name: permissionId
-        required: true
-        type: string
-      - description: Permission Details
-        in: body
-        name: requestBody
-        required: true
-        schema:
-          $ref: '#/definitions/user_svc.UpserPermissionRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/user_svc.CreateUserResponse'
-        "400":
-          description: 'Bad Request: Invalid JSON or Bad Namespace'
-          schema:
-            type: string
-        "401":
-          description: Unauthorized
-          schema:
-            type: string
-        "500":
-          description: Internal Server Error
-          schema:
-            type: string
-      security:
-      - BearerAuth: []
-      summary: Upsert a Permission
-      tags:
-      - User Svc
   /user-svc/permission/{permissionId}/is-authorized:
     post:
       consumes:
@@ -5108,6 +5088,48 @@ paths:
       security:
       - BearerAuth: []
       summary: Is Authorized
+      tags:
+      - User Svc
+  /user-svc/permissions:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Creates or updates a list of permissions.
+        <b>The permission ID must be prefixed by the callers slug.</b>
+        Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+
+        Requires the `user-svc:permission:create` permission.
+      operationId: savePermissions
+      parameters:
+      - description: Permission Details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user_svc.SavePermissionsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user_svc.SavePermissionsResponse'
+        "400":
+          description: 'Bad Request: Invalid JSON or Bad Namespace'
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Save Permissions
       tags:
       - User Svc
   /user-svc/public-key:
@@ -5244,46 +5266,6 @@ paths:
       summary: Delete a Role
       tags:
       - User Svc
-  /user-svc/role/{roleId}/permission/{permissionId}:
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Adds a specific permission to a role identified by roleId.
-
-        Requires the `user-svc:permission:assign` permission.
-      operationId: addPermissionToRole
-      parameters:
-      - description: Role ID
-        in: path
-        name: roleId
-        required: true
-        type: string
-      - description: Permission ID
-        in: path
-        name: permissionId
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/user_svc.CreateUserResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/user_svc.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/user_svc.ErrorResponse'
-      security:
-      - BearerAuth: []
-      summary: Add Permission to Role
-      tags:
-      - User Svc
   /user-svc/role/{roleId}/permissions:
     get:
       consumes:
@@ -5387,6 +5369,42 @@ paths:
       security:
       - BearerAuth: []
       summary: Get all Roles
+      tags:
+      - User Svc
+  /user-svc/roles/permissions:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Assign permissions to roles.
+
+        Requires the `user-svc:permission:assign` permission.
+      operationId: assignPermissions
+      parameters:
+      - description: Assign Permissions Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user_svc.AssignPermissionsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Assign Permissions successfully
+          schema:
+            $ref: '#/definitions/user_svc.AssignPermissionsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/user_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Assign Permissions
       tags:
       - User Svc
   /user-svc/self:

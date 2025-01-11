@@ -107,7 +107,7 @@ export class FileSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "FileSvcDownloadRequest")
+                body: ObjectSerializer.serialize(body, "FileSvcDownloadFileRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {

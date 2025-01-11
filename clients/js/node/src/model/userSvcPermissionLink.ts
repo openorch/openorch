@@ -12,26 +12,26 @@
 
 import { RequestFile } from './models';
 
-export class FileSvcDownloadRequest {
-    'folderPath'?: string;
-    'url'?: string;
+export class UserSvcPermissionLink {
+    'permissionId'?: string;
+    'roleId'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "folderPath",
-            "baseName": "folderPath",
+            "name": "permissionId",
+            "baseName": "permissionId",
             "type": "string"
         },
         {
-            "name": "url",
-            "baseName": "url",
+            "name": "roleId",
+            "baseName": "roleId",
             "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return FileSvcDownloadRequest.attributeTypeMap;
+        return UserSvcPermissionLink.attributeTypeMap;
     }
 }
 

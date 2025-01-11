@@ -57,7 +57,7 @@ export * from './emailSvcFile';
 export * from './emailSvcSendEmailRequest';
 export * from './emailSvcSendEmailResponse';
 export * from './fileSvcDownload';
-export * from './fileSvcDownloadRequest';
+export * from './fileSvcDownloadFileRequest';
 export * from './fileSvcDownloadsResponse';
 export * from './fileSvcErrorResponse';
 export * from './fileSvcGetDownloadResponse';
@@ -131,6 +131,7 @@ export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
 export * from './userSvcAddUserToOrganizationRequest';
+export * from './userSvcAssignPermissionsRequest';
 export * from './userSvcAuthToken';
 export * from './userSvcChangePasswordAdminRequest';
 export * from './userSvcChangePasswordRequest';
@@ -154,14 +155,16 @@ export * from './userSvcLoginRequest';
 export * from './userSvcLoginResponse';
 export * from './userSvcOrganization';
 export * from './userSvcPermission';
+export * from './userSvcPermissionLink';
 export * from './userSvcReadUserByTokenResponse';
 export * from './userSvcRegisterRequest';
 export * from './userSvcRegisterResponse';
 export * from './userSvcRole';
 export * from './userSvcSaveGrantsRequest';
+export * from './userSvcSavePermissionsRequest';
+export * from './userSvcSavePermissionsResponse';
 export * from './userSvcSaveProfileRequest';
 export * from './userSvcSetRolePermissionsRequest';
-export * from './userSvcUpserPermissionRequest';
 export * from './userSvcUser';
 import { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest';
 import { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest';
@@ -222,7 +225,7 @@ import { EmailSvcFile } from './emailSvcFile';
 import { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest';
 import { EmailSvcSendEmailResponse } from './emailSvcSendEmailResponse';
 import { FileSvcDownload } from './fileSvcDownload';
-import { FileSvcDownloadRequest } from './fileSvcDownloadRequest';
+import { FileSvcDownloadFileRequest } from './fileSvcDownloadFileRequest';
 import { FileSvcDownloadsResponse } from './fileSvcDownloadsResponse';
 import { FileSvcErrorResponse } from './fileSvcErrorResponse';
 import { FileSvcGetDownloadResponse } from './fileSvcGetDownloadResponse';
@@ -296,6 +299,7 @@ import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
+import { UserSvcAssignPermissionsRequest } from './userSvcAssignPermissionsRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
 import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
 import { UserSvcChangePasswordRequest } from './userSvcChangePasswordRequest';
@@ -319,14 +323,16 @@ import { UserSvcLoginRequest } from './userSvcLoginRequest';
 import { UserSvcLoginResponse } from './userSvcLoginResponse';
 import { UserSvcOrganization } from './userSvcOrganization';
 import { UserSvcPermission } from './userSvcPermission';
+import { UserSvcPermissionLink } from './userSvcPermissionLink';
 import { UserSvcReadUserByTokenResponse } from './userSvcReadUserByTokenResponse';
 import { UserSvcRegisterRequest } from './userSvcRegisterRequest';
 import { UserSvcRegisterResponse } from './userSvcRegisterResponse';
 import { UserSvcRole } from './userSvcRole';
 import { UserSvcSaveGrantsRequest } from './userSvcSaveGrantsRequest';
+import { UserSvcSavePermissionsRequest } from './userSvcSavePermissionsRequest';
+import { UserSvcSavePermissionsResponse } from './userSvcSavePermissionsResponse';
 import { UserSvcSaveProfileRequest } from './userSvcSaveProfileRequest';
 import { UserSvcSetRolePermissionsRequest } from './userSvcSetRolePermissionsRequest';
-import { UserSvcUpserPermissionRequest } from './userSvcUpserPermissionRequest';
 import { UserSvcUser } from './userSvcUser';
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -408,7 +414,7 @@ let typeMap = {
     "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,
     "EmailSvcSendEmailResponse": EmailSvcSendEmailResponse,
     "FileSvcDownload": FileSvcDownload,
-    "FileSvcDownloadRequest": FileSvcDownloadRequest,
+    "FileSvcDownloadFileRequest": FileSvcDownloadFileRequest,
     "FileSvcDownloadsResponse": FileSvcDownloadsResponse,
     "FileSvcErrorResponse": FileSvcErrorResponse,
     "FileSvcGetDownloadResponse": FileSvcGetDownloadResponse,
@@ -475,6 +481,7 @@ let typeMap = {
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
+    "UserSvcAssignPermissionsRequest": UserSvcAssignPermissionsRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
     "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,
     "UserSvcChangePasswordRequest": UserSvcChangePasswordRequest,
@@ -498,14 +505,16 @@ let typeMap = {
     "UserSvcLoginResponse": UserSvcLoginResponse,
     "UserSvcOrganization": UserSvcOrganization,
     "UserSvcPermission": UserSvcPermission,
+    "UserSvcPermissionLink": UserSvcPermissionLink,
     "UserSvcReadUserByTokenResponse": UserSvcReadUserByTokenResponse,
     "UserSvcRegisterRequest": UserSvcRegisterRequest,
     "UserSvcRegisterResponse": UserSvcRegisterResponse,
     "UserSvcRole": UserSvcRole,
     "UserSvcSaveGrantsRequest": UserSvcSaveGrantsRequest,
+    "UserSvcSavePermissionsRequest": UserSvcSavePermissionsRequest,
+    "UserSvcSavePermissionsResponse": UserSvcSavePermissionsResponse,
     "UserSvcSaveProfileRequest": UserSvcSaveProfileRequest,
     "UserSvcSetRolePermissionsRequest": UserSvcSetRolePermissionsRequest,
-    "UserSvcUpserPermissionRequest": UserSvcUpserPermissionRequest,
     "UserSvcUser": UserSvcUser,
 };
 // Check if a string starts with another string without using es6 features

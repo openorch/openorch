@@ -11,22 +11,27 @@
  */
 
 import { RequestFile } from './models';
-import { UserSvcPermission } from './userSvcPermission';
 
-export class UserSvcUpserPermissionRequest {
-    'permission'?: UserSvcPermission;
+export class FileSvcDownloadFileRequest {
+    'folderPath'?: string;
+    'url': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "permission",
-            "baseName": "permission",
-            "type": "UserSvcPermission"
+            "name": "folderPath",
+            "baseName": "folderPath",
+            "type": "string"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return UserSvcUpserPermissionRequest.attributeTypeMap;
+        return FileSvcDownloadFileRequest.attributeTypeMap;
     }
 }
 

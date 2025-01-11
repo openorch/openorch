@@ -9,21 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class FileSvcDownloadRequest {
+export class UserSvcAssignPermissionsRequest {
     static getAttributeTypeMap() {
-        return FileSvcDownloadRequest.attributeTypeMap;
+        return UserSvcAssignPermissionsRequest.attributeTypeMap;
     }
 }
-FileSvcDownloadRequest.discriminator = undefined;
-FileSvcDownloadRequest.attributeTypeMap = [
+UserSvcAssignPermissionsRequest.discriminator = undefined;
+UserSvcAssignPermissionsRequest.attributeTypeMap = [
     {
-        "name": "folderPath",
-        "baseName": "folderPath",
-        "type": "string"
-    },
-    {
-        "name": "url",
-        "baseName": "url",
-        "type": "string"
+        "name": "permissionLinks",
+        "baseName": "permissionLinks",
+        "type": "Array<UserSvcPermissionLink>"
     }
 ];

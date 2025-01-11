@@ -11,6 +11,7 @@
  */
 import http from 'http';
 import { UserSvcAddUserToOrganizationRequest } from '../model/userSvcAddUserToOrganizationRequest';
+import { UserSvcAssignPermissionsRequest } from '../model/userSvcAssignPermissionsRequest';
 import { UserSvcChangePasswordAdminRequest } from '../model/userSvcChangePasswordAdminRequest';
 import { UserSvcChangePasswordRequest } from '../model/userSvcChangePasswordRequest';
 import { UserSvcCreateOrganizationRequest } from '../model/userSvcCreateOrganizationRequest';
@@ -32,9 +33,10 @@ import { UserSvcReadUserByTokenResponse } from '../model/userSvcReadUserByTokenR
 import { UserSvcRegisterRequest } from '../model/userSvcRegisterRequest';
 import { UserSvcRegisterResponse } from '../model/userSvcRegisterResponse';
 import { UserSvcSaveGrantsRequest } from '../model/userSvcSaveGrantsRequest';
+import { UserSvcSavePermissionsRequest } from '../model/userSvcSavePermissionsRequest';
+import { UserSvcSavePermissionsResponse } from '../model/userSvcSavePermissionsResponse';
 import { UserSvcSaveProfileRequest } from '../model/userSvcSaveProfileRequest';
 import { UserSvcSetRolePermissionsRequest } from '../model/userSvcSetRolePermissionsRequest';
-import { UserSvcUpserPermissionRequest } from '../model/userSvcUpserPermissionRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum UserSvcApiApiKeys {
@@ -59,12 +61,12 @@ export declare class UserSvcApi {
     setApiKey(key: UserSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * @summary Add Permission to Role
-     * @param roleId Role ID
-     * @param permissionId Permission ID
+     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
+     * @summary Add a User to an Organization
+     * @param organizationId Organization ID
+     * @param body Add User to Organization Request
      */
-    addPermissionToRole(roleId: string, permissionId: string, options?: {
+    addUserToOrganization(organizationId: string, body: UserSvcAddUserToOrganizationRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -73,12 +75,11 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
-     * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
-     * @summary Add a User to an Organization
-     * @param organizationId Organization ID
-     * @param body Add User to Organization Request
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * @summary Assign Permissions
+     * @param body Assign Permissions Request
      */
-    addUserToOrganization(organizationId: string, body: UserSvcAddUserToOrganizationRequest, options?: {
+    assignPermissions(body: UserSvcAssignPermissionsRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -321,6 +322,19 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * @summary Save Permissions
+     * @param body Permission Details
+     */
+    savePermissions(body: UserSvcSavePermissionsRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: UserSvcSavePermissionsResponse;
+    }>;
+    /**
      * Save user\'s own profile information.
      * @summary Save User Profile
      * @param userId User ID
@@ -355,20 +369,6 @@ export declare class UserSvcApi {
      * @param body Set Role Permissions Request
      */
     setRolePermission(roleId: string, body: UserSvcSetRolePermissionsRequest, options?: {
-        headers: {
-            [name: string]: string;
-        };
-    }): Promise<{
-        response: http.IncomingMessage;
-        body: object;
-    }>;
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * @summary Upsert a Permission
-     * @param permissionId Permission ID
-     * @param requestBody Permission Details
-     */
-    upsertPermission(permissionId: string, requestBody: UserSvcUpserPermissionRequest, options?: {
         headers: {
             [name: string]: string;
         };
