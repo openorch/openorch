@@ -17,9 +17,11 @@
   </div>
 </p>
 
-OpenOrch is, at its core, a microservices development platform—a shared backend designed to supercharge your development process. But it doesn’t stop there. OpenOrch is also an orchestrator, a reverse proxy, an ORM, an AI platform, a user management tool, and much more. It brings together a suite of essential tools to streamline your backend development, enabling you to build and deploy powerful applications with ease.
+Originally developed as a local ChatGPT alternative, OpenOrch quickly evolved into a robust, language-agnostic microservices platform designed to supercharge your development process. This evolution was a natural progression, driven by its authors’ career-spanning expertise in microservices and their need for a comprehensive platform to build on.
 
-Whether you’re managing AI models, creating microservices, or handling user authentication, OpenOrch provides a unified, developer-friendly foundation that adapts to your needs. By eliminating the need to reimplement common functionalities like file uploads and reducing reliance on complex infrastructure components such as secret and configuration management, OpenOrch simplifies setups and accelerates development processes—letting you focus on building, not managing.
+At its core, OpenOrch serves as a shared backend—but it goes far beyond that. It functions as an orchestrator, reverse proxy, ORM, AI platform, user management tool, and more. By unifying a suite of essential tools, OpenOrch streamlines backend development, enabling you to build and deploy powerful applications with ease.
+
+Whether managing AI models, creating microservices, handling user authentication, or leveraging a wide range of other capabilities, OpenOrch provides a unified, developer-friendly foundation that adapts to your needs. By eliminating the need to reimplement common functionalities and reducing reliance on complex infrastructure components, OpenOrch simplifies setups and accelerates development—allowing you to focus on building, not managing.
 
 ## Starting
 
@@ -121,8 +123,8 @@ go install github.com/openorch/openorch/cli/oo@latest
 $ oo env add local http://127.0.0.1:58231
 
 $ oo env ls
-ENV NAME   SELECTED   URL                           DESCRIPTION     
-local      *          http://127.0.0.1:58231 
+ENV NAME   SELECTED   URL                           DESCRIPTION
+local      *          http://127.0.0.1:58231
 ```
 
 ```sh
