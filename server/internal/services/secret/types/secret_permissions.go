@@ -27,7 +27,10 @@ var PermissionSecretRemove = openapi.UserSvcPermission{
 	Name: openapi.PtrString("Secret Svc - Secret Remove"),
 }
 
-var AdminPermissions = []openapi.UserSvcPermission{
+// These sensitive looking permissions are not
+// just for the admins because there is custom authorization
+// (eg. 'readers', 'writers', 'deleters' etc) in the endpoints.
+var Permissions = []openapi.UserSvcPermission{
 	PermissionSecretList,
 	PermissionSecretSave,
 	PermissionSecretRemove,

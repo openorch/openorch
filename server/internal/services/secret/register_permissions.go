@@ -23,7 +23,7 @@ func (p *SecretService) registerPermissions() error {
 
 	_, _, err := userSvc.SavePermissions(ctx).
 		Body(openapi.UserSvcSavePermissionsRequest{
-			Permissions: dockertypes.AdminPermissions,
+			Permissions: secrettypes.AdminPermissions,
 		}).
 		Execute()
 	if err != nil {
@@ -34,8 +34,13 @@ func (p *SecretService) registerPermissions() error {
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
+		// THIS IS CORRECT, DO NOT PANIC
+		// Users can list, save and delete secrets if they
+		// are authorized to do so by the "readers", "writers", "deleters"
+		// list of a secret.
+		usertypes.RoleUser,
 	} {
-		for _, permission := range dockertypes.AdminPermissions {
+		for _, permission := range secrettypes.Permissions {
 			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
 				RoleId:       openapi.PtrString(role.Id),
 				PermissionId: permission.Id,
