@@ -2,8 +2,10 @@ package fileservice_test
 
 import (
 	"context"
+	"io"
 	"io/ioutil"
 
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -19,6 +21,21 @@ import (
 )
 
 func TestServeDownloadProxy(t *testing.T) {
+	fileHostServer := httptest.NewServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			rangeHeader := r.Header.Get("Range")
+			if rangeHeader != "" {
+				w.Header().Set("Content-Range", "bytes 0-10/11")
+				w.WriteHeader(http.StatusPartialContent)
+				io.WriteString(w, "Hello world")
+			} else {
+				w.WriteHeader(http.StatusOK)
+				io.WriteString(w, "Hello world")
+			}
+		}),
+	)
+	defer fileHostServer.Close()
+
 	ctx := context.Background()
 
 	hs := &di.HandlerSwitcher{}
@@ -45,9 +62,13 @@ func TestServeDownloadProxy(t *testing.T) {
 	adminClient, _, err := test.AdminClient(opt1.ClientFactory)
 	require.NoError(t, err)
 
+	downloadUrl := fileHostServer.URL + "/somefile.txt"
+
 	t.Run("download to node1 works", func(t *testing.T) {
 		_, _, err = adminClient.FileSvcAPI.DownloadFile(ctx).
-			Body(openapi.FileSvcDownloadFileRequest{}).
+			Body(openapi.FileSvcDownloadFileRequest{
+				Url: downloadUrl,
+			}).
 			Execute()
 		require.NoError(t, err)
 	})
@@ -70,8 +91,6 @@ func TestServeDownloadProxy(t *testing.T) {
 	adminClient2, _, err := test.AdminClient(opt2.ClientFactory)
 	require.NoError(t, err)
 
-	var downloadUrl string
-
 	t.Run("download serve from node2 works", func(t *testing.T) {
 		// listing can be done from either node as the list comes from a DB
 		rsp, _, err := adminClient.FileSvcAPI.ListDownloads(ctx).Execute()
@@ -79,7 +98,7 @@ func TestServeDownloadProxy(t *testing.T) {
 		require.Equal(t, 1, len(rsp.Downloads))
 		require.Equal(t, int64(16), rsp.Downloads[0].FileSize)
 
-		downloadUrl = *rsp.Downloads[0].Url
+		require.Equal(t, downloadUrl, *rsp.Downloads[0].Url)
 
 		fileRsp, fileHttpRsp, err := adminClient2.FileSvcAPI.ServeDownload(ctx, downloadUrl).Execute()
 		require.NoError(t, err)
