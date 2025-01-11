@@ -163,6 +163,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		options.ClientFactory,
 		options.Authorizer,
 		options.DatastoreFactory,
+		options.Test,
 	)
 	if err != nil {
 		logger.Error(
