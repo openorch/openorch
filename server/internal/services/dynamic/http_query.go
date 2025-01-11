@@ -22,7 +22,6 @@ import (
 	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
-// Query retrieves objects based on provided criteria
 // @ID query
 // @Summary Query Objects
 // @Description Retrieves objects from a specified table based on search criteria.
@@ -46,7 +45,7 @@ func (g *DynamicService) Query(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionGenericView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionObjectView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

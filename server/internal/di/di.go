@@ -658,8 +658,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		userService.Register(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/user-svc/role/{roleId}/permission/{permissionId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		userService.AddPermissionToRole(w, r)
+	router.HandleFunc("/user-svc/roles/permissions", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.AssignPermissions(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/public-key", appl(func(w http.ResponseWriter, r *http.Request) {

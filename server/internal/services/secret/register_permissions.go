@@ -23,7 +23,7 @@ func (p *SecretService) registerPermissions() error {
 
 	_, _, err := userSvc.SavePermissions(ctx).
 		Body(openapi.UserSvcSavePermissionsRequest{
-			Permissions: secrettypes.AdminPermissions,
+			Permissions: secrettypes.Permissions,
 		}).
 		Execute()
 	if err != nil {

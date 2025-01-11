@@ -26,7 +26,7 @@ func (g *DynamicService) UpsertMany(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *dynamictypes.PermissionGenericCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamictypes.PermissionObjectCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

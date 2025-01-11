@@ -9,38 +9,38 @@
 package dynamic_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionGenericCreate = usertypes.Permission{
-	Id:   "dynamic-svc:object:create",
-	Name: "Dynamic Svc - Object Create",
+var PermissionObjectCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("dynamic-svc:object:create"),
+	Name: openapi.PtrString("Dynamic Svc - Object Create"),
 }
 
-var PermissionGenericView = usertypes.Permission{
-	Id:   "dynamic-svc:object:view",
-	Name: "Dynamic Svc - Object View",
+var PermissionObjectView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("dynamic-svc:object:view"),
+	Name: openapi.PtrString("Dynamic Svc - Object View"),
 }
 
-var PermissionGenericEdit = usertypes.Permission{
-	Id:   "dynamic-svc:object:edit",
-	Name: "Dynamic Svc - Object Edit",
+var PermissionObjectEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("dynamic-svc:object:edit"),
+	Name: openapi.PtrString("Dynamic Svc - Object Edit"),
 }
 
-var PermissionGenericDelete = usertypes.Permission{
-	Id:   "dynamic-svc:object:delete",
-	Name: "Dynamic Svc - Object Delete",
+var PermissionObjectDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("dynamic-svc:object:delete"),
+	Name: openapi.PtrString("Dynamic Svc - Object Delete"),
 }
 
-var PermissionGenericStream = usertypes.Permission{
-	Id:   "dynamic-svc:object:stream",
-	Name: "Dynamic Svc - Object Stream",
+var PermissionObjectStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("dynamic-svc:object:stream"),
+	Name: openapi.PtrString("Dynamic Svc - Object Stream"),
 }
 
-var GenericPermissions = []usertypes.Permission{
-	PermissionGenericCreate,
-	PermissionGenericView,
-	PermissionGenericEdit,
-	PermissionGenericDelete,
-	PermissionGenericStream,
+var Permissions = []openapi.UserSvcPermission{
+	PermissionObjectCreate,
+	PermissionObjectView,
+	PermissionObjectEdit,
+	PermissionObjectDelete,
+	PermissionObjectStream,
 }

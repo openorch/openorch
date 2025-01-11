@@ -1,7 +1,6 @@
 package sourceservice
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -38,7 +37,7 @@ func (s *SourceService) CheckoutRepo(w http.ResponseWriter,
 	r *http.Request) {
 
 	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(context.Background(), source.PermissionSourceRepoCheckout.Id).Body(
+		UserSvcAPI.IsAuthorized(r.Context(), *source.PermissionSourceRepoCheckout.Id).Body(
 		openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"deploy-svc"},
 		}).
