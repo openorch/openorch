@@ -540,15 +540,15 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/upsert-permission",
-          label: "Upsert a Permission",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
           id: "openorch/is-authorized",
           label: "Is Authorized",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/save-permissions",
+          label: "Save Permissions",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -576,12 +576,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/add-permission-to-role",
-          label: "Add Permission to Role",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
           id: "openorch/get-permissions-by-role",
           label: "Get Permissions by Role",
           className: "api-method get",
@@ -597,6 +591,12 @@ const sidebar: SidebarsConfig = {
           id: "openorch/get-roles",
           label: "Get all Roles",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "openorch/assign-permissions",
+          label: "Assign Permissions",
+          className: "api-method put",
         },
         {
           type: "doc",

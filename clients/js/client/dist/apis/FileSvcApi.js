@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { FileSvcDownloadRequestToJSON, FileSvcDownloadsResponseFromJSON, FileSvcGetDownloadResponseFromJSON, FileSvcListUploadsRequestToJSON, FileSvcListUploadsResponseFromJSON, FileSvcUploadFileResponseFromJSON, } from '../models/index';
+import { FileSvcDownloadFileRequestToJSON, FileSvcDownloadsResponseFromJSON, FileSvcGetDownloadResponseFromJSON, FileSvcListUploadsRequestToJSON, FileSvcListUploadsResponseFromJSON, FileSvcUploadFileResponseFromJSON, } from '../models/index';
 /**
  *
  */
@@ -46,7 +46,7 @@ export class FileSvcApi extends runtime.BaseAPI {
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
-                body: FileSvcDownloadRequestToJSON(requestParameters['body']),
+                body: FileSvcDownloadFileRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response);
         });

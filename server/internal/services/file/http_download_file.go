@@ -29,7 +29,7 @@ import (
 // @Tags File Svc
 // @Accept json
 // @Produce json
-// @Param body body file.DownloadRequest true "Download Request"
+// @Param body body file.DownloadFileRequest true "Download Request"
 // @Success 200 {object} map[string]any "Download initiated successfully"
 // @Failure 400 {object} file.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} file.ErrorResponse "Unauthorized"
@@ -58,7 +58,7 @@ func (ds *FileService) Download(
 		return
 	}
 
-	req := file.DownloadRequest{}
+	req := file.DownloadFileRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -67,7 +67,7 @@ func (ds *FileService) Download(
 	}
 	defer r.Body.Close()
 
-	err = ds.download(req.URL, req.FolderPath)
+	err = ds.download(r.Context(), req.URL, req.FolderPath)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

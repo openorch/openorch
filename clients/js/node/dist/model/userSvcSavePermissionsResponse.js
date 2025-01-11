@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class UserSvcUpserPermissionRequest {
+export class UserSvcSavePermissionsResponse {
     static getAttributeTypeMap() {
-        return UserSvcUpserPermissionRequest.attributeTypeMap;
+        return UserSvcSavePermissionsResponse.attributeTypeMap;
     }
 }
-UserSvcUpserPermissionRequest.discriminator = undefined;
-UserSvcUpserPermissionRequest.attributeTypeMap = [
+UserSvcSavePermissionsResponse.discriminator = undefined;
+UserSvcSavePermissionsResponse.attributeTypeMap = [
     {
-        "name": "permission",
-        "baseName": "permission",
-        "type": "UserSvcPermission"
+        "name": "permissions",
+        "baseName": "permissions",
+        "type": "Array<UserSvcPermission>"
     }
 ];

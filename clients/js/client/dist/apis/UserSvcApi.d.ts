@@ -10,14 +10,13 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { UserSvcAddUserToOrganizationRequest, UserSvcChangePasswordAdminRequest, UserSvcChangePasswordRequest, UserSvcCreateOrganizationRequest, UserSvcCreateRoleRequest, UserSvcCreateRoleResponse, UserSvcCreateUserRequest, UserSvcGetPermissionsResponse, UserSvcGetPublicKeyResponse, UserSvcGetRolesResponse, UserSvcGetUsersRequest, UserSvcGetUsersResponse, UserSvcIsAuthorizedRequest, UserSvcIsAuthorizedResponse, UserSvcListGrantsRequest, UserSvcListGrantsResponse, UserSvcLoginRequest, UserSvcLoginResponse, UserSvcReadUserByTokenResponse, UserSvcRegisterRequest, UserSvcRegisterResponse, UserSvcSaveGrantsRequest, UserSvcSaveProfileRequest, UserSvcSetRolePermissionsRequest, UserSvcUpserPermissionRequest } from '../models/index';
-export interface AddPermissionToRoleRequest {
-    roleId: string;
-    permissionId: string;
-}
+import type { UserSvcAddUserToOrganizationRequest, UserSvcAssignPermissionsRequest, UserSvcChangePasswordAdminRequest, UserSvcChangePasswordRequest, UserSvcCreateOrganizationRequest, UserSvcCreateRoleRequest, UserSvcCreateRoleResponse, UserSvcCreateUserRequest, UserSvcGetPermissionsResponse, UserSvcGetPublicKeyResponse, UserSvcGetRolesResponse, UserSvcGetUsersRequest, UserSvcGetUsersResponse, UserSvcIsAuthorizedRequest, UserSvcIsAuthorizedResponse, UserSvcListGrantsRequest, UserSvcListGrantsResponse, UserSvcLoginRequest, UserSvcLoginResponse, UserSvcReadUserByTokenResponse, UserSvcRegisterRequest, UserSvcRegisterResponse, UserSvcSaveGrantsRequest, UserSvcSavePermissionsRequest, UserSvcSavePermissionsResponse, UserSvcSaveProfileRequest, UserSvcSetRolePermissionsRequest } from '../models/index';
 export interface AddUserToOrganizationRequest {
     organizationId: string;
     body: UserSvcAddUserToOrganizationRequest;
+}
+export interface AssignPermissionsRequest {
+    body: UserSvcAssignPermissionsRequest;
 }
 export interface ChangePasswordRequest {
     body: UserSvcChangePasswordRequest;
@@ -67,6 +66,9 @@ export interface RemoveUserFromOrganizationRequest {
 export interface SaveGrantsRequest {
     body: UserSvcSaveGrantsRequest;
 }
+export interface SavePermissionsRequest {
+    body: UserSvcSavePermissionsRequest;
+}
 export interface SaveSelfRequest {
     userId: string;
     body: UserSvcSaveProfileRequest;
@@ -79,24 +81,10 @@ export interface SetRolePermissionRequest {
     roleId: string;
     body: UserSvcSetRolePermissionsRequest;
 }
-export interface UpsertPermissionRequest {
-    permissionId: string;
-    requestBody: UserSvcUpserPermissionRequest;
-}
 /**
  *
  */
 export declare class UserSvcApi extends runtime.BaseAPI {
-    /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * Add Permission to Role
-     */
-    addPermissionToRoleRaw(requestParameters: AddPermissionToRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
-    /**
-     * Adds a specific permission to a role identified by roleId.  Requires the `user-svc:permission:assign` permission.
-     * Add Permission to Role
-     */
-    addPermissionToRole(requestParameters: AddPermissionToRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
      * Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
      * Add a User to an Organization
@@ -107,6 +95,16 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      * Add a User to an Organization
      */
     addUserToOrganization(requestParameters: AddUserToOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
+    /**
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * Assign Permissions
+     */
+    assignPermissionsRaw(requestParameters: AssignPermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
+    /**
+     * Assign permissions to roles.  Requires the `user-svc:permission:assign` permission.
+     * Assign Permissions
+     */
+    assignPermissions(requestParameters: AssignPermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
      * Allows an authenticated user to change their own password.
      * Change User Password
@@ -288,6 +286,16 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      */
     saveGrants(requestParameters: SaveGrantsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Save Permissions
+     */
+    savePermissionsRaw(requestParameters: SavePermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserSvcSavePermissionsResponse>>;
+    /**
+     * Creates or updates a list of permissions. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
+     * Save Permissions
+     */
+    savePermissions(requestParameters: SavePermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserSvcSavePermissionsResponse>;
+    /**
      * Save user\'s own profile information.
      * Save User Profile
      */
@@ -317,14 +325,4 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      * Set Role Permissions
      */
     setRolePermission(requestParameters: SetRolePermissionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * Upsert a Permission
-     */
-    upsertPermissionRaw(requestParameters: UpsertPermissionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
-    /**
-     * Creates or updates a permission. <b>The permission ID must be prefixed by the callers slug.</b> Eg. if the owner\'s slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.  Requires the `user-svc:permission:create` permission.
-     * Upsert a Permission
-     */
-    upsertPermission(requestParameters: UpsertPermissionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
 }

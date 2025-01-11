@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gorilla/mux"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -170,8 +169,6 @@ func (fs *FileService) serveRemote(
 	}
 
 	defer file.Close()
-
-	spew.Dump("upload folder", fs.uploadFolder)
 
 	w.Header().Set("Content-Type", fileHttpRsp.Header.Get("Content-Type"))
 	w.Header().Set("Content-Disposition", fileHttpRsp.Header.Get("Content-Disposition"))

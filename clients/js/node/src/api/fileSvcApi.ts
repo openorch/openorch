@@ -15,7 +15,7 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { FileSvcDownloadRequest } from '../model/fileSvcDownloadRequest';
+import { FileSvcDownloadFileRequest } from '../model/fileSvcDownloadFileRequest';
 import { FileSvcDownloadsResponse } from '../model/fileSvcDownloadsResponse';
 import { FileSvcErrorResponse } from '../model/fileSvcErrorResponse';
 import { FileSvcGetDownloadResponse } from '../model/fileSvcGetDownloadResponse';
@@ -100,7 +100,7 @@ export class FileSvcApi {
      * @summary Download a File
      * @param body Download Request
      */
-    public async downloadFile (body: FileSvcDownloadRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: { [key: string]: any; };  }> {
+    public async downloadFile (body: FileSvcDownloadFileRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: { [key: string]: any; };  }> {
         const localVarPath = this.basePath + '/file-svc/download';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -129,7 +129,7 @@ export class FileSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(body, "FileSvcDownloadRequest")
+            body: ObjectSerializer.serialize(body, "FileSvcDownloadFileRequest")
         };
 
         let authenticationPromise = Promise.resolve();

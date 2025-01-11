@@ -9,9 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export declare class FileSvcDownloadRequest {
-    'folderPath'?: string;
-    'url'?: string;
+import { UserSvcPermission } from './userSvcPermission';
+export declare class UserSvcSavePermissionsRequest {
+    'permissions'?: Array<UserSvcPermission>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

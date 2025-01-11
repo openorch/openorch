@@ -1548,7 +1548,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/file_svc.DownloadRequest"
+                            "$ref": "#/definitions/file_svc.DownloadFileRequest"
                         }
                     }
                 ],
@@ -6070,8 +6070,11 @@ const docTemplate = `{
                 }
             }
         },
-        "file_svc.DownloadRequest": {
+        "file_svc.DownloadFileRequest": {
             "type": "object",
+            "required": [
+                "url"
+            ],
             "properties": {
                 "folderPath": {
                     "type": "string"

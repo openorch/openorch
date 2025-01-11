@@ -163,11 +163,11 @@ type FileSvcAPIService service
 type ApiDownloadFileRequest struct {
 	ctx context.Context
 	ApiService FileSvcAPI
-	body *FileSvcDownloadRequest
+	body *FileSvcDownloadFileRequest
 }
 
 // Download Request
-func (r ApiDownloadFileRequest) Body(body FileSvcDownloadRequest) ApiDownloadFileRequest {
+func (r ApiDownloadFileRequest) Body(body FileSvcDownloadFileRequest) ApiDownloadFileRequest {
 	r.body = &body
 	return r
 }

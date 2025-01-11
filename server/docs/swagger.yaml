@@ -809,12 +809,14 @@ definitions:
       url:
         type: string
     type: object
-  file_svc.DownloadRequest:
+  file_svc.DownloadFileRequest:
     properties:
       folderPath:
         type: string
       url:
         type: string
+    required:
+    - url
     type: object
   file_svc.DownloadsResponse:
     properties:
@@ -3347,7 +3349,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/file_svc.DownloadRequest'
+          $ref: '#/definitions/file_svc.DownloadFileRequest'
       produces:
       - application/json
       responses:

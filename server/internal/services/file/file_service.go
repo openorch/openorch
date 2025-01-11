@@ -137,7 +137,7 @@ func (dm *FileService) Start() error {
 		download := downloadI.(*types.InternalDownload)
 
 		if download.Status == types.DownloadStatusInProgress {
-			err = dm.download(download.URL, path.Dir(download.FilePath))
+			err = dm.download(context.Background(), download.URL, path.Dir(download.FilePath))
 			if err != nil {
 				return err
 			}

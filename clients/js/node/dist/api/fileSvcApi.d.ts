@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import http from 'http';
-import { FileSvcDownloadRequest } from '../model/fileSvcDownloadRequest';
+import { FileSvcDownloadFileRequest } from '../model/fileSvcDownloadFileRequest';
 import { FileSvcDownloadsResponse } from '../model/fileSvcDownloadsResponse';
 import { FileSvcGetDownloadResponse } from '../model/fileSvcGetDownloadResponse';
 import { FileSvcListUploadsRequest } from '../model/fileSvcListUploadsRequest';
@@ -45,7 +45,7 @@ export declare class FileSvcApi {
      * @summary Download a File
      * @param body Download Request
      */
-    downloadFile(body: FileSvcDownloadRequest, options?: {
+    downloadFile(body: FileSvcDownloadFileRequest, options?: {
         headers: {
             [name: string]: string;
         };
