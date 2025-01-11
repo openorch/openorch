@@ -44,12 +44,15 @@ type UserService struct {
 	privateKey    *rsa.PrivateKey
 	publicKeyPem  string
 	serviceUserId string
+
+	isTest bool
 }
 
 func NewUserService(
 	clientFactory sdk.ClientFactory,
 	authorizer sdk.Authorizer,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
+	isTest bool,
 ) (*UserService, error) {
 	usersStore, err := datastoreFactory("userSvcUsers", &usertypes.User{})
 	if err != nil {
@@ -156,6 +159,7 @@ func NewUserService(
 		userRoleLinksStore:         userRoleLinksStore,
 		permissionRoleLinksStore:   permissionRoleLinksStore,
 		grantsStore:                grantsStore,
+		isTest:                     isTest,
 	}
 
 	err = service.registerRoles()
@@ -193,7 +197,12 @@ func (s *UserService) bootstrap() error {
 		s.privateKey = privKey
 		s.publicKeyPem = kp.PublicKey
 	} else {
-		privKey, pubKey, err := generateRSAKeys(4096)
+		bits := 4096
+		if s.isTest {
+			bits = 512
+		}
+		privKey, pubKey, err := generateRSAKeys(bits)
+
 		if err != nil {
 			return err
 		}
