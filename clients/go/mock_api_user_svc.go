@@ -39,36 +39,6 @@ func (m *MockUserSvcAPI) EXPECT() *MockUserSvcAPIMockRecorder {
 	return m.recorder
 }
 
-// AddPermissionToRole mocks base method.
-func (m *MockUserSvcAPI) AddPermissionToRole(ctx context.Context, roleId, permissionId string) ApiAddPermissionToRoleRequest {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddPermissionToRole", ctx, roleId, permissionId)
-	ret0, _ := ret[0].(ApiAddPermissionToRoleRequest)
-	return ret0
-}
-
-// AddPermissionToRole indicates an expected call of AddPermissionToRole.
-func (mr *MockUserSvcAPIMockRecorder) AddPermissionToRole(ctx, roleId, permissionId any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPermissionToRole", reflect.TypeOf((*MockUserSvcAPI)(nil).AddPermissionToRole), ctx, roleId, permissionId)
-}
-
-// AddPermissionToRoleExecute mocks base method.
-func (m *MockUserSvcAPI) AddPermissionToRoleExecute(r ApiAddPermissionToRoleRequest) (map[string]any, *http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddPermissionToRoleExecute", r)
-	ret0, _ := ret[0].(map[string]any)
-	ret1, _ := ret[1].(*http.Response)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// AddPermissionToRoleExecute indicates an expected call of AddPermissionToRoleExecute.
-func (mr *MockUserSvcAPIMockRecorder) AddPermissionToRoleExecute(r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPermissionToRoleExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).AddPermissionToRoleExecute), r)
-}
-
 // AddUserToOrganization mocks base method.
 func (m *MockUserSvcAPI) AddUserToOrganization(ctx context.Context, organizationId string) ApiAddUserToOrganizationRequest {
 	m.ctrl.T.Helper()
@@ -97,6 +67,36 @@ func (m *MockUserSvcAPI) AddUserToOrganizationExecute(r ApiAddUserToOrganization
 func (mr *MockUserSvcAPIMockRecorder) AddUserToOrganizationExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUserToOrganizationExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).AddUserToOrganizationExecute), r)
+}
+
+// AssignPermissions mocks base method.
+func (m *MockUserSvcAPI) AssignPermissions(ctx context.Context) ApiAssignPermissionsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AssignPermissions", ctx)
+	ret0, _ := ret[0].(ApiAssignPermissionsRequest)
+	return ret0
+}
+
+// AssignPermissions indicates an expected call of AssignPermissions.
+func (mr *MockUserSvcAPIMockRecorder) AssignPermissions(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AssignPermissions", reflect.TypeOf((*MockUserSvcAPI)(nil).AssignPermissions), ctx)
+}
+
+// AssignPermissionsExecute mocks base method.
+func (m *MockUserSvcAPI) AssignPermissionsExecute(r ApiAssignPermissionsRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AssignPermissionsExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// AssignPermissionsExecute indicates an expected call of AssignPermissionsExecute.
+func (mr *MockUserSvcAPIMockRecorder) AssignPermissionsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AssignPermissionsExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).AssignPermissionsExecute), r)
 }
 
 // ChangePassword mocks base method.
@@ -639,6 +639,36 @@ func (mr *MockUserSvcAPIMockRecorder) SaveGrantsExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveGrantsExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SaveGrantsExecute), r)
 }
 
+// SavePermissions mocks base method.
+func (m *MockUserSvcAPI) SavePermissions(ctx context.Context) ApiSavePermissionsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SavePermissions", ctx)
+	ret0, _ := ret[0].(ApiSavePermissionsRequest)
+	return ret0
+}
+
+// SavePermissions indicates an expected call of SavePermissions.
+func (mr *MockUserSvcAPIMockRecorder) SavePermissions(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SavePermissions", reflect.TypeOf((*MockUserSvcAPI)(nil).SavePermissions), ctx)
+}
+
+// SavePermissionsExecute mocks base method.
+func (m *MockUserSvcAPI) SavePermissionsExecute(r ApiSavePermissionsRequest) (*UserSvcSavePermissionsResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SavePermissionsExecute", r)
+	ret0, _ := ret[0].(*UserSvcSavePermissionsResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SavePermissionsExecute indicates an expected call of SavePermissionsExecute.
+func (mr *MockUserSvcAPIMockRecorder) SavePermissionsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SavePermissionsExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SavePermissionsExecute), r)
+}
+
 // SaveSelf mocks base method.
 func (m *MockUserSvcAPI) SaveSelf(ctx context.Context, userId string) ApiSaveSelfRequest {
 	m.ctrl.T.Helper()
@@ -727,34 +757,4 @@ func (m *MockUserSvcAPI) SetRolePermissionExecute(r ApiSetRolePermissionRequest)
 func (mr *MockUserSvcAPIMockRecorder) SetRolePermissionExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetRolePermissionExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).SetRolePermissionExecute), r)
-}
-
-// UpsertPermission mocks base method.
-func (m *MockUserSvcAPI) UpsertPermission(ctx context.Context, permissionId string) ApiUpsertPermissionRequest {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpsertPermission", ctx, permissionId)
-	ret0, _ := ret[0].(ApiUpsertPermissionRequest)
-	return ret0
-}
-
-// UpsertPermission indicates an expected call of UpsertPermission.
-func (mr *MockUserSvcAPIMockRecorder) UpsertPermission(ctx, permissionId any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertPermission", reflect.TypeOf((*MockUserSvcAPI)(nil).UpsertPermission), ctx, permissionId)
-}
-
-// UpsertPermissionExecute mocks base method.
-func (m *MockUserSvcAPI) UpsertPermissionExecute(r ApiUpsertPermissionRequest) (map[string]any, *http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpsertPermissionExecute", r)
-	ret0, _ := ret[0].(map[string]any)
-	ret1, _ := ret[1].(*http.Response)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// UpsertPermissionExecute indicates an expected call of UpsertPermissionExecute.
-func (mr *MockUserSvcAPIMockRecorder) UpsertPermissionExecute(r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertPermissionExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).UpsertPermissionExecute), r)
 }

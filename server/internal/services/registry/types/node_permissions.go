@@ -9,35 +9,35 @@
 package registry_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionNodeCreate = usertypes.Permission{
-	Id:   "registry-svc:node:create",
-	Name: "Registry Svc - Node Create",
+var PermissionNodeCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:node:create"),
+	Name: openapi.PtrString("Registry Svc - Node Create"),
 }
 
-var PermissionNodeView = usertypes.Permission{
-	Id:   "registry-svc:node:view",
-	Name: "Registry Svc - Node View",
+var PermissionNodeView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:node:view"),
+	Name: openapi.PtrString("Registry Svc - Node View"),
 }
 
-var PermissionNodeEdit = usertypes.Permission{
-	Id:   "registry-svc:node:edit",
-	Name: "Registry Svc - Node Edit",
+var PermissionNodeEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:node:edit"),
+	Name: openapi.PtrString("Registry Svc - Node Edit"),
 }
 
-var PermissionNodeDelete = usertypes.Permission{
-	Id:   "registry-svc:node:delete",
-	Name: "Registry Svc - Node Delete",
+var PermissionNodeDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:node:delete"),
+	Name: openapi.PtrString("Registry Svc - Node Delete"),
 }
 
-var PermissionNodeStream = usertypes.Permission{
-	Id:   "registry-svc:node:stream",
-	Name: "Registry Svc - Node Stream",
+var PermissionNodeStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("registry-svc:node:stream"),
+	Name: openapi.PtrString("Registry Svc - Node Stream"),
 }
 
-var NodeAdminPermissions = []usertypes.Permission{
+var NodeAdminPermissions = []openapi.UserSvcPermission{
 	PermissionNodeCreate,
 	PermissionNodeView,
 	PermissionNodeEdit,

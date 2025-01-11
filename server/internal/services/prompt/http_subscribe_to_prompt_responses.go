@@ -44,7 +44,7 @@ func (p *PromptService) SubscribeToPromptResponses(
 ) {
 
 	isAuthRsp, _, err := p.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), prompt.PermissionPromptStream.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *prompt.PermissionPromptStream.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{}).
 		Execute()
 	if err != nil {

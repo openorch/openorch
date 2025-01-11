@@ -42,7 +42,7 @@ func (g *DynamicService) Upsert(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionObjectCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

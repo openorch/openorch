@@ -20,7 +20,6 @@ import (
 	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
-// Update modifies existing dynamic objects based on given conditions
 // @ID updateObjects
 // @Summary Update Objects
 // @Description Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
@@ -40,7 +39,7 @@ func (g *DynamicService) Update(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionObjectEdit.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

@@ -9,20 +9,20 @@
 package firehose_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionEventPublish = usertypes.Permission{
-	Id:   "firehose-svc:event:publish",
-	Name: "Firehose Svc - Event Publish",
+var PermissionEventPublish = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("firehose-svc:event:publish"),
+	Name: openapi.PtrString("Firehose Svc - Event Publish"),
 }
 
-var PermissionFirehoseStream = usertypes.Permission{
-	Id:   "firehose-svc:event:stream",
-	Name: "Firehose Svc - Event Stream",
+var PermissionFirehoseStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("firehose-svc:event:stream"),
+	Name: openapi.PtrString("Firehose Svc - Event Stream"),
 }
 
-var FirehoseAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionEventPublish,
 	PermissionFirehoseStream,
 }

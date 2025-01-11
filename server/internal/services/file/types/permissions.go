@@ -9,40 +9,40 @@
 package file_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionDownloadCreate = usertypes.Permission{
-	Id:   "file-svc:download:create",
-	Name: "File Svc - Download Create",
+var PermissionDownloadCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:download:create"),
+	Name: openapi.PtrString("File Svc - Download Create"),
 }
 
-var PermissionDownloadView = usertypes.Permission{
-	Id:   "file-svc:download:view",
-	Name: "File Svc - Download View",
+var PermissionDownloadView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:download:view"),
+	Name: openapi.PtrString("File Svc - Download View"),
 }
 
-var PermissionDownloadEdit = usertypes.Permission{
-	Id:   "file-svc:download:edit",
-	Name: "File Svc - Download Edit",
+var PermissionDownloadEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:download:edit"),
+	Name: openapi.PtrString("File Svc - Download Edit"),
 }
 
-var PermissionDownloadDelete = usertypes.Permission{
-	Id:   "file-svc:download:delete",
-	Name: "File Svc - Download Delete",
+var PermissionDownloadDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:download:delete"),
+	Name: openapi.PtrString("File Svc - Download Delete"),
 }
 
-var PermissionUploadCreate = usertypes.Permission{
-	Id:   "file-svc:upload:create",
-	Name: "File Svc - Upload Create",
+var PermissionUploadCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:upload:create"),
+	Name: openapi.PtrString("File Svc - Upload Create"),
 }
 
-var PermissionUploadView = usertypes.Permission{
-	Id:   "file-svc:upload:view",
-	Name: "File Svc - Upload View",
+var PermissionUploadView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("file-svc:upload:view"),
+	Name: openapi.PtrString("File Svc - Upload View"),
 }
 
-var FileAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionDownloadCreate,
 	PermissionDownloadView,
 	PermissionDownloadEdit,

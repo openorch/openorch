@@ -16,17 +16,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 
-	"github.com/gorilla/mux"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
+	"github.com/pkg/errors"
 )
 
-// UpsertPermission handles the creation or update of a permission
-// @ID upsertPermission
-// @Summary Upsert a Permission
-// @Description Creates or updates a permission.
+// @ID savePermissions
+// @Summary Save Permissions
+// @Description Creates or updates a list of permissions.
 // @Description <b>The permission ID must be prefixed by the callers slug.</b>
 // @Description Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
 // @Descripion The user account who creates the permission will become the owner of that permission, and only the owner will be able to edit the permission.
@@ -35,20 +33,18 @@ import (
 // @Tags User Svc
 // @Accept json
 // @Produce json
-// @Param permissionId path string true "Permission ID"
-// @Param requestBody body user.UpserPermissionRequest true "Permission Details"
-// @Success 200 {object} user.CreateUserResponse
+// @Param body body user.SavePermissionsRequest true "Permission Details"
+// @Success 200 {object} user.SavePermissionsResponse
 // @Failure 400 {string} string "Bad Request: Invalid JSON or Bad Namespace"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /user-svc/permission/{permissionId} [put]
-func (s *UserService) UpsertPermission(
+// @Router /user-svc/permissions [put]
+func (s *UserService) SavePermissions(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
-	// @todo add proper permission here
 	usr, err := s.isAuthorized(r, user.PermissionPermissionCreate.Id, nil, nil)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -56,8 +52,8 @@ func (s *UserService) UpsertPermission(
 		return
 	}
 
-	req := user.UpserPermissionRequest{}
-	err = json.NewDecoder(r.Body).Decode(&req)
+	req := &user.SavePermissionsRequest{}
+	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(err.Error()))
@@ -65,19 +61,9 @@ func (s *UserService) UpsertPermission(
 	}
 	defer r.Body.Close()
 
-	vars := mux.Vars(r)
-
-	if !strings.HasPrefix(vars["permissionId"], usr.Slug) {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`Bad Namespace`))
-		return
-	}
-
-	_, err = s.upsertPermission(
+	permissions, err := s.savePermissions(
 		usr.Id,
-		vars["permissionId"],
-		req.Permission.Name,
-		req.Permission.Description,
+		req,
 	)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -85,42 +71,59 @@ func (s *UserService) UpsertPermission(
 		return
 	}
 
-	bs, _ := json.Marshal(user.CreateUserResponse{})
+	bs, _ := json.Marshal(user.SavePermissionsResponse{
+		Permissions: permissions,
+	})
 	w.Write(bs)
 }
 
-func (s *UserService) upsertPermission(
-	userId, id, name, description string,
-) (*user.Permission, error) {
-	query := s.permissionsStore.Query(
-		datastore.Equals(datastore.Field("id"), id),
-	)
+func (s *UserService) savePermissions(
+	userId string,
+	req *user.SavePermissionsRequest,
+) ([]*user.Permission, error) {
+	ret := []*user.Permission{}
 
-	permI, found, err := query.FindOne()
-	if err != nil {
-		return nil, err
-	}
+	for _, permission := range req.Permissions {
+		query := s.permissionsStore.Query(
+			datastore.Equals(datastore.Field("id"), permission.Id),
+		)
 
-	if found {
-		perm := permI.(*user.Permission)
-		if perm.OwnerId != userId {
-			return nil, fmt.Errorf("cannot update unowned permission")
+		permI, found, err := query.FindOne()
+		if err != nil {
+			return nil, err
 		}
 
-		perm.Name = name
-		perm.Description = description
-		query.Update(perm)
-		return perm, nil
+		if found {
+			perm := permI.(*user.Permission)
+			if perm.OwnerId != userId {
+				return nil, fmt.Errorf("cannot update unowned permission")
+			}
+
+			perm.Name = permission.Name
+			perm.Description = permission.Description
+			err = query.Update(perm)
+			if err != nil {
+				return nil, errors.Wrap(err, "error updating permission")
+			}
+
+			ret = append(ret, perm)
+			continue
+		}
+
+		perm := &user.Permission{
+			Id:          permission.Id,
+			Name:        permission.Name,
+			Description: permission.Description,
+			OwnerId:     userId,
+		}
+
+		err = s.permissionsStore.Create(perm)
+		if err != nil {
+			return nil, errors.Wrap(err, "error creating permission")
+		}
+
+		ret = append(ret, perm)
 	}
 
-	permission := &user.Permission{
-		Id:          id,
-		Name:        name,
-		Description: description,
-		OwnerId:     userId,
-	}
-
-	s.permissionsStore.Create(permission)
-
-	return permission, nil
+	return ret, nil
 }

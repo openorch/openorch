@@ -39,7 +39,7 @@ func (ns *DeployService) ListDeployments(
 ) {
 
 	isAuthRsp, _, err := ns.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), deploy.PermissionDeploymentView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *deploy.PermissionDeploymentView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

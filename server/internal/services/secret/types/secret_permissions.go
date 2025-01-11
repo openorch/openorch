@@ -9,25 +9,28 @@
 package secret_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionSecretList = usertypes.Permission{
-	Id:   "secret-svc:secret:list",
-	Name: "Secret Svc - Secret List",
+var PermissionSecretList = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("secret-svc:secret:list"),
+	Name: openapi.PtrString("Secret Svc - Secret List"),
 }
 
-var PermissionSecretSave = usertypes.Permission{
-	Id:   "secret-svc:secret:save",
-	Name: "Secret Svc - Secret Save",
+var PermissionSecretSave = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("secret-svc:secret:save"),
+	Name: openapi.PtrString("Secret Svc - Secret Save"),
 }
 
-var PermissionSecretRemove = usertypes.Permission{
-	Id:   "secret-svc:secret:remove",
-	Name: "Secret Svc - Secret Remove",
+var PermissionSecretRemove = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("secret-svc:secret:remove"),
+	Name: openapi.PtrString("Secret Svc - Secret Remove"),
 }
 
-var Permissions = []usertypes.Permission{
+// These sensitive looking permissions are not
+// just for the admins because there is custom authorization
+// (eg. 'readers', 'writers', 'deleters' etc) in the endpoints.
+var Permissions = []openapi.UserSvcPermission{
 	PermissionSecretList,
 	PermissionSecretSave,
 	PermissionSecretRemove,

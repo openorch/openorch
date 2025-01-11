@@ -9,30 +9,30 @@
 package deploy_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionDeploymentCreate = usertypes.Permission{
-	Id:   "deploy-svc:deployment:create",
-	Name: "Deploy Svc - Deployment Create",
+var PermissionDeploymentCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("deploy-svc:deployment:create"),
+	Name: openapi.PtrString("Deploy Svc - Deployment Create"),
 }
 
-var PermissionDeploymentView = usertypes.Permission{
-	Id:   "deploy-svc:deployment:view",
-	Name: "Deploy Svc - Deployment View",
+var PermissionDeploymentView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("deploy-svc:deployment:view"),
+	Name: openapi.PtrString("Deploy Svc - Deployment View"),
 }
 
-var PermissionDeploymentEdit = usertypes.Permission{
-	Id:   "deploy-svc:deployment:create",
-	Name: "Deploy Svc - Deployment Create",
+var PermissionDeploymentEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("deploy-svc:deployment:create"),
+	Name: openapi.PtrString("Deploy Svc - Deployment Create"),
 }
 
-var PermissionDeploymentDelete = usertypes.Permission{
-	Id:   "deploy-svc:deployment:delete",
-	Name: "Deploy Svc - Deployment Delete",
+var PermissionDeploymentDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("deploy-svc:deployment:delete"),
+	Name: openapi.PtrString("Deploy Svc - Deployment Delete"),
 }
 
-var AdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionDeploymentCreate,
 	PermissionDeploymentEdit,
 	PermissionDeploymentView,

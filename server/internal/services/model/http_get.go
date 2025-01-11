@@ -44,7 +44,7 @@ func (ms *ModelService) Get(
 ) {
 
 	isAuthRsp, _, err := ms.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), model.PermissionModelView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *model.PermissionModelView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"prompt-svc"},
 		}).

@@ -39,7 +39,7 @@ func (ds *FileService) ListDownloads(
 ) {
 
 	isAuthRsp, _, err := ds.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), file.PermissionDownloadView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *file.PermissionDownloadView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

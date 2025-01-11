@@ -24,24 +24,6 @@ import (
 type UserSvcAPI interface {
 
 	/*
-	AddPermissionToRole Add Permission to Role
-
-	Adds a specific permission to a role identified by roleId.
-
-Requires the `user-svc:permission:assign` permission.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param roleId Role ID
-	@param permissionId Permission ID
-	@return ApiAddPermissionToRoleRequest
-	*/
-	AddPermissionToRole(ctx context.Context, roleId string, permissionId string) ApiAddPermissionToRoleRequest
-
-	// AddPermissionToRoleExecute executes the request
-	//  @return map[string]interface{}
-	AddPermissionToRoleExecute(r ApiAddPermissionToRoleRequest) (map[string]interface{}, *http.Response, error)
-
-	/*
 	AddUserToOrganization Add a User to an Organization
 
 	Allows an authorized user to add another user to a specific organization. The user will be assigned a specific role within the organization.
@@ -55,6 +37,22 @@ Requires the `user-svc:permission:assign` permission.
 	// AddUserToOrganizationExecute executes the request
 	//  @return map[string]interface{}
 	AddUserToOrganizationExecute(r ApiAddUserToOrganizationRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+	AssignPermissions Assign Permissions
+
+	Assign permissions to roles.
+
+Requires the `user-svc:permission:assign` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAssignPermissionsRequest
+	*/
+	AssignPermissions(ctx context.Context) ApiAssignPermissionsRequest
+
+	// AssignPermissionsExecute executes the request
+	//  @return map[string]interface{}
+	AssignPermissionsExecute(r ApiAssignPermissionsRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
 	ChangePassword Change User Password
@@ -330,6 +328,24 @@ Requires the `user-svc:grant:create` permission.
 	SaveGrantsExecute(r ApiSaveGrantsRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
+	SavePermissions Save Permissions
+
+	Creates or updates a list of permissions.
+<b>The permission ID must be prefixed by the callers slug.</b>
+Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+
+Requires the `user-svc:permission:create` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSavePermissionsRequest
+	*/
+	SavePermissions(ctx context.Context) ApiSavePermissionsRequest
+
+	// SavePermissionsExecute executes the request
+	//  @return UserSvcSavePermissionsResponse
+	SavePermissionsExecute(r ApiSavePermissionsRequest) (*UserSvcSavePermissionsResponse, *http.Response, error)
+
+	/*
 	SaveSelf Save User Profile
 
 	Save user's own profile information.
@@ -376,173 +392,10 @@ If the caller tries to add a permission it doesn't own to a role, `StatusBadRequ
 	// SetRolePermissionExecute executes the request
 	//  @return map[string]interface{}
 	SetRolePermissionExecute(r ApiSetRolePermissionRequest) (map[string]interface{}, *http.Response, error)
-
-	/*
-	UpsertPermission Upsert a Permission
-
-	Creates or updates a permission.
-<b>The permission ID must be prefixed by the callers slug.</b>
-Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
-
-Requires the `user-svc:permission:create` permission.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param permissionId Permission ID
-	@return ApiUpsertPermissionRequest
-	*/
-	UpsertPermission(ctx context.Context, permissionId string) ApiUpsertPermissionRequest
-
-	// UpsertPermissionExecute executes the request
-	//  @return map[string]interface{}
-	UpsertPermissionExecute(r ApiUpsertPermissionRequest) (map[string]interface{}, *http.Response, error)
 }
 
 // UserSvcAPIService UserSvcAPI service
 type UserSvcAPIService service
-
-type ApiAddPermissionToRoleRequest struct {
-	ctx context.Context
-	ApiService UserSvcAPI
-	roleId string
-	permissionId string
-}
-
-func (r ApiAddPermissionToRoleRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.AddPermissionToRoleExecute(r)
-}
-
-/*
-AddPermissionToRole Add Permission to Role
-
-Adds a specific permission to a role identified by roleId.
-
-Requires the `user-svc:permission:assign` permission.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId Role ID
- @param permissionId Permission ID
- @return ApiAddPermissionToRoleRequest
-*/
-func (a *UserSvcAPIService) AddPermissionToRole(ctx context.Context, roleId string, permissionId string) ApiAddPermissionToRoleRequest {
-	return ApiAddPermissionToRoleRequest{
-		ApiService: a,
-		ctx: ctx,
-		roleId: roleId,
-		permissionId: permissionId,
-	}
-}
-
-// Execute executes the request
-//  @return map[string]interface{}
-func (a *UserSvcAPIService) AddPermissionToRoleExecute(r ApiAddPermissionToRoleRequest) (map[string]interface{}, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.AddPermissionToRole")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/user-svc/role/{roleId}/permission/{permissionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"roleId"+"}", url.PathEscape(parameterValueToString(r.roleId, "roleId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"permissionId"+"}", url.PathEscape(parameterValueToString(r.permissionId, "permissionId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["BearerAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v UserSvcErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v UserSvcErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
 
 type ApiAddUserToOrganizationRequest struct {
 	ctx context.Context
@@ -692,6 +545,154 @@ func (a *UserSvcAPIService) AddUserToOrganizationExecute(r ApiAddUserToOrganizat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v UserSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v UserSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiAssignPermissionsRequest struct {
+	ctx context.Context
+	ApiService UserSvcAPI
+	body *UserSvcAssignPermissionsRequest
+}
+
+// Assign Permissions Request
+func (r ApiAssignPermissionsRequest) Body(body UserSvcAssignPermissionsRequest) ApiAssignPermissionsRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiAssignPermissionsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.AssignPermissionsExecute(r)
+}
+
+/*
+AssignPermissions Assign Permissions
+
+Assign permissions to roles.
+
+Requires the `user-svc:permission:assign` permission.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAssignPermissionsRequest
+*/
+func (a *UserSvcAPIService) AssignPermissions(ctx context.Context) ApiAssignPermissionsRequest {
+	return ApiAssignPermissionsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *UserSvcAPIService) AssignPermissionsExecute(r ApiAssignPermissionsRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.AssignPermissions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user-svc/roles/permissions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
 			var v UserSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -3403,6 +3404,167 @@ func (a *UserSvcAPIService) SaveGrantsExecute(r ApiSaveGrantsRequest) (map[strin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiSavePermissionsRequest struct {
+	ctx context.Context
+	ApiService UserSvcAPI
+	body *UserSvcSavePermissionsRequest
+}
+
+// Permission Details
+func (r ApiSavePermissionsRequest) Body(body UserSvcSavePermissionsRequest) ApiSavePermissionsRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiSavePermissionsRequest) Execute() (*UserSvcSavePermissionsResponse, *http.Response, error) {
+	return r.ApiService.SavePermissionsExecute(r)
+}
+
+/*
+SavePermissions Save Permissions
+
+Creates or updates a list of permissions.
+<b>The permission ID must be prefixed by the callers slug.</b>
+Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
+
+Requires the `user-svc:permission:create` permission.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSavePermissionsRequest
+*/
+func (a *UserSvcAPIService) SavePermissions(ctx context.Context) ApiSavePermissionsRequest {
+	return ApiSavePermissionsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return UserSvcSavePermissionsResponse
+func (a *UserSvcAPIService) SavePermissionsExecute(r ApiSavePermissionsRequest) (*UserSvcSavePermissionsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UserSvcSavePermissionsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.SavePermissions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/user-svc/permissions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiSaveSelfRequest struct {
 	ctx context.Context
 	ApiService UserSvcAPI
@@ -3866,171 +4028,6 @@ func (a *UserSvcAPIService) SetRolePermissionExecute(r ApiSetRolePermissionReque
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v UserSvcErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpsertPermissionRequest struct {
-	ctx context.Context
-	ApiService UserSvcAPI
-	permissionId string
-	requestBody *UserSvcUpserPermissionRequest
-}
-
-// Permission Details
-func (r ApiUpsertPermissionRequest) RequestBody(requestBody UserSvcUpserPermissionRequest) ApiUpsertPermissionRequest {
-	r.requestBody = &requestBody
-	return r
-}
-
-func (r ApiUpsertPermissionRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.UpsertPermissionExecute(r)
-}
-
-/*
-UpsertPermission Upsert a Permission
-
-Creates or updates a permission.
-<b>The permission ID must be prefixed by the callers slug.</b>
-Eg. if the owner's slug is `petstore-svc` the permission should look like `petstore-svc:pet:edit`.
-
-Requires the `user-svc:permission:create` permission.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param permissionId Permission ID
- @return ApiUpsertPermissionRequest
-*/
-func (a *UserSvcAPIService) UpsertPermission(ctx context.Context, permissionId string) ApiUpsertPermissionRequest {
-	return ApiUpsertPermissionRequest{
-		ApiService: a,
-		ctx: ctx,
-		permissionId: permissionId,
-	}
-}
-
-// Execute executes the request
-//  @return map[string]interface{}
-func (a *UserSvcAPIService) UpsertPermissionExecute(r ApiUpsertPermissionRequest) (map[string]interface{}, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserSvcAPIService.UpsertPermission")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/user-svc/permission/{permissionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"permissionId"+"}", url.PathEscape(parameterValueToString(r.permissionId, "permissionId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.requestBody == nil {
-		return localVarReturnValue, nil, reportError("requestBody is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.requestBody
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["BearerAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v string
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v string
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

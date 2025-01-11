@@ -13,34 +13,33 @@
 package userservice
 
 import (
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
 func (us *UserService) registerPermissions() error {
-	for _, permission := range append(usertypes.UserPermissions, usertypes.AdminPermissions...) {
-		_, err := us.upsertPermission(
-			us.serviceUserId,
-			permission.Id,
-			permission.Name,
-			permission.Description,
-		)
-		if err != nil {
-			return err
-		}
+	ps := append(usertypes.UserPermissions, usertypes.AdminPermissions...)
+
+	_, err := us.savePermissions(
+		us.serviceUserId,
+		&usertypes.SavePermissionsRequest{
+			Permissions: ps,
+		},
+	)
+	if err != nil {
+		return err
 	}
+
+	links := []*user.PermissionLink{}
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
 		for _, permission := range usertypes.AdminPermissions {
-			err := us.addPermissionToRole(
-				us.serviceUserId,
-				role.Id,
-				permission.Id,
-			)
-			if err != nil {
-				return err
-			}
+			links = append(links, &user.PermissionLink{
+				RoleId:       role.Id,
+				PermissionId: permission.Id,
+			})
 		}
 	}
 
@@ -48,15 +47,19 @@ func (us *UserService) registerPermissions() error {
 		usertypes.RoleUser,
 	} {
 		for _, permission := range usertypes.UserPermissions {
-			err := us.addPermissionToRole(
-				us.serviceUserId,
-				role.Id,
-				permission.Id,
-			)
-			if err != nil {
-				return err
-			}
+			links = append(links, &user.PermissionLink{
+				RoleId:       role.Id,
+				PermissionId: permission.Id,
+			})
 		}
+	}
+
+	err = us.assignPermissions(
+		us.serviceUserId,
+		links,
+	)
+	if err != nil {
+		return err
 	}
 
 	return nil

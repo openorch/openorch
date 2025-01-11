@@ -23,7 +23,6 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// SetRolePermissions sets the permissions for a specified role
 // @ID setRolePermission
 // @Summary Set Role Permissions
 // @Description Set permissions for a specified role. The caller can add permissions it owns to any role.
@@ -109,7 +108,12 @@ func (s *UserService) overwriteRolePermissions(
 	}
 
 	for _, permissionId := range permissionIds {
-		err = s.addPermissionToRole(userId, roleId, permissionId)
+		err = s.assignPermissions(userId, []*user.PermissionLink{
+			{
+				RoleId:       role.Id,
+				PermissionId: permissionId,
+			},
+		})
 		if err != nil {
 			return err
 		}

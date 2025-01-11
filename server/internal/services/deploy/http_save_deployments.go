@@ -13,7 +13,6 @@
 package deployservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
@@ -41,7 +40,7 @@ func (ns *DeployService) SaveDeployment(
 ) {
 
 	isAuthRsp, _, err := ns.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(context.Background(), deploy.PermissionDeploymentView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *deploy.PermissionDeploymentView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

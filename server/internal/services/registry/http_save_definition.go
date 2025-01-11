@@ -1,7 +1,6 @@
 package registryservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
@@ -29,7 +28,7 @@ func (rs *RegistryService) SaveDefinition(
 ) {
 
 	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionNodeView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *registry.PermissionNodeView.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

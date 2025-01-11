@@ -42,7 +42,7 @@ func (dm *DockerService) BuildImage(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionImageBuild.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionImageBuild.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"deploy-svc"},
 		}).

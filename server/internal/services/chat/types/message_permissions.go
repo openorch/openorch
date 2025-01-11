@@ -9,35 +9,35 @@
 package chat_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionMessageCreate = usertypes.Permission{
-	Id:   "chat-svc:message:create",
-	Name: "Message Create",
+var PermissionMessageCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:message:create"),
+	Name: openapi.PtrString("Message Create"),
 }
 
-var PermissionMessageView = usertypes.Permission{
-	Id:   "chat-svc:message:view",
-	Name: "Message View",
+var PermissionMessageView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:message:view"),
+	Name: openapi.PtrString("Message View"),
 }
 
-var PermissionMessageEdit = usertypes.Permission{
-	Id:   "chat-svc:message:edit",
-	Name: "Message Edit",
+var PermissionMessageEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:message:edit"),
+	Name: openapi.PtrString("Message Edit"),
 }
 
-var PermissionMessageDelete = usertypes.Permission{
-	Id:   "chat-svc:message:delete",
-	Name: "Message Delete",
+var PermissionMessageDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:message:delete"),
+	Name: openapi.PtrString("Message Delete"),
 }
 
-var PermissionMessageStream = usertypes.Permission{
-	Id:   "chat-svc:message:stream",
-	Name: "Message Stream",
+var PermissionMessageStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("chat-svc:message:stream"),
+	Name: openapi.PtrString("Message Stream"),
 }
 
-var MessagePermissions = []usertypes.Permission{
+var MessagePermissions = []openapi.UserSvcPermission{
 	PermissionMessageCreate,
 	PermissionMessageView,
 	PermissionMessageEdit,

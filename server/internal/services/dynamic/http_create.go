@@ -20,7 +20,6 @@ import (
 	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
-// Create creates a new generic object
 // @ID createObject
 // @Summary Create a Generic Object
 // @Description Creates a new object with the provided details. Requires authorization and user authentication.
@@ -40,7 +39,7 @@ func (g *DynamicService) Create(
 ) {
 
 	isAuthRsp, _, err := g.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), dynamic.PermissionGenericCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *dynamic.PermissionObjectCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

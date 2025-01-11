@@ -111,7 +111,12 @@ func (s *UserService) createRole(
 	}
 
 	for _, permissionId := range permissionIds {
-		err = s.addPermissionToRole(ownerId, role.Id, permissionId)
+		err = s.assignPermissions(ownerId, []*user.PermissionLink{
+			{
+				RoleId:       role.Id,
+				PermissionId: permissionId,
+			},
+		})
 		if err != nil {
 			return nil, err
 		}

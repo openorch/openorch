@@ -9,35 +9,35 @@
 package prompt_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionPromptCreate = usertypes.Permission{
-	Id:   "prompt-svc:prompt:create",
-	Name: "Prompt Svc - Prompt Create",
+var PermissionPromptCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("prompt-svc:prompt:create"),
+	Name: openapi.PtrString("Prompt Svc - Prompt Create"),
 }
 
-var PermissionPromptView = usertypes.Permission{
-	Id:   "prompt-svc:prompt:view",
-	Name: "Prompt Svc - Prompt View",
+var PermissionPromptView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("prompt-svc:prompt:view"),
+	Name: openapi.PtrString("Prompt Svc - Prompt View"),
 }
 
-var PermissionPromptEdit = usertypes.Permission{
-	Id:   "prompt-svc:prompt:edit",
-	Name: "Prompt Svc - Prompt Edit",
+var PermissionPromptEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("prompt-svc:prompt:edit"),
+	Name: openapi.PtrString("Prompt Svc - Prompt Edit"),
 }
 
-var PermissionPromptDelete = usertypes.Permission{
-	Id:   "prompt-svc:prompt:delete",
-	Name: "Prompt Svc - Prompt Delete",
+var PermissionPromptDelete = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("prompt-svc:prompt:delete"),
+	Name: openapi.PtrString("Prompt Svc - Prompt Delete"),
 }
 
-var PermissionPromptStream = usertypes.Permission{
-	Id:   "prompt-svc:prompt:stream",
-	Name: "Prompt Svc - Prompt Stream",
+var PermissionPromptStream = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("prompt-svc:prompt:stream"),
+	Name: openapi.PtrString("Prompt Svc - Prompt Stream"),
 }
 
-var PromptAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionPromptCreate,
 	PermissionPromptView,
 	PermissionPromptEdit,

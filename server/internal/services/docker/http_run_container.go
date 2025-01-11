@@ -42,7 +42,7 @@ func (dm *DockerService) RunContainer(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), docker.PermissionContainerCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"model-svc", "deploy-svc"},
 		}).

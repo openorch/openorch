@@ -9,35 +9,35 @@
 package docker_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionContainerCreate = usertypes.Permission{
-	Id:   "docker-svc:container:create",
-	Name: "Docker Svc - Container Create",
+var PermissionContainerCreate = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("docker-svc:container:create"),
+	Name: openapi.PtrString("Docker Svc - Container Create"),
 }
 
-var PermissionContainerView = usertypes.Permission{
-	Id:   "docker-svc:container:view",
-	Name: "Docker Svc - Container View",
+var PermissionContainerView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("docker-svc:container:view"),
+	Name: openapi.PtrString("Docker Svc - Container View"),
 }
 
-var PermissionContainerEdit = usertypes.Permission{
-	Id:   "docker-svc:container:edit",
-	Name: "Docker Svc - Container Edit",
+var PermissionContainerEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("docker-svc:container:edit"),
+	Name: openapi.PtrString("Docker Svc - Container Edit"),
 }
 
-var PermissionContainerStop = usertypes.Permission{
-	Id:   "docker-svc:container:stop",
-	Name: "Docker Svc - Container Stop",
+var PermissionContainerStop = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("docker-svc:container:stop"),
+	Name: openapi.PtrString("Docker Svc - Container Stop"),
 }
 
-var PermissionImageBuild = usertypes.Permission{
-	Id:   "docker-svc:image:build",
-	Name: "Docker Svc - Image Build",
+var PermissionImageBuild = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("docker-svc:image:build"),
+	Name: openapi.PtrString("Docker Svc - Image Build"),
 }
 
-var AdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionContainerView,
 	PermissionContainerEdit,
 	PermissionContainerStop,

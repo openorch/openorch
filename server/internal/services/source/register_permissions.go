@@ -11,7 +11,7 @@ package sourceservice
 import (
 	"context"
 
-	client "github.com/openorch/openorch/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 
@@ -22,31 +22,33 @@ func (ns *SourceService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := ns.clientFactory.Client(sdk.WithToken(ns.token)).UserSvcAPI
 
-	for _, permission := range sourcetypes.SourceAdminPermissions {
-		_, _, err := userSvc.UpsertPermission(ctx, permission.Id).
-			RequestBody(client.UserSvcUpserPermissionRequest{
-				Permission: &client.UserSvcPermission{
-					Name:        client.PtrString(permission.Name),
-					Description: client.PtrString(permission.Description),
-				},
-			}).
-			Execute()
-		if err != nil {
-			return err
-		}
+	_, _, err := userSvc.SavePermissions(ctx).
+		Body(openapi.UserSvcSavePermissionsRequest{
+			Permissions: sourcetypes.AdminPermissions,
+		}).
+		Execute()
+	if err != nil {
+		return err
 	}
+
+	req := openapi.UserSvcAssignPermissionsRequest{}
 
 	for _, role := range []*usertypes.Role{
 		usertypes.RoleAdmin,
 	} {
-		for _, permission := range sourcetypes.SourceAdminPermissions {
-
-			_, _, err := userSvc.AddPermissionToRole(ctx, role.Id, permission.Id).
-				Execute()
-			if err != nil {
-				return err
-			}
+		for _, permission := range sourcetypes.AdminPermissions {
+			req.PermissionLinks = append(req.PermissionLinks, openapi.UserSvcPermissionLink{
+				RoleId:       openapi.PtrString(role.Id),
+				PermissionId: permission.Id,
+			})
 		}
+	}
+
+	_, _, err = userSvc.AssignPermissions(ctx).
+		Body(req).
+		Execute()
+	if err != nil {
+		return err
 	}
 
 	return nil

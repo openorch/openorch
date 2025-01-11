@@ -1,7 +1,6 @@
 package registryservice
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -32,7 +31,7 @@ func (rs *RegistryService) DeleteDefinition(
 ) {
 
 	isAuthRsp, _, err := rs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(context.Background(), registry.PermissionDefinitionDelete.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *registry.PermissionDefinitionDelete.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"deploy-svc"},
 		}).

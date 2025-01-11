@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/openorch/openorch/sdk/go/datastore"
+	user "github.com/openorch/openorch/server/internal/services/user/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
@@ -62,11 +63,18 @@ func (s *UserService) upsertRole(
 		}
 	}
 
+	links := []*user.PermissionLink{}
+
 	for _, permissionId := range permissionIds {
-		err = s.addPermissionToRole(userId, roleI.GetId(), permissionId)
-		if err != nil {
-			return err
-		}
+		links = append(links, &user.PermissionLink{
+			RoleId:       roleI.GetId(),
+			PermissionId: permissionId,
+		})
+	}
+
+	err = s.assignPermissions(userId, links)
+	if err != nil {
+		return err
 	}
 
 	return nil

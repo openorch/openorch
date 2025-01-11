@@ -9,14 +9,14 @@
 package source_svc
 
 import (
-	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
+	openapi "github.com/openorch/openorch/clients/go"
 )
 
-var PermissionSourceRepoCheckout = usertypes.Permission{
-	Id:   "source-svc:repo:checkout",
-	Name: "Source Svc - Repo Checkout",
+var PermissionSourceRepoCheckout = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("source-svc:repo:checkout"),
+	Name: openapi.PtrString("Source Svc - Repo Checkout"),
 }
 
-var SourceAdminPermissions = []usertypes.Permission{
+var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionSourceRepoCheckout,
 }

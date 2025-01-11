@@ -11,7 +11,6 @@ import (
 	"golang.org/x/time/rate"
 )
 
-// Check records a resource access and returns if the access is allowed.
 // @ID check
 // @Summary Check
 // @Description Check records a resource access and returns if the access is allowed.
@@ -31,7 +30,7 @@ func (s *PolicyService) Check(
 ) {
 
 	isAuthRsp, _, err := s.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), policy.PermissionTemplateEdit.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *policy.PermissionTemplateEdit.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
