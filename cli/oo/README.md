@@ -22,14 +22,14 @@ SELECTED   NAME    URL                                DESCRIPTION
 #### Login
 
 ```sh
-~/openorch/cli$ go run main.go login singulatron changeme
+~/openorch/cli$ go run main.go login openorch changeme
 ```
 
 #### Whoami
 
 ```sh
 $ ~/openorch/cli$ go run main.go whoami
-singularon
+openorch
 ```
 
 ### Service Definitions
@@ -42,7 +42,7 @@ image:
   port: 8080
 hostPort: 8887
 
-~/singulatron/cli$ cat fixtures/definitionB.yaml
+~/openorch/cli$ cat fixtures/definitionB.yaml
 id: test-b
 repository:
   url: https://github.com/openorch/openorch.git
@@ -50,8 +50,8 @@ repository:
   port: 58231
 hostPort: 9998
 
-~/singulatron/cli$ go run main.go definition save fixtures/definitionA.yaml
-~/singulatron/cli$ go run main.go definition save fixtures/definitionB.yaml
+~/openorch/cli$ go run main.go definition save fixtures/definitionA.yaml
+~/openorch/cli$ go run main.go definition save fixtures/definitionB.yaml
 ```
 
 ### Deployments
@@ -59,8 +59,8 @@ hostPort: 9998
 #### List
 
 ```sh
-~/singulatron/cli$ go run main.go deployment list
+~/openorch/cli$ go run main.go deployment list
 ID                DEFINITION ID   STATUS   DETAILS
 depl_dy2PDIkzqf   test-b          Error    build failed: COPY failed: file not found in build context or excluded by…
-depl_dbOdi5eLQK   test-a          OK  
+depl_dbOdi5eLQK   test-a          OK
 ```

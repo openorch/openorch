@@ -12,11 +12,11 @@ The easiest way to run OpenOrch is to use [Docker Compose](https://docs.docker.c
 
 ## Docker Compose
 
-The easiest way to run this is to clone [the repo](https://github.com/singulatron/singulatron), step into the repo root and run:
+The easiest way to run this is to clone [the repo](https://github.com/openorch/openorch), step into the repo root and run:
 
 ```sh
-git clone git@github.com:singulatron/singulatron.git
-cd singulatron
+git clone git@github.com:openorch/openorch.git
+cd openorch
 docker compose up
 # or use the -d flag to run it in the background
 # docker compose up -d
@@ -35,7 +35,7 @@ If you have both Go and Angular installed on your computer, the easiest way to d
 ## Backend
 
 ```bash
-cd localtron;
+cd server;
 go run main.go
 ```
 

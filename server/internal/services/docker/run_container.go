@@ -15,11 +15,16 @@ package dockerservice
 import (
 	"bufio"
 	"context"
+	"crypto/sha256"
+	"encoding/base64"
+	"encoding/hex"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log/slog"
 	"os"
 	"path"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -55,7 +60,7 @@ func (d *DockerService) runContainer(
 		options = &dockertypes.RunContainerOptions{}
 	}
 	if options.Name == "" {
-		options.Name = "the-singulatron"
+		options.Name = "the-openorch"
 	}
 
 	envs, hostBinds, err := d.additionalEnvsAndHostBinds(
@@ -184,47 +189,55 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 ) ([]string, []string, error) {
 	// We turn the asset map (which is an envar name to file URL map)
 	// eg. {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
-	// to an envarNameToFilePath
-	// eg. {"MODEL": "/var/lib/some/local/path.gguf"}
-	envarNameToFilePath := map[string]string{}
+	// to environment variables
+	// eg. MODEL=/var/lib/some/local/path.gguf"
+	environment := []string{}
 
 	// We translate URLs in the assets map into local file paths
-	// by asking the File Svc where did it download the file(s).
+	// by streaming the URL from the File Svc into a file and then mounting that file.
 
 	for envarName, assetURL := range assets {
+		// We use the /root/.openorch/downloads as it's also the location that the File Svc uses.
+		// So if everything is running on the same node we avoid unnecessary processing.
+		// This is obviously just a hack for local setups when we run directly on the host and not inside containers.
+		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(assetURL))
 
-		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			FileSvcAPI.GetDownload(context.Background(), assetURL).
-			Execute()
-		if err != nil {
-			return nil, nil, err
-		}
-		if !rsp.Exists {
-			return nil, nil, fmt.Errorf(
-				"asset with URL '%v' cannot be found locally",
-				assetURL,
-			)
+		assetExists := false
+		if fileExists(assetPath) {
+			assetExists = true
 		}
 
-		// @todo use the DownloadServe endpoint to fetch the file
-		// into the current node
-		assetPath := *rsp.Download.FilePath
+		if !assetExists {
+			// @todo we could do checksum calculation to verify file integrity as well
+			rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+				FileSvcAPI.ServeDownload(context.Background(), assetURL).
+				Execute()
+			if err != nil {
+				return nil, nil, err
+			}
+			defer rspFile.Close()
+
+			targetFile, err := os.Create(assetPath)
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "failed to create asset file")
+			}
+			defer targetFile.Close()
+
+			_, err = io.Copy(targetFile, rspFile)
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "failed to write asset data to file")
+			}
+		}
+
 		assetPath = transformWinPaths(assetPath)
 
-		envarNameToFilePath[envarName] = assetPath
-	}
-
-	envs := []string{}
-
-	for envName, assetPath := range envarNameToFilePath {
-		fileName := path.Base(assetPath)
-		// eg. MODEL=/root/.openorch/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
-		envs = append(
-			envs,
+		// eg. MODEL=/root/.openorch/downloads/sOm3H4ashedFileName
+		environment = append(
+			environment,
 			fmt.Sprintf(
-				"%v=/root/.openorch/downloads/%v",
-				envName,
-				fileName,
+				"%v=%v",
+				envarName,
+				assetPath,
 			),
 		)
 	}
@@ -234,8 +247,8 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	// If the OpenOrch daemon is running directly on the host, we will just mount the ~/.openorch folder in
 	// the containers the OpenOrch daemon starts.
 
-	singulatronVolumeName := d.volumeName
-	if singulatronVolumeName == "" {
+	openorchVolumeName := d.volumeName
+	if openorchVolumeName == "" {
 		if isRunningInDocker() {
 			currentContainerId, err := getContainerID()
 			if err != nil {
@@ -250,11 +263,13 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 				return nil, nil, err
 			}
 
-			singulatronVolumeName = mountedVolume
+			openorchVolumeName = mountedVolume
 		} else {
 			// If we are not running in Docker, we will ask the Config Svc about the config directory and we mount that.
-
-			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
+			// If that's not set, we will just default to `~/.openorch`.
+			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+				ConfigSvcAPI.GetConfig(context.Background()).
+				Execute()
 			if err != nil {
 				return nil, nil, err
 			}
@@ -266,7 +281,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 				configFolderPath = path.Join(homeDir, ".openorch")
 			}
 
-			singulatronVolumeName = configFolderPath
+			openorchVolumeName = configFolderPath
 		}
 
 	}
@@ -275,24 +290,24 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	hostBinds = append(
 		hostBinds,
-		fmt.Sprintf("%v:/root/.openorch", singulatronVolumeName),
+		fmt.Sprintf("%v:/root/.openorch", openorchVolumeName),
 	)
 
 	// Persistent paths are paths in the container we want to persist.
 	// eg. /root/.cache/huggingface/diffusers
-	// Then here we mount singulatron-data:/root/.cache/huggingface/diffusers
+	// Then here we mount openorch-data:/root/.cache/huggingface/diffusers
 	for _, persistentPath := range persistentPaths {
 		hostBinds = append(
 			hostBinds,
 			fmt.Sprintf(
 				"%v:%v",
-				singulatronVolumeName,
+				openorchVolumeName,
 				path.Dir(persistentPath),
 			),
 		)
 	}
 
-	return envs, hostBinds, nil
+	return environment, hostBinds, nil
 }
 
 func (d *DockerService) getMountedVolume(
@@ -538,4 +553,33 @@ func transformWinPaths(dirPath string) string {
 	}
 
 	return newDirPath
+}
+
+func encodeURLtoFileName(url string) string {
+	hash := sha256.New()
+	hash.Write([]byte(url))
+	hashBytes := hash.Sum(nil)
+
+	encoded := base64.URLEncoding.EncodeToString(hashBytes)
+
+	return strings.TrimRight(encoded, "=")
+}
+
+func computeChecksum(data []byte) string {
+	hash := sha256.Sum256(data)
+	return hex.EncodeToString(hash[:])
+}
+
+func computeFileChecksum(file *os.File) (string, error) {
+	hash := sha256.New()
+	if _, err := io.Copy(hash, file); err != nil {
+		return "", errors.Wrap(err, "failed to compute file checksum")
+	}
+	return hex.EncodeToString(hash.Sum(nil)), nil
+}
+
+func fileExists(filePath string) bool {
+	_, err := os.Stat(filePath)
+	// Check if the error is due to the file not existing
+	return !os.IsNotExist(err)
 }

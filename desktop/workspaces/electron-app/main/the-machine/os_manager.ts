@@ -28,7 +28,7 @@ export class OSManager {
 		});
 
 		// @todo fix path, config service is now in server
-		this.logFilePath = path.join(os.homedir(), 'singulatron_install.log');
+		this.logFilePath = path.join(os.homedir(), 'openorch_install.log');
 
 		this.initLogFile();
 

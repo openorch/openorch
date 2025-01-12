@@ -126,7 +126,8 @@ outer:
 	require.NoError(t, err)
 	require.Equal(t, "Hello world", string(data))
 
-	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeDownload(context.Background(), downloadUrl).Execute()
+	fileRsp, fileHttpRsp, err := userClient.FileSvcAPI.ServeDownload(context.Background(), downloadUrl).
+		Execute()
 	require.NoError(t, err)
 	bs, err := ioutil.ReadAll(fileRsp)
 	require.NoError(t, err)

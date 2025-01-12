@@ -97,7 +97,8 @@ func (fs *FileService) serveLocal(
 		contentType = "application/octet-stream"
 	}
 	w.Header().Set("Content-Type", contentType)
-	w.Header().Set("Content-Disposition", "attachment; filename=\""+sanitizeFilename(upload.FileName)+"\"")
+	w.Header().
+		Set("Content-Disposition", "attachment; filename=\""+sanitizeFilename(upload.FileName)+"\"")
 	w.Header().Set("Content-Length", strconv.FormatInt(fileInfo.Size(), 10))
 
 	srcFile, err := os.Open(upload.FilePath)
@@ -208,7 +209,10 @@ func (fs *FileService) isLocal(ctx context.Context, uploads []*file.Upload) (boo
 	return false, nil
 }
 
-func (fs *FileService) pickLocal(ctx context.Context, uploads []*file.Upload) (*file.Upload, error) {
+func (fs *FileService) pickLocal(
+	ctx context.Context,
+	uploads []*file.Upload,
+) (*file.Upload, error) {
 	if fs.nodeId == "" {
 		err := fs.getNodeId(ctx)
 		if err != nil {
@@ -225,7 +229,10 @@ func (fs *FileService) pickLocal(ctx context.Context, uploads []*file.Upload) (*
 	return nil, fmt.Errorf("upload not found")
 }
 
-func (fs *FileService) pickRemotes(ctx context.Context, uploads []*file.Upload) ([]*file.Upload, error) {
+func (fs *FileService) pickRemotes(
+	ctx context.Context,
+	uploads []*file.Upload,
+) ([]*file.Upload, error) {
 	if fs.nodeId == "" {
 		err := fs.getNodeId(ctx)
 		if err != nil {
