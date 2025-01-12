@@ -15,9 +15,9 @@ import (
 )
 
 type Claims struct {
-	UserId  string   `json:"sui"` // `sui`: singulatron user ids
-	Slug    string   `json:"slu"` // `slu`: singulatron slug
-	RoleIds []string `json:"sri"` // `sri`: singulatron role ids
+	UserId  string   `json:"oui"` // `sui`: openorch user ids
+	Slug    string   `json:"olu"` // `slu`: openorch slug
+	RoleIds []string `json:"ori"` // `sri`: openorch role ids
 	jwt.RegisteredClaims
 }
 

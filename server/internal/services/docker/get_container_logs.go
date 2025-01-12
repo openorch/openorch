@@ -17,7 +17,7 @@ type logsAndStatus struct {
 }
 
 func (d *DockerService) getContainerLogsAndStatus(
-	singulatronHash string,
+	openorchHash string,
 	logCount int,
 ) (*logsAndStatus, error) {
 	ctx := context.Background()
@@ -33,7 +33,7 @@ func (d *DockerService) getContainerLogsAndStatus(
 	}
 
 	for _, modelContainer := range containers {
-		if modelContainer.Labels["openorch-hash"] == singulatronHash {
+		if modelContainer.Labels["openorch-hash"] == openorchHash {
 			logOptions := container.LogsOptions{
 				ShowStdout: true,
 				ShowStderr: true,

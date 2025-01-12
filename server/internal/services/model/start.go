@@ -240,9 +240,9 @@ func (ms *ModelService) checkIfAnswers(
 		}
 		dockerHost := hostRsp.Host
 
-		singulatronLLMHost := ms.llmHost
-		if singulatronLLMHost != "" {
-			dockerHost = singulatronLLMHost
+		openorchLLMHost := ms.llmHost
+		if openorchLLMHost != "" {
+			dockerHost = openorchLLMHost
 		}
 
 		if !strings.HasPrefix(dockerHost, "http") {

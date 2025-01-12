@@ -37,9 +37,9 @@ func (ms *ModelService) status(
 	}
 
 	dockerHost := hostRsp.Host
-	singulatronLLMHost := ms.llmHost
-	if singulatronLLMHost != "" {
-		dockerHost = singulatronLLMHost
+	openorchLLMHost := ms.llmHost
+	if openorchLLMHost != "" {
+		dockerHost = openorchLLMHost
 	}
 
 	modelAddress := fmt.Sprintf("%v:%v", dockerHost, hostPortNum)

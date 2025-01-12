@@ -15,11 +15,15 @@ package dockerservice
 import (
 	"bufio"
 	"context"
+	"crypto/sha256"
+	"encoding/base64"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log/slog"
 	"os"
 	"path"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -55,7 +59,7 @@ func (d *DockerService) runContainer(
 		options = &dockertypes.RunContainerOptions{}
 	}
 	if options.Name == "" {
-		options.Name = "the-singulatron"
+		options.Name = "the-openorch"
 	}
 
 	envs, hostBinds, err := d.additionalEnvsAndHostBinds(
@@ -184,47 +188,49 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 ) ([]string, []string, error) {
 	// We turn the asset map (which is an envar name to file URL map)
 	// eg. {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
-	// to an envarNameToFilePath
-	// eg. {"MODEL": "/var/lib/some/local/path.gguf"}
-	envarNameToFilePath := map[string]string{}
+	// to environment variables
+	// eg. MODEL=/var/lib/some/local/path.gguf"
+	environment := []string{}
 
 	// We translate URLs in the assets map into local file paths
 	// by asking the File Svc where did it download the file(s).
 
 	for envarName, assetURL := range assets {
-
-		rsp, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			FileSvcAPI.GetDownload(context.Background(), assetURL).
+		rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+			FileSvcAPI.ServeDownload(context.Background(), assetURL).
 			Execute()
 		if err != nil {
 			return nil, nil, err
 		}
-		if !rsp.Exists {
-			return nil, nil, fmt.Errorf(
-				"asset with URL '%v' cannot be found locally",
-				assetURL,
-			)
+		defer rspFile.Close()
+
+		tempDir := filepath.Join(os.TempDir(), ".openorch")
+		if err := os.MkdirAll(tempDir, 0755); err != nil {
+			return nil, nil, errors.Wrap(err, "failed to create temp directory")
 		}
 
-		// @todo use the DownloadServe endpoint to fetch the file
-		// into the current node
-		assetPath := *rsp.Download.FilePath
+		assetPath := filepath.Join("/root/.openorch/downloads/%v", encodeURLtoFileName(assetURL))
+
+		targetFile, err := os.Create(assetPath)
+		if err != nil {
+			return nil, nil, errors.Wrap(err, "failed to create asset file")
+		}
+		defer targetFile.Close()
+
+		_, err = io.Copy(targetFile, rspFile)
+		if err != nil {
+			return nil, nil, errors.Wrap(err, "failed to write asset data to file")
+		}
+
 		assetPath = transformWinPaths(assetPath)
 
-		envarNameToFilePath[envarName] = assetPath
-	}
-
-	envs := []string{}
-
-	for envName, assetPath := range envarNameToFilePath {
-		fileName := path.Base(assetPath)
-		// eg. MODEL=/root/.openorch/downloads/mistral-7b-instruct-v0.2.Q2_K.gguf
-		envs = append(
-			envs,
+		// eg. MODEL=/root/.openorch/downloads/sOm3H4ashedFileName
+		environment = append(
+			environment,
 			fmt.Sprintf(
-				"%v=/root/.openorch/downloads/%v",
-				envName,
-				fileName,
+				"%v=%v",
+				envarName,
+				assetPath,
 			),
 		)
 	}
@@ -234,8 +240,8 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	// If the OpenOrch daemon is running directly on the host, we will just mount the ~/.openorch folder in
 	// the containers the OpenOrch daemon starts.
 
-	singulatronVolumeName := d.volumeName
-	if singulatronVolumeName == "" {
+	openorchVolumeName := d.volumeName
+	if openorchVolumeName == "" {
 		if isRunningInDocker() {
 			currentContainerId, err := getContainerID()
 			if err != nil {
@@ -250,7 +256,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 				return nil, nil, err
 			}
 
-			singulatronVolumeName = mountedVolume
+			openorchVolumeName = mountedVolume
 		} else {
 			// If we are not running in Docker, we will ask the Config Svc about the config directory and we mount that.
 
@@ -266,7 +272,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 				configFolderPath = path.Join(homeDir, ".openorch")
 			}
 
-			singulatronVolumeName = configFolderPath
+			openorchVolumeName = configFolderPath
 		}
 
 	}
@@ -275,24 +281,24 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 
 	hostBinds = append(
 		hostBinds,
-		fmt.Sprintf("%v:/root/.openorch", singulatronVolumeName),
+		fmt.Sprintf("%v:/root/.openorch", openorchVolumeName),
 	)
 
 	// Persistent paths are paths in the container we want to persist.
 	// eg. /root/.cache/huggingface/diffusers
-	// Then here we mount singulatron-data:/root/.cache/huggingface/diffusers
+	// Then here we mount openorch-data:/root/.cache/huggingface/diffusers
 	for _, persistentPath := range persistentPaths {
 		hostBinds = append(
 			hostBinds,
 			fmt.Sprintf(
 				"%v:%v",
-				singulatronVolumeName,
+				openorchVolumeName,
 				path.Dir(persistentPath),
 			),
 		)
 	}
 
-	return envs, hostBinds, nil
+	return environment, hostBinds, nil
 }
 
 func (d *DockerService) getMountedVolume(
@@ -538,4 +544,14 @@ func transformWinPaths(dirPath string) string {
 	}
 
 	return newDirPath
+}
+
+func encodeURLtoFileName(url string) string {
+	hash := sha256.New()
+	hash.Write([]byte(url))
+	hashBytes := hash.Sum(nil)
+
+	encoded := base64.URLEncoding.EncodeToString(hashBytes)
+
+	return strings.TrimRight(encoded, "=")
 }
