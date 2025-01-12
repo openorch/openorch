@@ -14,9 +14,11 @@ package dockerservice
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -204,22 +206,36 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 		}
 		defer rspFile.Close()
 
-		tempDir := filepath.Join(os.TempDir(), ".openorch")
-		if err := os.MkdirAll(tempDir, 0755); err != nil {
-			return nil, nil, errors.Wrap(err, "failed to create temp directory")
+		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(assetURL))
+
+		var buf bytes.Buffer
+		checksumWriter := io.MultiWriter(&buf)
+		if _, err := io.Copy(checksumWriter, rspFile); err != nil {
+			return nil, nil, errors.Wrap(err, "failed to compute checksum of downloaded file")
+		}
+		downloadedChecksum := computeChecksum(buf.Bytes())
+
+		skipDownload := false
+		if existingFile, err := os.Open(assetPath); err == nil {
+			defer existingFile.Close()
+			existingChecksum, err := computeFileChecksum(existingFile)
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "failed to compute existing file checksum")
+			}
+			skipDownload = existingChecksum == downloadedChecksum
 		}
 
-		assetPath := filepath.Join("/root/.openorch/downloads/%v", encodeURLtoFileName(assetURL))
+		if !skipDownload {
+			targetFile, err := os.Create(assetPath)
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "failed to create asset file")
+			}
+			defer targetFile.Close()
 
-		targetFile, err := os.Create(assetPath)
-		if err != nil {
-			return nil, nil, errors.Wrap(err, "failed to create asset file")
-		}
-		defer targetFile.Close()
-
-		_, err = io.Copy(targetFile, rspFile)
-		if err != nil {
-			return nil, nil, errors.Wrap(err, "failed to write asset data to file")
+			_, err = io.Copy(targetFile, rspFile)
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "failed to write asset data to file")
+			}
 		}
 
 		assetPath = transformWinPaths(assetPath)
@@ -554,4 +570,17 @@ func encodeURLtoFileName(url string) string {
 	encoded := base64.URLEncoding.EncodeToString(hashBytes)
 
 	return strings.TrimRight(encoded, "=")
+}
+
+func computeChecksum(data []byte) string {
+	hash := sha256.Sum256(data)
+	return hex.EncodeToString(hash[:])
+}
+
+func computeFileChecksum(file *os.File) (string, error) {
+	hash := sha256.New()
+	if _, err := io.Copy(hash, file); err != nil {
+		return "", errors.Wrap(err, "failed to compute file checksum")
+	}
+	return hex.EncodeToString(hash.Sum(nil)), nil
 }
