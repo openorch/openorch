@@ -14,7 +14,6 @@ package dockerservice
 
 import (
 	"bufio"
-	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/base64"
@@ -198,34 +197,24 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	// by asking the File Svc where did it download the file(s).
 
 	for envarName, assetURL := range assets {
-		rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-			FileSvcAPI.ServeDownload(context.Background(), assetURL).
-			Execute()
-		if err != nil {
-			return nil, nil, err
-		}
-		defer rspFile.Close()
-
+		// We use the /root/.openorch/downloads as it's also the location that the File Svc uses.
+		// So if everything is running on the same node we avoid unnecessary processing.
 		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(assetURL))
 
-		var buf bytes.Buffer
-		checksumWriter := io.MultiWriter(&buf)
-		if _, err := io.Copy(checksumWriter, rspFile); err != nil {
-			return nil, nil, errors.Wrap(err, "failed to compute checksum of downloaded file")
-		}
-		downloadedChecksum := computeChecksum(buf.Bytes())
-
 		skipDownload := false
-		if existingFile, err := os.Open(assetPath); err == nil {
-			defer existingFile.Close()
-			existingChecksum, err := computeFileChecksum(existingFile)
-			if err != nil {
-				return nil, nil, errors.Wrap(err, "failed to compute existing file checksum")
-			}
-			skipDownload = existingChecksum == downloadedChecksum
+		if fileExists(assetPath) {
+			skipDownload = true
 		}
 
 		if !skipDownload {
+			rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+				FileSvcAPI.ServeDownload(context.Background(), assetURL).
+				Execute()
+			if err != nil {
+				return nil, nil, err
+			}
+			defer rspFile.Close()
+
 			targetFile, err := os.Create(assetPath)
 			if err != nil {
 				return nil, nil, errors.Wrap(err, "failed to create asset file")
@@ -583,4 +572,10 @@ func computeFileChecksum(file *os.File) (string, error) {
 		return "", errors.Wrap(err, "failed to compute file checksum")
 	}
 	return hex.EncodeToString(hash.Sum(nil)), nil
+}
+
+func fileExists(filePath string) bool {
+	_, err := os.Stat(filePath)
+	// Check if the error is due to the file not existing
+	return !os.IsNotExist(err)
 }
