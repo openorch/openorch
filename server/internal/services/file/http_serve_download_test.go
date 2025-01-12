@@ -100,7 +100,8 @@ func TestServeDownloadProxy(t *testing.T) {
 
 		require.Equal(t, downloadUrl, *rsp.Downloads[0].Url)
 
-		fileRsp, fileHttpRsp, err := adminClient2.FileSvcAPI.ServeDownload(ctx, downloadUrl).Execute()
+		fileRsp, fileHttpRsp, err := adminClient2.FileSvcAPI.ServeDownload(ctx, downloadUrl).
+			Execute()
 		require.NoError(t, err)
 		require.Equal(t, true, fileRsp != nil)
 		bs, err := ioutil.ReadAll(fileRsp)

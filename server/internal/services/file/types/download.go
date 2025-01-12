@@ -59,7 +59,7 @@ type Download struct {
 }
 
 type DownloadFileRequest struct {
-	URL        string `json:"url" binding:"required"`
+	URL        string `json:"url"                  binding:"required"`
 	FolderPath string `json:"folderPath,omitempty"`
 	// FileName   *string `json:"fileName,omitempty"`
 }
@@ -69,7 +69,7 @@ type GetDownloadRequest struct {
 }
 
 type GetDownloadResponse struct {
-	Exists   bool      `json:"exists" binding:"required"`
+	Exists   bool      `json:"exists"   binding:"required"`
 	Download *Download `json:"download"`
 }
 

@@ -200,7 +200,10 @@ func toDownloads(downloadIs []datastore.Row) []*file.InternalDownload {
 	return ret
 }
 
-func (fs *FileService) isLocalDownload(ctx context.Context, downloads []*file.InternalDownload) (bool, error) {
+func (fs *FileService) isLocalDownload(
+	ctx context.Context,
+	downloads []*file.InternalDownload,
+) (bool, error) {
 	if fs.nodeId == "" {
 		err := fs.getNodeId(ctx)
 		if err != nil {
@@ -217,7 +220,10 @@ func (fs *FileService) isLocalDownload(ctx context.Context, downloads []*file.In
 	return false, nil
 }
 
-func (fs *FileService) pickLocalDownload(ctx context.Context, downloads []*file.InternalDownload) (*file.InternalDownload, error) {
+func (fs *FileService) pickLocalDownload(
+	ctx context.Context,
+	downloads []*file.InternalDownload,
+) (*file.InternalDownload, error) {
 	if fs.nodeId == "" {
 		err := fs.getNodeId(ctx)
 		if err != nil {
@@ -234,7 +240,10 @@ func (fs *FileService) pickLocalDownload(ctx context.Context, downloads []*file.
 	return nil, fmt.Errorf("download not found")
 }
 
-func (fs *FileService) pickRemoteDownloads(ctx context.Context, downloads []*file.InternalDownload) ([]*file.InternalDownload, error) {
+func (fs *FileService) pickRemoteDownloads(
+	ctx context.Context,
+	downloads []*file.InternalDownload,
+) ([]*file.InternalDownload, error) {
 	if fs.nodeId == "" {
 		err := fs.getNodeId(ctx)
 		if err != nil {

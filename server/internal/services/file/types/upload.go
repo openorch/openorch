@@ -33,7 +33,7 @@ type Upload struct {
 	FileName string `json:"fileName"`
 
 	UserId   string `json:"userId,omitempty"`
-	FileSize int64  `json:"fileSize" binding:"required" format:"int64"`
+	FileSize int64  `json:"fileSize"         binding:"required" format:"int64"`
 }
 
 func (u Upload) GetId() string {

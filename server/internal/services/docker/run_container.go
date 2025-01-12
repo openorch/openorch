@@ -194,19 +194,21 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	environment := []string{}
 
 	// We translate URLs in the assets map into local file paths
-	// by asking the File Svc where did it download the file(s).
+	// by streaming the URL from the File Svc into a file and then mounting that file.
 
 	for envarName, assetURL := range assets {
 		// We use the /root/.openorch/downloads as it's also the location that the File Svc uses.
 		// So if everything is running on the same node we avoid unnecessary processing.
+		// This is obviously just a hack for local setups when we run directly on the host and not inside containers.
 		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(assetURL))
 
-		skipDownload := false
+		assetExists := false
 		if fileExists(assetPath) {
-			skipDownload = true
+			assetExists = true
 		}
 
-		if !skipDownload {
+		if !assetExists {
+			// @todo we could do checksum calculation to verify file integrity as well
 			rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
 				FileSvcAPI.ServeDownload(context.Background(), assetURL).
 				Execute()
@@ -264,8 +266,10 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 			openorchVolumeName = mountedVolume
 		} else {
 			// If we are not running in Docker, we will ask the Config Svc about the config directory and we mount that.
-
-			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).ConfigSvcAPI.GetConfig(context.Background()).Execute()
+			// If that's not set, we will just default to `~/.openorch`.
+			getConfigResponse, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
+				ConfigSvcAPI.GetConfig(context.Background()).
+				Execute()
 			if err != nil {
 				return nil, nil, err
 			}
