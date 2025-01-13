@@ -1,77 +1,44 @@
-import {
-	enableProdMode,
-	importProvidersFrom,
-	provideExperimentalZonelessChangeDetection,
-} from '@angular/core';
+// import { provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 
-import { HttpLoaderFactory } from './app/app.module';
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
-import { MarkdownModule } from 'ngx-markdown';
-import { AiModule } from './app/ai.module';
-import { StdlibModule } from './app/stdlib.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app/app-routing.module';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { bootstrapApplication } from '@angular/platform-browser';
 import {
 	provideHttpClient,
 	withInterceptorsFromDi,
-	HttpClient,
+	withFetch,
 } from '@angular/common/http';
+import { OPENORCH_SERVICE_CONFIG } from './app/services/server.service';
+import { API_SERVICE_CONFIG } from './app/api.service';
+import { provideRouter, RouteReuseStrategy } from '@angular/router';
+import { routes } from './app/app-routing.module';
 import {
-	OPENORCH_SERVICE_CONFIG,
-	ServerService,
-} from './app/services/server.service';
-import { MobileService } from './app/services/mobile.service';
-import { FooterService } from './app/services/footer.service';
+	IonicRouteStrategy,
+	provideIonicAngular,
+} from '@ionic/angular/standalone';
 
 if (environment.production) {
 	enableProdMode();
 }
 
-async function start() {
-	await bootstrapApplication(AppComponent, {
-		providers: [
-			MobileService,
-			FooterService,
-			provideExperimentalZonelessChangeDetection(),
-			importProvidersFrom(
-				BrowserModule,
-				AppRoutingModule,
-				ReactiveFormsModule,
-				IonicModule.forRoot({
-					// force Android mode across all platforms
-					mode: 'md',
-				}),
-				TranslateModule.forRoot({
-					defaultLanguage: 'en',
-					loader: {
-						provide: TranslateLoader,
-						useFactory: HttpLoaderFactory,
-						deps: [HttpClient],
-					},
-				}),
-				StdlibModule.forRoot({
-					apiServiceConfig: {
-						env: environment,
-					},
-				}),
-				AiModule,
-				MarkdownModule.forRoot()
-			),
-			{
-				provide: OPENORCH_SERVICE_CONFIG,
-				useValue: { env: environment },
-			},
-			ServerService,
-			provideHttpClient(withInterceptorsFromDi()),
-			provideAnimations(),
-		],
-	});
-}
-
-// eslint-disable-next-line
-start();
+bootstrapApplication(AppComponent, {
+	providers: [
+		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+		provideIonicAngular(),
+		provideHttpClient(withFetch(), withInterceptorsFromDi()),
+		provideRouter(routes),
+		// provideExperimentalZonelessChangeDetection(),
+		{
+			provide: OPENORCH_SERVICE_CONFIG,
+			useValue: { env: environment },
+		},
+		{
+			provide: API_SERVICE_CONFIG,
+			useValue: { env: environment },
+		},
+		provideAnimationsAsync(),
+	],
+	// eslint-disable-next-line
+}).catch((error) => console.error(error));

@@ -5,8 +5,7 @@
  * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { StartupComponent } from './startup/startup.component';
 import { ChatComponent } from './chat/chat.component';
 import { ModelExplorerComponent } from './model-explorer/model-explorer.component';
@@ -19,7 +18,7 @@ import { LogoutComponent } from './users/logout/logout.component';
 import { PromptsComponent } from './prompts/prompts.component';
 import { NodesComponent } from './nodes/nodes.component';
 
-const routes: Routes = [
+export const routes: Routes = [
 	{
 		path: '',
 		component: HomeComponent,
@@ -54,20 +53,14 @@ const routes: Routes = [
 	},
 	{
 		path: 'logout',
-		component: LogoutComponent
+		component: LogoutComponent,
 	},
 	{
 		path: 'prompts',
-		component: PromptsComponent
+		component: PromptsComponent,
 	},
 	{
 		path: 'nodes',
-		component: NodesComponent
-	}
+		component: NodesComponent,
+	},
 ];
-
-@NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule],
-})
-export class AppRoutingModule {}

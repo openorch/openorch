@@ -12,22 +12,53 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { IonModal } from '@ionic/angular';
 import { NgFor, NgIf } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonModal,
+	IonHeader,
+	IonToolbar,
+	IonTitle,
+	IonButtons,
+	IonButton,
+	IonIcon,
+	IonContent,
+	IonSegment,
+	IonLabel,
+	IonSegmentButton,
+	IonItem,
+	IonTextarea,
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import {
 	CharacterService,
 	Character,
 	initCharacter,
 } from '../../services/character.service';
+import { addIcons } from 'ionicons';
+import { createOutline, playCircleOutline, closeOutline } from 'ionicons/icons';
 
 @Component({
 	selector: 'app-ai-character',
 	templateUrl: './character.component.html',
 	styleUrl: './character.component.scss',
-	imports: [IonicModule, NgFor, NgIf, FormsModule],
-	standalone: true,
+	imports: [
+		IonModal,
+		IonHeader,
+		IonToolbar,
+		IonTitle,
+		IonButtons,
+		IonButton,
+		IonIcon,
+		IonContent,
+		IonSegment,
+		IonLabel,
+		NgFor,
+		NgIf,
+		FormsModule,
+		IonSegmentButton,
+		IonItem,
+		IonTextarea,
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,8 +72,13 @@ export class CharacterComponent {
 	constructor(
 		private characterService: CharacterService,
 		private cd: ChangeDetectorRef
-	) {}
-
+	) {
+		addIcons({
+			'create-outline': createOutline,
+			'close-outline': closeOutline,
+			'play-circle-outline': playCircleOutline,
+		});
+	}
 
 	async ngOnInit() {
 		await this.loadCharacters();

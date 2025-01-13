@@ -26,7 +26,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Save saves the configuration
 // @Id saveConfig
 // @Summary Save Config
 // @Description Save the provided configuration to the server

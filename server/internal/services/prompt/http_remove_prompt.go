@@ -21,7 +21,6 @@ import (
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
-// Remove removes a prompt
 // @ID removePrompt
 // @Summary Remove Prompt
 // @Description Remove a prompt by ID.

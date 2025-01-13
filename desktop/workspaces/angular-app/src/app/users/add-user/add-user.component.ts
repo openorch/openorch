@@ -16,7 +16,16 @@ import {
 import { UserService } from '../../services/user.service';
 import { UserSvcUser as User, UserSvcRole as Role } from '@openorch/client';
 import { first } from 'rxjs';
-import { ToastController, IonicModule } from '@ionic/angular';
+import {
+	ToastController,
+	IonCardContent,
+	IonItem,
+	IonSelectOption,
+	IonSelect,
+	IonRow,
+	IonCol,
+	IonButton,
+} from '@ionic/angular/standalone';
 import { TranslatePipe } from '../../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgFor } from '@angular/common';
@@ -29,14 +38,19 @@ import { IconMenuComponent } from '../../components/icon-menu/icon-menu.componen
 	selector: 'app-add-user',
 	templateUrl: './add-user.component.html',
 	styleUrls: ['./add-user.component.scss'],
-	standalone: true,
 	imports: [
+		IonRow,
+		IonCol,
+		IonButton,
+		IonCardContent,
+		IonItem,
+		IonSelectOption,
+		IonSelect,
 		PageComponent,
 		IconMenuComponent,
 		CenteredComponent,
 		FormsModule,
 		ReactiveFormsModule,
-		IonicModule,
 		NgFor,
 		TranslateModule,
 		TranslatePipe,

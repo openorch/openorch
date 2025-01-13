@@ -20,7 +20,6 @@ import (
 	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
-// Delete removes a dynamic object based on the provided conditions
 // @ID deleteObjects
 // @Summary     Delete a Generic Object
 // @Description Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.

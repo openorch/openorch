@@ -20,7 +20,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// StartDefault godoc
 // @ID startDefaultModel
 // @Summary Start the Default Model
 // @Description Starts The Default Model.

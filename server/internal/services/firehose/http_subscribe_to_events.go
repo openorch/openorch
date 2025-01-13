@@ -23,7 +23,6 @@ import (
 	firehose "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
 
-// Subscribe subscribes to a firehose stream and streams events to the client
 // @ID subscribeToEvents
 // @Summary Subscribe to the Event Stream
 // @Description Establish a subscription to the firehose events and accept a real time stream of them.

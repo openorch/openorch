@@ -18,7 +18,7 @@ import {
 	OnInit,
 	ViewEncapsulation,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon, IonTextarea, IonFabButton } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { TranslatePipe } from '../../../translate.pipe';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +31,8 @@ import { ModelService } from '../../../services/model.service';
 import { ModelSvcModel as Model } from '@openorch/client';
 import { ConfigService } from '../../../services/config.service';
 import { ChatService } from '../../../services/chat.service';
+import { addIcons } from 'ionicons';
+import { settingsOutline, arrowUpOutline } from 'ionicons/icons';
 
 export interface SendOutput {
 	message: string;
@@ -40,8 +42,7 @@ export interface SendOutput {
 
 @Component({
 	selector: 'app-chat-input',
-	standalone: true,
-	imports: [IonicModule, FormsModule, TranslatePipe],
+	imports: [IonIcon, IonTextarea, IonFabButton, FormsModule, TranslatePipe],
 	templateUrl: './chat-input.component.html',
 	styleUrls: ['./chat-input.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -65,7 +66,12 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		private cd: ChangeDetectorRef,
 		private chatService: ChatService,
 		private resolver: ComponentFactoryResolver
-	) {}
+	) {
+		addIcons({
+			'settings-outline': settingsOutline,
+			'arrow-up-outline': arrowUpOutline
+		});
+	}
 
 	async ngOnInit() {
 		this.models = await this.modelService.getModels();

@@ -9,7 +9,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// List all registered definitions or filter by criteria
 // @ID listDefinitions
 // @Summary List Definitions
 // @Description Retrieves a list of all definitions or filters them by specific criteria.

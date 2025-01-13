@@ -21,7 +21,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// UpdateThread updates the details of an existing chat thread
 // @ID updateThread
 // @Summary Update Thread
 // @Description Modify the details of a specific chat thread

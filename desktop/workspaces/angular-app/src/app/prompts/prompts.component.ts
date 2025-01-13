@@ -10,9 +10,9 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { NgFor, NgIf} from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonButton } from '@ionic/angular/standalone';
 import { PromptService } from '../services/prompt.service';
 import { UserService } from '../services/user.service';
 import { first } from 'rxjs';
@@ -31,12 +31,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-prompts',
-	standalone: true,
 	imports: [
+		IonButton,
 		CenteredComponent,
 		PageComponent,
 		IconMenuComponent,
-		IonicModule,
 		NgFor,
 		NgIf,
 		FormsModule,

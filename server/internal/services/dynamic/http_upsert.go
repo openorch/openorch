@@ -21,7 +21,6 @@ import (
 	dynamic "github.com/openorch/openorch/server/internal/services/dynamic/types"
 )
 
-// Upsert creates or updates a dynamic object based on the provided data
 // @ID upsertObject
 // @Summary Upsert a Generic Object
 // @Description Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.

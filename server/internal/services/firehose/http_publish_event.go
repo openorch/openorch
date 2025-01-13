@@ -17,8 +17,8 @@ import (
 	firehose "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
 
-// @Summary Publish an Event
 // @ID publishEvent
+// @Summary Publish an Event
 // @Description Publishes an event to the firehose service after authorization check
 // @Tags Firehose Svc
 // @Accept json

@@ -15,7 +15,17 @@ import {
 } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { first } from 'rxjs';
-import { ToastController, IonicModule } from '@ionic/angular';
+import {
+	ToastController,
+	IonList,
+	IonLabel,
+	IonItem,
+	IonIcon,
+	IonCardContent,
+	IonRow,
+	IonCol,
+	IonButton,
+} from '@ionic/angular/standalone';
 import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgFor, NgIf } from '@angular/common';
@@ -42,10 +52,17 @@ interface UserVisible extends UserSvcUser {
 	styleUrls: ['./users.component.scss'],
 	standalone: true,
 	imports: [
+		IonList,
+		IonLabel,
+		IonItem,
+		IonIcon,
+		IonCardContent,
+		IonRow,
+		IonCol,
+		IonButton,
 		PageComponent,
 		IconMenuComponent,
 		CenteredComponent,
-		IonicModule,
 		NgFor,
 		FormsModule,
 		ReactiveFormsModule,

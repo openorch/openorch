@@ -19,7 +19,6 @@ import (
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-// ChangePasswordAdmin updates a user's password by an administrator
 // @ID changePasswordAdmin
 // @Summary Change User Password (Admin)
 // @Description Allows an administrator to change a user's password.

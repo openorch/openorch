@@ -21,7 +21,6 @@ import (
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
-// Add a new prompt
 // @ID addPrompt
 // @Summary Add Prompt
 // @Description Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.

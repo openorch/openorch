@@ -9,7 +9,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// List all instances or filter by criteria
 // @ID listInstances
 // @Summary List Service Instances
 // @Description Retrieves a list of all instances or filters them by specific criteria (e.g., host, IP).

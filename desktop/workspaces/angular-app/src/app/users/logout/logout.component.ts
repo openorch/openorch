@@ -8,7 +8,12 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {
+	IonList,
+	IonItem,
+	IonLabel,
+	IonButton,
+} from '@ionic/angular/standalone';
 import { TranslatePipe } from '../../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { CenteredComponent } from '../../components/centered/centered.component';
@@ -21,10 +26,13 @@ import { UserService } from '../../services/user.service';
 	selector: 'app-logout',
 	standalone: true,
 	imports: [
+		IonList,
+		IonItem,
+		IonLabel,
+		IonButton,
 		PageComponent,
 		IconMenuComponent,
 		CenteredComponent,
-		IonicModule,
 		FormsModule,
 		ReactiveFormsModule,
 		TranslateModule,

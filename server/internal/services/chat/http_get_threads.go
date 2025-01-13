@@ -20,7 +20,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// GetThreads retrieves a list of chat threads for a user
 // @ID getThreads
 // @Summary Get Threads
 // @Description Fetch all chat threads associated with a specific user

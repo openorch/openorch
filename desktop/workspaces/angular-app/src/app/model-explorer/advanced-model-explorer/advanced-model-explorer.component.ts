@@ -17,11 +17,33 @@ import { ModelSvcModel as Model } from '@openorch/client';
 import { DownloadService } from '../../services/download.service';
 import { DownloadStatusChangeEvent } from '../../services/download.service';
 import { ConfigService } from '../../services/config.service';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonGrid,
+	IonRow,
+	IonCol,
+	IonSearchbar,
+	IonIcon,
+	IonCard,
+	IonLabel,
+	IonCardHeader,
+	IonCardTitle,
+	IonCardContent,
+	IonButton,
+	IonChip,
+} from '@ionic/angular/standalone';
 import { TranslatePipe } from '../../translate.pipe';
 import { DecimalPipe } from '@angular/common';
 import { DownloadingComponent } from '../../downloading/downloading.component';
 import { FormsModule } from '@angular/forms';
+import { addIcons } from 'ionicons';
+import {
+	cloudDownloadOutline,
+	playOutline,
+	pauseCircleOutline,
+	caretForwardOutline,
+	downloadOutline,
+	hardwareChipOutline,
+} from 'ionicons/icons';
 
 const veryLargeScreenWidth = 2400;
 
@@ -29,14 +51,24 @@ const veryLargeScreenWidth = 2400;
 	selector: 'app-advanced-model-explorer',
 	templateUrl: './advanced-model-explorer.component.html',
 	styleUrl: './advanced-model-explorer.component.scss',
-	standalone: true,
 	imports: [
 		CommonModule,
-		IonicModule,
 		FormsModule,
 		DownloadingComponent,
 		TranslatePipe,
 		DecimalPipe,
+		IonGrid,
+		IonRow,
+		IonCol,
+		IonSearchbar,
+		IonIcon,
+		IonCard,
+		IonLabel,
+		IonCardHeader,
+		IonCardTitle,
+		IonChip,
+		IonCardContent,
+		IonButton,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -67,6 +99,14 @@ export class AdvancedModelExplorerComponent {
 		public configService: ConfigService,
 		private cd: ChangeDetectorRef
 	) {
+		addIcons({
+			'cloud-download-outline': cloudDownloadOutline,
+			'play-outline': playOutline,
+			'pause-circle-outline': pauseCircleOutline,
+			'caret-forward-outline': caretForwardOutline,
+			'download-outline': downloadOutline,
+			'hardware-chip-outline': hardwareChipOutline
+		});
 		this.detectLargeScreen();
 	}
 

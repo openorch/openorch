@@ -23,7 +23,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// Get godoc
 // @ID getModel
 // @Summary Get a Model
 // @Description Retrieves the details of a model by its ID.

@@ -7,11 +7,20 @@
  */
 import { Component } from '@angular/core';
 
-import { DecimalPipe, NgFor, NgIf} from '@angular/common';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { first } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonList,
+	IonCard,
+	IonCardHeader,
+	IonCardTitle,
+	IonCardContent,
+	IonItem,
+	IonLabel,
+	IonText,
+} from '@ionic/angular/standalone';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 import { CenteredComponent } from '../components/centered/centered.component';
@@ -26,7 +35,14 @@ import { RegistrySvcNode as Node } from '@openorch/client';
 		CenteredComponent,
 		PageComponent,
 		IconMenuComponent,
-		IonicModule,
+		IonCard,
+		IonCardHeader,
+		IonCardTitle,
+		IonList,
+		IonCardContent,
+		IonItem,
+		IonLabel,
+		IonText,
 		NgFor,
 		NgIf,
 		FormsModule,

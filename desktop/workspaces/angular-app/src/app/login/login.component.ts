@@ -8,7 +8,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { UserSvcLoginResponse as LoginResponse } from '@openorch/client';
-import { ToastController, IonicModule } from '@ionic/angular';
+import {
+	ToastController,
+	IonCard,
+	IonItem,
+	IonInput,
+	IonCardContent,
+	IonRow,
+	IonCol,
+	IonButton,
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CenteredComponent } from '../components/centered/centered.component';
@@ -24,7 +33,13 @@ import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 		PageComponent,
 		IconMenuComponent,
 		CenteredComponent,
-		IonicModule,
+		IonCard,
+		IonItem,
+		IonInput,
+		IonCardContent,
+		IonRow,
+		IonCol,
+		IonButton,
 		NgIf,
 		FormsModule,
 	],
@@ -50,7 +65,7 @@ export class LoginComponent {
 		try {
 			rsp = await this.userService.login(this.slug, this.password);
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 			const toast = await this.toast.create({
 				cssClass: 'white-text',
 				color: 'danger',

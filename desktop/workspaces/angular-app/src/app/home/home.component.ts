@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonInput, IonButton } from '@ionic/angular/standalone';
 import { CenteredComponent } from '../components/centered/centered.component';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
@@ -21,12 +21,12 @@ import { UserService } from '../services/user.service';
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.css',
-	standalone: true,
 	imports: [
 		IconMenuComponent,
 		PageComponent,
 		CenteredComponent,
-		IonicModule,
+		IonInput,
+		IonButton,
 		NgFor,
 		NgIf,
 		FormsModule,
