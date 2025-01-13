@@ -44,6 +44,8 @@ import {
 import { MobileService } from '../../services/mobile.service';
 import { FooterService } from '../../services/footer.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { closeCircleOutline } from 'ionicons/icons';
 
 const defaultThreadName = 'New chat';
 
@@ -101,7 +103,11 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 		public footer: FooterService,
 
 		private router: Router
-	) {}
+	) {
+		addIcons({
+			'close-circle-outline': closeCircleOutline,
+		});
+	}
 
 	getFooterComponent(): ComponentRef<ChatInputComponent> {
 		if (this.footerComponentRef) {

@@ -19,19 +19,32 @@ import {
 } from '@openorch/client';
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
-import { MarkdownComponent } from 'ngx-markdown';
+import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
 import { IonIcon } from '@ionic/angular/standalone';
 import { NgIf, DatePipe, AsyncPipe } from '@angular/common';
 import { MobileService } from '../../../services/mobile.service';
 import { UserService } from '../../../services/user.service';
-import { MarkdownService } from 'ngx-markdown';
+import { addIcons } from 'ionicons';
+import {
+	personCircleOutline,
+	copyOutline,
+	reloadOutline,
+	trashOutline,
+} from 'ionicons/icons';
 
 @Component({
 	selector: 'app-message',
 	templateUrl: './message.component.html',
 	styleUrl: './message.component.scss',
-	providers: [MarkdownService],
-	imports: [IonIcon, NgIf, MarkdownComponent, DatePipe, AsyncPipe],
+	providers: [provideMarkdown()],
+	imports: [
+		MarkdownComponent,
+		IonIcon,
+		NgIf,
+		MarkdownComponent,
+		DatePipe,
+		AsyncPipe,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent {
@@ -41,7 +54,14 @@ export class MessageComponent {
 		public userService: UserService,
 		private server: ServerService,
 		public mobile: MobileService
-	) {}
+	) {
+		addIcons({
+			'person-circle-outline': personCircleOutline,
+			'copy-outline': copyOutline,
+			'reload-outline': reloadOutline,
+			'trash-outline': trashOutline,
+		});
+	}
 	hasAsset = false;
 
 	@Input() message!: Message;
