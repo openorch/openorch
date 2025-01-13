@@ -20,7 +20,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// AddThread creates a new chat thread
 // @ID addThread
 // @Summary Add Thread
 // @Description Create a new chat thread and add the requesting user to it.

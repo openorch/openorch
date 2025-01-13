@@ -23,7 +23,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// Status godoc
 // @ID getModelStatus
 // @Summary Get Model Status
 // @Description Retrieves the status of a model by ID.

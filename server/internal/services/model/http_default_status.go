@@ -21,7 +21,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// DefaultStatus godoc
 // @ID getDefaultModelStatus
 // @Summary Get Default Model Status
 // @Description Retrieves the status of the default model.

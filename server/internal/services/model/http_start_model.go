@@ -22,7 +22,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// StartSpecific godoc
 // @ID startModel
 // @Summary Start a Model
 // @Description Starts a model by ID

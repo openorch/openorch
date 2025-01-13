@@ -21,7 +21,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// GetMessages retrieves messages from a chat thread
 // @ID getMessages
 // @Summary List Messages
 // @Description Fetch messages (and associated assets) for a specific chat thread.

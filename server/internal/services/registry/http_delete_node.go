@@ -11,7 +11,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// Delete an node
 // @ID deleteNode
 // @Summary Delete Node
 // @Description Deletes a registered node by node URL. This endpoint is useful when a node is no longer available but it's still present in the database.

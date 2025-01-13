@@ -23,7 +23,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Get retrieves the current configuration
 // @Id getConfig
 // @Summary Get Config
 // @Description Fetch the current configuration from the server

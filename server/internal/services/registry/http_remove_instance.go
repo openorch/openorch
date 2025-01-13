@@ -10,7 +10,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// Remove an instance
 // @ID removeInstance
 // @Summary Remove Instance
 // @Description Removes a registered instance by ID.

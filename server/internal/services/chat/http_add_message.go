@@ -21,7 +21,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// AddMessage sends a new message to a chat thread
 // @ID addMessage
 // @Summary Add Message
 // @Description Add a new message to a specific thread.

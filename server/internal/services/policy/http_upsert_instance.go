@@ -9,7 +9,6 @@ import (
 	policy "github.com/openorch/openorch/server/internal/services/policy/types"
 )
 
-// UpsertInstance allows a user to upsert a new policy instance
 // @ID upsertInstance
 // @Summary Upsert an Instance
 // @Description Allows user to upsert a new policy instance based on a template.

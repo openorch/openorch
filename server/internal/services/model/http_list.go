@@ -21,7 +21,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// List godoc
 // @ID listModels
 // @Summary List Models
 // @Description Retrieves a list of models.

@@ -22,7 +22,6 @@ import (
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
-// MakeDefault godoc
 // @ID makeDefault
 // @Summary Make a Model Default
 // @Description Sets a model as the default model — when prompts are sent without a Model ID, the default model is used.

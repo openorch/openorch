@@ -10,7 +10,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// Delete a service definition
 // @ID deleteDefinition
 // @Summary Delete Definition
 // @Description Deletes a registered definition by ID.

@@ -22,7 +22,6 @@ import (
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
-// List lists prompts
 // @ID listPrompts
 // @Summary List Prompts
 // @Description List prompts that satisfy a query.

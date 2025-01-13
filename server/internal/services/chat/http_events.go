@@ -19,7 +19,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// Events is a dummy endpoint to display documentation about the events that this service emits.
 // @ID events
 // @Summary Events
 // @Description Events is a dummy endpoint to display documentation about the events that this service emits.

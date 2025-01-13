@@ -21,7 +21,6 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// DeleteMessage removes a message from a chat thread
 // @ID deleteMessage
 // @Summary Delete a Message
 // @Description Delete a specific message from a chat thread by its ID

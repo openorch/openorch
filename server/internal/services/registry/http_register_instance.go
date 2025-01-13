@@ -11,7 +11,6 @@ import (
 	registry "github.com/openorch/openorch/server/internal/services/registry/types"
 )
 
-// Register a new instance
 // @ID registerInstance
 // @Summary Register Instance
 // @Description Registers an instance. Idempoent.

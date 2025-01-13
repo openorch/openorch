@@ -27,7 +27,6 @@ import (
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
-// Subscribe streams prompt responses to the client by thread.
 // @ID subscribeToPromptResponses
 // @Summary Subscribe to Prompt Responses by Thread
 // @Description Subscribe to prompt responses by thread via Server-Sent Events (SSE)
