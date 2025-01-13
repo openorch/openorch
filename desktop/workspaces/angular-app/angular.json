@@ -24,8 +24,9 @@
 							"base": "./.dist/angular-app"
 						},
 						"index": "src/index.html",
+						"polyfills": ["zone.js"],
 						"browser": "src/main.ts",
-						"server": "src/server.ts",
+						"server": "src/main.server.ts",
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": [

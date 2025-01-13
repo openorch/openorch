@@ -30,6 +30,8 @@ import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { IonIcon } from '@ionic/angular/standalone';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
+import { addIcons } from 'ionicons';
+import { createOutline, playCircleOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
 	selector: 'app-chat',
@@ -64,7 +66,13 @@ export class ChatComponent implements OnInit {
 		private modelService: ModelService,
 		private ipcService: ElectronIpcService,
 		private cd: ChangeDetectorRef
-	) {}
+	) {
+		addIcons({
+			'create-outline': createOutline,
+			'trash-outline': trashOutline,
+			'play-circle-outline': playCircleOutline,
+		});
+	}
 
 	async ngOnInit() {
 		await this.refreshThreadList();

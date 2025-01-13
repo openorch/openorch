@@ -7,6 +7,19 @@ import { NavController } from '@ionic/angular/standalone';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { NgStyle, NgIf } from '@angular/common';
+import { addIcons } from 'ionicons';
+import {
+	chatboxEllipsesOutline,
+	arrowUpCircleOutline,
+	createOutline,
+	playCircleOutline,
+	trashOutline,
+	listOutline,
+	peopleOutline,
+	personAddOutline,
+	shirtOutline,
+	homeOutline,
+} from 'ionicons/icons';
 
 type appGroup = 'ai-group' | 'users-group' | 'cluster' | '';
 
@@ -24,7 +37,20 @@ export class IconMenuComponent {
 		public navCtrl: NavController,
 		private activatedRoute: ActivatedRoute,
 		private cd: ChangeDetectorRef
-	) {}
+	) {
+		addIcons({
+			'create-outline': createOutline,
+			'trash-outline': trashOutline,
+			'play-circle-outline': playCircleOutline,
+			'shirt-outline': shirtOutline,
+			'person-add-outline': personAddOutline,
+			'people-outline': peopleOutline,
+			'list-outline': listOutline,
+			'chatbox-ellipses-outline': chatboxEllipsesOutline,
+			'arrow-up-circle-outline': arrowUpCircleOutline,
+			'home-outline': homeOutline,
+		});
+	}
 
 	ngOnInit() {
 		this.activatedRoute.url

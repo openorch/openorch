@@ -5,8 +5,7 @@
  * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { StartupComponent } from './startup/startup.component';
 import { ChatComponent } from './chat/chat.component';
 import { ModelExplorerComponent } from './model-explorer/model-explorer.component';
@@ -65,9 +64,3 @@ export const routes: Routes = [
 		component: NodesComponent,
 	},
 ];
-
-@NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule],
-})
-export class AppRoutingModule {}

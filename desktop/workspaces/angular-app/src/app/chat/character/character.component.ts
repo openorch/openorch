@@ -34,6 +34,8 @@ import {
 	Character,
 	initCharacter,
 } from '../../services/character.service';
+import { addIcons } from 'ionicons';
+import { createOutline, playCircleOutline, closeOutline } from 'ionicons/icons';
 
 @Component({
 	selector: 'app-ai-character',
@@ -70,7 +72,13 @@ export class CharacterComponent {
 	constructor(
 		private characterService: CharacterService,
 		private cd: ChangeDetectorRef
-	) {}
+	) {
+		addIcons({
+			'create-outline': createOutline,
+			'close-outline': closeOutline,
+			'play-circle-outline': playCircleOutline,
+		});
+	}
 
 	async ngOnInit() {
 		await this.loadCharacters();

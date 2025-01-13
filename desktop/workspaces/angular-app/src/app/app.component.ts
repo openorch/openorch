@@ -58,7 +58,6 @@ function overrideConsole(ipcService: ElectronIpcService) {
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
-	standalone: true,
 	imports: [IonRouterOutlet],
 })
 export class AppComponent {
