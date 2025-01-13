@@ -24,11 +24,13 @@ import { IonIcon } from '@ionic/angular/standalone';
 import { NgIf, DatePipe, AsyncPipe } from '@angular/common';
 import { MobileService } from '../../../services/mobile.service';
 import { UserService } from '../../../services/user.service';
+import { MarkdownService } from 'ngx-markdown';
 
 @Component({
 	selector: 'app-message',
 	templateUrl: './message.component.html',
 	styleUrl: './message.component.scss',
+	providers: [MarkdownService],
 	imports: [IonIcon, NgIf, MarkdownComponent, DatePipe, AsyncPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

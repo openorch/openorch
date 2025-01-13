@@ -19,6 +19,7 @@ import {
 	personAddOutline,
 	shirtOutline,
 	homeOutline,
+	codeWorkingOutline
 } from 'ionicons/icons';
 
 type appGroup = 'ai-group' | 'users-group' | 'cluster' | '';
@@ -49,6 +50,7 @@ export class IconMenuComponent {
 			'chatbox-ellipses-outline': chatboxEllipsesOutline,
 			'arrow-up-circle-outline': arrowUpCircleOutline,
 			'home-outline': homeOutline,
+			'code-working-outline': codeWorkingOutline
 		});
 	}
 

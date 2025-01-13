@@ -35,6 +35,14 @@ import {
 	IonButton,
 	IonSpinner,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {
+	laptopOutline,
+	chevronDown,
+	chevronForward,
+	cubeOutline,
+	hardwareChipOutline,
+} from 'ionicons/icons';
 
 @Component({
 	selector: 'app-startup',
@@ -96,7 +104,16 @@ export class StartupComponent implements OnInit {
 		public downloadService: DownloadService,
 		public dockerService: DockerService,
 		public modelService: ModelService
-	) {}
+	) {
+		addIcons({
+			'laptop-outline': laptopOutline,
+			'chevron-down': chevronDown,
+			'chevron-forward': chevronForward,
+			'cube-outline': cubeOutline,
+			'hardware-chip-outline' :hardwareChipOutline,
+
+		});
+	}
 
 	handleDownloadStatus(data: Download) {
 		this.isDownloading = data.status == 'inProgress' || data.status == 'paused';

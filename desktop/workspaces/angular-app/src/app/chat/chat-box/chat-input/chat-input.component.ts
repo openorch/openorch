@@ -31,6 +31,8 @@ import { ModelService } from '../../../services/model.service';
 import { ModelSvcModel as Model } from '@openorch/client';
 import { ConfigService } from '../../../services/config.service';
 import { ChatService } from '../../../services/chat.service';
+import { addIcons } from 'ionicons';
+import { settingsOutline, arrowUpOutline } from 'ionicons/icons';
 
 export interface SendOutput {
 	message: string;
@@ -64,7 +66,12 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		private cd: ChangeDetectorRef,
 		private chatService: ChatService,
 		private resolver: ComponentFactoryResolver
-	) {}
+	) {
+		addIcons({
+			'settings-outline': settingsOutline,
+			'arrow-up-outline': arrowUpOutline
+		});
+	}
 
 	async ngOnInit() {
 		this.models = await this.modelService.getModels();

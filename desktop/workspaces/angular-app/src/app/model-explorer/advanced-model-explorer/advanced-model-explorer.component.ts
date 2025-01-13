@@ -35,6 +35,15 @@ import { TranslatePipe } from '../../translate.pipe';
 import { DecimalPipe } from '@angular/common';
 import { DownloadingComponent } from '../../downloading/downloading.component';
 import { FormsModule } from '@angular/forms';
+import { addIcons } from 'ionicons';
+import {
+	cloudDownloadOutline,
+	playOutline,
+	pauseCircleOutline,
+	caretForwardOutline,
+	downloadOutline,
+	hardwareChipOutline,
+} from 'ionicons/icons';
 
 const veryLargeScreenWidth = 2400;
 
@@ -90,6 +99,14 @@ export class AdvancedModelExplorerComponent {
 		public configService: ConfigService,
 		private cd: ChangeDetectorRef
 	) {
+		addIcons({
+			'cloud-download-outline': cloudDownloadOutline,
+			'play-outline': playOutline,
+			'pause-circle-outline': pauseCircleOutline,
+			'caret-forward-outline': caretForwardOutline,
+			'download-outline': downloadOutline,
+			'hardware-chip-outline': hardwareChipOutline
+		});
 		this.detectLargeScreen();
 	}
 
