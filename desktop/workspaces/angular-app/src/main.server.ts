@@ -28,12 +28,12 @@ const bootstrap = () =>
 			provideRouter(routes),
 		],
 	})
-		.then((appRef) => {
-			return appRef;
+		.then((appReference) => {
+			return appReference;
 		})
-		.catch((err) => {
-			console.error(err);
-			throw err; // Re-throw the error to maintain the return type
+		.catch((error) => {
+			console.error(error);
+			throw error; // Re-throw the error to maintain the return type
 		});
 
 export default bootstrap;

@@ -40,4 +40,5 @@ bootstrapApplication(AppComponent, {
 		},
 		provideAnimationsAsync(),
 	],
-}).catch((err) => console.error(err));
+	// eslint-disable-next-line
+}).catch((error) => console.error(error));
