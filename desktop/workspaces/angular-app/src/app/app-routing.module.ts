@@ -19,7 +19,7 @@ import { LogoutComponent } from './users/logout/logout.component';
 import { PromptsComponent } from './prompts/prompts.component';
 import { NodesComponent } from './nodes/nodes.component';
 
-const routes: Routes = [
+export const routes: Routes = [
 	{
 		path: '',
 		component: HomeComponent,
@@ -54,16 +54,16 @@ const routes: Routes = [
 	},
 	{
 		path: 'logout',
-		component: LogoutComponent
+		component: LogoutComponent,
 	},
 	{
 		path: 'prompts',
-		component: PromptsComponent
+		component: PromptsComponent,
 	},
 	{
 		path: 'nodes',
-		component: NodesComponent
-	}
+		component: NodesComponent,
+	},
 ];
 
 @NgModule({

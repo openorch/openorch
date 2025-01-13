@@ -7,16 +7,23 @@
  */
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import {  NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonCard,
+	IonCardContent,
+	IonItem,
+	IonLabel,
+} from '@ionic/angular/standalone';
 import { PromptSvcPrompt as Prompt } from '@openorch/client';
 import { DatePipe } from '@angular/common';
 @Component({
 	selector: 'app-prompt',
-	standalone: true,
 	imports: [
-		IonicModule,
+		IonCard,
+		IonCardContent,
+		IonItem,
+		IonLabel,
 		NgIf,
 		FormsModule,
 		DatePipe,

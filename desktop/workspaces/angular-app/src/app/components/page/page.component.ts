@@ -18,9 +18,27 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CommonModule, NgFor } from '@angular/common';
-import { IonicModule, IonMenu } from '@ionic/angular';
-import { NgStyle, NgIf, NgClass } from '@angular/common';
+import { NgFor } from '@angular/common';
+import {
+	IonMenu,
+	IonApp,
+	IonContent,
+	IonList,
+	IonItem,
+	IonIcon,
+	IonHeader,
+	IonToolbar,
+	IonButtons,
+	IonMenuButton,
+	IonTitle,
+} from '@ionic/angular/standalone';
+import {
+	AsyncPipe,
+	NgTemplateOutlet,
+	NgStyle,
+	NgIf,
+	NgClass,
+} from '@angular/common';
 import { MobileService } from '../../services/mobile.service';
 import { FooterService } from '../../services/footer.service';
 import { ServerService } from '../../services/server.service';
@@ -28,12 +46,22 @@ import { Router, NavigationStart } from '@angular/router';
 
 @Component({
 	selector: 'app-page',
-	standalone: true,
 	templateUrl: './page.component.html',
 	styleUrl: './page.component.scss',
 	imports: [
-		IonicModule,
-		CommonModule,
+		AsyncPipe,
+		IonApp,
+		IonContent,
+		IonList,
+		IonItem,
+		IonIcon,
+		IonMenu,
+		IonHeader,
+		IonButtons,
+		IonToolbar,
+		IonMenuButton,
+		IonTitle,
+		NgTemplateOutlet,
 		NgStyle,
 		NgIf,
 		NgFor,

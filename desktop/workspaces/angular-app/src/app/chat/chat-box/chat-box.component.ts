@@ -36,7 +36,7 @@ import { ElectronAppService } from '../../services/electron-app.service';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './message/message.component';
 import { NgFor, NgIf, AsyncPipe, NgStyle } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular/standalone';
 import {
 	ChatInputComponent,
 	SendOutput,
@@ -52,9 +52,8 @@ const defaultThreadName = 'New chat';
 	templateUrl: './chat-box.component.html',
 	styleUrl: './chat-box.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	standalone: true,
 	imports: [
-		IonicModule,
+		IonIcon,
 		NgFor,
 		MessageComponent,
 		NgIf,

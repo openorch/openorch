@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ChatBoxComponent } from './chat/chat-box/chat-box.component';
 import { CharacterComponent } from './chat/character/character.component';
 import { IonicModule } from '@ionic/angular';
-import { StdlibModule } from '../app/stdlib.module';
+import { StdlibModule } from './stdlib.module.tsbackup';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { MessageComponent } from './chat/chat-box/message/message.component';
 

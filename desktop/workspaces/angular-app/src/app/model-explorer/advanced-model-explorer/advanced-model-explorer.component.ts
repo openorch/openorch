@@ -17,7 +17,20 @@ import { ModelSvcModel as Model } from '@openorch/client';
 import { DownloadService } from '../../services/download.service';
 import { DownloadStatusChangeEvent } from '../../services/download.service';
 import { ConfigService } from '../../services/config.service';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonGrid,
+	IonRow,
+	IonCol,
+	IonSearchbar,
+	IonIcon,
+	IonCard,
+	IonLabel,
+	IonCardHeader,
+	IonCardTitle,
+	IonCardContent,
+	IonButton,
+	IonChip,
+} from '@ionic/angular/standalone';
 import { TranslatePipe } from '../../translate.pipe';
 import { DecimalPipe } from '@angular/common';
 import { DownloadingComponent } from '../../downloading/downloading.component';
@@ -29,14 +42,24 @@ const veryLargeScreenWidth = 2400;
 	selector: 'app-advanced-model-explorer',
 	templateUrl: './advanced-model-explorer.component.html',
 	styleUrl: './advanced-model-explorer.component.scss',
-	standalone: true,
 	imports: [
 		CommonModule,
-		IonicModule,
 		FormsModule,
 		DownloadingComponent,
 		TranslatePipe,
 		DecimalPipe,
+		IonGrid,
+		IonRow,
+		IonCol,
+		IonSearchbar,
+		IonIcon,
+		IonCard,
+		IonLabel,
+		IonCardHeader,
+		IonCardTitle,
+		IonChip,
+		IonCardContent,
+		IonButton,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

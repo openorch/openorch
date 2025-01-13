@@ -18,7 +18,7 @@ import {
 	OnInit,
 	ViewEncapsulation,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon, IonTextarea, IonFabButton } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { TranslatePipe } from '../../../translate.pipe';
 import { FormsModule } from '@angular/forms';
@@ -40,8 +40,7 @@ export interface SendOutput {
 
 @Component({
 	selector: 'app-chat-input',
-	standalone: true,
-	imports: [IonicModule, FormsModule, TranslatePipe],
+	imports: [IonIcon, IonTextarea, IonFabButton, FormsModule, TranslatePipe],
 	templateUrl: './chat-input.component.html',
 	styleUrls: ['./chat-input.component.scss'],
 	encapsulation: ViewEncapsulation.None,

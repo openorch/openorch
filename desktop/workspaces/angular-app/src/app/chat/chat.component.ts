@@ -27,7 +27,7 @@ import {
 import { ConfigService } from '../services/config.service';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { NgFor, NgIf, AsyncPipe } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular/standalone';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 
@@ -35,10 +35,9 @@ import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
 	selector: 'app-chat',
 	templateUrl: './chat.component.html',
 	styleUrl: './chat.component.scss',
-	standalone: true,
 	imports: [
+		IonIcon,
 		PageComponent,
-		IonicModule,
 		NgFor,
 		NgIf,
 		ChatBoxComponent,

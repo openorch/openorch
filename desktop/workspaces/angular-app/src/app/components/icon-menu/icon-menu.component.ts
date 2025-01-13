@@ -3,7 +3,7 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 } from '@angular/core';
-import { NavController, IonicModule } from '@ionic/angular';
+import { NavController } from '@ionic/angular/standalone';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { NgStyle, NgIf } from '@angular/common';
@@ -12,8 +12,7 @@ type appGroup = 'ai-group' | 'users-group' | 'cluster' | '';
 
 @Component({
 	selector: 'app-icon-menu',
-	standalone: true,
-	imports: [IonicModule, NgStyle, RouterLink, NgIf],
+	imports: [NgStyle, RouterLink, NgIf],
 	templateUrl: './icon-menu.component.html',
 	styleUrl: './icon-menu.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

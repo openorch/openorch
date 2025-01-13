@@ -20,7 +20,7 @@ import {
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent } from 'ngx-markdown';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular/standalone';
 import { NgIf, DatePipe, AsyncPipe } from '@angular/common';
 import { MobileService } from '../../../services/mobile.service';
 import { UserService } from '../../../services/user.service';
@@ -29,8 +29,7 @@ import { UserService } from '../../../services/user.service';
 	selector: 'app-message',
 	templateUrl: './message.component.html',
 	styleUrl: './message.component.scss',
-	standalone: true,
-	imports: [NgIf, IonicModule, MarkdownComponent, DatePipe, AsyncPipe],
+	imports: [IonIcon, NgIf, MarkdownComponent, DatePipe, AsyncPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent {

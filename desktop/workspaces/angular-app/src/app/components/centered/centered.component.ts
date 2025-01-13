@@ -6,13 +6,12 @@
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgIf, NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NgIf,  NgTemplateOutlet, NgStyle } from '@angular/common';
 
 @Component({
 	selector: 'app-centered',
 	templateUrl: './centered.component.html',
 	styleUrl: './centered.component.css',
-	standalone: true,
 	imports: [NgIf, NgTemplateOutlet, NgStyle],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

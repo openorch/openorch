@@ -11,8 +11,7 @@ import {
 import { HttpLoaderFactory } from './app/app.module';
 import { environment } from './environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
-import { AiModule } from './app/ai.module';
-import { StdlibModule } from './app/stdlib.module';
+import { StdlibModule } from './app/stdlib.module.tsbackup';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -58,7 +57,6 @@ import { FooterService } from './app/services/footer.service';
 					env: environment,
 				},
 			}),
-			AiModule,
 			MarkdownModule.forRoot()
 		),
 		{

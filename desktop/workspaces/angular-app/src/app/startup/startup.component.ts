@@ -23,23 +23,34 @@ import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { DownloadingComponent } from '../downloading/downloading.component';
 import { RouterLink } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { NgIf, NgStyle, AsyncPipe } from '@angular/common';
 import { CenteredComponent } from '../components/centered/centered.component';
 import { PageComponent } from '../components/page/page.component';
 import { IconMenuComponent } from '../components/icon-menu/icon-menu.component';
+import {
+	IonList,
+	IonItem,
+	IonIcon,
+	IonLabel,
+	IonButton,
+	IonSpinner,
+} from '@ionic/angular/standalone';
 
 @Component({
 	selector: 'app-startup',
 	templateUrl: './startup.component.html',
 	styleUrl: './startup.component.scss',
-	standalone: true,
 	imports: [
+		IonList,
+		IonItem,
+		IonIcon,
+		IonLabel,
+		IonButton,
+		IonSpinner,
 		IconMenuComponent,
 		PageComponent,
 		CenteredComponent,
 		NgIf,
-		IonicModule,
 		NgStyle,
 		RouterLink,
 		DownloadingComponent,

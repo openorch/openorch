@@ -11,15 +11,21 @@ import { DownloadService } from '../services/download.service';
 import { FileSvcDownload as Download } from '@openorch/client';
 import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
-import { IonicModule } from '@ionic/angular';
+import { IonSpinner, IonIcon } from '@ionic/angular/standalone';
 import { NgIf, DecimalPipe } from '@angular/common';
 
 @Component({
 	selector: 'app-downloading',
 	templateUrl: './downloading.component.html',
 	styleUrl: './downloading.component.scss',
-	standalone: true,
-	imports: [NgIf, IonicModule, DecimalPipe, TranslateModule, TranslatePipe],
+	imports: [
+		IonSpinner,
+		IonIcon,
+		NgIf,
+		DecimalPipe,
+		TranslateModule,
+		TranslatePipe,
+	],
 })
 export class DownloadingComponent {
 	@Input() url!: string;

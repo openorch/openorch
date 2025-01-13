@@ -7,7 +7,14 @@ import {
 import { first } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+	IonList,
+	IonListHeader,
+	IonLabel,
+	IonItem,
+	IonButton,
+	IonCheckbox,
+} from '@ionic/angular/standalone';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { PageComponent } from '../../components/page/page.component';
 import { IconMenuComponent } from '../../components/icon-menu/icon-menu.component';
@@ -16,11 +23,15 @@ import { IconMenuComponent } from '../../components/icon-menu/icon-menu.componen
 	selector: 'app-roles',
 	templateUrl: './roles.component.html',
 	styleUrls: ['./roles.component.css'],
-	standalone: true,
 	imports: [
+		IonList,
+		IonListHeader,
+		IonLabel,
+		IonItem,
+		IonButton,
+		IonCheckbox,
 		PageComponent,
 		IconMenuComponent,
-		IonicModule,
 		FormsModule,
 		NgFor,
 		NgIf,
