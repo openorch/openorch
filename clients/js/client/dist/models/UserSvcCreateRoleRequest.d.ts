@@ -26,6 +26,12 @@ export interface UserSvcCreateRoleRequest {
      * @type {string}
      * @memberof UserSvcCreateRoleRequest
      */
+    id: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserSvcCreateRoleRequest
+     */
     name?: string;
     /**
      *

@@ -22,6 +22,11 @@ UserSvcCreateRoleRequest.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
         "name": "name",
         "baseName": "name",
         "type": "string"

@@ -15,10 +15,10 @@ package userservice
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"strings"
 
-	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
@@ -59,18 +59,10 @@ func (s *UserService) CreateRole(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	ownerUsername := rsp.Slug
-	if !strings.HasPrefix(req.Name, ownerUsername) {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`Invalid prefix`))
-		return
-	}
-
 	role, err := s.createRole(
 		rsp.Id,
-		req.Name,
-		req.Description,
-		req.PermissionIds,
+		rsp.Slug,
+		&req,
 	)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -85,24 +77,32 @@ func (s *UserService) CreateRole(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *UserService) createRole(
-	ownerId, name, description string,
-	permissionIds []string,
+	callerId string,
+	callerSlug string,
+	req *user.CreateRoleRequest,
 ) (*user.Role, error) {
 	permissions, err := s.permissionsStore.Query(
-		datastore.Equals(datastore.Field("id"), permissionIds),
+		datastore.Equals(datastore.Field("id"), req.PermissionIds),
 	).Find()
 	if err != nil {
 		return nil, err
 	}
-	if len(permissions) < len(permissionIds) {
+	if len(permissions) < len(req.PermissionIds) {
 		return nil, errors.New("nonexistent permissions")
 	}
 
+	if req.Id == "" {
+		return nil, fmt.Errorf("create role is missing id")
+	}
+	if !strings.HasPrefix(req.Id, callerSlug) {
+		return nil, fmt.Errorf("created role id must be prefixed by caller slug")
+	}
+
 	role := &user.Role{
-		Id:          sdk.Id("rol"),
-		Name:        name,
-		Description: description,
-		OwnerId:     ownerId,
+		Id:          req.Id,
+		Name:        req.Name,
+		Description: req.Description,
+		OwnerId:     callerId,
 	}
 
 	err = s.rolesStore.Upsert(role)
@@ -110,16 +110,17 @@ func (s *UserService) createRole(
 		return nil, err
 	}
 
-	for _, permissionId := range permissionIds {
-		err = s.assignPermissions(ownerId, []*user.PermissionLink{
-			{
-				RoleId:       role.Id,
-				PermissionId: permissionId,
-			},
+	links := []*user.PermissionLink{}
+	for _, permissionId := range req.PermissionIds {
+		links = append(links, &user.PermissionLink{
+			RoleId:       role.Id,
+			PermissionId: permissionId,
 		})
-		if err != nil {
-			return nil, err
-		}
+	}
+
+	err = s.assignPermissions(callerId, links)
+	if err != nil {
+		return nil, err
 	}
 
 	return role, nil

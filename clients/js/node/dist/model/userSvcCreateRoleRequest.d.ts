@@ -11,6 +11,7 @@
  */
 export declare class UserSvcCreateRoleRequest {
     'description'?: string;
+    'id': string;
     'name'?: string;
     'permissionIds'?: Array<string>;
     static discriminator: string | undefined;

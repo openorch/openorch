@@ -14,6 +14,7 @@ import { RequestFile } from './models';
 
 export class UserSvcCreateRoleRequest {
     'description'?: string;
+    'id': string;
     'name'?: string;
     'permissionIds'?: Array<string>;
 
@@ -23,6 +24,11 @@ export class UserSvcCreateRoleRequest {
         {
             "name": "description",
             "baseName": "description",
+            "type": "string"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string"
         },
         {

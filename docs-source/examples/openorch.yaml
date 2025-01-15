@@ -2004,7 +2004,7 @@ definitions:
         description: |-
           The unique identifier, which can be a URL.
 
-          Example values: "joe12" (singulatron username), "twitter.com/thejoe" (twitter url), "joe@joesdomain.com" (email)
+          Example values: "joe12" (openorch username), "twitter.com/thejoe" (twitter url), "joe@joesdomain.com" (email)
         example: twitter.com/thejoe
         type: string
       isPrimary:
@@ -2025,7 +2025,7 @@ definitions:
           For email and phones the `id` and the `value` will be the same.
           This field mostly exists for display purposes.
 
-          Example values: "joe12" (singulatron username), "thejoe" (twitter username), "joe@joesdomain.com" (email)
+          Example values: "joe12" (openorch username), "thejoe" (twitter username), "joe@joesdomain.com" (email)
         example: thejoe
         type: string
       verified:
@@ -2050,12 +2050,16 @@ definitions:
     properties:
       description:
         type: string
+      id:
+        type: string
       name:
         type: string
       permissionIds:
         items:
           type: string
         type: array
+    required:
+    - id
     type: object
   user_svc.CreateRoleResponse:
     properties:
@@ -4913,8 +4917,8 @@ paths:
       - application/json
       description: |-
         Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.
-        The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization.
-        Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+        The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `{organizationId}` is a unique identifier for the created organization.
+        Dynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.
       operationId: createOrganization
       parameters:
       - description: Create User Request

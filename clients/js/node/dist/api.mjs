@@ -4873,6 +4873,11 @@ UserSvcCreateRoleRequest.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "id",
+        "baseName": "id",
+        "type": "string"
+    },
+    {
         "name": "name",
         "baseName": "name",
         "type": "string"
@@ -11826,7 +11831,7 @@ class UserSvcApi {
         });
     }
     /**
-     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `{organizationId}` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.
      * @summary Create an Organization
      * @param body Create User Request
      */

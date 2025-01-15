@@ -160,6 +160,10 @@ var PermissionGrantView = Permission{
 }
 
 var UserPermissions = []*Permission{
+	// Anyone can create and edit their own roles,
+	// provided the role ID is prefixed by the caller's slug.
+	&PermissionRoleCreate,
+
 	// Anyone can create and edit their own permissions
 	// given they start wiht their slug
 	&PermissionPermissionCreate,

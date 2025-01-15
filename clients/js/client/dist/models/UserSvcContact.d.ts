@@ -30,7 +30,7 @@ export interface UserSvcContact {
     /**
      * The unique identifier, which can be a URL.
      *
-     * Example values: "joe12" (singulatron username), "twitter.com/thejoe" (twitter url), "joe@joesdomain.com" (email)
+     * Example values: "joe12" (openorch username), "twitter.com/thejoe" (twitter url), "joe@joesdomain.com" (email)
      * @type {string}
      * @memberof UserSvcContact
      */
@@ -65,7 +65,7 @@ export interface UserSvcContact {
      * For email and phones the `id` and the `value` will be the same.
      * This field mostly exists for display purposes.
      *
-     * Example values: "joe12" (singulatron username), "thejoe" (twitter username), "joe@joesdomain.com" (email)
+     * Example values: "joe12" (openorch username), "thejoe" (twitter username), "joe@joesdomain.com" (email)
      * @type {string}
      * @memberof UserSvcContact
      */

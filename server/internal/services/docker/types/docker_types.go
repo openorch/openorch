@@ -106,6 +106,7 @@ type GetContainerSummaryRequest struct {
 type GetContainerSummaryResponse struct {
 	Status string `json:"status"  binding:"required"`
 	Logs   string `json:"logs"    binding:"required"`
+
 	// DEPRECATED. Summary contains both Status and Logs.
 	Summary string `json:"summary" binding:"required"`
 }

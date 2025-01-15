@@ -70,7 +70,7 @@ You can either use this token as a proper JWT - decode it and inspect the conten
 
 The [`/user-svc/public-key`](/docs/openorch/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
 
-Use the JWT libraries that are available in your programming language to do that, or use the Singularon [SDK](https://github.com/singulatron/singulatron/tree/main/sdk) if your language is supported.
+Use the JWT libraries that are available in your programming language to do that, or use the Singularon [SDK](https://github.com/openorch/openorch/tree/main/sdk) if your language is supported.
 
 ### Token structure
 
@@ -91,28 +91,46 @@ The field names are kept short to save space, so perhaps the Go definition is al
 
 ```go
 type Claims struct {
-	UserId  string   `json:"sui"` // `sui`: singulatron user ids
-	Slug    string   `json:"slu"` // `slu`: singulatron slug
-	RoleIds []string `json:"sri"` // `sri`: singulatron role ids
+	UserId  string   `json:"sui"` // `sui`: openorch (previously singulatron) user ids
+	Slug    string   `json:"slu"` // `slu`: openorch (previously singulatron) slug
+	RoleIds []string `json:"sri"` // `sri`: openorch (previously singulatron) role ids
 	jwt.RegisteredClaims
 }
 ```
 
 ## Roles
 
-### Types of roles
+Keep in mind that in the below sections we'll refer to roles by their ID (such as `user-svc:admin`).
 
-### Static
+Usually such readable strings are slugs, but in the case of roles slugs were eliminated for simplicity.
 
-Static roles, such as `user-svc:admin` and `user-svc:user` defined by the `User Svc` are primarily used for simple role-based access control: in the Superplatform UI and API you can edit static roles to add or remove endpoints a user can call.
+### Static roles
+
+Static roles, such as
+
+```sh
+user-svc:admin
+user-svc:user
+```
+
+defined by the `User Svc` are primarily used for simple role-based access control: in the Superplatform UI and API you can edit static roles to add or remove endpoints a user can call.
 
 > If you are looking at restricting access to endpoints in other ways, you might be interested in: [Policy Svc](/docs/built-in-services/policy-svc).
 
-#### Dynamic
+Each user/service is also free to create roles.
+
+### Dynamic roles
 
 Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
 
-Dynamic roles look like `user-svc:org:{org_dBZRCej3fo}:admin`. The dynamic values must be surrounded by `{}` symbols. The above example is how organization roles are represented.
+Dynamic roles look like
+
+```sh
+user-svc:org:{org_dBZRCej3fo}:admin
+user-svc:org:{org_dBZRCej3fo}:user
+```
+
+The dynamic values must be surrounded by `{}` symbols. The above example is how organization roles are represented. For more about organizations see the Organizations section on this page.
 
 These dynamic roles, like static roles are stored in the JWT tokens so it is advisable to keep them to a minimum. The organization example is an apt one here: think about how many GitHub or Google organizations you are part of. Likely even a few dozen are at the most extreme upper limit.
 
@@ -122,6 +140,31 @@ These dynamic roles, like static roles are stored in the JWT tokens so it is adv
 
 Each role created must by prefixed by the slug of the account that created it. Said account becomes the owner of the role and only that account can edit the role.
 
+## Organizations
+
+In the dynamic roles section we already talked about organizations, lets elaborate on them here a bit.
+
+```yaml
+id: "org_eZqC0BbdG2"
+name: "Acme Corporation" # Full name of the organization
+slug: "acme-corporation" # URL-friendly unique identifier for the organization
+createdAt: "2025-01-15T12:00:00Z" # Example ISO 8601 timestamp
+```
+
+### Access rules
+
+#### Create
+
+Any logged in user can create an organization, provided the `Organization` slug is not taken yet. The creator becomes the first admin of the organization, acquiring the role of `user-svc:org:{$orgId}:admin` role.
+
+#### Membership
+
+Admins can assign other users member (`user-svc:org:{$orgId}:user`) or admin roles (`user-svc:org:{$orgId}:admin`) for the organizations they administer.
+
+### Use cases
+
+Organizations let users to freely associate with each other and create groups. Think about Discord servers, Slack workspaces, Github organizations etc.
+
 ## Permissions
 
 ### Conventions
@@ -130,4 +173,4 @@ Each permission created must by prefixed by the slug of the account that created
 
 > Once you (your service) own a permission (by creating it, and it being prefixed by your account slug), you can add it to any role, not just roles owned by you.
 
-Example; let's say your service is `petstore-svc`. Superplatform prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.
+Example; let's say your service is `petstore-svc`. OpenOrch prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.
