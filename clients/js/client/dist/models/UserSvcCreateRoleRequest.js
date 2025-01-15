@@ -15,6 +15,8 @@
  * Check if a given object implements the UserSvcCreateRoleRequest interface.
  */
 export function instanceOfUserSvcCreateRoleRequest(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
     return true;
 }
 export function UserSvcCreateRoleRequestFromJSON(json) {
@@ -26,6 +28,7 @@ export function UserSvcCreateRoleRequestFromJSONTyped(json, ignoreDiscriminator)
     }
     return {
         'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
     };
@@ -39,6 +42,7 @@ export function UserSvcCreateRoleRequestToJSONTyped(value, ignoreDiscriminator =
     }
     return {
         'description': value['description'],
+        'id': value['id'],
         'name': value['name'],
         'permissionIds': value['permissionIds'],
     };

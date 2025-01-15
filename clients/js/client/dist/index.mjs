@@ -6949,6 +6949,8 @@ function UserSvcCreateOrganizationRequestToJSONTyped(value, ignoreDiscriminator 
  * Check if a given object implements the UserSvcCreateRoleRequest interface.
  */
 function instanceOfUserSvcCreateRoleRequest(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
     return true;
 }
 function UserSvcCreateRoleRequestFromJSON(json) {
@@ -6960,6 +6962,7 @@ function UserSvcCreateRoleRequestFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
     };
@@ -6973,6 +6976,7 @@ function UserSvcCreateRoleRequestToJSONTyped(value, ignoreDiscriminator = false)
     }
     return {
         'description': value['description'],
+        'id': value['id'],
         'name': value['name'],
         'permissionIds': value['permissionIds'],
     };
@@ -10860,7 +10864,7 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `{organizationId}` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.
      * Create an Organization
      */
     createOrganizationRaw(requestParameters, initOverrides) {
@@ -10885,7 +10889,7 @@ class UserSvcApi extends BaseAPI {
         });
     }
     /**
-     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+     * Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization. The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `{organizationId}` is a unique identifier for the created organization. Dynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.
      * Create an Organization
      */
     createOrganization(requestParameters, initOverrides) {

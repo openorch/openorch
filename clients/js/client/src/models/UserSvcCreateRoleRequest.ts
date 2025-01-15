@@ -30,6 +30,12 @@ export interface UserSvcCreateRoleRequest {
      * @type {string}
      * @memberof UserSvcCreateRoleRequest
      */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserSvcCreateRoleRequest
+     */
     name?: string;
     /**
      * 
@@ -43,6 +49,7 @@ export interface UserSvcCreateRoleRequest {
  * Check if a given object implements the UserSvcCreateRoleRequest interface.
  */
 export function instanceOfUserSvcCreateRoleRequest(value: object): value is UserSvcCreateRoleRequest {
+    if (!('id' in value) || value['id'] === undefined) return false;
     return true;
 }
 
@@ -57,6 +64,7 @@ export function UserSvcCreateRoleRequestFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'permissionIds': json['permissionIds'] == null ? undefined : json['permissionIds'],
     };
@@ -74,6 +82,7 @@ export function UserSvcCreateRoleRequestToJSONTyped(value?: UserSvcCreateRoleReq
     return {
         
         'description': value['description'],
+        'id': value['id'],
         'name': value['name'],
         'permissionIds': value['permissionIds'],
     };
