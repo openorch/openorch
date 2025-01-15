@@ -3889,7 +3889,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.\nThe initiating user will receive a dynamic role in the format ` + "`" + `user-svc:org:{organizationId}:admin` + "`" + `, where ` + "`" + `$organization-slug` + "`" + ` is a unique identifier for the created organization.\nDynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.",
+                "description": "Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.\nThe initiating user will receive a dynamic role in the format ` + "`" + `user-svc:org:{organizationId}:admin` + "`" + `, where ` + "`" + `{organizationId}` + "`" + ` is a unique identifier for the created organization.\nDynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.",
                 "consumes": [
                     "application/json"
                 ],
@@ -7715,7 +7715,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
-                    "description": "The unique identifier, which can be a URL.\n\nExample values: \"joe12\" (singulatron username), \"twitter.com/thejoe\" (twitter url), \"joe@joesdomain.com\" (email)",
+                    "description": "The unique identifier, which can be a URL.\n\nExample values: \"joe12\" (openorch username), \"twitter.com/thejoe\" (twitter url), \"joe@joesdomain.com\" (email)",
                     "type": "string",
                     "example": "twitter.com/thejoe"
                 },
@@ -7735,7 +7735,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "value": {
-                    "description": "Value is the platform local unique identifier.\nIe. while the ` + "`" + `id` + "`" + ` of a Twitter contact is ` + "`" + `twitter.com/thejoe` + "`" + `, the value will be only ` + "`" + `thejoe` + "`" + `.\nFor email and phones the ` + "`" + `id` + "`" + ` and the ` + "`" + `value` + "`" + ` will be the same.\nThis field mostly exists for display purposes.\n\nExample values: \"joe12\" (singulatron username), \"thejoe\" (twitter username), \"joe@joesdomain.com\" (email)",
+                    "description": "Value is the platform local unique identifier.\nIe. while the ` + "`" + `id` + "`" + ` of a Twitter contact is ` + "`" + `twitter.com/thejoe` + "`" + `, the value will be only ` + "`" + `thejoe` + "`" + `.\nFor email and phones the ` + "`" + `id` + "`" + ` and the ` + "`" + `value` + "`" + ` will be the same.\nThis field mostly exists for display purposes.\n\nExample values: \"joe12\" (openorch username), \"thejoe\" (twitter username), \"joe@joesdomain.com\" (email)",
                     "type": "string",
                     "example": "thejoe"
                 },
@@ -7766,8 +7766,14 @@ const docTemplate = `{
         },
         "user_svc.CreateRoleRequest": {
             "type": "object",
+            "required": [
+                "id"
+            ],
             "properties": {
                 "description": {
+                    "type": "string"
+                },
+                "id": {
                     "type": "string"
                 },
                 "name": {

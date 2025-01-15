@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserSvcCreateRoleRequest type satisfies the MappedNullable interface at compile time
@@ -21,16 +23,20 @@ var _ MappedNullable = &UserSvcCreateRoleRequest{}
 // UserSvcCreateRoleRequest struct for UserSvcCreateRoleRequest
 type UserSvcCreateRoleRequest struct {
 	Description *string `json:"description,omitempty"`
+	Id string `json:"id"`
 	Name *string `json:"name,omitempty"`
 	PermissionIds []string `json:"permissionIds,omitempty"`
 }
+
+type _UserSvcCreateRoleRequest UserSvcCreateRoleRequest
 
 // NewUserSvcCreateRoleRequest instantiates a new UserSvcCreateRoleRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserSvcCreateRoleRequest() *UserSvcCreateRoleRequest {
+func NewUserSvcCreateRoleRequest(id string) *UserSvcCreateRoleRequest {
 	this := UserSvcCreateRoleRequest{}
+	this.Id = id
 	return &this
 }
 
@@ -72,6 +78,30 @@ func (o *UserSvcCreateRoleRequest) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *UserSvcCreateRoleRequest) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetId returns the Id field value
+func (o *UserSvcCreateRoleRequest) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *UserSvcCreateRoleRequest) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *UserSvcCreateRoleRequest) SetId(v string) {
+	o.Id = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -151,6 +181,7 @@ func (o UserSvcCreateRoleRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -158,6 +189,43 @@ func (o UserSvcCreateRoleRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["permissionIds"] = o.PermissionIds
 	}
 	return toSerialize, nil
+}
+
+func (o *UserSvcCreateRoleRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserSvcCreateRoleRequest := _UserSvcCreateRoleRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserSvcCreateRoleRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserSvcCreateRoleRequest(varUserSvcCreateRoleRequest)
+
+	return err
 }
 
 type NullableUserSvcCreateRoleRequest struct {

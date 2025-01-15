@@ -26,8 +26,8 @@ import (
 // @ID createOrganization
 // @Summary Create an Organization
 // @Description Allows a logged-in user to create a new organization. The user initiating the request will be assigned the role of admin for that organization.
-// @Description The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `$organization-slug` is a unique identifier for the created organization.
-// @Description Dynamic roles are generated based on specific user-resource associations, offering more flexible permission management compared to static roles.
+// @Description The initiating user will receive a dynamic role in the format `user-svc:org:{organizationId}:admin`, where `{organizationId}` is a unique identifier for the created organization.
+// @Description Dynamic roles are generated based on specific user-resource associations (in this case the resource being the organization), offering more flexible permission management compared to static roles.
 // @Tags User Svc
 // @Accept json
 // @Produce json
