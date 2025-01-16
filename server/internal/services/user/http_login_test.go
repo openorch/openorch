@@ -41,7 +41,7 @@ func TestRegistration(t *testing.T) {
 	require.NoError(t, err)
 
 	t.Run("user password change", func(t *testing.T) {
-		claim, err := options.Authorizer.DecodeJWT(
+		claim, err := options.Authorizer.ParseJWT(
 			*publicKeyRsp.PublicKey,
 			adminToken,
 		)
@@ -126,7 +126,7 @@ func TestOrganization(t *testing.T) {
 				Execute()
 			require.NoError(t, err)
 
-			claim, err := options.Authorizer.DecodeJWT(
+			claim, err := options.Authorizer.ParseJWT(
 				*publicKeyRsp.PublicKey,
 				adminToken,
 			)
@@ -143,7 +143,7 @@ func TestOrganization(t *testing.T) {
 				Execute()
 			require.NoError(t, err)
 
-			claim, err = options.Authorizer.DecodeJWT(
+			claim, err = options.Authorizer.ParseJWT(
 				*publicKeyRsp.PublicKey,
 				*loginRsp.Token.Token,
 			)
@@ -192,7 +192,7 @@ func TestOrganization(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		claim, err := options.Authorizer.DecodeJWT(
+		claim, err := options.Authorizer.ParseJWT(
 			*publicKeyRsp.PublicKey,
 			*loginRsp.Token.Token,
 		)

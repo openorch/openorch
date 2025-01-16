@@ -38,34 +38,34 @@ func (m *MockAuthorizer) EXPECT() *MockAuthorizerMockRecorder {
 	return m.recorder
 }
 
-// DecodeJWT mocks base method.
-func (m *MockAuthorizer) DecodeJWT(userSvcPublicKey, token string) (*Claims, error) {
+// ParseJWT mocks base method.
+func (m *MockAuthorizer) ParseJWT(userSvcPublicKey, token string) (*Claims, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DecodeJWT", userSvcPublicKey, token)
+	ret := m.ctrl.Call(m, "ParseJWT", userSvcPublicKey, token)
 	ret0, _ := ret[0].(*Claims)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// DecodeJWT indicates an expected call of DecodeJWT.
-func (mr *MockAuthorizerMockRecorder) DecodeJWT(userSvcPublicKey, token any) *gomock.Call {
+// ParseJWT indicates an expected call of ParseJWT.
+func (mr *MockAuthorizerMockRecorder) ParseJWT(userSvcPublicKey, token any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DecodeJWT", reflect.TypeOf((*MockAuthorizer)(nil).DecodeJWT), userSvcPublicKey, token)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWT", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWT), userSvcPublicKey, token)
 }
 
-// DecodeJWTFromRequest mocks base method.
-func (m *MockAuthorizer) DecodeJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
+// ParseJWTFromRequest mocks base method.
+func (m *MockAuthorizer) ParseJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DecodeJWTFromRequest", userSvcPublicKey, r)
+	ret := m.ctrl.Call(m, "ParseJWTFromRequest", userSvcPublicKey, r)
 	ret0, _ := ret[0].(*Claims)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// DecodeJWTFromRequest indicates an expected call of DecodeJWTFromRequest.
-func (mr *MockAuthorizerMockRecorder) DecodeJWTFromRequest(userSvcPublicKey, r any) *gomock.Call {
+// ParseJWTFromRequest indicates an expected call of ParseJWTFromRequest.
+func (mr *MockAuthorizerMockRecorder) ParseJWTFromRequest(userSvcPublicKey, r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DecodeJWTFromRequest", reflect.TypeOf((*MockAuthorizer)(nil).DecodeJWTFromRequest), userSvcPublicKey, r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWTFromRequest", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWTFromRequest), userSvcPublicKey, r)
 }
 
 // IsAdmin mocks base method.

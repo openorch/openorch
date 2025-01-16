@@ -52,7 +52,7 @@ func Whoami(cmd *cobra.Command, args []string) error {
 		return errors.Wrap(err, "failed to get public key")
 	}
 
-	claims, err := sdk.AuthorizerImpl{}.DecodeJWT(*publicKeyRsp.PublicKey, usr.Token)
+	claims, err := sdk.AuthorizerImpl{}.ParseJWT(*publicKeyRsp.PublicKey, usr.Token)
 	if err != nil {
 		return errors.Wrap(err, "failed to decode JWT")
 	}
