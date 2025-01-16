@@ -14,24 +14,24 @@ import (
 // Authorization also happens by calling the User Svc to check if a user has a specific permission to call an endpoint.
 type Authorizer interface {
 	TokenFromRequest(r *http.Request) (string, bool)
-	DecodeJWT(userSvcPublicKey, token string) (*Claims, error)
-	DecodeJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error)
+	ParseJWT(userSvcPublicKey, token string) (*Claims, error)
+	ParseJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error)
 	IsAdmin(userSvcPublicKey string, token string) (bool, error)
 	IsAdminFromRequest(userSvcPublicKey string, r *http.Request) (bool, error)
 }
 
 type AuthorizerImpl struct{}
 
-func (a AuthorizerImpl) DecodeJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
+func (a AuthorizerImpl) ParseJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
 	tokenString, hasToken := a.TokenFromRequest(r)
 	if !hasToken {
 		return nil, fmt.Errorf("no token found in request")
 	}
 
-	return a.DecodeJWT(userSvcPublicKey, tokenString)
+	return a.ParseJWT(userSvcPublicKey, tokenString)
 }
 
-func (a AuthorizerImpl) DecodeJWT(userSvcPublicKey, token string) (*Claims, error) {
+func (a AuthorizerImpl) ParseJWT(userSvcPublicKey, token string) (*Claims, error) {
 	publicKey, err := PublicKeyFromString(userSvcPublicKey)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get public key from string")
@@ -76,7 +76,7 @@ func (a AuthorizerImpl) IsAdminFromRequest(userSvcPublicKey string, r *http.Requ
 }
 
 func (a AuthorizerImpl) IsAdmin(userSvcPublicKey, token string) (bool, error) {
-	claims, err := a.DecodeJWT(userSvcPublicKey, token)
+	claims, err := a.ParseJWT(userSvcPublicKey, token)
 	if err != nil {
 		return false, err
 	}

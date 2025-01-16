@@ -17,7 +17,7 @@ The user service is at the heart of OpenOrch, managing users, tokens, organizati
 
 > This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/openorch/login).
 
-## How it works
+## Overview
 
 The most important thing about the User Svc is that service (machine) and user (human) accounts look and function the same.
 
@@ -25,7 +25,7 @@ Every service you write needs to [register](/docs/openorch/register) at startup,
 
 A service account is not an admin account, it's a simple user level account. You might wonder how service-to-service calls work then.
 
-### Service to service calls
+## Service to service calls
 
 Most endpoints on OpenOrch can only be called by administrators by default.
 
@@ -52,21 +52,13 @@ You can apply these grants with an administrator account in your CI workflow wit
 oo grant save user-prompter-grant.yaml
 ```
 
-### Services with multiple nodes
-
-You might now wonder what happens when a service has multiple instances/nodes. Won't their user accounts "clash" in the `User Svc`? The answer to this is that from the `User Svc` point of view, each node/instance of a service is the same account.
-
-This is possible because the platform is designed with services having a "Shared Database Access".
-
-Let's say you have a Cassandra network that spans multiple Availability Zones/Regions. Your nodes will also span multiple AZs/Regions and each instance of them will log in as `X Svc`.
-
-### The token
+## Tokens
 
 The User Svc produces a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token)) upon [/user-svc/login](/docs/openorch/login) in the `token.token` field (see the response documentation).
 
 You can either use this token as a proper JWT - decode it and inspect the contents, or you can just use the token to read the user account that belongs to the token with the [/user-svc/user/by-token](/docs/openorch/read-user-by-token) endpoint.
 
-### Decoding the token
+### Decoding a token
 
 The [`/user-svc/public-key`](/docs/openorch/get-public-key) will return you the public key of the User Svc which then you can use that to decode the token.
 
@@ -100,9 +92,20 @@ type Claims struct {
 
 ## Roles
 
-Keep in mind that in the below sections we'll refer to roles by their ID (such as `user-svc:admin`).
+Every user has a role, and a user token (see more about tokens on this page) produced upon login contains all the roles a user has.
 
-Usually such readable strings are slugs, but in the case of roles slugs were eliminated for simplicity.
+```yaml
+id: "user-svc:admin"
+name: "User Svc - Admin Role"
+```
+
+```yaml
+id: "your-svc:your-role"
+name: "Your Svc - Your Role"
+ownerId: "usr_eaSNcJ0BB0" # your user ID
+```
+
+In the below sections we'll refer to roles by their ID (such as `user-svc:admin`). Usually such readable strings are slugs, but in the case of roles slugs were eliminated for simplicity.
 
 ### Static roles
 
@@ -113,11 +116,26 @@ user-svc:admin
 user-svc:user
 ```
 
-defined by the `User Svc` are primarily used for simple role-based access control: in the Superplatform UI and API you can edit static roles to add or remove endpoints a user can call.
+defined by the `User Svc` are used for role-based access control. Each role has a list of permissions associated with it. When endpoints authorize a user it can do two things:
+
+- Call the [Is Authorized](/docs/openorch/is-authorized) with the caller user auth headers and a permission ID to see if a given caller is authorized for that endpoint.
+- Cache the list of permissions belonging to different roles and inspect only the caller's token to see if an appropriate role is present. This has the advantage of being quicker but slightly more complex (suitable SDK functions can help here). To parse and verify a token yourself, see the [Get Public Key](/docs/openorch/get-public-key) endpoint.
 
 > If you are looking at restricting access to endpoints in other ways, you might be interested in: [Policy Svc](/docs/built-in-services/policy-svc).
 
-Each user/service is also free to create roles.
+#### Custom static roles
+
+While deceptively simple, static roles can get you far, even without any permissions associated with them. A prime use case is product subscriptions.
+
+Let's say you have a new product called "Funny Cats Newsletter" with two subscription tiers: Pro and Ultra.
+You might create a service with the slug `funny-cats-newsletter-svc` for this product. You could have the following custom static roles created by your service (by calling the [Create Role](/docs/openorch/create-role) endpoint):
+
+```yaml
+funny-cats-newsletter-svc:pro
+funny-cats-newsletter-svc:ultra
+```
+
+By checking the existence of these roles in a user's token you can successfully authorize product specific features.
 
 ### Dynamic roles
 
@@ -174,3 +192,11 @@ Each permission created must by prefixed by the slug of the account that created
 > Once you (your service) own a permission (by creating it, and it being prefixed by your account slug), you can add it to any role, not just roles owned by you.
 
 Example; let's say your service is `petstore-svc`. OpenOrch prefers fine-grained access control, so you are free to define your own permissions, such as `petstore-svc:read` or `petstore-svc:pet:read`.
+
+## Services with multiple nodes
+
+You might now wonder what happens when a service has multiple instances/nodes. Won't their user accounts "clash" in the `User Svc`? The answer to this is that from the `User Svc` point of view, each node/instance of a service is the same account.
+
+This is possible because the platform is designed with services having a "Shared Database Access".
+
+Let's say you have a Cassandra network that spans multiple Availability Zones/Regions. Your nodes will also span multiple AZs/Regions and each instance of them will log in as `X Svc`.

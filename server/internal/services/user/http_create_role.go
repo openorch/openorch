@@ -26,8 +26,8 @@ import (
 // @ID createRole
 // @Summary Create a New Role
 // @Description Create a new role.
-// @Description <b>The role ID must be prefixed by the callers username (email).</b>
-// @Description Eg. if the owner's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
+// @Description <b>The role ID must be prefixed by the caller's slug.</b>
+// @Description Eg. if the caller's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
 // @Description The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.
 // @Description
 // @Description Requires the `user-svc:role:create` permission.
