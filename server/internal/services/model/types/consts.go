@@ -4,11 +4,13 @@ var PlatformLlamaCpp = Platform{
 	Id: "llama-cpp",
 	Architectures: Architectures{
 		Default: Container{
-			Port:  8000,
+			Port: 8000,
+			// For the source of this image, see `server/docker/llama-cpp-python/simple`
 			Image: "crufter/llama-cpp-python-simple",
 		},
 		Cuda: Container{
-			Port:   8000,
+			Port: 8000,
+			// For the source of this image, see `server/docker/llama-cpp-python/cude`
 			Image:  "crufter/llama-cpp-python-cuda",
 			Envars: []string{"NVIDIA_VISIBLE_DEVICES=all"},
 		},
