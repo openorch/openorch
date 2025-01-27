@@ -1,48 +1,35 @@
-name: "Backend build"
+name: "Backend container build and push to DockerHub"
 
 on:
   push:
+    branches:
+      - "main"
+
+env:
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  IMAGE_NAME: "openorch-backend"
 
 jobs:
-  test:
-    timeout-minutes: 5
+  build-and-push:
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout the repository
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
+      - name: Login to Docker Hub
+        id: login-dockerhub
+        uses: docker/login-action@v2
         with:
-          go-version: "^1.23.2"
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Install dependencies
+      - name: Build Docker image
         run: |
-          cd server
-          go mod tidy
+          DOCKER_BUILDKIT=1 docker build -f ./server/docker/Dockerfile -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
+          docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
-      - name: Run tests
-        run: |
-          docker rm -f mypostgres
-          docker run --name mypostgres -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=mydatabase -p 5432:5432 -d postgres
-
-          # Run non-distributed tests with localstore backend
-          go test ./... -v -tags='!dist' -timeout=30s
-
-          # We rerun non-distributed tests with an SQL backend
-          OPENORCH_DB=postgres \
-            OPENORCH_DB_DEBUG=true \
-            OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
-            go test ./... -tags='!dist' -timeout=30s
-
-          # Run distributed test with SQL (localstore makes no sense in a distributed setting)
-          go test ./... -tags=dist -timeout=30s
-        working-directory: server
-
-      - name: Test OpenAPI annotations
-        run: |
-          go install github.com/swaggo/swag/cmd/swag@latest
-          npm install @openapitools/openapi-generator-cli -g
-          swag init --parseDependency
-          openapi-generator-cli generate -i docs/swagger.yaml -g typescript-fetch -o ./genn
-        working-directory: server
+          # The NVIDIA version is needed to interact with the GPUs - for example in the Node Svc
+          DOCKER_BUILDKIT=1 docker build -f ./server/docker/DockerfileNvidia -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:nvidia-latest .
+          docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:nvidia-latest
