@@ -34,7 +34,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
 RUN python -m pip install --upgrade pip pytest cmake scikit-build setuptools \
     uvicorn starlette fastapi sqlalchemy sse_starlette starlette_context pydantic_settings
 
-
 # Install llama_cpp_python with CUDA support
 RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on -DCMAKE_CUDA_ARCHITECTURES=all-major" FORCE_CMAKE=1 \
     pip install jupyterlab llama_cpp_python --no-cache-dir --force-reinstall --upgrade

@@ -23,7 +23,7 @@ This local address serves two purposes:
 
 For information about this, please refer to the [Registry Svc Node section](/docs/built-in-services/registry-svc#node)
 
-## `OPENORCH_GPU_PLATFORM`
+## `OPENORCH_GPU_PLATFORM`  
 
 This envar is used to enabel GPU acceleration.
 Supported platforms:
