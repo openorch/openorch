@@ -27,6 +27,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          DOCKER_BUILDKIT=1 docker build -f ./server/docker/Dockerfile -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
+          DOCKER_BUILDKIT=1 docker build -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
           docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
         working-directory: ./server/docker/llama-cpp-python/simple
