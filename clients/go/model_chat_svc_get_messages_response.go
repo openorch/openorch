@@ -20,7 +20,6 @@ var _ MappedNullable = &ChatSvcGetMessagesResponse{}
 
 // ChatSvcGetMessagesResponse struct for ChatSvcGetMessagesResponse
 type ChatSvcGetMessagesResponse struct {
-	Assets []ChatSvcAsset `json:"assets,omitempty"`
 	Messages []ChatSvcMessage `json:"messages,omitempty"`
 }
 
@@ -39,38 +38,6 @@ func NewChatSvcGetMessagesResponse() *ChatSvcGetMessagesResponse {
 func NewChatSvcGetMessagesResponseWithDefaults() *ChatSvcGetMessagesResponse {
 	this := ChatSvcGetMessagesResponse{}
 	return &this
-}
-
-// GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *ChatSvcGetMessagesResponse) GetAssets() []ChatSvcAsset {
-	if o == nil || IsNil(o.Assets) {
-		var ret []ChatSvcAsset
-		return ret
-	}
-	return o.Assets
-}
-
-// GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChatSvcGetMessagesResponse) GetAssetsOk() ([]ChatSvcAsset, bool) {
-	if o == nil || IsNil(o.Assets) {
-		return nil, false
-	}
-	return o.Assets, true
-}
-
-// HasAssets returns a boolean if a field has been set.
-func (o *ChatSvcGetMessagesResponse) HasAssets() bool {
-	if o != nil && !IsNil(o.Assets) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssets gets a reference to the given []ChatSvcAsset and assigns it to the Assets field.
-func (o *ChatSvcGetMessagesResponse) SetAssets(v []ChatSvcAsset) {
-	o.Assets = v
 }
 
 // GetMessages returns the Messages field value if set, zero value otherwise.
@@ -115,9 +82,6 @@ func (o ChatSvcGetMessagesResponse) MarshalJSON() ([]byte, error) {
 
 func (o ChatSvcGetMessagesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Assets) {
-		toSerialize["assets"] = o.Assets
-	}
 	if !IsNil(o.Messages) {
 		toSerialize["messages"] = o.Messages
 	}

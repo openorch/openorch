@@ -1738,7 +1738,7 @@ const docTemplate = `{
                 "tags": [
                     "File Svc"
                 ],
-                "summary": "Serve a Downloaded file.",
+                "summary": "Serve a Downloaded file",
                 "operationId": "serveDownload",
                 "parameters": [
                     {
@@ -1779,7 +1779,7 @@ const docTemplate = `{
         },
         "/file-svc/serve/upload/{fileId}": {
             "get": {
-                "description": "Serves a previously uploaded file based on its File ID.\nPlease keep in mind that the ID and the FileID of an Upload is two different fields.",
+                "description": "Retrieves and serves a previously uploaded file using its File ID.\nNote: The ` + "`" + `ID` + "`" + ` and ` + "`" + `FileID` + "`" + ` fields of an upload are different.\n- ` + "`" + `FileID` + "`" + ` is a unique identifier for the file itself.\n- ` + "`" + `ID` + "`" + ` is a unique identifier for a specific replica of the file.\nSince OpenOrch is a distributed system, files can be replicated across multiple nodes.\nThis means each uploaded file may have multiple records with the same ` + "`" + `FileID` + "`" + ` but different ` + "`" + `ID` + "`" + `s.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4218,7 +4218,7 @@ const docTemplate = `{
         },
         "/user-svc/public-key": {
             "get": {
-                "description": "Get the public key to descrypt the JWT.",
+                "description": "Get the public key to parse and verify the JWT.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4306,7 +4306,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Create a new role.\n\u003cb\u003eThe role ID must be prefixed by the callers username (email).\u003c/b\u003e\nEg. if the owner's slug is ` + "`" + `petstore-svc` + "`" + ` the role should look like ` + "`" + `petstore-svc:admin` + "`" + `.\nThe user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.\n\nRequires the ` + "`" + `user-svc:role:create` + "`" + ` permission.",
+                "description": "Create a new role.\n\u003cb\u003eThe role ID must be prefixed by the caller's slug.\u003c/b\u003e\nEg. if the caller's slug is ` + "`" + `petstore-svc` + "`" + ` the role should look like ` + "`" + `petstore-svc:admin` + "`" + `.\nThe user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.\n\nRequires the ` + "`" + `user-svc:role:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4985,34 +4985,6 @@ const docTemplate = `{
                 }
             }
         },
-        "chat_svc.Asset": {
-            "type": "object",
-            "properties": {
-                "content": {
-                    "description": "Content is the base64 encoded binary file direcly embedded in the asset itself",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "url": {
-                    "description": "Url of the asset where",
-                    "type": "string"
-                }
-            }
-        },
         "chat_svc.EventMessageAdded": {
             "type": "object",
             "properties": {
@@ -5040,12 +5012,6 @@ const docTemplate = `{
         "chat_svc.GetMessagesResponse": {
             "type": "object",
             "properties": {
-                "assets": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/chat_svc.Asset"
-                    }
-                },
                 "messages": {
                     "type": "array",
                     "items": {
@@ -5082,19 +5048,19 @@ const docTemplate = `{
         "chat_svc.Message": {
             "type": "object",
             "properties": {
-                "assetIds": {
-                    "description": "AssetIds defines the attachments the message has.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "content": {
                     "description": "Content of the message eg. \"Hi, what's up?\"",
                     "type": "string"
                 },
                 "createdAt": {
                     "type": "string"
+                },
+                "fileIds": {
+                    "description": "FileIds defines the file attachments the message has.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "id": {
                     "type": "string"

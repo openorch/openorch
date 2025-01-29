@@ -20,11 +20,11 @@ var _ MappedNullable = &ChatSvcMessage{}
 
 // ChatSvcMessage struct for ChatSvcMessage
 type ChatSvcMessage struct {
-	// AssetIds defines the attachments the message has.
-	AssetIds []string `json:"assetIds,omitempty"`
 	// Content of the message eg. \"Hi, what's up?\"
 	Content *string `json:"content,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// FileIds defines the file attachments the message has.
+	FileIds []string `json:"fileIds,omitempty"`
 	Id *string `json:"id,omitempty"`
 	// ThreadId of the message.
 	ThreadId *string `json:"threadId,omitempty"`
@@ -48,38 +48,6 @@ func NewChatSvcMessage() *ChatSvcMessage {
 func NewChatSvcMessageWithDefaults() *ChatSvcMessage {
 	this := ChatSvcMessage{}
 	return &this
-}
-
-// GetAssetIds returns the AssetIds field value if set, zero value otherwise.
-func (o *ChatSvcMessage) GetAssetIds() []string {
-	if o == nil || IsNil(o.AssetIds) {
-		var ret []string
-		return ret
-	}
-	return o.AssetIds
-}
-
-// GetAssetIdsOk returns a tuple with the AssetIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChatSvcMessage) GetAssetIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.AssetIds) {
-		return nil, false
-	}
-	return o.AssetIds, true
-}
-
-// HasAssetIds returns a boolean if a field has been set.
-func (o *ChatSvcMessage) HasAssetIds() bool {
-	if o != nil && !IsNil(o.AssetIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetIds gets a reference to the given []string and assigns it to the AssetIds field.
-func (o *ChatSvcMessage) SetAssetIds(v []string) {
-	o.AssetIds = v
 }
 
 // GetContent returns the Content field value if set, zero value otherwise.
@@ -144,6 +112,38 @@ func (o *ChatSvcMessage) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *ChatSvcMessage) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetFileIds returns the FileIds field value if set, zero value otherwise.
+func (o *ChatSvcMessage) GetFileIds() []string {
+	if o == nil || IsNil(o.FileIds) {
+		var ret []string
+		return ret
+	}
+	return o.FileIds
+}
+
+// GetFileIdsOk returns a tuple with the FileIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatSvcMessage) GetFileIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.FileIds) {
+		return nil, false
+	}
+	return o.FileIds, true
+}
+
+// HasFileIds returns a boolean if a field has been set.
+func (o *ChatSvcMessage) HasFileIds() bool {
+	if o != nil && !IsNil(o.FileIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileIds gets a reference to the given []string and assigns it to the FileIds field.
+func (o *ChatSvcMessage) SetFileIds(v []string) {
+	o.FileIds = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -284,14 +284,14 @@ func (o ChatSvcMessage) MarshalJSON() ([]byte, error) {
 
 func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AssetIds) {
-		toSerialize["assetIds"] = o.AssetIds
-	}
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.FileIds) {
+		toSerialize["fileIds"] = o.FileIds
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

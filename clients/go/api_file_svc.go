@@ -107,7 +107,7 @@ Requires the `file-svc:download:edit` permission.
 	PauseDownloadExecute(r ApiPauseDownloadRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
-	ServeDownload Serve a Downloaded file.
+	ServeDownload Serve a Downloaded file
 
 	Serves a previously downloaded file based on its URL.
 
@@ -124,8 +124,12 @@ Requires the `file-svc:download:edit` permission.
 	/*
 	ServeUpload Serve an Uploaded File
 
-	Serves a previously uploaded file based on its File ID.
-Please keep in mind that the ID and the FileID of an Upload is two different fields.
+	Retrieves and serves a previously uploaded file using its File ID.
+Note: The `ID` and `FileID` fields of an upload are different.
+- `FileID` is a unique identifier for the file itself.
+- `ID` is a unique identifier for a specific replica of the file.
+Since OpenOrch is a distributed system, files can be replicated across multiple nodes.
+This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param fileId Upload ID
@@ -902,7 +906,7 @@ func (r ApiServeDownloadRequest) Execute() (*os.File, *http.Response, error) {
 }
 
 /*
-ServeDownload Serve a Downloaded file.
+ServeDownload Serve a Downloaded file
 
 Serves a previously downloaded file based on its URL.
 
@@ -1039,8 +1043,12 @@ func (r ApiServeUploadRequest) Execute() (*os.File, *http.Response, error) {
 /*
 ServeUpload Serve an Uploaded File
 
-Serves a previously uploaded file based on its File ID.
-Please keep in mind that the ID and the FileID of an Upload is two different fields.
+Retrieves and serves a previously uploaded file using its File ID.
+Note: The `ID` and `FileID` fields of an upload are different.
+- `FileID` is a unique identifier for the file itself.
+- `ID` is a unique identifier for a specific replica of the file.
+Since OpenOrch is a distributed system, files can be replicated across multiple nodes.
+This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param fileId Upload ID

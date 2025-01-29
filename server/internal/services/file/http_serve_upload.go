@@ -20,8 +20,12 @@ import (
 
 // @ID serveUpload
 // @Summary Serve an Uploaded File
-// @Description Serves a previously uploaded file based on its File ID.
-// @Description Please keep in mind that the ID and the FileID of an Upload is two different fields.
+// @Description Retrieves and serves a previously uploaded file using its File ID.
+// @Description Note: The `ID` and `FileID` fields of an upload are different.
+// @Description - `FileID` is a unique identifier for the file itself.
+// @Description - `ID` is a unique identifier for a specific replica of the file.
+// @Description Since OpenOrch is a distributed system, files can be replicated across multiple nodes.
+// @Description This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
 // @Tags File Svc
 // @Accept json
 // @Produce application/octet-stream

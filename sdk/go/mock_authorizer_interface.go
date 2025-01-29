@@ -38,36 +38,6 @@ func (m *MockAuthorizer) EXPECT() *MockAuthorizerMockRecorder {
 	return m.recorder
 }
 
-// ParseJWT mocks base method.
-func (m *MockAuthorizer) ParseJWT(userSvcPublicKey, token string) (*Claims, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ParseJWT", userSvcPublicKey, token)
-	ret0, _ := ret[0].(*Claims)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ParseJWT indicates an expected call of ParseJWT.
-func (mr *MockAuthorizerMockRecorder) ParseJWT(userSvcPublicKey, token any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWT", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWT), userSvcPublicKey, token)
-}
-
-// ParseJWTFromRequest mocks base method.
-func (m *MockAuthorizer) ParseJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ParseJWTFromRequest", userSvcPublicKey, r)
-	ret0, _ := ret[0].(*Claims)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ParseJWTFromRequest indicates an expected call of ParseJWTFromRequest.
-func (mr *MockAuthorizerMockRecorder) ParseJWTFromRequest(userSvcPublicKey, r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWTFromRequest", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWTFromRequest), userSvcPublicKey, r)
-}
-
 // IsAdmin mocks base method.
 func (m *MockAuthorizer) IsAdmin(userSvcPublicKey, token string) (bool, error) {
 	m.ctrl.T.Helper()
@@ -96,6 +66,36 @@ func (m *MockAuthorizer) IsAdminFromRequest(userSvcPublicKey string, r *http.Req
 func (mr *MockAuthorizerMockRecorder) IsAdminFromRequest(userSvcPublicKey, r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsAdminFromRequest", reflect.TypeOf((*MockAuthorizer)(nil).IsAdminFromRequest), userSvcPublicKey, r)
+}
+
+// ParseJWT mocks base method.
+func (m *MockAuthorizer) ParseJWT(userSvcPublicKey, token string) (*Claims, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ParseJWT", userSvcPublicKey, token)
+	ret0, _ := ret[0].(*Claims)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ParseJWT indicates an expected call of ParseJWT.
+func (mr *MockAuthorizerMockRecorder) ParseJWT(userSvcPublicKey, token any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWT", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWT), userSvcPublicKey, token)
+}
+
+// ParseJWTFromRequest mocks base method.
+func (m *MockAuthorizer) ParseJWTFromRequest(userSvcPublicKey string, r *http.Request) (*Claims, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ParseJWTFromRequest", userSvcPublicKey, r)
+	ret0, _ := ret[0].(*Claims)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ParseJWTFromRequest indicates an expected call of ParseJWTFromRequest.
+func (mr *MockAuthorizerMockRecorder) ParseJWTFromRequest(userSvcPublicKey, r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ParseJWTFromRequest", reflect.TypeOf((*MockAuthorizer)(nil).ParseJWTFromRequest), userSvcPublicKey, r)
 }
 
 // TokenFromRequest mocks base method.

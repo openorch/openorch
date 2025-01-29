@@ -11,12 +11,13 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log/slog"
 	"net/http"
+
+	"github.com/pkg/errors"
 
 	"github.com/openorch/openorch/sdk/go/logger"
 )
@@ -152,24 +153,28 @@ func FileURL(addr string, fileName string) string {
 
 // GetImageAsBase64 fetches the image from the given URL and returns it as a base64 encoded string.
 func GetImageAsBase64(imageURL string) (string, error) {
+	imageData, err := GetImage(imageURL)
+	if err != nil {
+		return "", errors.Wrap(err, "error getting image")
+	}
+	base64Image := base64.StdEncoding.EncodeToString(imageData)
+
+	return base64Image, nil
+}
+
+// GetImage fetches the image from the given URL.
+func GetImage(imageURL string) ([]byte, error) {
 	resp, err := http.Get(imageURL)
 	if err != nil {
-		return "", errors.New("failed to fetch image: " + err.Error())
+		return nil, errors.New("failed to fetch image: " + err.Error())
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return "", errors.New("failed to fetch image: status code " + resp.Status)
+		return nil, errors.New("failed to fetch image: status code " + resp.Status)
 	}
 
-	imageData, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", errors.New("failed to read image data: " + err.Error())
-	}
-
-	base64Image := base64.StdEncoding.EncodeToString(imageData)
-
-	return base64Image, nil
+	return io.ReadAll(resp.Body)
 }
 
 func (c *Client) Predict(req PredictRequest) (*PredictResponse, error) {

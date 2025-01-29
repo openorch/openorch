@@ -17,6 +17,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log/slog"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -31,7 +32,6 @@ import (
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/logger"
 
-	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
 	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
@@ -361,26 +361,36 @@ func (p *PromptService) processStableDiffusion(
 
 	imgUrl := stable_diffusion.FileURL(address, rsp.Data[0].FileData[0].Name)
 
-	base64String, err := stable_diffusion.GetImageAsBase64(imgUrl)
+	imageBytes, err := stable_diffusion.GetImage(imgUrl)
 	if err != nil {
 		return err
 	}
-	if len(base64String) == 0 {
-		return errors.New("empty image acquired")
+
+	// Write imageBytes to a temporary file
+	tempFile, err := os.CreateTemp("", "upload-*.png")
+	if err != nil {
+		return err
+	}
+	defer tempFile.Close()
+
+	_, err = tempFile.Write(imageBytes)
+	if err != nil {
+		return err
 	}
 
-	asset := &apptypes.Asset{
-		Id:      sdk.Id("ast"),
-		Content: base64String,
+	// Open the file for uploading
+	imageFile, err := os.Open(tempFile.Name())
+	if err != nil {
+		return err
 	}
+	defer imageFile.Close()
 
-	// @todo upsert asset
-	// upsertReq := chattypes.UpsertAssetsRequest{
-	// 	Assets: []*apptypes.Asset{
-	// 		asset,
-	// 	},
-	// }
-	// upsertRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.UpsertAssets(context.Background()).Request(upsertReq).Execute()
+	uploadRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+		FileSvcAPI.UploadFile(context.Background()).
+		File(imageFile).
+		Execute()
+
+	fileIds := []string{*uploadRsp.Upload.FileId}
 
 	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
 		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
@@ -390,7 +400,7 @@ func (p *PromptService) processStableDiffusion(
 					Id:       openapi.PtrString(sdk.Id("msg")),
 					ThreadId: openapi.PtrString(currentPrompt.ThreadId),
 					Content:  openapi.PtrString("Sure, here is your image"),
-					AssetIds: []string{asset.Id},
+					FileIds:  fileIds,
 				},
 			},
 		).
