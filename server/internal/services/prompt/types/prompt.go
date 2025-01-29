@@ -85,6 +85,32 @@ type Prompt struct {
 
 	// UserId contains the ID of the user who submitted the prompt.
 	UserId string `json:"userId"`
+
+	// AI platform specific parameters
+	Parameters Parameters `json:"parameters,omitempty"`
+}
+
+type Parameters struct {
+	StableDiffusion *StableDiffusionParameters `json:"lastRun,omitempty"`
+}
+
+// represents
+// "data":["draw me a cat",1,6,256,256,7.5,0,false,false,"PNDM",0.25,null,null,null]
+type StableDiffusionParameters struct {
+	Prompt        string  `json:"prompt"`
+	NumImages     int     `json:"num_images"`
+	Steps         int     `json:"steps"`
+	Width         int     `json:"width"`
+	Height        int     `json:"height"`
+	GuidanceScale float64 `json:"guidance_scale"`
+	Seed          int     `json:"seed"`
+	Flag1         bool    `json:"flag1"`
+	Flag2         bool    `json:"flag2"`
+	Scheduler     string  `json:"scheduler"`
+	Rate          float64 `json:"rate"`
+	Optional1     *string `json:"optional1"`
+	Optional2     *string `json:"optional2"`
+	Optional3     *string `json:"optional3"`
 }
 
 func (c *Prompt) GetId() string {

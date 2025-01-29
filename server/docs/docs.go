@@ -6623,6 +6623,14 @@ const docTemplate = `{
                 }
             }
         },
+        "prompt_svc.Parameters": {
+            "type": "object",
+            "properties": {
+                "lastRun": {
+                    "$ref": "#/definitions/prompt_svc.StableDiffusionParameters"
+                }
+            }
+        },
         "prompt_svc.Prompt": {
             "type": "object",
             "required": [
@@ -6654,6 +6662,14 @@ const docTemplate = `{
                     "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "parameters": {
+                    "description": "AI platform specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Parameters"
+                        }
+                    ]
                 },
                 "prompt": {
                     "description": "Prompt is the message itself eg. \"What's a banana?",
@@ -6724,6 +6740,53 @@ const docTemplate = `{
         },
         "prompt_svc.RemovePromptResponse": {
             "type": "object"
+        },
+        "prompt_svc.StableDiffusionParameters": {
+            "type": "object",
+            "properties": {
+                "flag1": {
+                    "type": "boolean"
+                },
+                "flag2": {
+                    "type": "boolean"
+                },
+                "guidance_scale": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "num_images": {
+                    "type": "integer"
+                },
+                "optional1": {
+                    "type": "string"
+                },
+                "optional2": {
+                    "type": "string"
+                },
+                "optional3": {
+                    "type": "string"
+                },
+                "prompt": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "number"
+                },
+                "scheduler": {
+                    "type": "string"
+                },
+                "seed": {
+                    "type": "integer"
+                },
+                "steps": {
+                    "type": "integer"
+                },
+                "width": {
+                    "type": "integer"
+                }
+            }
         },
         "registry_svc.APISpec": {
             "type": "object",

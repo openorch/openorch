@@ -17,11 +17,6 @@ export class PolicySvcInstance {
 PolicySvcInstance.discriminator = undefined;
 PolicySvcInstance.attributeTypeMap = [
     {
-        "name": "blocklistParameters",
-        "baseName": "blocklistParameters",
-        "type": "PolicySvcBlocklistParameters"
-    },
-    {
         "name": "endpoint",
         "baseName": "endpoint",
         "type": "string"
@@ -32,9 +27,9 @@ PolicySvcInstance.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "rateLimitParameters",
-        "baseName": "rateLimitParameters",
-        "type": "PolicySvcRateLimitParameters"
+        "name": "parameters",
+        "baseName": "parameters",
+        "type": "PolicySvcParameters"
     },
     {
         "name": "templateId",

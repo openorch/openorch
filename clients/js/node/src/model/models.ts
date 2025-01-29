@@ -84,6 +84,7 @@ export * from './policySvcCheckResponse';
 export * from './policySvcEntity';
 export * from './policySvcErrorResponse';
 export * from './policySvcInstance';
+export * from './policySvcParameters';
 export * from './policySvcRateLimitParameters';
 export * from './policySvcScope';
 export * from './policySvcTemplateId';
@@ -93,9 +94,11 @@ export * from './promptSvcAddPromptResponse';
 export * from './promptSvcErrorResponse';
 export * from './promptSvcListPromptsRequest';
 export * from './promptSvcListPromptsResponse';
+export * from './promptSvcParameters';
 export * from './promptSvcPrompt';
 export * from './promptSvcPromptStatus';
 export * from './promptSvcRemovePromptRequest';
+export * from './promptSvcStableDiffusionParameters';
 export * from './registrySvcAPISpec';
 export * from './registrySvcClient';
 export * from './registrySvcDefinition';
@@ -265,6 +268,7 @@ import { PolicySvcCheckResponse } from './policySvcCheckResponse';
 import { PolicySvcEntity } from './policySvcEntity';
 import { PolicySvcErrorResponse } from './policySvcErrorResponse';
 import { PolicySvcInstance } from './policySvcInstance';
+import { PolicySvcParameters } from './policySvcParameters';
 import { PolicySvcRateLimitParameters } from './policySvcRateLimitParameters';
 import { PolicySvcScope } from './policySvcScope';
 import { PolicySvcTemplateId } from './policySvcTemplateId';
@@ -274,9 +278,11 @@ import { PromptSvcAddPromptResponse } from './promptSvcAddPromptResponse';
 import { PromptSvcErrorResponse } from './promptSvcErrorResponse';
 import { PromptSvcListPromptsRequest } from './promptSvcListPromptsRequest';
 import { PromptSvcListPromptsResponse } from './promptSvcListPromptsResponse';
+import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPrompt } from './promptSvcPrompt';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 import { PromptSvcRemovePromptRequest } from './promptSvcRemovePromptRequest';
+import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcDefinition } from './registrySvcDefinition';
@@ -455,6 +461,7 @@ let typeMap: {[index: string]: any} = {
     "PolicySvcCheckResponse": PolicySvcCheckResponse,
     "PolicySvcErrorResponse": PolicySvcErrorResponse,
     "PolicySvcInstance": PolicySvcInstance,
+    "PolicySvcParameters": PolicySvcParameters,
     "PolicySvcRateLimitParameters": PolicySvcRateLimitParameters,
     "PolicySvcUpsertInstanceRequest": PolicySvcUpsertInstanceRequest,
     "PromptSvcAddPromptRequest": PromptSvcAddPromptRequest,
@@ -462,8 +469,10 @@ let typeMap: {[index: string]: any} = {
     "PromptSvcErrorResponse": PromptSvcErrorResponse,
     "PromptSvcListPromptsRequest": PromptSvcListPromptsRequest,
     "PromptSvcListPromptsResponse": PromptSvcListPromptsResponse,
+    "PromptSvcParameters": PromptSvcParameters,
     "PromptSvcPrompt": PromptSvcPrompt,
     "PromptSvcRemovePromptRequest": PromptSvcRemovePromptRequest,
+    "PromptSvcStableDiffusionParameters": PromptSvcStableDiffusionParameters,
     "RegistrySvcAPISpec": RegistrySvcAPISpec,
     "RegistrySvcClient": RegistrySvcClient,
     "RegistrySvcDefinition": RegistrySvcDefinition,

@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PromptSvcParameters } from './PromptSvcParameters';
+import {
+    PromptSvcParametersFromJSON,
+    PromptSvcParametersFromJSONTyped,
+    PromptSvcParametersToJSON,
+    PromptSvcParametersToJSONTyped,
+} from './PromptSvcParameters';
 import type { PromptSvcPromptStatus } from './PromptSvcPromptStatus';
 import {
     PromptSvcPromptStatusFromJSON,
@@ -63,6 +70,12 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     modelId?: string;
+    /**
+     * AI platform specific parameters
+     * @type {PromptSvcParameters}
+     * @memberof PromptSvcPrompt
+     */
+    parameters?: PromptSvcParameters;
     /**
      * Prompt is the message itself eg. "What's a banana?
      * @type {string}
@@ -145,6 +158,7 @@ export function PromptSvcPromptFromJSONTyped(json: any, ignoreDiscriminator: boo
         'lastRun': json['lastRun'] == null ? undefined : json['lastRun'],
         'maxRetries': json['maxRetries'] == null ? undefined : json['maxRetries'],
         'modelId': json['modelId'] == null ? undefined : json['modelId'],
+        'parameters': json['parameters'] == null ? undefined : PromptSvcParametersFromJSON(json['parameters']),
         'prompt': json['prompt'],
         'runCount': json['runCount'] == null ? undefined : json['runCount'],
         'status': json['status'] == null ? undefined : PromptSvcPromptStatusFromJSON(json['status']),
@@ -173,6 +187,7 @@ export function PromptSvcPromptToJSONTyped(value?: PromptSvcPrompt | null, ignor
         'lastRun': value['lastRun'],
         'maxRetries': value['maxRetries'],
         'modelId': value['modelId'],
+        'parameters': PromptSvcParametersToJSON(value['parameters']),
         'prompt': value['prompt'],
         'runCount': value['runCount'],
         'status': PromptSvcPromptStatusToJSON(value['status']),

@@ -11,13 +11,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PolicySvcRateLimitParametersFromJSON, PolicySvcRateLimitParametersToJSON, } from './PolicySvcRateLimitParameters';
 import { PolicySvcTemplateIdFromJSON, PolicySvcTemplateIdToJSON, } from './PolicySvcTemplateId';
-import { PolicySvcBlocklistParametersFromJSON, PolicySvcBlocklistParametersToJSON, } from './PolicySvcBlocklistParameters';
+import { PolicySvcParametersFromJSON, PolicySvcParametersToJSON, } from './PolicySvcParameters';
 /**
  * Check if a given object implements the PolicySvcInstance interface.
  */
 export function instanceOfPolicySvcInstance(value) {
+    if (!('parameters' in value) || value['parameters'] === undefined)
+        return false;
     if (!('templateId' in value) || value['templateId'] === undefined)
         return false;
     return true;
@@ -30,10 +31,9 @@ export function PolicySvcInstanceFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'blocklistParameters': json['blocklistParameters'] == null ? undefined : PolicySvcBlocklistParametersFromJSON(json['blocklistParameters']),
         'endpoint': json['endpoint'] == null ? undefined : json['endpoint'],
         'id': json['id'] == null ? undefined : json['id'],
-        'rateLimitParameters': json['rateLimitParameters'] == null ? undefined : PolicySvcRateLimitParametersFromJSON(json['rateLimitParameters']),
+        'parameters': PolicySvcParametersFromJSON(json['parameters']),
         'templateId': PolicySvcTemplateIdFromJSON(json['templateId']),
     };
 }
@@ -45,10 +45,9 @@ export function PolicySvcInstanceToJSONTyped(value, ignoreDiscriminator = false)
         return value;
     }
     return {
-        'blocklistParameters': PolicySvcBlocklistParametersToJSON(value['blocklistParameters']),
         'endpoint': value['endpoint'],
         'id': value['id'],
-        'rateLimitParameters': PolicySvcRateLimitParametersToJSON(value['rateLimitParameters']),
+        'parameters': PolicySvcParametersToJSON(value['parameters']),
         'templateId': PolicySvcTemplateIdToJSON(value['templateId']),
     };
 }

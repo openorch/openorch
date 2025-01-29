@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 
 export class PromptSvcPrompt {
@@ -38,6 +39,10 @@ export class PromptSvcPrompt {
     * ModelId is just the OpenOrch internal ID of the model.
     */
     'modelId'?: string;
+    /**
+    * AI platform specific parameters
+    */
+    'parameters'?: PromptSvcParameters;
     /**
     * Prompt is the message itself eg. \"What\'s a banana?
     */
@@ -103,6 +108,11 @@ export class PromptSvcPrompt {
             "name": "modelId",
             "baseName": "modelId",
             "type": "string"
+        },
+        {
+            "name": "parameters",
+            "baseName": "parameters",
+            "type": "PromptSvcParameters"
         },
         {
             "name": "prompt",

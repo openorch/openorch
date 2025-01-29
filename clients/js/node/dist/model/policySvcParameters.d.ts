@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PolicySvcParameters } from './policySvcParameters';
-import { PolicySvcTemplateId } from './policySvcTemplateId';
-export declare class PolicySvcInstance {
-    'endpoint'?: string;
-    'id'?: string;
-    'parameters': PolicySvcParameters;
-    'templateId': PolicySvcTemplateId;
+import { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters';
+import { PolicySvcRateLimitParameters } from './policySvcRateLimitParameters';
+export declare class PolicySvcParameters {
+    'blocklist'?: PolicySvcBlocklistParameters;
+    'rateLimit'?: PolicySvcRateLimitParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;
@@ -27,6 +25,4 @@ export declare class PolicySvcInstance {
         baseName: string;
         type: string;
     }[];
-}
-export declare namespace PolicySvcInstance {
 }

@@ -13,13 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { PolicySvcRateLimitParameters } from './PolicySvcRateLimitParameters';
-import {
-    PolicySvcRateLimitParametersFromJSON,
-    PolicySvcRateLimitParametersFromJSONTyped,
-    PolicySvcRateLimitParametersToJSON,
-    PolicySvcRateLimitParametersToJSONTyped,
-} from './PolicySvcRateLimitParameters';
 import type { PolicySvcTemplateId } from './PolicySvcTemplateId';
 import {
     PolicySvcTemplateIdFromJSON,
@@ -27,13 +20,13 @@ import {
     PolicySvcTemplateIdToJSON,
     PolicySvcTemplateIdToJSONTyped,
 } from './PolicySvcTemplateId';
-import type { PolicySvcBlocklistParameters } from './PolicySvcBlocklistParameters';
+import type { PolicySvcParameters } from './PolicySvcParameters';
 import {
-    PolicySvcBlocklistParametersFromJSON,
-    PolicySvcBlocklistParametersFromJSONTyped,
-    PolicySvcBlocklistParametersToJSON,
-    PolicySvcBlocklistParametersToJSONTyped,
-} from './PolicySvcBlocklistParameters';
+    PolicySvcParametersFromJSON,
+    PolicySvcParametersFromJSONTyped,
+    PolicySvcParametersToJSON,
+    PolicySvcParametersToJSONTyped,
+} from './PolicySvcParameters';
 
 /**
  * 
@@ -41,12 +34,6 @@ import {
  * @interface PolicySvcInstance
  */
 export interface PolicySvcInstance {
-    /**
-     * 
-     * @type {PolicySvcBlocklistParameters}
-     * @memberof PolicySvcInstance
-     */
-    blocklistParameters?: PolicySvcBlocklistParameters;
     /**
      * 
      * @type {string}
@@ -61,10 +48,10 @@ export interface PolicySvcInstance {
     id?: string;
     /**
      * 
-     * @type {PolicySvcRateLimitParameters}
+     * @type {PolicySvcParameters}
      * @memberof PolicySvcInstance
      */
-    rateLimitParameters?: PolicySvcRateLimitParameters;
+    parameters: PolicySvcParameters;
     /**
      * 
      * @type {PolicySvcTemplateId}
@@ -79,6 +66,7 @@ export interface PolicySvcInstance {
  * Check if a given object implements the PolicySvcInstance interface.
  */
 export function instanceOfPolicySvcInstance(value: object): value is PolicySvcInstance {
+    if (!('parameters' in value) || value['parameters'] === undefined) return false;
     if (!('templateId' in value) || value['templateId'] === undefined) return false;
     return true;
 }
@@ -93,10 +81,9 @@ export function PolicySvcInstanceFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'blocklistParameters': json['blocklistParameters'] == null ? undefined : PolicySvcBlocklistParametersFromJSON(json['blocklistParameters']),
         'endpoint': json['endpoint'] == null ? undefined : json['endpoint'],
         'id': json['id'] == null ? undefined : json['id'],
-        'rateLimitParameters': json['rateLimitParameters'] == null ? undefined : PolicySvcRateLimitParametersFromJSON(json['rateLimitParameters']),
+        'parameters': PolicySvcParametersFromJSON(json['parameters']),
         'templateId': PolicySvcTemplateIdFromJSON(json['templateId']),
     };
 }
@@ -112,10 +99,9 @@ export function PolicySvcInstanceToJSONTyped(value?: PolicySvcInstance | null, i
 
     return {
         
-        'blocklistParameters': PolicySvcBlocklistParametersToJSON(value['blocklistParameters']),
         'endpoint': value['endpoint'],
         'id': value['id'],
-        'rateLimitParameters': PolicySvcRateLimitParametersToJSON(value['rateLimitParameters']),
+        'parameters': PolicySvcParametersToJSON(value['parameters']),
         'templateId': PolicySvcTemplateIdToJSON(value['templateId']),
     };
 }

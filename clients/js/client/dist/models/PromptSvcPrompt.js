@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PromptSvcParametersFromJSON, PromptSvcParametersToJSON, } from './PromptSvcParameters';
 import { PromptSvcPromptStatusFromJSON, PromptSvcPromptStatusToJSON, } from './PromptSvcPromptStatus';
 /**
  * Check if a given object implements the PromptSvcPrompt interface.
@@ -34,6 +35,7 @@ export function PromptSvcPromptFromJSONTyped(json, ignoreDiscriminator) {
         'lastRun': json['lastRun'] == null ? undefined : json['lastRun'],
         'maxRetries': json['maxRetries'] == null ? undefined : json['maxRetries'],
         'modelId': json['modelId'] == null ? undefined : json['modelId'],
+        'parameters': json['parameters'] == null ? undefined : PromptSvcParametersFromJSON(json['parameters']),
         'prompt': json['prompt'],
         'runCount': json['runCount'] == null ? undefined : json['runCount'],
         'status': json['status'] == null ? undefined : PromptSvcPromptStatusFromJSON(json['status']),
@@ -58,6 +60,7 @@ export function PromptSvcPromptToJSONTyped(value, ignoreDiscriminator = false) {
         'lastRun': value['lastRun'],
         'maxRetries': value['maxRetries'],
         'modelId': value['modelId'],
+        'parameters': PromptSvcParametersToJSON(value['parameters']),
         'prompt': value['prompt'],
         'runCount': value['runCount'],
         'status': PromptSvcPromptStatusToJSON(value['status']),

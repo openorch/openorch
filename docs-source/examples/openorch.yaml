@@ -1057,21 +1057,27 @@ definitions:
     type: object
   policy_svc.Instance:
     properties:
-      blocklistParameters:
-        $ref: '#/definitions/policy_svc.BlocklistParameters'
       endpoint:
         example: /user-svc/register
         type: string
       id:
         type: string
-      rateLimitParameters:
-        $ref: '#/definitions/policy_svc.RateLimitParameters'
+      parameters:
+        $ref: '#/definitions/policy_svc.Parameters'
       templateId:
         allOf:
         - $ref: '#/definitions/policy_svc.TemplateId'
         example: rate-limit
     required:
+    - parameters
     - templateId
+    type: object
+  policy_svc.Parameters:
+    properties:
+      blocklist:
+        $ref: '#/definitions/policy_svc.BlocklistParameters'
+      rateLimit:
+        $ref: '#/definitions/policy_svc.RateLimitParameters'
     type: object
   policy_svc.RateLimitParameters:
     properties:
@@ -1180,6 +1186,11 @@ definitions:
           $ref: '#/definitions/prompt_svc.Prompt'
         type: array
     type: object
+  prompt_svc.Parameters:
+    properties:
+      lastRun:
+        $ref: '#/definitions/prompt_svc.StableDiffusionParameters'
+    type: object
   prompt_svc.Prompt:
     properties:
       createdAt:
@@ -1203,6 +1214,10 @@ definitions:
         description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
+      parameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.Parameters'
+        description: AI platform specific parameters
       prompt:
         description: Prompt is the message itself eg. "What's a banana?
         example: What's a banana?
@@ -1265,6 +1280,37 @@ definitions:
         type: string
     type: object
   prompt_svc.RemovePromptResponse:
+    type: object
+  prompt_svc.StableDiffusionParameters:
+    properties:
+      flag1:
+        type: boolean
+      flag2:
+        type: boolean
+      guidance_scale:
+        type: number
+      height:
+        type: integer
+      num_images:
+        type: integer
+      optional1:
+        type: string
+      optional2:
+        type: string
+      optional3:
+        type: string
+      prompt:
+        type: string
+      rate:
+        type: number
+      scheduler:
+        type: string
+      seed:
+        type: integer
+      steps:
+        type: integer
+      width:
+        type: integer
     type: object
   registry_svc.APISpec:
     properties:

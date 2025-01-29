@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { PromptSvcParameters } from './PromptSvcParameters';
 import type { PromptSvcPromptStatus } from './PromptSvcPromptStatus';
 /**
  *
@@ -52,6 +53,12 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     modelId?: string;
+    /**
+     * AI platform specific parameters
+     * @type {PromptSvcParameters}
+     * @memberof PromptSvcPrompt
+     */
+    parameters?: PromptSvcParameters;
     /**
      * Prompt is the message itself eg. "What's a banana?
      * @type {string}

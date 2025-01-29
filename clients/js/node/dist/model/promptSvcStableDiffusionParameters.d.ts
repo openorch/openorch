@@ -9,13 +9,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PolicySvcParameters } from './policySvcParameters';
-import { PolicySvcTemplateId } from './policySvcTemplateId';
-export declare class PolicySvcInstance {
-    'endpoint'?: string;
-    'id'?: string;
-    'parameters': PolicySvcParameters;
-    'templateId': PolicySvcTemplateId;
+export declare class PromptSvcStableDiffusionParameters {
+    'flag1'?: boolean;
+    'flag2'?: boolean;
+    'guidanceScale'?: number;
+    'height'?: number;
+    'numImages'?: number;
+    'optional1'?: string;
+    'optional2'?: string;
+    'optional3'?: string;
+    'prompt'?: string;
+    'rate'?: number;
+    'scheduler'?: string;
+    'seed'?: number;
+    'steps'?: number;
+    'width'?: number;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;
@@ -27,6 +35,4 @@ export declare class PolicySvcInstance {
         baseName: string;
         type: string;
     }[];
-}
-export declare namespace PolicySvcInstance {
 }

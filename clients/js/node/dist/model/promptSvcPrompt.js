@@ -47,6 +47,11 @@ PromptSvcPrompt.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "parameters",
+        "baseName": "parameters",
+        "type": "PromptSvcParameters"
+    },
+    {
         "name": "prompt",
         "baseName": "prompt",
         "type": "string"

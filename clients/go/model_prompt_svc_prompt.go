@@ -34,6 +34,8 @@ type PromptSvcPrompt struct {
 	MaxRetries *int32 `json:"maxRetries,omitempty"`
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId *string `json:"modelId,omitempty"`
+	// AI platform specific parameters
+	Parameters *PromptSvcParameters `json:"parameters,omitempty"`
 	// Prompt is the message itself eg. \"What's a banana?
 	Prompt string `json:"prompt"`
 	// RunCount is the number of times the prompt was retried due to errors
@@ -262,6 +264,38 @@ func (o *PromptSvcPrompt) HasModelId() bool {
 // SetModelId gets a reference to the given string and assigns it to the ModelId field.
 func (o *PromptSvcPrompt) SetModelId(v string) {
 	o.ModelId = &v
+}
+
+// GetParameters returns the Parameters field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetParameters() PromptSvcParameters {
+	if o == nil || IsNil(o.Parameters) {
+		var ret PromptSvcParameters
+		return ret
+	}
+	return *o.Parameters
+}
+
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetParametersOk() (*PromptSvcParameters, bool) {
+	if o == nil || IsNil(o.Parameters) {
+		return nil, false
+	}
+	return o.Parameters, true
+}
+
+// HasParameters returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParameters gets a reference to the given PromptSvcParameters and assigns it to the Parameters field.
+func (o *PromptSvcPrompt) SetParameters(v PromptSvcParameters) {
+	o.Parameters = &v
 }
 
 // GetPrompt returns the Prompt field value
@@ -539,6 +573,9 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ModelId) {
 		toSerialize["modelId"] = o.ModelId
+	}
+	if !IsNil(o.Parameters) {
+		toSerialize["parameters"] = o.Parameters
 	}
 	toSerialize["prompt"] = o.Prompt
 	if !IsNil(o.RunCount) {

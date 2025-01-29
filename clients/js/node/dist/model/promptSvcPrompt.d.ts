@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 export declare class PromptSvcPrompt {
     /**
@@ -35,6 +36,10 @@ export declare class PromptSvcPrompt {
     * ModelId is just the OpenOrch internal ID of the model.
     */
     'modelId'?: string;
+    /**
+    * AI platform specific parameters
+    */
+    'parameters'?: PromptSvcParameters;
     /**
     * Prompt is the message itself eg. \"What\'s a banana?
     */
