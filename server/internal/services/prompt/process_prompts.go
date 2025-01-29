@@ -389,6 +389,9 @@ func (p *PromptService) processStableDiffusion(
 		FileSvcAPI.UploadFile(context.Background()).
 		File(imageFile).
 		Execute()
+	if err != nil {
+		return errors.Wrap(err, "error uploading image")
+	}
 
 	fileIds := []string{*uploadRsp.Upload.FileId}
 
