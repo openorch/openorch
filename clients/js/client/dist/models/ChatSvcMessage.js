@@ -25,9 +25,9 @@ export function ChatSvcMessageFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'assetIds': json['assetIds'] == null ? undefined : json['assetIds'],
         'content': json['content'] == null ? undefined : json['content'],
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'fileIds': json['fileIds'] == null ? undefined : json['fileIds'],
         'id': json['id'] == null ? undefined : json['id'],
         'threadId': json['threadId'] == null ? undefined : json['threadId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
@@ -42,9 +42,9 @@ export function ChatSvcMessageToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
-        'assetIds': value['assetIds'],
         'content': value['content'],
         'createdAt': value['createdAt'],
+        'fileIds': value['fileIds'],
         'id': value['id'],
         'threadId': value['threadId'],
         'updatedAt': value['updatedAt'],

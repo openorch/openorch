@@ -136,12 +136,12 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      */
     createOrganization(requestParameters: CreateOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
-     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * Create a new role. <b>The role ID must be prefixed by the caller\'s slug.</b> Eg. if the caller\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
      * Create a New Role
      */
     createRoleRaw(requestParameters: CreateRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserSvcCreateRoleResponse>>;
     /**
-     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * Create a new role. <b>The role ID must be prefixed by the caller\'s slug.</b> Eg. if the caller\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
      * Create a New Role
      */
     createRole(requestParameters: CreateRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserSvcCreateRoleResponse>;
@@ -186,12 +186,12 @@ export declare class UserSvcApi extends runtime.BaseAPI {
      */
     getPermissionsByRole(requestParameters: GetPermissionsByRoleRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserSvcGetPermissionsResponse>;
     /**
-     * Get the public key to descrypt the JWT.
+     * Get the public key to parse and verify the JWT.
      * Get Public Key
      */
     getPublicKeyRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserSvcGetPublicKeyResponse>>;
     /**
-     * Get the public key to descrypt the JWT.
+     * Get the public key to parse and verify the JWT.
      * Get Public Key
      */
     getPublicKey(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserSvcGetPublicKeyResponse>;

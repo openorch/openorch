@@ -6444,12 +6444,10 @@ const docTemplate = `{
         "policy_svc.Instance": {
             "type": "object",
             "required": [
+                "parameters",
                 "templateId"
             ],
             "properties": {
-                "blocklistParameters": {
-                    "$ref": "#/definitions/policy_svc.BlocklistParameters"
-                },
                 "endpoint": {
                     "type": "string",
                     "example": "/user-svc/register"
@@ -6457,8 +6455,8 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "rateLimitParameters": {
-                    "$ref": "#/definitions/policy_svc.RateLimitParameters"
+                "parameters": {
+                    "$ref": "#/definitions/policy_svc.Parameters"
                 },
                 "templateId": {
                     "allOf": [
@@ -6467,6 +6465,17 @@ const docTemplate = `{
                         }
                     ],
                     "example": "rate-limit"
+                }
+            }
+        },
+        "policy_svc.Parameters": {
+            "type": "object",
+            "properties": {
+                "blocklist": {
+                    "$ref": "#/definitions/policy_svc.BlocklistParameters"
+                },
+                "rateLimit": {
+                    "$ref": "#/definitions/policy_svc.RateLimitParameters"
                 }
             }
         },

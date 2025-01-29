@@ -1057,21 +1057,27 @@ definitions:
     type: object
   policy_svc.Instance:
     properties:
-      blocklistParameters:
-        $ref: '#/definitions/policy_svc.BlocklistParameters'
       endpoint:
         example: /user-svc/register
         type: string
       id:
         type: string
-      rateLimitParameters:
-        $ref: '#/definitions/policy_svc.RateLimitParameters'
+      parameters:
+        $ref: '#/definitions/policy_svc.Parameters'
       templateId:
         allOf:
         - $ref: '#/definitions/policy_svc.TemplateId'
         example: rate-limit
     required:
+    - parameters
     - templateId
+    type: object
+  policy_svc.Parameters:
+    properties:
+      blocklist:
+        $ref: '#/definitions/policy_svc.BlocklistParameters'
+      rateLimit:
+        $ref: '#/definitions/policy_svc.RateLimitParameters'
     type: object
   policy_svc.RateLimitParameters:
     properties:

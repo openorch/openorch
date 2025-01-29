@@ -257,6 +257,7 @@ Class | Method | HTTP request | Description
  - [PolicySvcEntity](docs/PolicySvcEntity.md)
  - [PolicySvcErrorResponse](docs/PolicySvcErrorResponse.md)
  - [PolicySvcInstance](docs/PolicySvcInstance.md)
+ - [PolicySvcParameters](docs/PolicySvcParameters.md)
  - [PolicySvcRateLimitParameters](docs/PolicySvcRateLimitParameters.md)
  - [PolicySvcScope](docs/PolicySvcScope.md)
  - [PolicySvcTemplateId](docs/PolicySvcTemplateId.md)

@@ -3,7 +3,6 @@
 export * from './ChatSvcAddMessageRequest';
 export * from './ChatSvcAddThreadRequest';
 export * from './ChatSvcAddThreadResponse';
-export * from './ChatSvcAsset';
 export * from './ChatSvcEventMessageAdded';
 export * from './ChatSvcEventThreadAdded';
 export * from './ChatSvcEventThreadUpdate';

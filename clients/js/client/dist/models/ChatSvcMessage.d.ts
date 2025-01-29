@@ -16,12 +16,6 @@
  */
 export interface ChatSvcMessage {
     /**
-     * AssetIds defines the attachments the message has.
-     * @type {Array<string>}
-     * @memberof ChatSvcMessage
-     */
-    assetIds?: Array<string>;
-    /**
      * Content of the message eg. "Hi, what's up?"
      * @type {string}
      * @memberof ChatSvcMessage
@@ -33,6 +27,12 @@ export interface ChatSvcMessage {
      * @memberof ChatSvcMessage
      */
     createdAt?: string;
+    /**
+     * FileIds defines the file attachments the message has.
+     * @type {Array<string>}
+     * @memberof ChatSvcMessage
+     */
+    fileIds?: Array<string>;
     /**
      *
      * @type {string}

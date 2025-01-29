@@ -2,7 +2,6 @@ import localVarRequest from 'request';
 export * from './chatSvcAddMessageRequest';
 export * from './chatSvcAddThreadRequest';
 export * from './chatSvcAddThreadResponse';
-export * from './chatSvcAsset';
 export * from './chatSvcEventMessageAdded';
 export * from './chatSvcEventThreadAdded';
 export * from './chatSvcEventThreadUpdate';

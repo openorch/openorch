@@ -11,14 +11,14 @@
  */
 export declare class ChatSvcMessage {
     /**
-    * AssetIds defines the attachments the message has.
-    */
-    'assetIds'?: Array<string>;
-    /**
     * Content of the message eg. \"Hi, what\'s up?\"
     */
     'content'?: string;
     'createdAt'?: string;
+    /**
+    * FileIds defines the file attachments the message has.
+    */
+    'fileIds'?: Array<string>;
     'id'?: string;
     /**
     * ThreadId of the message.

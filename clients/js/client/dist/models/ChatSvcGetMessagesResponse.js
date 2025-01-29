@@ -12,7 +12,6 @@
  * Do not edit the class manually.
  */
 import { ChatSvcMessageFromJSON, ChatSvcMessageToJSON, } from './ChatSvcMessage';
-import { ChatSvcAssetFromJSON, ChatSvcAssetToJSON, } from './ChatSvcAsset';
 /**
  * Check if a given object implements the ChatSvcGetMessagesResponse interface.
  */
@@ -27,7 +26,6 @@ export function ChatSvcGetMessagesResponseFromJSONTyped(json, ignoreDiscriminato
         return json;
     }
     return {
-        'assets': json['assets'] == null ? undefined : (json['assets'].map(ChatSvcAssetFromJSON)),
         'messages': json['messages'] == null ? undefined : (json['messages'].map(ChatSvcMessageFromJSON)),
     };
 }
@@ -39,7 +37,6 @@ export function ChatSvcGetMessagesResponseToJSONTyped(value, ignoreDiscriminator
         return value;
     }
     return {
-        'assets': value['assets'] == null ? undefined : (value['assets'].map(ChatSvcAssetToJSON)),
         'messages': value['messages'] == null ? undefined : (value['messages'].map(ChatSvcMessageToJSON)),
     };
 }

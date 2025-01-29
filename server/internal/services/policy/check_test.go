@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	clients "github.com/openorch/openorch/clients/go"
+	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/server/internal/di"
 	policytypes "github.com/openorch/openorch/server/internal/services/policy/types"
 )
@@ -29,8 +29,8 @@ func TestRateLimiting(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	client := clients.NewAPIClient(&clients.Configuration{
-		Servers: clients.ServerConfigurations{
+	client := openapi.NewAPIClient(&openapi.Configuration{
+		Servers: openapi.ServerConfigurations{
 			{
 				URL:         server.URL,
 				Description: "Default server",
@@ -39,15 +39,15 @@ func TestRateLimiting(t *testing.T) {
 	})
 
 	adminLoginRsp, _, err := client.UserSvcAPI.Login(context.Background()).
-		Body(clients.UserSvcLoginRequest{
-			Slug:     clients.PtrString("openorch"),
-			Password: clients.PtrString("changeme"),
+		Body(openapi.UserSvcLoginRequest{
+			Slug:     openapi.PtrString("openorch"),
+			Password: openapi.PtrString("changeme"),
 		}).
 		Execute()
 	require.NoError(t, err)
 
-	client = clients.NewAPIClient(&clients.Configuration{
-		Servers: clients.ServerConfigurations{
+	client = openapi.NewAPIClient(&openapi.Configuration{
+		Servers: openapi.ServerConfigurations{
 			{
 				URL:         server.URL,
 				Description: "Default server",
@@ -62,18 +62,20 @@ func TestRateLimiting(t *testing.T) {
 	instanceId := "instance-1"
 
 	// Create a rate limit policy instance
-	rateLimitReq := clients.PolicySvcUpsertInstanceRequest{
-		Instance: &clients.PolicySvcInstance{
+	rateLimitReq := openapi.PolicySvcUpsertInstanceRequest{
+		Instance: &openapi.PolicySvcInstance{
 			Id:       &instanceId,
-			Endpoint: clients.PtrString("/test-endpoint"),
-			TemplateId: clients.PolicySvcTemplateId(
+			Endpoint: openapi.PtrString("/test-endpoint"),
+			TemplateId: openapi.PolicySvcTemplateId(
 				policytypes.RateLimitPolicyTemplate.Id,
 			),
-			RateLimitParameters: &clients.PolicySvcRateLimitParameters{
-				MaxRequests: clients.PtrInt32(5),
-				TimeWindow:  clients.PtrString("1m"),
-				Entity:      clients.EntityUserID.Ptr(),
-				Scope:       clients.ScopeEndpoint.Ptr(),
+			Parameters: openapi.PolicySvcParameters{
+				RateLimit: &openapi.PolicySvcRateLimitParameters{
+					MaxRequests: openapi.PtrInt32(5),
+					TimeWindow:  openapi.PtrString("1m"),
+					Entity:      openapi.EntityUserID.Ptr(),
+					Scope:       openapi.ScopeEndpoint.Ptr(),
+				},
 			},
 		},
 	}
@@ -85,11 +87,11 @@ func TestRateLimiting(t *testing.T) {
 	t.Run("allow up to the limit", func(t *testing.T) {
 		for i := 0; i < 5; i++ {
 			checkRsp, _, err := policySvc.Check(context.Background()).
-				Body(clients.PolicySvcCheckRequest{
-					Endpoint: clients.PtrString("/test-endpoint"),
-					Method:   clients.PtrString("GET"),
-					Ip:       clients.PtrString("127.0.0.1"),
-					UserId:   clients.PtrString("user-1"),
+				Body(openapi.PolicySvcCheckRequest{
+					Endpoint: openapi.PtrString("/test-endpoint"),
+					Method:   openapi.PtrString("GET"),
+					Ip:       openapi.PtrString("127.0.0.1"),
+					UserId:   openapi.PtrString("user-1"),
 				}).
 				Execute()
 			require.NoError(t, err)
@@ -99,11 +101,11 @@ func TestRateLimiting(t *testing.T) {
 
 	t.Run("exceeding the limit", func(t *testing.T) {
 		checkRsp, _, err := policySvc.Check(context.Background()).
-			Body(clients.PolicySvcCheckRequest{
-				Endpoint: clients.PtrString("/test-endpoint"),
-				Method:   clients.PtrString("GET"),
-				Ip:       clients.PtrString("127.0.0.1"),
-				UserId:   clients.PtrString("user-1"),
+			Body(openapi.PolicySvcCheckRequest{
+				Endpoint: openapi.PtrString("/test-endpoint"),
+				Method:   openapi.PtrString("GET"),
+				Ip:       openapi.PtrString("127.0.0.1"),
+				UserId:   openapi.PtrString("user-1"),
 			}).
 			Execute()
 		require.NoError(t, err)

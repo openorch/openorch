@@ -14,14 +14,14 @@ import { RequestFile } from './models';
 
 export class ChatSvcMessage {
     /**
-    * AssetIds defines the attachments the message has.
-    */
-    'assetIds'?: Array<string>;
-    /**
     * Content of the message eg. \"Hi, what\'s up?\"
     */
     'content'?: string;
     'createdAt'?: string;
+    /**
+    * FileIds defines the file attachments the message has.
+    */
+    'fileIds'?: Array<string>;
     'id'?: string;
     /**
     * ThreadId of the message.
@@ -37,11 +37,6 @@ export class ChatSvcMessage {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "assetIds",
-            "baseName": "assetIds",
-            "type": "Array<string>"
-        },
-        {
             "name": "content",
             "baseName": "content",
             "type": "string"
@@ -50,6 +45,11 @@ export class ChatSvcMessage {
             "name": "createdAt",
             "baseName": "createdAt",
             "type": "string"
+        },
+        {
+            "name": "fileIds",
+            "baseName": "fileIds",
+            "type": "Array<string>"
         },
         {
             "name": "id",

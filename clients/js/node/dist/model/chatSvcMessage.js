@@ -17,11 +17,6 @@ export class ChatSvcMessage {
 ChatSvcMessage.discriminator = undefined;
 ChatSvcMessage.attributeTypeMap = [
     {
-        "name": "assetIds",
-        "baseName": "assetIds",
-        "type": "Array<string>"
-    },
-    {
         "name": "content",
         "baseName": "content",
         "type": "string"
@@ -30,6 +25,11 @@ ChatSvcMessage.attributeTypeMap = [
         "name": "createdAt",
         "baseName": "createdAt",
         "type": "string"
+    },
+    {
+        "name": "fileIds",
+        "baseName": "fileIds",
+        "type": "Array<string>"
     },
     {
         "name": "id",

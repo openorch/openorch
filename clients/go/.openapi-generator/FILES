@@ -113,6 +113,7 @@ docs/PolicySvcCheckResponse.md
 docs/PolicySvcEntity.md
 docs/PolicySvcErrorResponse.md
 docs/PolicySvcInstance.md
+docs/PolicySvcParameters.md
 docs/PolicySvcRateLimitParameters.md
 docs/PolicySvcScope.md
 docs/PolicySvcTemplateId.md
@@ -288,6 +289,7 @@ model_policy_svc_check_response.go
 model_policy_svc_entity.go
 model_policy_svc_error_response.go
 model_policy_svc_instance.go
+model_policy_svc_parameters.go
 model_policy_svc_rate_limit_parameters.go
 model_policy_svc_scope.go
 model_policy_svc_template_id.go

@@ -71,16 +71,16 @@ func (s *PolicyService) check(request *policy.CheckRequest) (bool, error) {
 		switch string(instance.TemplateId) {
 		case policy.RateLimitPolicyTemplate.GetId():
 
-			maxRequests := instance.RateLimitParameters.MaxRequests
+			maxRequests := instance.Parameters.RateLimit.MaxRequests
 			timeWindow, err := time.ParseDuration(
-				instance.RateLimitParameters.TimeWindow,
+				instance.Parameters.RateLimit.TimeWindow,
 			)
 			if err != nil {
 				return false, err
 			}
 
 			var limiterKey string
-			switch instance.RateLimitParameters.Entity {
+			switch instance.Parameters.RateLimit.Entity {
 			case policy.EntityUserID:
 				limiterKey = request.UserId
 			case policy.EntityIP:
@@ -89,7 +89,7 @@ func (s *PolicyService) check(request *policy.CheckRequest) (bool, error) {
 				return false, fmt.Errorf("unknown entity type")
 			}
 
-			if instance.RateLimitParameters.Scope == policy.ScopeEndpoint {
+			if instance.Parameters.RateLimit.Scope == policy.ScopeEndpoint {
 				limiterKey += ":" + request.Endpoint
 			}
 

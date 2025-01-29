@@ -10,19 +10,12 @@
  * Do not edit the class manually.
  */
 import type { ChatSvcMessage } from './ChatSvcMessage';
-import type { ChatSvcAsset } from './ChatSvcAsset';
 /**
  *
  * @export
  * @interface ChatSvcGetMessagesResponse
  */
 export interface ChatSvcGetMessagesResponse {
-    /**
-     *
-     * @type {Array<ChatSvcAsset>}
-     * @memberof ChatSvcGetMessagesResponse
-     */
-    assets?: Array<ChatSvcAsset>;
     /**
      *
      * @type {Array<ChatSvcMessage>}

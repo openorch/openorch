@@ -20,13 +20,6 @@ import {
     ChatSvcMessageToJSON,
     ChatSvcMessageToJSONTyped,
 } from './ChatSvcMessage';
-import type { ChatSvcAsset } from './ChatSvcAsset';
-import {
-    ChatSvcAssetFromJSON,
-    ChatSvcAssetFromJSONTyped,
-    ChatSvcAssetToJSON,
-    ChatSvcAssetToJSONTyped,
-} from './ChatSvcAsset';
 
 /**
  * 
@@ -34,12 +27,6 @@ import {
  * @interface ChatSvcGetMessagesResponse
  */
 export interface ChatSvcGetMessagesResponse {
-    /**
-     * 
-     * @type {Array<ChatSvcAsset>}
-     * @memberof ChatSvcGetMessagesResponse
-     */
-    assets?: Array<ChatSvcAsset>;
     /**
      * 
      * @type {Array<ChatSvcMessage>}
@@ -65,7 +52,6 @@ export function ChatSvcGetMessagesResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'assets': json['assets'] == null ? undefined : ((json['assets'] as Array<any>).map(ChatSvcAssetFromJSON)),
         'messages': json['messages'] == null ? undefined : ((json['messages'] as Array<any>).map(ChatSvcMessageFromJSON)),
     };
 }
@@ -81,7 +67,6 @@ export function ChatSvcGetMessagesResponseToJSONTyped(value?: ChatSvcGetMessages
 
     return {
         
-        'assets': value['assets'] == null ? undefined : ((value['assets'] as Array<any>).map(ChatSvcAssetToJSON)),
         'messages': value['messages'] == null ? undefined : ((value['messages'] as Array<any>).map(ChatSvcMessageToJSON)),
     };
 }

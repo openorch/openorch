@@ -11,21 +11,14 @@
  */
 
 import { RequestFile } from './models';
-import { ChatSvcAsset } from './chatSvcAsset';
 import { ChatSvcMessage } from './chatSvcMessage';
 
 export class ChatSvcGetMessagesResponse {
-    'assets'?: Array<ChatSvcAsset>;
     'messages'?: Array<ChatSvcMessage>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "assets",
-            "baseName": "assets",
-            "type": "Array<ChatSvcAsset>"
-        },
         {
             "name": "messages",
             "baseName": "messages",

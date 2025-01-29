@@ -445,7 +445,7 @@ export class FileSvcApi {
     }
     /**
      * Serves a previously downloaded file based on its URL.
-     * @summary Serve a Downloaded file.
+     * @summary Serve a Downloaded file
      * @param url URL of the file. Even after downloading, the file is still referenced by its original internet URL.
      */
     public async serveDownload (url: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Buffer;  }> {
@@ -513,7 +513,7 @@ export class FileSvcApi {
         });
     }
     /**
-     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
+     * Retrieves and serves a previously uploaded file using its File ID. Note: The `ID` and `FileID` fields of an upload are different. - `FileID` is a unique identifier for the file itself. - `ID` is a unique identifier for a specific replica of the file. Since OpenOrch is a distributed system, files can be replicated across multiple nodes. This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
      * @summary Serve an Uploaded File
      * @param fileId Upload ID
      */

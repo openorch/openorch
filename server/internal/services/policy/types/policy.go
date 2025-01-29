@@ -82,8 +82,12 @@ type Instance struct {
 	Endpoint   string     `json:"endpoint"   example:"/user-svc/register"`
 	TemplateId TemplateId `json:"templateId" example:"rate-limit"         binding:"required"`
 
-	RateLimitParameters *RateLimitParameters `json:"rateLimitParameters,omitempty"`
-	BlocklistParameters *BlocklistParameters `json:"blocklistParameters,omitempty"`
+	Parameters *Parameters `json:"parameters" binding:"required"`
+}
+
+type Parameters struct {
+	RateLimit *RateLimitParameters `json:"rateLimit,omitempty"`
+	Blocklist *BlocklistParameters `json:"blocklist,omitempty"`
 }
 
 func (t *Instance) GetId() string {

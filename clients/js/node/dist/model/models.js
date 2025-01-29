@@ -1,7 +1,6 @@
 export * from './chatSvcAddMessageRequest';
 export * from './chatSvcAddThreadRequest';
 export * from './chatSvcAddThreadResponse';
-export * from './chatSvcAsset';
 export * from './chatSvcEventMessageAdded';
 export * from './chatSvcEventThreadAdded';
 export * from './chatSvcEventThreadUpdate';
@@ -169,7 +168,6 @@ export * from './userSvcUser';
 import { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest';
 import { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest';
 import { ChatSvcAddThreadResponse } from './chatSvcAddThreadResponse';
-import { ChatSvcAsset } from './chatSvcAsset';
 import { ChatSvcEventMessageAdded } from './chatSvcEventMessageAdded';
 import { ChatSvcEventThreadAdded } from './chatSvcEventThreadAdded';
 import { ChatSvcEventThreadUpdate } from './chatSvcEventThreadUpdate';
@@ -361,7 +359,6 @@ let typeMap = {
     "ChatSvcAddMessageRequest": ChatSvcAddMessageRequest,
     "ChatSvcAddThreadRequest": ChatSvcAddThreadRequest,
     "ChatSvcAddThreadResponse": ChatSvcAddThreadResponse,
-    "ChatSvcAsset": ChatSvcAsset,
     "ChatSvcEventMessageAdded": ChatSvcEventMessageAdded,
     "ChatSvcEventThreadAdded": ChatSvcEventThreadAdded,
     "ChatSvcEventThreadUpdate": ChatSvcEventThreadUpdate,
