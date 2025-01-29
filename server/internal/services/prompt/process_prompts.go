@@ -332,34 +332,29 @@ func (p *PromptService) processStableDiffusion(
 		Address: address,
 	}
 
-	req := stable_diffusion.PredictRequest{
-		FnIndex: 1,
-		Params: stable_diffusion.StableDiffusionParams{
-			Prompt:        fullPrompt,
-			NumImages:     1,
-			Steps:         50,
-			Width:         512,
-			Height:        512,
-			GuidanceScale: 7.5,
-			Seed:          0,
-			Flag1:         false,
-			Flag2:         false,
-			Scheduler:     "PNDM",
-			Rate:          0.25,
-		},
+	req := stable_diffusion.Txt2ImgRequest{
+		Prompt:        fullPrompt,
+		Steps:         20,
+		Width:         100,
+		Height:        100,
+		GuidanceScale: 7.5,
+		HRScale:       2,
+		Seed:          0,
+		SamplerIndex:  "Euler",
+		NumIterations: 1,
+		RestoreFaces:  true,
+		Tiling:        true,
 	}
-	req.ConvertParamsToData()
 
-	rsp, err := sd.Predict(req)
+	rsp, err := sd.Txt2Img(req)
 	if err != nil {
 		return err
 	}
-
-	if len(rsp.Data) == 0 {
+	if len(rsp.Images) == 0 {
 		return errors.New("no image in response")
 	}
 
-	imgUrl := stable_diffusion.FileURL(address, rsp.Data[0].FileData[0].Name)
+	imgUrl := stable_diffusion.FileURL(address, "s")
 
 	imageBytes, err := stable_diffusion.GetImage(imgUrl)
 	if err != nil {

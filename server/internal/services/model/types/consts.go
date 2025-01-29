@@ -17,19 +17,20 @@ var PlatformLlamaCpp = Platform{
 	},
 }
 
+// ENVAR taken from here: https://github.com/AbdBarho/stable-diffusion-webui-docker/blob/master/docker-compose.yml
 var PlatformStableDiffusion = Platform{
 	Id: "stable-diffusion",
 	Architectures: Architectures{
 		Default: Container{
 			Port:   7860,
-			Image:  "crufter/stable-diffusion",
-			Envars: []string{"FP16=0"},
-			Keeps:  []string{"/root/.cache/huggingface/diffusers"},
+			Image:  "sd-auto:78",
+			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
+			Keeps:  []string{"/data"},
 		},
 		Cuda: Container{
 			Port:   7860,
-			Image:  "crufter/stable-diffusion",
-			Envars: []string{"DEVICES=all"},
+			Image:  "sd-auto:78",
+			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
 			Keeps:  []string{"/root/.cache/huggingface/diffusers"},
 		},
 	},

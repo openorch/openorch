@@ -302,7 +302,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 			fmt.Sprintf(
 				"%v:%v",
 				openorchVolumeName,
-				path.Dir(persistentPath),
+				persistentPath,
 			),
 		)
 	}
