@@ -140,7 +140,7 @@ func (cs *ConfigService) loadConfigs() error {
 	}
 
 	for _, configI := range configIs {
-		config := configI.(types.Config)
+		config := configI.(*types.Config)
 
 		v := map[string]any{}
 		err := json.Unmarshal([]byte(config.DataJSON), &v)
