@@ -30,7 +30,6 @@ type ChatService struct {
 
 	messagesStore   datastore.DataStore
 	threadsStore    datastore.DataStore
-	assetsStore     datastore.DataStore
 	credentialStore datastore.DataStore
 }
 
@@ -43,6 +42,7 @@ func NewChatService(
 	if err != nil {
 		return nil, err
 	}
+
 	messagesStore, err := datastoreFactory(
 		"chatSvcMessages",
 		&chattypes.Message{},
@@ -50,10 +50,7 @@ func NewChatService(
 	if err != nil {
 		return nil, err
 	}
-	assetsStore, err := datastoreFactory("chatSvcAssets", &chattypes.Asset{})
-	if err != nil {
-		return nil, err
-	}
+
 	credentialStore, err := datastoreFactory(
 		"chatSvcCredentials",
 		&sdk.Credential{},
@@ -68,7 +65,6 @@ func NewChatService(
 		lock:            lock,
 		messagesStore:   messagesStore,
 		threadsStore:    threadsStore,
-		assetsStore:     assetsStore,
 		credentialStore: credentialStore,
 	}
 

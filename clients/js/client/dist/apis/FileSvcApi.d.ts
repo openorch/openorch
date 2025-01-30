@@ -96,21 +96,21 @@ export declare class FileSvcApi extends runtime.BaseAPI {
     }>;
     /**
      * Serves a previously downloaded file based on its URL.
-     * Serve a Downloaded file.
+     * Serve a Downloaded file
      */
     serveDownloadRaw(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
     /**
      * Serves a previously downloaded file based on its URL.
-     * Serve a Downloaded file.
+     * Serve a Downloaded file
      */
     serveDownload(requestParameters: ServeDownloadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;
     /**
-     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
+     * Retrieves and serves a previously uploaded file using its File ID. Note: The `ID` and `FileID` fields of an upload are different. - `FileID` is a unique identifier for the file itself. - `ID` is a unique identifier for a specific replica of the file. Since OpenOrch is a distributed system, files can be replicated across multiple nodes. This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
      * Serve an Uploaded File
      */
     serveUploadRaw(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>>;
     /**
-     * Serves a previously uploaded file based on its File ID. Please keep in mind that the ID and the FileID of an Upload is two different fields.
+     * Retrieves and serves a previously uploaded file using its File ID. Note: The `ID` and `FileID` fields of an upload are different. - `FileID` is a unique identifier for the file itself. - `ID` is a unique identifier for a specific replica of the file. Since OpenOrch is a distributed system, files can be replicated across multiple nodes. This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
      * Serve an Uploaded File
      */
     serveUpload(requestParameters: ServeUploadRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob>;

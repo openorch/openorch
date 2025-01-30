@@ -24,6 +24,8 @@ var _ MappedNullable = &PromptSvcPrompt{}
 type PromptSvcPrompt struct {
 	// CreatedAt is the time of the prompt creation.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+	EngineParameters *PromptSvcEngineParameters `json:"engineParameters,omitempty"`
 	// Error that arose during prompt execution, if any.
 	Error *string `json:"error,omitempty"`
 	// Id is the unique ID of the prompt.
@@ -34,6 +36,8 @@ type PromptSvcPrompt struct {
 	MaxRetries *int32 `json:"maxRetries,omitempty"`
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId *string `json:"modelId,omitempty"`
+	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don't care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
+	Parameters *PromptSvcParameters `json:"parameters,omitempty"`
 	// Prompt is the message itself eg. \"What's a banana?
 	Prompt string `json:"prompt"`
 	// RunCount is the number of times the prompt was retried due to errors
@@ -102,6 +106,38 @@ func (o *PromptSvcPrompt) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *PromptSvcPrompt) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetEngineParameters returns the EngineParameters field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetEngineParameters() PromptSvcEngineParameters {
+	if o == nil || IsNil(o.EngineParameters) {
+		var ret PromptSvcEngineParameters
+		return ret
+	}
+	return *o.EngineParameters
+}
+
+// GetEngineParametersOk returns a tuple with the EngineParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetEngineParametersOk() (*PromptSvcEngineParameters, bool) {
+	if o == nil || IsNil(o.EngineParameters) {
+		return nil, false
+	}
+	return o.EngineParameters, true
+}
+
+// HasEngineParameters returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasEngineParameters() bool {
+	if o != nil && !IsNil(o.EngineParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetEngineParameters gets a reference to the given PromptSvcEngineParameters and assigns it to the EngineParameters field.
+func (o *PromptSvcPrompt) SetEngineParameters(v PromptSvcEngineParameters) {
+	o.EngineParameters = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
@@ -262,6 +298,38 @@ func (o *PromptSvcPrompt) HasModelId() bool {
 // SetModelId gets a reference to the given string and assigns it to the ModelId field.
 func (o *PromptSvcPrompt) SetModelId(v string) {
 	o.ModelId = &v
+}
+
+// GetParameters returns the Parameters field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetParameters() PromptSvcParameters {
+	if o == nil || IsNil(o.Parameters) {
+		var ret PromptSvcParameters
+		return ret
+	}
+	return *o.Parameters
+}
+
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetParametersOk() (*PromptSvcParameters, bool) {
+	if o == nil || IsNil(o.Parameters) {
+		return nil, false
+	}
+	return o.Parameters, true
+}
+
+// HasParameters returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParameters gets a reference to the given PromptSvcParameters and assigns it to the Parameters field.
+func (o *PromptSvcPrompt) SetParameters(v PromptSvcParameters) {
+	o.Parameters = &v
 }
 
 // GetPrompt returns the Prompt field value
@@ -525,6 +593,9 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
+	if !IsNil(o.EngineParameters) {
+		toSerialize["engineParameters"] = o.EngineParameters
+	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
@@ -539,6 +610,9 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ModelId) {
 		toSerialize["modelId"] = o.ModelId
+	}
+	if !IsNil(o.Parameters) {
+		toSerialize["parameters"] = o.Parameters
 	}
 	toSerialize["prompt"] = o.Prompt
 	if !IsNil(o.RunCount) {

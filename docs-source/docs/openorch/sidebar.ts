@@ -235,7 +235,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "openorch/serve-download",
-          label: "Serve a Downloaded file.",
+          label: "Serve a Downloaded file",
           className: "api-method get",
         },
         {

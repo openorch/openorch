@@ -15,26 +15,6 @@ definitions:
       thread:
         $ref: '#/definitions/chat_svc.Thread'
     type: object
-  chat_svc.Asset:
-    properties:
-      content:
-        description: Content is the base64 encoded binary file direcly embedded in
-          the asset itself
-        type: string
-      createdAt:
-        type: string
-      description:
-        type: string
-      id:
-        type: string
-      type:
-        type: string
-      updatedAt:
-        type: string
-      url:
-        description: Url of the asset where
-        type: string
-    type: object
   chat_svc.EventMessageAdded:
     properties:
       threadId:
@@ -52,10 +32,6 @@ definitions:
     type: object
   chat_svc.GetMessagesResponse:
     properties:
-      assets:
-        items:
-          $ref: '#/definitions/chat_svc.Asset'
-        type: array
       messages:
         items:
           $ref: '#/definitions/chat_svc.Message'
@@ -79,16 +55,16 @@ definitions:
     type: object
   chat_svc.Message:
     properties:
-      assetIds:
-        description: AssetIds defines the attachments the message has.
-        items:
-          type: string
-        type: array
       content:
         description: Content of the message eg. "Hi, what's up?"
         type: string
       createdAt:
         type: string
+      fileIds:
+        description: FileIds defines the file attachments the message has.
+        items:
+          type: string
+        type: array
       id:
         type: string
       threadId:
@@ -1081,21 +1057,27 @@ definitions:
     type: object
   policy_svc.Instance:
     properties:
-      blocklistParameters:
-        $ref: '#/definitions/policy_svc.BlocklistParameters'
       endpoint:
         example: /user-svc/register
         type: string
       id:
         type: string
-      rateLimitParameters:
-        $ref: '#/definitions/policy_svc.RateLimitParameters'
+      parameters:
+        $ref: '#/definitions/policy_svc.Parameters'
       templateId:
         allOf:
         - $ref: '#/definitions/policy_svc.TemplateId'
         example: rate-limit
     required:
+    - parameters
     - templateId
+    type: object
+  policy_svc.Parameters:
+    properties:
+      blocklist:
+        $ref: '#/definitions/policy_svc.BlocklistParameters'
+      rateLimit:
+        $ref: '#/definitions/policy_svc.RateLimitParameters'
     type: object
   policy_svc.RateLimitParameters:
     properties:
@@ -1139,6 +1121,10 @@ definitions:
     type: object
   prompt_svc.AddPromptRequest:
     properties:
+      engineParameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.EngineParameters'
+        description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
       id:
         description: Id is the unique ID of the prompt.
         type: string
@@ -1151,6 +1137,13 @@ definitions:
         description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
+      parameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.Parameters'
+        description: |-
+          AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+          Use these high level parameters when you don't care about the actual engine, only
+          the functionality (eg. text to image, image to image) it provides.
       prompt:
         description: Prompt is the message itself eg. "What's a banana?
         example: What's a banana?
@@ -1184,6 +1177,11 @@ definitions:
       prompt:
         $ref: '#/definitions/prompt_svc.Prompt'
     type: object
+  prompt_svc.EngineParameters:
+    properties:
+      stableDiffusion:
+        $ref: '#/definitions/prompt_svc.StableDiffusionParameters'
+    type: object
   prompt_svc.ErrorResponse:
     properties:
       error:
@@ -1204,11 +1202,20 @@ definitions:
           $ref: '#/definitions/prompt_svc.Prompt'
         type: array
     type: object
+  prompt_svc.Parameters:
+    properties:
+      textToImage:
+        $ref: '#/definitions/prompt_svc.TextToImageParameters'
+    type: object
   prompt_svc.Prompt:
     properties:
       createdAt:
         description: CreatedAt is the time of the prompt creation.
         type: string
+      engineParameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.EngineParameters'
+        description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
       error:
         description: Error that arose during prompt execution, if any.
         type: string
@@ -1227,6 +1234,13 @@ definitions:
         description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
+      parameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.Parameters'
+        description: |-
+          AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+          Use these high level parameters when you don't care about the actual engine, only
+          the functionality (eg. text to image, image to image) it provides.
       prompt:
         description: Prompt is the message itself eg. "What's a banana?
         example: What's a banana?
@@ -1289,6 +1303,67 @@ definitions:
         type: string
     type: object
   prompt_svc.RemovePromptResponse:
+    type: object
+  prompt_svc.StableDiffusionParameters:
+    properties:
+      txt2Img:
+        allOf:
+        - $ref: '#/definitions/stable_diffusion.Txt2ImgRequest'
+        description: Text to image parameters
+    type: object
+  prompt_svc.TextToImageParameters:
+    properties:
+      aspectRatio:
+        description: Alternative to width/height (e.g., "16:9", "1:1")
+        type: string
+      batchSize:
+        description: Number of images per batch
+        type: integer
+      denoisingStrength:
+        description: Noise control for variation
+        type: number
+      enableUpscaling:
+        description: Whether to use AI upscaling
+        type: boolean
+      format:
+        description: Output format (png, jpg, webp, etc.)
+        type: string
+      guidanceScale:
+        description: How closely to follow the prompt
+        type: number
+      height:
+        description: Image height in pixels
+        type: integer
+      negativePrompt:
+        type: string
+      numIterations:
+        description: How many times to run the prompt (batches)
+        type: integer
+      prompt:
+        type: string
+      qualityPreset:
+        description: Low, Medium, High, Ultra (for services like DALL·E)
+        type: string
+      restoreFaces:
+        description: Face restoration for portraits
+        type: boolean
+      scheduler:
+        description: Sampling method, if applicable
+        type: string
+      seed:
+        description: Optional, used for reproducibility
+        type: integer
+      steps:
+        description: Number of inference steps
+        type: integer
+      styles:
+        description: Artistic styles or themes
+        items:
+          type: string
+        type: array
+      width:
+        description: Image width in pixels
+        type: integer
     type: object
   registry_svc.APISpec:
     properties:
@@ -1942,6 +2017,129 @@ definitions:
     properties:
       error:
         type: string
+    type: object
+  stable_diffusion.Txt2ImgRequest:
+    properties:
+      alwayson_scripts:
+        additionalProperties:
+          type: string
+        type: object
+      batch_size:
+        type: integer
+      cfg_scale:
+        type: number
+      comments:
+        additionalProperties:
+          type: string
+        type: object
+      denoising_strength:
+        type: number
+      disable_extra_networks:
+        type: boolean
+      do_not_save_grid:
+        type: boolean
+      do_not_save_samples:
+        type: boolean
+      enable_hr:
+        type: boolean
+      eta:
+        type: number
+      firstpass_image:
+        type: string
+      firstphase_height:
+        type: integer
+      firstphase_width:
+        type: integer
+      force_task_id:
+        type: string
+      height:
+        type: integer
+      hr_checkpoint_name:
+        type: string
+      hr_negative_prompt:
+        type: string
+      hr_prompt:
+        type: string
+      hr_resize_x:
+        type: integer
+      hr_resize_y:
+        type: integer
+      hr_sampler_name:
+        type: string
+      hr_scale:
+        type: number
+      hr_scheduler:
+        type: string
+      hr_second_pass_steps:
+        type: integer
+      hr_upscaler:
+        type: string
+      infotext:
+        type: string
+      n_iter:
+        type: integer
+      negative_prompt:
+        type: string
+      override_settings:
+        additionalProperties:
+          type: string
+        type: object
+      override_settings_restore_afterwards:
+        type: boolean
+      prompt:
+        type: string
+      refiner_checkpoint:
+        type: string
+      refiner_switch_at:
+        type: number
+      restore_faces:
+        type: boolean
+      s_churn:
+        type: number
+      s_min_uncond:
+        type: number
+      s_noise:
+        type: number
+      s_tmax:
+        type: number
+      s_tmin:
+        type: number
+      sampler_index:
+        type: string
+      sampler_name:
+        type: string
+      save_images:
+        type: boolean
+      scheduler:
+        type: string
+      script_args:
+        items:
+          type: string
+        type: array
+      script_name:
+        type: string
+      seed:
+        type: integer
+      seed_resize_from_h:
+        type: integer
+      seed_resize_from_w:
+        type: integer
+      send_images:
+        type: boolean
+      steps:
+        type: integer
+      styles:
+        items:
+          type: string
+        type: array
+      subseed:
+        type: integer
+      subseed_strength:
+        type: number
+      tiling:
+        type: boolean
+      width:
+        type: integer
     type: object
   user_svc.AddUserToOrganizationRequest:
     properties:
@@ -3513,7 +3711,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/file_svc.ErrorResponse'
-      summary: Serve a Downloaded file.
+      summary: Serve a Downloaded file
       tags:
       - File Svc
   /file-svc/serve/upload/{fileId}:
@@ -3521,8 +3719,12 @@ paths:
       consumes:
       - application/json
       description: |-
-        Serves a previously uploaded file based on its File ID.
-        Please keep in mind that the ID and the FileID of an Upload is two different fields.
+        Retrieves and serves a previously uploaded file using its File ID.
+        Note: The `ID` and `FileID` fields of an upload are different.
+        - `FileID` is a unique identifier for the file itself.
+        - `ID` is a unique identifier for a specific replica of the file.
+        Since OpenOrch is a distributed system, files can be replicated across multiple nodes.
+        This means each uploaded file may have multiple records with the same `FileID` but different `ID`s.
       operationId: serveUpload
       parameters:
       - description: Upload ID
@@ -5140,7 +5342,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get the public key to descrypt the JWT.
+      description: Get the public key to parse and verify the JWT.
       operationId: getPublicKey
       produces:
       - application/json
@@ -5197,8 +5399,8 @@ paths:
       - application/json
       description: |-
         Create a new role.
-        <b>The role ID must be prefixed by the callers username (email).</b>
-        Eg. if the owner's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
+        <b>The role ID must be prefixed by the caller's slug.</b>
+        Eg. if the caller's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
         The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.
 
         Requires the `user-svc:role:create` permission.

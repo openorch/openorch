@@ -111,7 +111,7 @@ Class | Method | HTTP request | Description
 *FileSvcAPI* | [**ListDownloads**](docs/FileSvcAPI.md#listdownloads) | **Post** /file-svc/downloads | List Downloads
 *FileSvcAPI* | [**ListUploads**](docs/FileSvcAPI.md#listuploads) | **Post** /file-svc/uploads | List Uploads
 *FileSvcAPI* | [**PauseDownload**](docs/FileSvcAPI.md#pausedownload) | **Put** /file-svc/download/{url}/pause | Pause a Download
-*FileSvcAPI* | [**ServeDownload**](docs/FileSvcAPI.md#servedownload) | **Get** /file-svc/serve/download/{url} | Serve a Downloaded file.
+*FileSvcAPI* | [**ServeDownload**](docs/FileSvcAPI.md#servedownload) | **Get** /file-svc/serve/download/{url} | Serve a Downloaded file
 *FileSvcAPI* | [**ServeUpload**](docs/FileSvcAPI.md#serveupload) | **Get** /file-svc/serve/upload/{fileId} | Serve an Uploaded File
 *FileSvcAPI* | [**UploadFile**](docs/FileSvcAPI.md#uploadfile) | **Put** /file-svc/upload | Upload a File
 *FirehoseSvcAPI* | [**PublishEvent**](docs/FirehoseSvcAPI.md#publishevent) | **Post** /firehose-svc/event | Publish an Event
@@ -176,7 +176,6 @@ Class | Method | HTTP request | Description
  - [ChatSvcAddMessageRequest](docs/ChatSvcAddMessageRequest.md)
  - [ChatSvcAddThreadRequest](docs/ChatSvcAddThreadRequest.md)
  - [ChatSvcAddThreadResponse](docs/ChatSvcAddThreadResponse.md)
- - [ChatSvcAsset](docs/ChatSvcAsset.md)
  - [ChatSvcEventMessageAdded](docs/ChatSvcEventMessageAdded.md)
  - [ChatSvcEventThreadAdded](docs/ChatSvcEventThreadAdded.md)
  - [ChatSvcEventThreadUpdate](docs/ChatSvcEventThreadUpdate.md)
@@ -258,18 +257,23 @@ Class | Method | HTTP request | Description
  - [PolicySvcEntity](docs/PolicySvcEntity.md)
  - [PolicySvcErrorResponse](docs/PolicySvcErrorResponse.md)
  - [PolicySvcInstance](docs/PolicySvcInstance.md)
+ - [PolicySvcParameters](docs/PolicySvcParameters.md)
  - [PolicySvcRateLimitParameters](docs/PolicySvcRateLimitParameters.md)
  - [PolicySvcScope](docs/PolicySvcScope.md)
  - [PolicySvcTemplateId](docs/PolicySvcTemplateId.md)
  - [PolicySvcUpsertInstanceRequest](docs/PolicySvcUpsertInstanceRequest.md)
  - [PromptSvcAddPromptRequest](docs/PromptSvcAddPromptRequest.md)
  - [PromptSvcAddPromptResponse](docs/PromptSvcAddPromptResponse.md)
+ - [PromptSvcEngineParameters](docs/PromptSvcEngineParameters.md)
  - [PromptSvcErrorResponse](docs/PromptSvcErrorResponse.md)
  - [PromptSvcListPromptsRequest](docs/PromptSvcListPromptsRequest.md)
  - [PromptSvcListPromptsResponse](docs/PromptSvcListPromptsResponse.md)
+ - [PromptSvcParameters](docs/PromptSvcParameters.md)
  - [PromptSvcPrompt](docs/PromptSvcPrompt.md)
  - [PromptSvcPromptStatus](docs/PromptSvcPromptStatus.md)
  - [PromptSvcRemovePromptRequest](docs/PromptSvcRemovePromptRequest.md)
+ - [PromptSvcStableDiffusionParameters](docs/PromptSvcStableDiffusionParameters.md)
+ - [PromptSvcTextToImageParameters](docs/PromptSvcTextToImageParameters.md)
  - [RegistrySvcAPISpec](docs/RegistrySvcAPISpec.md)
  - [RegistrySvcClient](docs/RegistrySvcClient.md)
  - [RegistrySvcDefinition](docs/RegistrySvcDefinition.md)
@@ -305,6 +309,7 @@ Class | Method | HTTP request | Description
  - [SourceSvcCheckoutRepoRequest](docs/SourceSvcCheckoutRepoRequest.md)
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
+ - [StableDiffusionTxt2ImgRequest](docs/StableDiffusionTxt2ImgRequest.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)
  - [UserSvcAssignPermissionsRequest](docs/UserSvcAssignPermissionsRequest.md)
  - [UserSvcAuthToken](docs/UserSvcAuthToken.md)

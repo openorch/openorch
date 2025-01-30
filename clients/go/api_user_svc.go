@@ -102,8 +102,8 @@ Dynamic roles are generated based on specific user-resource associations (in thi
 	CreateRole Create a New Role
 
 	Create a new role.
-<b>The role ID must be prefixed by the callers username (email).</b>
-Eg. if the owner's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
+<b>The role ID must be prefixed by the caller's slug.</b>
+Eg. if the caller's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
 The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.
 
 Requires the `user-svc:role:create` permission.
@@ -179,7 +179,7 @@ Requires the `user-svc:role:create` permission.
 	/*
 	GetPublicKey Get Public Key
 
-	Get the public key to descrypt the JWT.
+	Get the public key to parse and verify the JWT.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetPublicKeyRequest
@@ -1221,8 +1221,8 @@ func (r ApiCreateRoleRequest) Execute() (*UserSvcCreateRoleResponse, *http.Respo
 CreateRole Create a New Role
 
 Create a new role.
-<b>The role ID must be prefixed by the callers username (email).</b>
-Eg. if the owner's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
+<b>The role ID must be prefixed by the caller's slug.</b>
+Eg. if the caller's slug is `petstore-svc` the role should look like `petstore-svc:admin`.
 The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.
 
 Requires the `user-svc:role:create` permission.
@@ -1968,7 +1968,7 @@ func (r ApiGetPublicKeyRequest) Execute() (*UserSvcGetPublicKeyResponse, *http.R
 /*
 GetPublicKey Get Public Key
 
-Get the public key to descrypt the JWT.
+Get the public key to parse and verify the JWT.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPublicKeyRequest

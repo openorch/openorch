@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
 )
 
@@ -85,6 +86,47 @@ type Prompt struct {
 
 	// UserId contains the ID of the user who submitted the prompt.
 	UserId string `json:"userId"`
+
+	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+
+	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+	// Use these high level parameters when you don't care about the actual engine, only
+	// the functionality (eg. text to image, image to image) it provides.
+	Parameters Parameters `json:"parameters,omitempty"`
+}
+
+type Parameters struct {
+	TextToImage TextToImageParameters `json:"textToImage,omitempty"`
+}
+
+type TextToImageParameters struct {
+	Prompt            string   `json:"prompt,omitempty"`
+	NegativePrompt    string   `json:"negativePrompt,omitempty"`
+	Styles            []string `json:"styles,omitempty"`            // Artistic styles or themes
+	Seed              *int     `json:"seed,omitempty"`              // Optional, used for reproducibility
+	BatchSize         int      `json:"batchSize,omitempty"`         // Number of images per batch
+	NumIterations     int      `json:"numIterations,omitempty"`     // How many times to run the prompt (batches)
+	Steps             int      `json:"steps,omitempty"`             // Number of inference steps
+	GuidanceScale     float64  `json:"guidanceScale,omitempty"`     // How closely to follow the prompt
+	Width             int      `json:"width,omitempty"`             // Image width in pixels
+	Height            int      `json:"height,omitempty"`            // Image height in pixels
+	AspectRatio       string   `json:"aspectRatio,omitempty"`       // Alternative to width/height (e.g., "16:9", "1:1")
+	DenoisingStrength float64  `json:"denoisingStrength,omitempty"` // Noise control for variation
+	EnableUpscaling   bool     `json:"enableUpscaling,omitempty"`   // Whether to use AI upscaling
+	RestoreFaces      bool     `json:"restoreFaces,omitempty"`      // Face restoration for portraits
+	Scheduler         string   `json:"scheduler,omitempty"`         // Sampling method, if applicable
+	QualityPreset     string   `json:"qualityPreset,omitempty"`     // Low, Medium, High, Ultra (for services like DALL·E)
+	Format            string   `json:"format,omitempty"`            // Output format (png, jpg, webp, etc.)
+}
+
+type EngineParameters struct {
+	StableDiffusion *StableDiffusionParameters `json:"stableDiffusion,omitempty"`
+}
+
+type StableDiffusionParameters struct {
+	// Text to image parameters
+	Txt2Img stable_diffusion.Txt2ImgRequest
 }
 
 func (c *Prompt) GetId() string {
@@ -122,6 +164,14 @@ type AddPromptRequest struct {
 
 	// MaxRetries specified how many times the system should retry a prompt when it keeps erroring.
 	MaxRetries int `json:"maxRetries,omitempty" example:"10"`
+
+	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+
+	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+	// Use these high level parameters when you don't care about the actual engine, only
+	// the functionality (eg. text to image, image to image) it provides.
+	Parameters Parameters `json:"parameters,omitempty"`
 }
 
 type AddPromptResponse struct {

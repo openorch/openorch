@@ -127,7 +127,7 @@ export declare class UserSvcApi {
         body: object;
     }>;
     /**
-     * Create a new role. <b>The role ID must be prefixed by the callers username (email).</b> Eg. if the owner\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
+     * Create a new role. <b>The role ID must be prefixed by the caller\'s slug.</b> Eg. if the caller\'s slug is `petstore-svc` the role should look like `petstore-svc:admin`. The user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.  Requires the `user-svc:role:create` permission.
      * @summary Create a New Role
      * @param body Create Role Request
      */
@@ -192,7 +192,7 @@ export declare class UserSvcApi {
         body: UserSvcGetPermissionsResponse;
     }>;
     /**
-     * Get the public key to descrypt the JWT.
+     * Get the public key to parse and verify the JWT.
      * @summary Get Public Key
      */
     getPublicKey(options?: {

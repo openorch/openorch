@@ -3,7 +3,6 @@ import localVarRequest from 'request';
 export * from './chatSvcAddMessageRequest';
 export * from './chatSvcAddThreadRequest';
 export * from './chatSvcAddThreadResponse';
-export * from './chatSvcAsset';
 export * from './chatSvcEventMessageAdded';
 export * from './chatSvcEventThreadAdded';
 export * from './chatSvcEventThreadUpdate';
@@ -85,18 +84,23 @@ export * from './policySvcCheckResponse';
 export * from './policySvcEntity';
 export * from './policySvcErrorResponse';
 export * from './policySvcInstance';
+export * from './policySvcParameters';
 export * from './policySvcRateLimitParameters';
 export * from './policySvcScope';
 export * from './policySvcTemplateId';
 export * from './policySvcUpsertInstanceRequest';
 export * from './promptSvcAddPromptRequest';
 export * from './promptSvcAddPromptResponse';
+export * from './promptSvcEngineParameters';
 export * from './promptSvcErrorResponse';
 export * from './promptSvcListPromptsRequest';
 export * from './promptSvcListPromptsResponse';
+export * from './promptSvcParameters';
 export * from './promptSvcPrompt';
 export * from './promptSvcPromptStatus';
 export * from './promptSvcRemovePromptRequest';
+export * from './promptSvcStableDiffusionParameters';
+export * from './promptSvcTextToImageParameters';
 export * from './registrySvcAPISpec';
 export * from './registrySvcClient';
 export * from './registrySvcDefinition';
@@ -132,6 +136,7 @@ export * from './secretSvcSecret';
 export * from './sourceSvcCheckoutRepoRequest';
 export * from './sourceSvcCheckoutRepoResponse';
 export * from './sourceSvcErrorResponse';
+export * from './stableDiffusionTxt2ImgRequest';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAssignPermissionsRequest';
 export * from './userSvcAuthToken';
@@ -185,7 +190,6 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 import { ChatSvcAddMessageRequest } from './chatSvcAddMessageRequest';
 import { ChatSvcAddThreadRequest } from './chatSvcAddThreadRequest';
 import { ChatSvcAddThreadResponse } from './chatSvcAddThreadResponse';
-import { ChatSvcAsset } from './chatSvcAsset';
 import { ChatSvcEventMessageAdded } from './chatSvcEventMessageAdded';
 import { ChatSvcEventThreadAdded } from './chatSvcEventThreadAdded';
 import { ChatSvcEventThreadUpdate } from './chatSvcEventThreadUpdate';
@@ -267,18 +271,23 @@ import { PolicySvcCheckResponse } from './policySvcCheckResponse';
 import { PolicySvcEntity } from './policySvcEntity';
 import { PolicySvcErrorResponse } from './policySvcErrorResponse';
 import { PolicySvcInstance } from './policySvcInstance';
+import { PolicySvcParameters } from './policySvcParameters';
 import { PolicySvcRateLimitParameters } from './policySvcRateLimitParameters';
 import { PolicySvcScope } from './policySvcScope';
 import { PolicySvcTemplateId } from './policySvcTemplateId';
 import { PolicySvcUpsertInstanceRequest } from './policySvcUpsertInstanceRequest';
 import { PromptSvcAddPromptRequest } from './promptSvcAddPromptRequest';
 import { PromptSvcAddPromptResponse } from './promptSvcAddPromptResponse';
+import { PromptSvcEngineParameters } from './promptSvcEngineParameters';
 import { PromptSvcErrorResponse } from './promptSvcErrorResponse';
 import { PromptSvcListPromptsRequest } from './promptSvcListPromptsRequest';
 import { PromptSvcListPromptsResponse } from './promptSvcListPromptsResponse';
+import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPrompt } from './promptSvcPrompt';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 import { PromptSvcRemovePromptRequest } from './promptSvcRemovePromptRequest';
+import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcDefinition } from './registrySvcDefinition';
@@ -314,6 +323,7 @@ import { SecretSvcSecret } from './secretSvcSecret';
 import { SourceSvcCheckoutRepoRequest } from './sourceSvcCheckoutRepoRequest';
 import { SourceSvcCheckoutRepoResponse } from './sourceSvcCheckoutRepoResponse';
 import { SourceSvcErrorResponse } from './sourceSvcErrorResponse';
+import { StableDiffusionTxt2ImgRequest } from './stableDiffusionTxt2ImgRequest';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAssignPermissionsRequest } from './userSvcAssignPermissionsRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
@@ -380,7 +390,6 @@ let typeMap: {[index: string]: any} = {
     "ChatSvcAddMessageRequest": ChatSvcAddMessageRequest,
     "ChatSvcAddThreadRequest": ChatSvcAddThreadRequest,
     "ChatSvcAddThreadResponse": ChatSvcAddThreadResponse,
-    "ChatSvcAsset": ChatSvcAsset,
     "ChatSvcEventMessageAdded": ChatSvcEventMessageAdded,
     "ChatSvcEventThreadAdded": ChatSvcEventThreadAdded,
     "ChatSvcEventThreadUpdate": ChatSvcEventThreadUpdate,
@@ -458,15 +467,20 @@ let typeMap: {[index: string]: any} = {
     "PolicySvcCheckResponse": PolicySvcCheckResponse,
     "PolicySvcErrorResponse": PolicySvcErrorResponse,
     "PolicySvcInstance": PolicySvcInstance,
+    "PolicySvcParameters": PolicySvcParameters,
     "PolicySvcRateLimitParameters": PolicySvcRateLimitParameters,
     "PolicySvcUpsertInstanceRequest": PolicySvcUpsertInstanceRequest,
     "PromptSvcAddPromptRequest": PromptSvcAddPromptRequest,
     "PromptSvcAddPromptResponse": PromptSvcAddPromptResponse,
+    "PromptSvcEngineParameters": PromptSvcEngineParameters,
     "PromptSvcErrorResponse": PromptSvcErrorResponse,
     "PromptSvcListPromptsRequest": PromptSvcListPromptsRequest,
     "PromptSvcListPromptsResponse": PromptSvcListPromptsResponse,
+    "PromptSvcParameters": PromptSvcParameters,
     "PromptSvcPrompt": PromptSvcPrompt,
     "PromptSvcRemovePromptRequest": PromptSvcRemovePromptRequest,
+    "PromptSvcStableDiffusionParameters": PromptSvcStableDiffusionParameters,
+    "PromptSvcTextToImageParameters": PromptSvcTextToImageParameters,
     "RegistrySvcAPISpec": RegistrySvcAPISpec,
     "RegistrySvcClient": RegistrySvcClient,
     "RegistrySvcDefinition": RegistrySvcDefinition,
@@ -499,6 +513,7 @@ let typeMap: {[index: string]: any} = {
     "SourceSvcCheckoutRepoRequest": SourceSvcCheckoutRepoRequest,
     "SourceSvcCheckoutRepoResponse": SourceSvcCheckoutRepoResponse,
     "SourceSvcErrorResponse": SourceSvcErrorResponse,
+    "StableDiffusionTxt2ImgRequest": StableDiffusionTxt2ImgRequest,
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAssignPermissionsRequest": UserSvcAssignPermissionsRequest,
     "UserSvcAuthToken": UserSvcAuthToken,

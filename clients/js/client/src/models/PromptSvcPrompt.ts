@@ -13,6 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PromptSvcParameters } from './PromptSvcParameters';
+import {
+    PromptSvcParametersFromJSON,
+    PromptSvcParametersFromJSONTyped,
+    PromptSvcParametersToJSON,
+    PromptSvcParametersToJSONTyped,
+} from './PromptSvcParameters';
+import type { PromptSvcEngineParameters } from './PromptSvcEngineParameters';
+import {
+    PromptSvcEngineParametersFromJSON,
+    PromptSvcEngineParametersFromJSONTyped,
+    PromptSvcEngineParametersToJSON,
+    PromptSvcEngineParametersToJSONTyped,
+} from './PromptSvcEngineParameters';
 import type { PromptSvcPromptStatus } from './PromptSvcPromptStatus';
 import {
     PromptSvcPromptStatusFromJSON,
@@ -33,6 +47,12 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     createdAt?: string;
+    /**
+     * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+     * @type {PromptSvcEngineParameters}
+     * @memberof PromptSvcPrompt
+     */
+    engineParameters?: PromptSvcEngineParameters;
     /**
      * Error that arose during prompt execution, if any.
      * @type {string}
@@ -63,6 +83,14 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     modelId?: string;
+    /**
+     * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+     * Use these high level parameters when you don't care about the actual engine, only
+     * the functionality (eg. text to image, image to image) it provides.
+     * @type {PromptSvcParameters}
+     * @memberof PromptSvcPrompt
+     */
+    parameters?: PromptSvcParameters;
     /**
      * Prompt is the message itself eg. "What's a banana?
      * @type {string}
@@ -140,11 +168,13 @@ export function PromptSvcPromptFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'engineParameters': json['engineParameters'] == null ? undefined : PromptSvcEngineParametersFromJSON(json['engineParameters']),
         'error': json['error'] == null ? undefined : json['error'],
         'id': json['id'] == null ? undefined : json['id'],
         'lastRun': json['lastRun'] == null ? undefined : json['lastRun'],
         'maxRetries': json['maxRetries'] == null ? undefined : json['maxRetries'],
         'modelId': json['modelId'] == null ? undefined : json['modelId'],
+        'parameters': json['parameters'] == null ? undefined : PromptSvcParametersFromJSON(json['parameters']),
         'prompt': json['prompt'],
         'runCount': json['runCount'] == null ? undefined : json['runCount'],
         'status': json['status'] == null ? undefined : PromptSvcPromptStatusFromJSON(json['status']),
@@ -168,11 +198,13 @@ export function PromptSvcPromptToJSONTyped(value?: PromptSvcPrompt | null, ignor
     return {
         
         'createdAt': value['createdAt'],
+        'engineParameters': PromptSvcEngineParametersToJSON(value['engineParameters']),
         'error': value['error'],
         'id': value['id'],
         'lastRun': value['lastRun'],
         'maxRetries': value['maxRetries'],
         'modelId': value['modelId'],
+        'parameters': PromptSvcParametersToJSON(value['parameters']),
         'prompt': value['prompt'],
         'runCount': value['runCount'],
         'status': PromptSvcPromptStatusToJSON(value['status']),

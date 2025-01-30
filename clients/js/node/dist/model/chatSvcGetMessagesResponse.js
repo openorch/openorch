@@ -17,11 +17,6 @@ export class ChatSvcGetMessagesResponse {
 ChatSvcGetMessagesResponse.discriminator = undefined;
 ChatSvcGetMessagesResponse.attributeTypeMap = [
     {
-        "name": "assets",
-        "baseName": "assets",
-        "type": "Array<ChatSvcAsset>"
-    },
-    {
         "name": "messages",
         "baseName": "messages",
         "type": "Array<ChatSvcMessage>"

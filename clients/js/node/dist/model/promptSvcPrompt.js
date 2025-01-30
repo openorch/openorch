@@ -22,6 +22,11 @@ PromptSvcPrompt.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "engineParameters",
+        "baseName": "engineParameters",
+        "type": "PromptSvcEngineParameters"
+    },
+    {
         "name": "error",
         "baseName": "error",
         "type": "string"
@@ -45,6 +50,11 @@ PromptSvcPrompt.attributeTypeMap = [
         "name": "modelId",
         "baseName": "modelId",
         "type": "string"
+    },
+    {
+        "name": "parameters",
+        "baseName": "parameters",
+        "type": "PromptSvcParameters"
     },
     {
         "name": "prompt",

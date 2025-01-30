@@ -9,20 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export declare class ChatSvcAsset {
-    /**
-    * Content is the base64 encoded binary file direcly embedded in the asset itself
-    */
-    'content'?: string;
-    'createdAt'?: string;
-    'description'?: string;
-    'id'?: string;
-    'type'?: string;
-    'updatedAt'?: string;
-    /**
-    * Url of the asset where
-    */
-    'url'?: string;
+import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+export declare class PromptSvcEngineParameters {
+    'lastRun'?: PromptSvcStableDiffusionParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

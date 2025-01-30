@@ -22,7 +22,7 @@ import (
 )
 
 // @ID serveDownload
-// @Summary Serve a Downloaded file.
+// @Summary Serve a Downloaded file
 // @Description Serves a previously downloaded file based on its URL.
 // @Tags File Svc
 // @Produce application/octet-stream

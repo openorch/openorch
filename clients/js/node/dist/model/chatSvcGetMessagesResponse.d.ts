@@ -9,10 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ChatSvcAsset } from './chatSvcAsset';
 import { ChatSvcMessage } from './chatSvcMessage';
 export declare class ChatSvcGetMessagesResponse {
-    'assets'?: Array<ChatSvcAsset>;
     'messages'?: Array<ChatSvcMessage>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{

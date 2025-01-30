@@ -13,10 +13,7 @@ import {
 	ChangeDetectionStrategy,
 } from '@angular/core';
 import { ChatService } from '../../../services/chat.service';
-import {
-	ChatSvcMessage as Message,
-	ChatSvcAsset as Asset,
-} from '@openorch/client';
+import { ChatSvcMessage as Message } from '@openorch/client';
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
@@ -31,6 +28,8 @@ import {
 	reloadOutline,
 	trashOutline,
 } from 'ionicons/icons';
+
+import { environment } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-message',
@@ -65,14 +64,13 @@ export class MessageComponent {
 	hasAsset = false;
 
 	@Input() message!: Message;
-	@Input() assets: Asset[] = [];
 	@Input() streaming: boolean = false;
 	@Input() modelId: string = '';
 
 	@Output() onCopyToClipboard = new EventEmitter<string>();
 
 	ngOnInit() {
-		if (this.assets?.length) {
+		if (this.message?.fileIds?.length) {
 			this.hasAsset = true;
 		}
 	}
@@ -91,9 +89,7 @@ export class MessageComponent {
 	}
 
 	asset(message: Message): string {
-		return ('data:image/png;base64,' +
-			this.assets.find((a) => message.assetIds?.includes(a.id!))
-				?.content) as string;
+		return `${environment.serverAddress}/file-svc/serve/upload/${message.fileIds![0]}`;
 	}
 
 	deleteMessage(messageId: string | undefined) {

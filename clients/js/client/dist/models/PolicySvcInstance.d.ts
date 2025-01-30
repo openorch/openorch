@@ -9,21 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { PolicySvcRateLimitParameters } from './PolicySvcRateLimitParameters';
 import type { PolicySvcTemplateId } from './PolicySvcTemplateId';
-import type { PolicySvcBlocklistParameters } from './PolicySvcBlocklistParameters';
+import type { PolicySvcParameters } from './PolicySvcParameters';
 /**
  *
  * @export
  * @interface PolicySvcInstance
  */
 export interface PolicySvcInstance {
-    /**
-     *
-     * @type {PolicySvcBlocklistParameters}
-     * @memberof PolicySvcInstance
-     */
-    blocklistParameters?: PolicySvcBlocklistParameters;
     /**
      *
      * @type {string}
@@ -38,10 +31,10 @@ export interface PolicySvcInstance {
     id?: string;
     /**
      *
-     * @type {PolicySvcRateLimitParameters}
+     * @type {PolicySvcParameters}
      * @memberof PolicySvcInstance
      */
-    rateLimitParameters?: PolicySvcRateLimitParameters;
+    parameters: PolicySvcParameters;
     /**
      *
      * @type {PolicySvcTemplateId}

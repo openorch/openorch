@@ -11,6 +11,8 @@
  */
 
 import { RequestFile } from './models';
+import { PromptSvcEngineParameters } from './promptSvcEngineParameters';
+import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 
 export class PromptSvcPrompt {
@@ -18,6 +20,10 @@ export class PromptSvcPrompt {
     * CreatedAt is the time of the prompt creation.
     */
     'createdAt'?: string;
+    /**
+    * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+    */
+    'engineParameters'?: PromptSvcEngineParameters;
     /**
     * Error that arose during prompt execution, if any.
     */
@@ -38,6 +44,10 @@ export class PromptSvcPrompt {
     * ModelId is just the OpenOrch internal ID of the model.
     */
     'modelId'?: string;
+    /**
+    * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don\'t care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
+    */
+    'parameters'?: PromptSvcParameters;
     /**
     * Prompt is the message itself eg. \"What\'s a banana?
     */
@@ -80,6 +90,11 @@ export class PromptSvcPrompt {
             "type": "string"
         },
         {
+            "name": "engineParameters",
+            "baseName": "engineParameters",
+            "type": "PromptSvcEngineParameters"
+        },
+        {
             "name": "error",
             "baseName": "error",
             "type": "string"
@@ -103,6 +118,11 @@ export class PromptSvcPrompt {
             "name": "modelId",
             "baseName": "modelId",
             "type": "string"
+        },
+        {
+            "name": "parameters",
+            "baseName": "parameters",
+            "type": "PromptSvcParameters"
         },
         {
             "name": "prompt",

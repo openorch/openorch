@@ -1738,7 +1738,7 @@ const docTemplate = `{
                 "tags": [
                     "File Svc"
                 ],
-                "summary": "Serve a Downloaded file.",
+                "summary": "Serve a Downloaded file",
                 "operationId": "serveDownload",
                 "parameters": [
                     {
@@ -1779,7 +1779,7 @@ const docTemplate = `{
         },
         "/file-svc/serve/upload/{fileId}": {
             "get": {
-                "description": "Serves a previously uploaded file based on its File ID.\nPlease keep in mind that the ID and the FileID of an Upload is two different fields.",
+                "description": "Retrieves and serves a previously uploaded file using its File ID.\nNote: The ` + "`" + `ID` + "`" + ` and ` + "`" + `FileID` + "`" + ` fields of an upload are different.\n- ` + "`" + `FileID` + "`" + ` is a unique identifier for the file itself.\n- ` + "`" + `ID` + "`" + ` is a unique identifier for a specific replica of the file.\nSince OpenOrch is a distributed system, files can be replicated across multiple nodes.\nThis means each uploaded file may have multiple records with the same ` + "`" + `FileID` + "`" + ` but different ` + "`" + `ID` + "`" + `s.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4218,7 +4218,7 @@ const docTemplate = `{
         },
         "/user-svc/public-key": {
             "get": {
-                "description": "Get the public key to descrypt the JWT.",
+                "description": "Get the public key to parse and verify the JWT.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4306,7 +4306,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Create a new role.\n\u003cb\u003eThe role ID must be prefixed by the callers username (email).\u003c/b\u003e\nEg. if the owner's slug is ` + "`" + `petstore-svc` + "`" + ` the role should look like ` + "`" + `petstore-svc:admin` + "`" + `.\nThe user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.\n\nRequires the ` + "`" + `user-svc:role:create` + "`" + ` permission.",
+                "description": "Create a new role.\n\u003cb\u003eThe role ID must be prefixed by the caller's slug.\u003c/b\u003e\nEg. if the caller's slug is ` + "`" + `petstore-svc` + "`" + ` the role should look like ` + "`" + `petstore-svc:admin` + "`" + `.\nThe user account who creates the role will become the owner of that role, and only the owner will be able to edit the role.\n\nRequires the ` + "`" + `user-svc:role:create` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -4985,34 +4985,6 @@ const docTemplate = `{
                 }
             }
         },
-        "chat_svc.Asset": {
-            "type": "object",
-            "properties": {
-                "content": {
-                    "description": "Content is the base64 encoded binary file direcly embedded in the asset itself",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "url": {
-                    "description": "Url of the asset where",
-                    "type": "string"
-                }
-            }
-        },
         "chat_svc.EventMessageAdded": {
             "type": "object",
             "properties": {
@@ -5040,12 +5012,6 @@ const docTemplate = `{
         "chat_svc.GetMessagesResponse": {
             "type": "object",
             "properties": {
-                "assets": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/chat_svc.Asset"
-                    }
-                },
                 "messages": {
                     "type": "array",
                     "items": {
@@ -5082,19 +5048,19 @@ const docTemplate = `{
         "chat_svc.Message": {
             "type": "object",
             "properties": {
-                "assetIds": {
-                    "description": "AssetIds defines the attachments the message has.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "content": {
                     "description": "Content of the message eg. \"Hi, what's up?\"",
                     "type": "string"
                 },
                 "createdAt": {
                     "type": "string"
+                },
+                "fileIds": {
+                    "description": "FileIds defines the file attachments the message has.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "id": {
                     "type": "string"
@@ -6478,12 +6444,10 @@ const docTemplate = `{
         "policy_svc.Instance": {
             "type": "object",
             "required": [
+                "parameters",
                 "templateId"
             ],
             "properties": {
-                "blocklistParameters": {
-                    "$ref": "#/definitions/policy_svc.BlocklistParameters"
-                },
                 "endpoint": {
                     "type": "string",
                     "example": "/user-svc/register"
@@ -6491,8 +6455,8 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "rateLimitParameters": {
-                    "$ref": "#/definitions/policy_svc.RateLimitParameters"
+                "parameters": {
+                    "$ref": "#/definitions/policy_svc.Parameters"
                 },
                 "templateId": {
                     "allOf": [
@@ -6501,6 +6465,17 @@ const docTemplate = `{
                         }
                     ],
                     "example": "rate-limit"
+                }
+            }
+        },
+        "policy_svc.Parameters": {
+            "type": "object",
+            "properties": {
+                "blocklist": {
+                    "$ref": "#/definitions/policy_svc.BlocklistParameters"
+                },
+                "rateLimit": {
+                    "$ref": "#/definitions/policy_svc.RateLimitParameters"
                 }
             }
         },
@@ -6572,6 +6547,14 @@ const docTemplate = `{
                 "prompt"
             ],
             "properties": {
+                "engineParameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.EngineParameters"
+                        }
+                    ]
+                },
                 "id": {
                     "description": "Id is the unique ID of the prompt.",
                     "type": "string"
@@ -6585,6 +6568,14 @@ const docTemplate = `{
                     "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "parameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Parameters"
+                        }
+                    ]
                 },
                 "prompt": {
                     "description": "Prompt is the message itself eg. \"What's a banana?",
@@ -6614,6 +6605,14 @@ const docTemplate = `{
                 },
                 "prompt": {
                     "$ref": "#/definitions/prompt_svc.Prompt"
+                }
+            }
+        },
+        "prompt_svc.EngineParameters": {
+            "type": "object",
+            "properties": {
+                "stableDiffusion": {
+                    "$ref": "#/definitions/prompt_svc.StableDiffusionParameters"
                 }
             }
         },
@@ -6648,6 +6647,14 @@ const docTemplate = `{
                 }
             }
         },
+        "prompt_svc.Parameters": {
+            "type": "object",
+            "properties": {
+                "textToImage": {
+                    "$ref": "#/definitions/prompt_svc.TextToImageParameters"
+                }
+            }
+        },
         "prompt_svc.Prompt": {
             "type": "object",
             "required": [
@@ -6657,6 +6664,14 @@ const docTemplate = `{
                 "createdAt": {
                     "description": "CreatedAt is the time of the prompt creation.",
                     "type": "string"
+                },
+                "engineParameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.EngineParameters"
+                        }
+                    ]
                 },
                 "error": {
                     "description": "Error that arose during prompt execution, if any.",
@@ -6679,6 +6694,14 @@ const docTemplate = `{
                     "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "parameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Parameters"
+                        }
+                    ]
                 },
                 "prompt": {
                     "description": "Prompt is the message itself eg. \"What's a banana?",
@@ -6749,6 +6772,93 @@ const docTemplate = `{
         },
         "prompt_svc.RemovePromptResponse": {
             "type": "object"
+        },
+        "prompt_svc.StableDiffusionParameters": {
+            "type": "object",
+            "properties": {
+                "txt2Img": {
+                    "description": "Text to image parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/stable_diffusion.Txt2ImgRequest"
+                        }
+                    ]
+                }
+            }
+        },
+        "prompt_svc.TextToImageParameters": {
+            "type": "object",
+            "properties": {
+                "aspectRatio": {
+                    "description": "Alternative to width/height (e.g., \"16:9\", \"1:1\")",
+                    "type": "string"
+                },
+                "batchSize": {
+                    "description": "Number of images per batch",
+                    "type": "integer"
+                },
+                "denoisingStrength": {
+                    "description": "Noise control for variation",
+                    "type": "number"
+                },
+                "enableUpscaling": {
+                    "description": "Whether to use AI upscaling",
+                    "type": "boolean"
+                },
+                "format": {
+                    "description": "Output format (png, jpg, webp, etc.)",
+                    "type": "string"
+                },
+                "guidanceScale": {
+                    "description": "How closely to follow the prompt",
+                    "type": "number"
+                },
+                "height": {
+                    "description": "Image height in pixels",
+                    "type": "integer"
+                },
+                "negativePrompt": {
+                    "type": "string"
+                },
+                "numIterations": {
+                    "description": "How many times to run the prompt (batches)",
+                    "type": "integer"
+                },
+                "prompt": {
+                    "type": "string"
+                },
+                "qualityPreset": {
+                    "description": "Low, Medium, High, Ultra (for services like DALL·E)",
+                    "type": "string"
+                },
+                "restoreFaces": {
+                    "description": "Face restoration for portraits",
+                    "type": "boolean"
+                },
+                "scheduler": {
+                    "description": "Sampling method, if applicable",
+                    "type": "string"
+                },
+                "seed": {
+                    "description": "Optional, used for reproducibility",
+                    "type": "integer"
+                },
+                "steps": {
+                    "description": "Number of inference steps",
+                    "type": "integer"
+                },
+                "styles": {
+                    "description": "Artistic styles or themes",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "width": {
+                    "description": "Image width in pixels",
+                    "type": "integer"
+                }
+            }
         },
         "registry_svc.APISpec": {
             "type": "object",
@@ -7623,6 +7733,191 @@ const docTemplate = `{
             "properties": {
                 "error": {
                     "type": "string"
+                }
+            }
+        },
+        "stable_diffusion.Txt2ImgRequest": {
+            "type": "object",
+            "properties": {
+                "alwayson_scripts": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "batch_size": {
+                    "type": "integer"
+                },
+                "cfg_scale": {
+                    "type": "number"
+                },
+                "comments": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "denoising_strength": {
+                    "type": "number"
+                },
+                "disable_extra_networks": {
+                    "type": "boolean"
+                },
+                "do_not_save_grid": {
+                    "type": "boolean"
+                },
+                "do_not_save_samples": {
+                    "type": "boolean"
+                },
+                "enable_hr": {
+                    "type": "boolean"
+                },
+                "eta": {
+                    "type": "number"
+                },
+                "firstpass_image": {
+                    "type": "string"
+                },
+                "firstphase_height": {
+                    "type": "integer"
+                },
+                "firstphase_width": {
+                    "type": "integer"
+                },
+                "force_task_id": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "hr_checkpoint_name": {
+                    "type": "string"
+                },
+                "hr_negative_prompt": {
+                    "type": "string"
+                },
+                "hr_prompt": {
+                    "type": "string"
+                },
+                "hr_resize_x": {
+                    "type": "integer"
+                },
+                "hr_resize_y": {
+                    "type": "integer"
+                },
+                "hr_sampler_name": {
+                    "type": "string"
+                },
+                "hr_scale": {
+                    "type": "number"
+                },
+                "hr_scheduler": {
+                    "type": "string"
+                },
+                "hr_second_pass_steps": {
+                    "type": "integer"
+                },
+                "hr_upscaler": {
+                    "type": "string"
+                },
+                "infotext": {
+                    "type": "string"
+                },
+                "n_iter": {
+                    "type": "integer"
+                },
+                "negative_prompt": {
+                    "type": "string"
+                },
+                "override_settings": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "override_settings_restore_afterwards": {
+                    "type": "boolean"
+                },
+                "prompt": {
+                    "type": "string"
+                },
+                "refiner_checkpoint": {
+                    "type": "string"
+                },
+                "refiner_switch_at": {
+                    "type": "number"
+                },
+                "restore_faces": {
+                    "type": "boolean"
+                },
+                "s_churn": {
+                    "type": "number"
+                },
+                "s_min_uncond": {
+                    "type": "number"
+                },
+                "s_noise": {
+                    "type": "number"
+                },
+                "s_tmax": {
+                    "type": "number"
+                },
+                "s_tmin": {
+                    "type": "number"
+                },
+                "sampler_index": {
+                    "type": "string"
+                },
+                "sampler_name": {
+                    "type": "string"
+                },
+                "save_images": {
+                    "type": "boolean"
+                },
+                "scheduler": {
+                    "type": "string"
+                },
+                "script_args": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "script_name": {
+                    "type": "string"
+                },
+                "seed": {
+                    "type": "integer"
+                },
+                "seed_resize_from_h": {
+                    "type": "integer"
+                },
+                "seed_resize_from_w": {
+                    "type": "integer"
+                },
+                "send_images": {
+                    "type": "boolean"
+                },
+                "steps": {
+                    "type": "integer"
+                },
+                "styles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "subseed": {
+                    "type": "integer"
+                },
+                "subseed_strength": {
+                    "type": "number"
+                },
+                "tiling": {
+                    "type": "boolean"
+                },
+                "width": {
+                    "type": "integer"
                 }
             }
         },

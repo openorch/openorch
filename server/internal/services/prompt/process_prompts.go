@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"log/slog"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/flusflas/dipper"
@@ -26,12 +25,9 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
-	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/logger"
 
-	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
 	modelservice "github.com/openorch/openorch/server/internal/services/model"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
@@ -321,175 +317,4 @@ func (p *PromptService) processPlatform(
 	}
 
 	return fmt.Errorf("cannot find platform %v", getModelRsp.Platform.Id)
-}
-
-func (p *PromptService) processStableDiffusion(
-	address string,
-	fullPrompt string,
-	currentPrompt *prompttypes.Prompt,
-) error {
-	sd := stable_diffusion.Client{
-		Address: address,
-	}
-
-	req := stable_diffusion.PredictRequest{
-		FnIndex: 1,
-		Params: stable_diffusion.StableDiffusionParams{
-			Prompt:        fullPrompt,
-			NumImages:     1,
-			Steps:         50,
-			Width:         512,
-			Height:        512,
-			GuidanceScale: 7.5,
-			Seed:          0,
-			Flag1:         false,
-			Flag2:         false,
-			Scheduler:     "PNDM",
-			Rate:          0.25,
-		},
-	}
-	req.ConvertParamsToData()
-
-	rsp, err := sd.Predict(req)
-	if err != nil {
-		return err
-	}
-
-	if len(rsp.Data) == 0 {
-		return errors.New("no image in response")
-	}
-
-	imgUrl := stable_diffusion.FileURL(address, rsp.Data[0].FileData[0].Name)
-
-	base64String, err := stable_diffusion.GetImageAsBase64(imgUrl)
-	if err != nil {
-		return err
-	}
-	if len(base64String) == 0 {
-		return errors.New("empty image acquired")
-	}
-
-	asset := &apptypes.Asset{
-		Id:      sdk.Id("ast"),
-		Content: base64String,
-	}
-
-	// @todo upsert asset
-	// upsertReq := chattypes.UpsertAssetsRequest{
-	// 	Assets: []*apptypes.Asset{
-	// 		asset,
-	// 	},
-	// }
-	// upsertRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).ChatSvcAPI.UpsertAssets(context.Background()).Request(upsertReq).Execute()
-
-	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
-		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-		Body(
-			openapi.ChatSvcAddMessageRequest{
-				Message: &openapi.ChatSvcMessage{
-					Id:       openapi.PtrString(sdk.Id("msg")),
-					ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-					Content:  openapi.PtrString("Sure, here is your image"),
-					AssetIds: []string{asset.Id},
-				},
-			},
-		).
-		Execute()
-
-	if err != nil {
-		logger.Error("Error when saving chat message after image generation",
-			slog.String("error", err.Error()))
-		return err
-	}
-
-	return nil
-}
-
-func (p *PromptService) processLlamaCpp(
-	address string,
-	fullPrompt string,
-	currentPrompt *prompttypes.Prompt,
-) error {
-	var llmClient llm.ClientI
-	if p.llmCLient != nil {
-		llmClient = p.llmCLient
-	} else {
-		llmClient = &llm.Client{
-			LLMAddress: address,
-		}
-	}
-
-	start := time.Now()
-	var responseCount int
-	var mu sync.Mutex
-
-	ticker := time.NewTicker(1 * time.Second)
-	defer ticker.Stop()
-	done := make(chan bool)
-
-	go func() {
-		for {
-			select {
-			case <-ticker.C:
-				mu.Lock()
-				logger.Debug(
-					"LLM is streaming",
-					slog.String("promptId", currentPrompt.Id),
-					slog.Float64(
-						"responsesPerSecond",
-						float64(responseCount/int(time.Since(start).Seconds())),
-					),
-					slog.Int("totalResponses", responseCount),
-				)
-				mu.Unlock()
-			case <-done:
-				return
-			}
-		}
-	}()
-
-	err := llmClient.PostCompletionsStreamed(llm.PostCompletionsRequest{
-		Prompt:    fullPrompt,
-		Stream:    true,
-		MaxTokens: 1000000,
-	}, func(resp *llm.CompletionResponse) {
-		mu.Lock()
-		responseCount++
-		mu.Unlock()
-
-		p.StreamManager.Broadcast(currentPrompt.ThreadId, resp)
-
-		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
-			defer func() {
-				done <- true
-			}()
-
-			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
-				ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-				Body(
-					openapi.ChatSvcAddMessageRequest{
-						Message: &openapi.ChatSvcMessage{
-							Id:       openapi.PtrString(sdk.Id("msg")),
-							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-							Content: openapi.PtrString(
-								llmResponseToText(
-									p.StreamManager.History[currentPrompt.ThreadId],
-								),
-							),
-						},
-					},
-				).
-				Execute()
-			if err != nil {
-				logger.Error("Error when saving chat message after broadcast",
-					slog.String("error", err.Error()))
-				return
-			}
-
-			delete(p.StreamManager.History, currentPrompt.ThreadId)
-
-		}
-	})
-
-	return err
 }

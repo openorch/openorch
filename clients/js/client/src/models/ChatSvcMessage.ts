@@ -20,12 +20,6 @@ import { mapValues } from '../runtime';
  */
 export interface ChatSvcMessage {
     /**
-     * AssetIds defines the attachments the message has.
-     * @type {Array<string>}
-     * @memberof ChatSvcMessage
-     */
-    assetIds?: Array<string>;
-    /**
      * Content of the message eg. "Hi, what's up?"
      * @type {string}
      * @memberof ChatSvcMessage
@@ -37,6 +31,12 @@ export interface ChatSvcMessage {
      * @memberof ChatSvcMessage
      */
     createdAt?: string;
+    /**
+     * FileIds defines the file attachments the message has.
+     * @type {Array<string>}
+     * @memberof ChatSvcMessage
+     */
+    fileIds?: Array<string>;
     /**
      * 
      * @type {string}
@@ -81,9 +81,9 @@ export function ChatSvcMessageFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'assetIds': json['assetIds'] == null ? undefined : json['assetIds'],
         'content': json['content'] == null ? undefined : json['content'],
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'fileIds': json['fileIds'] == null ? undefined : json['fileIds'],
         'id': json['id'] == null ? undefined : json['id'],
         'threadId': json['threadId'] == null ? undefined : json['threadId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
@@ -102,9 +102,9 @@ export function ChatSvcMessageToJSONTyped(value?: ChatSvcMessage | null, ignoreD
 
     return {
         
-        'assetIds': value['assetIds'],
         'content': value['content'],
         'createdAt': value['createdAt'],
+        'fileIds': value['fileIds'],
         'id': value['id'],
         'threadId': value['threadId'],
         'updatedAt': value['updatedAt'],

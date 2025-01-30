@@ -36,27 +36,8 @@ type Message struct {
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 
-	// AssetIds defines the attachments the message has.
-	AssetIds []string `json:"assetIds,omitempty"`
-}
-
-type Asset struct {
-	Id string `json:"id"`
-
-	// Url of the asset where
-	Url string `json:"url,omitempty"`
-
-	// Content is the base64 encoded binary file direcly embedded in the asset itself
-	Content string `json:"content,omitempty"`
-
-	Type       string    `json:"type,omitempty"`
-	Decription string    `json:"description,omitempty"`
-	CreatedAt  time.Time `json:"createdAt,omitempty"`
-	UpdatedAt  time.Time `json:"updatedAt,omitempty"`
-}
-
-func (a Asset) GetId() string {
-	return a.Id
+	// FileIds defines the file attachments the message has.
+	FileIds []string `json:"fileIds,omitempty"`
 }
 
 func (c *Message) GetId() string {
@@ -91,15 +72,8 @@ type GetMessagesRequest struct {
 
 type GetMessagesResponse struct {
 	Messages []*Message `json:"messages"`
-	Assets   []*Asset   `json:"assets,omitempty"`
 }
 
 type DeleteMessageRequest struct {
 	MessageId string `json:"messageId"`
 }
-
-type UpsertAssetsRequest struct {
-	Assets []*Asset `json:"assets,omitempty"`
-}
-
-type UpsertAssetsResponse struct{}

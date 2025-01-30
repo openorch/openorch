@@ -62,20 +62,8 @@ func (a *ChatService) GetMessages(
 		return
 	}
 
-	assetIds := []string{}
-	for _, v := range messages {
-		assetIds = append(assetIds, v.AssetIds...)
-	}
-	assets, err := a.getAssets(assetIds)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		return
-	}
-
 	jsonData, _ := json.Marshal(chat.GetMessagesResponse{
 		Messages: messages,
-		Assets:   assets,
 	})
 	w.Write(jsonData)
 }

@@ -11,12 +11,13 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log/slog"
 	"net/http"
+
+	"github.com/pkg/errors"
 
 	"github.com/openorch/openorch/sdk/go/logger"
 )
@@ -29,116 +30,69 @@ func NewClient(address string) *Client {
 	return &Client{Address: address}
 }
 
-// represents
-// "data":["draw me a cat",1,6,256,256,7.5,0,false,false,"PNDM",0.25,null,null,null]
-type StableDiffusionParams struct {
-	Prompt        string  `json:"prompt"`
-	NumImages     int     `json:"num_images"`
-	Steps         int     `json:"steps"`
-	Width         int     `json:"width"`
-	Height        int     `json:"height"`
-	GuidanceScale float64 `json:"guidance_scale"`
-	Seed          int     `json:"seed"`
-	Flag1         bool    `json:"flag1"`
-	Flag2         bool    `json:"flag2"`
-	Scheduler     string  `json:"scheduler"`
-	Rate          float64 `json:"rate"`
-	Optional1     *string `json:"optional1"`
-	Optional2     *string `json:"optional2"`
-	Optional3     *string `json:"optional3"`
+// /sdapi/v1/txt2img
+type Txt2ImgRequest struct {
+	Prompt                  string            `json:"prompt,omitempty"`
+	NegativePrompt          *string           `json:"negative_prompt,omitempty"`
+	Styles                  *[]string         `json:"styles,omitempty"`
+	Seed                    *int              `json:"seed,omitempty"`
+	Subseed                 *int              `json:"subseed,omitempty"`
+	SubseedStrength         *float64          `json:"subseed_strength,omitempty"`
+	SeedResizeFromH         *int              `json:"seed_resize_from_h,omitempty"`
+	SeedResizeFromW         *int              `json:"seed_resize_from_w,omitempty"`
+	SamplerName             *string           `json:"sampler_name,omitempty"`
+	Scheduler               *string           `json:"scheduler,omitempty"`
+	BatchSize               *int              `json:"batch_size,omitempty"`
+	NumIterations           *int              `json:"n_iter,omitempty"`
+	Steps                   *int              `json:"steps,omitempty"`
+	GuidanceScale           *float64          `json:"cfg_scale,omitempty"`
+	Width                   *int              `json:"width,omitempty"`
+	Height                  *int              `json:"height,omitempty"`
+	RestoreFaces            *bool             `json:"restore_faces,omitempty"`
+	Tiling                  *bool             `json:"tiling,omitempty"`
+	DoNotSaveSamples        *bool             `json:"do_not_save_samples,omitempty"`
+	DoNotSaveGrid           *bool             `json:"do_not_save_grid,omitempty"`
+	Eta                     *float64          `json:"eta,omitempty"`
+	DenoisingStrength       *float64          `json:"denoising_strength,omitempty"`
+	SMinUncond              *float64          `json:"s_min_uncond,omitempty"`
+	SChurn                  *float64          `json:"s_churn,omitempty"`
+	STmax                   *float64          `json:"s_tmax,omitempty"`
+	STmin                   *float64          `json:"s_tmin,omitempty"`
+	SNoise                  *float64          `json:"s_noise,omitempty"`
+	OverrideSettings        map[string]string `json:"override_settings,omitempty"`
+	OverrideSettingsRestore *bool             `json:"override_settings_restore_afterwards,omitempty"`
+	RefinerCheckpoint       *string           `json:"refiner_checkpoint,omitempty"`
+	RefinerSwitchAt         *float64          `json:"refiner_switch_at,omitempty"`
+	DisableExtraNetworks    *bool             `json:"disable_extra_networks,omitempty"`
+	FirstPassImage          *string           `json:"firstpass_image,omitempty"`
+	Comments                map[string]string `json:"comments,omitempty"`
+	EnableHR                *bool             `json:"enable_hr,omitempty"`
+	FirstPhaseWidth         *int              `json:"firstphase_width,omitempty"`
+	FirstPhaseHeight        *int              `json:"firstphase_height,omitempty"`
+	HRScale                 *float64          `json:"hr_scale,omitempty"`
+	HRUpscaler              *string           `json:"hr_upscaler,omitempty"`
+	HRSecondPassSteps       *int              `json:"hr_second_pass_steps,omitempty"`
+	HRResizeX               *int              `json:"hr_resize_x,omitempty"`
+	HRResizeY               *int              `json:"hr_resize_y,omitempty"`
+	HRCheckpointName        *string           `json:"hr_checkpoint_name,omitempty"`
+	HRSamplerName           *string           `json:"hr_sampler_name,omitempty"`
+	HRScheduler             *string           `json:"hr_scheduler,omitempty"`
+	HRPrompt                *string           `json:"hr_prompt,omitempty"`
+	HRNegativePrompt        *string           `json:"hr_negative_prompt,omitempty"`
+	ForceTaskID             *string           `json:"force_task_id,omitempty"`
+	SamplerIndex            *string           `json:"sampler_index,omitempty"`
+	ScriptName              *string           `json:"script_name,omitempty"`
+	ScriptArgs              *[]string         `json:"script_args,omitempty"`
+	SendImages              *bool             `json:"send_images,omitempty"`
+	SaveImages              *bool             `json:"save_images,omitempty"`
+	AlwaysOnScripts         map[string]string `json:"alwayson_scripts,omitempty"`
+	InfoText                *string           `json:"infotext,omitempty"`
 }
 
-type PredictRequest struct {
-	FnIndex int `json:"fn_index"`
-	/* Params gets turned into `Data` */
-	Params      StableDiffusionParams `json:"-"`
-	Data        []interface{}         `json:"data"`
-	SessionHash string                `json:"session_hash"`
-}
-
-func (pr *PredictRequest) ConvertParamsToData() {
-	pr.Data = []interface{}{
-		pr.Params.Prompt,
-		pr.Params.NumImages,
-		pr.Params.Steps,
-		pr.Params.Width,
-		pr.Params.Height,
-		pr.Params.GuidanceScale,
-		pr.Params.Seed,
-		pr.Params.Flag1,
-		pr.Params.Flag2,
-		pr.Params.Scheduler,
-		pr.Params.Rate,
-		pr.Params.Optional1,
-		pr.Params.Optional2,
-		pr.Params.Optional3,
-	}
-}
-
-type FileData struct {
-	Name   string      `json:"name"`
-	Data   interface{} `json:"data"`
-	IsFile bool        `json:"is_file"`
-}
-
-type HistoryData struct {
-	Headers []string   `json:"headers"`
-	Data    [][]string `json:"data"`
-}
-
-type PredictData struct {
-	FileData    []FileData  // This will hold FileData if JSON is an array
-	IsHistory   bool        // Flag to indicate if the JSON represents HistoryData
-	HistoryData HistoryData // This will hold HistoryData if JSON represents it
-}
-
-func (pd *PredictData) UnmarshalJSON(data []byte) error {
-	// First, try to unmarshal as FileData array
-	var files []FileData
-	if err := json.Unmarshal(data, &files); err == nil {
-		pd.FileData = files
-		pd.IsHistory = false
-		return nil
-	}
-
-	// If not FileData array, try to unmarshal as HistoryData
-	var history HistoryData
-	if err := json.Unmarshal(data, &history); err == nil {
-		pd.HistoryData = history
-		pd.IsHistory = true
-		return nil
-	}
-
-	return errors.New("cannot unmarshal into PredictData")
-}
-
-//	{
-//		"data": [
-//		  [
-//			{
-//			  "name": "/tmp/tmpj74v2rly/tmpr1li4qkz.png",
-//			  "data": null,
-//			  "is_file": true
-//			}
-//		  ],
-//		  {
-//			"headers": ["Prompt History"],
-//			"data": [
-//			  ["older prompt 1"],
-//			  ["older prompt 2"],
-//			]
-//		  }
-//		],
-//		"is_generating": false,
-//		"duration": 23.146581172943115,
-//		"average_duration": 19.378071202172173
-//	}
-type PredictResponse struct {
-	/* Can be either a []FileData or HistoryData */
-	Data            []PredictData `json:"data"`
-	IsGenerating    bool          `json:"is_generating"`
-	Duration        float64       `json:"duration"`
-	AverageDuration float64       `json:"average_duration"`
+type Txt2ImgResponse struct {
+	Images     []string               `json:"images"`
+	Parameters map[string]interface{} `json:"parameters"`
+	Info       string                 `json:"info"`
 }
 
 /*
@@ -152,28 +106,32 @@ func FileURL(addr string, fileName string) string {
 
 // GetImageAsBase64 fetches the image from the given URL and returns it as a base64 encoded string.
 func GetImageAsBase64(imageURL string) (string, error) {
-	resp, err := http.Get(imageURL)
+	imageData, err := GetImage(imageURL)
 	if err != nil {
-		return "", errors.New("failed to fetch image: " + err.Error())
+		return "", errors.Wrap(err, "error getting image")
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return "", errors.New("failed to fetch image: status code " + resp.Status)
-	}
-
-	imageData, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", errors.New("failed to read image data: " + err.Error())
-	}
-
 	base64Image := base64.StdEncoding.EncodeToString(imageData)
 
 	return base64Image, nil
 }
 
-func (c *Client) Predict(req PredictRequest) (*PredictResponse, error) {
-	url := c.Address + "/run/predict/"
+// GetImage fetches the image from the given URL.
+func GetImage(imageURL string) ([]byte, error) {
+	resp, err := http.Get(imageURL)
+	if err != nil {
+		return nil, errors.New("failed to fetch image: " + err.Error())
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("failed to fetch image: status code " + resp.Status)
+	}
+
+	return io.ReadAll(resp.Body)
+}
+
+func (c *Client) Txt2Img(req Txt2ImgRequest) (*Txt2ImgResponse, error) {
+	url := c.Address + "/sdapi/v1/txt2img"
 
 	jsonBody, err := json.Marshal(req)
 	if err != nil {
@@ -188,7 +146,6 @@ func (c *Client) Predict(req PredictRequest) (*PredictResponse, error) {
 	httpReq.Header.Set("Accept", "*/*")
 	httpReq.Header.Set("Connection", "keep-alive")
 	httpReq.Header.Set("Content-Type", "application/json")
-
 	client := &http.Client{}
 	resp, err := client.Do(httpReq)
 	if err != nil {
@@ -205,7 +162,7 @@ func (c *Client) Predict(req PredictRequest) (*PredictResponse, error) {
 		return nil, err
 	}
 
-	var predictResp PredictResponse
+	var predictResp Txt2ImgResponse
 	err = json.Unmarshal(body, &predictResp)
 	if err != nil {
 		logger.Error("Mismatch between types and StableDiffusion response",
