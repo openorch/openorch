@@ -23,15 +23,15 @@ var PlatformStableDiffusion = Platform{
 	Architectures: Architectures{
 		Default: Container{
 			Port:   7860,
-			Image:  "sd-auto:78",
+			Image:  "crufter/stable-diffusion-simple:v0.3.0-rc.9",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
 			Keeps:  []string{"/data"},
 		},
 		Cuda: Container{
 			Port:   7860,
-			Image:  "sd-auto:78",
+			Image:  "crufter/stable-diffusion-cuda:v0.3.0-rc.9",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-			Keeps:  []string{"/root/.cache/huggingface/diffusers"},
+			Keeps:  []string{"/data"},
 		},
 	},
 }
