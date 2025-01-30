@@ -14,6 +14,7 @@ package promptservice
 
 import (
 	"context"
+	"encoding/base64"
 	"log/slog"
 	"os"
 
@@ -79,21 +80,18 @@ func (p *PromptService) processStableDiffusion(
 		return errors.New("no image in response")
 	}
 
-	imgUrl := stable_diffusion.FileURL(address, "s")
-
-	imageBytes, err := stable_diffusion.GetImage(imgUrl)
+	decodedImage, err := base64.RawStdEncoding.DecodeString(rsp.Images[0])
 	if err != nil {
 		return err
 	}
 
-	// Write imageBytes to a temporary file
 	tempFile, err := os.CreateTemp("", "upload-*.png")
 	if err != nil {
 		return err
 	}
 	defer tempFile.Close()
 
-	_, err = tempFile.Write(imageBytes)
+	_, err = tempFile.Write(decodedImage)
 	if err != nil {
 		return err
 	}

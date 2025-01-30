@@ -29,7 +29,6 @@ import { PromptSvcPrompt as Prompt } from '@openorch/client';
 import {
 	ChatSvcThread as Thread,
 	ChatSvcMessage as Message,
-	ChatSvcAsset as Asset,
 } from '@openorch/client';
 import { ElectronAppService } from '../../services/electron-app.service';
 
@@ -78,7 +77,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 	public promptQueue: Prompt[] = [];
 
 	public messages: Message[] = [];
-	public assets: Asset[] = [];
 	public messageCurrentlyStreamed: Message = {} as any;
 	private subscriptions: Subscription[] = [];
 
@@ -148,7 +146,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 		if (this.thread?.id) {
 			const rsp = await this.chatService.chatMessages(this.thread.id);
 			this.messages = rsp.messages!;
-			this.assets = rsp.assets!;
 			// The mutationObserver triggers before the app-messages components are rendered.
 			// This ensures scrollToBottom is called when the app loads for the first time,
 			// after the app-messages have been rendered.
@@ -165,7 +162,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 				if (this.thread?.id && this.thread.id == event.threadId) {
 					const rsp = await this.chatService.chatMessages(this.thread?.id);
 					this.messages = rsp.messages!;
-					this.assets = rsp.assets!;
 					this.cd.markForCheck();
 				}
 			})
@@ -209,10 +205,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 		this.shouldScrollToBottom = atBottom;
 	}
 
-	getAssets(message: Message): Asset[] {
-		return this.assets?.filter((a) => message.assetIds?.includes(a.id!));
-	}
-
 	async handleSend(emitted: SendOutput) {
 		if (!this.thread?.title) {
 			this.thread.title = emitted.message.slice(0, 100);
@@ -244,7 +236,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 		if (changes.thread) {
 			this.shouldScrollToBottom = true;
 			this.messages = [];
-			this.assets = [];
 			this.cd.markForCheck();
 
 			if (this.streamSubscription) {
@@ -260,7 +251,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 				threadId = changes.thread.currentValue.id;
 				const rsp = await this.chatService.chatMessages(threadId);
 				this.messages = rsp.messages!;
-				this.assets = rsp.assets!;
 			} else {
 				this.thread = {
 					id: this.server.id('thr'),
@@ -324,7 +314,6 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 						// event coming from the firehose
 						const rsp = await this.chatService.chatMessages(threadId);
 						this.messages = rsp.messages!;
-						this.assets = rsp.assets!;
 
 						this.messageCurrentlyStreamed = {
 							...this.messageCurrentlyStreamed,
