@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<markdown class="markdown-body" [data]="message.content"></markdown>
-		<img [src]="asset(message)" *ngIf="assets?.length" />
+		<img [src]="asset(message)" *ngIf="message.fileIds?.length" />
 	</div>
 </div>
 
@@ -132,6 +132,6 @@
 			</div>
 		</div>
 		<markdown class="markdown-body" [data]="message.content"></markdown>
-		<img [src]="asset(message)" *ngIf="assets?.length" />
+		<img [src]="asset(message)" *ngIf="message?.fileIds?.length"/>
 	</div>
 </div>
