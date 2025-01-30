@@ -38,7 +38,7 @@ func (fs *FileService) UploadFile(
 	isAuthRsp, isAuthHttpRsp, err := fs.clientFactory.Client(sdk.WithTokenFromRequest(r)).
 		UserSvcAPI.IsAuthorized(r.Context(), *file.PermissionUploadCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
-			GrantedSlugs: []string{},
+			GrantedSlugs: []string{"prompt-svc"},
 		}).
 		Execute()
 

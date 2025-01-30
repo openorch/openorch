@@ -104,7 +104,7 @@ type TextToImageParameters struct {
 	Prompt            string   `json:"prompt,omitempty"`
 	NegativePrompt    string   `json:"negativePrompt,omitempty"`
 	Styles            []string `json:"styles,omitempty"`            // Artistic styles or themes
-	Seed              *int     `json:"seed,omitempty"`              // Optional, used for reproducibility
+	Seed              int      `json:"seed,omitempty"`              // Optional, used for reproducibility
 	BatchSize         int      `json:"batchSize,omitempty"`         // Number of images per batch
 	NumIterations     int      `json:"numIterations,omitempty"`     // How many times to run the prompt (batches)
 	Steps             int      `json:"steps,omitempty"`             // Number of inference steps
@@ -121,7 +121,7 @@ type TextToImageParameters struct {
 }
 
 type EngineParameters struct {
-	StableDiffusion *StableDiffusionParameters `json:"stableDiffusion,omitempty"`
+	StableDiffusion StableDiffusionParameters `json:"stableDiffusion,omitempty"`
 }
 
 type StableDiffusionParameters struct {
