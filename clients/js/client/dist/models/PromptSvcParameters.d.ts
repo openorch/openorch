@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffusionParameters';
+import type { PromptSvcTextToImageParameters } from './PromptSvcTextToImageParameters';
 /**
  *
  * @export
@@ -18,10 +18,10 @@ import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffus
 export interface PromptSvcParameters {
     /**
      *
-     * @type {PromptSvcStableDiffusionParameters}
+     * @type {PromptSvcTextToImageParameters}
      * @memberof PromptSvcParameters
      */
-    lastRun?: PromptSvcStableDiffusionParameters;
+    textToImage?: PromptSvcTextToImageParameters;
 }
 /**
  * Check if a given object implements the PromptSvcParameters interface.

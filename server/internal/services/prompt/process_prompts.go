@@ -332,18 +332,39 @@ func (p *PromptService) processStableDiffusion(
 		Address: address,
 	}
 
-	req := stable_diffusion.Txt2ImgRequest{
-		Prompt:        fullPrompt,
-		Steps:         20,
-		Width:         100,
-		Height:        100,
-		GuidanceScale: 7.5,
-		HRScale:       2,
-		Seed:          0,
-		SamplerIndex:  "Euler",
-		NumIterations: 1,
-		RestoreFaces:  true,
-		Tiling:        true,
+	// @todo
+	// support the high level `Parameters` field as well,
+	// not just the `EngineParameters`
+
+	req := currentPrompt.EngineParameters.StableDiffusion.Txt2Img
+	req.Prompt = fullPrompt
+
+	if req.Steps == nil {
+		req.Steps = openapi.PtrInt(20)
+	}
+	if req.Width == nil {
+		req.Width = openapi.PtrInt(100)
+	}
+	if req.Height == nil {
+		req.Height = openapi.PtrInt(100)
+	}
+	if req.GuidanceScale == nil {
+		req.GuidanceScale = openapi.PtrFloat64(7.5)
+	}
+	if req.HRScale == nil {
+		req.HRScale = openapi.PtrFloat64(2)
+	}
+	if req.SamplerIndex == nil {
+		req.SamplerIndex = openapi.PtrString("Euler")
+	}
+	if req.NumIterations == nil {
+		req.NumIterations = openapi.PtrInt(1)
+	}
+	if req.RestoreFaces == nil {
+		req.RestoreFaces = openapi.PtrBool(true)
+	}
+	if req.Tiling == nil {
+		req.Tiling = openapi.PtrBool(true)
 	}
 
 	rsp, err := sd.Txt2Img(req)

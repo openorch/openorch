@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { StableDiffusionTxt2ImgRequestFromJSON, StableDiffusionTxt2ImgRequestToJSON, } from './StableDiffusionTxt2ImgRequest';
 /**
  * Check if a given object implements the PromptSvcStableDiffusionParameters interface.
  */
@@ -25,20 +26,7 @@ export function PromptSvcStableDiffusionParametersFromJSONTyped(json, ignoreDisc
         return json;
     }
     return {
-        'flag1': json['flag1'] == null ? undefined : json['flag1'],
-        'flag2': json['flag2'] == null ? undefined : json['flag2'],
-        'guidanceScale': json['guidance_scale'] == null ? undefined : json['guidance_scale'],
-        'height': json['height'] == null ? undefined : json['height'],
-        'numImages': json['num_images'] == null ? undefined : json['num_images'],
-        'optional1': json['optional1'] == null ? undefined : json['optional1'],
-        'optional2': json['optional2'] == null ? undefined : json['optional2'],
-        'optional3': json['optional3'] == null ? undefined : json['optional3'],
-        'prompt': json['prompt'] == null ? undefined : json['prompt'],
-        'rate': json['rate'] == null ? undefined : json['rate'],
-        'scheduler': json['scheduler'] == null ? undefined : json['scheduler'],
-        'seed': json['seed'] == null ? undefined : json['seed'],
-        'steps': json['steps'] == null ? undefined : json['steps'],
-        'width': json['width'] == null ? undefined : json['width'],
+        'txt2Img': json['txt2Img'] == null ? undefined : StableDiffusionTxt2ImgRequestFromJSON(json['txt2Img']),
     };
 }
 export function PromptSvcStableDiffusionParametersToJSON(json) {
@@ -49,19 +37,6 @@ export function PromptSvcStableDiffusionParametersToJSONTyped(value, ignoreDiscr
         return value;
     }
     return {
-        'flag1': value['flag1'],
-        'flag2': value['flag2'],
-        'guidance_scale': value['guidanceScale'],
-        'height': value['height'],
-        'num_images': value['numImages'],
-        'optional1': value['optional1'],
-        'optional2': value['optional2'],
-        'optional3': value['optional3'],
-        'prompt': value['prompt'],
-        'rate': value['rate'],
-        'scheduler': value['scheduler'],
-        'seed': value['seed'],
-        'steps': value['steps'],
-        'width': value['width'],
+        'txt2Img': StableDiffusionTxt2ImgRequestToJSON(value['txt2Img']),
     };
 }

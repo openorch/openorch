@@ -20,7 +20,7 @@ var _ MappedNullable = &PromptSvcParameters{}
 
 // PromptSvcParameters struct for PromptSvcParameters
 type PromptSvcParameters struct {
-	LastRun *PromptSvcStableDiffusionParameters `json:"lastRun,omitempty"`
+	TextToImage *PromptSvcTextToImageParameters `json:"textToImage,omitempty"`
 }
 
 // NewPromptSvcParameters instantiates a new PromptSvcParameters object
@@ -40,36 +40,36 @@ func NewPromptSvcParametersWithDefaults() *PromptSvcParameters {
 	return &this
 }
 
-// GetLastRun returns the LastRun field value if set, zero value otherwise.
-func (o *PromptSvcParameters) GetLastRun() PromptSvcStableDiffusionParameters {
-	if o == nil || IsNil(o.LastRun) {
-		var ret PromptSvcStableDiffusionParameters
+// GetTextToImage returns the TextToImage field value if set, zero value otherwise.
+func (o *PromptSvcParameters) GetTextToImage() PromptSvcTextToImageParameters {
+	if o == nil || IsNil(o.TextToImage) {
+		var ret PromptSvcTextToImageParameters
 		return ret
 	}
-	return *o.LastRun
+	return *o.TextToImage
 }
 
-// GetLastRunOk returns a tuple with the LastRun field value if set, nil otherwise
+// GetTextToImageOk returns a tuple with the TextToImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptSvcParameters) GetLastRunOk() (*PromptSvcStableDiffusionParameters, bool) {
-	if o == nil || IsNil(o.LastRun) {
+func (o *PromptSvcParameters) GetTextToImageOk() (*PromptSvcTextToImageParameters, bool) {
+	if o == nil || IsNil(o.TextToImage) {
 		return nil, false
 	}
-	return o.LastRun, true
+	return o.TextToImage, true
 }
 
-// HasLastRun returns a boolean if a field has been set.
-func (o *PromptSvcParameters) HasLastRun() bool {
-	if o != nil && !IsNil(o.LastRun) {
+// HasTextToImage returns a boolean if a field has been set.
+func (o *PromptSvcParameters) HasTextToImage() bool {
+	if o != nil && !IsNil(o.TextToImage) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastRun gets a reference to the given PromptSvcStableDiffusionParameters and assigns it to the LastRun field.
-func (o *PromptSvcParameters) SetLastRun(v PromptSvcStableDiffusionParameters) {
-	o.LastRun = &v
+// SetTextToImage gets a reference to the given PromptSvcTextToImageParameters and assigns it to the TextToImage field.
+func (o *PromptSvcParameters) SetTextToImage(v PromptSvcTextToImageParameters) {
+	o.TextToImage = &v
 }
 
 func (o PromptSvcParameters) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o PromptSvcParameters) MarshalJSON() ([]byte, error) {
 
 func (o PromptSvcParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastRun) {
-		toSerialize["lastRun"] = o.LastRun
+	if !IsNil(o.TextToImage) {
+		toSerialize["textToImage"] = o.TextToImage
 	}
 	return toSerialize, nil
 }

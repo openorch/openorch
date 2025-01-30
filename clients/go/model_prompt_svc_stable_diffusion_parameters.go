@@ -20,20 +20,8 @@ var _ MappedNullable = &PromptSvcStableDiffusionParameters{}
 
 // PromptSvcStableDiffusionParameters struct for PromptSvcStableDiffusionParameters
 type PromptSvcStableDiffusionParameters struct {
-	Flag1 *bool `json:"flag1,omitempty"`
-	Flag2 *bool `json:"flag2,omitempty"`
-	GuidanceScale *float32 `json:"guidance_scale,omitempty"`
-	Height *int32 `json:"height,omitempty"`
-	NumImages *int32 `json:"num_images,omitempty"`
-	Optional1 *string `json:"optional1,omitempty"`
-	Optional2 *string `json:"optional2,omitempty"`
-	Optional3 *string `json:"optional3,omitempty"`
-	Prompt *string `json:"prompt,omitempty"`
-	Rate *float32 `json:"rate,omitempty"`
-	Scheduler *string `json:"scheduler,omitempty"`
-	Seed *int32 `json:"seed,omitempty"`
-	Steps *int32 `json:"steps,omitempty"`
-	Width *int32 `json:"width,omitempty"`
+	// Text to image parameters
+	Txt2Img *StableDiffusionTxt2ImgRequest `json:"txt2Img,omitempty"`
 }
 
 // NewPromptSvcStableDiffusionParameters instantiates a new PromptSvcStableDiffusionParameters object
@@ -53,452 +41,36 @@ func NewPromptSvcStableDiffusionParametersWithDefaults() *PromptSvcStableDiffusi
 	return &this
 }
 
-// GetFlag1 returns the Flag1 field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetFlag1() bool {
-	if o == nil || IsNil(o.Flag1) {
-		var ret bool
+// GetTxt2Img returns the Txt2Img field value if set, zero value otherwise.
+func (o *PromptSvcStableDiffusionParameters) GetTxt2Img() StableDiffusionTxt2ImgRequest {
+	if o == nil || IsNil(o.Txt2Img) {
+		var ret StableDiffusionTxt2ImgRequest
 		return ret
 	}
-	return *o.Flag1
+	return *o.Txt2Img
 }
 
-// GetFlag1Ok returns a tuple with the Flag1 field value if set, nil otherwise
+// GetTxt2ImgOk returns a tuple with the Txt2Img field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetFlag1Ok() (*bool, bool) {
-	if o == nil || IsNil(o.Flag1) {
+func (o *PromptSvcStableDiffusionParameters) GetTxt2ImgOk() (*StableDiffusionTxt2ImgRequest, bool) {
+	if o == nil || IsNil(o.Txt2Img) {
 		return nil, false
 	}
-	return o.Flag1, true
+	return o.Txt2Img, true
 }
 
-// HasFlag1 returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasFlag1() bool {
-	if o != nil && !IsNil(o.Flag1) {
+// HasTxt2Img returns a boolean if a field has been set.
+func (o *PromptSvcStableDiffusionParameters) HasTxt2Img() bool {
+	if o != nil && !IsNil(o.Txt2Img) {
 		return true
 	}
 
 	return false
 }
 
-// SetFlag1 gets a reference to the given bool and assigns it to the Flag1 field.
-func (o *PromptSvcStableDiffusionParameters) SetFlag1(v bool) {
-	o.Flag1 = &v
-}
-
-// GetFlag2 returns the Flag2 field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetFlag2() bool {
-	if o == nil || IsNil(o.Flag2) {
-		var ret bool
-		return ret
-	}
-	return *o.Flag2
-}
-
-// GetFlag2Ok returns a tuple with the Flag2 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetFlag2Ok() (*bool, bool) {
-	if o == nil || IsNil(o.Flag2) {
-		return nil, false
-	}
-	return o.Flag2, true
-}
-
-// HasFlag2 returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasFlag2() bool {
-	if o != nil && !IsNil(o.Flag2) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlag2 gets a reference to the given bool and assigns it to the Flag2 field.
-func (o *PromptSvcStableDiffusionParameters) SetFlag2(v bool) {
-	o.Flag2 = &v
-}
-
-// GetGuidanceScale returns the GuidanceScale field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetGuidanceScale() float32 {
-	if o == nil || IsNil(o.GuidanceScale) {
-		var ret float32
-		return ret
-	}
-	return *o.GuidanceScale
-}
-
-// GetGuidanceScaleOk returns a tuple with the GuidanceScale field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetGuidanceScaleOk() (*float32, bool) {
-	if o == nil || IsNil(o.GuidanceScale) {
-		return nil, false
-	}
-	return o.GuidanceScale, true
-}
-
-// HasGuidanceScale returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasGuidanceScale() bool {
-	if o != nil && !IsNil(o.GuidanceScale) {
-		return true
-	}
-
-	return false
-}
-
-// SetGuidanceScale gets a reference to the given float32 and assigns it to the GuidanceScale field.
-func (o *PromptSvcStableDiffusionParameters) SetGuidanceScale(v float32) {
-	o.GuidanceScale = &v
-}
-
-// GetHeight returns the Height field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetHeight() int32 {
-	if o == nil || IsNil(o.Height) {
-		var ret int32
-		return ret
-	}
-	return *o.Height
-}
-
-// GetHeightOk returns a tuple with the Height field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetHeightOk() (*int32, bool) {
-	if o == nil || IsNil(o.Height) {
-		return nil, false
-	}
-	return o.Height, true
-}
-
-// HasHeight returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasHeight() bool {
-	if o != nil && !IsNil(o.Height) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeight gets a reference to the given int32 and assigns it to the Height field.
-func (o *PromptSvcStableDiffusionParameters) SetHeight(v int32) {
-	o.Height = &v
-}
-
-// GetNumImages returns the NumImages field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetNumImages() int32 {
-	if o == nil || IsNil(o.NumImages) {
-		var ret int32
-		return ret
-	}
-	return *o.NumImages
-}
-
-// GetNumImagesOk returns a tuple with the NumImages field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetNumImagesOk() (*int32, bool) {
-	if o == nil || IsNil(o.NumImages) {
-		return nil, false
-	}
-	return o.NumImages, true
-}
-
-// HasNumImages returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasNumImages() bool {
-	if o != nil && !IsNil(o.NumImages) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumImages gets a reference to the given int32 and assigns it to the NumImages field.
-func (o *PromptSvcStableDiffusionParameters) SetNumImages(v int32) {
-	o.NumImages = &v
-}
-
-// GetOptional1 returns the Optional1 field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetOptional1() string {
-	if o == nil || IsNil(o.Optional1) {
-		var ret string
-		return ret
-	}
-	return *o.Optional1
-}
-
-// GetOptional1Ok returns a tuple with the Optional1 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetOptional1Ok() (*string, bool) {
-	if o == nil || IsNil(o.Optional1) {
-		return nil, false
-	}
-	return o.Optional1, true
-}
-
-// HasOptional1 returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasOptional1() bool {
-	if o != nil && !IsNil(o.Optional1) {
-		return true
-	}
-
-	return false
-}
-
-// SetOptional1 gets a reference to the given string and assigns it to the Optional1 field.
-func (o *PromptSvcStableDiffusionParameters) SetOptional1(v string) {
-	o.Optional1 = &v
-}
-
-// GetOptional2 returns the Optional2 field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetOptional2() string {
-	if o == nil || IsNil(o.Optional2) {
-		var ret string
-		return ret
-	}
-	return *o.Optional2
-}
-
-// GetOptional2Ok returns a tuple with the Optional2 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetOptional2Ok() (*string, bool) {
-	if o == nil || IsNil(o.Optional2) {
-		return nil, false
-	}
-	return o.Optional2, true
-}
-
-// HasOptional2 returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasOptional2() bool {
-	if o != nil && !IsNil(o.Optional2) {
-		return true
-	}
-
-	return false
-}
-
-// SetOptional2 gets a reference to the given string and assigns it to the Optional2 field.
-func (o *PromptSvcStableDiffusionParameters) SetOptional2(v string) {
-	o.Optional2 = &v
-}
-
-// GetOptional3 returns the Optional3 field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetOptional3() string {
-	if o == nil || IsNil(o.Optional3) {
-		var ret string
-		return ret
-	}
-	return *o.Optional3
-}
-
-// GetOptional3Ok returns a tuple with the Optional3 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetOptional3Ok() (*string, bool) {
-	if o == nil || IsNil(o.Optional3) {
-		return nil, false
-	}
-	return o.Optional3, true
-}
-
-// HasOptional3 returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasOptional3() bool {
-	if o != nil && !IsNil(o.Optional3) {
-		return true
-	}
-
-	return false
-}
-
-// SetOptional3 gets a reference to the given string and assigns it to the Optional3 field.
-func (o *PromptSvcStableDiffusionParameters) SetOptional3(v string) {
-	o.Optional3 = &v
-}
-
-// GetPrompt returns the Prompt field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetPrompt() string {
-	if o == nil || IsNil(o.Prompt) {
-		var ret string
-		return ret
-	}
-	return *o.Prompt
-}
-
-// GetPromptOk returns a tuple with the Prompt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetPromptOk() (*string, bool) {
-	if o == nil || IsNil(o.Prompt) {
-		return nil, false
-	}
-	return o.Prompt, true
-}
-
-// HasPrompt returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasPrompt() bool {
-	if o != nil && !IsNil(o.Prompt) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrompt gets a reference to the given string and assigns it to the Prompt field.
-func (o *PromptSvcStableDiffusionParameters) SetPrompt(v string) {
-	o.Prompt = &v
-}
-
-// GetRate returns the Rate field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetRate() float32 {
-	if o == nil || IsNil(o.Rate) {
-		var ret float32
-		return ret
-	}
-	return *o.Rate
-}
-
-// GetRateOk returns a tuple with the Rate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetRateOk() (*float32, bool) {
-	if o == nil || IsNil(o.Rate) {
-		return nil, false
-	}
-	return o.Rate, true
-}
-
-// HasRate returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasRate() bool {
-	if o != nil && !IsNil(o.Rate) {
-		return true
-	}
-
-	return false
-}
-
-// SetRate gets a reference to the given float32 and assigns it to the Rate field.
-func (o *PromptSvcStableDiffusionParameters) SetRate(v float32) {
-	o.Rate = &v
-}
-
-// GetScheduler returns the Scheduler field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetScheduler() string {
-	if o == nil || IsNil(o.Scheduler) {
-		var ret string
-		return ret
-	}
-	return *o.Scheduler
-}
-
-// GetSchedulerOk returns a tuple with the Scheduler field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetSchedulerOk() (*string, bool) {
-	if o == nil || IsNil(o.Scheduler) {
-		return nil, false
-	}
-	return o.Scheduler, true
-}
-
-// HasScheduler returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasScheduler() bool {
-	if o != nil && !IsNil(o.Scheduler) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduler gets a reference to the given string and assigns it to the Scheduler field.
-func (o *PromptSvcStableDiffusionParameters) SetScheduler(v string) {
-	o.Scheduler = &v
-}
-
-// GetSeed returns the Seed field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetSeed() int32 {
-	if o == nil || IsNil(o.Seed) {
-		var ret int32
-		return ret
-	}
-	return *o.Seed
-}
-
-// GetSeedOk returns a tuple with the Seed field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetSeedOk() (*int32, bool) {
-	if o == nil || IsNil(o.Seed) {
-		return nil, false
-	}
-	return o.Seed, true
-}
-
-// HasSeed returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasSeed() bool {
-	if o != nil && !IsNil(o.Seed) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeed gets a reference to the given int32 and assigns it to the Seed field.
-func (o *PromptSvcStableDiffusionParameters) SetSeed(v int32) {
-	o.Seed = &v
-}
-
-// GetSteps returns the Steps field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetSteps() int32 {
-	if o == nil || IsNil(o.Steps) {
-		var ret int32
-		return ret
-	}
-	return *o.Steps
-}
-
-// GetStepsOk returns a tuple with the Steps field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetStepsOk() (*int32, bool) {
-	if o == nil || IsNil(o.Steps) {
-		return nil, false
-	}
-	return o.Steps, true
-}
-
-// HasSteps returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasSteps() bool {
-	if o != nil && !IsNil(o.Steps) {
-		return true
-	}
-
-	return false
-}
-
-// SetSteps gets a reference to the given int32 and assigns it to the Steps field.
-func (o *PromptSvcStableDiffusionParameters) SetSteps(v int32) {
-	o.Steps = &v
-}
-
-// GetWidth returns the Width field value if set, zero value otherwise.
-func (o *PromptSvcStableDiffusionParameters) GetWidth() int32 {
-	if o == nil || IsNil(o.Width) {
-		var ret int32
-		return ret
-	}
-	return *o.Width
-}
-
-// GetWidthOk returns a tuple with the Width field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcStableDiffusionParameters) GetWidthOk() (*int32, bool) {
-	if o == nil || IsNil(o.Width) {
-		return nil, false
-	}
-	return o.Width, true
-}
-
-// HasWidth returns a boolean if a field has been set.
-func (o *PromptSvcStableDiffusionParameters) HasWidth() bool {
-	if o != nil && !IsNil(o.Width) {
-		return true
-	}
-
-	return false
-}
-
-// SetWidth gets a reference to the given int32 and assigns it to the Width field.
-func (o *PromptSvcStableDiffusionParameters) SetWidth(v int32) {
-	o.Width = &v
+// SetTxt2Img gets a reference to the given StableDiffusionTxt2ImgRequest and assigns it to the Txt2Img field.
+func (o *PromptSvcStableDiffusionParameters) SetTxt2Img(v StableDiffusionTxt2ImgRequest) {
+	o.Txt2Img = &v
 }
 
 func (o PromptSvcStableDiffusionParameters) MarshalJSON() ([]byte, error) {
@@ -511,47 +83,8 @@ func (o PromptSvcStableDiffusionParameters) MarshalJSON() ([]byte, error) {
 
 func (o PromptSvcStableDiffusionParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Flag1) {
-		toSerialize["flag1"] = o.Flag1
-	}
-	if !IsNil(o.Flag2) {
-		toSerialize["flag2"] = o.Flag2
-	}
-	if !IsNil(o.GuidanceScale) {
-		toSerialize["guidance_scale"] = o.GuidanceScale
-	}
-	if !IsNil(o.Height) {
-		toSerialize["height"] = o.Height
-	}
-	if !IsNil(o.NumImages) {
-		toSerialize["num_images"] = o.NumImages
-	}
-	if !IsNil(o.Optional1) {
-		toSerialize["optional1"] = o.Optional1
-	}
-	if !IsNil(o.Optional2) {
-		toSerialize["optional2"] = o.Optional2
-	}
-	if !IsNil(o.Optional3) {
-		toSerialize["optional3"] = o.Optional3
-	}
-	if !IsNil(o.Prompt) {
-		toSerialize["prompt"] = o.Prompt
-	}
-	if !IsNil(o.Rate) {
-		toSerialize["rate"] = o.Rate
-	}
-	if !IsNil(o.Scheduler) {
-		toSerialize["scheduler"] = o.Scheduler
-	}
-	if !IsNil(o.Seed) {
-		toSerialize["seed"] = o.Seed
-	}
-	if !IsNil(o.Steps) {
-		toSerialize["steps"] = o.Steps
-	}
-	if !IsNil(o.Width) {
-		toSerialize["width"] = o.Width
+	if !IsNil(o.Txt2Img) {
+		toSerialize["txt2Img"] = o.Txt2Img
 	}
 	return toSerialize, nil
 }

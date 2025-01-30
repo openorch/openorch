@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class PromptSvcParameters {
+export class PromptSvcEngineParameters {
     static getAttributeTypeMap() {
-        return PromptSvcParameters.attributeTypeMap;
+        return PromptSvcEngineParameters.attributeTypeMap;
     }
 }
-PromptSvcParameters.discriminator = undefined;
-PromptSvcParameters.attributeTypeMap = [
+PromptSvcEngineParameters.discriminator = undefined;
+PromptSvcEngineParameters.attributeTypeMap = [
     {
-        "name": "textToImage",
-        "baseName": "textToImage",
-        "type": "PromptSvcTextToImageParameters"
+        "name": "lastRun",
+        "baseName": "lastRun",
+        "type": "PromptSvcStableDiffusionParameters"
     }
 ];

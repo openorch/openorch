@@ -17,73 +17,8 @@ export class PromptSvcStableDiffusionParameters {
 PromptSvcStableDiffusionParameters.discriminator = undefined;
 PromptSvcStableDiffusionParameters.attributeTypeMap = [
     {
-        "name": "flag1",
-        "baseName": "flag1",
-        "type": "boolean"
-    },
-    {
-        "name": "flag2",
-        "baseName": "flag2",
-        "type": "boolean"
-    },
-    {
-        "name": "guidanceScale",
-        "baseName": "guidance_scale",
-        "type": "number"
-    },
-    {
-        "name": "height",
-        "baseName": "height",
-        "type": "number"
-    },
-    {
-        "name": "numImages",
-        "baseName": "num_images",
-        "type": "number"
-    },
-    {
-        "name": "optional1",
-        "baseName": "optional1",
-        "type": "string"
-    },
-    {
-        "name": "optional2",
-        "baseName": "optional2",
-        "type": "string"
-    },
-    {
-        "name": "optional3",
-        "baseName": "optional3",
-        "type": "string"
-    },
-    {
-        "name": "prompt",
-        "baseName": "prompt",
-        "type": "string"
-    },
-    {
-        "name": "rate",
-        "baseName": "rate",
-        "type": "number"
-    },
-    {
-        "name": "scheduler",
-        "baseName": "scheduler",
-        "type": "string"
-    },
-    {
-        "name": "seed",
-        "baseName": "seed",
-        "type": "number"
-    },
-    {
-        "name": "steps",
-        "baseName": "steps",
-        "type": "number"
-    },
-    {
-        "name": "width",
-        "baseName": "width",
-        "type": "number"
+        "name": "txt2Img",
+        "baseName": "txt2Img",
+        "type": "StableDiffusionTxt2ImgRequest"
     }
 ];

@@ -6541,6 +6541,14 @@
                 "prompt"
             ],
             "properties": {
+                "engineParameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.EngineParameters"
+                        }
+                    ]
+                },
                 "id": {
                     "description": "Id is the unique ID of the prompt.",
                     "type": "string"
@@ -6554,6 +6562,14 @@
                     "description": "ModelId is just the OpenOrch internal ID of the model.",
                     "type": "string",
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "parameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Parameters"
+                        }
+                    ]
                 },
                 "prompt": {
                     "description": "Prompt is the message itself eg. \"What's a banana?",
@@ -6583,6 +6599,14 @@
                 },
                 "prompt": {
                     "$ref": "#/definitions/prompt_svc.Prompt"
+                }
+            }
+        },
+        "prompt_svc.EngineParameters": {
+            "type": "object",
+            "properties": {
+                "stableDiffusion": {
+                    "$ref": "#/definitions/prompt_svc.StableDiffusionParameters"
                 }
             }
         },
@@ -6620,8 +6644,8 @@
         "prompt_svc.Parameters": {
             "type": "object",
             "properties": {
-                "lastRun": {
-                    "$ref": "#/definitions/prompt_svc.StableDiffusionParameters"
+                "textToImage": {
+                    "$ref": "#/definitions/prompt_svc.TextToImageParameters"
                 }
             }
         },
@@ -6634,6 +6658,14 @@
                 "createdAt": {
                     "description": "CreatedAt is the time of the prompt creation.",
                     "type": "string"
+                },
+                "engineParameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.EngineParameters"
+                        }
+                    ]
                 },
                 "error": {
                     "description": "Error that arose during prompt execution, if any.",
@@ -6658,7 +6690,7 @@
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
                 "parameters": {
-                    "description": "AI platform specific parameters",
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/prompt_svc.Parameters"
@@ -6738,46 +6770,86 @@
         "prompt_svc.StableDiffusionParameters": {
             "type": "object",
             "properties": {
-                "flag1": {
+                "txt2Img": {
+                    "description": "Text to image parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/stable_diffusion.Txt2ImgRequest"
+                        }
+                    ]
+                }
+            }
+        },
+        "prompt_svc.TextToImageParameters": {
+            "type": "object",
+            "properties": {
+                "aspectRatio": {
+                    "description": "Alternative to width/height (e.g., \"16:9\", \"1:1\")",
+                    "type": "string"
+                },
+                "batchSize": {
+                    "description": "Number of images per batch",
+                    "type": "integer"
+                },
+                "denoisingStrength": {
+                    "description": "Noise control for variation",
+                    "type": "number"
+                },
+                "enableUpscaling": {
+                    "description": "Whether to use AI upscaling",
                     "type": "boolean"
                 },
-                "flag2": {
-                    "type": "boolean"
+                "format": {
+                    "description": "Output format (png, jpg, webp, etc.)",
+                    "type": "string"
                 },
-                "guidance_scale": {
+                "guidanceScale": {
+                    "description": "How closely to follow the prompt",
                     "type": "number"
                 },
                 "height": {
+                    "description": "Image height in pixels",
                     "type": "integer"
                 },
-                "num_images": {
+                "negativePrompt": {
+                    "type": "string"
+                },
+                "numIterations": {
+                    "description": "How many times to run the prompt (batches)",
                     "type": "integer"
-                },
-                "optional1": {
-                    "type": "string"
-                },
-                "optional2": {
-                    "type": "string"
-                },
-                "optional3": {
-                    "type": "string"
                 },
                 "prompt": {
                     "type": "string"
                 },
-                "rate": {
-                    "type": "number"
+                "qualityPreset": {
+                    "description": "Low, Medium, High, Ultra (for services like DALL·E)",
+                    "type": "string"
+                },
+                "restoreFaces": {
+                    "description": "Face restoration for portraits",
+                    "type": "boolean"
                 },
                 "scheduler": {
+                    "description": "Sampling method, if applicable",
                     "type": "string"
                 },
                 "seed": {
+                    "description": "Optional, used for reproducibility",
                     "type": "integer"
                 },
                 "steps": {
+                    "description": "Number of inference steps",
                     "type": "integer"
                 },
+                "styles": {
+                    "description": "Artistic styles or themes",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "width": {
+                    "description": "Image width in pixels",
                     "type": "integer"
                 }
             }
@@ -7655,6 +7727,191 @@
             "properties": {
                 "error": {
                     "type": "string"
+                }
+            }
+        },
+        "stable_diffusion.Txt2ImgRequest": {
+            "type": "object",
+            "properties": {
+                "alwayson_scripts": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "batch_size": {
+                    "type": "integer"
+                },
+                "cfg_scale": {
+                    "type": "number"
+                },
+                "comments": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "denoising_strength": {
+                    "type": "number"
+                },
+                "disable_extra_networks": {
+                    "type": "boolean"
+                },
+                "do_not_save_grid": {
+                    "type": "boolean"
+                },
+                "do_not_save_samples": {
+                    "type": "boolean"
+                },
+                "enable_hr": {
+                    "type": "boolean"
+                },
+                "eta": {
+                    "type": "number"
+                },
+                "firstpass_image": {
+                    "type": "string"
+                },
+                "firstphase_height": {
+                    "type": "integer"
+                },
+                "firstphase_width": {
+                    "type": "integer"
+                },
+                "force_task_id": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "hr_checkpoint_name": {
+                    "type": "string"
+                },
+                "hr_negative_prompt": {
+                    "type": "string"
+                },
+                "hr_prompt": {
+                    "type": "string"
+                },
+                "hr_resize_x": {
+                    "type": "integer"
+                },
+                "hr_resize_y": {
+                    "type": "integer"
+                },
+                "hr_sampler_name": {
+                    "type": "string"
+                },
+                "hr_scale": {
+                    "type": "number"
+                },
+                "hr_scheduler": {
+                    "type": "string"
+                },
+                "hr_second_pass_steps": {
+                    "type": "integer"
+                },
+                "hr_upscaler": {
+                    "type": "string"
+                },
+                "infotext": {
+                    "type": "string"
+                },
+                "n_iter": {
+                    "type": "integer"
+                },
+                "negative_prompt": {
+                    "type": "string"
+                },
+                "override_settings": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "override_settings_restore_afterwards": {
+                    "type": "boolean"
+                },
+                "prompt": {
+                    "type": "string"
+                },
+                "refiner_checkpoint": {
+                    "type": "string"
+                },
+                "refiner_switch_at": {
+                    "type": "number"
+                },
+                "restore_faces": {
+                    "type": "boolean"
+                },
+                "s_churn": {
+                    "type": "number"
+                },
+                "s_min_uncond": {
+                    "type": "number"
+                },
+                "s_noise": {
+                    "type": "number"
+                },
+                "s_tmax": {
+                    "type": "number"
+                },
+                "s_tmin": {
+                    "type": "number"
+                },
+                "sampler_index": {
+                    "type": "string"
+                },
+                "sampler_name": {
+                    "type": "string"
+                },
+                "save_images": {
+                    "type": "boolean"
+                },
+                "scheduler": {
+                    "type": "string"
+                },
+                "script_args": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "script_name": {
+                    "type": "string"
+                },
+                "seed": {
+                    "type": "integer"
+                },
+                "seed_resize_from_h": {
+                    "type": "integer"
+                },
+                "seed_resize_from_w": {
+                    "type": "integer"
+                },
+                "send_images": {
+                    "type": "boolean"
+                },
+                "steps": {
+                    "type": "integer"
+                },
+                "styles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "subseed": {
+                    "type": "integer"
+                },
+                "subseed_strength": {
+                    "type": "number"
+                },
+                "tiling": {
+                    "type": "boolean"
+                },
+                "width": {
+                    "type": "integer"
                 }
             }
         },

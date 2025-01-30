@@ -9,21 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { StableDiffusionTxt2ImgRequest } from './stableDiffusionTxt2ImgRequest';
 export declare class PromptSvcStableDiffusionParameters {
-    'flag1'?: boolean;
-    'flag2'?: boolean;
-    'guidanceScale'?: number;
-    'height'?: number;
-    'numImages'?: number;
-    'optional1'?: string;
-    'optional2'?: string;
-    'optional3'?: string;
-    'prompt'?: string;
-    'rate'?: number;
-    'scheduler'?: string;
-    'seed'?: number;
-    'steps'?: number;
-    'width'?: number;
+    /**
+    * Text to image parameters
+    */
+    'txt2Img'?: StableDiffusionTxt2ImgRequest;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

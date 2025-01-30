@@ -9,9 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
-export declare class PromptSvcParameters {
-    'textToImage'?: PromptSvcTextToImageParameters;
+import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+export declare class PromptSvcEngineParameters {
+    'lastRun'?: PromptSvcStableDiffusionParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { StableDiffusionTxt2ImgRequest } from './StableDiffusionTxt2ImgRequest';
+import {
+    StableDiffusionTxt2ImgRequestFromJSON,
+    StableDiffusionTxt2ImgRequestFromJSONTyped,
+    StableDiffusionTxt2ImgRequestToJSON,
+    StableDiffusionTxt2ImgRequestToJSONTyped,
+} from './StableDiffusionTxt2ImgRequest';
+
 /**
  * 
  * @export
@@ -20,89 +28,11 @@ import { mapValues } from '../runtime';
  */
 export interface PromptSvcStableDiffusionParameters {
     /**
-     * 
-     * @type {boolean}
+     * Text to image parameters
+     * @type {StableDiffusionTxt2ImgRequest}
      * @memberof PromptSvcStableDiffusionParameters
      */
-    flag1?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    flag2?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    guidanceScale?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    height?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    numImages?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional1?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional2?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional3?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    prompt?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    rate?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    scheduler?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    seed?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    steps?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    width?: number;
+    txt2Img?: StableDiffusionTxt2ImgRequest;
 }
 
 /**
@@ -122,20 +52,7 @@ export function PromptSvcStableDiffusionParametersFromJSONTyped(json: any, ignor
     }
     return {
         
-        'flag1': json['flag1'] == null ? undefined : json['flag1'],
-        'flag2': json['flag2'] == null ? undefined : json['flag2'],
-        'guidanceScale': json['guidance_scale'] == null ? undefined : json['guidance_scale'],
-        'height': json['height'] == null ? undefined : json['height'],
-        'numImages': json['num_images'] == null ? undefined : json['num_images'],
-        'optional1': json['optional1'] == null ? undefined : json['optional1'],
-        'optional2': json['optional2'] == null ? undefined : json['optional2'],
-        'optional3': json['optional3'] == null ? undefined : json['optional3'],
-        'prompt': json['prompt'] == null ? undefined : json['prompt'],
-        'rate': json['rate'] == null ? undefined : json['rate'],
-        'scheduler': json['scheduler'] == null ? undefined : json['scheduler'],
-        'seed': json['seed'] == null ? undefined : json['seed'],
-        'steps': json['steps'] == null ? undefined : json['steps'],
-        'width': json['width'] == null ? undefined : json['width'],
+        'txt2Img': json['txt2Img'] == null ? undefined : StableDiffusionTxt2ImgRequestFromJSON(json['txt2Img']),
     };
 }
 
@@ -150,20 +67,7 @@ export function PromptSvcStableDiffusionParametersToJSONTyped(value?: PromptSvcS
 
     return {
         
-        'flag1': value['flag1'],
-        'flag2': value['flag2'],
-        'guidance_scale': value['guidanceScale'],
-        'height': value['height'],
-        'num_images': value['numImages'],
-        'optional1': value['optional1'],
-        'optional2': value['optional2'],
-        'optional3': value['optional3'],
-        'prompt': value['prompt'],
-        'rate': value['rate'],
-        'scheduler': value['scheduler'],
-        'seed': value['seed'],
-        'steps': value['steps'],
-        'width': value['width'],
+        'txt2Img': StableDiffusionTxt2ImgRequestToJSON(value['txt2Img']),
     };
 }
 

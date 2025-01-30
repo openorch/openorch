@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { StableDiffusionTxt2ImgRequest } from './StableDiffusionTxt2ImgRequest';
 /**
  *
  * @export
@@ -16,89 +17,11 @@
  */
 export interface PromptSvcStableDiffusionParameters {
     /**
-     *
-     * @type {boolean}
+     * Text to image parameters
+     * @type {StableDiffusionTxt2ImgRequest}
      * @memberof PromptSvcStableDiffusionParameters
      */
-    flag1?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    flag2?: boolean;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    guidanceScale?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    height?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    numImages?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional1?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional2?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    optional3?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    prompt?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    rate?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    scheduler?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    seed?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    steps?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PromptSvcStableDiffusionParameters
-     */
-    width?: number;
+    txt2Img?: StableDiffusionTxt2ImgRequest;
 }
 /**
  * Check if a given object implements the PromptSvcStableDiffusionParameters interface.

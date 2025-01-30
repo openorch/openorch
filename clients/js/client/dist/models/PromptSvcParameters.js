@@ -11,7 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PromptSvcStableDiffusionParametersFromJSON, PromptSvcStableDiffusionParametersToJSON, } from './PromptSvcStableDiffusionParameters';
+import { PromptSvcTextToImageParametersFromJSON, PromptSvcTextToImageParametersToJSON, } from './PromptSvcTextToImageParameters';
 /**
  * Check if a given object implements the PromptSvcParameters interface.
  */
@@ -26,7 +26,7 @@ export function PromptSvcParametersFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'lastRun': json['lastRun'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['lastRun']),
+        'textToImage': json['textToImage'] == null ? undefined : PromptSvcTextToImageParametersFromJSON(json['textToImage']),
     };
 }
 export function PromptSvcParametersToJSON(json) {
@@ -37,6 +37,6 @@ export function PromptSvcParametersToJSONTyped(value, ignoreDiscriminator = fals
         return value;
     }
     return {
-        'lastRun': PromptSvcStableDiffusionParametersToJSON(value['lastRun']),
+        'textToImage': PromptSvcTextToImageParametersToJSON(value['textToImage']),
     };
 }

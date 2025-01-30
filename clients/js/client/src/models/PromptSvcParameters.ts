@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffusionParameters';
+import type { PromptSvcTextToImageParameters } from './PromptSvcTextToImageParameters';
 import {
-    PromptSvcStableDiffusionParametersFromJSON,
-    PromptSvcStableDiffusionParametersFromJSONTyped,
-    PromptSvcStableDiffusionParametersToJSON,
-    PromptSvcStableDiffusionParametersToJSONTyped,
-} from './PromptSvcStableDiffusionParameters';
+    PromptSvcTextToImageParametersFromJSON,
+    PromptSvcTextToImageParametersFromJSONTyped,
+    PromptSvcTextToImageParametersToJSON,
+    PromptSvcTextToImageParametersToJSONTyped,
+} from './PromptSvcTextToImageParameters';
 
 /**
  * 
@@ -29,10 +29,10 @@ import {
 export interface PromptSvcParameters {
     /**
      * 
-     * @type {PromptSvcStableDiffusionParameters}
+     * @type {PromptSvcTextToImageParameters}
      * @memberof PromptSvcParameters
      */
-    lastRun?: PromptSvcStableDiffusionParameters;
+    textToImage?: PromptSvcTextToImageParameters;
 }
 
 /**
@@ -52,7 +52,7 @@ export function PromptSvcParametersFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'lastRun': json['lastRun'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['lastRun']),
+        'textToImage': json['textToImage'] == null ? undefined : PromptSvcTextToImageParametersFromJSON(json['textToImage']),
     };
 }
 
@@ -67,7 +67,7 @@ export function PromptSvcParametersToJSONTyped(value?: PromptSvcParameters | nul
 
     return {
         
-        'lastRun': PromptSvcStableDiffusionParametersToJSON(value['lastRun']),
+        'textToImage': PromptSvcTextToImageParametersToJSON(value['textToImage']),
     };
 }
 

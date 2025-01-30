@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import type { PromptSvcParameters } from './PromptSvcParameters';
+import type { PromptSvcEngineParameters } from './PromptSvcEngineParameters';
 import type { PromptSvcPromptStatus } from './PromptSvcPromptStatus';
 /**
  *
@@ -23,6 +24,12 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     createdAt?: string;
+    /**
+     * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+     * @type {PromptSvcEngineParameters}
+     * @memberof PromptSvcPrompt
+     */
+    engineParameters?: PromptSvcEngineParameters;
     /**
      * Error that arose during prompt execution, if any.
      * @type {string}
@@ -54,7 +61,9 @@ export interface PromptSvcPrompt {
      */
     modelId?: string;
     /**
-     * AI platform specific parameters
+     * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+     * Use these high level parameters when you don't care about the actual engine, only
+     * the functionality (eg. text to image, image to image) it provides.
      * @type {PromptSvcParameters}
      * @memberof PromptSvcPrompt
      */

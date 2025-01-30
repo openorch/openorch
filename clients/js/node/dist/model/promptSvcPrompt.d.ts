@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PromptSvcEngineParameters } from './promptSvcEngineParameters';
 import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 export declare class PromptSvcPrompt {
@@ -16,6 +17,10 @@ export declare class PromptSvcPrompt {
     * CreatedAt is the time of the prompt creation.
     */
     'createdAt'?: string;
+    /**
+    * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+    */
+    'engineParameters'?: PromptSvcEngineParameters;
     /**
     * Error that arose during prompt execution, if any.
     */
@@ -37,7 +42,7 @@ export declare class PromptSvcPrompt {
     */
     'modelId'?: string;
     /**
-    * AI platform specific parameters
+    * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don\'t care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
     */
     'parameters'?: PromptSvcParameters;
     /**

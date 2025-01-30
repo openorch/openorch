@@ -11,18 +11,18 @@
  */
 
 import { RequestFile } from './models';
-import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
 
 export class PromptSvcParameters {
-    'lastRun'?: PromptSvcStableDiffusionParameters;
+    'textToImage'?: PromptSvcTextToImageParameters;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "lastRun",
-            "baseName": "lastRun",
-            "type": "PromptSvcStableDiffusionParameters"
+            "name": "textToImage",
+            "baseName": "textToImage",
+            "type": "PromptSvcTextToImageParameters"
         }    ];
 
     static getAttributeTypeMap() {

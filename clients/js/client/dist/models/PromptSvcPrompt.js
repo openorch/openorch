@@ -12,6 +12,7 @@
  * Do not edit the class manually.
  */
 import { PromptSvcParametersFromJSON, PromptSvcParametersToJSON, } from './PromptSvcParameters';
+import { PromptSvcEngineParametersFromJSON, PromptSvcEngineParametersToJSON, } from './PromptSvcEngineParameters';
 import { PromptSvcPromptStatusFromJSON, PromptSvcPromptStatusToJSON, } from './PromptSvcPromptStatus';
 /**
  * Check if a given object implements the PromptSvcPrompt interface.
@@ -30,6 +31,7 @@ export function PromptSvcPromptFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
+        'engineParameters': json['engineParameters'] == null ? undefined : PromptSvcEngineParametersFromJSON(json['engineParameters']),
         'error': json['error'] == null ? undefined : json['error'],
         'id': json['id'] == null ? undefined : json['id'],
         'lastRun': json['lastRun'] == null ? undefined : json['lastRun'],
@@ -55,6 +57,7 @@ export function PromptSvcPromptToJSONTyped(value, ignoreDiscriminator = false) {
     }
     return {
         'createdAt': value['createdAt'],
+        'engineParameters': PromptSvcEngineParametersToJSON(value['engineParameters']),
         'error': value['error'],
         'id': value['id'],
         'lastRun': value['lastRun'],

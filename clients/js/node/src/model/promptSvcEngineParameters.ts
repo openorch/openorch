@@ -11,25 +11,22 @@
  */
 
 import { RequestFile } from './models';
-import { StableDiffusionTxt2ImgRequest } from './stableDiffusionTxt2ImgRequest';
+import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
 
-export class PromptSvcStableDiffusionParameters {
-    /**
-    * Text to image parameters
-    */
-    'txt2Img'?: StableDiffusionTxt2ImgRequest;
+export class PromptSvcEngineParameters {
+    'lastRun'?: PromptSvcStableDiffusionParameters;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "txt2Img",
-            "baseName": "txt2Img",
-            "type": "StableDiffusionTxt2ImgRequest"
+            "name": "lastRun",
+            "baseName": "lastRun",
+            "type": "PromptSvcStableDiffusionParameters"
         }    ];
 
     static getAttributeTypeMap() {
-        return PromptSvcStableDiffusionParameters.attributeTypeMap;
+        return PromptSvcEngineParameters.attributeTypeMap;
     }
 }
 

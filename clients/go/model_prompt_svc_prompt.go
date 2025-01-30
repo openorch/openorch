@@ -24,6 +24,8 @@ var _ MappedNullable = &PromptSvcPrompt{}
 type PromptSvcPrompt struct {
 	// CreatedAt is the time of the prompt creation.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+	EngineParameters *PromptSvcEngineParameters `json:"engineParameters,omitempty"`
 	// Error that arose during prompt execution, if any.
 	Error *string `json:"error,omitempty"`
 	// Id is the unique ID of the prompt.
@@ -34,7 +36,7 @@ type PromptSvcPrompt struct {
 	MaxRetries *int32 `json:"maxRetries,omitempty"`
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId *string `json:"modelId,omitempty"`
-	// AI platform specific parameters
+	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don't care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
 	Parameters *PromptSvcParameters `json:"parameters,omitempty"`
 	// Prompt is the message itself eg. \"What's a banana?
 	Prompt string `json:"prompt"`
@@ -104,6 +106,38 @@ func (o *PromptSvcPrompt) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *PromptSvcPrompt) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetEngineParameters returns the EngineParameters field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetEngineParameters() PromptSvcEngineParameters {
+	if o == nil || IsNil(o.EngineParameters) {
+		var ret PromptSvcEngineParameters
+		return ret
+	}
+	return *o.EngineParameters
+}
+
+// GetEngineParametersOk returns a tuple with the EngineParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetEngineParametersOk() (*PromptSvcEngineParameters, bool) {
+	if o == nil || IsNil(o.EngineParameters) {
+		return nil, false
+	}
+	return o.EngineParameters, true
+}
+
+// HasEngineParameters returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasEngineParameters() bool {
+	if o != nil && !IsNil(o.EngineParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetEngineParameters gets a reference to the given PromptSvcEngineParameters and assigns it to the EngineParameters field.
+func (o *PromptSvcPrompt) SetEngineParameters(v PromptSvcEngineParameters) {
+	o.EngineParameters = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
@@ -558,6 +592,9 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.EngineParameters) {
+		toSerialize["engineParameters"] = o.EngineParameters
 	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
