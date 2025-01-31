@@ -139,39 +139,39 @@ func (c *Prompt) GetUpdatedAt() string {
 
 type AddPromptRequest struct {
 	// Id is the unique ID of the prompt.
-	Id string `json:"id"`
+	Id string `json:"id" extensions:"x-order=0"`
 
 	// Prompt is the message itself eg. "What's a banana?
-	Prompt string `json:"prompt" example:"What's a banana?" binding:"required"`
+	Prompt string `json:"prompt" extensions:"x-order=1" example:"What's a banana?" binding:"required"`
 
 	// Sync drives whether prompt add request should wait and hang until
 	// the prompt is done executing. By default the prompt just gets put on a queue
 	// and the client will just subscribe to a Thread Stream.
-	// For quick and dirty scripting however it's often times easier to do things syncronously.
+	// For quick and dirty scripting however it's often times easier to do things synchronously.
 	// In those cases set Sync to true.
-	Sync bool `json:"sync"`
+	Sync bool `json:"sync" extensions:"x-order=2"`
 
 	// ThreadId is the ID of the thread a prompt belongs to.
 	// Clients subscribe to Thread Streams to see the answer to a prompt,
 	// or set `prompt.sync` to true for a blocking answer.
-	ThreadId string `json:"threadId"`
+	ThreadId string `json:"threadId" extensions:"x-order=3"`
 
 	// Template of the prompt. Optional. If not present it's derived from ModelId.
-	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
+	Template string `json:"template" extensions:"x-order=4" example:"[INST]{prompt}[/INST]"`
 
 	// ModelId is just the OpenOrch internal ID of the model.
-	ModelId string `json:"modelId,omitempty" example:"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"`
+	ModelId string `json:"modelId,omitempty" extensions:"x-order=5" example:"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"`
 
 	// MaxRetries specified how many times the system should retry a prompt when it keeps erroring.
-	MaxRetries int `json:"maxRetries,omitempty" example:"10"`
+	MaxRetries int `json:"maxRetries,omitempty" extensions:"x-order=6" example:"10"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
-	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+	EngineParameters EngineParameters `json:"engineParameters,omitempty" extensions:"x-order=7"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
 	// Use these high level parameters when you don't care about the actual engine, only
 	// the functionality (eg. text to image, image to image) it provides.
-	Parameters Parameters `json:"parameters,omitempty"`
+	Parameters Parameters `json:"parameters,omitempty" extensions:"x-order=8"`
 }
 
 type AddPromptResponse struct {

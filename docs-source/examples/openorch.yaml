@@ -1125,18 +1125,22 @@ definitions:
         allOf:
         - $ref: '#/definitions/prompt_svc.EngineParameters'
         description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+        x-order: "7"
       id:
         description: Id is the unique ID of the prompt.
         type: string
+        x-order: "0"
       maxRetries:
         description: MaxRetries specified how many times the system should retry a
           prompt when it keeps erroring.
         example: 10
         type: integer
+        x-order: "6"
       modelId:
         description: ModelId is just the OpenOrch internal ID of the model.
         example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
         type: string
+        x-order: "5"
       parameters:
         allOf:
         - $ref: '#/definitions/prompt_svc.Parameters'
@@ -1144,29 +1148,34 @@ definitions:
           AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
           Use these high level parameters when you don't care about the actual engine, only
           the functionality (eg. text to image, image to image) it provides.
+        x-order: "8"
       prompt:
         description: Prompt is the message itself eg. "What's a banana?
         example: What's a banana?
         type: string
+        x-order: "1"
       sync:
         description: |-
           Sync drives whether prompt add request should wait and hang until
           the prompt is done executing. By default the prompt just gets put on a queue
           and the client will just subscribe to a Thread Stream.
-          For quick and dirty scripting however it's often times easier to do things syncronously.
+          For quick and dirty scripting however it's often times easier to do things synchronously.
           In those cases set Sync to true.
         type: boolean
+        x-order: "2"
       template:
         description: Template of the prompt. Optional. If not present it's derived
           from ModelId.
         example: '[INST]{prompt}[/INST]'
         type: string
+        x-order: "4"
       threadId:
         description: |-
           ThreadId is the ID of the thread a prompt belongs to.
           Clients subscribe to Thread Streams to see the answer to a prompt,
           or set `prompt.sync` to true for a blocking answer.
         type: string
+        x-order: "3"
     required:
     - prompt
     type: object

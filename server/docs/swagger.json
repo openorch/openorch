@@ -6541,27 +6541,53 @@
                 "prompt"
             ],
             "properties": {
+                "id": {
+                    "description": "Id is the unique ID of the prompt.",
+                    "type": "string",
+                    "x-order": "0"
+                },
+                "prompt": {
+                    "description": "Prompt is the message itself eg. \"What's a banana?",
+                    "type": "string",
+                    "x-order": "1",
+                    "example": "What's a banana?"
+                },
+                "sync": {
+                    "description": "Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things synchronously.\nIn those cases set Sync to true.",
+                    "type": "boolean",
+                    "x-order": "2"
+                },
+                "threadId": {
+                    "description": "ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set `prompt.sync` to true for a blocking answer.",
+                    "type": "string",
+                    "x-order": "3"
+                },
+                "template": {
+                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
+                    "type": "string",
+                    "x-order": "4",
+                    "example": "[INST]{prompt}[/INST]"
+                },
+                "modelId": {
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
+                    "type": "string",
+                    "x-order": "5",
+                    "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "maxRetries": {
+                    "description": "MaxRetries specified how many times the system should retry a prompt when it keeps erroring.",
+                    "type": "integer",
+                    "x-order": "6",
+                    "example": 10
+                },
                 "engineParameters": {
                     "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
                     "allOf": [
                         {
                             "$ref": "#/definitions/prompt_svc.EngineParameters"
                         }
-                    ]
-                },
-                "id": {
-                    "description": "Id is the unique ID of the prompt.",
-                    "type": "string"
-                },
-                "maxRetries": {
-                    "description": "MaxRetries specified how many times the system should retry a prompt when it keeps erroring.",
-                    "type": "integer",
-                    "example": 10
-                },
-                "modelId": {
-                    "description": "ModelId is just the OpenOrch internal ID of the model.",
-                    "type": "string",
-                    "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                    ],
+                    "x-order": "7"
                 },
                 "parameters": {
                     "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
@@ -6569,25 +6595,8 @@
                         {
                             "$ref": "#/definitions/prompt_svc.Parameters"
                         }
-                    ]
-                },
-                "prompt": {
-                    "description": "Prompt is the message itself eg. \"What's a banana?",
-                    "type": "string",
-                    "example": "What's a banana?"
-                },
-                "sync": {
-                    "description": "Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things syncronously.\nIn those cases set Sync to true.",
-                    "type": "boolean"
-                },
-                "template": {
-                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
-                    "type": "string",
-                    "example": "[INST]{prompt}[/INST]"
-                },
-                "threadId": {
-                    "description": "ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set `prompt.sync` to true for a blocking answer.",
-                    "type": "string"
+                    ],
+                    "x-order": "8"
                 }
             }
         },
