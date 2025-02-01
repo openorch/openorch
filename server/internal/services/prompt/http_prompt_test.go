@@ -25,7 +25,7 @@ import (
 	"github.com/onsi/gomega"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
@@ -42,7 +42,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		server     *httptest.Server
 		ctrl       *gomock.Controller
 		ctx        context.Context
-		lc         *llm.MockClientI
+		lc         *llamacpp.MockClientI
 		userClient *openapi.APIClient
 
 		mockClientFactory *sdk.MockClientFactory
@@ -55,7 +55,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		universe    *mux.Router
 		starterFunc func() error
 
-		responses []*llm.CompletionResponse
+		responses []*llamacpp.CompletionResponse
 	)
 
 	ginkgo.BeforeEach(func() {
@@ -64,7 +64,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		hs := &di.HandlerSwitcher{}
 		server = httptest.NewServer(hs)
 
-		lc = llm.NewMockClientI(ctrl)
+		lc = llamacpp.NewMockClientI(ctrl)
 
 		mockClientFactory = sdk.NewMockClientFactory(ctrl)
 		mockUserSvc = test.MockUserSvc(ctx, ctrl, test.WithIsAuthorizedFactory(func() bool {
@@ -90,10 +90,10 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			AnyTimes()
 
 		options := &di.Options{
-			Test:          true,
-			Url:           server.URL,
-			LLMClient:     lc,
-			ClientFactory: mockClientFactory,
+			Test:           true,
+			Url:            server.URL,
+			LLamaCppClient: lc,
+			ClientFactory:  mockClientFactory,
 		}
 
 		var err error
@@ -202,7 +202,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 
 		lc.EXPECT().
 			PostCompletionsStreamed(gomock.Any(), gomock.Any()).
-			DoAndReturn(func(req llm.PostCompletionsRequest, callback llm.StreamCallback) error {
+			DoAndReturn(func(req llamacpp.PostCompletionsRequest, callback llamacpp.StreamCallback) error {
 				go func() {
 
 					for i := range responses {
@@ -228,7 +228,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 		ginkgo.BeforeEach(func() {
 			userClient = mockClientFactory.Client()
 
-			responses = []*llm.CompletionResponse{
+			responses = []*llamacpp.CompletionResponse{
 				{
 					Choices: []struct {
 						Text         string      `json:"text,omitempty"`

@@ -15,20 +15,20 @@ package streammanager
 import (
 	"sync"
 
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 type StreamManager struct {
 	streams map[string][]prompttypes.SubscriberChan
-	History map[string][]*llm.CompletionResponse
+	History map[string][]*llamacpp.CompletionResponse
 	lock    sync.RWMutex
 }
 
 func NewStreamManager() *StreamManager {
 	return &StreamManager{
 		streams: make(map[string][]prompttypes.SubscriberChan),
-		History: make(map[string][]*llm.CompletionResponse),
+		History: make(map[string][]*llamacpp.CompletionResponse),
 	}
 }
 
@@ -72,7 +72,7 @@ func (sm *StreamManager) Unsubscribe(
 
 func (sm *StreamManager) Broadcast(
 	threadId string,
-	response *llm.CompletionResponse,
+	response *llamacpp.CompletionResponse,
 ) {
 	sm.lock.Lock()
 	defer sm.lock.Unlock()

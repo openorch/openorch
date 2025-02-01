@@ -21,7 +21,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
@@ -68,7 +68,7 @@ func (p *PromptService) SubscribeToPromptResponses(
 
 	w.Header().Set("Content-Type", "text/event-stream")
 
-	subscriber := make(chan *llm.CompletionResponse)
+	subscriber := make(chan *llamacpp.CompletionResponse)
 	p.Subscribe(threadId, subscriber)
 	defer p.Unsubscribe(threadId, subscriber)
 

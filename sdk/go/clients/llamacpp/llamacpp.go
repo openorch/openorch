@@ -5,7 +5,7 @@
  * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
-package llm
+package llamacpp
 
 import (
 	"bufio"
@@ -20,7 +20,7 @@ import (
 )
 
 type Client struct {
-	LLMAddress string
+	LLamaCppAddress string
 }
 
 func NewClient() *Client {
@@ -57,7 +57,7 @@ func (c *Client) PostCompletions(prompt PostCompletionsRequest) (*CompletionResp
 		return nil, errors.New("streamed completions not supported by this method")
 	}
 
-	address := c.LLMAddress
+	address := c.LLamaCppAddress
 
 	jsonBody, err := json.Marshal(prompt)
 	if err != nil {
@@ -104,13 +104,13 @@ type StreamCallback func(*CompletionResponse)
 
 func (c *Client) SetAddress(address string) ClientI {
 	return &Client{
-		LLMAddress: address,
+		LLamaCppAddress: address,
 	}
 }
 
 // Must be only used by the prompt service
 func (c *Client) PostCompletionsStreamed(prompt PostCompletionsRequest, callback StreamCallback) error {
-	address := c.LLMAddress
+	address := c.LLamaCppAddress
 
 	jsonBody, err := json.Marshal(prompt)
 	if err != nil {

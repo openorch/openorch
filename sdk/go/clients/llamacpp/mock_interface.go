@@ -5,7 +5,7 @@
 //
 
 // Package llm is a generated GoMock package.
-package llm
+package llamacpp
 
 import (
 	reflect "reflect"

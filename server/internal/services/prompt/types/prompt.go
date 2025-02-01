@@ -16,7 +16,7 @@ import (
 	"time"
 
 	openapi "github.com/openorch/openorch/clients/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
 )
@@ -25,7 +25,7 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type SubscriberChan chan *llm.CompletionResponse
+type SubscriberChan chan *llamacpp.CompletionResponse
 
 type PromptStatus string
 

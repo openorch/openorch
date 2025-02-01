@@ -20,7 +20,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
@@ -29,7 +29,7 @@ import (
 
 const maxThreadTitle = 100
 
-func (p *PromptService) addPrompt(
+func (p *PromptService) prompt(
 	ctx context.Context,
 	promptReq *prompttypes.PromptRequest,
 	userId string,
@@ -145,7 +145,7 @@ func (p *PromptService) addPrompt(
 	rsp := &prompttypes.PromptResponse{}
 
 	if prompt.Sync {
-		subscriber := make(chan *llm.CompletionResponse)
+		subscriber := make(chan *llamacpp.CompletionResponse)
 		p.StreamManager.Subscribe(threadId, subscriber)
 
 		go func() {

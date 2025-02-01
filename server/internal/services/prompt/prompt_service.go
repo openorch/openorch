@@ -17,7 +17,7 @@ import (
 	"sync"
 
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
 
@@ -29,8 +29,8 @@ type PromptService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
-	llmCLient llm.ClientI
-	lock      lock.DistributedLock
+	llamaCppCLient llamacpp.ClientI
+	lock           lock.DistributedLock
 
 	*streammanager.StreamManager
 
@@ -43,7 +43,7 @@ type PromptService struct {
 
 func NewPromptService(
 	clientFactory sdk.ClientFactory,
-	llmClient llm.ClientI,
+	llamaCppClient llamacpp.ClientI,
 	lock lock.DistributedLock,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*PromptService, error) {
@@ -66,8 +66,8 @@ func NewPromptService(
 	service := &PromptService{
 		clientFactory: clientFactory,
 
-		llmCLient: llmClient,
-		lock:      lock,
+		llamaCppCLient: llamaCppClient,
+		lock:           lock,
 
 		StreamManager: streammanager.NewStreamManager(),
 

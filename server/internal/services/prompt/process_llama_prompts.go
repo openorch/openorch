@@ -21,7 +21,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
@@ -47,12 +47,12 @@ func (p *PromptService) processLlamaCpp(
 		)
 	}
 
-	var llmClient llm.ClientI
-	if p.llmCLient != nil {
-		llmClient = p.llmCLient
+	var llamaCppClient llamacpp.ClientI
+	if p.llamaCppCLient != nil {
+		llamaCppClient = p.llamaCppCLient
 	} else {
-		llmClient = &llm.Client{
-			LLMAddress: address,
+		llamaCppClient = &llamacpp.Client{
+			LLamaCppAddress: address,
 		}
 	}
 
@@ -85,11 +85,11 @@ func (p *PromptService) processLlamaCpp(
 		}
 	}()
 
-	err := llmClient.PostCompletionsStreamed(llm.PostCompletionsRequest{
+	err := llamaCppClient.PostCompletionsStreamed(llamacpp.PostCompletionsRequest{
 		Prompt:    fullPrompt,
 		Stream:    true,
 		MaxTokens: 1000000,
-	}, func(resp *llm.CompletionResponse) {
+	}, func(resp *llamacpp.CompletionResponse) {
 		mu.Lock()
 		responseCount++
 		mu.Unlock()
@@ -109,7 +109,7 @@ func (p *PromptService) processLlamaCpp(
 							Id:       openapi.PtrString(sdk.Id("msg")),
 							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
 							Text: openapi.PtrString(
-								llmResponseToText(
+								llamaCppResponseToText(
 									p.StreamManager.History[currentPrompt.ThreadId],
 								),
 							),

@@ -15,10 +15,10 @@ package promptservice
 import (
 	"strings"
 
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 )
 
-func llmResponseToText(responses []*llm.CompletionResponse) string {
+func llamaCppResponseToText(responses []*llamacpp.CompletionResponse) string {
 	var result strings.Builder
 
 	first := true
