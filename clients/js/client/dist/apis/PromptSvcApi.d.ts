@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { PromptSvcAddPromptRequest, PromptSvcAddPromptResponse, PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcRemovePromptRequest } from '../models/index';
-export interface AddPromptRequest {
-    body: PromptSvcAddPromptRequest;
-}
+import type { PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcPromptRequest, PromptSvcPromptResponse, PromptSvcRemovePromptRequest } from '../models/index';
 export interface ListPromptsRequest {
     body?: PromptSvcListPromptsRequest;
+}
+export interface PromptRequest {
+    body: PromptSvcPromptRequest;
 }
 export interface RemovePromptRequest {
     body: PromptSvcRemovePromptRequest;
@@ -28,16 +28,6 @@ export interface SubscribeToPromptResponsesRequest {
  */
 export declare class PromptSvcApi extends runtime.BaseAPI {
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
-     * Add Prompt
-     */
-    addPromptRaw(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PromptSvcAddPromptResponse>>;
-    /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
-     * Add Prompt
-     */
-    addPrompt(requestParameters: AddPromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcAddPromptResponse>;
-    /**
      * List prompts that satisfy a query.
      * List Prompts
      */
@@ -47,6 +37,16 @@ export declare class PromptSvcApi extends runtime.BaseAPI {
      * List Prompts
      */
     listPrompts(requestParameters?: ListPromptsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcListPromptsResponse>;
+    /**
+     * Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.  Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation. If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.  **Prompting Modes** - **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality. - **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.  **Permissions Required:** `prompt-svc:prompt:create`
+     * Prompt an AI
+     */
+    promptRaw(requestParameters: PromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PromptSvcPromptResponse>>;
+    /**
+     * Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.  Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation. If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.  **Prompting Modes** - **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality. - **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.  **Permissions Required:** `prompt-svc:prompt:create`
+     * Prompt an AI
+     */
+    prompt(requestParameters: PromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcPromptResponse>;
     /**
      * Remove a prompt by ID.
      * Remove Prompt

@@ -11,17 +11,24 @@
  */
 
 import { RequestFile } from './models';
+import { PromptSvcLlamaCppParameters } from './promptSvcLlamaCppParameters';
 import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
 
 export class PromptSvcEngineParameters {
-    'lastRun'?: PromptSvcStableDiffusionParameters;
+    'llamaCppParameters'?: PromptSvcLlamaCppParameters;
+    'stableDiffusion'?: PromptSvcStableDiffusionParameters;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "lastRun",
-            "baseName": "lastRun",
+            "name": "llamaCppParameters",
+            "baseName": "llamaCppParameters",
+            "type": "PromptSvcLlamaCppParameters"
+        },
+        {
+            "name": "stableDiffusion",
+            "baseName": "stableDiffusion",
             "type": "PromptSvcStableDiffusionParameters"
         }    ];
 

@@ -16,12 +16,6 @@
  */
 export interface ChatSvcMessage {
     /**
-     * Content of the message eg. "Hi, what's up?"
-     * @type {string}
-     * @memberof ChatSvcMessage
-     */
-    content?: string;
-    /**
      *
      * @type {string}
      * @memberof ChatSvcMessage
@@ -39,6 +33,12 @@ export interface ChatSvcMessage {
      * @memberof ChatSvcMessage
      */
     id?: string;
+    /**
+     * Text content of the message eg. "Hi, what's up?"
+     * @type {string}
+     * @memberof ChatSvcMessage
+     */
+    text?: string;
     /**
      * ThreadId of the message.
      * @type {string}

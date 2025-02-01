@@ -30,7 +30,6 @@ import (
 
 func (p *PromptService) processStableDiffusion(
 	address string,
-	fullPrompt string,
 	currentPrompt *prompttypes.Prompt,
 ) error {
 	sd := stable_diffusion.Client{
@@ -42,7 +41,7 @@ func (p *PromptService) processStableDiffusion(
 	// not just the `EngineParameters`
 
 	req := currentPrompt.EngineParameters.StableDiffusion.Txt2Img
-	req.Prompt = fullPrompt
+	req.Prompt = currentPrompt.Prompt
 
 	if req.Steps == nil {
 		req.Steps = openapi.PtrInt(20)
@@ -120,7 +119,7 @@ func (p *PromptService) processStableDiffusion(
 				Message: &openapi.ChatSvcMessage{
 					Id:       openapi.PtrString(sdk.Id("msg")),
 					ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-					Content:  openapi.PtrString("Sure, here is your image"),
+					Text:     openapi.PtrString("Sure, here is your image"),
 					FileIds:  fileIds,
 				},
 			},

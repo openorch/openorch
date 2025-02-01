@@ -20,5 +20,10 @@ PromptSvcParameters.attributeTypeMap = [
         "name": "textToImage",
         "baseName": "textToImage",
         "type": "PromptSvcTextToImageParameters"
+    },
+    {
+        "name": "textToText",
+        "baseName": "textToText",
+        "type": "PromptSvcTextToTextParameters"
     }
 ];

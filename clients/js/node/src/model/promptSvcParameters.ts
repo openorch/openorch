@@ -12,9 +12,11 @@
 
 import { RequestFile } from './models';
 import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
+import { PromptSvcTextToTextParameters } from './promptSvcTextToTextParameters';
 
 export class PromptSvcParameters {
     'textToImage'?: PromptSvcTextToImageParameters;
+    'textToText'?: PromptSvcTextToTextParameters;
 
     static discriminator: string | undefined = undefined;
 
@@ -23,6 +25,11 @@ export class PromptSvcParameters {
             "name": "textToImage",
             "baseName": "textToImage",
             "type": "PromptSvcTextToImageParameters"
+        },
+        {
+            "name": "textToText",
+            "baseName": "textToText",
+            "type": "PromptSvcTextToTextParameters"
         }    ];
 
     static getAttributeTypeMap() {

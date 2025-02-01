@@ -62,6 +62,16 @@ PromptSvcPrompt.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "requestMessageId",
+        "baseName": "requestMessageId",
+        "type": "string"
+    },
+    {
+        "name": "responseMessageId",
+        "baseName": "responseMessageId",
+        "type": "string"
+    },
+    {
         "name": "runCount",
         "baseName": "runCount",
         "type": "number"
@@ -77,14 +87,14 @@ PromptSvcPrompt.attributeTypeMap = [
         "type": "boolean"
     },
     {
-        "name": "template",
-        "baseName": "template",
-        "type": "string"
-    },
-    {
         "name": "threadId",
         "baseName": "threadId",
         "type": "string"
+    },
+    {
+        "name": "type",
+        "baseName": "type",
+        "type": "PromptSvcPromptType"
     },
     {
         "name": "updatedAt",

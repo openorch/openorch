@@ -34,6 +34,13 @@ import {
     PromptSvcPromptStatusToJSON,
     PromptSvcPromptStatusToJSONTyped,
 } from './PromptSvcPromptStatus';
+import type { PromptSvcPromptType } from './PromptSvcPromptType';
+import {
+    PromptSvcPromptTypeFromJSON,
+    PromptSvcPromptTypeFromJSONTyped,
+    PromptSvcPromptTypeToJSON,
+    PromptSvcPromptTypeToJSONTyped,
+} from './PromptSvcPromptType';
 
 /**
  * 
@@ -48,7 +55,7 @@ export interface PromptSvcPrompt {
      */
     createdAt?: string;
     /**
-     * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+     * AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters
      * @type {PromptSvcEngineParameters}
      * @memberof PromptSvcPrompt
      */
@@ -84,7 +91,7 @@ export interface PromptSvcPrompt {
      */
     modelId?: string;
     /**
-     * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+     * AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters.
      * Use these high level parameters when you don't care about the actual engine, only
      * the functionality (eg. text to image, image to image) it provides.
      * @type {PromptSvcParameters}
@@ -97,6 +104,18 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     prompt: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PromptSvcPrompt
+     */
+    requestMessageId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PromptSvcPrompt
+     */
+    responseMessageId?: string;
     /**
      * RunCount is the number of times the prompt was retried due to errors
      * @type {number}
@@ -120,12 +139,6 @@ export interface PromptSvcPrompt {
      */
     sync?: boolean;
     /**
-     * Template of the prompt. Optional. If not present it's derived from ModelId.
-     * @type {string}
-     * @memberof PromptSvcPrompt
-     */
-    template?: string;
-    /**
      * ThreadId is the ID of the thread a prompt belongs to.
      * Clients subscribe to Thread Streams to see the answer to a prompt,
      * or set `prompt.sync` to true for a blocking answer.
@@ -133,6 +146,14 @@ export interface PromptSvcPrompt {
      * @memberof PromptSvcPrompt
      */
     threadId?: string;
+    /**
+     * Type is inferred from the `Parameters` or `EngineParameters` field.
+     * Eg. A LLamaCpp prompt will be "Text-to-Text",
+     * a Stabel Diffusion one will be "Text-to-Image" etc.
+     * @type {PromptSvcPromptType}
+     * @memberof PromptSvcPrompt
+     */
+    type?: PromptSvcPromptType;
     /**
      * UpdatedAt is the last time the prompt was updated.
      * @type {string}
@@ -176,11 +197,13 @@ export function PromptSvcPromptFromJSONTyped(json: any, ignoreDiscriminator: boo
         'modelId': json['modelId'] == null ? undefined : json['modelId'],
         'parameters': json['parameters'] == null ? undefined : PromptSvcParametersFromJSON(json['parameters']),
         'prompt': json['prompt'],
+        'requestMessageId': json['requestMessageId'] == null ? undefined : json['requestMessageId'],
+        'responseMessageId': json['responseMessageId'] == null ? undefined : json['responseMessageId'],
         'runCount': json['runCount'] == null ? undefined : json['runCount'],
         'status': json['status'] == null ? undefined : PromptSvcPromptStatusFromJSON(json['status']),
         'sync': json['sync'] == null ? undefined : json['sync'],
-        'template': json['template'] == null ? undefined : json['template'],
         'threadId': json['threadId'] == null ? undefined : json['threadId'],
+        'type': json['type'] == null ? undefined : PromptSvcPromptTypeFromJSON(json['type']),
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
         'userId': json['userId'] == null ? undefined : json['userId'],
     };
@@ -206,11 +229,13 @@ export function PromptSvcPromptToJSONTyped(value?: PromptSvcPrompt | null, ignor
         'modelId': value['modelId'],
         'parameters': PromptSvcParametersToJSON(value['parameters']),
         'prompt': value['prompt'],
+        'requestMessageId': value['requestMessageId'],
+        'responseMessageId': value['responseMessageId'],
         'runCount': value['runCount'],
         'status': PromptSvcPromptStatusToJSON(value['status']),
         'sync': value['sync'],
-        'template': value['template'],
         'threadId': value['threadId'],
+        'type': PromptSvcPromptTypeToJSON(value['type']),
         'updatedAt': value['updatedAt'],
         'userId': value['userId'],
     };

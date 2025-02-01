@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import type { PromptSvcTextToImageParameters } from './PromptSvcTextToImageParameters';
+import type { PromptSvcTextToTextParameters } from './PromptSvcTextToTextParameters';
 /**
  *
  * @export
@@ -22,6 +23,12 @@ export interface PromptSvcParameters {
      * @memberof PromptSvcParameters
      */
     textToImage?: PromptSvcTextToImageParameters;
+    /**
+     *
+     * @type {PromptSvcTextToTextParameters}
+     * @memberof PromptSvcParameters
+     */
+    textToText?: PromptSvcTextToTextParameters;
 }
 /**
  * Check if a given object implements the PromptSvcParameters interface.

@@ -12,13 +12,14 @@
 import { PromptSvcEngineParameters } from './promptSvcEngineParameters';
 import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
+import { PromptSvcPromptType } from './promptSvcPromptType';
 export declare class PromptSvcPrompt {
     /**
     * CreatedAt is the time of the prompt creation.
     */
     'createdAt'?: string;
     /**
-    * AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+    * AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters
     */
     'engineParameters'?: PromptSvcEngineParameters;
     /**
@@ -42,13 +43,15 @@ export declare class PromptSvcPrompt {
     */
     'modelId'?: string;
     /**
-    * AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don\'t care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
+    * AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters. Use these high level parameters when you don\'t care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
     */
     'parameters'?: PromptSvcParameters;
     /**
     * Prompt is the message itself eg. \"What\'s a banana?
     */
     'prompt': string;
+    'requestMessageId'?: string;
+    'responseMessageId'?: string;
     /**
     * RunCount is the number of times the prompt was retried due to errors
     */
@@ -62,13 +65,13 @@ export declare class PromptSvcPrompt {
     */
     'sync'?: boolean;
     /**
-    * Template of the prompt. Optional. If not present it\'s derived from ModelId.
-    */
-    'template'?: string;
-    /**
     * ThreadId is the ID of the thread a prompt belongs to. Clients subscribe to Thread Streams to see the answer to a prompt, or set `prompt.sync` to true for a blocking answer.
     */
     'threadId'?: string;
+    /**
+    * Type is inferred from the `Parameters` or `EngineParameters` field. Eg. A LLamaCpp prompt will be \"Text-to-Text\", a Stabel Diffusion one will be \"Text-to-Image\" etc.
+    */
+    'type'?: PromptSvcPromptType;
     /**
     * UpdatedAt is the last time the prompt was updated.
     */

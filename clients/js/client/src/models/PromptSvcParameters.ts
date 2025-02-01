@@ -20,6 +20,13 @@ import {
     PromptSvcTextToImageParametersToJSON,
     PromptSvcTextToImageParametersToJSONTyped,
 } from './PromptSvcTextToImageParameters';
+import type { PromptSvcTextToTextParameters } from './PromptSvcTextToTextParameters';
+import {
+    PromptSvcTextToTextParametersFromJSON,
+    PromptSvcTextToTextParametersFromJSONTyped,
+    PromptSvcTextToTextParametersToJSON,
+    PromptSvcTextToTextParametersToJSONTyped,
+} from './PromptSvcTextToTextParameters';
 
 /**
  * 
@@ -33,6 +40,12 @@ export interface PromptSvcParameters {
      * @memberof PromptSvcParameters
      */
     textToImage?: PromptSvcTextToImageParameters;
+    /**
+     * 
+     * @type {PromptSvcTextToTextParameters}
+     * @memberof PromptSvcParameters
+     */
+    textToText?: PromptSvcTextToTextParameters;
 }
 
 /**
@@ -53,6 +66,7 @@ export function PromptSvcParametersFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'textToImage': json['textToImage'] == null ? undefined : PromptSvcTextToImageParametersFromJSON(json['textToImage']),
+        'textToText': json['textToText'] == null ? undefined : PromptSvcTextToTextParametersFromJSON(json['textToText']),
     };
 }
 
@@ -68,6 +82,7 @@ export function PromptSvcParametersToJSONTyped(value?: PromptSvcParameters | nul
     return {
         
         'textToImage': PromptSvcTextToImageParametersToJSON(value['textToImage']),
+        'textToText': PromptSvcTextToTextParametersToJSON(value['textToText']),
     };
 }
 

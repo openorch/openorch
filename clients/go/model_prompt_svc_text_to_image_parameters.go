@@ -20,37 +20,38 @@ var _ MappedNullable = &PromptSvcTextToImageParameters{}
 
 // PromptSvcTextToImageParameters struct for PromptSvcTextToImageParameters
 type PromptSvcTextToImageParameters struct {
-	// Alternative to width/height (e.g., \"16:9\", \"1:1\")
+	// Alternative way to specify dimensions (e.g., \"16:9\", \"1:1\").
 	AspectRatio *string `json:"aspectRatio,omitempty"`
-	// Number of images per batch
+	// Number of images to generate per batch.
 	BatchSize *int32 `json:"batchSize,omitempty"`
-	// Noise control for variation
+	// Controls how much variation is introduced in image modifications.
 	DenoisingStrength *float32 `json:"denoisingStrength,omitempty"`
-	// Whether to use AI upscaling
+	// Whether to apply AI-based upscaling.
 	EnableUpscaling *bool `json:"enableUpscaling,omitempty"`
-	// Output format (png, jpg, webp, etc.)
+	// Output format for the generated image (png, jpg, webp, etc.).
 	Format *string `json:"format,omitempty"`
-	// How closely to follow the prompt
+	// How closely the output should follow the prompt.
 	GuidanceScale *float32 `json:"guidanceScale,omitempty"`
-	// Image height in pixels
 	Height *int32 `json:"height,omitempty"`
+	// A negative prompt to specify what should be avoided in the image.
 	NegativePrompt *string `json:"negativePrompt,omitempty"`
-	// How many times to run the prompt (batches)
+	// Number of batches to generate.
 	NumIterations *int32 `json:"numIterations,omitempty"`
+	// The primary prompt for generating the image. Defaults to the top-level prompt if not specified. If both are provided (which should be avoided), this field takes precedence.
 	Prompt *string `json:"prompt,omitempty"`
-	// Low, Medium, High, Ultra (for services like DALL·E)
+	// Preset quality settings (e.g., Low, Medium, High, Ultra).
 	QualityPreset *string `json:"qualityPreset,omitempty"`
-	// Face restoration for portraits
+	// Whether to enhance facial details for portraits.
 	RestoreFaces *bool `json:"restoreFaces,omitempty"`
-	// Sampling method, if applicable
+	// Specifies the sampling method used during generation.
 	Scheduler *string `json:"scheduler,omitempty"`
-	// Optional, used for reproducibility
+	// Optional seed for reproducibility. If not set, a random seed is used.
 	Seed *int32 `json:"seed,omitempty"`
-	// Number of inference steps
+	// Number of inference steps for image generation.
 	Steps *int32 `json:"steps,omitempty"`
-	// Artistic styles or themes
+	// List of artistic styles or themes to apply.
 	Styles []string `json:"styles,omitempty"`
-	// Image width in pixels
+	// Image dimensions (width and height in pixels).
 	Width *int32 `json:"width,omitempty"`
 }
 

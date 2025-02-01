@@ -24,7 +24,7 @@ var _ MappedNullable = &PromptSvcPrompt{}
 type PromptSvcPrompt struct {
 	// CreatedAt is the time of the prompt creation.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters
 	EngineParameters *PromptSvcEngineParameters `json:"engineParameters,omitempty"`
 	// Error that arose during prompt execution, if any.
 	Error *string `json:"error,omitempty"`
@@ -36,20 +36,22 @@ type PromptSvcPrompt struct {
 	MaxRetries *int32 `json:"maxRetries,omitempty"`
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId *string `json:"modelId,omitempty"`
-	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters. Use these high level parameters when you don't care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
+	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters. Use these high level parameters when you don't care about the actual engine, only the functionality (eg. text to image, image to image) it provides.
 	Parameters *PromptSvcParameters `json:"parameters,omitempty"`
 	// Prompt is the message itself eg. \"What's a banana?
 	Prompt string `json:"prompt"`
+	RequestMessageId *string `json:"requestMessageId,omitempty"`
+	ResponseMessageId *string `json:"responseMessageId,omitempty"`
 	// RunCount is the number of times the prompt was retried due to errors
 	RunCount *int32 `json:"runCount,omitempty"`
 	// Status of the prompt.
 	Status *PromptSvcPromptStatus `json:"status,omitempty"`
 	// Sync drives whether prompt add request should wait and hang until the prompt is done executing. By default the prompt just gets put on a queue and the client will just subscribe to a Thread Stream. For quick and dirty scripting however it's often times easier to do things syncronously. In those cases set Sync to true.
 	Sync *bool `json:"sync,omitempty"`
-	// Template of the prompt. Optional. If not present it's derived from ModelId.
-	Template *string `json:"template,omitempty"`
 	// ThreadId is the ID of the thread a prompt belongs to. Clients subscribe to Thread Streams to see the answer to a prompt, or set `prompt.sync` to true for a blocking answer.
 	ThreadId *string `json:"threadId,omitempty"`
+	// Type is inferred from the `Parameters` or `EngineParameters` field. Eg. A LLamaCpp prompt will be \"Text-to-Text\", a Stabel Diffusion one will be \"Text-to-Image\" etc.
+	Type *PromptSvcPromptType `json:"type,omitempty"`
 	// UpdatedAt is the last time the prompt was updated.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	// UserId contains the ID of the user who submitted the prompt.
@@ -356,6 +358,70 @@ func (o *PromptSvcPrompt) SetPrompt(v string) {
 	o.Prompt = v
 }
 
+// GetRequestMessageId returns the RequestMessageId field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetRequestMessageId() string {
+	if o == nil || IsNil(o.RequestMessageId) {
+		var ret string
+		return ret
+	}
+	return *o.RequestMessageId
+}
+
+// GetRequestMessageIdOk returns a tuple with the RequestMessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetRequestMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RequestMessageId) {
+		return nil, false
+	}
+	return o.RequestMessageId, true
+}
+
+// HasRequestMessageId returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasRequestMessageId() bool {
+	if o != nil && !IsNil(o.RequestMessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestMessageId gets a reference to the given string and assigns it to the RequestMessageId field.
+func (o *PromptSvcPrompt) SetRequestMessageId(v string) {
+	o.RequestMessageId = &v
+}
+
+// GetResponseMessageId returns the ResponseMessageId field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetResponseMessageId() string {
+	if o == nil || IsNil(o.ResponseMessageId) {
+		var ret string
+		return ret
+	}
+	return *o.ResponseMessageId
+}
+
+// GetResponseMessageIdOk returns a tuple with the ResponseMessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetResponseMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ResponseMessageId) {
+		return nil, false
+	}
+	return o.ResponseMessageId, true
+}
+
+// HasResponseMessageId returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasResponseMessageId() bool {
+	if o != nil && !IsNil(o.ResponseMessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseMessageId gets a reference to the given string and assigns it to the ResponseMessageId field.
+func (o *PromptSvcPrompt) SetResponseMessageId(v string) {
+	o.ResponseMessageId = &v
+}
+
 // GetRunCount returns the RunCount field value if set, zero value otherwise.
 func (o *PromptSvcPrompt) GetRunCount() int32 {
 	if o == nil || IsNil(o.RunCount) {
@@ -452,38 +518,6 @@ func (o *PromptSvcPrompt) SetSync(v bool) {
 	o.Sync = &v
 }
 
-// GetTemplate returns the Template field value if set, zero value otherwise.
-func (o *PromptSvcPrompt) GetTemplate() string {
-	if o == nil || IsNil(o.Template) {
-		var ret string
-		return ret
-	}
-	return *o.Template
-}
-
-// GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromptSvcPrompt) GetTemplateOk() (*string, bool) {
-	if o == nil || IsNil(o.Template) {
-		return nil, false
-	}
-	return o.Template, true
-}
-
-// HasTemplate returns a boolean if a field has been set.
-func (o *PromptSvcPrompt) HasTemplate() bool {
-	if o != nil && !IsNil(o.Template) {
-		return true
-	}
-
-	return false
-}
-
-// SetTemplate gets a reference to the given string and assigns it to the Template field.
-func (o *PromptSvcPrompt) SetTemplate(v string) {
-	o.Template = &v
-}
-
 // GetThreadId returns the ThreadId field value if set, zero value otherwise.
 func (o *PromptSvcPrompt) GetThreadId() string {
 	if o == nil || IsNil(o.ThreadId) {
@@ -514,6 +548,38 @@ func (o *PromptSvcPrompt) HasThreadId() bool {
 // SetThreadId gets a reference to the given string and assigns it to the ThreadId field.
 func (o *PromptSvcPrompt) SetThreadId(v string) {
 	o.ThreadId = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PromptSvcPrompt) GetType() PromptSvcPromptType {
+	if o == nil || IsNil(o.Type) {
+		var ret PromptSvcPromptType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcPrompt) GetTypeOk() (*PromptSvcPromptType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PromptSvcPrompt) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given PromptSvcPromptType and assigns it to the Type field.
+func (o *PromptSvcPrompt) SetType(v PromptSvcPromptType) {
+	o.Type = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -615,6 +681,12 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 		toSerialize["parameters"] = o.Parameters
 	}
 	toSerialize["prompt"] = o.Prompt
+	if !IsNil(o.RequestMessageId) {
+		toSerialize["requestMessageId"] = o.RequestMessageId
+	}
+	if !IsNil(o.ResponseMessageId) {
+		toSerialize["responseMessageId"] = o.ResponseMessageId
+	}
 	if !IsNil(o.RunCount) {
 		toSerialize["runCount"] = o.RunCount
 	}
@@ -624,11 +696,11 @@ func (o PromptSvcPrompt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sync) {
 		toSerialize["sync"] = o.Sync
 	}
-	if !IsNil(o.Template) {
-		toSerialize["template"] = o.Template
-	}
 	if !IsNil(o.ThreadId) {
 		toSerialize["threadId"] = o.ThreadId
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt

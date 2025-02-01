@@ -17,8 +17,13 @@ export class PromptSvcEngineParameters {
 PromptSvcEngineParameters.discriminator = undefined;
 PromptSvcEngineParameters.attributeTypeMap = [
     {
-        "name": "lastRun",
-        "baseName": "lastRun",
+        "name": "llamaCppParameters",
+        "baseName": "llamaCppParameters",
+        "type": "PromptSvcLlamaCppParameters"
+    },
+    {
+        "name": "stableDiffusion",
+        "baseName": "stableDiffusion",
         "type": "PromptSvcStableDiffusionParameters"
     }
 ];

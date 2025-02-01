@@ -10,8 +10,10 @@
  * Do not edit the class manually.
  */
 import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
+import { PromptSvcTextToTextParameters } from './promptSvcTextToTextParameters';
 export declare class PromptSvcParameters {
     'textToImage'?: PromptSvcTextToImageParameters;
+    'textToText'?: PromptSvcTextToTextParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

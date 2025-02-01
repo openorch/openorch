@@ -2496,7 +2496,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Adds a new prompt to the prompt queue and either waits for the response (if ` + "`" + `sync` + "`" + ` is set to true), or returns immediately.\n\nRequires the ` + "`" + `prompt-svc:prompt:create` + "`" + ` permission.",
+                "description": "Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.\n\nPrompts can be used for ` + "`" + `text-to-text` + "`" + `, ` + "`" + `text-to-image` + "`" + `, ` + "`" + `image-to-image` + "`" + `, and other types of generation.\nIf no model ID is specified, the default model will be used (see ` + "`" + `Model Svc` + "`" + ` for details). The default model may or may not support the requested generation type.\n\n**Prompting Modes**\n- **High-Level Parameters**: Uses predefined parameters relevant to ` + "`" + `text-to-image` + "`" + `, ` + "`" + `image-to-image` + "`" + `, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality.\n- **Engine-Specific Parameters**: Uses ` + "`" + `engineParameters` + "`" + ` to directly specify an AI engine, exposing all available parameters for fine-tuned control.\n\n**Permissions Required:** ` + "`" + `prompt-svc:prompt:create` + "`" + `",
                 "consumes": [
                     "application/json"
                 ],
@@ -2506,8 +2506,8 @@ const docTemplate = `{
                 "tags": [
                     "Prompt Svc"
                 ],
-                "summary": "Add Prompt",
-                "operationId": "addPrompt",
+                "summary": "Prompt an AI",
+                "operationId": "prompt",
                 "parameters": [
                     {
                         "description": "Add Prompt Request",
@@ -2515,7 +2515,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/prompt_svc.AddPromptRequest"
+                            "$ref": "#/definitions/prompt_svc.PromptRequest"
                         }
                     }
                 ],
@@ -2523,7 +2523,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/prompt_svc.AddPromptResponse"
+                            "$ref": "#/definitions/prompt_svc.PromptResponse"
                         }
                     },
                     "400": {
@@ -5048,10 +5048,6 @@ const docTemplate = `{
         "chat_svc.Message": {
             "type": "object",
             "properties": {
-                "content": {
-                    "description": "Content of the message eg. \"Hi, what's up?\"",
-                    "type": "string"
-                },
                 "createdAt": {
                     "type": "string"
                 },
@@ -5063,6 +5059,10 @@ const docTemplate = `{
                     }
                 },
                 "id": {
+                    "type": "string"
+                },
+                "text": {
+                    "description": "Text content of the message eg. \"Hi, what's up?\"",
                     "type": "string"
                 },
                 "threadId": {
@@ -6383,6 +6383,39 @@ const docTemplate = `{
                 }
             }
         },
+        "openapi.ChatSvcMessage": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "fileIds": {
+                    "description": "FileIds defines the file attachments the message has.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "text": {
+                    "description": "Text content of the message eg. \\\"Hi, what's up?\\\"",
+                    "type": "string"
+                },
+                "threadId": {
+                    "description": "ThreadId of the message.",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "UserId is the id of the user who wrote the message. For AI messages this field is empty.",
+                    "type": "string"
+                }
+            }
+        },
         "policy_svc.BlocklistParameters": {
             "type": "object",
             "properties": {
@@ -6541,85 +6574,12 @@ const docTemplate = `{
         "policy_svc.UpsertInstanceResponse": {
             "type": "object"
         },
-        "prompt_svc.AddPromptRequest": {
-            "type": "object",
-            "required": [
-                "prompt"
-            ],
-            "properties": {
-                "id": {
-                    "description": "Id is the unique ID of the prompt.",
-                    "type": "string",
-                    "x-order": "0"
-                },
-                "prompt": {
-                    "description": "Prompt is the message itself eg. \"What's a banana?",
-                    "type": "string",
-                    "x-order": "1",
-                    "example": "What's a banana?"
-                },
-                "sync": {
-                    "description": "Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things synchronously.\nIn those cases set Sync to true.",
-                    "type": "boolean",
-                    "x-order": "2"
-                },
-                "threadId": {
-                    "description": "ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set ` + "`" + `prompt.sync` + "`" + ` to true for a blocking answer.",
-                    "type": "string",
-                    "x-order": "3"
-                },
-                "template": {
-                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
-                    "type": "string",
-                    "x-order": "4",
-                    "example": "[INST]{prompt}[/INST]"
-                },
-                "modelId": {
-                    "description": "ModelId is just the OpenOrch internal ID of the model.",
-                    "type": "string",
-                    "x-order": "5",
-                    "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
-                },
-                "maxRetries": {
-                    "description": "MaxRetries specified how many times the system should retry a prompt when it keeps erroring.",
-                    "type": "integer",
-                    "x-order": "6",
-                    "example": 10
-                },
-                "engineParameters": {
-                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/prompt_svc.EngineParameters"
-                        }
-                    ],
-                    "x-order": "7"
-                },
-                "parameters": {
-                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/prompt_svc.Parameters"
-                        }
-                    ],
-                    "x-order": "8"
-                }
-            }
-        },
-        "prompt_svc.AddPromptResponse": {
-            "type": "object",
-            "properties": {
-                "answer": {
-                    "type": "string"
-                },
-                "prompt": {
-                    "$ref": "#/definitions/prompt_svc.Prompt"
-                }
-            }
-        },
         "prompt_svc.EngineParameters": {
             "type": "object",
             "properties": {
+                "llamaCppParameters": {
+                    "$ref": "#/definitions/prompt_svc.LlamaCppParameters"
+                },
                 "stableDiffusion": {
                     "$ref": "#/definitions/prompt_svc.StableDiffusionParameters"
                 }
@@ -6656,11 +6616,24 @@ const docTemplate = `{
                 }
             }
         },
+        "prompt_svc.LlamaCppParameters": {
+            "type": "object",
+            "properties": {
+                "template": {
+                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
+                    "type": "string",
+                    "example": "[INST]{prompt}[/INST]"
+                }
+            }
+        },
         "prompt_svc.Parameters": {
             "type": "object",
             "properties": {
                 "textToImage": {
                     "$ref": "#/definitions/prompt_svc.TextToImageParameters"
+                },
+                "textToText": {
+                    "$ref": "#/definitions/prompt_svc.TextToTextParameters"
                 }
             }
         },
@@ -6675,7 +6648,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "engineParameters": {
-                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "description": "AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters",
                     "allOf": [
                         {
                             "$ref": "#/definitions/prompt_svc.EngineParameters"
@@ -6705,7 +6678,7 @@ const docTemplate = `{
                     "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
                 },
                 "parameters": {
-                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
+                    "description": "AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/prompt_svc.Parameters"
@@ -6716,6 +6689,12 @@ const docTemplate = `{
                     "description": "Prompt is the message itself eg. \"What's a banana?",
                     "type": "string",
                     "example": "What's a banana?"
+                },
+                "requestMessageId": {
+                    "type": "string"
+                },
+                "responseMessageId": {
+                    "type": "string"
                 },
                 "runCount": {
                     "description": "RunCount is the number of times the prompt was retried due to errors",
@@ -6733,14 +6712,17 @@ const docTemplate = `{
                     "description": "Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things syncronously.\nIn those cases set Sync to true.",
                     "type": "boolean"
                 },
-                "template": {
-                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
-                    "type": "string",
-                    "example": "[INST]{prompt}[/INST]"
-                },
                 "threadId": {
                     "description": "ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set ` + "`" + `prompt.sync` + "`" + ` to true for a blocking answer.",
                     "type": "string"
+                },
+                "type": {
+                    "description": "Type is inferred from the ` + "`" + `Parameters` + "`" + ` or ` + "`" + `EngineParameters` + "`" + ` field.\nEg. A LLamaCpp prompt will be \"Text-to-Text\",\na Stabel Diffusion one will be \"Text-to-Image\" etc.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.PromptType"
+                        }
+                    ]
                 },
                 "updatedAt": {
                     "description": "UpdatedAt is the last time the prompt was updated.",
@@ -6749,6 +6731,78 @@ const docTemplate = `{
                 "userId": {
                     "description": "UserId contains the ID of the user who submitted the prompt.",
                     "type": "string"
+                }
+            }
+        },
+        "prompt_svc.PromptRequest": {
+            "type": "object",
+            "required": [
+                "prompt"
+            ],
+            "properties": {
+                "engineParameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) specific parameters",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.EngineParameters"
+                        }
+                    ]
+                },
+                "id": {
+                    "description": "Id is the unique ID of the prompt.",
+                    "type": "string"
+                },
+                "maxRetries": {
+                    "description": "MaxRetries specified how many times the system should retry a prompt when it keeps erroring.",
+                    "type": "integer",
+                    "example": 10
+                },
+                "modelId": {
+                    "description": "ModelId is just the OpenOrch internal ID of the model.",
+                    "type": "string",
+                    "example": "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"
+                },
+                "parameters": {
+                    "description": "AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.\nUse these high level parameters when you don't care about the actual engine, only\nthe functionality (eg. text to image, image to image) it provides.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Parameters"
+                        }
+                    ]
+                },
+                "prompt": {
+                    "description": "Prompt is the message itself eg. \"What's a banana?",
+                    "type": "string",
+                    "example": "What's a banana?"
+                },
+                "sync": {
+                    "description": "Sync drives whether prompt add request should wait and hang until\nthe prompt is done executing. By default the prompt just gets put on a queue\nand the client will just subscribe to a Thread Stream.\nFor quick and dirty scripting however it's often times easier to do things synchronously.\nIn those cases set Sync to true.",
+                    "type": "boolean"
+                },
+                "threadId": {
+                    "description": "ThreadId is the ID of the thread a prompt belongs to.\nClients subscribe to Thread Streams to see the answer to a prompt,\nor set ` + "`" + `prompt.sync` + "`" + ` to true for a blocking answer.",
+                    "type": "string"
+                }
+            }
+        },
+        "prompt_svc.PromptResponse": {
+            "type": "object",
+            "properties": {
+                "prompt": {
+                    "description": "Prompt contains the details of the prompt that was just created by this request.\nThis includes the ID, prompt text, status, and other associated metadata.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc.Prompt"
+                        }
+                    ]
+                },
+                "responseMessage": {
+                    "description": "Response message contains the response text and files.\nThis field is populated only for synchronous prompts (` + "`" + `sync = true` + "`" + `).\nFor asynchronous prompts, the response will provided in the associated\nmessage identified by the ` + "`" + `responseMessageId` + "`" + ` of the ` + "`" + `promptSvc.prompt` + "`" + ` object once the prompt completes.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/openapi.ChatSvcMessage"
+                        }
+                    ]
                 }
             }
         },
@@ -6769,6 +6823,69 @@ const docTemplate = `{
                 "PromptStatusErrored",
                 "PromptStatusAbandoned",
                 "PromptStatusCanceled"
+            ]
+        },
+        "prompt_svc.PromptType": {
+            "type": "string",
+            "enum": [
+                "Image-Text-to-Text",
+                "Visual Question Answering",
+                "Document Question Answering",
+                "Text-to-Image",
+                "Image-to-Image",
+                "Image-to-Video",
+                "Unconditional Image Generation",
+                "Text-to-Video",
+                "Zero-Shot Image Classification",
+                "Zero-Shot Object Detection",
+                "Text-to-3D",
+                "Image-to-3D",
+                "Image Feature Extraction",
+                "Keypoint Detection",
+                "Text-to-Text",
+                "Question Answering",
+                "Translation",
+                "Summarization",
+                "Text Generation",
+                "Fill-Mask",
+                "Text-to-Speech",
+                "Text-to-Audio",
+                "Automatic Speech Recognition",
+                "Audio-to-Audio",
+                "Audio Classification",
+                "Reinforcement Learning",
+                "Robotics",
+                "Graph Machine Learning"
+            ],
+            "x-enum-varnames": [
+                "PromptTypeImageTextToText",
+                "PromptTypeVisualQuestionAnswering",
+                "PromptTypeDocumentQuestionAnswering",
+                "PromptTypeTextToImage",
+                "PromptTypeImageToImage",
+                "PromptTypeImageToVideo",
+                "PromptTypeUnconditionalImageGeneration",
+                "PromptTypeTextToVideo",
+                "PromptTypeZeroShotImageClassification",
+                "PromptTypeZeroShotObjectDetection",
+                "PromptTypeTextTo3D",
+                "PromptTypeImageTo3D",
+                "PromptTypeImageFeatureExtraction",
+                "PromptTypeKeypointDetection",
+                "PromptTypeTextToText",
+                "PromptTypeQuestionAnswering",
+                "PromptTypeTranslation",
+                "PromptTypeSummarization",
+                "PromptTypeTextGeneration",
+                "PromptTypeFillMask",
+                "PromptTypeTextToSpeech",
+                "PromptTypeTextToAudio",
+                "PromptTypeAutomaticSpeechRecognition",
+                "PromptTypeAudioToAudio",
+                "PromptTypeAudioClassification",
+                "PromptTypeReinforcementLearning",
+                "PromptTypeRobotics",
+                "PromptTypeGraphMachineLearning"
             ]
         },
         "prompt_svc.RemovePromptRequest": {
@@ -6799,73 +6916,84 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "aspectRatio": {
-                    "description": "Alternative to width/height (e.g., \"16:9\", \"1:1\")",
+                    "description": "Alternative way to specify dimensions (e.g., \"16:9\", \"1:1\").",
                     "type": "string"
                 },
                 "batchSize": {
-                    "description": "Number of images per batch",
+                    "description": "Number of images to generate per batch.",
                     "type": "integer"
                 },
                 "denoisingStrength": {
-                    "description": "Noise control for variation",
+                    "description": "Controls how much variation is introduced in image modifications.",
                     "type": "number"
                 },
                 "enableUpscaling": {
-                    "description": "Whether to use AI upscaling",
+                    "description": "Whether to apply AI-based upscaling.",
                     "type": "boolean"
                 },
                 "format": {
-                    "description": "Output format (png, jpg, webp, etc.)",
+                    "description": "Output format for the generated image (png, jpg, webp, etc.).",
                     "type": "string"
                 },
                 "guidanceScale": {
-                    "description": "How closely to follow the prompt",
+                    "description": "How closely the output should follow the prompt.",
                     "type": "number"
                 },
                 "height": {
-                    "description": "Image height in pixels",
                     "type": "integer"
                 },
                 "negativePrompt": {
+                    "description": "A negative prompt to specify what should be avoided in the image.",
                     "type": "string"
                 },
                 "numIterations": {
-                    "description": "How many times to run the prompt (batches)",
+                    "description": "Number of batches to generate.",
                     "type": "integer"
                 },
                 "prompt": {
+                    "description": "The primary prompt for generating the image.\nDefaults to the top-level prompt if not specified.\nIf both are provided (which should be avoided), this field takes precedence.",
                     "type": "string"
                 },
                 "qualityPreset": {
-                    "description": "Low, Medium, High, Ultra (for services like DALL·E)",
+                    "description": "Preset quality settings (e.g., Low, Medium, High, Ultra).",
                     "type": "string"
                 },
                 "restoreFaces": {
-                    "description": "Face restoration for portraits",
+                    "description": "Whether to enhance facial details for portraits.",
                     "type": "boolean"
                 },
                 "scheduler": {
-                    "description": "Sampling method, if applicable",
+                    "description": "Specifies the sampling method used during generation.",
                     "type": "string"
                 },
                 "seed": {
-                    "description": "Optional, used for reproducibility",
+                    "description": "Optional seed for reproducibility. If not set, a random seed is used.",
                     "type": "integer"
                 },
                 "steps": {
-                    "description": "Number of inference steps",
+                    "description": "Number of inference steps for image generation.",
                     "type": "integer"
                 },
                 "styles": {
-                    "description": "Artistic styles or themes",
+                    "description": "List of artistic styles or themes to apply.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "width": {
-                    "description": "Image width in pixels",
+                    "description": "Image dimensions (width and height in pixels).",
                     "type": "integer"
+                }
+            }
+        },
+        "prompt_svc.TextToTextParameters": {
+            "type": "object",
+            "properties": {
+                "template": {
+                    "description": "Template of the prompt. Optional. If not present it's derived from ModelId.",
+                    "type": "string",
+                    "example": "[INST]{prompt}[/INST]"
                 }
             }
         },

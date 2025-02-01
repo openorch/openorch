@@ -10,16 +10,16 @@
  * Do not edit the class manually.
  */
 export declare class ChatSvcMessage {
-    /**
-    * Content of the message eg. \"Hi, what\'s up?\"
-    */
-    'content'?: string;
     'createdAt'?: string;
     /**
     * FileIds defines the file attachments the message has.
     */
     'fileIds'?: Array<string>;
     'id'?: string;
+    /**
+    * Text content of the message eg. \"Hi, what\'s up?\"
+    */
+    'text'?: string;
     /**
     * ThreadId of the message.
     */
