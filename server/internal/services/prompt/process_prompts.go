@@ -228,7 +228,7 @@ func (p *PromptService) processPrompt(
 				Id:       openapi.PtrString(currentPrompt.Id),
 				ThreadId: openapi.PtrString(currentPrompt.ThreadId),
 				UserId:   openapi.PtrString(currentPrompt.UserId),
-				Content:  openapi.PtrString(currentPrompt.Prompt),
+				Text:     openapi.PtrString(currentPrompt.Prompt),
 				CreatedAt: openapi.PtrString(
 					time.Now().Format(time.RFC3339Nano),
 				),
@@ -274,17 +274,7 @@ func (p *PromptService) processPrompt(
 		stat.Address = "http://" + stat.Address
 	}
 
-	fullPrompt := currentPrompt.Prompt
-	if currentPrompt.Template != "" {
-		fullPrompt = strings.Replace(
-			currentPrompt.Template,
-			"{prompt}",
-			currentPrompt.Prompt,
-			-1,
-		)
-	}
-
-	err = p.processPlatform(stat.Address, modelId, fullPrompt, currentPrompt)
+	err = p.processPlatform(stat.Address, modelId, currentPrompt)
 
 	logger.Debug("Finished streaming LLM",
 		slog.String("error", fmt.Sprintf("%v", err)),
@@ -299,7 +289,6 @@ func (p *PromptService) processPrompt(
 func (p *PromptService) processPlatform(
 	address string,
 	modelId string,
-	fullPrompt string,
 	currentPrompt *prompttypes.Prompt,
 ) error {
 	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
@@ -311,9 +300,9 @@ func (p *PromptService) processPlatform(
 
 	switch *getModelRsp.Platform.Id {
 	case modeltypes.PlatformLlamaCpp.Id:
-		return p.processLlamaCpp(address, fullPrompt, currentPrompt)
+		return p.processLlamaCpp(address, currentPrompt)
 	case modeltypes.PlatformStableDiffusion.Id:
-		return p.processStableDiffusion(address, fullPrompt, currentPrompt)
+		return p.processStableDiffusion(address, currentPrompt)
 	}
 
 	return fmt.Errorf("cannot find platform %v", getModelRsp.Platform.Id)

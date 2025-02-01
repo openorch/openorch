@@ -125,8 +125,8 @@ Class | Method | HTTP request | Description
 *ModelSvcAPI* | [**StartModel**](docs/ModelSvcAPI.md#startmodel) | **Put** /model-svc/model/{modelId}/start | Start a Model
 *PolicySvcAPI* | [**Check**](docs/PolicySvcAPI.md#check) | **Post** /policy-svc/check | Check
 *PolicySvcAPI* | [**UpsertInstance**](docs/PolicySvcAPI.md#upsertinstance) | **Put** /policy-svc/instance/{instanceId} | Upsert an Instance
-*PromptSvcAPI* | [**AddPrompt**](docs/PromptSvcAPI.md#addprompt) | **Post** /prompt-svc/prompt | Add Prompt
 *PromptSvcAPI* | [**ListPrompts**](docs/PromptSvcAPI.md#listprompts) | **Post** /prompt-svc/prompts | List Prompts
+*PromptSvcAPI* | [**Prompt**](docs/PromptSvcAPI.md#prompt) | **Post** /prompt-svc/prompt | Prompt an AI
 *PromptSvcAPI* | [**RemovePrompt**](docs/PromptSvcAPI.md#removeprompt) | **Post** /prompt-svc/remove | Remove Prompt
 *PromptSvcAPI* | [**SubscribeToPromptResponses**](docs/PromptSvcAPI.md#subscribetopromptresponses) | **Get** /prompt-svc/prompts/{threadId}/responses/subscribe | Subscribe to Prompt Responses by Thread
 *RegistrySvcAPI* | [**DeleteDefinition**](docs/RegistrySvcAPI.md#deletedefinition) | **Delete** /registry-svc/definition/{id} | Delete Definition
@@ -251,6 +251,7 @@ Class | Method | HTTP request | Description
  - [ModelSvcModelStatus](docs/ModelSvcModelStatus.md)
  - [ModelSvcPlatform](docs/ModelSvcPlatform.md)
  - [ModelSvcStatusResponse](docs/ModelSvcStatusResponse.md)
+ - [OpenapiChatSvcMessage](docs/OpenapiChatSvcMessage.md)
  - [PolicySvcBlocklistParameters](docs/PolicySvcBlocklistParameters.md)
  - [PolicySvcCheckRequest](docs/PolicySvcCheckRequest.md)
  - [PolicySvcCheckResponse](docs/PolicySvcCheckResponse.md)
@@ -262,18 +263,21 @@ Class | Method | HTTP request | Description
  - [PolicySvcScope](docs/PolicySvcScope.md)
  - [PolicySvcTemplateId](docs/PolicySvcTemplateId.md)
  - [PolicySvcUpsertInstanceRequest](docs/PolicySvcUpsertInstanceRequest.md)
- - [PromptSvcAddPromptRequest](docs/PromptSvcAddPromptRequest.md)
- - [PromptSvcAddPromptResponse](docs/PromptSvcAddPromptResponse.md)
  - [PromptSvcEngineParameters](docs/PromptSvcEngineParameters.md)
  - [PromptSvcErrorResponse](docs/PromptSvcErrorResponse.md)
  - [PromptSvcListPromptsRequest](docs/PromptSvcListPromptsRequest.md)
  - [PromptSvcListPromptsResponse](docs/PromptSvcListPromptsResponse.md)
+ - [PromptSvcLlamaCppParameters](docs/PromptSvcLlamaCppParameters.md)
  - [PromptSvcParameters](docs/PromptSvcParameters.md)
  - [PromptSvcPrompt](docs/PromptSvcPrompt.md)
+ - [PromptSvcPromptRequest](docs/PromptSvcPromptRequest.md)
+ - [PromptSvcPromptResponse](docs/PromptSvcPromptResponse.md)
  - [PromptSvcPromptStatus](docs/PromptSvcPromptStatus.md)
+ - [PromptSvcPromptType](docs/PromptSvcPromptType.md)
  - [PromptSvcRemovePromptRequest](docs/PromptSvcRemovePromptRequest.md)
  - [PromptSvcStableDiffusionParameters](docs/PromptSvcStableDiffusionParameters.md)
  - [PromptSvcTextToImageParameters](docs/PromptSvcTextToImageParameters.md)
+ - [PromptSvcTextToTextParameters](docs/PromptSvcTextToTextParameters.md)
  - [RegistrySvcAPISpec](docs/RegistrySvcAPISpec.md)
  - [RegistrySvcClient](docs/RegistrySvcClient.md)
  - [RegistrySvcDefinition](docs/RegistrySvcDefinition.md)

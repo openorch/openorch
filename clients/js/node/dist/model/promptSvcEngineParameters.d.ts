@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PromptSvcLlamaCppParameters } from './promptSvcLlamaCppParameters';
 import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
 export declare class PromptSvcEngineParameters {
-    'lastRun'?: PromptSvcStableDiffusionParameters;
+    'llamaCppParameters'?: PromptSvcLlamaCppParameters;
+    'stableDiffusion'?: PromptSvcStableDiffusionParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

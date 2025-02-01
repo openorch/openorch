@@ -560,7 +560,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/prompt-svc/prompt", appl(func(w http.ResponseWriter, r *http.Request) {
-		promptService.AddPrompt(w, r)
+		promptService.Prompt(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 

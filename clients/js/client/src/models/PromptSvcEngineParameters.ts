@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PromptSvcLlamaCppParameters } from './PromptSvcLlamaCppParameters';
+import {
+    PromptSvcLlamaCppParametersFromJSON,
+    PromptSvcLlamaCppParametersFromJSONTyped,
+    PromptSvcLlamaCppParametersToJSON,
+    PromptSvcLlamaCppParametersToJSONTyped,
+} from './PromptSvcLlamaCppParameters';
 import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffusionParameters';
 import {
     PromptSvcStableDiffusionParametersFromJSON,
@@ -29,10 +36,16 @@ import {
 export interface PromptSvcEngineParameters {
     /**
      * 
+     * @type {PromptSvcLlamaCppParameters}
+     * @memberof PromptSvcEngineParameters
+     */
+    llamaCppParameters?: PromptSvcLlamaCppParameters;
+    /**
+     * 
      * @type {PromptSvcStableDiffusionParameters}
      * @memberof PromptSvcEngineParameters
      */
-    lastRun?: PromptSvcStableDiffusionParameters;
+    stableDiffusion?: PromptSvcStableDiffusionParameters;
 }
 
 /**
@@ -52,7 +65,8 @@ export function PromptSvcEngineParametersFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'lastRun': json['lastRun'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['lastRun']),
+        'llamaCppParameters': json['llamaCppParameters'] == null ? undefined : PromptSvcLlamaCppParametersFromJSON(json['llamaCppParameters']),
+        'stableDiffusion': json['stableDiffusion'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['stableDiffusion']),
     };
 }
 
@@ -67,7 +81,8 @@ export function PromptSvcEngineParametersToJSONTyped(value?: PromptSvcEnginePara
 
     return {
         
-        'lastRun': PromptSvcStableDiffusionParametersToJSON(value['lastRun']),
+        'llamaCppParameters': PromptSvcLlamaCppParametersToJSON(value['llamaCppParameters']),
+        'stableDiffusion': PromptSvcStableDiffusionParametersToJSON(value['stableDiffusion']),
     };
 }
 

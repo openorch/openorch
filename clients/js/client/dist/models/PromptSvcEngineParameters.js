@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PromptSvcLlamaCppParametersFromJSON, PromptSvcLlamaCppParametersToJSON, } from './PromptSvcLlamaCppParameters';
 import { PromptSvcStableDiffusionParametersFromJSON, PromptSvcStableDiffusionParametersToJSON, } from './PromptSvcStableDiffusionParameters';
 /**
  * Check if a given object implements the PromptSvcEngineParameters interface.
@@ -26,7 +27,8 @@ export function PromptSvcEngineParametersFromJSONTyped(json, ignoreDiscriminator
         return json;
     }
     return {
-        'lastRun': json['lastRun'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['lastRun']),
+        'llamaCppParameters': json['llamaCppParameters'] == null ? undefined : PromptSvcLlamaCppParametersFromJSON(json['llamaCppParameters']),
+        'stableDiffusion': json['stableDiffusion'] == null ? undefined : PromptSvcStableDiffusionParametersFromJSON(json['stableDiffusion']),
     };
 }
 export function PromptSvcEngineParametersToJSON(json) {
@@ -37,6 +39,7 @@ export function PromptSvcEngineParametersToJSONTyped(value, ignoreDiscriminator 
         return value;
     }
     return {
-        'lastRun': PromptSvcStableDiffusionParametersToJSON(value['lastRun']),
+        'llamaCppParameters': PromptSvcLlamaCppParametersToJSON(value['llamaCppParameters']),
+        'stableDiffusion': PromptSvcStableDiffusionParametersToJSON(value['stableDiffusion']),
     };
 }

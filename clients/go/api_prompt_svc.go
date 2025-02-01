@@ -24,22 +24,6 @@ import (
 type PromptSvcAPI interface {
 
 	/*
-	AddPrompt Add Prompt
-
-	Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
-
-Requires the `prompt-svc:prompt:create` permission.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAddPromptRequest
-	*/
-	AddPrompt(ctx context.Context) ApiAddPromptRequest
-
-	// AddPromptExecute executes the request
-	//  @return PromptSvcAddPromptResponse
-	AddPromptExecute(r ApiAddPromptRequest) (*PromptSvcAddPromptResponse, *http.Response, error)
-
-	/*
 	ListPrompts List Prompts
 
 	List prompts that satisfy a query.
@@ -52,6 +36,29 @@ Requires the `prompt-svc:prompt:create` permission.
 	// ListPromptsExecute executes the request
 	//  @return PromptSvcListPromptsResponse
 	ListPromptsExecute(r ApiListPromptsRequest) (*PromptSvcListPromptsResponse, *http.Response, error)
+
+	/*
+	Prompt Prompt an AI
+
+	Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.
+
+Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation.
+If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.
+
+**Prompting Modes**
+- **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality.
+- **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.
+
+**Permissions Required:** `prompt-svc:prompt:create`
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPromptRequest
+	*/
+	Prompt(ctx context.Context) ApiPromptRequest
+
+	// PromptExecute executes the request
+	//  @return PromptSvcPromptResponse
+	PromptExecute(r ApiPromptRequest) (*PromptSvcPromptResponse, *http.Response, error)
 
 	/*
 	RemovePrompt Remove Prompt
@@ -86,62 +93,57 @@ Requires the `prompt-svc:prompt:create` permission.
 // PromptSvcAPIService PromptSvcAPI service
 type PromptSvcAPIService service
 
-type ApiAddPromptRequest struct {
+type ApiListPromptsRequest struct {
 	ctx context.Context
 	ApiService PromptSvcAPI
-	body *PromptSvcAddPromptRequest
+	body *PromptSvcListPromptsRequest
 }
 
-// Add Prompt Request
-func (r ApiAddPromptRequest) Body(body PromptSvcAddPromptRequest) ApiAddPromptRequest {
+// List Prompts Request
+func (r ApiListPromptsRequest) Body(body PromptSvcListPromptsRequest) ApiListPromptsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiAddPromptRequest) Execute() (*PromptSvcAddPromptResponse, *http.Response, error) {
-	return r.ApiService.AddPromptExecute(r)
+func (r ApiListPromptsRequest) Execute() (*PromptSvcListPromptsResponse, *http.Response, error) {
+	return r.ApiService.ListPromptsExecute(r)
 }
 
 /*
-AddPrompt Add Prompt
+ListPrompts List Prompts
 
-Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
-
-Requires the `prompt-svc:prompt:create` permission.
+List prompts that satisfy a query.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddPromptRequest
+ @return ApiListPromptsRequest
 */
-func (a *PromptSvcAPIService) AddPrompt(ctx context.Context) ApiAddPromptRequest {
-	return ApiAddPromptRequest{
+func (a *PromptSvcAPIService) ListPrompts(ctx context.Context) ApiListPromptsRequest {
+	return ApiListPromptsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PromptSvcAddPromptResponse
-func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSvcAddPromptResponse, *http.Response, error) {
+//  @return PromptSvcListPromptsResponse
+func (a *PromptSvcAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*PromptSvcListPromptsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PromptSvcAddPromptResponse
+		localVarReturnValue  *PromptSvcListPromptsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptSvcAPIService.AddPrompt")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptSvcAPIService.ListPrompts")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/prompt-svc/prompt"
+	localVarPath := localBasePath + "/prompt-svc/prompts"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -245,57 +247,69 @@ func (a *PromptSvcAPIService) AddPromptExecute(r ApiAddPromptRequest) (*PromptSv
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListPromptsRequest struct {
+type ApiPromptRequest struct {
 	ctx context.Context
 	ApiService PromptSvcAPI
-	body *PromptSvcListPromptsRequest
+	body *PromptSvcPromptRequest
 }
 
-// List Prompts Request
-func (r ApiListPromptsRequest) Body(body PromptSvcListPromptsRequest) ApiListPromptsRequest {
+// Add Prompt Request
+func (r ApiPromptRequest) Body(body PromptSvcPromptRequest) ApiPromptRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiListPromptsRequest) Execute() (*PromptSvcListPromptsResponse, *http.Response, error) {
-	return r.ApiService.ListPromptsExecute(r)
+func (r ApiPromptRequest) Execute() (*PromptSvcPromptResponse, *http.Response, error) {
+	return r.ApiService.PromptExecute(r)
 }
 
 /*
-ListPrompts List Prompts
+Prompt Prompt an AI
 
-List prompts that satisfy a query.
+Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.
+
+Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation.
+If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.
+
+**Prompting Modes**
+- **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality.
+- **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.
+
+**Permissions Required:** `prompt-svc:prompt:create`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListPromptsRequest
+ @return ApiPromptRequest
 */
-func (a *PromptSvcAPIService) ListPrompts(ctx context.Context) ApiListPromptsRequest {
-	return ApiListPromptsRequest{
+func (a *PromptSvcAPIService) Prompt(ctx context.Context) ApiPromptRequest {
+	return ApiPromptRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PromptSvcListPromptsResponse
-func (a *PromptSvcAPIService) ListPromptsExecute(r ApiListPromptsRequest) (*PromptSvcListPromptsResponse, *http.Response, error) {
+//  @return PromptSvcPromptResponse
+func (a *PromptSvcAPIService) PromptExecute(r ApiPromptRequest) (*PromptSvcPromptResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PromptSvcListPromptsResponse
+		localVarReturnValue  *PromptSvcPromptResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptSvcAPIService.ListPrompts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PromptSvcAPIService.Prompt")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/prompt-svc/prompts"
+	localVarPath := localBasePath + "/prompt-svc/prompt"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

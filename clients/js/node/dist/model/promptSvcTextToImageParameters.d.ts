@@ -11,65 +11,68 @@
  */
 export declare class PromptSvcTextToImageParameters {
     /**
-    * Alternative to width/height (e.g., \"16:9\", \"1:1\")
+    * Alternative way to specify dimensions (e.g., \"16:9\", \"1:1\").
     */
     'aspectRatio'?: string;
     /**
-    * Number of images per batch
+    * Number of images to generate per batch.
     */
     'batchSize'?: number;
     /**
-    * Noise control for variation
+    * Controls how much variation is introduced in image modifications.
     */
     'denoisingStrength'?: number;
     /**
-    * Whether to use AI upscaling
+    * Whether to apply AI-based upscaling.
     */
     'enableUpscaling'?: boolean;
     /**
-    * Output format (png, jpg, webp, etc.)
+    * Output format for the generated image (png, jpg, webp, etc.).
     */
     'format'?: string;
     /**
-    * How closely to follow the prompt
+    * How closely the output should follow the prompt.
     */
     'guidanceScale'?: number;
-    /**
-    * Image height in pixels
-    */
     'height'?: number;
+    /**
+    * A negative prompt to specify what should be avoided in the image.
+    */
     'negativePrompt'?: string;
     /**
-    * How many times to run the prompt (batches)
+    * Number of batches to generate.
     */
     'numIterations'?: number;
+    /**
+    * The primary prompt for generating the image. Defaults to the top-level prompt if not specified. If both are provided (which should be avoided), this field takes precedence.
+    */
     'prompt'?: string;
     /**
-    * Low, Medium, High, Ultra (for services like DALL·E)
+    * Preset quality settings (e.g., Low, Medium, High, Ultra).
     */
     'qualityPreset'?: string;
     /**
-    * Face restoration for portraits
+    * Whether to enhance facial details for portraits.
     */
     'restoreFaces'?: boolean;
     /**
-    * Sampling method, if applicable
+    * Specifies the sampling method used during generation.
     */
     'scheduler'?: string;
     /**
-    * Optional, used for reproducibility
+    * Optional seed for reproducibility. If not set, a random seed is used.
     */
     'seed'?: number;
     /**
-    * Number of inference steps
+    * Number of inference steps for image generation.
     */
     'steps'?: number;
     /**
-    * Artistic styles or themes
+    * List of artistic styles or themes to apply.
     */
     'styles'?: Array<string>;
     /**
-    * Image width in pixels
+    * Image dimensions (width and height in pixels).
     */
     'width'?: number;
     static discriminator: string | undefined;

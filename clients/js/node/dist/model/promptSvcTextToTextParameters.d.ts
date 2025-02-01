@@ -9,10 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PromptSvcPrompt } from './promptSvcPrompt';
-export declare class PromptSvcAddPromptResponse {
-    'answer'?: string;
-    'prompt'?: PromptSvcPrompt;
+export declare class PromptSvcTextToTextParameters {
+    /**
+    * Template of the prompt. Optional. If not present it\'s derived from ModelId.
+    */
+    'template'?: string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

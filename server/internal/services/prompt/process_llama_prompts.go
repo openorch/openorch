@@ -15,6 +15,7 @@ package promptservice
 import (
 	"context"
 	"log/slog"
+	"strings"
 	"sync"
 	"time"
 
@@ -28,9 +29,24 @@ import (
 
 func (p *PromptService) processLlamaCpp(
 	address string,
-	fullPrompt string,
 	currentPrompt *prompttypes.Prompt,
 ) error {
+	fullPrompt := currentPrompt.Prompt
+
+	template := currentPrompt.Parameters.TextToText.Template
+	if template == "" {
+		template = currentPrompt.EngineParameters.LlamaCpp.Template
+	}
+
+	if template != "" {
+		fullPrompt = strings.Replace(
+			template,
+			"{prompt}",
+			currentPrompt.Prompt,
+			-1,
+		)
+	}
+
 	var llmClient llm.ClientI
 	if p.llmCLient != nil {
 		llmClient = p.llmCLient
@@ -92,7 +108,7 @@ func (p *PromptService) processLlamaCpp(
 						Message: &openapi.ChatSvcMessage{
 							Id:       openapi.PtrString(sdk.Id("msg")),
 							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-							Content: openapi.PtrString(
+							Text: openapi.PtrString(
 								llmResponseToText(
 									p.StreamManager.History[currentPrompt.ThreadId],
 								),

@@ -9,13 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class PromptSvcAddPromptRequest {
+export class PromptSvcPromptRequest {
     static getAttributeTypeMap() {
-        return PromptSvcAddPromptRequest.attributeTypeMap;
+        return PromptSvcPromptRequest.attributeTypeMap;
     }
 }
-PromptSvcAddPromptRequest.discriminator = undefined;
-PromptSvcAddPromptRequest.attributeTypeMap = [
+PromptSvcPromptRequest.discriminator = undefined;
+PromptSvcPromptRequest.attributeTypeMap = [
+    {
+        "name": "engineParameters",
+        "baseName": "engineParameters",
+        "type": "PromptSvcEngineParameters"
+    },
     {
         "name": "id",
         "baseName": "id",
@@ -32,6 +37,11 @@ PromptSvcAddPromptRequest.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "parameters",
+        "baseName": "parameters",
+        "type": "PromptSvcParameters"
+    },
+    {
         "name": "prompt",
         "baseName": "prompt",
         "type": "string"
@@ -40,11 +50,6 @@ PromptSvcAddPromptRequest.attributeTypeMap = [
         "name": "sync",
         "baseName": "sync",
         "type": "boolean"
-    },
-    {
-        "name": "template",
-        "baseName": "template",
-        "type": "string"
     },
     {
         "name": "threadId",

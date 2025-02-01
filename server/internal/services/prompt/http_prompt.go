@@ -21,22 +21,29 @@ import (
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
-// @ID addPrompt
-// @Summary Add Prompt
-// @Description Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+// @ID prompt
+// @Summary Prompt an AI
+// @Description Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.
 // @Description
-// @Description Requires the `prompt-svc:prompt:create` permission.
+// @Description Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation.
+// @Description If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.
+// @Description
+// @Description **Prompting Modes**
+// @Description - **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality.
+// @Description - **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.
+// @Description
+// @Description **Permissions Required:** `prompt-svc:prompt:create`
 // @Tags Prompt Svc
 // @Accept json
 // @Produce json
-// @Param body body prompt.AddPromptRequest true "Add Prompt Request"
-// @Success 200 {object} prompt.AddPromptResponse
+// @Param body body prompt.PromptRequest true "Add Prompt Request"
+// @Success 200 {object} prompt.PromptResponse
 // @Failure 400 {object} prompt.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} prompt.ErrorResponse "Unauthorized"
 // @Failure 500 {object} prompt.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /prompt-svc/prompt [post]
-func (p *PromptService) AddPrompt(
+func (p *PromptService) Prompt(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -57,7 +64,7 @@ func (p *PromptService) AddPrompt(
 		return
 	}
 
-	req := &prompt.AddPromptRequest{}
+	req := &prompt.PromptRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

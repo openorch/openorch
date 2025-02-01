@@ -11,28 +11,24 @@
  */
 
 import { RequestFile } from './models';
-import { PromptSvcPrompt } from './promptSvcPrompt';
 
-export class PromptSvcAddPromptResponse {
-    'answer'?: string;
-    'prompt'?: PromptSvcPrompt;
+export class PromptSvcLlamaCppParameters {
+    /**
+    * Template of the prompt. Optional. If not present it\'s derived from ModelId.
+    */
+    'template'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "answer",
-            "baseName": "answer",
+            "name": "template",
+            "baseName": "template",
             "type": "string"
-        },
-        {
-            "name": "prompt",
-            "baseName": "prompt",
-            "type": "PromptSvcPrompt"
         }    ];
 
     static getAttributeTypeMap() {
-        return PromptSvcAddPromptResponse.attributeTypeMap;
+        return PromptSvcLlamaCppParameters.attributeTypeMap;
     }
 }
 

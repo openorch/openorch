@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { PromptSvcLlamaCppParameters } from './PromptSvcLlamaCppParameters';
 import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffusionParameters';
 /**
  *
@@ -18,10 +19,16 @@ import type { PromptSvcStableDiffusionParameters } from './PromptSvcStableDiffus
 export interface PromptSvcEngineParameters {
     /**
      *
+     * @type {PromptSvcLlamaCppParameters}
+     * @memberof PromptSvcEngineParameters
+     */
+    llamaCppParameters?: PromptSvcLlamaCppParameters;
+    /**
+     *
      * @type {PromptSvcStableDiffusionParameters}
      * @memberof PromptSvcEngineParameters
      */
-    lastRun?: PromptSvcStableDiffusionParameters;
+    stableDiffusion?: PromptSvcStableDiffusionParameters;
 }
 /**
  * Check if a given object implements the PromptSvcEngineParameters interface.

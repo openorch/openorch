@@ -31,17 +31,18 @@ const maxThreadTitle = 100
 
 func (p *PromptService) addPrompt(
 	ctx context.Context,
-	promptReq *prompttypes.AddPromptRequest,
+	promptReq *prompttypes.PromptRequest,
 	userId string,
-) (*prompttypes.AddPromptResponse, error) {
+) (*prompttypes.PromptResponse, error) {
 	prompt := &prompttypes.Prompt{
-		Id:         promptReq.Id,
-		Prompt:     promptReq.Prompt,
-		Sync:       promptReq.Sync,
-		ThreadId:   promptReq.ThreadId,
-		Template:   promptReq.Template,
-		ModelId:    promptReq.ModelId,
-		MaxRetries: promptReq.MaxRetries,
+		Id:               promptReq.Id,
+		Prompt:           promptReq.Prompt,
+		Sync:             promptReq.Sync,
+		ThreadId:         promptReq.ThreadId,
+		ModelId:          promptReq.ModelId,
+		MaxRetries:       promptReq.MaxRetries,
+		Parameters:       promptReq.Parameters,
+		EngineParameters: promptReq.EngineParameters,
 	}
 
 	prompt.Status = prompttypes.PromptStatusScheduled
@@ -141,7 +142,7 @@ func (p *PromptService) addPrompt(
 
 	go p.triggerPromptProcessing()
 
-	rsp := &prompttypes.AddPromptResponse{}
+	rsp := &prompttypes.PromptResponse{}
 
 	if prompt.Sync {
 		subscriber := make(chan *llm.CompletionResponse)
@@ -153,9 +154,8 @@ func (p *PromptService) addPrompt(
 		}()
 
 		for resp := range subscriber {
-			rsp.Answer += resp.Choices[0].Text
-
 			if resp.Choices[0].FinishReason != "" {
+
 				return rsp, nil
 			}
 		}

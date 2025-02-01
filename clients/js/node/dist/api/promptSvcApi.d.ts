@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 import http from 'http';
-import { PromptSvcAddPromptRequest } from '../model/promptSvcAddPromptRequest';
-import { PromptSvcAddPromptResponse } from '../model/promptSvcAddPromptResponse';
 import { PromptSvcListPromptsRequest } from '../model/promptSvcListPromptsRequest';
 import { PromptSvcListPromptsResponse } from '../model/promptSvcListPromptsResponse';
+import { PromptSvcPromptRequest } from '../model/promptSvcPromptRequest';
+import { PromptSvcPromptResponse } from '../model/promptSvcPromptResponse';
 import { PromptSvcRemovePromptRequest } from '../model/promptSvcRemovePromptRequest';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
@@ -39,19 +39,6 @@ export declare class PromptSvcApi {
     setApiKey(key: PromptSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
-     * Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.  Requires the `prompt-svc:prompt:create` permission.
-     * @summary Add Prompt
-     * @param body Add Prompt Request
-     */
-    addPrompt(body: PromptSvcAddPromptRequest, options?: {
-        headers: {
-            [name: string]: string;
-        };
-    }): Promise<{
-        response: http.IncomingMessage;
-        body: PromptSvcAddPromptResponse;
-    }>;
-    /**
      * List prompts that satisfy a query.
      * @summary List Prompts
      * @param body List Prompts Request
@@ -63,6 +50,19 @@ export declare class PromptSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: PromptSvcListPromptsResponse;
+    }>;
+    /**
+     * Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.  Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation. If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.  **Prompting Modes** - **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality. - **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.  **Permissions Required:** `prompt-svc:prompt:create`
+     * @summary Prompt an AI
+     * @param body Add Prompt Request
+     */
+    prompt(body: PromptSvcPromptRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: PromptSvcPromptResponse;
     }>;
     /**
      * Remove a prompt by ID.

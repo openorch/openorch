@@ -9,21 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class PromptSvcAddPromptResponse {
+export class PromptSvcTextToTextParameters {
     static getAttributeTypeMap() {
-        return PromptSvcAddPromptResponse.attributeTypeMap;
+        return PromptSvcTextToTextParameters.attributeTypeMap;
     }
 }
-PromptSvcAddPromptResponse.discriminator = undefined;
-PromptSvcAddPromptResponse.attributeTypeMap = [
+PromptSvcTextToTextParameters.discriminator = undefined;
+PromptSvcTextToTextParameters.attributeTypeMap = [
     {
-        "name": "answer",
-        "baseName": "answer",
+        "name": "template",
+        "baseName": "template",
         "type": "string"
-    },
-    {
-        "name": "prompt",
-        "baseName": "prompt",
-        "type": "PromptSvcPrompt"
     }
 ];
