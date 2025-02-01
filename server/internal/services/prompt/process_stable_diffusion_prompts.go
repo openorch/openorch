@@ -79,7 +79,7 @@ func (p *PromptService) processStableDiffusion(
 		return errors.New("no image in response")
 	}
 
-	decodedImage, err := base64.RawStdEncoding.DecodeString(rsp.Images[0])
+	decodedImage, err := base64.StdEncoding.DecodeString(rsp.Images[0])
 	if err != nil {
 		return err
 	}
