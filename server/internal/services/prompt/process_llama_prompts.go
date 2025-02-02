@@ -34,8 +34,11 @@ func (p *PromptService) processLlamaCpp(
 ) error {
 	fullPrompt := currentPrompt.Prompt
 
-	template := currentPrompt.Parameters.TextToText.Template
-	if template == "" {
+	template := ""
+	switch {
+	case currentPrompt.Parameters != nil && currentPrompt.Parameters.TextToText != nil:
+		template = currentPrompt.Parameters.TextToText.Template
+	case currentPrompt.EngineParameters != nil && currentPrompt.EngineParameters.LlamaCpp != nil:
 		template = currentPrompt.EngineParameters.LlamaCpp.Template
 	}
 
@@ -71,7 +74,7 @@ func (p *PromptService) processLlamaCpp(
 			case <-ticker.C:
 				mu.Lock()
 				logger.Debug(
-					"LLM is streaming",
+					"LLamaCPP is streaming",
 					slog.String("promptId", currentPrompt.Id),
 					slog.Float64(
 						"responsesPerSecond",

@@ -71,7 +71,7 @@ func (p *PromptService) processStableDiffusion(
 		req.Tiling = openapi.PtrBool(true)
 	}
 
-	rsp, err := sd.Txt2Img(req)
+	rsp, err := sd.Txt2Img(*req)
 	if err != nil {
 		return err
 	}

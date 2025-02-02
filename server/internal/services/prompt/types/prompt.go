@@ -132,17 +132,17 @@ type Prompt struct {
 	UserId string `json:"userId"`
 
 	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters
-	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+	EngineParameters *EngineParameters `json:"engineParameters,omitempty"`
 
 	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters.
 	// Use these high level parameters when you don't care about the actual engine, only
 	// the functionality (eg. text to image, image to image) it provides.
-	Parameters Parameters `json:"parameters,omitempty"`
+	Parameters *Parameters `json:"parameters,omitempty"`
 }
 
 type Parameters struct {
-	TextToText  TextToTextParameters  `json:"textToText,omitempty"`
-	TextToImage TextToImageParameters `json:"textToImage,omitempty"`
+	TextToText  *TextToTextParameters  `json:"textToText,omitempty"`
+	TextToImage *TextToImageParameters `json:"textToImage,omitempty"`
 }
 
 // TextToTextParameters represents a high-level, abstract text to text AI engine.
@@ -217,7 +217,7 @@ type LlamaCppParameters struct {
 
 type StableDiffusionParameters struct {
 	// Text to image parameters
-	Txt2Img stable_diffusion.Txt2ImgRequest
+	Txt2Img *stable_diffusion.Txt2ImgRequest
 }
 
 func (c *Prompt) GetId() string {
@@ -254,12 +254,12 @@ type PromptRequest struct {
 	MaxRetries int `json:"maxRetries,omitempty" example:"10"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
-	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+	EngineParameters *EngineParameters `json:"engineParameters,omitempty"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
 	// Use these high level parameters when you don't care about the actual engine, only
 	// the functionality (eg. text to image, image to image) it provides.
-	Parameters Parameters `json:"parameters,omitempty"`
+	Parameters *Parameters `json:"parameters,omitempty"`
 }
 
 type PromptResponse struct {
