@@ -14,6 +14,8 @@ package promptservice
 
 import (
 	"net/http"
+
+	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 // @ID promptTypes
@@ -34,5 +36,8 @@ func (p *PromptService) Types(
 	r *http.Request,
 ) {
 
-	w.Write([]byte(`{}`))
+	// only here so the prompt package is not unimported by the tooling
+	dummy := prompt.ErrorResponse{}
+
+	w.Write([]byte(`{}` + dummy.Error))
 }

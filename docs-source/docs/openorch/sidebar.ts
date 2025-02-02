@@ -370,6 +370,12 @@ const sidebar: SidebarsConfig = {
           label: "Remove Prompt",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "openorch/prompt-types",
+          label: "Prompt Types",
+          className: "api-method post",
+        },
       ],
     },
     {

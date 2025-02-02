@@ -18,7 +18,7 @@ import (
 	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
-	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 )
 
 type ErrorResponse struct {

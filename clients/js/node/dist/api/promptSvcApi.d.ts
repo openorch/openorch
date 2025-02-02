@@ -15,6 +15,7 @@ import { PromptSvcListPromptsResponse } from '../model/promptSvcListPromptsRespo
 import { PromptSvcPromptRequest } from '../model/promptSvcPromptRequest';
 import { PromptSvcPromptResponse } from '../model/promptSvcPromptResponse';
 import { PromptSvcRemovePromptRequest } from '../model/promptSvcRemovePromptRequest';
+import { PromptSvcTypesResponse } from '../model/promptSvcTypesResponse';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum PromptSvcApiApiKeys {
@@ -63,6 +64,19 @@ export declare class PromptSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: PromptSvcPromptResponse;
+    }>;
+    /**
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * @summary Prompt Types
+     * @param body Types Request
+     */
+    promptTypes(body: object, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: PromptSvcTypesResponse;
     }>;
     /**
      * Remove a prompt by ID.

@@ -82,7 +82,7 @@ export class MessageComponent {
 
 		await this.promptService.promptAdd({
 			id: this.server.id('msg'),
-			prompt: message.content!,
+			prompt: message.text!,
 			threadId: message.threadId as string,
 			modelId: this.modelId as string,
 		});

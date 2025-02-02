@@ -127,6 +127,7 @@ Class | Method | HTTP request | Description
 *PolicySvcAPI* | [**UpsertInstance**](docs/PolicySvcAPI.md#upsertinstance) | **Put** /policy-svc/instance/{instanceId} | Upsert an Instance
 *PromptSvcAPI* | [**ListPrompts**](docs/PromptSvcAPI.md#listprompts) | **Post** /prompt-svc/prompts | List Prompts
 *PromptSvcAPI* | [**Prompt**](docs/PromptSvcAPI.md#prompt) | **Post** /prompt-svc/prompt | Prompt an AI
+*PromptSvcAPI* | [**PromptTypes**](docs/PromptSvcAPI.md#prompttypes) | **Post** /prompt-svc/types | Prompt Types
 *PromptSvcAPI* | [**RemovePrompt**](docs/PromptSvcAPI.md#removeprompt) | **Post** /prompt-svc/remove | Remove Prompt
 *PromptSvcAPI* | [**SubscribeToPromptResponses**](docs/PromptSvcAPI.md#subscribetopromptresponses) | **Get** /prompt-svc/prompts/{threadId}/responses/subscribe | Subscribe to Prompt Responses by Thread
 *RegistrySvcAPI* | [**DeleteDefinition**](docs/RegistrySvcAPI.md#deletedefinition) | **Delete** /registry-svc/definition/{id} | Delete Definition
@@ -278,6 +279,7 @@ Class | Method | HTTP request | Description
  - [PromptSvcStableDiffusionParameters](docs/PromptSvcStableDiffusionParameters.md)
  - [PromptSvcTextToImageParameters](docs/PromptSvcTextToImageParameters.md)
  - [PromptSvcTextToTextParameters](docs/PromptSvcTextToTextParameters.md)
+ - [PromptSvcTypesResponse](docs/PromptSvcTypesResponse.md)
  - [RegistrySvcAPISpec](docs/RegistrySvcAPISpec.md)
  - [RegistrySvcClient](docs/RegistrySvcClient.md)
  - [RegistrySvcDefinition](docs/RegistrySvcDefinition.md)
@@ -314,6 +316,8 @@ Class | Method | HTTP request | Description
  - [SourceSvcCheckoutRepoResponse](docs/SourceSvcCheckoutRepoResponse.md)
  - [SourceSvcErrorResponse](docs/SourceSvcErrorResponse.md)
  - [StableDiffusionTxt2ImgRequest](docs/StableDiffusionTxt2ImgRequest.md)
+ - [StreammanagerChunk](docs/StreammanagerChunk.md)
+ - [StreammanagerChunkType](docs/StreammanagerChunkType.md)
  - [UserSvcAddUserToOrganizationRequest](docs/UserSvcAddUserToOrganizationRequest.md)
  - [UserSvcAssignPermissionsRequest](docs/UserSvcAssignPermissionsRequest.md)
  - [UserSvcAuthToken](docs/UserSvcAuthToken.md)

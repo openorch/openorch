@@ -10,12 +10,15 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcPromptRequest, PromptSvcPromptResponse, PromptSvcRemovePromptRequest } from '../models/index';
+import type { PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcPromptRequest, PromptSvcPromptResponse, PromptSvcRemovePromptRequest, PromptSvcTypesResponse } from '../models/index';
 export interface ListPromptsRequest {
     body?: PromptSvcListPromptsRequest;
 }
 export interface PromptRequest {
     body: PromptSvcPromptRequest;
+}
+export interface PromptTypesRequest {
+    body: object;
 }
 export interface RemovePromptRequest {
     body: PromptSvcRemovePromptRequest;
@@ -47,6 +50,16 @@ export declare class PromptSvcApi extends runtime.BaseAPI {
      * Prompt an AI
      */
     prompt(requestParameters: PromptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcPromptResponse>;
+    /**
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * Prompt Types
+     */
+    promptTypesRaw(requestParameters: PromptTypesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PromptSvcTypesResponse>>;
+    /**
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * Prompt Types
+     */
+    promptTypes(requestParameters: PromptTypesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PromptSvcTypesResponse>;
     /**
      * Remove a prompt by ID.
      * Remove Prompt

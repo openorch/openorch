@@ -25,7 +25,10 @@ import { Subscription, filter } from 'rxjs';
 import { ServerService } from '../../services/server.service';
 import { ChatService } from '../../services/chat.service';
 import { PromptService } from '../../services/prompt.service';
-import { PromptSvcPrompt as Prompt } from '@openorch/client';
+import {
+	PromptSvcPrompt as Prompt,
+	PromptSvcStreamChunkType as ChunkType,
+} from '@openorch/client';
 import {
 	ChatSvcThread as Thread,
 	ChatSvcMessage as Message,
@@ -214,7 +217,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 			id: this.server.id('prom'),
 			prompt: emitted.message,
 			// characterId: emitted.characterId,
-			template: this.promptTemplate,
+			// template: this.promptTemplate,
 			threadId: this.thread.id as string,
 			modelId: emitted.modelId as string,
 		});
@@ -267,7 +270,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 					this.cd.markForCheck();
 				});
 
-			this.messageCurrentlyStreamed.content = '';
+			this.messageCurrentlyStreamed.text = '';
 			let first = true;
 
 			this.cd.markForCheck();
@@ -278,19 +281,14 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 			this.streamSubscription = this.promptService
 				.promptSubscribe(threadId)
 				.subscribe(async (response) => {
-					if (
-						response?.choices &&
-						response?.choices?.length > 0 &&
-						response?.choices[0]?.text
-					) {
+					if (response.type == ChunkType.ChunkTypeProgress) {
 						const insidePre =
-							(this.messageCurrentlyStreamed.content!.match(/```/g) || [])
-								.length %
+							(this.messageCurrentlyStreamed.text!.match(/```/g) || []).length %
 								2 ===
 							1;
 						let addValue = insidePre
-							? response?.choices[0].text
-							: escapeHtml(response?.choices[0].text);
+							? response?.text!
+							: escapeHtml(response?.text!);
 
 						if (first) {
 							addValue = addValue.trimStart();
@@ -299,16 +297,13 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 
 						this.messageCurrentlyStreamed = {
 							...this.messageCurrentlyStreamed,
-							content: this.messageCurrentlyStreamed.content + addValue,
+							content: this.messageCurrentlyStreamed.text + addValue,
 						} as any;
 					}
 
-					if (
-						response?.choices?.length > 0 &&
-						response?.choices[0]?.finish_reason === 'stop'
-					) {
+					if (response.type == ChunkType.ChunkTypeDone) {
 						if (this.messages?.length == 1) {
-							this.setThreadName(this.messages[0].content!);
+							this.setThreadName(this.messages[0].text!);
 						}
 						// @todo might not be needed now we have the `chatMessageAdded`
 						// event coming from the firehose

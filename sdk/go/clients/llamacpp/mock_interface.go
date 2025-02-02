@@ -4,7 +4,7 @@
 //
 //
 
-// Package llm is a generated GoMock package.
+// Package llamacpp is a generated GoMock package.
 package llamacpp
 
 import (

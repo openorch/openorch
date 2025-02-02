@@ -23,7 +23,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
-	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 

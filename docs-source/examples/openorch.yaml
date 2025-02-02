@@ -1486,6 +1486,13 @@ definitions:
         example: '[INST]{prompt}[/INST]'
         type: string
     type: object
+  prompt_svc.TypesRequest:
+    type: object
+  prompt_svc.TypesResponse:
+    properties:
+      chunk:
+        $ref: '#/definitions/streammanager.Chunk'
+    type: object
   registry_svc.APISpec:
     properties:
       metadata:
@@ -2262,6 +2269,24 @@ definitions:
       width:
         type: integer
     type: object
+  streammanager.Chunk:
+    properties:
+      text:
+        description: TextChunk contains a part of the text output from the stream.
+        type: string
+      type:
+        allOf:
+        - $ref: '#/definitions/streammanager.ChunkType'
+        description: Type indicates the type of the stream event (e.g., text, done).
+    type: object
+  streammanager.ChunkType:
+    enum:
+    - progress
+    - done
+    type: string
+    x-enum-varnames:
+    - ChunkTypeProgress
+    - ChunkTypeDone
   user_svc.AddUserToOrganizationRequest:
     properties:
       userId:
@@ -4471,6 +4496,44 @@ paths:
       security:
       - BearerAuth: []
       summary: Remove Prompt
+      tags:
+      - Prompt Svc
+  /prompt-svc/types:
+    post:
+      consumes:
+      - application/json
+      description: The only purpose of this "endpoint" is to export types otherwise
+        not appearing in the API docs.
+      operationId: promptTypes
+      parameters:
+      - description: Types Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/prompt_svc.TypesRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/prompt_svc.TypesResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Prompt Types
       tags:
       - Prompt Svc
   /registry-svc/definition:

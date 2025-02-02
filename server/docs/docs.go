@@ -2706,6 +2706,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/prompt-svc/types": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Prompt Svc"
+                ],
+                "summary": "Prompt Types",
+                "operationId": "promptTypes",
+                "parameters": [
+                    {
+                        "description": "Types Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/prompt_svc.TypesRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/prompt_svc.TypesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/prompt_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/prompt_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/prompt_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/registry-svc/definition": {
             "put": {
                 "security": [
@@ -6996,6 +7054,45 @@ const docTemplate = `{
                     "example": "[INST]{prompt}[/INST]"
                 }
             }
+        },
+        "prompt_svc.TypesRequest": {
+            "type": "object"
+        },
+        "prompt_svc.TypesResponse": {
+            "type": "object",
+            "properties": {
+                "chunk": {
+                    "$ref": "#/definitions/prompt_svc_stream.Chunk"
+                }
+            }
+        },
+        "prompt_svc_stream.Chunk": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "description": "TextChunk contains a part of the text output from the stream.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Type indicates the type of the stream event (e.g., text, done).",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/prompt_svc_stream.ChunkType"
+                        }
+                    ]
+                }
+            }
+        },
+        "prompt_svc_stream.ChunkType": {
+            "type": "string",
+            "enum": [
+                "progress",
+                "done"
+            ],
+            "x-enum-varnames": [
+                "ChunkTypeProgress",
+                "ChunkTypeDone"
+            ]
         },
         "registry_svc.APISpec": {
             "type": "object",

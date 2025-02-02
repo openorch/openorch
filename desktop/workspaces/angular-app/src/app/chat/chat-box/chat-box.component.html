@@ -24,7 +24,7 @@
 				></app-message>
 			</ng-container>
 	
-			<ng-container *ngIf="messageCurrentlyStreamed.content?.length">
+			<ng-container *ngIf="messageCurrentlyStreamed.text?.length">
 				<app-message
 					[message]="messageCurrentlyStreamed"
 					[streaming]="true"

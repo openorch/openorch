@@ -20,6 +20,7 @@ import {
 	PromptSvcPromptResponse,
 	PromptSvcListPromptsRequest,
 	PromptSvcListPromptsResponse,
+	PromptSvcStreamChunk,
 } from '@openorch/client';
 
 @Injectable({
@@ -102,13 +103,13 @@ export class PromptService {
 	}
 
 	private resubCount = 0;
-	promptSubscribe(threadId: string): Observable<PromptSvcStream> {
+	promptSubscribe(threadId: string): Observable<PromptSvcStreamChunk> {
 		if (!threadId) {
 			console.log('No thread id');
 			throw 'no thread id';
 		}
 
-		return new Observable<PromptSvcStream>((observer) => {
+		return new Observable<PromptSvcStreamChunk>((observer) => {
 			const controller = new AbortController();
 			const { signal } = controller;
 
@@ -173,7 +174,7 @@ export class PromptService {
 													.trim();
 
 												try {
-													const json = JSON.parse(cleanedText);
+													const json: PromptSvcStreamChunk = JSON.parse(cleanedText);
 													observer.next(json);
 												} catch (error) {
 													console.error(

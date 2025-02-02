@@ -10,7 +10,10 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package streammanager
+
+// This package is named "prompt_svc_*" so the generated and exported
+// swaggo Chunk type is prefixed with PromptSvcStream
+package prompt_svc_stream
 
 import (
 	"strings"

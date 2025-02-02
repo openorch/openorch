@@ -103,8 +103,11 @@ export * from './promptSvcPromptStatus';
 export * from './promptSvcPromptType';
 export * from './promptSvcRemovePromptRequest';
 export * from './promptSvcStableDiffusionParameters';
+export * from './promptSvcStreamChunk';
+export * from './promptSvcStreamChunkType';
 export * from './promptSvcTextToImageParameters';
 export * from './promptSvcTextToTextParameters';
+export * from './promptSvcTypesResponse';
 export * from './registrySvcAPISpec';
 export * from './registrySvcClient';
 export * from './registrySvcDefinition';
@@ -294,8 +297,11 @@ import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
 import { PromptSvcPromptType } from './promptSvcPromptType';
 import { PromptSvcRemovePromptRequest } from './promptSvcRemovePromptRequest';
 import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+import { PromptSvcStreamChunk } from './promptSvcStreamChunk';
+import { PromptSvcStreamChunkType } from './promptSvcStreamChunkType';
 import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
 import { PromptSvcTextToTextParameters } from './promptSvcTextToTextParameters';
+import { PromptSvcTypesResponse } from './promptSvcTypesResponse';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcDefinition } from './registrySvcDefinition';
@@ -390,6 +396,7 @@ let enumsMap: {[index: string]: any} = {
         "PolicySvcTemplateId": PolicySvcTemplateId,
         "PromptSvcPromptStatus": PromptSvcPromptStatus,
         "PromptSvcPromptType": PromptSvcPromptType,
+        "PromptSvcStreamChunkType": PromptSvcStreamChunkType,
         "RegistrySvcInstanceStatus": RegistrySvcInstanceStatus,
         "RegistrySvcLanguage": RegistrySvcLanguage,
         "SecretSvcChecksumAlgorithm": SecretSvcChecksumAlgorithm,
@@ -491,8 +498,10 @@ let typeMap: {[index: string]: any} = {
     "PromptSvcPromptResponse": PromptSvcPromptResponse,
     "PromptSvcRemovePromptRequest": PromptSvcRemovePromptRequest,
     "PromptSvcStableDiffusionParameters": PromptSvcStableDiffusionParameters,
+    "PromptSvcStreamChunk": PromptSvcStreamChunk,
     "PromptSvcTextToImageParameters": PromptSvcTextToImageParameters,
     "PromptSvcTextToTextParameters": PromptSvcTextToTextParameters,
+    "PromptSvcTypesResponse": PromptSvcTypesResponse,
     "RegistrySvcAPISpec": RegistrySvcAPISpec,
     "RegistrySvcClient": RegistrySvcClient,
     "RegistrySvcDefinition": RegistrySvcDefinition,

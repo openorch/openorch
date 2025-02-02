@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { PromptSvcListPromptsRequestToJSON, PromptSvcListPromptsResponseFromJSON, PromptSvcPromptRequestToJSON, PromptSvcPromptResponseFromJSON, PromptSvcRemovePromptRequestToJSON, } from '../models/index';
+import { PromptSvcListPromptsRequestToJSON, PromptSvcListPromptsResponseFromJSON, PromptSvcPromptRequestToJSON, PromptSvcPromptResponseFromJSON, PromptSvcRemovePromptRequestToJSON, PromptSvcTypesResponseFromJSON, } from '../models/index';
 /**
  *
  */
@@ -90,6 +90,41 @@ export class PromptSvcApi extends runtime.BaseAPI {
     prompt(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.promptRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * Prompt Types
+     */
+    promptTypesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling promptTypes().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/prompt-svc/types`,
+                method: 'POST',
+                headers: headerParameters,
+                query: queryParameters,
+                body: requestParameters['body'],
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => PromptSvcTypesResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * Prompt Types
+     */
+    promptTypes(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.promptTypesRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
