@@ -285,7 +285,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			ticker := time.NewTicker(tick)
 			defer ticker.Stop()
 
-			var prsp *openapi.PromptSvcAddPromptResponse
+			var prsp *openapi.PromptSvcPromptResponse
 
 		outer:
 			for {
@@ -295,9 +295,9 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 					return
 				case <-ticker.C:
 
-					prsp, _, err = userClient.PromptSvcAPI.AddPrompt(ctx).
+					prsp, _, err = userClient.PromptSvcAPI.Prompt(ctx).
 						Body(
-							openapi.PromptSvcAddPromptRequest{
+							openapi.PromptSvcPromptRequest{
 								Prompt: "Hi there, how are you?",
 								Sync:   openapi.PtrBool(true),
 							},
@@ -309,8 +309,8 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			}
 
 			gomega.Expect(prsp).NotTo(gomega.BeNil())
-			gomega.Expect(prsp.Answer).NotTo(gomega.BeNil())
-			gomega.Expect(*prsp.Answer).To(gomega.ContainSubstring("how"))
+			gomega.Expect(prsp.ResponseMessage).NotTo(gomega.BeNil())
+			gomega.Expect(*prsp.ResponseMessage.Text).To(gomega.ContainSubstring("how"))
 		})
 	})
 })

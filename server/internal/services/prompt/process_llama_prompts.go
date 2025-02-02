@@ -24,6 +24,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
@@ -94,7 +95,17 @@ func (p *PromptService) processLlamaCpp(
 		responseCount++
 		mu.Unlock()
 
-		p.StreamManager.Broadcast(currentPrompt.ThreadId, resp)
+		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text: resp.Choices[0].Text,
+				Type: streammanager.ChunkTypeDone,
+			})
+		} else {
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text: resp.Choices[0].Text,
+				Type: streammanager.ChunkTypeProgress,
+			})
+		}
 
 		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
 			defer func() {
@@ -109,9 +120,7 @@ func (p *PromptService) processLlamaCpp(
 							Id:       openapi.PtrString(sdk.Id("msg")),
 							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
 							Text: openapi.PtrString(
-								llamaCppResponseToText(
-									p.StreamManager.History[currentPrompt.ThreadId],
-								),
+								p.streamManager.ConcatHistoryText(currentPrompt.ThreadId),
 							),
 						},
 					},
@@ -123,10 +132,17 @@ func (p *PromptService) processLlamaCpp(
 				return
 			}
 
-			delete(p.StreamManager.History, currentPrompt.ThreadId)
-
+			p.streamManager.DeleteHistory(currentPrompt.ThreadId)
 		}
 	})
 
 	return err
+}
+
+func errToString(err error) string {
+	if err != nil {
+		return err.Error()
+	}
+
+	return ""
 }

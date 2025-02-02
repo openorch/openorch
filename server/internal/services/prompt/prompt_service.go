@@ -21,7 +21,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
 
-	streammanager "github.com/openorch/openorch/server/internal/services/prompt/sub/stream_manager"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
@@ -32,7 +32,7 @@ type PromptService struct {
 	llamaCppCLient llamacpp.ClientI
 	lock           lock.DistributedLock
 
-	*streammanager.StreamManager
+	streamManager *streammanager.StreamManager
 
 	promptsStore    datastore.DataStore
 	credentialStore datastore.DataStore
@@ -69,7 +69,7 @@ func NewPromptService(
 		llamaCppCLient: llamaCppClient,
 		lock:           lock,
 
-		StreamManager: streammanager.NewStreamManager(),
+		streamManager: streammanager.NewStreamManager(),
 
 		promptsStore:    promptsStore,
 		credentialStore: credentialStore,

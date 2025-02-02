@@ -16,16 +16,14 @@ import (
 	"time"
 
 	openapi "github.com/openorch/openorch/clients/go"
-	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
 )
 
 type ErrorResponse struct {
 	Error string `json:"error"`
 }
-
-type SubscriberChan chan *llamacpp.CompletionResponse
 
 type PromptStatus string
 
@@ -294,4 +292,11 @@ type RemovePromptResponse struct{}
 
 type ListPromptOptions struct {
 	Query *datastore.Query `json:"query"`
+}
+
+type TypesRequest struct {
+}
+
+type TypesResponse struct {
+	Chunk streammanager.Chunk
 }

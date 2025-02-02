@@ -20,10 +20,10 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream_manager"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
@@ -145,17 +145,16 @@ func (p *PromptService) prompt(
 	rsp := &prompttypes.PromptResponse{}
 
 	if prompt.Sync {
-		subscriber := make(chan *llamacpp.CompletionResponse)
-		p.StreamManager.Subscribe(threadId, subscriber)
+		subscriber := make(chan *streammanager.Chunk)
+		p.streamManager.Subscribe(threadId, subscriber)
 
 		go func() {
 			<-ctx.Done()
-			p.StreamManager.Unsubscribe(threadId, subscriber)
+			p.streamManager.Unsubscribe(threadId, subscriber)
 		}()
 
 		for resp := range subscriber {
-			if resp.Choices[0].FinishReason != "" {
-
+			if resp.Type == streammanager.ChunkTypeDone {
 				return rsp, nil
 			}
 		}
