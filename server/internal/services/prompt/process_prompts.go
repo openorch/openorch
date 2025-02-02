@@ -276,7 +276,7 @@ func (p *PromptService) processPrompt(
 
 	err = p.processPlatform(stat.Address, modelId, currentPrompt)
 
-	logger.Debug("Finished streaming LLM",
+	logger.Debug("Finished streaming prompt",
 		slog.String("error", fmt.Sprintf("%v", err)),
 	)
 	if err != nil {

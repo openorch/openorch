@@ -297,8 +297,8 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 
 						this.messageCurrentlyStreamed = {
 							...this.messageCurrentlyStreamed,
-							content: this.messageCurrentlyStreamed.text + addValue,
-						} as any;
+							text: this.messageCurrentlyStreamed.text + addValue,
+						} as Message;
 					}
 
 					if (response.type == ChunkType.ChunkTypeDone) {
@@ -312,9 +312,10 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 
 						this.messageCurrentlyStreamed = {
 							...this.messageCurrentlyStreamed,
-							content: '',
-						} as any;
+							text: '',
+						} as Message;
 					}
+
 					this.cd.detectChanges();
 				});
 		}

@@ -103,6 +103,7 @@ export class PromptService {
 	}
 
 	private resubCount = 0;
+	
 	promptSubscribe(threadId: string): Observable<PromptSvcStreamChunk> {
 		if (!threadId) {
 			console.log('No thread id');
