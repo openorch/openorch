@@ -287,8 +287,8 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 								2 ===
 							1;
 						let addValue = insidePre
-							? response?.text!
-							: escapeHtml(response?.text!);
+							? response?.text || ''
+							: escapeHtml(response?.text || '') ;
 
 						if (first) {
 							addValue = addValue.trimStart();

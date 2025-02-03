@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.11
+API version: 0.3.0-rc.12
 Contact: sales@singulatron.com
 */
 
@@ -91,7 +91,9 @@ If no model ID is specified, the default model will be used (see `Model Svc` for
 	/*
 	SubscribeToPromptResponses Subscribe to Prompt Responses by Thread
 
-	Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+	Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+You can subscribe to threads before they are created.
+The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param threadId Thread ID
@@ -754,7 +756,9 @@ func (r ApiSubscribeToPromptResponsesRequest) Execute() (string, *http.Response,
 /*
 SubscribeToPromptResponses Subscribe to Prompt Responses by Thread
 
-Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+You can subscribe to threads before they are created.
+The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param threadId Thread ID

@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.11
+API version: 0.3.0-rc.12
 Contact: sales@singulatron.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &PromptSvcTypesResponse{}
 
 // PromptSvcTypesResponse struct for PromptSvcTypesResponse
 type PromptSvcTypesResponse struct {
-	Chunk *StreammanagerChunk `json:"chunk,omitempty"`
+	Chunk *PromptSvcStreamChunk `json:"chunk,omitempty"`
 }
 
 // NewPromptSvcTypesResponse instantiates a new PromptSvcTypesResponse object
@@ -41,9 +41,9 @@ func NewPromptSvcTypesResponseWithDefaults() *PromptSvcTypesResponse {
 }
 
 // GetChunk returns the Chunk field value if set, zero value otherwise.
-func (o *PromptSvcTypesResponse) GetChunk() StreammanagerChunk {
+func (o *PromptSvcTypesResponse) GetChunk() PromptSvcStreamChunk {
 	if o == nil || IsNil(o.Chunk) {
-		var ret StreammanagerChunk
+		var ret PromptSvcStreamChunk
 		return ret
 	}
 	return *o.Chunk
@@ -51,7 +51,7 @@ func (o *PromptSvcTypesResponse) GetChunk() StreammanagerChunk {
 
 // GetChunkOk returns a tuple with the Chunk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptSvcTypesResponse) GetChunkOk() (*StreammanagerChunk, bool) {
+func (o *PromptSvcTypesResponse) GetChunkOk() (*PromptSvcStreamChunk, bool) {
 	if o == nil || IsNil(o.Chunk) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *PromptSvcTypesResponse) HasChunk() bool {
 	return false
 }
 
-// SetChunk gets a reference to the given StreammanagerChunk and assigns it to the Chunk field.
-func (o *PromptSvcTypesResponse) SetChunk(v StreammanagerChunk) {
+// SetChunk gets a reference to the given PromptSvcStreamChunk and assigns it to the Chunk field.
+func (o *PromptSvcTypesResponse) SetChunk(v PromptSvcStreamChunk) {
 	o.Chunk = &v
 }
 
