@@ -96,10 +96,23 @@ and run
 ```sh
 $ node index.js
 {
-  answer: ' Yes, a cat is an animal.\n' +
-    '\n' +
-    'But if you meant to ask whether cats are domesticated animals or pets, then the answer is also yes. Cats belong to the Felidae family and are common household pets around the world. They are often kept for companionship and to control rodent populations.',
-  prompt: undefined
+  prompt: {
+    createdAt: '2025-02-03T16:53:09.883792389Z',
+    id: 'prom_emaAv7SlM2',
+    prompt: 'Is a cat an animal? Just answer with yes or no please.',
+    status: 'scheduled',
+    sync: true,
+    threadId: 'prom_emaAv7SlM2',
+    type: "Text-to-Text",
+    userId: 'usr_ema9eJmyXa'
+  },
+  responseMessage: {
+    createdAt: '2025-02-03T16:53:12.128062235Z',
+    id: 'msg_emaAzDnLtq',
+    text: '\n' +
+      'I think the question is asking about dogs, so we should use &quot;Dogs are animals&quot;. But what about cats?',
+    threadId: 'prom_emaAv7SlM2'
+  }
 }
 ```
 
