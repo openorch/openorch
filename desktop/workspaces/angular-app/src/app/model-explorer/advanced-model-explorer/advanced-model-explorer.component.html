@@ -14,6 +14,8 @@
 					placeholder="{{
 						'Search models' | translate
 					}}. Try 'Chat', 'Instruct', '5 GB' etc..."
+					name="searchQuery"
+					ngDefaultControl
 					[(ngModel)]="searchQuery"
 					(ionChange)="filterModels()"
 				></ion-searchbar>
@@ -33,6 +35,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-checkbox
+					name="showOnlyDownloadedModels"
+					ngDefaultControl
 					[(ngModel)]="showOnlyDownloadedModels"
 					(ngModelChange)="filterModels()"
 					>Show only downloaded models</ion-checkbox
@@ -176,8 +180,8 @@
 						>
 							<ion-button
 								*ngIf="
-									(configService.config$ | async)!.data['model-svc'].currentModelId !==
-									model.id
+									(configService.config$ | async)!.data['model-svc']
+										.currentModelId !== model.id
 								"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
