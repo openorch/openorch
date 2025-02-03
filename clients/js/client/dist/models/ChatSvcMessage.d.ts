@@ -32,7 +32,7 @@ export interface ChatSvcMessage {
      * @type {string}
      * @memberof ChatSvcMessage
      */
-    id?: string;
+    id: string;
     /**
      * Text content of the message eg. "Hi, what's up?"
      * @type {string}
@@ -44,7 +44,7 @@ export interface ChatSvcMessage {
      * @type {string}
      * @memberof ChatSvcMessage
      */
-    threadId?: string;
+    threadId: string;
     /**
      *
      * @type {string}

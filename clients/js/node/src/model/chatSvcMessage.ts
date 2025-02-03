@@ -18,7 +18,7 @@ export class ChatSvcMessage {
     * FileIds defines the file attachments the message has.
     */
     'fileIds'?: Array<string>;
-    'id'?: string;
+    'id': string;
     /**
     * Text content of the message eg. \"Hi, what\'s up?\"
     */
@@ -26,7 +26,7 @@ export class ChatSvcMessage {
     /**
     * ThreadId of the message.
     */
-    'threadId'?: string;
+    'threadId': string;
     'updatedAt'?: string;
     /**
     * UserId is the id of the user who wrote the message. For AI messages this field is empty.

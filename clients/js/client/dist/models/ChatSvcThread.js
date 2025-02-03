@@ -15,6 +15,8 @@
  * Check if a given object implements the ChatSvcThread interface.
  */
 export function instanceOfChatSvcThread(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
     return true;
 }
 export function ChatSvcThreadFromJSON(json) {
@@ -26,7 +28,7 @@ export function ChatSvcThreadFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'title': json['title'] == null ? undefined : json['title'],
         'topicIds': json['topicIds'] == null ? undefined : json['topicIds'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],

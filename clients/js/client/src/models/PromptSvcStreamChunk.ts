@@ -28,6 +28,13 @@ import {
  */
 export interface PromptSvcStreamChunk {
     /**
+     * MessageId is the ChatSvc Message id that the chunk is part of.
+     * Might only be available for "done" chunks.
+     * @type {string}
+     * @memberof PromptSvcStreamChunk
+     */
+    messageId?: string;
+    /**
      * TextChunk contains a part of the text output from the stream.
      * @type {string}
      * @memberof PromptSvcStreamChunk
@@ -60,6 +67,7 @@ export function PromptSvcStreamChunkFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
+        'messageId': json['messageId'] == null ? undefined : json['messageId'],
         'text': json['text'] == null ? undefined : json['text'],
         'type': json['type'] == null ? undefined : PromptSvcStreamChunkTypeFromJSON(json['type']),
     };
@@ -76,6 +84,7 @@ export function PromptSvcStreamChunkToJSONTyped(value?: PromptSvcStreamChunk | n
 
     return {
         
+        'messageId': value['messageId'],
         'text': value['text'],
         'type': PromptSvcStreamChunkTypeToJSON(value['type']),
     };

@@ -14,7 +14,7 @@ import { RequestFile } from './models';
 
 export class ChatSvcThread {
     'createdAt'?: string;
-    'id'?: string;
+    'id': string;
     /**
     * Title of the thread.
     */

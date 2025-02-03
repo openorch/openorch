@@ -14,6 +14,7 @@ import { ChatSvcAddMessageRequest } from '../model/chatSvcAddMessageRequest';
 import { ChatSvcAddThreadRequest } from '../model/chatSvcAddThreadRequest';
 import { ChatSvcAddThreadResponse } from '../model/chatSvcAddThreadResponse';
 import { ChatSvcEventThreadUpdate } from '../model/chatSvcEventThreadUpdate';
+import { ChatSvcGetMessageResponse } from '../model/chatSvcGetMessageResponse';
 import { ChatSvcGetMessagesResponse } from '../model/chatSvcGetMessagesResponse';
 import { ChatSvcGetThreadResponse } from '../model/chatSvcGetThreadResponse';
 import { ChatSvcGetThreadsResponse } from '../model/chatSvcGetThreadsResponse';
@@ -111,6 +112,19 @@ export declare class ChatSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: ChatSvcEventThreadUpdate;
+    }>;
+    /**
+     * Fetch information about a specific chat message by its ID
+     * @summary Get Message
+     * @param messageId Message ID
+     */
+    getMessage(messageId: string, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: ChatSvcGetMessageResponse;
     }>;
     /**
      * Fetch messages (and associated assets) for a specific chat thread.

@@ -24,6 +24,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/get-message",
+          label: "Get Message",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "openorch/add-thread",
           label: "Add Thread",
           className: "api-method post",

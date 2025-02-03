@@ -11,7 +11,7 @@
  */
 export declare class ChatSvcThread {
     'createdAt'?: string;
-    'id'?: string;
+    'id': string;
     /**
     * Title of the thread.
     */

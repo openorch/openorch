@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { ChatSvcAddMessageRequest, ChatSvcAddThreadRequest, ChatSvcAddThreadResponse, ChatSvcEventThreadUpdate, ChatSvcGetMessagesResponse, ChatSvcGetThreadResponse, ChatSvcGetThreadsResponse, ChatSvcUpdateThreadRequest } from '../models/index';
+import type { ChatSvcAddMessageRequest, ChatSvcAddThreadRequest, ChatSvcAddThreadResponse, ChatSvcEventThreadUpdate, ChatSvcGetMessageResponse, ChatSvcGetMessagesResponse, ChatSvcGetThreadResponse, ChatSvcGetThreadsResponse, ChatSvcUpdateThreadRequest } from '../models/index';
 export interface AddMessageRequest {
     threadId: string;
     body: ChatSvcAddMessageRequest;
@@ -23,6 +23,9 @@ export interface DeleteMessageRequest {
 }
 export interface DeleteThreadRequest {
     threadId: string;
+}
+export interface GetMessageRequest {
+    messageId: string;
 }
 export interface GetMessagesRequest {
     threadId: string;
@@ -103,6 +106,16 @@ export declare class ChatSvcApi extends runtime.BaseAPI {
      * Events
      */
     events(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChatSvcEventThreadUpdate>;
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    getMessageRaw(requestParameters: GetMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChatSvcGetMessageResponse>>;
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    getMessage(requestParameters: GetMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChatSvcGetMessageResponse>;
     /**
      * Fetch messages (and associated assets) for a specific chat thread.
      * List Messages

@@ -17,6 +17,11 @@ export class PromptSvcStreamChunk {
 PromptSvcStreamChunk.discriminator = undefined;
 PromptSvcStreamChunk.attributeTypeMap = [
     {
+        "name": "messageId",
+        "baseName": "messageId",
+        "type": "string"
+    },
+    {
         "name": "text",
         "baseName": "text",
         "type": "string"

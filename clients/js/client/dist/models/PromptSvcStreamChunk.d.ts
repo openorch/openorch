@@ -17,6 +17,13 @@ import type { PromptSvcStreamChunkType } from './PromptSvcStreamChunkType';
  */
 export interface PromptSvcStreamChunk {
     /**
+     * MessageId is the ChatSvc Message id that the chunk is part of.
+     * Might only be available for "done" chunks.
+     * @type {string}
+     * @memberof PromptSvcStreamChunk
+     */
+    messageId?: string;
+    /**
      * TextChunk contains a part of the text output from the stream.
      * @type {string}
      * @memberof PromptSvcStreamChunk

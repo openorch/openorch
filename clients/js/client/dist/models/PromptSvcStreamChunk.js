@@ -26,6 +26,7 @@ export function PromptSvcStreamChunkFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
+        'messageId': json['messageId'] == null ? undefined : json['messageId'],
         'text': json['text'] == null ? undefined : json['text'],
         'type': json['type'] == null ? undefined : PromptSvcStreamChunkTypeFromJSON(json['type']),
     };
@@ -38,6 +39,7 @@ export function PromptSvcStreamChunkToJSONTyped(value, ignoreDiscriminator = fal
         return value;
     }
     return {
+        'messageId': value['messageId'],
         'text': value['text'],
         'type': PromptSvcStreamChunkTypeToJSON(value['type']),
     };

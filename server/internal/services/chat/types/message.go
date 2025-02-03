@@ -21,13 +21,13 @@ type ErrorResponse struct {
 }
 
 type Message struct {
-	Id string `json:"id"`
+	Id string `json:"id" example:"msg_emSOPlW58o" binding:"required"`
 
 	// ThreadId of the message.
-	ThreadId string `json:"threadId"`
+	ThreadId string `json:"threadId" example:"thr_emSOeEUWAg" binding:"required"`
 
 	// Text content of the message eg. "Hi, what's up?"
-	Text string `json:"text"`
+	Text string `json:"text,omitempty"`
 
 	// UserId is the id of the user who wrote the message.
 	// For AI messages this field is empty.

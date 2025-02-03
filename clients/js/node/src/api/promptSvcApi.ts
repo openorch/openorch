@@ -235,7 +235,7 @@ export class PromptSvcApi {
         });
     }
     /**
-     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs. This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
      * @summary Prompt Types
      * @param body Types Request
      */

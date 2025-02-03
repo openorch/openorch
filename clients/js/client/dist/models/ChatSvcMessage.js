@@ -15,6 +15,10 @@
  * Check if a given object implements the ChatSvcMessage interface.
  */
 export function instanceOfChatSvcMessage(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('threadId' in value) || value['threadId'] === undefined)
+        return false;
     return true;
 }
 export function ChatSvcMessageFromJSON(json) {
@@ -27,9 +31,9 @@ export function ChatSvcMessageFromJSONTyped(json, ignoreDiscriminator) {
     return {
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileIds': json['fileIds'] == null ? undefined : json['fileIds'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'text': json['text'] == null ? undefined : json['text'],
-        'threadId': json['threadId'] == null ? undefined : json['threadId'],
+        'threadId': json['threadId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
         'userId': json['userId'] == null ? undefined : json['userId'],
     };

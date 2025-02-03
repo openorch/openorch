@@ -9,20 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PromptSvcStreamChunkType } from './promptSvcStreamChunkType';
-export declare class PromptSvcStreamChunk {
-    /**
-    * MessageId is the ChatSvc Message id that the chunk is part of. Might only be available for \"done\" chunks.
-    */
-    'messageId'?: string;
-    /**
-    * TextChunk contains a part of the text output from the stream.
-    */
-    'text'?: string;
-    /**
-    * Type indicates the type of the stream event (e.g., text, done).
-    */
-    'type'?: PromptSvcStreamChunkType;
+import { ChatSvcMessage } from './chatSvcMessage';
+export declare class ChatSvcGetMessageResponse {
+    'exists'?: boolean;
+    'message'?: ChatSvcMessage;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;
@@ -34,6 +24,4 @@ export declare class PromptSvcStreamChunk {
         baseName: string;
         type: string;
     }[];
-}
-export declare namespace PromptSvcStreamChunk {
 }

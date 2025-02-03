@@ -26,7 +26,7 @@ export interface ChatSvcThread {
      * @type {string}
      * @memberof ChatSvcThread
      */
-    id?: string;
+    id: string;
     /**
      * Title of the thread.
      * @type {string}

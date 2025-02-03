@@ -20,6 +20,8 @@ var _ MappedNullable = &PromptSvcStreamChunk{}
 
 // PromptSvcStreamChunk struct for PromptSvcStreamChunk
 type PromptSvcStreamChunk struct {
+	// MessageId is the ChatSvc Message id that the chunk is part of. Might only be available for \"done\" chunks.
+	MessageId *string `json:"messageId,omitempty"`
 	// TextChunk contains a part of the text output from the stream.
 	Text *string `json:"text,omitempty"`
 	// Type indicates the type of the stream event (e.g., text, done).
@@ -41,6 +43,38 @@ func NewPromptSvcStreamChunk() *PromptSvcStreamChunk {
 func NewPromptSvcStreamChunkWithDefaults() *PromptSvcStreamChunk {
 	this := PromptSvcStreamChunk{}
 	return &this
+}
+
+// GetMessageId returns the MessageId field value if set, zero value otherwise.
+func (o *PromptSvcStreamChunk) GetMessageId() string {
+	if o == nil || IsNil(o.MessageId) {
+		var ret string
+		return ret
+	}
+	return *o.MessageId
+}
+
+// GetMessageIdOk returns a tuple with the MessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcStreamChunk) GetMessageIdOk() (*string, bool) {
+	if o == nil || IsNil(o.MessageId) {
+		return nil, false
+	}
+	return o.MessageId, true
+}
+
+// HasMessageId returns a boolean if a field has been set.
+func (o *PromptSvcStreamChunk) HasMessageId() bool {
+	if o != nil && !IsNil(o.MessageId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessageId gets a reference to the given string and assigns it to the MessageId field.
+func (o *PromptSvcStreamChunk) SetMessageId(v string) {
+	o.MessageId = &v
 }
 
 // GetText returns the Text field value if set, zero value otherwise.
@@ -117,6 +151,9 @@ func (o PromptSvcStreamChunk) MarshalJSON() ([]byte, error) {
 
 func (o PromptSvcStreamChunk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MessageId) {
+		toSerialize["messageId"] = o.MessageId
+	}
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}

@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { ChatSvcAddMessageRequestToJSON, ChatSvcAddThreadRequestToJSON, ChatSvcAddThreadResponseFromJSON, ChatSvcEventThreadUpdateFromJSON, ChatSvcGetMessagesResponseFromJSON, ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadsResponseFromJSON, ChatSvcUpdateThreadRequestToJSON, } from '../models/index';
+import { ChatSvcAddMessageRequestToJSON, ChatSvcAddThreadRequestToJSON, ChatSvcAddThreadResponseFromJSON, ChatSvcEventThreadUpdateFromJSON, ChatSvcGetMessageResponseFromJSON, ChatSvcGetMessagesResponseFromJSON, ChatSvcGetThreadResponseFromJSON, ChatSvcGetThreadsResponseFromJSON, ChatSvcUpdateThreadRequestToJSON, } from '../models/index';
 /**
  *
  */
@@ -189,6 +189,39 @@ export class ChatSvcApi extends runtime.BaseAPI {
     events(initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.eventsRaw(initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    getMessageRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['messageId'] == null) {
+                throw new runtime.RequiredError('messageId', 'Required parameter "messageId" was null or undefined when calling getMessage().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/chat-svc/message/{messageId}`.replace(`{${"messageId"}}`, encodeURIComponent(String(requestParameters['messageId']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => ChatSvcGetMessageResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    getMessage(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getMessageRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

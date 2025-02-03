@@ -19,6 +19,7 @@ import type {
   ChatSvcAddThreadRequest,
   ChatSvcAddThreadResponse,
   ChatSvcEventThreadUpdate,
+  ChatSvcGetMessageResponse,
   ChatSvcGetMessagesResponse,
   ChatSvcGetThreadResponse,
   ChatSvcGetThreadsResponse,
@@ -33,6 +34,8 @@ import {
     ChatSvcAddThreadResponseToJSON,
     ChatSvcEventThreadUpdateFromJSON,
     ChatSvcEventThreadUpdateToJSON,
+    ChatSvcGetMessageResponseFromJSON,
+    ChatSvcGetMessageResponseToJSON,
     ChatSvcGetMessagesResponseFromJSON,
     ChatSvcGetMessagesResponseToJSON,
     ChatSvcGetThreadResponseFromJSON,
@@ -58,6 +61,10 @@ export interface DeleteMessageRequest {
 
 export interface DeleteThreadRequest {
     threadId: string;
+}
+
+export interface GetMessageRequest {
+    messageId: string;
 }
 
 export interface GetMessagesRequest {
@@ -276,6 +283,45 @@ export class ChatSvcApi extends runtime.BaseAPI {
      */
     async events(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChatSvcEventThreadUpdate> {
         const response = await this.eventsRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    async getMessageRaw(requestParameters: GetMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChatSvcGetMessageResponse>> {
+        if (requestParameters['messageId'] == null) {
+            throw new runtime.RequiredError(
+                'messageId',
+                'Required parameter "messageId" was null or undefined when calling getMessage().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/chat-svc/message/{messageId}`.replace(`{${"messageId"}}`, encodeURIComponent(String(requestParameters['messageId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ChatSvcGetMessageResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Fetch information about a specific chat message by its ID
+     * Get Message
+     */
+    async getMessage(requestParameters: GetMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChatSvcGetMessageResponse> {
+        const response = await this.getMessageRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

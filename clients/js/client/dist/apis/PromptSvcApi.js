@@ -94,7 +94,7 @@ export class PromptSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs. This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
      * Prompt Types
      */
     promptTypesRaw(requestParameters, initOverrides) {
@@ -119,7 +119,7 @@ export class PromptSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.
+     * The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs. This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
      * Prompt Types
      */
     promptTypes(requestParameters, initOverrides) {

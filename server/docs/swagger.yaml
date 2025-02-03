@@ -70,12 +70,14 @@ definitions:
           type: string
         type: array
       id:
+        example: msg_emSOPlW58o
         type: string
       text:
         description: Text content of the message eg. "Hi, what's up?"
         type: string
       threadId:
         description: ThreadId of the message.
+        example: thr_emSOeEUWAg
         type: string
       updatedAt:
         type: string
@@ -84,12 +86,16 @@ definitions:
           UserId is the id of the user who wrote the message.
           For AI messages this field is empty.
         type: string
+    required:
+    - id
+    - threadId
     type: object
   chat_svc.Thread:
     properties:
       createdAt:
         type: string
       id:
+        example: thr_emSQnpJbhG
         type: string
       title:
         description: Title of the thread.
@@ -108,6 +114,8 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - id
     type: object
   chat_svc.UpdateThreadRequest:
     properties:
@@ -1502,6 +1510,11 @@ definitions:
     type: object
   prompt_svc_stream.Chunk:
     properties:
+      messageId:
+        description: |-
+          MessageId is the ChatSvc Message id that the chunk is part of.
+          Might only be available for "done" chunks.
+        type: string
       text:
         description: TextChunk contains a part of the text output from the stream.
         type: string

@@ -5170,6 +5170,10 @@ const docTemplate = `{
         },
         "chat_svc.Message": {
             "type": "object",
+            "required": [
+                "id",
+                "threadId"
+            ],
             "properties": {
                 "createdAt": {
                     "type": "string"
@@ -5182,7 +5186,8 @@ const docTemplate = `{
                     }
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "msg_emSOPlW58o"
                 },
                 "text": {
                     "description": "Text content of the message eg. \"Hi, what's up?\"",
@@ -5190,7 +5195,8 @@ const docTemplate = `{
                 },
                 "threadId": {
                     "description": "ThreadId of the message.",
-                    "type": "string"
+                    "type": "string",
+                    "example": "thr_emSOeEUWAg"
                 },
                 "updatedAt": {
                     "type": "string"
@@ -5203,12 +5209,16 @@ const docTemplate = `{
         },
         "chat_svc.Thread": {
             "type": "object",
+            "required": [
+                "id"
+            ],
             "properties": {
                 "createdAt": {
                     "type": "string"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "thr_emSQnpJbhG"
                 },
                 "title": {
                     "description": "Title of the thread.",
@@ -7134,6 +7144,10 @@ const docTemplate = `{
         "prompt_svc_stream.Chunk": {
             "type": "object",
             "properties": {
+                "messageId": {
+                    "description": "MessageId is the ChatSvc Message id that the chunk is part of.\nMight only be available for \"done\" chunks.",
+                    "type": "string"
+                },
                 "text": {
                     "description": "TextChunk contains a part of the text output from the stream.",
                     "type": "string"
