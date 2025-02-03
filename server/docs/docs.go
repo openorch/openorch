@@ -49,6 +49,60 @@ const docTemplate = `{
             }
         },
         "/chat-svc/message/{messageId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Fetch information about a specific chat message by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Chat Svc"
+                ],
+                "summary": "Get Message",
+                "operationId": "getMessage",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Message ID",
+                        "name": "messageId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message details successfully retrieved",
+                        "schema": {
+                            "$ref": "#/definitions/chat_svc.GetMessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "security": [
                     {
@@ -2713,7 +2767,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.",
+                "description": "The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.\nThis endpoint otherwise does nothing. Do not depend on this endpoint, only its types.",
                 "consumes": [
                     "application/json"
                 ],
@@ -5064,6 +5118,17 @@ const docTemplate = `{
             "properties": {
                 "threadId": {
                     "type": "string"
+                }
+            }
+        },
+        "chat_svc.GetMessageResponse": {
+            "type": "object",
+            "properties": {
+                "exists": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "$ref": "#/definitions/chat_svc.Message"
                 }
             }
         },

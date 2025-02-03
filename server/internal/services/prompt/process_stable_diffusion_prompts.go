@@ -40,7 +40,12 @@ func (p *PromptService) processStableDiffusion(
 	// support the high level `Parameters` field as well,
 	// not just the `EngineParameters`
 
-	req := currentPrompt.EngineParameters.StableDiffusion.Txt2Img
+	req := &stable_diffusion.Txt2ImgRequest{}
+	if currentPrompt.EngineParameters != nil &&
+		currentPrompt.EngineParameters.StableDiffusion != nil &&
+		currentPrompt.EngineParameters.StableDiffusion.Txt2Img != nil {
+		req = currentPrompt.EngineParameters.StableDiffusion.Txt2Img
+	}
 	req.Prompt = currentPrompt.Prompt
 
 	if req.Steps == nil {

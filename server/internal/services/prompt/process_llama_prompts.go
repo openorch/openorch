@@ -99,28 +99,18 @@ func (p *PromptService) processLlamaCpp(
 		mu.Unlock()
 
 		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
-			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
-				Text: resp.Choices[0].Text,
-				Type: streammanager.ChunkTypeDone,
-			})
-		} else {
-			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
-				Text: resp.Choices[0].Text,
-				Type: streammanager.ChunkTypeProgress,
-			})
-		}
-
-		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
 			defer func() {
 				done <- true
 			}()
+
+			messageId := sdk.Id("msg")
 
 			_, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
 				ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
 				Body(
 					openapi.ChatSvcAddMessageRequest{
 						Message: &openapi.ChatSvcMessage{
-							Id:       openapi.PtrString(sdk.Id("msg")),
+							Id:       openapi.PtrString(messageId),
 							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
 							Text: openapi.PtrString(
 								p.streamManager.ConcatHistoryText(currentPrompt.ThreadId),
@@ -136,6 +126,17 @@ func (p *PromptService) processLlamaCpp(
 			}
 
 			p.streamManager.DeleteHistory(currentPrompt.ThreadId)
+
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text:      resp.Choices[0].Text,
+				Type:      streammanager.ChunkTypeDone,
+				MessageId: messageId,
+			})
+		} else {
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text: resp.Choices[0].Text,
+				Type: streammanager.ChunkTypeProgress,
+			})
 		}
 	})
 
