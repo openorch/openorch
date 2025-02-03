@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.11
+API version: 0.3.0-rc.12
 Contact: sales@singulatron.com
 */
 
@@ -20,12 +20,12 @@ var _ MappedNullable = &ChatSvcMessage{}
 
 // ChatSvcMessage struct for ChatSvcMessage
 type ChatSvcMessage struct {
-	// Content of the message eg. \"Hi, what's up?\"
-	Content *string `json:"content,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// FileIds defines the file attachments the message has.
 	FileIds []string `json:"fileIds,omitempty"`
 	Id *string `json:"id,omitempty"`
+	// Text content of the message eg. \"Hi, what's up?\"
+	Text *string `json:"text,omitempty"`
 	// ThreadId of the message.
 	ThreadId *string `json:"threadId,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
@@ -48,38 +48,6 @@ func NewChatSvcMessage() *ChatSvcMessage {
 func NewChatSvcMessageWithDefaults() *ChatSvcMessage {
 	this := ChatSvcMessage{}
 	return &this
-}
-
-// GetContent returns the Content field value if set, zero value otherwise.
-func (o *ChatSvcMessage) GetContent() string {
-	if o == nil || IsNil(o.Content) {
-		var ret string
-		return ret
-	}
-	return *o.Content
-}
-
-// GetContentOk returns a tuple with the Content field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChatSvcMessage) GetContentOk() (*string, bool) {
-	if o == nil || IsNil(o.Content) {
-		return nil, false
-	}
-	return o.Content, true
-}
-
-// HasContent returns a boolean if a field has been set.
-func (o *ChatSvcMessage) HasContent() bool {
-	if o != nil && !IsNil(o.Content) {
-		return true
-	}
-
-	return false
-}
-
-// SetContent gets a reference to the given string and assigns it to the Content field.
-func (o *ChatSvcMessage) SetContent(v string) {
-	o.Content = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -176,6 +144,38 @@ func (o *ChatSvcMessage) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *ChatSvcMessage) SetId(v string) {
 	o.Id = &v
+}
+
+// GetText returns the Text field value if set, zero value otherwise.
+func (o *ChatSvcMessage) GetText() string {
+	if o == nil || IsNil(o.Text) {
+		var ret string
+		return ret
+	}
+	return *o.Text
+}
+
+// GetTextOk returns a tuple with the Text field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatSvcMessage) GetTextOk() (*string, bool) {
+	if o == nil || IsNil(o.Text) {
+		return nil, false
+	}
+	return o.Text, true
+}
+
+// HasText returns a boolean if a field has been set.
+func (o *ChatSvcMessage) HasText() bool {
+	if o != nil && !IsNil(o.Text) {
+		return true
+	}
+
+	return false
+}
+
+// SetText gets a reference to the given string and assigns it to the Text field.
+func (o *ChatSvcMessage) SetText(v string) {
+	o.Text = &v
 }
 
 // GetThreadId returns the ThreadId field value if set, zero value otherwise.
@@ -284,9 +284,6 @@ func (o ChatSvcMessage) MarshalJSON() ([]byte, error) {
 
 func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Content) {
-		toSerialize["content"] = o.Content
-	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
@@ -295,6 +292,9 @@ func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Text) {
+		toSerialize["text"] = o.Text
 	}
 	if !IsNil(o.ThreadId) {
 		toSerialize["threadId"] = o.ThreadId

@@ -15,28 +15,48 @@ package promptservice
 import (
 	"context"
 	"log/slog"
+	"strings"
 	"sync"
 	"time"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/logger"
 
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 func (p *PromptService) processLlamaCpp(
 	address string,
-	fullPrompt string,
 	currentPrompt *prompttypes.Prompt,
 ) error {
-	var llmClient llm.ClientI
-	if p.llmCLient != nil {
-		llmClient = p.llmCLient
+	fullPrompt := currentPrompt.Prompt
+
+	template := ""
+	switch {
+	case currentPrompt.Parameters != nil && currentPrompt.Parameters.TextToText != nil:
+		template = currentPrompt.Parameters.TextToText.Template
+	case currentPrompt.EngineParameters != nil && currentPrompt.EngineParameters.LlamaCpp != nil:
+		template = currentPrompt.EngineParameters.LlamaCpp.Template
+	}
+
+	if template != "" {
+		fullPrompt = strings.Replace(
+			template,
+			"{prompt}",
+			currentPrompt.Prompt,
+			-1,
+		)
+	}
+
+	var llamaCppClient llamacpp.ClientI
+	if p.llamaCppCLient != nil {
+		llamaCppClient = p.llamaCppCLient
 	} else {
-		llmClient = &llm.Client{
-			LLMAddress: address,
+		llamaCppClient = &llamacpp.Client{
+			LLamaCppAddress: address,
 		}
 	}
 
@@ -54,7 +74,7 @@ func (p *PromptService) processLlamaCpp(
 			case <-ticker.C:
 				mu.Lock()
 				logger.Debug(
-					"LLM is streaming",
+					"LLamaCPP is streaming",
 					slog.String("promptId", currentPrompt.Id),
 					slog.Float64(
 						"responsesPerSecond",
@@ -69,16 +89,26 @@ func (p *PromptService) processLlamaCpp(
 		}
 	}()
 
-	err := llmClient.PostCompletionsStreamed(llm.PostCompletionsRequest{
+	err := llamaCppClient.PostCompletionsStreamed(llamacpp.PostCompletionsRequest{
 		Prompt:    fullPrompt,
 		Stream:    true,
 		MaxTokens: 1000000,
-	}, func(resp *llm.CompletionResponse) {
+	}, func(resp *llamacpp.CompletionResponse) {
 		mu.Lock()
 		responseCount++
 		mu.Unlock()
 
-		p.StreamManager.Broadcast(currentPrompt.ThreadId, resp)
+		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text: resp.Choices[0].Text,
+				Type: streammanager.ChunkTypeDone,
+			})
+		} else {
+			p.streamManager.Broadcast(currentPrompt.ThreadId, &streammanager.Chunk{
+				Text: resp.Choices[0].Text,
+				Type: streammanager.ChunkTypeProgress,
+			})
+		}
 
 		if len(resp.Choices) > 0 && resp.Choices[0].FinishReason == "stop" {
 			defer func() {
@@ -92,10 +122,8 @@ func (p *PromptService) processLlamaCpp(
 						Message: &openapi.ChatSvcMessage{
 							Id:       openapi.PtrString(sdk.Id("msg")),
 							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
-							Content: openapi.PtrString(
-								llmResponseToText(
-									p.StreamManager.History[currentPrompt.ThreadId],
-								),
+							Text: openapi.PtrString(
+								p.streamManager.ConcatHistoryText(currentPrompt.ThreadId),
 							),
 						},
 					},
@@ -107,10 +135,17 @@ func (p *PromptService) processLlamaCpp(
 				return
 			}
 
-			delete(p.StreamManager.History, currentPrompt.ThreadId)
-
+			p.streamManager.DeleteHistory(currentPrompt.ThreadId)
 		}
 	})
 
 	return err
+}
+
+func errToString(err error) string {
+	if err != nil {
+		return err.Error()
+	}
+
+	return ""
 }

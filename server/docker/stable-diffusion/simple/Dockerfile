@@ -33,6 +33,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   git reset --hard v1.9.4 && \
   pip install -r requirements_versions.txt
 
+RUN pip install --upgrade typing-extensions
+
 
 ENV ROOT=/stable-diffusion-webui
 
@@ -62,5 +64,6 @@ WORKDIR ${ROOT}
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV CLI_ARGS=""
 EXPOSE 7860
+RUN chmod +x /docker/entrypoint.sh
 ENTRYPOINT ["/docker/entrypoint.sh"]
 CMD python -u webui.py --listen --port 7860 ${CLI_ARGS}

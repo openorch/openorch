@@ -348,8 +348,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "openorch/add-prompt",
-          label: "Add Prompt",
+          id: "openorch/prompt",
+          label: "Prompt an AI",
           className: "api-method post",
         },
         {
@@ -368,6 +368,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "openorch/remove-prompt",
           label: "Remove Prompt",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/prompt-types",
+          label: "Prompt Types",
           className: "api-method post",
         },
       ],

@@ -15,16 +15,15 @@ package prompt_svc
 import (
 	"time"
 
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 )
 
 type ErrorResponse struct {
 	Error string `json:"error"`
 }
-
-type SubscriberChan chan *llm.CompletionResponse
 
 type PromptStatus string
 
@@ -36,6 +35,46 @@ const (
 	PromptStatusErrored   PromptStatus = "errored"
 	PromptStatusAbandoned PromptStatus = "abandoned"
 	PromptStatusCanceled  PromptStatus = "canceled"
+)
+
+type PromptType string
+
+const (
+	// Multimodal prompts
+	PromptTypeImageTextToText              PromptType = "Image-Text-to-Text"
+	PromptTypeVisualQuestionAnswering      PromptType = "Visual Question Answering"
+	PromptTypeDocumentQuestionAnswering    PromptType = "Document Question Answering"
+	PromptTypeTextToImage                  PromptType = "Text-to-Image"
+	PromptTypeImageToImage                 PromptType = "Image-to-Image"
+	PromptTypeImageToVideo                 PromptType = "Image-to-Video"
+	PromptTypeUnconditionalImageGeneration PromptType = "Unconditional Image Generation"
+	PromptTypeTextToVideo                  PromptType = "Text-to-Video"
+	PromptTypeZeroShotImageClassification  PromptType = "Zero-Shot Image Classification"
+	PromptTypeZeroShotObjectDetection      PromptType = "Zero-Shot Object Detection"
+	PromptTypeTextTo3D                     PromptType = "Text-to-3D"
+	PromptTypeImageTo3D                    PromptType = "Image-to-3D"
+	PromptTypeImageFeatureExtraction       PromptType = "Image Feature Extraction"
+	PromptTypeKeypointDetection            PromptType = "Keypoint Detection"
+
+	// NLP prompts
+	PromptTypeTextToText        PromptType = "Text-to-Text"
+	PromptTypeQuestionAnswering PromptType = "Question Answering"
+	PromptTypeTranslation       PromptType = "Translation"
+	PromptTypeSummarization     PromptType = "Summarization"
+	PromptTypeTextGeneration    PromptType = "Text Generation"
+	PromptTypeFillMask          PromptType = "Fill-Mask"
+
+	// Audio prompts
+	PromptTypeTextToSpeech               PromptType = "Text-to-Speech"
+	PromptTypeTextToAudio                PromptType = "Text-to-Audio"
+	PromptTypeAutomaticSpeechRecognition PromptType = "Automatic Speech Recognition"
+	PromptTypeAudioToAudio               PromptType = "Audio-to-Audio"
+	PromptTypeAudioClassification        PromptType = "Audio Classification"
+
+	// Other
+	PromptTypeReinforcementLearning PromptType = "Reinforcement Learning"
+	PromptTypeRobotics              PromptType = "Robotics"
+	PromptTypeGraphMachineLearning  PromptType = "Graph Machine Learning"
 )
 
 type Prompt struct {
@@ -52,13 +91,18 @@ type Prompt struct {
 	// In those cases set Sync to true.
 	Sync bool `json:"sync"`
 
+	// Type is inferred from the `Parameters` or `EngineParameters` field.
+	// Eg. A LLamaCpp prompt will be "Text-to-Text",
+	// a Stabel Diffusion one will be "Text-to-Image" etc.
+	Type PromptType `json:"type,omitempty"`
+
 	// ThreadId is the ID of the thread a prompt belongs to.
 	// Clients subscribe to Thread Streams to see the answer to a prompt,
 	// or set `prompt.sync` to true for a blocking answer.
 	ThreadId string `json:"threadId"`
 
-	// Template of the prompt. Optional. If not present it's derived from ModelId.
-	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
+	RequestMessageId  string `json:"requestMessageId"`
+	ResponseMessageId string `json:"responseMessageId"`
 
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId string `json:"modelId,omitempty" example:"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"`
@@ -87,46 +131,93 @@ type Prompt struct {
 	// UserId contains the ID of the user who submitted the prompt.
 	UserId string `json:"userId"`
 
-	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
-	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific parameters
+	EngineParameters *EngineParameters `json:"engineParameters,omitempty"`
 
-	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+	// AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters.
 	// Use these high level parameters when you don't care about the actual engine, only
 	// the functionality (eg. text to image, image to image) it provides.
-	Parameters Parameters `json:"parameters,omitempty"`
+	Parameters *Parameters `json:"parameters,omitempty"`
 }
 
 type Parameters struct {
-	TextToImage TextToImageParameters `json:"textToImage,omitempty"`
+	TextToText  *TextToTextParameters  `json:"textToText,omitempty"`
+	TextToImage *TextToImageParameters `json:"textToImage,omitempty"`
 }
 
+// TextToTextParameters represents a high-level, abstract text to text AI engine.
+type TextToTextParameters struct {
+	// Template of the prompt. Optional. If not present it's derived from ModelId.
+	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
+}
+
+// TextToImageParameters represents a high-level, abstract text to image AI engine.
 type TextToImageParameters struct {
-	Prompt            string   `json:"prompt,omitempty"`
-	NegativePrompt    string   `json:"negativePrompt,omitempty"`
-	Styles            []string `json:"styles,omitempty"`            // Artistic styles or themes
-	Seed              *int     `json:"seed,omitempty"`              // Optional, used for reproducibility
-	BatchSize         int      `json:"batchSize,omitempty"`         // Number of images per batch
-	NumIterations     int      `json:"numIterations,omitempty"`     // How many times to run the prompt (batches)
-	Steps             int      `json:"steps,omitempty"`             // Number of inference steps
-	GuidanceScale     float64  `json:"guidanceScale,omitempty"`     // How closely to follow the prompt
-	Width             int      `json:"width,omitempty"`             // Image width in pixels
-	Height            int      `json:"height,omitempty"`            // Image height in pixels
-	AspectRatio       string   `json:"aspectRatio,omitempty"`       // Alternative to width/height (e.g., "16:9", "1:1")
-	DenoisingStrength float64  `json:"denoisingStrength,omitempty"` // Noise control for variation
-	EnableUpscaling   bool     `json:"enableUpscaling,omitempty"`   // Whether to use AI upscaling
-	RestoreFaces      bool     `json:"restoreFaces,omitempty"`      // Face restoration for portraits
-	Scheduler         string   `json:"scheduler,omitempty"`         // Sampling method, if applicable
-	QualityPreset     string   `json:"qualityPreset,omitempty"`     // Low, Medium, High, Ultra (for services like DALL·E)
-	Format            string   `json:"format,omitempty"`            // Output format (png, jpg, webp, etc.)
+	// The primary prompt for generating the image.
+	// Defaults to the top-level prompt if not specified.
+	// If both are provided (which should be avoided), this field takes precedence.
+	Prompt string `json:"prompt,omitempty"`
+
+	// A negative prompt to specify what should be avoided in the image.
+	NegativePrompt string `json:"negativePrompt,omitempty"`
+
+	// List of artistic styles or themes to apply.
+	Styles []string `json:"styles,omitempty"`
+
+	// Optional seed for reproducibility. If not set, a random seed is used.
+	Seed *int `json:"seed,omitempty"`
+
+	// Number of images to generate per batch.
+	BatchSize int `json:"batchSize,omitempty"`
+
+	// Number of batches to generate.
+	NumIterations int `json:"numIterations,omitempty"`
+
+	// Number of inference steps for image generation.
+	Steps int `json:"steps,omitempty"`
+
+	// How closely the output should follow the prompt.
+	GuidanceScale float64 `json:"guidanceScale,omitempty"`
+
+	// Image dimensions (width and height in pixels).
+	Width  int `json:"width,omitempty"`
+	Height int `json:"height,omitempty"`
+
+	// Alternative way to specify dimensions (e.g., "16:9", "1:1").
+	AspectRatio string `json:"aspectRatio,omitempty"`
+
+	// Controls how much variation is introduced in image modifications.
+	DenoisingStrength float64 `json:"denoisingStrength,omitempty"`
+
+	// Whether to apply AI-based upscaling.
+	EnableUpscaling bool `json:"enableUpscaling,omitempty"`
+
+	// Whether to enhance facial details for portraits.
+	RestoreFaces bool `json:"restoreFaces,omitempty"`
+
+	// Specifies the sampling method used during generation.
+	Scheduler string `json:"scheduler,omitempty"`
+
+	// Preset quality settings (e.g., Low, Medium, High, Ultra).
+	QualityPreset string `json:"qualityPreset,omitempty"`
+
+	// Output format for the generated image (png, jpg, webp, etc.).
+	Format string `json:"format,omitempty"`
 }
 
 type EngineParameters struct {
+	LlamaCpp        *LlamaCppParameters        `json:"llamaCppParameters,omitempty"`
 	StableDiffusion *StableDiffusionParameters `json:"stableDiffusion,omitempty"`
+}
+
+type LlamaCppParameters struct {
+	// Template of the prompt. Optional. If not present it's derived from ModelId.
+	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
 }
 
 type StableDiffusionParameters struct {
 	// Text to image parameters
-	Txt2Img stable_diffusion.Txt2ImgRequest
+	Txt2Img *stable_diffusion.Txt2ImgRequest
 }
 
 func (c *Prompt) GetId() string {
@@ -137,7 +228,7 @@ func (c *Prompt) GetUpdatedAt() string {
 	return c.Id
 }
 
-type AddPromptRequest struct {
+type PromptRequest struct {
 	// Id is the unique ID of the prompt.
 	Id string `json:"id"`
 
@@ -147,7 +238,7 @@ type AddPromptRequest struct {
 	// Sync drives whether prompt add request should wait and hang until
 	// the prompt is done executing. By default the prompt just gets put on a queue
 	// and the client will just subscribe to a Thread Stream.
-	// For quick and dirty scripting however it's often times easier to do things syncronously.
+	// For quick and dirty scripting however it's often times easier to do things synchronously.
 	// In those cases set Sync to true.
 	Sync bool `json:"sync"`
 
@@ -156,9 +247,6 @@ type AddPromptRequest struct {
 	// or set `prompt.sync` to true for a blocking answer.
 	ThreadId string `json:"threadId"`
 
-	// Template of the prompt. Optional. If not present it's derived from ModelId.
-	Template string `json:"template" example:"[INST]{prompt}[/INST]"`
-
 	// ModelId is just the OpenOrch internal ID of the model.
 	ModelId string `json:"modelId,omitempty" example:"huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf"`
 
@@ -166,17 +254,24 @@ type AddPromptRequest struct {
 	MaxRetries int `json:"maxRetries,omitempty" example:"10"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
-	EngineParameters EngineParameters `json:"engineParameters,omitempty"`
+	EngineParameters *EngineParameters `json:"engineParameters,omitempty"`
 
 	// AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
 	// Use these high level parameters when you don't care about the actual engine, only
 	// the functionality (eg. text to image, image to image) it provides.
-	Parameters Parameters `json:"parameters,omitempty"`
+	Parameters *Parameters `json:"parameters,omitempty"`
 }
 
-type AddPromptResponse struct {
-	Prompt *Prompt `json:"prompt"`
-	Answer string  `json:"answer"`
+type PromptResponse struct {
+	// Response message contains the response text and files.
+	// This field is populated only for synchronous prompts (`sync = true`).
+	// For asynchronous prompts, the response will provided in the associated
+	// message identified by the `responseMessageId` of the `promptSvc.prompt` object once the prompt completes.
+	ResponseMessage *openapi.ChatSvcMessage `json:"responseMessage,omitempty"`
+
+	// Prompt contains the details of the prompt that was just created by this request.
+	// This includes the ID, prompt text, status, and other associated metadata.
+	Prompt *Prompt `json:"prompt,omitempty"`
 }
 
 type ListPromptsRequest struct {
@@ -197,4 +292,11 @@ type RemovePromptResponse struct{}
 
 type ListPromptOptions struct {
 	Query *datastore.Query `json:"query"`
+}
+
+type TypesRequest struct {
+}
+
+type TypesResponse struct {
+	Chunk streammanager.Chunk
 }

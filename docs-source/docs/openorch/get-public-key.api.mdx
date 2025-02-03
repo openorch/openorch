@@ -5,25 +5,19 @@ description: "Get the public key to parse and verify the JWT."
 sidebar_label: "Get Public Key"
 hide_title: true
 hide_table_of_contents: true
-api: eJy9VE1v2zAM/SsCz46dNBsw+LQMGIq0xVIgLXZoc1BkxlYrSxolJ/MM//eBdtKv7bIedrJAU4+Pj4/qoMCgSPuonYUczjGKWKHwzdZoJR6xFdEJLymgkLYQeyS9a4eUi+83KSTgPJLk28sCcigxXg9XL7GFBAiDdzZggLyDs+mUP68Lri4hAeVsRBv5r/TeaDUAZg+BUzoIqsJa8skTl4t6BPRPlfIOYusRcgiRtC2h75NTxG0fUEXoe459+BuHpd1LowtxsV59E45ErUPQthQeaTg6K3TxfppI5OhfKM7+pHhrZRMrR/oX/i8mHJRlgPwObgOSWO8VbBKoMVbuOGpIwMtYQQ5ZE5AmYa+ycSiTx2H+AWmPxBgdNGQ4MTNOSVO5EPOPn87mM+g3nKca0rFdM/GR6xeUhLRoGP6tGjetR3F/TLkHsXPGuAMWYtsKKYKXanRrdI9ohVQ/Gk1YiB25erDuqR9x5UptBdrCO20j21kzfoWyQIIErKxZlcVR+0FleBJLes3mY6W03TnmyYORahgM1lJzx0EaDJ/ZUI2RkZxNlatfYF8vxbrx3hHLOYpUxejzLHMerSNVpY7KDPrk7erYiSesdUCxWApvZNw5qofGa63IsfhaYRCoXGhDxJobNFqhDcgMTwzOr6/Efp5OX9UPeZYdDoe0tM1Q/3gvZLL0ZjJPp2kVa8OsIlIdVrv1WO6ZfjjIskRKtcuGlIyV09FwysqjXZGqIAE2yNjQNJ2n0wmpdDZjXO9CrKV9wZRfp/F5EeP78kqQ7nkt3vGOHWca8WfMvJHaMoVBju5o8js4mZx9/2zzTQJsZ07ouq0MeEum7zn8o0FqIb/bJLCXpOWWe7/b9MnJYbwXDJHDQin07IC9NM1orjd73b9cvvOvN9D3vwGwS/f0
+api: eJy9VE1v2zAM/SsCz46dNhsw+LQMGIq0xVIgLXZIc1BkxlYrSxolJ/MM//eBdtKv7bIedrJAU4+Pj4/qoMCgSPuonYUcLjCKWKHwzdZoJR6xFdEJLymgkLYQeyS9a4eUy++3KSTgPJLk24sCcigx3gxXr7CFBAiDdzZggLyD8+mUP68LLq8gAeVsRBv5r/TeaDUAZg+BUzoIqsJa8skTl4t6BPRPlfIOYusRcgiRtC2h75NTxG0fUEXoe459+BuHhd1LowtxuVp+E45ErUPQthQeaTg6K3TxfppI5OhfKJ79SfHOyiZWjvQv/F9MOCjLAPka7gKSWO0VbBKoMVbuOGpIwMtYQQ5ZE5AmYa+ycSiTx2H+AWmPxBgdNGQ4MTNOSVO5EPOPn85nZ9BvOE81pGO7YuIj1y8oCWneMPxbNW5bj+L+mHIPYueMcQcsxLYVUgQv1ejW6B7RCql+NJqwEDty9WDdUz/i2pXaCrSFd9pGtrNm/AplgQQJWFmzKvOj9oPK8CSW9JrNx0ppu3PMkwcj1TAYrKXmjoM0GD6zoRojIzmbKle/wL5ZiFXjvSOWcxSpitHnWeY8WkeqSh2VGfTJ29WxE09Y64BivhDeyLhzVA+N11qRY/G1wiBQudCGiDU3aLRCG5AZnhhc3FyL/Sydvqof8iw7HA5paZuh/vFeyGTpzWSWTtMq1oZZRaQ6LHersdwz/XCQZYmUapcNKRkrp6PhlKVHuyRVQQJskLGhaTpLpxNS6dk543oXYi3tC6b8Oo3Pixjfl1eCdM9r8Y537DjTiD9j5o3UlikMcnRHk6/hZHL2/bPNNwmwnTmh67Yy4B2ZvufwjwaphXy9SWAvScst977e9MnJYbwXDJHDXCn07IC9NM1orjd73b9cvouvt9D3vwGxcvf1
 sidebar_class_name: "get api-method"
 info_path: docs/openorch/openorch
 custom_edit_url: null
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
-import Heading from "@theme/Heading";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
 <Heading
   as={"h1"}
@@ -35,6 +29,7 @@ import TabItem from "@theme/TabItem";
 <MethodEndpoint
   method={"get"}
   path={"/user-svc/public-key"}
+  context={"endpoint"}
 >
   
 </MethodEndpoint>
@@ -43,233 +38,26 @@ import TabItem from "@theme/TabItem";
 
 Get the public key to parse and verify the JWT.
 
-<div>
-  <div>
-    <ApiTabs
-      label={undefined}
-      id={undefined}
-    >
-      <TabItem
-        label={"200"}
-        value={"200"}
-      >
-        <div>
-          
-          
-          OK
-          
-          
-        </div><div>
-          <MimeTabs
-            className={"openapi-tabs__mime"}
-            schemaType={"response"}
-          >
-            <TabItem
-              label={"application/json"}
-              value={"application/json"}
-            >
-              <SchemaTabs
-                className={"openapi-tabs__schema"}
-              >
-                <TabItem
-                  label={"Schema"}
-                  value={"Schema"}
-                >
-                  <details
-                    style={{}}
-                    className={"openapi-markdown__details response"}
-                    data-collapsed={false}
-                    open={true}
-                  >
-                    <summary
-                      style={{}}
-                      className={"openapi-markdown__details-summary-response"}
-                    >
-                      <strong>
-                        Schema
-                      </strong>
-                    </summary><div
-                      style={{"textAlign":"left","marginLeft":"1rem"}}
-                    >
-                      
-                    </div><ul
-                      style={{"marginLeft":"1rem"}}
-                    >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"publicKey"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
-                      >
-                        
-                      </SchemaItem>
-                    </ul>
-                  </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"publicKey\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
-                </TabItem>
-              </SchemaTabs>
-            </TabItem>
-          </MimeTabs>
-        </div>
-      </TabItem><TabItem
-        label={"400"}
-        value={"400"}
-      >
-        <div>
-          
-          
-          Invalid JSON or missing permission id
-          
-          
-        </div><div>
-          <MimeTabs
-            className={"openapi-tabs__mime"}
-            schemaType={"response"}
-          >
-            <TabItem
-              label={"application/json"}
-              value={"application/json"}
-            >
-              <SchemaTabs
-                className={"openapi-tabs__schema"}
-              >
-                <TabItem
-                  label={"Schema"}
-                  value={"Schema"}
-                >
-                  <details
-                    style={{}}
-                    className={"openapi-markdown__details response"}
-                    data-collapsed={false}
-                    open={true}
-                  >
-                    <summary
-                      style={{}}
-                      className={"openapi-markdown__details-summary-response"}
-                    >
-                      <strong>
-                        Schema
-                      </strong>
-                    </summary><div
-                      style={{"textAlign":"left","marginLeft":"1rem"}}
-                    >
-                      
-                    </div><ul
-                      style={{"marginLeft":"1rem"}}
-                    >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
-                      >
-                        
-                      </SchemaItem>
-                    </ul>
-                  </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
-                </TabItem>
-              </SchemaTabs>
-            </TabItem>
-          </MimeTabs>
-        </div>
-      </TabItem><TabItem
-        label={"401"}
-        value={"401"}
-      >
-        <div>
-          
-          
-          Unauthorized
-          
-          
-        </div><div>
-          <MimeTabs
-            className={"openapi-tabs__mime"}
-            schemaType={"response"}
-          >
-            <TabItem
-              label={"application/json"}
-              value={"application/json"}
-            >
-              <SchemaTabs
-                className={"openapi-tabs__schema"}
-              >
-                <TabItem
-                  label={"Schema"}
-                  value={"Schema"}
-                >
-                  <details
-                    style={{}}
-                    className={"openapi-markdown__details response"}
-                    data-collapsed={false}
-                    open={true}
-                  >
-                    <summary
-                      style={{}}
-                      className={"openapi-markdown__details-summary-response"}
-                    >
-                      <strong>
-                        Schema
-                      </strong>
-                    </summary><div
-                      style={{"textAlign":"left","marginLeft":"1rem"}}
-                    >
-                      
-                    </div><ul
-                      style={{"marginLeft":"1rem"}}
-                    >
-                      <SchemaItem
-                        collapsible={false}
-                        name={"error"}
-                        required={false}
-                        schemaName={"string"}
-                        qualifierMessage={undefined}
-                        schema={{"type":"string"}}
-                      >
-                        
-                      </SchemaItem>
-                    </ul>
-                  </details>
-                </TabItem><TabItem
-                  label={"Example (from schema)"}
-                  value={"Example (from schema)"}
-                >
-                  <ResponseSamples
-                    responseExample={"{\n  \"error\": \"string\"\n}"}
-                    language={"json"}
-                  >
-                    
-                  </ResponseSamples>
-                </TabItem>
-              </SchemaTabs>
-            </TabItem>
-          </MimeTabs>
-        </div>
-      </TabItem>
-    </ApiTabs>
-  </div>
-</div>
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"OK","content":{"application/json":{"schema":{"properties":{"publicKey":{"type":"string"}},"type":"object"}}}},"400":{"description":"Invalid JSON or missing permission id","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}}}}
+>
+  
+</StatusCodes>
+
+
       

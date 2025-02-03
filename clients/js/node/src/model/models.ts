@@ -78,6 +78,7 @@ export * from './modelSvcModel';
 export * from './modelSvcModelStatus';
 export * from './modelSvcPlatform';
 export * from './modelSvcStatusResponse';
+export * from './openapiChatSvcMessage';
 export * from './policySvcBlocklistParameters';
 export * from './policySvcCheckRequest';
 export * from './policySvcCheckResponse';
@@ -89,18 +90,24 @@ export * from './policySvcRateLimitParameters';
 export * from './policySvcScope';
 export * from './policySvcTemplateId';
 export * from './policySvcUpsertInstanceRequest';
-export * from './promptSvcAddPromptRequest';
-export * from './promptSvcAddPromptResponse';
 export * from './promptSvcEngineParameters';
 export * from './promptSvcErrorResponse';
 export * from './promptSvcListPromptsRequest';
 export * from './promptSvcListPromptsResponse';
+export * from './promptSvcLlamaCppParameters';
 export * from './promptSvcParameters';
 export * from './promptSvcPrompt';
+export * from './promptSvcPromptRequest';
+export * from './promptSvcPromptResponse';
 export * from './promptSvcPromptStatus';
+export * from './promptSvcPromptType';
 export * from './promptSvcRemovePromptRequest';
 export * from './promptSvcStableDiffusionParameters';
+export * from './promptSvcStreamChunk';
+export * from './promptSvcStreamChunkType';
 export * from './promptSvcTextToImageParameters';
+export * from './promptSvcTextToTextParameters';
+export * from './promptSvcTypesResponse';
 export * from './registrySvcAPISpec';
 export * from './registrySvcClient';
 export * from './registrySvcDefinition';
@@ -265,6 +272,7 @@ import { ModelSvcModel } from './modelSvcModel';
 import { ModelSvcModelStatus } from './modelSvcModelStatus';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 import { ModelSvcStatusResponse } from './modelSvcStatusResponse';
+import { OpenapiChatSvcMessage } from './openapiChatSvcMessage';
 import { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters';
 import { PolicySvcCheckRequest } from './policySvcCheckRequest';
 import { PolicySvcCheckResponse } from './policySvcCheckResponse';
@@ -276,18 +284,24 @@ import { PolicySvcRateLimitParameters } from './policySvcRateLimitParameters';
 import { PolicySvcScope } from './policySvcScope';
 import { PolicySvcTemplateId } from './policySvcTemplateId';
 import { PolicySvcUpsertInstanceRequest } from './policySvcUpsertInstanceRequest';
-import { PromptSvcAddPromptRequest } from './promptSvcAddPromptRequest';
-import { PromptSvcAddPromptResponse } from './promptSvcAddPromptResponse';
 import { PromptSvcEngineParameters } from './promptSvcEngineParameters';
 import { PromptSvcErrorResponse } from './promptSvcErrorResponse';
 import { PromptSvcListPromptsRequest } from './promptSvcListPromptsRequest';
 import { PromptSvcListPromptsResponse } from './promptSvcListPromptsResponse';
+import { PromptSvcLlamaCppParameters } from './promptSvcLlamaCppParameters';
 import { PromptSvcParameters } from './promptSvcParameters';
 import { PromptSvcPrompt } from './promptSvcPrompt';
+import { PromptSvcPromptRequest } from './promptSvcPromptRequest';
+import { PromptSvcPromptResponse } from './promptSvcPromptResponse';
 import { PromptSvcPromptStatus } from './promptSvcPromptStatus';
+import { PromptSvcPromptType } from './promptSvcPromptType';
 import { PromptSvcRemovePromptRequest } from './promptSvcRemovePromptRequest';
 import { PromptSvcStableDiffusionParameters } from './promptSvcStableDiffusionParameters';
+import { PromptSvcStreamChunk } from './promptSvcStreamChunk';
+import { PromptSvcStreamChunkType } from './promptSvcStreamChunkType';
 import { PromptSvcTextToImageParameters } from './promptSvcTextToImageParameters';
+import { PromptSvcTextToTextParameters } from './promptSvcTextToTextParameters';
+import { PromptSvcTypesResponse } from './promptSvcTypesResponse';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcDefinition } from './registrySvcDefinition';
@@ -381,6 +395,8 @@ let enumsMap: {[index: string]: any} = {
         "PolicySvcScope": PolicySvcScope,
         "PolicySvcTemplateId": PolicySvcTemplateId,
         "PromptSvcPromptStatus": PromptSvcPromptStatus,
+        "PromptSvcPromptType": PromptSvcPromptType,
+        "PromptSvcStreamChunkType": PromptSvcStreamChunkType,
         "RegistrySvcInstanceStatus": RegistrySvcInstanceStatus,
         "RegistrySvcLanguage": RegistrySvcLanguage,
         "SecretSvcChecksumAlgorithm": SecretSvcChecksumAlgorithm,
@@ -462,6 +478,7 @@ let typeMap: {[index: string]: any} = {
     "ModelSvcModelStatus": ModelSvcModelStatus,
     "ModelSvcPlatform": ModelSvcPlatform,
     "ModelSvcStatusResponse": ModelSvcStatusResponse,
+    "OpenapiChatSvcMessage": OpenapiChatSvcMessage,
     "PolicySvcBlocklistParameters": PolicySvcBlocklistParameters,
     "PolicySvcCheckRequest": PolicySvcCheckRequest,
     "PolicySvcCheckResponse": PolicySvcCheckResponse,
@@ -470,17 +487,21 @@ let typeMap: {[index: string]: any} = {
     "PolicySvcParameters": PolicySvcParameters,
     "PolicySvcRateLimitParameters": PolicySvcRateLimitParameters,
     "PolicySvcUpsertInstanceRequest": PolicySvcUpsertInstanceRequest,
-    "PromptSvcAddPromptRequest": PromptSvcAddPromptRequest,
-    "PromptSvcAddPromptResponse": PromptSvcAddPromptResponse,
     "PromptSvcEngineParameters": PromptSvcEngineParameters,
     "PromptSvcErrorResponse": PromptSvcErrorResponse,
     "PromptSvcListPromptsRequest": PromptSvcListPromptsRequest,
     "PromptSvcListPromptsResponse": PromptSvcListPromptsResponse,
+    "PromptSvcLlamaCppParameters": PromptSvcLlamaCppParameters,
     "PromptSvcParameters": PromptSvcParameters,
     "PromptSvcPrompt": PromptSvcPrompt,
+    "PromptSvcPromptRequest": PromptSvcPromptRequest,
+    "PromptSvcPromptResponse": PromptSvcPromptResponse,
     "PromptSvcRemovePromptRequest": PromptSvcRemovePromptRequest,
     "PromptSvcStableDiffusionParameters": PromptSvcStableDiffusionParameters,
+    "PromptSvcStreamChunk": PromptSvcStreamChunk,
     "PromptSvcTextToImageParameters": PromptSvcTextToImageParameters,
+    "PromptSvcTextToTextParameters": PromptSvcTextToTextParameters,
+    "PromptSvcTypesResponse": PromptSvcTypesResponse,
     "RegistrySvcAPISpec": RegistrySvcAPISpec,
     "RegistrySvcClient": RegistrySvcClient,
     "RegistrySvcDefinition": RegistrySvcDefinition,

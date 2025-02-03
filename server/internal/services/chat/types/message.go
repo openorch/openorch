@@ -26,8 +26,8 @@ type Message struct {
 	// ThreadId of the message.
 	ThreadId string `json:"threadId"`
 
-	// Content of the message eg. "Hi, what's up?"
-	Content string `json:"content"`
+	// Text content of the message eg. "Hi, what's up?"
+	Text string `json:"text"`
 
 	// UserId is the id of the user who wrote the message.
 	// For AI messages this field is empty.

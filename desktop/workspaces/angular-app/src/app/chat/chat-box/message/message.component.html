@@ -50,7 +50,7 @@
 						title="Copy to clipboard"
 						class="small-icon"
 						name="copy-outline"
-						(click)="propagateCopyToClipboard(message.content)"
+						(click)="propagateCopyToClipboard(message.text)"
 					></ion-icon>
 					<ion-icon
 						title="Delete message"
@@ -69,8 +69,8 @@
 				</div>
 			</div>
 		</div>
-		<markdown class="markdown-body" [data]="message.content"></markdown>
-		<img [src]="asset(message)" *ngIf="assets?.length" />
+		<markdown class="markdown-body" [data]="message.text"></markdown>
+		<img [src]="asset(message)" *ngIf="message.fileIds?.length" />
 	</div>
 </div>
 
@@ -113,7 +113,7 @@
 						title="Copy to clipboard"
 						class="small-icon"
 						name="copy-outline"
-						(click)="propagateCopyToClipboard(message.content)"
+						(click)="propagateCopyToClipboard(message.text)"
 					></ion-icon>
 					<ion-icon
 						title="Delete message"
@@ -131,7 +131,7 @@
 				</div>
 			</div>
 		</div>
-		<markdown class="markdown-body" [data]="message.content"></markdown>
-		<img [src]="asset(message)" *ngIf="assets?.length" />
+		<markdown class="markdown-body" [data]="message.text"></markdown>
+		<img [src]="asset(message)" *ngIf="message?.fileIds?.length"/>
 	</div>
 </div>

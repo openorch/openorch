@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
+	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/datastore/localstore"
 	"github.com/openorch/openorch/sdk/go/lock"
@@ -55,7 +55,7 @@ type Options struct {
 	// eg: leader election
 	Lock lock.DistributedLock
 
-	LLMClient llm.ClientI
+	LLamaCppClient llamacpp.ClientI
 
 	// DatastoreFactory can create database tables
 	DatastoreFactory func(tableName string, instance any) (datastore.DataStore, error)
@@ -261,7 +261,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 
 	promptService, err := promptservice.NewPromptService(
 		options.ClientFactory,
-		options.LLMClient,
+		options.LLamaCppClient,
 		options.Lock,
 		options.DatastoreFactory,
 	)
@@ -560,7 +560,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/prompt-svc/prompt", appl(func(w http.ResponseWriter, r *http.Request) {
-		promptService.AddPrompt(w, r)
+		promptService.Prompt(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 

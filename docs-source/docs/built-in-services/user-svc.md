@@ -31,7 +31,7 @@ Most endpoints on OpenOrch can only be called by administrators by default.
 
 Let's take prompting. If you want to let your users prompt AIs you might write a wrapper service called `User Prompter Svc` with the slug `user-prompter-svc`.
 
-If we look at the [Add Prompt endpoint API docs](/docs/openorch/add-prompt), we can see that it mentions
+If we look at the [Add Prompt endpoint API docs](/docs/openorch/prompt), we can see that it mentions
 
 ```
 Requires the `prompt-svc:prompt:create` permission.

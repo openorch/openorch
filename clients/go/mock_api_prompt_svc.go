@@ -39,36 +39,6 @@ func (m *MockPromptSvcAPI) EXPECT() *MockPromptSvcAPIMockRecorder {
 	return m.recorder
 }
 
-// AddPrompt mocks base method.
-func (m *MockPromptSvcAPI) AddPrompt(ctx context.Context) ApiAddPromptRequest {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddPrompt", ctx)
-	ret0, _ := ret[0].(ApiAddPromptRequest)
-	return ret0
-}
-
-// AddPrompt indicates an expected call of AddPrompt.
-func (mr *MockPromptSvcAPIMockRecorder) AddPrompt(ctx any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPrompt", reflect.TypeOf((*MockPromptSvcAPI)(nil).AddPrompt), ctx)
-}
-
-// AddPromptExecute mocks base method.
-func (m *MockPromptSvcAPI) AddPromptExecute(r ApiAddPromptRequest) (*PromptSvcAddPromptResponse, *http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddPromptExecute", r)
-	ret0, _ := ret[0].(*PromptSvcAddPromptResponse)
-	ret1, _ := ret[1].(*http.Response)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// AddPromptExecute indicates an expected call of AddPromptExecute.
-func (mr *MockPromptSvcAPIMockRecorder) AddPromptExecute(r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPromptExecute", reflect.TypeOf((*MockPromptSvcAPI)(nil).AddPromptExecute), r)
-}
-
 // ListPrompts mocks base method.
 func (m *MockPromptSvcAPI) ListPrompts(ctx context.Context) ApiListPromptsRequest {
 	m.ctrl.T.Helper()
@@ -97,6 +67,66 @@ func (m *MockPromptSvcAPI) ListPromptsExecute(r ApiListPromptsRequest) (*PromptS
 func (mr *MockPromptSvcAPIMockRecorder) ListPromptsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPromptsExecute", reflect.TypeOf((*MockPromptSvcAPI)(nil).ListPromptsExecute), r)
+}
+
+// Prompt mocks base method.
+func (m *MockPromptSvcAPI) Prompt(ctx context.Context) ApiPromptRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Prompt", ctx)
+	ret0, _ := ret[0].(ApiPromptRequest)
+	return ret0
+}
+
+// Prompt indicates an expected call of Prompt.
+func (mr *MockPromptSvcAPIMockRecorder) Prompt(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Prompt", reflect.TypeOf((*MockPromptSvcAPI)(nil).Prompt), ctx)
+}
+
+// PromptExecute mocks base method.
+func (m *MockPromptSvcAPI) PromptExecute(r ApiPromptRequest) (*PromptSvcPromptResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PromptExecute", r)
+	ret0, _ := ret[0].(*PromptSvcPromptResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// PromptExecute indicates an expected call of PromptExecute.
+func (mr *MockPromptSvcAPIMockRecorder) PromptExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PromptExecute", reflect.TypeOf((*MockPromptSvcAPI)(nil).PromptExecute), r)
+}
+
+// PromptTypes mocks base method.
+func (m *MockPromptSvcAPI) PromptTypes(ctx context.Context) ApiPromptTypesRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PromptTypes", ctx)
+	ret0, _ := ret[0].(ApiPromptTypesRequest)
+	return ret0
+}
+
+// PromptTypes indicates an expected call of PromptTypes.
+func (mr *MockPromptSvcAPIMockRecorder) PromptTypes(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PromptTypes", reflect.TypeOf((*MockPromptSvcAPI)(nil).PromptTypes), ctx)
+}
+
+// PromptTypesExecute mocks base method.
+func (m *MockPromptSvcAPI) PromptTypesExecute(r ApiPromptTypesRequest) (*PromptSvcTypesResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PromptTypesExecute", r)
+	ret0, _ := ret[0].(*PromptSvcTypesResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// PromptTypesExecute indicates an expected call of PromptTypesExecute.
+func (mr *MockPromptSvcAPIMockRecorder) PromptTypesExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PromptTypesExecute", reflect.TypeOf((*MockPromptSvcAPI)(nil).PromptTypesExecute), r)
 }
 
 // RemovePrompt mocks base method.

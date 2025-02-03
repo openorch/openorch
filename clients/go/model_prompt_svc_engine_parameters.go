@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.11
+API version: 0.3.0-rc.12
 Contact: sales@singulatron.com
 */
 
@@ -20,7 +20,8 @@ var _ MappedNullable = &PromptSvcEngineParameters{}
 
 // PromptSvcEngineParameters struct for PromptSvcEngineParameters
 type PromptSvcEngineParameters struct {
-	LastRun *PromptSvcStableDiffusionParameters `json:"lastRun,omitempty"`
+	LlamaCppParameters *PromptSvcLlamaCppParameters `json:"llamaCppParameters,omitempty"`
+	StableDiffusion *PromptSvcStableDiffusionParameters `json:"stableDiffusion,omitempty"`
 }
 
 // NewPromptSvcEngineParameters instantiates a new PromptSvcEngineParameters object
@@ -40,36 +41,68 @@ func NewPromptSvcEngineParametersWithDefaults() *PromptSvcEngineParameters {
 	return &this
 }
 
-// GetLastRun returns the LastRun field value if set, zero value otherwise.
-func (o *PromptSvcEngineParameters) GetLastRun() PromptSvcStableDiffusionParameters {
-	if o == nil || IsNil(o.LastRun) {
-		var ret PromptSvcStableDiffusionParameters
+// GetLlamaCppParameters returns the LlamaCppParameters field value if set, zero value otherwise.
+func (o *PromptSvcEngineParameters) GetLlamaCppParameters() PromptSvcLlamaCppParameters {
+	if o == nil || IsNil(o.LlamaCppParameters) {
+		var ret PromptSvcLlamaCppParameters
 		return ret
 	}
-	return *o.LastRun
+	return *o.LlamaCppParameters
 }
 
-// GetLastRunOk returns a tuple with the LastRun field value if set, nil otherwise
+// GetLlamaCppParametersOk returns a tuple with the LlamaCppParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PromptSvcEngineParameters) GetLastRunOk() (*PromptSvcStableDiffusionParameters, bool) {
-	if o == nil || IsNil(o.LastRun) {
+func (o *PromptSvcEngineParameters) GetLlamaCppParametersOk() (*PromptSvcLlamaCppParameters, bool) {
+	if o == nil || IsNil(o.LlamaCppParameters) {
 		return nil, false
 	}
-	return o.LastRun, true
+	return o.LlamaCppParameters, true
 }
 
-// HasLastRun returns a boolean if a field has been set.
-func (o *PromptSvcEngineParameters) HasLastRun() bool {
-	if o != nil && !IsNil(o.LastRun) {
+// HasLlamaCppParameters returns a boolean if a field has been set.
+func (o *PromptSvcEngineParameters) HasLlamaCppParameters() bool {
+	if o != nil && !IsNil(o.LlamaCppParameters) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastRun gets a reference to the given PromptSvcStableDiffusionParameters and assigns it to the LastRun field.
-func (o *PromptSvcEngineParameters) SetLastRun(v PromptSvcStableDiffusionParameters) {
-	o.LastRun = &v
+// SetLlamaCppParameters gets a reference to the given PromptSvcLlamaCppParameters and assigns it to the LlamaCppParameters field.
+func (o *PromptSvcEngineParameters) SetLlamaCppParameters(v PromptSvcLlamaCppParameters) {
+	o.LlamaCppParameters = &v
+}
+
+// GetStableDiffusion returns the StableDiffusion field value if set, zero value otherwise.
+func (o *PromptSvcEngineParameters) GetStableDiffusion() PromptSvcStableDiffusionParameters {
+	if o == nil || IsNil(o.StableDiffusion) {
+		var ret PromptSvcStableDiffusionParameters
+		return ret
+	}
+	return *o.StableDiffusion
+}
+
+// GetStableDiffusionOk returns a tuple with the StableDiffusion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromptSvcEngineParameters) GetStableDiffusionOk() (*PromptSvcStableDiffusionParameters, bool) {
+	if o == nil || IsNil(o.StableDiffusion) {
+		return nil, false
+	}
+	return o.StableDiffusion, true
+}
+
+// HasStableDiffusion returns a boolean if a field has been set.
+func (o *PromptSvcEngineParameters) HasStableDiffusion() bool {
+	if o != nil && !IsNil(o.StableDiffusion) {
+		return true
+	}
+
+	return false
+}
+
+// SetStableDiffusion gets a reference to the given PromptSvcStableDiffusionParameters and assigns it to the StableDiffusion field.
+func (o *PromptSvcEngineParameters) SetStableDiffusion(v PromptSvcStableDiffusionParameters) {
+	o.StableDiffusion = &v
 }
 
 func (o PromptSvcEngineParameters) MarshalJSON() ([]byte, error) {
@@ -82,8 +115,11 @@ func (o PromptSvcEngineParameters) MarshalJSON() ([]byte, error) {
 
 func (o PromptSvcEngineParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastRun) {
-		toSerialize["lastRun"] = o.LastRun
+	if !IsNil(o.LlamaCppParameters) {
+		toSerialize["llamaCppParameters"] = o.LlamaCppParameters
+	}
+	if !IsNil(o.StableDiffusion) {
+		toSerialize["stableDiffusion"] = o.StableDiffusion
 	}
 	return toSerialize, nil
 }

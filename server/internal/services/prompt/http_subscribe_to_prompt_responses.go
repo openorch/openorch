@@ -21,15 +21,17 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/clients/llm"
 	"github.com/openorch/openorch/sdk/go/logger"
 
+	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 // @ID subscribeToPromptResponses
 // @Summary Subscribe to Prompt Responses by Thread
-// @Description Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+// @Description Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+// @Description You can subscribe to threads before they are created.
+// @Description The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
 // @Tags Prompt Svc
 // @Param threadId path string true "Thread ID"
 // @Success 200 {string} string "Streaming response"
@@ -68,19 +70,18 @@ func (p *PromptService) SubscribeToPromptResponses(
 
 	w.Header().Set("Content-Type", "text/event-stream")
 
-	subscriber := make(chan *llm.CompletionResponse)
-	p.Subscribe(threadId, subscriber)
-	defer p.Unsubscribe(threadId, subscriber)
+	subscriber := make(chan *streammanager.Chunk)
+	p.streamManager.Subscribe(threadId, subscriber)
+	defer p.streamManager.Unsubscribe(threadId, subscriber)
 
 	// Use context to handle client disconnection
 	ctx := r.Context()
 	go func() {
 		<-ctx.Done()
-		p.Unsubscribe(threadId, subscriber)
+		p.streamManager.Unsubscribe(threadId, subscriber)
 	}()
 
 	for resp := range subscriber {
-		resp.Model = "" // Redact model from response
 		jsonResp, err := json.Marshal(resp)
 		if err != nil {
 			log.Printf("Failed to marshal JSON: %v", err)

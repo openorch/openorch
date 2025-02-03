@@ -55,9 +55,6 @@ definitions:
     type: object
   chat_svc.Message:
     properties:
-      content:
-        description: Content of the message eg. "Hi, what's up?"
-        type: string
       createdAt:
         type: string
       fileIds:
@@ -66,6 +63,9 @@ definitions:
           type: string
         type: array
       id:
+        type: string
+      text:
+        description: Text content of the message eg. "Hi, what's up?"
         type: string
       threadId:
         description: ThreadId of the message.
@@ -1017,6 +1017,30 @@ definitions:
       status:
         $ref: '#/definitions/model_svc.ModelStatus'
     type: object
+  openapi.ChatSvcMessage:
+    properties:
+      createdAt:
+        type: string
+      fileIds:
+        description: FileIds defines the file attachments the message has.
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      text:
+        description: Text content of the message eg. \"Hi, what's up?\"
+        type: string
+      threadId:
+        description: ThreadId of the message.
+        type: string
+      updatedAt:
+        type: string
+      userId:
+        description: UserId is the id of the user who wrote the message. For AI messages
+          this field is empty.
+        type: string
+    type: object
   policy_svc.BlocklistParameters:
     properties:
       blockedIPs:
@@ -1119,66 +1143,10 @@ definitions:
     type: object
   policy_svc.UpsertInstanceResponse:
     type: object
-  prompt_svc.AddPromptRequest:
-    properties:
-      engineParameters:
-        allOf:
-        - $ref: '#/definitions/prompt_svc.EngineParameters'
-        description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
-      id:
-        description: Id is the unique ID of the prompt.
-        type: string
-      maxRetries:
-        description: MaxRetries specified how many times the system should retry a
-          prompt when it keeps erroring.
-        example: 10
-        type: integer
-      modelId:
-        description: ModelId is just the OpenOrch internal ID of the model.
-        example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
-        type: string
-      parameters:
-        allOf:
-        - $ref: '#/definitions/prompt_svc.Parameters'
-        description: |-
-          AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
-          Use these high level parameters when you don't care about the actual engine, only
-          the functionality (eg. text to image, image to image) it provides.
-      prompt:
-        description: Prompt is the message itself eg. "What's a banana?
-        example: What's a banana?
-        type: string
-      sync:
-        description: |-
-          Sync drives whether prompt add request should wait and hang until
-          the prompt is done executing. By default the prompt just gets put on a queue
-          and the client will just subscribe to a Thread Stream.
-          For quick and dirty scripting however it's often times easier to do things syncronously.
-          In those cases set Sync to true.
-        type: boolean
-      template:
-        description: Template of the prompt. Optional. If not present it's derived
-          from ModelId.
-        example: '[INST]{prompt}[/INST]'
-        type: string
-      threadId:
-        description: |-
-          ThreadId is the ID of the thread a prompt belongs to.
-          Clients subscribe to Thread Streams to see the answer to a prompt,
-          or set `prompt.sync` to true for a blocking answer.
-        type: string
-    required:
-    - prompt
-    type: object
-  prompt_svc.AddPromptResponse:
-    properties:
-      answer:
-        type: string
-      prompt:
-        $ref: '#/definitions/prompt_svc.Prompt'
-    type: object
   prompt_svc.EngineParameters:
     properties:
+      llamaCppParameters:
+        $ref: '#/definitions/prompt_svc.LlamaCppParameters'
       stableDiffusion:
         $ref: '#/definitions/prompt_svc.StableDiffusionParameters'
     type: object
@@ -1202,10 +1170,20 @@ definitions:
           $ref: '#/definitions/prompt_svc.Prompt'
         type: array
     type: object
+  prompt_svc.LlamaCppParameters:
+    properties:
+      template:
+        description: Template of the prompt. Optional. If not present it's derived
+          from ModelId.
+        example: '[INST]{prompt}[/INST]'
+        type: string
+    type: object
   prompt_svc.Parameters:
     properties:
       textToImage:
         $ref: '#/definitions/prompt_svc.TextToImageParameters'
+      textToText:
+        $ref: '#/definitions/prompt_svc.TextToTextParameters'
     type: object
   prompt_svc.Prompt:
     properties:
@@ -1215,7 +1193,8 @@ definitions:
       engineParameters:
         allOf:
         - $ref: '#/definitions/prompt_svc.EngineParameters'
-        description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+        description: AI engine/platform (eg. LlamaCpp, Stable Diffusion) specific
+          parameters
       error:
         description: Error that arose during prompt execution, if any.
         type: string
@@ -1238,12 +1217,16 @@ definitions:
         allOf:
         - $ref: '#/definitions/prompt_svc.Parameters'
         description: |-
-          AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+          AI engine/platform (eg. LlamaCpp, Stable Diffusion) agnostic parameters.
           Use these high level parameters when you don't care about the actual engine, only
           the functionality (eg. text to image, image to image) it provides.
       prompt:
         description: Prompt is the message itself eg. "What's a banana?
         example: What's a banana?
+        type: string
+      requestMessageId:
+        type: string
+      responseMessageId:
         type: string
       runCount:
         description: RunCount is the number of times the prompt was retried due to
@@ -1261,17 +1244,19 @@ definitions:
           For quick and dirty scripting however it's often times easier to do things syncronously.
           In those cases set Sync to true.
         type: boolean
-      template:
-        description: Template of the prompt. Optional. If not present it's derived
-          from ModelId.
-        example: '[INST]{prompt}[/INST]'
-        type: string
       threadId:
         description: |-
           ThreadId is the ID of the thread a prompt belongs to.
           Clients subscribe to Thread Streams to see the answer to a prompt,
           or set `prompt.sync` to true for a blocking answer.
         type: string
+      type:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.PromptType'
+        description: |-
+          Type is inferred from the `Parameters` or `EngineParameters` field.
+          Eg. A LLamaCpp prompt will be "Text-to-Text",
+          a Stabel Diffusion one will be "Text-to-Image" etc.
       updatedAt:
         description: UpdatedAt is the last time the prompt was updated.
         type: string
@@ -1280,6 +1265,69 @@ definitions:
         type: string
     required:
     - prompt
+    type: object
+  prompt_svc.PromptRequest:
+    properties:
+      engineParameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.EngineParameters'
+        description: AI engine/platform (eg. Llama, Stable Diffusion) specific parameters
+      id:
+        description: Id is the unique ID of the prompt.
+        type: string
+      maxRetries:
+        description: MaxRetries specified how many times the system should retry a
+          prompt when it keeps erroring.
+        example: 10
+        type: integer
+      modelId:
+        description: ModelId is just the OpenOrch internal ID of the model.
+        example: huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf
+        type: string
+      parameters:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.Parameters'
+        description: |-
+          AI engine/platform (eg. Llama, Stable Diffusion) agnostic parameters.
+          Use these high level parameters when you don't care about the actual engine, only
+          the functionality (eg. text to image, image to image) it provides.
+      prompt:
+        description: Prompt is the message itself eg. "What's a banana?
+        example: What's a banana?
+        type: string
+      sync:
+        description: |-
+          Sync drives whether prompt add request should wait and hang until
+          the prompt is done executing. By default the prompt just gets put on a queue
+          and the client will just subscribe to a Thread Stream.
+          For quick and dirty scripting however it's often times easier to do things synchronously.
+          In those cases set Sync to true.
+        type: boolean
+      threadId:
+        description: |-
+          ThreadId is the ID of the thread a prompt belongs to.
+          Clients subscribe to Thread Streams to see the answer to a prompt,
+          or set `prompt.sync` to true for a blocking answer.
+        type: string
+    required:
+    - prompt
+    type: object
+  prompt_svc.PromptResponse:
+    properties:
+      prompt:
+        allOf:
+        - $ref: '#/definitions/prompt_svc.Prompt'
+        description: |-
+          Prompt contains the details of the prompt that was just created by this request.
+          This includes the ID, prompt text, status, and other associated metadata.
+      responseMessage:
+        allOf:
+        - $ref: '#/definitions/openapi.ChatSvcMessage'
+        description: |-
+          Response message contains the response text and files.
+          This field is populated only for synchronous prompts (`sync = true`).
+          For asynchronous prompts, the response will provided in the associated
+          message identified by the `responseMessageId` of the `promptSvc.prompt` object once the prompt completes.
     type: object
   prompt_svc.PromptStatus:
     enum:
@@ -1297,6 +1345,66 @@ definitions:
     - PromptStatusErrored
     - PromptStatusAbandoned
     - PromptStatusCanceled
+  prompt_svc.PromptType:
+    enum:
+    - Image-Text-to-Text
+    - Visual Question Answering
+    - Document Question Answering
+    - Text-to-Image
+    - Image-to-Image
+    - Image-to-Video
+    - Unconditional Image Generation
+    - Text-to-Video
+    - Zero-Shot Image Classification
+    - Zero-Shot Object Detection
+    - Text-to-3D
+    - Image-to-3D
+    - Image Feature Extraction
+    - Keypoint Detection
+    - Text-to-Text
+    - Question Answering
+    - Translation
+    - Summarization
+    - Text Generation
+    - Fill-Mask
+    - Text-to-Speech
+    - Text-to-Audio
+    - Automatic Speech Recognition
+    - Audio-to-Audio
+    - Audio Classification
+    - Reinforcement Learning
+    - Robotics
+    - Graph Machine Learning
+    type: string
+    x-enum-varnames:
+    - PromptTypeImageTextToText
+    - PromptTypeVisualQuestionAnswering
+    - PromptTypeDocumentQuestionAnswering
+    - PromptTypeTextToImage
+    - PromptTypeImageToImage
+    - PromptTypeImageToVideo
+    - PromptTypeUnconditionalImageGeneration
+    - PromptTypeTextToVideo
+    - PromptTypeZeroShotImageClassification
+    - PromptTypeZeroShotObjectDetection
+    - PromptTypeTextTo3D
+    - PromptTypeImageTo3D
+    - PromptTypeImageFeatureExtraction
+    - PromptTypeKeypointDetection
+    - PromptTypeTextToText
+    - PromptTypeQuestionAnswering
+    - PromptTypeTranslation
+    - PromptTypeSummarization
+    - PromptTypeTextGeneration
+    - PromptTypeFillMask
+    - PromptTypeTextToSpeech
+    - PromptTypeTextToAudio
+    - PromptTypeAutomaticSpeechRecognition
+    - PromptTypeAudioToAudio
+    - PromptTypeAudioClassification
+    - PromptTypeReinforcementLearning
+    - PromptTypeRobotics
+    - PromptTypeGraphMachineLearning
   prompt_svc.RemovePromptRequest:
     properties:
       promptId:
@@ -1314,57 +1422,95 @@ definitions:
   prompt_svc.TextToImageParameters:
     properties:
       aspectRatio:
-        description: Alternative to width/height (e.g., "16:9", "1:1")
+        description: Alternative way to specify dimensions (e.g., "16:9", "1:1").
         type: string
       batchSize:
-        description: Number of images per batch
+        description: Number of images to generate per batch.
         type: integer
       denoisingStrength:
-        description: Noise control for variation
+        description: Controls how much variation is introduced in image modifications.
         type: number
       enableUpscaling:
-        description: Whether to use AI upscaling
+        description: Whether to apply AI-based upscaling.
         type: boolean
       format:
-        description: Output format (png, jpg, webp, etc.)
+        description: Output format for the generated image (png, jpg, webp, etc.).
         type: string
       guidanceScale:
-        description: How closely to follow the prompt
+        description: How closely the output should follow the prompt.
         type: number
       height:
-        description: Image height in pixels
         type: integer
       negativePrompt:
+        description: A negative prompt to specify what should be avoided in the image.
         type: string
       numIterations:
-        description: How many times to run the prompt (batches)
+        description: Number of batches to generate.
         type: integer
       prompt:
+        description: |-
+          The primary prompt for generating the image.
+          Defaults to the top-level prompt if not specified.
+          If both are provided (which should be avoided), this field takes precedence.
         type: string
       qualityPreset:
-        description: Low, Medium, High, Ultra (for services like DALL·E)
+        description: Preset quality settings (e.g., Low, Medium, High, Ultra).
         type: string
       restoreFaces:
-        description: Face restoration for portraits
+        description: Whether to enhance facial details for portraits.
         type: boolean
       scheduler:
-        description: Sampling method, if applicable
+        description: Specifies the sampling method used during generation.
         type: string
       seed:
-        description: Optional, used for reproducibility
+        description: Optional seed for reproducibility. If not set, a random seed
+          is used.
         type: integer
       steps:
-        description: Number of inference steps
+        description: Number of inference steps for image generation.
         type: integer
       styles:
-        description: Artistic styles or themes
+        description: List of artistic styles or themes to apply.
         items:
           type: string
         type: array
       width:
-        description: Image width in pixels
+        description: Image dimensions (width and height in pixels).
         type: integer
     type: object
+  prompt_svc.TextToTextParameters:
+    properties:
+      template:
+        description: Template of the prompt. Optional. If not present it's derived
+          from ModelId.
+        example: '[INST]{prompt}[/INST]'
+        type: string
+    type: object
+  prompt_svc.TypesRequest:
+    type: object
+  prompt_svc.TypesResponse:
+    properties:
+      chunk:
+        $ref: '#/definitions/prompt_svc_stream.Chunk'
+    type: object
+  prompt_svc_stream.Chunk:
+    properties:
+      text:
+        description: TextChunk contains a part of the text output from the stream.
+        type: string
+      type:
+        allOf:
+        - $ref: '#/definitions/prompt_svc_stream.ChunkType'
+        description: Type indicates the type of the stream event (e.g., text, done).
+    type: object
+  prompt_svc_stream.ChunkType:
+    enum:
+    - progress
+    - done
+    type: string
+    x-enum-varnames:
+    - ChunkTypeProgress
+    - ChunkTypeDone
   registry_svc.APISpec:
     properties:
       metadata:
@@ -2553,7 +2699,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.11
+  version: 0.3.0-rc.12
 paths:
   /chat-svc/events:
     get:
@@ -4208,24 +4354,31 @@ paths:
       consumes:
       - application/json
       description: |-
-        Adds a new prompt to the prompt queue and either waits for the response (if `sync` is set to true), or returns immediately.
+        Sends a prompt and waits for a response if sync is true. If sync is false, adds the prompt to the queue and returns immediately.
 
-        Requires the `prompt-svc:prompt:create` permission.
-      operationId: addPrompt
+        Prompts can be used for `text-to-text`, `text-to-image`, `image-to-image`, and other types of generation.
+        If no model ID is specified, the default model will be used (see `Model Svc` for details). The default model may or may not support the requested generation type.
+
+        **Prompting Modes**
+        - **High-Level Parameters**: Uses predefined parameters relevant to `text-to-image`, `image-to-image`, etc. This mode abstracts away the underlying engine (e.g., LLaMA, Stable Diffusion) and focuses on functionality.
+        - **Engine-Specific Parameters**: Uses `engineParameters` to directly specify an AI engine, exposing all available parameters for fine-tuned control.
+
+        **Permissions Required:** `prompt-svc:prompt:create`
+      operationId: prompt
       parameters:
       - description: Add Prompt Request
         in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/prompt_svc.AddPromptRequest'
+          $ref: '#/definitions/prompt_svc.PromptRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/prompt_svc.AddPromptResponse'
+            $ref: '#/definitions/prompt_svc.PromptResponse'
         "400":
           description: Invalid JSON
           schema:
@@ -4240,7 +4393,7 @@ paths:
             $ref: '#/definitions/prompt_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Add Prompt
+      summary: Prompt an AI
       tags:
       - Prompt Svc
   /prompt-svc/prompts:
@@ -4281,8 +4434,10 @@ paths:
       - Prompt Svc
   /prompt-svc/prompts/{threadId}/responses/subscribe:
     get:
-      description: Subscribe to prompt responses by thread via Server-Sent Events
-        (SSE)
+      description: |-
+        Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+        You can subscribe to threads before they are created.
+        The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
       operationId: subscribeToPromptResponses
       parameters:
       - description: Thread ID
@@ -4343,6 +4498,44 @@ paths:
       security:
       - BearerAuth: []
       summary: Remove Prompt
+      tags:
+      - Prompt Svc
+  /prompt-svc/types:
+    post:
+      consumes:
+      - application/json
+      description: The only purpose of this "endpoint" is to export types otherwise
+        not appearing in the API docs.
+      operationId: promptTypes
+      parameters:
+      - description: Types Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/prompt_svc.TypesRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/prompt_svc.TypesResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/prompt_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Prompt Types
       tags:
       - Prompt Svc
   /registry-svc/definition:

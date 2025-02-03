@@ -62,7 +62,7 @@ export async function promptTest(apiKey: string) {
   console.log("Prompting");
 
   const promptRsp = await Promise.race([
-    promptSvc.addPrompt({
+    promptSvc.prompt({
       body: {
         sync: true,
         prompt: "Is a cat an animal? Just answer with yes or no please.",

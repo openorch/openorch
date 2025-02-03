@@ -12,36 +12,15 @@ import { FirehoseService } from './firehose.service';
 import { first } from 'rxjs';
 import { UserService } from './user.service';
 
-export interface CompletionChoice {
-	text: string;
-	index: number;
-	logprobs: any;
-	finish_reason: string;
-}
-
-export interface CompletionUsage {
-	prompt_tokens: number;
-	completion_tokens: number;
-	total_tokens: number;
-}
-
-export interface CompletionResponse {
-	id: string;
-	object: string;
-	created: number;
-	model: string;
-	choices: CompletionChoice[];
-	usage: CompletionUsage;
-}
-
 import {
 	PromptSvcApi,
 	PromptSvcPrompt as Prompt,
 	Configuration,
-	PromptSvcAddPromptRequest,
-	PromptSvcAddPromptResponse,
+	PromptSvcPromptRequest,
+	PromptSvcPromptResponse,
 	PromptSvcListPromptsRequest,
 	PromptSvcListPromptsResponse,
+	PromptSvcStreamChunk,
 } from '@openorch/client';
 
 @Injectable({
@@ -96,13 +75,13 @@ export class PromptService {
 		}
 	}
 
-	async promptAdd(prompt: Prompt): Promise<PromptSvcAddPromptResponse> {
+	async promptAdd(prompt: Prompt): Promise<PromptSvcPromptResponse> {
 		if (!prompt.id) {
 			prompt.id = this.server.id('prom');
 		}
-		const request: PromptSvcAddPromptRequest = prompt;
+		const request: PromptSvcPromptRequest = prompt;
 
-		return this.promptService.addPrompt({
+		return this.promptService.prompt({
 			body: request,
 		});
 	}
@@ -124,13 +103,14 @@ export class PromptService {
 	}
 
 	private resubCount = 0;
-	promptSubscribe(threadId: string): Observable<CompletionResponse> {
+	
+	promptSubscribe(threadId: string): Observable<PromptSvcStreamChunk> {
 		if (!threadId) {
 			console.log('No thread id');
 			throw 'no thread id';
 		}
 
-		return new Observable<CompletionResponse>((observer) => {
+		return new Observable<PromptSvcStreamChunk>((observer) => {
 			const controller = new AbortController();
 			const { signal } = controller;
 
@@ -195,7 +175,7 @@ export class PromptService {
 													.trim();
 
 												try {
-													const json = JSON.parse(cleanedText);
+													const json: PromptSvcStreamChunk = JSON.parse(cleanedText);
 													observer.next(json);
 												} catch (error) {
 													console.error(
