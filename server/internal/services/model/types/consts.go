@@ -25,13 +25,13 @@ var PlatformStableDiffusion = Platform{
 			Port:   7860,
 			Image:  "crufter/stable-diffusion-simple:v0.3.0-rc.11",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-			Keeps:  []string{"/data"},
+			Keeps:  []string{},
 		},
 		Cuda: Container{
 			Port:   7860,
 			Image:  "crufter/stable-diffusion-cuda:v0.3.0-rc.11",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-			Keeps:  []string{"/data"},
+			Keeps:  []string{},
 		},
 	},
 }

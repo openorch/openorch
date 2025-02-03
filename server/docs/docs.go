@@ -49,6 +49,60 @@ const docTemplate = `{
             }
         },
         "/chat-svc/message/{messageId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Fetch information about a specific chat message by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Chat Svc"
+                ],
+                "summary": "Get Message",
+                "operationId": "getMessage",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Message ID",
+                        "name": "messageId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message details successfully retrieved",
+                        "schema": {
+                            "$ref": "#/definitions/chat_svc.GetMessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "security": [
                     {
@@ -2713,7 +2767,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.",
+                "description": "The only purpose of this \"endpoint\" is to export types otherwise not appearing in the API docs.\nThis endpoint otherwise does nothing. Do not depend on this endpoint, only its types.",
                 "consumes": [
                     "application/json"
                 ],
@@ -5067,6 +5121,17 @@ const docTemplate = `{
                 }
             }
         },
+        "chat_svc.GetMessageResponse": {
+            "type": "object",
+            "properties": {
+                "exists": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "$ref": "#/definitions/chat_svc.Message"
+                }
+            }
+        },
         "chat_svc.GetMessagesResponse": {
             "type": "object",
             "properties": {
@@ -5105,6 +5170,10 @@ const docTemplate = `{
         },
         "chat_svc.Message": {
             "type": "object",
+            "required": [
+                "id",
+                "threadId"
+            ],
             "properties": {
                 "createdAt": {
                     "type": "string"
@@ -5117,7 +5186,8 @@ const docTemplate = `{
                     }
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "msg_emSOPlW58o"
                 },
                 "text": {
                     "description": "Text content of the message eg. \"Hi, what's up?\"",
@@ -5125,7 +5195,8 @@ const docTemplate = `{
                 },
                 "threadId": {
                     "description": "ThreadId of the message.",
-                    "type": "string"
+                    "type": "string",
+                    "example": "thr_emSOeEUWAg"
                 },
                 "updatedAt": {
                     "type": "string"
@@ -5138,12 +5209,16 @@ const docTemplate = `{
         },
         "chat_svc.Thread": {
             "type": "object",
+            "required": [
+                "id"
+            ],
             "properties": {
                 "createdAt": {
                     "type": "string"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "thr_emSQnpJbhG"
                 },
                 "title": {
                     "description": "Title of the thread.",
@@ -7069,6 +7144,10 @@ const docTemplate = `{
         "prompt_svc_stream.Chunk": {
             "type": "object",
             "properties": {
+                "messageId": {
+                    "description": "MessageId is the ChatSvc Message id that the chunk is part of.\nMight only be available for \"done\" chunks.",
+                    "type": "string"
+                },
                 "text": {
                     "description": "TextChunk contains a part of the text output from the stream.",
                     "type": "string"
@@ -8756,7 +8835,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.12",
+	Version:          "0.3.0-rc.13",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

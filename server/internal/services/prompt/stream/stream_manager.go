@@ -36,6 +36,10 @@ type Chunk struct {
 	// TextChunk contains a part of the text output from the stream.
 	Text string `json:"text,omitempty"`
 
+	// MessageId is the ChatSvc Message id that the chunk is part of.
+	// Might only be available for "done" chunks.
+	MessageId string `json:"messageId,omitempty"`
+
 	// Type indicates the type of the stream event (e.g., text, done).
 	Type ChunkType `json:"type"`
 }

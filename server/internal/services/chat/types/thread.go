@@ -17,7 +17,8 @@ import (
 )
 
 type Thread struct {
-	Id        string    `json:"id"`
+	Id string `json:"id" example:"thr_emSQnpJbhG" binding:"required"`
+
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 
@@ -29,7 +30,7 @@ type Thread struct {
 	UserIds []string `json:"userIds,omitempty"`
 
 	// Title of the thread.
-	Title string `json:"title"`
+	Title string `json:"title,omitempty"`
 }
 
 func (c *Thread) GetId() string {

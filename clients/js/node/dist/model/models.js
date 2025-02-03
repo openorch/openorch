@@ -4,6 +4,7 @@ export * from './chatSvcAddThreadResponse';
 export * from './chatSvcEventMessageAdded';
 export * from './chatSvcEventThreadAdded';
 export * from './chatSvcEventThreadUpdate';
+export * from './chatSvcGetMessageResponse';
 export * from './chatSvcGetMessagesResponse';
 export * from './chatSvcGetThreadResponse';
 export * from './chatSvcGetThreadsResponse';
@@ -184,6 +185,7 @@ import { ChatSvcAddThreadResponse } from './chatSvcAddThreadResponse';
 import { ChatSvcEventMessageAdded } from './chatSvcEventMessageAdded';
 import { ChatSvcEventThreadAdded } from './chatSvcEventThreadAdded';
 import { ChatSvcEventThreadUpdate } from './chatSvcEventThreadUpdate';
+import { ChatSvcGetMessageResponse } from './chatSvcGetMessageResponse';
 import { ChatSvcGetMessagesResponse } from './chatSvcGetMessagesResponse';
 import { ChatSvcGetThreadResponse } from './chatSvcGetThreadResponse';
 import { ChatSvcGetThreadsResponse } from './chatSvcGetThreadsResponse';
@@ -390,6 +392,7 @@ let typeMap = {
     "ChatSvcEventMessageAdded": ChatSvcEventMessageAdded,
     "ChatSvcEventThreadAdded": ChatSvcEventThreadAdded,
     "ChatSvcEventThreadUpdate": ChatSvcEventThreadUpdate,
+    "ChatSvcGetMessageResponse": ChatSvcGetMessageResponse,
     "ChatSvcGetMessagesResponse": ChatSvcGetMessagesResponse,
     "ChatSvcGetThreadResponse": ChatSvcGetThreadResponse,
     "ChatSvcGetThreadsResponse": ChatSvcGetThreadsResponse,

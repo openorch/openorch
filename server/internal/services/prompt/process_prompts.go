@@ -225,8 +225,8 @@ func (p *PromptService) processPrompt(
 			Message: &openapi.ChatSvcMessage{
 				// not a fan of taking the prompt id but at least it makes this idempotent
 				// in case prompts get retried over and over again
-				Id:       openapi.PtrString(currentPrompt.Id),
-				ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+				Id:       currentPrompt.Id,
+				ThreadId: currentPrompt.ThreadId,
 				UserId:   openapi.PtrString(currentPrompt.UserId),
 				Text:     openapi.PtrString(currentPrompt.Prompt),
 				CreatedAt: openapi.PtrString(

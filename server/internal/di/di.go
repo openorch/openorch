@@ -520,6 +520,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "POST")
 
 	router.HandleFunc("/chat-svc/message/{messageId}", appl(func(w http.ResponseWriter, r *http.Request) {
+		chatService.GetMessage(w, r)
+	})).
+		Methods("OPTIONS", "GET")
+
+	router.HandleFunc("/chat-svc/message/{messageId}", appl(func(w http.ResponseWriter, r *http.Request) {
 		chatService.DeleteMessage(w, r)
 	})).
 		Methods("OPTIONS", "DELETE")

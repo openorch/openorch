@@ -29,7 +29,7 @@ import (
 var port = router.GetPort()
 
 // @title           OpenOrch
-// @version         0.3.0-rc.12
+// @version         0.3.0-rc.13
 // @description     On-premise AI platform and microservices ecosystem.
 // @termsOfService  http://swagger.io/terms/
 

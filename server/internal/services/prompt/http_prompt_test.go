@@ -165,7 +165,21 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			Return(&openapi.ChatSvcGetThreadResponse{
 				Exists: openapi.PtrBool(true),
 				Thread: &openapi.ChatSvcThread{
-					Id: openapi.PtrString("thread-1"),
+					Id: "thread-1",
+				},
+			}, nil, nil)
+		mockChatSvc.EXPECT().
+			GetMessage(gomock.Any(), gomock.Any()).
+			Return(openapi.ApiGetMessageRequest{
+				ApiService: mockChatSvc,
+			})
+		mockChatSvc.EXPECT().
+			GetMessageExecute(gomock.Any()).
+			Return(&openapi.ChatSvcGetMessageResponse{
+				Exists: openapi.PtrBool(true),
+				Message: &openapi.ChatSvcMessage{
+					Id:   "message-1",
+					Text: openapi.PtrString("thanks, how are you?"),
 				},
 			}, nil, nil)
 		mockChatSvc.EXPECT().

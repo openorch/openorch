@@ -189,6 +189,36 @@ func (mr *MockChatSvcAPIMockRecorder) EventsExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EventsExecute", reflect.TypeOf((*MockChatSvcAPI)(nil).EventsExecute), r)
 }
 
+// GetMessage mocks base method.
+func (m *MockChatSvcAPI) GetMessage(ctx context.Context, messageId string) ApiGetMessageRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMessage", ctx, messageId)
+	ret0, _ := ret[0].(ApiGetMessageRequest)
+	return ret0
+}
+
+// GetMessage indicates an expected call of GetMessage.
+func (mr *MockChatSvcAPIMockRecorder) GetMessage(ctx, messageId any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMessage", reflect.TypeOf((*MockChatSvcAPI)(nil).GetMessage), ctx, messageId)
+}
+
+// GetMessageExecute mocks base method.
+func (m *MockChatSvcAPI) GetMessageExecute(r ApiGetMessageRequest) (*ChatSvcGetMessageResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMessageExecute", r)
+	ret0, _ := ret[0].(*ChatSvcGetMessageResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetMessageExecute indicates an expected call of GetMessageExecute.
+func (mr *MockChatSvcAPIMockRecorder) GetMessageExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMessageExecute", reflect.TypeOf((*MockChatSvcAPI)(nil).GetMessageExecute), r)
+}
+
 // GetMessages mocks base method.
 func (m *MockChatSvcAPI) GetMessages(ctx context.Context, threadId string) ApiGetMessagesRequest {
 	m.ctrl.T.Helper()

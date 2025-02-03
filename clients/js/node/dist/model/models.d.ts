@@ -5,6 +5,7 @@ export * from './chatSvcAddThreadResponse';
 export * from './chatSvcEventMessageAdded';
 export * from './chatSvcEventThreadAdded';
 export * from './chatSvcEventThreadUpdate';
+export * from './chatSvcGetMessageResponse';
 export * from './chatSvcGetMessagesResponse';
 export * from './chatSvcGetThreadResponse';
 export * from './chatSvcGetThreadsResponse';

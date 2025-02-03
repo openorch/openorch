@@ -30,6 +30,13 @@ definitions:
       threadId:
         type: string
     type: object
+  chat_svc.GetMessageResponse:
+    properties:
+      exists:
+        type: boolean
+      message:
+        $ref: '#/definitions/chat_svc.Message'
+    type: object
   chat_svc.GetMessagesResponse:
     properties:
       messages:
@@ -63,12 +70,14 @@ definitions:
           type: string
         type: array
       id:
+        example: msg_emSOPlW58o
         type: string
       text:
         description: Text content of the message eg. "Hi, what's up?"
         type: string
       threadId:
         description: ThreadId of the message.
+        example: thr_emSOeEUWAg
         type: string
       updatedAt:
         type: string
@@ -77,12 +86,16 @@ definitions:
           UserId is the id of the user who wrote the message.
           For AI messages this field is empty.
         type: string
+    required:
+    - id
+    - threadId
     type: object
   chat_svc.Thread:
     properties:
       createdAt:
         type: string
       id:
+        example: thr_emSQnpJbhG
         type: string
       title:
         description: Title of the thread.
@@ -101,6 +114,8 @@ definitions:
         items:
           type: string
         type: array
+    required:
+    - id
     type: object
   chat_svc.UpdateThreadRequest:
     properties:
@@ -1495,6 +1510,11 @@ definitions:
     type: object
   prompt_svc_stream.Chunk:
     properties:
+      messageId:
+        description: |-
+          MessageId is the ChatSvc Message id that the chunk is part of.
+          Might only be available for "done" chunks.
+        type: string
       text:
         description: TextChunk contains a part of the text output from the stream.
         type: string
@@ -2699,7 +2719,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.12
+  version: 0.3.0-rc.13
 paths:
   /chat-svc/events:
     get:
@@ -2753,6 +2773,41 @@ paths:
       security:
       - BearerAuth: []
       summary: Delete a Message
+      tags:
+      - Chat Svc
+    get:
+      consumes:
+      - application/json
+      description: Fetch information about a specific chat message by its ID
+      operationId: getMessage
+      parameters:
+      - description: Message ID
+        in: path
+        name: messageId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message details successfully retrieved
+          schema:
+            $ref: '#/definitions/chat_svc.GetMessageResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Get Message
       tags:
       - Chat Svc
   /chat-svc/thread:
@@ -4504,8 +4559,9 @@ paths:
     post:
       consumes:
       - application/json
-      description: The only purpose of this "endpoint" is to export types otherwise
-        not appearing in the API docs.
+      description: |-
+        The only purpose of this "endpoint" is to export types otherwise not appearing in the API docs.
+        This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
       operationId: promptTypes
       parameters:
       - description: Types Request

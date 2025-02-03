@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.12
+API version: 0.3.0-rc.13
 Contact: sales@singulatron.com
 */
 
@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ChatSvcMessage type satisfies the MappedNullable interface at compile time
@@ -23,22 +25,26 @@ type ChatSvcMessage struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// FileIds defines the file attachments the message has.
 	FileIds []string `json:"fileIds,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Text content of the message eg. \"Hi, what's up?\"
 	Text *string `json:"text,omitempty"`
 	// ThreadId of the message.
-	ThreadId *string `json:"threadId,omitempty"`
+	ThreadId string `json:"threadId"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	// UserId is the id of the user who wrote the message. For AI messages this field is empty.
 	UserId *string `json:"userId,omitempty"`
 }
 
+type _ChatSvcMessage ChatSvcMessage
+
 // NewChatSvcMessage instantiates a new ChatSvcMessage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChatSvcMessage() *ChatSvcMessage {
+func NewChatSvcMessage(id string, threadId string) *ChatSvcMessage {
 	this := ChatSvcMessage{}
+	this.Id = id
+	this.ThreadId = threadId
 	return &this
 }
 
@@ -114,36 +120,28 @@ func (o *ChatSvcMessage) SetFileIds(v []string) {
 	o.FileIds = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ChatSvcMessage) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ChatSvcMessage) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ChatSvcMessage) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ChatSvcMessage) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetText returns the Text field value if set, zero value otherwise.
@@ -178,36 +176,28 @@ func (o *ChatSvcMessage) SetText(v string) {
 	o.Text = &v
 }
 
-// GetThreadId returns the ThreadId field value if set, zero value otherwise.
+// GetThreadId returns the ThreadId field value
 func (o *ChatSvcMessage) GetThreadId() string {
-	if o == nil || IsNil(o.ThreadId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ThreadId
+
+	return o.ThreadId
 }
 
-// GetThreadIdOk returns a tuple with the ThreadId field value if set, nil otherwise
+// GetThreadIdOk returns a tuple with the ThreadId field value
 // and a boolean to check if the value has been set.
 func (o *ChatSvcMessage) GetThreadIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ThreadId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ThreadId, true
+	return &o.ThreadId, true
 }
 
-// HasThreadId returns a boolean if a field has been set.
-func (o *ChatSvcMessage) HasThreadId() bool {
-	if o != nil && !IsNil(o.ThreadId) {
-		return true
-	}
-
-	return false
-}
-
-// SetThreadId gets a reference to the given string and assigns it to the ThreadId field.
+// SetThreadId sets field value
 func (o *ChatSvcMessage) SetThreadId(v string) {
-	o.ThreadId = &v
+	o.ThreadId = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -290,15 +280,11 @@ func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FileIds) {
 		toSerialize["fileIds"] = o.FileIds
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
-	if !IsNil(o.ThreadId) {
-		toSerialize["threadId"] = o.ThreadId
-	}
+	toSerialize["threadId"] = o.ThreadId
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
@@ -306,6 +292,44 @@ func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 		toSerialize["userId"] = o.UserId
 	}
 	return toSerialize, nil
+}
+
+func (o *ChatSvcMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"threadId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varChatSvcMessage := _ChatSvcMessage{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varChatSvcMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ChatSvcMessage(varChatSvcMessage)
+
+	return err
 }
 
 type NullableChatSvcMessage struct {

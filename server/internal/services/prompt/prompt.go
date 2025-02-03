@@ -21,6 +21,7 @@ import (
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/pkg/errors"
 
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
 	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
@@ -102,7 +103,7 @@ func (p *PromptService) prompt(
 			ChatSvcAPI.AddThread(ctx).
 			Body(openapi.ChatSvcAddThreadRequest{
 				Thread: &openapi.ChatSvcThread{
-					Id:      openapi.PtrString(thread.Id),
+					Id:      thread.Id,
 					Title:   openapi.PtrString(thread.Title),
 					UserIds: thread.UserIds,
 					CreatedAt: openapi.PtrString(
@@ -155,6 +156,16 @@ func (p *PromptService) prompt(
 
 		for resp := range subscriber {
 			if resp.Type == streammanager.ChunkTypeDone {
+				r, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+					ChatSvcAPI.
+					GetMessage(ctx, resp.MessageId).
+					Execute()
+				if err != nil {
+					return nil, errors.Wrap(err, "error reading message")
+				}
+
+				rsp.ResponseMessage = r.Message
+
 				return rsp, nil
 			}
 		}

@@ -18,6 +18,7 @@ import (
 
 	"github.com/gorilla/mux"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
@@ -66,4 +67,22 @@ func (a *ChatService) GetMessages(
 		Messages: messages,
 	})
 	w.Write(jsonData)
+}
+
+func (a *ChatService) getMessages(
+	threadId string,
+) ([]*chat.Message, error) {
+	messageIs, err := a.messagesStore.Query(
+		datastore.Equals(datastore.Field("threadId"), threadId),
+	).OrderBy(datastore.OrderByField("createdAt", false)).Find()
+	if err != nil {
+		return nil, err
+	}
+
+	messages := []*chat.Message{}
+	for _, messageI := range messageIs {
+		messages = append(messages, messageI.(*chat.Message))
+	}
+
+	return messages, nil
 }

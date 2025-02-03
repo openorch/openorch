@@ -3,7 +3,7 @@ OpenOrch
 
 On-premise AI platform and microservices ecosystem.
 
-API version: 0.3.0-rc.12
+API version: 0.3.0-rc.13
 Contact: sales@singulatron.com
 */
 
@@ -64,6 +64,7 @@ If no model ID is specified, the default model will be used (see `Model Svc` for
 	PromptTypes Prompt Types
 
 	The only purpose of this "endpoint" is to export types otherwise not appearing in the API docs.
+This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPromptTypesRequest
@@ -449,6 +450,7 @@ func (r ApiPromptTypesRequest) Execute() (*PromptSvcTypesResponse, *http.Respons
 PromptTypes Prompt Types
 
 The only purpose of this "endpoint" is to export types otherwise not appearing in the API docs.
+This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPromptTypesRequest
