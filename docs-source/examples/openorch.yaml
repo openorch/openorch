@@ -1491,8 +1491,26 @@ definitions:
   prompt_svc.TypesResponse:
     properties:
       chunk:
-        $ref: '#/definitions/streammanager.Chunk'
+        $ref: '#/definitions/prompt_svc_stream.Chunk'
     type: object
+  prompt_svc_stream.Chunk:
+    properties:
+      text:
+        description: TextChunk contains a part of the text output from the stream.
+        type: string
+      type:
+        allOf:
+        - $ref: '#/definitions/prompt_svc_stream.ChunkType'
+        description: Type indicates the type of the stream event (e.g., text, done).
+    type: object
+  prompt_svc_stream.ChunkType:
+    enum:
+    - progress
+    - done
+    type: string
+    x-enum-varnames:
+    - ChunkTypeProgress
+    - ChunkTypeDone
   registry_svc.APISpec:
     properties:
       metadata:
@@ -2269,24 +2287,6 @@ definitions:
       width:
         type: integer
     type: object
-  streammanager.Chunk:
-    properties:
-      text:
-        description: TextChunk contains a part of the text output from the stream.
-        type: string
-      type:
-        allOf:
-        - $ref: '#/definitions/streammanager.ChunkType'
-        description: Type indicates the type of the stream event (e.g., text, done).
-    type: object
-  streammanager.ChunkType:
-    enum:
-    - progress
-    - done
-    type: string
-    x-enum-varnames:
-    - ChunkTypeProgress
-    - ChunkTypeDone
   user_svc.AddUserToOrganizationRequest:
     properties:
       userId:
@@ -4434,8 +4434,10 @@ paths:
       - Prompt Svc
   /prompt-svc/prompts/{threadId}/responses/subscribe:
     get:
-      description: Subscribe to prompt responses by thread via Server-Sent Events
-        (SSE)
+      description: |-
+        Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+        You can subscribe to threads before they are created.
+        The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
       operationId: subscribeToPromptResponses
       parameters:
       - description: Thread ID

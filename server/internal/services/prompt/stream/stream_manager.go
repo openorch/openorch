@@ -57,6 +57,9 @@ func NewStreamManager() *StreamManager {
 	}
 }
 
+// Subscribe to prompt responses for a given thread.
+// It's acceptable to subscribe even if the thread doesn't exist yet.
+// When you subscribe, any pending prompt responses that haven't been saved into a `ChatSvc.Message` are immediately streamed to the subscriber.
 func (sm *StreamManager) Subscribe(
 	threadId string,
 	subscriber SubscriberChan,
@@ -115,6 +118,8 @@ func (sm *StreamManager) Broadcast(
 	sm.history[threadId] = append(sm.history[threadId], response)
 }
 
+// DeleteHistory resets the history of a thread. Use this method from AI engine processors
+// when the engine finished processing, right at the time when you save the outputs into a `ChatSvc.Message`.
 func (sm *StreamManager) DeleteHistory(threadId string) {
 	delete(sm.history, threadId)
 }

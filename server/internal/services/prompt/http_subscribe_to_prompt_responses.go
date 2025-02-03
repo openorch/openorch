@@ -29,7 +29,9 @@ import (
 
 // @ID subscribeToPromptResponses
 // @Summary Subscribe to Prompt Responses by Thread
-// @Description Subscribe to prompt responses by thread via Server-Sent Events (SSE)
+// @Description Subscribe to prompt responses by thread via Server-Sent Events (SSE).
+// @Description You can subscribe to threads before they are created.
+// @Description The streamed strings are of type `StreamChunk`, see the PromptTypes endpoint for more details.
 // @Tags Prompt Svc
 // @Param threadId path string true "Thread ID"
 // @Success 200 {string} string "Streaming response"

@@ -2611,7 +2611,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Subscribe to prompt responses by thread via Server-Sent Events (SSE)",
+                "description": "Subscribe to prompt responses by thread via Server-Sent Events (SSE).\nYou can subscribe to threads before they are created.\nThe streamed strings are of type ` + "`" + `StreamChunk` + "`" + `, see the PromptTypes endpoint for more details.",
                 "tags": [
                     "Prompt Svc"
                 ],
