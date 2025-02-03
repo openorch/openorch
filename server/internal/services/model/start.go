@@ -264,7 +264,7 @@ func (ms *ModelService) checkIfAnswers(
 			continue
 		}
 
-		logger.Debug("LLM pinged successfully", slog.Int("port", port))
+		logger.Debug("AI engine pinged successfully", slog.Int("port", port))
 		state.SetAnswering(true)
 		return
 	}
