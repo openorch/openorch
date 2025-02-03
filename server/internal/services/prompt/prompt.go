@@ -143,7 +143,9 @@ func (p *PromptService) prompt(
 
 	go p.triggerPromptProcessing()
 
-	rsp := &prompttypes.PromptResponse{}
+	rsp := &prompttypes.PromptResponse{
+		Prompt: prompt,
+	}
 
 	if prompt.Sync {
 		subscriber := make(chan *streammanager.Chunk)

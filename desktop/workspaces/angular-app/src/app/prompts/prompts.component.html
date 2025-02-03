@@ -24,6 +24,8 @@
 			<ion-searchbar
 				(ionInput)="redirect()"
 				placeholder="Search prompts by model id"
+				name="searchTerm"
+				ngDefaultControl
 				[(ngModel)]="searchTerm"
 			></ion-searchbar>
 			<div class="prompt-wrapper" *ngFor="let prompt of prompts">
