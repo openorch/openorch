@@ -122,8 +122,8 @@ func (p *PromptService) processStableDiffusion(
 		Body(
 			openapi.ChatSvcAddMessageRequest{
 				Message: &openapi.ChatSvcMessage{
-					Id:       openapi.PtrString(sdk.Id("msg")),
-					ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+					Id:       sdk.Id("msg"),
+					ThreadId: currentPrompt.ThreadId,
 					Text:     openapi.PtrString("Sure, here is your image"),
 					FileIds:  fileIds,
 				},

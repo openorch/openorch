@@ -110,8 +110,8 @@ func (p *PromptService) processLlamaCpp(
 				Body(
 					openapi.ChatSvcAddMessageRequest{
 						Message: &openapi.ChatSvcMessage{
-							Id:       openapi.PtrString(messageId),
-							ThreadId: openapi.PtrString(currentPrompt.ThreadId),
+							Id:       messageId,
+							ThreadId: currentPrompt.ThreadId,
 							Text: openapi.PtrString(
 								p.streamManager.ConcatHistoryText(currentPrompt.ThreadId),
 							),

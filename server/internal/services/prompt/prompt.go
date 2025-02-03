@@ -103,7 +103,7 @@ func (p *PromptService) prompt(
 			ChatSvcAPI.AddThread(ctx).
 			Body(openapi.ChatSvcAddThreadRequest{
 				Thread: &openapi.ChatSvcThread{
-					Id:      openapi.PtrString(thread.Id),
+					Id:      thread.Id,
 					Title:   openapi.PtrString(thread.Title),
 					UserIds: thread.UserIds,
 					CreatedAt: openapi.PtrString(

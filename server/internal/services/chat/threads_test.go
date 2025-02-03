@@ -51,7 +51,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:   openapi.PtrString(req.Message.Id),
+						Id:   req.Message.Id,
 						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
@@ -73,7 +73,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:   openapi.PtrString(req.Message.Id),
+						Id:   req.Message.Id,
 						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
@@ -97,7 +97,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddThreadRequest{
 					Thread: &openapi.ChatSvcThread{
-						Id:    openapi.PtrString(req.Thread.Id),
+						Id:    req.Thread.Id,
 						Title: openapi.PtrString(req.Thread.Title),
 					},
 				},
@@ -125,7 +125,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddThreadRequest{
 					Thread: &openapi.ChatSvcThread{
-						Id:      openapi.PtrString(req.Thread.Id),
+						Id:      req.Thread.Id,
 						Title:   openapi.PtrString(req.Thread.Title),
 						UserIds: []string{userId},
 					},
@@ -136,7 +136,7 @@ func TestMessageCreatesThread(t *testing.T) {
 
 		thread := rsp.Thread
 
-		require.Equal(t, tid, *thread.Id)
+		require.Equal(t, tid, thread.Id)
 		require.Equal(t, title, *thread.Title)
 		threadId = req.Thread.Id
 	})
@@ -153,7 +153,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:   openapi.PtrString(req.Message.Id),
+						Id:   req.Message.Id,
 						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
