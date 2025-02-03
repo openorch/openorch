@@ -22,26 +22,26 @@ import (
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
-// @ID getThread
-// @Summary Get Thread
-// @Description Fetch information about a specific chat thread by its ID
+// @ID getMessage
+// @Summary Get Message
+// @Description Fetch information about a specific chat message by its ID
 // @Tags Chat Svc
 // @Accept json
 // @Produce json
-// @Param threadId path string true "Thread ID"
-// @Success 200 {object} chat.GetThreadResponse "Thread details successfully retrieved"
+// @Param messageId path string true "Message ID"
+// @Success 200 {object} chat.GetMessageResponse "Message details successfully retrieved"
 // @Failure 400 {string} string "Invalid JSON"
 // @Failure 401 {string} string "Unauthorized"
 // @Failure 500 {string} string "Internal Server Error"
 // @Security BearerAuth
-// @Router /chat-svc/thread/{threadId} [get]
-func (a *ChatService) GetThread(
+// @Router /chat-svc/message/{messageId} [get]
+func (a *ChatService) GetMessage(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := a.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *chat.PermissionThreadCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *chat.PermissionMessageCreate.Id).
 		Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -55,27 +55,27 @@ func (a *ChatService) GetThread(
 	}
 
 	vars := mux.Vars(r)
-	threadId := vars["threadId"]
+	messageId := vars["messageId"]
 
-	thread, found, err := a.getThread(threadId)
+	message, found, err := a.getMessage(messageId)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(chat.GetThreadResponse{
-		Exists: found,
-		Thread: thread,
+	jsonData, _ := json.Marshal(chat.GetMessageResponse{
+		Exists:  found,
+		Message: message,
 	})
 	w.Write(jsonData)
 }
 
-func (a *ChatService) getThread(
-	threadId string,
-) (*chat.Thread, bool, error) {
-	threadI, found, err := a.threadsStore.Query(
-		datastore.Equals(datastore.Field("id"), threadId),
+func (a *ChatService) getMessage(
+	messageId string,
+) (*chat.Message, bool, error) {
+	messageI, found, err := a.messagesStore.Query(
+		datastore.Equals(datastore.Field("id"), messageId),
 	).FindOne()
 	if err != nil {
 		return nil, false, err
@@ -84,5 +84,5 @@ func (a *ChatService) getThread(
 		return nil, false, nil
 	}
 
-	return threadI.(*chat.Thread), true, nil
+	return messageI.(*chat.Message), true, nil
 }

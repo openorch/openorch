@@ -13,10 +13,16 @@
 package chatservice
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
+	"log/slog"
 	"net/http"
+	"time"
 
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/logger"
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
@@ -82,4 +88,50 @@ func (a *ChatService) AddThread(
 		Thread: thread,
 	})
 	w.Write(jsonData)
+}
+
+func (a *ChatService) addThread(
+	ctx context.Context,
+	chatThread *chat.Thread,
+) (*chat.Thread, error) {
+	if chatThread.Id == "" {
+		chatThread.Id = sdk.Id("thr")
+	}
+	if chatThread.Title == "" {
+		chatThread.Title = "New chat"
+	}
+	if chatThread.CreatedAt.IsZero() {
+		chatThread.CreatedAt = time.Now()
+	}
+	if len(chatThread.UserIds) == 0 {
+		return nil, errors.New("no user ids")
+	}
+
+	err := a.threadsStore.Create(chatThread)
+	if err != nil {
+		return nil, err
+	}
+
+	ev := chat.EventThreadAdded{
+		ThreadId: chatThread.Id,
+	}
+
+	var m map[string]interface{}
+	js, _ := json.Marshal(ev)
+	json.Unmarshal(js, &m)
+
+	_, err = a.clientFactory.Client(sdk.WithToken(a.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
+			},
+		}).
+		Execute()
+	if err != nil {
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
+	}
+
+	return chatThread, nil
 }

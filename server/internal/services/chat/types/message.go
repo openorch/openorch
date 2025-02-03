@@ -77,3 +77,8 @@ type GetMessagesResponse struct {
 type DeleteMessageRequest struct {
 	MessageId string `json:"messageId"`
 }
+
+type GetMessageResponse struct {
+	Exists  bool     `json:"exists"`
+	Message *Message `json:"message"`
+}

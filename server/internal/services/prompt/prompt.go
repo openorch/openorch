@@ -155,6 +155,15 @@ func (p *PromptService) prompt(
 
 		for resp := range subscriber {
 			if resp.Type == streammanager.ChunkTypeDone {
+				p.clientFactory.Client(sdk.WithToken(p.token)).
+					FirehoseSvcAPI.PublishEvent(context.Background()).
+					Event(openapi.FirehoseSvcEventPublishRequest{
+						Event: &openapi.FirehoseSvcEvent{
+							Name: openapi.PtrString(ev.Name()),
+							Data: m,
+						},
+					}).
+					Execute()
 				return rsp, nil
 			}
 		}

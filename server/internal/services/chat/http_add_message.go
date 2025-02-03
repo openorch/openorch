@@ -13,11 +13,18 @@
 package chatservice
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
+	"log/slog"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
@@ -76,4 +83,59 @@ func (a *ChatService) AddMessage(
 
 	jsonData, _ := json.Marshal(map[string]any{})
 	w.Write(jsonData)
+}
+
+func (a *ChatService) addMessage(
+	ctx context.Context,
+	chatMessage *chat.Message,
+) error {
+	if chatMessage.ThreadId == "" {
+		return errors.New("empty chat message thread id")
+	}
+	if chatMessage.Id == "" {
+		chatMessage.Id = sdk.Id("msg")
+	}
+	if chatMessage.CreatedAt.IsZero() {
+		chatMessage.CreatedAt = time.Now()
+	}
+
+	threads, err := a.threadsStore.Query(
+		datastore.Equals(datastore.Field("id"), chatMessage.ThreadId),
+	).Find()
+	if err != nil {
+		return err
+	}
+
+	if len(threads) == 0 {
+		return errors.New("thread does not exist")
+	}
+
+	logger.Info("Saving chat message",
+		slog.String("messageId", chatMessage.Id),
+	)
+
+	ev := chat.EventMessageAdded{
+		ThreadId: chatMessage.ThreadId,
+	}
+
+	var m map[string]interface{}
+	js, _ := json.Marshal(ev)
+	json.Unmarshal(js, &m)
+
+	_, err = a.clientFactory.Client(sdk.WithToken(a.token)).
+		FirehoseSvcAPI.PublishEvent(context.Background()).
+		Event(openapi.FirehoseSvcEventPublishRequest{
+			Event: &openapi.FirehoseSvcEvent{
+				Name: openapi.PtrString(ev.Name()),
+				Data: m,
+			},
+		}).
+		Execute()
+	if err != nil {
+		logger.Error("Failed to publish firehose event", slog.Any("error", err))
+	}
+
+	return a.messagesStore.Query(
+		datastore.Equals(datastore.Field("id"), chatMessage.Id),
+	).Upsert(chatMessage)
 }

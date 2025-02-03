@@ -42,8 +42,8 @@ func TestMessageCreatesThread(t *testing.T) {
 	t.Run("no thread id", func(t *testing.T) {
 		req := &chattypes.AddMessageRequest{
 			Message: &chattypes.Message{
-				Id:      sdk.Id("msg"),
-				Content: "hi there",
+				Id:   sdk.Id("msg"),
+				Text: "hi there",
 			},
 		}
 
@@ -51,8 +51,8 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:      openapi.PtrString(req.Message.Id),
-						Content: openapi.PtrString(req.Message.Content),
+						Id:   openapi.PtrString(req.Message.Id),
+						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
 			).
@@ -65,7 +65,7 @@ func TestMessageCreatesThread(t *testing.T) {
 			Message: &chattypes.Message{
 				Id:       sdk.Id("msg"),
 				ThreadId: "1",
-				Content:  "hi there",
+				Text:     "hi there",
 			},
 		}
 
@@ -73,8 +73,8 @@ func TestMessageCreatesThread(t *testing.T) {
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:      openapi.PtrString(req.Message.Id),
-						Content: openapi.PtrString(req.Message.Content),
+						Id:   openapi.PtrString(req.Message.Id),
+						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
 			).
@@ -146,15 +146,15 @@ func TestMessageCreatesThread(t *testing.T) {
 			Message: &chattypes.Message{
 				Id:       sdk.Id("msg"),
 				ThreadId: threadId,
-				Content:  "hi there",
+				Text:     "hi there",
 			}}
 
 		_, _, err := userClient.ChatSvcAPI.AddMessage(context.Background(), req.Message.ThreadId).
 			Body(
 				openapi.ChatSvcAddMessageRequest{
 					Message: &openapi.ChatSvcMessage{
-						Id:      openapi.PtrString(req.Message.Id),
-						Content: openapi.PtrString(req.Message.Content),
+						Id:   openapi.PtrString(req.Message.Id),
+						Text: openapi.PtrString(req.Message.Text),
 					},
 				},
 			).

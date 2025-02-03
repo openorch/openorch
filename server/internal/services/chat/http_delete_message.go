@@ -18,6 +18,7 @@ import (
 
 	"github.com/gorilla/mux"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
@@ -65,4 +66,10 @@ func (a *ChatService) DeleteMessage(
 
 	jsonData, _ := json.Marshal(map[string]any{})
 	w.Write(jsonData)
+}
+
+func (a *ChatService) deleteMessage(id string) error {
+	return a.messagesStore.Query(
+		datastore.Equals(datastore.Field("id"), id),
+	).Delete()
 }

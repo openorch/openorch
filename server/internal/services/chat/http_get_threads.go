@@ -17,6 +17,7 @@ import (
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
@@ -63,4 +64,20 @@ func (a *ChatService) GetThreads(
 		Threads: threads,
 	})
 	w.Write(jsonData)
+}
+
+func (a *ChatService) getThreads(userId string) ([]*chat.Thread, error) {
+	threadIs, err := a.threadsStore.Query(
+		datastore.Equals(datastore.Field("userIds"), userId),
+	).OrderBy(datastore.OrderByField("createdAt", true)).Find()
+	if err != nil {
+		return nil, err
+	}
+
+	threads := []*chat.Thread{}
+	for _, threadI := range threadIs {
+		threads = append(threads, threadI.(*chat.Thread))
+	}
+
+	return threads, nil
 }
