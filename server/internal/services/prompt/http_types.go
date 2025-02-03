@@ -21,6 +21,7 @@ import (
 // @ID promptTypes
 // @Summary Prompt Types
 // @Description The only purpose of this "endpoint" is to export types otherwise not appearing in the API docs.
+// @Description This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
 // @Tags Prompt Svc
 // @Accept json
 // @Produce json
