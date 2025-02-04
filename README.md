@@ -78,7 +78,7 @@ async function testDrive() {
     })
   );
 
-  let promptRsp = await promptSvc.addPrompt({
+  let promptRsp = await promptSvc.prompt({
     request: {
       sync: true,
       prompt: "Is a cat an animal? Just answer with yes or no please.",
