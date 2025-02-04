@@ -18,6 +18,7 @@
 	<ng-template #columnContent>
 		<div class="roles-container">
 			<ion-searchbar
+				ngDefaultControl
 				[(ngModel)]="roleSearchQuery"
 				placeholder="Search Roles"
 			></ion-searchbar>
@@ -40,6 +41,7 @@
 		<div class="permissions-container">
 			<ion-item *ngIf="selectedRole">
 				<ion-searchbar
+					ngDefaultControl
 					[(ngModel)]="permissionSearchQuery"
 					placeholder="Search Permissions"
 				></ion-searchbar>
