@@ -1,6 +1,6 @@
 {
   "name": "@openorch/client",
-  "version": "0.3.0-rc.13",
+  "version": "0.3.0-rc.14",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
-    "glob": "^11.0.0"
+    "glob": "^11.0.0",
+    "tslib": "^2.8.1"
   }
 }

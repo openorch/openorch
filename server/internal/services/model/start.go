@@ -34,6 +34,7 @@ import (
 	modeltypes "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
+// This obviously means there is a single container that can be active at the moment on a node.
 const hostPortNum = 8001
 
 /*
@@ -86,9 +87,7 @@ func (ms *ModelService) startWithDocker(
 	model *modeltypes.Model,
 	platform *modeltypes.Platform,
 ) error {
-	launchOptions := &openapi.DockerSvcRunContainerOptions{
-		Name: openapi.PtrString(platform.Id),
-	}
+	launchOptions := &openapi.DockerSvcRunContainerOptions{}
 
 	image := platform.Architectures.Default.Image
 	port := platform.Architectures.Default.Port

@@ -20,6 +20,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
 
@@ -300,6 +301,7 @@ func (p *PromptService) processPlatform(
 
 	switch *getModelRsp.Platform.Id {
 	case modeltypes.PlatformLlamaCpp.Id:
+		spew.Dump(*getModelRsp.Platform.Id)
 		return p.processLlamaCpp(address, currentPrompt)
 	case modeltypes.PlatformStableDiffusion.Id:
 		return p.processStableDiffusion(address, currentPrompt)
