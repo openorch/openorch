@@ -55,6 +55,7 @@ For brevity the below example assumes you went to the UI and downloaded a model 
 Let's do a sync prompting in JS. In your project run
 
 ```sh
+npm init -y && jq '. + { "type": "module" }' package.json > temp.json && mv temp.json package.json
 npm i -s @openorch/client
 ```
 
@@ -66,7 +67,7 @@ import { UserSvcApi, PromptSvcApi, Configuration } from "@openorch/client";
 async function testDrive() {
   let userService = new UserSvcApi();
   let loginResponse = await userService.login({
-    request: {
+    body: {
       slug: "openorch",
       password: "changeme",
     },
@@ -78,8 +79,11 @@ async function testDrive() {
     })
   );
 
+  // Make sure there is a model downloaded and active at this point,
+  // either through the UI or programmatically .
+
   let promptRsp = await promptSvc.prompt({
-    request: {
+    body: {
       sync: true,
       prompt: "Is a cat an animal? Just answer with yes or no please.",
     },

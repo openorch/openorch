@@ -32,6 +32,8 @@ func (p *PromptService) processLlamaCpp(
 	address string,
 	currentPrompt *prompttypes.Prompt,
 ) error {
+	logger.Debug("Starting LLamaCPP stream")
+
 	fullPrompt := currentPrompt.Prompt
 
 	template := ""

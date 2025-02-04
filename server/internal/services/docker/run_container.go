@@ -40,6 +40,9 @@ import (
 	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
 )
 
+// This obviously means there is a single container that can be active at the moment on a node.
+const launchedContainerName = "openorch-ai-container"
+
 /*
 A low level method for running containers.
 */
@@ -60,7 +63,7 @@ func (d *DockerService) runContainer(
 		options = &dockertypes.RunContainerOptions{}
 	}
 	if options.Name == "" {
-		options.Name = "the-openorch"
+		options.Name = launchedContainerName
 	}
 
 	envs, hostBinds, err := d.additionalEnvsAndHostBinds(
