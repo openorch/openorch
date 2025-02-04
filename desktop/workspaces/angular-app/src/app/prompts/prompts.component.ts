@@ -132,7 +132,7 @@ export class PromptsComponent {
 			query.filters.push({
 				fields: ['status'],
 				jsonValues: JSON.stringify(this.request.statuses),
-				op: 'equals',
+				op: 'isInList',
 			});
 		}
 		query.orderBys = [{ field: 'createdAt', desc: true }];

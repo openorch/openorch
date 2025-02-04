@@ -116,8 +116,9 @@ export class QueryParser {
 
 			return {
 				fields: [fieldName],
-				jsonValues: JSON.stringify(
+				jsonValues: JSON.stringify([
 					Number.isNaN(numericValue) ? value : numericValue
+				]
 				),
 				op: 'equals',
 			};
