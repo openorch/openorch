@@ -23,6 +23,8 @@
 				<ion-searchbar
 					(ionInput)="redirect()"
 					placeholder="Search users by name or slug"
+					name="searchTerm"
+					ngDefaultControl
 					[(ngModel)]="searchTerm"
 				></ion-searchbar>
 				<ion-list>
