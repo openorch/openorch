@@ -1,9 +1,9 @@
 /*
 OpenOrch
 
-On-premise AI platform and microservices ecosystem.
+AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.
 
-API version: 0.3.0-rc.13
+API version: 0.3.0-rc.14
 Contact: sales@singulatron.com
 */
 
@@ -23,6 +23,8 @@ type ModelSvcPlatform struct {
 	Architectures *ModelSvcArchitectures `json:"architectures,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	// Types is a list of prompt types that the AI engine supports.
+	Types []PromptSvcPromptType `json:"types,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 }
 
@@ -139,6 +141,38 @@ func (o *ModelSvcPlatform) SetName(v string) {
 	o.Name = &v
 }
 
+// GetTypes returns the Types field value if set, zero value otherwise.
+func (o *ModelSvcPlatform) GetTypes() []PromptSvcPromptType {
+	if o == nil || IsNil(o.Types) {
+		var ret []PromptSvcPromptType
+		return ret
+	}
+	return o.Types
+}
+
+// GetTypesOk returns a tuple with the Types field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelSvcPlatform) GetTypesOk() ([]PromptSvcPromptType, bool) {
+	if o == nil || IsNil(o.Types) {
+		return nil, false
+	}
+	return o.Types, true
+}
+
+// HasTypes returns a boolean if a field has been set.
+func (o *ModelSvcPlatform) HasTypes() bool {
+	if o != nil && !IsNil(o.Types) {
+		return true
+	}
+
+	return false
+}
+
+// SetTypes gets a reference to the given []PromptSvcPromptType and assigns it to the Types field.
+func (o *ModelSvcPlatform) SetTypes(v []PromptSvcPromptType) {
+	o.Types = v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ModelSvcPlatform) GetVersion() int32 {
 	if o == nil || IsNil(o.Version) {
@@ -189,6 +223,9 @@ func (o ModelSvcPlatform) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Types) {
+		toSerialize["types"] = o.Types
 	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version

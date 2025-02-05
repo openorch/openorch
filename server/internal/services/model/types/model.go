@@ -8,7 +8,11 @@
 
 package model_svc
 
-import "sync"
+import (
+	"sync"
+
+	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
+)
 
 type ErrorResponse struct {
 	Error string `json:"error"`
@@ -22,6 +26,9 @@ type Platform struct {
 	Name          *string       `json:"name,omitempty"`
 	Version       *int          `json:"version,omitempty"`
 	Architectures Architectures `json:"architectures"`
+
+	// Types is a list of prompt types that the AI engine supports.
+	Types []prompt.PromptType `json:"types"`
 }
 
 func (p Platform) GetId() string {
@@ -134,9 +141,9 @@ type MakeDefaultRequest struct {
 type MakeDefaultResponse struct {
 }
 
-type ListRequest struct{}
+type ListModelsRequest struct{}
 
-type ListResponse struct {
+type ListModelsResponse struct {
 	Models []*Model `json:"models,omitempty"`
 }
 
@@ -148,6 +155,11 @@ type GetModelResponse struct {
 	Exists   bool      `json:"exists"             binding:"required"`
 	Model    *Model    `json:"model,omitempty"    binding:"required"`
 	Platform *Platform `json:"platform,omitempty" binding:"required"`
+}
+
+type ListPlatformsRequest struct{}
+type ListPlatformsResponse struct {
+	Platforms []*Platform `json:"platforms,omitempty" binding:"required"`
 }
 
 //

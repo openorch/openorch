@@ -37,10 +37,22 @@ var PermissionModelStream = openapi.UserSvcPermission{
 	Name: openapi.PtrString("Model Svc - Model Stream"),
 }
 
+var PermissionPlatformView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:platform:view"),
+	Name: openapi.PtrString("Model Svc - Platform View"),
+}
+
+var PermissionPlatformEdit = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("model-svc:platform:edit"),
+	Name: openapi.PtrString("Model Svc - Platform Edit"),
+}
+
 var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionModelCreate,
 	PermissionModelView,
 	PermissionModelEdit,
 	PermissionModelDelete,
 	PermissionModelStream,
+	PermissionPlatformEdit,
+	PermissionPlatformView,
 }

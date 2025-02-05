@@ -1,5 +1,9 @@
 package model_svc
 
+import (
+	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
+)
+
 var PlatformLlamaCpp = Platform{
 	Id: "llama-cpp",
 	Architectures: Architectures{
@@ -14,6 +18,9 @@ var PlatformLlamaCpp = Platform{
 			Image:  "crufter/llama-cpp-python-cuda:v0.3.0-rc.9",
 			Envars: []string{"NVIDIA_VISIBLE_DEVICES=all"},
 		},
+	},
+	Types: []prompt.PromptType{
+		prompt.PromptTypeTextToText,
 	},
 }
 
@@ -33,6 +40,10 @@ var PlatformStableDiffusion = Platform{
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
 			Keeps:  []string{},
 		},
+	},
+	Types: []prompt.PromptType{
+		prompt.PromptTypeTextToImage,
+		prompt.PromptTypeImageToImage,
 	},
 }
 

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "On-premise AI platform and microservices ecosystem.",
+        "description": "AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.",
         "title": "OpenOrch",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.13"
+        "version": "0.3.0-rc.14"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -2396,7 +2396,48 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model_svc.ListResponse"
+                            "$ref": "#/definitions/model_svc.ListModelsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/model-svc/platforms": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieves a list of AI platforms. Eg. LlamaCpp, StableDiffusion etc.\n\nRequires `model-svc:platform:view` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Model Svc"
+                ],
+                "summary": "List Platforms",
+                "operationId": "listPlatforms",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ListPlatformsResponse"
                         }
                     },
                     "401": {
@@ -6374,13 +6415,27 @@
                 }
             }
         },
-        "model_svc.ListResponse": {
+        "model_svc.ListModelsResponse": {
             "type": "object",
             "properties": {
                 "models": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/model_svc.Model"
+                    }
+                }
+            }
+        },
+        "model_svc.ListPlatformsResponse": {
+            "type": "object",
+            "required": [
+                "platforms"
+            ],
+            "properties": {
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model_svc.Platform"
                     }
                 }
             }
@@ -6493,6 +6548,13 @@
                 },
                 "name": {
                     "type": "string"
+                },
+                "types": {
+                    "description": "Types is a list of prompt types that the AI engine supports.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/prompt_svc.PromptType"
+                    }
                 },
                 "version": {
                     "type": "integer"

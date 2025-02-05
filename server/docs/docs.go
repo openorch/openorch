@@ -2402,7 +2402,48 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model_svc.ListResponse"
+                            "$ref": "#/definitions/model_svc.ListModelsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/model-svc/platforms": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieves a list of AI platforms. Eg. LlamaCpp, StableDiffusion etc.\n\nRequires ` + "`" + `model-svc:platform:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Model Svc"
+                ],
+                "summary": "List Platforms",
+                "operationId": "listPlatforms",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model_svc.ListPlatformsResponse"
                         }
                     },
                     "401": {
@@ -6380,13 +6421,27 @@ const docTemplate = `{
                 }
             }
         },
-        "model_svc.ListResponse": {
+        "model_svc.ListModelsResponse": {
             "type": "object",
             "properties": {
                 "models": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/model_svc.Model"
+                    }
+                }
+            }
+        },
+        "model_svc.ListPlatformsResponse": {
+            "type": "object",
+            "required": [
+                "platforms"
+            ],
+            "properties": {
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model_svc.Platform"
                     }
                 }
             }
@@ -6499,6 +6554,13 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
+                },
+                "types": {
+                    "description": "Types is a list of prompt types that the AI engine supports.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/prompt_svc.PromptType"
+                    }
                 },
                 "version": {
                     "type": "integer"
@@ -8835,12 +8897,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.13",
+	Version:          "0.3.0-rc.14",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "OpenOrch",
-	Description:      "On-premise AI platform and microservices ecosystem.",
+	Description:      "AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

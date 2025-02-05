@@ -144,10 +144,10 @@ func (mr *MockModelSvcAPIMockRecorder) ListModels(ctx any) *gomock.Call {
 }
 
 // ListModelsExecute mocks base method.
-func (m *MockModelSvcAPI) ListModelsExecute(r ApiListModelsRequest) (*ModelSvcListResponse, *http.Response, error) {
+func (m *MockModelSvcAPI) ListModelsExecute(r ApiListModelsRequest) (*ModelSvcListModelsResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListModelsExecute", r)
-	ret0, _ := ret[0].(*ModelSvcListResponse)
+	ret0, _ := ret[0].(*ModelSvcListModelsResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
@@ -157,6 +157,36 @@ func (m *MockModelSvcAPI) ListModelsExecute(r ApiListModelsRequest) (*ModelSvcLi
 func (mr *MockModelSvcAPIMockRecorder) ListModelsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListModelsExecute", reflect.TypeOf((*MockModelSvcAPI)(nil).ListModelsExecute), r)
+}
+
+// ListPlatforms mocks base method.
+func (m *MockModelSvcAPI) ListPlatforms(ctx context.Context) ApiListPlatformsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListPlatforms", ctx)
+	ret0, _ := ret[0].(ApiListPlatformsRequest)
+	return ret0
+}
+
+// ListPlatforms indicates an expected call of ListPlatforms.
+func (mr *MockModelSvcAPIMockRecorder) ListPlatforms(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPlatforms", reflect.TypeOf((*MockModelSvcAPI)(nil).ListPlatforms), ctx)
+}
+
+// ListPlatformsExecute mocks base method.
+func (m *MockModelSvcAPI) ListPlatformsExecute(r ApiListPlatformsRequest) (*ModelSvcListPlatformsResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListPlatformsExecute", r)
+	ret0, _ := ret[0].(*ModelSvcListPlatformsResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ListPlatformsExecute indicates an expected call of ListPlatformsExecute.
+func (mr *MockModelSvcAPIMockRecorder) ListPlatformsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPlatformsExecute", reflect.TypeOf((*MockModelSvcAPI)(nil).ListPlatformsExecute), r)
 }
 
 // MakeDefault mocks base method.

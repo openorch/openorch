@@ -80,6 +80,7 @@ export * from './modelSvcModelStatus';
 export * from './modelSvcPlatform';
 export * from './modelSvcStatusResponse';
 export * from './openapiChatSvcMessage';
+export * from './openapiPromptSvcPromptType';
 export * from './policySvcBlocklistParameters';
 export * from './policySvcCheckRequest';
 export * from './policySvcCheckResponse';
@@ -275,6 +276,7 @@ import { ModelSvcModelStatus } from './modelSvcModelStatus';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 import { ModelSvcStatusResponse } from './modelSvcStatusResponse';
 import { OpenapiChatSvcMessage } from './openapiChatSvcMessage';
+import { OpenapiPromptSvcPromptType } from './openapiPromptSvcPromptType';
 import { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters';
 import { PolicySvcCheckRequest } from './policySvcCheckRequest';
 import { PolicySvcCheckResponse } from './policySvcCheckResponse';
@@ -393,6 +395,7 @@ let enumsMap: {[index: string]: any} = {
         "DatastoreOp": DatastoreOp,
         "DeploySvcDeploymentStatus": DeploySvcDeploymentStatus,
         "DeploySvcStrategyType": DeploySvcStrategyType,
+        "OpenapiPromptSvcPromptType": OpenapiPromptSvcPromptType,
         "PolicySvcEntity": PolicySvcEntity,
         "PolicySvcScope": PolicySvcScope,
         "PolicySvcTemplateId": PolicySvcTemplateId,

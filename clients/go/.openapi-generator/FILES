@@ -102,7 +102,8 @@ docs/ModelSvcArchitectures.md
 docs/ModelSvcContainer.md
 docs/ModelSvcErrorResponse.md
 docs/ModelSvcGetModelResponse.md
-docs/ModelSvcListResponse.md
+docs/ModelSvcListModelsResponse.md
+docs/ModelSvcListPlatformsResponse.md
 docs/ModelSvcModel.md
 docs/ModelSvcModelStatus.md
 docs/ModelSvcPlatform.md
@@ -292,7 +293,8 @@ model_model_svc_architectures.go
 model_model_svc_container.go
 model_model_svc_error_response.go
 model_model_svc_get_model_response.go
-model_model_svc_list_response.go
+model_model_svc_list_models_response.go
+model_model_svc_list_platforms_response.go
 model_model_svc_model.go
 model_model_svc_model_status.go
 model_model_svc_platform.go

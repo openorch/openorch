@@ -78,6 +78,7 @@ export * from './ModelSvcModelStatus';
 export * from './ModelSvcPlatform';
 export * from './ModelSvcStatusResponse';
 export * from './OpenapiChatSvcMessage';
+export * from './OpenapiPromptSvcPromptType';
 export * from './PolicySvcBlocklistParameters';
 export * from './PolicySvcCheckRequest';
 export * from './PolicySvcCheckResponse';
