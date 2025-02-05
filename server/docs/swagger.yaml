@@ -941,12 +941,21 @@ definitions:
     - model
     - platform
     type: object
-  model_svc.ListResponse:
+  model_svc.ListModelsResponse:
     properties:
       models:
         items:
           $ref: '#/definitions/model_svc.Model'
         type: array
+    type: object
+  model_svc.ListPlatformsResponse:
+    properties:
+      platforms:
+        items:
+          $ref: '#/definitions/model_svc.Platform'
+        type: array
+    required:
+    - platforms
     type: object
   model_svc.MakeDefaultResponse:
     type: object
@@ -1022,6 +1031,11 @@ definitions:
         type: string
       name:
         type: string
+      types:
+        description: Types is a list of prompt types that the AI engine supports.
+        items:
+          $ref: '#/definitions/prompt_svc.PromptType'
+        type: array
       version:
         type: integer
     type: object
@@ -2713,13 +2727,14 @@ info:
     email: sales@singulatron.com
     name: API Support
     url: http://openorch.org/
-  description: On-premise AI platform and microservices ecosystem.
+  description: AI app platform. A language-agnostic, distributed platform for building
+    microservices-based AI apps.
   license:
     name: AGPL v3.0
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.13
+  version: 0.3.0-rc.14
 paths:
   /chat-svc/events:
     get:
@@ -4311,7 +4326,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model_svc.ListResponse'
+            $ref: '#/definitions/model_svc.ListModelsResponse'
         "401":
           description: Unauthorized
           schema:
@@ -4323,6 +4338,35 @@ paths:
       security:
       - BearerAuth: []
       summary: List Models
+      tags:
+      - Model Svc
+  /model-svc/platforms:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Retrieves a list of AI platforms. Eg. LlamaCpp, StableDiffusion etc.
+
+        Requires `model-svc:platform:view` permission.
+      operationId: listPlatforms
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model_svc.ListPlatformsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/model_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Platforms
       tags:
       - Model Svc
   /policy-svc/check:

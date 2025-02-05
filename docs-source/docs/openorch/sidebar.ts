@@ -328,6 +328,12 @@ const sidebar: SidebarsConfig = {
           label: "List Models",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "openorch/list-platforms",
+          label: "List Platforms",
+          className: "api-method post",
+        },
       ],
     },
     {

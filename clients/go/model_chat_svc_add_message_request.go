@@ -1,9 +1,9 @@
 /*
 OpenOrch
 
-On-premise AI platform and microservices ecosystem.
+AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.
 
-API version: 0.3.0-rc.13
+API version: 0.3.0-rc.14
 Contact: sales@singulatron.com
 */
 

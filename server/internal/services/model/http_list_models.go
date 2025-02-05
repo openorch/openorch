@@ -18,6 +18,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	model "github.com/openorch/openorch/server/internal/services/model/types"
 )
 
@@ -29,12 +30,12 @@ import (
 // @Tags Model Svc
 // @Accept json
 // @Produce json
-// @Success 200 {object} model.ListResponse
+// @Success 200 {object} model.ListModelsResponse
 // @Failure 401 {object} model.ErrorResponse "Unauthorized"
 // @Failure 500 {object} model.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /model-svc/models [post]
-func (ms *ModelService) List(
+func (ms *ModelService) ListModels(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -56,15 +57,51 @@ func (ms *ModelService) List(
 		return
 	}
 
-	models, err := ms.getModels()
+	models, err := ms.listModels()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(model.ListResponse{
+	jsonData, _ := json.Marshal(model.ListModelsResponse{
 		Models: models,
 	})
 	w.Write(jsonData)
+}
+
+func (ms *ModelService) listModels() ([]*model.Model, error) {
+	modelIs, err := ms.modelsStore.Query().Find()
+	if err != nil {
+		return nil, err
+	}
+
+	models := []*model.Model{}
+	for _, modelI := range modelIs {
+		models = append(models, modelI.(*model.Model))
+	}
+
+	return models, nil
+}
+
+func (ms *ModelService) getModel(
+	modelId string,
+) (*model.Model, bool, error) {
+	modelIs, err := ms.modelsStore.Query(
+		datastore.Id(modelId),
+	).Find()
+	if err != nil {
+		return nil, false, err
+	}
+
+	models := []*model.Model{}
+	for _, modelI := range modelIs {
+		models = append(models, modelI.(*model.Model))
+	}
+
+	if len(models) == 0 {
+		return nil, false, nil
+	}
+
+	return models[0], true, nil
 }

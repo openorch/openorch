@@ -485,7 +485,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "GET")
 	router.HandleFunc("/model-svc/models", appl(func(w http.ResponseWriter, r *http.Request) {
-		modelService.List(w, r)
+		modelService.ListModels(w, r)
+	})).
+		Methods("OPTIONS", "POST")
+	router.HandleFunc("/model-svc/platforms", appl(func(w http.ResponseWriter, r *http.Request) {
+		modelService.ListPlatforms(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/model-svc/model/{modelId}", appl(func(w http.ResponseWriter, r *http.Request) {
