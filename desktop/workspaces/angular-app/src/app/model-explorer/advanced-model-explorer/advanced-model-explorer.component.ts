@@ -105,7 +105,7 @@ export class AdvancedModelExplorerComponent {
 			'pause-circle-outline': pauseCircleOutline,
 			'caret-forward-outline': caretForwardOutline,
 			'download-outline': downloadOutline,
-			'hardware-chip-outline': hardwareChipOutline
+			'hardware-chip-outline': hardwareChipOutline,
 		});
 		this.detectLargeScreen();
 	}

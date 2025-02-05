@@ -9,7 +9,7 @@
 <ion-grid>
 	<ion-grid>
 		<ion-row class="ion-justify-content-center">
-			<ion-col size="12" size-md="8" size-lg="6">
+			<ion-col size="12">
 				<ion-searchbar
 					placeholder="{{
 						'Search models' | translate
@@ -20,51 +20,14 @@
 					(ionChange)="filterModels()"
 				></ion-searchbar>
 			</ion-col>
-			<ion-col style="align-self: center">
-				<ion-chip
-					*ngFor="let modelCategoryOption of modelCategoryOptions"
-					(click)="modelCategoryClicked(modelCategoryOption)"
-					[ngStyle]="
-						modelCategoryOption.active ? { 'background-color': '#ffe74c' } : {}
-					"
-				>
-					<ion-label>{{ modelCategoryOption.name }}</ion-label>
-				</ion-chip>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<ion-checkbox
-					name="showOnlyDownloadedModels"
-					ngDefaultControl
-					[(ngModel)]="showOnlyDownloadedModels"
-					(ngModelChange)="filterModels()"
-					>Show only downloaded models</ion-checkbox
-				>
-			</ion-col>
-			<ion-col *ngIf="false" size="auto">
-				<ion-icon
-					style="width: 1.3rem; height: 1.3rem; cursor: pointer"
-					name="{{ gridView ? 'grid-outline' : 'list-outline' }}"
-					title="Switch between grid/list view"
-					(click)="switchGridListView()"
-				></ion-icon>
-			</ion-col>
 		</ion-row>
 	</ion-grid>
 </ion-grid>
 
 <ion-grid *ngIf="gridView">
 	<ion-row>
-		<ion-col
-			size-xs="12"
-			size-sm="12"
-			size-md="12"
-			size-lg="12"
-			[attr.size-xl]="veryLargeScreen ? '4' : '6'"
-			*ngFor="let model of models; trackBy: trackById"
-		>
-			<ion-card style="padding-bottom: 0.5rem">
+		<ion-col size="12" *ngFor="let model of models; trackBy: trackById">
+			<ion-card class="flat-card" style="padding-bottom: 0.5rem">
 				<ion-card-header style="padding-right: 0.5rem">
 					<ion-card-title>
 						<span>
@@ -166,7 +129,7 @@
 								)
 							"
 							fill="outline"
-							color="secondary"
+							color="primary"
 						>
 							<ion-icon slot="start" name="download-outline"></ion-icon>
 							{{ 'Download' | translate }}
@@ -185,7 +148,7 @@
 								"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
-								color="secondary"
+								color="primary"
 							>
 								<ion-icon slot="start" name="caret-forward-outline"></ion-icon>
 								{{ 'Make default' | translate }}
@@ -195,7 +158,7 @@
 									(configService.config$ | async)!.data['model-svc']
 										.currentModelId === model.id
 								"
-								color="secondary"
+								color="primary"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
 								disabled="true"
@@ -224,11 +187,13 @@
 			<ion-button
 				(click)="loadPage(currentPage - 1)"
 				[disabled]="currentPage <= 1"
+				color="secondary"
 				><span style="color: white">Previous</span></ion-button
 			>
 			<ion-button
 				(click)="loadPage(currentPage + 1)"
 				[disabled]="currentPage * itemsPerPage >= totalItems"
+				color="secondary"
 				><span style="color: white">Next</span></ion-button
 			>
 		</ion-col>

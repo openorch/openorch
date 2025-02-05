@@ -8,7 +8,11 @@
 
 package model_svc
 
-import "sync"
+import (
+	"sync"
+
+	openapi "github.com/openorch/openorch/clients/go"
+)
 
 type ErrorResponse struct {
 	Error string `json:"error"`
@@ -22,6 +26,9 @@ type Platform struct {
 	Name          *string       `json:"name,omitempty"`
 	Version       *int          `json:"version,omitempty"`
 	Architectures Architectures `json:"architectures"`
+
+	// Types is a list of prompt types that the AI engine supports.
+	Types []openapi.PromptSvcPromptType
 }
 
 func (p Platform) GetId() string {
