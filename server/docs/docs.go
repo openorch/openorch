@@ -8897,12 +8897,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.14",
+	Version:          "0.3.0-rc.15",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "OpenOrch",
-	Description:      "AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.",
+	Description:      "AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

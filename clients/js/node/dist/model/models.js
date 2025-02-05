@@ -72,13 +72,13 @@ export * from './modelSvcArchitectures';
 export * from './modelSvcContainer';
 export * from './modelSvcErrorResponse';
 export * from './modelSvcGetModelResponse';
-export * from './modelSvcListResponse';
+export * from './modelSvcListModelsResponse';
+export * from './modelSvcListPlatformsResponse';
 export * from './modelSvcModel';
 export * from './modelSvcModelStatus';
 export * from './modelSvcPlatform';
 export * from './modelSvcStatusResponse';
 export * from './openapiChatSvcMessage';
-export * from './openapiPromptSvcPromptType';
 export * from './policySvcBlocklistParameters';
 export * from './policySvcCheckRequest';
 export * from './policySvcCheckResponse';
@@ -254,13 +254,13 @@ import { ModelSvcArchitectures } from './modelSvcArchitectures';
 import { ModelSvcContainer } from './modelSvcContainer';
 import { ModelSvcErrorResponse } from './modelSvcErrorResponse';
 import { ModelSvcGetModelResponse } from './modelSvcGetModelResponse';
-import { ModelSvcListResponse } from './modelSvcListResponse';
+import { ModelSvcListModelsResponse } from './modelSvcListModelsResponse';
+import { ModelSvcListPlatformsResponse } from './modelSvcListPlatformsResponse';
 import { ModelSvcModel } from './modelSvcModel';
 import { ModelSvcModelStatus } from './modelSvcModelStatus';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 import { ModelSvcStatusResponse } from './modelSvcStatusResponse';
 import { OpenapiChatSvcMessage } from './openapiChatSvcMessage';
-import { OpenapiPromptSvcPromptType } from './openapiPromptSvcPromptType';
 import { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters';
 import { PolicySvcCheckRequest } from './policySvcCheckRequest';
 import { PolicySvcCheckResponse } from './policySvcCheckResponse';
@@ -377,7 +377,6 @@ let enumsMap = {
     "DatastoreOp": DatastoreOp,
     "DeploySvcDeploymentStatus": DeploySvcDeploymentStatus,
     "DeploySvcStrategyType": DeploySvcStrategyType,
-    "OpenapiPromptSvcPromptType": OpenapiPromptSvcPromptType,
     "PolicySvcEntity": PolicySvcEntity,
     "PolicySvcScope": PolicySvcScope,
     "PolicySvcTemplateId": PolicySvcTemplateId,
@@ -460,7 +459,8 @@ let typeMap = {
     "ModelSvcContainer": ModelSvcContainer,
     "ModelSvcErrorResponse": ModelSvcErrorResponse,
     "ModelSvcGetModelResponse": ModelSvcGetModelResponse,
-    "ModelSvcListResponse": ModelSvcListResponse,
+    "ModelSvcListModelsResponse": ModelSvcListModelsResponse,
+    "ModelSvcListPlatformsResponse": ModelSvcListPlatformsResponse,
     "ModelSvcModel": ModelSvcModel,
     "ModelSvcModelStatus": ModelSvcModelStatus,
     "ModelSvcPlatform": ModelSvcPlatform,

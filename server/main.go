@@ -30,7 +30,7 @@ var port = router.GetPort()
 
 // @title           OpenOrch
 // @version         0.3.0-rc.15
-// @description     AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.
+// @description     AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support

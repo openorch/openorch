@@ -1,9 +1,9 @@
 /*
 OpenOrch
 
-AI app platform. A language-agnostic, distributed platform for building microservices-based AI apps.
+AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
 
-API version: 0.3.0-rc.14
+API version: 0.3.0-rc.15
 Contact: sales@singulatron.com
 */
 
