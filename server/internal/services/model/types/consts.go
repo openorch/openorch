@@ -1061,6 +1061,9 @@ var Models = []*Model{
 		Name:           "Stable Diffusion",
 		PromptTemplate: "{prompt}",
 	},
+	//
+	// TinyLlama
+	//
 	{
 		Id: "huggingface/TheBloke/tinyllama-1.1b-chat-v1.0.Q4_K_S.gguf",
 		Assets: map[string]string{
@@ -1082,5 +1085,48 @@ var Models = []*Model{
 <|user|>
 {prompt}</s>
 <|assistant|>`,
+	},
+	//
+	// Deepseek
+	//
+	{
+		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf",
+		Assets: map[string]string{
+			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf",
+		},
+		PlatformId:     PlatformLlamaCpp.Id,
+		Name:           "Mistral",
+		Parameters:     "7B",
+		Flavour:        "Instruct",
+		Version:        "v0.2",
+		Quality:        "Q2_K",
+		Extension:      "GGUF",
+		FullName:       "Mistral 7B Instruct v0.2 Q2_K",
+		Size:           3.08,
+		MaxRam:         5.58,
+		QuantComment:   "smallest, significant quality loss - not recommended for most purposes",
+		Description:    mistralDescription,
+		PromptTemplate: "[INST] {prompt} [/INST]",
+	},
+	{
+		Id: "huggingface/TheBloke/deepseek-llm-67b-chat.Q4_K_M.gguf",
+		Assets: map[string]string{
+			"MODEL": "https://huggingface.co/TheBloke/deepseek-llm-67b-chat-GGUF/resolve/main/deepseek-llm-67b-chat.Q4_K_M.gguf?download=true",
+		},
+		PlatformId:   PlatformLlamaCpp.Id,
+		Name:         "DeepSeek",
+		Parameters:   "67B",
+		Flavour:      "Chat",
+		Version:      "",
+		Quality:      "Q4_K_M",
+		Extension:    "GGUF",
+		FullName:     "DeepSeek LLM 67B Chat Q4_K_M",
+		Size:         47.65,
+		MaxRam:       50.15,
+		QuantComment: "medium, balanced quality - recommended",
+		Description:  "Deepseek",
+		PromptTemplate: `User: {prompt}
+
+Assistant:`,
 	},
 }
