@@ -13,6 +13,8 @@ import { TranslatePipe } from '../translate.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonSpinner, IonIcon } from '@ionic/angular/standalone';
 import { NgIf, DecimalPipe } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { pauseOutline, playOutline } from 'ionicons/icons';
 
 @Component({
 	selector: 'app-downloading',
@@ -33,7 +35,12 @@ export class DownloadingComponent {
 
 	details!: Download;
 
-	constructor(private downloadService: DownloadService) {}
+	constructor(private downloadService: DownloadService) {
+		addIcons({
+			play: playOutline,
+			pause: pauseOutline,
+		});
+	}
 
 	subscriptions: Subscription[] = [];
 
