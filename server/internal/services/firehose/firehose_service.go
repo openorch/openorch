@@ -15,13 +15,11 @@ package firehoseservice
 import (
 	"context"
 	"log"
-	"log/slog"
 	"sync"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
-	"github.com/openorch/openorch/sdk/go/logger"
 
 	firehosetypes "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
@@ -83,11 +81,12 @@ func (fs *FirehoseService) Start() error {
 }
 
 func (fs *FirehoseService) publishMany(events ...*firehosetypes.Event) {
-	for _, event := range events {
-		logger.Debug("Event published",
-			slog.String("eventName", event.Name),
-		)
-	}
+	// for _, event := range events {
+	// 	logger.Debug("Event published",
+	// 		slog.String("eventName", event.Name),
+	// 	)
+	// }
+
 	fs.mu.Lock()
 	defer fs.mu.Unlock()
 	for _, subscriber := range fs.subscribers {
