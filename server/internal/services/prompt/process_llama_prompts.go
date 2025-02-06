@@ -44,6 +44,19 @@ func (p *PromptService) processLlamaCpp(
 		template = currentPrompt.EngineParameters.LlamaCpp.Template
 	}
 
+	if template == "" {
+		modelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+			ModelSvcAPI.GetModel(context.Background(), currentPrompt.ModelId).
+			Execute()
+		if err != nil {
+			return err
+		}
+
+		if modelRsp.Model.PromptTemplate != nil {
+			template = *modelRsp.Model.PromptTemplate
+		}
+	}
+
 	if template != "" {
 		fullPrompt = strings.Replace(
 			template,

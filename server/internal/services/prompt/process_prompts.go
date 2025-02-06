@@ -255,6 +255,9 @@ func (p *PromptService) processPrompt(
 			modelId = modelservice.DefaultModelId
 		}
 	}
+	if currentPrompt.ModelId == "" {
+		currentPrompt.ModelId = modelId
+	}
 
 	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
 		ModelSvcAPI.GetModelStatus(context.Background(), modelId).
