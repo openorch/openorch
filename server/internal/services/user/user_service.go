@@ -228,9 +228,12 @@ func (s *UserService) bootstrap() error {
 
 	}
 
-	// bootstrap admin user
+	// Bootstrap admin user. Since it's not efficient to query for admins
+	// we will just query by slug.
 
-	count, err := s.usersStore.Query().Count()
+	count, err := s.usersStore.Query(
+		datastore.Equals([]string{"slug"}, "openorch"),
+	).Count()
 
 	if err != nil {
 		return err
