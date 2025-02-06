@@ -23,6 +23,7 @@ import (
 	"strconv"
 	"strings"
 
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 	types "github.com/openorch/openorch/server/internal/services/file/types"
@@ -200,6 +201,17 @@ func (dm *FileService) downloadFile(d *types.InternalDownload) error {
 				if err != nil {
 					return errors.Wrap(err, "failed to upsert download")
 				}
+
+				ev := types.EventDownloadStatusChange{}
+				_, err = dm.clientFactory.Client(sdk.WithToken(dm.token)).
+					FirehoseSvcAPI.PublishEvent(context.Background()).
+					Event(openapi.FirehoseSvcEventPublishRequest{
+						Event: &openapi.FirehoseSvcEvent{
+							Name: openapi.PtrString(ev.Name()),
+							Data: nil,
+						},
+					}).
+					Execute()
 			}
 			if err == io.EOF {
 				break
