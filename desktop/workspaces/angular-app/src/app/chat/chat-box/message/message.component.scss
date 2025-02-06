@@ -16,6 +16,7 @@
 			width: 2.5rem;
 			position: relative;
 			top: 0.0625rem;
+			border-radius: 50%;
 		}
 	}
 
@@ -85,6 +86,7 @@
 			width: 2.5rem;
 			position: relative;
 			top: 0.0625rem;
+			border-radius: 50%;
 		}
 	}
 
@@ -126,7 +128,6 @@
 		}
 	}
 }
-
 
 .message-block-narrow .message-action-buttons {
 	visibility: hidden;

@@ -15,6 +15,7 @@
 		height: 100%;
 		width: 100%;
 		object-fit: contain; /* Ensure the image is not distorted */
+		border-radius: 50%;
 	}
 
 	.text-container {
