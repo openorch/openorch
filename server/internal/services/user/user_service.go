@@ -234,20 +234,17 @@ func (s *UserService) bootstrap() error {
 	count, err := s.usersStore.Query(
 		datastore.Equals([]string{"slug"}, "openorch"),
 	).Count()
-
 	if err != nil {
 		return err
 	}
 
-	if count > 0 {
-		return nil
-	}
-
-	_, err = s.register("openorch", "changeme", "Admin", []string{
-		usertypes.RoleAdmin.Id,
-	})
-	if err != nil {
-		return err
+	if count == 0 {
+		_, err = s.register("openorch", "changeme", "Admin", []string{
+			usertypes.RoleAdmin.Id,
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	// bootstrapping service user
@@ -277,8 +274,6 @@ func (s *UserService) bootstrap() error {
 
 	tok, err := s.login(slug, pw)
 	if err != nil {
-		// logger.Debug("Registering service", slog.String("slug", slug))
-
 		usr, err := s.register(slug, pw,
 			"User Svc", []string{
 				usertypes.RoleUser.Id,
