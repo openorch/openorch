@@ -84,7 +84,7 @@ func (fs *FirehoseService) Start() error {
 
 func (fs *FirehoseService) publishMany(events ...*firehosetypes.Event) {
 	for _, event := range events {
-		logger.Trace("Event published",
+		logger.Debug("Event published",
 			slog.String("eventName", event.Name),
 		)
 	}
