@@ -21,9 +21,6 @@ import (
 
 // pause a download
 func (ds *FileService) pause(url string) error {
-	ds.lock.Lock()
-	defer ds.lock.Unlock()
-
 	d, exists := ds.getDownload(url)
 	if !exists {
 		return fmt.Errorf("url '%v' is not being downloaded", url)
