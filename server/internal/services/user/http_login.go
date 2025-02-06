@@ -59,6 +59,7 @@ func (s *UserService) Login(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
 		}
+		return
 	}
 
 	bs, _ := json.Marshal(user.LoginResponse{
