@@ -8,7 +8,7 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from './server.service';
 import { FirehoseService } from './firehose.service';
-import { ReplaySubject, first } from 'rxjs';
+import { ReplaySubject, first, filter, throttleTime } from 'rxjs';
 import { UserService } from './user.service';
 import {
 	FileSvcApi,
@@ -52,17 +52,17 @@ export class DownloadService {
 	}
 
 	async init() {
-		this.firehoseService.firehoseEvent$.subscribe(async (event) => {
-			switch (event.name) {
-				case 'downloadStatusChange': {
-					const rsp = await this.downloadList();
-					this.onFileDownloadStatusSubject.next({
-						allDownloads: rsp?.downloads || [],
-					});
-					break;
-				}
-			}
-		});
+		this.firehoseService.firehoseEvent$
+			.pipe(
+				filter((event) => event.name === 'downloadStatusChange'),
+				throttleTime(500) // Throttle to at most once every 500ms
+			)
+			.subscribe(async () => {
+				const rsp = await this.downloadList();
+				this.onFileDownloadStatusSubject.next({
+					allDownloads: rsp?.downloads || [],
+				});
+			});
 	}
 
 	async loggedInInit() {
