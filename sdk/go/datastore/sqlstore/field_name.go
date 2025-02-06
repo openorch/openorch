@@ -40,9 +40,7 @@ func (s *SQLStore) fieldName(fieldName string) string {
 func escape(columnName string) string {
 	toEscape := false
 	switch columnName {
-	case "table":
-		toEscape = true
-	case "to":
+	case "table", "to", "type":
 		toEscape = true
 	}
 
