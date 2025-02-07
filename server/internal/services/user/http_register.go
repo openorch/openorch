@@ -117,10 +117,11 @@ func (s *UserService) register(
 		return nil, err
 	}
 
+	now := time.Now()
 	user := &user.User{
 		Id:           sdk.Id("usr"),
-		CreatedAt:    time.Now(),
-		UpdatedAt:    time.Now(),
+		CreatedAt:    now,
+		UpdatedAt:    now,
 		Name:         name,
 		Slug:         slug,
 		PasswordHash: passwordHash,
