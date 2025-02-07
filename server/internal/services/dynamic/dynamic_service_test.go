@@ -54,7 +54,7 @@ func TestCreate(t *testing.T) {
 	uuid1 := sdk.Id(table1)
 	uuid2 := sdk.Id(table2)
 
-	obj := client.DynamicSvcObjectCreateFields{
+	obj := client.DynamicSvcCreateObjectFields{
 		Id:       &uuid1,
 		Table:    table1,
 		Readers:  []string{"_self"},
@@ -84,7 +84,7 @@ func TestCreate(t *testing.T) {
 		require.Equal(t, uuid1, *rsp.Objects[0].Id)
 	})
 
-	obj2 := client.DynamicSvcObjectCreateFields{
+	obj2 := client.DynamicSvcCreateObjectFields{
 		Id:      &uuid2,
 		Table:   table2,
 		Readers: []string{*tokenReadRsp2.User.Id},

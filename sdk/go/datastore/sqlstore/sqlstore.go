@@ -451,6 +451,9 @@ type SQLQueryBuilder struct {
 }
 
 func (q *SQLQueryBuilder) OrderBy(orderbys ...datastore.OrderBy) datastore.QueryBuilder {
+	if len(orderbys) == 0 {
+		return nil
+	}
 	q.orderField = orderbys[0].Field
 	q.orderDesc = orderbys[0].Desc
 	return q
@@ -762,7 +765,7 @@ func (q *SQLQueryBuilder) buildSelectQuery() (string, []interface{}, error) {
 			if jsonTag := field.Tag.Get("json"); jsonTag != "" {
 				columnName = strings.Split(jsonTag, ",")[0]
 			}
-			columns = append(columns, columnName)
+			columns = append(columns, q.store.fieldName(columnName))
 		}
 
 		query = fmt.Sprintf("SELECT %s FROM %s", strings.Join(columns, ", "), strings.ToLower(q.store.db.Tablename()))
