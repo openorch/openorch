@@ -1,12 +1,9 @@
-name: "Frontend build"
+name: "Frontend container build and push to DockerHub"
 
 on:
   push:
     branches:
-      - "**"
-    paths:
-      - ".github/workflows/frontend-container-build-github.yaml"
-      - "desktop/**"
+      - "main"
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
