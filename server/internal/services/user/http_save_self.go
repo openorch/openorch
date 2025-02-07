@@ -58,7 +58,7 @@ func (s *UserService) SaveSelf(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	// cannot change slug for now
-	err = s.saveProfile(usr.Slug, req.Name)
+	err = s.saveProfile(usr.Id, req.Name)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

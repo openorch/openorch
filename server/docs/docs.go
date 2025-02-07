@@ -3822,64 +3822,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/user-svc/change-password-admin": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Allows an administrator to change a user's password.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Svc"
-                ],
-                "summary": "Change User Password (Admin)",
-                "operationId": "changePasswordAdmin",
-                "parameters": [
-                    {
-                        "description": "Change Password Request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ChangePasswordAdminRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Password changed successfully",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ChangePasswordAdminResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/user_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
         "/user-svc/grants": {
             "put": {
                 "security": [
@@ -5089,6 +5031,71 @@ const docTemplate = `{
                         "description": "List of users retrieved successfully",
                         "schema": {
                             "$ref": "#/definitions/user_svc.GetUsersResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-svc/{userId}/reset-password": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Allows an administrator to change a user's password.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Svc"
+                ],
+                "summary": "Reset Password",
+                "operationId": "resetPassword",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Change Password Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Password changed successfully",
+                        "schema": {
+                            "$ref": "#/definitions/user_svc.ResetPasswordResponse"
                         }
                     },
                     "400": {
@@ -6578,39 +6585,6 @@ const docTemplate = `{
                 }
             }
         },
-        "openapi.ChatSvcMessage": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "fileIds": {
-                    "description": "FileIds defines the file attachments the message has.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "text": {
-                    "description": "Text content of the message eg. \\\"Hi, what's up?\\\"",
-                    "type": "string"
-                },
-                "threadId": {
-                    "description": "ThreadId of the message.",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "userId": {
-                    "description": "UserId is the id of the user who wrote the message. For AI messages this field is empty.",
-                    "type": "string"
-                }
-            }
-        },
         "policy_svc.BlocklistParameters": {
             "type": "object",
             "properties": {
@@ -6995,7 +6969,7 @@ const docTemplate = `{
                     "description": "Response message contains the response text and files.\nThis field is populated only for synchronous prompts (` + "`" + `sync = true` + "`" + `).\nFor asynchronous prompts, the response will provided in the associated\nmessage identified by the ` + "`" + `responseMessageId` + "`" + ` of the ` + "`" + `promptSvc.prompt` + "`" + ` object once the prompt completes.",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/openapi.ChatSvcMessage"
+                            "$ref": "#/definitions/chat_svc.Message"
                         }
                     ]
                 }
@@ -8348,20 +8322,6 @@ const docTemplate = `{
                 }
             }
         },
-        "user_svc.ChangePasswordAdminRequest": {
-            "type": "object",
-            "properties": {
-                "newPassword": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                }
-            }
-        },
-        "user_svc.ChangePasswordAdminResponse": {
-            "type": "object"
-        },
         "user_svc.ChangePasswordRequest": {
             "type": "object",
             "properties": {
@@ -8760,6 +8720,20 @@ const docTemplate = `{
         "user_svc.RemoveUserFromOrganizationResponse": {
             "type": "object"
         },
+        "user_svc.ResetPasswordRequest": {
+            "type": "object",
+            "properties": {
+                "newPassword": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "user_svc.ResetPasswordResponse": {
+            "type": "object"
+        },
         "user_svc.Role": {
             "type": "object",
             "properties": {
@@ -8901,7 +8875,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.15",
+	Version:          "0.3.0-rc.16",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

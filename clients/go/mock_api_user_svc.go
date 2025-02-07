@@ -113,36 +113,6 @@ func (mr *MockUserSvcAPIMockRecorder) ChangePassword(ctx any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangePassword", reflect.TypeOf((*MockUserSvcAPI)(nil).ChangePassword), ctx)
 }
 
-// ChangePasswordAdmin mocks base method.
-func (m *MockUserSvcAPI) ChangePasswordAdmin(ctx context.Context) ApiChangePasswordAdminRequest {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ChangePasswordAdmin", ctx)
-	ret0, _ := ret[0].(ApiChangePasswordAdminRequest)
-	return ret0
-}
-
-// ChangePasswordAdmin indicates an expected call of ChangePasswordAdmin.
-func (mr *MockUserSvcAPIMockRecorder) ChangePasswordAdmin(ctx any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangePasswordAdmin", reflect.TypeOf((*MockUserSvcAPI)(nil).ChangePasswordAdmin), ctx)
-}
-
-// ChangePasswordAdminExecute mocks base method.
-func (m *MockUserSvcAPI) ChangePasswordAdminExecute(r ApiChangePasswordAdminRequest) (map[string]any, *http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ChangePasswordAdminExecute", r)
-	ret0, _ := ret[0].(map[string]any)
-	ret1, _ := ret[1].(*http.Response)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// ChangePasswordAdminExecute indicates an expected call of ChangePasswordAdminExecute.
-func (mr *MockUserSvcAPIMockRecorder) ChangePasswordAdminExecute(r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangePasswordAdminExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).ChangePasswordAdminExecute), r)
-}
-
 // ChangePasswordExecute mocks base method.
 func (m *MockUserSvcAPI) ChangePasswordExecute(r ApiChangePasswordRequest) (map[string]any, *http.Response, error) {
 	m.ctrl.T.Helper()
@@ -607,6 +577,36 @@ func (m *MockUserSvcAPI) RemoveUserFromOrganizationExecute(r ApiRemoveUserFromOr
 func (mr *MockUserSvcAPIMockRecorder) RemoveUserFromOrganizationExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveUserFromOrganizationExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).RemoveUserFromOrganizationExecute), r)
+}
+
+// ResetPassword mocks base method.
+func (m *MockUserSvcAPI) ResetPassword(ctx context.Context, userId string) ApiResetPasswordRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResetPassword", ctx, userId)
+	ret0, _ := ret[0].(ApiResetPasswordRequest)
+	return ret0
+}
+
+// ResetPassword indicates an expected call of ResetPassword.
+func (mr *MockUserSvcAPIMockRecorder) ResetPassword(ctx, userId any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPassword", reflect.TypeOf((*MockUserSvcAPI)(nil).ResetPassword), ctx, userId)
+}
+
+// ResetPasswordExecute mocks base method.
+func (m *MockUserSvcAPI) ResetPasswordExecute(r ApiResetPasswordRequest) (map[string]any, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResetPasswordExecute", r)
+	ret0, _ := ret[0].(map[string]any)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ResetPasswordExecute indicates an expected call of ResetPasswordExecute.
+func (mr *MockUserSvcAPIMockRecorder) ResetPasswordExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPasswordExecute", reflect.TypeOf((*MockUserSvcAPI)(nil).ResetPasswordExecute), r)
 }
 
 // SaveGrants mocks base method.

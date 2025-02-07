@@ -93,27 +93,3 @@ func (s *UserService) changePassword(
 
 	return q.Update(user)
 }
-
-func (s *UserService) changePasswordAdmin(slug, newPassword string) error {
-	q := s.usersStore.Query(
-		datastore.Equals(datastore.Field("slug"), slug),
-	)
-	userI, found, err := q.FindOne()
-	if err != nil {
-		return err
-	}
-	if !found {
-		return errors.New("user not found")
-	}
-	user := userI.(*usertypes.User)
-
-	newPasswordHash, err := s.hashPassword(newPassword)
-	if err != nil {
-		return err
-	}
-
-	user.PasswordHash = newPasswordHash
-	user.UpdatedAt = time.Now()
-
-	return q.Update(user)
-}

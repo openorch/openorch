@@ -108,7 +108,6 @@ docs/ModelSvcModel.md
 docs/ModelSvcModelStatus.md
 docs/ModelSvcPlatform.md
 docs/ModelSvcStatusResponse.md
-docs/OpenapiChatSvcMessage.md
 docs/PolicySvcAPI.md
 docs/PolicySvcBlocklistParameters.md
 docs/PolicySvcCheckRequest.md
@@ -183,7 +182,6 @@ docs/UserSvcAPI.md
 docs/UserSvcAddUserToOrganizationRequest.md
 docs/UserSvcAssignPermissionsRequest.md
 docs/UserSvcAuthToken.md
-docs/UserSvcChangePasswordAdminRequest.md
 docs/UserSvcChangePasswordRequest.md
 docs/UserSvcContact.md
 docs/UserSvcCreateOrganizationRequest.md
@@ -209,6 +207,7 @@ docs/UserSvcPermissionLink.md
 docs/UserSvcReadUserByTokenResponse.md
 docs/UserSvcRegisterRequest.md
 docs/UserSvcRegisterResponse.md
+docs/UserSvcResetPasswordRequest.md
 docs/UserSvcRole.md
 docs/UserSvcSaveGrantsRequest.md
 docs/UserSvcSavePermissionsRequest.md
@@ -299,7 +298,6 @@ model_model_svc_model.go
 model_model_svc_model_status.go
 model_model_svc_platform.go
 model_model_svc_status_response.go
-model_openapi_chat_svc_message.go
 model_policy_svc_blocklist_parameters.go
 model_policy_svc_check_request.go
 model_policy_svc_check_response.go
@@ -368,7 +366,6 @@ model_stable_diffusion_txt2_img_request.go
 model_user_svc_add_user_to_organization_request.go
 model_user_svc_assign_permissions_request.go
 model_user_svc_auth_token.go
-model_user_svc_change_password_admin_request.go
 model_user_svc_change_password_request.go
 model_user_svc_contact.go
 model_user_svc_create_organization_request.go
@@ -394,6 +391,7 @@ model_user_svc_permission_link.go
 model_user_svc_read_user_by_token_response.go
 model_user_svc_register_request.go
 model_user_svc_register_response.go
+model_user_svc_reset_password_request.go
 model_user_svc_role.go
 model_user_svc_save_grants_request.go
 model_user_svc_save_permissions_request.go

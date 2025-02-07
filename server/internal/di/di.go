@@ -601,19 +601,19 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/user/{userId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		userService.SaveProfile(w, r)
+		userService.SaveUser(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/self", appl(func(w http.ResponseWriter, r *http.Request) {
-		userService.SaveProfile(w, r)
+		userService.SaveSelf(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/user-svc/change-password", appl(func(w http.ResponseWriter, r *http.Request) {
 		userService.ChangePassword(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/user-svc/change-password-admin", appl(func(w http.ResponseWriter, r *http.Request) {
-		userService.ChangePasswordAdmin(w, r)
+	router.HandleFunc("/user-svc/{userId}/reset-password", appl(func(w http.ResponseWriter, r *http.Request) {
+		userService.ResetPassword(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/user-svc/organization", appl(func(w http.ResponseWriter, r *http.Request) {

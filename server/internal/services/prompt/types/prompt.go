@@ -15,10 +15,11 @@ package prompt_svc
 import (
 	"time"
 
-	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
+
+	chat "github.com/openorch/openorch/server/internal/services/chat/types"
 )
 
 type ErrorResponse struct {
@@ -267,7 +268,7 @@ type PromptResponse struct {
 	// This field is populated only for synchronous prompts (`sync = true`).
 	// For asynchronous prompts, the response will provided in the associated
 	// message identified by the `responseMessageId` of the `promptSvc.prompt` object once the prompt completes.
-	ResponseMessage *openapi.ChatSvcMessage `json:"responseMessage,omitempty"`
+	ResponseMessage *chat.Message `json:"responseMessage,omitempty"`
 
 	// Prompt contains the details of the prompt that was just created by this request.
 	// This includes the ID, prompt text, status, and other associated metadata.

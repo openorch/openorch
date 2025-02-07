@@ -233,7 +233,7 @@ export class UsersComponent {
 		}
 
 		try {
-			let toastMessage = `Profile ${name} saved`;
+			let toastMessage = `User '${name}' saved`;
 			await this.userService.saveProfile(userId, slug, name);
 
 			if (password) {
