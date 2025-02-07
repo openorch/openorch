@@ -20,6 +20,8 @@ var _ MappedNullable = &UserSvcAuthToken{}
 
 // UserSvcAuthToken struct for UserSvcAuthToken
 type UserSvcAuthToken struct {
+	// Active tokens contain the most up-to-date information. When a user's role changes—due to role assignment, organization creation/assignment, etc.—all existing tokens are marked inactive. Active tokens are reused during login, while inactive tokens are retained for historical reference.
+	Active *bool `json:"active,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
 	DeletedAt *string `json:"deletedAt,omitempty"`
 	Id *string `json:"id,omitempty"`
@@ -43,6 +45,38 @@ func NewUserSvcAuthToken() *UserSvcAuthToken {
 func NewUserSvcAuthTokenWithDefaults() *UserSvcAuthToken {
 	this := UserSvcAuthToken{}
 	return &this
+}
+
+// GetActive returns the Active field value if set, zero value otherwise.
+func (o *UserSvcAuthToken) GetActive() bool {
+	if o == nil || IsNil(o.Active) {
+		var ret bool
+		return ret
+	}
+	return *o.Active
+}
+
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserSvcAuthToken) GetActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.Active) {
+		return nil, false
+	}
+	return o.Active, true
+}
+
+// HasActive returns a boolean if a field has been set.
+func (o *UserSvcAuthToken) HasActive() bool {
+	if o != nil && !IsNil(o.Active) {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given bool and assigns it to the Active field.
+func (o *UserSvcAuthToken) SetActive(v bool) {
+	o.Active = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -247,6 +281,9 @@ func (o UserSvcAuthToken) MarshalJSON() ([]byte, error) {
 
 func (o UserSvcAuthToken) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}

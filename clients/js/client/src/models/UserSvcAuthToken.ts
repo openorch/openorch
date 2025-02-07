@@ -20,6 +20,16 @@ import { mapValues } from '../runtime';
  */
 export interface UserSvcAuthToken {
     /**
+     * Active tokens contain the most up-to-date information.
+     * When a user's role changes—due to role assignment, organization
+     * creation/assignment, etc.—all existing tokens are marked inactive.
+     * Active tokens are reused during login, while inactive tokens
+     * are retained for historical reference.
+     * @type {boolean}
+     * @memberof UserSvcAuthToken
+     */
+    active?: boolean;
+    /**
      * 
      * @type {string}
      * @memberof UserSvcAuthToken
@@ -74,6 +84,7 @@ export function UserSvcAuthTokenFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
+        'active': json['active'] == null ? undefined : json['active'],
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -94,6 +105,7 @@ export function UserSvcAuthTokenToJSONTyped(value?: UserSvcAuthToken | null, ign
 
     return {
         
+        'active': value['active'],
         'createdAt': value['createdAt'],
         'deletedAt': value['deletedAt'],
         'id': value['id'],

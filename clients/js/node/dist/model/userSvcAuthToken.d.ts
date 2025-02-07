@@ -10,6 +10,10 @@
  * Do not edit the class manually.
  */
 export declare class UserSvcAuthToken {
+    /**
+    * Active tokens contain the most up-to-date information. When a user\'s role changes—due to role assignment, organization creation/assignment, etc.—all existing tokens are marked inactive. Active tokens are reused during login, while inactive tokens are retained for historical reference.
+    */
+    'active'?: boolean;
     'createdAt'?: string;
     'deletedAt'?: string;
     'id'?: string;

@@ -16,6 +16,16 @@
  */
 export interface UserSvcAuthToken {
     /**
+     * Active tokens contain the most up-to-date information.
+     * When a user's role changes—due to role assignment, organization
+     * creation/assignment, etc.—all existing tokens are marked inactive.
+     * Active tokens are reused during login, while inactive tokens
+     * are retained for historical reference.
+     * @type {boolean}
+     * @memberof UserSvcAuthToken
+     */
+    active?: boolean;
+    /**
      *
      * @type {string}
      * @memberof UserSvcAuthToken
