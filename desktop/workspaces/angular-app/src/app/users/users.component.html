@@ -35,7 +35,7 @@
 							<ion-item
 								detail="false"
 								lines="full"
-								(click)="users[i].visible = !users[i].visible"
+								(click)="toggleVisible(user.id!)"
 								button
 							>
 								<ion-label>
@@ -66,6 +66,7 @@
 										labelPlacement="floating"
 										type="text"
 										required
+										ngDefaultControl
 									></ion-input>
 								</ion-item>
 
@@ -73,10 +74,10 @@
 									<ion-input
 										formControlName="slug"
 										label="Slug"
+										ngDefaultControl
 										labelPlacement="floating"
 										type="text"
 										required
-										[disabled]="true"
 									></ion-input>
 								</ion-item>
 
@@ -84,6 +85,7 @@
 									<ion-input
 										formControlName="password"
 										label="New Password"
+										ngDefaultControl
 										labelPlacement="floating"
 										type="password"
 										placeholder="If you leave this blank, the password won't be changed"
@@ -94,6 +96,7 @@
 									<ion-input
 										formControlName="passwordConfirmation"
 										label="Password Confirmation"
+										ngDefaultControl
 										labelPlacement="floating"
 										type="password"
 									></ion-input>

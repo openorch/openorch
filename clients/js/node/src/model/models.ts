@@ -80,7 +80,6 @@ export * from './modelSvcModel';
 export * from './modelSvcModelStatus';
 export * from './modelSvcPlatform';
 export * from './modelSvcStatusResponse';
-export * from './openapiChatSvcMessage';
 export * from './policySvcBlocklistParameters';
 export * from './policySvcCheckRequest';
 export * from './policySvcCheckResponse';
@@ -149,7 +148,6 @@ export * from './stableDiffusionTxt2ImgRequest';
 export * from './userSvcAddUserToOrganizationRequest';
 export * from './userSvcAssignPermissionsRequest';
 export * from './userSvcAuthToken';
-export * from './userSvcChangePasswordAdminRequest';
 export * from './userSvcChangePasswordRequest';
 export * from './userSvcContact';
 export * from './userSvcCreateOrganizationRequest';
@@ -175,6 +173,7 @@ export * from './userSvcPermissionLink';
 export * from './userSvcReadUserByTokenResponse';
 export * from './userSvcRegisterRequest';
 export * from './userSvcRegisterResponse';
+export * from './userSvcResetPasswordRequest';
 export * from './userSvcRole';
 export * from './userSvcSaveGrantsRequest';
 export * from './userSvcSavePermissionsRequest';
@@ -276,7 +275,6 @@ import { ModelSvcModel } from './modelSvcModel';
 import { ModelSvcModelStatus } from './modelSvcModelStatus';
 import { ModelSvcPlatform } from './modelSvcPlatform';
 import { ModelSvcStatusResponse } from './modelSvcStatusResponse';
-import { OpenapiChatSvcMessage } from './openapiChatSvcMessage';
 import { PolicySvcBlocklistParameters } from './policySvcBlocklistParameters';
 import { PolicySvcCheckRequest } from './policySvcCheckRequest';
 import { PolicySvcCheckResponse } from './policySvcCheckResponse';
@@ -345,7 +343,6 @@ import { StableDiffusionTxt2ImgRequest } from './stableDiffusionTxt2ImgRequest';
 import { UserSvcAddUserToOrganizationRequest } from './userSvcAddUserToOrganizationRequest';
 import { UserSvcAssignPermissionsRequest } from './userSvcAssignPermissionsRequest';
 import { UserSvcAuthToken } from './userSvcAuthToken';
-import { UserSvcChangePasswordAdminRequest } from './userSvcChangePasswordAdminRequest';
 import { UserSvcChangePasswordRequest } from './userSvcChangePasswordRequest';
 import { UserSvcContact } from './userSvcContact';
 import { UserSvcCreateOrganizationRequest } from './userSvcCreateOrganizationRequest';
@@ -371,6 +368,7 @@ import { UserSvcPermissionLink } from './userSvcPermissionLink';
 import { UserSvcReadUserByTokenResponse } from './userSvcReadUserByTokenResponse';
 import { UserSvcRegisterRequest } from './userSvcRegisterRequest';
 import { UserSvcRegisterResponse } from './userSvcRegisterResponse';
+import { UserSvcResetPasswordRequest } from './userSvcResetPasswordRequest';
 import { UserSvcRole } from './userSvcRole';
 import { UserSvcSaveGrantsRequest } from './userSvcSaveGrantsRequest';
 import { UserSvcSavePermissionsRequest } from './userSvcSavePermissionsRequest';
@@ -484,7 +482,6 @@ let typeMap: {[index: string]: any} = {
     "ModelSvcModelStatus": ModelSvcModelStatus,
     "ModelSvcPlatform": ModelSvcPlatform,
     "ModelSvcStatusResponse": ModelSvcStatusResponse,
-    "OpenapiChatSvcMessage": OpenapiChatSvcMessage,
     "PolicySvcBlocklistParameters": PolicySvcBlocklistParameters,
     "PolicySvcCheckRequest": PolicySvcCheckRequest,
     "PolicySvcCheckResponse": PolicySvcCheckResponse,
@@ -544,7 +541,6 @@ let typeMap: {[index: string]: any} = {
     "UserSvcAddUserToOrganizationRequest": UserSvcAddUserToOrganizationRequest,
     "UserSvcAssignPermissionsRequest": UserSvcAssignPermissionsRequest,
     "UserSvcAuthToken": UserSvcAuthToken,
-    "UserSvcChangePasswordAdminRequest": UserSvcChangePasswordAdminRequest,
     "UserSvcChangePasswordRequest": UserSvcChangePasswordRequest,
     "UserSvcContact": UserSvcContact,
     "UserSvcCreateOrganizationRequest": UserSvcCreateOrganizationRequest,
@@ -570,6 +566,7 @@ let typeMap: {[index: string]: any} = {
     "UserSvcReadUserByTokenResponse": UserSvcReadUserByTokenResponse,
     "UserSvcRegisterRequest": UserSvcRegisterRequest,
     "UserSvcRegisterResponse": UserSvcRegisterResponse,
+    "UserSvcResetPasswordRequest": UserSvcResetPasswordRequest,
     "UserSvcRole": UserSvcRole,
     "UserSvcSaveGrantsRequest": UserSvcSaveGrantsRequest,
     "UserSvcSavePermissionsRequest": UserSvcSavePermissionsRequest,

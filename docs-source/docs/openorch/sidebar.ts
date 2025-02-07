@@ -510,14 +510,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "openorch/change-password",
-          label: "Change User Password",
+          id: "openorch/reset-password",
+          label: "Reset Password",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "openorch/change-password-admin",
-          label: "Change User Password (Admin)",
+          id: "openorch/change-password",
+          label: "Change User Password",
           className: "api-method post",
         },
         {

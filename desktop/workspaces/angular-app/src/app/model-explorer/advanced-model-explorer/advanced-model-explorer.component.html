@@ -129,7 +129,7 @@
 								)
 							"
 							fill="outline"
-							color="primary"
+							color="secondary"
 						>
 							<ion-icon slot="start" name="download-outline"></ion-icon>
 							{{ 'Download' | translate }}
@@ -148,7 +148,7 @@
 								"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
-								color="primary"
+								color="secondary"
 							>
 								<ion-icon slot="start" name="caret-forward-outline"></ion-icon>
 								{{ 'Make default' | translate }}
@@ -158,7 +158,7 @@
 									(configService.config$ | async)!.data['model-svc']
 										.currentModelId === model.id
 								"
-								color="primary"
+								color="secondary"
 								(click)="makeModelDefault(model.id!)"
 								fill="outline"
 								disabled="true"
@@ -187,13 +187,11 @@
 			<ion-button
 				(click)="loadPage(currentPage - 1)"
 				[disabled]="currentPage <= 1"
-				color="secondary"
 				><span style="color: white">Previous</span></ion-button
 			>
 			<ion-button
 				(click)="loadPage(currentPage + 1)"
 				[disabled]="currentPage * itemsPerPage >= totalItems"
-				color="secondary"
 				><span style="color: white">Next</span></ion-button
 			>
 		</ion-col>

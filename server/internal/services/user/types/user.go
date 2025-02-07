@@ -114,12 +114,12 @@ type ChangePasswordRequest struct {
 
 type ChangePasswordResponse struct{}
 
-type ChangePasswordAdminRequest struct {
+type ResetPasswordRequest struct {
 	Slug        string `json:"slug,omitempty"`
 	NewPassword string `json:"newPassword,omitempty"`
 }
 
-type ChangePasswordAdminResponse struct{}
+type ResetPasswordResponse struct{}
 
 type GetUsersRequest struct {
 	Query *datastore.Query `json:"query"`

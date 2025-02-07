@@ -23,6 +23,8 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 	"github.com/pkg/errors"
 
+	chat "github.com/openorch/openorch/server/internal/services/chat/types"
+
 	apptypes "github.com/openorch/openorch/server/internal/services/chat/types"
 	streammanager "github.com/openorch/openorch/server/internal/services/prompt/stream"
 	prompttypes "github.com/openorch/openorch/server/internal/services/prompt/types"
@@ -166,7 +168,21 @@ func (p *PromptService) prompt(
 					return nil, errors.Wrap(err, "error reading message")
 				}
 
-				rsp.ResponseMessage = r.Message
+				m := r.Message
+
+				// @todo should use openapi type here but there are issues
+				// with the generation
+				rsp.ResponseMessage = &chat.Message{
+					Id:       m.Id,
+					ThreadId: m.ThreadId,
+					FileIds:  m.FileIds,
+				}
+				if m.Text != nil {
+					rsp.ResponseMessage.Text = *m.Text
+				}
+				if m.UserId != nil {
+					rsp.ResponseMessage.UserId = *m.UserId
+				}
 
 				return rsp, nil
 			}

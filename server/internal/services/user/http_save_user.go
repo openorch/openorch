@@ -16,6 +16,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	user "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
@@ -35,7 +36,7 @@ import (
 // @Failure 500 {object} user.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /user-svc/user/{userId} [put]
-func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
+func (s *UserService) SaveUser(w http.ResponseWriter, r *http.Request) {
 
 	_, err := s.isAuthorized(r, user.PermissionUserEdit.Id, nil, nil)
 	if err != nil {
@@ -44,8 +45,8 @@ func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// @todo
-	// userId is ignored here, all that matters is the slug
+	vars := mux.Vars(r)
+	userId := vars["userId"]
 
 	req := user.SaveProfileRequest{}
 	err = json.NewDecoder(r.Body).Decode(&req)
@@ -56,7 +57,7 @@ func (s *UserService) SaveProfile(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	err = s.saveProfile(req.Slug, req.Name)
+	err = s.saveProfile(userId, req.Name)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
