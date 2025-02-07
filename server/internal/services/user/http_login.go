@@ -89,6 +89,7 @@ func (s *UserService) login(
 	// Let's see if there is an active token we can reuse
 	tokenI, found, err := s.authTokensStore.Query(
 		datastore.Equals(datastore.Field("userId"), u.Id),
+		datastore.Equals(datastore.Field("active"), true),
 	).FindOne()
 	if err != nil {
 		return nil, err
@@ -139,6 +140,7 @@ func (s *UserService) generateAuthToken(
 		Id:        sdk.Id("tok"),
 		UserId:    u.Id,
 		Token:     token,
+		Active:    true,
 		CreatedAt: time.Now(),
 	}, nil
 }
