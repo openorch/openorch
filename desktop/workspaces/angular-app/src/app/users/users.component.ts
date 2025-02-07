@@ -152,11 +152,11 @@ export class UsersComponent {
 	}
 
 	public toggleVisible(userId: string) {
-		this.users.forEach((u) => {
+		for (const u of this.users) {
 			if (u.id == userId) {
 				u.visible = !u.visible;
 			}
-		});
+		}
 	}
 
 	public async fetchUsers() {
@@ -208,8 +208,7 @@ export class UsersComponent {
 	}
 
 	getUserForm(userId: string): FormGroup {
-		let v = this.userForms.get(userId)!;
-		return v;
+		return this.userForms.get(userId)!;
 	}
 
 	async saveUser(userId: string) {
