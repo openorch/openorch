@@ -47,11 +47,21 @@ func (s *UserService) Register(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	err = s.createUser(&user.User{
-		Name:     req.Name,
-		Slug:     req.Slug,
-		Contacts: []user.Contact{req.Contact},
-	}, req.Password, []string{user.RoleUser.Id})
+	newUser := &user.User{
+		Name: req.Name,
+		Slug: req.Slug,
+	}
+
+	if req.Contact.Value != "" {
+		now := time.Now()
+		req.Contact.CreatedAt = now
+		req.Contact.UpdatedAt = now
+		newUser.Contacts = []user.Contact{
+			req.Contact,
+		}
+	}
+
+	err = s.createUser(newUser, req.Password, []string{user.RoleUser.Id})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

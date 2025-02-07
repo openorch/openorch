@@ -81,9 +81,6 @@ func validateUser(u *user.User) error {
 	if u.Slug == "" {
 		return errors.New("slug is required")
 	}
-	if len(u.Contacts) == 0 {
-		return errors.New("contact is required")
-	}
 	if len(u.Contacts) > 1 {
 		return errors.New("more than one contact")
 	}

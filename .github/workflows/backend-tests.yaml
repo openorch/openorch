@@ -1,4 +1,4 @@
-name: "Go SDK build"
+name: "Backend tests"
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           go mod tidy
-        working-directory: sdk/go
+        working-directory: server
 
       - name: Run tests
         run: |
@@ -33,12 +33,4 @@ jobs:
             OPENORCH_DB_DEBUG=true \
             OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
             go test ./... -v -timeout=30s
-        working-directory: sdk/go
-
-      - name: Test OpenAPI annotations
-        run: |
-          go install github.com/swaggo/swag/cmd/swag@latest
-          npm install @openapitools/openapi-generator-cli -g
-          swag init --parseDependency
-          openapi-generator-cli generate -i docs/swagger.yaml -g typescript-fetch -o ./genn
         working-directory: server
