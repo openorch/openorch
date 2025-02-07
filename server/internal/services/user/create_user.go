@@ -26,15 +26,28 @@ func (s *UserService) createUser(
 	password string,
 	roleIds []string,
 ) error {
-	_, contactExists, err := s.contactsStore.Query(
-		datastore.Equals(datastore.Field("id"), user.Contacts[0].Id),
+	if len(user.Contacts) > 0 {
+		_, contactExists, err := s.contactsStore.Query(
+			datastore.Equals(datastore.Field("id"), user.Contacts[0].Id),
+		).FindOne()
+		if err != nil {
+			return err
+		}
+
+		if contactExists {
+			return errors.New("contact already exists")
+		}
+	}
+
+	_, slugExists, err := s.usersStore.Query(
+		datastore.Equals(datastore.Field("slug"), user.Slug),
 	).FindOne()
 	if err != nil {
 		return err
 	}
 
-	if contactExists {
-		return errors.New("contact already exists")
+	if slugExists {
+		return errors.New("slug already exists")
 	}
 
 	passwordHash, err := s.hashPassword(password)
@@ -42,22 +55,24 @@ func (s *UserService) createUser(
 		return err
 	}
 
-	roleIdAnys := []any{}
-	for _, roleId := range roleIds {
-		roleIdAnys = append(roleIdAnys, roleId)
-	}
+	if len(roleIds) > 0 {
+		roleIdAnys := []any{}
+		for _, roleId := range roleIds {
+			roleIdAnys = append(roleIdAnys, roleId)
+		}
 
-	roles, err := s.rolesStore.Query(
-		datastore.IsInList(datastore.Field("id"), roleIdAnys...),
-	).Find()
-	if err != nil {
-		return err
-	}
-	if len(roles) == 0 {
-		return errors.New("no roles found")
-	}
-	if len(roles) < len(roleIds) {
-		return errors.New("some roles are not found")
+		roles, err := s.rolesStore.Query(
+			datastore.IsInList(datastore.Field("id"), roleIdAnys...),
+		).Find()
+		if err != nil {
+			return err
+		}
+		if len(roles) == 0 {
+			return errors.New("no roles found")
+		}
+		if len(roles) < len(roleIds) {
+			return errors.New("some roles are not found")
+		}
 	}
 
 	user.PasswordHash = passwordHash
@@ -76,6 +91,13 @@ func (s *UserService) createUser(
 
 	for _, roleId := range roleIds {
 		err = s.addRoleToUser(user.Id, roleId)
+		if err != nil {
+			return err
+		}
+	}
+
+	if len(roleIds) == 0 {
+		err = s.addRoleToUser(user.Id, usertypes.RoleUser.Id)
 		if err != nil {
 			return err
 		}

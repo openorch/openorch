@@ -181,7 +181,7 @@ func NewUserService(
 }
 
 func (s *UserService) bootstrap() error {
-	// bootstrapping keys
+	// Bootstrapping key pairs
 
 	keyPairs, err := s.keyPairsStore.Query().Find()
 	if err != nil {
@@ -228,8 +228,9 @@ func (s *UserService) bootstrap() error {
 
 	}
 
-	// Bootstrap admin user. Since it's not efficient to query for admins
-	// we will just query by slug.
+	// Bootstrapping the admin user. Instead of inefficient role-based queries,
+	// we enforce the existence of an admin account with the slug "openorch".
+	// If absent, it's created with a default password, which should be updated for security.
 
 	count, err := s.usersStore.Query(
 		datastore.Equals([]string{"slug"}, "openorch"),
@@ -247,7 +248,7 @@ func (s *UserService) bootstrap() error {
 		}
 	}
 
-	// bootstrapping service user
+	// Bootstrapping credentials
 
 	credentials, err := s.credentialsStore.Query().Find()
 	if err != nil {
