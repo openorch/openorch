@@ -17,6 +17,13 @@ type AuthToken struct {
 
 	UserId string `json:"userId,omitempty"`
 	Token  string `json:"token,omitempty"`
+
+	// Active tokens contain the most up-to-date information.
+	// When a user's role changes—due to role assignment, organization
+	// creation/assignment, etc.—all existing tokens are marked inactive.
+	// Active tokens are reused during login, while inactive tokens
+	// are retained for historical reference.
+	Active bool `json:"active,omitempty"`
 }
 
 func (c *AuthToken) GetId() string {

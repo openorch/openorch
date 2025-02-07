@@ -101,10 +101,15 @@ func (s *UserService) addUserToOrganization(
 		return fmt.Errorf("not an admin of the organization")
 	}
 
-	return s.addRoleToUser(
+	err = s.addRoleToUser(
 		userId,
 		fmt.Sprintf("user-svc:org:{%v}:user", org.(*user.Organization).Id),
 	)
+	if err != nil {
+		return err
+	}
+
+	return s.inactivateTokens(userId)
 }
 
 func contains(ss []string, s string) bool {

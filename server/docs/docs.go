@@ -8324,6 +8324,10 @@ const docTemplate = `{
         "user_svc.AuthToken": {
             "type": "object",
             "properties": {
+                "active": {
+                    "description": "Active tokens contain the most up-to-date information.\nWhen a user's role changes—due to role assignment, organization\ncreation/assignment, etc.—all existing tokens are marked inactive.\nActive tokens are reused during login, while inactive tokens\nare retained for historical reference.",
+                    "type": "boolean"
+                },
                 "createdAt": {
                     "type": "string"
                 },

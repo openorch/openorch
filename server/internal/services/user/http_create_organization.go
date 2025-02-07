@@ -121,10 +121,25 @@ func (s *UserService) createOrganization(
 		return err
 	}
 
-	return s.addDynamicRoleToUser(
+	err = s.addDynamicRoleToUser(
 		userId,
 		fmt.Sprintf("user-svc:org:{%v}:admin", org.Id),
 	)
+	if err != nil {
+		return err
+	}
+
+	return s.inactivateTokens(userId)
+}
+
+func (s *UserService) inactivateTokens(userId string) error {
+	return s.authTokensStore.Query(
+		datastore.Equals(
+			datastore.Fields("userId"),
+			userId,
+		)).UpdateFields(map[string]any{
+		"active": false,
+	})
 }
 
 func (s *UserService) addStaticRoleToUser(userId, roleId string) error {

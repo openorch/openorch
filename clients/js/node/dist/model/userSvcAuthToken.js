@@ -17,6 +17,11 @@ export class UserSvcAuthToken {
 UserSvcAuthToken.discriminator = undefined;
 UserSvcAuthToken.attributeTypeMap = [
     {
+        "name": "active",
+        "baseName": "active",
+        "type": "boolean"
+    },
+    {
         "name": "createdAt",
         "baseName": "createdAt",
         "type": "string"

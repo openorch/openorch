@@ -7501,6 +7501,7 @@ function UserSvcAuthTokenFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
+        'active': json['active'] == null ? undefined : json['active'],
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'deletedAt': json['deletedAt'] == null ? undefined : json['deletedAt'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -7517,6 +7518,7 @@ function UserSvcAuthTokenToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
+        'active': value['active'],
         'createdAt': value['createdAt'],
         'deletedAt': value['deletedAt'],
         'id': value['id'],
