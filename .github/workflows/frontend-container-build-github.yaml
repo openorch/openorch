@@ -1,9 +1,7 @@
-name: "Frontend container build and push to DockerHub"
+name: "Frontend container build"
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -28,5 +26,10 @@ jobs:
       - name: Build Docker image
         run: |
           DOCKER_BUILDKIT=1 docker build -f ./docker/Dockerfile -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
+        working-directory: ./desktop
+
+      - name: Push to DockerHub
+        if: github.ref == 'refs/heads/main'
+        run: |
           docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
         working-directory: ./desktop
