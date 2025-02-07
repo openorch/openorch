@@ -84,10 +84,14 @@ func (s *SQLStore) sqlType(t reflect.Type) string {
 	switch t.Kind() {
 	case reflect.String:
 		return "TEXT"
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
 		return "INTEGER"
-	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+	case reflect.Int64:
+		return "BIGINT"
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32:
 		return "INTEGER"
+	case reflect.Uint64:
+		return "BIGINT"
 	case reflect.Float32, reflect.Float64:
 		return "REAL"
 	case reflect.Bool:
