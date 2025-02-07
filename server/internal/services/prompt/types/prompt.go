@@ -45,11 +45,15 @@ type PromptType string
 // once we start using generated openapi types cross services
 // (as we should in a microservices setting).
 func (pt *PromptType) Scan(value interface{}) error {
-	bytes, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("failed to scan PromptType: %v", value)
+	switch v := value.(type) {
+	case []byte:
+		*pt = PromptType(string(v))
+	case string:
+		*pt = PromptType(v)
+	default:
+		return fmt.Errorf("unexpected PromptType type: '%T'", value)
 	}
-	*pt = PromptType(string(bytes))
+
 	return nil
 }
 

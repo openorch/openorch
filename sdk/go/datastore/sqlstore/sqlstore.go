@@ -290,6 +290,9 @@ func (s *SQLStore) IsInTransaction() bool {
 }
 
 func (s *SQLStore) convertParam(param any) (any, error) {
+	if param == nil {
+		return nil, nil
+	}
 	t := reflect.TypeOf(param)
 	v := reflect.ValueOf(param)
 

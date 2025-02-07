@@ -77,7 +77,7 @@ func (s *UserService) CreateOrganization(
 func (s *UserService) createOrganization(
 	userId, orgId, name, slug string,
 ) error {
-	_, exists, err := s.contactsStore.Query(
+	_, exists, err := s.organizationsStore.Query(
 		datastore.Equals(datastore.Field("slug"), slug),
 	).FindOne()
 	if err != nil {
