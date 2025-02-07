@@ -1,3 +1,6 @@
+//go:build dist
+// +build dist
+
 package fileservice_test
 
 import (

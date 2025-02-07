@@ -1,3 +1,6 @@
+//go:build dist
+// +build dist
+
 /**
  * @license
  * Copyright (c) The Authors (see the AUTHORS file)
