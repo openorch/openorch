@@ -1,6 +1,7 @@
 package di
 
 import (
+	"database/sql"
 	"log/slog"
 	"net/http"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/clients/llamacpp"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/datastore/localstore"
+	"github.com/openorch/openorch/sdk/go/datastore/sqlstore"
 	"github.com/openorch/openorch/sdk/go/lock"
 	distlock "github.com/openorch/openorch/sdk/go/lock/local"
 	"github.com/openorch/openorch/sdk/go/logger"
@@ -127,21 +129,41 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	if options.DatastoreFactory == nil {
-		localStorePath := path.Join(homeDir, "data")
-		err = os.MkdirAll(localStorePath, 0755)
-		if err != nil {
-			logger.Error(
-				"Creating data folder failed",
-				slog.String("error", err.Error()),
-			)
-			os.Exit(1)
-		}
+		// @todo this is a temporary ugly hack
+		// to make tests work automatically with
+		// localstore and postgres depending on envars
+		if os.Getenv("OPENORCH_DB") == "postgres" {
+			db, err := sql.Open("postgres", os.Getenv("OPENORCH_DB_SQL_CONNECTION_STRING"))
+			if err != nil {
+				return nil, nil, errors.Wrap(err, "error opening sql db")
+			}
 
-		options.DatastoreFactory = func(tableName string, instance any) (datastore.DataStore, error) {
-			return localstore.NewLocalStore(
-				instance,
-				path.Join(localStorePath, tableName),
-			)
+			options.DatastoreFactory = func(tableName string, instance any) (datastore.DataStore, error) {
+				return sqlstore.NewSQLStore(
+					instance,
+					"postgres",
+					db,
+					sdk.Id("test")+"_"+tableName,
+					false,
+				)
+			}
+		} else {
+			localStorePath := path.Join(homeDir, "data")
+			err = os.MkdirAll(localStorePath, 0755)
+			if err != nil {
+				logger.Error(
+					"Creating data folder failed",
+					slog.String("error", err.Error()),
+				)
+				os.Exit(1)
+			}
+
+			options.DatastoreFactory = func(tableName string, instance any) (datastore.DataStore, error) {
+				return localstore.NewLocalStore(
+					instance,
+					path.Join(localStorePath, tableName),
+				)
+			}
 		}
 	}
 
