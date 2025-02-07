@@ -151,6 +151,14 @@ export class UsersComponent {
 		});
 	}
 
+	public toggleVisible(userId: string) {
+		this.users.forEach((u) => {
+			if (u.id == userId) {
+				u.visible = !u.visible;
+			}
+		});
+	}
+
 	public async fetchUsers() {
 		const query = this.queryParser.parse(this.searchTerm);
 		query.count = true;
@@ -190,7 +198,7 @@ export class UsersComponent {
 	createUserForm(user: UserVisible): FormGroup {
 		return this.fb.group({
 			name: [user.name, Validators.required],
-			slug: [user.slug, [Validators.required]],
+			slug: [{ value: user.slug, disabled: true }, [Validators.required]],
 			password: [''],
 			passwordConfirmation: [''],
 			createdAt: [{ value: user.createdAt, disabled: true }],
@@ -200,7 +208,8 @@ export class UsersComponent {
 	}
 
 	getUserForm(userId: string): FormGroup {
-		return this.userForms.get(userId)!;
+		let v = this.userForms.get(userId)!;
+		return v;
 	}
 
 	async saveUser(userId: string) {
