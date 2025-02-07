@@ -198,7 +198,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			})
 		mockModelSvc.EXPECT().
 			ListModelsExecute(gomock.Any()).
-			Return(&openapi.ModelSvcListResponse{
+			Return(&openapi.ModelSvcListModelsResponse{
 				Models: []openapi.ModelSvcModel{
 					{
 						Id: openapi.PtrString("mistral-1"),
