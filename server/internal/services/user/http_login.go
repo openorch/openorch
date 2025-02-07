@@ -86,6 +86,18 @@ func (s *UserService) login(
 		return nil, errors.New("unauthorized")
 	}
 
+	// Let's see if there is an active token we can reuse
+	tokenI, found, err := s.authTokensStore.Query(
+		datastore.Equals(datastore.Field("userId"), u.Id),
+	).FindOne()
+	if err != nil {
+		return nil, err
+	}
+
+	if found {
+		return tokenI.(*user.AuthToken), nil
+	}
+
 	token, err := s.generateAuthToken(u)
 	if err != nil {
 		return nil, err
