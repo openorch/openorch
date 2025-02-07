@@ -40,7 +40,9 @@ func (s *SQLStore) fieldName(fieldName string) string {
 func escape(columnName string) string {
 	toEscape := false
 	switch columnName {
-	case "table", "to", "type":
+	// @todo import full list from here
+	// https://www.postgresql.org/docs/current/sql-keywords-appendix.html
+	case "table", "to", "type", "types":
 		toEscape = true
 	}
 
