@@ -524,7 +524,9 @@ func (q *SQLQueryBuilder) Find() ([]datastore.Row, error) {
 				elemType := fieldType.Elem()
 				elemKind := elemType.Kind()
 
-				if elemKind == reflect.Struct || (elemKind == reflect.Ptr && reflect.Indirect(reflect.New(fieldType.Elem().Elem())).Kind() == reflect.Struct) {
+				if elemKind == reflect.Struct ||
+					(elemKind == reflect.Ptr && reflect.Indirect(reflect.New(fieldType.Elem().Elem())).Kind() == reflect.Struct) {
+
 					// For []Example and []*Example (or any other struct slice)
 					slice := reflect.MakeSlice(reflect.SliceOf(elemType), 0, 0).Interface()
 					fields[i] = &slice // Directly using the slice

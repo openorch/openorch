@@ -129,9 +129,12 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	if options.DatastoreFactory == nil {
-		// @todo this is a temporary ugly hack
+		// @todo This is a temporary ugly hack
 		// to make tests work automatically with
-		// localstore and postgres depending on envars
+		// localstore and postgres depending on envars.
+		//
+		// Rethink this and the `node.Start` functions (which is supposed to self contain)
+		// the envars.
 		if os.Getenv("OPENORCH_DB") == "postgres" {
 			db, err := sql.Open("postgres", os.Getenv("OPENORCH_DB_SQL_CONNECTION_STRING"))
 			if err != nil {
