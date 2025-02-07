@@ -28,11 +28,8 @@ import {
 	UserSvcGetUsersRequest,
 	UserSvcSaveProfileRequest,
 	UserSvcChangePasswordRequest,
-	UserSvcChangePasswordAdminRequest,
-	// UserSvcCreateUserResponse,
+	UserSvcResetPasswordRequest,
 	UserSvcSetRolePermissionsRequest,
-	// UserSvcDeleteRoleResponse,
-	// UserSvcDeleteUserResponse,
 } from '@openorch/client';
 
 @Injectable({
@@ -173,12 +170,12 @@ export class UserService {
 		});
 	}
 
-	changePasswordAdmin(slug: string, newPassword: string) {
-		const request: UserSvcChangePasswordAdminRequest = {
-			slug: slug,
+	resetPassword(userId: string, newPassword: string) {
+		const request: UserSvcResetPasswordRequest = {
 			newPassword: newPassword,
 		};
-		this.userService.changePasswordAdmin({
+		this.userService.resetPassword({
+			userId: userId,
 			body: request,
 		});
 

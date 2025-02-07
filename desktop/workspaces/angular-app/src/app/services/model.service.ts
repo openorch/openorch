@@ -12,7 +12,7 @@ import { ReplaySubject, combineLatest } from 'rxjs';
 import {
 	ModelSvcApi,
 	ModelSvcModel as Model,
-	ModelSvcListResponse as GetModelsResponse,
+	ModelSvcListModelsResponse as GetModelsResponse,
 	Configuration,
 	ModelSvcStatusResponse,
 } from '@openorch/client';

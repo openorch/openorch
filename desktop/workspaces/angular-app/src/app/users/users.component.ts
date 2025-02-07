@@ -238,7 +238,7 @@ export class UsersComponent {
 
 			if (password) {
 				toastMessage += ' and password changed';
-				await this.userService.changePasswordAdmin(slug, password);
+				await this.userService.resetPassword(userId, password);
 			}
 
 			const toast = await this.toast.create({
