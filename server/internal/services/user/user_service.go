@@ -14,10 +14,12 @@ package userservice
 
 import (
 	"crypto/rsa"
+	"log/slog"
 	"time"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
+	"github.com/openorch/openorch/sdk/go/logger"
 
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
@@ -238,6 +240,8 @@ func (s *UserService) bootstrap() error {
 	if err != nil {
 		return err
 	}
+
+	logger.Debug("Checking default user", slog.Bool("found", count > 0))
 
 	if count == 0 {
 		_, err = s.register("openorch", "changeme", "Admin", []string{
