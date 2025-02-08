@@ -218,10 +218,9 @@ func (g *DynamicService) delete(
 		conditions,
 		datastore.Equals(datastore.Field("table"), tableName),
 	)
-	conditions = append(conditions, datastore.Equals(
-		datastore.Field("userId"),
-		userId,
-	))
+	conditions = append(conditions,
+		datastore.Intersects(datastore.Field("deleters"), []any{userId}),
+	)
 
 	return g.store.Query(
 		conditions...,

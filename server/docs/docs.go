@@ -5861,11 +5861,62 @@ const docTemplate = `{
         "docker_svc.StopContainerResponse": {
             "type": "object"
         },
+        "dynamic_svc.CreateObjectFields": {
+            "type": "object",
+            "required": [
+                "data",
+                "table"
+            ],
+            "properties": {
+                "authors": {
+                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "deleters": {
+                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "readers": {
+                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "table": {
+                    "type": "string"
+                },
+                "writers": {
+                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "dynamic_svc.CreateObjectRequest": {
             "type": "object",
             "properties": {
                 "object": {
-                    "$ref": "#/definitions/dynamic_svc.ObjectCreateFields"
+                    "$ref": "#/definitions/dynamic_svc.CreateObjectFields"
                 }
             }
         },
@@ -5916,7 +5967,8 @@ const docTemplate = `{
                         "type": "string"
                     },
                     "example": [
-                        "["
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
                     ]
                 },
                 "createdAt": {
@@ -5947,56 +5999,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string"
-                },
-                "writers": {
-                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "dynamic_svc.ObjectCreateFields": {
-            "type": "object",
-            "required": [
-                "data",
-                "table"
-            ],
-            "properties": {
-                "authors": {
-                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "["
-                    ]
-                },
-                "data": {
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "deleters": {
-                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "readers": {
-                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n` + "`" + `_self` + "`" + ` can be used to refer to the caller user's userId and\n` + "`" + `_org` + "`" + ` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "table": {
                     "type": "string"
                 },
                 "writers": {
@@ -6060,7 +6062,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "object": {
-                    "$ref": "#/definitions/dynamic_svc.ObjectCreateFields"
+                    "$ref": "#/definitions/dynamic_svc.CreateObjectFields"
                 }
             }
         },

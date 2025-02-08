@@ -13,6 +13,7 @@
 package prompt_svc
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/openorch/openorch/sdk/go/clients/stable_diffusion"
@@ -39,6 +40,22 @@ const (
 )
 
 type PromptType string
+
+// Scan implementations like this will cause issues
+// once we start using generated openapi types cross services
+// (as we should in a microservices setting).
+func (pt *PromptType) Scan(value interface{}) error {
+	switch v := value.(type) {
+	case []byte:
+		*pt = PromptType(string(v))
+	case string:
+		*pt = PromptType(v)
+	default:
+		return fmt.Errorf("unexpected PromptType type: '%T'", value)
+	}
+
+	return nil
+}
 
 const (
 	// Multimodal prompts

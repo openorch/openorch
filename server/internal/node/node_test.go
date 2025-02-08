@@ -35,9 +35,9 @@ func TestStart(t *testing.T) {
 	require.NoError(t, err)
 
 	hs1.UpdateHandler(nodeInfo1.Router)
-	// @todo why is this called here and also down below?
-	// if i remove this there is a config service error
-	// which i think points to a syncronization issue
+	// @todo Why is this called here and also down below?
+	// If I remove this there is a config service error
+	// which i think points to a syncronization issue.
 	err = nodeInfo1.StarterFunc()
 	require.NoError(t, err)
 

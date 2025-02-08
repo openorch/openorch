@@ -32,5 +32,5 @@ jobs:
           OPENORCH_DB=postgres \
             OPENORCH_DB_DEBUG=true \
             OPENORCH_DB_SQL_CONNECTION_STRING="postgres://postgres:mysecretpassword@localhost:5432/mydatabase?sslmode=disable" \
-            go test ./... -v -timeout=30s
+            go test ./... -tags=dist -v -timeout=90s
         working-directory: server
