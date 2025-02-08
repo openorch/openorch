@@ -25,4 +25,4 @@ RUN CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python
 
 # Run the server
 # without --n_gpu_layers GPU wont be utilized
-CMD python3 -m llama_cpp.server --n_gpu_layers 35
+CMD python3 -m llama_cpp.server --n_gpu_layers -1
