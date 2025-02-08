@@ -1,4 +1,8 @@
-ARG CUDA_IMAGE="12.5.0-devel-ubuntu22.04"
+ARG BACKEND_VERSION="12.5.0"
+ARG UBUNTU_VERSION="22.04"
+
+ARG CUDA_IMAGE="${BACKEND_VERSION}-devel-ubuntu${UBUNTU_VERSION}"
+
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # We need to set the host to 0.0.0.0 to allow outside access

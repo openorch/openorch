@@ -1,3 +1,7 @@
+ARG BACKEND_VERSION="12.1"
+ARG PYTORCH_VERSION="2.3.0"
+ARG CUDNN_VERSION="8"
+
 FROM alpine/git:2.36.2 as download
 
 COPY clone.sh /clone.sh
@@ -13,8 +17,7 @@ RUN . /clone.sh clip-interrogator https://github.com/pharmapsychotic/clip-interr
 RUN . /clone.sh generative-models https://github.com/Stability-AI/generative-models 45c443b316737a4ab6e40413d7794a7f5657c19f
 RUN . /clone.sh stable-diffusion-webui-assets https://github.com/AUTOMATIC1111/stable-diffusion-webui-assets 6f7db241d2f8ba7457bac5ca9753331f0c266917
 
-
-FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
+FROM pytorch/pytorch:${PYTORCH_VERSION}-cuda${CUDA_IMAGE}-cudnn${CUDNN_VERSION}-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 
