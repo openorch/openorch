@@ -1,4 +1,4 @@
-name: E2E Run JS/TS client example
+name: "E2E: local Docker Compose + run JS/TS client example"
 
 on:
   push:
