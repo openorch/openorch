@@ -59,7 +59,7 @@ jobs:
           cd ${{ github.event.inputs.backend }}
 
           DOCKER_BUILDKIT=1 docker build \
-            --build-arg BACKEND_VERSION="${{ github.event.inputs.backend_version }}"
+            --build-arg BACKEND_VERSION="${{ github.event.inputs.backend_version }}" \
             -t ${{ env.IMAGE_TAG }} .
 
           docker push ${{ env.IMAGE_TAG }}
