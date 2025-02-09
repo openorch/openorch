@@ -23,7 +23,7 @@ services:
   openorch-backend:
     build:
       context: .
-      dockerfile: ./server/docker/Dockerfile
+      dockerfile: ./server/docker/openorch/default/Dockerfile
     ports:
       - "58231:58231"
     volumes:
