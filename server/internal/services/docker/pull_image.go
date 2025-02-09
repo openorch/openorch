@@ -18,6 +18,8 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"regexp"
+	"strconv"
 	"sync"
 
 	"github.com/docker/docker/api/types/image"
@@ -25,6 +27,8 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 	"github.com/pkg/errors"
 )
+
+var progressRegex = regexp.MustCompile(`(\d+(\.\d+)?)([KMG]?B)/(\d+(\.\d+)?)([KMG]?B)`)
 
 func (d *DockerService) pullImage(imageName string) error {
 	d.imagePullGlobalMutex.Lock()
@@ -84,6 +88,10 @@ type PullStatus struct {
 	Status   string `json:"status"`
 	Progress string `json:"progress"`
 	ID       string `json:"id"`
+
+	// Fields set by OpenOrch
+
+	ImageName string
 }
 
 func pullImageWithProgress(d *client.Client, imageName string) error {
@@ -112,23 +120,63 @@ func pullImageWithProgress(d *client.Client, imageName string) error {
 			)
 			return errors.Wrap(err, "Failed to decode image pull output")
 		}
+		status.ImageName = imageName
 		logPullProgress(status)
 	}
 
 	return nil
 }
 
+// Example values:
+// "status":"Downloading"
+// "progress":"[================>                                  ]  722.2MB/2.219GB"
 func logPullProgress(status PullStatus) {
 	if status.Progress != "" {
 		logger.Info("Pulling image progress",
-			slog.String("pullImageStatus", status.Status),
-			slog.String("pullImageProgress", status.Progress),
-			slog.String("imageId", status.ID),
+			slog.String("status", status.Status),
+			slog.String("progress", status.Progress),
+			slog.String("imageName", status.ImageName),
 		)
 	} else {
 		logger.Info("Pulling image",
-			slog.String("pullImageStatus", status.Status),
-			slog.String("id", status.ID),
+			slog.String("status", status.Status),
+			slog.String("imageName", status.ImageName),
 		)
+	}
+}
+
+func calculateProgressPercentage(progress string) float64 {
+	matches := progressRegex.FindStringSubmatch(progress)
+	if len(matches) < 7 {
+		return 0
+	}
+
+	downloaded, _ := strconv.ParseFloat(matches[1], 64)
+	downloadUnit := matches[3]
+	total, _ := strconv.ParseFloat(matches[4], 64)
+	totalUnit := matches[6]
+
+	downloadedBytes := convertToBytes(downloaded, downloadUnit)
+	totalBytes := convertToBytes(total, totalUnit)
+
+	if totalBytes == 0 {
+		return 0
+	}
+	return (downloadedBytes / totalBytes) * 100
+}
+
+// Docker seems to report sizes in base-10 (SI units) where 1 GB = 1000 MB, not 1024 MB.
+const base = 1000
+
+func convertToBytes(value float64, unit string) float64 {
+	switch unit {
+	case "KB":
+		return value * base
+	case "MB":
+		return value * base * base
+	case "GB":
+		return value * base * base * base
+	default:
+		return value
 	}
 }

@@ -1,4 +1,8 @@
-ARG CUDA_IMAGE="12.5.0-devel-ubuntu22.04"
+ARG BACKEND_VERSION="12.5.0"
+ARG UBUNTU_VERSION="22.04"
+
+ARG CUDA_IMAGE="${BACKEND_VERSION}-devel-ubuntu${UBUNTU_VERSION}"
+
 FROM nvidia/cuda:${CUDA_IMAGE}
 
 # We need to set the host to 0.0.0.0 to allow outside access
@@ -25,4 +29,4 @@ RUN CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python
 
 # Run the server
 # without --n_gpu_layers GPU wont be utilized
-CMD python3 -m llama_cpp.server --n_gpu_layers 35
+CMD python3 -m llama_cpp.server --n_gpu_layers -1
