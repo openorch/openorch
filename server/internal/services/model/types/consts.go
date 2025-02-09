@@ -9,13 +9,13 @@ var PlatformLlamaCpp = Platform{
 	Architectures: Architectures{
 		Default: Container{
 			Port: 8000,
-			// For the source of this image, see `server/docker/llama-cpp-python/simple`
-			Image: "crufter/llama-cpp-python-simple:v0.3.0-rc.9",
+			// For the source of this image, see `server/docker/llama-cpp-python/default`
+			Image: "crufter/llama-cpp-python:default-1-latest",
 		},
 		Cuda: Container{
 			Port: 8000,
-			// For the source of this image, see `server/docker/llama-cpp-python/cude`
-			Image:  "crufter/llama-cpp-python-cuda:v0.3.0-rc.9",
+			// For the source of this image, see `server/docker/llama-cpp-python/cuda`
+			Image:  "crufter/llama-cpp-python:cuda-12.5.0-latest",
 			Envars: []string{"NVIDIA_VISIBLE_DEVICES=all"},
 		},
 	},
@@ -30,13 +30,13 @@ var PlatformStableDiffusion = Platform{
 	Architectures: Architectures{
 		Default: Container{
 			Port:   7860,
-			Image:  "crufter/stable-diffusion-simple:v0.3.0-rc.11",
+			Image:  "crufter/stable-diffusion:default-1-latest",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
 			Keeps:  []string{},
 		},
 		Cuda: Container{
 			Port:   7860,
-			Image:  "crufter/stable-diffusion-cuda:v0.3.0-rc.11",
+			Image:  "crufter/stable-diffusion:cuda-1-latest",
 			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
 			Keeps:  []string{},
 		},

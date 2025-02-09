@@ -1,4 +1,4 @@
-name: "[GH] Desktop Build"
+name: "Desktop build"
 # ..
 on:
   push:

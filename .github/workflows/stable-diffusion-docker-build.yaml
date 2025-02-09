@@ -1,4 +1,4 @@
-name: "Stable Diffusion Docker Build"
+name: "Stable Diffusion Docker build"
 
 on:
   workflow_dispatch:
