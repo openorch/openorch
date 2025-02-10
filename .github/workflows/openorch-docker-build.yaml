@@ -10,7 +10,7 @@ on:
       backend:
         description: "Compute backend (default, cuda)"
         required: true
-        default: "default"
+        default: "cuda"
       backend_version:
         description: "Backend version (e.g., 12.5.0 for CUDA, etc.)"
         required: false
