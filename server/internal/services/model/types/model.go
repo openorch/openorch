@@ -37,15 +37,25 @@ func (p Platform) GetId() string {
 
 /* Containers by GPU/hardware platform */
 type Architectures struct {
-	Default Container `json:"default"`
-	Cuda    Container `json:"cuda,omitempty"`
+	Default DefaultParameters `json:"default"`
+	Cuda    CudaParameters    `json:"cuda,omitempty"`
+}
+
+type DefaultParameters struct {
+	Container Container `json:"container"`
+}
+
+type CudaParameters struct {
+	Container           Container `json:"container"`
+	DefaultCudaVersion  string    `json:"defaultCudaVersion"`
+	DefaultCudnnVersion string    `json:"defaultCudnnVersion"`
 }
 
 type Container struct {
 	/* Port is the internal port of the Container */
 	Port int `json:"port"`
 
-	Image string `json:"image"`
+	ImageTemplate string `json:"imageTemplate"`
 
 	/* Envars passed to the container. eg.
 	'DEVICES=all'

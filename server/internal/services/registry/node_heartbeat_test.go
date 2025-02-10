@@ -51,3 +51,17 @@ func TestNvidiaSmiOutput(t *testing.T) {
 	require.Equal(t, float64(0), gpu2.GPUUtilization)
 	require.Equal(t, "Default", gpu2.ComputeMode)
 }
+
+const nvidiaSmiQueryOutput = `
+some lines
+CUDA Version                              : 12.2
+some more lines
+`
+
+func TestNvidiaSmiQueryOutput(t *testing.T) {
+	ns := registryservice.RegistryService{URL: "testhost:58231"}
+
+	cudaVersion, err := ns.ParseNvidiaSmiQueryOutput(nvidiaSmiQueryOutput)
+	require.NoError(t, err)
+	require.Equal(t, "12.2", cudaVersion)
+}

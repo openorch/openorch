@@ -89,27 +89,27 @@ func (ms *ModelService) startWithDocker(
 ) error {
 	launchOptions := &openapi.DockerSvcRunContainerOptions{}
 
-	image := platform.Architectures.Default.Image
-	port := platform.Architectures.Default.Port
-	launchOptions.Envs = platform.Architectures.Default.Envars
-	launchOptions.Keeps = platform.Architectures.Default.Keeps
+	image := platform.Architectures.Default.Container.ImageTemplate
+	port := platform.Architectures.Default.Container.Port
+	launchOptions.Envs = platform.Architectures.Default.Container.Envars
+	launchOptions.Keeps = platform.Architectures.Default.Container.Keeps
 	launchOptions.Assets = &model.Assets
 
 	switch ms.gpuPlatform {
 	case "cuda":
 		launchOptions.GpuEnabled = openapi.PtrBool(true)
 
-		if platform.Architectures.Cuda.Image != "" {
-			image = platform.Architectures.Cuda.Image
+		if platform.Architectures.Cuda.Container.ImageTemplate != "" {
+			image = platform.Architectures.Cuda.Container.ImageTemplate
 		}
-		if platform.Architectures.Cuda.Port != 0 {
-			port = platform.Architectures.Cuda.Port
+		if platform.Architectures.Cuda.Container.Port != 0 {
+			port = platform.Architectures.Cuda.Container.Port
 		}
-		if len(platform.Architectures.Cuda.Envars) > 0 {
-			launchOptions.Envs = platform.Architectures.Cuda.Envars
+		if len(platform.Architectures.Cuda.Container.Envars) > 0 {
+			launchOptions.Envs = platform.Architectures.Cuda.Container.Envars
 		}
-		if len(platform.Architectures.Cuda.Keeps) > 0 {
-			launchOptions.Keeps = platform.Architectures.Cuda.Keeps
+		if len(platform.Architectures.Cuda.Container.Keeps) > 0 {
+			launchOptions.Keeps = platform.Architectures.Cuda.Container.Keeps
 		}
 	}
 
