@@ -18,7 +18,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID runContainer
@@ -29,11 +29,11 @@ import (
 // @Tags Container Svc
 // @Accept json
 // @Produce json
-// @Param body body docker.RunContainerRequest true "Run Container Request"
-// @Success 200 {object} docker.RunContainerResponse
-// @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
-// @Failure 401 {object} docker.ErrorResponse "Unauthorized"
-// @Failure 500 {object} docker.ErrorResponse "Internal Server Error"
+// @Param body body container.RunContainerRequest true "Run Container Request"
+// @Success 200 {object} container.RunContainerResponse
+// @Failure 400 {object} container.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} container.ErrorResponse "Unauthorized"
+// @Failure 500 {object} container.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /container-svc/container [put]
 func (dm *DockerService) RunContainer(
@@ -42,7 +42,7 @@ func (dm *DockerService) RunContainer(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerCreate.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *container.PermissionContainerCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"model-svc", "deploy-svc"},
 		}).
@@ -58,7 +58,7 @@ func (dm *DockerService) RunContainer(
 		return
 	}
 
-	req := &docker.RunContainerRequest{}
+	req := &container.RunContainerRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -74,7 +74,7 @@ func (dm *DockerService) RunContainer(
 		return
 	}
 
-	jsonData, _ := json.Marshal(&docker.RunContainerResponse{
+	jsonData, _ := json.Marshal(&container.RunContainerResponse{
 		Info: di,
 	})
 	w.Write(jsonData)

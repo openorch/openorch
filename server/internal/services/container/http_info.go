@@ -18,7 +18,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID getInfo
@@ -27,9 +27,9 @@ import (
 // @Tags         Container Svc
 // @Accept       json
 // @Produce      json
-// @Success      200   {object} docker.GetInfoResponse "Service Information"
-// @Failure      401   {object} docker.ErrorResponse  "Unauthorized"
-// @Failure      500   {object} docker.ErrorResponse  "Internal Server Error"
+// @Success      200   {object} container.GetInfoResponse "Service Information"
+// @Failure      401   {object} container.ErrorResponse  "Unauthorized"
+// @Failure      500   {object} container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
 // @Router       /container-svc/info [get]
 func (dm *DockerService) Info(
@@ -38,7 +38,7 @@ func (dm *DockerService) Info(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(req)).
-		UserSvcAPI.IsAuthorized(req.Context(), *docker.PermissionContainerView.Id).
+		UserSvcAPI.IsAuthorized(req.Context(), *container.PermissionContainerView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{}).
 		Execute()
 	if err != nil {
@@ -59,7 +59,7 @@ func (dm *DockerService) Info(
 		return
 	}
 
-	jsonData, _ := json.Marshal(docker.GetInfoResponse{
+	jsonData, _ := json.Marshal(container.GetInfoResponse{
 		Info: di,
 	})
 	w.Write(jsonData)

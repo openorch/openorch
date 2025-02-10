@@ -20,3 +20,11 @@ type BuildImageRequest struct {
 
 type BuildImageResponse struct {
 }
+
+type ImageExistsRequest struct {
+	ImageTag string `json:"imageTag" example:"crufter/llama-cpp-python:cuda-12.8.0-latest" binding:"required"`
+}
+
+type ImageExistsResponse struct {
+	Exists bool `json:"exists" binding:"required"`
+}

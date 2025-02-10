@@ -18,7 +18,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID containerIsRunning
@@ -29,10 +29,10 @@ import (
 // @Produce      json
 // @Param        hash  query     string  false  "Container Hash"
 // @Param        name  query     string  false  "Container Name"
-// @Success      200   {object}  docker.ContainerIsRunningResponse
-// @Failure      400   {object}  docker.ErrorResponse  "Invalid JSON or Missing Parameters"
-// @Failure      401   {object}  docker.ErrorResponse  "Unauthorized"
-// @Failure      500   {object}  docker.ErrorResponse  "Internal Server Error"
+// @Success      200   {object}  container.ContainerIsRunningResponse
+// @Failure      400   {object}  container.ErrorResponse  "Invalid JSON or Missing Parameters"
+// @Failure      401   {object}  container.ErrorResponse  "Unauthorized"
+// @Failure      500   {object}  container.ErrorResponse  "Internal Server Error"
 // @SecurityDefinitions.bearerAuth BearerAuth
 // @Security     BearerAuth
 // @Router       /container-svc/container/is-running [get]
@@ -42,7 +42,7 @@ func (dm *DockerService) ContainerIsRunning(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerView.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *container.PermissionContainerView.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"model-svc"},
 		}).
@@ -92,7 +92,7 @@ func (dm *DockerService) ContainerIsRunning(
 		return
 	}
 
-	jsonData, _ := json.Marshal(&docker.ContainerIsRunningResponse{
+	jsonData, _ := json.Marshal(&container.ContainerIsRunningResponse{
 		IsRunning: isRunning,
 	})
 	w.Write(jsonData)

@@ -98,9 +98,3 @@ type ContainerIsRunningRequest struct {
 type ContainerIsRunningResponse struct {
 	IsRunning bool `json:"isRunning" binding:"required"`
 }
-
-type GetDockerHostRequest struct{}
-
-type GetDockerHostResponse struct {
-	Host string `json:"host" binding:"required"`
-}

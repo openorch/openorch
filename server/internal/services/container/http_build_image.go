@@ -18,7 +18,7 @@ import (
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
-	docker "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID buildImage
@@ -29,11 +29,11 @@ import (
 // @Tags Container Svc
 // @Accept json
 // @Produce json
-// @Param body body docker.BuildImageRequest true "Build Image Request"
-// @Success 200 {object} docker.BuildImageResponse
-// @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
-// @Failure 401 {object} docker.ErrorResponse "Unauthorized"
-// @Failure 500 {object} docker.ErrorResponse "Internal Server Error"
+// @Param body body container.BuildImageRequest true "Build Image Request"
+// @Success 200 {object} container.BuildImageResponse
+// @Failure 400 {object} container.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} container.ErrorResponse "Unauthorized"
+// @Failure 500 {object} container.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /container-svc/image [put]
 func (dm *DockerService) BuildImage(
@@ -42,7 +42,7 @@ func (dm *DockerService) BuildImage(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionImageBuild.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *container.PermissionImageBuild.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"deploy-svc"},
 		}).
@@ -58,11 +58,11 @@ func (dm *DockerService) BuildImage(
 		return
 	}
 
-	req := &docker.BuildImageRequest{}
+	req := &container.BuildImageRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(docker.ErrorResponse{Error: "Invalid JSON"})
+		json.NewEncoder(w).Encode(container.ErrorResponse{Error: "Invalid JSON"})
 		return
 	}
 	defer r.Body.Close()
@@ -74,10 +74,10 @@ func (dm *DockerService) BuildImage(
 		return
 	}
 
-	json.NewEncoder(w).Encode(&docker.BuildImageResponse{})
+	json.NewEncoder(w).Encode(&container.BuildImageResponse{})
 }
 
-func (dm *DockerService) buildImage(req *docker.BuildImageRequest) error {
+func (dm *DockerService) buildImage(req *container.BuildImageRequest) error {
 	ctx := context.Background()
 
 	tarBuffer, err := createTarFromContext(req.ContextPath)

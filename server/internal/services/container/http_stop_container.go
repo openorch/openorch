@@ -17,10 +17,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/docker/docker/api/types/container"
+	dockercontainer "github.com/docker/docker/api/types/container"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID stopContainer
@@ -31,11 +31,11 @@ import (
 // @Tags Container Svc
 // @Accept json
 // @Produce json
-// @Param body body docker.StopContainerRequest true "Stop Container Request"
-// @Success 200 {object} docker.StopContainerResponse
-// @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
-// @Failure 401 {object} docker.ErrorResponse "Unauthorized"
-// @Failure 500 {object} docker.ErrorResponse "Internal Server Error"
+// @Param body body container.StopContainerRequest true "Stop Container Request"
+// @Success 200 {object} container.StopContainerResponse
+// @Failure 400 {object} container.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} container.ErrorResponse "Unauthorized"
+// @Failure 500 {object} container.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /container-svc/container/stop [put]
 func (dm *DockerService) StopContainer(
@@ -44,7 +44,7 @@ func (dm *DockerService) StopContainer(
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerStop.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *container.PermissionContainerStop.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"model-svc", "deploy-svc"},
 		}).
@@ -60,7 +60,7 @@ func (dm *DockerService) StopContainer(
 		return
 	}
 
-	req := &docker.StopContainerRequest{}
+	req := &container.StopContainerRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -76,18 +76,18 @@ func (dm *DockerService) StopContainer(
 		return
 	}
 
-	jsonData, _ := json.Marshal(&docker.StopContainerResponse{})
+	jsonData, _ := json.Marshal(&container.StopContainerResponse{})
 	w.Write(jsonData)
 }
 
 func (dm *DockerService) stopContainer(
 	ctx context.Context,
-	req *docker.StopContainerRequest,
+	req *container.StopContainerRequest,
 ) error {
 	stopID := req.Id
 	if stopID == "" {
 		stopID = req.Name
 	}
 
-	return dm.client.ContainerStop(ctx, stopID, container.StopOptions{})
+	return dm.client.ContainerStop(ctx, stopID, dockercontainer.StopOptions{})
 }

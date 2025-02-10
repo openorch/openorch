@@ -21,9 +21,9 @@ import (
 	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
-// @ID getHost
-// @Summary      Get Docker Host
-// @Description  Retrieve information about the Docker host
+// @ID imageExists
+// @Summary      Container Image Exists
+// @Description  Check if an image exists on in the container registry and is pullable.
 // @Tags         Container Svc
 // @Accept       json
 // @Produce      json
@@ -32,7 +32,7 @@ import (
 // @Failure      500   {object}  container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
 // @Router       /container-svc/host [get]
-func (dm *DockerService) Host(
+func (dm *DockerService) ImageExists(
 	w http.ResponseWriter,
 	req *http.Request,
 ) {
