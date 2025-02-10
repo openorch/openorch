@@ -76,13 +76,13 @@ export class DockerSvcApi {
         this.interceptors.push(interceptor);
     }
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * @summary Build an Image
      * @param body Build Image Request
      */
     buildImage(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/image';
+            const localVarPath = this.basePath + '/container-svc/image';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -154,7 +154,7 @@ export class DockerSvcApi {
      */
     containerIsRunning(hash_1, name_1) {
         return __awaiter(this, arguments, void 0, function* (hash, name, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/is-running';
+            const localVarPath = this.basePath + '/container-svc/container/is-running';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -228,7 +228,7 @@ export class DockerSvcApi {
      */
     containerSummary(hash_1, name_1, lines_1) {
         return __awaiter(this, arguments, void 0, function* (hash, name, lines, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/summary';
+            const localVarPath = this.basePath + '/container-svc/container/summary';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -302,7 +302,7 @@ export class DockerSvcApi {
      */
     getHost() {
         return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/host';
+            const localVarPath = this.basePath + '/container-svc/host';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -367,7 +367,7 @@ export class DockerSvcApi {
      */
     getInfo() {
         return __awaiter(this, arguments, void 0, function* (options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/info';
+            const localVarPath = this.basePath + '/container-svc/info';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -427,13 +427,13 @@ export class DockerSvcApi {
         });
     }
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * @summary Run a Container
      * @param body Run Container Request
      */
     runContainer(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container';
+            const localVarPath = this.basePath + '/container-svc/container';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];
@@ -498,13 +498,13 @@ export class DockerSvcApi {
         });
     }
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * @summary Stop a Container
      * @param body Stop Container Request
      */
     stopContainer(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/docker-svc/container/stop';
+            const localVarPath = this.basePath + '/container-svc/container/stop';
             let localVarQueryParameters = {};
             let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
             const produces = ['application/json'];

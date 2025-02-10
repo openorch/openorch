@@ -3264,14 +3264,14 @@ paths:
       summary: List Deployments
       tags:
       - Deploy Svc
-  /docker-svc/container:
+  /container-svc/container:
     put:
       consumes:
       - application/json
       description: |-
         Runs a Docker container with the specified parameters.
 
-        Requires the `docker-svc:container:run` permission.
+        Requires the `container-svc:container:run` permission.
       operationId: runContainer
       parameters:
       - description: Run Container Request
@@ -3303,8 +3303,8 @@ paths:
       - BearerAuth: []
       summary: Run a Container
       tags:
-      - Docker Svc
-  /docker-svc/container/is-running:
+      - Container Svc
+  /container-svc/container/is-running:
     get:
       consumes:
       - application/json
@@ -3342,15 +3342,15 @@ paths:
       - BearerAuth: []
       summary: Check If a Container Is Running
       tags:
-      - Docker Svc
-  /docker-svc/container/stop:
+      - Container Svc
+  /container-svc/container/stop:
     put:
       consumes:
       - application/json
       description: |-
         Stops a Docker container with the specified parameters.
 
-        Requires the `docker-svc:container:stop` permission.
+        Requires the `container-svc:container:stop` permission.
       operationId: stopContainer
       parameters:
       - description: Stop Container Request
@@ -3382,8 +3382,8 @@ paths:
       - BearerAuth: []
       summary: Stop a Container
       tags:
-      - Docker Svc
-  /docker-svc/container/summary:
+      - Container Svc
+  /container-svc/container/summary:
     get:
       consumes:
       - application/json
@@ -3426,8 +3426,8 @@ paths:
       - BearerAuth: []
       summary: Get Container Summary
       tags:
-      - Docker Svc
-  /docker-svc/host:
+      - Container Svc
+  /container-svc/host:
     get:
       consumes:
       - application/json
@@ -3452,15 +3452,15 @@ paths:
       - BearerAuth: []
       summary: Get Docker Host
       tags:
-      - Docker Svc
-  /docker-svc/image:
+      - Container Svc
+  /container-svc/image:
     put:
       consumes:
       - application/json
       description: |-
         Builds a Docker image with the specified parameters.
 
-        Requires the `docker-svc:image:build` permission.
+        Requires the `container-svc:image:build` permission.
       operationId: buildImage
       parameters:
       - description: Build Image Request
@@ -3492,8 +3492,8 @@ paths:
       - BearerAuth: []
       summary: Build an Image
       tags:
-      - Docker Svc
-  /docker-svc/info:
+      - Container Svc
+  /container-svc/info:
     get:
       consumes:
       - application/json
@@ -3518,7 +3518,7 @@ paths:
       - BearerAuth: []
       summary: Get Docker Service Information
       tags:
-      - Docker Svc
+      - Container Svc
   /dynamic-svc/object:
     post:
       consumes:

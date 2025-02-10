@@ -98,12 +98,12 @@ export class DockerSvcApi {
     }
 
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * @summary Build an Image
      * @param body Build Image Request
      */
     public async buildImage (body: DockerSvcBuildImageRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/docker-svc/image';
+        const localVarPath = this.basePath + '/container-svc/image';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -176,7 +176,7 @@ export class DockerSvcApi {
      * @param name Container Name
      */
     public async containerIsRunning (hash?: string, name?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcContainerIsRunningResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/container/is-running';
+        const localVarPath = this.basePath + '/container-svc/container/is-running';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -252,7 +252,7 @@ export class DockerSvcApi {
      * @param lines Number of Lines
      */
     public async containerSummary (hash?: string, name?: string, lines?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcGetContainerSummaryResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/container/summary';
+        const localVarPath = this.basePath + '/container-svc/container/summary';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -329,7 +329,7 @@ export class DockerSvcApi {
      * @summary Get Docker Host
      */
     public async getHost (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcGetDockerHostResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/host';
+        const localVarPath = this.basePath + '/container-svc/host';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -394,7 +394,7 @@ export class DockerSvcApi {
      * @summary Get Docker Service Information
      */
     public async getInfo (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcGetInfoResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/info';
+        const localVarPath = this.basePath + '/container-svc/info';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -455,12 +455,12 @@ export class DockerSvcApi {
         });
     }
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * @summary Run a Container
      * @param body Run Container Request
      */
     public async runContainer (body: DockerSvcRunContainerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DockerSvcRunContainerResponse;  }> {
-        const localVarPath = this.basePath + '/docker-svc/container';
+        const localVarPath = this.basePath + '/container-svc/container';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -527,12 +527,12 @@ export class DockerSvcApi {
         });
     }
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * @summary Stop a Container
      * @param body Stop Container Request
      */
     public async stopContainer (body: DockerSvcStopContainerRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/docker-svc/container/stop';
+        const localVarPath = this.basePath + '/container-svc/container/stop';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];

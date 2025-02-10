@@ -26,7 +26,7 @@ import (
 // @Description Runs a Docker container with the specified parameters.
 // @Description
 // @Description Requires the `docker-svc:container:run` permission.
-// @Tags Docker Svc
+// @Tags Container Svc
 // @Accept json
 // @Produce json
 // @Param body body docker.RunContainerRequest true "Run Container Request"

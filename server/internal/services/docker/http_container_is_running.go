@@ -24,7 +24,7 @@ import (
 // @ID containerIsRunning
 // @Summary      Check If a Container Is Running
 // @Description  Check if a Docker container is running, identified by hash or name.
-// @Tags         Docker Svc
+// @Tags         Container Svc
 // @Accept       json
 // @Produce      json
 // @Param        hash  query     string  false  "Container Hash"

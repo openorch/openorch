@@ -24,7 +24,7 @@ import (
 // @ID getInfo
 // @Summary      Get Docker Service Information
 // @Description  Retrieve detailed information about the Docker service
-// @Tags         Docker Svc
+// @Tags         Container Svc
 // @Accept       json
 // @Produce      json
 // @Success      200   {object} docker.GetInfoResponse "Service Information"

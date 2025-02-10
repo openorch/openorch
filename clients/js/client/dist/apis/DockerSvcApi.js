@@ -27,7 +27,7 @@ import { DockerSvcBuildImageRequestToJSON, DockerSvcContainerIsRunningResponseFr
  */
 export class DockerSvcApi extends runtime.BaseAPI {
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * Build an Image
      */
     buildImageRaw(requestParameters, initOverrides) {
@@ -42,7 +42,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/image`,
+                path: `/container-svc/image`,
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
@@ -52,7 +52,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * Build an Image
      */
     buildImage(requestParameters, initOverrides) {
@@ -79,7 +79,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container/is-running`,
+                path: `/container-svc/container/is-running`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -118,7 +118,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container/summary`,
+                path: `/container-svc/container/summary`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -148,7 +148,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/host`,
+                path: `/container-svc/host`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -178,7 +178,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/info`,
+                path: `/container-svc/info`,
                 method: 'GET',
                 headers: headerParameters,
                 query: queryParameters,
@@ -197,7 +197,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * Run a Container
      */
     runContainerRaw(requestParameters, initOverrides) {
@@ -212,7 +212,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container`,
+                path: `/container-svc/container`,
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
@@ -222,7 +222,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * Run a Container
      */
     runContainer(requestParameters, initOverrides) {
@@ -232,7 +232,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * Stop a Container
      */
     stopContainerRaw(requestParameters, initOverrides) {
@@ -247,7 +247,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
                 headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
             }
             const response = yield this.request({
-                path: `/docker-svc/container/stop`,
+                path: `/container-svc/container/stop`,
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
@@ -257,7 +257,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * Stop a Container
      */
     stopContainer(requestParameters, initOverrides) {

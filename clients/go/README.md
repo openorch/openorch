@@ -94,13 +94,13 @@ Class | Method | HTTP request | Description
 *DeploySvcAPI* | [**DeleteDeployment**](docs/DeploySvcAPI.md#deletedeployment) | **Delete** /deploy-svc/deployment | Delete Deployment
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
-*DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /docker-svc/image | Build an Image
-*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /docker-svc/container/is-running | Check If a Container Is Running
-*DockerSvcAPI* | [**ContainerSummary**](docs/DockerSvcAPI.md#containersummary) | **Get** /docker-svc/container/summary | Get Container Summary
-*DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /docker-svc/host | Get Docker Host
-*DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /docker-svc/info | Get Docker Service Information
-*DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /docker-svc/container | Run a Container
-*DockerSvcAPI* | [**StopContainer**](docs/DockerSvcAPI.md#stopcontainer) | **Put** /docker-svc/container/stop | Stop a Container
+*DockerSvcAPI* | [**BuildImage**](docs/DockerSvcAPI.md#buildimage) | **Put** /container-svc/image | Build an Image
+*DockerSvcAPI* | [**ContainerIsRunning**](docs/DockerSvcAPI.md#containerisrunning) | **Get** /container-svc/container/is-running | Check If a Container Is Running
+*DockerSvcAPI* | [**ContainerSummary**](docs/DockerSvcAPI.md#containersummary) | **Get** /container-svc/container/summary | Get Container Summary
+*DockerSvcAPI* | [**GetHost**](docs/DockerSvcAPI.md#gethost) | **Get** /container-svc/host | Get Docker Host
+*DockerSvcAPI* | [**GetInfo**](docs/DockerSvcAPI.md#getinfo) | **Get** /container-svc/info | Get Docker Service Information
+*DockerSvcAPI* | [**RunContainer**](docs/DockerSvcAPI.md#runcontainer) | **Put** /container-svc/container | Run a Container
+*DockerSvcAPI* | [**StopContainer**](docs/DockerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
 *DynamicSvcAPI* | [**CreateObject**](docs/DynamicSvcAPI.md#createobject) | **Post** /dynamic-svc/object | Create a Generic Object
 *DynamicSvcAPI* | [**DeleteObjects**](docs/DynamicSvcAPI.md#deleteobjects) | **Post** /dynamic-svc/objects/delete | Delete a Generic Object
 *DynamicSvcAPI* | [**Query**](docs/DynamicSvcAPI.md#query) | **Post** /dynamic-svc/objects | Query Objects

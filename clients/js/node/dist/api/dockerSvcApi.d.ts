@@ -42,7 +42,7 @@ export declare class DockerSvcApi {
     setApiKey(key: DockerSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * @summary Build an Image
      * @param body Build Image Request
      */
@@ -108,7 +108,7 @@ export declare class DockerSvcApi {
         body: DockerSvcGetInfoResponse;
     }>;
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * @summary Run a Container
      * @param body Run Container Request
      */
@@ -121,7 +121,7 @@ export declare class DockerSvcApi {
         body: DockerSvcRunContainerResponse;
     }>;
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * @summary Stop a Container
      * @param body Stop Container Request
      */

@@ -24,7 +24,7 @@ import (
 // @ID getHost
 // @Summary      Get Docker Host
 // @Description  Retrieve information about the Docker host
-// @Tags         Docker Svc
+// @Tags         Container Svc
 // @Accept       json
 // @Produce      json
 // @Success      200   {object}  docker.GetDockerHostResponse

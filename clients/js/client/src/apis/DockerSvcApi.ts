@@ -75,7 +75,7 @@ export interface StopContainerRequest {
 export class DockerSvcApi extends runtime.BaseAPI {
 
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * Build an Image
      */
     async buildImageRaw(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -97,7 +97,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/image`,
+            path: `/container-svc/image`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -108,7 +108,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Builds a Docker image with the specified parameters.  Requires the `docker-svc:image:build` permission.
+     * Builds a Docker image with the specified parameters.  Requires the `container-svc:image:build` permission.
      * Build an Image
      */
     async buildImage(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
@@ -138,7 +138,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container/is-running`,
+            path: `/container-svc/container/is-running`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -182,7 +182,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container/summary`,
+            path: `/container-svc/container/summary`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -214,7 +214,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/host`,
+            path: `/container-svc/host`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -246,7 +246,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/info`,
+            path: `/container-svc/info`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -265,7 +265,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * Run a Container
      */
     async runContainerRaw(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DockerSvcRunContainerResponse>> {
@@ -287,7 +287,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container`,
+            path: `/container-svc/container`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -298,7 +298,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Runs a Docker container with the specified parameters.  Requires the `docker-svc:container:run` permission.
+     * Runs a Docker container with the specified parameters.  Requires the `container-svc:container:run` permission.
      * Run a Container
      */
     async runContainer(requestParameters: RunContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DockerSvcRunContainerResponse> {
@@ -307,7 +307,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * Stop a Container
      */
     async stopContainerRaw(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -329,7 +329,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/docker-svc/container/stop`,
+            path: `/container-svc/container/stop`,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
@@ -340,7 +340,7 @@ export class DockerSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Stops a Docker container with the specified parameters.  Requires the `docker-svc:container:stop` permission.
+     * Stops a Docker container with the specified parameters.  Requires the `container-svc:container:stop` permission.
      * Stop a Container
      */
     async stopContainer(requestParameters: StopContainerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {

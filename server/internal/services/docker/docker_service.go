@@ -89,7 +89,7 @@ func (ds *DockerService) Start() error {
 	token, err := sdk.RegisterService(
 		ds.clientFactory.Client().UserSvcAPI,
 		"docker-svc",
-		"Docker Svc",
+		"Container Svc",
 		ds.credentialStore,
 	)
 	if err != nil {

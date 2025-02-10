@@ -26,7 +26,7 @@ import (
 // @Description Builds a Docker image with the specified parameters.
 // @Description
 // @Description Requires the `docker-svc:image:build` permission.
-// @Tags Docker Svc
+// @Tags Container Svc
 // @Accept json
 // @Produce json
 // @Param body body docker.BuildImageRequest true "Build Image Request"

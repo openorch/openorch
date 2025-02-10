@@ -28,7 +28,7 @@ import (
 // @Description Stops a Docker container with the specified parameters.
 // @Description
 // @Description Requires the `docker-svc:container:stop` permission.
-// @Tags Docker Svc
+// @Tags Container Svc
 // @Accept json
 // @Produce json
 // @Param body body docker.StopContainerRequest true "Stop Container Request"
