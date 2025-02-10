@@ -27,7 +27,7 @@ env:
 
 jobs:
   build-and-push:
-    timeout-minutes: 25
+    timeout-minutes: 45
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
