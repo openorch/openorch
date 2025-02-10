@@ -27,7 +27,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/docker/docker/client"
-	ts "github.com/openorch/openorch/server/internal/services/docker/types"
+	ts "github.com/openorch/openorch/server/internal/services/container/types"
 	"github.com/pkg/errors"
 
 	"github.com/openorch/openorch/sdk/go/logger"

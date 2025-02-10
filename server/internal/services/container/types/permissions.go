@@ -6,34 +6,34 @@
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package docker_svc
+package container_svc
 
 import (
 	openapi "github.com/openorch/openorch/clients/go"
 )
 
 var PermissionContainerCreate = openapi.UserSvcPermission{
-	Id:   openapi.PtrString("docker-svc:container:create"),
+	Id:   openapi.PtrString("container-svc:container:create"),
 	Name: openapi.PtrString("Container Svc - Container Create"),
 }
 
 var PermissionContainerView = openapi.UserSvcPermission{
-	Id:   openapi.PtrString("docker-svc:container:view"),
+	Id:   openapi.PtrString("container-svc:container:view"),
 	Name: openapi.PtrString("Container Svc - Container View"),
 }
 
 var PermissionContainerEdit = openapi.UserSvcPermission{
-	Id:   openapi.PtrString("docker-svc:container:edit"),
+	Id:   openapi.PtrString("container-svc:container:edit"),
 	Name: openapi.PtrString("Container Svc - Container Edit"),
 }
 
 var PermissionContainerStop = openapi.UserSvcPermission{
-	Id:   openapi.PtrString("docker-svc:container:stop"),
+	Id:   openapi.PtrString("container-svc:container:stop"),
 	Name: openapi.PtrString("Container Svc - Container Stop"),
 }
 
 var PermissionImageBuild = openapi.UserSvcPermission{
-	Id:   openapi.PtrString("docker-svc:image:build"),
+	Id:   openapi.PtrString("container-svc:image:build"),
 	Name: openapi.PtrString("Container Svc - Image Build"),
 }
 

@@ -19,7 +19,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/docker/types"
+	docker "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID containerSummary
@@ -36,7 +36,7 @@ import (
 // @Failure      401            {object} docker.ErrorResponse  "Unauthorized"
 // @Failure      500            {object} docker.ErrorResponse  "Internal Server Error"
 // @Security     BearerAuth
-// @Router       /docker-svc/container/summary [get]
+// @Router       /container-svc/container/summary [get]
 func (dm *DockerService) Summary(
 	w http.ResponseWriter,
 	r *http.Request,

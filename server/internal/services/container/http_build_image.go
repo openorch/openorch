@@ -18,14 +18,14 @@ import (
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
-	docker "github.com/openorch/openorch/server/internal/services/docker/types"
+	docker "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID buildImage
 // @Summary Build an Image
 // @Description Builds a Docker image with the specified parameters.
 // @Description
-// @Description Requires the `docker-svc:image:build` permission.
+// @Description Requires the `container-svc:image:build` permission.
 // @Tags Container Svc
 // @Accept json
 // @Produce json
@@ -35,7 +35,7 @@ import (
 // @Failure 401 {object} docker.ErrorResponse "Unauthorized"
 // @Failure 500 {object} docker.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /docker-svc/image [put]
+// @Router /container-svc/image [put]
 func (dm *DockerService) BuildImage(
 	w http.ResponseWriter,
 	r *http.Request,

@@ -380,7 +380,7 @@ definitions:
         description: 'Optional: Specific zone for the deployment'
         type: string
     type: object
-  docker_svc.BuildImageRequest:
+  container_svc.BuildImageRequest:
     properties:
       contextPath:
         description: ContextPath is the local path to the build context
@@ -398,16 +398,16 @@ definitions:
     - contextPath
     - name
     type: object
-  docker_svc.BuildImageResponse:
+  container_svc.BuildImageResponse:
     type: object
-  docker_svc.ContainerIsRunningResponse:
+  container_svc.ContainerIsRunningResponse:
     properties:
       isRunning:
         type: boolean
     required:
     - isRunning
     type: object
-  docker_svc.DockerInfo:
+  container_svc.DockerInfo:
     properties:
       dockerDaemonAddress:
         type: string
@@ -416,12 +416,12 @@ definitions:
       hasDocker:
         type: boolean
     type: object
-  docker_svc.ErrorResponse:
+  container_svc.ErrorResponse:
     properties:
       error:
         type: string
     type: object
-  docker_svc.GetContainerSummaryResponse:
+  container_svc.GetContainerSummaryResponse:
     properties:
       logs:
         type: string
@@ -435,19 +435,19 @@ definitions:
     - status
     - summary
     type: object
-  docker_svc.GetDockerHostResponse:
+  container_svc.GetDockerHostResponse:
     properties:
       host:
         type: string
     required:
     - host
     type: object
-  docker_svc.GetInfoResponse:
+  container_svc.GetInfoResponse:
     properties:
       info:
-        $ref: '#/definitions/docker_svc.DockerInfo'
+        $ref: '#/definitions/container_svc.DockerInfo'
     type: object
-  docker_svc.RunContainerOptions:
+  container_svc.RunContainerOptions:
     properties:
       assets:
         additionalProperties:
@@ -485,7 +485,7 @@ definitions:
         description: Name is the name of the container
         type: string
     type: object
-  docker_svc.RunContainerRequest:
+  container_svc.RunContainerRequest:
     properties:
       hostPort:
         description: HostPort is the port on the host machine that will be mapped
@@ -498,7 +498,7 @@ definitions:
         type: string
       options:
         allOf:
-        - $ref: '#/definitions/docker_svc.RunContainerOptions'
+        - $ref: '#/definitions/container_svc.RunContainerOptions'
         description: Options provides additional options for launching the container
       port:
         description: Port is the port number that the container will expose
@@ -508,19 +508,19 @@ definitions:
     - image
     - port
     type: object
-  docker_svc.RunContainerResponse:
+  container_svc.RunContainerResponse:
     properties:
       info:
-        $ref: '#/definitions/docker_svc.RunInfo'
+        $ref: '#/definitions/container_svc.RunInfo'
     type: object
-  docker_svc.RunInfo:
+  container_svc.RunInfo:
     properties:
       newContainerStarted:
         type: boolean
       portNumber:
         type: integer
     type: object
-  docker_svc.StopContainerRequest:
+  container_svc.StopContainerRequest:
     properties:
       id:
         example: 4378b76e05ba
@@ -529,7 +529,7 @@ definitions:
         example: sup-container-x
         type: string
     type: object
-  docker_svc.StopContainerResponse:
+  container_svc.StopContainerResponse:
     type: object
   dynamic_svc.CreateObjectFields:
     properties:
@@ -3279,26 +3279,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/docker_svc.RunContainerRequest'
+          $ref: '#/definitions/container_svc.RunContainerRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.RunContainerResponse'
+            $ref: '#/definitions/container_svc.RunContainerResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Run a Container
@@ -3325,19 +3325,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.ContainerIsRunningResponse'
+            $ref: '#/definitions/container_svc.ContainerIsRunningResponse'
         "400":
           description: Invalid JSON or Missing Parameters
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Check If a Container Is Running
@@ -3358,26 +3358,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/docker_svc.StopContainerRequest'
+          $ref: '#/definitions/container_svc.StopContainerRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.StopContainerResponse'
+            $ref: '#/definitions/container_svc.StopContainerResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Stop a Container
@@ -3409,19 +3409,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.GetContainerSummaryResponse'
+            $ref: '#/definitions/container_svc.GetContainerSummaryResponse'
         "400":
           description: Invalid JSON or Missing Parameters
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Get Container Summary
@@ -3439,15 +3439,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.GetDockerHostResponse'
+            $ref: '#/definitions/container_svc.GetDockerHostResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Get Docker Host
@@ -3468,26 +3468,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/docker_svc.BuildImageRequest'
+          $ref: '#/definitions/container_svc.BuildImageRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/docker_svc.BuildImageResponse'
+            $ref: '#/definitions/container_svc.BuildImageResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Build an Image
@@ -3505,15 +3505,15 @@ paths:
         "200":
           description: Service Information
           schema:
-            $ref: '#/definitions/docker_svc.GetInfoResponse'
+            $ref: '#/definitions/container_svc.GetInfoResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/docker_svc.ErrorResponse'
+            $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Get Docker Service Information

@@ -13,38 +13,36 @@
 package dockerservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
-	"github.com/docker/docker/api/types/container"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/docker/types"
+	docker "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
-// @ID stopContainer
-// @Summary Stop a Container
-// @Description Stops a Docker container with the specified parameters.
+// @ID runContainer
+// @Summary Run a Container
+// @Description Runs a Docker container with the specified parameters.
 // @Description
-// @Description Requires the `docker-svc:container:stop` permission.
+// @Description Requires the `container-svc:container:run` permission.
 // @Tags Container Svc
 // @Accept json
 // @Produce json
-// @Param body body docker.StopContainerRequest true "Stop Container Request"
-// @Success 200 {object} docker.StopContainerResponse
+// @Param body body docker.RunContainerRequest true "Run Container Request"
+// @Success 200 {object} docker.RunContainerResponse
 // @Failure 400 {object} docker.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} docker.ErrorResponse "Unauthorized"
 // @Failure 500 {object} docker.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
-// @Router /docker-svc/container/stop [put]
-func (dm *DockerService) StopContainer(
+// @Router /container-svc/container [put]
+func (dm *DockerService) RunContainer(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
 
 	isAuthRsp, _, err := dm.clientFactory.Client(sdk.WithTokenFromRequest(r)).
-		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerStop.Id).
+		UserSvcAPI.IsAuthorized(r.Context(), *docker.PermissionContainerCreate.Id).
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{"model-svc", "deploy-svc"},
 		}).
@@ -60,7 +58,7 @@ func (dm *DockerService) StopContainer(
 		return
 	}
 
-	req := &docker.StopContainerRequest{}
+	req := &docker.RunContainerRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -69,25 +67,15 @@ func (dm *DockerService) StopContainer(
 	}
 	defer r.Body.Close()
 
-	err = dm.stopContainer(r.Context(), req)
+	di, err := dm.runContainer(req.Image, req.Port, req.HostPort, req.Options)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(&docker.StopContainerResponse{})
+	jsonData, _ := json.Marshal(&docker.RunContainerResponse{
+		Info: di,
+	})
 	w.Write(jsonData)
-}
-
-func (dm *DockerService) stopContainer(
-	ctx context.Context,
-	req *docker.StopContainerRequest,
-) error {
-	stopID := req.Id
-	if stopID == "" {
-		stopID = req.Name
-	}
-
-	return dm.client.ContainerStop(ctx, stopID, container.StopOptions{})
 }

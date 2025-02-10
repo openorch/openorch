@@ -13,7 +13,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
+	dockertypes "github.com/openorch/openorch/server/internal/services/container/types"
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 

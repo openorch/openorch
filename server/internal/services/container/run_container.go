@@ -37,7 +37,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 
-	dockertypes "github.com/openorch/openorch/server/internal/services/docker/types"
+	dockertypes "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // This obviously means there is a single container that can be active at the moment on a node.

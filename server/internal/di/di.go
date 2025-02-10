@@ -22,8 +22,8 @@ import (
 	node_types "github.com/openorch/openorch/server/internal/node/types"
 	chatservice "github.com/openorch/openorch/server/internal/services/chat"
 	configservice "github.com/openorch/openorch/server/internal/services/config"
+	dockerservice "github.com/openorch/openorch/server/internal/services/container"
 	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
-	dockerservice "github.com/openorch/openorch/server/internal/services/docker"
 	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
 	emailservice "github.com/openorch/openorch/server/internal/services/email"
 	fileservice "github.com/openorch/openorch/server/internal/services/file"
@@ -473,31 +473,31 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "GET")
 
-	router.HandleFunc("/docker-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Info(w, r)
 	})).
 		Methods("OPTIONS", "GET")
-	router.HandleFunc("/docker-svc/host", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/host", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Host(w, r)
 	})).
 		Methods("OPTIONS", "GET")
-	router.HandleFunc("/docker-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.RunContainer(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/docker-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.BuildImage(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/docker-svc/container/stop", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/container/stop", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.StopContainer(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
-	router.HandleFunc("/docker-svc/container/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/container/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.ContainerIsRunning(w, r)
 	})).
 		Methods("OPTIONS", "GET")
-	router.HandleFunc("/docker-svc/container/summary", appl(func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/container-svc/container/summary", appl(func(w http.ResponseWriter, r *http.Request) {
 		dockerService.Summary(w, r)
 	})).
 		Methods("OPTIONS", "GET")

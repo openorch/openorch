@@ -5,7 +5,7 @@
  * This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
-package docker_svc
+package container_svc
 
 type ErrorResponse struct {
 	Error string `json:"error"`
@@ -16,12 +16,6 @@ type RunInfo struct {
 	PortNumber          int
 }
 
-type ModelRunRequest struct{}
-
-type OnModelRun struct {
-	Error *string `json:"error,omitempty"`
-}
-
 type GetInfoResponse struct {
 	Info *DockerInfo `json:"info"`
 }
@@ -30,6 +24,20 @@ type DockerInfo struct {
 	HasDocker           bool    `json:"hasDocker"`
 	DockerDaemonAddress *string `json:"dockerDaemonAddress,omitempty"`
 	Error               *string `json:"error,omitempty"`
+}
+
+type RunContainerRequest struct {
+	// Image is the Docker image to use for the container
+	Image string `json:"image" example:"nginx:latest" binding:"required"`
+
+	// Port is the port number that the container will expose
+	Port int `json:"port" example:"8080" binding:"required"`
+
+	// HostPort is the port on the host machine that will be mapped to the container's port
+	HostPort int `json:"hostPort" example:"8081"`
+
+	// Options provides additional options for launching the container
+	Options *RunContainerOptions `json:"options"`
 }
 
 type RunContainerOptions struct {
@@ -59,29 +67,8 @@ type RunContainerOptions struct {
 	Assets map[string]string `json:"assets,omitempty"`
 }
 
-type RunContainerRequest struct {
-	// Image is the Docker image to use for the container
-	Image string `json:"image" example:"nginx:latest" binding:"required"`
-
-	// Port is the port number that the container will expose
-	Port int `json:"port" example:"8080" binding:"required"`
-
-	// HostPort is the port on the host machine that will be mapped to the container's port
-	HostPort int `json:"hostPort" example:"8081"`
-
-	// Options provides additional options for launching the container
-	Options *RunContainerOptions `json:"options"`
-}
-
-type BuildImageRequest struct {
-	// Name is the name of the image to build
-	Name string `json:"name" example:"nginx:latest" binding:"required"`
-
-	// ContextPath is the local path to the build context
-	ContextPath string `json:"contextPath" example:"." binding:"required"`
-
-	// DockerfilePath is the local path to the Dockerfile
-	DockerfilePath string `json:"dockerfilePath" example:"Dockerfile"`
+type RunContainerResponse struct {
+	Info *RunInfo `json:"info"`
 }
 
 type StopContainerRequest struct {
@@ -90,13 +77,6 @@ type StopContainerRequest struct {
 }
 
 type StopContainerResponse struct{}
-
-type BuildImageResponse struct {
-}
-
-type RunContainerResponse struct {
-	Info *RunInfo `json:"info"`
-}
 
 type GetContainerSummaryRequest struct {
 	Hash  string `json:"hash"`
@@ -123,19 +103,4 @@ type GetDockerHostRequest struct{}
 
 type GetDockerHostResponse struct {
 	Host string `json:"host" binding:"required"`
-}
-
-//
-// Events
-//
-
-// @todo nothing to trigger this yet
-const EventDockerInfoUpdatedName = "dockerInfoUpdated"
-
-type EventDockerInfoUpdated struct {
-	ThreadId string `json:"threadId"`
-}
-
-func (e EventDockerInfoUpdated) Name() string {
-	return EventDockerInfoUpdatedName
 }

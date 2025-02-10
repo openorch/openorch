@@ -18,7 +18,7 @@ import (
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
-	docker "github.com/openorch/openorch/server/internal/services/docker/types"
+	docker "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // @ID containerIsRunning
@@ -35,7 +35,7 @@ import (
 // @Failure      500   {object}  docker.ErrorResponse  "Internal Server Error"
 // @SecurityDefinitions.bearerAuth BearerAuth
 // @Security     BearerAuth
-// @Router       /docker-svc/container/is-running [get]
+// @Router       /container-svc/container/is-running [get]
 func (dm *DockerService) ContainerIsRunning(
 	w http.ResponseWriter,
 	r *http.Request,
