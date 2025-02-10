@@ -1,4 +1,4 @@
-name: Build JS/TS clients
+name: JS/TS clients build
 
 on:
   push:
