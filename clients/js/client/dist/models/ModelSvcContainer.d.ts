@@ -27,7 +27,7 @@ export interface ModelSvcContainer {
      * @type {string}
      * @memberof ModelSvcContainer
      */
-    image?: string;
+    imageTemplate?: string;
     /**
      * Keeps are paths in the container that should be persisted across restarts.
      * @type {Array<string>}

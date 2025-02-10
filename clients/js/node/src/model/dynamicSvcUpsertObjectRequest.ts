@@ -11,10 +11,10 @@
  */
 
 import { RequestFile } from './models';
-import { DynamicSvcObjectCreateFields } from './dynamicSvcObjectCreateFields';
+import { DynamicSvcCreateObjectFields } from './dynamicSvcCreateObjectFields';
 
 export class DynamicSvcUpsertObjectRequest {
-    'object'?: DynamicSvcObjectCreateFields;
+    'object'?: DynamicSvcCreateObjectFields;
 
     static discriminator: string | undefined = undefined;
 
@@ -22,7 +22,7 @@ export class DynamicSvcUpsertObjectRequest {
         {
             "name": "object",
             "baseName": "object",
-            "type": "DynamicSvcObjectCreateFields"
+            "type": "DynamicSvcCreateObjectFields"
         }    ];
 
     static getAttributeTypeMap() {

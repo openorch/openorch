@@ -16,6 +16,9 @@ import (
 	"context"
 	"sync"
 
+	openapi "github.com/openorch/openorch/clients/go"
+	"github.com/pkg/errors"
+
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
@@ -41,6 +44,9 @@ type ModelService struct {
 
 	gpuPlatform string
 	llmHost     string
+
+	selfNode      *openapi.RegistrySvcNode
+	selfNodeMutex sync.Mutex
 }
 
 func NewModelService(
@@ -105,4 +111,25 @@ func (ms *ModelService) Start() error {
 	ms.token = token
 
 	return ms.registerPermissions()
+}
+
+func (ms *ModelService) getNode() (*openapi.RegistrySvcNode, error) {
+	ms.selfNodeMutex.Lock()
+	defer ms.selfNodeMutex.Unlock()
+
+	if ms.selfNode != nil {
+		return ms.selfNode, nil
+	}
+
+	rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+		RegistrySvcAPI.SelfNode(context.Background()).
+		Execute()
+
+	if err != nil {
+		return nil, errors.Wrap(err, "error getting self node from model service")
+	}
+
+	ms.selfNode = &rsp.Node
+
+	return ms.selfNode, nil
 }

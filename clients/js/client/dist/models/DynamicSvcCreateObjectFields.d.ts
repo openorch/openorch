@@ -12,21 +12,21 @@
 /**
  *
  * @export
- * @interface DynamicSvcObjectCreateFields
+ * @interface DynamicSvcCreateObjectFields
  */
-export interface DynamicSvcObjectCreateFields {
+export interface DynamicSvcCreateObjectFields {
     /**
      * Authors is a list of user ID and organization ID who created the object.
      * If an organization ID is not provided, the currently active organization will
      * be queried from the User Svc.
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     authors?: Array<string>;
     /**
      *
      * @type {{ [key: string]: any; }}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     data: {
         [key: string]: any;
@@ -36,13 +36,13 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     deleters?: Array<string>;
     /**
      *
      * @type {string}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     id?: string;
     /**
@@ -50,13 +50,13 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     readers?: Array<string>;
     /**
      *
      * @type {string}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     table: string;
     /**
@@ -64,15 +64,15 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     writers?: Array<string>;
 }
 /**
- * Check if a given object implements the DynamicSvcObjectCreateFields interface.
+ * Check if a given object implements the DynamicSvcCreateObjectFields interface.
  */
-export declare function instanceOfDynamicSvcObjectCreateFields(value: object): value is DynamicSvcObjectCreateFields;
-export declare function DynamicSvcObjectCreateFieldsFromJSON(json: any): DynamicSvcObjectCreateFields;
-export declare function DynamicSvcObjectCreateFieldsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcObjectCreateFields;
-export declare function DynamicSvcObjectCreateFieldsToJSON(json: any): DynamicSvcObjectCreateFields;
-export declare function DynamicSvcObjectCreateFieldsToJSONTyped(value?: DynamicSvcObjectCreateFields | null, ignoreDiscriminator?: boolean): any;
+export declare function instanceOfDynamicSvcCreateObjectFields(value: object): value is DynamicSvcCreateObjectFields;
+export declare function DynamicSvcCreateObjectFieldsFromJSON(json: any): DynamicSvcCreateObjectFields;
+export declare function DynamicSvcCreateObjectFieldsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcCreateObjectFields;
+export declare function DynamicSvcCreateObjectFieldsToJSON(json: any): DynamicSvcCreateObjectFields;
+export declare function DynamicSvcCreateObjectFieldsToJSONTyped(value?: DynamicSvcCreateObjectFields | null, ignoreDiscriminator?: boolean): any;

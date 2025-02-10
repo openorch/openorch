@@ -7,16 +7,21 @@ import (
 var PlatformLlamaCpp = Platform{
 	Id: "llama-cpp",
 	Architectures: Architectures{
-		Default: Container{
-			Port: 8000,
-			// For the source of this image, see `server/docker/llama-cpp-python/default`
-			Image: "crufter/llama-cpp-python:default-1-latest",
+		Default: DefaultParameters{
+			Container: Container{
+				Port: 8000,
+				// For the source of this image, see `server/docker/llama-cpp-python/default`
+				ImageTemplate: "crufter/llama-cpp-python:default-1-latest",
+			},
 		},
-		Cuda: Container{
-			Port: 8000,
-			// For the source of this image, see `server/docker/llama-cpp-python/cuda`
-			Image:  "crufter/llama-cpp-python:cuda-12.5.0-latest",
-			Envars: []string{"NVIDIA_VISIBLE_DEVICES=all"},
+		Cuda: CudaParameters{
+			DefaultCudaVersion: "12.8.0",
+			Container: Container{
+				Port: 8000,
+				// For the source of this image, see `server/docker/llama-cpp-python/cuda`
+				ImageTemplate: "crufter/llama-cpp-python:cuda-$cudaVersion-latest",
+				Envars:        []string{"NVIDIA_VISIBLE_DEVICES=all"},
+			},
 		},
 	},
 	Types: []prompt.PromptType{
@@ -24,21 +29,27 @@ var PlatformLlamaCpp = Platform{
 	},
 }
 
-// ENVAR taken from here: https://github.com/AbdBarho/stable-diffusion-webui-docker/blob/master/docker-compose.yml
+// ENVAR(s) taken from here: https://github.com/AbdBarho/stable-diffusion-webui-docker/blob/master/docker-compose.yml
 var PlatformStableDiffusion = Platform{
 	Id: "stable-diffusion",
 	Architectures: Architectures{
-		Default: Container{
-			Port:   7860,
-			Image:  "crufter/stable-diffusion:default-1-latest",
-			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-			Keeps:  []string{},
+		Default: DefaultParameters{
+			Container: Container{
+				Port:          7860,
+				ImageTemplate: "crufter/stable-diffusion:default-1-latest",
+				Envars:        []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
+				Keeps:         []string{},
+			},
 		},
-		Cuda: Container{
-			Port:   7860,
-			Image:  "crufter/stable-diffusion:cuda-1-latest",
-			Envars: []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-			Keeps:  []string{},
+		Cuda: CudaParameters{
+			DefaultCudaVersion:  "12.6",
+			DefaultCudnnVersion: "9",
+			Container: Container{
+				Port:          7860,
+				ImageTemplate: "crufter/stable-diffusion:cuda-$cudaVersion-latest",
+				Envars:        []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
+				Keeps:         []string{},
+			},
 		},
 	},
 	Types: []prompt.PromptType{

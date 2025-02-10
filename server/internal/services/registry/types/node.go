@@ -66,6 +66,7 @@ type GPU struct {
 	GPUUtilization   float64   `json:"gpuUtilization"`
 	ComputeMode      string    `json:"computeMode"`
 	ProcessDetails   []Process `json:"processDetails,omitempty"`
+	CudaVersion      string    `json:"cudaVersion,omitempty"`
 }
 
 type Process struct {

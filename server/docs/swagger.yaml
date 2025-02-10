@@ -902,9 +902,9 @@ definitions:
   model_svc.Architectures:
     properties:
       cuda:
-        $ref: '#/definitions/model_svc.Container'
+        $ref: '#/definitions/model_svc.CudaParameters'
       default:
-        $ref: '#/definitions/model_svc.Container'
+        $ref: '#/definitions/model_svc.DefaultParameters'
     type: object
   model_svc.Container:
     properties:
@@ -913,7 +913,7 @@ definitions:
         items:
           type: string
         type: array
-      image:
+      imageTemplate:
         type: string
       keeps:
         description: Keeps are paths in the container that should be persisted across
@@ -924,6 +924,20 @@ definitions:
       port:
         description: Port is the internal port of the Container
         type: integer
+    type: object
+  model_svc.CudaParameters:
+    properties:
+      container:
+        $ref: '#/definitions/model_svc.Container'
+      defaultCudaVersion:
+        type: string
+      defaultCudnnVersion:
+        type: string
+    type: object
+  model_svc.DefaultParameters:
+    properties:
+      container:
+        $ref: '#/definitions/model_svc.Container'
     type: object
   model_svc.ErrorResponse:
     properties:
@@ -1609,6 +1623,8 @@ definitions:
       busId:
         type: string
       computeMode:
+        type: string
+      cudaVersion:
         type: string
       gpuUtilization:
         type: number

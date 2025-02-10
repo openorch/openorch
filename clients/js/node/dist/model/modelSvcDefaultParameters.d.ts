@@ -9,25 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RegistrySvcProcess } from './registrySvcProcess';
-export declare class RegistrySvcGPU {
-    'busId'?: string;
-    'computeMode'?: string;
-    'cudaVersion'?: string;
-    'gpuUtilization'?: number;
-    /**
-    * Id Node.URL + IntraNodeId
-    */
-    'id'?: string;
-    'intraNodeId'?: number;
-    'memoryTotal'?: number;
-    'memoryUsage'?: number;
-    'name'?: string;
-    'performanceState'?: string;
-    'powerCap'?: number;
-    'powerUsage'?: number;
-    'processDetails'?: Array<RegistrySvcProcess>;
-    'temperature'?: number;
+import { ModelSvcContainer } from './modelSvcContainer';
+export declare class ModelSvcDefaultParameters {
+    'container'?: ModelSvcContainer;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

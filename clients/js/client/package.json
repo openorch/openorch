@@ -1,6 +1,6 @@
 {
   "name": "@openorch/client",
-  "version": "0.3.0-rc.16",
+  "version": "0.3.0-rc.17",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

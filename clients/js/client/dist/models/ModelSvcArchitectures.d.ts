@@ -9,7 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { ModelSvcContainer } from './ModelSvcContainer';
+import type { ModelSvcCudaParameters } from './ModelSvcCudaParameters';
+import type { ModelSvcDefaultParameters } from './ModelSvcDefaultParameters';
 /**
  *
  * @export
@@ -18,16 +19,16 @@ import type { ModelSvcContainer } from './ModelSvcContainer';
 export interface ModelSvcArchitectures {
     /**
      *
-     * @type {ModelSvcContainer}
+     * @type {ModelSvcCudaParameters}
      * @memberof ModelSvcArchitectures
      */
-    cuda?: ModelSvcContainer;
+    cuda?: ModelSvcCudaParameters;
     /**
      *
-     * @type {ModelSvcContainer}
+     * @type {ModelSvcDefaultParameters}
      * @memberof ModelSvcArchitectures
      */
-    _default?: ModelSvcContainer;
+    _default?: ModelSvcDefaultParameters;
 }
 /**
  * Check if a given object implements the ModelSvcArchitectures interface.

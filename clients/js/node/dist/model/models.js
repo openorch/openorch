@@ -41,12 +41,12 @@ export * from './dockerSvcRunContainerRequest';
 export * from './dockerSvcRunContainerResponse';
 export * from './dockerSvcRunInfo';
 export * from './dockerSvcStopContainerRequest';
+export * from './dynamicSvcCreateObjectFields';
 export * from './dynamicSvcCreateObjectRequest';
 export * from './dynamicSvcCreateObjectResponse';
 export * from './dynamicSvcDeleteObjectRequest';
 export * from './dynamicSvcErrorResponse';
 export * from './dynamicSvcObject';
-export * from './dynamicSvcObjectCreateFields';
 export * from './dynamicSvcQueryRequest';
 export * from './dynamicSvcQueryResponse';
 export * from './dynamicSvcUpdateObjectRequest';
@@ -70,6 +70,8 @@ export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
 export * from './modelSvcArchitectures';
 export * from './modelSvcContainer';
+export * from './modelSvcCudaParameters';
+export * from './modelSvcDefaultParameters';
 export * from './modelSvcErrorResponse';
 export * from './modelSvcGetModelResponse';
 export * from './modelSvcListModelsResponse';
@@ -222,12 +224,12 @@ import { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest';
 import { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse';
 import { DockerSvcRunInfo } from './dockerSvcRunInfo';
 import { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest';
+import { DynamicSvcCreateObjectFields } from './dynamicSvcCreateObjectFields';
 import { DynamicSvcCreateObjectRequest } from './dynamicSvcCreateObjectRequest';
 import { DynamicSvcCreateObjectResponse } from './dynamicSvcCreateObjectResponse';
 import { DynamicSvcDeleteObjectRequest } from './dynamicSvcDeleteObjectRequest';
 import { DynamicSvcErrorResponse } from './dynamicSvcErrorResponse';
 import { DynamicSvcObject } from './dynamicSvcObject';
-import { DynamicSvcObjectCreateFields } from './dynamicSvcObjectCreateFields';
 import { DynamicSvcQueryRequest } from './dynamicSvcQueryRequest';
 import { DynamicSvcQueryResponse } from './dynamicSvcQueryResponse';
 import { DynamicSvcUpdateObjectRequest } from './dynamicSvcUpdateObjectRequest';
@@ -251,6 +253,8 @@ import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
 import { ModelSvcArchitectures } from './modelSvcArchitectures';
 import { ModelSvcContainer } from './modelSvcContainer';
+import { ModelSvcCudaParameters } from './modelSvcCudaParameters';
+import { ModelSvcDefaultParameters } from './modelSvcDefaultParameters';
 import { ModelSvcErrorResponse } from './modelSvcErrorResponse';
 import { ModelSvcGetModelResponse } from './modelSvcGetModelResponse';
 import { ModelSvcListModelsResponse } from './modelSvcListModelsResponse';
@@ -426,12 +430,12 @@ let typeMap = {
     "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
     "DockerSvcRunInfo": DockerSvcRunInfo,
     "DockerSvcStopContainerRequest": DockerSvcStopContainerRequest,
+    "DynamicSvcCreateObjectFields": DynamicSvcCreateObjectFields,
     "DynamicSvcCreateObjectRequest": DynamicSvcCreateObjectRequest,
     "DynamicSvcCreateObjectResponse": DynamicSvcCreateObjectResponse,
     "DynamicSvcDeleteObjectRequest": DynamicSvcDeleteObjectRequest,
     "DynamicSvcErrorResponse": DynamicSvcErrorResponse,
     "DynamicSvcObject": DynamicSvcObject,
-    "DynamicSvcObjectCreateFields": DynamicSvcObjectCreateFields,
     "DynamicSvcQueryRequest": DynamicSvcQueryRequest,
     "DynamicSvcQueryResponse": DynamicSvcQueryResponse,
     "DynamicSvcUpdateObjectRequest": DynamicSvcUpdateObjectRequest,
@@ -455,6 +459,8 @@ let typeMap = {
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
     "ModelSvcArchitectures": ModelSvcArchitectures,
     "ModelSvcContainer": ModelSvcContainer,
+    "ModelSvcCudaParameters": ModelSvcCudaParameters,
+    "ModelSvcDefaultParameters": ModelSvcDefaultParameters,
     "ModelSvcErrorResponse": ModelSvcErrorResponse,
     "ModelSvcGetModelResponse": ModelSvcGetModelResponse,
     "ModelSvcListModelsResponse": ModelSvcListModelsResponse,

@@ -16,6 +16,7 @@ import { RegistrySvcProcess } from './registrySvcProcess';
 export class RegistrySvcGPU {
     'busId'?: string;
     'computeMode'?: string;
+    'cudaVersion'?: string;
     'gpuUtilization'?: number;
     /**
     * Id Node.URL + IntraNodeId
@@ -42,6 +43,11 @@ export class RegistrySvcGPU {
         {
             "name": "computeMode",
             "baseName": "computeMode",
+            "type": "string"
+        },
+        {
+            "name": "cudaVersion",
+            "baseName": "cudaVersion",
             "type": "string"
         },
         {

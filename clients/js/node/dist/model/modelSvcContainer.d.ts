@@ -14,7 +14,7 @@ export declare class ModelSvcContainer {
     * Envars passed to the container. eg.  \'DEVICES=all\'
     */
     'envars'?: Array<string>;
-    'image'?: string;
+    'imageTemplate'?: string;
     /**
     * Keeps are paths in the container that should be persisted across restarts.
     */

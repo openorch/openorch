@@ -89,27 +89,49 @@ func (ms *ModelService) startWithDocker(
 ) error {
 	launchOptions := &openapi.DockerSvcRunContainerOptions{}
 
-	image := platform.Architectures.Default.Image
-	port := platform.Architectures.Default.Port
-	launchOptions.Envs = platform.Architectures.Default.Envars
-	launchOptions.Keeps = platform.Architectures.Default.Keeps
+	image := platform.Architectures.Default.Container.ImageTemplate
+	port := platform.Architectures.Default.Container.Port
+	launchOptions.Envs = platform.Architectures.Default.Container.Envars
+	launchOptions.Keeps = platform.Architectures.Default.Container.Keeps
 	launchOptions.Assets = &model.Assets
 
 	switch ms.gpuPlatform {
 	case "cuda":
 		launchOptions.GpuEnabled = openapi.PtrBool(true)
 
-		if platform.Architectures.Cuda.Image != "" {
-			image = platform.Architectures.Cuda.Image
+		if platform.Architectures.Cuda.Container.ImageTemplate != "" {
+			cudaImageTemplate := platform.Architectures.Cuda.Container.ImageTemplate
+			// We need to resolve CUDA image templates like
+			// "crufter/llama-cpp-python:cuda-$cudaVersion-latest"
+			// to actual images here.
+			// To do this we need to find the CUDA version on the current machine.
+			node, err := ms.getNode()
+			if err != nil || node == nil {
+				// Error as unresolved image templates won't be usable
+				return errors.Wrap(err, "cannot resolve cuda image template")
+			}
+			if len(node.Gpus) == 0 {
+				return fmt.Errorf("cannot resolve cuda image template, no gpus")
+			}
+			gpu := node.Gpus[0]
+			if gpu.CudaVersion == nil {
+				return fmt.Errorf("cannot resolve cuda image template, no cuda version")
+			}
+
+			// Here we need to make sure that the CUDA version coming from the GPU
+			// like 12.2 is the same length as our image tags, which are 12.2.0.
+			cudaVersion := longCudaVersionFormat(*gpu.CudaVersion)
+
+			image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
 		}
-		if platform.Architectures.Cuda.Port != 0 {
-			port = platform.Architectures.Cuda.Port
+		if platform.Architectures.Cuda.Container.Port != 0 {
+			port = platform.Architectures.Cuda.Container.Port
 		}
-		if len(platform.Architectures.Cuda.Envars) > 0 {
-			launchOptions.Envs = platform.Architectures.Cuda.Envars
+		if len(platform.Architectures.Cuda.Container.Envars) > 0 {
+			launchOptions.Envs = platform.Architectures.Cuda.Container.Envars
 		}
-		if len(platform.Architectures.Cuda.Keeps) > 0 {
-			launchOptions.Keeps = platform.Architectures.Cuda.Keeps
+		if len(platform.Architectures.Cuda.Container.Keeps) > 0 {
+			launchOptions.Keeps = platform.Architectures.Cuda.Container.Keeps
 		}
 	}
 
@@ -295,4 +317,17 @@ func pingAddress(host string, port int) error {
 	}
 	defer conn.Close()
 	return nil
+}
+
+func longCudaVersionFormat(gpuCudaVersion string) string {
+	// Split the incoming CUDA version by '.' to check the length
+	parts := strings.Split(gpuCudaVersion, ".")
+
+	// If it's already in the correct length (3 parts), return as is
+	if len(parts) == 3 {
+		return gpuCudaVersion + ".0"
+	}
+
+	// If it's not in the correct format, ensure it matches by appending ".0"
+	return gpuCudaVersion + ".0"
 }

@@ -11,7 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DynamicSvcObjectCreateFieldsFromJSON, DynamicSvcObjectCreateFieldsToJSON, } from './DynamicSvcObjectCreateFields';
+import { DynamicSvcCreateObjectFieldsFromJSON, DynamicSvcCreateObjectFieldsToJSON, } from './DynamicSvcCreateObjectFields';
 /**
  * Check if a given object implements the DynamicSvcUpsertObjectRequest interface.
  */
@@ -26,7 +26,7 @@ export function DynamicSvcUpsertObjectRequestFromJSONTyped(json, ignoreDiscrimin
         return json;
     }
     return {
-        'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFieldsFromJSON(json['object']),
+        'object': json['object'] == null ? undefined : DynamicSvcCreateObjectFieldsFromJSON(json['object']),
     };
 }
 export function DynamicSvcUpsertObjectRequestToJSON(json) {
@@ -37,6 +37,6 @@ export function DynamicSvcUpsertObjectRequestToJSONTyped(value, ignoreDiscrimina
         return value;
     }
     return {
-        'object': DynamicSvcObjectCreateFieldsToJSON(value['object']),
+        'object': DynamicSvcCreateObjectFieldsToJSON(value['object']),
     };
 }

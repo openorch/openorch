@@ -27,6 +27,11 @@ RegistrySvcGPU.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "cudaVersion",
+        "baseName": "cudaVersion",
+        "type": "string"
+    },
+    {
         "name": "gpuUtilization",
         "baseName": "gpuUtilization",
         "type": "number"

@@ -12,19 +12,19 @@
  * Do not edit the class manually.
  */
 /**
- * Check if a given object implements the DynamicSvcObjectCreateFields interface.
+ * Check if a given object implements the DynamicSvcCreateObjectFields interface.
  */
-export function instanceOfDynamicSvcObjectCreateFields(value) {
+export function instanceOfDynamicSvcCreateObjectFields(value) {
     if (!('data' in value) || value['data'] === undefined)
         return false;
     if (!('table' in value) || value['table'] === undefined)
         return false;
     return true;
 }
-export function DynamicSvcObjectCreateFieldsFromJSON(json) {
-    return DynamicSvcObjectCreateFieldsFromJSONTyped(json, false);
+export function DynamicSvcCreateObjectFieldsFromJSON(json) {
+    return DynamicSvcCreateObjectFieldsFromJSONTyped(json, false);
 }
-export function DynamicSvcObjectCreateFieldsFromJSONTyped(json, ignoreDiscriminator) {
+export function DynamicSvcCreateObjectFieldsFromJSONTyped(json, ignoreDiscriminator) {
     if (json == null) {
         return json;
     }
@@ -38,10 +38,10 @@ export function DynamicSvcObjectCreateFieldsFromJSONTyped(json, ignoreDiscrimina
         'writers': json['writers'] == null ? undefined : json['writers'],
     };
 }
-export function DynamicSvcObjectCreateFieldsToJSON(json) {
-    return DynamicSvcObjectCreateFieldsToJSONTyped(json, false);
+export function DynamicSvcCreateObjectFieldsToJSON(json) {
+    return DynamicSvcCreateObjectFieldsToJSONTyped(json, false);
 }
-export function DynamicSvcObjectCreateFieldsToJSONTyped(value, ignoreDiscriminator = false) {
+export function DynamicSvcCreateObjectFieldsToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

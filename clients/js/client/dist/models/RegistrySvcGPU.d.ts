@@ -30,6 +30,12 @@ export interface RegistrySvcGPU {
     computeMode?: string;
     /**
      *
+     * @type {string}
+     * @memberof RegistrySvcGPU
+     */
+    cudaVersion?: string;
+    /**
+     *
      * @type {number}
      * @memberof RegistrySvcGPU
      */

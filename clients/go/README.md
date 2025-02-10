@@ -248,6 +248,8 @@ Class | Method | HTTP request | Description
  - [FirehoseSvcEventPublishRequest](docs/FirehoseSvcEventPublishRequest.md)
  - [ModelSvcArchitectures](docs/ModelSvcArchitectures.md)
  - [ModelSvcContainer](docs/ModelSvcContainer.md)
+ - [ModelSvcCudaParameters](docs/ModelSvcCudaParameters.md)
+ - [ModelSvcDefaultParameters](docs/ModelSvcDefaultParameters.md)
  - [ModelSvcErrorResponse](docs/ModelSvcErrorResponse.md)
  - [ModelSvcGetModelResponse](docs/ModelSvcGetModelResponse.md)
  - [ModelSvcListModelsResponse](docs/ModelSvcListModelsResponse.md)

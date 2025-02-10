@@ -11,7 +11,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ModelSvcContainerFromJSON, ModelSvcContainerToJSON, } from './ModelSvcContainer';
+import { ModelSvcCudaParametersFromJSON, ModelSvcCudaParametersToJSON, } from './ModelSvcCudaParameters';
+import { ModelSvcDefaultParametersFromJSON, ModelSvcDefaultParametersToJSON, } from './ModelSvcDefaultParameters';
 /**
  * Check if a given object implements the ModelSvcArchitectures interface.
  */
@@ -26,8 +27,8 @@ export function ModelSvcArchitecturesFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'cuda': json['cuda'] == null ? undefined : ModelSvcContainerFromJSON(json['cuda']),
-        '_default': json['default'] == null ? undefined : ModelSvcContainerFromJSON(json['default']),
+        'cuda': json['cuda'] == null ? undefined : ModelSvcCudaParametersFromJSON(json['cuda']),
+        '_default': json['default'] == null ? undefined : ModelSvcDefaultParametersFromJSON(json['default']),
     };
 }
 export function ModelSvcArchitecturesToJSON(json) {
@@ -38,7 +39,7 @@ export function ModelSvcArchitecturesToJSONTyped(value, ignoreDiscriminator = fa
         return value;
     }
     return {
-        'cuda': ModelSvcContainerToJSON(value['cuda']),
-        'default': ModelSvcContainerToJSON(value['_default']),
+        'cuda': ModelSvcCudaParametersToJSON(value['cuda']),
+        'default': ModelSvcDefaultParametersToJSON(value['_default']),
     };
 }

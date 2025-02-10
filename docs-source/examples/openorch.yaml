@@ -531,10 +531,58 @@ definitions:
     type: object
   docker_svc.StopContainerResponse:
     type: object
+  dynamic_svc.CreateObjectFields:
+    properties:
+      authors:
+        description: |-
+          Authors is a list of user ID and organization ID who created the object.
+          If an organization ID is not provided, the currently active organization will
+          be queried from the User Svc.
+        example:
+        - '["usr_12345"'
+        - ' "org_67890"]'
+        items:
+          type: string
+        type: array
+      data:
+        additionalProperties: true
+        type: object
+      deleters:
+        description: |-
+          Deleters is a list of user IDs and role IDs that can delete the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      readers:
+        description: |-
+          Readers is a list of user IDs and role IDs that can read the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      table:
+        type: string
+      writers:
+        description: |-
+          Writers is a list of user IDs and role IDs that can write the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+    required:
+    - data
+    - table
+    type: object
   dynamic_svc.CreateObjectRequest:
     properties:
       object:
-        $ref: '#/definitions/dynamic_svc.ObjectCreateFields'
+        $ref: '#/definitions/dynamic_svc.CreateObjectFields'
     type: object
   dynamic_svc.CreateObjectResponse:
     properties:
@@ -565,7 +613,8 @@ definitions:
           If an organization ID is not provided, the currently active organization will
           be queried from the User Svc.
         example:
-        - '['
+        - '["usr_12345"'
+        - ' "org_67890"]'
         items:
           type: string
         type: array
@@ -595,53 +644,6 @@ definitions:
       table:
         type: string
       updatedAt:
-        type: string
-      writers:
-        description: |-
-          Writers is a list of user IDs and role IDs that can write the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-    required:
-    - data
-    - table
-    type: object
-  dynamic_svc.ObjectCreateFields:
-    properties:
-      authors:
-        description: |-
-          Authors is a list of user ID and organization ID who created the object.
-          If an organization ID is not provided, the currently active organization will
-          be queried from the User Svc.
-        example:
-        - '['
-        items:
-          type: string
-        type: array
-      data:
-        additionalProperties: true
-        type: object
-      deleters:
-        description: |-
-          Deleters is a list of user IDs and role IDs that can delete the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      id:
-        type: string
-      readers:
-        description: |-
-          Readers is a list of user IDs and role IDs that can read the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      table:
         type: string
       writers:
         description: |-
@@ -689,7 +691,7 @@ definitions:
   dynamic_svc.UpsertObjectRequest:
     properties:
       object:
-        $ref: '#/definitions/dynamic_svc.ObjectCreateFields'
+        $ref: '#/definitions/dynamic_svc.CreateObjectFields'
     type: object
   dynamic_svc.UpsertObjectResponse:
     properties:
@@ -900,9 +902,9 @@ definitions:
   model_svc.Architectures:
     properties:
       cuda:
-        $ref: '#/definitions/model_svc.Container'
+        $ref: '#/definitions/model_svc.CudaParameters'
       default:
-        $ref: '#/definitions/model_svc.Container'
+        $ref: '#/definitions/model_svc.DefaultParameters'
     type: object
   model_svc.Container:
     properties:
@@ -911,7 +913,7 @@ definitions:
         items:
           type: string
         type: array
-      image:
+      imageTemplate:
         type: string
       keeps:
         description: Keeps are paths in the container that should be persisted across
@@ -922,6 +924,20 @@ definitions:
       port:
         description: Port is the internal port of the Container
         type: integer
+    type: object
+  model_svc.CudaParameters:
+    properties:
+      container:
+        $ref: '#/definitions/model_svc.Container'
+      defaultCudaVersion:
+        type: string
+      defaultCudnnVersion:
+        type: string
+    type: object
+  model_svc.DefaultParameters:
+    properties:
+      container:
+        $ref: '#/definitions/model_svc.Container'
     type: object
   model_svc.ErrorResponse:
     properties:
@@ -1607,6 +1623,8 @@ definitions:
       busId:
         type: string
       computeMode:
+        type: string
+      cudaVersion:
         type: string
       gpuUtilization:
         type: number

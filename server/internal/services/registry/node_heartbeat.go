@@ -20,6 +20,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"regexp"
 	"strconv"
 	"strings"
 	"syscall"
@@ -102,6 +103,15 @@ func (ns *RegistryService) heartbeatCycle() error {
 		if err != nil {
 			logger.Warn("Failed to parse smi output", slog.Any("error", err))
 		} else {
+			// add the CudaVersion from an other command to each GPU
+			queryOutp, err := ns.getNvidiaSmiQueryOutput()
+			if err == nil {
+				cudaVersion, _ := ns.ParseNvidiaSmiQueryOutput(queryOutp)
+				for i := range gpus {
+					gpus[i].CudaVersion = cudaVersion
+				}
+			}
+
 			node.GPUs = gpus
 		}
 	}
@@ -112,6 +122,17 @@ func (ns *RegistryService) heartbeatCycle() error {
 	}
 
 	return nil
+}
+
+func (ns *RegistryService) ParseNvidiaSmiQueryOutput(output string) (cudaVersion string, err error) {
+	rgx := regexp.MustCompile(`CUDA Version\s*:\s*([0-9]+\.[0-9]+)`) // Matches 'CUDA Version : 12.2'
+	matches := rgx.FindStringSubmatch(output)
+
+	if len(matches) < 2 {
+		return "", errors.New("CUDA version not found in nvidia-smi output")
+	}
+
+	return strings.TrimSpace(matches[1]), nil
 }
 
 func (ns *RegistryService) ParseNvidiaSmiOutput(
@@ -188,6 +209,21 @@ func (ns *RegistryService) getNvidiaSmiOutput() (string, error) {
 		return "", errors.Wrap(
 			err,
 			fmt.Sprintf("executing nvidia-smi command: %v", string(output)),
+		)
+	}
+	return string(output), nil
+}
+
+func (ns *RegistryService) getNvidiaSmiQueryOutput() (string, error) {
+	cmd := exec.Command(
+		"nvidia-smi",
+		"--query",
+	)
+	output, err := cmd.Output()
+	if err != nil {
+		return "", errors.Wrap(
+			err,
+			fmt.Sprintf("executing nvidia-smi --query command: %v", string(output)),
 		)
 	}
 	return string(output), nil

@@ -19,6 +19,6 @@ DynamicSvcUpsertObjectRequest.attributeTypeMap = [
     {
         "name": "object",
         "baseName": "object",
-        "type": "DynamicSvcObjectCreateFields"
+        "type": "DynamicSvcCreateObjectFields"
     }
 ];

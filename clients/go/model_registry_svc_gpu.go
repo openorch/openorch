@@ -22,6 +22,7 @@ var _ MappedNullable = &RegistrySvcGPU{}
 type RegistrySvcGPU struct {
 	BusId *string `json:"busId,omitempty"`
 	ComputeMode *string `json:"computeMode,omitempty"`
+	CudaVersion *string `json:"cudaVersion,omitempty"`
 	GpuUtilization *float32 `json:"gpuUtilization,omitempty"`
 	// Id Node.URL + IntraNodeId
 	Id *string `json:"id,omitempty"`
@@ -115,6 +116,38 @@ func (o *RegistrySvcGPU) HasComputeMode() bool {
 // SetComputeMode gets a reference to the given string and assigns it to the ComputeMode field.
 func (o *RegistrySvcGPU) SetComputeMode(v string) {
 	o.ComputeMode = &v
+}
+
+// GetCudaVersion returns the CudaVersion field value if set, zero value otherwise.
+func (o *RegistrySvcGPU) GetCudaVersion() string {
+	if o == nil || IsNil(o.CudaVersion) {
+		var ret string
+		return ret
+	}
+	return *o.CudaVersion
+}
+
+// GetCudaVersionOk returns a tuple with the CudaVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcGPU) GetCudaVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.CudaVersion) {
+		return nil, false
+	}
+	return o.CudaVersion, true
+}
+
+// HasCudaVersion returns a boolean if a field has been set.
+func (o *RegistrySvcGPU) HasCudaVersion() bool {
+	if o != nil && !IsNil(o.CudaVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetCudaVersion gets a reference to the given string and assigns it to the CudaVersion field.
+func (o *RegistrySvcGPU) SetCudaVersion(v string) {
+	o.CudaVersion = &v
 }
 
 // GetGpuUtilization returns the GpuUtilization field value if set, zero value otherwise.
@@ -484,6 +517,9 @@ func (o RegistrySvcGPU) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ComputeMode) {
 		toSerialize["computeMode"] = o.ComputeMode
+	}
+	if !IsNil(o.CudaVersion) {
+		toSerialize["cudaVersion"] = o.CudaVersion
 	}
 	if !IsNil(o.GpuUtilization) {
 		toSerialize["gpuUtilization"] = o.GpuUtilization
