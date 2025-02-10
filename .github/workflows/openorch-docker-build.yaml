@@ -63,4 +63,4 @@ jobs:
             -t ${{ env.IMAGE_TAG }} .
 
           docker push ${{ env.IMAGE_TAG }}
-        working-directory: ./server/docker/openorch
+        working-directory: ${{ github.workspace }}

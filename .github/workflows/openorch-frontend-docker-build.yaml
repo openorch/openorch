@@ -1,4 +1,4 @@
-name: "Frontend container build"
+name: "OpenOrch frontend docker build"
 
 on:
   push:
