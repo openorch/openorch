@@ -46,6 +46,7 @@ func (ns *RegistryService) NodeSelf(
 		Body(openapi.UserSvcIsAuthorizedRequest{
 			GrantedSlugs: []string{
 				"file-svc",
+				"model-svc",
 			},
 		}).
 		Execute()
