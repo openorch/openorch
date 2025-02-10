@@ -13,13 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { ModelSvcContainer } from './ModelSvcContainer';
+import type { ModelSvcCudaParameters } from './ModelSvcCudaParameters';
 import {
-    ModelSvcContainerFromJSON,
-    ModelSvcContainerFromJSONTyped,
-    ModelSvcContainerToJSON,
-    ModelSvcContainerToJSONTyped,
-} from './ModelSvcContainer';
+    ModelSvcCudaParametersFromJSON,
+    ModelSvcCudaParametersFromJSONTyped,
+    ModelSvcCudaParametersToJSON,
+    ModelSvcCudaParametersToJSONTyped,
+} from './ModelSvcCudaParameters';
+import type { ModelSvcDefaultParameters } from './ModelSvcDefaultParameters';
+import {
+    ModelSvcDefaultParametersFromJSON,
+    ModelSvcDefaultParametersFromJSONTyped,
+    ModelSvcDefaultParametersToJSON,
+    ModelSvcDefaultParametersToJSONTyped,
+} from './ModelSvcDefaultParameters';
 
 /**
  * 
@@ -29,16 +36,16 @@ import {
 export interface ModelSvcArchitectures {
     /**
      * 
-     * @type {ModelSvcContainer}
+     * @type {ModelSvcCudaParameters}
      * @memberof ModelSvcArchitectures
      */
-    cuda?: ModelSvcContainer;
+    cuda?: ModelSvcCudaParameters;
     /**
      * 
-     * @type {ModelSvcContainer}
+     * @type {ModelSvcDefaultParameters}
      * @memberof ModelSvcArchitectures
      */
-    _default?: ModelSvcContainer;
+    _default?: ModelSvcDefaultParameters;
 }
 
 /**
@@ -58,8 +65,8 @@ export function ModelSvcArchitecturesFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'cuda': json['cuda'] == null ? undefined : ModelSvcContainerFromJSON(json['cuda']),
-        '_default': json['default'] == null ? undefined : ModelSvcContainerFromJSON(json['default']),
+        'cuda': json['cuda'] == null ? undefined : ModelSvcCudaParametersFromJSON(json['cuda']),
+        '_default': json['default'] == null ? undefined : ModelSvcDefaultParametersFromJSON(json['default']),
     };
 }
 
@@ -74,8 +81,8 @@ export function ModelSvcArchitecturesToJSONTyped(value?: ModelSvcArchitectures |
 
     return {
         
-        'cuda': ModelSvcContainerToJSON(value['cuda']),
-        'default': ModelSvcContainerToJSON(value['_default']),
+        'cuda': ModelSvcCudaParametersToJSON(value['cuda']),
+        'default': ModelSvcDefaultParametersToJSON(value['_default']),
     };
 }
 

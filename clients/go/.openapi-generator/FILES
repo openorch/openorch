@@ -100,6 +100,8 @@ docs/FirehoseSvcEventPublishRequest.md
 docs/ModelSvcAPI.md
 docs/ModelSvcArchitectures.md
 docs/ModelSvcContainer.md
+docs/ModelSvcCudaParameters.md
+docs/ModelSvcDefaultParameters.md
 docs/ModelSvcErrorResponse.md
 docs/ModelSvcGetModelResponse.md
 docs/ModelSvcListModelsResponse.md
@@ -290,6 +292,8 @@ model_firehose_svc_event.go
 model_firehose_svc_event_publish_request.go
 model_model_svc_architectures.go
 model_model_svc_container.go
+model_model_svc_cuda_parameters.go
+model_model_svc_default_parameters.go
 model_model_svc_error_response.go
 model_model_svc_get_model_response.go
 model_model_svc_list_models_response.go

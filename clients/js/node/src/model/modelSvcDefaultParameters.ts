@@ -11,22 +11,22 @@
  */
 
 import { RequestFile } from './models';
-import { DynamicSvcCreateObjectFields } from './dynamicSvcCreateObjectFields';
+import { ModelSvcContainer } from './modelSvcContainer';
 
-export class DynamicSvcCreateObjectRequest {
-    'object'?: DynamicSvcCreateObjectFields;
+export class ModelSvcDefaultParameters {
+    'container'?: ModelSvcContainer;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "DynamicSvcCreateObjectFields"
+            "name": "container",
+            "baseName": "container",
+            "type": "ModelSvcContainer"
         }    ];
 
     static getAttributeTypeMap() {
-        return DynamicSvcCreateObjectRequest.attributeTypeMap;
+        return ModelSvcDefaultParameters.attributeTypeMap;
     }
 }
 

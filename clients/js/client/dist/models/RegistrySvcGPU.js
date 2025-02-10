@@ -28,6 +28,7 @@ export function RegistrySvcGPUFromJSONTyped(json, ignoreDiscriminator) {
     return {
         'busId': json['busId'] == null ? undefined : json['busId'],
         'computeMode': json['computeMode'] == null ? undefined : json['computeMode'],
+        'cudaVersion': json['cudaVersion'] == null ? undefined : json['cudaVersion'],
         'gpuUtilization': json['gpuUtilization'] == null ? undefined : json['gpuUtilization'],
         'id': json['id'] == null ? undefined : json['id'],
         'intraNodeId': json['intraNodeId'] == null ? undefined : json['intraNodeId'],
@@ -51,6 +52,7 @@ export function RegistrySvcGPUToJSONTyped(value, ignoreDiscriminator = false) {
     return {
         'busId': value['busId'],
         'computeMode': value['computeMode'],
+        'cudaVersion': value['cudaVersion'],
         'gpuUtilization': value['gpuUtilization'],
         'id': value['id'],
         'intraNodeId': value['intraNodeId'],

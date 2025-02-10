@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class DynamicSvcObjectCreateFields {
+export class DynamicSvcCreateObjectFields {
     static getAttributeTypeMap() {
-        return DynamicSvcObjectCreateFields.attributeTypeMap;
+        return DynamicSvcCreateObjectFields.attributeTypeMap;
     }
 }
-DynamicSvcObjectCreateFields.discriminator = undefined;
-DynamicSvcObjectCreateFields.attributeTypeMap = [
+DynamicSvcCreateObjectFields.discriminator = undefined;
+DynamicSvcCreateObjectFields.attributeTypeMap = [
     {
         "name": "authors",
         "baseName": "authors",

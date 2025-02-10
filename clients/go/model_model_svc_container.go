@@ -22,7 +22,7 @@ var _ MappedNullable = &ModelSvcContainer{}
 type ModelSvcContainer struct {
 	// Envars passed to the container. eg.  'DEVICES=all'
 	Envars []string `json:"envars,omitempty"`
-	Image *string `json:"image,omitempty"`
+	ImageTemplate *string `json:"imageTemplate,omitempty"`
 	// Keeps are paths in the container that should be persisted across restarts.
 	Keeps []string `json:"keeps,omitempty"`
 	// Port is the internal port of the Container
@@ -78,36 +78,36 @@ func (o *ModelSvcContainer) SetEnvars(v []string) {
 	o.Envars = v
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
-func (o *ModelSvcContainer) GetImage() string {
-	if o == nil || IsNil(o.Image) {
+// GetImageTemplate returns the ImageTemplate field value if set, zero value otherwise.
+func (o *ModelSvcContainer) GetImageTemplate() string {
+	if o == nil || IsNil(o.ImageTemplate) {
 		var ret string
 		return ret
 	}
-	return *o.Image
+	return *o.ImageTemplate
 }
 
-// GetImageOk returns a tuple with the Image field value if set, nil otherwise
+// GetImageTemplateOk returns a tuple with the ImageTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcContainer) GetImageOk() (*string, bool) {
-	if o == nil || IsNil(o.Image) {
+func (o *ModelSvcContainer) GetImageTemplateOk() (*string, bool) {
+	if o == nil || IsNil(o.ImageTemplate) {
 		return nil, false
 	}
-	return o.Image, true
+	return o.ImageTemplate, true
 }
 
-// HasImage returns a boolean if a field has been set.
-func (o *ModelSvcContainer) HasImage() bool {
-	if o != nil && !IsNil(o.Image) {
+// HasImageTemplate returns a boolean if a field has been set.
+func (o *ModelSvcContainer) HasImageTemplate() bool {
+	if o != nil && !IsNil(o.ImageTemplate) {
 		return true
 	}
 
 	return false
 }
 
-// SetImage gets a reference to the given string and assigns it to the Image field.
-func (o *ModelSvcContainer) SetImage(v string) {
-	o.Image = &v
+// SetImageTemplate gets a reference to the given string and assigns it to the ImageTemplate field.
+func (o *ModelSvcContainer) SetImageTemplate(v string) {
+	o.ImageTemplate = &v
 }
 
 // GetKeeps returns the Keeps field value if set, zero value otherwise.
@@ -187,8 +187,8 @@ func (o ModelSvcContainer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Envars) {
 		toSerialize["envars"] = o.Envars
 	}
-	if !IsNil(o.Image) {
-		toSerialize["image"] = o.Image
+	if !IsNil(o.ImageTemplate) {
+		toSerialize["imageTemplate"] = o.ImageTemplate
 	}
 	if !IsNil(o.Keeps) {
 		toSerialize["keeps"] = o.Keeps

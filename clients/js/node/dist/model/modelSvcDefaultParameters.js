@@ -9,21 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class ModelSvcArchitectures {
+export class ModelSvcDefaultParameters {
     static getAttributeTypeMap() {
-        return ModelSvcArchitectures.attributeTypeMap;
+        return ModelSvcDefaultParameters.attributeTypeMap;
     }
 }
-ModelSvcArchitectures.discriminator = undefined;
-ModelSvcArchitectures.attributeTypeMap = [
+ModelSvcDefaultParameters.discriminator = undefined;
+ModelSvcDefaultParameters.attributeTypeMap = [
     {
-        "name": "cuda",
-        "baseName": "cuda",
-        "type": "ModelSvcCudaParameters"
-    },
-    {
-        "name": "_default",
-        "baseName": "default",
-        "type": "ModelSvcDefaultParameters"
+        "name": "container",
+        "baseName": "container",
+        "type": "ModelSvcContainer"
     }
 ];

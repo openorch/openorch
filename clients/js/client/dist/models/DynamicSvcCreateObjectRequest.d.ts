@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { DynamicSvcObjectCreateFields } from './DynamicSvcObjectCreateFields';
+import type { DynamicSvcCreateObjectFields } from './DynamicSvcCreateObjectFields';
 /**
  *
  * @export
@@ -18,10 +18,10 @@ import type { DynamicSvcObjectCreateFields } from './DynamicSvcObjectCreateField
 export interface DynamicSvcCreateObjectRequest {
     /**
      *
-     * @type {DynamicSvcObjectCreateFields}
+     * @type {DynamicSvcCreateObjectFields}
      * @memberof DynamicSvcCreateObjectRequest
      */
-    object?: DynamicSvcObjectCreateFields;
+    object?: DynamicSvcCreateObjectFields;
 }
 /**
  * Check if a given object implements the DynamicSvcCreateObjectRequest interface.

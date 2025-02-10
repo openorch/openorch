@@ -17,7 +17,7 @@ export class ModelSvcContainer {
     * Envars passed to the container. eg.  \'DEVICES=all\'
     */
     'envars'?: Array<string>;
-    'image'?: string;
+    'imageTemplate'?: string;
     /**
     * Keeps are paths in the container that should be persisted across restarts.
     */
@@ -36,8 +36,8 @@ export class ModelSvcContainer {
             "type": "Array<string>"
         },
         {
-            "name": "image",
-            "baseName": "image",
+            "name": "imageTemplate",
+            "baseName": "imageTemplate",
             "type": "string"
         },
         {

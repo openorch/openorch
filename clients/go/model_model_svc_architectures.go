@@ -20,8 +20,8 @@ var _ MappedNullable = &ModelSvcArchitectures{}
 
 // ModelSvcArchitectures struct for ModelSvcArchitectures
 type ModelSvcArchitectures struct {
-	Cuda *ModelSvcContainer `json:"cuda,omitempty"`
-	Default *ModelSvcContainer `json:"default,omitempty"`
+	Cuda *ModelSvcCudaParameters `json:"cuda,omitempty"`
+	Default *ModelSvcDefaultParameters `json:"default,omitempty"`
 }
 
 // NewModelSvcArchitectures instantiates a new ModelSvcArchitectures object
@@ -42,9 +42,9 @@ func NewModelSvcArchitecturesWithDefaults() *ModelSvcArchitectures {
 }
 
 // GetCuda returns the Cuda field value if set, zero value otherwise.
-func (o *ModelSvcArchitectures) GetCuda() ModelSvcContainer {
+func (o *ModelSvcArchitectures) GetCuda() ModelSvcCudaParameters {
 	if o == nil || IsNil(o.Cuda) {
-		var ret ModelSvcContainer
+		var ret ModelSvcCudaParameters
 		return ret
 	}
 	return *o.Cuda
@@ -52,7 +52,7 @@ func (o *ModelSvcArchitectures) GetCuda() ModelSvcContainer {
 
 // GetCudaOk returns a tuple with the Cuda field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcArchitectures) GetCudaOk() (*ModelSvcContainer, bool) {
+func (o *ModelSvcArchitectures) GetCudaOk() (*ModelSvcCudaParameters, bool) {
 	if o == nil || IsNil(o.Cuda) {
 		return nil, false
 	}
@@ -68,15 +68,15 @@ func (o *ModelSvcArchitectures) HasCuda() bool {
 	return false
 }
 
-// SetCuda gets a reference to the given ModelSvcContainer and assigns it to the Cuda field.
-func (o *ModelSvcArchitectures) SetCuda(v ModelSvcContainer) {
+// SetCuda gets a reference to the given ModelSvcCudaParameters and assigns it to the Cuda field.
+func (o *ModelSvcArchitectures) SetCuda(v ModelSvcCudaParameters) {
 	o.Cuda = &v
 }
 
 // GetDefault returns the Default field value if set, zero value otherwise.
-func (o *ModelSvcArchitectures) GetDefault() ModelSvcContainer {
+func (o *ModelSvcArchitectures) GetDefault() ModelSvcDefaultParameters {
 	if o == nil || IsNil(o.Default) {
-		var ret ModelSvcContainer
+		var ret ModelSvcDefaultParameters
 		return ret
 	}
 	return *o.Default
@@ -84,7 +84,7 @@ func (o *ModelSvcArchitectures) GetDefault() ModelSvcContainer {
 
 // GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcArchitectures) GetDefaultOk() (*ModelSvcContainer, bool) {
+func (o *ModelSvcArchitectures) GetDefaultOk() (*ModelSvcDefaultParameters, bool) {
 	if o == nil || IsNil(o.Default) {
 		return nil, false
 	}
@@ -100,8 +100,8 @@ func (o *ModelSvcArchitectures) HasDefault() bool {
 	return false
 }
 
-// SetDefault gets a reference to the given ModelSvcContainer and assigns it to the Default field.
-func (o *ModelSvcArchitectures) SetDefault(v ModelSvcContainer) {
+// SetDefault gets a reference to the given ModelSvcDefaultParameters and assigns it to the Default field.
+func (o *ModelSvcArchitectures) SetDefault(v ModelSvcDefaultParameters) {
 	o.Default = &v
 }
 

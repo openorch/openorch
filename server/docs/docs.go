@@ -6370,10 +6370,10 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "cuda": {
-                    "$ref": "#/definitions/model_svc.Container"
+                    "$ref": "#/definitions/model_svc.CudaParameters"
                 },
                 "default": {
-                    "$ref": "#/definitions/model_svc.Container"
+                    "$ref": "#/definitions/model_svc.DefaultParameters"
                 }
             }
         },
@@ -6387,7 +6387,7 @@ const docTemplate = `{
                         "type": "string"
                     }
                 },
-                "image": {
+                "imageTemplate": {
                     "type": "string"
                 },
                 "keeps": {
@@ -6400,6 +6400,28 @@ const docTemplate = `{
                 "port": {
                     "description": "Port is the internal port of the Container",
                     "type": "integer"
+                }
+            }
+        },
+        "model_svc.CudaParameters": {
+            "type": "object",
+            "properties": {
+                "container": {
+                    "$ref": "#/definitions/model_svc.Container"
+                },
+                "defaultCudaVersion": {
+                    "type": "string"
+                },
+                "defaultCudnnVersion": {
+                    "type": "string"
+                }
+            }
+        },
+        "model_svc.DefaultParameters": {
+            "type": "object",
+            "properties": {
+                "container": {
+                    "$ref": "#/definitions/model_svc.Container"
                 }
             }
         },
@@ -7325,6 +7347,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "computeMode": {
+                    "type": "string"
+                },
+                "cudaVersion": {
                     "type": "string"
                 },
                 "gpuUtilization": {

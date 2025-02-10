@@ -22,8 +22,8 @@ ModelSvcContainer.attributeTypeMap = [
         "type": "Array<string>"
     },
     {
-        "name": "image",
-        "baseName": "image",
+        "name": "imageTemplate",
+        "baseName": "imageTemplate",
         "type": "string"
     },
     {

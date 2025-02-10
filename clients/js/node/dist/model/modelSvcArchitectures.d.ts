@@ -9,10 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ModelSvcContainer } from './modelSvcContainer';
+import { ModelSvcCudaParameters } from './modelSvcCudaParameters';
+import { ModelSvcDefaultParameters } from './modelSvcDefaultParameters';
 export declare class ModelSvcArchitectures {
-    'cuda'?: ModelSvcContainer;
-    '_default'?: ModelSvcContainer;
+    'cuda'?: ModelSvcCudaParameters;
+    '_default'?: ModelSvcDefaultParameters;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

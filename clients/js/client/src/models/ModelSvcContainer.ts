@@ -31,7 +31,7 @@ export interface ModelSvcContainer {
      * @type {string}
      * @memberof ModelSvcContainer
      */
-    image?: string;
+    imageTemplate?: string;
     /**
      * Keeps are paths in the container that should be persisted across restarts.
      * @type {Array<string>}
@@ -64,7 +64,7 @@ export function ModelSvcContainerFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'envars': json['envars'] == null ? undefined : json['envars'],
-        'image': json['image'] == null ? undefined : json['image'],
+        'imageTemplate': json['imageTemplate'] == null ? undefined : json['imageTemplate'],
         'keeps': json['keeps'] == null ? undefined : json['keeps'],
         'port': json['port'] == null ? undefined : json['port'],
     };
@@ -82,7 +82,7 @@ export function ModelSvcContainerToJSONTyped(value?: ModelSvcContainer | null, i
     return {
         
         'envars': value['envars'],
-        'image': value['image'],
+        'imageTemplate': value['imageTemplate'],
         'keeps': value['keeps'],
         'port': value['port'],
     };

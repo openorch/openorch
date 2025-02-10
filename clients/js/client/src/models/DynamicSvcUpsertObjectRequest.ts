@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { DynamicSvcObjectCreateFields } from './DynamicSvcObjectCreateFields';
+import type { DynamicSvcCreateObjectFields } from './DynamicSvcCreateObjectFields';
 import {
-    DynamicSvcObjectCreateFieldsFromJSON,
-    DynamicSvcObjectCreateFieldsFromJSONTyped,
-    DynamicSvcObjectCreateFieldsToJSON,
-    DynamicSvcObjectCreateFieldsToJSONTyped,
-} from './DynamicSvcObjectCreateFields';
+    DynamicSvcCreateObjectFieldsFromJSON,
+    DynamicSvcCreateObjectFieldsFromJSONTyped,
+    DynamicSvcCreateObjectFieldsToJSON,
+    DynamicSvcCreateObjectFieldsToJSONTyped,
+} from './DynamicSvcCreateObjectFields';
 
 /**
  * 
@@ -29,10 +29,10 @@ import {
 export interface DynamicSvcUpsertObjectRequest {
     /**
      * 
-     * @type {DynamicSvcObjectCreateFields}
+     * @type {DynamicSvcCreateObjectFields}
      * @memberof DynamicSvcUpsertObjectRequest
      */
-    object?: DynamicSvcObjectCreateFields;
+    object?: DynamicSvcCreateObjectFields;
 }
 
 /**
@@ -52,7 +52,7 @@ export function DynamicSvcUpsertObjectRequestFromJSONTyped(json: any, ignoreDisc
     }
     return {
         
-        'object': json['object'] == null ? undefined : DynamicSvcObjectCreateFieldsFromJSON(json['object']),
+        'object': json['object'] == null ? undefined : DynamicSvcCreateObjectFieldsFromJSON(json['object']),
     };
 }
 
@@ -67,7 +67,7 @@ export function DynamicSvcUpsertObjectRequestToJSONTyped(value?: DynamicSvcUpser
 
     return {
         
-        'object': DynamicSvcObjectCreateFieldsToJSON(value['object']),
+        'object': DynamicSvcCreateObjectFieldsToJSON(value['object']),
     };
 }
 

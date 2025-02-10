@@ -16,21 +16,21 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface DynamicSvcObjectCreateFields
+ * @interface DynamicSvcCreateObjectFields
  */
-export interface DynamicSvcObjectCreateFields {
+export interface DynamicSvcCreateObjectFields {
     /**
      * Authors is a list of user ID and organization ID who created the object.
      * If an organization ID is not provided, the currently active organization will
      * be queried from the User Svc.
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     authors?: Array<string>;
     /**
      * 
      * @type {{ [key: string]: any; }}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     data: { [key: string]: any; };
     /**
@@ -38,13 +38,13 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     deleters?: Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     id?: string;
     /**
@@ -52,13 +52,13 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     readers?: Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     table: string;
     /**
@@ -66,25 +66,25 @@ export interface DynamicSvcObjectCreateFields {
      * `_self` can be used to refer to the caller user's userId and
      * `_org` can be used to refer to the user's currently active organization (if exists).
      * @type {Array<string>}
-     * @memberof DynamicSvcObjectCreateFields
+     * @memberof DynamicSvcCreateObjectFields
      */
     writers?: Array<string>;
 }
 
 /**
- * Check if a given object implements the DynamicSvcObjectCreateFields interface.
+ * Check if a given object implements the DynamicSvcCreateObjectFields interface.
  */
-export function instanceOfDynamicSvcObjectCreateFields(value: object): value is DynamicSvcObjectCreateFields {
+export function instanceOfDynamicSvcCreateObjectFields(value: object): value is DynamicSvcCreateObjectFields {
     if (!('data' in value) || value['data'] === undefined) return false;
     if (!('table' in value) || value['table'] === undefined) return false;
     return true;
 }
 
-export function DynamicSvcObjectCreateFieldsFromJSON(json: any): DynamicSvcObjectCreateFields {
-    return DynamicSvcObjectCreateFieldsFromJSONTyped(json, false);
+export function DynamicSvcCreateObjectFieldsFromJSON(json: any): DynamicSvcCreateObjectFields {
+    return DynamicSvcCreateObjectFieldsFromJSONTyped(json, false);
 }
 
-export function DynamicSvcObjectCreateFieldsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcObjectCreateFields {
+export function DynamicSvcCreateObjectFieldsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DynamicSvcCreateObjectFields {
     if (json == null) {
         return json;
     }
@@ -100,11 +100,11 @@ export function DynamicSvcObjectCreateFieldsFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function DynamicSvcObjectCreateFieldsToJSON(json: any): DynamicSvcObjectCreateFields {
-    return DynamicSvcObjectCreateFieldsToJSONTyped(json, false);
+export function DynamicSvcCreateObjectFieldsToJSON(json: any): DynamicSvcCreateObjectFields {
+    return DynamicSvcCreateObjectFieldsToJSONTyped(json, false);
 }
 
-export function DynamicSvcObjectCreateFieldsToJSONTyped(value?: DynamicSvcObjectCreateFields | null, ignoreDiscriminator: boolean = false): any {
+export function DynamicSvcCreateObjectFieldsToJSONTyped(value?: DynamicSvcCreateObjectFields | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

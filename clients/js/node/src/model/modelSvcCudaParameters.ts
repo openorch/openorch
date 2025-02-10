@@ -11,29 +11,34 @@
  */
 
 import { RequestFile } from './models';
-import { ModelSvcCudaParameters } from './modelSvcCudaParameters';
-import { ModelSvcDefaultParameters } from './modelSvcDefaultParameters';
+import { ModelSvcContainer } from './modelSvcContainer';
 
-export class ModelSvcArchitectures {
-    'cuda'?: ModelSvcCudaParameters;
-    '_default'?: ModelSvcDefaultParameters;
+export class ModelSvcCudaParameters {
+    'container'?: ModelSvcContainer;
+    'defaultCudaVersion'?: string;
+    'defaultCudnnVersion'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "cuda",
-            "baseName": "cuda",
-            "type": "ModelSvcCudaParameters"
+            "name": "container",
+            "baseName": "container",
+            "type": "ModelSvcContainer"
         },
         {
-            "name": "_default",
-            "baseName": "default",
-            "type": "ModelSvcDefaultParameters"
+            "name": "defaultCudaVersion",
+            "baseName": "defaultCudaVersion",
+            "type": "string"
+        },
+        {
+            "name": "defaultCudnnVersion",
+            "baseName": "defaultCudnnVersion",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
-        return ModelSvcArchitectures.attributeTypeMap;
+        return ModelSvcCudaParameters.attributeTypeMap;
     }
 }
 

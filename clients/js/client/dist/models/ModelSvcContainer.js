@@ -26,7 +26,7 @@ export function ModelSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
     }
     return {
         'envars': json['envars'] == null ? undefined : json['envars'],
-        'image': json['image'] == null ? undefined : json['image'],
+        'imageTemplate': json['imageTemplate'] == null ? undefined : json['imageTemplate'],
         'keeps': json['keeps'] == null ? undefined : json['keeps'],
         'port': json['port'] == null ? undefined : json['port'],
     };
@@ -40,7 +40,7 @@ export function ModelSvcContainerToJSONTyped(value, ignoreDiscriminator = false)
     }
     return {
         'envars': value['envars'],
-        'image': value['image'],
+        'imageTemplate': value['imageTemplate'],
         'keeps': value['keeps'],
         'port': value['port'],
     };
