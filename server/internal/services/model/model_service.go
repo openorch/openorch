@@ -50,6 +50,7 @@ type ModelService struct {
 }
 
 func NewModelService(
+	// @todo GPU platform maybe this could be autodetected
 	gpuPlatform string,
 	llmHost string,
 	clientFactory sdk.ClientFactory,

@@ -257,6 +257,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	}
 
 	modelService, err := modelservice.NewModelService(
+		// @todo GPU platform maybe this could be autodetected
 		options.NodeOptions.GpuPlatform,
 		options.NodeOptions.LLMHost,
 		options.ClientFactory,
