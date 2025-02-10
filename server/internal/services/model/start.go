@@ -101,26 +101,20 @@ func (ms *ModelService) startWithDocker(
 
 		if platform.Architectures.Cuda.Container.ImageTemplate != "" {
 			cudaImageTemplate := platform.Architectures.Cuda.Container.ImageTemplate
+
 			// We need to resolve CUDA image templates like
 			// "crufter/llama-cpp-python:cuda-$cudaVersion-latest"
 			// to actual images here.
 			// To do this we need to find the CUDA version on the current machine.
-			node, err := ms.getNode()
-			if err != nil || node == nil {
-				// Error as unresolved image templates won't be usable
-				return errors.Wrap(err, "cannot resolve cuda image template")
-			}
-			if len(node.Gpus) == 0 {
-				return fmt.Errorf("cannot resolve cuda image template, no gpus")
-			}
-			gpu := node.Gpus[0]
-			if gpu.CudaVersion == nil {
-				return fmt.Errorf("cannot resolve cuda image template, no cuda version")
-			}
 
-			// Here we need to make sure that the CUDA version coming from the GPU
-			// like 12.2 is the same length as our image tags, which are 12.2.0.
-			cudaVersion := longCudaVersionFormat(*gpu.CudaVersion)
+			cudaVersion, err := ms.cudaVersion()
+			if err != nil {
+				cudaVersion = platform.Architectures.Cuda.DefaultCudaVersion
+
+				logger.Error("Error getting cuda version, defaulting",
+					slog.String("error", err.Error()),
+					slog.String("default", cudaVersion))
+			}
 
 			image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
 		}
@@ -169,6 +163,27 @@ func (ms *ModelService) startWithDocker(
 	}
 
 	return nil
+}
+
+func (ms *ModelService) cudaVersion() (string, error) {
+	node, err := ms.getNode()
+	if err != nil || node == nil {
+		// Error as unresolved image templates won't be usable
+		return "", errors.Wrap(err, "cannot get current node")
+	}
+	if len(node.Gpus) == 0 {
+		return "", fmt.Errorf("no gpus")
+	}
+	gpu := node.Gpus[0]
+	if gpu.CudaVersion == nil {
+		return "", fmt.Errorf("no cuda version")
+	}
+
+	// Here we need to make sure that the CUDA version coming from the GPU
+	// like 12.2 is the same length as our image tags, which are 12.2.0.
+	cudaVersion := longCudaVersionFormat(*gpu.CudaVersion)
+
+	return cudaVersion, nil
 }
 
 func (ms *ModelService) get(port int) *modeltypes.ModelState {
