@@ -11,7 +11,7 @@ var PlatformLlamaCpp = Platform{
 			Container: Container{
 				Port: 8000,
 				// For the source of this image, see `server/docker/llama-cpp-python/default`
-				ImageTemplate: "crufter/llama-cpp-python:default-$cudaVersion-latest",
+				ImageTemplate: "crufter/llama-cpp-python:default-1-latest",
 			},
 		},
 		Cuda: CudaParameters{
