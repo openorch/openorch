@@ -40,6 +40,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
       - openorch-data:/root/.openorch
+    # For GPU acceleration uncomment the lines below and set the
+    # OPENORCH_GPU_PLATFORM envar.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     environment:
       # This volume will be mounted by the LLM containers to access the models downloaded by OpenOrch.
       - OPENORCH_VOLUME_NAME=openorch-data
