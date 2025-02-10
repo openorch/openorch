@@ -60,6 +60,7 @@ jobs:
 
           DOCKER_BUILDKIT=1 docker build \
             --build-arg BACKEND_VERSION="${{ github.event.inputs.backend_version }}" \
+            -f server/docker/openorch/${{ github.event.inputs.backend }}/Dockerfile \
             -t ${{ env.IMAGE_TAG }} .
 
           docker push ${{ env.IMAGE_TAG }}
