@@ -56,6 +56,7 @@ func Start(options *node_types.Options) (*NodeInfo, error) {
 		}
 	}()
 
+	// @todo GPU platform maybe this could be autodetected
 	if options.GpuPlatform == "" {
 		options.GpuPlatform = os.Getenv("OPENORCH_GPU_PLATFORM")
 	}
