@@ -920,7 +920,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Check if an image exists on in the container registry and is pullable.",
+                "description": "Retrieve information about the Container host",
                 "consumes": [
                     "application/json"
                 ],
@@ -930,13 +930,13 @@ const docTemplate = `{
                 "tags": [
                     "Container Svc"
                 ],
-                "summary": "Container Image Exists",
-                "operationId": "imageExists",
+                "summary": "Get Container Host",
+                "operationId": "getHost",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/container_svc.GetDockerHostResponse"
+                            "$ref": "#/definitions/container_svc.GetHostResponse"
                         }
                     },
                     "401": {
@@ -1012,6 +1012,56 @@ const docTemplate = `{
                 }
             }
         },
+        "/container-svc/image/{imageName}/pullable": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Check if an image exists on in the container registry and is pullable.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Check if Container Image is Pullable",
+                "operationId": "imagePullable",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Image name",
+                        "name": "imageName",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ImagePullableResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/container-svc/info": {
             "get": {
                 "security": [
@@ -1019,7 +1069,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Retrieve detailed information about the Docker service",
+                "description": "Retrieve detailed information about the Container service",
                 "consumes": [
                     "application/json"
                 ],
@@ -5419,7 +5469,7 @@ const docTemplate = `{
                 }
             }
         },
-        "container_svc.GetDockerHostResponse": {
+        "container_svc.GetHostResponse": {
             "type": "object",
             "required": [
                 "host"
@@ -5435,6 +5485,17 @@ const docTemplate = `{
             "properties": {
                 "info": {
                     "$ref": "#/definitions/container_svc.DockerInfo"
+                }
+            }
+        },
+        "container_svc.ImagePullableResponse": {
+            "type": "object",
+            "required": [
+                "pullable"
+            ],
+            "properties": {
+                "pullable": {
+                    "type": "boolean"
                 }
             }
         },

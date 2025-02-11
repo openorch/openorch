@@ -129,6 +129,36 @@ func (mr *MockContainerSvcAPIMockRecorder) ContainerSummaryExecute(r any) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerSummaryExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ContainerSummaryExecute), r)
 }
 
+// GetHost mocks base method.
+func (m *MockContainerSvcAPI) GetHost(ctx context.Context) ApiGetHostRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetHost", ctx)
+	ret0, _ := ret[0].(ApiGetHostRequest)
+	return ret0
+}
+
+// GetHost indicates an expected call of GetHost.
+func (mr *MockContainerSvcAPIMockRecorder) GetHost(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHost", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetHost), ctx)
+}
+
+// GetHostExecute mocks base method.
+func (m *MockContainerSvcAPI) GetHostExecute(r ApiGetHostRequest) (*ContainerSvcGetHostResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetHostExecute", r)
+	ret0, _ := ret[0].(*ContainerSvcGetHostResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetHostExecute indicates an expected call of GetHostExecute.
+func (mr *MockContainerSvcAPIMockRecorder) GetHostExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHostExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetHostExecute), r)
+}
+
 // GetInfo mocks base method.
 func (m *MockContainerSvcAPI) GetInfo(ctx context.Context) ApiGetInfoRequest {
 	m.ctrl.T.Helper()
@@ -159,34 +189,34 @@ func (mr *MockContainerSvcAPIMockRecorder) GetInfoExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInfoExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetInfoExecute), r)
 }
 
-// ImageExists mocks base method.
-func (m *MockContainerSvcAPI) ImageExists(ctx context.Context) ApiImageExistsRequest {
+// ImagePullable mocks base method.
+func (m *MockContainerSvcAPI) ImagePullable(ctx context.Context, imageName string) ApiImagePullableRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ImageExists", ctx)
-	ret0, _ := ret[0].(ApiImageExistsRequest)
+	ret := m.ctrl.Call(m, "ImagePullable", ctx, imageName)
+	ret0, _ := ret[0].(ApiImagePullableRequest)
 	return ret0
 }
 
-// ImageExists indicates an expected call of ImageExists.
-func (mr *MockContainerSvcAPIMockRecorder) ImageExists(ctx any) *gomock.Call {
+// ImagePullable indicates an expected call of ImagePullable.
+func (mr *MockContainerSvcAPIMockRecorder) ImagePullable(ctx, imageName any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImageExists", reflect.TypeOf((*MockContainerSvcAPI)(nil).ImageExists), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImagePullable", reflect.TypeOf((*MockContainerSvcAPI)(nil).ImagePullable), ctx, imageName)
 }
 
-// ImageExistsExecute mocks base method.
-func (m *MockContainerSvcAPI) ImageExistsExecute(r ApiImageExistsRequest) (*ContainerSvcGetDockerHostResponse, *http.Response, error) {
+// ImagePullableExecute mocks base method.
+func (m *MockContainerSvcAPI) ImagePullableExecute(r ApiImagePullableRequest) (*ContainerSvcImagePullableResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ImageExistsExecute", r)
-	ret0, _ := ret[0].(*ContainerSvcGetDockerHostResponse)
+	ret := m.ctrl.Call(m, "ImagePullableExecute", r)
+	ret0, _ := ret[0].(*ContainerSvcImagePullableResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// ImageExistsExecute indicates an expected call of ImageExistsExecute.
-func (mr *MockContainerSvcAPIMockRecorder) ImageExistsExecute(r any) *gomock.Call {
+// ImagePullableExecute indicates an expected call of ImagePullableExecute.
+func (mr *MockContainerSvcAPIMockRecorder) ImagePullableExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImageExistsExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ImageExistsExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImagePullableExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ImagePullableExecute), r)
 }
 
 // RunContainer mocks base method.

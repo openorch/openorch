@@ -203,7 +203,7 @@ definitions:
     - status
     - summary
     type: object
-  container_svc.GetDockerHostResponse:
+  container_svc.GetHostResponse:
     properties:
       host:
         type: string
@@ -214,6 +214,13 @@ definitions:
     properties:
       info:
         $ref: '#/definitions/container_svc.DockerInfo'
+    type: object
+  container_svc.ImagePullableResponse:
+    properties:
+      pullable:
+        type: boolean
+    required:
+    - pullable
     type: object
   container_svc.RunContainerOptions:
     properties:
@@ -3324,15 +3331,15 @@ paths:
     get:
       consumes:
       - application/json
-      description: Check if an image exists on in the container registry and is pullable.
-      operationId: imageExists
+      description: Retrieve information about the Container host
+      operationId: getHost
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/container_svc.GetDockerHostResponse'
+            $ref: '#/definitions/container_svc.GetHostResponse'
         "401":
           description: Unauthorized
           schema:
@@ -3343,7 +3350,7 @@ paths:
             $ref: '#/definitions/container_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Container Image Exists
+      summary: Get Container Host
       tags:
       - Container Svc
   /container-svc/image:
@@ -3386,11 +3393,43 @@ paths:
       summary: Build an Image
       tags:
       - Container Svc
+  /container-svc/image/{imageName}/pullable:
+    get:
+      consumes:
+      - application/json
+      description: Check if an image exists on in the container registry and is pullable.
+      operationId: imagePullable
+      parameters:
+      - description: Image name
+        in: path
+        name: imageName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/container_svc.ImagePullableResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Check if Container Image is Pullable
+      tags:
+      - Container Svc
   /container-svc/info:
     get:
       consumes:
       - application/json
-      description: Retrieve detailed information about the Docker service
+      description: Retrieve detailed information about the Container service
       operationId: getInfo
       produces:
       - application/json

@@ -22,12 +22,12 @@ import (
 )
 
 // @ID getHost
-// @Summary      Get Docker Host
-// @Description  Retrieve information about the Docker host
+// @Summary      Get Container Host
+// @Description  Retrieve information about the Container host
 // @Tags         Container Svc
 // @Accept       json
 // @Produce      json
-// @Success      200   {object}  container.GetDockerHostResponse
+// @Success      200   {object}  container.GetHostResponse
 // @Failure      401   {object}  container.ErrorResponse  "Unauthorized"
 // @Failure      500   {object}  container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
@@ -61,7 +61,7 @@ func (dm *DockerService) Host(
 		return
 	}
 
-	jsonData, _ := json.Marshal(container.GetDockerHostResponse{
+	jsonData, _ := json.Marshal(container.GetHostResponse{
 		Host: host,
 	})
 	w.Write(jsonData)

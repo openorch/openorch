@@ -1,7 +1,7 @@
 package container_svc
 
-type GetDockerHostRequest struct{}
+type GetHostRequest struct{}
 
-type GetDockerHostResponse struct {
+type GetHostResponse struct {
 	Host string `json:"host" binding:"required"`
 }

@@ -94,8 +94,9 @@ Class | Method | HTTP request | Description
 *ContainerSvcAPI* | [**BuildImage**](docs/ContainerSvcAPI.md#buildimage) | **Put** /container-svc/image | Build an Image
 *ContainerSvcAPI* | [**ContainerIsRunning**](docs/ContainerSvcAPI.md#containerisrunning) | **Get** /container-svc/container/is-running | Check If a Container Is Running
 *ContainerSvcAPI* | [**ContainerSummary**](docs/ContainerSvcAPI.md#containersummary) | **Get** /container-svc/container/summary | Get Container Summary
+*ContainerSvcAPI* | [**GetHost**](docs/ContainerSvcAPI.md#gethost) | **Get** /container-svc/host | Get Container Host
 *ContainerSvcAPI* | [**GetInfo**](docs/ContainerSvcAPI.md#getinfo) | **Get** /container-svc/info | Get Docker Service Information
-*ContainerSvcAPI* | [**ImageExists**](docs/ContainerSvcAPI.md#imageexists) | **Get** /container-svc/host | Container Image Exists
+*ContainerSvcAPI* | [**ImagePullable**](docs/ContainerSvcAPI.md#imagepullable) | **Get** /container-svc/image/{imageName}/pullable | Check if Container Image is Pullable
 *ContainerSvcAPI* | [**RunContainer**](docs/ContainerSvcAPI.md#runcontainer) | **Put** /container-svc/container | Run a Container
 *ContainerSvcAPI* | [**StopContainer**](docs/ContainerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
 *DeploySvcAPI* | [**DeleteDeployment**](docs/DeploySvcAPI.md#deletedeployment) | **Delete** /deploy-svc/deployment | Delete Deployment
@@ -197,8 +198,9 @@ Class | Method | HTTP request | Description
  - [ContainerSvcDockerInfo](docs/ContainerSvcDockerInfo.md)
  - [ContainerSvcErrorResponse](docs/ContainerSvcErrorResponse.md)
  - [ContainerSvcGetContainerSummaryResponse](docs/ContainerSvcGetContainerSummaryResponse.md)
- - [ContainerSvcGetDockerHostResponse](docs/ContainerSvcGetDockerHostResponse.md)
+ - [ContainerSvcGetHostResponse](docs/ContainerSvcGetHostResponse.md)
  - [ContainerSvcGetInfoResponse](docs/ContainerSvcGetInfoResponse.md)
+ - [ContainerSvcImagePullableResponse](docs/ContainerSvcImagePullableResponse.md)
  - [ContainerSvcRunContainerOptions](docs/ContainerSvcRunContainerOptions.md)
  - [ContainerSvcRunContainerRequest](docs/ContainerSvcRunContainerRequest.md)
  - [ContainerSvcRunContainerResponse](docs/ContainerSvcRunContainerResponse.md)

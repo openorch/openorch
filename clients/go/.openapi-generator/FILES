@@ -43,8 +43,9 @@ docs/ContainerSvcContainerIsRunningResponse.md
 docs/ContainerSvcDockerInfo.md
 docs/ContainerSvcErrorResponse.md
 docs/ContainerSvcGetContainerSummaryResponse.md
-docs/ContainerSvcGetDockerHostResponse.md
+docs/ContainerSvcGetHostResponse.md
 docs/ContainerSvcGetInfoResponse.md
+docs/ContainerSvcImagePullableResponse.md
 docs/ContainerSvcRunContainerOptions.md
 docs/ContainerSvcRunContainerRequest.md
 docs/ContainerSvcRunContainerResponse.md
@@ -241,8 +242,9 @@ model_container_svc_container_is_running_response.go
 model_container_svc_docker_info.go
 model_container_svc_error_response.go
 model_container_svc_get_container_summary_response.go
-model_container_svc_get_docker_host_response.go
+model_container_svc_get_host_response.go
 model_container_svc_get_info_response.go
+model_container_svc_image_pullable_response.go
 model_container_svc_run_container_options.go
 model_container_svc_run_container_request.go
 model_container_svc_run_container_response.go
@@ -404,5 +406,4 @@ model_user_svc_save_profile_request.go
 model_user_svc_set_role_permissions_request.go
 model_user_svc_user.go
 response.go
-test/api_container_svc_test.go
 utils.go
