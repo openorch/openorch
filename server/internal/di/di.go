@@ -748,7 +748,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/registry-svc/nodes", appl(func(w http.ResponseWriter, r *http.Request) {
-		registryService.List(w, r)
+		registryService.ListNodes(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 

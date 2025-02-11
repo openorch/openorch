@@ -7,7 +7,7 @@
  -->
 <app-page
 	title="Chat"
-	[columnWidths]="['3rem', '20%']"
+	[columnWidths]="['3rem', '25%']"
 	[mobileColumnWidths]="['3rem', 'calc(100% - 3rem)']"
 >
 	<ng-template #columnContent>
@@ -17,8 +17,11 @@
 	</ng-template>
 	<ng-template #columnContent>
 		<div class="thread-list">
-			<div class="sng-test-open-new-thread" (click)="openNewThread()">
-				<img src="/assets/logo_circled_grey.svg" alt="OpenOrch" class="logo" />
+			<div
+				class="thread-header sng-test-open-new-thread"
+				(click)="openNewThread()"
+			>
+				<img class="logo" src="/assets/logo_circled_grey.svg" alt="OpenOrch" />
 				<span class="brand-name">OpenOrch</span>
 				<ion-icon name="create-outline"></ion-icon>
 			</div>

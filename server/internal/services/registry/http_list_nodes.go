@@ -27,14 +27,14 @@ import (
 // @Tags Registry Svc
 // @Accept json
 // @Produce json
-// @Param body body registry.ListNodesRequest false "List Registrys Request"
+// @Param body body registry.ListNodesRequest false "List Nodes Request"
 // @Success 200 {object} registry.ListNodesResponse
 // @Failure 400 {object} registry.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} registry.ErrorResponse "Unauthorized"
 // @Failure 500 {object} registry.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /registry-svc/nodes [post]
-func (ns *RegistryService) List(
+func (ns *RegistryService) ListNodes(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -60,13 +60,15 @@ func (ns *RegistryService) List(
 	}
 
 	req := &registry.ListNodesRequest{}
-	err = json.NewDecoder(r.Body).Decode(req)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`Invalid JSON`))
-		return
+	if r.ContentLength != 0 {
+		err = json.NewDecoder(r.Body).Decode(req)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(`Invalid JSON`))
+			return
+		}
+		defer r.Body.Close()
 	}
-	defer r.Body.Close()
 
 	nodes, err := ns.listNodes(req)
 	if err != nil {

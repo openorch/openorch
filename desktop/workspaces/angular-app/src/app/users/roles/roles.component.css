@@ -1,5 +1,3 @@
-
-
 .roles-container {
 	ion-item.selected {
 		background-color: var(--ion-color-light);
@@ -22,11 +20,5 @@
 		--padding-bottom: 0.75rem;
 		--padding-start: 2rem;
 		--padding-end: 2rem;
-	}
-
-	ion-checkbox.custom-checkbox {
-		--background: var(--ion-color-primary);
-		--border-color: var(--ion-color-primary);
-		--checkmark-color: var(--ion-color-light);
 	}
 }

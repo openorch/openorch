@@ -59,14 +59,14 @@
 										}}.
 									</div>
 									<ion-button
-										color="secondary"
 										style="margin-top: 1rem"
 										detail
 										(click)="installRuntime()"
 									>
 										<span
 											*ngIf="
-												!(configService.config$ | async)!.data['config-svc'].isRuntimeInstalled
+												!(configService.config$ | async)!.data['config-svc']
+													.isRuntimeInstalled
 											"
 											style="color: white"
 											class="sng-test-runtime-button"
@@ -161,7 +161,6 @@
 										</p>
 										<div style="padding-top: 1rem; display: flex">
 											<ion-button
-												color="secondary"
 												style="margin-right: 1rem"
 												(click)="download()"
 												[disabled]="isDownloading"
@@ -260,7 +259,7 @@
 
 				<ng-container *ngIf="allIsWell">
 					<div style="margin-top: 2rem; padding-left: 4.5rem">
-						<ion-button color="secondary" routerLink="/chat"
+						<ion-button routerLink="/chat"
 							><span class="sng-test-go-button"
 								>{{ 'Go' | translate }}!</span
 							></ion-button
