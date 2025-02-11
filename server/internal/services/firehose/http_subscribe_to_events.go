@@ -18,7 +18,6 @@ import (
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
-	"github.com/openorch/openorch/sdk/go/logger"
 
 	firehose "github.com/openorch/openorch/server/internal/services/firehose/types"
 )
@@ -76,11 +75,10 @@ func (p *FirehoseService) Subscribe(
 
 	for {
 		select {
-		// case <-time.After(time.Second * 8):
-		// 	panic("timeout test")
 		case events, ok := <-eventsChannel:
 			if !ok {
-				logger.Info("Events channel closed unexpectedly")
+				// The channel is closed, indicating the user has disconnected from the event stream.
+				// Simply exit the loop and return.
 				return
 			}
 

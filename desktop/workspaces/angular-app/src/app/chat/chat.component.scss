@@ -1,5 +1,24 @@
-
 .thread-list {
+	.thread-header {
+		font-size: 16px;
+		margin-top: 5px;
+		color: #222;
+
+		.logo {
+			height: 24px;
+			width: auto;
+			margin-right: 1rem;
+		}
+
+		.brand-name {
+			flex-grow: 1;
+		}
+
+		ion-icon {
+			font-size: 24px;
+		}
+	}
+
 	> div {
 		padding: 10px;
 		padding-left: 1rem;
@@ -13,28 +32,6 @@
 
 		&:hover {
 			background-color: #e0e0e0;
-		}
-
-		// Logo OpenOrch +
-		&:first-child {
-			font-size: 16px;
-			margin-top: 5px;
-
-			color: #222;
-
-			.logo {
-				height: 24px;
-				width: auto;
-				margin-right: 1rem;
-			}
-
-			.brand-name {
-				flex-grow: 1;
-			}
-
-			ion-icon {
-				font-size: 24px;
-			}
 		}
 	}
 

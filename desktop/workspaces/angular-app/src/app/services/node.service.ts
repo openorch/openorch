@@ -19,13 +19,13 @@ import { first } from 'rxjs';
 	providedIn: 'root',
 })
 export class NodeService {
-	private nodeService!: RegistrySvcApi;
+	private registryService!: RegistrySvcApi;
 
 	constructor(
 		private server: ServerService,
 		private userService: UserService
 	) {
-		this.nodeService = new RegistrySvcApi(
+		this.registryService = new RegistrySvcApi(
 			new Configuration({
 				basePath: this.server.addr(),
 				apiKey: this.server.token(),
@@ -38,7 +38,7 @@ export class NodeService {
 	}
 
 	async nodesList(): Promise<RegistrySvcListNodesResponse> {
-		return this.nodeService.listNodes({});
+		return this.registryService.listNodes({});
 	}
 
 	async init() {}

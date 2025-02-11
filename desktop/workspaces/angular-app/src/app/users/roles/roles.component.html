@@ -7,7 +7,7 @@
  -->
 <app-page
 	title="Roles"
-	[columnWidths]="['3rem', '25%']"
+	[columnWidths]="['3rem', '33%']"
 	[mobileColumnWidths]="['3rem', 'calc(100% - 3rem)']"
 >
 	<ng-template #columnContent>
@@ -55,6 +55,7 @@
 				</ion-list-header>
 				<ion-item *ngFor="let permission of filteredPermissions()">
 					<ion-checkbox
+						color="secondary"
 						class="custom-checkbox"
 						slot="start"
 						[checked]="selectedRolePermissions.has(permission.id || '')"
