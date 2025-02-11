@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package dockerservice
+package containerservice
 
 import (
 	"encoding/json"
@@ -23,7 +23,7 @@ import (
 
 // @ID getInfo
 // @Summary      Get Docker Service Information
-// @Description  Retrieve detailed information about the Docker service
+// @Description  Retrieve detailed information about the Container service
 // @Tags         Container Svc
 // @Accept       json
 // @Produce      json

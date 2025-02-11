@@ -22,7 +22,7 @@ import (
 	node_types "github.com/openorch/openorch/server/internal/node/types"
 	chatservice "github.com/openorch/openorch/server/internal/services/chat"
 	configservice "github.com/openorch/openorch/server/internal/services/config"
-	dockerservice "github.com/openorch/openorch/server/internal/services/container"
+	containerservice "github.com/openorch/openorch/server/internal/services/container"
 	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
 	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
 	emailservice "github.com/openorch/openorch/server/internal/services/email"
@@ -242,7 +242,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	dockerService, err := dockerservice.NewDockerService(
+	containerService, err := containerservice.NewContainerService(
 		options.NodeOptions.VolumeName,
 		options.ClientFactory,
 		options.Lock,
@@ -250,7 +250,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	)
 	if err != nil {
 		logger.Error(
-			"Docker service creation failed",
+			"Container service creation failed",
 			slog.String("error", err.Error()),
 		)
 		os.Exit(1)
@@ -474,31 +474,31 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		Methods("OPTIONS", "GET")
 
 	router.HandleFunc("/container-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.Info(w, r)
+		containerService.Info(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 	router.HandleFunc("/container-svc/host", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.Host(w, r)
+		containerService.Host(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 	router.HandleFunc("/container-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.RunContainer(w, r)
+		containerService.RunContainer(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/container-svc/image", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.BuildImage(w, r)
+		containerService.BuildImage(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/container-svc/container/stop", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.StopContainer(w, r)
+		containerService.StopContainer(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 	router.HandleFunc("/container-svc/container/is-running", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.ContainerIsRunning(w, r)
+		containerService.ContainerIsRunning(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 	router.HandleFunc("/container-svc/container/summary", appl(func(w http.ResponseWriter, r *http.Request) {
-		dockerService.Summary(w, r)
+		containerService.Summary(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 
@@ -847,7 +847,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		if err != nil {
 			return errors.Wrap(err, "firehose service start failed")
 		}
-		err = dockerService.Start()
+		err = containerService.Start()
 		if err != nil {
 			return errors.Wrap(err, "docker service start failed")
 		}

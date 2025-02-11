@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package dockerservice
+package containerservice
 
 import (
 	"context"
@@ -44,7 +44,7 @@ type DockerService struct {
 	volumeName string
 }
 
-func NewDockerService(
+func NewContainerService(
 	volumeName string,
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,

@@ -92,31 +92,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Deploy Svc",
-      items: [
-        {
-          type: "doc",
-          id: "openorch/delete-deployment",
-          label: "Delete Deployment",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
-          id: "openorch/save-deployment",
-          label: "Save Deployment",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "openorch/list-deployments",
-          label: "List Deployments",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Docker Svc",
+      label: "Container Svc",
       items: [
         {
           type: "doc",
@@ -144,8 +120,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/get-host",
-          label: "Get Docker Host",
+          id: "openorch/image-exists",
+          label: "Container Image Exists",
           className: "api-method get",
         },
         {
@@ -159,6 +135,30 @@ const sidebar: SidebarsConfig = {
           id: "openorch/get-info",
           label: "Get Docker Service Information",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Deploy Svc",
+      items: [
+        {
+          type: "doc",
+          id: "openorch/delete-deployment",
+          label: "Delete Deployment",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "openorch/save-deployment",
+          label: "Save Deployment",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "openorch/list-deployments",
+          label: "List Deployments",
+          className: "api-method post",
         },
       ],
     },

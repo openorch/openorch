@@ -1,4 +1,4 @@
-package dockerservice
+package containerservice
 
 import (
 	"testing"
