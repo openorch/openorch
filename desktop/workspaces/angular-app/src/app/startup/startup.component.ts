@@ -13,7 +13,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { DownloadService, FileSvcConfig } from '../services/download.service';
 import { ModelService, ModelSvcConfig } from '../services/model.service';
 import { ModelSvcModel as Model } from '@openorch/client';
-import { DockerService } from '../services/docker.service';
+import { ContainerService } from '../services/container.service';
 import { ConfigService } from '../services/config.service';
 import {
 	FileSvcDownload as Download,
@@ -102,7 +102,7 @@ export class StartupComponent implements OnInit {
 		public lapi: ElectronAppService,
 		public configService: ConfigService,
 		public downloadService: DownloadService,
-		public dockerService: DockerService,
+		public containerService: ContainerService,
 		public modelService: ModelService
 	) {
 		addIcons({
@@ -110,8 +110,7 @@ export class StartupComponent implements OnInit {
 			'chevron-down': chevronDown,
 			'chevron-forward': chevronForward,
 			'cube-outline': cubeOutline,
-			'hardware-chip-outline' :hardwareChipOutline,
-
+			'hardware-chip-outline': hardwareChipOutline,
 		});
 	}
 
@@ -195,7 +194,7 @@ export class StartupComponent implements OnInit {
 		);
 
 		combineLatest([
-			this.dockerService.onDockerInfo$,
+			this.containerService.onContainerInfo$,
 			this.modelService.onModelCheck$,
 		]).subscribe(([dockerInfo, modelCheck]) => {
 			if (this.allIsWell) {

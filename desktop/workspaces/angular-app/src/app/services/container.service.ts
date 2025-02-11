@@ -10,19 +10,19 @@ import { ReplaySubject } from 'rxjs';
 import { OnDockerInfo } from 'shared-lib/models/event-request-response';
 import { ServerService } from './server.service';
 import {
-	DockerSvcApi,
+	ContainerSvcApi,
 	Configuration,
-	DockerSvcGetInfoResponse,
+	ContainerSvcGetInfoResponse,
 } from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class DockerService {
-	private dockerService!: DockerSvcApi;
+export class ContainerService {
+	private dockerService!: ContainerSvcApi;
 
-	onDockerInfoSubject = new ReplaySubject<OnDockerInfo>(1);
-	onDockerInfo$ = this.onDockerInfoSubject.asObservable();
+	onContainerInfoSubject = new ReplaySubject<OnDockerInfo>(1);
+	onContainerInfo$ = this.onContainerInfoSubject.asObservable();
 
 	constructor(private server: ServerService) {
 		// @todo nothing to trigger docker info yet
@@ -40,7 +40,7 @@ export class DockerService {
 			}
 			this.initInProgress = true;
 			if (!this.dockerService) {
-				this.dockerService = new DockerSvcApi(
+				this.dockerService = new ContainerSvcApi(
 					new Configuration({
 						basePath: this.server.addr(),
 						apiKey: this.server.token(),
@@ -50,7 +50,7 @@ export class DockerService {
 
 			const rsp = await this.dockerInfo();
 
-			this.onDockerInfoSubject.next({
+			this.onContainerInfoSubject.next({
 				hasDocker: rsp?.info?.hasDocker || false,
 			});
 		} catch (error) {
@@ -62,7 +62,7 @@ export class DockerService {
 		}
 	}
 
-	async dockerInfo(): Promise<DockerSvcGetInfoResponse> {
+	async dockerInfo(): Promise<ContainerSvcGetInfoResponse> {
 		return this.dockerService.getInfo();
 	}
 }

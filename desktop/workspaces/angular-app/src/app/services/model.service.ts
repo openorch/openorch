@@ -7,7 +7,7 @@
  */
 import { Injectable } from '@angular/core';
 import { ServerService } from './server.service';
-import { DockerService } from './docker.service';
+import { ContainerService } from './container.service';
 import { ReplaySubject, combineLatest } from 'rxjs';
 import {
 	ModelSvcApi,
@@ -46,7 +46,7 @@ export class ModelService {
 
 	constructor(
 		private server: ServerService,
-		private dockerService: DockerService
+		private dockerService: ContainerService
 	) {
 		this.modelService = new ModelSvcApi(
 			new Configuration({
@@ -76,7 +76,7 @@ export class ModelService {
 
 	private listenToModelReady(): void {
 		combineLatest([
-			this.dockerService.onDockerInfo$,
+			this.dockerService.onContainerInfo$,
 			this.onModelCheck$,
 		]).subscribe(([dockerInfo, modelCheck]) => {
 			if (dockerInfo.hasDocker && modelCheck.assetsReady) {

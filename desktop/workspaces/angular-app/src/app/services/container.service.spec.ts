@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DockerService } from './docker.service';
+import { ContainerService } from './docker.service';
 
-describe('DockerService', () => {
-	let service: DockerService;
+describe('ContainerService', () => {
+	let service: ContainerService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({});
-		service = TestBed.inject(DockerService);
+		service = TestBed.inject(ContainerService);
 	});
 
 	it('should be created', () => {
