@@ -21,8 +21,9 @@ export * from './containerSvcContainerIsRunningResponse';
 export * from './containerSvcDockerInfo';
 export * from './containerSvcErrorResponse';
 export * from './containerSvcGetContainerSummaryResponse';
-export * from './containerSvcGetDockerHostResponse';
+export * from './containerSvcGetHostResponse';
 export * from './containerSvcGetInfoResponse';
+export * from './containerSvcImagePullableResponse';
 export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
@@ -218,8 +219,9 @@ import { ContainerSvcContainerIsRunningResponse } from './containerSvcContainerI
 import { ContainerSvcDockerInfo } from './containerSvcDockerInfo';
 import { ContainerSvcErrorResponse } from './containerSvcErrorResponse';
 import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContainerSummaryResponse';
-import { ContainerSvcGetDockerHostResponse } from './containerSvcGetDockerHostResponse';
+import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
 import { ContainerSvcGetInfoResponse } from './containerSvcGetInfoResponse';
+import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
 import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
@@ -430,8 +432,9 @@ let typeMap: {[index: string]: any} = {
     "ContainerSvcDockerInfo": ContainerSvcDockerInfo,
     "ContainerSvcErrorResponse": ContainerSvcErrorResponse,
     "ContainerSvcGetContainerSummaryResponse": ContainerSvcGetContainerSummaryResponse,
-    "ContainerSvcGetDockerHostResponse": ContainerSvcGetDockerHostResponse,
+    "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
     "ContainerSvcGetInfoResponse": ContainerSvcGetInfoResponse,
+    "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
     "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,

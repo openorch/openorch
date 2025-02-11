@@ -120,8 +120,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/image-exists",
-          label: "Container Image Exists",
+          id: "openorch/get-host",
+          label: "Get Container Host",
           className: "api-method get",
         },
         {
@@ -129,6 +129,12 @@ const sidebar: SidebarsConfig = {
           id: "openorch/build-image",
           label: "Build an Image",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "openorch/image-pullable",
+          label: "Check if Container Image is Pullable",
+          className: "api-method get",
         },
         {
           type: "doc",

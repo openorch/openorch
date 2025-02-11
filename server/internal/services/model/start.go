@@ -109,14 +109,28 @@ func (ms *ModelService) startWithDocker(
 
 			cudaVersion, err := ms.cudaVersion()
 			if err != nil {
-				cudaVersion = platform.Architectures.Cuda.DefaultCudaVersion
-
 				logger.Error("Error getting cuda version, defaulting",
 					slog.String("error", err.Error()),
 					slog.String("default", cudaVersion))
+
+				cudaVersion = platform.Architectures.Cuda.DefaultCudaVersion
 			}
 
-			image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			versionAccurateImage := strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+
+			imagePullableRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+				ContainerSvcAPI.
+				ImagePullable(context.Background(), versionAccurateImage).
+				Execute()
+			if err != nil {
+				logger.Error("Image pull check failed", slog.String("error", err.Error()))
+			}
+
+			if err != nil || !imagePullableRsp.Pullable {
+				image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			} else {
+				image = versionAccurateImage
+			}
 		}
 		if platform.Architectures.Cuda.Container.Port != 0 {
 			port = platform.Architectures.Cuda.Container.Port

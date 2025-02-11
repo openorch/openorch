@@ -3,7 +3,7 @@ OpenOrch
 
 AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
 
-API version: 0.3.0-rc.17
+API version: 0.3.0-rc.18
 Contact: sales@singulatron.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the OpenOrch API v0.3.0-rc.17
+// APIClient manages communication with the OpenOrch API v0.3.0-rc.18
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
