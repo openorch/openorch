@@ -100,7 +100,7 @@ export declare class RegistrySvcApi {
     /**
      * Retrieve a list of nodes.
      * @summary List Nodes
-     * @param body List Registrys Request
+     * @param body List Nodes Request
      */
     listNodes(body?: RegistrySvcListNodesRequest, options?: {
         headers: {

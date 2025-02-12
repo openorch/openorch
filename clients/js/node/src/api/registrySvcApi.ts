@@ -406,7 +406,7 @@ export class RegistrySvcApi {
     /**
      * Retrieve a list of nodes.
      * @summary List Nodes
-     * @param body List Registrys Request
+     * @param body List Nodes Request
      */
     public async listNodes (body?: RegistrySvcListNodesRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: RegistrySvcListNodesResponse;  }> {
         const localVarPath = this.basePath + '/registry-svc/nodes';

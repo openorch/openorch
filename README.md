@@ -17,7 +17,7 @@
   </div>
 </p>
 
-Originally developed as a local ChatGPT alternative, OpenOrch quickly evolved into a robust, language-agnostic microservices platform. This evolution was a natural progression, driven by its authors’ career-spanning expertise in microservices and their need for a comprehensive platform to build on.
+Originally developed as a local ChatGPT alternative, OpenOrch quickly evolved into a robust, language-agnostic microservices platform to buil AI applications. This evolution was a natural progression, driven by its authors’ career-spanning expertise in microservices and their need for a comprehensive platform to build on.
 
 At its core, OpenOrch serves as a shared backend—but it goes far beyond that. It functions as an orchestrator, reverse proxy, ORM, AI platform, user management tool, and more. By unifying a suite of essential tools, OpenOrch streamlines backend development, enabling you to build and deploy powerful applications with ease.
 
@@ -161,7 +161,7 @@ $ oo post /prompt-svc/prompt --sync=true --prompt="Is a cat an animal? Just answ
 
 ## Context
 
-OpenOrch is a microservices platform that started taking shape in 2013 while I was at Hailo, an Uber competitor. The idea stuck with me and kept evolving over the years – including during my time at [Micro](https://github.com/micro/micro), a microservices framework company. I assumed someone else would eventually build it, but with the AI boom and the wave of AI apps we’re rolling out, I’ve realized it’s time to build it myself.
+OpenOrch is a microservices platform, the seeds of which began taking shape in 2013 while I was at Hailo, an Uber competitor. The idea stuck with me and kept evolving over the years – including during my time at [Micro](https://github.com/micro/micro), a microservices platform company. I assumed someone else would eventually build it, but with the AI boom and the wave of AI apps we’re rolling out, I’ve realized it’s time to build it myself.
 
 ## Run On Your Servers
 

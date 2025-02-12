@@ -3406,7 +3406,7 @@ const docTemplate = `{
                 "operationId": "listNodes",
                 "parameters": [
                     {
-                        "description": "List Registrys Request",
+                        "description": "List Nodes Request",
                         "name": "body",
                         "in": "body",
                         "schema": {

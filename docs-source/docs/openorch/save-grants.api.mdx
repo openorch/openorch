@@ -1,0 +1,75 @@
+---
+id: save-grants
+title: "Save Grants"
+description: "Save grants."
+sidebar_label: "Save Grants"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVlGP2zYM/isCnx37rrcCm5+WDkWRrdgdmt5TLkAZmbHVkyWdJCfNAv/3gXLcpEk2dC8F9hIoFEV9/Eh+8h4qCtIrF5U1UMIcNyRqjyaG/Mk8mXdpKSpaK0Ni2yjZiKC7Ogj0JDAEVRuqRHAk1VpJ4ci3KgRlTciE3ZD3qlKmFrEhDoKdjkJas1Z155HvTLd8oJdOeQrJ7VMXyE/CRpYJRyk9YaRPJ6FzyMA6GgLMKigh4IYGqJCBp5eOQnxjqx2Ue5DWRDKRl+icVjIdKz4HTngPQTbUIq+c56BRUeB/Awm8UpHacOmgKv6NO0cMIHplaugzOMKcXXdI9PHOGfOJ1W1jE7PpdqoSIQ+nEbMjnIvIBwN6jzvojwa7+kwyfo8Hm640xKELPgzEHihWniooo++oZ0Nw1oSBmVc3N5f5pRiCC1WJ0ElJIaw7rXeQfX+FLtD2Gfx07bKZ2aBWlfh9fv/nf7ng2wqT99ZfYfoabwnJ7SWSR4NdbKxXf1H1w5C8vs5JJG9Qizn5DXnxNsX8MZC47Ul2XsUdlIs9vCH05KddbKBcLPtlBhF5KBbwGMiL+UbCMoOWYmN5vF3HTeeQ3aEY9aGox4kPKaOQQndes1OhrUTd2BDL1z+/ursFvmTEMOechjROkZwz9nHnSDwdXJ5ArK3WdkuVWO0EiuBQkkBTiWifyQiUw0yItbdtGtwxF/He1soIMpWzykSWL8XxG8KKuAQGWyZseuiUVAA4TqtTf9AwrlyUD0d5e/sFW6fpVK4WgzCN5TjXo6P9IEOL0bLslz3jWttRNFGmpqAWlU4aqyn8GpSpO43RW5NL256Af5iJeeec9VyroQpNjK4sCuvIWC+b3Pq6gAuJmc4EOiecxri2vs3FVGg0dYc1TbA2NkQlM1EpBrrqWBVHV7G2Xqw6pdMb0yrpLbeCkhQmKwxUielMrFA+k6kC066VJBMSYSPsdw/vxeYuv/kGdCiLYrvd5rXpEujDuVBg7fTkLr/Jm9jqpKjk23C/ng/XHnMOW6xr8rmyRXIpuJ4qcrHg3pG597KBDLhtBxZu8rv8ZuJlfvtLekZsiC2aE6QnSgxnFJ48cv+fF/zQ3ZG+xMJpVIbTTiXYH0Z9AWMgyMYGX2bAQ82b+z3X+NHrvmfzS0ee1WWZwQa9whVzveCmPswZz8Yz7aCE3wa2JjzgXATU3TBoZ/LXZ+OJqZTk4r/6ngrWw+NHyGB1+AJpbcVHPG756cQtlJC+YPhwEqFk28PY9VDCEJJHHg/SdBQDRpSNC05q3DK7E4DnYjLkwb+c1dUj+/0gNX3/1X/Y+scTXxVs8OYaLvu+/xuIOJsX
+sidebar_class_name: "put api-method"
+info_path: docs/openorch/openorch
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Save Grants"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/user-svc/grants"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Save grants.
+
+Grants define which slugs are assigned specific permissions, overriding the default configuration.
+
+Requires the `user-svc:grant:create` permission.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"properties":{"grants":{"items":{"properties":{"id":{"type":"string"},"permissionId":{"type":"string"},"slugs":{"description":"Slugs who are granted the PermissionId","items":{"type":"string"},"type":"array"}},"type":"object"},"type":"array"}},"type":"object"}}},"description":"Save Grants Request","required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Grant saved successfully","content":{"application/json":{"schema":{"type":"object"}}}},"400":{"description":"Invalid JSON","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}},"500":{"description":"Internal Server Error","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

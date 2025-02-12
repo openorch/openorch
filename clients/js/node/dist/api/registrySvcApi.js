@@ -376,7 +376,7 @@ export class RegistrySvcApi {
     /**
      * Retrieve a list of nodes.
      * @summary List Nodes
-     * @param body List Registrys Request
+     * @param body List Nodes Request
      */
     listNodes(body_1) {
         return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {

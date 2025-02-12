@@ -9,7 +9,7 @@ tags:
 
 # Deploy Svc
 
-The deploy service is responsible of launching containers on whatever infrastructure the OpenOrch is running on (eg. [Docker Svc](/docs/built-in-services/docker-svc)) and registering them into the [Registry Svc](/docs/built-in-services/docker-svc).
+The deploy service is responsible of launching containers on whatever infrastructure the OpenOrch is running on (eg. [Docker Svc](/docs/built-in-services/container-svc)) and registering them into the [Registry Svc](/docs/built-in-services/container-svc).
 
 > This page is a high level overview of the `Deploy Svc`. For more details, please see the [Deploy Svc API documentation](/docs/openorch/save-deployment).
 
@@ -56,5 +56,5 @@ envars:
 
 ## Dependencies
 
-- [Docker Svc](/docs/built-in-services/docker-svc) to start containers of services
+- [Container Svc](/docs/built-in-services/container-svc) to start containers of services
 - [Registry Svc](/docs/built-in-services/registry-svc) to start containers of services
