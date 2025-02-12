@@ -5,7 +5,7 @@ import { ElectronAppService } from '../services/electron-app.service';
 import { ConfigService } from '../services/config.service';
 import { DownloadService } from '../services/download.service';
 import { ModelService } from '../services/model.service';
-import { DockerService } from '../services/docker.service';
+import { ContainerService } from '../services/docker.service';
 import { of } from 'rxjs';
 
 describe('StartupComponent', () => {
@@ -67,7 +67,7 @@ describe('StartupComponent', () => {
 				{ provide: ConfigService, useValue: configServiceMock },
 				{ provide: DownloadService, useValue: downloadServiceMock },
 				{ provide: ModelService, useValue: modelServiceMock },
-				{ provide: DockerService, useValue: dockerServiceMock },
+				{ provide: ContainerService, useValue: dockerServiceMock },
 			],
 		}).compileComponents();
 

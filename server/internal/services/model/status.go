@@ -30,7 +30,7 @@ func (ms *ModelService) status(
 	modelId string,
 ) (*modeltypes.ModelStatus, error) {
 	hostRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
-		DockerSvcAPI.GetHost(context.Background()).
+		ContainerSvcAPI.GetHost(context.Background()).
 		Execute()
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (ms *ModelService) status(
 	isRunning := false
 
 	hashRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
-		DockerSvcAPI.ContainerIsRunning(context.Background()).
+		ContainerSvcAPI.ContainerIsRunning(context.Background()).
 		Hash(hash).
 		Execute()
 	if err != nil {

@@ -31,7 +31,7 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		mockUserSvc          *openapi.MockUserSvcAPI
 		universe             *mux.Router
 		mockRegistrySvc      *openapi.MockRegistrySvcAPI
-		mockDockerSvc        *openapi.MockDockerSvcAPI
+		mockContainerSvc     *openapi.MockContainerSvcAPI
 		starterFunc          func() error
 		adminClient          *openapi.APIClient
 		launchContainerError error
@@ -52,14 +52,14 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 			return true
 		}))
 		mockRegistrySvc = openapi.NewMockRegistrySvcAPI(ctrl)
-		mockDockerSvc = openapi.NewMockDockerSvcAPI(ctrl)
+		mockContainerSvc = openapi.NewMockContainerSvcAPI(ctrl)
 
 		mockClientFactory.EXPECT().
 			Client(gomock.Any()).
 			Return(&openapi.APIClient{
-				UserSvcAPI:     mockUserSvc,
-				RegistrySvcAPI: mockRegistrySvc,
-				DockerSvcAPI:   mockDockerSvc,
+				UserSvcAPI:      mockUserSvc,
+				RegistrySvcAPI:  mockRegistrySvc,
+				ContainerSvcAPI: mockContainerSvc,
 				DeploySvcAPI: sdk.NewApiClientFactory(server.URL).
 					Client().
 					DeploySvcAPI,
@@ -123,13 +123,13 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 		).AnyTimes()
 
 		mockLaunchContainerRequest := openapi.ApiRunContainerRequest{
-			ApiService: mockDockerSvc,
+			ApiService: mockContainerSvc,
 		}
-		mockDockerSvc.EXPECT().
+		mockContainerSvc.EXPECT().
 			RunContainer(ctx).
 			Return(mockLaunchContainerRequest).
 			AnyTimes()
-		mockDockerSvc.EXPECT().
+		mockContainerSvc.EXPECT().
 			RunContainerExecute(gomock.Any()).
 			Return(nil, nil, launchContainerError).
 			AnyTimes()

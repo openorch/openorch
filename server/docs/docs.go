@@ -669,6 +669,440 @@ const docTemplate = `{
                 }
             }
         },
+        "/container-svc/container": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Runs a Docker container with the specified parameters.\n\nRequires the ` + "`" + `container-svc:container:run` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Run a Container",
+                "operationId": "runContainer",
+                "parameters": [
+                    {
+                        "description": "Run Container Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.RunContainerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.RunContainerResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/container/is-running": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Check if a Docker container is running, identified by hash or name.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Check If a Container Is Running",
+                "operationId": "containerIsRunning",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Container Hash",
+                        "name": "hash",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Container Name",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ContainerIsRunningResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON or Missing Parameters",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/container/stop": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Stops a Docker container with the specified parameters.\n\nRequires the ` + "`" + `container-svc:container:stop` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Stop a Container",
+                "operationId": "stopContainer",
+                "parameters": [
+                    {
+                        "description": "Stop Container Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.StopContainerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.StopContainerResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/container/summary": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Get Container Summary",
+                "operationId": "containerSummary",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Container Hash",
+                        "name": "hash",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Container Name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of Lines",
+                        "name": "lines",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.GetContainerSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON or Missing Parameters",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/host": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve information about the Container host",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Get Container Host",
+                "operationId": "getHost",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.GetHostResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/image": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Builds a Docker image with the specified parameters.\n\nRequires the ` + "`" + `container-svc:image:build` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Build an Image",
+                "operationId": "buildImage",
+                "parameters": [
+                    {
+                        "description": "Build Image Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.BuildImageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.BuildImageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/image/{imageName}/pullable": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Check if an image exists on in the container registry and is pullable.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Check if Container Image is Pullable",
+                "operationId": "imagePullable",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Image name",
+                        "name": "imageName",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ImagePullableResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/info": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve detailed information about the Container service",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Get Docker Service Information",
+                "operationId": "getInfo",
+                "responses": {
+                    "200": {
+                        "description": "Service Information",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.GetInfoResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/deploy-svc/deployment": {
             "put": {
                 "security": [
@@ -833,390 +1267,6 @@ const docTemplate = `{
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/deploy_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/container": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Runs a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:container:run` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Run a Container",
-                "operationId": "runContainer",
-                "parameters": [
-                    {
-                        "description": "Run Container Request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.RunContainerRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.RunContainerResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/container/is-running": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Check if a Docker container is running, identified by hash or name.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Check If a Container Is Running",
-                "operationId": "containerIsRunning",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Container Hash",
-                        "name": "hash",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Container Name",
-                        "name": "name",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ContainerIsRunningResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON or Missing Parameters",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/container/stop": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Stops a Docker container with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:container:stop` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Stop a Container",
-                "operationId": "stopContainer",
-                "parameters": [
-                    {
-                        "description": "Stop Container Request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.StopContainerRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.StopContainerResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/container/summary": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Get a summary of the Docker container identified by hash or name, limited to a specified number of lines.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Get Container Summary",
-                "operationId": "containerSummary",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Container Hash",
-                        "name": "hash",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Container Name",
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Number of Lines",
-                        "name": "lines",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.GetContainerSummaryResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON or Missing Parameters",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/host": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Retrieve information about the Docker host",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Get Docker Host",
-                "operationId": "getHost",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.GetDockerHostResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/image": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Builds a Docker image with the specified parameters.\n\nRequires the ` + "`" + `docker-svc:image:build` + "`" + ` permission.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Build an Image",
-                "operationId": "buildImage",
-                "parameters": [
-                    {
-                        "description": "Build Image Request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.BuildImageRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.BuildImageResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/docker-svc/info": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Retrieve detailed information about the Docker service",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Docker Svc"
-                ],
-                "summary": "Get Docker Service Information",
-                "operationId": "getInfo",
-                "responses": {
-                    "200": {
-                        "description": "Service Information",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.GetInfoResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/docker_svc.ErrorResponse"
                         }
                     }
                 }
@@ -5339,6 +5389,228 @@ const docTemplate = `{
         "config_svc.SaveConfigResponse": {
             "type": "object"
         },
+        "container_svc.BuildImageRequest": {
+            "type": "object",
+            "required": [
+                "contextPath",
+                "name"
+            ],
+            "properties": {
+                "contextPath": {
+                    "description": "ContextPath is the local path to the build context",
+                    "type": "string",
+                    "example": "."
+                },
+                "dockerfilePath": {
+                    "description": "DockerfilePath is the local path to the Dockerfile",
+                    "type": "string",
+                    "example": "Dockerfile"
+                },
+                "name": {
+                    "description": "Name is the name of the image to build",
+                    "type": "string",
+                    "example": "nginx:latest"
+                }
+            }
+        },
+        "container_svc.BuildImageResponse": {
+            "type": "object"
+        },
+        "container_svc.ContainerIsRunningResponse": {
+            "type": "object",
+            "required": [
+                "isRunning"
+            ],
+            "properties": {
+                "isRunning": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.DockerInfo": {
+            "type": "object",
+            "properties": {
+                "dockerDaemonAddress": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "hasDocker": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.GetContainerSummaryResponse": {
+            "type": "object",
+            "required": [
+                "logs",
+                "status",
+                "summary"
+            ],
+            "properties": {
+                "logs": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "DEPRECATED. Summary contains both Status and Logs.",
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.GetHostResponse": {
+            "type": "object",
+            "required": [
+                "host"
+            ],
+            "properties": {
+                "host": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.GetInfoResponse": {
+            "type": "object",
+            "properties": {
+                "info": {
+                    "$ref": "#/definitions/container_svc.DockerInfo"
+                }
+            }
+        },
+        "container_svc.ImagePullableResponse": {
+            "type": "object",
+            "required": [
+                "pullable"
+            ],
+            "properties": {
+                "pullable": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.RunContainerOptions": {
+            "type": "object",
+            "properties": {
+                "assets": {
+                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "envs": {
+                    "description": "Envs are environment variables to set in the container",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "gpuEnabled": {
+                    "description": "GPUEnabled specifies if GPU support is enabled",
+                    "type": "boolean"
+                },
+                "hash": {
+                    "description": "Hash is a unique identifier for the container",
+                    "type": "string"
+                },
+                "keeps": {
+                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "labels": {
+                    "description": "Labels are metadata labels associated with the container",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "description": "Name is the name of the container",
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.RunContainerRequest": {
+            "type": "object",
+            "required": [
+                "image",
+                "port"
+            ],
+            "properties": {
+                "hostPort": {
+                    "description": "HostPort is the port on the host machine that will be mapped to the container's port",
+                    "type": "integer",
+                    "example": 8081
+                },
+                "image": {
+                    "description": "Image is the Docker image to use for the container",
+                    "type": "string",
+                    "example": "nginx:latest"
+                },
+                "options": {
+                    "description": "Options provides additional options for launching the container",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.RunContainerOptions"
+                        }
+                    ]
+                },
+                "port": {
+                    "description": "Port is the port number that the container will expose",
+                    "type": "integer",
+                    "example": 8080
+                }
+            }
+        },
+        "container_svc.RunContainerResponse": {
+            "type": "object",
+            "properties": {
+                "info": {
+                    "$ref": "#/definitions/container_svc.RunInfo"
+                }
+            }
+        },
+        "container_svc.RunInfo": {
+            "type": "object",
+            "properties": {
+                "newContainerStarted": {
+                    "type": "boolean"
+                },
+                "portNumber": {
+                    "type": "integer"
+                }
+            }
+        },
+        "container_svc.StopContainerRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "4378b76e05ba"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "sup-container-x"
+                }
+            }
+        },
+        "container_svc.StopContainerResponse": {
+            "type": "object"
+        },
         "datastore.Filter": {
             "type": "object",
             "properties": {
@@ -5649,217 +5921,6 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
-        },
-        "docker_svc.BuildImageRequest": {
-            "type": "object",
-            "required": [
-                "contextPath",
-                "name"
-            ],
-            "properties": {
-                "contextPath": {
-                    "description": "ContextPath is the local path to the build context",
-                    "type": "string",
-                    "example": "."
-                },
-                "dockerfilePath": {
-                    "description": "DockerfilePath is the local path to the Dockerfile",
-                    "type": "string",
-                    "example": "Dockerfile"
-                },
-                "name": {
-                    "description": "Name is the name of the image to build",
-                    "type": "string",
-                    "example": "nginx:latest"
-                }
-            }
-        },
-        "docker_svc.BuildImageResponse": {
-            "type": "object"
-        },
-        "docker_svc.ContainerIsRunningResponse": {
-            "type": "object",
-            "required": [
-                "isRunning"
-            ],
-            "properties": {
-                "isRunning": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "docker_svc.DockerInfo": {
-            "type": "object",
-            "properties": {
-                "dockerDaemonAddress": {
-                    "type": "string"
-                },
-                "error": {
-                    "type": "string"
-                },
-                "hasDocker": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "docker_svc.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            }
-        },
-        "docker_svc.GetContainerSummaryResponse": {
-            "type": "object",
-            "required": [
-                "logs",
-                "status",
-                "summary"
-            ],
-            "properties": {
-                "logs": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "summary": {
-                    "description": "DEPRECATED. Summary contains both Status and Logs.",
-                    "type": "string"
-                }
-            }
-        },
-        "docker_svc.GetDockerHostResponse": {
-            "type": "object",
-            "required": [
-                "host"
-            ],
-            "properties": {
-                "host": {
-                    "type": "string"
-                }
-            }
-        },
-        "docker_svc.GetInfoResponse": {
-            "type": "object",
-            "properties": {
-                "info": {
-                    "$ref": "#/definitions/docker_svc.DockerInfo"
-                }
-            }
-        },
-        "docker_svc.RunContainerOptions": {
-            "type": "object",
-            "properties": {
-                "assets": {
-                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "envs": {
-                    "description": "Envs are environment variables to set in the container",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "gpuEnabled": {
-                    "description": "GPUEnabled specifies if GPU support is enabled",
-                    "type": "boolean"
-                },
-                "hash": {
-                    "description": "Hash is a unique identifier for the container",
-                    "type": "string"
-                },
-                "keeps": {
-                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "labels": {
-                    "description": "Labels are metadata labels associated with the container",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "name": {
-                    "description": "Name is the name of the container",
-                    "type": "string"
-                }
-            }
-        },
-        "docker_svc.RunContainerRequest": {
-            "type": "object",
-            "required": [
-                "image",
-                "port"
-            ],
-            "properties": {
-                "hostPort": {
-                    "description": "HostPort is the port on the host machine that will be mapped to the container's port",
-                    "type": "integer",
-                    "example": 8081
-                },
-                "image": {
-                    "description": "Image is the Docker image to use for the container",
-                    "type": "string",
-                    "example": "nginx:latest"
-                },
-                "options": {
-                    "description": "Options provides additional options for launching the container",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/docker_svc.RunContainerOptions"
-                        }
-                    ]
-                },
-                "port": {
-                    "description": "Port is the port number that the container will expose",
-                    "type": "integer",
-                    "example": 8080
-                }
-            }
-        },
-        "docker_svc.RunContainerResponse": {
-            "type": "object",
-            "properties": {
-                "info": {
-                    "$ref": "#/definitions/docker_svc.RunInfo"
-                }
-            }
-        },
-        "docker_svc.RunInfo": {
-            "type": "object",
-            "properties": {
-                "newContainerStarted": {
-                    "type": "boolean"
-                },
-                "portNumber": {
-                    "type": "integer"
-                }
-            }
-        },
-        "docker_svc.StopContainerRequest": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "4378b76e05ba"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "sup-container-x"
-                }
-            }
-        },
-        "docker_svc.StopContainerResponse": {
-            "type": "object"
         },
         "dynamic_svc.CreateObjectFields": {
             "type": "object",
@@ -8902,7 +8963,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.16",
+	Version:          "0.3.0-rc.19",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

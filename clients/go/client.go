@@ -3,7 +3,7 @@ OpenOrch
 
 AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
 
-API version: 0.3.0-rc.16
+API version: 0.3.0-rc.19
 Contact: sales@singulatron.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the OpenOrch API v0.3.0-rc.16
+// APIClient manages communication with the OpenOrch API v0.3.0-rc.19
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -54,9 +54,9 @@ type APIClient struct {
 
 	ConfigSvcAPI ConfigSvcAPI
 
-	DeploySvcAPI DeploySvcAPI
+	ContainerSvcAPI ContainerSvcAPI
 
-	DockerSvcAPI DockerSvcAPI
+	DeploySvcAPI DeploySvcAPI
 
 	DynamicSvcAPI DynamicSvcAPI
 
@@ -99,8 +99,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.ChatSvcAPI = (*ChatSvcAPIService)(&c.common)
 	c.ConfigSvcAPI = (*ConfigSvcAPIService)(&c.common)
+	c.ContainerSvcAPI = (*ContainerSvcAPIService)(&c.common)
 	c.DeploySvcAPI = (*DeploySvcAPIService)(&c.common)
-	c.DockerSvcAPI = (*DockerSvcAPIService)(&c.common)
 	c.DynamicSvcAPI = (*DynamicSvcAPIService)(&c.common)
 	c.EmailSvcAPI = (*EmailSvcAPIService)(&c.common)
 	c.FileSvcAPI = (*FileSvcAPIService)(&c.common)

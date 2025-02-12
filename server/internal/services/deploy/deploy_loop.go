@@ -220,8 +220,8 @@ func (ns *DeployService) executeKillCommand(
 	)
 
 	name := fmt.Sprintf("sup-%v", definition.Id)
-	_, _, err := client.DockerSvcAPI.StopContainer(ctx).Body(
-		openapi.DockerSvcStopContainerRequest{
+	_, _, err := client.ContainerSvcAPI.StopContainer(ctx).Body(
+		openapi.ContainerSvcStopContainerRequest{
 			Name: &name,
 		},
 	).Execute()
@@ -339,12 +339,12 @@ func (ns *DeployService) makeSureItRuns(
 	}
 
 	if definition.Image != nil {
-		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Body(
-			openapi.DockerSvcRunContainerRequest{
+		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
+			openapi.ContainerSvcRunContainerRequest{
 				Image:    definition.Image.Name,
 				Port:     definition.Image.Port,
 				HostPort: definition.HostPort,
-				Options: &openapi.DockerSvcRunContainerOptions{
+				Options: &openapi.ContainerSvcRunContainerOptions{
 					Name: openapi.PtrString(
 						fmt.Sprintf("openorch-%v", definition.Id),
 					),
@@ -367,8 +367,8 @@ func (ns *DeployService) makeSureItRuns(
 			buildContext = path.Join(buildContext, *definition.Repository.BuildContext)
 		}
 
-		_, _, err = client.DockerSvcAPI.BuildImage(ctx).Body(
-			openapi.DockerSvcBuildImageRequest{
+		_, _, err = client.ContainerSvcAPI.BuildImage(ctx).Body(
+			openapi.ContainerSvcBuildImageRequest{
 				ContextPath:    buildContext,
 				DockerfilePath: definition.Repository.ContainerFile,
 				Name:           fmt.Sprintf("%v-%v", containerPrefix, definition.Id),
@@ -379,12 +379,12 @@ func (ns *DeployService) makeSureItRuns(
 			return err
 		}
 
-		_, _, err = client.DockerSvcAPI.RunContainer(ctx).Body(
-			openapi.DockerSvcRunContainerRequest{
+		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
+			openapi.ContainerSvcRunContainerRequest{
 				Image:    fmt.Sprintf("openorch-%v", definition.Id),
 				Port:     *definition.Repository.Port,
 				HostPort: definition.HostPort,
-				Options: &openapi.DockerSvcRunContainerOptions{
+				Options: &openapi.ContainerSvcRunContainerOptions{
 					Name: openapi.PtrString(fmt.Sprintf("openorch-%v", definition.Id)),
 				},
 			},

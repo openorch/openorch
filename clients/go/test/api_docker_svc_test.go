@@ -1,7 +1,7 @@
 /*
 OpenOrch
 
-Testing DockerSvcAPIService
+Testing ContainerSvcAPIService
 
 */
 
@@ -18,19 +18,19 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_openapi_DockerSvcAPIService(t *testing.T) {
+func Test_openapi_ContainerSvcAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test DockerSvcAPIService GetContainerSummary", func(t *testing.T) {
+	t.Run("Test ContainerSvcAPIService GetContainerSummary", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var hash string
 		var numberOfLines int32
 
-		resp, httpRes, err := apiClient.DockerSvcAPI.GetContainerSummary(context.Background(), hash, numberOfLines).Execute()
+		resp, httpRes, err := apiClient.ContainerSvcAPI.GetContainerSummary(context.Background(), hash, numberOfLines).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,11 +38,11 @@ func Test_openapi_DockerSvcAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DockerSvcAPIService GetHost", func(t *testing.T) {
+	t.Run("Test ContainerSvcAPIService GetHost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DockerSvcAPI.GetHost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ContainerSvcAPI.GetHost(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,11 +50,11 @@ func Test_openapi_DockerSvcAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DockerSvcAPIService GetInfo", func(t *testing.T) {
+	t.Run("Test ContainerSvcAPIService GetInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DockerSvcAPI.GetInfo(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ContainerSvcAPI.GetInfo(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -62,13 +62,13 @@ func Test_openapi_DockerSvcAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DockerSvcAPIService IsRunning", func(t *testing.T) {
+	t.Run("Test ContainerSvcAPIService IsRunning", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var hash string
 
-		resp, httpRes, err := apiClient.DockerSvcAPI.IsRunning(context.Background(), hash).Execute()
+		resp, httpRes, err := apiClient.ContainerSvcAPI.IsRunning(context.Background(), hash).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -76,11 +76,11 @@ func Test_openapi_DockerSvcAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DockerSvcAPIService LaunchContainer", func(t *testing.T) {
+	t.Run("Test ContainerSvcAPIService LaunchContainer", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DockerSvcAPI.LaunchContainer(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ContainerSvcAPI.LaunchContainer(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

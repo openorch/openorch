@@ -16,6 +16,19 @@ export * from './chatSvcUpdateThreadRequest';
 export * from './configSvcConfig';
 export * from './configSvcGetConfigResponse';
 export * from './configSvcSaveConfigRequest';
+export * from './containerSvcBuildImageRequest';
+export * from './containerSvcContainerIsRunningResponse';
+export * from './containerSvcDockerInfo';
+export * from './containerSvcErrorResponse';
+export * from './containerSvcGetContainerSummaryResponse';
+export * from './containerSvcGetHostResponse';
+export * from './containerSvcGetInfoResponse';
+export * from './containerSvcImagePullableResponse';
+export * from './containerSvcRunContainerOptions';
+export * from './containerSvcRunContainerRequest';
+export * from './containerSvcRunContainerResponse';
+export * from './containerSvcRunInfo';
+export * from './containerSvcStopContainerRequest';
 export * from './datastoreFilter';
 export * from './datastoreOp';
 export * from './datastoreOrderBy';
@@ -31,18 +44,6 @@ export * from './deploySvcResourceLimits';
 export * from './deploySvcSaveDeploymentRequest';
 export * from './deploySvcStrategyType';
 export * from './deploySvcTargetRegion';
-export * from './dockerSvcBuildImageRequest';
-export * from './dockerSvcContainerIsRunningResponse';
-export * from './dockerSvcDockerInfo';
-export * from './dockerSvcErrorResponse';
-export * from './dockerSvcGetContainerSummaryResponse';
-export * from './dockerSvcGetDockerHostResponse';
-export * from './dockerSvcGetInfoResponse';
-export * from './dockerSvcRunContainerOptions';
-export * from './dockerSvcRunContainerRequest';
-export * from './dockerSvcRunContainerResponse';
-export * from './dockerSvcRunInfo';
-export * from './dockerSvcStopContainerRequest';
 export * from './dynamicSvcCreateObjectFields';
 export * from './dynamicSvcCreateObjectRequest';
 export * from './dynamicSvcCreateObjectResponse';
@@ -213,6 +214,19 @@ import { ChatSvcUpdateThreadRequest } from './chatSvcUpdateThreadRequest';
 import { ConfigSvcConfig } from './configSvcConfig';
 import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
+import { ContainerSvcBuildImageRequest } from './containerSvcBuildImageRequest';
+import { ContainerSvcContainerIsRunningResponse } from './containerSvcContainerIsRunningResponse';
+import { ContainerSvcDockerInfo } from './containerSvcDockerInfo';
+import { ContainerSvcErrorResponse } from './containerSvcErrorResponse';
+import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContainerSummaryResponse';
+import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
+import { ContainerSvcGetInfoResponse } from './containerSvcGetInfoResponse';
+import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
+import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
+import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
+import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
+import { ContainerSvcRunInfo } from './containerSvcRunInfo';
+import { ContainerSvcStopContainerRequest } from './containerSvcStopContainerRequest';
 import { DatastoreFilter } from './datastoreFilter';
 import { DatastoreOp } from './datastoreOp';
 import { DatastoreOrderBy } from './datastoreOrderBy';
@@ -228,18 +242,6 @@ import { DeploySvcResourceLimits } from './deploySvcResourceLimits';
 import { DeploySvcSaveDeploymentRequest } from './deploySvcSaveDeploymentRequest';
 import { DeploySvcStrategyType } from './deploySvcStrategyType';
 import { DeploySvcTargetRegion } from './deploySvcTargetRegion';
-import { DockerSvcBuildImageRequest } from './dockerSvcBuildImageRequest';
-import { DockerSvcContainerIsRunningResponse } from './dockerSvcContainerIsRunningResponse';
-import { DockerSvcDockerInfo } from './dockerSvcDockerInfo';
-import { DockerSvcErrorResponse } from './dockerSvcErrorResponse';
-import { DockerSvcGetContainerSummaryResponse } from './dockerSvcGetContainerSummaryResponse';
-import { DockerSvcGetDockerHostResponse } from './dockerSvcGetDockerHostResponse';
-import { DockerSvcGetInfoResponse } from './dockerSvcGetInfoResponse';
-import { DockerSvcRunContainerOptions } from './dockerSvcRunContainerOptions';
-import { DockerSvcRunContainerRequest } from './dockerSvcRunContainerRequest';
-import { DockerSvcRunContainerResponse } from './dockerSvcRunContainerResponse';
-import { DockerSvcRunInfo } from './dockerSvcRunInfo';
-import { DockerSvcStopContainerRequest } from './dockerSvcStopContainerRequest';
 import { DynamicSvcCreateObjectFields } from './dynamicSvcCreateObjectFields';
 import { DynamicSvcCreateObjectRequest } from './dynamicSvcCreateObjectRequest';
 import { DynamicSvcCreateObjectResponse } from './dynamicSvcCreateObjectResponse';
@@ -425,6 +427,19 @@ let typeMap: {[index: string]: any} = {
     "ConfigSvcConfig": ConfigSvcConfig,
     "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
+    "ContainerSvcBuildImageRequest": ContainerSvcBuildImageRequest,
+    "ContainerSvcContainerIsRunningResponse": ContainerSvcContainerIsRunningResponse,
+    "ContainerSvcDockerInfo": ContainerSvcDockerInfo,
+    "ContainerSvcErrorResponse": ContainerSvcErrorResponse,
+    "ContainerSvcGetContainerSummaryResponse": ContainerSvcGetContainerSummaryResponse,
+    "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
+    "ContainerSvcGetInfoResponse": ContainerSvcGetInfoResponse,
+    "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
+    "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
+    "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
+    "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,
+    "ContainerSvcRunInfo": ContainerSvcRunInfo,
+    "ContainerSvcStopContainerRequest": ContainerSvcStopContainerRequest,
     "DatastoreFilter": DatastoreFilter,
     "DatastoreOrderBy": DatastoreOrderBy,
     "DatastoreQuery": DatastoreQuery,
@@ -437,18 +452,6 @@ let typeMap: {[index: string]: any} = {
     "DeploySvcResourceLimits": DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": DeploySvcTargetRegion,
-    "DockerSvcBuildImageRequest": DockerSvcBuildImageRequest,
-    "DockerSvcContainerIsRunningResponse": DockerSvcContainerIsRunningResponse,
-    "DockerSvcDockerInfo": DockerSvcDockerInfo,
-    "DockerSvcErrorResponse": DockerSvcErrorResponse,
-    "DockerSvcGetContainerSummaryResponse": DockerSvcGetContainerSummaryResponse,
-    "DockerSvcGetDockerHostResponse": DockerSvcGetDockerHostResponse,
-    "DockerSvcGetInfoResponse": DockerSvcGetInfoResponse,
-    "DockerSvcRunContainerOptions": DockerSvcRunContainerOptions,
-    "DockerSvcRunContainerRequest": DockerSvcRunContainerRequest,
-    "DockerSvcRunContainerResponse": DockerSvcRunContainerResponse,
-    "DockerSvcRunInfo": DockerSvcRunInfo,
-    "DockerSvcStopContainerRequest": DockerSvcStopContainerRequest,
     "DynamicSvcCreateObjectFields": DynamicSvcCreateObjectFields,
     "DynamicSvcCreateObjectRequest": DynamicSvcCreateObjectRequest,
     "DynamicSvcCreateObjectResponse": DynamicSvcCreateObjectResponse,

@@ -29,7 +29,7 @@
 					>
 						<ion-icon
 							[ngStyle]="
-								(dockerService.onDockerInfo$ | async)?.hasDocker
+								(containerService.onContainerInfo$ | async)?.hasDocker
 									? { color: '#53DD6C' }
 									: {}
 							"
@@ -46,10 +46,14 @@
 						></ion-icon>
 					</ion-item>
 					<ion-list class="dropdown" *ngIf="showSections.dependencies">
-						<ion-item *ngIf="(dockerService.onDockerInfo$ | async)?.hasDocker">
+						<ion-item
+							*ngIf="(containerService.onContainerInfo$ | async)?.hasDocker"
+						>
 							{{ 'You have all the required dependecies. Yay!' | translate }}
 						</ion-item>
-						<ion-item *ngIf="!(dockerService.onDockerInfo$ | async)?.hasDocker">
+						<ion-item
+							*ngIf="!(containerService.onContainerInfo$ | async)?.hasDocker"
+						>
 							<ion-label>
 								<ng-container *ngIf="!isRuntimeInstalling">
 									<div>
@@ -104,7 +108,7 @@
 					</ion-list>
 
 					<ng-container
-						*ngIf="(dockerService.onDockerInfo$ | async)?.hasDocker"
+						*ngIf="(containerService.onContainerInfo$ | async)?.hasDocker"
 					>
 						<ion-item button detail="false" (click)="toggleSection('model')">
 							<ion-icon
@@ -219,7 +223,7 @@
 					<ng-container
 						*ngIf="
 							(modelService?.onModelCheck$ | async)?.assetsReady &&
-							(dockerService?.onDockerInfo$ | async)?.hasDocker
+							(containerService?.onContainerInfo$ | async)?.hasDocker
 						"
 					>
 						<ion-item button detail="false" (click)="toggleSection('starting')">
