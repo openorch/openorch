@@ -1,0 +1,65 @@
+---
+id: list-downloads
+title: "List Downloads"
+description: "List download details."
+sidebar_label: "List Downloads"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVdtu4zYQ/RWCz4rkbHaLVk/1YtsiaNAE9eYpMbBjaixxQ5FcDmWvY+jfi6F8kROnaNG++MIZDg/PnDPcygpJBe2jdlaW8kZTFJVbW+OgEhVG0IbyR/to/8RvnQ5IIjYoviy1wQtaqXKfW640rr8Ij6HVRNrZXGbSeQzAla8rWUqjKX7apZPMZEDyzhKSLLfy3WTCX2fQuOUBEO9Szka0kZPBe6NVOqD4SrxjK0k12AL/8oGPj3qofyxRbqWO2NLrHBUQIlbTVDxuPMpSUgza1rLPDhWw+riJu6InaD+dJgj8rimSiE5Q49aJtwOzPrg6IJHQVkQMLfE1OcN27QID/1ukImACQrURx9OZ2KULLURZSm3jD+9ltkerbcQaA8PFEFw4exHu3R/Q4pvBO4jNm8GZfsbXd/91FxF6EMiyM0YstQUzQi54vyD9jP/wDro6C2NP3ig40MZBihA7Oruv89Xf9LcL5sx6f8DlFl9RRXlcgBBgcy6j57X3k8vXNN1b6GLjgn7G6t9o+SUoPuDDOcdc24iBWZ9hWGEQvyQV/KeTmFNUXdBxI8uHrfyIEDBMO9bIw7yfZzJCTbJ8SCIQs5WS80y2GBvHrveOosykT5qSxX5wFGNPUwJLqXxqgywK4xSYxlEsP/z47upS8kF7HDOGO1hwjOYlGZ83HsXjLuVRiqUzxq2xEouNAEEeFAqwlYjuCa0AlQZcJZbBtUnE94SB7yNuXK2tQFt5p21k8Wqu3yBUyOza5CY53fU2cXsUNHj9Ow5C0Xbp0qRxNoJK7cAWNN+YwCD9TNrWnYEYnM2Va0e1767FrPPeBWZzIKmJ0ZdF4TxaF1STu1AXaVKdsDC9FuC98AYiWy4XU2HA1h3UeAG1dRS1ykSlueWLLmJ1SBVLF8Si06bSthatVsFxp7RCulgAYSWm12IB6gltRcyK0QotpfGwh/3b3Y1YXeWTE9BUFsV6vc5r2yXQu31UQO3NxVU+yZvYmmQ1no23y9lw7PHOtIa6xpBrV6SUgunW0XDKrUd7G1QjM8mqGliY5Ff55CKo/PKnNEIcxRbsCGl6a8bP0wmL26OD/uc3cieSiN9j4Q1oO5pFg2ke5L6SzEbv2DyTbA+Ob7fcjvtg+p6Xv3UY2KvzTK4gaFgwLQ/zPtsrln32hBvuj1LoWVErMN0g1hfToR+b+e529llmErqTBwK85mrZ/geX34fsZlT8pUEGDPzZZ29s2W4H+/T9IX8Ivbnj4Mohmwmd933/FyaLFkA=
+sidebar_class_name: "post api-method"
+info_path: docs/openorch/openorch
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List Downloads"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/file-svc/downloads"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List download details.
+
+Requires the `file-svc:download:view` permission.
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"List of downloads","content":{"application/json":{"schema":{"properties":{"downloads":{"items":{"properties":{"createdAt":{"type":"string"},"downloadedBytes":{"description":"DownloadedBytes exists to show the download progress in terms of the number of bytes already downloaded.","format":"int64","type":"integer"},"error":{"type":"string"},"fileName":{"type":"string"},"filePath":{"type":"string"},"fileSize":{"description":"FileSize is the full final downloaded file size.","format":"int64","type":"integer"},"id":{"type":"string"},"progress":{"type":"number"},"status":{"type":"string"},"updatedAt":{"type":"string"},"url":{"type":"string"}},"type":"object"},"type":"array"}},"type":"object"}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"type":"string"}}}},"500":{"description":"Internal Server Error","content":{"application/json":{"schema":{"type":"string"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

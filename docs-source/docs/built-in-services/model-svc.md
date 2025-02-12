@@ -20,7 +20,7 @@ The model service can start, stop AI models across multiple runtimes (eg. Docker
 
 ## Dependencies
 
-- [Docker Svc](/docs/built-in-services/docker-svc) to start containerized AI models (eg. Llama, Stabel Diffusion etc.)
+- [Container Svc](/docs/built-in-services/container-svc) to start containerized AI models (eg. Llama, Stabel Diffusion etc.)
 
 ## Current Limitations
 

@@ -83,12 +83,12 @@ func NewContainerService(
 
 func (ds *DockerService) Start() error {
 	ctx := context.Background()
-	ds.lock.Acquire(ctx, "docker-svc-start")
-	defer ds.lock.Release(ctx, "docker-svc-start")
+	ds.lock.Acquire(ctx, "container-svc-start")
+	defer ds.lock.Release(ctx, "container-svc-start")
 
 	token, err := sdk.RegisterService(
 		ds.clientFactory.Client().UserSvcAPI,
-		"docker-svc",
+		"container-svc",
 		"Container Svc",
 		ds.credentialStore,
 	)

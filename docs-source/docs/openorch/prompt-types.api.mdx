@@ -1,0 +1,72 @@
+---
+id: prompt-types
+title: "Prompt Types"
+description: "The only purpose of this 'endpoint' is to export types otherwise not appearing in the API docs."
+sidebar_label: "Prompt Types"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVt9v2zYQ/lcO97QBspQ2K7Dpae4PDFnbOaiTpzgPNHWW2FAkS1J2XEP/+3CUFLtJOgx7KLAXWyB5d999d/eRB6woSK9cVNZgiVcNgTV6D67zzgYCu4HYqAArJFM5q0xcIagA0QLdO+sjxL2jADY25HcqEBgbQThHwitTgzIQG4L55QVUVoZ8Za7Y3eTsxK6yFNi4UabO4a1NjipyZCqwZkAxmWUDSBXDED7HDK0jLziNiwpLdN62Ll7xJmbo6UtHIb621R7LA0prIpnIn8I5rWSyKz4H5uCAQTbUCv5i51iiXX8mGbHv++wxXyn5T4P7MZDyVGEZfUc9LwRnTaDA7l6enfHfty4W7zH794ic5zyjGhzKpjN3T5dbCkHUxEQ8jvZx2kpFbAjeNCIutxLGDVAVxEbEtJfc80EnfAS7yVfmo6qbOLC/JhBbobRYa4KN9bDCyhpa4WCXijISGCI3A/YZRrqPT1Fd0X18k4IxEUKZAGIKmpCwGdguui7Cxts2LYboSbTPh0kLBxRaLzZY3hyQTNdiecNM1Z4CdwWjxdvH1hnez/jwbCu8ES0zeoMJHBf78mj+sPY2+elvn2sOUKbiatLANoeachrgA23JRPiJ8jrPUp4ZMLCfc+wfEjl24NMVXvvluca6MFuhVQV/Lhd//fcWI++tP5mFiePvInnxFMm1EV1srFdfqfphSF49z0kkb4SGJfkteXiXfP4YSH2GgWTnVdynjnxNwpOfd7HB8ia1TxR16rbLJF6w3Epuz5ZiY5Om2aQxTrAFFoPEzcJWFnHUuZCyCsl95zWfKrSVQjc2xPLVry/PXyAHmnAsOa8hlVM0T8aTu3Y1HlkhbKzWdkcVrPcgIDghCYSpINo7MiDkoIHHQb0O5Dkb+GBrZR5UnCdXsf+GREVcBp43LHE+dksqwnG8hVPvaZ/Y5cJ8Oor6u3vROs0T37PLjZ1UXshUU2qFYjaC0BR+D8rUnRbRW5NL257EvbyAZef4WsNsJLCJ0ZVFYR0Z62WTW18X+OQemF/wnQdOi7ixvs1hDlqYuhM1zURtbIhKZlApbpB1F6l6OJqUc90pXfF12SrpLVdRSQqztQhUwfwC1kLekamSpGolyYSkbhPsPy4/wPY8P/sGdCiLYrfb5bXpEujRLhSidnp2np/lTWz1oMm+DYvNcgh7zDnsRF2Tz5Ut0pGCS6Ei84wLR2bhZYMZcscNLJzl5/nZzMv8xW/sl/u1FeYE6djY07X8DYcn1/L/+Rky9ioLeeG0UIaZSFU5jJN7g8fJHQ0CzznPKO8eDlz3a6/7npe/dORZMG4z3Aqv+LZNepFNY8PDfkd7LPHNQOCM+eXCCN0Nc/NI0fpssphLSS7+49lTBbpcLK8ww/X4jmptxTZe7PjpI3ZYYnqIsXUSlbR2wGkUsMTBJ4+wGKXmONwMKZs+OKtpy+xPED4WhyER/uW0njU5HAbp6PuH88PWdy0eFGk4zVW87fv+b0LL4rY=
+sidebar_class_name: "post api-method"
+info_path: docs/openorch/openorch
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Prompt Types"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/prompt-svc/types"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+The only purpose of this "endpoint" is to export types otherwise not appearing in the API docs.
+This endpoint otherwise does nothing. Do not depend on this endpoint, only its types.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object"}}},"description":"Types Request","required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"OK","content":{"application/json":{"schema":{"properties":{"chunk":{"properties":{"messageId":{"description":"MessageId is the ChatSvc Message id that the chunk is part of.\nMight only be available for \"done\" chunks.","type":"string"},"text":{"description":"TextChunk contains a part of the text output from the stream.","type":"string"},"type":{"allOf":[{"enum":["progress","done"],"type":"string","x-enum-varnames":["ChunkTypeProgress","ChunkTypeDone"]}],"description":"Type indicates the type of the stream event (e.g., text, done)."}},"type":"object"}},"type":"object"}}}},"400":{"description":"Invalid JSON","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}},"500":{"description":"Internal Server Error","content":{"application/json":{"schema":{"properties":{"error":{"type":"string"}},"type":"object"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

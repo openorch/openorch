@@ -795,7 +795,7 @@ type ApiListNodesRequest struct {
 	body *RegistrySvcListNodesRequest
 }
 
-// List Registrys Request
+// List Nodes Request
 func (r ApiListNodesRequest) Body(body RegistrySvcListNodesRequest) ApiListNodesRequest {
 	r.body = &body
 	return r

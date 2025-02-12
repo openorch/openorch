@@ -4995,7 +4995,7 @@ paths:
       description: Retrieve a list of nodes.
       operationId: listNodes
       parameters:
-      - description: List Registrys Request
+      - description: List Nodes Request
         in: body
         name: body
         schema:
