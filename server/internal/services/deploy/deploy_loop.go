@@ -305,8 +305,8 @@ func (ns *DeployService) executeStartCommand(
 
 	_, _, err = client.RegistrySvcAPI.RegisterInstance(ctx).Body(
 		openapi.RegistrySvcRegisterInstanceRequest{
-			Id:           sdk.Id("inst"),
-			DeploymentId: deployment.Id,
+			Id:           openapi.PtrString(sdk.Id("inst")),
+			DeploymentId: openapi.PtrString(deployment.Id),
 			Url:          ur.String(),
 			Host:         openapi.PtrString(ur.Hostname()),
 			Port:         definition.HostPort,
