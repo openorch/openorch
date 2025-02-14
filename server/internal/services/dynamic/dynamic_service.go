@@ -80,7 +80,7 @@ func (g *DynamicService) Start() error {
 	}
 	g.publicKey = *pk.PublicKey
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		g.clientFactory.Client().UserSvcAPI,
 		"dynamic-svc",
 		"Dynamic Svc",

@@ -204,7 +204,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     registerInstanceRaw(requestParameters, initOverrides) {
@@ -229,7 +229,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     registerInstance(requestParameters, initOverrides) {

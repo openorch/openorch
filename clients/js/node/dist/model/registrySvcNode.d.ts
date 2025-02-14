@@ -33,7 +33,7 @@ export declare class RegistrySvcNode {
     */
     'region'?: string;
     /**
-    * URL of the daemon running on the node. If not configured defaults to hostname + default OpenOrch daemon port.
+    * URL of the daemon running on the node. If not configured defaults to hostname + default OpenOrch server port.
     */
     'url': string;
     /**

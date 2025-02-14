@@ -86,7 +86,7 @@ func (ds *DockerService) Start() error {
 	ds.lock.Acquire(ctx, "container-svc-start")
 	defer ds.lock.Release(ctx, "container-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		ds.clientFactory.Client().UserSvcAPI,
 		"container-svc",
 		"Container Svc",

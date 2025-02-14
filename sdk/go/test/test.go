@@ -32,7 +32,7 @@ func MakeClients(clientFactory sdk.ClientFactory, num int) ([]*openapi.APIClient
 		password := fmt.Sprintf("testUserPassword%v", i)
 		username := fmt.Sprintf("Test User Name %v", i)
 
-		token, err := sdk.RegisterUser(clientFactory.Client().UserSvcAPI, slug, password, username)
+		token, err := sdk.RegisterUserAccount(clientFactory.Client().UserSvcAPI, slug, password, username)
 		if err != nil {
 			return nil, err
 		}

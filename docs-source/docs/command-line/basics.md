@@ -4,9 +4,9 @@ tags:
   - cli
 ---
 
-# Basics
+# Command line basics
 
-## Installation
+## CLI installation
 
 At the moment you need Go to install the OpenOrch CLI:
 
@@ -14,9 +14,9 @@ At the moment you need Go to install the OpenOrch CLI:
 go install github.com/openorch/openorch/cli/oo@latest
 ```
 
-## Use
+## CLI usage
 
-After the daemon already runs (see [this section about that](/docs/running-the-daemon/using#default-credentials)), you can interact with it through the CLI.
+Assuming the daemon is running already (see [this section about that](/docs/running-the-server/using#default-credentials)), you can interact with it through the CLI.
 
 Let's add the local environment first:
 

@@ -111,7 +111,7 @@ export declare class RegistrySvcApi {
         body: RegistrySvcListNodesResponse;
     }>;
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * @summary Register Instance
      * @param body Register Instance Request
      */

@@ -12,16 +12,16 @@ Whether you're deploying AI or building microservices, OpenOrch is your one-stop
 
 ## Running
 
-The first step is to run the daemon. For details about that, see [Running the Daemon](./category/running-the-daemon/).
+The first step is to run the daemon. For details about that, see [Running the Server](/docs/category/running-the-server).
 
 ## Built-ins
 
-For a quick overview about what the system is capable, read through the [Built-in Service Docs](./category/built-in-services).
+For a quick overview about what the system is capable, read through the [Built-in Service Docs](/docs/category/built-in-services).
 
 ## Building on top
 
-To build and run your own services on OpenOrch, see [Your First Service](./writing-custom-services/your-first-service)
+To build and run your own services on OpenOrch, see [Your First Service](/docs/writing-custom-services/your-first-service)
 
 ## Privacy notice
 
-Privacy is of prime importance to us. To learn more about the privcy aspects of this software, visit the [Privacy Notice](./privacy-notice) page.
+Privacy is of prime importance to us. To learn more about the privcy aspects of this software, visit the [Privacy Notice](/docs/privacy-notice) page.

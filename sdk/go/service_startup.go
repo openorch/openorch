@@ -8,7 +8,7 @@ import (
 	client "github.com/openorch/openorch/clients/go"
 )
 
-func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName string, store datastore.DataStore) (string, error) {
+func RegisterServiceAccount(userService client.UserSvcAPI, serviceSlug, serviceName string, store datastore.DataStore) (string, error) {
 	ctx := context.Background()
 
 	res, err := store.Query().Find()
@@ -44,8 +44,6 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 	}).Execute()
 
 	if err != nil {
-		// logger.Debug("Registering service user", slog.String("serviceSlug", serviceSlug))
-
 		_, _, err = userService.Register(ctx).Body(client.UserSvcRegisterRequest{
 			Slug:     client.PtrString(slug),
 			Name:     client.PtrString(serviceName),
@@ -67,7 +65,7 @@ func RegisterService(userService client.UserSvcAPI, serviceSlug, serviceName str
 	return *loginRsp.Token.Token, nil
 }
 
-func RegisterUser(userService client.UserSvcAPI, slug, password, username string) (string, error) {
+func RegisterUserAccount(userService client.UserSvcAPI, slug, password, username string) (string, error) {
 	_, _, err := userService.Register(context.Background()).Body(client.UserSvcRegisterRequest{
 		Slug:     client.PtrString(slug),
 		Password: client.PtrString(password),

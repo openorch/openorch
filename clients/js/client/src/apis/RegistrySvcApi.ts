@@ -290,7 +290,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     async registerInstanceRaw(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -323,7 +323,7 @@ export class RegistrySvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     async registerInstance(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {

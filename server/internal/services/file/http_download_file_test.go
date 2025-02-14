@@ -64,7 +64,7 @@ func TestDownloadFile(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(
+	token, err := sdk.RegisterUserAccount(
 		options.ClientFactory.Client().UserSvcAPI,
 		"someuser",
 		"pw123",
@@ -166,7 +166,7 @@ func TestDownloadFileWithPartFile(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(
+	token, err := sdk.RegisterUserAccount(
 		options.ClientFactory.Client().UserSvcAPI,
 		"someuser",
 		"pw123",
@@ -255,7 +255,7 @@ func TestDownloadFileWithFullFile(t *testing.T) {
 	err = starterFunc()
 	require.NoError(t, err)
 
-	token, err := sdk.RegisterUser(
+	token, err := sdk.RegisterUserAccount(
 		options.ClientFactory.Client().UserSvcAPI,
 		"someuser",
 		"pw123",

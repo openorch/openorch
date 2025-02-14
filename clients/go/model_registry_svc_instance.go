@@ -34,7 +34,7 @@ type RegistrySvcInstance struct {
 	Ip *string `json:"ip,omitempty"`
 	// Last time the instance gave a sign of life
 	LastHeartbeat *string `json:"lastHeartbeat,omitempty"`
-	// NodeURL is the URL of the OpenOrch daemon the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch daemon URL when registering its instance
+	// NodeURL is the URL of the OpenOrch server the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch server URL when registering its instance
 	NodeUrl *string `json:"nodeUrl,omitempty"`
 	// Path of the instance address. Optional (e.g., \"/api\")
 	Path *string `json:"path,omitempty"`

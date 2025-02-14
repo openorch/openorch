@@ -96,7 +96,7 @@ func (cs *SecretService) Start() error {
 
 	client := cs.clientFactory.Client()
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		client.UserSvcAPI,
 		"secret-svc",
 		"Secret Svc",

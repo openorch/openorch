@@ -20,7 +20,7 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    deploymentId: string;
+    deploymentId?: string;
     /**
      * Host of the instance address. Required if URL is not provided
      * @type {string}
@@ -32,7 +32,7 @@ export interface RegistrySvcRegisterInstanceRequest {
      * @type {string}
      * @memberof RegistrySvcRegisterInstanceRequest
      */
-    id: string;
+    id?: string;
     /**
      * IP of the instance address. Optional: to register by IP instead of host
      * @type {string}

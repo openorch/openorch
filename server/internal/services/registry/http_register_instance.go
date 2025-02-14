@@ -13,7 +13,7 @@ import (
 
 // @ID registerInstance
 // @Summary Register Instance
-// @Description Registers an instance. Idempoent.
+// @Description Registers an instance. Idempotent.
 // @Tags Registry Svc
 // @Accept json
 // @Produce json

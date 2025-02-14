@@ -110,7 +110,7 @@ func (cs *PromptService) Start() error {
 	cs.lock.Acquire(ctx, "prompt-svc-start")
 	defer cs.lock.Release(ctx, "prompt-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		cs.clientFactory.Client().UserSvcAPI,
 		"prompt-svc",
 		"Prompt Svc",

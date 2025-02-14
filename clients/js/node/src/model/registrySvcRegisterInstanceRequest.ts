@@ -16,12 +16,12 @@ export class RegistrySvcRegisterInstanceRequest {
     /**
     * The ID of the deployment that this instance is an instance of.
     */
-    'deploymentId': string;
+    'deploymentId'?: string;
     /**
     * Host of the instance address. Required if URL is not provided
     */
     'host'?: string;
-    'id': string;
+    'id'?: string;
     /**
     * IP of the instance address. Optional: to register by IP instead of host
     */

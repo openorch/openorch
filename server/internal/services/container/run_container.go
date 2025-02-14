@@ -245,10 +245,10 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 		)
 	}
 
-	// If the OpenOrch daemon is running in Docker, we need to find the volume it mounted so we can share
-	// the downloaded files with containers the OpenOrch daemon starts.
-	// If the OpenOrch daemon is running directly on the host, we will just mount the ~/.openorch folder in
-	// the containers the OpenOrch daemon starts.
+	// If the OpenOrch server is running in Docker, we need to find the volume it mounted so we can share
+	// the downloaded files with containers the OpenOrch server starts.
+	// If the OpenOrch server is running directly on the host, we will just mount the ~/.openorch folder in
+	// the containers the OpenOrch server starts.
 
 	openorchVolumeName := d.volumeName
 	if openorchVolumeName == "" {
