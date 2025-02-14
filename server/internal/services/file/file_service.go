@@ -109,7 +109,7 @@ func (dm *FileService) Start() error {
 	dm.dlock.Acquire(ctx, "file-svc-start")
 	defer dm.dlock.Release(ctx, "file-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		dm.clientFactory.Client().UserSvcAPI,
 		"file-svc",
 		"File Svc",

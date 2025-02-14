@@ -66,7 +66,7 @@ Definitions become instances through the [Deployment entity of the Deploy Servic
 
 ### Node
 
-A `Node` is a physical or virtual machine that runs a OpenOrch daemon.
+A `Node` is a physical or virtual machine that runs a OpenOrch server.
 Maintaining a list of nodes is important so the daemon can efficiently distribute workload across the nodes. It's the basis for all distributed features.
 
 This is how a well configured node should look like:
@@ -93,11 +93,11 @@ node_eIfnt9CGJV   http://127.0.0.1:58231      8s ago
 
 For single node setups that can work, but not if you plan to use distributed features.
 
-To configure the nodes, please see the `OPENORCH_URL` and `OPENORCH_NODE_ID` envars [here](/docs/running-the-daemon/backend-environment-variables)
+To configure the nodes, please see the `OPENORCH_URL` and `OPENORCH_NODE_ID` envars [here](/docs/running-the-server/backend-environment-variables)
 
 ## How It Works
 
-The registry is needed when you want to call services not included in the OpenOrch daemon. You can think of the daemon as the standard library and services in the registry as third party libraries.
+The registry is needed when you want to call services not included in the OpenOrch server. You can think of the daemon as the standard library and services in the registry as third party libraries.
 
 When you want to call a service, you can ask the registry to provide you with a list of instance addresses for a service by service slug. Then you can use any of those instance addresses to make a call.
 

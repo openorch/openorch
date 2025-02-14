@@ -12,11 +12,11 @@ tags:
 
 ## `OPENORCH_URL`
 
-The OPENORCH_URL is the internally addressable (non-public-facing) URL of an OpenOrch daemon. It should point to the local OpenOrch instance on each physical node. Ideally, every node should have its own OpenOrch instance.
+The OPENORCH_URL is the internally addressable (non-public-facing) URL of an OpenOrch server. It should point to the local OpenOrch instance on each physical node. Ideally, every node should have its own OpenOrch instance.
 
 This local address serves two purposes:
 
-- It acts as the "self address" for the OpenOrch daemon when calling built-in services (though it can default to 127.0.0.1).
+- It acts as the "self address" for the OpenOrch server when calling built-in services (though it can default to 127.0.0.1).
 - It is also used by custom services when registering themselves, among other tasks.
 
 ## `OPENORCH_NODE_ID`

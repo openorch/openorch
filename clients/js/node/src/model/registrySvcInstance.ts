@@ -39,7 +39,7 @@ export class RegistrySvcInstance {
     */
     'lastHeartbeat'?: string;
     /**
-    * NodeURL is the URL of the OpenOrch daemon the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch daemon URL when registering its instance
+    * NodeURL is the URL of the OpenOrch server the instance is running on. To have a NodeURL the instance must either: - Be deployed by OpenOrch - Declare the OpenOrch server URL when registering its instance
     */
     'nodeUrl'?: string;
     /**

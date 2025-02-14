@@ -87,7 +87,7 @@ func (cs *PolicyService) Start() error {
 		cs.instances = append(cs.instances, instance)
 	}
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		cs.clientFactory.Client().UserSvcAPI,
 		"policy-svc",
 		"Policy Svc",

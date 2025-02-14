@@ -96,12 +96,12 @@ export declare class RegistrySvcApi extends runtime.BaseAPI {
      */
     listNodes(requestParameters?: ListNodesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RegistrySvcListNodesResponse>;
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     registerInstanceRaw(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * Register Instance
      */
     registerInstance(requestParameters: RegisterInstanceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;

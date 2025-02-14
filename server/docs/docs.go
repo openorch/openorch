@@ -3074,7 +3074,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Registers an instance. Idempoent.",
+                "description": "Registers an instance. Idempotent.",
                 "consumes": [
                     "application/json"
                 ],
@@ -7509,7 +7509,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "nodeUrl": {
-                    "description": "NodeURL is the URL of the OpenOrch daemon the instance is running on.\nTo have a NodeURL the instance must either:\n- Be deployed by OpenOrch\n- Declare the OpenOrch daemon URL when registering its instance",
+                    "description": "NodeURL is the URL of the OpenOrch server the instance is running on.\nTo have a NodeURL the instance must either:\n- Be deployed by OpenOrch\n- Declare the OpenOrch server URL when registering its instance",
                     "type": "string",
                     "example": "https://myserver.com:58231"
                 },
@@ -7706,7 +7706,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "url": {
-                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default OpenOrch daemon port.",
+                    "description": "URL of the daemon running on the node.\nIf not configured defaults to hostname + default OpenOrch server port.",
                     "type": "string"
                 },
                 "usage": {
@@ -7750,8 +7750,6 @@ const docTemplate = `{
         "registry_svc.RegisterInstanceRequest": {
             "type": "object",
             "required": [
-                "deploymentId",
-                "id",
                 "url"
             ],
             "properties": {

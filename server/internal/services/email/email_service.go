@@ -76,7 +76,7 @@ func (fs *EmailService) Start() error {
 	fs.lock.Acquire(ctx, "email-svc-start")
 	defer fs.lock.Release(ctx, "email-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		fs.clientFactory.Client().UserSvcAPI,
 		"email-svc",
 		"Email Svc",

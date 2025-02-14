@@ -66,7 +66,7 @@ func (fs *FirehoseService) Start() error {
 	fs.lock.Acquire(ctx, "firehose-svc-start")
 	defer fs.lock.Release(ctx, "firehose-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		fs.clientFactory.Client().UserSvcAPI,
 		"firehose-svc",
 		"Firehose Svc",

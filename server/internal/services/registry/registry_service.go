@@ -123,7 +123,7 @@ func (ns *RegistryService) Start() error {
 	ns.lock.Acquire(ctx, "registry-svc-start")
 	defer ns.lock.Release(ctx, "registry-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		ns.clientFactory.Client().UserSvcAPI,
 		"registry-svc",
 		"Registry Svc",

@@ -96,7 +96,7 @@ type RegistrySvcAPI interface {
 	/*
 	RegisterInstance Register Instance
 
-	Registers an instance. Idempoent.
+	Registers an instance. Idempotent.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiRegisterInstanceRequest
@@ -962,7 +962,7 @@ func (r ApiRegisterInstanceRequest) Execute() (map[string]interface{}, *http.Res
 /*
 RegisterInstance Register Instance
 
-Registers an instance. Idempoent.
+Registers an instance. Idempotent.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRegisterInstanceRequest

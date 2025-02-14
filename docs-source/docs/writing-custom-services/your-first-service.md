@@ -9,15 +9,18 @@ tags:
 While OpenOrch itself is written in Go, services that run on OpenOrch can be written in any language.
 A service only needs a few things to fully function:
 
-- Must register a user account. This is just like a human user account (for more info about this, see the [User Svc](/docs/built-in-services/user-svc))
-- Must register its instance in the registry so OpenOrch knows how where to proxy the requests to.
+- Register a user account, just like a human user. For details, see the [User Svc](/docs/built-in-services/user-svc).
+- Register its instance in the registry so OpenOrch knows where to route requests.
 
 ## A Go example
 
-Below is an example Go service that does the following things:
+The following Go service demonstrates these steps:
 
-- Registers a user for itself with the slug `skeleton-svc`
-- Registers/updates its own URL in the [Registry](/docs/built-in-services/registry-svc).
+- Registers itself as a user with the slug `skeleton-svc`
+- Registers or updates its URL (`http://127.0.0.1:9311`) in the [Registry](/docs/built-in-services/registry-svc).
+
+You may notice that the following code uses a "Go SDK," but it's simply a set of convenience functions built on top of the OpenOrch API.
+OpenOrch is language-agnostic and can be used with any language, even if no SDK is available in the repository.
 
 ```go
 package main
@@ -74,7 +77,7 @@ func NewService() (*SkeletonService, error) {
 	}
 
 	client := sdk.NewApiClientFactory(spUrl).Client()
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		client.UserSvcAPI,
 		"skeleton-svc",
 		"Skeleton Svc",
@@ -85,9 +88,11 @@ func NewService() (*SkeletonService, error) {
 	}
 
 	client = sdk.NewApiClientFactory(spUrl).Client(sdk.WithToken(token))
-	_, _, err = client.RegistrySvcAPI.RegisterInstance(context.Background()).Body(openapi.RegistrySvcRegisterInstanceRequest{
-		Url: selfUrl,
-	}).Execute()
+	_, _, err = client.RegistrySvcAPI.
+		RegisterInstance(context.Background()).
+		Body(openapi.RegistrySvcRegisterInstanceRequest{
+			Url: selfUrl,
+		}).Execute()
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot register instance")
 	}
@@ -111,21 +116,21 @@ Just make sure you run it with the appropriate envars:
 OPENORCH_URL=http://127.0.0.1:58231 SELF_URL=http://127.0.0.1:9311 go run main.go
 ```
 
-Once it's running you will be able to call the Superplatform daemon proxy and that will proxy to your skeleton service:
+Once it's running you will be able to call the OpenOrch server proxy and that will proxy to your skeleton service:
 
 ```sh
-# 127.0.0.1:58231 here is the address of the OpenOrch daemon
+# 127.0.0.1:58231 here is the address of the OpenOrch server
 $ curl 127.0.0.1:58231/skeleton-svc/hello
 {"hello": "world"}
 ```
 
-This is so you don't have to expose your skeleton service to the outside world, only your Superplatform.
+This is so you don't have to expose your skeleton service to the outside world, only your OpenOrch server.
 
 Let's recap how the proxying works:
 
 - Service registers an account, acquires the `skeleton-svc` slug.
-- Service calls the OpenOrch [Regustry Svc](/docs/built-in-services/registry-svc) to tell the system an instance of the Skeleton service is available under the URL `http://127.0.0.1:9311`
-- When you curl the OpenOrch daemon with a path like `127.0.0.1:58231/skeleton-svc/hello`, the first section of the path will be a user account slug. The daemon checks what instances are owned by that slug and routes the request to one of the instances.
+- Service calls the OpenOrch [Registry Svc](/docs/built-in-services/registry-svc) to tell the system an instance of the Skeleton service is available under the URL `http://127.0.0.1:9311`
+- When you curl the OpenOrch server with a path like `127.0.0.1:58231/skeleton-svc/hello`, the first section of the path will be a user account slug. The daemon checks what instances are owned by that slug and routes the request to one of the instances.
 
 ```sh
 $ oo instance ls
@@ -137,7 +142,7 @@ inst_eHFTNvAlk9   http://127.0.0.1:9311   Healthy   skeleton-svc     10s ago
 
 ### Instance registration
 
-Like most other things on the platform, service instances become owned by a user account slug. When the skeleton service calls RegisterInstance, the host will be associated with the `skeleton-svc` slug.
+Like most other things on the platform, service instances become owned by a user account slug. When the skeleton service calls [RegisterInstance](/docs/openorch/register-instance), the host will be associated with the `skeleton-svc` slug.
 
 Updates to this host won't be possible unless the caller is the skeleton service (or the caller is an admin). The service becomes the owner of that URL essentially.
 

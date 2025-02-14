@@ -5,7 +5,7 @@ tags:
   - deploy
 ---
 
-# Docker Compose
+# Running the OpenOrch server with Docker Compose and prebuilt images
 
 This deployment method is one step above local development in terms of sophistication. It’s suitable for a development server or simple production environments.
 
@@ -25,12 +25,17 @@ services:
     ports:
       - "3901:80"
     environment:
-      # The `BACKEND_ADDRESS` must be accessible from the   browser.
-      # It is not an internal address, it's the address the   browser will make API requests to.
+      # `BACKEND_ADDRESS` must be reachable from the browser.
+      # This is the API the browser will communicate with, not an internal address.
       - BACKEND_ADDRESS=http://127.0.0.1:58231
 
   openorch-backend:
-    image: crufter/openorch-backend:latest
+    image: crufter/openorch-backend:default-1-latest
+    # Use a version that matches your GPU architecture for GPU acceleration, e.g.:
+    # crufter/openorch-backend:cuda-12.2.0-latest
+    # For available versions, see:
+    # - https://hub.docker.com/r/crufter/openorch-backend/tags
+    # - The build file `openorch-docker-build.yaml`
     ports:
       - "58231:58231"
     volumes:
@@ -40,8 +45,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # We mount a volume so data will be persisted
       - openorch-data:/root/.openorch
-    # For GPU acceleration uncomment the lines below and set the
-    # OPENORCH_GPU_PLATFORM envar.
+    # Grants OpenOrch access to GPU metrics.
+    # Containers launched by OpenOrch can still use GPU acceleration even if OpenOrch lacks direct GPU access.
     # deploy:
     #   resources:
     #     reservations:
@@ -50,11 +55,11 @@ services:
     #           count: all
     #           capabilities: [gpu]
     environment:
-      # This volume will be mounted by the LLM containers to access the models downloaded by OpenOrch.
+      # Volume mounted by AI containers launched by OpenOrch to access models downloaded by the OpenOrch File Svc.
       - OPENORCH_VOLUME_NAME=openorch-data
       #
-      # GPU Acceleration for NVIDIA GPUs
-      # Uncomment this envar for NVIDIA GPUs.
+      # Enables GPU acceleration for NVIDIA GPUs.
+      # This flag controls GPU access for AI containers launched by OpenOrch.
       #
       # - OPENORCH_GPU_PLATFORM=cuda
 ```
@@ -67,7 +72,7 @@ docker compose up
 
 ## Once it's running
 
-After the containers successfully start, you can go to `127.0.0.1:3901` and log in with the [Default Credentials](/docs/running-the-daemon/using#default-credentials).
+After the containers successfully start, you can go to `127.0.0.1:3901` and log in with the [Default Credentials](/docs/running-the-server/using#default-credentials).
 
 ## Configuring
 

@@ -471,7 +471,7 @@ export class RegistrySvcApi {
         });
     }
     /**
-     * Registers an instance. Idempoent.
+     * Registers an instance. Idempotent.
      * @summary Register Instance
      * @param body Register Instance Request
      */

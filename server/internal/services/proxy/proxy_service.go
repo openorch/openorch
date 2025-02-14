@@ -167,7 +167,7 @@ func (cs *ProxyService) Start() error {
 
 	client := cs.clientFactory.Client()
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		client.UserSvcAPI,
 		"proxy-svc",
 		"Proxy Svc",

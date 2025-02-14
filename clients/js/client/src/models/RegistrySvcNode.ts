@@ -66,7 +66,7 @@ export interface RegistrySvcNode {
     region?: string;
     /**
      * URL of the daemon running on the node.
-     * If not configured defaults to hostname + default OpenOrch daemon port.
+     * If not configured defaults to hostname + default OpenOrch server port.
      * @type {string}
      * @memberof RegistrySvcNode
      */

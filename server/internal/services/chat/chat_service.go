@@ -76,7 +76,7 @@ func (cs *ChatService) Start() error {
 	cs.lock.Acquire(ctx, "chat-svc-start")
 	defer cs.lock.Release(ctx, "chat-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		cs.clientFactory.Client().UserSvcAPI,
 		"chat-svc",
 		"Chat Svc",

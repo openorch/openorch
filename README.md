@@ -165,7 +165,7 @@ OpenOrch is a microservices-based AI platform, the seeds of which began taking s
 
 ## Run On Your Servers
 
-See the [Running the daemon](https://openorch.org/docs/category/running-the-daemon) page to help you get started.
+See the [Running the daemon](https://openorch.org/docs/category/running-the-server) page to help you get started.
 
 ## Services
 

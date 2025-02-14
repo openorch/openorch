@@ -107,7 +107,7 @@ func (cs *ConfigService) Start() error {
 
 	client := cs.clientFactory.Client()
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		client.UserSvcAPI,
 		"config-svc",
 		"Config Svc",

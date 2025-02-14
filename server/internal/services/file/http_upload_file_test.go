@@ -42,7 +42,7 @@ func TestUploadFile(t *testing.T) {
 	hs.UpdateHandler(universe)
 	require.NoError(t, starterFunc())
 
-	token, err := sdk.RegisterUser(
+	token, err := sdk.RegisterUserAccount(
 		options.ClientFactory.Client().UserSvcAPI,
 		"someuser",
 		"pw123",

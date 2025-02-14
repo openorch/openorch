@@ -10,11 +10,14 @@ tags:
   - file serve
   - file serving
   - file proxy
+  - non-distributed
 ---
 
 # File Svc
 
 The File Service handles file-related operations, including downloading files from the internet (to cache them for faster access), accepting file uploads, and serving both downloaded and uploaded files.
+
+The File Svc is distributed. Downloads and uploads may reside on any node in the system, any File Svc node will be able to proxy them to you.
 
 > This page is a high level overview of the `File Svc`. For more details, please see the [File Svc API documentation](/docs/openorch/download-file).
 

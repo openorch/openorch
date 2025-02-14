@@ -76,7 +76,7 @@ func (ns *DeployService) Start() error {
 	ns.lock.Acquire(ctx, "deploy-svc-start")
 	defer ns.lock.Release(ctx, "deploy-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		ns.clientFactory.Client().UserSvcAPI,
 		"deploy-svc",
 		"Deploy Svc",

@@ -45,7 +45,7 @@ type Options struct {
 	// NodeOptions contains settings coming from envars
 	NodeOptions *node_types.Options
 
-	// URL of the local OpenOrch daemon instance
+	// URL of the local OpenOrch server instance
 	Url string
 
 	// Test mode if true will cause the localstore to

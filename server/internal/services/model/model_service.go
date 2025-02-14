@@ -100,7 +100,7 @@ func (ms *ModelService) Start() error {
 	ms.lock.Acquire(ctx, "model-svc-start")
 	defer ms.lock.Release(ctx, "model-svc-start")
 
-	token, err := sdk.RegisterService(
+	token, err := sdk.RegisterServiceAccount(
 		ms.clientFactory.Client().UserSvcAPI,
 		"model-svc",
 		"Model Svc",

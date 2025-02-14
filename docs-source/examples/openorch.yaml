@@ -1705,10 +1705,10 @@ definitions:
         type: string
       nodeUrl:
         description: |-
-          NodeURL is the URL of the OpenOrch daemon the instance is running on.
+          NodeURL is the URL of the OpenOrch server the instance is running on.
           To have a NodeURL the instance must either:
           - Be deployed by OpenOrch
-          - Declare the OpenOrch daemon URL when registering its instance
+          - Declare the OpenOrch server URL when registering its instance
         example: https://myserver.com:58231
         type: string
       path:
@@ -1870,7 +1870,7 @@ definitions:
       url:
         description: |-
           URL of the daemon running on the node.
-          If not configured defaults to hostname + default OpenOrch daemon port.
+          If not configured defaults to hostname + default OpenOrch server port.
         type: string
       usage:
         allOf:
@@ -1933,8 +1933,6 @@ definitions:
         example: https://myserver.com:5981
         type: string
     required:
-    - deploymentId
-    - id
     - url
     type: object
   registry_svc.RegisterInstanceResponse:
@@ -4786,7 +4784,7 @@ paths:
     put:
       consumes:
       - application/json
-      description: Registers an instance. Idempoent.
+      description: Registers an instance. Idempotent.
       operationId: registerInstance
       parameters:
       - description: Register Instance Request
