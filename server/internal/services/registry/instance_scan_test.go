@@ -92,9 +92,9 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			_, _, err := adminClient.RegistrySvcAPI.RegisterInstance(ctx).
 				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
-						Id:           "test-a",
+						Id:           openapi.PtrString("test-a"),
 						Url:          "http://test-a",
-						DeploymentId: "test-deployment",
+						DeploymentId: openapi.PtrString("test-deployment"),
 					},
 				).
 				Execute()
@@ -125,9 +125,9 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
 				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
-						Id:           "test-a",
+						Id:           openapi.PtrString("test-a"),
 						Url:          healthServer.URL,
-						DeploymentId: "test-deployment",
+						DeploymentId: openapi.PtrString("test-deployment"),
 					},
 				).
 				Execute()
@@ -153,9 +153,9 @@ var _ = ginkgo.Describe("Instance Scan", func() {
 			_, _, err = adminClient.RegistrySvcAPI.RegisterInstance(ctx).
 				Body(
 					openapi.RegistrySvcRegisterInstanceRequest{
-						Id:           "test-a",
+						Id:           openapi.PtrString("test-a"),
 						Url:          healthServer.URL,
-						DeploymentId: "test-deployment",
+						DeploymentId: openapi.PtrString("test-deployment"),
 					},
 				).
 				Execute()
