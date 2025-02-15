@@ -21,7 +21,7 @@ Originally built as a local ChatGPT alternative, OpenOrch rapidly evolved into a
 
 Highlights:
 
-- OpenOrch is like the "Angular" of the backend—a complete, language-agnostic framework designed for distributed systems and microservices.
+- OpenOrch is like a web framework, but built for microservices and distributed environments. We like to joke that it’s the Angular of the backend.
 - It includes built-in services for common tasks like file uploads, downloads, user management, and more.
 - Reduces infrastructure complexity by functioning as a container orchestrator, reverse proxy, and more.
 - Supports multiple databases with its own built-in ORM.
