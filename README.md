@@ -61,7 +61,7 @@ npm i -s @openorch/client
 
 Make sure your `package.json` contains `"type": "module"`, put the following snippet into `index.js`
 
-```ts
+```js
 import { UserSvcApi, PromptSvcApi, Configuration } from "@openorch/client";
 
 async function testDrive() {
@@ -97,7 +97,7 @@ testDrive();
 
 and run
 
-```sh
+```js
 $ node index.js
 {
   prompt: {
