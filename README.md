@@ -21,6 +21,7 @@ Originally built as a local ChatGPT alternative, OpenOrch rapidly evolved into a
 
 Highlights:
 
+- Can be used as an on-premise ChatGPT alternative.
 - OpenOrch is like a web framework, but built for microservices and distributed environments. We like to think of it as the Angular of the backend—designed for large, scalable enterprise codebases, offering more flexibility than traditional monolithic web frameworks.
 - It includes built-in services for common tasks like file uploads, downloads, user management, and more.
 - Reduces infrastructure complexity by functioning as a container orchestrator, reverse proxy, and more.
