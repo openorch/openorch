@@ -17,16 +17,30 @@
   </div>
 </p>
 
-Originally built as a local ChatGPT alternative, OpenOrch rapidly evolved into a powerful, language-agnostic microservices platform for AI application development.
+Originally built as a local ChatGPT alternative, OpenOrch quickly evolved into a powerful, language-agnostic microservices platform for AI application development.
 
-Highlights:
+## Why We Built OpenOrch
 
-- Can be used as an on-premise ChatGPT alternative.
-- OpenOrch is like a web framework, but built for microservices and distributed environments. We like to think of it as the Angular of the backend—designed for large, scalable enterprise codebases, offering more flexibility than traditional monolithic web frameworks.
-- It includes built-in services for common tasks like file uploads, downloads, user management, and more.
-- Reduces infrastructure complexity by functioning as a container orchestrator, reverse proxy, and more.
-- Supports multiple databases with its own built-in ORM.
-- Designed to integrate with various AI platforms, including LlamaCpp and StableDiffusion.
+We started with simple goals:
+
+- Run AI models locally without relying on cloud-based services.
+- Expose those models over a network for easy access.
+- Make it work with multiple GPUs and machines.
+
+As we began building AI applications on top, we quickly realized:
+
+- Despite years (decades) of experience with microservices, we still weren’t happy with the available platforms—so we built one that actually fit our needs.
+- With over a decade of experience in microservices and distributed systems, we turned OpenOrch into a flexible, scalable backend framework.
+- We also started implementing features that let us eliminate infrastructure components we disliked setting up every time—like Kubernetes, Docker Compose/Swarm, service discovery, and reverse proxies.
+
+## Highlights
+
+- On-premise ChatGPT alternative – Run your AI models locally.
+- A "microservices-first" web framework – Think of it like Angular for the backend, built for large, scalable enterprise codebases.
+- Out-of-the-box services – Includes built-in file uploads, downloads, user management, and more.
+- Infrastructure simplification – Acts as a container orchestrator, reverse proxy, and more.
+- Multi-database support – Comes with its own built-in ORM.
+- AI integration – Works with LlamaCpp, StableDiffusion, and other AI platforms.
 
 ## Starting
 
@@ -55,7 +69,7 @@ Click on the big "AI" button and download a model first. Don't worry, this model
 
 ### Clients
 
-For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done with clients but would be longer).
+For brevity the below example assumes you went to the UI and downloaded a model already. (That could also be done in code with the clients but then the code snippet would be longer).
 
 Let's do a sync prompting in JS. In your project run
 

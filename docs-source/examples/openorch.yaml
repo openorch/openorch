@@ -2734,8 +2734,7 @@ info:
     email: sales@singulatron.com
     name: API Support
     url: http://openorch.org/
-  description: AI app platform. A language-agnostic, distributed platform for building
-    microservices-based AI backends.
+  description: A language-agnostic microservices framework for AI applications.
   license:
     name: AGPL v3.0
     url: https://www.gnu.org/licenses/agpl-3.0.html

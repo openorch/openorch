@@ -8966,7 +8966,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "OpenOrch",
-	Description:      "AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.",
+	Description:      "A language-agnostic microservices framework for AI applications.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

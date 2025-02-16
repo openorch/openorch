@@ -9,7 +9,7 @@ import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 const config: Config = {
   title: "OpenOrch",
   tagline:
-    "AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.",
+    "A language-agnostic microservices framework for AI applications.",
   url: "https://openorch.org",
   baseUrl: "/",
   onBrokenLinks: "throw",
