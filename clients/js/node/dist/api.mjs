@@ -3,7 +3,7 @@ import localVarRequest from 'request';
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -28,7 +28,7 @@ ChatSvcAddMessageRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -53,7 +53,7 @@ ChatSvcAddThreadRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -78,7 +78,7 @@ ChatSvcAddThreadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -103,7 +103,7 @@ ChatSvcEventMessageAdded.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -128,7 +128,7 @@ ChatSvcEventThreadAdded.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -153,7 +153,7 @@ ChatSvcEventThreadUpdate.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -183,7 +183,7 @@ ChatSvcGetMessageResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -208,7 +208,7 @@ ChatSvcGetMessagesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -238,7 +238,7 @@ ChatSvcGetThreadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -263,7 +263,7 @@ ChatSvcGetThreadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -318,7 +318,7 @@ ChatSvcMessage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -368,7 +368,7 @@ ChatSvcThread.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -393,7 +393,7 @@ ChatSvcUpdateThreadRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -433,7 +433,7 @@ ConfigSvcConfig.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -458,7 +458,7 @@ ConfigSvcGetConfigResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -483,7 +483,7 @@ ConfigSvcSaveConfigRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -518,7 +518,7 @@ ContainerSvcBuildImageRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -543,7 +543,7 @@ ContainerSvcContainerIsRunningResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -578,7 +578,7 @@ ContainerSvcDockerInfo.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -603,7 +603,7 @@ ContainerSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -638,7 +638,7 @@ ContainerSvcGetContainerSummaryResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -663,7 +663,7 @@ ContainerSvcGetHostResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -688,7 +688,7 @@ ContainerSvcGetInfoResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -713,7 +713,7 @@ ContainerSvcImagePullableResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -768,7 +768,7 @@ ContainerSvcRunContainerOptions.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -808,7 +808,7 @@ ContainerSvcRunContainerRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -833,7 +833,7 @@ ContainerSvcRunContainerResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -863,7 +863,7 @@ ContainerSvcRunInfo.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -893,7 +893,7 @@ ContainerSvcStopContainerRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -928,7 +928,7 @@ DatastoreFilter.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -948,7 +948,7 @@ var DatastoreOp;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -983,7 +983,7 @@ DatastoreOrderBy.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1028,7 +1028,7 @@ DatastoreQuery.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1063,7 +1063,7 @@ DeploySvcAutoScalingConfig.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1088,7 +1088,7 @@ DeploySvcDeleteDeploymentRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1168,7 +1168,7 @@ DeploySvcDeployment.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1188,7 +1188,7 @@ var DeploySvcDeploymentStatus;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1223,7 +1223,7 @@ DeploySvcDeploymentStrategy.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1248,7 +1248,7 @@ DeploySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1273,7 +1273,7 @@ DeploySvcListDeploymentsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1308,7 +1308,7 @@ DeploySvcResourceLimits.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1333,7 +1333,7 @@ DeploySvcSaveDeploymentRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1350,7 +1350,7 @@ var DeploySvcStrategyType;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1380,7 +1380,7 @@ DeploySvcTargetRegion.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1435,7 +1435,7 @@ DynamicSvcCreateObjectFields.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1460,7 +1460,7 @@ DynamicSvcCreateObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1485,7 +1485,7 @@ DynamicSvcCreateObjectResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1515,7 +1515,7 @@ DynamicSvcDeleteObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1540,7 +1540,7 @@ DynamicSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1605,7 +1605,7 @@ DynamicSvcObject.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1640,7 +1640,7 @@ DynamicSvcQueryRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1665,7 +1665,7 @@ DynamicSvcQueryResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1700,7 +1700,7 @@ DynamicSvcUpdateObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1725,7 +1725,7 @@ DynamicSvcUpsertObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1750,7 +1750,7 @@ DynamicSvcUpsertObjectResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1775,7 +1775,7 @@ EmailSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1810,7 +1810,7 @@ EmailSvcFile.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1875,7 +1875,7 @@ EmailSvcSendEmailRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1905,7 +1905,7 @@ EmailSvcSendEmailResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1980,7 +1980,7 @@ FileSvcDownload.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2010,7 +2010,7 @@ FileSvcDownloadFileRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2035,7 +2035,7 @@ FileSvcDownloadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2060,7 +2060,7 @@ FileSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2090,7 +2090,7 @@ FileSvcGetDownloadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2125,7 +2125,7 @@ FileSvcListUploadsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2150,7 +2150,7 @@ FileSvcListUploadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2215,7 +2215,7 @@ FileSvcUpload.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2240,7 +2240,7 @@ FileSvcUploadFileResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2265,7 +2265,7 @@ FirehoseSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2295,7 +2295,7 @@ FirehoseSvcEvent.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2320,7 +2320,7 @@ FirehoseSvcEventPublishRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2350,7 +2350,7 @@ ModelSvcArchitectures.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2390,7 +2390,7 @@ ModelSvcContainer.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2425,7 +2425,7 @@ ModelSvcCudaParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2450,7 +2450,7 @@ ModelSvcDefaultParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2475,7 +2475,7 @@ ModelSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2510,7 +2510,7 @@ ModelSvcGetModelResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2535,7 +2535,7 @@ ModelSvcListModelsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2560,7 +2560,7 @@ ModelSvcListPlatformsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2680,7 +2680,7 @@ ModelSvcModel.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2715,7 +2715,7 @@ ModelSvcModelStatus.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2760,7 +2760,7 @@ ModelSvcPlatform.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2785,7 +2785,7 @@ ModelSvcStatusResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2810,7 +2810,7 @@ PolicySvcBlocklistParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2850,7 +2850,7 @@ PolicySvcCheckRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2875,7 +2875,7 @@ PolicySvcCheckResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2892,7 +2892,7 @@ var PolicySvcEntity;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2917,7 +2917,7 @@ PolicySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2957,7 +2957,7 @@ PolicySvcInstance.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2987,7 +2987,7 @@ PolicySvcParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3027,7 +3027,7 @@ PolicySvcRateLimitParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3044,7 +3044,7 @@ var PolicySvcScope;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3061,7 +3061,7 @@ var PolicySvcTemplateId;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3086,7 +3086,7 @@ PolicySvcUpsertInstanceRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3116,7 +3116,7 @@ PromptSvcEngineParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3141,7 +3141,7 @@ PromptSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3166,7 +3166,7 @@ PromptSvcListPromptsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3201,7 +3201,7 @@ PromptSvcListPromptsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3226,7 +3226,7 @@ PromptSvcLlamaCppParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3256,7 +3256,7 @@ PromptSvcParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3366,7 +3366,7 @@ PromptSvcPrompt.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3426,7 +3426,7 @@ PromptSvcPromptRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3456,7 +3456,7 @@ PromptSvcPromptResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3477,7 +3477,7 @@ var PromptSvcPromptStatus;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3520,7 +3520,7 @@ var PromptSvcPromptType;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3545,7 +3545,7 @@ PromptSvcRemovePromptRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3570,7 +3570,7 @@ PromptSvcStableDiffusionParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3605,7 +3605,7 @@ PromptSvcStreamChunk.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3622,7 +3622,7 @@ var PromptSvcStreamChunkType;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3727,7 +3727,7 @@ PromptSvcTextToImageParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3752,7 +3752,7 @@ PromptSvcTextToTextParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3777,7 +3777,7 @@ PromptSvcTypesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3817,7 +3817,7 @@ RegistrySvcAPISpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3847,7 +3847,7 @@ RegistrySvcClient.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3902,7 +3902,7 @@ RegistrySvcDefinition.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3927,7 +3927,7 @@ RegistrySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4017,7 +4017,7 @@ RegistrySvcGPU.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4047,7 +4047,7 @@ RegistrySvcImageSpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4137,7 +4137,7 @@ RegistrySvcInstance.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4157,7 +4157,7 @@ var RegistrySvcInstanceStatus;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4191,7 +4191,7 @@ var RegistrySvcLanguage;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4216,7 +4216,7 @@ RegistrySvcListDefinitionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4241,7 +4241,7 @@ RegistrySvcListInstancesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4266,7 +4266,7 @@ RegistrySvcListNodesRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4291,7 +4291,7 @@ RegistrySvcListNodesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4346,7 +4346,7 @@ RegistrySvcNode.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4371,7 +4371,7 @@ RegistrySvcNodeSelfResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4406,7 +4406,7 @@ RegistrySvcProcess.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4466,7 +4466,7 @@ RegistrySvcRegisterInstanceRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4511,7 +4511,7 @@ RegistrySvcRepositorySpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4546,7 +4546,7 @@ RegistrySvcResourceUsage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4571,7 +4571,7 @@ RegistrySvcSaveDefinitionRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4606,7 +4606,7 @@ RegistrySvcUsage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4626,7 +4626,7 @@ var SecretSvcChecksumAlgorithm;
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4656,7 +4656,7 @@ SecretSvcDecryptValueRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4686,7 +4686,7 @@ SecretSvcDecryptValueResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4716,7 +4716,7 @@ SecretSvcEncryptValueRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4746,7 +4746,7 @@ SecretSvcEncryptValueResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4771,7 +4771,7 @@ SecretSvcIsSecureResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4806,7 +4806,7 @@ SecretSvcListSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4831,7 +4831,7 @@ SecretSvcListSecretsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4871,7 +4871,7 @@ SecretSvcRemoveSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4896,7 +4896,7 @@ SecretSvcSaveSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4981,7 +4981,7 @@ SecretSvcSecret.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5036,7 +5036,7 @@ SourceSvcCheckoutRepoRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5061,7 +5061,7 @@ SourceSvcCheckoutRepoResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5086,7 +5086,7 @@ SourceSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5381,7 +5381,7 @@ StableDiffusionTxt2ImgRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5406,7 +5406,7 @@ UserSvcAddUserToOrganizationRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5431,7 +5431,7 @@ UserSvcAssignPermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5486,7 +5486,7 @@ UserSvcAuthToken.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5521,7 +5521,7 @@ UserSvcChangePasswordRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5586,7 +5586,7 @@ UserSvcContact.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5621,7 +5621,7 @@ UserSvcCreateOrganizationRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5661,7 +5661,7 @@ UserSvcCreateRoleRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5686,7 +5686,7 @@ UserSvcCreateRoleResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5721,7 +5721,7 @@ UserSvcCreateUserRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5746,7 +5746,7 @@ UserSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5771,7 +5771,7 @@ UserSvcGetPermissionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5796,7 +5796,7 @@ UserSvcGetPublicKeyResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5821,7 +5821,7 @@ UserSvcGetRolesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5846,7 +5846,7 @@ UserSvcGetUsersRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5881,7 +5881,7 @@ UserSvcGetUsersResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5916,7 +5916,7 @@ UserSvcGrant.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5946,7 +5946,7 @@ UserSvcIsAuthorizedRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5976,7 +5976,7 @@ UserSvcIsAuthorizedResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6006,7 +6006,7 @@ UserSvcListGrantsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6031,7 +6031,7 @@ UserSvcListGrantsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6066,7 +6066,7 @@ UserSvcLoginRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6091,7 +6091,7 @@ UserSvcLoginResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6141,7 +6141,7 @@ UserSvcOrganization.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6191,7 +6191,7 @@ UserSvcPermission.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6221,7 +6221,7 @@ UserSvcPermissionLink.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6256,7 +6256,7 @@ UserSvcReadUserByTokenResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6296,7 +6296,7 @@ UserSvcRegisterRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6321,7 +6321,7 @@ UserSvcRegisterResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6351,7 +6351,7 @@ UserSvcResetPasswordRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6401,7 +6401,7 @@ UserSvcRole.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6426,7 +6426,7 @@ UserSvcSaveGrantsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6451,7 +6451,7 @@ UserSvcSavePermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6476,7 +6476,7 @@ UserSvcSavePermissionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6506,7 +6506,7 @@ UserSvcSaveProfileRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6531,7 +6531,7 @@ UserSvcSetRolePermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7018,7 +7018,7 @@ class VoidAuth {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7753,7 +7753,7 @@ class ChatSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7951,7 +7951,7 @@ class ConfigSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -8549,7 +8549,7 @@ class ContainerSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -8804,7 +8804,7 @@ class DeploySvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -9207,7 +9207,7 @@ class DynamicSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -9340,7 +9340,7 @@ class EmailSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -9933,7 +9933,7 @@ class FileSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10126,7 +10126,7 @@ class FirehoseSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10704,7 +10704,7 @@ class ModelSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10910,7 +10910,7 @@ class PolicySvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -11307,7 +11307,7 @@ class PromptSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -11981,7 +11981,7 @@ class RegistrySvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -12439,7 +12439,7 @@ class SecretSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -12572,7 +12572,7 @@ class SourceSvcApi {
 
 /**
  * OpenOrch
- * AI app platform. A language-agnostic, distributed platform for building microservices-based AI backends.
+ * A language-agnostic microservices framework for AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
