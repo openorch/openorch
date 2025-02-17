@@ -1123,7 +1123,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.CreateObjectRequest"
+                            "$ref": "#/definitions/data_svc.CreateObjectRequest"
                         }
                     }
                 ],
@@ -1131,25 +1131,25 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.CreateObjectResponse"
+                            "$ref": "#/definitions/data_svc.CreateObjectResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     }
                 }
@@ -1188,7 +1188,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpsertObjectRequest"
+                            "$ref": "#/definitions/data_svc.UpsertObjectRequest"
                         }
                     }
                 ],
@@ -1196,25 +1196,25 @@
                     "200": {
                         "description": "Successful creation or update of object",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpsertObjectResponse"
+                            "$ref": "#/definitions/data_svc.UpsertObjectResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     }
                 }
@@ -1245,7 +1245,7 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.QueryRequest"
+                            "$ref": "#/definitions/data_svc.QueryRequest"
                         }
                     }
                 ],
@@ -1253,25 +1253,25 @@
                     "200": {
                         "description": "Successful retrieval of objects",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.QueryResponse"
+                            "$ref": "#/definitions/data_svc.QueryResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     }
                 }
@@ -1303,7 +1303,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.DeleteObjectRequest"
+                            "$ref": "#/definitions/data_svc.DeleteObjectRequest"
                         }
                     }
                 ],
@@ -1311,25 +1311,25 @@
                     "200": {
                         "description": "Successful deletion of object",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.DeleteObjectResponse"
+                            "$ref": "#/definitions/data_svc.DeleteObjectResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     }
                 }
@@ -1361,7 +1361,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpdateObjectRequest"
+                            "$ref": "#/definitions/data_svc.UpdateObjectRequest"
                         }
                     }
                 ],
@@ -1369,25 +1369,25 @@
                     "200": {
                         "description": "Successful update of objects",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpdateObjectResponse"
+                            "$ref": "#/definitions/data_svc.UpdateObjectResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid JSON",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
                         }
                     }
                 }
@@ -5605,6 +5605,219 @@
         "container_svc.StopContainerResponse": {
             "type": "object"
         },
+        "data_svc.CreateObjectFields": {
+            "type": "object",
+            "required": [
+                "data",
+                "table"
+            ],
+            "properties": {
+                "authors": {
+                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "deleters": {
+                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "readers": {
+                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "table": {
+                    "type": "string"
+                },
+                "writers": {
+                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "data_svc.CreateObjectRequest": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "$ref": "#/definitions/data_svc.CreateObjectFields"
+                }
+            }
+        },
+        "data_svc.CreateObjectResponse": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "$ref": "#/definitions/data_svc.Object"
+                }
+            }
+        },
+        "data_svc.DeleteObjectRequest": {
+            "type": "object",
+            "properties": {
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/datastore.Filter"
+                    }
+                },
+                "table": {
+                    "type": "string"
+                }
+            }
+        },
+        "data_svc.DeleteObjectResponse": {
+            "type": "object"
+        },
+        "data_svc.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "data_svc.Object": {
+            "type": "object",
+            "required": [
+                "data",
+                "table"
+            ],
+            "properties": {
+                "authors": {
+                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "deleters": {
+                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "readers": {
+                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "table": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "writers": {
+                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "data_svc.QueryRequest": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "$ref": "#/definitions/datastore.Query"
+                },
+                "readers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "table": {
+                    "type": "string"
+                }
+            }
+        },
+        "data_svc.QueryResponse": {
+            "type": "object",
+            "properties": {
+                "objects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/data_svc.Object"
+                    }
+                }
+            }
+        },
+        "data_svc.UpdateObjectRequest": {
+            "type": "object",
+            "properties": {
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/datastore.Filter"
+                    }
+                },
+                "object": {
+                    "$ref": "#/definitions/data_svc.Object"
+                },
+                "table": {
+                    "type": "string"
+                }
+            }
+        },
+        "data_svc.UpdateObjectResponse": {
+            "type": "object"
+        },
+        "data_svc.UpsertObjectRequest": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "$ref": "#/definitions/data_svc.CreateObjectFields"
+                }
+            }
+        },
+        "data_svc.UpsertObjectResponse": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "$ref": "#/definitions/data_svc.Object"
+                }
+            }
+        },
         "datastore.Filter": {
             "type": "object",
             "properties": {
@@ -5913,219 +6126,6 @@
                 "zone": {
                     "description": "Optional: Specific zone for the deployment",
                     "type": "string"
-                }
-            }
-        },
-        "dynamic_svc.CreateObjectFields": {
-            "type": "object",
-            "required": [
-                "data",
-                "table"
-            ],
-            "properties": {
-                "authors": {
-                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
-                    ]
-                },
-                "data": {
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "deleters": {
-                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "readers": {
-                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "table": {
-                    "type": "string"
-                },
-                "writers": {
-                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "dynamic_svc.CreateObjectRequest": {
-            "type": "object",
-            "properties": {
-                "object": {
-                    "$ref": "#/definitions/dynamic_svc.CreateObjectFields"
-                }
-            }
-        },
-        "dynamic_svc.CreateObjectResponse": {
-            "type": "object",
-            "properties": {
-                "object": {
-                    "$ref": "#/definitions/dynamic_svc.Object"
-                }
-            }
-        },
-        "dynamic_svc.DeleteObjectRequest": {
-            "type": "object",
-            "properties": {
-                "filters": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/datastore.Filter"
-                    }
-                },
-                "table": {
-                    "type": "string"
-                }
-            }
-        },
-        "dynamic_svc.DeleteObjectResponse": {
-            "type": "object"
-        },
-        "dynamic_svc.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            }
-        },
-        "dynamic_svc.Object": {
-            "type": "object",
-            "required": [
-                "data",
-                "table"
-            ],
-            "properties": {
-                "authors": {
-                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "[\"usr_12345\"",
-                        " \"org_67890\"]"
-                    ]
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "data": {
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "deleters": {
-                    "description": "Deleters is a list of user IDs and role IDs that can delete the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "readers": {
-                    "description": "Readers is a list of user IDs and role IDs that can read the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "table": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "writers": {
-                    "description": "Writers is a list of user IDs and role IDs that can write the object.\n`_self` can be used to refer to the caller user's userId and\n`_org` can be used to refer to the user's currently active organization (if exists).",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "dynamic_svc.QueryRequest": {
-            "type": "object",
-            "properties": {
-                "query": {
-                    "$ref": "#/definitions/datastore.Query"
-                },
-                "readers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "table": {
-                    "type": "string"
-                }
-            }
-        },
-        "dynamic_svc.QueryResponse": {
-            "type": "object",
-            "properties": {
-                "objects": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/dynamic_svc.Object"
-                    }
-                }
-            }
-        },
-        "dynamic_svc.UpdateObjectRequest": {
-            "type": "object",
-            "properties": {
-                "filters": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/datastore.Filter"
-                    }
-                },
-                "object": {
-                    "$ref": "#/definitions/dynamic_svc.Object"
-                },
-                "table": {
-                    "type": "string"
-                }
-            }
-        },
-        "dynamic_svc.UpdateObjectResponse": {
-            "type": "object"
-        },
-        "dynamic_svc.UpsertObjectRequest": {
-            "type": "object",
-            "properties": {
-                "object": {
-                    "$ref": "#/definitions/dynamic_svc.CreateObjectFields"
-                }
-            }
-        },
-        "dynamic_svc.UpsertObjectResponse": {
-            "type": "object",
-            "properties": {
-                "object": {
-                    "$ref": "#/definitions/dynamic_svc.Object"
                 }
             }
         },

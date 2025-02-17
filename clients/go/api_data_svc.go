@@ -34,8 +34,8 @@ type DataSvcAPI interface {
 	CreateObject(ctx context.Context) ApiCreateObjectRequest
 
 	// CreateObjectExecute executes the request
-	//  @return DynamicSvcCreateObjectResponse
-	CreateObjectExecute(r ApiCreateObjectRequest) (*DynamicSvcCreateObjectResponse, *http.Response, error)
+	//  @return DataSvcCreateObjectResponse
+	CreateObjectExecute(r ApiCreateObjectRequest) (*DataSvcCreateObjectResponse, *http.Response, error)
 
 	/*
 	DeleteObjects Delete a Generic Object
@@ -66,8 +66,8 @@ Use helper functions in your respective client library such as condition constru
 	Query(ctx context.Context) ApiQueryRequest
 
 	// QueryExecute executes the request
-	//  @return DynamicSvcQueryResponse
-	QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryResponse, *http.Response, error)
+	//  @return DataSvcQueryResponse
+	QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error)
 
 	/*
 	UpdateObjects Update Objects
@@ -95,8 +95,8 @@ Use helper functions in your respective client library such as condition constru
 	UpsertObject(ctx context.Context, objectId string) ApiUpsertObjectRequest
 
 	// UpsertObjectExecute executes the request
-	//  @return DynamicSvcUpsertObjectResponse
-	UpsertObjectExecute(r ApiUpsertObjectRequest) (*DynamicSvcUpsertObjectResponse, *http.Response, error)
+	//  @return DataSvcUpsertObjectResponse
+	UpsertObjectExecute(r ApiUpsertObjectRequest) (*DataSvcUpsertObjectResponse, *http.Response, error)
 }
 
 // DataSvcAPIService DataSvcAPI service
@@ -105,16 +105,16 @@ type DataSvcAPIService service
 type ApiCreateObjectRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
-	body *DynamicSvcCreateObjectRequest
+	body *DataSvcCreateObjectRequest
 }
 
 // Create request payload
-func (r ApiCreateObjectRequest) Body(body DynamicSvcCreateObjectRequest) ApiCreateObjectRequest {
+func (r ApiCreateObjectRequest) Body(body DataSvcCreateObjectRequest) ApiCreateObjectRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiCreateObjectRequest) Execute() (*DynamicSvcCreateObjectResponse, *http.Response, error) {
+func (r ApiCreateObjectRequest) Execute() (*DataSvcCreateObjectResponse, *http.Response, error) {
 	return r.ApiService.CreateObjectExecute(r)
 }
 
@@ -134,13 +134,13 @@ func (a *DataSvcAPIService) CreateObject(ctx context.Context) ApiCreateObjectReq
 }
 
 // Execute executes the request
-//  @return DynamicSvcCreateObjectResponse
-func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*DynamicSvcCreateObjectResponse, *http.Response, error) {
+//  @return DataSvcCreateObjectResponse
+func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*DataSvcCreateObjectResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DynamicSvcCreateObjectResponse
+		localVarReturnValue  *DataSvcCreateObjectResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.CreateObject")
@@ -213,7 +213,7 @@ func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*Dyna
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -224,7 +224,7 @@ func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*Dyna
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -235,7 +235,7 @@ func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*Dyna
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -262,11 +262,11 @@ func (a *DataSvcAPIService) CreateObjectExecute(r ApiCreateObjectRequest) (*Dyna
 type ApiDeleteObjectsRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
-	body *DynamicSvcDeleteObjectRequest
+	body *DataSvcDeleteObjectRequest
 }
 
 // Delete request payload
-func (r ApiDeleteObjectsRequest) Body(body DynamicSvcDeleteObjectRequest) ApiDeleteObjectsRequest {
+func (r ApiDeleteObjectsRequest) Body(body DataSvcDeleteObjectRequest) ApiDeleteObjectsRequest {
 	r.body = &body
 	return r
 }
@@ -370,7 +370,7 @@ func (a *DataSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -381,7 +381,7 @@ func (a *DataSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -392,7 +392,7 @@ func (a *DataSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -419,16 +419,16 @@ func (a *DataSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map
 type ApiQueryRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
-	body *DynamicSvcQueryRequest
+	body *DataSvcQueryRequest
 }
 
 // Query Request
-func (r ApiQueryRequest) Body(body DynamicSvcQueryRequest) ApiQueryRequest {
+func (r ApiQueryRequest) Body(body DataSvcQueryRequest) ApiQueryRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiQueryRequest) Execute() (*DynamicSvcQueryResponse, *http.Response, error) {
+func (r ApiQueryRequest) Execute() (*DataSvcQueryResponse, *http.Response, error) {
 	return r.ApiService.QueryExecute(r)
 }
 
@@ -452,13 +452,13 @@ func (a *DataSvcAPIService) Query(ctx context.Context) ApiQueryRequest {
 }
 
 // Execute executes the request
-//  @return DynamicSvcQueryResponse
-func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryResponse, *http.Response, error) {
+//  @return DataSvcQueryResponse
+func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DynamicSvcQueryResponse
+		localVarReturnValue  *DataSvcQueryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.Query")
@@ -528,7 +528,7 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryRes
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -539,7 +539,7 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryRes
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -550,7 +550,7 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryRes
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -577,11 +577,11 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryRes
 type ApiUpdateObjectsRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
-	body *DynamicSvcUpdateObjectRequest
+	body *DataSvcUpdateObjectRequest
 }
 
 // Update request payload
-func (r ApiUpdateObjectsRequest) Body(body DynamicSvcUpdateObjectRequest) ApiUpdateObjectsRequest {
+func (r ApiUpdateObjectsRequest) Body(body DataSvcUpdateObjectRequest) ApiUpdateObjectsRequest {
 	r.body = &body
 	return r
 }
@@ -685,7 +685,7 @@ func (a *DataSvcAPIService) UpdateObjectsExecute(r ApiUpdateObjectsRequest) (map
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -696,7 +696,7 @@ func (a *DataSvcAPIService) UpdateObjectsExecute(r ApiUpdateObjectsRequest) (map
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -707,7 +707,7 @@ func (a *DataSvcAPIService) UpdateObjectsExecute(r ApiUpdateObjectsRequest) (map
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -735,16 +735,16 @@ type ApiUpsertObjectRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
 	objectId string
-	body *DynamicSvcUpsertObjectRequest
+	body *DataSvcUpsertObjectRequest
 }
 
 // Upsert request payload
-func (r ApiUpsertObjectRequest) Body(body DynamicSvcUpsertObjectRequest) ApiUpsertObjectRequest {
+func (r ApiUpsertObjectRequest) Body(body DataSvcUpsertObjectRequest) ApiUpsertObjectRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiUpsertObjectRequest) Execute() (*DynamicSvcUpsertObjectResponse, *http.Response, error) {
+func (r ApiUpsertObjectRequest) Execute() (*DataSvcUpsertObjectResponse, *http.Response, error) {
 	return r.ApiService.UpsertObjectExecute(r)
 }
 
@@ -766,13 +766,13 @@ func (a *DataSvcAPIService) UpsertObject(ctx context.Context, objectId string) A
 }
 
 // Execute executes the request
-//  @return DynamicSvcUpsertObjectResponse
-func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*DynamicSvcUpsertObjectResponse, *http.Response, error) {
+//  @return DataSvcUpsertObjectResponse
+func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*DataSvcUpsertObjectResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *DynamicSvcUpsertObjectResponse
+		localVarReturnValue  *DataSvcUpsertObjectResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.UpsertObject")
@@ -846,7 +846,7 @@ func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*Dyna
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -857,7 +857,7 @@ func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*Dyna
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -868,7 +868,7 @@ func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*Dyna
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v DynamicSvcErrorResponse
+			var v DataSvcErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

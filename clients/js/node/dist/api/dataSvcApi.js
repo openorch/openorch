@@ -107,7 +107,7 @@ export class DataSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcCreateObjectRequest")
+                body: ObjectSerializer.serialize(body, "DataSvcCreateObjectRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -134,7 +134,7 @@ export class DataSvcApi {
                         }
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcCreateObjectResponse");
+                                body = ObjectSerializer.deserialize(body, "DataSvcCreateObjectResponse");
                                 resolve({ response: response, body: body });
                             }
                             else {
@@ -178,7 +178,7 @@ export class DataSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcDeleteObjectRequest")
+                body: ObjectSerializer.serialize(body, "DataSvcDeleteObjectRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -245,7 +245,7 @@ export class DataSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcQueryRequest")
+                body: ObjectSerializer.serialize(body, "DataSvcQueryRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -272,7 +272,7 @@ export class DataSvcApi {
                         }
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcQueryResponse");
+                                body = ObjectSerializer.deserialize(body, "DataSvcQueryResponse");
                                 resolve({ response: response, body: body });
                             }
                             else {
@@ -316,7 +316,7 @@ export class DataSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcUpdateObjectRequest")
+                body: ObjectSerializer.serialize(body, "DataSvcUpdateObjectRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -393,7 +393,7 @@ export class DataSvcApi {
                 uri: localVarPath,
                 useQuerystring: this._useQuerystring,
                 json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcUpsertObjectRequest")
+                body: ObjectSerializer.serialize(body, "DataSvcUpsertObjectRequest")
             };
             let authenticationPromise = Promise.resolve();
             if (this.authentications.BearerAuth.apiKey) {
@@ -420,7 +420,7 @@ export class DataSvcApi {
                         }
                         else {
                             if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcUpsertObjectResponse");
+                                body = ObjectSerializer.deserialize(body, "DataSvcUpsertObjectResponse");
                                 resolve({ response: response, body: body });
                             }
                             else {

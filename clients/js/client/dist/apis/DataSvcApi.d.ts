@@ -10,22 +10,22 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { DynamicSvcCreateObjectRequest, DynamicSvcCreateObjectResponse, DynamicSvcDeleteObjectRequest, DynamicSvcQueryRequest, DynamicSvcQueryResponse, DynamicSvcUpdateObjectRequest, DynamicSvcUpsertObjectRequest, DynamicSvcUpsertObjectResponse } from '../models/index';
+import type { DataSvcCreateObjectRequest, DataSvcCreateObjectResponse, DataSvcDeleteObjectRequest, DataSvcQueryRequest, DataSvcQueryResponse, DataSvcUpdateObjectRequest, DataSvcUpsertObjectRequest, DataSvcUpsertObjectResponse } from '../models/index';
 export interface CreateObjectRequest {
-    body: DynamicSvcCreateObjectRequest;
+    body: DataSvcCreateObjectRequest;
 }
 export interface DeleteObjectsRequest {
-    body: DynamicSvcDeleteObjectRequest;
+    body: DataSvcDeleteObjectRequest;
 }
 export interface QueryRequest {
-    body?: DynamicSvcQueryRequest;
+    body?: DataSvcQueryRequest;
 }
 export interface UpdateObjectsRequest {
-    body: DynamicSvcUpdateObjectRequest;
+    body: DataSvcUpdateObjectRequest;
 }
 export interface UpsertObjectRequest {
     objectId: string;
-    body: DynamicSvcUpsertObjectRequest;
+    body: DataSvcUpsertObjectRequest;
 }
 /**
  *
@@ -35,12 +35,12 @@ export declare class DataSvcApi extends runtime.BaseAPI {
      * Creates a new object with the provided details. Requires authorization and user authentication.
      * Create a Generic Object
      */
-    createObjectRaw(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcCreateObjectResponse>>;
+    createObjectRaw(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcCreateObjectResponse>>;
     /**
      * Creates a new object with the provided details. Requires authorization and user authentication.
      * Create a Generic Object
      */
-    createObject(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcCreateObjectResponse>;
+    createObject(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcCreateObjectResponse>;
     /**
      * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
      * Delete a Generic Object
@@ -55,12 +55,12 @@ export declare class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcQueryResponse>>;
+    queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>>;
     /**
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    query(requestParameters?: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcQueryResponse>;
+    query(requestParameters?: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse>;
     /**
      * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
      * Update Objects
@@ -75,10 +75,10 @@ export declare class DataSvcApi extends runtime.BaseAPI {
      * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
      * Upsert a Generic Object
      */
-    upsertObjectRaw(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcUpsertObjectResponse>>;
+    upsertObjectRaw(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcUpsertObjectResponse>>;
     /**
      * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
      * Upsert a Generic Object
      */
-    upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcUpsertObjectResponse>;
+    upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse>;
 }

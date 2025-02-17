@@ -27,6 +27,17 @@ export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
 export * from './containerSvcRunInfo';
 export * from './containerSvcStopContainerRequest';
+export * from './dataSvcCreateObjectFields';
+export * from './dataSvcCreateObjectRequest';
+export * from './dataSvcCreateObjectResponse';
+export * from './dataSvcDeleteObjectRequest';
+export * from './dataSvcErrorResponse';
+export * from './dataSvcObject';
+export * from './dataSvcQueryRequest';
+export * from './dataSvcQueryResponse';
+export * from './dataSvcUpdateObjectRequest';
+export * from './dataSvcUpsertObjectRequest';
+export * from './dataSvcUpsertObjectResponse';
 export * from './datastoreFilter';
 export * from './datastoreOp';
 export * from './datastoreOrderBy';
@@ -42,17 +53,6 @@ export * from './deploySvcResourceLimits';
 export * from './deploySvcSaveDeploymentRequest';
 export * from './deploySvcStrategyType';
 export * from './deploySvcTargetRegion';
-export * from './dynamicSvcCreateObjectFields';
-export * from './dynamicSvcCreateObjectRequest';
-export * from './dynamicSvcCreateObjectResponse';
-export * from './dynamicSvcDeleteObjectRequest';
-export * from './dynamicSvcErrorResponse';
-export * from './dynamicSvcObject';
-export * from './dynamicSvcQueryRequest';
-export * from './dynamicSvcQueryResponse';
-export * from './dynamicSvcUpdateObjectRequest';
-export * from './dynamicSvcUpsertObjectRequest';
-export * from './dynamicSvcUpsertObjectResponse';
 export * from './emailSvcErrorResponse';
 export * from './emailSvcFile';
 export * from './emailSvcSendEmailRequest';
@@ -211,6 +211,17 @@ import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerReque
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
 import { ContainerSvcRunInfo } from './containerSvcRunInfo';
 import { ContainerSvcStopContainerRequest } from './containerSvcStopContainerRequest';
+import { DataSvcCreateObjectFields } from './dataSvcCreateObjectFields';
+import { DataSvcCreateObjectRequest } from './dataSvcCreateObjectRequest';
+import { DataSvcCreateObjectResponse } from './dataSvcCreateObjectResponse';
+import { DataSvcDeleteObjectRequest } from './dataSvcDeleteObjectRequest';
+import { DataSvcErrorResponse } from './dataSvcErrorResponse';
+import { DataSvcObject } from './dataSvcObject';
+import { DataSvcQueryRequest } from './dataSvcQueryRequest';
+import { DataSvcQueryResponse } from './dataSvcQueryResponse';
+import { DataSvcUpdateObjectRequest } from './dataSvcUpdateObjectRequest';
+import { DataSvcUpsertObjectRequest } from './dataSvcUpsertObjectRequest';
+import { DataSvcUpsertObjectResponse } from './dataSvcUpsertObjectResponse';
 import { DatastoreFilter } from './datastoreFilter';
 import { DatastoreOp } from './datastoreOp';
 import { DatastoreOrderBy } from './datastoreOrderBy';
@@ -226,17 +237,6 @@ import { DeploySvcResourceLimits } from './deploySvcResourceLimits';
 import { DeploySvcSaveDeploymentRequest } from './deploySvcSaveDeploymentRequest';
 import { DeploySvcStrategyType } from './deploySvcStrategyType';
 import { DeploySvcTargetRegion } from './deploySvcTargetRegion';
-import { DynamicSvcCreateObjectFields } from './dynamicSvcCreateObjectFields';
-import { DynamicSvcCreateObjectRequest } from './dynamicSvcCreateObjectRequest';
-import { DynamicSvcCreateObjectResponse } from './dynamicSvcCreateObjectResponse';
-import { DynamicSvcDeleteObjectRequest } from './dynamicSvcDeleteObjectRequest';
-import { DynamicSvcErrorResponse } from './dynamicSvcErrorResponse';
-import { DynamicSvcObject } from './dynamicSvcObject';
-import { DynamicSvcQueryRequest } from './dynamicSvcQueryRequest';
-import { DynamicSvcQueryResponse } from './dynamicSvcQueryResponse';
-import { DynamicSvcUpdateObjectRequest } from './dynamicSvcUpdateObjectRequest';
-import { DynamicSvcUpsertObjectRequest } from './dynamicSvcUpsertObjectRequest';
-import { DynamicSvcUpsertObjectResponse } from './dynamicSvcUpsertObjectResponse';
 import { EmailSvcErrorResponse } from './emailSvcErrorResponse';
 import { EmailSvcFile } from './emailSvcFile';
 import { EmailSvcSendEmailRequest } from './emailSvcSendEmailRequest';
@@ -421,6 +421,17 @@ let typeMap = {
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,
     "ContainerSvcRunInfo": ContainerSvcRunInfo,
     "ContainerSvcStopContainerRequest": ContainerSvcStopContainerRequest,
+    "DataSvcCreateObjectFields": DataSvcCreateObjectFields,
+    "DataSvcCreateObjectRequest": DataSvcCreateObjectRequest,
+    "DataSvcCreateObjectResponse": DataSvcCreateObjectResponse,
+    "DataSvcDeleteObjectRequest": DataSvcDeleteObjectRequest,
+    "DataSvcErrorResponse": DataSvcErrorResponse,
+    "DataSvcObject": DataSvcObject,
+    "DataSvcQueryRequest": DataSvcQueryRequest,
+    "DataSvcQueryResponse": DataSvcQueryResponse,
+    "DataSvcUpdateObjectRequest": DataSvcUpdateObjectRequest,
+    "DataSvcUpsertObjectRequest": DataSvcUpsertObjectRequest,
+    "DataSvcUpsertObjectResponse": DataSvcUpsertObjectResponse,
     "DatastoreFilter": DatastoreFilter,
     "DatastoreOrderBy": DatastoreOrderBy,
     "DatastoreQuery": DatastoreQuery,
@@ -433,17 +444,6 @@ let typeMap = {
     "DeploySvcResourceLimits": DeploySvcResourceLimits,
     "DeploySvcSaveDeploymentRequest": DeploySvcSaveDeploymentRequest,
     "DeploySvcTargetRegion": DeploySvcTargetRegion,
-    "DynamicSvcCreateObjectFields": DynamicSvcCreateObjectFields,
-    "DynamicSvcCreateObjectRequest": DynamicSvcCreateObjectRequest,
-    "DynamicSvcCreateObjectResponse": DynamicSvcCreateObjectResponse,
-    "DynamicSvcDeleteObjectRequest": DynamicSvcDeleteObjectRequest,
-    "DynamicSvcErrorResponse": DynamicSvcErrorResponse,
-    "DynamicSvcObject": DynamicSvcObject,
-    "DynamicSvcQueryRequest": DynamicSvcQueryRequest,
-    "DynamicSvcQueryResponse": DynamicSvcQueryResponse,
-    "DynamicSvcUpdateObjectRequest": DynamicSvcUpdateObjectRequest,
-    "DynamicSvcUpsertObjectRequest": DynamicSvcUpsertObjectRequest,
-    "DynamicSvcUpsertObjectResponse": DynamicSvcUpsertObjectResponse,
     "EmailSvcErrorResponse": EmailSvcErrorResponse,
     "EmailSvcFile": EmailSvcFile,
     "EmailSvcSendEmailRequest": EmailSvcSendEmailRequest,

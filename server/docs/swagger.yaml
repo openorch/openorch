@@ -306,6 +306,173 @@ definitions:
     type: object
   container_svc.StopContainerResponse:
     type: object
+  data_svc.CreateObjectFields:
+    properties:
+      authors:
+        description: |-
+          Authors is a list of user ID and organization ID who created the object.
+          If an organization ID is not provided, the currently active organization will
+          be queried from the User Svc.
+        example:
+        - '["usr_12345"'
+        - ' "org_67890"]'
+        items:
+          type: string
+        type: array
+      data:
+        additionalProperties: true
+        type: object
+      deleters:
+        description: |-
+          Deleters is a list of user IDs and role IDs that can delete the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      readers:
+        description: |-
+          Readers is a list of user IDs and role IDs that can read the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      table:
+        type: string
+      writers:
+        description: |-
+          Writers is a list of user IDs and role IDs that can write the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+    required:
+    - data
+    - table
+    type: object
+  data_svc.CreateObjectRequest:
+    properties:
+      object:
+        $ref: '#/definitions/data_svc.CreateObjectFields'
+    type: object
+  data_svc.CreateObjectResponse:
+    properties:
+      object:
+        $ref: '#/definitions/data_svc.Object'
+    type: object
+  data_svc.DeleteObjectRequest:
+    properties:
+      filters:
+        items:
+          $ref: '#/definitions/datastore.Filter'
+        type: array
+      table:
+        type: string
+    type: object
+  data_svc.DeleteObjectResponse:
+    type: object
+  data_svc.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  data_svc.Object:
+    properties:
+      authors:
+        description: |-
+          Authors is a list of user ID and organization ID who created the object.
+          If an organization ID is not provided, the currently active organization will
+          be queried from the User Svc.
+        example:
+        - '["usr_12345"'
+        - ' "org_67890"]'
+        items:
+          type: string
+        type: array
+      createdAt:
+        type: string
+      data:
+        additionalProperties: true
+        type: object
+      deleters:
+        description: |-
+          Deleters is a list of user IDs and role IDs that can delete the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      readers:
+        description: |-
+          Readers is a list of user IDs and role IDs that can read the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+      table:
+        type: string
+      updatedAt:
+        type: string
+      writers:
+        description: |-
+          Writers is a list of user IDs and role IDs that can write the object.
+          `_self` can be used to refer to the caller user's userId and
+          `_org` can be used to refer to the user's currently active organization (if exists).
+        items:
+          type: string
+        type: array
+    required:
+    - data
+    - table
+    type: object
+  data_svc.QueryRequest:
+    properties:
+      query:
+        $ref: '#/definitions/datastore.Query'
+      readers:
+        items:
+          type: string
+        type: array
+      table:
+        type: string
+    type: object
+  data_svc.QueryResponse:
+    properties:
+      objects:
+        items:
+          $ref: '#/definitions/data_svc.Object'
+        type: array
+    type: object
+  data_svc.UpdateObjectRequest:
+    properties:
+      filters:
+        items:
+          $ref: '#/definitions/datastore.Filter'
+        type: array
+      object:
+        $ref: '#/definitions/data_svc.Object'
+      table:
+        type: string
+    type: object
+  data_svc.UpdateObjectResponse:
+    type: object
+  data_svc.UpsertObjectRequest:
+    properties:
+      object:
+        $ref: '#/definitions/data_svc.CreateObjectFields'
+    type: object
+  data_svc.UpsertObjectResponse:
+    properties:
+      object:
+        $ref: '#/definitions/data_svc.Object'
+    type: object
   datastore.Filter:
     properties:
       fields:
@@ -537,173 +704,6 @@ definitions:
       zone:
         description: 'Optional: Specific zone for the deployment'
         type: string
-    type: object
-  dynamic_svc.CreateObjectFields:
-    properties:
-      authors:
-        description: |-
-          Authors is a list of user ID and organization ID who created the object.
-          If an organization ID is not provided, the currently active organization will
-          be queried from the User Svc.
-        example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
-        items:
-          type: string
-        type: array
-      data:
-        additionalProperties: true
-        type: object
-      deleters:
-        description: |-
-          Deleters is a list of user IDs and role IDs that can delete the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      id:
-        type: string
-      readers:
-        description: |-
-          Readers is a list of user IDs and role IDs that can read the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      table:
-        type: string
-      writers:
-        description: |-
-          Writers is a list of user IDs and role IDs that can write the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-    required:
-    - data
-    - table
-    type: object
-  dynamic_svc.CreateObjectRequest:
-    properties:
-      object:
-        $ref: '#/definitions/dynamic_svc.CreateObjectFields'
-    type: object
-  dynamic_svc.CreateObjectResponse:
-    properties:
-      object:
-        $ref: '#/definitions/dynamic_svc.Object'
-    type: object
-  dynamic_svc.DeleteObjectRequest:
-    properties:
-      filters:
-        items:
-          $ref: '#/definitions/datastore.Filter'
-        type: array
-      table:
-        type: string
-    type: object
-  dynamic_svc.DeleteObjectResponse:
-    type: object
-  dynamic_svc.ErrorResponse:
-    properties:
-      error:
-        type: string
-    type: object
-  dynamic_svc.Object:
-    properties:
-      authors:
-        description: |-
-          Authors is a list of user ID and organization ID who created the object.
-          If an organization ID is not provided, the currently active organization will
-          be queried from the User Svc.
-        example:
-        - '["usr_12345"'
-        - ' "org_67890"]'
-        items:
-          type: string
-        type: array
-      createdAt:
-        type: string
-      data:
-        additionalProperties: true
-        type: object
-      deleters:
-        description: |-
-          Deleters is a list of user IDs and role IDs that can delete the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      id:
-        type: string
-      readers:
-        description: |-
-          Readers is a list of user IDs and role IDs that can read the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-      table:
-        type: string
-      updatedAt:
-        type: string
-      writers:
-        description: |-
-          Writers is a list of user IDs and role IDs that can write the object.
-          `_self` can be used to refer to the caller user's userId and
-          `_org` can be used to refer to the user's currently active organization (if exists).
-        items:
-          type: string
-        type: array
-    required:
-    - data
-    - table
-    type: object
-  dynamic_svc.QueryRequest:
-    properties:
-      query:
-        $ref: '#/definitions/datastore.Query'
-      readers:
-        items:
-          type: string
-        type: array
-      table:
-        type: string
-    type: object
-  dynamic_svc.QueryResponse:
-    properties:
-      objects:
-        items:
-          $ref: '#/definitions/dynamic_svc.Object'
-        type: array
-    type: object
-  dynamic_svc.UpdateObjectRequest:
-    properties:
-      filters:
-        items:
-          $ref: '#/definitions/datastore.Filter'
-        type: array
-      object:
-        $ref: '#/definitions/dynamic_svc.Object'
-      table:
-        type: string
-    type: object
-  dynamic_svc.UpdateObjectResponse:
-    type: object
-  dynamic_svc.UpsertObjectRequest:
-    properties:
-      object:
-        $ref: '#/definitions/dynamic_svc.CreateObjectFields'
-    type: object
-  dynamic_svc.UpsertObjectResponse:
-    properties:
-      object:
-        $ref: '#/definitions/dynamic_svc.Object'
     type: object
   email_svc.ErrorResponse:
     properties:
@@ -3461,26 +3461,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/dynamic_svc.CreateObjectRequest'
+          $ref: '#/definitions/data_svc.CreateObjectRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/dynamic_svc.CreateObjectResponse'
+            $ref: '#/definitions/data_svc.CreateObjectResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Create a Generic Object
@@ -3504,26 +3504,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/dynamic_svc.UpsertObjectRequest'
+          $ref: '#/definitions/data_svc.UpsertObjectRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Successful creation or update of object
           schema:
-            $ref: '#/definitions/dynamic_svc.UpsertObjectResponse'
+            $ref: '#/definitions/data_svc.UpsertObjectResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Upsert a Generic Object
@@ -3545,26 +3545,26 @@ paths:
         in: body
         name: body
         schema:
-          $ref: '#/definitions/dynamic_svc.QueryRequest'
+          $ref: '#/definitions/data_svc.QueryRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Successful retrieval of objects
           schema:
-            $ref: '#/definitions/dynamic_svc.QueryResponse'
+            $ref: '#/definitions/data_svc.QueryResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Query Objects
@@ -3583,26 +3583,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/dynamic_svc.DeleteObjectRequest'
+          $ref: '#/definitions/data_svc.DeleteObjectRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Successful deletion of object
           schema:
-            $ref: '#/definitions/dynamic_svc.DeleteObjectResponse'
+            $ref: '#/definitions/data_svc.DeleteObjectResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Delete a Generic Object
@@ -3621,26 +3621,26 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/dynamic_svc.UpdateObjectRequest'
+          $ref: '#/definitions/data_svc.UpdateObjectRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Successful update of objects
           schema:
-            $ref: '#/definitions/dynamic_svc.UpdateObjectResponse'
+            $ref: '#/definitions/data_svc.UpdateObjectResponse'
         "400":
           description: Invalid JSON
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/dynamic_svc.ErrorResponse'
+            $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Update Objects

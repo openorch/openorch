@@ -15,56 +15,56 @@
 
 import * as runtime from '../runtime';
 import type {
-  DynamicSvcCreateObjectRequest,
-  DynamicSvcCreateObjectResponse,
-  DynamicSvcDeleteObjectRequest,
-  DynamicSvcErrorResponse,
-  DynamicSvcQueryRequest,
-  DynamicSvcQueryResponse,
-  DynamicSvcUpdateObjectRequest,
-  DynamicSvcUpsertObjectRequest,
-  DynamicSvcUpsertObjectResponse,
+  DataSvcCreateObjectRequest,
+  DataSvcCreateObjectResponse,
+  DataSvcDeleteObjectRequest,
+  DataSvcErrorResponse,
+  DataSvcQueryRequest,
+  DataSvcQueryResponse,
+  DataSvcUpdateObjectRequest,
+  DataSvcUpsertObjectRequest,
+  DataSvcUpsertObjectResponse,
 } from '../models/index';
 import {
-    DynamicSvcCreateObjectRequestFromJSON,
-    DynamicSvcCreateObjectRequestToJSON,
-    DynamicSvcCreateObjectResponseFromJSON,
-    DynamicSvcCreateObjectResponseToJSON,
-    DynamicSvcDeleteObjectRequestFromJSON,
-    DynamicSvcDeleteObjectRequestToJSON,
-    DynamicSvcErrorResponseFromJSON,
-    DynamicSvcErrorResponseToJSON,
-    DynamicSvcQueryRequestFromJSON,
-    DynamicSvcQueryRequestToJSON,
-    DynamicSvcQueryResponseFromJSON,
-    DynamicSvcQueryResponseToJSON,
-    DynamicSvcUpdateObjectRequestFromJSON,
-    DynamicSvcUpdateObjectRequestToJSON,
-    DynamicSvcUpsertObjectRequestFromJSON,
-    DynamicSvcUpsertObjectRequestToJSON,
-    DynamicSvcUpsertObjectResponseFromJSON,
-    DynamicSvcUpsertObjectResponseToJSON,
+    DataSvcCreateObjectRequestFromJSON,
+    DataSvcCreateObjectRequestToJSON,
+    DataSvcCreateObjectResponseFromJSON,
+    DataSvcCreateObjectResponseToJSON,
+    DataSvcDeleteObjectRequestFromJSON,
+    DataSvcDeleteObjectRequestToJSON,
+    DataSvcErrorResponseFromJSON,
+    DataSvcErrorResponseToJSON,
+    DataSvcQueryRequestFromJSON,
+    DataSvcQueryRequestToJSON,
+    DataSvcQueryResponseFromJSON,
+    DataSvcQueryResponseToJSON,
+    DataSvcUpdateObjectRequestFromJSON,
+    DataSvcUpdateObjectRequestToJSON,
+    DataSvcUpsertObjectRequestFromJSON,
+    DataSvcUpsertObjectRequestToJSON,
+    DataSvcUpsertObjectResponseFromJSON,
+    DataSvcUpsertObjectResponseToJSON,
 } from '../models/index';
 
 export interface CreateObjectRequest {
-    body: DynamicSvcCreateObjectRequest;
+    body: DataSvcCreateObjectRequest;
 }
 
 export interface DeleteObjectsRequest {
-    body: DynamicSvcDeleteObjectRequest;
+    body: DataSvcDeleteObjectRequest;
 }
 
 export interface QueryRequest {
-    body?: DynamicSvcQueryRequest;
+    body?: DataSvcQueryRequest;
 }
 
 export interface UpdateObjectsRequest {
-    body: DynamicSvcUpdateObjectRequest;
+    body: DataSvcUpdateObjectRequest;
 }
 
 export interface UpsertObjectRequest {
     objectId: string;
-    body: DynamicSvcUpsertObjectRequest;
+    body: DataSvcUpsertObjectRequest;
 }
 
 /**
@@ -76,7 +76,7 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Creates a new object with the provided details. Requires authorization and user authentication.
      * Create a Generic Object
      */
-    async createObjectRaw(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcCreateObjectResponse>> {
+    async createObjectRaw(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcCreateObjectResponse>> {
         if (requestParameters['body'] == null) {
             throw new runtime.RequiredError(
                 'body',
@@ -99,17 +99,17 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: DynamicSvcCreateObjectRequestToJSON(requestParameters['body']),
+            body: DataSvcCreateObjectRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcCreateObjectResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcCreateObjectResponseFromJSON(jsonValue));
     }
 
     /**
      * Creates a new object with the provided details. Requires authorization and user authentication.
      * Create a Generic Object
      */
-    async createObject(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcCreateObjectResponse> {
+    async createObject(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcCreateObjectResponse> {
         const response = await this.createObjectRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -141,7 +141,7 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: DynamicSvcDeleteObjectRequestToJSON(requestParameters['body']),
+            body: DataSvcDeleteObjectRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
@@ -160,7 +160,7 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    async queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcQueryResponse>> {
+    async queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -176,17 +176,17 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: DynamicSvcQueryRequestToJSON(requestParameters['body']),
+            body: DataSvcQueryRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcQueryResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcQueryResponseFromJSON(jsonValue));
     }
 
     /**
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    async query(requestParameters: QueryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcQueryResponse> {
+    async query(requestParameters: QueryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse> {
         const response = await this.queryRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -218,7 +218,7 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: DynamicSvcUpdateObjectRequestToJSON(requestParameters['body']),
+            body: DataSvcUpdateObjectRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
@@ -237,7 +237,7 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
      * Upsert a Generic Object
      */
-    async upsertObjectRaw(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DynamicSvcUpsertObjectResponse>> {
+    async upsertObjectRaw(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcUpsertObjectResponse>> {
         if (requestParameters['objectId'] == null) {
             throw new runtime.RequiredError(
                 'objectId',
@@ -267,17 +267,17 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: DynamicSvcUpsertObjectRequestToJSON(requestParameters['body']),
+            body: DataSvcUpsertObjectRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcUpsertObjectResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcUpsertObjectResponseFromJSON(jsonValue));
     }
 
     /**
      * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
      * Upsert a Generic Object
      */
-    async upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DynamicSvcUpsertObjectResponse> {
+    async upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse> {
         const response = await this.upsertObjectRaw(requestParameters, initOverrides);
         return await response.value();
     }

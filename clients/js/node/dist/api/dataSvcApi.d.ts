@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 import http from 'http';
-import { DynamicSvcCreateObjectRequest } from '../model/dynamicSvcCreateObjectRequest';
-import { DynamicSvcCreateObjectResponse } from '../model/dynamicSvcCreateObjectResponse';
-import { DynamicSvcDeleteObjectRequest } from '../model/dynamicSvcDeleteObjectRequest';
-import { DynamicSvcQueryRequest } from '../model/dynamicSvcQueryRequest';
-import { DynamicSvcQueryResponse } from '../model/dynamicSvcQueryResponse';
-import { DynamicSvcUpdateObjectRequest } from '../model/dynamicSvcUpdateObjectRequest';
-import { DynamicSvcUpsertObjectRequest } from '../model/dynamicSvcUpsertObjectRequest';
-import { DynamicSvcUpsertObjectResponse } from '../model/dynamicSvcUpsertObjectResponse';
+import { DataSvcCreateObjectRequest } from '../model/dataSvcCreateObjectRequest';
+import { DataSvcCreateObjectResponse } from '../model/dataSvcCreateObjectResponse';
+import { DataSvcDeleteObjectRequest } from '../model/dataSvcDeleteObjectRequest';
+import { DataSvcQueryRequest } from '../model/dataSvcQueryRequest';
+import { DataSvcQueryResponse } from '../model/dataSvcQueryResponse';
+import { DataSvcUpdateObjectRequest } from '../model/dataSvcUpdateObjectRequest';
+import { DataSvcUpsertObjectRequest } from '../model/dataSvcUpsertObjectRequest';
+import { DataSvcUpsertObjectResponse } from '../model/dataSvcUpsertObjectResponse';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
 export declare enum DataSvcApiApiKeys {
@@ -46,20 +46,20 @@ export declare class DataSvcApi {
      * @summary Create a Generic Object
      * @param body Create request payload
      */
-    createObject(body: DynamicSvcCreateObjectRequest, options?: {
+    createObject(body: DataSvcCreateObjectRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: DynamicSvcCreateObjectResponse;
+        body: DataSvcCreateObjectResponse;
     }>;
     /**
      * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
      * @summary Delete a Generic Object
      * @param body Delete request payload
      */
-    deleteObjects(body: DynamicSvcDeleteObjectRequest, options?: {
+    deleteObjects(body: DataSvcDeleteObjectRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -72,20 +72,20 @@ export declare class DataSvcApi {
      * @summary Query Objects
      * @param body Query Request
      */
-    query(body?: DynamicSvcQueryRequest, options?: {
+    query(body?: DataSvcQueryRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: DynamicSvcQueryResponse;
+        body: DataSvcQueryResponse;
     }>;
     /**
      * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
      * @summary Update Objects
      * @param body Update request payload
      */
-    updateObjects(body: DynamicSvcUpdateObjectRequest, options?: {
+    updateObjects(body: DataSvcUpdateObjectRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -99,12 +99,12 @@ export declare class DataSvcApi {
      * @param objectId Object ID
      * @param body Upsert request payload
      */
-    upsertObject(objectId: string, body: DynamicSvcUpsertObjectRequest, options?: {
+    upsertObject(objectId: string, body: DataSvcUpsertObjectRequest, options?: {
         headers: {
             [name: string]: string;
         };
     }): Promise<{
         response: http.IncomingMessage;
-        body: DynamicSvcUpsertObjectResponse;
+        body: DataSvcUpsertObjectResponse;
     }>;
 }

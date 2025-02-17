@@ -54,10 +54,10 @@ func (mr *MockDataSvcAPIMockRecorder) CreateObject(ctx any) *gomock.Call {
 }
 
 // CreateObjectExecute mocks base method.
-func (m *MockDataSvcAPI) CreateObjectExecute(r ApiCreateObjectRequest) (*DynamicSvcCreateObjectResponse, *http.Response, error) {
+func (m *MockDataSvcAPI) CreateObjectExecute(r ApiCreateObjectRequest) (*DataSvcCreateObjectResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateObjectExecute", r)
-	ret0, _ := ret[0].(*DynamicSvcCreateObjectResponse)
+	ret0, _ := ret[0].(*DataSvcCreateObjectResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
@@ -114,10 +114,10 @@ func (mr *MockDataSvcAPIMockRecorder) Query(ctx any) *gomock.Call {
 }
 
 // QueryExecute mocks base method.
-func (m *MockDataSvcAPI) QueryExecute(r ApiQueryRequest) (*DynamicSvcQueryResponse, *http.Response, error) {
+func (m *MockDataSvcAPI) QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExecute", r)
-	ret0, _ := ret[0].(*DynamicSvcQueryResponse)
+	ret0, _ := ret[0].(*DataSvcQueryResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
@@ -174,10 +174,10 @@ func (mr *MockDataSvcAPIMockRecorder) UpsertObject(ctx, objectId any) *gomock.Ca
 }
 
 // UpsertObjectExecute mocks base method.
-func (m *MockDataSvcAPI) UpsertObjectExecute(r ApiUpsertObjectRequest) (*DynamicSvcUpsertObjectResponse, *http.Response, error) {
+func (m *MockDataSvcAPI) UpsertObjectExecute(r ApiUpsertObjectRequest) (*DataSvcUpsertObjectResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpsertObjectExecute", r)
-	ret0, _ := ret[0].(*DynamicSvcUpsertObjectResponse)
+	ret0, _ := ret[0].(*DataSvcUpsertObjectResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2

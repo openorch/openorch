@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { DynamicSvcCreateObjectRequestToJSON, DynamicSvcCreateObjectResponseFromJSON, DynamicSvcDeleteObjectRequestToJSON, DynamicSvcQueryRequestToJSON, DynamicSvcQueryResponseFromJSON, DynamicSvcUpdateObjectRequestToJSON, DynamicSvcUpsertObjectRequestToJSON, DynamicSvcUpsertObjectResponseFromJSON, } from '../models/index';
+import { DataSvcCreateObjectRequestToJSON, DataSvcCreateObjectResponseFromJSON, DataSvcDeleteObjectRequestToJSON, DataSvcQueryRequestToJSON, DataSvcQueryResponseFromJSON, DataSvcUpdateObjectRequestToJSON, DataSvcUpsertObjectRequestToJSON, DataSvcUpsertObjectResponseFromJSON, } from '../models/index';
 /**
  *
  */
@@ -46,9 +46,9 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DynamicSvcCreateObjectRequestToJSON(requestParameters['body']),
+                body: DataSvcCreateObjectRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcCreateObjectResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcCreateObjectResponseFromJSON(jsonValue));
         });
     }
     /**
@@ -81,7 +81,7 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DynamicSvcDeleteObjectRequestToJSON(requestParameters['body']),
+                body: DataSvcDeleteObjectRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response);
         });
@@ -113,9 +113,9 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DynamicSvcQueryRequestToJSON(requestParameters['body']),
+                body: DataSvcQueryRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcQueryResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcQueryResponseFromJSON(jsonValue));
         });
     }
     /**
@@ -148,7 +148,7 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DynamicSvcUpdateObjectRequestToJSON(requestParameters['body']),
+                body: DataSvcUpdateObjectRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response);
         });
@@ -186,9 +186,9 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'PUT',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DynamicSvcUpsertObjectRequestToJSON(requestParameters['body']),
+                body: DataSvcUpsertObjectRequestToJSON(requestParameters['body']),
             }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => DynamicSvcUpsertObjectResponseFromJSON(jsonValue));
+            return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcUpsertObjectResponseFromJSON(jsonValue));
         });
     }
     /**

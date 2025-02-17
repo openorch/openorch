@@ -869,7 +869,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		}
 		err = dataService.Start()
 		if err != nil {
-			return errors.Wrap(err, "dynamic service start failed")
+			return errors.Wrap(err, "data service start failed")
 		}
 		err = policyService.Start()
 		if err != nil {
