@@ -23,7 +23,7 @@ import (
 	chatservice "github.com/openorch/openorch/server/internal/services/chat"
 	configservice "github.com/openorch/openorch/server/internal/services/config"
 	containerservice "github.com/openorch/openorch/server/internal/services/container"
-	dynamicservice "github.com/openorch/openorch/server/internal/services/data"
+	dataservice "github.com/openorch/openorch/server/internal/services/data"
 	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
 	emailservice "github.com/openorch/openorch/server/internal/services/email"
 	fileservice "github.com/openorch/openorch/server/internal/services/file"
@@ -299,7 +299,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	dataService, err := dynamicservice.NewDataService(
+	dataService, err := dataservice.NewDataService(
 		options.ClientFactory,
 		options.Lock,
 		options.Authorizer,
