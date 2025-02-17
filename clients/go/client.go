@@ -1,9 +1,9 @@
 /*
 OpenOrch
 
-A language-agnostic microservices framework for AI applications.
+A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.19
+API version: 0.3.0-rc.20
 Contact: sales@singulatron.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the OpenOrch API v0.3.0-rc.19
+// APIClient manages communication with the OpenOrch API v0.3.0-rc.20
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -56,9 +56,9 @@ type APIClient struct {
 
 	ContainerSvcAPI ContainerSvcAPI
 
-	DeploySvcAPI DeploySvcAPI
+	DataSvcAPI DataSvcAPI
 
-	DynamicSvcAPI DynamicSvcAPI
+	DeploySvcAPI DeploySvcAPI
 
 	EmailSvcAPI EmailSvcAPI
 
@@ -100,8 +100,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ChatSvcAPI = (*ChatSvcAPIService)(&c.common)
 	c.ConfigSvcAPI = (*ConfigSvcAPIService)(&c.common)
 	c.ContainerSvcAPI = (*ContainerSvcAPIService)(&c.common)
+	c.DataSvcAPI = (*DataSvcAPIService)(&c.common)
 	c.DeploySvcAPI = (*DeploySvcAPIService)(&c.common)
-	c.DynamicSvcAPI = (*DynamicSvcAPIService)(&c.common)
 	c.EmailSvcAPI = (*EmailSvcAPIService)(&c.common)
 	c.FileSvcAPI = (*FileSvcAPIService)(&c.common)
 	c.FirehoseSvcAPI = (*FirehoseSvcAPIService)(&c.common)

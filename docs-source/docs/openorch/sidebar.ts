@@ -146,31 +146,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Deploy Svc",
-      items: [
-        {
-          type: "doc",
-          id: "openorch/delete-deployment",
-          label: "Delete Deployment",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
-          id: "openorch/save-deployment",
-          label: "Save Deployment",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "openorch/list-deployments",
-          label: "List Deployments",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Dynamic Svc",
+      label: "Data Svc",
       items: [
         {
           type: "doc",
@@ -200,6 +176,30 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "openorch/update-objects",
           label: "Update Objects",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Deploy Svc",
+      items: [
+        {
+          type: "doc",
+          id: "openorch/delete-deployment",
+          label: "Delete Deployment",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "openorch/save-deployment",
+          label: "Save Deployment",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "openorch/list-deployments",
+          label: "List Deployments",
           className: "api-method post",
         },
       ],

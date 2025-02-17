@@ -1,5 +1,5 @@
 import { Configuration, UserSvcApi } from "@openorch/client";
-import { dynamicTest } from "./dynamic_example.js";
+import { dynamicTest } from "./data_example.js";
 import { promptTest } from "./prompt_example.js";
 
 async function start() {

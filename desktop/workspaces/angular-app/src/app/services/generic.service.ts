@@ -12,26 +12,26 @@ import { first } from 'rxjs';
 import { UserService } from './user.service';
 import {
 	Configuration,
-	DynamicSvcApi,
+	DataSvcApi,
 	DatastoreFilter,
-	DynamicSvcCreateObjectRequest as CreateObjectRequest,
-	DynamicSvcQueryRequest as QueryRequest,
-	DynamicSvcQueryResponse as QueryResponse,
-	DynamicSvcObject as DynamicObject,
-	DynamicSvcUpdateObjectRequest as UpdateObjectRequest,
-	DynamicSvcCreateObjectResponse as UpdateObjectResponse,
-	DynamicSvcUpsertObjectRequest as UpsertObjectRequest,
-	DynamicSvcCreateObjectResponse,
-	DynamicSvcUpsertObjectResponse,
-	// DynamicSvcDeleteObjectRequest as DeleteObjectRequest,
-	// DynamicSvcDeleteObjectResponse as DeleteObjectResponse,
+	DataSvcCreateObjectRequest as CreateObjectRequest,
+	DataSvcQueryRequest as QueryRequest,
+	DataSvcQueryResponse as QueryResponse,
+	DataSvcObject as DataObject,
+	DataSvcUpdateObjectRequest as UpdateObjectRequest,
+	DataSvcCreateObjectResponse as UpdateObjectResponse,
+	DataSvcUpsertObjectRequest as UpsertObjectRequest,
+	DataSvcCreateObjectResponse,
+	DataSvcUpsertObjectResponse,
+	// DataSvcDeleteObjectRequest as DeleteObjectRequest,
+	// DataSvcDeleteObjectResponse as DeleteObjectResponse,
 } from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class DynamicService {
-	dynamicService!: DynamicSvcApi;
+export class DataService {
+	dataService!: DataSvcApi;
 
 	constructor(
 		private server: ServerService,
@@ -40,7 +40,7 @@ export class DynamicService {
 	) {
 		this.userService.user$.pipe(first()).subscribe(() => {
 			this.init();
-			this.dynamicService = new DynamicSvcApi(
+			this.dataService = new DataSvcApi(
 				new Configuration({
 					apiKey: this.server.token(),
 					basePath: this.server.addr(),
@@ -59,14 +59,14 @@ export class DynamicService {
 
 	async create(
 		table: string,
-		object: DynamicObject
-	): Promise<DynamicSvcCreateObjectResponse> {
+		object: DataObject
+	): Promise<DataSvcCreateObjectResponse> {
 		object.table = table;
 		const request: CreateObjectRequest = {
 			object: object,
 		};
 
-		return this.dynamicService.createObject({ body: request });
+		return this.dataService.createObject({ body: request });
 	}
 
 	async find(
@@ -80,19 +80,19 @@ export class DynamicService {
 			},
 		};
 
-		return this.dynamicService.query({ body: request });
+		return this.dataService.query({ body: request });
 	}
 
 	async upsert(
 		table: string,
-		object: DynamicObject
-	): Promise<DynamicSvcUpsertObjectResponse> {
+		object: DataObject
+	): Promise<DataSvcUpsertObjectResponse> {
 		object.table = table;
 		const request: UpsertObjectRequest = {
 			object: object,
 		};
 
-		return this.dynamicService.upsertObject({
+		return this.dataService.upsertObject({
 			objectId: object.id!,
 			body: request,
 		});
@@ -101,7 +101,7 @@ export class DynamicService {
 	async update(
 		table: string,
 		filters: DatastoreFilter[],
-		object: DynamicObject
+		object: DataObject
 	): Promise<UpdateObjectResponse> {
 		const request: UpdateObjectRequest = {
 			table: table,
@@ -109,7 +109,7 @@ export class DynamicService {
 			object: object,
 		};
 
-		return this.dynamicService.updateObjects({
+		return this.dataService.updateObjects({
 			body: request,
 		});
 	}
@@ -121,7 +121,7 @@ export class DynamicService {
 		// 	table: table,
 		// 	filters: filters,
 		// };
-		//eturn this.dynamicService.deleteObjects({
+		//eturn this.dataService.deleteObjects({
 		//	body: request,
 		//);
 	}

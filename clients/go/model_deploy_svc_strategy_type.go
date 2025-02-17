@@ -1,9 +1,9 @@
 /*
 OpenOrch
 
-A language-agnostic microservices framework for AI applications.
+A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.19
+API version: 0.3.0-rc.20
 Contact: sales@singulatron.com
 */
 

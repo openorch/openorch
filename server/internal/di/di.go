@@ -23,8 +23,8 @@ import (
 	chatservice "github.com/openorch/openorch/server/internal/services/chat"
 	configservice "github.com/openorch/openorch/server/internal/services/config"
 	containerservice "github.com/openorch/openorch/server/internal/services/container"
+	dataservice "github.com/openorch/openorch/server/internal/services/data"
 	deployservice "github.com/openorch/openorch/server/internal/services/deploy"
-	dynamicservice "github.com/openorch/openorch/server/internal/services/dynamic"
 	emailservice "github.com/openorch/openorch/server/internal/services/email"
 	fileservice "github.com/openorch/openorch/server/internal/services/file"
 	firehoseservice "github.com/openorch/openorch/server/internal/services/firehose"
@@ -299,7 +299,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		os.Exit(1)
 	}
 
-	dynamicService, err := dynamicservice.NewDynamicService(
+	dataService, err := dataservice.NewDataService(
 		options.ClientFactory,
 		options.Lock,
 		options.Authorizer,
@@ -715,24 +715,24 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 
-	router.HandleFunc("/dynamic-svc/object", appl(func(w http.ResponseWriter, r *http.Request) {
-		dynamicService.Create(w, r)
+	router.HandleFunc("/data-svc/object", appl(func(w http.ResponseWriter, r *http.Request) {
+		dataService.Create(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/dynamic-svc/objects/update", appl(func(w http.ResponseWriter, r *http.Request) {
-		dynamicService.Update(w, r)
+	router.HandleFunc("/data-svc/objects/update", appl(func(w http.ResponseWriter, r *http.Request) {
+		dataService.Update(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/dynamic-svc/objects/delete", appl(func(w http.ResponseWriter, r *http.Request) {
-		dynamicService.Delete(w, r)
+	router.HandleFunc("/data-svc/objects/delete", appl(func(w http.ResponseWriter, r *http.Request) {
+		dataService.Delete(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/dynamic-svc/objects", appl(func(w http.ResponseWriter, r *http.Request) {
-		dynamicService.Query(w, r)
+	router.HandleFunc("/data-svc/objects", appl(func(w http.ResponseWriter, r *http.Request) {
+		dataService.Query(w, r)
 	})).
 		Methods("OPTIONS", "POST")
-	router.HandleFunc("/dynamic-svc/object/{objectId}", appl(func(w http.ResponseWriter, r *http.Request) {
-		dynamicService.Upsert(w, r)
+	router.HandleFunc("/data-svc/object/{objectId}", appl(func(w http.ResponseWriter, r *http.Request) {
+		dataService.Upsert(w, r)
 	})).
 		Methods("OPTIONS", "PUT")
 
@@ -867,9 +867,9 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		if err != nil {
 			return errors.Wrap(err, "prompt service start failed")
 		}
-		err = dynamicService.Start()
+		err = dataService.Start()
 		if err != nil {
-			return errors.Wrap(err, "dynamic service start failed")
+			return errors.Wrap(err, "data service start failed")
 		}
 		err = policyService.Start()
 		if err != nil {
