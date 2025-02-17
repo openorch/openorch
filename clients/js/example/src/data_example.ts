@@ -1,7 +1,7 @@
-import { Configuration, DynamicSvcApi } from "@openorch/client";
+import { Configuration, DataSvcApi } from "@openorch/client";
 
 export async function dynamicTest(apiKey: string) {
-  const dataService: DynamicSvcApi = new DynamicSvcApi(
+  const dataService: DataSvcApi = new DataSvcApi(
     new Configuration({
       apiKey: apiKey,
     })
