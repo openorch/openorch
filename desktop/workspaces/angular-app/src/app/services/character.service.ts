@@ -10,7 +10,7 @@ import { DataService } from './generic.service';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 import { first } from 'rxjs';
-import { DynamicSvcObject } from '@openorch/client';
+import { DataSvcObject } from '@openorch/client';
 
 const CHARACTERS_TABLE_NAME = 'characters';
 const SELECTED_CHARACTERS_TABLE_NAME = 'selected-characters';
@@ -157,7 +157,7 @@ export class CharacterService {
 	}
 }
 
-export interface Character extends DynamicSvcObject {
+export interface Character extends DataSvcObject {
 	data: {
 		name: string;
 		behaviour: string;
@@ -165,7 +165,7 @@ export interface Character extends DynamicSvcObject {
 	};
 }
 
-export interface SelectedCharacter extends DynamicSvcObject {
+export interface SelectedCharacter extends DataSvcObject {
 	data: {
 		selectedCharacterId: string;
 	};

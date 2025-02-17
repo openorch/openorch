@@ -12,26 +12,26 @@ import { first } from 'rxjs';
 import { UserService } from './user.service';
 import {
 	Configuration,
-	DynamicSvcApi,
+	DataSvcApi,
 	DatastoreFilter,
-	DynamicSvcCreateObjectRequest as CreateObjectRequest,
-	DynamicSvcQueryRequest as QueryRequest,
-	DynamicSvcQueryResponse as QueryResponse,
-	DynamicSvcObject as DynamicObject,
-	DynamicSvcUpdateObjectRequest as UpdateObjectRequest,
-	DynamicSvcCreateObjectResponse as UpdateObjectResponse,
-	DynamicSvcUpsertObjectRequest as UpsertObjectRequest,
-	DynamicSvcCreateObjectResponse,
-	DynamicSvcUpsertObjectResponse,
-	// DynamicSvcDeleteObjectRequest as DeleteObjectRequest,
-	// DynamicSvcDeleteObjectResponse as DeleteObjectResponse,
+	DataSvcCreateObjectRequest as CreateObjectRequest,
+	DataSvcQueryRequest as QueryRequest,
+	DataSvcQueryResponse as QueryResponse,
+	DataSvcObject as DataObject,
+	DataSvcUpdateObjectRequest as UpdateObjectRequest,
+	DataSvcCreateObjectResponse as UpdateObjectResponse,
+	DataSvcUpsertObjectRequest as UpsertObjectRequest,
+	DataSvcCreateObjectResponse,
+	DataSvcUpsertObjectResponse,
+	// DataSvcDeleteObjectRequest as DeleteObjectRequest,
+	// DataSvcDeleteObjectResponse as DeleteObjectResponse,
 } from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class DataService {
-	dataService!: DynamicSvcApi;
+	dataService!: DataSvcApi;
 
 	constructor(
 		private server: ServerService,
@@ -40,7 +40,7 @@ export class DataService {
 	) {
 		this.userService.user$.pipe(first()).subscribe(() => {
 			this.init();
-			this.dataService = new DynamicSvcApi(
+			this.dataService = new DataSvcApi(
 				new Configuration({
 					apiKey: this.server.token(),
 					basePath: this.server.addr(),
@@ -59,8 +59,8 @@ export class DataService {
 
 	async create(
 		table: string,
-		object: DynamicObject
-	): Promise<DynamicSvcCreateObjectResponse> {
+		object: DataObject
+	): Promise<DataSvcCreateObjectResponse> {
 		object.table = table;
 		const request: CreateObjectRequest = {
 			object: object,
@@ -85,8 +85,8 @@ export class DataService {
 
 	async upsert(
 		table: string,
-		object: DynamicObject
-	): Promise<DynamicSvcUpsertObjectResponse> {
+		object: DataObject
+	): Promise<DataSvcUpsertObjectResponse> {
 		object.table = table;
 		const request: UpsertObjectRequest = {
 			object: object,
@@ -101,7 +101,7 @@ export class DataService {
 	async update(
 		table: string,
 		filters: DatastoreFilter[],
-		object: DynamicObject
+		object: DataObject
 	): Promise<UpdateObjectResponse> {
 		const request: UpdateObjectRequest = {
 			table: table,
