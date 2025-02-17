@@ -35,7 +35,7 @@ As we began building AI applications on top, we quickly realized:
 
 ## Highlights
 
-- On-premise ChatGPT alternative – Run your AI models locally.
+- On-premise ChatGPT alternative – Run your AI models locally through a UI, CLI or API.
 - A "microservices-first" web framework – Think of it like Angular for the backend, built for large, scalable enterprise codebases.
 - Out-of-the-box services – Includes built-in file uploads, downloads, user management, and more.
 - Infrastructure simplification – Acts as a container orchestrator, reverse proxy, and more.
