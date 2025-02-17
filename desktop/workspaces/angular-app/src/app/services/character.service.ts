@@ -6,7 +6,7 @@
  * You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
  */
 import { Injectable } from '@angular/core';
-import { DynamicService } from './generic.service';
+import { DataService } from './generic.service';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 import { first } from 'rxjs';
@@ -23,7 +23,7 @@ export class CharacterService {
 
 	constructor(
 		private server: ServerService,
-		private dynamicService: DynamicService,
+		private dataService: DataService,
 		private userService: UserService
 	) {
 		this.userService.user$.pipe(first()).subscribe(() => {
@@ -39,7 +39,7 @@ export class CharacterService {
 	}
 
 	async loadCharacters(): Promise<Character[]> {
-		const response = await this.dynamicService.find(CHARACTERS_TABLE_NAME, [
+		const response = await this.dataService.find(CHARACTERS_TABLE_NAME, [
 			// all(),
 		]);
 		return response?.objects as Character[];
@@ -56,7 +56,7 @@ export class CharacterService {
 		const id = this.server.id('char');
 		const now = new Date().toISOString();
 		character.id = id;
-		await this.dynamicService.create(CHARACTERS_TABLE_NAME, {
+		await this.dataService.create(CHARACTERS_TABLE_NAME, {
 			...character,
 			id,
 			createdAt: now,
@@ -69,7 +69,7 @@ export class CharacterService {
 			this.selectedCharacter = {} as any;
 			await this.deleteCharacterSelection(character.id!);
 		}
-		await this.dynamicService.delete(CHARACTERS_TABLE_NAME, [
+		await this.dataService.delete(CHARACTERS_TABLE_NAME, [
 			// idCondition(character.id!),
 		]);
 	}
@@ -77,7 +77,7 @@ export class CharacterService {
 	async updateCharacter(character: Character) {
 		const now = new Date().toISOString();
 		character.updatedAt = now;
-		this.dynamicService.update(
+		this.dataService.update(
 			CHARACTERS_TABLE_NAME,
 			[
 				//idCondition(character.id!)
@@ -91,7 +91,7 @@ export class CharacterService {
 	async getCharacter(characterId: string): Promise<Character | undefined> {
 		console.log(characterId);
 		try {
-			const response = await this.dynamicService.find(CHARACTERS_TABLE_NAME, [
+			const response = await this.dataService.find(CHARACTERS_TABLE_NAME, [
 				// idCondition(characterId),
 			]);
 			return response?.objects?.[0] as any as Character;
@@ -129,7 +129,7 @@ export class CharacterService {
 		}
 		characterSelection.updatedAt = now;
 		characterSelection.data.selectedCharacterId = selectedCharacterId;
-		this.dynamicService.upsert(SELECTED_CHARACTERS_TABLE_NAME, {
+		this.dataService.upsert(SELECTED_CHARACTERS_TABLE_NAME, {
 			...characterSelection,
 		});
 	}
@@ -137,7 +137,7 @@ export class CharacterService {
 	async getCharacterSelection(): Promise<SelectedCharacter | null> {
 		const userId = await this.userService.getUserId();
 		console.log(userId);
-		const response = await this.dynamicService.find(
+		const response = await this.dataService.find(
 			SELECTED_CHARACTERS_TABLE_NAME,
 			[
 				// userIdCondition(userId)
@@ -151,7 +151,7 @@ export class CharacterService {
 	 */
 	async deleteCharacterSelection(characterId: string) {
 		console.log(characterId);
-		this.dynamicService.delete(SELECTED_CHARACTERS_TABLE_NAME, [
+		this.dataService.delete(SELECTED_CHARACTERS_TABLE_NAME, [
 			//idCondition(characterId),
 		]);
 	}

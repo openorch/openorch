@@ -1,13 +1,13 @@
 import { Configuration, DynamicSvcApi } from "@openorch/client";
 
 export async function dynamicTest(apiKey: string) {
-  const dynamicService: DynamicSvcApi = new DynamicSvcApi(
+  const dataService: DynamicSvcApi = new DynamicSvcApi(
     new Configuration({
       apiKey: apiKey,
     })
   );
 
-  await dynamicService.createObject({
+  await dataService.createObject({
     body: {
       object: {
         table: "uzerz",
@@ -19,7 +19,7 @@ export async function dynamicTest(apiKey: string) {
     },
   });
 
-  await dynamicService.createObject({
+  await dataService.createObject({
     body: {
       object: {
         table: "uzerz",
@@ -31,7 +31,7 @@ export async function dynamicTest(apiKey: string) {
     },
   });
 
-  let rsp = await dynamicService.query({
+  let rsp = await dataService.query({
     body: {
       table: "uzerz",
       readers: ["_self"],

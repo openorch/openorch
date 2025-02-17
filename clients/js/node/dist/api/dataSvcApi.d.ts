@@ -1,6 +1,6 @@
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -20,10 +20,10 @@ import { DynamicSvcUpsertObjectRequest } from '../model/dynamicSvcUpsertObjectRe
 import { DynamicSvcUpsertObjectResponse } from '../model/dynamicSvcUpsertObjectResponse';
 import { Authentication, Interceptor } from '../model/models';
 import { ApiKeyAuth } from '../model/models';
-export declare enum DynamicSvcApiApiKeys {
+export declare enum DataSvcApiApiKeys {
     BearerAuth = 0
 }
-export declare class DynamicSvcApi {
+export declare class DataSvcApi {
     protected _basePath: string;
     protected _defaultHeaders: any;
     protected _useQuerystring: boolean;
@@ -39,7 +39,7 @@ export declare class DynamicSvcApi {
     get defaultHeaders(): any;
     get basePath(): string;
     setDefaultAuthentication(auth: Authentication): void;
-    setApiKey(key: DynamicSvcApiApiKeys, value: string): void;
+    setApiKey(key: DataSvcApiApiKeys, value: string): void;
     addInterceptor(interceptor: Interceptor): void;
     /**
      * Creates a new object with the provided details. Requires authorization and user authentication.

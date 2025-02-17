@@ -1,7 +1,7 @@
 /*
 OpenOrch
 
-A language-agnostic microservices framework for AI applications.
+A language-agnostic microservices framework for building AI applications.
 
 API version: 0.3.0-rc.19
 Contact: sales@singulatron.com
@@ -56,9 +56,9 @@ type APIClient struct {
 
 	ContainerSvcAPI ContainerSvcAPI
 
-	DeploySvcAPI DeploySvcAPI
+	DataSvcAPI DataSvcAPI
 
-	DynamicSvcAPI DynamicSvcAPI
+	DeploySvcAPI DeploySvcAPI
 
 	EmailSvcAPI EmailSvcAPI
 
@@ -100,8 +100,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ChatSvcAPI = (*ChatSvcAPIService)(&c.common)
 	c.ConfigSvcAPI = (*ConfigSvcAPIService)(&c.common)
 	c.ContainerSvcAPI = (*ContainerSvcAPIService)(&c.common)
+	c.DataSvcAPI = (*DataSvcAPIService)(&c.common)
 	c.DeploySvcAPI = (*DeploySvcAPIService)(&c.common)
-	c.DynamicSvcAPI = (*DynamicSvcAPIService)(&c.common)
 	c.EmailSvcAPI = (*EmailSvcAPIService)(&c.common)
 	c.FileSvcAPI = (*FileSvcAPIService)(&c.common)
 	c.FirehoseSvcAPI = (*FirehoseSvcAPIService)(&c.common)

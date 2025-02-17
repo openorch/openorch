@@ -3,7 +3,7 @@ import localVarRequest from 'request';
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -28,7 +28,7 @@ ChatSvcAddMessageRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -53,7 +53,7 @@ ChatSvcAddThreadRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -78,7 +78,7 @@ ChatSvcAddThreadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -103,7 +103,7 @@ ChatSvcEventMessageAdded.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -128,7 +128,7 @@ ChatSvcEventThreadAdded.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -153,7 +153,7 @@ ChatSvcEventThreadUpdate.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -183,7 +183,7 @@ ChatSvcGetMessageResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -208,7 +208,7 @@ ChatSvcGetMessagesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -238,7 +238,7 @@ ChatSvcGetThreadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -263,7 +263,7 @@ ChatSvcGetThreadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -318,7 +318,7 @@ ChatSvcMessage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -368,7 +368,7 @@ ChatSvcThread.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -393,7 +393,7 @@ ChatSvcUpdateThreadRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -433,7 +433,7 @@ ConfigSvcConfig.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -458,7 +458,7 @@ ConfigSvcGetConfigResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -483,7 +483,7 @@ ConfigSvcSaveConfigRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -518,7 +518,7 @@ ContainerSvcBuildImageRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -543,7 +543,7 @@ ContainerSvcContainerIsRunningResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -578,7 +578,7 @@ ContainerSvcDockerInfo.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -603,7 +603,7 @@ ContainerSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -638,7 +638,7 @@ ContainerSvcGetContainerSummaryResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -663,7 +663,7 @@ ContainerSvcGetHostResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -688,7 +688,7 @@ ContainerSvcGetInfoResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -713,7 +713,7 @@ ContainerSvcImagePullableResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -768,7 +768,7 @@ ContainerSvcRunContainerOptions.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -808,7 +808,7 @@ ContainerSvcRunContainerRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -833,7 +833,7 @@ ContainerSvcRunContainerResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -863,7 +863,7 @@ ContainerSvcRunInfo.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -893,7 +893,7 @@ ContainerSvcStopContainerRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -928,7 +928,7 @@ DatastoreFilter.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -948,7 +948,7 @@ var DatastoreOp;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -983,7 +983,7 @@ DatastoreOrderBy.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1028,7 +1028,7 @@ DatastoreQuery.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1063,7 +1063,7 @@ DeploySvcAutoScalingConfig.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1088,7 +1088,7 @@ DeploySvcDeleteDeploymentRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1168,7 +1168,7 @@ DeploySvcDeployment.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1188,7 +1188,7 @@ var DeploySvcDeploymentStatus;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1223,7 +1223,7 @@ DeploySvcDeploymentStrategy.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1248,7 +1248,7 @@ DeploySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1273,7 +1273,7 @@ DeploySvcListDeploymentsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1308,7 +1308,7 @@ DeploySvcResourceLimits.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1333,7 +1333,7 @@ DeploySvcSaveDeploymentRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1350,7 +1350,7 @@ var DeploySvcStrategyType;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1380,7 +1380,7 @@ DeploySvcTargetRegion.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1435,7 +1435,7 @@ DynamicSvcCreateObjectFields.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1460,7 +1460,7 @@ DynamicSvcCreateObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1485,7 +1485,7 @@ DynamicSvcCreateObjectResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1515,7 +1515,7 @@ DynamicSvcDeleteObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1540,7 +1540,7 @@ DynamicSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1605,7 +1605,7 @@ DynamicSvcObject.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1640,7 +1640,7 @@ DynamicSvcQueryRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1665,7 +1665,7 @@ DynamicSvcQueryResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1700,7 +1700,7 @@ DynamicSvcUpdateObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1725,7 +1725,7 @@ DynamicSvcUpsertObjectRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1750,7 +1750,7 @@ DynamicSvcUpsertObjectResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1775,7 +1775,7 @@ EmailSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1810,7 +1810,7 @@ EmailSvcFile.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1875,7 +1875,7 @@ EmailSvcSendEmailRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1905,7 +1905,7 @@ EmailSvcSendEmailResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -1980,7 +1980,7 @@ FileSvcDownload.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2010,7 +2010,7 @@ FileSvcDownloadFileRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2035,7 +2035,7 @@ FileSvcDownloadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2060,7 +2060,7 @@ FileSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2090,7 +2090,7 @@ FileSvcGetDownloadResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2125,7 +2125,7 @@ FileSvcListUploadsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2150,7 +2150,7 @@ FileSvcListUploadsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2215,7 +2215,7 @@ FileSvcUpload.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2240,7 +2240,7 @@ FileSvcUploadFileResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2265,7 +2265,7 @@ FirehoseSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2295,7 +2295,7 @@ FirehoseSvcEvent.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2320,7 +2320,7 @@ FirehoseSvcEventPublishRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2350,7 +2350,7 @@ ModelSvcArchitectures.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2390,7 +2390,7 @@ ModelSvcContainer.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2425,7 +2425,7 @@ ModelSvcCudaParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2450,7 +2450,7 @@ ModelSvcDefaultParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2475,7 +2475,7 @@ ModelSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2510,7 +2510,7 @@ ModelSvcGetModelResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2535,7 +2535,7 @@ ModelSvcListModelsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2560,7 +2560,7 @@ ModelSvcListPlatformsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2680,7 +2680,7 @@ ModelSvcModel.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2715,7 +2715,7 @@ ModelSvcModelStatus.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2760,7 +2760,7 @@ ModelSvcPlatform.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2785,7 +2785,7 @@ ModelSvcStatusResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2810,7 +2810,7 @@ PolicySvcBlocklistParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2850,7 +2850,7 @@ PolicySvcCheckRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2875,7 +2875,7 @@ PolicySvcCheckResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2892,7 +2892,7 @@ var PolicySvcEntity;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2917,7 +2917,7 @@ PolicySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2957,7 +2957,7 @@ PolicySvcInstance.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -2987,7 +2987,7 @@ PolicySvcParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3027,7 +3027,7 @@ PolicySvcRateLimitParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3044,7 +3044,7 @@ var PolicySvcScope;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3061,7 +3061,7 @@ var PolicySvcTemplateId;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3086,7 +3086,7 @@ PolicySvcUpsertInstanceRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3116,7 +3116,7 @@ PromptSvcEngineParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3141,7 +3141,7 @@ PromptSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3166,7 +3166,7 @@ PromptSvcListPromptsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3201,7 +3201,7 @@ PromptSvcListPromptsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3226,7 +3226,7 @@ PromptSvcLlamaCppParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3256,7 +3256,7 @@ PromptSvcParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3366,7 +3366,7 @@ PromptSvcPrompt.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3426,7 +3426,7 @@ PromptSvcPromptRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3456,7 +3456,7 @@ PromptSvcPromptResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3477,7 +3477,7 @@ var PromptSvcPromptStatus;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3520,7 +3520,7 @@ var PromptSvcPromptType;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3545,7 +3545,7 @@ PromptSvcRemovePromptRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3570,7 +3570,7 @@ PromptSvcStableDiffusionParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3605,7 +3605,7 @@ PromptSvcStreamChunk.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3622,7 +3622,7 @@ var PromptSvcStreamChunkType;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3727,7 +3727,7 @@ PromptSvcTextToImageParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3752,7 +3752,7 @@ PromptSvcTextToTextParameters.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3777,7 +3777,7 @@ PromptSvcTypesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3817,7 +3817,7 @@ RegistrySvcAPISpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3847,7 +3847,7 @@ RegistrySvcClient.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3902,7 +3902,7 @@ RegistrySvcDefinition.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -3927,7 +3927,7 @@ RegistrySvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4017,7 +4017,7 @@ RegistrySvcGPU.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4047,7 +4047,7 @@ RegistrySvcImageSpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4137,7 +4137,7 @@ RegistrySvcInstance.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4157,7 +4157,7 @@ var RegistrySvcInstanceStatus;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4191,7 +4191,7 @@ var RegistrySvcLanguage;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4216,7 +4216,7 @@ RegistrySvcListDefinitionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4241,7 +4241,7 @@ RegistrySvcListInstancesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4266,7 +4266,7 @@ RegistrySvcListNodesRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4291,7 +4291,7 @@ RegistrySvcListNodesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4346,7 +4346,7 @@ RegistrySvcNode.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4371,7 +4371,7 @@ RegistrySvcNodeSelfResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4406,7 +4406,7 @@ RegistrySvcProcess.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4466,7 +4466,7 @@ RegistrySvcRegisterInstanceRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4511,7 +4511,7 @@ RegistrySvcRepositorySpec.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4546,7 +4546,7 @@ RegistrySvcResourceUsage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4571,7 +4571,7 @@ RegistrySvcSaveDefinitionRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4606,7 +4606,7 @@ RegistrySvcUsage.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4626,7 +4626,7 @@ var SecretSvcChecksumAlgorithm;
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4656,7 +4656,7 @@ SecretSvcDecryptValueRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4686,7 +4686,7 @@ SecretSvcDecryptValueResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4716,7 +4716,7 @@ SecretSvcEncryptValueRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4746,7 +4746,7 @@ SecretSvcEncryptValueResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4771,7 +4771,7 @@ SecretSvcIsSecureResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4806,7 +4806,7 @@ SecretSvcListSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4831,7 +4831,7 @@ SecretSvcListSecretsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4871,7 +4871,7 @@ SecretSvcRemoveSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4896,7 +4896,7 @@ SecretSvcSaveSecretsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -4981,7 +4981,7 @@ SecretSvcSecret.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5036,7 +5036,7 @@ SourceSvcCheckoutRepoRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5061,7 +5061,7 @@ SourceSvcCheckoutRepoResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5086,7 +5086,7 @@ SourceSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5381,7 +5381,7 @@ StableDiffusionTxt2ImgRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5406,7 +5406,7 @@ UserSvcAddUserToOrganizationRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5431,7 +5431,7 @@ UserSvcAssignPermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5486,7 +5486,7 @@ UserSvcAuthToken.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5521,7 +5521,7 @@ UserSvcChangePasswordRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5586,7 +5586,7 @@ UserSvcContact.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5621,7 +5621,7 @@ UserSvcCreateOrganizationRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5661,7 +5661,7 @@ UserSvcCreateRoleRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5686,7 +5686,7 @@ UserSvcCreateRoleResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5721,7 +5721,7 @@ UserSvcCreateUserRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5746,7 +5746,7 @@ UserSvcErrorResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5771,7 +5771,7 @@ UserSvcGetPermissionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5796,7 +5796,7 @@ UserSvcGetPublicKeyResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5821,7 +5821,7 @@ UserSvcGetRolesResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5846,7 +5846,7 @@ UserSvcGetUsersRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5881,7 +5881,7 @@ UserSvcGetUsersResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5916,7 +5916,7 @@ UserSvcGrant.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5946,7 +5946,7 @@ UserSvcIsAuthorizedRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -5976,7 +5976,7 @@ UserSvcIsAuthorizedResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6006,7 +6006,7 @@ UserSvcListGrantsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6031,7 +6031,7 @@ UserSvcListGrantsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6066,7 +6066,7 @@ UserSvcLoginRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6091,7 +6091,7 @@ UserSvcLoginResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6141,7 +6141,7 @@ UserSvcOrganization.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6191,7 +6191,7 @@ UserSvcPermission.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6221,7 +6221,7 @@ UserSvcPermissionLink.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6256,7 +6256,7 @@ UserSvcReadUserByTokenResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6296,7 +6296,7 @@ UserSvcRegisterRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6321,7 +6321,7 @@ UserSvcRegisterResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6351,7 +6351,7 @@ UserSvcResetPasswordRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6401,7 +6401,7 @@ UserSvcRole.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6426,7 +6426,7 @@ UserSvcSaveGrantsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6451,7 +6451,7 @@ UserSvcSavePermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6476,7 +6476,7 @@ UserSvcSavePermissionsResponse.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6506,7 +6506,7 @@ UserSvcSaveProfileRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -6531,7 +6531,7 @@ UserSvcSetRolePermissionsRequest.attributeTypeMap = [
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7018,7 +7018,7 @@ class VoidAuth {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7753,7 +7753,7 @@ class ChatSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -7951,7 +7951,7 @@ class ConfigSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -8549,7 +8549,7 @@ class ContainerSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -8562,13 +8562,416 @@ let defaultBasePath$b = 'http://localhost:58231';
 // ===============================================
 // This file is autogenerated - Please do not edit
 // ===============================================
+var DataSvcApiApiKeys;
+(function (DataSvcApiApiKeys) {
+    DataSvcApiApiKeys[DataSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
+})(DataSvcApiApiKeys || (DataSvcApiApiKeys = {}));
+class DataSvcApi {
+    constructor(basePathOrUsername, password, basePath) {
+        this._basePath = defaultBasePath$b;
+        this._defaultHeaders = {};
+        this._useQuerystring = false;
+        this.authentications = {
+            'default': new VoidAuth(),
+            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
+        };
+        this.interceptors = [];
+        if (password) {
+            if (basePath) {
+                this.basePath = basePath;
+            }
+        }
+        else {
+            if (basePathOrUsername) {
+                this.basePath = basePathOrUsername;
+            }
+        }
+    }
+    set useQuerystring(value) {
+        this._useQuerystring = value;
+    }
+    set basePath(basePath) {
+        this._basePath = basePath;
+    }
+    set defaultHeaders(defaultHeaders) {
+        this._defaultHeaders = defaultHeaders;
+    }
+    get defaultHeaders() {
+        return this._defaultHeaders;
+    }
+    get basePath() {
+        return this._basePath;
+    }
+    setDefaultAuthentication(auth) {
+        this.authentications.default = auth;
+    }
+    setApiKey(key, value) {
+        this.authentications[DataSvcApiApiKeys[key]].apiKey = value;
+    }
+    addInterceptor(interceptor) {
+        this.interceptors.push(interceptor);
+    }
+    /**
+     * Creates a new object with the provided details. Requires authorization and user authentication.
+     * @summary Create a Generic Object
+     * @param body Create request payload
+     */
+    createObject(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/data-svc/object';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling createObject.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcCreateObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcCreateObjectResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+     * @summary Delete a Generic Object
+     * @param body Delete request payload
+     */
+    deleteObjects(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/data-svc/objects/delete';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling deleteObjects.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcDeleteObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
+     * @summary Query Objects
+     * @param body Query Request
+     */
+    query(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/data-svc/objects';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcQueryRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcQueryResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * @summary Update Objects
+     * @param body Update request payload
+     */
+    updateObjects(body_1) {
+        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/data-svc/objects/update';
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling updateObjects.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'POST',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcUpdateObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "object");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    /**
+     * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
+     * @summary Upsert a Generic Object
+     * @param objectId Object ID
+     * @param body Upsert request payload
+     */
+    upsertObject(objectId_1, body_1) {
+        return __awaiter(this, arguments, void 0, function* (objectId, body, options = { headers: {} }) {
+            const localVarPath = this.basePath + '/data-svc/object/{objectId}'
+                .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
+            let localVarQueryParameters = {};
+            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
+            const produces = ['application/json'];
+            // give precedence to 'application/json'
+            if (produces.indexOf('application/json') >= 0) {
+                localVarHeaderParams.Accept = 'application/json';
+            }
+            else {
+                localVarHeaderParams.Accept = produces.join(',');
+            }
+            let localVarFormParams = {};
+            // verify required parameter 'objectId' is not null or undefined
+            if (objectId === null || objectId === undefined) {
+                throw new Error('Required parameter objectId was null or undefined when calling upsertObject.');
+            }
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new Error('Required parameter body was null or undefined when calling upsertObject.');
+            }
+            Object.assign(localVarHeaderParams, options.headers);
+            let localVarRequestOptions = {
+                method: 'PUT',
+                qs: localVarQueryParameters,
+                headers: localVarHeaderParams,
+                uri: localVarPath,
+                useQuerystring: this._useQuerystring,
+                json: true,
+                body: ObjectSerializer.serialize(body, "DynamicSvcUpsertObjectRequest")
+            };
+            let authenticationPromise = Promise.resolve();
+            if (this.authentications.BearerAuth.apiKey) {
+                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+            }
+            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+            let interceptorPromise = authenticationPromise;
+            for (const interceptor of this.interceptors) {
+                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+            }
+            return interceptorPromise.then(() => {
+                if (Object.keys(localVarFormParams).length) {
+                    {
+                        localVarRequestOptions.form = localVarFormParams;
+                    }
+                }
+                return new Promise((resolve, reject) => {
+                    localVarRequest(localVarRequestOptions, (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        else {
+                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                                body = ObjectSerializer.deserialize(body, "DynamicSvcUpsertObjectResponse");
+                                resolve({ response: response, body: body });
+                            }
+                            else {
+                                reject(new HttpError(response, body, response.statusCode));
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+}
+
+/**
+ * OpenOrch
+ * A language-agnostic microservices framework for building AI applications.
+ *
+ * The version of the OpenAPI document: 0.3.0-rc.19
+ * Contact: sales@singulatron.com
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+let defaultBasePath$a = 'http://localhost:58231';
+// ===============================================
+// This file is autogenerated - Please do not edit
+// ===============================================
 var DeploySvcApiApiKeys;
 (function (DeploySvcApiApiKeys) {
     DeploySvcApiApiKeys[DeploySvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
 })(DeploySvcApiApiKeys || (DeploySvcApiApiKeys = {}));
 class DeploySvcApi {
     constructor(basePathOrUsername, password, basePath) {
-        this._basePath = defaultBasePath$b;
+        this._basePath = defaultBasePath$a;
         this._defaultHeaders = {};
         this._useQuerystring = false;
         this.authentications = {
@@ -8804,410 +9207,7 @@ class DeploySvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
- *
- * The version of the OpenAPI document: 0.3.0-rc.19
- * Contact: sales@singulatron.com
- *
- * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
- * https://openapi-generator.tech
- * Do not edit the class manually.
- */
-let defaultBasePath$a = 'http://localhost:58231';
-// ===============================================
-// This file is autogenerated - Please do not edit
-// ===============================================
-var DynamicSvcApiApiKeys;
-(function (DynamicSvcApiApiKeys) {
-    DynamicSvcApiApiKeys[DynamicSvcApiApiKeys["BearerAuth"] = 0] = "BearerAuth";
-})(DynamicSvcApiApiKeys || (DynamicSvcApiApiKeys = {}));
-class DynamicSvcApi {
-    constructor(basePathOrUsername, password, basePath) {
-        this._basePath = defaultBasePath$a;
-        this._defaultHeaders = {};
-        this._useQuerystring = false;
-        this.authentications = {
-            'default': new VoidAuth(),
-            'BearerAuth': new ApiKeyAuth('header', 'Authorization'),
-        };
-        this.interceptors = [];
-        if (password) {
-            if (basePath) {
-                this.basePath = basePath;
-            }
-        }
-        else {
-            if (basePathOrUsername) {
-                this.basePath = basePathOrUsername;
-            }
-        }
-    }
-    set useQuerystring(value) {
-        this._useQuerystring = value;
-    }
-    set basePath(basePath) {
-        this._basePath = basePath;
-    }
-    set defaultHeaders(defaultHeaders) {
-        this._defaultHeaders = defaultHeaders;
-    }
-    get defaultHeaders() {
-        return this._defaultHeaders;
-    }
-    get basePath() {
-        return this._basePath;
-    }
-    setDefaultAuthentication(auth) {
-        this.authentications.default = auth;
-    }
-    setApiKey(key, value) {
-        this.authentications[DynamicSvcApiApiKeys[key]].apiKey = value;
-    }
-    addInterceptor(interceptor) {
-        this.interceptors.push(interceptor);
-    }
-    /**
-     * Creates a new object with the provided details. Requires authorization and user authentication.
-     * @summary Create a Generic Object
-     * @param body Create request payload
-     */
-    createObject(body_1) {
-        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/dynamic-svc/object';
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling createObject.');
-            }
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'POST',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcCreateObjectRequest")
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcCreateObjectResponse");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-    /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * @summary Delete a Generic Object
-     * @param body Delete request payload
-     */
-    deleteObjects(body_1) {
-        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/dynamic-svc/objects/delete';
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling deleteObjects.');
-            }
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'POST',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcDeleteObjectRequest")
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "object");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-    /**
-     * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
-     * @summary Query Objects
-     * @param body Query Request
-     */
-    query(body_1) {
-        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/dynamic-svc/objects';
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'POST',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcQueryRequest")
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcQueryResponse");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-    /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
-     * @summary Update Objects
-     * @param body Update request payload
-     */
-    updateObjects(body_1) {
-        return __awaiter(this, arguments, void 0, function* (body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/dynamic-svc/objects/update';
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling updateObjects.');
-            }
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'POST',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcUpdateObjectRequest")
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "object");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-    /**
-     * Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.
-     * @summary Upsert a Generic Object
-     * @param objectId Object ID
-     * @param body Upsert request payload
-     */
-    upsertObject(objectId_1, body_1) {
-        return __awaiter(this, arguments, void 0, function* (objectId, body, options = { headers: {} }) {
-            const localVarPath = this.basePath + '/dynamic-svc/object/{objectId}'
-                .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
-            let localVarQueryParameters = {};
-            let localVarHeaderParams = Object.assign({}, this._defaultHeaders);
-            const produces = ['application/json'];
-            // give precedence to 'application/json'
-            if (produces.indexOf('application/json') >= 0) {
-                localVarHeaderParams.Accept = 'application/json';
-            }
-            else {
-                localVarHeaderParams.Accept = produces.join(',');
-            }
-            let localVarFormParams = {};
-            // verify required parameter 'objectId' is not null or undefined
-            if (objectId === null || objectId === undefined) {
-                throw new Error('Required parameter objectId was null or undefined when calling upsertObject.');
-            }
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new Error('Required parameter body was null or undefined when calling upsertObject.');
-            }
-            Object.assign(localVarHeaderParams, options.headers);
-            let localVarRequestOptions = {
-                method: 'PUT',
-                qs: localVarQueryParameters,
-                headers: localVarHeaderParams,
-                uri: localVarPath,
-                useQuerystring: this._useQuerystring,
-                json: true,
-                body: ObjectSerializer.serialize(body, "DynamicSvcUpsertObjectRequest")
-            };
-            let authenticationPromise = Promise.resolve();
-            if (this.authentications.BearerAuth.apiKey) {
-                authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
-            }
-            authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-            let interceptorPromise = authenticationPromise;
-            for (const interceptor of this.interceptors) {
-                interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-            }
-            return interceptorPromise.then(() => {
-                if (Object.keys(localVarFormParams).length) {
-                    {
-                        localVarRequestOptions.form = localVarFormParams;
-                    }
-                }
-                return new Promise((resolve, reject) => {
-                    localVarRequest(localVarRequestOptions, (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                        }
-                        else {
-                            if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                                body = ObjectSerializer.deserialize(body, "DynamicSvcUpsertObjectResponse");
-                                resolve({ response: response, body: body });
-                            }
-                            else {
-                                reject(new HttpError(response, body, response.statusCode));
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    }
-}
-
-/**
- * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -9340,7 +9340,7 @@ class EmailSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -9933,7 +9933,7 @@ class FileSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10126,7 +10126,7 @@ class FirehoseSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10704,7 +10704,7 @@ class ModelSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -10910,7 +10910,7 @@ class PolicySvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -11307,7 +11307,7 @@ class PromptSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -11981,7 +11981,7 @@ class RegistrySvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -12439,7 +12439,7 @@ class SecretSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -12572,7 +12572,7 @@ class SourceSvcApi {
 
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -14262,6 +14262,6 @@ class HttpError extends Error {
         this.name = 'HttpError';
     }
 }
-const APIS = [ChatSvcApi, ConfigSvcApi, ContainerSvcApi, DeploySvcApi, DynamicSvcApi, EmailSvcApi, FileSvcApi, FirehoseSvcApi, ModelSvcApi, PolicySvcApi, PromptSvcApi, RegistrySvcApi, SecretSvcApi, SourceSvcApi, UserSvcApi];
+const APIS = [ChatSvcApi, ConfigSvcApi, ContainerSvcApi, DataSvcApi, DeploySvcApi, EmailSvcApi, FileSvcApi, FirehoseSvcApi, ModelSvcApi, PolicySvcApi, PromptSvcApi, RegistrySvcApi, SecretSvcApi, SourceSvcApi, UserSvcApi];
 
-export { APIS, ApiKeyAuth, ChatSvcAddMessageRequest, ChatSvcAddThreadRequest, ChatSvcAddThreadResponse, ChatSvcApi, ChatSvcApiApiKeys, ChatSvcEventMessageAdded, ChatSvcEventThreadAdded, ChatSvcEventThreadUpdate, ChatSvcGetMessageResponse, ChatSvcGetMessagesResponse, ChatSvcGetThreadResponse, ChatSvcGetThreadsResponse, ChatSvcMessage, ChatSvcThread, ChatSvcUpdateThreadRequest, ConfigSvcApi, ConfigSvcApiApiKeys, ConfigSvcConfig, ConfigSvcGetConfigResponse, ConfigSvcSaveConfigRequest, ContainerSvcApi, ContainerSvcApiApiKeys, ContainerSvcBuildImageRequest, ContainerSvcContainerIsRunningResponse, ContainerSvcDockerInfo, ContainerSvcErrorResponse, ContainerSvcGetContainerSummaryResponse, ContainerSvcGetHostResponse, ContainerSvcGetInfoResponse, ContainerSvcImagePullableResponse, ContainerSvcRunContainerOptions, ContainerSvcRunContainerRequest, ContainerSvcRunContainerResponse, ContainerSvcRunInfo, ContainerSvcStopContainerRequest, DatastoreFilter, DatastoreOp, DatastoreOrderBy, DatastoreQuery, DeploySvcApi, DeploySvcApiApiKeys, DeploySvcAutoScalingConfig, DeploySvcDeleteDeploymentRequest, DeploySvcDeployment, DeploySvcDeploymentStatus, DeploySvcDeploymentStrategy, DeploySvcErrorResponse, DeploySvcListDeploymentsResponse, DeploySvcResourceLimits, DeploySvcSaveDeploymentRequest, DeploySvcStrategyType, DeploySvcTargetRegion, DynamicSvcApi, DynamicSvcApiApiKeys, DynamicSvcCreateObjectFields, DynamicSvcCreateObjectRequest, DynamicSvcCreateObjectResponse, DynamicSvcDeleteObjectRequest, DynamicSvcErrorResponse, DynamicSvcObject, DynamicSvcQueryRequest, DynamicSvcQueryResponse, DynamicSvcUpdateObjectRequest, DynamicSvcUpsertObjectRequest, DynamicSvcUpsertObjectResponse, EmailSvcApi, EmailSvcApiApiKeys, EmailSvcErrorResponse, EmailSvcFile, EmailSvcSendEmailRequest, EmailSvcSendEmailResponse, FileSvcApi, FileSvcApiApiKeys, FileSvcDownload, FileSvcDownloadFileRequest, FileSvcDownloadsResponse, FileSvcErrorResponse, FileSvcGetDownloadResponse, FileSvcListUploadsRequest, FileSvcListUploadsResponse, FileSvcUpload, FileSvcUploadFileResponse, FirehoseSvcApi, FirehoseSvcApiApiKeys, FirehoseSvcErrorResponse, FirehoseSvcEvent, FirehoseSvcEventPublishRequest, HttpBasicAuth, HttpBearerAuth, HttpError, ModelSvcApi, ModelSvcApiApiKeys, ModelSvcArchitectures, ModelSvcContainer, ModelSvcCudaParameters, ModelSvcDefaultParameters, ModelSvcErrorResponse, ModelSvcGetModelResponse, ModelSvcListModelsResponse, ModelSvcListPlatformsResponse, ModelSvcModel, ModelSvcModelStatus, ModelSvcPlatform, ModelSvcStatusResponse, OAuth, ObjectSerializer, PolicySvcApi, PolicySvcApiApiKeys, PolicySvcBlocklistParameters, PolicySvcCheckRequest, PolicySvcCheckResponse, PolicySvcEntity, PolicySvcErrorResponse, PolicySvcInstance, PolicySvcParameters, PolicySvcRateLimitParameters, PolicySvcScope, PolicySvcTemplateId, PolicySvcUpsertInstanceRequest, PromptSvcApi, PromptSvcApiApiKeys, PromptSvcEngineParameters, PromptSvcErrorResponse, PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcLlamaCppParameters, PromptSvcParameters, PromptSvcPrompt, PromptSvcPromptRequest, PromptSvcPromptResponse, PromptSvcPromptStatus, PromptSvcPromptType, PromptSvcRemovePromptRequest, PromptSvcStableDiffusionParameters, PromptSvcStreamChunk, PromptSvcStreamChunkType, PromptSvcTextToImageParameters, PromptSvcTextToTextParameters, PromptSvcTypesResponse, RegistrySvcAPISpec, RegistrySvcApi, RegistrySvcApiApiKeys, RegistrySvcClient, RegistrySvcDefinition, RegistrySvcErrorResponse, RegistrySvcGPU, RegistrySvcImageSpec, RegistrySvcInstance, RegistrySvcInstanceStatus, RegistrySvcLanguage, RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesRequest, RegistrySvcListNodesResponse, RegistrySvcNode, RegistrySvcNodeSelfResponse, RegistrySvcProcess, RegistrySvcRegisterInstanceRequest, RegistrySvcRepositorySpec, RegistrySvcResourceUsage, RegistrySvcSaveDefinitionRequest, RegistrySvcUsage, SecretSvcApi, SecretSvcApiApiKeys, SecretSvcChecksumAlgorithm, SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcIsSecureResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest, SecretSvcSecret, SourceSvcApi, SourceSvcApiApiKeys, SourceSvcCheckoutRepoRequest, SourceSvcCheckoutRepoResponse, SourceSvcErrorResponse, StableDiffusionTxt2ImgRequest, UserSvcAddUserToOrganizationRequest, UserSvcApi, UserSvcApiApiKeys, UserSvcAssignPermissionsRequest, UserSvcAuthToken, UserSvcChangePasswordRequest, UserSvcContact, UserSvcCreateOrganizationRequest, UserSvcCreateRoleRequest, UserSvcCreateRoleResponse, UserSvcCreateUserRequest, UserSvcErrorResponse, UserSvcGetPermissionsResponse, UserSvcGetPublicKeyResponse, UserSvcGetRolesResponse, UserSvcGetUsersRequest, UserSvcGetUsersResponse, UserSvcGrant, UserSvcIsAuthorizedRequest, UserSvcIsAuthorizedResponse, UserSvcListGrantsRequest, UserSvcListGrantsResponse, UserSvcLoginRequest, UserSvcLoginResponse, UserSvcOrganization, UserSvcPermission, UserSvcPermissionLink, UserSvcReadUserByTokenResponse, UserSvcRegisterRequest, UserSvcRegisterResponse, UserSvcResetPasswordRequest, UserSvcRole, UserSvcSaveGrantsRequest, UserSvcSavePermissionsRequest, UserSvcSavePermissionsResponse, UserSvcSaveProfileRequest, UserSvcSetRolePermissionsRequest, UserSvcUser, VoidAuth };
+export { APIS, ApiKeyAuth, ChatSvcAddMessageRequest, ChatSvcAddThreadRequest, ChatSvcAddThreadResponse, ChatSvcApi, ChatSvcApiApiKeys, ChatSvcEventMessageAdded, ChatSvcEventThreadAdded, ChatSvcEventThreadUpdate, ChatSvcGetMessageResponse, ChatSvcGetMessagesResponse, ChatSvcGetThreadResponse, ChatSvcGetThreadsResponse, ChatSvcMessage, ChatSvcThread, ChatSvcUpdateThreadRequest, ConfigSvcApi, ConfigSvcApiApiKeys, ConfigSvcConfig, ConfigSvcGetConfigResponse, ConfigSvcSaveConfigRequest, ContainerSvcApi, ContainerSvcApiApiKeys, ContainerSvcBuildImageRequest, ContainerSvcContainerIsRunningResponse, ContainerSvcDockerInfo, ContainerSvcErrorResponse, ContainerSvcGetContainerSummaryResponse, ContainerSvcGetHostResponse, ContainerSvcGetInfoResponse, ContainerSvcImagePullableResponse, ContainerSvcRunContainerOptions, ContainerSvcRunContainerRequest, ContainerSvcRunContainerResponse, ContainerSvcRunInfo, ContainerSvcStopContainerRequest, DataSvcApi, DataSvcApiApiKeys, DatastoreFilter, DatastoreOp, DatastoreOrderBy, DatastoreQuery, DeploySvcApi, DeploySvcApiApiKeys, DeploySvcAutoScalingConfig, DeploySvcDeleteDeploymentRequest, DeploySvcDeployment, DeploySvcDeploymentStatus, DeploySvcDeploymentStrategy, DeploySvcErrorResponse, DeploySvcListDeploymentsResponse, DeploySvcResourceLimits, DeploySvcSaveDeploymentRequest, DeploySvcStrategyType, DeploySvcTargetRegion, DynamicSvcCreateObjectFields, DynamicSvcCreateObjectRequest, DynamicSvcCreateObjectResponse, DynamicSvcDeleteObjectRequest, DynamicSvcErrorResponse, DynamicSvcObject, DynamicSvcQueryRequest, DynamicSvcQueryResponse, DynamicSvcUpdateObjectRequest, DynamicSvcUpsertObjectRequest, DynamicSvcUpsertObjectResponse, EmailSvcApi, EmailSvcApiApiKeys, EmailSvcErrorResponse, EmailSvcFile, EmailSvcSendEmailRequest, EmailSvcSendEmailResponse, FileSvcApi, FileSvcApiApiKeys, FileSvcDownload, FileSvcDownloadFileRequest, FileSvcDownloadsResponse, FileSvcErrorResponse, FileSvcGetDownloadResponse, FileSvcListUploadsRequest, FileSvcListUploadsResponse, FileSvcUpload, FileSvcUploadFileResponse, FirehoseSvcApi, FirehoseSvcApiApiKeys, FirehoseSvcErrorResponse, FirehoseSvcEvent, FirehoseSvcEventPublishRequest, HttpBasicAuth, HttpBearerAuth, HttpError, ModelSvcApi, ModelSvcApiApiKeys, ModelSvcArchitectures, ModelSvcContainer, ModelSvcCudaParameters, ModelSvcDefaultParameters, ModelSvcErrorResponse, ModelSvcGetModelResponse, ModelSvcListModelsResponse, ModelSvcListPlatformsResponse, ModelSvcModel, ModelSvcModelStatus, ModelSvcPlatform, ModelSvcStatusResponse, OAuth, ObjectSerializer, PolicySvcApi, PolicySvcApiApiKeys, PolicySvcBlocklistParameters, PolicySvcCheckRequest, PolicySvcCheckResponse, PolicySvcEntity, PolicySvcErrorResponse, PolicySvcInstance, PolicySvcParameters, PolicySvcRateLimitParameters, PolicySvcScope, PolicySvcTemplateId, PolicySvcUpsertInstanceRequest, PromptSvcApi, PromptSvcApiApiKeys, PromptSvcEngineParameters, PromptSvcErrorResponse, PromptSvcListPromptsRequest, PromptSvcListPromptsResponse, PromptSvcLlamaCppParameters, PromptSvcParameters, PromptSvcPrompt, PromptSvcPromptRequest, PromptSvcPromptResponse, PromptSvcPromptStatus, PromptSvcPromptType, PromptSvcRemovePromptRequest, PromptSvcStableDiffusionParameters, PromptSvcStreamChunk, PromptSvcStreamChunkType, PromptSvcTextToImageParameters, PromptSvcTextToTextParameters, PromptSvcTypesResponse, RegistrySvcAPISpec, RegistrySvcApi, RegistrySvcApiApiKeys, RegistrySvcClient, RegistrySvcDefinition, RegistrySvcErrorResponse, RegistrySvcGPU, RegistrySvcImageSpec, RegistrySvcInstance, RegistrySvcInstanceStatus, RegistrySvcLanguage, RegistrySvcListDefinitionsResponse, RegistrySvcListInstancesResponse, RegistrySvcListNodesRequest, RegistrySvcListNodesResponse, RegistrySvcNode, RegistrySvcNodeSelfResponse, RegistrySvcProcess, RegistrySvcRegisterInstanceRequest, RegistrySvcRepositorySpec, RegistrySvcResourceUsage, RegistrySvcSaveDefinitionRequest, RegistrySvcUsage, SecretSvcApi, SecretSvcApiApiKeys, SecretSvcChecksumAlgorithm, SecretSvcDecryptValueRequest, SecretSvcDecryptValueResponse, SecretSvcEncryptValueRequest, SecretSvcEncryptValueResponse, SecretSvcIsSecureResponse, SecretSvcListSecretsRequest, SecretSvcListSecretsResponse, SecretSvcRemoveSecretsRequest, SecretSvcSaveSecretsRequest, SecretSvcSecret, SourceSvcApi, SourceSvcApiApiKeys, SourceSvcCheckoutRepoRequest, SourceSvcCheckoutRepoResponse, SourceSvcErrorResponse, StableDiffusionTxt2ImgRequest, UserSvcAddUserToOrganizationRequest, UserSvcApi, UserSvcApiApiKeys, UserSvcAssignPermissionsRequest, UserSvcAuthToken, UserSvcChangePasswordRequest, UserSvcContact, UserSvcCreateOrganizationRequest, UserSvcCreateRoleRequest, UserSvcCreateRoleResponse, UserSvcCreateUserRequest, UserSvcErrorResponse, UserSvcGetPermissionsResponse, UserSvcGetPublicKeyResponse, UserSvcGetRolesResponse, UserSvcGetUsersRequest, UserSvcGetUsersResponse, UserSvcGrant, UserSvcIsAuthorizedRequest, UserSvcIsAuthorizedResponse, UserSvcListGrantsRequest, UserSvcListGrantsResponse, UserSvcLoginRequest, UserSvcLoginResponse, UserSvcOrganization, UserSvcPermission, UserSvcPermissionLink, UserSvcReadUserByTokenResponse, UserSvcRegisterRequest, UserSvcRegisterResponse, UserSvcResetPasswordRequest, UserSvcRole, UserSvcSaveGrantsRequest, UserSvcSavePermissionsRequest, UserSvcSavePermissionsResponse, UserSvcSaveProfileRequest, UserSvcSetRolePermissionsRequest, UserSvcUser, VoidAuth };

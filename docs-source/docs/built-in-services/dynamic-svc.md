@@ -9,15 +9,15 @@ tags:
   - services
 ---
 
-# Dynamic Svc
+# Data Svc
 
 The dynamic service is designed to help build backendless applications: the goal is to be able to save and query data directly from the frontend. Similarly to Firebase.
 
-> This page is a high level overview of the `Dynamic Svc`. For more details, please see the [Dynamic Svc API documentation](/docs/openorch/query).
+> This page is a high level overview of the `Data Svc`. For more details, please see the [Data Svc API documentation](/docs/openorch/query).
 
 Aimed at prototyping or where building a service to store the data feels like an overkill. It doesn't aim to be a definitive and exclusively used datastore by any means.
 
-> Currently the Dynamic Svc is being used with internal apps but the goal is to have a permission model that works for public apps (where adversarial users might be present). If you find a logical inconsitency that hinders building public apps, please report it.
+> Currently the Data Svc is being used with internal apps but the goal is to have a permission model that works for public apps (where adversarial users might be present). If you find a logical inconsitency that hinders building public apps, please report it.
 
 ## How It Works
 
@@ -27,7 +27,7 @@ Multiple tenants (users, services) write to the same table/s. Rows are then owne
 
 ### Permission Model
 
-The Dynamic Svc has a permission model with the following goals:
+The Data Svc has a permission model with the following goals:
 
 - Be simple & easy to understand
 - Be as versatile as possible while being simple

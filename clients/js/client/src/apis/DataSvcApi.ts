@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -70,7 +70,7 @@ export interface UpsertObjectRequest {
 /**
  * 
  */
-export class DynamicSvcApi extends runtime.BaseAPI {
+export class DataSvcApi extends runtime.BaseAPI {
 
     /**
      * Creates a new object with the provided details. Requires authorization and user authentication.
@@ -95,7 +95,7 @@ export class DynamicSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/dynamic-svc/object`,
+            path: `/data-svc/object`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -137,7 +137,7 @@ export class DynamicSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/dynamic-svc/objects/delete`,
+            path: `/data-svc/objects/delete`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -172,7 +172,7 @@ export class DynamicSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/dynamic-svc/objects`,
+            path: `/data-svc/objects`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -214,7 +214,7 @@ export class DynamicSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/dynamic-svc/objects/update`,
+            path: `/data-svc/objects/update`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -263,7 +263,7 @@ export class DynamicSvcApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/dynamic-svc/object/{objectId}`.replace(`{${"objectId"}}`, encodeURIComponent(String(requestParameters['objectId']))),
+            path: `/data-svc/object/{objectId}`.replace(`{${"objectId"}}`, encodeURIComponent(String(requestParameters['objectId']))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,

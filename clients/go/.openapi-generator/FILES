@@ -5,8 +5,8 @@ api/openapi.yaml
 api_chat_svc.go
 api_config_svc.go
 api_container_svc.go
+api_data_svc.go
 api_deploy_svc.go
-api_dynamic_svc.go
 api_email_svc.go
 api_file_svc.go
 api_firehose_svc.go
@@ -51,6 +51,7 @@ docs/ContainerSvcRunContainerRequest.md
 docs/ContainerSvcRunContainerResponse.md
 docs/ContainerSvcRunInfo.md
 docs/ContainerSvcStopContainerRequest.md
+docs/DataSvcAPI.md
 docs/DatastoreFilter.md
 docs/DatastoreOp.md
 docs/DatastoreOrderBy.md
@@ -67,7 +68,6 @@ docs/DeploySvcResourceLimits.md
 docs/DeploySvcSaveDeploymentRequest.md
 docs/DeploySvcStrategyType.md
 docs/DeploySvcTargetRegion.md
-docs/DynamicSvcAPI.md
 docs/DynamicSvcCreateObjectFields.md
 docs/DynamicSvcCreateObjectRequest.md
 docs/DynamicSvcCreateObjectResponse.md
@@ -406,4 +406,5 @@ model_user_svc_save_profile_request.go
 model_user_svc_set_role_permissions_request.go
 model_user_svc_user.go
 response.go
+test/api_data_svc_test.go
 utils.go

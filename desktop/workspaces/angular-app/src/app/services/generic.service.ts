@@ -30,8 +30,8 @@ import {
 @Injectable({
 	providedIn: 'root',
 })
-export class DynamicService {
-	dynamicService!: DynamicSvcApi;
+export class DataService {
+	dataService!: DynamicSvcApi;
 
 	constructor(
 		private server: ServerService,
@@ -40,7 +40,7 @@ export class DynamicService {
 	) {
 		this.userService.user$.pipe(first()).subscribe(() => {
 			this.init();
-			this.dynamicService = new DynamicSvcApi(
+			this.dataService = new DynamicSvcApi(
 				new Configuration({
 					apiKey: this.server.token(),
 					basePath: this.server.addr(),
@@ -66,7 +66,7 @@ export class DynamicService {
 			object: object,
 		};
 
-		return this.dynamicService.createObject({ body: request });
+		return this.dataService.createObject({ body: request });
 	}
 
 	async find(
@@ -80,7 +80,7 @@ export class DynamicService {
 			},
 		};
 
-		return this.dynamicService.query({ body: request });
+		return this.dataService.query({ body: request });
 	}
 
 	async upsert(
@@ -92,7 +92,7 @@ export class DynamicService {
 			object: object,
 		};
 
-		return this.dynamicService.upsertObject({
+		return this.dataService.upsertObject({
 			objectId: object.id!,
 			body: request,
 		});
@@ -109,7 +109,7 @@ export class DynamicService {
 			object: object,
 		};
 
-		return this.dynamicService.updateObjects({
+		return this.dataService.updateObjects({
 			body: request,
 		});
 	}
@@ -121,7 +121,7 @@ export class DynamicService {
 		// 	table: table,
 		// 	filters: filters,
 		// };
-		//eturn this.dynamicService.deleteObjects({
+		//eturn this.dataService.deleteObjects({
 		//	body: request,
 		//);
 	}

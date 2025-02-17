@@ -1,6 +1,6 @@
 /**
  * OpenOrch
- * A language-agnostic microservices framework for AI applications.
+ * A language-agnostic microservices framework for building AI applications.
  *
  * The version of the OpenAPI document: 0.3.0-rc.19
  * Contact: sales@singulatron.com
@@ -30,7 +30,7 @@ export interface UpsertObjectRequest {
 /**
  *
  */
-export declare class DynamicSvcApi extends runtime.BaseAPI {
+export declare class DataSvcApi extends runtime.BaseAPI {
     /**
      * Creates a new object with the provided details. Requires authorization and user authentication.
      * Create a Generic Object

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "A language-agnostic microservices framework for AI applications.",
+        "description": "A language-agnostic microservices framework for building AI applications.",
         "title": "OpenOrch",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -1097,6 +1097,302 @@
                 }
             }
         },
+        "/data-svc/object": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a new object with the provided details. Requires authorization and user authentication.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Create a Generic Object",
+                "operationId": "createObject",
+                "parameters": [
+                    {
+                        "description": "Create request payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.CreateObjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.CreateObjectResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/data-svc/object/{objectId}": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Upsert a Generic Object",
+                "operationId": "upsertObject",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Object ID",
+                        "name": "objectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Upsert request payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.UpsertObjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful creation or update of object",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.UpsertObjectResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/data-svc/objects": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieves objects from a specified table based on search criteria.\nRequires authorization and user authentication.\n\n\nUse helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Query Objects",
+                "operationId": "query",
+                "parameters": [
+                    {
+                        "description": "Query Request",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.QueryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of objects",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.QueryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/data-svc/objects/delete": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Delete a Generic Object",
+                "operationId": "deleteObjects",
+                "parameters": [
+                    {
+                        "description": "Delete request payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.DeleteObjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful deletion of object",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.DeleteObjectResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/data-svc/objects/update": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Update Objects",
+                "operationId": "updateObjects",
+                "parameters": [
+                    {
+                        "description": "Update request payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.UpdateObjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful update of objects",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.UpdateObjectResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/deploy-svc/deployment": {
             "put": {
                 "security": [
@@ -1261,302 +1557,6 @@
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/deploy_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/dynamic-svc/object": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Creates a new object with the provided details. Requires authorization and user authentication.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dynamic Svc"
-                ],
-                "summary": "Create a Generic Object",
-                "operationId": "createObject",
-                "parameters": [
-                    {
-                        "description": "Create request payload",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.CreateObjectRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.CreateObjectResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/dynamic-svc/object/{objectId}": {
-            "put": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Creates a new dynamic object or updates an existing one based on the provided data. Requires authorization and user authentication.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dynamic Svc"
-                ],
-                "summary": "Upsert a Generic Object",
-                "operationId": "upsertObject",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Object ID",
-                        "name": "objectId",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Upsert request payload",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpsertObjectRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful creation or update of object",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpsertObjectResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/dynamic-svc/objects": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Retrieves objects from a specified table based on search criteria.\nRequires authorization and user authentication.\n\n\nUse helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dynamic Svc"
-                ],
-                "summary": "Query Objects",
-                "operationId": "query",
-                "parameters": [
-                    {
-                        "description": "Query Request",
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.QueryRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful retrieval of objects",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.QueryResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/dynamic-svc/objects/delete": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dynamic Svc"
-                ],
-                "summary": "Delete a Generic Object",
-                "operationId": "deleteObjects",
-                "parameters": [
-                    {
-                        "description": "Delete request payload",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.DeleteObjectRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful deletion of object",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.DeleteObjectResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/dynamic-svc/objects/update": {
-            "post": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dynamic Svc"
-                ],
-                "summary": "Update Objects",
-                "operationId": "updateObjects",
-                "parameters": [
-                    {
-                        "description": "Update request payload",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpdateObjectRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful update of objects",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.UpdateObjectResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid JSON",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dynamic_svc.ErrorResponse"
                         }
                     }
                 }
