@@ -20,7 +20,20 @@ import (
 	data "github.com/openorch/openorch/server/internal/services/data/types"
 )
 
-func (g *DataService) UpsertMany(
+// @ID upsertObjects
+// @Summary Update Objects
+// @Description Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+// @Tags Data Svc
+// @Accept json
+// @Produce json
+// @Param body body data.UpdateObjectRequest true "Update request payload"
+// @Success 200 {object} data.UpdateObjectResponse "Successful upsert of objects"
+// @Failure 400 {object} data.ErrorResponse "Invalid JSON"
+// @Failure 401 {object} data.ErrorResponse "Unauthorized"
+// @Failure 500 {object} data.ErrorResponse "Internal Server Error"
+// @Security BearerAuth
+// @Router /data-svc/objects/upsert [put]
+func (g *DataService) UpsertObjects(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {

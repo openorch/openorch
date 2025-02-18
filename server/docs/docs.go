@@ -5711,7 +5711,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "authors": {
-                    "description": "Authors is a list of user ID and organization ID who created the object.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
+                    "description": "Authors is a list of user ID and organization ID who created the object.\nThe authors field tracks which users or organizations created an entry, helping to prevent spam.\nIf an organization ID is not provided, the currently active organization will\nbe queried from the User Svc.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -5733,7 +5733,11 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
                 },
                 "id": {
                     "type": "string"
@@ -5743,7 +5747,11 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
                 },
                 "table": {
                     "type": "string"
@@ -5756,7 +5764,11 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "example": [
+                        "[\"usr_12345\"",
+                        " \"org_67890\"]"
+                    ]
                 }
             }
         },

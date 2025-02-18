@@ -15,7 +15,7 @@ tags:
 
 The user service is at the heart of OpenOrch, managing users, tokens, organizations, permissions and more. Each service and human on an OpenOrch network has an account in the `User Svc`.
 
-> This page is a high level overview of the `User Svc`. For more details, please see the [User Svc API documentation](/docs/openorch/login).
+> This page provides a high-level overview of `User Svc`. For detailed information, refer to the [User Svc API documentation](/docs/openorch/login).
 
 ## Overview
 

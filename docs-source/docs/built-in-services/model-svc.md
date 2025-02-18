@@ -11,7 +11,7 @@ tags:
 
 The model service can start, stop AI models across multiple runtimes (eg. Docker) and maintains a database of available models on the platform.
 
-> This page is a high level overview of the `Model Svc`. For more details, please see the [Model Svc API documentation](/docs/openorch/start-default-model).
+> This page provides a high-level overview of `Model Svc`. For detailed information, refer to the [Model Svc API documentation](/docs/openorch/start-default-model).
 
 ## Responsibilities
 

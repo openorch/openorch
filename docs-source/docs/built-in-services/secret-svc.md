@@ -11,7 +11,7 @@ tags:
 
 The Secret Svc stores sensitive or internal (non-end-user-facing) configuration. Aims to store all configuration not required at bootstrap, both for internal and external services.
 
-> This page is a high level overview of the `Secret Svc`. For more details, please see the [Secret Svc API documentation](/docs/openorch/list-secrets).
+> This page provides a high-level overview of `Secret Svc`. For detailed information, refer to the [Secret Svc API documentation](/docs/openorch/list-secrets).
 
 ## Access rules
 

@@ -11,7 +11,7 @@ tags:
 
 The prompt service provides an easy to use interface to prompt LLMs and use AI models. Aims to serve humans and machines alike with its resilient queue based architecture.
 
-> This page is a high level overview of the `Prompt Svc`. For more details, please see the [Prompt Svc API documentation](/docs/openorch/upsert-instance).
+> This page provides a high-level overview of `Prompt Svc`. For detailed information, refer to the [Prompt Svc API documentation](/docs/openorch/upsert-instance).
 
 ## Responsibilities
 

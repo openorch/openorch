@@ -13,7 +13,7 @@ tags:
 
 The policy service provides features such as rate limiting of endpoint calls by user ip, user id, organization id and more.
 
-> This page is a high level overview of the `Policy Svc`. For more details, please see the [Policy Svc API documentation](/docs/openorch/upsert-instance).
+> This page provides a high-level overview of `Policy Svc`. For detailed information, refer to the [Policy Svc API documentation](/docs/openorch/upsert-instance).
 
 ## Responsibilities
 
