@@ -720,7 +720,7 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/data-svc/objects/update", appl(func(w http.ResponseWriter, r *http.Request) {
-		dataService.Update(w, r)
+		dataService.UpdateObjects(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/data-svc/objects/delete", appl(func(w http.ResponseWriter, r *http.Request) {
