@@ -32,7 +32,7 @@ import { ModelSvcModel as Model } from '@openorch/client';
 import { ConfigService } from '../../../services/config.service';
 import { ChatService } from '../../../services/chat.service';
 import { addIcons } from 'ionicons';
-import { settingsOutline, arrowUpOutline } from 'ionicons/icons';
+import { addOutline, arrowUpOutline } from 'ionicons/icons';
 
 export interface SendOutput {
 	message: string;
@@ -68,7 +68,7 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		private resolver: ComponentFactoryResolver
 	) {
 		addIcons({
-			'settings-outline': settingsOutline,
+			'add-outline': addOutline,
 			'arrow-up-outline': arrowUpOutline
 		});
 	}
