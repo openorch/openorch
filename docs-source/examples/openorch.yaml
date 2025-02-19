@@ -554,7 +554,9 @@ definitions:
           effective in scalable and distributed environments compared
           to offset-based pagination.
 
-          JSONAfter is a JSON encoded string due to limitations of Swaggo (ie. []interface{} generates []map[stirng]interface{}).
+          JSONAfter is a JSON-encoded string due to limitations in Swaggo (e.g., []interface{} gets converted to []map[string]interface{}).
+          There is no way to specify a type that results in an any/interface{} type in the `go -> openapi -> go` generation process.
+          As a result, JSONAfter is a JSON-marshalled string representing an array, e.g., `[42]`.
         type: string
       limit:
         description: Limit the number of records in the result set.
@@ -2771,7 +2773,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.20
+  version: 0.3.0-rc.21
 paths:
   /chat-svc/events:
     get:

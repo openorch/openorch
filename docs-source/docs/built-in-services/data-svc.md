@@ -106,7 +106,7 @@ Data Svc allows querying objects with flexible filtering, sorting, and paginatio
 
 Request
 
-```json
+```js
 {
   "table": "pet",
   "query": {
@@ -127,7 +127,7 @@ Unfortunately ordering on JSONB fields defaults to string sorting. The `sortingT
 
 Response:
 
-```json
+```js
 {
   "objects": [
     { "table": "pet", "id": "pet_19", "data": { "age": 19 } },
@@ -139,7 +139,7 @@ Response:
 
 ### Ordering by ascending value
 
-```json
+```js
 {
   "table": "pet",
   "query": {
@@ -155,7 +155,7 @@ Response:
 
 Response:
 
-```json
+```js
 {
   "objects": [
     { "table": "pet", "id": "pet_0", "data": { "age": 0 } },
@@ -167,7 +167,7 @@ Response:
 
 ### Limiting results
 
-```json
+```js
 {
   "table": "pet",
   "query": {
@@ -184,7 +184,7 @@ Response:
 
 Response:
 
-```json
+```js
 {
   "objects": [
     { "table": "pet", "id": "pet_0", "data": { "age": 0 } },
@@ -200,7 +200,7 @@ Response:
 
 Request:
 
-```json
+```js
 {
   "table": "pet",
   "query": {
@@ -216,9 +216,11 @@ Request:
 }
 ```
 
+The `after` field is named `jsonAfter` and is a string-marshalled array to address limitations in Swaggo. Specifically, Swaggo converts []interface{} to []map[string]interface{}, and there is no way to define a type that resolves to an any/interface{} during the `go -> openapi -> go` generation process. Therefore, `jsonAfter` is a JSON-encoded string representing an array, e.g., `[42]`.
+
 Response:
 
-```json
+```js
 {
   "objects": [
     { "table:" "pet", "id": "pet_5", "data": { "age": 5 } },
@@ -234,7 +236,7 @@ Response:
 
 Request:
 
-```json
+```js
 {
   "table": "pet",
   "query": {
@@ -253,7 +255,7 @@ Request:
 
 Response:
 
-```json
+```js
 {
   "objects": [
     { "id": "pet_14", "data": { "age": 14 } },

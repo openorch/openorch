@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.20
+API version: 0.3.0-rc.21
 Contact: sales@singulatron.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the OpenOrch API v0.3.0-rc.20
+// APIClient manages communication with the OpenOrch API v0.3.0-rc.21
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration

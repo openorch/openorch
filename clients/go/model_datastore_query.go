@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.20
+API version: 0.3.0-rc.21
 Contact: sales@singulatron.com
 */
 
@@ -24,7 +24,7 @@ type DatastoreQuery struct {
 	Count *bool `json:"count,omitempty"`
 	// Filters are filtering options of a query. It is advised to use It's advised to use helper functions in your respective client library such as filter constructors (`all`, `equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
 	Filters []DatastoreFilter `json:"filters,omitempty"`
-	// JSONAfter is used for cursor-based pagination, which is more effective in scalable and distributed environments compared to offset-based pagination.  JSONAfter is a JSON encoded string due to limitations of Swaggo (ie. []interface{} generates []map[stirng]interface{}).
+	// JSONAfter is used for cursor-based pagination, which is more effective in scalable and distributed environments compared to offset-based pagination.  JSONAfter is a JSON-encoded string due to limitations in Swaggo (e.g., []interface{} gets converted to []map[string]interface{}). There is no way to specify a type that results in an any/interface{} type in the `go -> openapi -> go` generation process. As a result, JSONAfter is a JSON-marshalled string representing an array, e.g., `[42]`.
 	JsonAfter *string `json:"jsonAfter,omitempty"`
 	// Limit the number of records in the result set.
 	Limit *int32 `json:"limit,omitempty"`

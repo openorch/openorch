@@ -5975,7 +5975,7 @@ const docTemplate = `{
                     }
                 },
                 "jsonAfter": {
-                    "description": "JSONAfter is used for cursor-based pagination, which is more\neffective in scalable and distributed environments compared\nto offset-based pagination.\n\nJSONAfter is a JSON encoded string due to limitations of Swaggo (ie. []interface{} generates []map[stirng]interface{}).",
+                    "description": "JSONAfter is used for cursor-based pagination, which is more\neffective in scalable and distributed environments compared\nto offset-based pagination.\n\nJSONAfter is a JSON-encoded string due to limitations in Swaggo (e.g., []interface{} gets converted to []map[string]interface{}).\nThere is no way to specify a type that results in an any/interface{} type in the ` + "`" + `go -\u003e openapi -\u003e go` + "`" + ` generation process.\nAs a result, JSONAfter is a JSON-marshalled string representing an array, e.g., ` + "`" + `[42]` + "`" + `.",
                     "type": "string"
                 },
                 "limit": {
@@ -9060,7 +9060,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.20",
+	Version:          "0.3.0-rc.21",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

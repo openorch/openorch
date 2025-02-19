@@ -28,13 +28,16 @@ type DataStore interface {
 	 * Returns ErrEntryAlreadyExists if the object already exists.
 	 */
 	Create(obj Row) error
+
 	/* Create many objects
 	* Returns ErrEntryAlreadyExists if any of the objects are already in set,
 	* and no object will be created.
 	 */
 	CreateMany(objs []Row) error
+
 	/* Create or Update an object */
 	Upsert(obj Row) error
+
 	/* Create or Update many objects */
 	UpsertMany(objs []Row) error
 
@@ -63,8 +66,10 @@ type QueryBuilder interface {
 
 	// Update by query. Errors if no update happens
 	Update(obj Row) error
+
 	// Upsert tries to update by query, and if no update appened, calls create.
 	Upsert(obj Row) error
+
 	UpdateFields(fields map[string]interface{}) error
 	Delete() error
 }
@@ -174,7 +179,9 @@ type Query struct {
 	// effective in scalable and distributed environments compared
 	// to offset-based pagination.
 	//
-	// JSONAfter is a JSON encoded string due to limitations of Swaggo (ie. []interface{} generates []map[stirng]interface{}).
+	// JSONAfter is a JSON-encoded string due to limitations in Swaggo (e.g., []interface{} gets converted to []map[string]interface{}).
+	// There is no way to specify a type that results in an any/interface{} type in the `go -> openapi -> go` generation process.
+	// As a result, JSONAfter is a JSON-marshalled string representing an array, e.g., `[42]`.
 	JSONAfter string `json:"jsonAfter,omitempty"`
 
 	// Limit the number of records in the result set.
