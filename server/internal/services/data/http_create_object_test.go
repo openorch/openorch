@@ -76,7 +76,7 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 		require.NoError(t, err)
@@ -104,7 +104,7 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp2.User.Id},
 		}
 
-		rsp, _, err := client2.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client2.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 		require.NoError(t, err)
@@ -126,7 +126,7 @@ func TestCreate(t *testing.T) {
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 		require.NoError(t, err)
@@ -148,7 +148,7 @@ func TestCreate(t *testing.T) {
 			Readers: []string{"_self"},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 		require.NoError(t, err)
@@ -178,7 +178,7 @@ func TestCreate(t *testing.T) {
 			}},
 			Readers: []string{*tokenReadRsp2.User.Id},
 		}
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 		require.NoError(t, err)
@@ -213,7 +213,7 @@ func TestCreate(t *testing.T) {
 			Table:   client.PtrString(table1),
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(*req).
 			Execute()
 
@@ -245,7 +245,7 @@ func TestCreate(t *testing.T) {
 			Table:   client.PtrString(table1),
 			Readers: []string{*tokenReadRsp1.User.Id},
 		}
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(*listReq).
 			Execute()
 		require.NoError(t, err)
@@ -258,7 +258,7 @@ func TestCreate(t *testing.T) {
 		req := &client.DataSvcQueryRequest{
 			Table: client.PtrString(table1),
 		}
-		rsp, _, err := client2.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client2.DataSvcAPI.QueryObjects(context.Background()).
 			Body(*req).
 			Execute()
 
