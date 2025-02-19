@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { DatastoreSortingType } from './datastoreSortingType';
 export declare class DatastoreOrderBy {
     /**
     * Desc indicates whether the sorting should be in descending order.
@@ -22,6 +23,10 @@ export declare class DatastoreOrderBy {
     * Randomize indicates that the results should be randomized instead of ordered by the `field` and `desc` criteria
     */
     'randomize'?: boolean;
+    /**
+    * Defines the type of sorting to apply (numeric, text, date, etc.)
+    */
+    'sortingType'?: DatastoreSortingType;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;
@@ -33,4 +38,6 @@ export declare class DatastoreOrderBy {
         baseName: string;
         type: string;
     }[];
+}
+export declare namespace DatastoreOrderBy {
 }

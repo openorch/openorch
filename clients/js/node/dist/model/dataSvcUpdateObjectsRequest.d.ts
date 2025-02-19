@@ -11,8 +11,14 @@
  */
 import { DataSvcObject } from './dataSvcObject';
 import { DatastoreFilter } from './datastoreFilter';
-export declare class DataSvcUpdateObjectRequest {
+export declare class DataSvcUpdateObjectsRequest {
+    /**
+    * Filters to determine which objects will be updated. Only objects matching all filters will be modified.
+    */
     'filters'?: Array<DatastoreFilter>;
+    /**
+    * The object containing the fields to update in matching objects.
+    */
     'object'?: DataSvcObject;
     'table'?: string;
     static discriminator: string | undefined;

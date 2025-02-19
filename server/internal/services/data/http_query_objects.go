@@ -24,7 +24,7 @@ import (
 	data "github.com/openorch/openorch/server/internal/services/data/types"
 )
 
-// @ID query
+// @ID queryObjects
 // @Summary Query Objects
 // @Description Retrieves objects from a specified table based on search criteria.
 // @Description Requires authorization and user authentication.

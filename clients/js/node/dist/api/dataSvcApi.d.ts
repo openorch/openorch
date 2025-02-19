@@ -15,7 +15,7 @@ import { DataSvcCreateObjectResponse } from '../model/dataSvcCreateObjectRespons
 import { DataSvcDeleteObjectRequest } from '../model/dataSvcDeleteObjectRequest';
 import { DataSvcQueryRequest } from '../model/dataSvcQueryRequest';
 import { DataSvcQueryResponse } from '../model/dataSvcQueryResponse';
-import { DataSvcUpdateObjectRequest } from '../model/dataSvcUpdateObjectRequest';
+import { DataSvcUpdateObjectsRequest } from '../model/dataSvcUpdateObjectsRequest';
 import { DataSvcUpsertObjectRequest } from '../model/dataSvcUpsertObjectRequest';
 import { DataSvcUpsertObjectResponse } from '../model/dataSvcUpsertObjectResponse';
 import { Authentication, Interceptor } from '../model/models';
@@ -55,8 +55,8 @@ export declare class DataSvcApi {
         body: DataSvcCreateObjectResponse;
     }>;
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * @summary Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * @summary Delete Objects
      * @param body Delete request payload
      */
     deleteObjects(body: DataSvcDeleteObjectRequest, options?: {
@@ -72,7 +72,7 @@ export declare class DataSvcApi {
      * @summary Query Objects
      * @param body Query Request
      */
-    query(body?: DataSvcQueryRequest, options?: {
+    queryObjects(body?: DataSvcQueryRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -81,11 +81,11 @@ export declare class DataSvcApi {
         body: DataSvcQueryResponse;
     }>;
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * @summary Update Objects
      * @param body Update request payload
      */
-    updateObjects(body: DataSvcUpdateObjectRequest, options?: {
+    updateObjects(body: DataSvcUpdateObjectsRequest, options?: {
         headers: {
             [name: string]: string;
         };
@@ -100,6 +100,19 @@ export declare class DataSvcApi {
      * @param body Upsert request payload
      */
     upsertObject(objectId: string, body: DataSvcUpsertObjectRequest, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: DataSvcUpsertObjectResponse;
+    }>;
+    /**
+     * Upserts objects by ids.
+     * @summary Upsert Objects
+     * @param body Upsert request payload
+     */
+    upsertObjects(body: DataSvcUpsertObjectRequest, options?: {
         headers: {
             [name: string]: string;
         };

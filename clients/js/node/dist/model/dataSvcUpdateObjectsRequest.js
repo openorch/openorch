@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class DataSvcUpdateObjectRequest {
+export class DataSvcUpdateObjectsRequest {
     static getAttributeTypeMap() {
-        return DataSvcUpdateObjectRequest.attributeTypeMap;
+        return DataSvcUpdateObjectsRequest.attributeTypeMap;
     }
 }
-DataSvcUpdateObjectRequest.discriminator = undefined;
-DataSvcUpdateObjectRequest.attributeTypeMap = [
+DataSvcUpdateObjectsRequest.discriminator = undefined;
+DataSvcUpdateObjectsRequest.attributeTypeMap = [
     {
         "name": "filters",
         "baseName": "filters",

@@ -3570,7 +3570,7 @@ paths:
 
 
         Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
-      operationId: query
+      operationId: queryObjects
       parameters:
       - description: Query Request
         in: body

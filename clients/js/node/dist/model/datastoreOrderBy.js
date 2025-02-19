@@ -30,5 +30,10 @@ DatastoreOrderBy.attributeTypeMap = [
         "name": "randomize",
         "baseName": "randomize",
         "type": "boolean"
+    },
+    {
+        "name": "sortingType",
+        "baseName": "sortingType",
+        "type": "DatastoreSortingType"
     }
 ];

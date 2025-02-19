@@ -21,7 +21,7 @@ import { DataSvcDeleteObjectRequest } from '../model/dataSvcDeleteObjectRequest'
 import { DataSvcErrorResponse } from '../model/dataSvcErrorResponse';
 import { DataSvcQueryRequest } from '../model/dataSvcQueryRequest';
 import { DataSvcQueryResponse } from '../model/dataSvcQueryResponse';
-import { DataSvcUpdateObjectRequest } from '../model/dataSvcUpdateObjectRequest';
+import { DataSvcUpdateObjectsRequest } from '../model/dataSvcUpdateObjectsRequest';
 import { DataSvcUpsertObjectRequest } from '../model/dataSvcUpsertObjectRequest';
 import { DataSvcUpsertObjectResponse } from '../model/dataSvcUpsertObjectResponse';
 
@@ -170,8 +170,8 @@ export class DataSvcApi {
         });
     }
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * @summary Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * @summary Delete Objects
      * @param body Delete request payload
      */
     public async deleteObjects (body: DataSvcDeleteObjectRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
@@ -246,7 +246,7 @@ export class DataSvcApi {
      * @summary Query Objects
      * @param body Query Request
      */
-    public async query (body?: DataSvcQueryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DataSvcQueryResponse;  }> {
+    public async queryObjects (body?: DataSvcQueryRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DataSvcQueryResponse;  }> {
         const localVarPath = this.basePath + '/data-svc/objects';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -309,11 +309,11 @@ export class DataSvcApi {
         });
     }
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * @summary Update Objects
      * @param body Update request payload
      */
-    public async updateObjects (body: DataSvcUpdateObjectRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async updateObjects (body: DataSvcUpdateObjectsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/data-svc/objects/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -342,7 +342,7 @@ export class DataSvcApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(body, "DataSvcUpdateObjectRequest")
+            body: ObjectSerializer.serialize(body, "DataSvcUpdateObjectsRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -408,6 +408,78 @@ export class DataSvcApi {
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling upsertObject.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(body, "DataSvcUpsertObjectRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.BearerAuth.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.BearerAuth.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: DataSvcUpsertObjectResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "DataSvcUpsertObjectResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Upserts objects by ids.
+     * @summary Upsert Objects
+     * @param body Upsert request payload
+     */
+    public async upsertObjects (body: DataSvcUpsertObjectRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: DataSvcUpsertObjectResponse;  }> {
+        const localVarPath = this.basePath + '/data-svc/objects/upsert';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'body' is not null or undefined
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling upsertObjects.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

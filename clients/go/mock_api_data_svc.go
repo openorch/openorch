@@ -99,34 +99,34 @@ func (mr *MockDataSvcAPIMockRecorder) DeleteObjectsExecute(r any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteObjectsExecute", reflect.TypeOf((*MockDataSvcAPI)(nil).DeleteObjectsExecute), r)
 }
 
-// Query mocks base method.
-func (m *MockDataSvcAPI) Query(ctx context.Context) ApiQueryRequest {
+// QueryObjects mocks base method.
+func (m *MockDataSvcAPI) QueryObjects(ctx context.Context) ApiQueryObjectsRequest {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Query", ctx)
-	ret0, _ := ret[0].(ApiQueryRequest)
+	ret := m.ctrl.Call(m, "QueryObjects", ctx)
+	ret0, _ := ret[0].(ApiQueryObjectsRequest)
 	return ret0
 }
 
-// Query indicates an expected call of Query.
-func (mr *MockDataSvcAPIMockRecorder) Query(ctx any) *gomock.Call {
+// QueryObjects indicates an expected call of QueryObjects.
+func (mr *MockDataSvcAPIMockRecorder) QueryObjects(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Query", reflect.TypeOf((*MockDataSvcAPI)(nil).Query), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryObjects", reflect.TypeOf((*MockDataSvcAPI)(nil).QueryObjects), ctx)
 }
 
-// QueryExecute mocks base method.
-func (m *MockDataSvcAPI) QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error) {
+// QueryObjectsExecute mocks base method.
+func (m *MockDataSvcAPI) QueryObjectsExecute(r ApiQueryObjectsRequest) (*DataSvcQueryResponse, *http.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "QueryExecute", r)
+	ret := m.ctrl.Call(m, "QueryObjectsExecute", r)
 	ret0, _ := ret[0].(*DataSvcQueryResponse)
 	ret1, _ := ret[1].(*http.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
-// QueryExecute indicates an expected call of QueryExecute.
-func (mr *MockDataSvcAPIMockRecorder) QueryExecute(r any) *gomock.Call {
+// QueryObjectsExecute indicates an expected call of QueryObjectsExecute.
+func (mr *MockDataSvcAPIMockRecorder) QueryObjectsExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExecute", reflect.TypeOf((*MockDataSvcAPI)(nil).QueryExecute), r)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryObjectsExecute", reflect.TypeOf((*MockDataSvcAPI)(nil).QueryObjectsExecute), r)
 }
 
 // UpdateObjects mocks base method.

@@ -14,8 +14,14 @@ import { RequestFile } from './models';
 import { DataSvcObject } from './dataSvcObject';
 import { DatastoreFilter } from './datastoreFilter';
 
-export class DataSvcUpdateObjectRequest {
+export class DataSvcUpdateObjectsRequest {
+    /**
+    * Filters to determine which objects will be updated. Only objects matching all filters will be modified.
+    */
     'filters'?: Array<DatastoreFilter>;
+    /**
+    * The object containing the fields to update in matching objects.
+    */
     'object'?: DataSvcObject;
     'table'?: string;
 
@@ -39,7 +45,7 @@ export class DataSvcUpdateObjectRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return DataSvcUpdateObjectRequest.attributeTypeMap;
+        return DataSvcUpdateObjectsRequest.attributeTypeMap;
     }
 }
 

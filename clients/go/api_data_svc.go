@@ -52,7 +52,7 @@ type DataSvcAPI interface {
 	DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map[string]interface{}, *http.Response, error)
 
 	/*
-	Query Query Objects
+	QueryObjects Query Objects
 
 	Retrieves objects from a specified table based on search criteria.
 Requires authorization and user authentication.
@@ -61,13 +61,13 @@ Requires authorization and user authentication.
 Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQueryRequest
+	@return ApiQueryObjectsRequest
 	*/
-	Query(ctx context.Context) ApiQueryRequest
+	QueryObjects(ctx context.Context) ApiQueryObjectsRequest
 
-	// QueryExecute executes the request
+	// QueryObjectsExecute executes the request
 	//  @return DataSvcQueryResponse
-	QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error)
+	QueryObjectsExecute(r ApiQueryObjectsRequest) (*DataSvcQueryResponse, *http.Response, error)
 
 	/*
 	UpdateObjects Update Objects
@@ -431,24 +431,24 @@ func (a *DataSvcAPIService) DeleteObjectsExecute(r ApiDeleteObjectsRequest) (map
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiQueryRequest struct {
+type ApiQueryObjectsRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
 	body *DataSvcQueryRequest
 }
 
 // Query Request
-func (r ApiQueryRequest) Body(body DataSvcQueryRequest) ApiQueryRequest {
+func (r ApiQueryObjectsRequest) Body(body DataSvcQueryRequest) ApiQueryObjectsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiQueryRequest) Execute() (*DataSvcQueryResponse, *http.Response, error) {
-	return r.ApiService.QueryExecute(r)
+func (r ApiQueryObjectsRequest) Execute() (*DataSvcQueryResponse, *http.Response, error) {
+	return r.ApiService.QueryObjectsExecute(r)
 }
 
 /*
-Query Query Objects
+QueryObjects Query Objects
 
 Retrieves objects from a specified table based on search criteria.
 Requires authorization and user authentication.
@@ -457,10 +457,10 @@ Requires authorization and user authentication.
 Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryRequest
+ @return ApiQueryObjectsRequest
 */
-func (a *DataSvcAPIService) Query(ctx context.Context) ApiQueryRequest {
-	return ApiQueryRequest{
+func (a *DataSvcAPIService) QueryObjects(ctx context.Context) ApiQueryObjectsRequest {
+	return ApiQueryObjectsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -468,7 +468,7 @@ func (a *DataSvcAPIService) Query(ctx context.Context) ApiQueryRequest {
 
 // Execute executes the request
 //  @return DataSvcQueryResponse
-func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DataSvcQueryResponse, *http.Response, error) {
+func (a *DataSvcAPIService) QueryObjectsExecute(r ApiQueryObjectsRequest) (*DataSvcQueryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -476,7 +476,7 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DataSvcQueryRespon
 		localVarReturnValue  *DataSvcQueryResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.Query")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.QueryObjects")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
