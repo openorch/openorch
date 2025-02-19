@@ -6,19 +6,19 @@ tags:
 
 # Welcome to OpenOrch
 
-OpenOrch is a daemon that transforms your servers into a powerful development environment. It can run AI models, containers, and microservices. Think of it as a blend of (an extremely simplistic, early-stage) Kubernetes and a language agnostic backend framework for building applications on top—designed for fixed-resource setups and straightforward self-hosting.
+OpenOrch transforms your servers into a powerful development environment. It can run AI models, containers, and microservices.
 
 Whether you're deploying AI or building microservices, OpenOrch is your one-stop shop for creating and managing applications, all while keeping full control over your infrastructure and data.
 
-## Running
+## Running the server
 
 The first step is to run the daemon. For details about that, see [Running the Server](/docs/category/running-the-server).
 
-## Built-ins
+## Built-in services
 
 For a quick overview about what the system is capable, read through the [Built-in Service Docs](/docs/category/built-in-services).
 
-## Building on top
+## Building your services
 
 To build and run your own services on OpenOrch, see [Your First Service](/docs/writing-custom-services/your-first-service)
 

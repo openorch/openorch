@@ -1,5 +1,7 @@
 package di
 
+// This is some of the cruftiest files in the system.
+
 import (
 	"database/sql"
 	"log/slog"
@@ -720,11 +722,11 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/data-svc/objects/update", appl(func(w http.ResponseWriter, r *http.Request) {
-		dataService.Update(w, r)
+		dataService.UpdateObjects(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/data-svc/objects/delete", appl(func(w http.ResponseWriter, r *http.Request) {
-		dataService.Delete(w, r)
+		dataService.DeleteObjects(w, r)
 	})).
 		Methods("OPTIONS", "POST")
 	router.HandleFunc("/data-svc/objects", appl(func(w http.ResponseWriter, r *http.Request) {

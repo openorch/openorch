@@ -188,3 +188,33 @@ func (mr *MockDataSvcAPIMockRecorder) UpsertObjectExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertObjectExecute", reflect.TypeOf((*MockDataSvcAPI)(nil).UpsertObjectExecute), r)
 }
+
+// UpsertObjects mocks base method.
+func (m *MockDataSvcAPI) UpsertObjects(ctx context.Context) ApiUpsertObjectsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpsertObjects", ctx)
+	ret0, _ := ret[0].(ApiUpsertObjectsRequest)
+	return ret0
+}
+
+// UpsertObjects indicates an expected call of UpsertObjects.
+func (mr *MockDataSvcAPIMockRecorder) UpsertObjects(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertObjects", reflect.TypeOf((*MockDataSvcAPI)(nil).UpsertObjects), ctx)
+}
+
+// UpsertObjectsExecute mocks base method.
+func (m *MockDataSvcAPI) UpsertObjectsExecute(r ApiUpsertObjectsRequest) (*DataSvcUpsertObjectResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpsertObjectsExecute", r)
+	ret0, _ := ret[0].(*DataSvcUpsertObjectResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// UpsertObjectsExecute indicates an expected call of UpsertObjectsExecute.
+func (mr *MockDataSvcAPIMockRecorder) UpsertObjectsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpsertObjectsExecute", reflect.TypeOf((*MockDataSvcAPI)(nil).UpsertObjectsExecute), r)
+}

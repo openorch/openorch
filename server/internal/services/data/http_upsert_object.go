@@ -14,11 +14,13 @@ package dynamicservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/gorilla/mux"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	data "github.com/openorch/openorch/server/internal/services/data/types"
 )
 
@@ -92,7 +94,7 @@ func (g *DataService) Upsert(
 	objectId := mux.Vars(r)
 	req.Object.Id = objectId["objectId"]
 
-	err = g.upsert(identifiers, req)
+	err = g.upsertObject(identifiers, req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -100,4 +102,36 @@ func (g *DataService) Upsert(
 	}
 
 	w.Write([]byte(`{}`))
+}
+
+func (g *DataService) upsertObject(
+	writers []string,
+	request *data.UpsertObjectRequest,
+) error {
+	vI, found, err := g.store.Query(
+		datastore.Id(request.Object.Id),
+	).FindOne()
+	if err != nil {
+		return err
+	}
+
+	if found {
+		v := vI.(*data.Object)
+
+		if !intersects(writers, v.Writers) {
+			return errors.New("unauthorized")
+		}
+
+		if request.Object.Readers == nil {
+			request.Object.Readers = v.Readers
+		}
+		if request.Object.Writers == nil {
+			request.Object.Writers = v.Writers
+		}
+		if request.Object.Deleters == nil {
+			request.Object.Deleters = v.Deleters
+		}
+	}
+
+	return g.store.Upsert(request.Object)
 }

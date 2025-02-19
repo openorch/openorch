@@ -1,7 +1,8 @@
 ---
 sidebar_position: 100
 tags:
-  - user-svc
+  - data-svc
+  - data
   - permissions
   - roles
   - authentication
@@ -11,74 +12,88 @@ tags:
 
 # Data Svc
 
-The data service is designed to help build backendless applications: the goal is to be able to save and query data directly from the frontend. Similarly to Firebase.
+The Data Service (Data Svc) is designed to facilitate backendless applications, allowing data to be saved and queried directly from the frontend, similar to Firebase.
 
-> This page is a high level overview of the `Data Svc`. For more details, please see the [Data Svc API documentation](/docs/openorch/query).
+> This page provides a high-level overview of `Data Svc`. For detailed information, refer to the [Data Svc API documentation](/docs/openorch/query).
 
-Aimed at prototyping or where building a service to store the data feels like an overkill. It doesn't aim to be a definitive and exclusively used datastore by any means.
+## Purpose
 
-> Currently the Data Svc is being used with internal apps but the goal is to have a permission model that works for public apps (where adversarial users might be present). If you find a logical inconsitency that hinders building public apps, please report it.
+Data Svc serves as a lightweight database abstraction designed for rapid prototyping. It allows direct reading, writing, and deletion from the frontend, eliminating the need for basic CRUD microservices that merely handle routine database operations.
 
 ## Data types
 
-The Data Svc currently supports only untyped/dynamic/schemaless entries called "Objects".
+Currently, Data Svc supports only untyped, dynamic, and schemaless entries known as `Object`s.
 
 ## Objects
 
 ### Data model
 
-Multiple tenants (users, services) write to the same table(s). Rows are then owned by whoever created them and access is dictated by the permissions, see Permission Model below.
+Multiple tenants (users or services) write to shared tables. Access is governed by the permission model outlined below.
 
 ### Permission model
 
-The Data Svc has a permission model with the following goals:
+The `Data Svc` `Object` permission model is designed with two primary goals:
 
-- Be simple & easy to understand
-- Be as versatile as possible while being simple
+- Simplicity – Easy to understand and implement
+- Flexibility – Versatile while maintaining simplicity
 
-To understand the permission model, lets disect an example entry:
+To illustrate the model, consider the following example entry:
 
-```json
-{
-  "authors": ["usr_12345", "org_67890"],
-  "data": {},
-  "deleters": ["usr_12345"],
-  "id": "pet_67890",
-  "readers": ["org_67890"],
-  "table": "pet",
-  "writers": ["org_67890"]
-}
+```yaml
+table: "pet"
+id: "pet_67890"
+data:
+  yourCustomKey1: "yourCustomValue1"
+  yourCustomKey2: 42
+readers:
+  - "usr_12345"
+  - "org_67890"
+writers:
+  - "org_67890"
+deleters:
+  - "usr_12345"
+authors:
+  - "usr_99999"
+  - "org_99999"
 ```
 
-### Readers
+## Readers
 
-Readers are user ids, organization ids or role ids that can read the entry.
+The `readers` field defines which users, organizations, or roles have permission to view an entry.
 
-You can specify other users' IDs or IDs of organizations you are not part of. This can sometimes cause "spam" in multitenant applications where adversarial entities can be present on the same platform. To fix this issue, see the `authors` field.
+- Users and organizations outside of your own can be granted access.
+- This field can be set by the author or writers to include user IDs, organization IDs, or roles they themselves do not belong to.
 
-### Authors
+## Authors
 
-The `authors` field simply marks which user or organization created the entry. This field is used to avoid "spam".
+The `authors` field identifies the original creators of an entry. Unlike `readers`, `writers`, and `deleters`, which are user-defined, this field is system-assigned. It can only include the author's user ID, organization IDs they belong to, or roles they hold. This ensures it cannot be altered or spoofed, helping to prevent spam.
 
-> In certain platforms spam is because anyone can "offer" a record to be read by an other user or organizations they are not part of. Sometimes this behaviour is undesired: imagine a chat application where strangers spam messages just by knowing the company ID. The Authors field fixes this.
+- In multi-tenant applications, spam can occur because anyone can "offer" a record to be read by another user or organization they are not part of. This can be problematic—for example, in a chat application where strangers could send unsolicited messages simply by knowing a company ID.
+- The `authors` field helps prevent such abuse limiting the list to resources the author has.
 
-### Writers
+## Writers
 
-Writers are user ids, organization ids or role ids that can edit entry.
+The `writers` field specifies which users, organizations, or roles have permission to modify an entry.
 
-### Deleters
+- This field can be set by the author or existing writers to include user IDs, organization IDs, or roles they themselves do not belong to.
 
-Deleters are user ids, organization ids or role ids that can delete the entry.
+## Deleters
+
+The `deleters` field defines which users, organizations, or roles are authorized to delete an entry.
+
+- This field can be set by the author or existing writers to include user IDs, organization IDs, or roles they themselves do not belong to.
 
 ### Conventions
 
 #### Table name and object ID
 
-The ID of an object must be prefixed by the table name. For this reason, use singular table names if possible.
+Each object ID must be prefixed with the table name. Whenever possible, use singular table names.
 
+```yaml
+table: "pet"
+id: "pet_67890"
 ```
-{
-  "table": "pet",
-  "id": "pet_67890"
-}
-```
+
+#### `_self`
+
+You can specify the reserved string `_self` in the `readers`, `writers` or `deleters` lists. It will be extrapolated to your user ID.

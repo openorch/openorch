@@ -26,6 +26,8 @@ type DatastoreOrderBy struct {
 	Field *string `json:"field,omitempty"`
 	// Randomize indicates that the results should be randomized instead of ordered by the `field` and `desc` criteria
 	Randomize *bool `json:"randomize,omitempty"`
+	// Defines the type of sorting to apply (numeric, text, date, etc.)
+	SortingType *DatastoreSortingType `json:"sortingType,omitempty"`
 }
 
 // NewDatastoreOrderBy instantiates a new DatastoreOrderBy object
@@ -141,6 +143,38 @@ func (o *DatastoreOrderBy) SetRandomize(v bool) {
 	o.Randomize = &v
 }
 
+// GetSortingType returns the SortingType field value if set, zero value otherwise.
+func (o *DatastoreOrderBy) GetSortingType() DatastoreSortingType {
+	if o == nil || IsNil(o.SortingType) {
+		var ret DatastoreSortingType
+		return ret
+	}
+	return *o.SortingType
+}
+
+// GetSortingTypeOk returns a tuple with the SortingType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatastoreOrderBy) GetSortingTypeOk() (*DatastoreSortingType, bool) {
+	if o == nil || IsNil(o.SortingType) {
+		return nil, false
+	}
+	return o.SortingType, true
+}
+
+// HasSortingType returns a boolean if a field has been set.
+func (o *DatastoreOrderBy) HasSortingType() bool {
+	if o != nil && !IsNil(o.SortingType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSortingType gets a reference to the given DatastoreSortingType and assigns it to the SortingType field.
+func (o *DatastoreOrderBy) SetSortingType(v DatastoreSortingType) {
+	o.SortingType = &v
+}
+
 func (o DatastoreOrderBy) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -159,6 +193,9 @@ func (o DatastoreOrderBy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Randomize) {
 		toSerialize["randomize"] = o.Randomize
+	}
+	if !IsNil(o.SortingType) {
+		toSerialize["sortingType"] = o.SortingType
 	}
 	return toSerialize, nil
 }

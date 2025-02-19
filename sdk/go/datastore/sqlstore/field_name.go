@@ -12,12 +12,16 @@ import (
 	"strings"
 )
 
-func (s *SQLStore) fieldName(fieldName string) string {
+func (s *SQLStore) fieldName(fieldName string, cast ...string) string {
 	if len(fieldName) == 0 {
 		return ""
 	}
 
 	fieldParts := strings.Split(fieldName, ".")
+
+	if len(cast) > 0 && len(cast[0]) > 0 {
+		fieldParts[0] = "((" + fieldParts[0]
+	}
 
 	for i, v := range fieldParts {
 		f := escape(strings.ToLower(v[0:1]) + v[1:])
@@ -28,7 +32,11 @@ func (s *SQLStore) fieldName(fieldName string) string {
 		}
 
 		if i == len(fieldParts)-1 {
-			fieldParts[i] = "->>" + fmt.Sprintf("'%v'", f)
+			if len(cast) > 0 && len(cast[0]) > 0 {
+				fieldParts[i] = fmt.Sprintf("->>'%v')::%s)", f, cast[0])
+			} else {
+				fieldParts[i] = "->>" + fmt.Sprintf("'%v'", f)
+			}
 		} else {
 			fieldParts[i] = "->" + f
 		}

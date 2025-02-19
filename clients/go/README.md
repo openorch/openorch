@@ -100,10 +100,11 @@ Class | Method | HTTP request | Description
 *ContainerSvcAPI* | [**RunContainer**](docs/ContainerSvcAPI.md#runcontainer) | **Put** /container-svc/container | Run a Container
 *ContainerSvcAPI* | [**StopContainer**](docs/ContainerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
 *DataSvcAPI* | [**CreateObject**](docs/DataSvcAPI.md#createobject) | **Post** /data-svc/object | Create a Generic Object
-*DataSvcAPI* | [**DeleteObjects**](docs/DataSvcAPI.md#deleteobjects) | **Post** /data-svc/objects/delete | Delete a Generic Object
+*DataSvcAPI* | [**DeleteObjects**](docs/DataSvcAPI.md#deleteobjects) | **Post** /data-svc/objects/delete | Delete Objects
 *DataSvcAPI* | [**Query**](docs/DataSvcAPI.md#query) | **Post** /data-svc/objects | Query Objects
 *DataSvcAPI* | [**UpdateObjects**](docs/DataSvcAPI.md#updateobjects) | **Post** /data-svc/objects/update | Update Objects
 *DataSvcAPI* | [**UpsertObject**](docs/DataSvcAPI.md#upsertobject) | **Put** /data-svc/object/{objectId} | Upsert a Generic Object
+*DataSvcAPI* | [**UpsertObjects**](docs/DataSvcAPI.md#upsertobjects) | **Put** /data-svc/objects/upsert | Upsert Objects
 *DeploySvcAPI* | [**DeleteDeployment**](docs/DeploySvcAPI.md#deletedeployment) | **Delete** /deploy-svc/deployment | Delete Deployment
 *DeploySvcAPI* | [**ListDeployments**](docs/DeploySvcAPI.md#listdeployments) | **Post** /deploy-svc/deployments | List Deployments
 *DeploySvcAPI* | [**SaveDeployment**](docs/DeploySvcAPI.md#savedeployment) | **Put** /deploy-svc/deployment | Save Deployment
@@ -214,13 +215,14 @@ Class | Method | HTTP request | Description
  - [DataSvcObject](docs/DataSvcObject.md)
  - [DataSvcQueryRequest](docs/DataSvcQueryRequest.md)
  - [DataSvcQueryResponse](docs/DataSvcQueryResponse.md)
- - [DataSvcUpdateObjectRequest](docs/DataSvcUpdateObjectRequest.md)
+ - [DataSvcUpdateObjectsRequest](docs/DataSvcUpdateObjectsRequest.md)
  - [DataSvcUpsertObjectRequest](docs/DataSvcUpsertObjectRequest.md)
  - [DataSvcUpsertObjectResponse](docs/DataSvcUpsertObjectResponse.md)
  - [DatastoreFilter](docs/DatastoreFilter.md)
  - [DatastoreOp](docs/DatastoreOp.md)
  - [DatastoreOrderBy](docs/DatastoreOrderBy.md)
  - [DatastoreQuery](docs/DatastoreQuery.md)
+ - [DatastoreSortingType](docs/DatastoreSortingType.md)
  - [DeploySvcAutoScalingConfig](docs/DeploySvcAutoScalingConfig.md)
  - [DeploySvcDeleteDeploymentRequest](docs/DeploySvcDeleteDeploymentRequest.md)
  - [DeploySvcDeployment](docs/DeploySvcDeployment.md)

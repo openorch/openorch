@@ -14,15 +14,17 @@ package dynamicservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	data "github.com/openorch/openorch/server/internal/services/data/types"
 )
 
 // @ID deleteObjects
-// @Summary     Delete a Generic Object
-// @Description Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+// @Summary     Delete Objects
+// @Description Deletes all objects matchin the provided filters.
 // @Tags        Data Svc
 // @Accept      json
 // @Produce     json
@@ -33,7 +35,7 @@ import (
 // @Failure     500       {object} data.ErrorResponse "Internal Server Error"
 // @Security    BearerAuth
 // @Router      /data-svc/objects/delete [post]
-func (g *DataService) Delete(
+func (g *DataService) DeleteObjects(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -61,7 +63,7 @@ func (g *DataService) Delete(
 	}
 	defer r.Body.Close()
 
-	err = g.delete(req.Table, *isAuthRsp.User.Id, req.Filters)
+	err = g.deleteObjects(req.Table, *isAuthRsp.User.Id, req.Filters)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -69,4 +71,26 @@ func (g *DataService) Delete(
 	}
 
 	w.Write([]byte(`{}`))
+}
+
+func (g *DataService) deleteObjects(
+	tableName string,
+	userId string,
+	conditions []datastore.Filter,
+) error {
+	if len(conditions) == 0 {
+		return errors.New("no conditions")
+	}
+
+	conditions = append(
+		conditions,
+		datastore.Equals(datastore.Field("table"), tableName),
+	)
+	conditions = append(conditions,
+		datastore.Intersects(datastore.Field("deleters"), []any{userId}),
+	)
+
+	return g.store.Query(
+		conditions...,
+	).Delete()
 }

@@ -441,13 +441,14 @@ func (s *SQLStore) buildUpsertQuery(obj datastore.Row) (string, []interface{}, e
 }
 
 type SQLQueryBuilder struct {
-	store        *SQLStore
-	filters      []datastore.Filter
-	orderField   string
-	orderDesc    bool
-	limit        int64
-	after        []any
-	selectFields []string
+	store            *SQLStore
+	filters          []datastore.Filter
+	orderField       string
+	orderDesc        bool
+	orderSortingType datastore.SortingType
+	limit            int64
+	after            []any
+	selectFields     []string
 }
 
 func (q *SQLQueryBuilder) OrderBy(orderbys ...datastore.OrderBy) datastore.QueryBuilder {
@@ -456,6 +457,8 @@ func (q *SQLQueryBuilder) OrderBy(orderbys ...datastore.OrderBy) datastore.Query
 	}
 	q.orderField = orderbys[0].Field
 	q.orderDesc = orderbys[0].Desc
+	q.orderSortingType = orderbys[0].SortingType
+
 	return q
 }
 
@@ -778,8 +781,12 @@ func (q *SQLQueryBuilder) buildSelectQuery() (string, []interface{}, error) {
 	if q.orderField != "" {
 		orderField := q.orderField
 		orderDesc := q.orderDesc
+		cast := ""
+		if q.orderSortingType == datastore.SortingTypeNumeric {
+			cast = "numeric"
+		}
 
-		query += fmt.Sprintf(" ORDER BY %s", q.store.fieldName(orderField))
+		query += fmt.Sprintf(" ORDER BY %s", q.store.fieldName(orderField, cast))
 		if orderDesc {
 			query += " DESC"
 		}

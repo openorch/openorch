@@ -198,6 +198,15 @@ func (q *Query) HasFieldFilter(fieldName string) bool {
 	return false
 }
 
+type SortingType string
+
+const (
+	SortingTypeDefault SortingType = ""
+	SortingTypeNumeric SortingType = "numeric"
+	SortingTypeText    SortingType = "text"
+	SortingTypeDate    SortingType = "date"
+)
+
 type OrderBy struct {
 	// The field by which to order the results
 	Field string `json:"field,omitempty"`
@@ -207,6 +216,9 @@ type OrderBy struct {
 
 	// Randomize indicates that the results should be randomized instead of ordered by the `field` and `desc` criteria
 	Randomize bool `json:"randomize,omitempty"`
+
+	// Defines the type of sorting to apply (numeric, text, date, etc.)
+	SortingType SortingType `json:"sortingType,omitempty"`
 }
 
 // random order. not advised for large datasets due to its slow speed

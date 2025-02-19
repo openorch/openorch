@@ -22,7 +22,7 @@ var _ MappedNullable = &DataSvcObject{}
 
 // DataSvcObject struct for DataSvcObject
 type DataSvcObject struct {
-	// Authors is a list of user ID and organization ID who created the object. If an organization ID is not provided, the currently active organization will be queried from the User Svc.
+	// Authors is a list of user ID and organization ID who created the object. The authors field tracks which users or organizations created an entry, helping to prevent spam. If an organization ID is not provided, the currently active organization will be queried from the User Svc.
 	Authors []string `json:"authors,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
 	Data map[string]interface{} `json:"data"`
