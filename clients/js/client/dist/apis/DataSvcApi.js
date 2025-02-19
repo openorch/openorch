@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { DataSvcCreateObjectRequestToJSON, DataSvcCreateObjectResponseFromJSON, DataSvcDeleteObjectRequestToJSON, DataSvcQueryRequestToJSON, DataSvcQueryResponseFromJSON, DataSvcUpdateObjectRequestToJSON, DataSvcUpsertObjectRequestToJSON, DataSvcUpsertObjectResponseFromJSON, } from '../models/index';
+import { DataSvcCreateObjectRequestToJSON, DataSvcCreateObjectResponseFromJSON, DataSvcDeleteObjectRequestToJSON, DataSvcQueryRequestToJSON, DataSvcQueryResponseFromJSON, DataSvcUpdateObjectsRequestToJSON, DataSvcUpsertObjectRequestToJSON, DataSvcUpsertObjectResponseFromJSON, } from '../models/index';
 /**
  *
  */
@@ -62,8 +62,8 @@ export class DataSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     deleteObjectsRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -87,8 +87,8 @@ export class DataSvcApi extends runtime.BaseAPI {
         });
     }
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     deleteObjects(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -100,7 +100,7 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    queryRaw(requestParameters, initOverrides) {
+    queryObjectsRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const queryParameters = {};
             const headerParameters = {};
@@ -122,14 +122,14 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    query() {
+    queryObjects() {
         return __awaiter(this, arguments, void 0, function* (requestParameters = {}, initOverrides) {
-            const response = yield this.queryRaw(requestParameters, initOverrides);
+            const response = yield this.queryObjectsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     updateObjectsRaw(requestParameters, initOverrides) {
@@ -148,13 +148,13 @@ export class DataSvcApi extends runtime.BaseAPI {
                 method: 'POST',
                 headers: headerParameters,
                 query: queryParameters,
-                body: DataSvcUpdateObjectRequestToJSON(requestParameters['body']),
+                body: DataSvcUpdateObjectsRequestToJSON(requestParameters['body']),
             }, initOverrides);
             return new runtime.JSONApiResponse(response);
         });
     }
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     updateObjects(requestParameters, initOverrides) {
@@ -198,6 +198,41 @@ export class DataSvcApi extends runtime.BaseAPI {
     upsertObject(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.upsertObjectRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    upsertObjectsRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['body'] == null) {
+                throw new runtime.RequiredError('body', 'Required parameter "body" was null or undefined when calling upsertObjects().');
+            }
+            const queryParameters = {};
+            const headerParameters = {};
+            headerParameters['Content-Type'] = 'application/json';
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/data-svc/objects/upsert`,
+                method: 'PUT',
+                headers: headerParameters,
+                query: queryParameters,
+                body: DataSvcUpsertObjectRequestToJSON(requestParameters['body']),
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcUpsertObjectResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    upsertObjects(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.upsertObjectsRaw(requestParameters, initOverrides);
             return yield response.value();
         });
     }

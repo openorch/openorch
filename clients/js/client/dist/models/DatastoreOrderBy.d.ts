@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { DatastoreSortingType } from './DatastoreSortingType';
 /**
  *
  * @export
@@ -33,6 +34,12 @@ export interface DatastoreOrderBy {
      * @memberof DatastoreOrderBy
      */
     randomize?: boolean;
+    /**
+     * Defines the type of sorting to apply (numeric, text, date, etc.)
+     * @type {DatastoreSortingType}
+     * @memberof DatastoreOrderBy
+     */
+    sortingType?: DatastoreSortingType;
 }
 /**
  * Check if a given object implements the DatastoreOrderBy interface.

@@ -460,18 +460,23 @@ definitions:
           $ref: '#/definitions/data_svc.Object'
         type: array
     type: object
-  data_svc.UpdateObjectRequest:
+  data_svc.UpdateObjectsRequest:
     properties:
       filters:
+        description: |-
+          Filters to determine which objects will be updated.
+          Only objects matching all filters will be modified.
         items:
           $ref: '#/definitions/datastore.Filter'
         type: array
       object:
-        $ref: '#/definitions/data_svc.Object'
+        allOf:
+        - $ref: '#/definitions/data_svc.Object'
+        description: The object containing the fields to update in matching objects.
       table:
         type: string
     type: object
-  data_svc.UpdateObjectResponse:
+  data_svc.UpdateObjectsResponse:
     type: object
   data_svc.UpsertObjectRequest:
     properties:
@@ -524,6 +529,10 @@ definitions:
         description: Randomize indicates that the results should be randomized instead
           of ordered by the `field` and `desc` criteria
         type: boolean
+      sortingType:
+        allOf:
+        - $ref: '#/definitions/datastore.SortingType'
+        description: Defines the type of sorting to apply (numeric, text, date, etc.)
     type: object
   datastore.Query:
     properties:
@@ -556,6 +565,18 @@ definitions:
           $ref: '#/definitions/datastore.OrderBy'
         type: array
     type: object
+  datastore.SortingType:
+    enum:
+    - ""
+    - numeric
+    - text
+    - date
+    type: string
+    x-enum-varnames:
+    - SortingTypeDefault
+    - SortingTypeNumeric
+    - SortingTypeText
+    - SortingTypeDate
   deploy_svc.AutoScalingConfig:
     properties:
       cpuThreshold:
@@ -3549,7 +3570,7 @@ paths:
 
 
         Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
-      operationId: query
+      operationId: queryObjects
       parameters:
       - description: Query Request
         in: body
@@ -3584,8 +3605,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Removes a dynamic object from the system based on the provided
-        conditions. Requires authorization and user authentication.
+      description: Deletes all objects matchin the provided filters.
       operationId: deleteObjects
       parameters:
       - description: Delete request payload
@@ -3615,15 +3635,16 @@ paths:
             $ref: '#/definitions/data_svc.ErrorResponse'
       security:
       - BearerAuth: []
-      summary: Delete a Generic Object
+      summary: Delete Objects
       tags:
       - Data Svc
   /data-svc/objects/update:
     post:
       consumes:
       - application/json
-      description: Updates objects in a specified table based on provided conditions.
-        Requires authorization and user authentication.
+      description: |-
+        Update fields of objects that match the given filters using the provided object.
+        Any fields not included in the incoming object will remain unchanged.
       operationId: updateObjects
       parameters:
       - description: Update request payload
@@ -3631,14 +3652,14 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/data_svc.UpdateObjectRequest'
+          $ref: '#/definitions/data_svc.UpdateObjectsRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Successful update of objects
           schema:
-            $ref: '#/definitions/data_svc.UpdateObjectResponse'
+            $ref: '#/definitions/data_svc.UpdateObjectsResponse'
         "400":
           description: Invalid JSON
           schema:
@@ -3654,6 +3675,43 @@ paths:
       security:
       - BearerAuth: []
       summary: Update Objects
+      tags:
+      - Data Svc
+  /data-svc/objects/upsert:
+    put:
+      consumes:
+      - application/json
+      description: Upserts objects by ids.
+      operationId: upsertObjects
+      parameters:
+      - description: Upsert request payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/data_svc.UpsertObjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful upsert of objects
+          schema:
+            $ref: '#/definitions/data_svc.UpsertObjectResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/data_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/data_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/data_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Upsert Objects
       tags:
       - Data Svc
   /deploy-svc/deployment:

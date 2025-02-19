@@ -79,7 +79,7 @@ func TestQueryObjects(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 
@@ -102,7 +102,7 @@ func TestQueryObjects(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 
@@ -125,7 +125,7 @@ func TestQueryObjects(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 
@@ -149,7 +149,7 @@ func TestQueryObjects(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 
@@ -174,7 +174,7 @@ func TestQueryObjects(t *testing.T) {
 			},
 		}
 
-		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+		rsp, _, err := client1.DataSvcAPI.QueryObjects(context.Background()).
 			Body(req).
 			Execute()
 

@@ -10,21 +10,24 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { DataSvcCreateObjectRequest, DataSvcCreateObjectResponse, DataSvcDeleteObjectRequest, DataSvcQueryRequest, DataSvcQueryResponse, DataSvcUpdateObjectRequest, DataSvcUpsertObjectRequest, DataSvcUpsertObjectResponse } from '../models/index';
+import type { DataSvcCreateObjectRequest, DataSvcCreateObjectResponse, DataSvcDeleteObjectRequest, DataSvcQueryRequest, DataSvcQueryResponse, DataSvcUpdateObjectsRequest, DataSvcUpsertObjectRequest, DataSvcUpsertObjectResponse } from '../models/index';
 export interface CreateObjectRequest {
     body: DataSvcCreateObjectRequest;
 }
 export interface DeleteObjectsRequest {
     body: DataSvcDeleteObjectRequest;
 }
-export interface QueryRequest {
+export interface QueryObjectsRequest {
     body?: DataSvcQueryRequest;
 }
 export interface UpdateObjectsRequest {
-    body: DataSvcUpdateObjectRequest;
+    body: DataSvcUpdateObjectsRequest;
 }
 export interface UpsertObjectRequest {
     objectId: string;
+    body: DataSvcUpsertObjectRequest;
+}
+export interface UpsertObjectsRequest {
     body: DataSvcUpsertObjectRequest;
 }
 /**
@@ -42,32 +45,32 @@ export declare class DataSvcApi extends runtime.BaseAPI {
      */
     createObject(requestParameters: CreateObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcCreateObjectResponse>;
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     deleteObjectsRaw(requestParameters: DeleteObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     deleteObjects(requestParameters: DeleteObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>>;
+    queryObjectsRaw(requestParameters: QueryObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>>;
     /**
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    query(requestParameters?: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse>;
+    queryObjects(requestParameters?: QueryObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse>;
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     updateObjectsRaw(requestParameters: UpdateObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>>;
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     updateObjects(requestParameters: UpdateObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
@@ -81,4 +84,14 @@ export declare class DataSvcApi extends runtime.BaseAPI {
      * Upsert a Generic Object
      */
     upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse>;
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    upsertObjectsRaw(requestParameters: UpsertObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcUpsertObjectResponse>>;
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    upsertObjects(requestParameters: UpsertObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse>;
 }

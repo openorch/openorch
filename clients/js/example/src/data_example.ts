@@ -31,7 +31,7 @@ export async function dynamicTest(apiKey: string) {
     },
   });
 
-  let rsp = await dataService.query({
+  let rsp = await dataService.queryObjects({
     body: {
       table: "uzerz",
       readers: ["_self"],

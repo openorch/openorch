@@ -35,13 +35,14 @@ export * from './dataSvcErrorResponse';
 export * from './dataSvcObject';
 export * from './dataSvcQueryRequest';
 export * from './dataSvcQueryResponse';
-export * from './dataSvcUpdateObjectRequest';
+export * from './dataSvcUpdateObjectsRequest';
 export * from './dataSvcUpsertObjectRequest';
 export * from './dataSvcUpsertObjectResponse';
 export * from './datastoreFilter';
 export * from './datastoreOp';
 export * from './datastoreOrderBy';
 export * from './datastoreQuery';
+export * from './datastoreSortingType';
 export * from './deploySvcAutoScalingConfig';
 export * from './deploySvcDeleteDeploymentRequest';
 export * from './deploySvcDeployment';
@@ -219,13 +220,14 @@ import { DataSvcErrorResponse } from './dataSvcErrorResponse';
 import { DataSvcObject } from './dataSvcObject';
 import { DataSvcQueryRequest } from './dataSvcQueryRequest';
 import { DataSvcQueryResponse } from './dataSvcQueryResponse';
-import { DataSvcUpdateObjectRequest } from './dataSvcUpdateObjectRequest';
+import { DataSvcUpdateObjectsRequest } from './dataSvcUpdateObjectsRequest';
 import { DataSvcUpsertObjectRequest } from './dataSvcUpsertObjectRequest';
 import { DataSvcUpsertObjectResponse } from './dataSvcUpsertObjectResponse';
 import { DatastoreFilter } from './datastoreFilter';
 import { DatastoreOp } from './datastoreOp';
 import { DatastoreOrderBy } from './datastoreOrderBy';
 import { DatastoreQuery } from './datastoreQuery';
+import { DatastoreSortingType } from './datastoreSortingType';
 import { DeploySvcAutoScalingConfig } from './deploySvcAutoScalingConfig';
 import { DeploySvcDeleteDeploymentRequest } from './deploySvcDeleteDeploymentRequest';
 import { DeploySvcDeployment } from './deploySvcDeployment';
@@ -379,6 +381,7 @@ let primitives = [
 ];
 let enumsMap = {
     "DatastoreOp": DatastoreOp,
+    "DatastoreSortingType": DatastoreSortingType,
     "DeploySvcDeploymentStatus": DeploySvcDeploymentStatus,
     "DeploySvcStrategyType": DeploySvcStrategyType,
     "PolicySvcEntity": PolicySvcEntity,
@@ -429,7 +432,7 @@ let typeMap = {
     "DataSvcObject": DataSvcObject,
     "DataSvcQueryRequest": DataSvcQueryRequest,
     "DataSvcQueryResponse": DataSvcQueryResponse,
-    "DataSvcUpdateObjectRequest": DataSvcUpdateObjectRequest,
+    "DataSvcUpdateObjectsRequest": DataSvcUpdateObjectsRequest,
     "DataSvcUpsertObjectRequest": DataSvcUpsertObjectRequest,
     "DataSvcUpsertObjectResponse": DataSvcUpsertObjectResponse,
     "DatastoreFilter": DatastoreFilter,

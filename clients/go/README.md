@@ -101,7 +101,7 @@ Class | Method | HTTP request | Description
 *ContainerSvcAPI* | [**StopContainer**](docs/ContainerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
 *DataSvcAPI* | [**CreateObject**](docs/DataSvcAPI.md#createobject) | **Post** /data-svc/object | Create a Generic Object
 *DataSvcAPI* | [**DeleteObjects**](docs/DataSvcAPI.md#deleteobjects) | **Post** /data-svc/objects/delete | Delete Objects
-*DataSvcAPI* | [**Query**](docs/DataSvcAPI.md#query) | **Post** /data-svc/objects | Query Objects
+*DataSvcAPI* | [**QueryObjects**](docs/DataSvcAPI.md#queryobjects) | **Post** /data-svc/objects | Query Objects
 *DataSvcAPI* | [**UpdateObjects**](docs/DataSvcAPI.md#updateobjects) | **Post** /data-svc/objects/update | Update Objects
 *DataSvcAPI* | [**UpsertObject**](docs/DataSvcAPI.md#upsertobject) | **Put** /data-svc/object/{objectId} | Upsert a Generic Object
 *DataSvcAPI* | [**UpsertObjects**](docs/DataSvcAPI.md#upsertobjects) | **Put** /data-svc/objects/upsert | Upsert Objects

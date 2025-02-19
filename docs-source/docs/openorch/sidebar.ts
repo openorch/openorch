@@ -162,14 +162,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "openorch/query",
+          id: "openorch/query-objects",
           label: "Query Objects",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "openorch/delete-objects",
-          label: "Delete a Generic Object",
+          label: "Delete Objects",
           className: "api-method post",
         },
         {
@@ -177,6 +177,12 @@ const sidebar: SidebarsConfig = {
           id: "openorch/update-objects",
           label: "Update Objects",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "openorch/upsert-objects",
+          label: "Upsert Objects",
+          className: "api-method put",
         },
       ],
     },

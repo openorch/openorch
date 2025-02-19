@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { DatastoreSortingTypeFromJSON, DatastoreSortingTypeToJSON, } from './DatastoreSortingType';
 /**
  * Check if a given object implements the DatastoreOrderBy interface.
  */
@@ -28,6 +29,7 @@ export function DatastoreOrderByFromJSONTyped(json, ignoreDiscriminator) {
         'desc': json['desc'] == null ? undefined : json['desc'],
         'field': json['field'] == null ? undefined : json['field'],
         'randomize': json['randomize'] == null ? undefined : json['randomize'],
+        'sortingType': json['sortingType'] == null ? undefined : DatastoreSortingTypeFromJSON(json['sortingType']),
     };
 }
 export function DatastoreOrderByToJSON(json) {
@@ -41,5 +43,6 @@ export function DatastoreOrderByToJSONTyped(value, ignoreDiscriminator = false) 
         'desc': value['desc'],
         'field': value['field'],
         'randomize': value['randomize'],
+        'sortingType': DatastoreSortingTypeToJSON(value['sortingType']),
     };
 }

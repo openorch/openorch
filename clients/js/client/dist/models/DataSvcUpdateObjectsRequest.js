@@ -14,15 +14,15 @@
 import { DatastoreFilterFromJSON, DatastoreFilterToJSON, } from './DatastoreFilter';
 import { DataSvcObjectFromJSON, DataSvcObjectToJSON, } from './DataSvcObject';
 /**
- * Check if a given object implements the DataSvcUpdateObjectRequest interface.
+ * Check if a given object implements the DataSvcUpdateObjectsRequest interface.
  */
-export function instanceOfDataSvcUpdateObjectRequest(value) {
+export function instanceOfDataSvcUpdateObjectsRequest(value) {
     return true;
 }
-export function DataSvcUpdateObjectRequestFromJSON(json) {
-    return DataSvcUpdateObjectRequestFromJSONTyped(json, false);
+export function DataSvcUpdateObjectsRequestFromJSON(json) {
+    return DataSvcUpdateObjectsRequestFromJSONTyped(json, false);
 }
-export function DataSvcUpdateObjectRequestFromJSONTyped(json, ignoreDiscriminator) {
+export function DataSvcUpdateObjectsRequestFromJSONTyped(json, ignoreDiscriminator) {
     if (json == null) {
         return json;
     }
@@ -32,10 +32,10 @@ export function DataSvcUpdateObjectRequestFromJSONTyped(json, ignoreDiscriminato
         'table': json['table'] == null ? undefined : json['table'],
     };
 }
-export function DataSvcUpdateObjectRequestToJSON(json) {
-    return DataSvcUpdateObjectRequestToJSONTyped(json, false);
+export function DataSvcUpdateObjectsRequestToJSON(json) {
+    return DataSvcUpdateObjectsRequestToJSONTyped(json, false);
 }
-export function DataSvcUpdateObjectRequestToJSONTyped(value, ignoreDiscriminator = false) {
+export function DataSvcUpdateObjectsRequestToJSONTyped(value, ignoreDiscriminator = false) {
     if (value == null) {
         return value;
     }

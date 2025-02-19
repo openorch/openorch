@@ -31,41 +31,42 @@ import {
 /**
  * 
  * @export
- * @interface DataSvcUpdateObjectRequest
+ * @interface DataSvcUpdateObjectsRequest
  */
-export interface DataSvcUpdateObjectRequest {
+export interface DataSvcUpdateObjectsRequest {
     /**
-     * 
+     * Filters to determine which objects will be updated.
+     * Only objects matching all filters will be modified.
      * @type {Array<DatastoreFilter>}
-     * @memberof DataSvcUpdateObjectRequest
+     * @memberof DataSvcUpdateObjectsRequest
      */
     filters?: Array<DatastoreFilter>;
     /**
-     * 
+     * The object containing the fields to update in matching objects.
      * @type {DataSvcObject}
-     * @memberof DataSvcUpdateObjectRequest
+     * @memberof DataSvcUpdateObjectsRequest
      */
     object?: DataSvcObject;
     /**
      * 
      * @type {string}
-     * @memberof DataSvcUpdateObjectRequest
+     * @memberof DataSvcUpdateObjectsRequest
      */
     table?: string;
 }
 
 /**
- * Check if a given object implements the DataSvcUpdateObjectRequest interface.
+ * Check if a given object implements the DataSvcUpdateObjectsRequest interface.
  */
-export function instanceOfDataSvcUpdateObjectRequest(value: object): value is DataSvcUpdateObjectRequest {
+export function instanceOfDataSvcUpdateObjectsRequest(value: object): value is DataSvcUpdateObjectsRequest {
     return true;
 }
 
-export function DataSvcUpdateObjectRequestFromJSON(json: any): DataSvcUpdateObjectRequest {
-    return DataSvcUpdateObjectRequestFromJSONTyped(json, false);
+export function DataSvcUpdateObjectsRequestFromJSON(json: any): DataSvcUpdateObjectsRequest {
+    return DataSvcUpdateObjectsRequestFromJSONTyped(json, false);
 }
 
-export function DataSvcUpdateObjectRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): DataSvcUpdateObjectRequest {
+export function DataSvcUpdateObjectsRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): DataSvcUpdateObjectsRequest {
     if (json == null) {
         return json;
     }
@@ -77,11 +78,11 @@ export function DataSvcUpdateObjectRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function DataSvcUpdateObjectRequestToJSON(json: any): DataSvcUpdateObjectRequest {
-    return DataSvcUpdateObjectRequestToJSONTyped(json, false);
+export function DataSvcUpdateObjectsRequestToJSON(json: any): DataSvcUpdateObjectsRequest {
+    return DataSvcUpdateObjectsRequestToJSONTyped(json, false);
 }
 
-export function DataSvcUpdateObjectRequestToJSONTyped(value?: DataSvcUpdateObjectRequest | null, ignoreDiscriminator: boolean = false): any {
+export function DataSvcUpdateObjectsRequestToJSONTyped(value?: DataSvcUpdateObjectsRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

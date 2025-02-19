@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { DatastoreSortingType } from './DatastoreSortingType';
+import {
+    DatastoreSortingTypeFromJSON,
+    DatastoreSortingTypeFromJSONTyped,
+    DatastoreSortingTypeToJSON,
+    DatastoreSortingTypeToJSONTyped,
+} from './DatastoreSortingType';
+
 /**
  * 
  * @export
@@ -37,7 +45,15 @@ export interface DatastoreOrderBy {
      * @memberof DatastoreOrderBy
      */
     randomize?: boolean;
+    /**
+     * Defines the type of sorting to apply (numeric, text, date, etc.)
+     * @type {DatastoreSortingType}
+     * @memberof DatastoreOrderBy
+     */
+    sortingType?: DatastoreSortingType;
 }
+
+
 
 /**
  * Check if a given object implements the DatastoreOrderBy interface.
@@ -59,6 +75,7 @@ export function DatastoreOrderByFromJSONTyped(json: any, ignoreDiscriminator: bo
         'desc': json['desc'] == null ? undefined : json['desc'],
         'field': json['field'] == null ? undefined : json['field'],
         'randomize': json['randomize'] == null ? undefined : json['randomize'],
+        'sortingType': json['sortingType'] == null ? undefined : DatastoreSortingTypeFromJSON(json['sortingType']),
     };
 }
 
@@ -76,6 +93,7 @@ export function DatastoreOrderByToJSONTyped(value?: DatastoreOrderBy | null, ign
         'desc': value['desc'],
         'field': value['field'],
         'randomize': value['randomize'],
+        'sortingType': DatastoreSortingTypeToJSON(value['sortingType']),
     };
 }
 

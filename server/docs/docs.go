@@ -1244,7 +1244,7 @@ const docTemplate = `{
                     "Data Svc"
                 ],
                 "summary": "Query Objects",
-                "operationId": "query",
+                "operationId": "queryObjects",
                 "parameters": [
                     {
                         "description": "Query Request",

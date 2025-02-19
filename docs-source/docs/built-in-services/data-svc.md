@@ -14,7 +14,7 @@ tags:
 
 The Data Service (Data Svc) is designed to facilitate backendless applications, allowing data to be saved and queried directly from the frontend, similar to Firebase.
 
-> This page provides a high-level overview of `Data Svc`. For detailed information, refer to the [Data Svc API documentation](/docs/openorch/query).
+> This page provides a high-level overview of `Data Svc`. For detailed information, refer to the [Data Svc API documentation](/docs/openorch/query-objects).
 
 ## Purpose
 
@@ -97,3 +97,170 @@ id: "pet_67890"
 #### `_self`
 
 You can specify the reserved string `_self` in the `readers`, `writers` or `deleters` lists. It will be extrapolated to your user ID.
+
+## Querying
+
+Data Svc allows querying objects with flexible filtering, sorting, and pagination options.
+
+### Ordering by descending value
+
+Request
+
+```json
+{
+  "table": "pet",
+  "query": {
+    "orderBys": [
+      {
+        "field": "age",
+        "desc": true,
+        "sortingType": "numeric"
+      }
+    ]
+  }
+}
+```
+
+You might wonder what sorting type is. It is essentially a clutch for some systems like PostgreSQL, where the Data Svc and its ORM stores the dynamic fields of Objects in a `JSONB` field.
+
+Unfortunately ordering on JSONB fields defaults to string sorting. The `sortingType` field helps the system force the correct ordering. For possible ordering values, see the [queryObjects endpoint API](/docs/openorch/query-objects)
+
+Response:
+
+```json
+{
+  "objects": [
+    { "table": "pet", "id": "pet_19", "data": { "age": 19 } },
+    { "table": "pet", "id": "pet_18", "data": { "age": 18 } },
+    { "table": "pet", "id": "pet_17", "data": { "age": 17 } }
+  ]
+}
+```
+
+### Ordering by ascending value
+
+```json
+{
+  "table": "pet",
+  "query": {
+    "orderBys": [
+      {
+        "field": "age",
+        "sortingType": "numeric"
+      }
+    ]
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "objects": [
+    { "table": "pet", "id": "pet_0", "data": { "age": 0 } },
+    { "table": "pet", "id": "pet_1", "data": { "age": 1 } },
+    { "table": "pet", "id": "pet_2", "data": { "age": 2 } }
+  ]
+}
+```
+
+### Limiting results
+
+```json
+{
+  "table": "pet",
+  "query": {
+    "orderBys": [
+      {
+        "field": "age",
+        "sortingType": "numeric"
+      }
+    ],
+    "limit": 5
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "objects": [
+    { "table": "pet", "id": "pet_0", "data": { "age": 0 } },
+    { "table": "pet", "id": "pet_1", "data": { "age": 1 } },
+    { "table": "pet", "id": "pet_2", "data": { "age": 2 } },
+    { "table": "pet", "id": "pet_3", "data": { "age": 3 } },
+    { "table": "pet", "id": "pet_4", "data": { "age": 4 } }
+  ]
+}
+```
+
+### Paginating with after
+
+Request:
+
+```json
+{
+  "table": "pet",
+  "query": {
+    "orderBys": [
+      {
+        "field": "age",
+        "sortingType": "numeric"
+      }
+    ],
+    "limit": 5,
+    "jsonAfter": "[4]"
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "objects": [
+    { "table:" "pet", "id": "pet_5", "data": { "age": 5 } },
+    { "table:" "pet", "id": "pet_6", "data": { "age": 6 } },
+    { "table:" "pet", "id": "pet_7", "data": { "age": 7 } },
+    { "table:" "pet", "id": "pet_8", "data": { "age": 8 } },
+    { "table:" "pet", "id": "pet_9", "data": { "age": 9 } }
+  ]
+}
+```
+
+### Paginating with after in descending order
+
+Request:
+
+```json
+{
+  "table": "pet",
+  "query": {
+    "orderBys": [
+      {
+        "field": "age",
+        "desc": true,
+        "sortingType": "numeric"
+      }
+    ],
+    "limit": 5,
+    "jsonAfter": "[15]"
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "objects": [
+    { "id": "pet_14", "data": { "age": 14 } },
+    { "id": "pet_13", "data": { "age": 13 } },
+    { "id": "pet_12", "data": { "age": 12 } },
+    { "id": "pet_11", "data": { "age": 11 } },
+    { "id": "pet_10", "data": { "age": 10 } }
+  ]
+}
+```

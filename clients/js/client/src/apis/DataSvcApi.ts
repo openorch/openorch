@@ -21,7 +21,7 @@ import type {
   DataSvcErrorResponse,
   DataSvcQueryRequest,
   DataSvcQueryResponse,
-  DataSvcUpdateObjectRequest,
+  DataSvcUpdateObjectsRequest,
   DataSvcUpsertObjectRequest,
   DataSvcUpsertObjectResponse,
 } from '../models/index';
@@ -38,8 +38,8 @@ import {
     DataSvcQueryRequestToJSON,
     DataSvcQueryResponseFromJSON,
     DataSvcQueryResponseToJSON,
-    DataSvcUpdateObjectRequestFromJSON,
-    DataSvcUpdateObjectRequestToJSON,
+    DataSvcUpdateObjectsRequestFromJSON,
+    DataSvcUpdateObjectsRequestToJSON,
     DataSvcUpsertObjectRequestFromJSON,
     DataSvcUpsertObjectRequestToJSON,
     DataSvcUpsertObjectResponseFromJSON,
@@ -54,16 +54,20 @@ export interface DeleteObjectsRequest {
     body: DataSvcDeleteObjectRequest;
 }
 
-export interface QueryRequest {
+export interface QueryObjectsRequest {
     body?: DataSvcQueryRequest;
 }
 
 export interface UpdateObjectsRequest {
-    body: DataSvcUpdateObjectRequest;
+    body: DataSvcUpdateObjectsRequest;
 }
 
 export interface UpsertObjectRequest {
     objectId: string;
+    body: DataSvcUpsertObjectRequest;
+}
+
+export interface UpsertObjectsRequest {
     body: DataSvcUpsertObjectRequest;
 }
 
@@ -115,8 +119,8 @@ export class DataSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     async deleteObjectsRaw(requestParameters: DeleteObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['body'] == null) {
@@ -148,8 +152,8 @@ export class DataSvcApi extends runtime.BaseAPI {
     }
 
     /**
-     * Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
-     * Delete a Generic Object
+     * Deletes all objects matchin the provided filters.
+     * Delete Objects
      */
     async deleteObjects(requestParameters: DeleteObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.deleteObjectsRaw(requestParameters, initOverrides);
@@ -160,7 +164,7 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    async queryRaw(requestParameters: QueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>> {
+    async queryObjectsRaw(requestParameters: QueryObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcQueryResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -186,13 +190,13 @@ export class DataSvcApi extends runtime.BaseAPI {
      * Retrieves objects from a specified table based on search criteria. Requires authorization and user authentication.   Use helper functions in your respective client library such as condition constructors (`equal`, `contains`, `startsWith`) and field selectors (`field`, `fields`, `id`) for easier access.
      * Query Objects
      */
-    async query(requestParameters: QueryRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse> {
-        const response = await this.queryRaw(requestParameters, initOverrides);
+    async queryObjects(requestParameters: QueryObjectsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcQueryResponse> {
+        const response = await this.queryObjectsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     async updateObjectsRaw(requestParameters: UpdateObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
@@ -218,14 +222,14 @@ export class DataSvcApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: DataSvcUpdateObjectRequestToJSON(requestParameters['body']),
+            body: DataSvcUpdateObjectsRequestToJSON(requestParameters['body']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
-     * Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+     * Update fields of objects that match the given filters using the provided object. Any fields not included in the incoming object will remain unchanged.
      * Update Objects
      */
     async updateObjects(requestParameters: UpdateObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
@@ -279,6 +283,48 @@ export class DataSvcApi extends runtime.BaseAPI {
      */
     async upsertObject(requestParameters: UpsertObjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse> {
         const response = await this.upsertObjectRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    async upsertObjectsRaw(requestParameters: UpsertObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DataSvcUpsertObjectResponse>> {
+        if (requestParameters['body'] == null) {
+            throw new runtime.RequiredError(
+                'body',
+                'Required parameter "body" was null or undefined when calling upsertObjects().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/data-svc/objects/upsert`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DataSvcUpsertObjectRequestToJSON(requestParameters['body']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DataSvcUpsertObjectResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Upserts objects by ids.
+     * Upsert Objects
+     */
+    async upsertObjects(requestParameters: UpsertObjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DataSvcUpsertObjectResponse> {
+        const response = await this.upsertObjectsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

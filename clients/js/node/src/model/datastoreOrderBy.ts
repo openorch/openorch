@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from './models';
+import { DatastoreSortingType } from './datastoreSortingType';
 
 export class DatastoreOrderBy {
     /**
@@ -25,6 +26,10 @@ export class DatastoreOrderBy {
     * Randomize indicates that the results should be randomized instead of ordered by the `field` and `desc` criteria
     */
     'randomize'?: boolean;
+    /**
+    * Defines the type of sorting to apply (numeric, text, date, etc.)
+    */
+    'sortingType'?: DatastoreSortingType;
 
     static discriminator: string | undefined = undefined;
 
@@ -43,6 +48,11 @@ export class DatastoreOrderBy {
             "name": "randomize",
             "baseName": "randomize",
             "type": "boolean"
+        },
+        {
+            "name": "sortingType",
+            "baseName": "sortingType",
+            "type": "DatastoreSortingType"
         }    ];
 
     static getAttributeTypeMap() {
@@ -50,3 +60,5 @@ export class DatastoreOrderBy {
     }
 }
 
+export namespace DatastoreOrderBy {
+}
