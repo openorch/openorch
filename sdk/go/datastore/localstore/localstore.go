@@ -325,7 +325,7 @@ func (q *QueryBuilder) Find() ([]datastore.Row, error) {
 
 	if q.orderField != "" {
 		sort.Slice(result, func(i, j int) bool {
-			vi, vj := getField(result[i], "data."+q.orderField), getField(result[j], "data."+q.orderField)
+			vi, vj := getField(result[i], q.orderField), getField(result[j], q.orderField)
 			return compare(vi, vj, q.orderDesc)
 		})
 	}
@@ -333,7 +333,7 @@ func (q *QueryBuilder) Find() ([]datastore.Row, error) {
 	if len(q.after) > 0 {
 		startIndex := -1
 		for i, obj := range result {
-			vi := getField(obj, "data."+q.orderField)
+			vi := getField(obj, q.orderField)
 
 			if reflect.DeepEqual(toBaseType(vi), toBaseType(q.after[0])) {
 				startIndex = i + 1

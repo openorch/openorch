@@ -213,7 +213,8 @@ func (q *SQLQueryBuilder) buildFilters(start ...int) ([]string, []interface{}, e
 	}
 
 	if len(q.after) > 0 {
-		fieldName := q.store.fieldName(q.orderField)
+		fieldName := q.store.fieldName(q.orderField, castType(q.after[0]))
+
 		placeHolder := q.store.placeholder(paramCounter)
 		if q.orderDesc {
 			filters = append(filters, fmt.Sprintf("%s < %s", fieldName, placeHolder))
@@ -236,4 +237,22 @@ func lowercaseFirstChar(s string) string {
 	runes := []rune(s)
 	runes[0] = unicode.ToLower(runes[0])
 	return string(runes)
+}
+
+func castType(v any) string {
+	switch v.(type) {
+	case int, int8, int16, int32, int64, float32, float64:
+		return "numeric"
+	}
+
+	return ""
+}
+
+func castTypeSlice(v []any) string {
+	switch v[0].(type) {
+	case int, int8, int16, int32, int64, float32, float64:
+		return "numeric"
+	}
+
+	return ""
 }

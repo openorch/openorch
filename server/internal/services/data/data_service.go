@@ -42,12 +42,12 @@ func NewDataService(
 	authorizer sdk.Authorizer,
 	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
 ) (*DataService, error) {
-	store, err := datastoreFactory("genericSvcObjects", &dynamictypes.Object{})
+	store, err := datastoreFactory("dataSvcObjects", &dynamictypes.Object{})
 	if err != nil {
 		return nil, err
 	}
 	credentialStore, err := datastoreFactory(
-		"genericSvcCredentials",
+		"dataSvcCredentials",
 		&sdk.Credential{},
 	)
 	if err != nil {
@@ -69,8 +69,8 @@ func NewDataService(
 
 func (g *DataService) Start() error {
 	ctx := context.Background()
-	g.lock.Acquire(ctx, "model-svc-start")
-	defer g.lock.Release(ctx, "model-svc-start")
+	g.lock.Acquire(ctx, "data-svc-start")
+	defer g.lock.Release(ctx, "data-svc-start")
 
 	pk, _, err := g.clientFactory.Client(sdk.WithToken(g.token)).
 		UserSvcAPI.GetPublicKey(context.Background()).
@@ -94,19 +94,6 @@ func (g *DataService) Start() error {
 	return g.registerPermissions()
 }
 
-func (g *DataService) create(
-	request *dynamictypes.CreateObjectRequest,
-) error {
-	if request.Object.Id == "" {
-		request.Object.Id = sdk.Id(request.Object.Table)
-	}
-	if !strings.HasPrefix(request.Object.Id, request.Object.Table) {
-		return errors.New("wrong prefix")
-	}
-
-	return g.store.Create(request.Object)
-}
-
 func (g *DataService) createMany(
 	request *dynamictypes.CreateManyRequest,
 ) error {
@@ -122,38 +109,6 @@ func (g *DataService) createMany(
 	}
 
 	return g.store.CreateMany(objectIs)
-}
-
-func (g *DataService) upsert(
-	writers []string,
-	request *dynamictypes.UpsertObjectRequest,
-) error {
-	vI, found, err := g.store.Query(
-		datastore.Id(request.Object.Id),
-	).FindOne()
-	if err != nil {
-		return err
-	}
-
-	if found {
-		v := vI.(*dynamictypes.Object)
-
-		if !intersects(writers, v.Writers) {
-			return errors.New("unauthorized")
-		}
-
-		if request.Object.Readers == nil {
-			request.Object.Readers = v.Readers
-		}
-		if request.Object.Writers == nil {
-			request.Object.Writers = v.Writers
-		}
-		if request.Object.Deleters == nil {
-			request.Object.Deleters = v.Deleters
-		}
-	}
-
-	return g.store.Upsert(request.Object)
 }
 
 func intersects(slice1, slice2 []string) bool {

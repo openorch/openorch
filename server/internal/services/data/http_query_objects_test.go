@@ -71,8 +71,9 @@ func TestQueryObjects(t *testing.T) {
 			Query: &openapi.DatastoreQuery{
 				OrderBys: []openapi.DatastoreOrderBy{
 					{
-						Desc:  openapi.PtrBool(true),
-						Field: openapi.PtrString("key"),
+						Desc:        openapi.PtrBool(true),
+						Field:       openapi.PtrString("key"),
+						SortingType: openapi.SortingTypeNumeric.Ptr(),
 					},
 				},
 			},
@@ -84,6 +85,7 @@ func TestQueryObjects(t *testing.T) {
 
 		require.NoError(t, err)
 		require.Equal(t, 20, len(rsp.Objects))
+
 		require.Equal(t, float64(19), rsp.Objects[0].Data["key"])
 	})
 
@@ -93,7 +95,8 @@ func TestQueryObjects(t *testing.T) {
 			Query: &openapi.DatastoreQuery{
 				OrderBys: []openapi.DatastoreOrderBy{
 					{
-						Field: openapi.PtrString("key"),
+						Field:       openapi.PtrString("key"),
+						SortingType: openapi.SortingTypeNumeric.Ptr(),
 					},
 				},
 			},
@@ -114,7 +117,8 @@ func TestQueryObjects(t *testing.T) {
 			Query: &openapi.DatastoreQuery{
 				OrderBys: []openapi.DatastoreOrderBy{
 					{
-						Field: openapi.PtrString("key"),
+						Field:       openapi.PtrString("key"),
+						SortingType: openapi.SortingTypeNumeric.Ptr(),
 					},
 				},
 				Limit: openapi.PtrInt32(5),
@@ -136,7 +140,8 @@ func TestQueryObjects(t *testing.T) {
 			Query: &openapi.DatastoreQuery{
 				OrderBys: []openapi.DatastoreOrderBy{
 					{
-						Field: openapi.PtrString("key"),
+						Field:       openapi.PtrString("key"),
+						SortingType: openapi.SortingTypeNumeric.Ptr(),
 					},
 				},
 				Limit:     openapi.PtrInt32(5),
@@ -159,8 +164,9 @@ func TestQueryObjects(t *testing.T) {
 			Query: &openapi.DatastoreQuery{
 				OrderBys: []openapi.DatastoreOrderBy{
 					{
-						Field: openapi.PtrString("key"),
-						Desc:  openapi.PtrBool(true),
+						Field:       openapi.PtrString("key"),
+						Desc:        openapi.PtrBool(true),
+						SortingType: openapi.SortingTypeNumeric.Ptr(),
 					},
 				},
 				Limit:     openapi.PtrInt32(5),

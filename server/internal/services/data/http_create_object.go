@@ -86,7 +86,14 @@ func (g *DataService) Create(
 		return
 	}
 
-	w.Write([]byte(`{}`))
+	bs, _ := json.Marshal(data.CreateObjectResponse{
+		Object: &data.Object{
+			Id:    req.Object.Id,
+			Table: req.Object.GetId(),
+			Data:  req.Object.Data,
+		},
+	})
+	w.Write(bs)
 }
 
 func (g *DataService) createObject(

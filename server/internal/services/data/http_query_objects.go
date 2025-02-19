@@ -115,6 +115,8 @@ func (g *DataService) query(
 		return nil, errors.New("no table name")
 	}
 
+	prependDataInQuery(options)
+
 	filters := []datastore.Filter{}
 	if options.Query != nil {
 		filters = append(filters, options.Query.Filters...)
@@ -164,4 +166,29 @@ func (g *DataService) query(
 	}
 
 	return objects, nil
+}
+
+func prependDataInQuery(options data.QueryOptions) {
+	if options.Query == nil {
+		return
+	}
+
+	for i := range options.Query.Filters {
+		for k := range options.Query.Filters[i].Fields {
+			options.Query.Filters[i].Fields[k] = prependField(options.Query.Filters[i].Fields[k])
+		}
+	}
+
+	for i := range options.Query.OrderBys {
+		options.Query.OrderBys[i].Field = prependField(options.Query.OrderBys[i].Field)
+	}
+}
+
+func prependField(field string) string {
+	switch field {
+	case "id", "readers", "writers", "deleters", "table":
+		return field
+	}
+
+	return "data." + field
 }

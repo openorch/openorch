@@ -1284,7 +1284,7 @@
                         "BearerAuth": []
                     }
                 ],
-                "description": "Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.",
+                "description": "Deletes all objects matchin the provided filters.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1294,7 +1294,7 @@
                 "tags": [
                     "Data Svc"
                 ],
-                "summary": "Delete a Generic Object",
+                "summary": "Delete Objects",
                 "operationId": "deleteObjects",
                 "parameters": [
                     {
@@ -1342,7 +1342,7 @@
                         "BearerAuth": []
                     }
                 ],
-                "description": "Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.",
+                "description": "Update fields of objects that match the given filters using the provided object.\nAny fields not included in the incoming object will remain unchanged.",
                 "consumes": [
                     "application/json"
                 ],
@@ -1361,7 +1361,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/data_svc.UpdateObjectRequest"
+                            "$ref": "#/definitions/data_svc.UpdateObjectsRequest"
                         }
                     }
                 ],
@@ -1369,7 +1369,65 @@
                     "200": {
                         "description": "Successful update of objects",
                         "schema": {
-                            "$ref": "#/definitions/data_svc.UpdateObjectResponse"
+                            "$ref": "#/definitions/data_svc.UpdateObjectsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/data_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/data-svc/objects/upsert": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Upserts objects by ids.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Data Svc"
+                ],
+                "summary": "Upsert Objects",
+                "operationId": "upsertObjects",
+                "parameters": [
+                    {
+                        "description": "Upsert request payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_svc.UpsertObjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful upsert of objects",
+                        "schema": {
+                            "$ref": "#/definitions/data_svc.UpsertObjectResponse"
                         }
                     },
                     "400": {
@@ -5794,24 +5852,30 @@
                 }
             }
         },
-        "data_svc.UpdateObjectRequest": {
+        "data_svc.UpdateObjectsRequest": {
             "type": "object",
             "properties": {
                 "filters": {
+                    "description": "Filters to determine which objects will be updated.\nOnly objects matching all filters will be modified.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/datastore.Filter"
                     }
                 },
                 "object": {
-                    "$ref": "#/definitions/data_svc.Object"
+                    "description": "The object containing the fields to update in matching objects.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/data_svc.Object"
+                        }
+                    ]
                 },
                 "table": {
                     "type": "string"
                 }
             }
         },
-        "data_svc.UpdateObjectResponse": {
+        "data_svc.UpdateObjectsResponse": {
             "type": "object"
         },
         "data_svc.UpsertObjectRequest": {
@@ -5879,6 +5943,14 @@
                 "randomize": {
                     "description": "Randomize indicates that the results should be randomized instead of ordered by the `field` and `desc` criteria",
                     "type": "boolean"
+                },
+                "sortingType": {
+                    "description": "Defines the type of sorting to apply (numeric, text, date, etc.)",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/datastore.SortingType"
+                        }
+                    ]
                 }
             }
         },
@@ -5912,6 +5984,21 @@
                     }
                 }
             }
+        },
+        "datastore.SortingType": {
+            "type": "string",
+            "enum": [
+                "",
+                "numeric",
+                "text",
+                "date"
+            ],
+            "x-enum-varnames": [
+                "SortingTypeDefault",
+                "SortingTypeNumeric",
+                "SortingTypeText",
+                "SortingTypeDate"
+            ]
         },
         "deploy_svc.AutoScalingConfig": {
             "type": "object",

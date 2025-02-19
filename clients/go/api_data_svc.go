@@ -38,9 +38,9 @@ type DataSvcAPI interface {
 	CreateObjectExecute(r ApiCreateObjectRequest) (*DataSvcCreateObjectResponse, *http.Response, error)
 
 	/*
-	DeleteObjects Delete a Generic Object
+	DeleteObjects Delete Objects
 
-	Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+	Deletes all objects matchin the provided filters.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDeleteObjectsRequest
@@ -72,7 +72,8 @@ Use helper functions in your respective client library such as condition constru
 	/*
 	UpdateObjects Update Objects
 
-	Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+	Update fields of objects that match the given filters using the provided object.
+Any fields not included in the incoming object will remain unchanged.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiUpdateObjectsRequest
@@ -97,6 +98,20 @@ Use helper functions in your respective client library such as condition constru
 	// UpsertObjectExecute executes the request
 	//  @return DataSvcUpsertObjectResponse
 	UpsertObjectExecute(r ApiUpsertObjectRequest) (*DataSvcUpsertObjectResponse, *http.Response, error)
+
+	/*
+	UpsertObjects Upsert Objects
+
+	Upserts objects by ids.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpsertObjectsRequest
+	*/
+	UpsertObjects(ctx context.Context) ApiUpsertObjectsRequest
+
+	// UpsertObjectsExecute executes the request
+	//  @return DataSvcUpsertObjectResponse
+	UpsertObjectsExecute(r ApiUpsertObjectsRequest) (*DataSvcUpsertObjectResponse, *http.Response, error)
 }
 
 // DataSvcAPIService DataSvcAPI service
@@ -276,9 +291,9 @@ func (r ApiDeleteObjectsRequest) Execute() (map[string]interface{}, *http.Respon
 }
 
 /*
-DeleteObjects Delete a Generic Object
+DeleteObjects Delete Objects
 
-Removes a dynamic object from the system based on the provided conditions. Requires authorization and user authentication.
+Deletes all objects matchin the provided filters.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDeleteObjectsRequest
@@ -577,11 +592,11 @@ func (a *DataSvcAPIService) QueryExecute(r ApiQueryRequest) (*DataSvcQueryRespon
 type ApiUpdateObjectsRequest struct {
 	ctx context.Context
 	ApiService DataSvcAPI
-	body *DataSvcUpdateObjectRequest
+	body *DataSvcUpdateObjectsRequest
 }
 
 // Update request payload
-func (r ApiUpdateObjectsRequest) Body(body DataSvcUpdateObjectRequest) ApiUpdateObjectsRequest {
+func (r ApiUpdateObjectsRequest) Body(body DataSvcUpdateObjectsRequest) ApiUpdateObjectsRequest {
 	r.body = &body
 	return r
 }
@@ -593,7 +608,8 @@ func (r ApiUpdateObjectsRequest) Execute() (map[string]interface{}, *http.Respon
 /*
 UpdateObjects Update Objects
 
-Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+Update fields of objects that match the given filters using the provided object.
+Any fields not included in the incoming object will remain unchanged.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiUpdateObjectsRequest
@@ -782,6 +798,163 @@ func (a *DataSvcAPIService) UpsertObjectExecute(r ApiUpsertObjectRequest) (*Data
 
 	localVarPath := localBasePath + "/data-svc/object/{objectId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"objectId"+"}", url.PathEscape(parameterValueToString(r.objectId, "objectId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["BearerAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v DataSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DataSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v DataSvcErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpsertObjectsRequest struct {
+	ctx context.Context
+	ApiService DataSvcAPI
+	body *DataSvcUpsertObjectRequest
+}
+
+// Upsert request payload
+func (r ApiUpsertObjectsRequest) Body(body DataSvcUpsertObjectRequest) ApiUpsertObjectsRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiUpsertObjectsRequest) Execute() (*DataSvcUpsertObjectResponse, *http.Response, error) {
+	return r.ApiService.UpsertObjectsExecute(r)
+}
+
+/*
+UpsertObjects Upsert Objects
+
+Upserts objects by ids.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpsertObjectsRequest
+*/
+func (a *DataSvcAPIService) UpsertObjects(ctx context.Context) ApiUpsertObjectsRequest {
+	return ApiUpsertObjectsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DataSvcUpsertObjectResponse
+func (a *DataSvcAPIService) UpsertObjectsExecute(r ApiUpsertObjectsRequest) (*DataSvcUpsertObjectResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DataSvcUpsertObjectResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataSvcAPIService.UpsertObjects")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/data-svc/objects/upsert"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
