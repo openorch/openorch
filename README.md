@@ -17,7 +17,7 @@
   </div>
 </p>
 
-Originally built as a local ChatGPT alternative, OpenOrch quickly evolved into a powerful, language-agnostic microservices platform for AI application development.
+Originally built as an on-premise ChatGPT alternative, OpenOrch quickly evolved into a powerful, language-agnostic microservices platform for AI application development.
 
 ## Why
 
