@@ -1,6 +1,6 @@
 {
   "name": "@openorch/node",
-  "version": "0.3.0-rc.20",
+  "version": "0.3.0-rc.21",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
