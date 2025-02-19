@@ -102,7 +102,7 @@ export class DataService {
 		table: string,
 		filters: DatastoreFilter[],
 		object: DataObject
-	): Promise<Object> {
+	): Promise<object> {
 		const request: UpdateObjectsRequest = {
 			table: table,
 			filters: filters,
