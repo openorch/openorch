@@ -18,8 +18,8 @@ import {
 	DataSvcQueryRequest as QueryRequest,
 	DataSvcQueryResponse as QueryResponse,
 	DataSvcObject as DataObject,
-	DataSvcUpdateObjectRequest as UpdateObjectRequest,
-	DataSvcCreateObjectResponse as UpdateObjectResponse,
+	DataSvcUpdateObjectsRequest as UpdateObjectsRequest,
+	// DataSvcUpdateObjectsResponse as UpdateObjectsResponse,
 	DataSvcUpsertObjectRequest as UpsertObjectRequest,
 	DataSvcCreateObjectResponse,
 	DataSvcUpsertObjectResponse,
@@ -80,7 +80,7 @@ export class DataService {
 			},
 		};
 
-		return this.dataService.query({ body: request });
+		return this.dataService.queryObjects({ body: request });
 	}
 
 	async upsert(
@@ -102,8 +102,8 @@ export class DataService {
 		table: string,
 		filters: DatastoreFilter[],
 		object: DataObject
-	): Promise<UpdateObjectResponse> {
-		const request: UpdateObjectRequest = {
+	): Promise<Object> {
+		const request: UpdateObjectsRequest = {
 			table: table,
 			filters: filters,
 			object: object,
