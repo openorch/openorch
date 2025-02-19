@@ -107,4 +107,73 @@ func TestQueryObjects(t *testing.T) {
 		require.Equal(t, 20, len(rsp.Objects))
 		require.Equal(t, float64(0), rsp.Objects[0].Data["key"])
 	})
+
+	t.Run("limit", func(t *testing.T) {
+		req := openapi.DataSvcQueryRequest{
+			Table: &table1,
+			Query: &openapi.DatastoreQuery{
+				OrderBys: []openapi.DatastoreOrderBy{
+					{
+						Field: openapi.PtrString("key"),
+					},
+				},
+				Limit: openapi.PtrInt32(5),
+			},
+		}
+
+		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
+
+		require.NoError(t, err)
+		require.Equal(t, 5, len(rsp.Objects))
+		require.Equal(t, float64(0), rsp.Objects[0].Data["key"])
+	})
+
+	t.Run("limit, after", func(t *testing.T) {
+		req := openapi.DataSvcQueryRequest{
+			Table: &table1,
+			Query: &openapi.DatastoreQuery{
+				OrderBys: []openapi.DatastoreOrderBy{
+					{
+						Field: openapi.PtrString("key"),
+					},
+				},
+				Limit:     openapi.PtrInt32(5),
+				JsonAfter: openapi.PtrString("[4]"),
+			},
+		}
+
+		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
+
+		require.NoError(t, err)
+		require.Equal(t, 5, len(rsp.Objects))
+		require.Equal(t, float64(5), rsp.Objects[0].Data["key"])
+	})
+
+	t.Run("limit, after desc", func(t *testing.T) {
+		req := openapi.DataSvcQueryRequest{
+			Table: &table1,
+			Query: &openapi.DatastoreQuery{
+				OrderBys: []openapi.DatastoreOrderBy{
+					{
+						Field: openapi.PtrString("key"),
+						Desc:  openapi.PtrBool(true),
+					},
+				},
+				Limit:     openapi.PtrInt32(5),
+				JsonAfter: openapi.PtrString("[15]"),
+			},
+		}
+
+		rsp, _, err := client1.DataSvcAPI.Query(context.Background()).
+			Body(req).
+			Execute()
+
+		require.NoError(t, err)
+		require.Equal(t, 5, len(rsp.Objects))
+		require.Equal(t, float64(14), rsp.Objects[0].Data["key"])
+	})
 }

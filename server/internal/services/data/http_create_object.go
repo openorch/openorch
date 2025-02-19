@@ -14,7 +14,9 @@ package dynamicservice
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
+	"strings"
 
 	sdk "github.com/openorch/openorch/sdk/go"
 	data "github.com/openorch/openorch/server/internal/services/data/types"
@@ -77,7 +79,7 @@ func (g *DataService) Create(
 		}
 	}
 
-	err = g.create(req)
+	err = g.createObject(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -85,4 +87,17 @@ func (g *DataService) Create(
 	}
 
 	w.Write([]byte(`{}`))
+}
+
+func (g *DataService) createObject(
+	request *data.CreateObjectRequest,
+) error {
+	if request.Object.Id == "" {
+		request.Object.Id = sdk.Id(request.Object.Table)
+	}
+	if !strings.HasPrefix(request.Object.Id, request.Object.Table) {
+		return errors.New("wrong prefix")
+	}
+
+	return g.store.Create(request.Object)
 }

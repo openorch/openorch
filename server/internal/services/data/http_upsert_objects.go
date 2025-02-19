@@ -17,23 +17,24 @@ import (
 	"net/http"
 
 	sdk "github.com/openorch/openorch/sdk/go"
+	"github.com/openorch/openorch/sdk/go/datastore"
 	data "github.com/openorch/openorch/server/internal/services/data/types"
 )
 
 // @ID upsertObjects
-// @Summary Update Objects
-// @Description Updates objects in a specified table based on provided conditions. Requires authorization and user authentication.
+// @Summary Upsert Objects
+// @Description Upserts objects by ids.
 // @Tags Data Svc
 // @Accept json
 // @Produce json
-// @Param body body data.UpdateObjectRequest true "Update request payload"
-// @Success 200 {object} data.UpdateObjectResponse "Successful upsert of objects"
+// @Param body body data.UpsertObjectRequest true "Upsert request payload"
+// @Success 200 {object} data.UpsertObjectResponse "Successful upsert of objects"
 // @Failure 400 {object} data.ErrorResponse "Invalid JSON"
 // @Failure 401 {object} data.ErrorResponse "Unauthorized"
 // @Failure 500 {object} data.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /data-svc/objects/upsert [put]
-func (g *DataService) UpsertObjects(
+func (g *DataService) SaveObjects(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -52,7 +53,7 @@ func (g *DataService) UpsertObjects(
 		return
 	}
 
-	req := &data.UpsertManyRequest{}
+	req := &data.UpsertObjectsRequest{}
 	err = json.NewDecoder(r.Body).Decode(req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -61,7 +62,7 @@ func (g *DataService) UpsertObjects(
 	}
 	defer r.Body.Close()
 
-	err = g.upsertMany(req)
+	err = g.upsertObjects(req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -69,4 +70,14 @@ func (g *DataService) UpsertObjects(
 	}
 
 	w.Write([]byte(`{}`))
+}
+
+func (g *DataService) upsertObjects(
+	request *data.UpsertObjectsRequest,
+) error {
+	objectIs := []datastore.Row{}
+	for _, object := range request.Objects {
+		objectIs = append(objectIs, object)
+	}
+	return g.store.UpsertMany(objectIs)
 }

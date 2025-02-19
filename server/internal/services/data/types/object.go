@@ -145,3 +145,11 @@ type UpdateObjectsRequest struct {
 
 type UpdateObjectsResponse struct {
 }
+
+type UpsertObjectsRequest struct {
+	Table string `json:"table,omitempty"`
+
+	Objects []Object `json:"objects,omitempty"`
+}
+
+type UpsertObjectsResponse struct{}

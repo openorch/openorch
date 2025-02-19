@@ -88,6 +88,8 @@ The Secret Svc, like most things in OpenOrch, is designed to be simple to reason
 
 Instead of the OpenOrch injecting environment variables into service containers when they are deployed, the services are left to their own devices to read secrets from the Secret Svc through normal service calls, using their credentials.
 
+This approach also works for services that you deploy manually (e.g., Kubernetes, Docker Compose) rather than through OpenOrch.
+
 ### Encryption at rest and transit
 
 All data is encrypted using the encryption key provided by the envar `OPENORCH_ENCRYPTION_KEY` (see Todo section).
@@ -105,12 +107,12 @@ $ oo secret encrypt example-key example-value
 ```
 
 ```yaml
-checksum: 45a3b25f
-checksumAlgorithm: CRC32
+id: "secr_eR6LbYOBK2"
+key: "example-key"
+value: "62bQMQf5wPMrAsJ7+bcZpKBMtA7Ap7DF6xZaioq9jU0="
 encrypted: true
-id: secr_eR6LbYOBK2
-key: example-key
-value: 62bQMQf5wPMrAsJ7+bcZpKBMtA7Ap7DF6xZaioq9jU0=
+checksum: "45a3b25f"
+checksumAlgorithm: "CRC32"
 ```
 
 Save the output to a file and, in your continuous delivery pipeline, apply it:

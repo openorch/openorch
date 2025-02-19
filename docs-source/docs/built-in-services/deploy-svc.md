@@ -13,6 +13,10 @@ The deploy service is responsible of launching containers on whatever infrastruc
 
 > This page provides a high-level overview of `Deploy Svc`. For detailed information, refer to the [Deploy Svc API documentation](/docs/openorch/save-deployment).
 
+## Warning
+
+Deployment capabilities are unfinished. This section is only for contributors. Deploy your services manually for now.
+
 ## Types of services
 
 On OpenOrch, services generally fall into the following categories:
