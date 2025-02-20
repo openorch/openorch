@@ -9,26 +9,26 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class ContainerSvcDockerInfo {
+export class ContainerSvcDaemonInfoResponse {
     static getAttributeTypeMap() {
-        return ContainerSvcDockerInfo.attributeTypeMap;
+        return ContainerSvcDaemonInfoResponse.attributeTypeMap;
     }
 }
-ContainerSvcDockerInfo.discriminator = undefined;
-ContainerSvcDockerInfo.attributeTypeMap = [
+ContainerSvcDaemonInfoResponse.discriminator = undefined;
+ContainerSvcDaemonInfoResponse.attributeTypeMap = [
     {
-        "name": "dockerDaemonAddress",
-        "baseName": "dockerDaemonAddress",
+        "name": "address",
+        "baseName": "address",
         "type": "string"
+    },
+    {
+        "name": "available",
+        "baseName": "available",
+        "type": "boolean"
     },
     {
         "name": "error",
         "baseName": "error",
         "type": "string"
-    },
-    {
-        "name": "hasDocker",
-        "baseName": "hasDocker",
-        "type": "boolean"
     }
 ];

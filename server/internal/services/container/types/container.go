@@ -16,16 +16,6 @@ type RunInfo struct {
 	PortNumber          int
 }
 
-type GetInfoResponse struct {
-	Info *DockerInfo `json:"info"`
-}
-
-type DockerInfo struct {
-	HasDocker           bool    `json:"hasDocker"`
-	DockerDaemonAddress *string `json:"dockerDaemonAddress,omitempty"`
-	Error               *string `json:"error,omitempty"`
-}
-
 type RunContainerRequest struct {
 	// Image is the Docker image to use for the container
 	Image string `json:"image" example:"nginx:latest" binding:"required"`

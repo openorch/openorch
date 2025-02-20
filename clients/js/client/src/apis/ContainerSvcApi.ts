@@ -17,10 +17,10 @@ import * as runtime from '../runtime';
 import type {
   ContainerSvcBuildImageRequest,
   ContainerSvcContainerIsRunningResponse,
+  ContainerSvcDaemonInfoResponse,
   ContainerSvcErrorResponse,
   ContainerSvcGetContainerSummaryResponse,
   ContainerSvcGetHostResponse,
-  ContainerSvcGetInfoResponse,
   ContainerSvcImagePullableResponse,
   ContainerSvcRunContainerRequest,
   ContainerSvcRunContainerResponse,
@@ -31,14 +31,14 @@ import {
     ContainerSvcBuildImageRequestToJSON,
     ContainerSvcContainerIsRunningResponseFromJSON,
     ContainerSvcContainerIsRunningResponseToJSON,
+    ContainerSvcDaemonInfoResponseFromJSON,
+    ContainerSvcDaemonInfoResponseToJSON,
     ContainerSvcErrorResponseFromJSON,
     ContainerSvcErrorResponseToJSON,
     ContainerSvcGetContainerSummaryResponseFromJSON,
     ContainerSvcGetContainerSummaryResponseToJSON,
     ContainerSvcGetHostResponseFromJSON,
     ContainerSvcGetHostResponseToJSON,
-    ContainerSvcGetInfoResponseFromJSON,
-    ContainerSvcGetInfoResponseToJSON,
     ContainerSvcImagePullableResponseFromJSON,
     ContainerSvcImagePullableResponseToJSON,
     ContainerSvcRunContainerRequestFromJSON,
@@ -120,6 +120,38 @@ export class ContainerSvcApi extends runtime.BaseAPI {
      */
     async buildImage(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.buildImageRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    async containerDaemonInfoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContainerSvcDaemonInfoResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/container-svc/daemon/info`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ContainerSvcDaemonInfoResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    async containerDaemonInfo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcDaemonInfoResponse> {
+        const response = await this.containerDaemonInfoRaw(initOverrides);
         return await response.value();
     }
 
@@ -236,38 +268,6 @@ export class ContainerSvcApi extends runtime.BaseAPI {
      */
     async getHost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcGetHostResponse> {
         const response = await this.getHostRaw(initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    async getInfoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContainerSvcGetInfoResponse>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // BearerAuth authentication
-        }
-
-        const response = await this.request({
-            path: `/container-svc/info`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ContainerSvcGetInfoResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    async getInfo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcGetInfoResponse> {
-        const response = await this.getInfoRaw(initOverrides);
         return await response.value();
     }
 

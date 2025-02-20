@@ -12,9 +12,9 @@
 import http from 'http';
 import { ContainerSvcBuildImageRequest } from '../model/containerSvcBuildImageRequest';
 import { ContainerSvcContainerIsRunningResponse } from '../model/containerSvcContainerIsRunningResponse';
+import { ContainerSvcDaemonInfoResponse } from '../model/containerSvcDaemonInfoResponse';
 import { ContainerSvcGetContainerSummaryResponse } from '../model/containerSvcGetContainerSummaryResponse';
 import { ContainerSvcGetHostResponse } from '../model/containerSvcGetHostResponse';
-import { ContainerSvcGetInfoResponse } from '../model/containerSvcGetInfoResponse';
 import { ContainerSvcImagePullableResponse } from '../model/containerSvcImagePullableResponse';
 import { ContainerSvcRunContainerRequest } from '../model/containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from '../model/containerSvcRunContainerResponse';
@@ -56,6 +56,18 @@ export declare class ContainerSvcApi {
         body: object;
     }>;
     /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * @summary Get Container Daemon Information
+     */
+    containerDaemonInfo(options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: ContainerSvcDaemonInfoResponse;
+    }>;
+    /**
      * Check if a Docker container is running, identified by hash or name.
      * @summary Check If a Container Is Running
      * @param hash Container Hash
@@ -95,18 +107,6 @@ export declare class ContainerSvcApi {
     }): Promise<{
         response: http.IncomingMessage;
         body: ContainerSvcGetHostResponse;
-    }>;
-    /**
-     * Retrieve detailed information about the Container service
-     * @summary Get Docker Service Information
-     */
-    getInfo(options?: {
-        headers: {
-            [name: string]: string;
-        };
-    }): Promise<{
-        response: http.IncomingMessage;
-        body: ContainerSvcGetInfoResponse;
     }>;
     /**
      * Check if an image exists on in the container registry and is pullable.

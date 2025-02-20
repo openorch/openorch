@@ -21,7 +21,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as runtime from '../runtime';
-import { ContainerSvcBuildImageRequestToJSON, ContainerSvcContainerIsRunningResponseFromJSON, ContainerSvcGetContainerSummaryResponseFromJSON, ContainerSvcGetHostResponseFromJSON, ContainerSvcGetInfoResponseFromJSON, ContainerSvcImagePullableResponseFromJSON, ContainerSvcRunContainerRequestToJSON, ContainerSvcRunContainerResponseFromJSON, ContainerSvcStopContainerRequestToJSON, } from '../models/index';
+import { ContainerSvcBuildImageRequestToJSON, ContainerSvcContainerIsRunningResponseFromJSON, ContainerSvcDaemonInfoResponseFromJSON, ContainerSvcGetContainerSummaryResponseFromJSON, ContainerSvcGetHostResponseFromJSON, ContainerSvcImagePullableResponseFromJSON, ContainerSvcRunContainerRequestToJSON, ContainerSvcRunContainerResponseFromJSON, ContainerSvcStopContainerRequestToJSON, } from '../models/index';
 /**
  *
  */
@@ -58,6 +58,36 @@ export class ContainerSvcApi extends runtime.BaseAPI {
     buildImage(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.buildImageRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    containerDaemonInfoRaw(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queryParameters = {};
+            const headerParameters = {};
+            if (this.configuration && this.configuration.apiKey) {
+                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
+            }
+            const response = yield this.request({
+                path: `/container-svc/daemon/info`,
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => ContainerSvcDaemonInfoResponseFromJSON(jsonValue));
+        });
+    }
+    /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    containerDaemonInfo(initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.containerDaemonInfoRaw(initOverrides);
             return yield response.value();
         });
     }
@@ -163,36 +193,6 @@ export class ContainerSvcApi extends runtime.BaseAPI {
     getHost(initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.getHostRaw(initOverrides);
-            return yield response.value();
-        });
-    }
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    getInfoRaw(initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const queryParameters = {};
-            const headerParameters = {};
-            if (this.configuration && this.configuration.apiKey) {
-                headerParameters["Authorization"] = yield this.configuration.apiKey("Authorization"); // BearerAuth authentication
-            }
-            const response = yield this.request({
-                path: `/container-svc/info`,
-                method: 'GET',
-                headers: headerParameters,
-                query: queryParameters,
-            }, initOverrides);
-            return new runtime.JSONApiResponse(response, (jsonValue) => ContainerSvcGetInfoResponseFromJSON(jsonValue));
-        });
-    }
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    getInfo(initOverrides) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.getInfoRaw(initOverrides);
             return yield response.value();
         });
     }

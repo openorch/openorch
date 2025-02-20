@@ -92,10 +92,10 @@ Class | Method | HTTP request | Description
 *ConfigSvcAPI* | [**GetConfig**](docs/ConfigSvcAPI.md#getconfig) | **Get** /config-svc/config | Get Config
 *ConfigSvcAPI* | [**SaveConfig**](docs/ConfigSvcAPI.md#saveconfig) | **Put** /config-svc/config | Save Config
 *ContainerSvcAPI* | [**BuildImage**](docs/ContainerSvcAPI.md#buildimage) | **Put** /container-svc/image | Build an Image
+*ContainerSvcAPI* | [**ContainerDaemonInfo**](docs/ContainerSvcAPI.md#containerdaemoninfo) | **Get** /container-svc/daemon/info | Get Container Daemon Information
 *ContainerSvcAPI* | [**ContainerIsRunning**](docs/ContainerSvcAPI.md#containerisrunning) | **Get** /container-svc/container/is-running | Check If a Container Is Running
 *ContainerSvcAPI* | [**ContainerSummary**](docs/ContainerSvcAPI.md#containersummary) | **Get** /container-svc/container/summary | Get Container Summary
 *ContainerSvcAPI* | [**GetHost**](docs/ContainerSvcAPI.md#gethost) | **Get** /container-svc/host | Get Container Host
-*ContainerSvcAPI* | [**GetInfo**](docs/ContainerSvcAPI.md#getinfo) | **Get** /container-svc/info | Get Docker Service Information
 *ContainerSvcAPI* | [**ImagePullable**](docs/ContainerSvcAPI.md#imagepullable) | **Get** /container-svc/image/{imageName}/pullable | Check if Container Image is Pullable
 *ContainerSvcAPI* | [**RunContainer**](docs/ContainerSvcAPI.md#runcontainer) | **Put** /container-svc/container | Run a Container
 *ContainerSvcAPI* | [**StopContainer**](docs/ContainerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
@@ -196,11 +196,10 @@ Class | Method | HTTP request | Description
  - [ConfigSvcSaveConfigRequest](docs/ConfigSvcSaveConfigRequest.md)
  - [ContainerSvcBuildImageRequest](docs/ContainerSvcBuildImageRequest.md)
  - [ContainerSvcContainerIsRunningResponse](docs/ContainerSvcContainerIsRunningResponse.md)
- - [ContainerSvcDockerInfo](docs/ContainerSvcDockerInfo.md)
+ - [ContainerSvcDaemonInfoResponse](docs/ContainerSvcDaemonInfoResponse.md)
  - [ContainerSvcErrorResponse](docs/ContainerSvcErrorResponse.md)
  - [ContainerSvcGetContainerSummaryResponse](docs/ContainerSvcGetContainerSummaryResponse.md)
  - [ContainerSvcGetHostResponse](docs/ContainerSvcGetHostResponse.md)
- - [ContainerSvcGetInfoResponse](docs/ContainerSvcGetInfoResponse.md)
  - [ContainerSvcImagePullableResponse](docs/ContainerSvcImagePullableResponse.md)
  - [ContainerSvcRunContainerOptions](docs/ContainerSvcRunContainerOptions.md)
  - [ContainerSvcRunContainerRequest](docs/ContainerSvcRunContainerRequest.md)

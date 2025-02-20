@@ -69,6 +69,36 @@ func (mr *MockContainerSvcAPIMockRecorder) BuildImageExecute(r any) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BuildImageExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).BuildImageExecute), r)
 }
 
+// ContainerDaemonInfo mocks base method.
+func (m *MockContainerSvcAPI) ContainerDaemonInfo(ctx context.Context) ApiContainerDaemonInfoRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ContainerDaemonInfo", ctx)
+	ret0, _ := ret[0].(ApiContainerDaemonInfoRequest)
+	return ret0
+}
+
+// ContainerDaemonInfo indicates an expected call of ContainerDaemonInfo.
+func (mr *MockContainerSvcAPIMockRecorder) ContainerDaemonInfo(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerDaemonInfo", reflect.TypeOf((*MockContainerSvcAPI)(nil).ContainerDaemonInfo), ctx)
+}
+
+// ContainerDaemonInfoExecute mocks base method.
+func (m *MockContainerSvcAPI) ContainerDaemonInfoExecute(r ApiContainerDaemonInfoRequest) (*ContainerSvcDaemonInfoResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ContainerDaemonInfoExecute", r)
+	ret0, _ := ret[0].(*ContainerSvcDaemonInfoResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ContainerDaemonInfoExecute indicates an expected call of ContainerDaemonInfoExecute.
+func (mr *MockContainerSvcAPIMockRecorder) ContainerDaemonInfoExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerDaemonInfoExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ContainerDaemonInfoExecute), r)
+}
+
 // ContainerIsRunning mocks base method.
 func (m *MockContainerSvcAPI) ContainerIsRunning(ctx context.Context) ApiContainerIsRunningRequest {
 	m.ctrl.T.Helper()
@@ -157,36 +187,6 @@ func (m *MockContainerSvcAPI) GetHostExecute(r ApiGetHostRequest) (*ContainerSvc
 func (mr *MockContainerSvcAPIMockRecorder) GetHostExecute(r any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHostExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetHostExecute), r)
-}
-
-// GetInfo mocks base method.
-func (m *MockContainerSvcAPI) GetInfo(ctx context.Context) ApiGetInfoRequest {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInfo", ctx)
-	ret0, _ := ret[0].(ApiGetInfoRequest)
-	return ret0
-}
-
-// GetInfo indicates an expected call of GetInfo.
-func (mr *MockContainerSvcAPIMockRecorder) GetInfo(ctx any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInfo", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetInfo), ctx)
-}
-
-// GetInfoExecute mocks base method.
-func (m *MockContainerSvcAPI) GetInfoExecute(r ApiGetInfoRequest) (*ContainerSvcGetInfoResponse, *http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetInfoExecute", r)
-	ret0, _ := ret[0].(*ContainerSvcGetInfoResponse)
-	ret1, _ := ret[1].(*http.Response)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// GetInfoExecute indicates an expected call of GetInfoExecute.
-func (mr *MockContainerSvcAPIMockRecorder) GetInfoExecute(r any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetInfoExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).GetInfoExecute), r)
 }
 
 // ImagePullable mocks base method.
