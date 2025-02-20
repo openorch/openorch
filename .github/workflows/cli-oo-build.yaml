@@ -27,3 +27,7 @@ jobs:
         run: |
           go build
         working-directory: ./cli/oo
+
+      - name: Insall current branch
+        run: |
+          go get github.com/openorch/openorch/cli/oo@${{ github.sha }}
