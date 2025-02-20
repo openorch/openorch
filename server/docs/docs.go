@@ -5345,6 +5345,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "msg_emSOPlW58o"
                 },
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
                 "text": {
                     "description": "Text content of the message eg. \"Hi, what's up?\"",
                     "type": "string"

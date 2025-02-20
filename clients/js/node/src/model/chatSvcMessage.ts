@@ -19,6 +19,7 @@ export class ChatSvcMessage {
     */
     'fileIds'?: Array<string>;
     'id': string;
+    'meta'?: { [key: string]: any; };
     /**
     * Text content of the message eg. \"Hi, what\'s up?\"
     */
@@ -50,6 +51,11 @@ export class ChatSvcMessage {
             "name": "id",
             "baseName": "id",
             "type": "string"
+        },
+        {
+            "name": "meta",
+            "baseName": "meta",
+            "type": "{ [key: string]: any; }"
         },
         {
             "name": "text",

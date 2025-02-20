@@ -16,6 +16,9 @@ export declare class ChatSvcMessage {
     */
     'fileIds'?: Array<string>;
     'id': string;
+    'meta'?: {
+        [key: string]: any;
+    };
     /**
     * Text content of the message eg. \"Hi, what\'s up?\"
     */

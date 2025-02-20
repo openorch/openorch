@@ -30,6 +30,10 @@ import {
 } from 'ionicons/icons';
 
 import { environment } from '../../../../environments/environment';
+import { ModelService } from '../../../../app/services/model.service';
+import {
+	ModelSvcModel as Model,
+} from '@openorch/client';
 
 @Component({
 	selector: 'app-message',
@@ -52,7 +56,8 @@ export class MessageComponent {
 		private promptService: PromptService,
 		public userService: UserService,
 		private server: ServerService,
-		public mobile: MobileService
+		public mobile: MobileService,
+		private modelService: ModelService,
 	) {
 		addIcons({
 			'person-circle-outline': personCircleOutline,
@@ -62,6 +67,8 @@ export class MessageComponent {
 		});
 	}
 	hasAsset = false;
+	models: Model[] = [];
+	currentModelName: string | undefined = "";
 
 	@Input() message!: Message;
 	@Input() streaming: boolean = false;
@@ -69,10 +76,19 @@ export class MessageComponent {
 
 	@Output() onCopyToClipboard = new EventEmitter<string>();
 
-	ngOnInit() {
+	async ngOnInit() {
+		this.models = await this.modelService.getModels();
+		//this.getCurrentModelName();
 		if (this.message?.fileIds?.length) {
 			this.hasAsset = true;
 		}
+	}
+
+	getCurrentModelName(){
+	const currentModel= this.models.find((e)=>{
+			e.id == this.message.meta!.modelId
+		})
+	this.currentModelName = currentModel?.name	
 	}
 
 	async regenerateAnswer(message: Message) {
