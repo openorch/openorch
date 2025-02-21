@@ -34,6 +34,14 @@ export interface ChatSvcMessage {
      */
     id: string;
     /**
+     *
+     * @type {{ [key: string]: any; }}
+     * @memberof ChatSvcMessage
+     */
+    meta?: {
+        [key: string]: any;
+    };
+    /**
      * Text content of the message eg. "Hi, what's up?"
      * @type {string}
      * @memberof ChatSvcMessage

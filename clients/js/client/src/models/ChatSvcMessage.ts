@@ -38,6 +38,12 @@ export interface ChatSvcMessage {
      */
     id: string;
     /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof ChatSvcMessage
+     */
+    meta?: { [key: string]: any; };
+    /**
      * Text content of the message eg. "Hi, what's up?"
      * @type {string}
      * @memberof ChatSvcMessage
@@ -86,6 +92,7 @@ export function ChatSvcMessageFromJSONTyped(json: any, ignoreDiscriminator: bool
         'createdAt': json['createdAt'] == null ? undefined : json['createdAt'],
         'fileIds': json['fileIds'] == null ? undefined : json['fileIds'],
         'id': json['id'],
+        'meta': json['meta'] == null ? undefined : json['meta'],
         'text': json['text'] == null ? undefined : json['text'],
         'threadId': json['threadId'],
         'updatedAt': json['updatedAt'] == null ? undefined : json['updatedAt'],
@@ -107,6 +114,7 @@ export function ChatSvcMessageToJSONTyped(value?: ChatSvcMessage | null, ignoreD
         'createdAt': value['createdAt'],
         'fileIds': value['fileIds'],
         'id': value['id'],
+        'meta': value['meta'],
         'text': value['text'],
         'threadId': value['threadId'],
         'updatedAt': value['updatedAt'],

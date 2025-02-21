@@ -148,6 +148,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 
 		if (this.thread?.id) {
 			const rsp = await this.chatService.chatMessages(this.thread.id);
+
 			this.messages = rsp.messages!;
 			// The mutationObserver triggers before the app-messages components are rendered.
 			// This ensures scrollToBottom is called when the app loads for the first time,

@@ -32,6 +32,11 @@ ChatSvcMessage.attributeTypeMap = [
         "type": "string"
     },
     {
+        "name": "meta",
+        "baseName": "meta",
+        "type": "{ [key: string]: any; }"
+    },
+    {
         "name": "text",
         "baseName": "text",
         "type": "string"

@@ -72,6 +72,9 @@ definitions:
       id:
         example: msg_emSOPlW58o
         type: string
+      meta:
+        additionalProperties: true
+        type: object
       text:
         description: Text content of the message eg. "Hi, what's up?"
         type: string
