@@ -16,6 +16,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -59,7 +60,12 @@ func (dm *DockerService) ImagePullable(
 	}
 
 	vars := mux.Vars(req)
-	imageName := vars["imageName"]
+	imageName, err := url.PathUnescape(vars["imageName"])
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Model ID in path is not URL encoded"))
+		return
+	}
 
 	pullable, err := dm.imagePullable(imageName)
 	if err != nil {
