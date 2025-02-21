@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { ContainerSvcBuildImageRequest, ContainerSvcContainerIsRunningResponse, ContainerSvcGetContainerSummaryResponse, ContainerSvcGetHostResponse, ContainerSvcGetInfoResponse, ContainerSvcImagePullableResponse, ContainerSvcRunContainerRequest, ContainerSvcRunContainerResponse, ContainerSvcStopContainerRequest } from '../models/index';
+import type { ContainerSvcBuildImageRequest, ContainerSvcContainerIsRunningResponse, ContainerSvcDaemonInfoResponse, ContainerSvcGetContainerSummaryResponse, ContainerSvcGetHostResponse, ContainerSvcImagePullableResponse, ContainerSvcRunContainerRequest, ContainerSvcRunContainerResponse, ContainerSvcStopContainerRequest } from '../models/index';
 export interface BuildImageRequest {
     body: ContainerSvcBuildImageRequest;
 }
@@ -47,6 +47,16 @@ export declare class ContainerSvcApi extends runtime.BaseAPI {
      */
     buildImage(requestParameters: BuildImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object>;
     /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    containerDaemonInfoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContainerSvcDaemonInfoResponse>>;
+    /**
+     * Retrieve detailed information about the availability and status of container daemons on the node.
+     * Get Container Daemon Information
+     */
+    containerDaemonInfo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcDaemonInfoResponse>;
+    /**
      * Check if a Docker container is running, identified by hash or name.
      * Check If a Container Is Running
      */
@@ -76,16 +86,6 @@ export declare class ContainerSvcApi extends runtime.BaseAPI {
      * Get Container Host
      */
     getHost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcGetHostResponse>;
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    getInfoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContainerSvcGetInfoResponse>>;
-    /**
-     * Retrieve detailed information about the Container service
-     * Get Docker Service Information
-     */
-    getInfo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContainerSvcGetInfoResponse>;
     /**
      * Check if an image exists on in the container registry and is pullable.
      * Check if Container Image is Pullable

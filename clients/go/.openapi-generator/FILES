@@ -40,11 +40,10 @@ docs/ConfigSvcSaveConfigRequest.md
 docs/ContainerSvcAPI.md
 docs/ContainerSvcBuildImageRequest.md
 docs/ContainerSvcContainerIsRunningResponse.md
-docs/ContainerSvcDockerInfo.md
+docs/ContainerSvcDaemonInfoResponse.md
 docs/ContainerSvcErrorResponse.md
 docs/ContainerSvcGetContainerSummaryResponse.md
 docs/ContainerSvcGetHostResponse.md
-docs/ContainerSvcGetInfoResponse.md
 docs/ContainerSvcImagePullableResponse.md
 docs/ContainerSvcRunContainerOptions.md
 docs/ContainerSvcRunContainerRequest.md
@@ -240,11 +239,10 @@ model_config_svc_get_config_response.go
 model_config_svc_save_config_request.go
 model_container_svc_build_image_request.go
 model_container_svc_container_is_running_response.go
-model_container_svc_docker_info.go
+model_container_svc_daemon_info_response.go
 model_container_svc_error_response.go
 model_container_svc_get_container_summary_response.go
 model_container_svc_get_host_response.go
-model_container_svc_get_info_response.go
 model_container_svc_image_pullable_response.go
 model_container_svc_run_container_options.go
 model_container_svc_run_container_request.go

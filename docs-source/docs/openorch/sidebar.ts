@@ -120,6 +120,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/container-daemon-info",
+          label: "Get Container Daemon Information",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "openorch/get-host",
           label: "Get Container Host",
           className: "api-method get",
@@ -134,12 +140,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "openorch/image-pullable",
           label: "Check if Container Image is Pullable",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "openorch/get-info",
-          label: "Get Docker Service Information",
           className: "api-method get",
         },
       ],

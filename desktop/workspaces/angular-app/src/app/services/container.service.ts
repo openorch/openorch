@@ -12,14 +12,14 @@ import { ServerService } from './server.service';
 import {
 	ContainerSvcApi,
 	Configuration,
-	ContainerSvcGetInfoResponse,
+	ContainerSvcDaemonInfoResponse,
 } from '@openorch/client';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ContainerService {
-	private dockerService!: ContainerSvcApi;
+	private daemonService!: ContainerSvcApi;
 
 	onContainerInfoSubject = new ReplaySubject<OnDockerInfo>(1);
 	onContainerInfo$ = this.onContainerInfoSubject.asObservable();
@@ -39,8 +39,8 @@ export class ContainerService {
 				return;
 			}
 			this.initInProgress = true;
-			if (!this.dockerService) {
-				this.dockerService = new ContainerSvcApi(
+			if (!this.daemonService) {
+				this.daemonService = new ContainerSvcApi(
 					new Configuration({
 						basePath: this.server.addr(),
 						apiKey: this.server.token(),
@@ -48,10 +48,10 @@ export class ContainerService {
 				);
 			}
 
-			const rsp = await this.dockerInfo();
+			const rsp = await this.daemonInfo();
 
 			this.onContainerInfoSubject.next({
-				hasDocker: rsp?.info?.hasDocker || false,
+				hasDocker: rsp?.available || false,
 			});
 		} catch (error) {
 			console.error('Error in docker.service init', {
@@ -62,7 +62,7 @@ export class ContainerService {
 		}
 	}
 
-	async dockerInfo(): Promise<ContainerSvcGetInfoResponse> {
-		return this.dockerService.getInfo();
+	async daemonInfo(): Promise<ContainerSvcDaemonInfoResponse> {
+		return this.daemonService.containerDaemonInfo();
 	}
 }

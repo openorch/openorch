@@ -33,7 +33,7 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 )
 
-func (d *DockerService) info() (*ts.DockerInfo, error) {
+func (d *DockerService) containerDaemonInfo() (*ts.DaemonInfoResponse, error) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 
@@ -41,14 +41,14 @@ func (d *DockerService) info() (*ts.DockerInfo, error) {
 	// even on windows, we want a docker daemon that can run linux containers
 	// as our containers are linux ones
 	if err == nil && inf.OSType == "linux" {
-		ret := &ts.DockerInfo{
-			HasDocker: true,
+		ret := &ts.DaemonInfoResponse{
+			Available: true,
 		}
 		if d.dockerHost != "" && d.dockerPort != 0 {
 			addr := fmt.Sprintf("%v:%v", d.dockerHost, d.dockerPort)
-			ret.DockerDaemonAddress = &addr
+			ret.Address = &addr
 		} else if d.dockerHost != "" {
-			ret.DockerDaemonAddress = &d.dockerHost
+			ret.Address = &d.dockerHost
 		}
 
 		return ret, nil
@@ -60,8 +60,8 @@ func (d *DockerService) info() (*ts.DockerInfo, error) {
 			"Cannot find Docker address",
 			slog.String("error", err.Error()),
 		)
-		return &ts.DockerInfo{
-			HasDocker: false,
+		return &ts.DaemonInfoResponse{
+			Available: false,
 		}, nil
 	}
 	logger.Info(
@@ -74,9 +74,9 @@ func (d *DockerService) info() (*ts.DockerInfo, error) {
 	d.dockerPort = port
 
 	daemonAddress := fmt.Sprintf("%v:%v", ip, port)
-	return &ts.DockerInfo{
-		HasDocker:           true,
-		DockerDaemonAddress: &daemonAddress,
+	return &ts.DaemonInfoResponse{
+		Available: true,
+		Address:   &daemonAddress,
 	}, nil
 }
 

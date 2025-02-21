@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export declare class ContainerSvcDockerInfo {
-    'dockerDaemonAddress'?: string;
+export declare class ContainerSvcDaemonInfoResponse {
+    'address'?: string;
+    'available': boolean;
     'error'?: string;
-    'hasDocker'?: boolean;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

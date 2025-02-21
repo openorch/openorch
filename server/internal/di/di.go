@@ -475,8 +475,8 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 	})).
 		Methods("OPTIONS", "GET")
 
-	router.HandleFunc("/container-svc/info", appl(func(w http.ResponseWriter, r *http.Request) {
-		containerService.Info(w, r)
+	router.HandleFunc("/container-svc/daemon/info", appl(func(w http.ResponseWriter, r *http.Request) {
+		containerService.DaemonInfo(w, r)
 	})).
 		Methods("OPTIONS", "GET")
 	router.HandleFunc("/container-svc/image/imageName/pullable", appl(func(w http.ResponseWriter, r *http.Request) {

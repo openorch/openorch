@@ -16,11 +16,10 @@ export * from './configSvcGetConfigResponse';
 export * from './configSvcSaveConfigRequest';
 export * from './containerSvcBuildImageRequest';
 export * from './containerSvcContainerIsRunningResponse';
-export * from './containerSvcDockerInfo';
+export * from './containerSvcDaemonInfoResponse';
 export * from './containerSvcErrorResponse';
 export * from './containerSvcGetContainerSummaryResponse';
 export * from './containerSvcGetHostResponse';
-export * from './containerSvcGetInfoResponse';
 export * from './containerSvcImagePullableResponse';
 export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
@@ -201,11 +200,10 @@ import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
 import { ContainerSvcBuildImageRequest } from './containerSvcBuildImageRequest';
 import { ContainerSvcContainerIsRunningResponse } from './containerSvcContainerIsRunningResponse';
-import { ContainerSvcDockerInfo } from './containerSvcDockerInfo';
+import { ContainerSvcDaemonInfoResponse } from './containerSvcDaemonInfoResponse';
 import { ContainerSvcErrorResponse } from './containerSvcErrorResponse';
 import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContainerSummaryResponse';
 import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
-import { ContainerSvcGetInfoResponse } from './containerSvcGetInfoResponse';
 import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
 import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
@@ -413,11 +411,10 @@ let typeMap = {
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
     "ContainerSvcBuildImageRequest": ContainerSvcBuildImageRequest,
     "ContainerSvcContainerIsRunningResponse": ContainerSvcContainerIsRunningResponse,
-    "ContainerSvcDockerInfo": ContainerSvcDockerInfo,
+    "ContainerSvcDaemonInfoResponse": ContainerSvcDaemonInfoResponse,
     "ContainerSvcErrorResponse": ContainerSvcErrorResponse,
     "ContainerSvcGetContainerSummaryResponse": ContainerSvcGetContainerSummaryResponse,
     "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
-    "ContainerSvcGetInfoResponse": ContainerSvcGetInfoResponse,
     "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
     "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
