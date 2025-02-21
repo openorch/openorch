@@ -107,7 +107,7 @@ func (ms *ModelService) startWithDocker(
 			// to actual images here.
 			// To do this we need to find the CUDA version on the current machine.
 
-			cudaVersion, err := ms.cudaVersion()
+			cudaVersion, err := ms.cudaVersion(platform.Architectures.Cuda.CudaVersionPrecision)
 			if err != nil {
 				logger.Error("Error getting cuda version, defaulting",
 					slog.String("error", err.Error()),
@@ -179,7 +179,7 @@ func (ms *ModelService) startWithDocker(
 	return nil
 }
 
-func (ms *ModelService) cudaVersion() (string, error) {
+func (ms *ModelService) cudaVersion(precision int) (string, error) {
 	node, err := ms.getNode()
 	if err != nil || node == nil {
 		// Error as unresolved image templates won't be usable
@@ -193,9 +193,13 @@ func (ms *ModelService) cudaVersion() (string, error) {
 		return "", fmt.Errorf("no cuda version")
 	}
 
-	// Here we need to make sure that the CUDA version coming from the GPU
-	// like 12.2 is the same length as our image tags, which are 12.2.0.
-	cudaVersion := longCudaVersionFormat(*gpu.CudaVersion)
+	cudaVersion := *gpu.CudaVersion
+
+	if precision > strings.Count(cudaVersion, ".")+1 {
+		// Here we need to make sure that the CUDA version coming from the GPU
+		// like 12.2 is the same length as our image tags, which are 12.2.0.
+		cudaVersion = longCudaVersionFormat(cudaVersion)
+	}
 
 	return cudaVersion, nil
 }

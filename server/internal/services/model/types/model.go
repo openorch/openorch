@@ -19,7 +19,8 @@ type ErrorResponse struct {
 }
 
 /*
-Platform (~AI Platform) roughly represents an AI container + its settings.
+Platform (~AI Platform) represents an AI container and its settings.
+It defines the AI runtime, supported prompt types, and the underlying hardware architecture.
 */
 type Platform struct {
 	Id            string        `json:"id"`
@@ -27,43 +28,67 @@ type Platform struct {
 	Version       *int          `json:"version,omitempty"`
 	Architectures Architectures `json:"architectures"`
 
-	// Types is a list of prompt types that the AI engine supports.
+	// List of prompt types that the AI engine supports.
 	Types []prompt.PromptType `json:"types"`
 }
 
+// GetId returns the platform's unique identifier.
 func (p Platform) GetId() string {
 	return p.Id
 }
 
-/* Containers by GPU/hardware platform */
+/*
+Architectures defines container configurations for different hardware platforms.
+Includes default settings and CUDA-specific configurations for GPU acceleration.
+*/
 type Architectures struct {
+	// Default container configuration for non-GPU environments.
 	Default DefaultParameters `json:"default"`
-	Cuda    CudaParameters    `json:"cuda,omitempty"`
+
+	// CUDA-specific container parameters, if applicable.
+	Cuda CudaParameters `json:"cuda,omitempty"`
 }
 
+/* DefaultParameters holds the container configuration for CPU-based execution. */
 type DefaultParameters struct {
 	Container Container `json:"container"`
 }
 
+/*
+CudaParameters defines CUDA-specific settings for GPU-accelerated containers.
+It specifies the CUDA and cuDNN versions along with container image details.
+*/
 type CudaParameters struct {
-	Container           Container `json:"container"`
-	DefaultCudaVersion  string    `json:"defaultCudaVersion"`
-	DefaultCudnnVersion string    `json:"defaultCudnnVersion"`
+	// Container configuration related to CUDA usage.
+	Container Container `json:"container"`
+
+	// Default CUDA version to use (e.g., "12.2" or "12.2.0").
+	DefaultCudaVersion string `json:"defaultCudaVersion"`
+
+	// Level of precision for selecting the CUDA version when resolving the container image.
+	// - 2 -> Use "major.minor" (e.g., "12.2")
+	// - 3 -> Use "major.minor.patch" (e.g., "12.2.0")
+	CudaVersionPrecision int `json:"cudaVersionPrecision"`
+
+	// Default cuDNN version to use alongside CUDA.
+	DefaultCudnnVersion string `json:"defaultCudnnVersion"`
 }
 
+/*
+Container represents a deployable container configuration, including
+image details, environment variables, and persistence settings.
+*/
 type Container struct {
-	/* Port is the internal port of the Container */
+	// Internal port exposed by the container.
 	Port int `json:"port"`
 
+	// Template for constructing the container image name.
 	ImageTemplate string `json:"imageTemplate"`
 
-	/* Envars passed to the container. eg.
-	'DEVICES=all'
-	*/
+	// Environment variables to be passed to the container (e.g., "DEVICES=all").
 	Envars []string `json:"envars"`
 
-	/* Keeps are paths in the container that should be persisted across restarts.
-	 */
+	// List of container paths that should persist across restarts.
 	Keeps []string `json:"keeps,omitempty"`
 }
 
