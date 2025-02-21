@@ -86,7 +86,7 @@ export class MessageComponent {
 
 	getCurrentModelName(){
 	const currentModel= this.models.find((e)=>{
-			e.id == this.message.meta!.modelId
+			return e.id == this.message.meta!.modelId
 		})
 	this.currentModelName = currentModel?.name	
 	}
