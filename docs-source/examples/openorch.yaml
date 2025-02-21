@@ -178,14 +178,16 @@ definitions:
     required:
     - isRunning
     type: object
-  container_svc.DockerInfo:
+  container_svc.DaemonInfoResponse:
     properties:
-      dockerDaemonAddress:
+      address:
         type: string
+      available:
+        type: boolean
       error:
         type: string
-      hasDocker:
-        type: boolean
+    required:
+    - available
     type: object
   container_svc.ErrorResponse:
     properties:
@@ -212,11 +214,6 @@ definitions:
         type: string
     required:
     - host
-    type: object
-  container_svc.GetInfoResponse:
-    properties:
-      info:
-        $ref: '#/definitions/container_svc.DockerInfo'
     type: object
   container_svc.ImagePullableResponse:
     properties:
@@ -3360,6 +3357,33 @@ paths:
       summary: Get Container Summary
       tags:
       - Container Svc
+  /container-svc/daemon/info:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve detailed information about the availability and status
+        of container daemons on the node.
+      operationId: containerDaemonInfo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service Information
+          schema:
+            $ref: '#/definitions/container_svc.DaemonInfoResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Container Daemon Information
+      tags:
+      - Container Svc
   /container-svc/host:
     get:
       consumes:
@@ -3456,32 +3480,6 @@ paths:
       security:
       - BearerAuth: []
       summary: Check if Container Image is Pullable
-      tags:
-      - Container Svc
-  /container-svc/info:
-    get:
-      consumes:
-      - application/json
-      description: Retrieve detailed information about the Container service
-      operationId: getInfo
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Service Information
-          schema:
-            $ref: '#/definitions/container_svc.GetInfoResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/container_svc.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/container_svc.ErrorResponse'
-      security:
-      - BearerAuth: []
-      summary: Get Docker Service Information
       tags:
       - Container Svc
   /data-svc/object:

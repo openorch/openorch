@@ -913,6 +913,47 @@ const docTemplate = `{
                 }
             }
         },
+        "/container-svc/daemon/info": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve detailed information about the availability and status of container daemons on the node.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "Get Container Daemon Information",
+                "operationId": "containerDaemonInfo",
+                "responses": {
+                    "200": {
+                        "description": "Service Information",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.DaemonInfoResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/container-svc/host": {
             "get": {
                 "security": [
@@ -1045,47 +1086,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/container_svc.ImagePullableResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/container_svc.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/container_svc.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/container-svc/info": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Retrieve detailed information about the Container service",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Container Svc"
-                ],
-                "summary": "Get Docker Service Information",
-                "operationId": "getInfo",
-                "responses": {
-                    "200": {
-                        "description": "Service Information",
-                        "schema": {
-                            "$ref": "#/definitions/container_svc.GetInfoResponse"
                         }
                     },
                     "401": {
@@ -5489,17 +5489,20 @@ const docTemplate = `{
                 }
             }
         },
-        "container_svc.DockerInfo": {
+        "container_svc.DaemonInfoResponse": {
             "type": "object",
+            "required": [
+                "available"
+            ],
             "properties": {
-                "dockerDaemonAddress": {
+                "address": {
                     "type": "string"
+                },
+                "available": {
+                    "type": "boolean"
                 },
                 "error": {
                     "type": "string"
-                },
-                "hasDocker": {
-                    "type": "boolean"
                 }
             }
         },
@@ -5539,14 +5542,6 @@ const docTemplate = `{
             "properties": {
                 "host": {
                     "type": "string"
-                }
-            }
-        },
-        "container_svc.GetInfoResponse": {
-            "type": "object",
-            "properties": {
-                "info": {
-                    "$ref": "#/definitions/container_svc.DockerInfo"
                 }
             }
         },
