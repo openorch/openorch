@@ -107,29 +107,31 @@ func (ms *ModelService) startWithDocker(
 			// to actual images here.
 			// To do this we need to find the CUDA version on the current machine.
 
-			cudaVersion, err := ms.cudaVersion(platform.Architectures.Cuda.CudaVersionPrecision)
+			systemCudaVersion, err := ms.cudaVersion(platform.Architectures.Cuda.CudaVersionPrecision)
 			if err != nil {
-				logger.Error("Error getting cuda version, defaulting",
-					slog.String("error", err.Error()),
-					slog.String("default", cudaVersion))
-
-				cudaVersion = platform.Architectures.Cuda.DefaultCudaVersion
+				logger.Error("Error getting cuda version",
+					slog.String("error", err.Error()))
 			}
+			defaultCudaVersion := platform.Architectures.Cuda.DefaultCudaVersion
 
-			versionAccurateImage := strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			systemMatchingImage := strings.Replace(cudaImageTemplate, "$cudaVersion", systemCudaVersion, -1)
 
-			imagePullableRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+			systemMatchingImagePullableRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 				ContainerSvcAPI.
-				ImagePullable(context.Background(), versionAccurateImage).
+				ImagePullable(context.Background(), systemMatchingImage).
 				Execute()
 			if err != nil {
 				logger.Error("Image pull check failed", slog.String("error", err.Error()))
 			}
 
-			if err != nil || !imagePullableRsp.Pullable {
-				image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			if err == nil && systemMatchingImagePullableRsp.Pullable {
+				image = systemMatchingImage
 			} else {
-				image = versionAccurateImage
+				logger.Debug("Using default CUDA version as system matching CUDA image is not pullable",
+					slog.String("systemMatchingCudaVersion", systemCudaVersion),
+					slog.String("defaultCudaVersion", defaultCudaVersion),
+				)
+				image = strings.Replace(cudaImageTemplate, "$cudaVersion", defaultCudaVersion, -1)
 			}
 		}
 		if platform.Architectures.Cuda.Container.Port != 0 {
