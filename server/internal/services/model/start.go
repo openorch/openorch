@@ -127,10 +127,6 @@ func (ms *ModelService) startWithDocker(
 			if err == nil && systemMatchingImagePullableRsp.Pullable {
 				image = systemMatchingImage
 			} else {
-				logger.Debug("Using default CUDA version as system matching CUDA image is not pullable",
-					slog.String("systemMatchingCudaVersion", systemCudaVersion),
-					slog.String("defaultCudaVersion", defaultCudaVersion),
-				)
 				image = strings.Replace(cudaImageTemplate, "$cudaVersion", defaultCudaVersion, -1)
 			}
 		}

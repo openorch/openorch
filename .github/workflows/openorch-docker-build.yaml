@@ -1,6 +1,9 @@
 name: "OpenOrch backend Docker build"
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       branch:
@@ -14,7 +17,7 @@ on:
       backend_version:
         description: "Backend version (e.g., 12.5.0 for CUDA, etc.)"
         required: false
-        default: "12.2.2"
+        default: "12.2.0"
       tag:
         description: "User-defined tag for the Docker image (e.g., 0.3.0-rc.16)"
         required: false

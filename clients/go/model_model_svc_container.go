@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.21
+API version: 0.3.0-rc.22
 Contact: sales@singulatron.com
 */
 
@@ -20,12 +20,13 @@ var _ MappedNullable = &ModelSvcContainer{}
 
 // ModelSvcContainer struct for ModelSvcContainer
 type ModelSvcContainer struct {
-	// Envars passed to the container. eg.  'DEVICES=all'
+	// Environment variables to be passed to the container (e.g., \"DEVICES=all\").
 	Envars []string `json:"envars,omitempty"`
+	// Template for constructing the container image name.
 	ImageTemplate *string `json:"imageTemplate,omitempty"`
-	// Keeps are paths in the container that should be persisted across restarts.
+	// List of container paths that should persist across restarts.
 	Keeps []string `json:"keeps,omitempty"`
-	// Port is the internal port of the Container
+	// Internal port exposed by the container.
 	Port *int32 `json:"port,omitempty"`
 }
 

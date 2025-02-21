@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.21
+API version: 0.3.0-rc.22
 Contact: sales@singulatron.com
 */
 
@@ -23,7 +23,7 @@ type ModelSvcPlatform struct {
 	Architectures *ModelSvcArchitectures `json:"architectures,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	// Types is a list of prompt types that the AI engine supports.
+	// List of prompt types that the AI engine supports.
 	Types []PromptSvcPromptType `json:"types,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 }

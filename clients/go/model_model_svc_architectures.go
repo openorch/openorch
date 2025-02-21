@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.21
+API version: 0.3.0-rc.22
 Contact: sales@singulatron.com
 */
 
@@ -20,7 +20,9 @@ var _ MappedNullable = &ModelSvcArchitectures{}
 
 // ModelSvcArchitectures struct for ModelSvcArchitectures
 type ModelSvcArchitectures struct {
+	// CUDA-specific container parameters, if applicable.
 	Cuda *ModelSvcCudaParameters `json:"cuda,omitempty"`
+	// Default container configuration for non-GPU environments.
 	Default *ModelSvcDefaultParameters `json:"default,omitempty"`
 }
 
