@@ -42,7 +42,7 @@ var PlatformStableDiffusion = Platform{
 			},
 		},
 		Cuda: CudaParameters{
-			DefaultCudaVersion:  "12.6",
+			DefaultCudaVersion:  "12.1",
 			DefaultCudnnVersion: "9",
 			Container: Container{
 				Port:          7860,

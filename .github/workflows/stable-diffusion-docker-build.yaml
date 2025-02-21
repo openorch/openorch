@@ -7,18 +7,39 @@ on:
         description: "Branch to build from"
         required: false
         default: "main"
+
       tag:
         description: "Tag to apply to the Docker image"
         required: false
         default: "latest"
+
       backend:
-        description: "Compute backend (cuda, openblas, mkl, default)"
+        description: |
+          Specifies the compute backend to use.  
+          - This determines which hardware acceleration libraries are enabled.  
+          - Options:  
+            - "cuda" (for NVIDIA GPUs)  
+            - "openblas" (for OpenBLAS-based CPU computations)  
+            - "mkl" (for Intel MKL-based CPU computations)  
+            - "default" (automatic selection)
         required: true
         default: "cuda"
+
       backend_version:
-        description: "Backend version (e.g., 12.5 for CUDA, etc.)"
-        required: false 
+        description: |
+          Specifies the backend version.  
+          - This is typically relevant for GPU-enabled environments.  
+          - Example: "12.5" for CUDA, indicating the CUDA version.
+        required: false
         default: "12.1"
+
+      cudnn_version:
+        description: |
+          Defines the cuDNN (CUDA Deep Neural Network) library version.  
+          - This is only applicable when using CUDA-based images.  
+          - Unlike the backend version, the cuDNN version does *not* appear in the final image name.
+        required: false
+        default: "9"
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -60,6 +81,7 @@ jobs:
 
           DOCKER_BUILDKIT=1 docker build \
             --build-arg BACKEND_VERSION=${{ github.event.inputs.backend_version }} \
+            --build-arg CUDNN_VERSION=${{ github.event.inputs.cudnn_version }} \         
             -t ${{ env.IMAGE_TAG }} .
 
           docker push ${{ env.IMAGE_TAG }}
