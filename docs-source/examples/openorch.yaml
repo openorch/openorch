@@ -939,36 +939,50 @@ definitions:
   model_svc.Architectures:
     properties:
       cuda:
-        $ref: '#/definitions/model_svc.CudaParameters'
+        allOf:
+        - $ref: '#/definitions/model_svc.CudaParameters'
+        description: CUDA-specific container parameters, if applicable.
       default:
-        $ref: '#/definitions/model_svc.DefaultParameters'
+        allOf:
+        - $ref: '#/definitions/model_svc.DefaultParameters'
+        description: Default container configuration for non-GPU environments.
     type: object
   model_svc.Container:
     properties:
       envars:
-        description: "Envars passed to the container. eg.\n\t'DEVICES=all'"
+        description: Environment variables to be passed to the container (e.g., "DEVICES=all").
         items:
           type: string
         type: array
       imageTemplate:
+        description: Template for constructing the container image name.
         type: string
       keeps:
-        description: Keeps are paths in the container that should be persisted across
-          restarts.
+        description: List of container paths that should persist across restarts.
         items:
           type: string
         type: array
       port:
-        description: Port is the internal port of the Container
+        description: Internal port exposed by the container.
         type: integer
     type: object
   model_svc.CudaParameters:
     properties:
       container:
-        $ref: '#/definitions/model_svc.Container'
+        allOf:
+        - $ref: '#/definitions/model_svc.Container'
+        description: Container configuration related to CUDA usage.
+      cudaVersionPrecision:
+        description: |-
+          Level of precision for selecting the CUDA version when resolving the container image.
+          - 2 -> Use "major.minor" (e.g., "12.2")
+          - 3 -> Use "major.minor.patch" (e.g., "12.2.0")
+        type: integer
       defaultCudaVersion:
+        description: Default CUDA version to use (e.g., "12.2" or "12.2.0").
         type: string
       defaultCudnnVersion:
+        description: Default cuDNN version to use alongside CUDA.
         type: string
     type: object
   model_svc.DefaultParameters:
@@ -1085,7 +1099,7 @@ definitions:
       name:
         type: string
       types:
-        description: Types is a list of prompt types that the AI engine supports.
+        description: List of prompt types that the AI engine supports.
         items:
           $ref: '#/definitions/prompt_svc.PromptType'
         type: array
@@ -2770,7 +2784,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.21
+  version: 0.3.0-rc.22
 paths:
   /chat-svc/events:
     get:

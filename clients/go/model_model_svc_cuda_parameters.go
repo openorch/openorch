@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.21
+API version: 0.3.0-rc.22
 Contact: sales@singulatron.com
 */
 
@@ -20,8 +20,13 @@ var _ MappedNullable = &ModelSvcCudaParameters{}
 
 // ModelSvcCudaParameters struct for ModelSvcCudaParameters
 type ModelSvcCudaParameters struct {
+	// Container configuration related to CUDA usage.
 	Container *ModelSvcContainer `json:"container,omitempty"`
+	// Level of precision for selecting the CUDA version when resolving the container image. - 2 -> Use \"major.minor\" (e.g., \"12.2\") - 3 -> Use \"major.minor.patch\" (e.g., \"12.2.0\")
+	CudaVersionPrecision *int32 `json:"cudaVersionPrecision,omitempty"`
+	// Default CUDA version to use (e.g., \"12.2\" or \"12.2.0\").
 	DefaultCudaVersion *string `json:"defaultCudaVersion,omitempty"`
+	// Default cuDNN version to use alongside CUDA.
 	DefaultCudnnVersion *string `json:"defaultCudnnVersion,omitempty"`
 }
 
@@ -72,6 +77,38 @@ func (o *ModelSvcCudaParameters) HasContainer() bool {
 // SetContainer gets a reference to the given ModelSvcContainer and assigns it to the Container field.
 func (o *ModelSvcCudaParameters) SetContainer(v ModelSvcContainer) {
 	o.Container = &v
+}
+
+// GetCudaVersionPrecision returns the CudaVersionPrecision field value if set, zero value otherwise.
+func (o *ModelSvcCudaParameters) GetCudaVersionPrecision() int32 {
+	if o == nil || IsNil(o.CudaVersionPrecision) {
+		var ret int32
+		return ret
+	}
+	return *o.CudaVersionPrecision
+}
+
+// GetCudaVersionPrecisionOk returns a tuple with the CudaVersionPrecision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelSvcCudaParameters) GetCudaVersionPrecisionOk() (*int32, bool) {
+	if o == nil || IsNil(o.CudaVersionPrecision) {
+		return nil, false
+	}
+	return o.CudaVersionPrecision, true
+}
+
+// HasCudaVersionPrecision returns a boolean if a field has been set.
+func (o *ModelSvcCudaParameters) HasCudaVersionPrecision() bool {
+	if o != nil && !IsNil(o.CudaVersionPrecision) {
+		return true
+	}
+
+	return false
+}
+
+// SetCudaVersionPrecision gets a reference to the given int32 and assigns it to the CudaVersionPrecision field.
+func (o *ModelSvcCudaParameters) SetCudaVersionPrecision(v int32) {
+	o.CudaVersionPrecision = &v
 }
 
 // GetDefaultCudaVersion returns the DefaultCudaVersion field value if set, zero value otherwise.
@@ -150,6 +187,9 @@ func (o ModelSvcCudaParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Container) {
 		toSerialize["container"] = o.Container
+	}
+	if !IsNil(o.CudaVersionPrecision) {
+		toSerialize["cudaVersionPrecision"] = o.CudaVersionPrecision
 	}
 	if !IsNil(o.DefaultCudaVersion) {
 		toSerialize["defaultCudaVersion"] = o.DefaultCudaVersion
