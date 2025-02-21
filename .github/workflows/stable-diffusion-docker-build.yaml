@@ -81,7 +81,7 @@ jobs:
 
           DOCKER_BUILDKIT=1 docker build \
             --build-arg BACKEND_VERSION=${{ github.event.inputs.backend_version }} \
-            --build-arg CUDNN_VERSION=${{ github.event.inputs.cudnn_version }} \         
+            --build-arg CUDNN_VERSION=${{ github.event.inputs.cudnn_version }} \
             -t ${{ env.IMAGE_TAG }} .
 
           docker push ${{ env.IMAGE_TAG }}
