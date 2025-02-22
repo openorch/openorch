@@ -17,7 +17,9 @@
   </div>
 </p>
 
-Originally built as an on-premise ChatGPT alternative, OpenOrch quickly evolved into a powerful, language-agnostic microservices platform for AI application development.
+OpenOrch was initially created to solve the challenge of running AI models on private servers, handling many concurrent prompts from both users and services. The goal was to build a ChatGPT-like interface for humans and a network-accessible API for machines.
+
+As the system grew, the authors—despite 10+ years of building both closed and open-source microservices platforms—realized there was still no backend framework that met their needs. So, OpenOrch evolved into the flexible, scalable microservices platform they had been searching for.
 
 ## Why
 
