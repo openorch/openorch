@@ -1,9 +1,6 @@
 name: "OpenOrch backend Docker build"
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       branch:
