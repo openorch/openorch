@@ -31,6 +31,7 @@ import (
 func (p *PromptService) processLlamaCpp(
 	address string,
 	currentPrompt *prompttypes.Prompt,
+	model *openapi.ModelSvcGetModelResponse,
 ) error {
 	logger.Debug("Starting LLamaCPP stream")
 
@@ -130,6 +131,10 @@ func (p *PromptService) processLlamaCpp(
 							Text: openapi.PtrString(
 								p.streamManager.ConcatHistoryText(currentPrompt.ThreadId),
 							),
+							Meta: map[string]interface{}{
+								"modelId":    model.Model.Id,
+								"platformId": model.Platform.Id,
+							},
 						},
 					},
 				).

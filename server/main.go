@@ -29,7 +29,7 @@ import (
 var port = router.GetPort()
 
 // @title           OpenOrch
-// @version         0.3.0-rc.24
+// @version         0.3.0-rc.25
 // @description     A language-agnostic microservices framework for building AI applications.
 // @termsOfService  http://swagger.io/terms/
 

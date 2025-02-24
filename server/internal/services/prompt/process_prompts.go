@@ -307,9 +307,9 @@ func (p *PromptService) processPlatform(
 
 	switch *model.Platform.Id {
 	case modeltypes.PlatformLlamaCpp.Id:
-		return p.processLlamaCpp(address, currentPrompt)
+		return p.processLlamaCpp(address, currentPrompt, model)
 	case modeltypes.PlatformStableDiffusion.Id:
-		return p.processStableDiffusion(address, currentPrompt)
+		return p.processStableDiffusion(address, currentPrompt, model)
 	}
 
 	return fmt.Errorf("cannot find platform %v", model.Platform.Id)

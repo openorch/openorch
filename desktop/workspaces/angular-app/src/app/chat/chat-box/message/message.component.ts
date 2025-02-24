@@ -13,7 +13,7 @@ import {
 	ChangeDetectionStrategy,
 } from '@angular/core';
 import { ChatService } from '../../../services/chat.service';
-import { ChatSvcMessage as Message } from '@openorch/client';
+import { ChatSvcMessage as Message, ModelSvcPlatform } from '@openorch/client';
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
@@ -57,7 +57,7 @@ export class MessageComponent {
 		public userService: UserService,
 		private server: ServerService,
 		public mobile: MobileService,
-		private modelService: ModelService,
+		public modelService: ModelService,
 	) {
 		addIcons({
 			'person-circle-outline': personCircleOutline,
@@ -77,19 +77,26 @@ export class MessageComponent {
 	@Output() onCopyToClipboard = new EventEmitter<string>();
 
 	async ngOnInit() {
-		this.models = await this.modelService.getModels();
-		//this.getCurrentModelName();
+
 		if (this.message?.fileIds?.length) {
 			this.hasAsset = true;
 		}
 	}
 
-	getCurrentModelName(){
-	const currentModel= this.models.find((e)=>{
-			return e.id == this.message.meta!.modelId
-		})
-	this.currentModelName = currentModel?.name	
-	}
+
+	formatPlatformName(platforms:ModelSvcPlatform[]| null):string{
+		console.log( this.message)
+		if(!platforms){
+			return ""
+		}
+		 if(!this.message.meta){
+			return ""
+		 }
+		 const pid = this.message.meta['platformId']
+		 return platforms.find(p => {
+			return p.id == pid
+		 })?.name || ""
+	} 
 
 	async regenerateAnswer(message: Message) {
 		if (message.userId) {
