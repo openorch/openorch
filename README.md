@@ -10,14 +10,16 @@
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/js-client-build.yaml/badge.svg" alt="js client build" style="max-width: 100%;"></a>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg"><img src="https://github.com/openorch/openorch/actions/workflows/go-sdk-build.yaml/badge.svg" alt="go sdk" style="max-width: 100%;"></a>
     </span>
-    <div style="margin-top: 2rem">A language-agnostic microservices framework for building AI applications.</div>
+    <div style="margin-top: 2rem">Build AI products faster. A language-agnostic microservices platform for building AI applications.</div>
     <div>
       <a href="https://openorch.org">openorch.org</a>
     </div>
   </div>
 </p>
 
-Originally built as an on-premise ChatGPT alternative, OpenOrch quickly evolved into a powerful, language-agnostic microservices platform for AI application development.
+OpenOrch was initially created to solve the challenge of running AI models on private servers, handling many concurrent prompts from both users and services. The goal was to build a ChatGPT-like interface for humans and a network-accessible API for machines.
+
+As the system grew, the authors—despite 10+ years of building both closed and open-source microservices platforms—realized there was still no backend framework that met their needs. So, OpenOrch evolved into the flexible, scalable microservices platform they had been searching for.
 
 ## Why
 

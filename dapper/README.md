@@ -1,3 +1,5 @@
+NOTE: This was only used in the desktop version which is unsupported at the moment.
+
 # dapper
 
 Dapper is a funky little configuration management tool that exists to install you runtime dependencies of OpenOrch locally on your computer - mostly Docker and related dependencies like WSL on Windows.

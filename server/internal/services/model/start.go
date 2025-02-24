@@ -107,29 +107,27 @@ func (ms *ModelService) startWithDocker(
 			// to actual images here.
 			// To do this we need to find the CUDA version on the current machine.
 
-			cudaVersion, err := ms.cudaVersion()
+			systemCudaVersion, err := ms.cudaVersion(platform.Architectures.Cuda.CudaVersionPrecision)
 			if err != nil {
-				logger.Error("Error getting cuda version, defaulting",
-					slog.String("error", err.Error()),
-					slog.String("default", cudaVersion))
-
-				cudaVersion = platform.Architectures.Cuda.DefaultCudaVersion
+				logger.Error("Error getting cuda version",
+					slog.String("error", err.Error()))
 			}
+			defaultCudaVersion := platform.Architectures.Cuda.DefaultCudaVersion
 
-			versionAccurateImage := strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			systemMatchingImage := strings.Replace(cudaImageTemplate, "$cudaVersion", systemCudaVersion, -1)
 
-			imagePullableRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+			systemMatchingImagePullableRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 				ContainerSvcAPI.
-				ImagePullable(context.Background(), versionAccurateImage).
+				ImagePullable(context.Background(), systemMatchingImage).
 				Execute()
 			if err != nil {
 				logger.Error("Image pull check failed", slog.String("error", err.Error()))
 			}
 
-			if err != nil || !imagePullableRsp.Pullable {
-				image = strings.Replace(cudaImageTemplate, "$cudaVersion", cudaVersion, -1)
+			if err == nil && systemMatchingImagePullableRsp.Pullable {
+				image = systemMatchingImage
 			} else {
-				image = versionAccurateImage
+				image = strings.Replace(cudaImageTemplate, "$cudaVersion", defaultCudaVersion, -1)
 			}
 		}
 		if platform.Architectures.Cuda.Container.Port != 0 {
@@ -179,7 +177,7 @@ func (ms *ModelService) startWithDocker(
 	return nil
 }
 
-func (ms *ModelService) cudaVersion() (string, error) {
+func (ms *ModelService) cudaVersion(precision int) (string, error) {
 	node, err := ms.getNode()
 	if err != nil || node == nil {
 		// Error as unresolved image templates won't be usable
@@ -193,9 +191,13 @@ func (ms *ModelService) cudaVersion() (string, error) {
 		return "", fmt.Errorf("no cuda version")
 	}
 
-	// Here we need to make sure that the CUDA version coming from the GPU
-	// like 12.2 is the same length as our image tags, which are 12.2.0.
-	cudaVersion := longCudaVersionFormat(*gpu.CudaVersion)
+	cudaVersion := *gpu.CudaVersion
+
+	if precision > strings.Count(cudaVersion, ".")+1 {
+		// Here we need to make sure that the CUDA version coming from the GPU
+		// like 12.2 is the same length as our image tags, which are 12.2.0.
+		cudaVersion = longCudaVersionFormat(cudaVersion)
+	}
 
 	return cudaVersion, nil
 }

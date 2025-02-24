@@ -6529,10 +6529,20 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "cuda": {
-                    "$ref": "#/definitions/model_svc.CudaParameters"
+                    "description": "CUDA-specific container parameters, if applicable.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model_svc.CudaParameters"
+                        }
+                    ]
                 },
                 "default": {
-                    "$ref": "#/definitions/model_svc.DefaultParameters"
+                    "description": "Default container configuration for non-GPU environments.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model_svc.DefaultParameters"
+                        }
+                    ]
                 }
             }
         },
@@ -6540,24 +6550,25 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "envars": {
-                    "description": "Envars passed to the container. eg.\n\t'DEVICES=all'",
+                    "description": "Environment variables to be passed to the container (e.g., \"DEVICES=all\").",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "imageTemplate": {
+                    "description": "Template for constructing the container image name.",
                     "type": "string"
                 },
                 "keeps": {
-                    "description": "Keeps are paths in the container that should be persisted across restarts.",
+                    "description": "List of container paths that should persist across restarts.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "port": {
-                    "description": "Port is the internal port of the Container",
+                    "description": "Internal port exposed by the container.",
                     "type": "integer"
                 }
             }
@@ -6566,12 +6577,23 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "container": {
-                    "$ref": "#/definitions/model_svc.Container"
+                    "description": "Container configuration related to CUDA usage.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model_svc.Container"
+                        }
+                    ]
+                },
+                "cudaVersionPrecision": {
+                    "description": "Level of precision for selecting the CUDA version when resolving the container image.\n- 2 -\u003e Use \"major.minor\" (e.g., \"12.2\")\n- 3 -\u003e Use \"major.minor.patch\" (e.g., \"12.2.0\")",
+                    "type": "integer"
                 },
                 "defaultCudaVersion": {
+                    "description": "Default CUDA version to use (e.g., \"12.2\" or \"12.2.0\").",
                     "type": "string"
                 },
                 "defaultCudnnVersion": {
+                    "description": "Default cuDNN version to use alongside CUDA.",
                     "type": "string"
                 }
             }
@@ -6746,7 +6768,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "types": {
-                    "description": "Types is a list of prompt types that the AI engine supports.",
+                    "description": "List of prompt types that the AI engine supports.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/prompt_svc.PromptType"
@@ -9059,7 +9081,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.21",
+	Version:          "0.3.0-rc.22",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

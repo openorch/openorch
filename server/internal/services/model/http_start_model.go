@@ -68,6 +68,7 @@ func (ms *ModelService) StartSpecific(
 		w.Write([]byte(`Invalid JSON`))
 		return
 	}
+
 	defer r.Body.Close()
 
 	modelId, err := url.PathUnescape(v["modelId"])
