@@ -72,6 +72,9 @@ definitions:
       id:
         example: msg_emSOPlW58o
         type: string
+      meta:
+        additionalProperties: true
+        type: object
       text:
         description: Text content of the message eg. "Hi, what's up?"
         type: string
@@ -2784,7 +2787,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.22
+  version: 0.3.0-rc.25
 paths:
   /chat-svc/events:
     get:

@@ -13,7 +13,7 @@
             "name": "AGPL v3.0",
             "url": "https://www.gnu.org/licenses/agpl-3.0.html"
         },
-        "version": "0.3.0-rc.22"
+        "version": "0.3.0-rc.25"
     },
     "host": "localhost:58231",
     "basePath": "/",
@@ -5338,6 +5338,10 @@
                 "id": {
                     "type": "string",
                     "example": "msg_emSOPlW58o"
+                },
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": true
                 },
                 "text": {
                     "description": "Text content of the message eg. \"Hi, what's up?\"",

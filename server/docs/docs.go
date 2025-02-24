@@ -5345,6 +5345,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "msg_emSOPlW58o"
                 },
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
                 "text": {
                     "description": "Text content of the message eg. \"Hi, what's up?\"",
                     "type": "string"
@@ -9077,7 +9081,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.22",
+	Version:          "0.3.0-rc.25",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

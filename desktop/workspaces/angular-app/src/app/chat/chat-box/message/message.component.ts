@@ -13,7 +13,7 @@ import {
 	ChangeDetectionStrategy,
 } from '@angular/core';
 import { ChatService } from '../../../services/chat.service';
-import { ChatSvcMessage as Message } from '@openorch/client';
+import { ChatSvcMessage as Message, ModelSvcPlatform } from '@openorch/client';
 import { PromptService } from '../../../services/prompt.service';
 import { ServerService } from '../../../services/server.service';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
@@ -30,6 +30,10 @@ import {
 } from 'ionicons/icons';
 
 import { environment } from '../../../../environments/environment';
+import { ModelService } from '../../../../app/services/model.service';
+import {
+	ModelSvcModel as Model,
+} from '@openorch/client';
 
 @Component({
 	selector: 'app-message',
@@ -52,7 +56,8 @@ export class MessageComponent {
 		private promptService: PromptService,
 		public userService: UserService,
 		private server: ServerService,
-		public mobile: MobileService
+		public mobile: MobileService,
+		public modelService: ModelService,
 	) {
 		addIcons({
 			'person-circle-outline': personCircleOutline,
@@ -62,6 +67,8 @@ export class MessageComponent {
 		});
 	}
 	hasAsset = false;
+	models: Model[] = [];
+	currentModelName: string | undefined = "";
 
 	@Input() message!: Message;
 	@Input() streaming: boolean = false;
@@ -69,11 +76,27 @@ export class MessageComponent {
 
 	@Output() onCopyToClipboard = new EventEmitter<string>();
 
-	ngOnInit() {
+	async ngOnInit() {
+
 		if (this.message?.fileIds?.length) {
 			this.hasAsset = true;
 		}
 	}
+
+
+	formatPlatformName(platforms:ModelSvcPlatform[]| null):string{
+		console.log( this.message)
+		if(!platforms){
+			return ""
+		}
+		 if(!this.message.meta){
+			return ""
+		 }
+		 const pid = this.message.meta['platformId']
+		 return platforms.find(p => {
+			return p.id == pid
+		 })?.name || ""
+	} 
 
 	async regenerateAnswer(message: Message) {
 		if (message.userId) {

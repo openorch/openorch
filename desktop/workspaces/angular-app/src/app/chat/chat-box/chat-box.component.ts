@@ -148,6 +148,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 
 		if (this.thread?.id) {
 			const rsp = await this.chatService.chatMessages(this.thread.id);
+			console.log(rsp.messages, "hello1")
 			this.messages = rsp.messages!;
 			// The mutationObserver triggers before the app-messages components are rendered.
 			// This ensures scrollToBottom is called when the app loads for the first time,
@@ -163,7 +164,9 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 		this.subscriptions.push(
 			this.chatService.onMessageAdded$.subscribe(async (event) => {
 				if (this.thread?.id && this.thread.id == event.threadId) {
-					const rsp = await this.chatService.chatMessages(this.thread?.id);
+					
+				const rsp = await this.chatService.chatMessages(this.thread?.id);
+				console.log(rsp.messages, "hello1")
 					this.messages = rsp.messages!;
 					this.cd.markForCheck();
 				}
@@ -253,6 +256,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 			if (this.thread) {
 				threadId = changes.thread.currentValue.id;
 				const rsp = await this.chatService.chatMessages(threadId);
+				console.log(rsp.messages, "hello1")
 				this.messages = rsp.messages!;
 			} else {
 				this.thread = {
@@ -308,6 +312,7 @@ export class ChatBoxComponent implements OnChanges, AfterViewInit, OnDestroy {
 						// @todo might not be needed now we have the `chatMessageAdded`
 						// event coming from the firehose
 						const rsp = await this.chatService.chatMessages(threadId);
+						console.log(rsp.messages, "hello1")
 						this.messages = rsp.messages!;
 
 						this.messageCurrentlyStreamed = {

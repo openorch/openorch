@@ -15,6 +15,7 @@ import {
 	ModelSvcListModelsResponse as GetModelsResponse,
 	Configuration,
 	ModelSvcStatusResponse,
+	ModelSvcPlatform as Platform
 } from '@openorch/client';
 import {
 	OnModelLaunch,
@@ -44,6 +45,10 @@ export class ModelService {
 	private onModelReadySubject = new ReplaySubject<OnModelReady>(1);
 	public onModelReady$ = this.onModelReadySubject.asObservable();
 
+	private platformsSubject = new ReplaySubject<Platform[]>(1);
+	public platforms$ = this.platformsSubject.asObservable();
+
+
 	constructor(
 		private server: ServerService,
 		private dockerService: ContainerService
@@ -54,6 +59,8 @@ export class ModelService {
 				apiKey: this.server.token(),
 			})
 		);
+
+		this.initPlatforms()
 
 		// @todo nothing to trigger model start so we resolve to polling
 		setInterval(() => {
@@ -72,6 +79,11 @@ export class ModelService {
 
 		const rsp: GetModelsResponse = await this.modelService.listModels();
 		return rsp.models!;
+	}
+
+	async initPlatforms(){
+		const platformsRsp = await this.modelService.listPlatforms()
+		this.platformsSubject.next(platformsRsp.platforms)
 	}
 
 	private listenToModelReady(): void {

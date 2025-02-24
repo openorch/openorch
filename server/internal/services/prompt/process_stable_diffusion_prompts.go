@@ -31,6 +31,7 @@ import (
 func (p *PromptService) processStableDiffusion(
 	address string,
 	currentPrompt *prompttypes.Prompt,
+	model *openapi.ModelSvcGetModelResponse,
 ) error {
 	sd := stable_diffusion.Client{
 		Address: address,
@@ -126,6 +127,10 @@ func (p *PromptService) processStableDiffusion(
 					ThreadId: currentPrompt.ThreadId,
 					Text:     openapi.PtrString("Sure, here is your image"),
 					FileIds:  fileIds,
+					Meta: map[string]interface{}{
+						"modelId":    model.Model.Id,
+						"platformId": model.Platform.Id,
+					},
 				},
 			},
 		).

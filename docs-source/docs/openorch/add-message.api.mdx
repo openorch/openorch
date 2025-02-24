@@ -54,7 +54,7 @@ Add a new message to a specific thread.
 
 <RequestSchema
   title={"Body"}
-  body={{"content":{"application/json":{"schema":{"properties":{"message":{"properties":{"createdAt":{"type":"string"},"fileIds":{"description":"FileIds defines the file attachments the message has.","items":{"type":"string"},"type":"array"},"id":{"example":"msg_emSOPlW58o","type":"string"},"text":{"description":"Text content of the message eg. \"Hi, what's up?\"","type":"string"},"threadId":{"description":"ThreadId of the message.","example":"thr_emSOeEUWAg","type":"string"},"updatedAt":{"type":"string"},"userId":{"description":"UserId is the id of the user who wrote the message.\nFor AI messages this field is empty.","type":"string"}},"required":["id","threadId"],"type":"object"}},"type":"object"}}},"description":"Add Message Request","required":true}}
+  body={{"content":{"application/json":{"schema":{"properties":{"message":{"properties":{"createdAt":{"type":"string"},"fileIds":{"description":"FileIds defines the file attachments the message has.","items":{"type":"string"},"type":"array"},"id":{"example":"msg_emSOPlW58o","type":"string"},"meta":{"additionalProperties":true,"type":"object"},"text":{"description":"Text content of the message eg. \"Hi, what's up?\"","type":"string"},"threadId":{"description":"ThreadId of the message.","example":"thr_emSOeEUWAg","type":"string"},"updatedAt":{"type":"string"},"userId":{"description":"UserId is the id of the user who wrote the message.\nFor AI messages this field is empty.","type":"string"}},"required":["id","threadId"],"type":"object"}},"type":"object"}}},"description":"Add Message Request","required":true}}
 >
   
 </RequestSchema>

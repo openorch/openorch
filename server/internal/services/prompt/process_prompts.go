@@ -219,26 +219,6 @@ func (p *PromptService) processPrompt(
 		logger.Error("Failed to publish firehose event", slog.Any("error", err))
 	}
 
-	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
-		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
-		Body(openapi.ChatSvcAddMessageRequest{
-			Message: &openapi.ChatSvcMessage{
-				// not a fan of taking the prompt id but at least it makes this idempotent
-				// in case prompts get retried over and over again
-				Id:       currentPrompt.Id,
-				ThreadId: currentPrompt.ThreadId,
-				UserId:   openapi.PtrString(currentPrompt.UserId),
-				Text:     openapi.PtrString(currentPrompt.Prompt),
-				CreatedAt: openapi.PtrString(
-					time.Now().Format(time.RFC3339Nano),
-				),
-			},
-		}).
-		Execute()
-	if err != nil {
-		return err
-	}
-
 	modelId := currentPrompt.ModelId
 	if modelId == "" {
 		getConfigRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
@@ -259,6 +239,36 @@ func (p *PromptService) processPrompt(
 		currentPrompt.ModelId = modelId
 	}
 
+	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
+		ModelSvcAPI.GetModel(context.Background(), modelId).
+		Execute()
+	if err != nil {
+		return err
+	}
+	_, _, err = p.clientFactory.Client(sdk.WithToken(p.token)).
+		ChatSvcAPI.AddMessage(context.Background(), currentPrompt.ThreadId).
+		Body(openapi.ChatSvcAddMessageRequest{
+			Message: &openapi.ChatSvcMessage{
+				// not a fan of taking the prompt id but at least it makes this idempotent
+				// in case prompts get retried over and over again
+				Id:       currentPrompt.Id,
+				ThreadId: currentPrompt.ThreadId,
+				UserId:   openapi.PtrString(currentPrompt.UserId),
+				Text:     openapi.PtrString(currentPrompt.Prompt),
+				CreatedAt: openapi.PtrString(
+					time.Now().Format(time.RFC3339Nano),
+				),
+				Meta: map[string]interface{}{
+					"modelId":    getModelRsp.Model.Id,
+					"platformId": getModelRsp.Platform.Id,
+				},
+			},
+		}).
+		Execute()
+	if err != nil {
+		return err
+	}
+
 	statusRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
 		ModelSvcAPI.GetModelStatus(context.Background(), modelId).
 		Execute()
@@ -277,7 +287,7 @@ func (p *PromptService) processPrompt(
 		stat.Address = "http://" + stat.Address
 	}
 
-	err = p.processPlatform(stat.Address, modelId, currentPrompt)
+	err = p.processPlatform(stat.Address, currentPrompt, getModelRsp)
 
 	logger.Debug("Finished streaming prompt",
 		slog.String("error", fmt.Sprintf("%v", err)),
@@ -291,22 +301,16 @@ func (p *PromptService) processPrompt(
 
 func (p *PromptService) processPlatform(
 	address string,
-	modelId string,
 	currentPrompt *prompttypes.Prompt,
+	model *openapi.ModelSvcGetModelResponse,
 ) error {
-	getModelRsp, _, err := p.clientFactory.Client(sdk.WithToken(p.token)).
-		ModelSvcAPI.GetModel(context.Background(), modelId).
-		Execute()
-	if err != nil {
-		return err
-	}
 
-	switch *getModelRsp.Platform.Id {
+	switch *model.Platform.Id {
 	case modeltypes.PlatformLlamaCpp.Id:
-		return p.processLlamaCpp(address, currentPrompt)
+		return p.processLlamaCpp(address, currentPrompt, model)
 	case modeltypes.PlatformStableDiffusion.Id:
-		return p.processStableDiffusion(address, currentPrompt)
+		return p.processStableDiffusion(address, currentPrompt, model)
 	}
 
-	return fmt.Errorf("cannot find platform %v", getModelRsp.Platform.Id)
+	return fmt.Errorf("cannot find platform %v", model.Platform.Id)
 }

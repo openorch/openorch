@@ -38,6 +38,8 @@ type Message struct {
 
 	// FileIds defines the file attachments the message has.
 	FileIds []string `json:"fileIds,omitempty"`
+
+	Meta map[string]interface{} `json:"meta,omitempty"`
 }
 
 func (c *Message) GetId() string {

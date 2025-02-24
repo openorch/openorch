@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.22
+API version: 0.3.0-rc.25
 Contact: sales@singulatron.com
 */
 
@@ -26,6 +26,7 @@ type ChatSvcMessage struct {
 	// FileIds defines the file attachments the message has.
 	FileIds []string `json:"fileIds,omitempty"`
 	Id string `json:"id"`
+	Meta map[string]interface{} `json:"meta,omitempty"`
 	// Text content of the message eg. \"Hi, what's up?\"
 	Text *string `json:"text,omitempty"`
 	// ThreadId of the message.
@@ -142,6 +143,38 @@ func (o *ChatSvcMessage) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *ChatSvcMessage) SetId(v string) {
 	o.Id = v
+}
+
+// GetMeta returns the Meta field value if set, zero value otherwise.
+func (o *ChatSvcMessage) GetMeta() map[string]interface{} {
+	if o == nil || IsNil(o.Meta) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Meta
+}
+
+// GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChatSvcMessage) GetMetaOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Meta) {
+		return map[string]interface{}{}, false
+	}
+	return o.Meta, true
+}
+
+// HasMeta returns a boolean if a field has been set.
+func (o *ChatSvcMessage) HasMeta() bool {
+	if o != nil && !IsNil(o.Meta) {
+		return true
+	}
+
+	return false
+}
+
+// SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
+func (o *ChatSvcMessage) SetMeta(v map[string]interface{}) {
+	o.Meta = v
 }
 
 // GetText returns the Text field value if set, zero value otherwise.
@@ -281,6 +314,9 @@ func (o ChatSvcMessage) ToMap() (map[string]interface{}, error) {
 		toSerialize["fileIds"] = o.FileIds
 	}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.Meta) {
+		toSerialize["meta"] = o.Meta
+	}
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
