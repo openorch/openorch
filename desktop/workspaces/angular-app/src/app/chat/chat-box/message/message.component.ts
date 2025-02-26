@@ -85,7 +85,6 @@ export class MessageComponent {
 
 
 	formatPlatformName(platforms:ModelSvcPlatform[]| null):string{
-		console.log( this.message)
 		if(!platforms){
 			return ""
 		}

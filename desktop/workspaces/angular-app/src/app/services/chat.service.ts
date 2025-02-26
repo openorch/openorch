@@ -88,9 +88,6 @@ export class ChatService {
 	}
 
 	async chatMessages(threadId: string): Promise<ChatSvcGetMessagesResponse> {
-		console.log(await this.chatService.getMessages({
-			threadId: threadId,
-		}))
 		return this.chatService.getMessages({
 			threadId: threadId,
 		});
