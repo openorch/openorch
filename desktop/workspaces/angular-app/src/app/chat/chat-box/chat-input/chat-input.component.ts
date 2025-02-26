@@ -51,7 +51,7 @@ export interface SendOutput {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatInputComponent implements OnInit, AfterViewInit {
-	private model: Model | undefined;
+	public model: Model | undefined;
 	private models: Model[] = [];
 	public message: string = '';
 	private subscriptions: Subscription[] = [];

@@ -83,9 +83,10 @@
 		color: #494949;
 		width: 240px;
 		border-bottom: #ccc 1px solid;
+		--highlight-color: #00bfff !important;
 	}
 	  ion-input input::placeholder {
-		font-size: 13px;
+		font-size: 12px;
 	}
 
 	  @media (max-width: 600px) {

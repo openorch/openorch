@@ -7,6 +7,10 @@
  -->
 <div class="wrapper" style="display: flex; width: 100%; flex-direction: column;">
 	<div [ngClass]="{'expanded': expanded}" class="chat-input-params">
+		<div *ngIf=" this.model?.platformId != 'stable-diffusion'" style="display: flex; justify-content: center; align-items: center; height: 140px;">
+			<p style="text-align: center; color: #494949; margin-bottom: 1em; align-self: center;">There are no parameters for this model.</p>
+		</div>
+       <div *ngIf=" this.model?.platformId == 'stable-diffusion'">
 		<p style="text-align: center; color: #494949; margin-bottom: 1em;">Stable Diffusion parameters</p>
 		<div class="param-inputs">
 		<ion-input [(ngModel)]="width" type = "number" label="Width" label-placement="floating" placeholder="Width of the generated image in pixels."></ion-input>
@@ -14,7 +18,8 @@
 		<ion-input [(ngModel)]="steps" type = "number"  label="Steps" label-placement="floating" placeholder="Number of steps for generation."></ion-input>
 		<ion-input [(ngModel)]="hrScale" type = "number" label="HRScale" label-placement="floating" placeholder="Controls the level of detail in the image."></ion-input>
 		<ion-input [(ngModel)]="cfgScale" type = "number" label="GuidanceScale" label-placement="floating" placeholder="How closely the image follows the input."></ion-input>
-	    </div>
+	  </div>
+	</div>
 	</div>
 	<div class="chat input" style="flex: 1; position: relative; display: flex; align-items: center; margin-top: auto;">
 		<span (click)="toggleExpand()" class="settings-icon">
