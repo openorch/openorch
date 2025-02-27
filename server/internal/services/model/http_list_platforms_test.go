@@ -47,6 +47,7 @@ func TestListPlatforms(t *testing.T) {
 
 		getModelsRsp, _, err := adminClient.ModelSvcAPI.ListPlatforms(context.Background()).
 			Execute()
+
 		require.NoError(t, err)
 
 		require.Equal(t, 2, len(getModelsRsp.Platforms))

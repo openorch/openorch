@@ -1,13 +1,12 @@
 package model_svc
 
 import (
-	openapi "github.com/openorch/openorch/clients/go"
 	prompt "github.com/openorch/openorch/server/internal/services/prompt/types"
 )
 
 var PlatformLlamaCpp = Platform{
 	Id:   "llama-cpp",
-	Name: openapi.PtrString("Llama CPP"),
+	Name: "Llama CPP",
 	Architectures: Architectures{
 		Default: DefaultParameters{
 			Container: Container{
@@ -34,7 +33,7 @@ var PlatformLlamaCpp = Platform{
 // ENVAR(s) taken from here: https://github.com/AbdBarho/stable-diffusion-webui-docker/blob/master/docker-compose.yml
 var PlatformStableDiffusion = Platform{
 	Id:   "stable-diffusion",
-	Name: openapi.PtrString("Stable Diffusion"),
+	Name: "Stable Diffusion",
 	Architectures: Architectures{
 		Default: DefaultParameters{
 			Container: Container{
