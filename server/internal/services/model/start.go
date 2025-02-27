@@ -197,13 +197,17 @@ func (ms *ModelService) cudaVersion(precision int) (string, error) {
 
 	cudaVersion := *gpu.CudaVersion
 
+	return correctCudaVersionLength(precision, cudaVersion), nil
+}
+
+func correctCudaVersionLength(precision int, cudaVersion string) string {
 	if precision > strings.Count(cudaVersion, ".")+1 {
 		// Here we need to make sure that the CUDA version coming from the GPU
 		// like 12.2 is the same length as our image tags, which are 12.2.0.
-		cudaVersion = longCudaVersionFormat(cudaVersion)
+		return longCudaVersionFormat(cudaVersion)
 	}
 
-	return cudaVersion, nil
+	return cudaVersion
 }
 
 func (ms *ModelService) get(port int) *modeltypes.ModelState {
@@ -360,7 +364,7 @@ func longCudaVersionFormat(gpuCudaVersion string) string {
 
 	// If it's already in the correct length (3 parts), return as is
 	if len(parts) == 3 {
-		return gpuCudaVersion + ".0"
+		return gpuCudaVersion
 	}
 
 	// If it's not in the correct format, ensure it matches by appending ".0"
