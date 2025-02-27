@@ -24,8 +24,8 @@ It defines the AI runtime, supported prompt types, and the underlying hardware a
 */
 type Platform struct {
 	Id            string        `json:"id"`
-	Name          *string       `json:"name,omitempty"`
-	Version       *int          `json:"version,omitempty"`
+	Name          string        `json:"name,omitempty"`
+	Version       int           `json:"version,omitempty"`
 	Architectures Architectures `json:"architectures"`
 
 	// List of prompt types that the AI engine supports.
