@@ -16,7 +16,8 @@ var PlatformLlamaCpp = Platform{
 			},
 		},
 		Cuda: CudaParameters{
-			DefaultCudaVersion: "12.8.0",
+			DefaultCudaVersion:   "12.8.0",
+			CudaVersionPrecision: 3,
 			Container: Container{
 				Port: 8000,
 				// For the source of this image, see `server/docker/llama-cpp-python/cuda`
