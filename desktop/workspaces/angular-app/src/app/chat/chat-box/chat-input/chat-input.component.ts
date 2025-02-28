@@ -176,8 +176,8 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 						steps: this.steps,
 						width: this.width,
 						height: this.height,
-						cfgScale: this.cfgScale,
-						hrScale: this.hrScale,
+						cfg_scale: this.cfgScale,
+						hr_scale: this.hrScale,
 					},
 				},
 			};
