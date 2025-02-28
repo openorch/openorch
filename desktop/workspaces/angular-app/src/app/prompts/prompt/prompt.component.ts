@@ -46,7 +46,7 @@ export class PromptComponent {
 				parameters: this.prompt.parameters,
 				engineParameters: this.prompt.engineParameters,
 			},
-			null,
+			undefined,
 			2
 		);
 	}
