@@ -13,59 +13,59 @@
 import { RequestFile } from './models';
 
 export class StableDiffusionTxt2ImgRequest {
-    'alwaysonScripts'?: { [key: string]: string; };
-    'batchSize'?: number;
-    'cfgScale'?: number;
+    'alwayson_scripts'?: { [key: string]: string; };
+    'batch_size'?: number;
+    'cfg_scale'?: number;
     'comments'?: { [key: string]: string; };
-    'denoisingStrength'?: number;
-    'disableExtraNetworks'?: boolean;
-    'doNotSaveGrid'?: boolean;
-    'doNotSaveSamples'?: boolean;
-    'enableHr'?: boolean;
+    'denoising_strength'?: number;
+    'disable_extra_networks'?: boolean;
+    'do_not_save_grid'?: boolean;
+    'do_not_save_samples'?: boolean;
+    'enable_hr'?: boolean;
     'eta'?: number;
-    'firstpassImage'?: string;
-    'firstphaseHeight'?: number;
-    'firstphaseWidth'?: number;
-    'forceTaskId'?: string;
+    'firstpass_image'?: string;
+    'firstphase_height'?: number;
+    'firstphase_width'?: number;
+    'force_task_id'?: string;
     'height'?: number;
-    'hrCheckpointName'?: string;
-    'hrNegativePrompt'?: string;
-    'hrPrompt'?: string;
-    'hrResizeX'?: number;
-    'hrResizeY'?: number;
-    'hrSamplerName'?: string;
-    'hrScale'?: number;
-    'hrScheduler'?: string;
-    'hrSecondPassSteps'?: number;
-    'hrUpscaler'?: string;
+    'hr_checkpoint_name'?: string;
+    'hr_negative_prompt'?: string;
+    'hr_prompt'?: string;
+    'hr_resize_x'?: number;
+    'hr_resize_y'?: number;
+    'hr_sampler_name'?: string;
+    'hr_scale'?: number;
+    'hr_scheduler'?: string;
+    'hr_second_pass_steps'?: number;
+    'hr_upscaler'?: string;
     'infotext'?: string;
-    'nIter'?: number;
-    'negativePrompt'?: string;
-    'overrideSettings'?: { [key: string]: string; };
-    'overrideSettingsRestoreAfterwards'?: boolean;
+    'n_iter'?: number;
+    'negative_prompt'?: string;
+    'override_settings'?: { [key: string]: string; };
+    'override_settings_restore_afterwards'?: boolean;
     'prompt'?: string;
-    'refinerCheckpoint'?: string;
-    'refinerSwitchAt'?: number;
-    'restoreFaces'?: boolean;
-    'sChurn'?: number;
-    'sMinUncond'?: number;
-    'sNoise'?: number;
-    'sTmax'?: number;
-    'sTmin'?: number;
-    'samplerIndex'?: string;
-    'samplerName'?: string;
-    'saveImages'?: boolean;
+    'refiner_checkpoint'?: string;
+    'refiner_switch_at'?: number;
+    'restore_faces'?: boolean;
+    's_churn'?: number;
+    's_min_uncond'?: number;
+    's_noise'?: number;
+    's_tmax'?: number;
+    's_tmin'?: number;
+    'sampler_index'?: string;
+    'sampler_name'?: string;
+    'save_images'?: boolean;
     'scheduler'?: string;
-    'scriptArgs'?: Array<string>;
-    'scriptName'?: string;
+    'script_args'?: Array<string>;
+    'script_name'?: string;
     'seed'?: number;
-    'seedResizeFromH'?: number;
-    'seedResizeFromW'?: number;
-    'sendImages'?: boolean;
+    'seed_resize_from_h'?: number;
+    'seed_resize_from_w'?: number;
+    'send_images'?: boolean;
     'steps'?: number;
     'styles'?: Array<string>;
     'subseed'?: number;
-    'subseedStrength'?: number;
+    'subseed_strength'?: number;
     'tiling'?: boolean;
     'width'?: number;
 
@@ -73,17 +73,17 @@ export class StableDiffusionTxt2ImgRequest {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "alwaysonScripts",
+            "name": "alwayson_scripts",
             "baseName": "alwayson_scripts",
             "type": "{ [key: string]: string; }"
         },
         {
-            "name": "batchSize",
+            "name": "batch_size",
             "baseName": "batch_size",
             "type": "number"
         },
         {
-            "name": "cfgScale",
+            "name": "cfg_scale",
             "baseName": "cfg_scale",
             "type": "number"
         },
@@ -93,27 +93,27 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "{ [key: string]: string; }"
         },
         {
-            "name": "denoisingStrength",
+            "name": "denoising_strength",
             "baseName": "denoising_strength",
             "type": "number"
         },
         {
-            "name": "disableExtraNetworks",
+            "name": "disable_extra_networks",
             "baseName": "disable_extra_networks",
             "type": "boolean"
         },
         {
-            "name": "doNotSaveGrid",
+            "name": "do_not_save_grid",
             "baseName": "do_not_save_grid",
             "type": "boolean"
         },
         {
-            "name": "doNotSaveSamples",
+            "name": "do_not_save_samples",
             "baseName": "do_not_save_samples",
             "type": "boolean"
         },
         {
-            "name": "enableHr",
+            "name": "enable_hr",
             "baseName": "enable_hr",
             "type": "boolean"
         },
@@ -123,22 +123,22 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "number"
         },
         {
-            "name": "firstpassImage",
+            "name": "firstpass_image",
             "baseName": "firstpass_image",
             "type": "string"
         },
         {
-            "name": "firstphaseHeight",
+            "name": "firstphase_height",
             "baseName": "firstphase_height",
             "type": "number"
         },
         {
-            "name": "firstphaseWidth",
+            "name": "firstphase_width",
             "baseName": "firstphase_width",
             "type": "number"
         },
         {
-            "name": "forceTaskId",
+            "name": "force_task_id",
             "baseName": "force_task_id",
             "type": "string"
         },
@@ -148,52 +148,52 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "number"
         },
         {
-            "name": "hrCheckpointName",
+            "name": "hr_checkpoint_name",
             "baseName": "hr_checkpoint_name",
             "type": "string"
         },
         {
-            "name": "hrNegativePrompt",
+            "name": "hr_negative_prompt",
             "baseName": "hr_negative_prompt",
             "type": "string"
         },
         {
-            "name": "hrPrompt",
+            "name": "hr_prompt",
             "baseName": "hr_prompt",
             "type": "string"
         },
         {
-            "name": "hrResizeX",
+            "name": "hr_resize_x",
             "baseName": "hr_resize_x",
             "type": "number"
         },
         {
-            "name": "hrResizeY",
+            "name": "hr_resize_y",
             "baseName": "hr_resize_y",
             "type": "number"
         },
         {
-            "name": "hrSamplerName",
+            "name": "hr_sampler_name",
             "baseName": "hr_sampler_name",
             "type": "string"
         },
         {
-            "name": "hrScale",
+            "name": "hr_scale",
             "baseName": "hr_scale",
             "type": "number"
         },
         {
-            "name": "hrScheduler",
+            "name": "hr_scheduler",
             "baseName": "hr_scheduler",
             "type": "string"
         },
         {
-            "name": "hrSecondPassSteps",
+            "name": "hr_second_pass_steps",
             "baseName": "hr_second_pass_steps",
             "type": "number"
         },
         {
-            "name": "hrUpscaler",
+            "name": "hr_upscaler",
             "baseName": "hr_upscaler",
             "type": "string"
         },
@@ -203,22 +203,22 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "string"
         },
         {
-            "name": "nIter",
+            "name": "n_iter",
             "baseName": "n_iter",
             "type": "number"
         },
         {
-            "name": "negativePrompt",
+            "name": "negative_prompt",
             "baseName": "negative_prompt",
             "type": "string"
         },
         {
-            "name": "overrideSettings",
+            "name": "override_settings",
             "baseName": "override_settings",
             "type": "{ [key: string]: string; }"
         },
         {
-            "name": "overrideSettingsRestoreAfterwards",
+            "name": "override_settings_restore_afterwards",
             "baseName": "override_settings_restore_afterwards",
             "type": "boolean"
         },
@@ -228,57 +228,57 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "string"
         },
         {
-            "name": "refinerCheckpoint",
+            "name": "refiner_checkpoint",
             "baseName": "refiner_checkpoint",
             "type": "string"
         },
         {
-            "name": "refinerSwitchAt",
+            "name": "refiner_switch_at",
             "baseName": "refiner_switch_at",
             "type": "number"
         },
         {
-            "name": "restoreFaces",
+            "name": "restore_faces",
             "baseName": "restore_faces",
             "type": "boolean"
         },
         {
-            "name": "sChurn",
+            "name": "s_churn",
             "baseName": "s_churn",
             "type": "number"
         },
         {
-            "name": "sMinUncond",
+            "name": "s_min_uncond",
             "baseName": "s_min_uncond",
             "type": "number"
         },
         {
-            "name": "sNoise",
+            "name": "s_noise",
             "baseName": "s_noise",
             "type": "number"
         },
         {
-            "name": "sTmax",
+            "name": "s_tmax",
             "baseName": "s_tmax",
             "type": "number"
         },
         {
-            "name": "sTmin",
+            "name": "s_tmin",
             "baseName": "s_tmin",
             "type": "number"
         },
         {
-            "name": "samplerIndex",
+            "name": "sampler_index",
             "baseName": "sampler_index",
             "type": "string"
         },
         {
-            "name": "samplerName",
+            "name": "sampler_name",
             "baseName": "sampler_name",
             "type": "string"
         },
         {
-            "name": "saveImages",
+            "name": "save_images",
             "baseName": "save_images",
             "type": "boolean"
         },
@@ -288,12 +288,12 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "string"
         },
         {
-            "name": "scriptArgs",
+            "name": "script_args",
             "baseName": "script_args",
             "type": "Array<string>"
         },
         {
-            "name": "scriptName",
+            "name": "script_name",
             "baseName": "script_name",
             "type": "string"
         },
@@ -303,17 +303,17 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "number"
         },
         {
-            "name": "seedResizeFromH",
+            "name": "seed_resize_from_h",
             "baseName": "seed_resize_from_h",
             "type": "number"
         },
         {
-            "name": "seedResizeFromW",
+            "name": "seed_resize_from_w",
             "baseName": "seed_resize_from_w",
             "type": "number"
         },
         {
-            "name": "sendImages",
+            "name": "send_images",
             "baseName": "send_images",
             "type": "boolean"
         },
@@ -333,7 +333,7 @@ export class StableDiffusionTxt2ImgRequest {
             "type": "number"
         },
         {
-            "name": "subseedStrength",
+            "name": "subseed_strength",
             "baseName": "subseed_strength",
             "type": "number"
         },

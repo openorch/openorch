@@ -20,7 +20,7 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {{ [key: string]: string; }}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    alwaysonScripts?: {
+    alwayson_scripts?: {
         [key: string]: string;
     };
     /**
@@ -28,13 +28,13 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    batchSize?: number;
+    batch_size?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    cfgScale?: number;
+    cfg_scale?: number;
     /**
      *
      * @type {{ [key: string]: string; }}
@@ -48,31 +48,31 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    denoisingStrength?: number;
+    denoising_strength?: number;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    disableExtraNetworks?: boolean;
+    disable_extra_networks?: boolean;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    doNotSaveGrid?: boolean;
+    do_not_save_grid?: boolean;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    doNotSaveSamples?: boolean;
+    do_not_save_samples?: boolean;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    enableHr?: boolean;
+    enable_hr?: boolean;
     /**
      *
      * @type {number}
@@ -84,25 +84,25 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstpassImage?: string;
+    firstpass_image?: string;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstphaseHeight?: number;
+    firstphase_height?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstphaseWidth?: number;
+    firstphase_width?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    forceTaskId?: string;
+    force_task_id?: string;
     /**
      *
      * @type {number}
@@ -114,61 +114,61 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrCheckpointName?: string;
+    hr_checkpoint_name?: string;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrNegativePrompt?: string;
+    hr_negative_prompt?: string;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrPrompt?: string;
+    hr_prompt?: string;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrResizeX?: number;
+    hr_resize_x?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrResizeY?: number;
+    hr_resize_y?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrSamplerName?: string;
+    hr_sampler_name?: string;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrScale?: number;
+    hr_scale?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrScheduler?: string;
+    hr_scheduler?: string;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrSecondPassSteps?: number;
+    hr_second_pass_steps?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrUpscaler?: string;
+    hr_upscaler?: string;
     /**
      *
      * @type {string}
@@ -180,19 +180,19 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    nIter?: number;
+    n_iter?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    negativePrompt?: string;
+    negative_prompt?: string;
     /**
      *
      * @type {{ [key: string]: string; }}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    overrideSettings?: {
+    override_settings?: {
         [key: string]: string;
     };
     /**
@@ -200,7 +200,7 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    overrideSettingsRestoreAfterwards?: boolean;
+    override_settings_restore_afterwards?: boolean;
     /**
      *
      * @type {string}
@@ -212,67 +212,67 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    refinerCheckpoint?: string;
+    refiner_checkpoint?: string;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    refinerSwitchAt?: number;
+    refiner_switch_at?: number;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    restoreFaces?: boolean;
+    restore_faces?: boolean;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sChurn?: number;
+    s_churn?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sMinUncond?: number;
+    s_min_uncond?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sNoise?: number;
+    s_noise?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sTmax?: number;
+    s_tmax?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sTmin?: number;
+    s_tmin?: number;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    samplerIndex?: string;
+    sampler_index?: string;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    samplerName?: string;
+    sampler_name?: string;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    saveImages?: boolean;
+    save_images?: boolean;
     /**
      *
      * @type {string}
@@ -284,13 +284,13 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {Array<string>}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    scriptArgs?: Array<string>;
+    script_args?: Array<string>;
     /**
      *
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    scriptName?: string;
+    script_name?: string;
     /**
      *
      * @type {number}
@@ -302,19 +302,19 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    seedResizeFromH?: number;
+    seed_resize_from_h?: number;
     /**
      *
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    seedResizeFromW?: number;
+    seed_resize_from_w?: number;
     /**
      *
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sendImages?: boolean;
+    send_images?: boolean;
     /**
      *
      * @type {number}
@@ -338,7 +338,7 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    subseedStrength?: number;
+    subseed_strength?: number;
     /**
      *
      * @type {boolean}

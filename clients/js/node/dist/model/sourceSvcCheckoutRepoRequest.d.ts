@@ -17,11 +17,11 @@ export declare class SourceSvcCheckoutRepoRequest {
     /**
     * SSH private key (optional for SSH connection)
     */
-    'sshKey'?: string;
+    'ssh_key'?: string;
     /**
     * Password for SSH private key if encrypted (optional)
     */
-    'sshKeyPwd'?: string;
+    'ssh_key_pwd'?: string;
     /**
     * Token for HTTPS auth (optional for SSH)
     */

@@ -20,11 +20,11 @@ export class SourceSvcCheckoutRepoRequest {
     /**
     * SSH private key (optional for SSH connection)
     */
-    'sshKey'?: string;
+    'ssh_key'?: string;
     /**
     * Password for SSH private key if encrypted (optional)
     */
-    'sshKeyPwd'?: string;
+    'ssh_key_pwd'?: string;
     /**
     * Token for HTTPS auth (optional for SSH)
     */
@@ -51,12 +51,12 @@ export class SourceSvcCheckoutRepoRequest {
             "type": "string"
         },
         {
-            "name": "sshKey",
+            "name": "ssh_key",
             "baseName": "ssh_key",
             "type": "string"
         },
         {
-            "name": "sshKeyPwd",
+            "name": "ssh_key_pwd",
             "baseName": "ssh_key_pwd",
             "type": "string"
         },

@@ -26,13 +26,21 @@ echo "Generating TypeScript Fetch client in $TYPESCRIPT_CLIENT_DIR"
 cd "$JS_CLIENT_DIR"
 rm -r "$TYPESCRIPT_CLIENT_DIR"/src/* || true
 rm -r "$TYPESCRIPT_CLIENT_DIR"/dist/* || true
-openapi-generator-cli generate -i "$SWAGGER_FILE" -g typescript-fetch -o "$TYPESCRIPT_CLIENT_DIR/src"
+openapi-generator-cli generate \
+-i "$SWAGGER_FILE" \
+-g typescript-fetch \
+-o "$TYPESCRIPT_CLIENT_DIR/src" \
+--additional-properties modelPropertyNaming=original \
 
 # Generate TypeScript Node client
 echo "Generating TypeScript Node client in $TYPESCRIPT_NODE_DIR"
 rm -r "$TYPESCRIPT_NODE_DIR"/src/* || true
 rm -r "$TYPESCRIPT_NODE_DIR"/dist/* || true
-openapi-generator-cli generate -i "$SWAGGER_FILE" -g typescript-node -o "$TYPESCRIPT_NODE_DIR/src"
+openapi-generator-cli generate \
+-i "$SWAGGER_FILE" \
+-g typescript-node \
+-o "$TYPESCRIPT_NODE_DIR/src" \
+--additional-properties modelPropertyNaming=original
 
 # Step into the node directory, install dependencies and build
 echo "Installing dependencies and building in node directory"

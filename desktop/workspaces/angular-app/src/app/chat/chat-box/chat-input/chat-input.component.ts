@@ -18,7 +18,12 @@ import {
 	OnInit,
 	ViewEncapsulation,
 } from '@angular/core';
-import { IonIcon, IonTextarea, IonFabButton, IonInput } from '@ionic/angular/standalone';
+import {
+	IonIcon,
+	IonTextarea,
+	IonFabButton,
+	IonInput,
+} from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { TranslatePipe } from '../../../translate.pipe';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +33,10 @@ import {
 } from '../../../services/character.service';
 import { CharacterComponent } from '../../character/character.component';
 import { ModelService } from '../../../services/model.service';
-import { ModelSvcModel as Model, PromptSvcEngineParameters } from '@openorch/client';
+import {
+	ModelSvcModel as Model,
+	PromptSvcEngineParameters,
+} from '@openorch/client';
 import { ConfigService } from '../../../services/config.service';
 import { ChatService } from '../../../services/chat.service';
 import { addIcons } from 'ionicons';
@@ -39,12 +47,21 @@ export interface SendOutput {
 	message: string;
 	characterId: string;
 	modelId: string;
-	engineParameters: PromptSvcEngineParameters
+	engineParameters: PromptSvcEngineParameters;
 }
 
 @Component({
 	selector: 'app-chat-input',
-	imports: [IonIcon, IonTextarea, IonFabButton, FormsModule, TranslatePipe, FormsModule, CommonModule, IonInput],
+	imports: [
+		IonIcon,
+		IonTextarea,
+		IonFabButton,
+		FormsModule,
+		TranslatePipe,
+		FormsModule,
+		CommonModule,
+		IonInput,
+	],
 	templateUrl: './chat-input.component.html',
 	styleUrls: ['./chat-input.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -72,15 +89,15 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		addIcons({
 			'add-outline': addOutline,
 			'arrow-up-outline': arrowUpOutline,
-			'remove-outline': removeOutline
+			'remove-outline': removeOutline,
 		});
 	}
 
 	width: number = 200;
 	height: number = 200;
 	steps: number = 2;
-	cfgScale: number = 7.5
-	hrScale: number = 2
+	cfgScale: number = 7.5;
+	hrScale: number = 2;
 
 	async ngOnInit() {
 		this.models = await this.modelService.getModels();
@@ -94,8 +111,6 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 			})
 		);
 	}
-
-
 
 	expanded: boolean = false;
 
@@ -152,21 +167,20 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		const message = this.message;
 		this.message = '';
 
-		let engineParameters = {}
+		let engineParameters: PromptSvcEngineParameters = {};
 
-		if(this.model?.platformId == "stable-diffusion"){
+		if (this.model?.platformId == 'stable-diffusion') {
 			engineParameters = {
-				stableDiffusion:
-				 {
-					txt2Img:{
-					steps:this.steps,
-					width: this.width,
-					height: this.height,
-					cfgScale: this.cfgScale,
-					hrScale: this.hrScale
-					}
+				stableDiffusion: {
+					txt2Img: {
+						steps: this.steps,
+						width: this.width,
+						height: this.height,
+						cfg_scale: this.cfgScale,
+						hr_scale: this.hrScale,
+					},
 				},
-			}
+			};
 		}
 
 		const character = this.getSelectedCharacter();
@@ -174,8 +188,7 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 			characterId: character?.id || '',
 			message: message,
 			modelId: this.model?.id || '',
-			engineParameters: engineParameters
-
+			engineParameters: engineParameters,
 		});
 	}
 

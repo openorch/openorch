@@ -235,7 +235,7 @@ type LlamaCppParameters struct {
 
 type StableDiffusionParameters struct {
 	// Text to image parameters
-	Txt2Img *stable_diffusion.Txt2ImgRequest
+	Txt2Img *stable_diffusion.Txt2ImgRequest `json:"txt2Img,omitempty"`
 }
 
 func (c *Prompt) GetId() string {

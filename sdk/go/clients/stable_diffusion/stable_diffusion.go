@@ -27,7 +27,9 @@ type Client struct {
 }
 
 func NewClient(address string) *Client {
-	return &Client{Address: address}
+	return &Client{
+		Address: address,
+	}
 }
 
 // /sdapi/v1/txt2img
