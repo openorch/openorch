@@ -24,19 +24,19 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {{ [key: string]: string; }}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    alwaysonScripts?: { [key: string]: string; };
+    alwayson_scripts?: { [key: string]: string; };
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    batchSize?: number;
+    batch_size?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    cfgScale?: number;
+    cfg_scale?: number;
     /**
      * 
      * @type {{ [key: string]: string; }}
@@ -48,31 +48,31 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    denoisingStrength?: number;
+    denoising_strength?: number;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    disableExtraNetworks?: boolean;
+    disable_extra_networks?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    doNotSaveGrid?: boolean;
+    do_not_save_grid?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    doNotSaveSamples?: boolean;
+    do_not_save_samples?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    enableHr?: boolean;
+    enable_hr?: boolean;
     /**
      * 
      * @type {number}
@@ -84,25 +84,25 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstpassImage?: string;
+    firstpass_image?: string;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstphaseHeight?: number;
+    firstphase_height?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    firstphaseWidth?: number;
+    firstphase_width?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    forceTaskId?: string;
+    force_task_id?: string;
     /**
      * 
      * @type {number}
@@ -114,61 +114,61 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrCheckpointName?: string;
+    hr_checkpoint_name?: string;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrNegativePrompt?: string;
+    hr_negative_prompt?: string;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrPrompt?: string;
+    hr_prompt?: string;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrResizeX?: number;
+    hr_resize_x?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrResizeY?: number;
+    hr_resize_y?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrSamplerName?: string;
+    hr_sampler_name?: string;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrScale?: number;
+    hr_scale?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrScheduler?: string;
+    hr_scheduler?: string;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrSecondPassSteps?: number;
+    hr_second_pass_steps?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    hrUpscaler?: string;
+    hr_upscaler?: string;
     /**
      * 
      * @type {string}
@@ -180,25 +180,25 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    nIter?: number;
+    n_iter?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    negativePrompt?: string;
+    negative_prompt?: string;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    overrideSettings?: { [key: string]: string; };
+    override_settings?: { [key: string]: string; };
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    overrideSettingsRestoreAfterwards?: boolean;
+    override_settings_restore_afterwards?: boolean;
     /**
      * 
      * @type {string}
@@ -210,67 +210,67 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    refinerCheckpoint?: string;
+    refiner_checkpoint?: string;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    refinerSwitchAt?: number;
+    refiner_switch_at?: number;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    restoreFaces?: boolean;
+    restore_faces?: boolean;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sChurn?: number;
+    s_churn?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sMinUncond?: number;
+    s_min_uncond?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sNoise?: number;
+    s_noise?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sTmax?: number;
+    s_tmax?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sTmin?: number;
+    s_tmin?: number;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    samplerIndex?: string;
+    sampler_index?: string;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    samplerName?: string;
+    sampler_name?: string;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    saveImages?: boolean;
+    save_images?: boolean;
     /**
      * 
      * @type {string}
@@ -282,13 +282,13 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {Array<string>}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    scriptArgs?: Array<string>;
+    script_args?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    scriptName?: string;
+    script_name?: string;
     /**
      * 
      * @type {number}
@@ -300,19 +300,19 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    seedResizeFromH?: number;
+    seed_resize_from_h?: number;
     /**
      * 
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    seedResizeFromW?: number;
+    seed_resize_from_w?: number;
     /**
      * 
      * @type {boolean}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    sendImages?: boolean;
+    send_images?: boolean;
     /**
      * 
      * @type {number}
@@ -336,7 +336,7 @@ export interface StableDiffusionTxt2ImgRequest {
      * @type {number}
      * @memberof StableDiffusionTxt2ImgRequest
      */
-    subseedStrength?: number;
+    subseed_strength?: number;
     /**
      * 
      * @type {boolean}
@@ -368,59 +368,59 @@ export function StableDiffusionTxt2ImgRequestFromJSONTyped(json: any, ignoreDisc
     }
     return {
         
-        'alwaysonScripts': json['alwayson_scripts'] == null ? undefined : json['alwayson_scripts'],
-        'batchSize': json['batch_size'] == null ? undefined : json['batch_size'],
-        'cfgScale': json['cfg_scale'] == null ? undefined : json['cfg_scale'],
+        'alwayson_scripts': json['alwayson_scripts'] == null ? undefined : json['alwayson_scripts'],
+        'batch_size': json['batch_size'] == null ? undefined : json['batch_size'],
+        'cfg_scale': json['cfg_scale'] == null ? undefined : json['cfg_scale'],
         'comments': json['comments'] == null ? undefined : json['comments'],
-        'denoisingStrength': json['denoising_strength'] == null ? undefined : json['denoising_strength'],
-        'disableExtraNetworks': json['disable_extra_networks'] == null ? undefined : json['disable_extra_networks'],
-        'doNotSaveGrid': json['do_not_save_grid'] == null ? undefined : json['do_not_save_grid'],
-        'doNotSaveSamples': json['do_not_save_samples'] == null ? undefined : json['do_not_save_samples'],
-        'enableHr': json['enable_hr'] == null ? undefined : json['enable_hr'],
+        'denoising_strength': json['denoising_strength'] == null ? undefined : json['denoising_strength'],
+        'disable_extra_networks': json['disable_extra_networks'] == null ? undefined : json['disable_extra_networks'],
+        'do_not_save_grid': json['do_not_save_grid'] == null ? undefined : json['do_not_save_grid'],
+        'do_not_save_samples': json['do_not_save_samples'] == null ? undefined : json['do_not_save_samples'],
+        'enable_hr': json['enable_hr'] == null ? undefined : json['enable_hr'],
         'eta': json['eta'] == null ? undefined : json['eta'],
-        'firstpassImage': json['firstpass_image'] == null ? undefined : json['firstpass_image'],
-        'firstphaseHeight': json['firstphase_height'] == null ? undefined : json['firstphase_height'],
-        'firstphaseWidth': json['firstphase_width'] == null ? undefined : json['firstphase_width'],
-        'forceTaskId': json['force_task_id'] == null ? undefined : json['force_task_id'],
+        'firstpass_image': json['firstpass_image'] == null ? undefined : json['firstpass_image'],
+        'firstphase_height': json['firstphase_height'] == null ? undefined : json['firstphase_height'],
+        'firstphase_width': json['firstphase_width'] == null ? undefined : json['firstphase_width'],
+        'force_task_id': json['force_task_id'] == null ? undefined : json['force_task_id'],
         'height': json['height'] == null ? undefined : json['height'],
-        'hrCheckpointName': json['hr_checkpoint_name'] == null ? undefined : json['hr_checkpoint_name'],
-        'hrNegativePrompt': json['hr_negative_prompt'] == null ? undefined : json['hr_negative_prompt'],
-        'hrPrompt': json['hr_prompt'] == null ? undefined : json['hr_prompt'],
-        'hrResizeX': json['hr_resize_x'] == null ? undefined : json['hr_resize_x'],
-        'hrResizeY': json['hr_resize_y'] == null ? undefined : json['hr_resize_y'],
-        'hrSamplerName': json['hr_sampler_name'] == null ? undefined : json['hr_sampler_name'],
-        'hrScale': json['hr_scale'] == null ? undefined : json['hr_scale'],
-        'hrScheduler': json['hr_scheduler'] == null ? undefined : json['hr_scheduler'],
-        'hrSecondPassSteps': json['hr_second_pass_steps'] == null ? undefined : json['hr_second_pass_steps'],
-        'hrUpscaler': json['hr_upscaler'] == null ? undefined : json['hr_upscaler'],
+        'hr_checkpoint_name': json['hr_checkpoint_name'] == null ? undefined : json['hr_checkpoint_name'],
+        'hr_negative_prompt': json['hr_negative_prompt'] == null ? undefined : json['hr_negative_prompt'],
+        'hr_prompt': json['hr_prompt'] == null ? undefined : json['hr_prompt'],
+        'hr_resize_x': json['hr_resize_x'] == null ? undefined : json['hr_resize_x'],
+        'hr_resize_y': json['hr_resize_y'] == null ? undefined : json['hr_resize_y'],
+        'hr_sampler_name': json['hr_sampler_name'] == null ? undefined : json['hr_sampler_name'],
+        'hr_scale': json['hr_scale'] == null ? undefined : json['hr_scale'],
+        'hr_scheduler': json['hr_scheduler'] == null ? undefined : json['hr_scheduler'],
+        'hr_second_pass_steps': json['hr_second_pass_steps'] == null ? undefined : json['hr_second_pass_steps'],
+        'hr_upscaler': json['hr_upscaler'] == null ? undefined : json['hr_upscaler'],
         'infotext': json['infotext'] == null ? undefined : json['infotext'],
-        'nIter': json['n_iter'] == null ? undefined : json['n_iter'],
-        'negativePrompt': json['negative_prompt'] == null ? undefined : json['negative_prompt'],
-        'overrideSettings': json['override_settings'] == null ? undefined : json['override_settings'],
-        'overrideSettingsRestoreAfterwards': json['override_settings_restore_afterwards'] == null ? undefined : json['override_settings_restore_afterwards'],
+        'n_iter': json['n_iter'] == null ? undefined : json['n_iter'],
+        'negative_prompt': json['negative_prompt'] == null ? undefined : json['negative_prompt'],
+        'override_settings': json['override_settings'] == null ? undefined : json['override_settings'],
+        'override_settings_restore_afterwards': json['override_settings_restore_afterwards'] == null ? undefined : json['override_settings_restore_afterwards'],
         'prompt': json['prompt'] == null ? undefined : json['prompt'],
-        'refinerCheckpoint': json['refiner_checkpoint'] == null ? undefined : json['refiner_checkpoint'],
-        'refinerSwitchAt': json['refiner_switch_at'] == null ? undefined : json['refiner_switch_at'],
-        'restoreFaces': json['restore_faces'] == null ? undefined : json['restore_faces'],
-        'sChurn': json['s_churn'] == null ? undefined : json['s_churn'],
-        'sMinUncond': json['s_min_uncond'] == null ? undefined : json['s_min_uncond'],
-        'sNoise': json['s_noise'] == null ? undefined : json['s_noise'],
-        'sTmax': json['s_tmax'] == null ? undefined : json['s_tmax'],
-        'sTmin': json['s_tmin'] == null ? undefined : json['s_tmin'],
-        'samplerIndex': json['sampler_index'] == null ? undefined : json['sampler_index'],
-        'samplerName': json['sampler_name'] == null ? undefined : json['sampler_name'],
-        'saveImages': json['save_images'] == null ? undefined : json['save_images'],
+        'refiner_checkpoint': json['refiner_checkpoint'] == null ? undefined : json['refiner_checkpoint'],
+        'refiner_switch_at': json['refiner_switch_at'] == null ? undefined : json['refiner_switch_at'],
+        'restore_faces': json['restore_faces'] == null ? undefined : json['restore_faces'],
+        's_churn': json['s_churn'] == null ? undefined : json['s_churn'],
+        's_min_uncond': json['s_min_uncond'] == null ? undefined : json['s_min_uncond'],
+        's_noise': json['s_noise'] == null ? undefined : json['s_noise'],
+        's_tmax': json['s_tmax'] == null ? undefined : json['s_tmax'],
+        's_tmin': json['s_tmin'] == null ? undefined : json['s_tmin'],
+        'sampler_index': json['sampler_index'] == null ? undefined : json['sampler_index'],
+        'sampler_name': json['sampler_name'] == null ? undefined : json['sampler_name'],
+        'save_images': json['save_images'] == null ? undefined : json['save_images'],
         'scheduler': json['scheduler'] == null ? undefined : json['scheduler'],
-        'scriptArgs': json['script_args'] == null ? undefined : json['script_args'],
-        'scriptName': json['script_name'] == null ? undefined : json['script_name'],
+        'script_args': json['script_args'] == null ? undefined : json['script_args'],
+        'script_name': json['script_name'] == null ? undefined : json['script_name'],
         'seed': json['seed'] == null ? undefined : json['seed'],
-        'seedResizeFromH': json['seed_resize_from_h'] == null ? undefined : json['seed_resize_from_h'],
-        'seedResizeFromW': json['seed_resize_from_w'] == null ? undefined : json['seed_resize_from_w'],
-        'sendImages': json['send_images'] == null ? undefined : json['send_images'],
+        'seed_resize_from_h': json['seed_resize_from_h'] == null ? undefined : json['seed_resize_from_h'],
+        'seed_resize_from_w': json['seed_resize_from_w'] == null ? undefined : json['seed_resize_from_w'],
+        'send_images': json['send_images'] == null ? undefined : json['send_images'],
         'steps': json['steps'] == null ? undefined : json['steps'],
         'styles': json['styles'] == null ? undefined : json['styles'],
         'subseed': json['subseed'] == null ? undefined : json['subseed'],
-        'subseedStrength': json['subseed_strength'] == null ? undefined : json['subseed_strength'],
+        'subseed_strength': json['subseed_strength'] == null ? undefined : json['subseed_strength'],
         'tiling': json['tiling'] == null ? undefined : json['tiling'],
         'width': json['width'] == null ? undefined : json['width'],
     };
@@ -437,59 +437,59 @@ export function StableDiffusionTxt2ImgRequestToJSONTyped(value?: StableDiffusion
 
     return {
         
-        'alwayson_scripts': value['alwaysonScripts'],
-        'batch_size': value['batchSize'],
-        'cfg_scale': value['cfgScale'],
+        'alwayson_scripts': value['alwayson_scripts'],
+        'batch_size': value['batch_size'],
+        'cfg_scale': value['cfg_scale'],
         'comments': value['comments'],
-        'denoising_strength': value['denoisingStrength'],
-        'disable_extra_networks': value['disableExtraNetworks'],
-        'do_not_save_grid': value['doNotSaveGrid'],
-        'do_not_save_samples': value['doNotSaveSamples'],
-        'enable_hr': value['enableHr'],
+        'denoising_strength': value['denoising_strength'],
+        'disable_extra_networks': value['disable_extra_networks'],
+        'do_not_save_grid': value['do_not_save_grid'],
+        'do_not_save_samples': value['do_not_save_samples'],
+        'enable_hr': value['enable_hr'],
         'eta': value['eta'],
-        'firstpass_image': value['firstpassImage'],
-        'firstphase_height': value['firstphaseHeight'],
-        'firstphase_width': value['firstphaseWidth'],
-        'force_task_id': value['forceTaskId'],
+        'firstpass_image': value['firstpass_image'],
+        'firstphase_height': value['firstphase_height'],
+        'firstphase_width': value['firstphase_width'],
+        'force_task_id': value['force_task_id'],
         'height': value['height'],
-        'hr_checkpoint_name': value['hrCheckpointName'],
-        'hr_negative_prompt': value['hrNegativePrompt'],
-        'hr_prompt': value['hrPrompt'],
-        'hr_resize_x': value['hrResizeX'],
-        'hr_resize_y': value['hrResizeY'],
-        'hr_sampler_name': value['hrSamplerName'],
-        'hr_scale': value['hrScale'],
-        'hr_scheduler': value['hrScheduler'],
-        'hr_second_pass_steps': value['hrSecondPassSteps'],
-        'hr_upscaler': value['hrUpscaler'],
+        'hr_checkpoint_name': value['hr_checkpoint_name'],
+        'hr_negative_prompt': value['hr_negative_prompt'],
+        'hr_prompt': value['hr_prompt'],
+        'hr_resize_x': value['hr_resize_x'],
+        'hr_resize_y': value['hr_resize_y'],
+        'hr_sampler_name': value['hr_sampler_name'],
+        'hr_scale': value['hr_scale'],
+        'hr_scheduler': value['hr_scheduler'],
+        'hr_second_pass_steps': value['hr_second_pass_steps'],
+        'hr_upscaler': value['hr_upscaler'],
         'infotext': value['infotext'],
-        'n_iter': value['nIter'],
-        'negative_prompt': value['negativePrompt'],
-        'override_settings': value['overrideSettings'],
-        'override_settings_restore_afterwards': value['overrideSettingsRestoreAfterwards'],
+        'n_iter': value['n_iter'],
+        'negative_prompt': value['negative_prompt'],
+        'override_settings': value['override_settings'],
+        'override_settings_restore_afterwards': value['override_settings_restore_afterwards'],
         'prompt': value['prompt'],
-        'refiner_checkpoint': value['refinerCheckpoint'],
-        'refiner_switch_at': value['refinerSwitchAt'],
-        'restore_faces': value['restoreFaces'],
-        's_churn': value['sChurn'],
-        's_min_uncond': value['sMinUncond'],
-        's_noise': value['sNoise'],
-        's_tmax': value['sTmax'],
-        's_tmin': value['sTmin'],
-        'sampler_index': value['samplerIndex'],
-        'sampler_name': value['samplerName'],
-        'save_images': value['saveImages'],
+        'refiner_checkpoint': value['refiner_checkpoint'],
+        'refiner_switch_at': value['refiner_switch_at'],
+        'restore_faces': value['restore_faces'],
+        's_churn': value['s_churn'],
+        's_min_uncond': value['s_min_uncond'],
+        's_noise': value['s_noise'],
+        's_tmax': value['s_tmax'],
+        's_tmin': value['s_tmin'],
+        'sampler_index': value['sampler_index'],
+        'sampler_name': value['sampler_name'],
+        'save_images': value['save_images'],
         'scheduler': value['scheduler'],
-        'script_args': value['scriptArgs'],
-        'script_name': value['scriptName'],
+        'script_args': value['script_args'],
+        'script_name': value['script_name'],
         'seed': value['seed'],
-        'seed_resize_from_h': value['seedResizeFromH'],
-        'seed_resize_from_w': value['seedResizeFromW'],
-        'send_images': value['sendImages'],
+        'seed_resize_from_h': value['seed_resize_from_h'],
+        'seed_resize_from_w': value['seed_resize_from_w'],
+        'send_images': value['send_images'],
         'steps': value['steps'],
         'styles': value['styles'],
         'subseed': value['subseed'],
-        'subseed_strength': value['subseedStrength'],
+        'subseed_strength': value['subseed_strength'],
         'tiling': value['tiling'],
         'width': value['width'],
     };

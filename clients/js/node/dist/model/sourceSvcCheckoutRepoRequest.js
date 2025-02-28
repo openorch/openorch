@@ -22,12 +22,12 @@ SourceSvcCheckoutRepoRequest.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "sshKey",
+        "name": "ssh_key",
         "baseName": "ssh_key",
         "type": "string"
     },
     {
-        "name": "sshKeyPwd",
+        "name": "ssh_key_pwd",
         "baseName": "ssh_key_pwd",
         "type": "string"
     },

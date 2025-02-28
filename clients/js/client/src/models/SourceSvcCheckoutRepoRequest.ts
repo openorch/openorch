@@ -30,13 +30,13 @@ export interface SourceSvcCheckoutRepoRequest {
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest
      */
-    sshKey?: string;
+    ssh_key?: string;
     /**
      * Password for SSH private key if encrypted (optional)
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest
      */
-    sshKeyPwd?: string;
+    ssh_key_pwd?: string;
     /**
      * Token for HTTPS auth (optional for SSH)
      * @type {string}
@@ -81,8 +81,8 @@ export function SourceSvcCheckoutRepoRequestFromJSONTyped(json: any, ignoreDiscr
     return {
         
         'password': json['password'] == null ? undefined : json['password'],
-        'sshKey': json['ssh_key'] == null ? undefined : json['ssh_key'],
-        'sshKeyPwd': json['ssh_key_pwd'] == null ? undefined : json['ssh_key_pwd'],
+        'ssh_key': json['ssh_key'] == null ? undefined : json['ssh_key'],
+        'ssh_key_pwd': json['ssh_key_pwd'] == null ? undefined : json['ssh_key_pwd'],
         'token': json['token'] == null ? undefined : json['token'],
         'url': json['url'] == null ? undefined : json['url'],
         'username': json['username'] == null ? undefined : json['username'],
@@ -102,8 +102,8 @@ export function SourceSvcCheckoutRepoRequestToJSONTyped(value?: SourceSvcCheckou
     return {
         
         'password': value['password'],
-        'ssh_key': value['sshKey'],
-        'ssh_key_pwd': value['sshKeyPwd'],
+        'ssh_key': value['ssh_key'],
+        'ssh_key_pwd': value['ssh_key_pwd'],
         'token': value['token'],
         'url': value['url'],
         'username': value['username'],

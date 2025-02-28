@@ -26,13 +26,13 @@ export interface SourceSvcCheckoutRepoRequest {
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest
      */
-    sshKey?: string;
+    ssh_key?: string;
     /**
      * Password for SSH private key if encrypted (optional)
      * @type {string}
      * @memberof SourceSvcCheckoutRepoRequest
      */
-    sshKeyPwd?: string;
+    ssh_key_pwd?: string;
     /**
      * Token for HTTPS auth (optional for SSH)
      * @type {string}
