@@ -36,5 +36,18 @@ export class PromptComponent {
 	@Input() prompt!: Prompt;
 	@Input() expanded = false;
 
+	parameters = '';
+
 	constructor() {}
+
+	ngOnInit() {
+		this.parameters = JSON.stringify(
+			{
+				parameters: this.prompt.parameters,
+				engineParameters: this.prompt.engineParameters,
+			},
+			null,
+			2
+		);
+	}
 }
