@@ -113,9 +113,21 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 	}
 
 	expanded: boolean = false;
+	isAdvancedConfigVisible: boolean = false;
 
 	toggleExpand() {
 		this.expanded = !this.expanded;
+	}
+
+	toggleAdvancedConfig() {
+		this.isAdvancedConfigVisible = !this.isAdvancedConfigVisible
+	}
+
+	getPanelHeight() {
+		if (this.isAdvancedConfigVisible) {
+			return this.expanded ? '300px' : '0px';
+		}
+		return this.expanded ? '150px' : '0px';
 	}
 
 	ngAfterViewInit() {

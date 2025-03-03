@@ -60,16 +60,18 @@
 		width: 100%;
 		height: 0;
 		transition: height 0.3s ease-in-out;
-		overflow: hidden;
+		//overflow: hidden;
 	    border-radius: 1rem;
 		border: 1px solid transparent;
 		margin-bottom: 0.5rem;
+		overflow-y: scroll;
 	
 	}
-	
 	.chat-input-params.expanded {
-		height: 150px;
+		border-radius: 1rem;
 		border: 1px solid #ccc;
+	}
+	.chat-input-params.second-expanded {
 		border-radius: 1rem;
 	}
 	.param-inputs{
@@ -90,10 +92,6 @@
 	}
 
 	  @media (max-width: 600px) {
-		.chat-input-params.expanded {
-			height: 150px;
-			overflow: scroll;
-		}
 		.param-inputs {
 			flex-direction: row;
 			flex-wrap: wrap;
@@ -108,8 +106,36 @@
 		ion-input input::placeholder {
 			font-size: 10px;
 		  }
+		  .advanced-span{
+			white-space: normal;
+            width: 60px;
+            text-align: left;
+		   }  
 	}
 
+	.advanced-span{
+		position: absolute; 
+		top: -5px; 
+		right: 10px; 
+		color: #494949; 
+		cursor: pointer;
+		font-size: small;
+		text-decoration: underline;
+	   } 
+
+	   .json-textarea {
+		font-family: monospace;
+		font-size: 14px;
+		background-color: #f4f4f4;
+		color: #333;
+		padding: 10px;
+		border: 2px solid #ccc;
+		border-radius: 2px;
+		white-space: pre-wrap;
+		box-sizing: border-box;
+		width: 60%;
+		min-height: 200px;
+	  }	  
 }
 
 
