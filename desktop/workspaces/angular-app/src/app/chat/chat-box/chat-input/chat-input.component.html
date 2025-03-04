@@ -33,8 +33,9 @@
 					</p>
 					<span (click)="toggleAdvancedConfig()" class="advanced-span">Back</span>
 				</div>
+				<span class="error-span" *ngIf="isInvalidJson">Invalid JSON</span>
 				<div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
-					<ion-textarea class="json-textarea" placeholder="Edit your JSON here..." [readonly]="false"
+					<ion-textarea (click)="this.isInvalidJson = false" [(ngModel)]="jsonData"  class="json-textarea" placeholder="Edit your JSON here..." [readonly]="false"
 						autoGrow="true">
 					</ion-textarea>
 				</div>
