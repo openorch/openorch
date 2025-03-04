@@ -3,9 +3,8 @@ on:
   push:
 
 jobs:
-  index-deploy:
+  demo-deploy:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
