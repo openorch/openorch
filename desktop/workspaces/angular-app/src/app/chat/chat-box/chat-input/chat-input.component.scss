@@ -95,6 +95,9 @@
 		border-bottom: #ccc 1px solid;
 		--highlight-color: #00bfff !important;
 	}
+	ion-textarea{
+		--highlight-color: #00bfff !important;
+	}
 
 	ion-input input::placeholder {
 		font-size: 12px;
