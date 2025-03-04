@@ -1,9 +1,11 @@
 name: "Deploy Demo"
 
 on:
-  push:
-    branches:
-      - "main"
+  workflow_run:
+    workflows: ["OpenOrch frontend Docker build"]
+    branches: [main]
+    types:
+      - completed
 
 jobs:
   demo-deploy:
