@@ -1,6 +1,9 @@
 name: "Deploy Demo"
+
 on:
   push:
+    branches:
+      - "main"
 
 jobs:
   demo-deploy:
