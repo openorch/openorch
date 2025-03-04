@@ -99,6 +99,13 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 	cfgScale: number = 7.5;
 	hrScale: number = 2;
 
+	jsonData: string = `{
+  "stableDiffusion": {
+    "txt2Img": {}
+  }
+}`
+	parsedJson: any;
+
 	async ngOnInit() {
 		this.models = await this.modelService.getModels();
 		this.cd.markForCheck();
@@ -112,10 +119,24 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		);
 	}
 
+	isInvalidJson: boolean = false;
+
 	expanded: boolean = false;
+	isAdvancedConfigVisible: boolean = false;
 
 	toggleExpand() {
 		this.expanded = !this.expanded;
+	}
+
+	toggleAdvancedConfig() {
+		this.isAdvancedConfigVisible = !this.isAdvancedConfigVisible
+	}
+
+	getPanelHeight() {
+		if (this.isAdvancedConfigVisible) {
+			return this.expanded ? '300px' : '0px';
+		}
+		return this.expanded ? '150px' : '0px';
 	}
 
 	ngAfterViewInit() {
@@ -170,17 +191,28 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 		let engineParameters: PromptSvcEngineParameters = {};
 
 		if (this.model?.platformId == 'stable-diffusion') {
-			engineParameters = {
-				stableDiffusion: {
-					txt2Img: {
-						steps: this.steps,
-						width: this.width,
-						height: this.height,
-						cfg_scale: this.cfgScale,
-						hr_scale: this.hrScale,
+			if (this.isAdvancedConfigVisible) {
+				try {
+					this.parsedJson = JSON.parse(this.jsonData);
+					engineParameters = this.parsedJson;
+				} catch (error) {
+					console.error('Invalid JSON:', error);
+					this.isInvalidJson = true;
+					return;
+				}
+			} else {
+				engineParameters = {
+					stableDiffusion: {
+						txt2Img: {
+							steps: this.steps,
+							width: this.width,
+							height: this.height,
+							cfg_scale: this.cfgScale,
+							hr_scale: this.hrScale,
+						},
 					},
-				},
-			};
+				};
+			}
 		}
 
 		const character = this.getSelectedCharacter();
@@ -188,7 +220,7 @@ export class ChatInputComponent implements OnInit, AfterViewInit {
 			characterId: character?.id || '',
 			message: message,
 			modelId: this.model?.id || '',
-			engineParameters: engineParameters,
+			engineParameters: engineParameters
 		});
 	}
 
