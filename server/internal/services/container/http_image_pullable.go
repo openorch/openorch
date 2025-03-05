@@ -37,7 +37,7 @@ import (
 // @Failure      500   {object}  container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
 // @Router       /container-svc/image/{imageName}/pullable [get]
-func (dm *DockerService) ImagePullable(
+func (dm *ContainerService) ImagePullable(
 	w http.ResponseWriter,
 	req *http.Request,
 ) {
@@ -85,7 +85,7 @@ type DockerHubResponse struct {
 	TagStatus string `json:"tag_status"`
 }
 
-func (dm *DockerService) imagePullable(imageName string) (bool, error) {
+func (dm *ContainerService) imagePullable(imageName string) (bool, error) {
 	parts := strings.Split(imageName, ":")
 	image := parts[0]
 	tag := "latest"

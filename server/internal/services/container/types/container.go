@@ -81,10 +81,60 @@ type GetContainerSummaryResponse struct {
 	Summary string `json:"summary" binding:"required"`
 }
 
+// This is only used by the backends, not by the HTTP methods
 type ContainerIsRunningRequest struct {
-	Hash string `json:"hash"`
+	Hash string
+	Name string
 }
 
 type ContainerIsRunningResponse struct {
 	IsRunning bool `json:"isRunning" binding:"required"`
+}
+
+type Container struct {
+	// Id is the unique identifier for the container instance.
+	Id string `json:"id"`
+
+	// Node Id
+	// Please see the documentation for the envar OPENORCH_NODE_ID
+	NodeId string `json:"nodeId"`
+
+	// Name is the human-readable name assigned to the container.
+	Name string `json:"name,omitempty"`
+
+	// Image is the Docker image used to create the container.
+	Image string `json:"image"`
+
+	// Port is the internal port exposed by the container.
+	Port int `json:"port"`
+
+	// HostPort is the port on the host machine mapped to the container’s internal port.
+	HostPort int `json:"hostPort"`
+
+	// Hash is a unique identifier associated with the container.
+	Hash string `json:"hash,omitempty"`
+
+	// Labels are metadata tags assigned to the container.
+	Labels map[string]string `json:"labels,omitempty"`
+
+	// Envs are environment variables set within the container.
+	Envs []string `json:"envs,omitempty"`
+
+	// Keeps are paths that persist across container restarts.
+	// They function like mounts or volumes, but their external storage location is irrelevant.
+	Keeps []string `json:"keeps,omitempty"`
+
+	// GPUEnabled specifies whether GPU support is enabled for the container.
+	GPUEnabled bool `json:"gpuEnabled,omitempty"`
+
+	// Status indicates the current state of the container (e.g., running, stopped).
+	Status string `json:"status"`
+}
+
+type ListContainersRequest struct {
+	NodeId string
+}
+
+type ListContainersResponse struct {
+	Containers []Container `json:"containers,omitempty"`
 }

@@ -36,7 +36,7 @@ import (
 // @SecurityDefinitions.bearerAuth BearerAuth
 // @Security     BearerAuth
 // @Router       /container-svc/container/is-running [get]
-func (dm *DockerService) ContainerIsRunning(
+func (dm *ContainerService) ContainerIsRunning(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {

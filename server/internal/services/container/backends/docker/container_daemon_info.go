@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package containerservice
+package dockerbackend
 
 import (
 	"bytes"
@@ -27,13 +27,13 @@ import (
 	"unicode/utf8"
 
 	"github.com/docker/docker/client"
-	ts "github.com/openorch/openorch/server/internal/services/container/types"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 	"github.com/pkg/errors"
 
 	"github.com/openorch/openorch/sdk/go/logger"
 )
 
-func (d *DockerService) containerDaemonInfo() (*ts.DaemonInfoResponse, error) {
+func (d *DockerBackend) DaemonInfo(container.DaemonInfoRequest) (*container.DaemonInfoResponse, error) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 
@@ -41,7 +41,7 @@ func (d *DockerService) containerDaemonInfo() (*ts.DaemonInfoResponse, error) {
 	// even on windows, we want a docker daemon that can run linux containers
 	// as our containers are linux ones
 	if err == nil && inf.OSType == "linux" {
-		ret := &ts.DaemonInfoResponse{
+		ret := &container.DaemonInfoResponse{
 			Available: true,
 		}
 		if d.dockerHost != "" && d.dockerPort != 0 {
@@ -60,7 +60,7 @@ func (d *DockerService) containerDaemonInfo() (*ts.DaemonInfoResponse, error) {
 			"Cannot find Docker address",
 			slog.String("error", err.Error()),
 		)
-		return &ts.DaemonInfoResponse{
+		return &container.DaemonInfoResponse{
 			Available: false,
 		}, nil
 	}
@@ -74,13 +74,13 @@ func (d *DockerService) containerDaemonInfo() (*ts.DaemonInfoResponse, error) {
 	d.dockerPort = port
 
 	daemonAddress := fmt.Sprintf("%v:%v", ip, port)
-	return &ts.DaemonInfoResponse{
+	return &container.DaemonInfoResponse{
 		Available: true,
 		Address:   &daemonAddress,
 	}, nil
 }
 
-func (d *DockerService) tryFixDockerAddress() (ip string, port int, err error) {
+func (d *DockerBackend) tryFixDockerAddress() (ip string, port int, err error) {
 	dockerTcpPort := 2375
 
 	switch runtime.GOOS {

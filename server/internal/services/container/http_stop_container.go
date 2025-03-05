@@ -38,7 +38,7 @@ import (
 // @Failure 500 {object} container.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /container-svc/container/stop [put]
-func (dm *DockerService) StopContainer(
+func (dm *ContainerService) StopContainer(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -80,7 +80,7 @@ func (dm *DockerService) StopContainer(
 	w.Write(jsonData)
 }
 
-func (dm *DockerService) stopContainer(
+func (dm *ContainerService) stopContainer(
 	ctx context.Context,
 	req *container.StopContainerRequest,
 ) error {

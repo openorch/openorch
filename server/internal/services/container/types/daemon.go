@@ -7,6 +7,8 @@
  */
 package container_svc
 
+type DaemonInfoRequest struct{}
+
 type DaemonInfoResponse struct {
 	Available bool    `json:"available" binding:"required"`
 	Address   *string `json:"address,omitempty"`

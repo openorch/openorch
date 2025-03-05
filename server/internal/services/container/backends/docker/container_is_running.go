@@ -10,20 +10,28 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package containerservice
+package dockerbackend
 
 import (
 	"context"
 
-	"github.com/docker/docker/api/types/container"
+	dockercontainer "github.com/docker/docker/api/types/container"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
+
 	"github.com/pkg/errors"
 )
 
-func (d *DockerService) hashIsRunning(hash string) (bool, error) {
+func (d *DockerBackend) ContainerIsRunning(container.ContainerIsRunningRequest) (*container.ContainerIsRunningResponse, error) {
+	return nil, nil
+}
+
+func (d *DockerBackend) hashIsRunning(hash string) (bool, error) {
 	ctx := context.Background()
 	containers, err := d.client.ContainerList(
 		ctx,
-		container.ListOptions{All: true},
+		dockercontainer.ListOptions{
+			All: true,
+		},
 	)
 	if err != nil {
 		return false, errors.Wrap(
@@ -32,11 +40,11 @@ func (d *DockerService) hashIsRunning(hash string) (bool, error) {
 		)
 	}
 
-	for _, container := range containers {
-		if container.State != "running" {
+	for _, cont := range containers {
+		if cont.State != "running" {
 			continue
 		}
-		if container.Labels["openorch-hash"] == hash {
+		if cont.Labels["openorch-hash"] == hash {
 			return true, nil
 		}
 	}
@@ -44,11 +52,13 @@ func (d *DockerService) hashIsRunning(hash string) (bool, error) {
 	return false, nil
 }
 
-func (d *DockerService) nameIsRunning(name string) (bool, error) {
+func (d *DockerBackend) nameIsRunning(name string) (bool, error) {
 	ctx := context.Background()
 	containers, err := d.client.ContainerList(
 		ctx,
-		container.ListOptions{All: true},
+		dockercontainer.ListOptions{
+			All: true,
+		},
 	)
 	if err != nil {
 		return false, errors.Wrap(
@@ -57,11 +67,11 @@ func (d *DockerService) nameIsRunning(name string) (bool, error) {
 		)
 	}
 
-	for _, container := range containers {
-		if container.State != "running" {
+	for _, cont := range containers {
+		if cont.State != "running" {
 			continue
 		}
-		for _, n := range container.Names {
+		for _, n := range cont.Names {
 			if n == name {
 				return true, nil
 			}

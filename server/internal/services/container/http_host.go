@@ -32,7 +32,7 @@ import (
 // @Failure      500   {object}  container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
 // @Router       /container-svc/host [get]
-func (dm *DockerService) Host(
+func (dm *ContainerService) Host(
 	w http.ResponseWriter,
 	req *http.Request,
 ) {
