@@ -36,7 +36,7 @@ import (
 // @Failure 500 {object} container.ErrorResponse "Internal Server Error"
 // @Security BearerAuth
 // @Router /container-svc/container [put]
-func (dm *DockerService) RunContainer(
+func (dm *ContainerService) RunContainer(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -67,15 +67,13 @@ func (dm *DockerService) RunContainer(
 	}
 	defer r.Body.Close()
 
-	di, err := dm.runContainer(req.Image, req.Port, req.HostPort, req.Options)
+	rsp, err := dm.backend.RunContainer(*req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.RunContainerResponse{
-		Info: di,
-	})
+	jsonData, _ := json.Marshal(rsp)
 	w.Write(jsonData)
 }

@@ -116,7 +116,7 @@ func (ms *ModelService) status(
 			slog.String("error", err.Error()),
 		)
 	}
-	if err == nil && hashRsp.IsRunning {
+	if err == nil && hashRsp != nil && hashRsp.IsRunning {
 		isRunning = true
 	}
 

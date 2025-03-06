@@ -37,7 +37,7 @@ import (
 // @Failure      500            {object} container.ErrorResponse  "Internal Server Error"
 // @Security     BearerAuth
 // @Router       /container-svc/container/summary [get]
-func (dm *DockerService) Summary(
+func (dm *ContainerService) Summary(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -77,17 +77,16 @@ func (dm *DockerService) Summary(
 		return
 	}
 
-	summary, err := dm.getContainerLogsAndStatus(hash, int(lines))
+	summary, err := dm.backend.GetContainerSummary(container.GetContainerSummaryRequest{
+		Hash:  hash,
+		Lines: int(lines),
+	})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.GetContainerSummaryResponse{
-		Summary: summary.Summary,
-		Logs:    summary.Logs,
-		Status:  summary.Status,
-	})
+	jsonData, _ := json.Marshal(summary)
 	w.Write(jsonData)
 }

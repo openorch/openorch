@@ -24,7 +24,6 @@ export * from './ContainerSvcImagePullableResponse';
 export * from './ContainerSvcRunContainerOptions';
 export * from './ContainerSvcRunContainerRequest';
 export * from './ContainerSvcRunContainerResponse';
-export * from './ContainerSvcRunInfo';
 export * from './ContainerSvcStopContainerRequest';
 export * from './DataSvcCreateObjectFields';
 export * from './DataSvcCreateObjectRequest';

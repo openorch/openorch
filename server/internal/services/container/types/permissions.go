@@ -38,6 +38,7 @@ var PermissionImageBuild = openapi.UserSvcPermission{
 }
 
 var AdminPermissions = []openapi.UserSvcPermission{
+	PermissionContainerCreate,
 	PermissionContainerView,
 	PermissionContainerEdit,
 	PermissionContainerStop,

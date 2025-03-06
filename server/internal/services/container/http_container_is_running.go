@@ -36,7 +36,7 @@ import (
 // @SecurityDefinitions.bearerAuth BearerAuth
 // @Security     BearerAuth
 // @Router       /container-svc/container/is-running [get]
-func (dm *DockerService) ContainerIsRunning(
+func (dm *ContainerService) ContainerIsRunning(
 	w http.ResponseWriter,
 	r *http.Request,
 ) {
@@ -75,16 +75,10 @@ func (dm *DockerService) ContainerIsRunning(
 		return
 	}
 
-	var (
-		isRunning bool
-	)
-
-	if hash != "" {
-		isRunning, err = dm.hashIsRunning(hash)
-	}
-	if name != "" {
-		isRunning, err = dm.nameIsRunning(name)
-	}
+	isRunningRsp, err := dm.backend.ContainerIsRunning(container.ContainerIsRunningRequest{
+		Hash: hash,
+		Name: name,
+	})
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -92,8 +86,6 @@ func (dm *DockerService) ContainerIsRunning(
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.ContainerIsRunningResponse{
-		IsRunning: isRunning,
-	})
+	jsonData, _ := json.Marshal(isRunningRsp)
 	w.Write(jsonData)
 }

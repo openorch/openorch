@@ -1,4 +1,16 @@
-package containerservice
+/*
+*
+
+  - @license
+
+  - Copyright (c) The Authors (see the AUTHORS file)
+    *
+
+  - This source code is licensed under the GNU Affero General Public License v3.0 (AGPLv3).
+
+  - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
+*/
+package dockerbackend
 
 import (
 	"context"
@@ -6,24 +18,20 @@ import (
 	"io"
 	"strings"
 
-	"github.com/docker/docker/api/types/container"
+	dockerapicontainer "github.com/docker/docker/api/types/container"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 	"github.com/pkg/errors"
 )
 
-type logsAndStatus struct {
-	Logs    string `json:"logs"`
-	Status  string `json:"status"`
-	Summary string `json:"summary"`
-}
-
-func (d *DockerService) getContainerLogsAndStatus(
-	openorchHash string,
-	logCount int,
-) (*logsAndStatus, error) {
+func (d *DockerBackend) GetContainerSummary(
+	request container.GetContainerSummaryRequest,
+) (*container.GetContainerSummaryResponse, error) {
 	ctx := context.Background()
 	containers, err := d.client.ContainerList(
 		ctx,
-		container.ListOptions{All: true},
+		dockerapicontainer.ListOptions{
+			All: true,
+		},
 	)
 	if err != nil {
 		return nil, errors.Wrap(
@@ -33,11 +41,11 @@ func (d *DockerService) getContainerLogsAndStatus(
 	}
 
 	for _, modelContainer := range containers {
-		if modelContainer.Labels["openorch-hash"] == openorchHash {
-			logOptions := container.LogsOptions{
+		if modelContainer.Labels["openorch-hash"] == request.Hash {
+			logOptions := dockerapicontainer.LogsOptions{
 				ShowStdout: true,
 				ShowStderr: true,
-				Tail:       fmt.Sprintf("%v", logCount),
+				Tail:       fmt.Sprintf("%v", request.Lines),
 			}
 			logsReader, err := d.client.ContainerLogs(
 				ctx,
@@ -111,7 +119,7 @@ func (d *DockerService) getContainerLogsAndStatus(
 				logs.String(),
 			)
 
-			return &logsAndStatus{
+			return &container.GetContainerSummaryResponse{
 				Summary: summary,
 				Status:  containerStatus,
 				Logs:    logs.String(),

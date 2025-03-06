@@ -32,7 +32,7 @@ import (
 // @Failure      500   {object} container.ErrorResponse  "Internal Server Error"
 // @Security BearerAuth
 // @Router       /container-svc/daemon/info [get]
-func (dm *DockerService) DaemonInfo(
+func (dm *ContainerService) DaemonInfo(
 	w http.ResponseWriter,
 	req *http.Request,
 ) {
@@ -52,7 +52,7 @@ func (dm *DockerService) DaemonInfo(
 		return
 	}
 
-	di, err := dm.containerDaemonInfo()
+	di, err := dm.backend.DaemonInfo(container.DaemonInfoRequest{})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

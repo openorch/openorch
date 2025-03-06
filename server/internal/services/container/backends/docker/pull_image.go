@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package containerservice
+package dockerbackend
 
 import (
 	"context"
@@ -30,7 +30,7 @@ import (
 
 var progressRegex = regexp.MustCompile(`(\d+(\.\d+)?)([KMG]?B)/(\d+(\.\d+)?)([KMG]?B)`)
 
-func (d *DockerService) pullImage(imageName string) error {
+func (d *DockerBackend) pullImage(imageName string) error {
 	d.imagePullGlobalMutex.Lock()
 
 	imageMutex, exists := d.imagePullMutexes[imageName]

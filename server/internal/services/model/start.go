@@ -166,13 +166,13 @@ func (ms *ModelService) startWithDocker(
 		return errors.Wrap(err, "failed to launch container")
 	}
 
-	if *runRsp.Info.NewContainerStarted {
-		state := ms.get(int(*runRsp.Info.PortNumber))
+	if *runRsp.NewContainerStarted {
+		state := ms.get(int(*runRsp.PortNumber))
 		if !state.HasCheckerRunning {
 			go ms.checkIfAnswers(
 				model,
 				platform,
-				int(*runRsp.Info.PortNumber),
+				int(*runRsp.PortNumber),
 				state,
 			)
 		}

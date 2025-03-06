@@ -10,7 +10,7 @@
 
   - You may obtain a copy of the AGPL v3.0 at https://www.gnu.org/licenses/agpl-3.0.html.
 */
-package containerservice
+package dockerbackend
 
 import (
 	"bufio"
@@ -29,7 +29,7 @@ import (
 	"strings"
 
 	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
+	dockercontainer "github.com/docker/docker/api/types/container"
 	"github.com/docker/go-connections/nat"
 	"github.com/flusflas/dipper"
 	"github.com/pkg/errors"
@@ -37,6 +37,7 @@ import (
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/logger"
 
+	container "github.com/openorch/openorch/server/internal/services/container/types"
 	dockertypes "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
@@ -46,11 +47,15 @@ const launchedContainerName = "openorch-ai-container"
 /*
 A low level method for running containers.
 */
-func (d *DockerService) runContainer(
-	image string,
-	internalPort, hostPort int,
-	options *dockertypes.RunContainerOptions,
-) (*dockertypes.RunInfo, error) {
+func (d *DockerBackend) RunContainer(
+	req container.RunContainerRequest,
+
+) (*container.RunContainerResponse, error) {
+	image := req.Image
+	internalPort := req.Port
+	hostPort := req.HostPort
+	options := req.Options
+
 	err := d.pullImage(image)
 	if err != nil {
 		return nil, errors.Wrap(err, "image pull failure")
@@ -74,7 +79,7 @@ func (d *DockerService) runContainer(
 		return nil, err
 	}
 
-	containerConfig := &container.Config{
+	containerConfig := &dockercontainer.Config{
 		Image: image,
 		Env:   append(options.Envs, envs...),
 		ExposedPorts: nat.PortSet{
@@ -82,7 +87,7 @@ func (d *DockerService) runContainer(
 		},
 		Labels: map[string]string{},
 	}
-	hostConfig := &container.HostConfig{
+	hostConfig := &dockercontainer.HostConfig{
 		Binds: hostBinds,
 		PortBindings: map[nat.Port][]nat.PortBinding{
 			nat.Port(fmt.Sprintf("%v/tcp", internalPort)): {
@@ -91,15 +96,15 @@ func (d *DockerService) runContainer(
 				},
 			},
 		},
-		Resources: container.Resources{
-			DeviceRequests: []container.DeviceRequest{},
+		Resources: dockercontainer.Resources{
+			DeviceRequests: []dockercontainer.DeviceRequest{},
 		},
 	}
 
 	if options.GPUEnabled {
 		hostConfig.Resources.DeviceRequests = append(
 			hostConfig.Resources.DeviceRequests,
-			container.DeviceRequest{
+			dockercontainer.DeviceRequest{
 				Capabilities: [][]string{
 					{"gpu"},
 				},
@@ -112,7 +117,7 @@ func (d *DockerService) runContainer(
 
 	containers, err := d.client.ContainerList(
 		ctx,
-		container.ListOptions{All: true},
+		dockercontainer.ListOptions{All: true},
 	)
 	if err != nil {
 		return nil, errors.Wrap(
@@ -138,7 +143,10 @@ func (d *DockerService) runContainer(
 	if existingContainer != nil {
 		if existingContainer.State != "running" ||
 			existingContainer.Labels["openorch-hash"] != options.Hash {
-			logs, err := d.getContainerLogsAndStatus(options.Hash, 10)
+			logs, err := d.GetContainerSummary(container.GetContainerSummaryRequest{
+				Hash:  options.Hash,
+				Lines: 10,
+			})
 			if err != nil {
 				logger.Warn(
 					"Error getting container logs",
@@ -151,11 +159,11 @@ func (d *DockerService) runContainer(
 				)
 			}
 
-			if err := d.client.ContainerRemove(ctx, existingContainer.ID, container.RemoveOptions{Force: true}); err != nil {
+			if err := d.client.ContainerRemove(ctx, existingContainer.ID, dockercontainer.RemoveOptions{Force: true}); err != nil {
 				return nil, errors.Wrap(err, "error removing Docker container")
 			}
 		} else {
-			return &dockertypes.RunInfo{
+			return &container.RunContainerResponse{
 				NewContainerStarted: false,
 				PortNumber:          hostPort,
 			}, nil
@@ -176,17 +184,17 @@ func (d *DockerService) runContainer(
 		return nil, errors.Wrap(err, "error creating Docker container")
 	}
 
-	if err := d.client.ContainerStart(ctx, createdContainer.ID, container.StartOptions{}); err != nil {
+	if err := d.client.ContainerStart(ctx, createdContainer.ID, dockercontainer.StartOptions{}); err != nil {
 		return nil, errors.Wrap(err, "error starting Docker container")
 	}
 
-	return &dockertypes.RunInfo{
+	return &container.RunContainerResponse{
 		NewContainerStarted: true,
 		PortNumber:          hostPort,
 	}, nil
 }
 
-func (d *DockerService) additionalEnvsAndHostBinds(
+func (d *DockerBackend) additionalEnvsAndHostBinds(
 	assets map[string]string,
 	persistentPaths []string,
 ) ([]string, []string, error) {
@@ -313,7 +321,7 @@ func (d *DockerService) additionalEnvsAndHostBinds(
 	return environment, hostBinds, nil
 }
 
-func (d *DockerService) getMountedVolume(
+func (d *DockerBackend) getMountedVolume(
 	containerID, mountPoint string,
 ) (string, error) {
 	container, err := d.client.ContainerInspect(

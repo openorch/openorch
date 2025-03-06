@@ -14,66 +14,70 @@ package containerservice
 
 import (
 	"context"
-	"fmt"
+	"log/slog"
 	"sync"
+	"time"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
+	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	"github.com/openorch/openorch/sdk/go/datastore"
 	"github.com/openorch/openorch/sdk/go/lock"
+	"github.com/openorch/openorch/sdk/go/logger"
+	"github.com/pkg/errors"
+
+	"github.com/openorch/openorch/server/internal/services/container/backends"
+	dockerbackend "github.com/openorch/openorch/server/internal/services/container/backends/docker"
 )
 
-type DockerService struct {
+type ContainerService struct {
 	clientFactory sdk.ClientFactory
 	token         string
 
 	lock lock.DistributedLock
 
-	imagesCache          map[string]bool
-	imagePullMutexes     map[string]*sync.Mutex
-	imagePullGlobalMutex sync.Mutex
-	runContainerMutex    sync.Mutex
-	dockerHost           string
-	dockerPort           int
-	client               *client.Client
-	mutex                sync.Mutex
+	backend backends.ContainerBackend
 
 	credentialStore datastore.DataStore
+	containerStore  datastore.DataStore
 
-	volumeName string
+	selfNode      *openapi.RegistrySvcNode
+	selfNodeMutex sync.Mutex
+
+	volumeName           string
+	containerLoopTrigger chan bool
 }
 
 func NewContainerService(
 	volumeName string,
 	clientFactory sdk.ClientFactory,
 	lock lock.DistributedLock,
-	datastoreFactory func(tableName string, instance any) (datastore.DataStore, error),
-) (*DockerService, error) {
-	c, err := client.NewClientWithOpts(
-		client.FromEnv,
-		client.WithAPIVersionNegotiation(),
-	)
-	if err != nil {
-		return nil, err
-	}
-
+	datastoreFactory func(
+		tableName string,
+		instance any,
+	) (datastore.DataStore, error),
+) (*ContainerService, error) {
 	credentialStore, err := datastoreFactory(
-		"dockerSvcCredentials",
+		"containerSvcCredentials",
 		&sdk.Credential{},
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	service := &DockerService{
-		clientFactory:   clientFactory,
-		lock:            lock,
-		credentialStore: credentialStore,
+	containerStore, err := datastoreFactory(
+		"containerSvcCredentials",
+		&sdk.Credential{},
+	)
+	if err != nil {
+		return nil, err
+	}
 
-		client:           c,
-		imagePullMutexes: make(map[string]*sync.Mutex),
-		imagesCache:      make(map[string]bool),
+	service := &ContainerService{
+		clientFactory: clientFactory,
+		lock:          lock,
+
+		credentialStore: credentialStore,
+		containerStore:  containerStore,
 
 		volumeName: volumeName,
 	}
@@ -81,7 +85,7 @@ func NewContainerService(
 	return service, nil
 }
 
-func (ds *DockerService) Start() error {
+func (ds *ContainerService) Start() error {
 	ctx := context.Background()
 	ds.lock.Acquire(ctx, "container-svc-start")
 	defer ds.lock.Release(ctx, "container-svc-start")
@@ -97,22 +101,19 @@ func (ds *DockerService) Start() error {
 	}
 	ds.token = token
 
-	return ds.registerPermissions()
-}
-
-func (ds *DockerService) getDockerHost() (string, error) {
-	// Docker host should only exist for cases like WSL when the
-	// Docker host address is not localhost.
-	// Here instead of trying to return localhost we will try to find the docker bridge
-	// ip so containers can address each other.
-	if ds.dockerHost == "" {
-		return ds.getDockerBridgeIP()
+	backend, err := dockerbackend.NewDockerBackend(
+		ds.volumeName,
+		ds.clientFactory,
+		ds.token,
+	)
+	if err != nil {
+		return err
 	}
-	return ds.dockerHost, nil
-}
+	ds.backend = backend
 
-func (ds *DockerService) getDockerPort() int {
-	return ds.dockerPort
+	go ds.containerLoop()
+
+	return ds.registerPermissions()
 }
 
 type InterfaceInfo struct {
@@ -120,23 +121,56 @@ type InterfaceInfo struct {
 	IPAddresses []string
 }
 
-func (d *DockerService) getDockerBridgeIP() (string, error) {
-	ctx := context.Background()
+func (ms *ContainerService) containerLoop() {
+	ticker := time.NewTicker(1000 * time.Millisecond)
+	defer ticker.Stop()
 
-	networks, err := d.client.NetworkList(ctx, types.NetworkListOptions{})
-	if err != nil {
-		return "", fmt.Errorf("failed to list Docker networks: %w", err)
-	}
+	for {
+		select {
+		case <-ticker.C:
+		case <-ms.containerLoopTrigger:
+		}
 
-	for _, network := range networks {
-		if network.Name == "bridge" {
-			for _, config := range network.IPAM.Config {
-				if config.Gateway != "" {
-					return config.Gateway, nil
-				}
-			}
+		err := ms.containerLoopCycle()
+		if err != nil {
+			logger.Error("Error processing prompt",
+				slog.String("error", err.Error()),
+			)
 		}
 	}
+}
 
-	return "", fmt.Errorf("Docker bridge network not found")
+func (ms *ContainerService) containerLoopCycle() error {
+	//node, err := ms.selfNode()
+	//if err != nil {
+	//	return err
+	//}
+	//
+	//containers, err := ms.client.ContainerList(context.Background(), container.ListOptions{})
+	//if err != nil {
+	//	return nil
+	//}
+
+	return nil
+}
+
+func (ms *ContainerService) getNode() (*openapi.RegistrySvcNode, error) {
+	ms.selfNodeMutex.Lock()
+	defer ms.selfNodeMutex.Unlock()
+
+	if ms.selfNode != nil {
+		return ms.selfNode, nil
+	}
+
+	rsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
+		RegistrySvcAPI.SelfNode(context.Background()).
+		Execute()
+
+	if err != nil {
+		return nil, errors.Wrap(err, "error getting self node from model service")
+	}
+
+	ms.selfNode = &rsp.Node
+
+	return ms.selfNode, nil
 }

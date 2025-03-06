@@ -17,7 +17,7 @@ import (
 	usertypes "github.com/openorch/openorch/server/internal/services/user/types"
 )
 
-func (p *DockerService) registerPermissions() error {
+func (p *ContainerService) registerPermissions() error {
 	ctx := context.Background()
 	userSvc := p.clientFactory.Client(sdk.WithToken(p.token)).UserSvcAPI
 
