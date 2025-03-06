@@ -55,7 +55,7 @@ func (dm *ContainerService) BuildImage(
 	}
 	defer r.Body.Close()
 
-	err = dm.dockerBackend.BuildImage(req)
+	_, err = dm.backend.BuildImage(*req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

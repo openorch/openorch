@@ -47,11 +47,15 @@ const launchedContainerName = "openorch-ai-container"
 /*
 A low level method for running containers.
 */
-func (d *DockerBackend) runContainer(
-	image string,
-	internalPort, hostPort int,
-	options *dockertypes.RunContainerOptions,
-) (*dockertypes.RunInfo, error) {
+func (d *DockerBackend) RunContainer(
+	req container.RunContainerRequest,
+
+) (*container.RunContainerResponse, error) {
+	image := req.Image
+	internalPort := req.Port
+	hostPort := req.HostPort
+	options := req.Options
+
 	err := d.pullImage(image)
 	if err != nil {
 		return nil, errors.Wrap(err, "image pull failure")
@@ -159,7 +163,7 @@ func (d *DockerBackend) runContainer(
 				return nil, errors.Wrap(err, "error removing Docker container")
 			}
 		} else {
-			return &dockertypes.RunInfo{
+			return &container.RunContainerResponse{
 				NewContainerStarted: false,
 				PortNumber:          hostPort,
 			}, nil
@@ -184,7 +188,7 @@ func (d *DockerBackend) runContainer(
 		return nil, errors.Wrap(err, "error starting Docker container")
 	}
 
-	return &dockertypes.RunInfo{
+	return &container.RunContainerResponse{
 		NewContainerStarted: true,
 		PortNumber:          hostPort,
 	}, nil

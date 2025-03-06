@@ -13,11 +13,9 @@
 package containerservice
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
-	dockercontainer "github.com/docker/docker/api/types/container"
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
 	container "github.com/openorch/openorch/server/internal/services/container/types"
@@ -69,25 +67,13 @@ func (dm *ContainerService) StopContainer(
 	}
 	defer r.Body.Close()
 
-	err = dm.stopContainer(r.Context(), req)
+	rsp, err := dm.backend.StopContainer(*req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.StopContainerResponse{})
+	jsonData, _ := json.Marshal(rsp)
 	w.Write(jsonData)
-}
-
-func (dm *ContainerService) stopContainer(
-	ctx context.Context,
-	req *container.StopContainerRequest,
-) error {
-	stopID := req.Id
-	if stopID == "" {
-		stopID = req.Name
-	}
-
-	return dm.client.ContainerStop(ctx, stopID, dockercontainer.StopOptions{})
 }

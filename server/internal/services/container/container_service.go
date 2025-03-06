@@ -35,7 +35,7 @@ type ContainerService struct {
 
 	lock lock.DistributedLock
 
-	dockerBackend backends.ContainerBackend
+	backend backends.ContainerBackend
 
 	credentialStore datastore.DataStore
 	containerStore  datastore.DataStore
@@ -101,7 +101,7 @@ func (ds *ContainerService) Start() error {
 	}
 	ds.token = token
 
-	dockerBackend, err := dockerbackend.NewDockerBackend(
+	backend, err := dockerbackend.NewDockerBackend(
 		ds.volumeName,
 		ds.clientFactory,
 		ds.token,
@@ -109,7 +109,7 @@ func (ds *ContainerService) Start() error {
 	if err != nil {
 		return err
 	}
-	ds.dockerBackend = dockerBackend
+	ds.backend = backend
 
 	go ds.containerLoop()
 

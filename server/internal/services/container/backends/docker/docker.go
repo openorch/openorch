@@ -92,7 +92,7 @@ func (d *DockerBackend) getDockerBridgeIP() (string, error) {
 	return "", fmt.Errorf("Docker bridge network not found")
 }
 
-func (ds *DockerBackend) getDockerHost() (string, error) {
+func (ds *DockerBackend) GetHost() (string, error) {
 	// Docker host should only exist for cases like WSL when the
 	// Docker host address is not localhost.
 	// Here instead of trying to return localhost we will try to find the docker bridge

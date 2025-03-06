@@ -11,11 +11,6 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-type RunInfo struct {
-	NewContainerStarted bool
-	PortNumber          int
-}
-
 type RunContainerRequest struct {
 	// Image is the Docker image to use for the container
 	Image string `json:"image" example:"nginx:latest" binding:"required"`
@@ -58,7 +53,8 @@ type RunContainerOptions struct {
 }
 
 type RunContainerResponse struct {
-	Info *RunInfo `json:"info"`
+	NewContainerStarted bool
+	PortNumber          int
 }
 
 type StopContainerRequest struct {

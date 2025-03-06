@@ -23,4 +23,6 @@ type ContainerBackend interface {
 	StopContainer(container.StopContainerRequest) (*container.StopContainerResponse, error)
 	ContainerIsRunning(container.ContainerIsRunningRequest) (*container.ContainerIsRunningResponse, error)
 	DaemonInfo(container.DaemonInfoRequest) (*container.DaemonInfoResponse, error)
+	GetHost() (string, error)
+	RunContainer(container.RunContainerRequest) (*container.RunContainerResponse, error)
 }

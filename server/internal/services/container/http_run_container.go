@@ -67,15 +67,13 @@ func (dm *ContainerService) RunContainer(
 	}
 	defer r.Body.Close()
 
-	di, err := dm.runContainer(req.Image, req.Port, req.HostPort, req.Options)
+	rsp, err := dm.backend.RunContainer(*req)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.RunContainerResponse{
-		Info: di,
-	})
+	jsonData, _ := json.Marshal(rsp)
 	w.Write(jsonData)
 }

@@ -77,7 +77,7 @@ func (dm *ContainerService) Summary(
 		return
 	}
 
-	summary, err := dm.dockerBackend.GetContainerSummary(container.GetContainerSummaryRequest{
+	summary, err := dm.backend.GetContainerSummary(container.GetContainerSummaryRequest{
 		Hash:  hash,
 		Lines: int(lines),
 	})

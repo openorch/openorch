@@ -52,7 +52,7 @@ func (dm *ContainerService) DaemonInfo(
 		return
 	}
 
-	di, err := dm.containerDaemonInfo()
+	di, err := dm.backend.DaemonInfo(container.DaemonInfoRequest{})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

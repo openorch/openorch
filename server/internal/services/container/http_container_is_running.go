@@ -75,16 +75,10 @@ func (dm *ContainerService) ContainerIsRunning(
 		return
 	}
 
-	var (
-		isRunning bool
-	)
-
-	if hash != "" {
-		isRunning, err = dm.hashIsRunning(hash)
-	}
-	if name != "" {
-		isRunning, err = dm.nameIsRunning(name)
-	}
+	isRunningRsp, err := dm.backend.ContainerIsRunning(container.ContainerIsRunningRequest{
+		Hash: hash,
+		Name: name,
+	})
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -92,8 +86,6 @@ func (dm *ContainerService) ContainerIsRunning(
 		return
 	}
 
-	jsonData, _ := json.Marshal(&container.ContainerIsRunningResponse{
-		IsRunning: isRunning,
-	})
+	jsonData, _ := json.Marshal(isRunningRsp)
 	w.Write(jsonData)
 }
