@@ -21,8 +21,24 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (d *DockerBackend) ContainerIsRunning(container.ContainerIsRunningRequest) (*container.ContainerIsRunningResponse, error) {
-	return nil, nil
+func (d *DockerBackend) ContainerIsRunning(req container.ContainerIsRunningRequest) (*container.ContainerIsRunningResponse, error) {
+	if req.Hash != "" {
+		isRunning, err := d.hashIsRunning(req.Hash)
+		if err != nil {
+			return nil, err
+		}
+		return &container.ContainerIsRunningResponse{
+			IsRunning: isRunning,
+		}, nil
+	}
+
+	isRunning, err := d.nameIsRunning(req.Hash)
+	if err != nil {
+		return nil, err
+	}
+	return &container.ContainerIsRunningResponse{
+		IsRunning: isRunning,
+	}, nil
 }
 
 func (d *DockerBackend) hashIsRunning(hash string) (bool, error) {
