@@ -5636,14 +5636,6 @@ const docTemplate = `{
         "container_svc.RunContainerResponse": {
             "type": "object",
             "properties": {
-                "info": {
-                    "$ref": "#/definitions/container_svc.RunInfo"
-                }
-            }
-        },
-        "container_svc.RunInfo": {
-            "type": "object",
-            "properties": {
                 "newContainerStarted": {
                     "type": "boolean"
                 },
@@ -9081,7 +9073,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.25",
+	Version:          "0.3.0-rc.26",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

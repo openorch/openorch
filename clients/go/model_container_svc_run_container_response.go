@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.25
+API version: 0.3.0-rc.26
 Contact: sales@singulatron.com
 */
 
@@ -20,7 +20,8 @@ var _ MappedNullable = &ContainerSvcRunContainerResponse{}
 
 // ContainerSvcRunContainerResponse struct for ContainerSvcRunContainerResponse
 type ContainerSvcRunContainerResponse struct {
-	Info *ContainerSvcRunInfo `json:"info,omitempty"`
+	NewContainerStarted *bool `json:"newContainerStarted,omitempty"`
+	PortNumber *int32 `json:"portNumber,omitempty"`
 }
 
 // NewContainerSvcRunContainerResponse instantiates a new ContainerSvcRunContainerResponse object
@@ -40,36 +41,68 @@ func NewContainerSvcRunContainerResponseWithDefaults() *ContainerSvcRunContainer
 	return &this
 }
 
-// GetInfo returns the Info field value if set, zero value otherwise.
-func (o *ContainerSvcRunContainerResponse) GetInfo() ContainerSvcRunInfo {
-	if o == nil || IsNil(o.Info) {
-		var ret ContainerSvcRunInfo
+// GetNewContainerStarted returns the NewContainerStarted field value if set, zero value otherwise.
+func (o *ContainerSvcRunContainerResponse) GetNewContainerStarted() bool {
+	if o == nil || IsNil(o.NewContainerStarted) {
+		var ret bool
 		return ret
 	}
-	return *o.Info
+	return *o.NewContainerStarted
 }
 
-// GetInfoOk returns a tuple with the Info field value if set, nil otherwise
+// GetNewContainerStartedOk returns a tuple with the NewContainerStarted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcRunContainerResponse) GetInfoOk() (*ContainerSvcRunInfo, bool) {
-	if o == nil || IsNil(o.Info) {
+func (o *ContainerSvcRunContainerResponse) GetNewContainerStartedOk() (*bool, bool) {
+	if o == nil || IsNil(o.NewContainerStarted) {
 		return nil, false
 	}
-	return o.Info, true
+	return o.NewContainerStarted, true
 }
 
-// HasInfo returns a boolean if a field has been set.
-func (o *ContainerSvcRunContainerResponse) HasInfo() bool {
-	if o != nil && !IsNil(o.Info) {
+// HasNewContainerStarted returns a boolean if a field has been set.
+func (o *ContainerSvcRunContainerResponse) HasNewContainerStarted() bool {
+	if o != nil && !IsNil(o.NewContainerStarted) {
 		return true
 	}
 
 	return false
 }
 
-// SetInfo gets a reference to the given ContainerSvcRunInfo and assigns it to the Info field.
-func (o *ContainerSvcRunContainerResponse) SetInfo(v ContainerSvcRunInfo) {
-	o.Info = &v
+// SetNewContainerStarted gets a reference to the given bool and assigns it to the NewContainerStarted field.
+func (o *ContainerSvcRunContainerResponse) SetNewContainerStarted(v bool) {
+	o.NewContainerStarted = &v
+}
+
+// GetPortNumber returns the PortNumber field value if set, zero value otherwise.
+func (o *ContainerSvcRunContainerResponse) GetPortNumber() int32 {
+	if o == nil || IsNil(o.PortNumber) {
+		var ret int32
+		return ret
+	}
+	return *o.PortNumber
+}
+
+// GetPortNumberOk returns a tuple with the PortNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcRunContainerResponse) GetPortNumberOk() (*int32, bool) {
+	if o == nil || IsNil(o.PortNumber) {
+		return nil, false
+	}
+	return o.PortNumber, true
+}
+
+// HasPortNumber returns a boolean if a field has been set.
+func (o *ContainerSvcRunContainerResponse) HasPortNumber() bool {
+	if o != nil && !IsNil(o.PortNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetPortNumber gets a reference to the given int32 and assigns it to the PortNumber field.
+func (o *ContainerSvcRunContainerResponse) SetPortNumber(v int32) {
+	o.PortNumber = &v
 }
 
 func (o ContainerSvcRunContainerResponse) MarshalJSON() ([]byte, error) {
@@ -82,8 +115,11 @@ func (o ContainerSvcRunContainerResponse) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcRunContainerResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Info) {
-		toSerialize["info"] = o.Info
+	if !IsNil(o.NewContainerStarted) {
+		toSerialize["newContainerStarted"] = o.NewContainerStarted
+	}
+	if !IsNil(o.PortNumber) {
+		toSerialize["portNumber"] = o.PortNumber
 	}
 	return toSerialize, nil
 }

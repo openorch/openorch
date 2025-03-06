@@ -48,7 +48,6 @@ docs/ContainerSvcImagePullableResponse.md
 docs/ContainerSvcRunContainerOptions.md
 docs/ContainerSvcRunContainerRequest.md
 docs/ContainerSvcRunContainerResponse.md
-docs/ContainerSvcRunInfo.md
 docs/ContainerSvcStopContainerRequest.md
 docs/DataSvcAPI.md
 docs/DataSvcCreateObjectFields.md
@@ -247,7 +246,6 @@ model_container_svc_image_pullable_response.go
 model_container_svc_run_container_options.go
 model_container_svc_run_container_request.go
 model_container_svc_run_container_response.go
-model_container_svc_run_info.go
 model_container_svc_stop_container_request.go
 model_data_svc_create_object_fields.go
 model_data_svc_create_object_request.go

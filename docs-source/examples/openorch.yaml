@@ -285,11 +285,6 @@ definitions:
     type: object
   container_svc.RunContainerResponse:
     properties:
-      info:
-        $ref: '#/definitions/container_svc.RunInfo'
-    type: object
-  container_svc.RunInfo:
-    properties:
       newContainerStarted:
         type: boolean
       portNumber:
@@ -2787,7 +2782,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.25
+  version: 0.3.0-rc.26
 paths:
   /chat-svc/events:
     get:

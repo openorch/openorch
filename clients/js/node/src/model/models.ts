@@ -26,7 +26,6 @@ export * from './containerSvcImagePullableResponse';
 export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
-export * from './containerSvcRunInfo';
 export * from './containerSvcStopContainerRequest';
 export * from './dataSvcCreateObjectFields';
 export * from './dataSvcCreateObjectRequest';
@@ -224,7 +223,6 @@ import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableRe
 import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
-import { ContainerSvcRunInfo } from './containerSvcRunInfo';
 import { ContainerSvcStopContainerRequest } from './containerSvcStopContainerRequest';
 import { DataSvcCreateObjectFields } from './dataSvcCreateObjectFields';
 import { DataSvcCreateObjectRequest } from './dataSvcCreateObjectRequest';
@@ -438,7 +436,6 @@ let typeMap: {[index: string]: any} = {
     "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,
-    "ContainerSvcRunInfo": ContainerSvcRunInfo,
     "ContainerSvcStopContainerRequest": ContainerSvcStopContainerRequest,
     "DataSvcCreateObjectFields": DataSvcCreateObjectFields,
     "DataSvcCreateObjectRequest": DataSvcCreateObjectRequest,
