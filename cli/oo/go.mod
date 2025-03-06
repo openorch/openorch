@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/openorch/openorch/clients/go v0.0.0-20250304135634-ebb37f32b4f4
+	github.com/openorch/openorch/clients/go v0.0.0-20241204104942-d2837b21586b
 	github.com/openorch/openorch/sdk/go v0.0.0-20250306122209-6efe374248a5
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.8.1
