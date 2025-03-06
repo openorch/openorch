@@ -20,6 +20,13 @@ type Permission struct {
 	Description string `json:"description,omitempty"`
 
 	// Service who owns the permission
+	//
+	// Uncertain if this aligns with the system's use of slugs.
+	// Issue encountered: I renamed Docker Svc to Container Svc in two steps (by mistake).
+	// The name/slug had already changed to "container-svc," but data was still being saved
+	// in the "dockerSvcCredentials" table.
+	// After renaming the tables as well, I hit a "cannot update unowned permission" error
+	// because ownership relies on this field rather than the user slug. YMMV.
 	OwnerId string `json:"ownerId,omitempty"`
 }
 
