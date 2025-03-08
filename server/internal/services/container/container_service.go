@@ -25,8 +25,12 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 	"github.com/pkg/errors"
 
+	dockerclient "github.com/docker/docker/client"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
+
 	"github.com/openorch/openorch/server/internal/services/container/backends"
 	dockerbackend "github.com/openorch/openorch/server/internal/services/container/backends/docker"
+	"github.com/openorch/openorch/server/internal/services/container/logaccumulator"
 )
 
 type ContainerService struct {
@@ -39,6 +43,7 @@ type ContainerService struct {
 
 	credentialStore datastore.DataStore
 	containerStore  datastore.DataStore
+	logStore        datastore.DataStore
 
 	selfNode      *openapi.RegistrySvcNode
 	selfNodeMutex sync.Mutex
@@ -65,8 +70,16 @@ func NewContainerService(
 	}
 
 	containerStore, err := datastoreFactory(
-		"containerSvcCredentials",
-		&sdk.Credential{},
+		"containerSvcContainers",
+		&container.Container{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	logStore, err := datastoreFactory(
+		"containerSvcLogs",
+		&container.Log{},
 	)
 	if err != nil {
 		return nil, err
@@ -78,6 +91,7 @@ func NewContainerService(
 
 		credentialStore: credentialStore,
 		containerStore:  containerStore,
+		logStore:        logStore,
 
 		volumeName: volumeName,
 	}
@@ -112,13 +126,33 @@ func (ds *ContainerService) Start() error {
 	ds.backend = backend
 
 	go ds.containerLoop()
+	go ds.logLoop()
 
 	return ds.registerPermissions()
 }
 
-type InterfaceInfo struct {
-	Name        string
-	IPAddresses []string
+func (ms *ContainerService) logLoop() {
+	la := logaccumulator.NewLogAccumulator(0, 0, func(ls []*logaccumulator.LogChunk) {
+		logs := make([]datastore.Row, len(ls))
+
+		for _, l := range ls {
+			logs = append(logs, &container.Log{
+				Id:          l.ChunkID,
+				ContainerId: l.ProducerID,
+				// @todo save node id
+				Content: l.Buffer.String(),
+			})
+		}
+
+		err := ms.logStore.UpsertMany(logs)
+		if err != nil {
+			logger.Error("Error saving container logs",
+				slog.String("error", err.Error()),
+			)
+		}
+	})
+
+	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
 }
 
 func (ms *ContainerService) containerLoop() {
