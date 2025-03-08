@@ -54,7 +54,7 @@ func (dm *ContainerService) Host(
 		return
 	}
 
-	host, err := dm.backend.GetHost()
+	host, err := dm.backend.DaemonAddress()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
