@@ -17,6 +17,7 @@ import (
 	"log/slog"
 	"sync"
 	"time"
+	"unicode/utf8"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -25,8 +26,12 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 	"github.com/pkg/errors"
 
+	dockerclient "github.com/docker/docker/client"
+	container "github.com/openorch/openorch/server/internal/services/container/types"
+
 	"github.com/openorch/openorch/server/internal/services/container/backends"
 	dockerbackend "github.com/openorch/openorch/server/internal/services/container/backends/docker"
+	"github.com/openorch/openorch/server/internal/services/container/logaccumulator"
 )
 
 type ContainerService struct {
@@ -39,6 +44,7 @@ type ContainerService struct {
 
 	credentialStore datastore.DataStore
 	containerStore  datastore.DataStore
+	logStore        datastore.DataStore
 
 	selfNode      *openapi.RegistrySvcNode
 	selfNodeMutex sync.Mutex
@@ -65,8 +71,16 @@ func NewContainerService(
 	}
 
 	containerStore, err := datastoreFactory(
-		"containerSvcCredentials",
-		&sdk.Credential{},
+		"containerSvcContainers",
+		&container.Container{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	logStore, err := datastoreFactory(
+		"containerSvcLogs",
+		&container.Log{},
 	)
 	if err != nil {
 		return nil, err
@@ -78,6 +92,7 @@ func NewContainerService(
 
 		credentialStore: credentialStore,
 		containerStore:  containerStore,
+		logStore:        logStore,
 
 		volumeName: volumeName,
 	}
@@ -112,13 +127,76 @@ func (ds *ContainerService) Start() error {
 	ds.backend = backend
 
 	go ds.containerLoop()
+	go ds.logLoop()
 
 	return ds.registerPermissions()
 }
 
-type InterfaceInfo struct {
-	Name        string
-	IPAddresses []string
+func (ms *ContainerService) logLoop() {
+	la := logaccumulator.NewLogAccumulator(0, 0, func(ls []*logaccumulator.LogChunk) {
+		// logs := make([]datastore.Row, len(ls))
+
+		for _, l := range ls {
+			log := &container.Log{
+				Id:          l.ChunkID,
+				ContainerId: l.ProducerID,
+				// @todo save node id
+
+				// Without trimming we get this:
+				// invalid byte sequence for encoding \"UTF8\": 0x00
+				Content: string(cleanInvalidUTF8(l.Buffer.Bytes())),
+			}
+
+			// logs = append(logs, log)
+
+			// @todo remove single upsert once upsertmany is fixed
+			err := ms.logStore.Upsert(log)
+			if err != nil {
+				logger.Error("Error saving container log",
+					slog.String("error", err.Error()),
+				)
+			}
+		}
+
+		// @todo Fix upsertmany and use that as it's more
+		// performant.
+		//
+		// err := ms.logStore.UpsertMany(logs)
+		// if err != nil {
+		// 	logger.Error("Error saving container logs",
+		// 		slog.String("error", err.Error()),
+		// 	)
+		// }
+	})
+
+	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
+}
+
+// Remove invalid UTF-8 byte sequences, including specific problematic bytes like 0x00
+func cleanInvalidUTF8(data []byte) []byte {
+	var result []byte
+
+	for len(data) > 0 {
+		r, size := utf8.DecodeRune(data)
+		if r == utf8.RuneError && size == 1 {
+			// Invalid byte sequence, skip it
+			data = data[size:]
+			continue
+		}
+
+		// Skip specific invalid bytes like 0x00 (null byte) or others (0x80, etc.)
+		if r == utf8.RuneError || r == '\x00' {
+			// Skip over invalid byte and continue to the next
+			data = data[size:]
+			continue
+		}
+
+		// Otherwise, it's a valid character, so add it to the result
+		result = append(result, data[:size]...)
+		data = data[size:]
+	}
+
+	return result
 }
 
 func (ms *ContainerService) containerLoop() {

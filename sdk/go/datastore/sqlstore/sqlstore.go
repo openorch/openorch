@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"log/slog"
 	"reflect"
+	"runtime/debug"
 	"strings"
 	"sync"
 	"time"
@@ -397,6 +398,10 @@ func (s *SQLStore) buildInsertQuery(obj datastore.Row) (string, []interface{}, e
 }
 
 func (s *SQLStore) buildUpsertQuery(obj datastore.Row) (string, []interface{}, error) {
+	if obj == nil {
+		return "", nil, errors.Wrap(errors.New(string(debug.Stack())), "cannot upsert nil object")
+	}
+
 	val := reflect.ValueOf(obj)
 	typ := val.Type()
 
