@@ -21,20 +21,6 @@ OpenOrch was initially created to solve the challenge of running AI models on pr
 
 As the system grew, the authors—despite 10+ years of building both closed and open-source microservices platforms—realized there was still no backend framework that met their needs. So, OpenOrch evolved into the flexible, scalable microservices platform they had been searching for.
 
-## Why
-
-We started with simple goals:
-
-- Run AI models locally without relying on cloud-based services.
-- Expose those models over a network for easy access.
-- Make it work with multiple GPUs and machines.
-
-As we began building AI applications on top, we quickly realized:
-
-- Despite years (decades) of experience with microservices, we still weren’t happy with the available platforms—so we built one that actually fit our needs.
-- With over a decade of experience in microservices and distributed systems, we turned OpenOrch into a flexible, scalable backend framework.
-- We also started implementing features that let us eliminate infrastructure components we disliked setting up every time—like Kubernetes, Docker Compose/Swarm, service discovery, and reverse proxies.
-
 ## Highlights
 
 - On-premise ChatGPT alternative – Run your AI models locally through a UI, CLI or API.
