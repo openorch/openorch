@@ -17,6 +17,7 @@ import (
 	"log/slog"
 	"sync"
 	"time"
+	"unicode/utf8"
 
 	openapi "github.com/openorch/openorch/clients/go"
 	sdk "github.com/openorch/openorch/sdk/go"
@@ -133,26 +134,69 @@ func (ds *ContainerService) Start() error {
 
 func (ms *ContainerService) logLoop() {
 	la := logaccumulator.NewLogAccumulator(0, 0, func(ls []*logaccumulator.LogChunk) {
-		logs := make([]datastore.Row, len(ls))
+		// logs := make([]datastore.Row, len(ls))
 
 		for _, l := range ls {
-			logs = append(logs, &container.Log{
+			log := &container.Log{
 				Id:          l.ChunkID,
 				ContainerId: l.ProducerID,
 				// @todo save node id
-				Content: l.Buffer.String(),
-			})
+
+				// Without trimming we get this:
+				// invalid byte sequence for encoding \"UTF8\": 0x00
+				Content: string(cleanInvalidUTF8(l.Buffer.Bytes())),
+			}
+
+			// logs = append(logs, log)
+
+			// @todo remove single upsert once upsertmany is fixed
+			err := ms.logStore.Upsert(log)
+			if err != nil {
+				logger.Error("Error saving container log",
+					slog.String("error", err.Error()),
+				)
+			}
 		}
 
-		err := ms.logStore.UpsertMany(logs)
-		if err != nil {
-			logger.Error("Error saving container logs",
-				slog.String("error", err.Error()),
-			)
-		}
+		// @todo Fix upsertmany and use that as it's more
+		// performant.
+		//
+		// err := ms.logStore.UpsertMany(logs)
+		// if err != nil {
+		// 	logger.Error("Error saving container logs",
+		// 		slog.String("error", err.Error()),
+		// 	)
+		// }
 	})
 
 	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
+}
+
+// Remove invalid UTF-8 byte sequences, including specific problematic bytes like 0x00
+func cleanInvalidUTF8(data []byte) []byte {
+	var result []byte
+
+	for len(data) > 0 {
+		r, size := utf8.DecodeRune(data)
+		if r == utf8.RuneError && size == 1 {
+			// Invalid byte sequence, skip it
+			data = data[size:]
+			continue
+		}
+
+		// Skip specific invalid bytes like 0x00 (null byte) or others (0x80, etc.)
+		if r == utf8.RuneError || r == '\x00' {
+			// Skip over invalid byte and continue to the next
+			data = data[size:]
+			continue
+		}
+
+		// Otherwise, it's a valid character, so add it to the result
+		result = append(result, data[:size]...)
+		data = data[size:]
+	}
+
+	return result
 }
 
 func (ms *ContainerService) containerLoop() {
