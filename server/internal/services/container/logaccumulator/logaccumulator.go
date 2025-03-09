@@ -14,9 +14,11 @@ type LogEntry struct {
 }
 
 type LogChunk struct {
-	ChunkID    string
-	ProducerID string
-	Buffer     bytes.Buffer
+	ChunkID     string
+	ProducerID  string
+	Buffer      bytes.Buffer
+	LastFlush   time.Time
+	HasNewWrite bool
 }
 
 type LogAccumulator struct {
@@ -63,24 +65,28 @@ func (la *LogAccumulator) autoFlush() {
 	}
 }
 
-// Flush logs (calls consumer only if there's data)
+// Flush logs that passed a certain interval (calls consumer only if there's data)
 func (la *LogAccumulator) Flush() {
 	la.mu.Lock()
 	defer la.mu.Unlock()
 
-	la.flushWithoutLock()
-}
+	flushed := make([]*LogChunk, 0, len(la.chunks))
 
-func (la *LogAccumulator) flushWithoutLock() {
-	chunks := make([]*LogChunk, len(la.chunks))
 	for _, chunk := range la.chunks {
 		if chunk.Buffer.Len() == 0 {
 			continue
 		}
-		chunks = append(chunks, chunk)
+		if time.Since(chunk.LastFlush) > la.flushInterval &&
+			chunk.HasNewWrite {
+			flushed = append(flushed, chunk)
+			chunk.HasNewWrite = false
+			chunk.LastFlush = time.Now()
+		}
 	}
 
-	la.consumer(chunks) // Send chunk to consumer (DB logic outside)
+	if len(flushed) > 0 {
+		la.consumer(flushed)
+	}
 }
 
 // Add log entry and manage chunk size
@@ -92,8 +98,9 @@ func (la *LogAccumulator) AddLog(entry LogEntry) {
 
 	if !exists {
 		chunk = &LogChunk{
-			ChunkID:    sdk.Id("lch"),
-			ProducerID: entry.ProducerID,
+			ChunkID:     sdk.Id("lch"),
+			ProducerID:  entry.ProducerID,
+			HasNewWrite: true,
 		}
 
 		chunk.Buffer.WriteString(entry.Message)
@@ -103,18 +110,28 @@ func (la *LogAccumulator) AddLog(entry LogEntry) {
 	}
 
 	if chunk.Buffer.Len()+len(entry.Message)+1 > la.maxChunkSize {
-		la.flushWithoutLock()
+		la.flushSpecificKey(chunk.ProducerID)
 
-		chunk = &LogChunk{
-			ChunkID:    sdk.Id("lch"),
-			ProducerID: entry.ProducerID,
+		newChunk := &LogChunk{
+			ChunkID:     sdk.Id("lch"),
+			ProducerID:  entry.ProducerID,
+			LastFlush:   time.Now(),
+			HasNewWrite: true,
 		}
 
-		chunk.Buffer.WriteString(entry.Message)
-		la.chunks[entry.ProducerID] = chunk
+		newChunk.Buffer.WriteString(entry.Message)
+
+		la.chunks[entry.ProducerID] = newChunk
 
 		return
 	}
 
+	chunk.HasNewWrite = true
 	chunk.Buffer.WriteString(entry.Message + "\n")
+}
+
+func (la *LogAccumulator) flushSpecificKey(producerId string) {
+	la.consumer([]*LogChunk{
+		la.chunks[producerId],
+	})
 }

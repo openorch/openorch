@@ -43,14 +43,14 @@ func TestLogAccumulatorSizeTriggeredFlush(t *testing.T) {
 		Message:    msg,
 	})
 
-	require.Equal(t, 2, len(chunks))
+	require.Equal(t, 1, len(chunks))
 
 	la.AddLog(LogEntry{
 		ProducerID: "1",
 		Message:    msg,
 	})
 
-	require.Equal(t, 3, len(chunks))
+	require.Equal(t, 2, len(chunks))
 	require.Equal(t, true, chunks[0].ChunkID != chunks[1].ChunkID)
 }
 
@@ -69,17 +69,33 @@ func TestLogAccumulatorTimeTriggeredFlush(t *testing.T) {
 		Message:    msg,
 	})
 
-	require.Equal(t, 0, len(chunks))
+	t.Run("elapsed flush interval should trigger a flush when there is content", func(t *testing.T) {
+		require.Equal(t, 0, len(chunks))
+	})
 
-	time.Sleep(11 * time.Millisecond)
+	t.Run("elapsed flush interval should trigger a flush when there is content", func(t *testing.T) {
+		time.Sleep(11 * time.Millisecond)
 
-	require.Equal(t, 1, len(chunks))
+		require.Equal(t, 1, len(chunks))
+	})
 
-	time.Sleep(11 * time.Millisecond)
+	t.Run("no new chunk because there were no new writes", func(t *testing.T) {
+		time.Sleep(11 * time.Millisecond)
 
-	require.Equal(t, true, chunks[0].ChunkID == chunks[1].ChunkID)
+		require.Equal(t, 1, len(chunks))
+	})
 
-	time.Sleep(11 * time.Millisecond)
+	t.Run("new chunk cretaed because of new writes", func(t *testing.T) {
+		la.AddLog(LogEntry{
+			ProducerID: "1",
+			Message:    msg,
+		})
 
-	require.Equal(t, 1, len(chunks))
+		time.Sleep(11 * time.Millisecond)
+		require.Equal(t, 2, len(chunks))
+	})
+
+	t.Run("chunk id should stay the same until size limit is reached", func(t *testing.T) {
+		require.Equal(t, true, chunks[0].ChunkID == chunks[1].ChunkID)
+	})
 }
