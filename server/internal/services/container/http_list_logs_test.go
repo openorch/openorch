@@ -18,7 +18,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
@@ -68,18 +67,9 @@ func TestListLogs(t *testing.T) {
 	time.Sleep(1000 * time.Millisecond)
 
 	t.Run("list logs", func(t *testing.T) {
-		rsp, _, err := adminClient.ContainerSvcAPI.ListContainerLogs(ctx).Body(openapi.ContainerSvcListLogsRequest{
-			Query: &openapi.DatastoreQuery{
-				OrderBys: []openapi.DatastoreOrderBy{
-					{
-						Field: openapi.PtrString("createdAt"),
-						Desc:  openapi.PtrBool(true),
-					},
-				},
-			},
-		}).Execute()
+		rsp, _, err := adminClient.ContainerSvcAPI.ListContainerLogs(ctx).Body(openapi.ContainerSvcListLogsRequest{}).Execute()
 
 		require.NoError(t, err)
-		spew.Dump(rsp)
+		require.Equal(t, true, len(rsp.Logs) > 0)
 	})
 }

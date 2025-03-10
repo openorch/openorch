@@ -5617,8 +5617,14 @@ const docTemplate = `{
         "container_svc.ListLogsRequest": {
             "type": "object",
             "properties": {
-                "query": {
-                    "$ref": "#/definitions/datastore.Query"
+                "containerId": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
                 }
             }
         },

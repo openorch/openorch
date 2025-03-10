@@ -224,8 +224,12 @@ definitions:
     type: object
   container_svc.ListLogsRequest:
     properties:
-      query:
-        $ref: '#/definitions/datastore.Query'
+      containerId:
+        type: string
+      limit:
+        type: integer
+      nodeId:
+        type: string
     type: object
   container_svc.ListLogsResponse:
     properties:

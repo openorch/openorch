@@ -9,8 +9,6 @@ package container_svc
 
 import (
 	"time"
-
-	"github.com/openorch/openorch/sdk/go/datastore"
 )
 
 type Log struct {
@@ -34,7 +32,9 @@ func (l *Log) GetId() string {
 }
 
 type ListLogsRequest struct {
-	Query datastore.Query `json:"query,omitempty"`
+	NodeId      string `json:"nodeId,omitempty"`
+	ContainerId string `json:"containerId,omitempty"`
+	Limit       int64  `json:"limit,omitempty"`
 }
 
 type ListLogsResponse struct {

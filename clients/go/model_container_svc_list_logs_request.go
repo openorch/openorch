@@ -20,7 +20,9 @@ var _ MappedNullable = &ContainerSvcListLogsRequest{}
 
 // ContainerSvcListLogsRequest struct for ContainerSvcListLogsRequest
 type ContainerSvcListLogsRequest struct {
-	Query *DatastoreQuery `json:"query,omitempty"`
+	ContainerId *string `json:"containerId,omitempty"`
+	Limit *int32 `json:"limit,omitempty"`
+	NodeId *string `json:"nodeId,omitempty"`
 }
 
 // NewContainerSvcListLogsRequest instantiates a new ContainerSvcListLogsRequest object
@@ -40,36 +42,100 @@ func NewContainerSvcListLogsRequestWithDefaults() *ContainerSvcListLogsRequest {
 	return &this
 }
 
-// GetQuery returns the Query field value if set, zero value otherwise.
-func (o *ContainerSvcListLogsRequest) GetQuery() DatastoreQuery {
-	if o == nil || IsNil(o.Query) {
-		var ret DatastoreQuery
+// GetContainerId returns the ContainerId field value if set, zero value otherwise.
+func (o *ContainerSvcListLogsRequest) GetContainerId() string {
+	if o == nil || IsNil(o.ContainerId) {
+		var ret string
 		return ret
 	}
-	return *o.Query
+	return *o.ContainerId
 }
 
-// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// GetContainerIdOk returns a tuple with the ContainerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcListLogsRequest) GetQueryOk() (*DatastoreQuery, bool) {
-	if o == nil || IsNil(o.Query) {
+func (o *ContainerSvcListLogsRequest) GetContainerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ContainerId) {
 		return nil, false
 	}
-	return o.Query, true
+	return o.ContainerId, true
 }
 
-// HasQuery returns a boolean if a field has been set.
-func (o *ContainerSvcListLogsRequest) HasQuery() bool {
-	if o != nil && !IsNil(o.Query) {
+// HasContainerId returns a boolean if a field has been set.
+func (o *ContainerSvcListLogsRequest) HasContainerId() bool {
+	if o != nil && !IsNil(o.ContainerId) {
 		return true
 	}
 
 	return false
 }
 
-// SetQuery gets a reference to the given DatastoreQuery and assigns it to the Query field.
-func (o *ContainerSvcListLogsRequest) SetQuery(v DatastoreQuery) {
-	o.Query = &v
+// SetContainerId gets a reference to the given string and assigns it to the ContainerId field.
+func (o *ContainerSvcListLogsRequest) SetContainerId(v string) {
+	o.ContainerId = &v
+}
+
+// GetLimit returns the Limit field value if set, zero value otherwise.
+func (o *ContainerSvcListLogsRequest) GetLimit() int32 {
+	if o == nil || IsNil(o.Limit) {
+		var ret int32
+		return ret
+	}
+	return *o.Limit
+}
+
+// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcListLogsRequest) GetLimitOk() (*int32, bool) {
+	if o == nil || IsNil(o.Limit) {
+		return nil, false
+	}
+	return o.Limit, true
+}
+
+// HasLimit returns a boolean if a field has been set.
+func (o *ContainerSvcListLogsRequest) HasLimit() bool {
+	if o != nil && !IsNil(o.Limit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLimit gets a reference to the given int32 and assigns it to the Limit field.
+func (o *ContainerSvcListLogsRequest) SetLimit(v int32) {
+	o.Limit = &v
+}
+
+// GetNodeId returns the NodeId field value if set, zero value otherwise.
+func (o *ContainerSvcListLogsRequest) GetNodeId() string {
+	if o == nil || IsNil(o.NodeId) {
+		var ret string
+		return ret
+	}
+	return *o.NodeId
+}
+
+// GetNodeIdOk returns a tuple with the NodeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcListLogsRequest) GetNodeIdOk() (*string, bool) {
+	if o == nil || IsNil(o.NodeId) {
+		return nil, false
+	}
+	return o.NodeId, true
+}
+
+// HasNodeId returns a boolean if a field has been set.
+func (o *ContainerSvcListLogsRequest) HasNodeId() bool {
+	if o != nil && !IsNil(o.NodeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeId gets a reference to the given string and assigns it to the NodeId field.
+func (o *ContainerSvcListLogsRequest) SetNodeId(v string) {
+	o.NodeId = &v
 }
 
 func (o ContainerSvcListLogsRequest) MarshalJSON() ([]byte, error) {
@@ -82,8 +148,14 @@ func (o ContainerSvcListLogsRequest) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcListLogsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Query) {
-		toSerialize["query"] = o.Query
+	if !IsNil(o.ContainerId) {
+		toSerialize["containerId"] = o.ContainerId
+	}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.NodeId) {
+		toSerialize["nodeId"] = o.NodeId
 	}
 	return toSerialize, nil
 }

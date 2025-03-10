@@ -80,26 +80,20 @@ func (dm *ContainerService) ListLogs(
 }
 
 func (dm *ContainerService) listLogs(req *container.ListLogsRequest) (*container.ListLogsResponse, error) {
-	var q datastore.QueryBuilder
-	if req.Query.Filters != nil {
-		q = dm.logStore.Query(req.Query.Filters...)
-	} else {
-		q = dm.logStore.Query()
+	q := dm.logStore.Query()
+
+	if req.NodeId != "" {
+		q = dm.logStore.Query(datastore.Equals([]string{"nodeId"}, req.NodeId))
 	}
 
-	if len(req.Query.OrderBys) > 0 {
-		q = q.OrderBy(req.Query.OrderBys...)
-	} else {
-		q = q.OrderBy(datastore.OrderByField("createdAt", false))
+	if req.ContainerId != "" {
+		q = dm.logStore.Query(datastore.Equals([]string{"containerId"}, req.ContainerId))
 	}
 
-	if req.Query.JSONAfter != "" {
-		v := []any{}
-		err := json.Unmarshal([]byte(req.Query.JSONAfter), &v)
-		if err != nil {
-			return nil, err
-		}
-		q = q.After(v...)
+	q = q.OrderBy(datastore.OrderByField("createdAt", true))
+
+	if req.Limit != 0 {
+		q.Limit(req.Limit)
 	}
 
 	resI, err := q.Find()
