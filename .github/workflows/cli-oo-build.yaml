@@ -28,6 +28,6 @@ jobs:
           go build
         working-directory: ./cli/oo
 
-      - name: Insall current branch
+      - name: Install current branch
         run: |
           go install github.com/openorch/openorch/cli/oo@${{ github.sha }}
