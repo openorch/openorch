@@ -19,15 +19,13 @@ func TestImageExistsInRegistry(t *testing.T) {
 			expectExists: true,
 			expectError:  false,
 		},
-		// @crufter I believe this fails now because of the DockerHub changes.
-		//
-		// {
-		// 	name:         "Existing Long Image Tag",
-		// 	image:        "crufter/llama-cpp-python",
-		// 	tag:          "cuda-12.2.0-latest",
-		// 	expectExists: true,
-		// 	expectError:  false,
-		// },
+		{
+			name:         "Existing Long Image Tag",
+			image:        "crufter/llama-cpp-python",
+			tag:          "cuda-12.2.0-latest",
+			expectExists: true,
+			expectError:  false,
+		},
 		{
 			name:         "Non-Existing Short Tag",
 			image:        "nginx",
@@ -41,11 +39,11 @@ func TestImageExistsInRegistry(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			exists, err := imageExistsInRegistry(tt.image, tt.tag)
 
-			if exists != tt.expectExists {
-				t.Errorf("expected exists=%v, got %v", tt.expectExists, exists)
-			}
 			if (err != nil) != tt.expectError {
 				t.Errorf("expected error=%v, got error=%v", tt.expectError, err)
+			}
+			if exists != tt.expectExists {
+				t.Errorf("expected exists=%v, got %v", tt.expectExists, exists)
 			}
 		})
 	}
