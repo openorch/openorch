@@ -487,6 +487,10 @@ func BigBang(options *Options) (*mux.Router, func() error, error) {
 		containerService.Host(w, r)
 	})).
 		Methods("OPTIONS", "GET")
+	router.HandleFunc("/container-svc/logs", appl(func(w http.ResponseWriter, r *http.Request) {
+		containerService.ListLogs(w, r)
+	})).
+		Methods("OPTIONS", "POST")
 	router.HandleFunc("/container-svc/container", appl(func(w http.ResponseWriter, r *http.Request) {
 		containerService.RunContainer(w, r)
 	})).

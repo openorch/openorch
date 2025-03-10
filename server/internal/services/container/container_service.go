@@ -172,26 +172,25 @@ func (ms *ContainerService) logLoop() {
 	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
 }
 
-// Remove invalid UTF-8 byte sequences, including specific problematic bytes like 0x00
+// Remove invalid UTF-8 sequences and unwanted control characters
 func cleanInvalidUTF8(data []byte) []byte {
-	var result []byte
+	result := make([]byte, 0, len(data)) // Preallocate for efficiency
 
 	for len(data) > 0 {
 		r, size := utf8.DecodeRune(data)
 		if r == utf8.RuneError && size == 1 {
-			// Invalid byte sequence, skip it
+			// Skip invalid UTF-8 bytes
 			data = data[size:]
 			continue
 		}
 
-		// Skip specific invalid bytes like 0x00 (null byte) or others (0x80, etc.)
-		if r == utf8.RuneError || r == '\x00' {
-			// Skip over invalid byte and continue to the next
+		// Skip null byte (0x00) and other control characters (0x01 - 0x1F, excluding \t, \n, \r)
+		if r == '\x00' || (r < 32 && r != '\t' && r != '\n' && r != '\r') {
 			data = data[size:]
 			continue
 		}
 
-		// Otherwise, it's a valid character, so add it to the result
+		// Append valid characters
 		result = append(result, data[:size]...)
 		data = data[size:]
 	}

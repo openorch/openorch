@@ -1103,6 +1103,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/container-svc/logs": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List Container logs.\n\nRequires the ` + "`" + `container-svc:log:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "List Logs",
+                "operationId": "listContainerLogs",
+                "parameters": [
+                    {
+                        "description": "List Logs Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListLogsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListLogsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/data-svc/object": {
             "post": {
                 "security": [
@@ -5556,6 +5614,47 @@ const docTemplate = `{
                 }
             }
         },
+        "container_svc.ListLogsRequest": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "$ref": "#/definitions/datastore.Query"
+                }
+            }
+        },
+        "container_svc.ListLogsResponse": {
+            "type": "object",
+            "properties": {
+                "logs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Log"
+                    }
+                }
+            }
+        },
+        "container_svc.Log": {
+            "type": "object",
+            "properties": {
+                "containerId": {
+                    "description": "ContainerId is the raw underlying container ID.\nEg. Docker container id. Node local.",
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nodeId": {
+                    "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
+                    "type": "string"
+                }
+            }
+        },
         "container_svc.RunContainerOptions": {
             "type": "object",
             "properties": {
@@ -8851,7 +8950,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "ownerId": {
-                    "description": "Service who owns the permission",
+                    "description": "Service who owns the permission\n\nUncertain if this aligns with the system's use of slugs.\nIssue encountered: I renamed Docker Svc to Container Svc in two steps (by mistake).\nThe name/slug had already changed to \"container-svc,\" but data was still being saved\nin the \"dockerSvcCredentials\" table.\nAfter renaming the tables as well, I hit a \"cannot update unowned permission\" error\nbecause ownership relies on this field rather than the user slug. YMMV.",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -9073,7 +9172,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.26",
+	Version:          "0.3.0-rc.27",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},
