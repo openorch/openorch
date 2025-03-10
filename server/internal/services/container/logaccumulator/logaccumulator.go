@@ -98,7 +98,7 @@ func (la *LogAccumulator) AddLog(entry LogEntry) {
 
 	if !exists {
 		chunk = &LogChunk{
-			ChunkID:     sdk.Id("lch"),
+			ChunkID:     sdk.Id("colog"),
 			ProducerID:  entry.ProducerID,
 			HasNewWrite: true,
 		}
@@ -113,7 +113,7 @@ func (la *LogAccumulator) AddLog(entry LogEntry) {
 		la.flushSpecificKey(chunk.ProducerID)
 
 		newChunk := &LogChunk{
-			ChunkID:     sdk.Id("lch"),
+			ChunkID:     sdk.Id("colog"),
 			ProducerID:  entry.ProducerID,
 			LastFlush:   time.Now(),
 			HasNewWrite: true,

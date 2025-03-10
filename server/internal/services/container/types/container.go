@@ -128,7 +128,8 @@ type ContainerIsRunningResponse struct {
 }
 
 type ListContainersRequest struct {
-	NodeId string
+	NodeId      string `json:"nodeId,omitempty"`
+	ContainerId string `json:"containerId,omitempty"`
 }
 
 type ListContainersResponse struct {

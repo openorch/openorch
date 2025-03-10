@@ -39,11 +39,11 @@ func TestImageExistsInRegistry(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			exists, err := imageExistsInRegistry(tt.image, tt.tag)
 
-			if exists != tt.expectExists {
-				t.Errorf("expected exists=%v, got %v", tt.expectExists, exists)
-			}
 			if (err != nil) != tt.expectError {
 				t.Errorf("expected error=%v, got error=%v", tt.expectError, err)
+			}
+			if exists != tt.expectExists {
+				t.Errorf("expected exists=%v, got %v", tt.expectExists, exists)
 			}
 		})
 	}

@@ -46,7 +46,7 @@ func TestRunContainer(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("run container", func(t *testing.T) {
-		_, _, err = adminClient.ContainerSvcAPI.RunContainer(ctx).Body(openapi.ContainerSvcRunContainerRequest{
+		rsp, _, err := adminClient.ContainerSvcAPI.RunContainer(ctx).Body(openapi.ContainerSvcRunContainerRequest{
 			Image:    "nginx:latest",
 			Port:     8080,
 			HostPort: openapi.PtrInt32(8081),
@@ -59,6 +59,10 @@ func TestRunContainer(t *testing.T) {
 				// Assets: &map[string]string{"MODEL": "https://example.com/model.gguf"},
 			},
 		}).Execute()
+
 		require.NoError(t, err)
+
+		require.NoError(t, err)
+		require.Equal(t, int32(8081), *rsp.PortNumber)
 	})
 }

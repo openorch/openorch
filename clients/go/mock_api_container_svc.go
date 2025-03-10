@@ -219,6 +219,36 @@ func (mr *MockContainerSvcAPIMockRecorder) ImagePullableExecute(r any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImagePullableExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ImagePullableExecute), r)
 }
 
+// ListContainerLogs mocks base method.
+func (m *MockContainerSvcAPI) ListContainerLogs(ctx context.Context) ApiListContainerLogsRequest {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListContainerLogs", ctx)
+	ret0, _ := ret[0].(ApiListContainerLogsRequest)
+	return ret0
+}
+
+// ListContainerLogs indicates an expected call of ListContainerLogs.
+func (mr *MockContainerSvcAPIMockRecorder) ListContainerLogs(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListContainerLogs", reflect.TypeOf((*MockContainerSvcAPI)(nil).ListContainerLogs), ctx)
+}
+
+// ListContainerLogsExecute mocks base method.
+func (m *MockContainerSvcAPI) ListContainerLogsExecute(r ApiListContainerLogsRequest) (*ContainerSvcListLogsResponse, *http.Response, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListContainerLogsExecute", r)
+	ret0, _ := ret[0].(*ContainerSvcListLogsResponse)
+	ret1, _ := ret[1].(*http.Response)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ListContainerLogsExecute indicates an expected call of ListContainerLogsExecute.
+func (mr *MockContainerSvcAPIMockRecorder) ListContainerLogsExecute(r any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListContainerLogsExecute", reflect.TypeOf((*MockContainerSvcAPI)(nil).ListContainerLogsExecute), r)
+}
+
 // RunContainer mocks base method.
 func (m *MockContainerSvcAPI) RunContainer(ctx context.Context) ApiRunContainerRequest {
 	m.ctrl.T.Helper()

@@ -53,6 +53,20 @@ func (mr *MockContainerBackendMockRecorder) BuildImage(arg0 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BuildImage", reflect.TypeOf((*MockContainerBackend)(nil).BuildImage), arg0)
 }
 
+// Client mocks base method.
+func (m *MockContainerBackend) Client() any {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Client")
+	ret0, _ := ret[0].(any)
+	return ret0
+}
+
+// Client indicates an expected call of Client.
+func (mr *MockContainerBackendMockRecorder) Client() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Client", reflect.TypeOf((*MockContainerBackend)(nil).Client))
+}
+
 // ContainerIsRunning mocks base method.
 func (m *MockContainerBackend) ContainerIsRunning(arg0 container_svc.ContainerIsRunningRequest) (*container_svc.ContainerIsRunningResponse, error) {
 	m.ctrl.T.Helper()
@@ -66,6 +80,21 @@ func (m *MockContainerBackend) ContainerIsRunning(arg0 container_svc.ContainerIs
 func (mr *MockContainerBackendMockRecorder) ContainerIsRunning(arg0 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ContainerIsRunning", reflect.TypeOf((*MockContainerBackend)(nil).ContainerIsRunning), arg0)
+}
+
+// DaemonAddress mocks base method.
+func (m *MockContainerBackend) DaemonAddress() (string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DaemonAddress")
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DaemonAddress indicates an expected call of DaemonAddress.
+func (mr *MockContainerBackendMockRecorder) DaemonAddress() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DaemonAddress", reflect.TypeOf((*MockContainerBackend)(nil).DaemonAddress))
 }
 
 // DaemonInfo mocks base method.
@@ -96,21 +125,6 @@ func (m *MockContainerBackend) GetContainerSummary(arg0 container_svc.GetContain
 func (mr *MockContainerBackendMockRecorder) GetContainerSummary(arg0 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetContainerSummary", reflect.TypeOf((*MockContainerBackend)(nil).GetContainerSummary), arg0)
-}
-
-// GetHost mocks base method.
-func (m *MockContainerBackend) GetHost() (string, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetHost")
-	ret0, _ := ret[0].(string)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetHost indicates an expected call of GetHost.
-func (mr *MockContainerBackendMockRecorder) GetHost() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHost", reflect.TypeOf((*MockContainerBackend)(nil).GetHost))
 }
 
 // ListContainers mocks base method.
