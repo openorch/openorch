@@ -17,12 +17,18 @@ export * from './configSvcConfig';
 export * from './configSvcGetConfigResponse';
 export * from './configSvcSaveConfigRequest';
 export * from './containerSvcBuildImageRequest';
+export * from './containerSvcContainer';
 export * from './containerSvcContainerIsRunningResponse';
 export * from './containerSvcDaemonInfoResponse';
 export * from './containerSvcErrorResponse';
 export * from './containerSvcGetContainerSummaryResponse';
 export * from './containerSvcGetHostResponse';
 export * from './containerSvcImagePullableResponse';
+export * from './containerSvcListContainersRequest';
+export * from './containerSvcListContainersResponse';
+export * from './containerSvcListLogsRequest';
+export * from './containerSvcListLogsResponse';
+export * from './containerSvcLog';
 export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
@@ -214,12 +220,18 @@ import { ConfigSvcConfig } from './configSvcConfig';
 import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
 import { ContainerSvcBuildImageRequest } from './containerSvcBuildImageRequest';
+import { ContainerSvcContainer } from './containerSvcContainer';
 import { ContainerSvcContainerIsRunningResponse } from './containerSvcContainerIsRunningResponse';
 import { ContainerSvcDaemonInfoResponse } from './containerSvcDaemonInfoResponse';
 import { ContainerSvcErrorResponse } from './containerSvcErrorResponse';
 import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContainerSummaryResponse';
 import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
 import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
+import { ContainerSvcListContainersRequest } from './containerSvcListContainersRequest';
+import { ContainerSvcListContainersResponse } from './containerSvcListContainersResponse';
+import { ContainerSvcListLogsRequest } from './containerSvcListLogsRequest';
+import { ContainerSvcListLogsResponse } from './containerSvcListLogsResponse';
+import { ContainerSvcLog } from './containerSvcLog';
 import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
@@ -427,12 +439,18 @@ let typeMap: {[index: string]: any} = {
     "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
     "ContainerSvcBuildImageRequest": ContainerSvcBuildImageRequest,
+    "ContainerSvcContainer": ContainerSvcContainer,
     "ContainerSvcContainerIsRunningResponse": ContainerSvcContainerIsRunningResponse,
     "ContainerSvcDaemonInfoResponse": ContainerSvcDaemonInfoResponse,
     "ContainerSvcErrorResponse": ContainerSvcErrorResponse,
     "ContainerSvcGetContainerSummaryResponse": ContainerSvcGetContainerSummaryResponse,
     "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
     "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
+    "ContainerSvcListContainersRequest": ContainerSvcListContainersRequest,
+    "ContainerSvcListContainersResponse": ContainerSvcListContainersResponse,
+    "ContainerSvcListLogsRequest": ContainerSvcListLogsRequest,
+    "ContainerSvcListLogsResponse": ContainerSvcListLogsResponse,
+    "ContainerSvcLog": ContainerSvcLog,
     "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,

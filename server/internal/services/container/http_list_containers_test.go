@@ -50,9 +50,9 @@ func TestListContainers(t *testing.T) {
 		_, _, err := adminClient.ContainerSvcAPI.RunContainer(ctx).Body(openapi.ContainerSvcRunContainerRequest{
 			Image:    "nginx:latest",
 			Port:     9080,
-			HostPort: openapi.PtrInt32(9081),
+			HostPort: openapi.PtrInt32(9082),
 			Options: &openapi.ContainerSvcRunContainerOptions{
-				Name:   openapi.PtrString("test-container"),
+				Name:   openapi.PtrString("test-container-2"),
 				Hash:   openapi.PtrString("abc123"),
 				Envs:   []string{"ENV_VAR=value"},
 				Labels: &map[string]string{"app": "test"},
@@ -72,11 +72,11 @@ func TestListContainers(t *testing.T) {
 
 		found := false
 		for _, c := range rsp.Containers {
-			if *c.Name == "test-container" {
+			if *c.Name == "test-container-2" {
 				require.Equal(t, true, len(rsp.Containers) > 0)
-				require.Equal(t, "nginx:latest", *rsp.Containers[0].Image)
-				require.Equal(t, 9081, *rsp.Containers[0].HostPort)
-				require.Equal(t, "test-container", *rsp.Containers[0].Name)
+				require.Equal(t, "nginx:latest", *c.Image)
+				require.Equal(t, int32(9082), *c.HostPort)
+				found = true
 			}
 		}
 

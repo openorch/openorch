@@ -171,6 +171,57 @@ definitions:
     type: object
   container_svc.BuildImageResponse:
     type: object
+  container_svc.Container:
+    properties:
+      envs:
+        description: Envs are environment variables set within the container.
+        items:
+          type: string
+        type: array
+      gpuEnabled:
+        description: GPUEnabled specifies whether GPU support is enabled for the container.
+        type: boolean
+      hash:
+        description: Hash is a unique identifier associated with the container.
+        type: string
+      hostPort:
+        description: HostPort is the port on the host machine mapped to the container’s
+          internal port.
+        type: integer
+      id:
+        description: Id is the unique identifier for the container instance.
+        type: string
+      image:
+        description: Image is the Docker image used to create the container.
+        type: string
+      keeps:
+        description: |-
+          Keeps are paths that persist across container restarts.
+          They function like mounts or volumes, but their external storage location is irrelevant.
+        items:
+          type: string
+        type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels are metadata tags assigned to the container.
+        type: object
+      name:
+        description: Name is the human-readable name assigned to the container.
+        type: string
+      nodeId:
+        description: |-
+          Node Id
+          Please see the documentation for the envar OPENORCH_NODE_ID
+        type: string
+      port:
+        description: Port is the internal port exposed by the container.
+        type: integer
+      status:
+        description: Status indicates the current state of the container (e.g., running,
+          stopped).
+        type: string
+    type: object
   container_svc.ContainerIsRunningResponse:
     properties:
       isRunning:
@@ -221,6 +272,57 @@ definitions:
         type: boolean
     required:
     - pullable
+    type: object
+  container_svc.ListContainersRequest:
+    properties:
+      containerId:
+        type: string
+      limit:
+        type: integer
+      nodeId:
+        type: string
+    type: object
+  container_svc.ListContainersResponse:
+    properties:
+      containers:
+        items:
+          $ref: '#/definitions/container_svc.Container'
+        type: array
+    type: object
+  container_svc.ListLogsRequest:
+    properties:
+      containerId:
+        type: string
+      limit:
+        type: integer
+      nodeId:
+        type: string
+    type: object
+  container_svc.ListLogsResponse:
+    properties:
+      logs:
+        items:
+          $ref: '#/definitions/container_svc.Log'
+        type: array
+    type: object
+  container_svc.Log:
+    properties:
+      containerId:
+        description: |-
+          ContainerId is the raw underlying container ID.
+          Eg. Docker container id. Node local.
+        type: string
+      content:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      nodeId:
+        description: |-
+          Node Id
+          Please see the documentation for the envar OPENORCH_NODE_ID
+        type: string
     type: object
   container_svc.RunContainerOptions:
     properties:
@@ -2632,7 +2734,15 @@ definitions:
         description: eg. "User Viewer"
         type: string
       ownerId:
-        description: Service who owns the permission
+        description: |-
+          Service who owns the permission
+
+          Uncertain if this aligns with the system's use of slugs.
+          Issue encountered: I renamed Docker Svc to Container Svc in two steps (by mistake).
+          The name/slug had already changed to "container-svc," but data was still being saved
+          in the "dockerSvcCredentials" table.
+          After renaming the tables as well, I hit a "cannot update unowned permission" error
+          because ownership relies on this field rather than the user slug. YMMV.
         type: string
       updatedAt:
         type: string
@@ -2782,7 +2892,7 @@ info:
     url: https://www.gnu.org/licenses/agpl-3.0.html
   termsOfService: http://swagger.io/terms/
   title: OpenOrch
-  version: 0.3.0-rc.26
+  version: 0.3.0-rc.27
 paths:
   /chat-svc/events:
     get:
@@ -3366,6 +3476,46 @@ paths:
       summary: Get Container Summary
       tags:
       - Container Svc
+  /container-svc/containers:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        List containers.
+
+        Requires the `container-svc:container:view` permission.
+      operationId: listContainers
+      parameters:
+      - description: List Containers Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/container_svc.ListContainersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/container_svc.ListContainersResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Containers
+      tags:
+      - Container Svc
   /container-svc/daemon/info:
     get:
       consumes:
@@ -3489,6 +3639,46 @@ paths:
       security:
       - BearerAuth: []
       summary: Check if Container Image is Pullable
+      tags:
+      - Container Svc
+  /container-svc/logs:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        List Container logs.
+
+        Requires the `container-svc:log:view` permission.
+      operationId: listContainerLogs
+      parameters:
+      - description: List Logs Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/container_svc.ListLogsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/container_svc.ListLogsResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Logs
       tags:
       - Container Svc
   /data-svc/object:

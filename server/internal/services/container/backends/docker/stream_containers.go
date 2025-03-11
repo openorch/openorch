@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	dockercontainer "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/events"
@@ -127,7 +128,32 @@ func extractPortFromList(c types.Container) int {
 
 func extractHostPortFromList(c types.Container) int {
 	if len(c.Ports) > 0 {
-		return int(c.Ports[0].PublicPort)
+		// Example:
+		// ([]types.Port) (len=3 cap=4) {
+		// (types.Port) {
+		//	IP: (string) "",
+		//	PrivatePort: (uint16) 80,
+		//	PublicPort: (uint16) 0,
+		//	Type: (string) (len=3) "tcp"
+		//   },
+		//   (types.Port) {
+		//	IP: (string) (len=7) "0.0.0.0",
+		//	PrivatePort: (uint16) 8080,
+		//	PublicPort: (uint16) 8081,
+		//	Type: (string) (len=3) "tcp"
+		//   },
+		//   (types.Port) {
+		//	IP: (string) (len=2) "::",
+		//	PrivatePort: (uint16) 8080,
+		//	PublicPort: (uint16) 8081,
+		//	Type: (string) (len=3) "tcp"
+		//   }
+		//  }
+		for _, port := range c.Ports {
+			if port.IP == "0.0.0.0" {
+				return int(port.PublicPort)
+			}
+		}
 	}
 	return 0
 }
@@ -143,6 +169,7 @@ func extractPortFromInspect(info types.ContainerJSON) int {
 }
 
 func extractHostPortFromInspect(info types.ContainerJSON) int {
+	spew.Dump("host port inspect", info.NetworkSettings)
 	if len(info.NetworkSettings.Ports) > 0 {
 		for _, bindings := range info.NetworkSettings.Ports {
 			if len(bindings) > 0 {
