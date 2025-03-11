@@ -64,12 +64,22 @@ func TestListContainers(t *testing.T) {
 		require.NoError(t, err)
 	})
 
-	time.Sleep(1000 * time.Millisecond)
+	time.Sleep(1100 * time.Millisecond)
 
 	t.Run("list containers", func(t *testing.T) {
-		rsp, _, err := adminClient.ContainerSvcAPI.ListContainers(ctx).Body(openapi.ContainerSvcListLogsRequest{}).Execute()
-
+		rsp, _, err := adminClient.ContainerSvcAPI.ListContainers(ctx).Body(openapi.ContainerSvcListContainersRequest{}).Execute()
 		require.NoError(t, err)
-		require.Equal(t, true, len(rsp.Logs) > 0)
+
+		found := false
+		for _, c := range rsp.Containers {
+			if *c.Name == "test-container" {
+				require.Equal(t, true, len(rsp.Containers) > 0)
+				require.Equal(t, "nginx:latest", *rsp.Containers[0].Image)
+				require.Equal(t, 9081, *rsp.Containers[0].HostPort)
+				require.Equal(t, "test-container", *rsp.Containers[0].Name)
+			}
+		}
+
+		require.Equal(t, true, found)
 	})
 }

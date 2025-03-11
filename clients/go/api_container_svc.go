@@ -111,22 +111,6 @@ Requires the `container-svc:image:build` permission.
 	ImagePullableExecute(r ApiImagePullableRequest) (*ContainerSvcImagePullableResponse, *http.Response, error)
 
 	/*
-	ListContainerContainers List Containers
-
-	List Container containers.
-
-Requires the `container-svc:container:view` permission.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListContainerContainersRequest
-	*/
-	ListContainerContainers(ctx context.Context) ApiListContainerContainersRequest
-
-	// ListContainerContainersExecute executes the request
-	//  @return ContainerSvcListContainersResponse
-	ListContainerContainersExecute(r ApiListContainerContainersRequest) (*ContainerSvcListContainersResponse, *http.Response, error)
-
-	/*
 	ListContainerLogs List Logs
 
 	List Container logs.
@@ -141,6 +125,22 @@ Requires the `container-svc:log:view` permission.
 	// ListContainerLogsExecute executes the request
 	//  @return ContainerSvcListLogsResponse
 	ListContainerLogsExecute(r ApiListContainerLogsRequest) (*ContainerSvcListLogsResponse, *http.Response, error)
+
+	/*
+	ListContainers List Containers
+
+	List containers.
+
+Requires the `container-svc:container:view` permission.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListContainersRequest
+	*/
+	ListContainers(ctx context.Context) ApiListContainersRequest
+
+	// ListContainersExecute executes the request
+	//  @return ContainerSvcListContainersResponse
+	ListContainersExecute(r ApiListContainersRequest) (*ContainerSvcListContainersResponse, *http.Response, error)
 
 	/*
 	RunContainer Run a Container
@@ -1083,55 +1083,55 @@ func (a *ContainerSvcAPIService) ImagePullableExecute(r ApiImagePullableRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListContainerContainersRequest struct {
+type ApiListContainerLogsRequest struct {
 	ctx context.Context
 	ApiService ContainerSvcAPI
-	body *ContainerSvcListContainersRequest
+	body *ContainerSvcListLogsRequest
 }
 
-// List Containers Request
-func (r ApiListContainerContainersRequest) Body(body ContainerSvcListContainersRequest) ApiListContainerContainersRequest {
+// List Logs Request
+func (r ApiListContainerLogsRequest) Body(body ContainerSvcListLogsRequest) ApiListContainerLogsRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiListContainerContainersRequest) Execute() (*ContainerSvcListContainersResponse, *http.Response, error) {
-	return r.ApiService.ListContainerContainersExecute(r)
+func (r ApiListContainerLogsRequest) Execute() (*ContainerSvcListLogsResponse, *http.Response, error) {
+	return r.ApiService.ListContainerLogsExecute(r)
 }
 
 /*
-ListContainerContainers List Containers
+ListContainerLogs List Logs
 
-List Container containers.
+List Container logs.
 
-Requires the `container-svc:container:view` permission.
+Requires the `container-svc:log:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListContainerContainersRequest
+ @return ApiListContainerLogsRequest
 */
-func (a *ContainerSvcAPIService) ListContainerContainers(ctx context.Context) ApiListContainerContainersRequest {
-	return ApiListContainerContainersRequest{
+func (a *ContainerSvcAPIService) ListContainerLogs(ctx context.Context) ApiListContainerLogsRequest {
+	return ApiListContainerLogsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ContainerSvcListContainersResponse
-func (a *ContainerSvcAPIService) ListContainerContainersExecute(r ApiListContainerContainersRequest) (*ContainerSvcListContainersResponse, *http.Response, error) {
+//  @return ContainerSvcListLogsResponse
+func (a *ContainerSvcAPIService) ListContainerLogsExecute(r ApiListContainerLogsRequest) (*ContainerSvcListLogsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ContainerSvcListContainersResponse
+		localVarReturnValue  *ContainerSvcListLogsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerSvcAPIService.ListContainerContainers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerSvcAPIService.ListContainerLogs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/container-svc/containers"
+	localVarPath := localBasePath + "/container-svc/logs"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1242,55 +1242,55 @@ func (a *ContainerSvcAPIService) ListContainerContainersExecute(r ApiListContain
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListContainerLogsRequest struct {
+type ApiListContainersRequest struct {
 	ctx context.Context
 	ApiService ContainerSvcAPI
-	body *ContainerSvcListLogsRequest
+	body *ContainerSvcListContainersRequest
 }
 
-// List Logs Request
-func (r ApiListContainerLogsRequest) Body(body ContainerSvcListLogsRequest) ApiListContainerLogsRequest {
+// List Containers Request
+func (r ApiListContainersRequest) Body(body ContainerSvcListContainersRequest) ApiListContainersRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiListContainerLogsRequest) Execute() (*ContainerSvcListLogsResponse, *http.Response, error) {
-	return r.ApiService.ListContainerLogsExecute(r)
+func (r ApiListContainersRequest) Execute() (*ContainerSvcListContainersResponse, *http.Response, error) {
+	return r.ApiService.ListContainersExecute(r)
 }
 
 /*
-ListContainerLogs List Logs
+ListContainers List Containers
 
-List Container logs.
+List containers.
 
-Requires the `container-svc:log:view` permission.
+Requires the `container-svc:container:view` permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListContainerLogsRequest
+ @return ApiListContainersRequest
 */
-func (a *ContainerSvcAPIService) ListContainerLogs(ctx context.Context) ApiListContainerLogsRequest {
-	return ApiListContainerLogsRequest{
+func (a *ContainerSvcAPIService) ListContainers(ctx context.Context) ApiListContainersRequest {
+	return ApiListContainersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ContainerSvcListLogsResponse
-func (a *ContainerSvcAPIService) ListContainerLogsExecute(r ApiListContainerLogsRequest) (*ContainerSvcListLogsResponse, *http.Response, error) {
+//  @return ContainerSvcListContainersResponse
+func (a *ContainerSvcAPIService) ListContainersExecute(r ApiListContainersRequest) (*ContainerSvcListContainersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ContainerSvcListLogsResponse
+		localVarReturnValue  *ContainerSvcListContainersResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerSvcAPIService.ListContainerLogs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerSvcAPIService.ListContainers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/container-svc/logs"
+	localVarPath := localBasePath + "/container-svc/containers"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -22,9 +22,9 @@ import (
 	container "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
-// @ID listContainerContainers
+// @ID listContainers
 // @Summary List Containers
-// @Description List Container containers.
+// @Description List containers.
 // @Description
 // @Description Requires the `container-svc:container:view` permission.
 // @Tags Container Svc

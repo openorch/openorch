@@ -920,7 +920,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "List Container containers.\n\nRequires the ` + "`" + `container-svc:container:view` + "`" + ` permission.",
+                "description": "List containers.\n\nRequires the ` + "`" + `container-svc:container:view` + "`" + ` permission.",
                 "consumes": [
                     "application/json"
                 ],
@@ -931,7 +931,7 @@ const docTemplate = `{
                     "Container Svc"
                 ],
                 "summary": "List Containers",
-                "operationId": "listContainerContainers",
+                "operationId": "listContainers",
                 "parameters": [
                     {
                         "description": "List Containers Request",

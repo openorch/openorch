@@ -128,6 +128,7 @@ func (ds *ContainerService) Start() error {
 
 	go ds.containerLoop()
 	go ds.logLoop()
+	go ds.containerLoop()
 
 	return ds.registerPermissions()
 }
@@ -169,7 +170,30 @@ func (ms *ContainerService) logLoop() {
 		// }
 	})
 
-	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
+	go dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
+}
+
+func (ms *ContainerService) containerLoop() {
+	ctracker := dockerbackend.NewContainerTracker()
+
+	go dockerbackend.StartDockerContainerTracker(ms.backend.Client().(*dockerclient.Client), ctracker)
+
+	ticker := time.NewTicker(1000 * time.Millisecond)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-ticker.C:
+			for _, c := range ctracker.GetContainers() {
+				err := ms.containerStore.Upsert(&c)
+				if err != nil {
+					logger.Error("Error saving container",
+						slog.String("error", err.Error()),
+					)
+				}
+			}
+		}
+	}
 }
 
 // Remove invalid UTF-8 sequences and unwanted control characters
@@ -196,25 +220,6 @@ func cleanInvalidUTF8(data []byte) []byte {
 	}
 
 	return result
-}
-
-func (ms *ContainerService) containerLoop() {
-	ticker := time.NewTicker(1000 * time.Millisecond)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-ticker.C:
-		case <-ms.containerLoopTrigger:
-		}
-
-		err := ms.containerLoopCycle()
-		if err != nil {
-			logger.Error("Error processing prompt",
-				slog.String("error", err.Error()),
-			)
-		}
-	}
 }
 
 func (ms *ContainerService) containerLoopCycle() error {

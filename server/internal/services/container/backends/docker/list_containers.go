@@ -37,9 +37,10 @@ func (d *DockerBackend) ListContainers(
 		)
 	}
 
-	ret := []container.Container{}
+	ret := []*container.Container{}
 	for _, cont := range containers {
-		ret = append(ret, mapDockerContainerToContainer(cont))
+		c := mapDockerContainerToContainer(cont)
+		ret = append(ret, &c)
 	}
 
 	return &container.ListContainersResponse{

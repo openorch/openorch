@@ -97,8 +97,8 @@ Class | Method | HTTP request | Description
 *ContainerSvcAPI* | [**ContainerSummary**](docs/ContainerSvcAPI.md#containersummary) | **Get** /container-svc/container/summary | Get Container Summary
 *ContainerSvcAPI* | [**GetHost**](docs/ContainerSvcAPI.md#gethost) | **Get** /container-svc/host | Get Container Host
 *ContainerSvcAPI* | [**ImagePullable**](docs/ContainerSvcAPI.md#imagepullable) | **Get** /container-svc/image/{imageName}/pullable | Check if Container Image is Pullable
-*ContainerSvcAPI* | [**ListContainerContainers**](docs/ContainerSvcAPI.md#listcontainercontainers) | **Post** /container-svc/containers | List Containers
 *ContainerSvcAPI* | [**ListContainerLogs**](docs/ContainerSvcAPI.md#listcontainerlogs) | **Post** /container-svc/logs | List Logs
+*ContainerSvcAPI* | [**ListContainers**](docs/ContainerSvcAPI.md#listcontainers) | **Post** /container-svc/containers | List Containers
 *ContainerSvcAPI* | [**RunContainer**](docs/ContainerSvcAPI.md#runcontainer) | **Put** /container-svc/container | Run a Container
 *ContainerSvcAPI* | [**StopContainer**](docs/ContainerSvcAPI.md#stopcontainer) | **Put** /container-svc/container/stop | Stop a Container
 *DataSvcAPI* | [**CreateObject**](docs/DataSvcAPI.md#createobject) | **Post** /data-svc/object | Create a Generic Object

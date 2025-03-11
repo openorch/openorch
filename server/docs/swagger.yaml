@@ -3481,10 +3481,10 @@ paths:
       consumes:
       - application/json
       description: |-
-        List Container containers.
+        List containers.
 
         Requires the `container-svc:container:view` permission.
-      operationId: listContainerContainers
+      operationId: listContainers
       parameters:
       - description: List Containers Request
         in: body
