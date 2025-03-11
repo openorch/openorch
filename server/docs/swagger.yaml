@@ -171,6 +171,57 @@ definitions:
     type: object
   container_svc.BuildImageResponse:
     type: object
+  container_svc.Container:
+    properties:
+      envs:
+        description: Envs are environment variables set within the container.
+        items:
+          type: string
+        type: array
+      gpuEnabled:
+        description: GPUEnabled specifies whether GPU support is enabled for the container.
+        type: boolean
+      hash:
+        description: Hash is a unique identifier associated with the container.
+        type: string
+      hostPort:
+        description: HostPort is the port on the host machine mapped to the container’s
+          internal port.
+        type: integer
+      id:
+        description: Id is the unique identifier for the container instance.
+        type: string
+      image:
+        description: Image is the Docker image used to create the container.
+        type: string
+      keeps:
+        description: |-
+          Keeps are paths that persist across container restarts.
+          They function like mounts or volumes, but their external storage location is irrelevant.
+        items:
+          type: string
+        type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels are metadata tags assigned to the container.
+        type: object
+      name:
+        description: Name is the human-readable name assigned to the container.
+        type: string
+      nodeId:
+        description: |-
+          Node Id
+          Please see the documentation for the envar OPENORCH_NODE_ID
+        type: string
+      port:
+        description: Port is the internal port exposed by the container.
+        type: integer
+      status:
+        description: Status indicates the current state of the container (e.g., running,
+          stopped).
+        type: string
+    type: object
   container_svc.ContainerIsRunningResponse:
     properties:
       isRunning:
@@ -221,6 +272,22 @@ definitions:
         type: boolean
     required:
     - pullable
+    type: object
+  container_svc.ListContainersRequest:
+    properties:
+      containerId:
+        type: string
+      limit:
+        type: integer
+      nodeId:
+        type: string
+    type: object
+  container_svc.ListContainersResponse:
+    properties:
+      containers:
+        items:
+          $ref: '#/definitions/container_svc.Container'
+        type: array
     type: object
   container_svc.ListLogsRequest:
     properties:
@@ -3407,6 +3474,46 @@ paths:
       security:
       - BearerAuth: []
       summary: Get Container Summary
+      tags:
+      - Container Svc
+  /container-svc/containers:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        List Container containers.
+
+        Requires the `container-svc:container:view` permission.
+      operationId: listContainerContainers
+      parameters:
+      - description: List Containers Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/container_svc.ListContainersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/container_svc.ListContainersResponse'
+        "400":
+          description: Invalid JSON
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/container_svc.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List Containers
       tags:
       - Container Svc
   /container-svc/daemon/info:

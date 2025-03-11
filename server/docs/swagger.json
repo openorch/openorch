@@ -907,6 +907,64 @@
                 }
             }
         },
+        "/container-svc/containers": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List Container containers.\n\nRequires the `container-svc:container:view` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "List Containers",
+                "operationId": "listContainerContainers",
+                "parameters": [
+                    {
+                        "description": "List Containers Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListContainersRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListContainersResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/container-svc/daemon/info": {
             "get": {
                 "security": [
@@ -5530,6 +5588,68 @@
         "container_svc.BuildImageResponse": {
             "type": "object"
         },
+        "container_svc.Container": {
+            "type": "object",
+            "properties": {
+                "envs": {
+                    "description": "Envs are environment variables set within the container.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "gpuEnabled": {
+                    "description": "GPUEnabled specifies whether GPU support is enabled for the container.",
+                    "type": "boolean"
+                },
+                "hash": {
+                    "description": "Hash is a unique identifier associated with the container.",
+                    "type": "string"
+                },
+                "hostPort": {
+                    "description": "HostPort is the port on the host machine mapped to the container’s internal port.",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "Id is the unique identifier for the container instance.",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "Image is the Docker image used to create the container.",
+                    "type": "string"
+                },
+                "keeps": {
+                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "labels": {
+                    "description": "Labels are metadata tags assigned to the container.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "description": "Name is the human-readable name assigned to the container.",
+                    "type": "string"
+                },
+                "nodeId": {
+                    "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
+                    "type": "string"
+                },
+                "port": {
+                    "description": "Port is the internal port exposed by the container.",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "Status indicates the current state of the container (e.g., running, stopped).",
+                    "type": "string"
+                }
+            }
+        },
         "container_svc.ContainerIsRunningResponse": {
             "type": "object",
             "required": [
@@ -5605,6 +5725,31 @@
             "properties": {
                 "pullable": {
                     "type": "boolean"
+                }
+            }
+        },
+        "container_svc.ListContainersRequest": {
+            "type": "object",
+            "properties": {
+                "containerId": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.ListContainersResponse": {
+            "type": "object",
+            "properties": {
+                "containers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Container"
+                    }
                 }
             }
         },

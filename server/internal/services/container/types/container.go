@@ -51,6 +51,10 @@ type Container struct {
 	Status string `json:"status"`
 }
 
+func (l *Container) GetId() string {
+	return l.Id
+}
+
 type RunContainerRequest struct {
 	// Image is the Docker image to use for the container
 	Image string `json:"image" example:"nginx:latest" binding:"required"`
@@ -130,8 +134,9 @@ type ContainerIsRunningResponse struct {
 type ListContainersRequest struct {
 	NodeId      string `json:"nodeId,omitempty"`
 	ContainerId string `json:"containerId,omitempty"`
+	Limit       int64  `json:"limit,omitempty"`
 }
 
 type ListContainersResponse struct {
-	Containers []Container `json:"containers,omitempty"`
+	Containers []*Container `json:"containers,omitempty"`
 }

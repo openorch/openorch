@@ -37,10 +37,16 @@ var PermissionImageBuild = openapi.UserSvcPermission{
 	Name: openapi.PtrString("Container Svc - Image Build"),
 }
 
+var PermissionLogView = openapi.UserSvcPermission{
+	Id:   openapi.PtrString("container-svc:log:view"),
+	Name: openapi.PtrString("Container Svc - Log View"),
+}
+
 var AdminPermissions = []openapi.UserSvcPermission{
 	PermissionContainerCreate,
 	PermissionContainerView,
 	PermissionContainerEdit,
 	PermissionContainerStop,
 	PermissionImageBuild,
+	PermissionLogView,
 }
