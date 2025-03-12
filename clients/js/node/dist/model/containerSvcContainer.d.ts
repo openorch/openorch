@@ -9,23 +9,25 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContainerSvcCapabilities } from './containerSvcCapabilities';
+import { ContainerSvcEnvVar } from './containerSvcEnvVar';
+import { ContainerSvcKeep } from './containerSvcKeep';
+import { ContainerSvcNetwork } from './containerSvcNetwork';
+import { ContainerSvcResources } from './containerSvcResources';
+import { ContainerSvcVolume } from './containerSvcVolume';
 export declare class ContainerSvcContainer {
+    /**
+    * Capabilities define additional runtime features, such as GPU support.
+    */
+    'capabilities'?: ContainerSvcCapabilities;
     /**
     * Envs are environment variables set within the container.
     */
-    'envs'?: Array<string>;
-    /**
-    * GPUEnabled specifies whether GPU support is enabled for the container.
-    */
-    'gpuEnabled'?: boolean;
+    'envs'?: Array<ContainerSvcEnvVar>;
     /**
     * Hash is a unique identifier associated with the container.
     */
     'hash'?: string;
-    /**
-    * HostPort is the port on the host machine mapped to the container’s internal port.
-    */
-    'hostPort'?: number;
     /**
     * Id is the unique identifier for the container instance.
     */
@@ -37,7 +39,7 @@ export declare class ContainerSvcContainer {
     /**
     * Keeps are paths that persist across container restarts. They function like mounts or volumes, but their external storage location is irrelevant.
     */
-    'keeps'?: Array<string>;
+    'keeps'?: Array<ContainerSvcKeep>;
     /**
     * Labels are metadata tags assigned to the container.
     */
@@ -45,21 +47,39 @@ export declare class ContainerSvcContainer {
         [key: string]: string;
     };
     /**
-    * Name is the human-readable name assigned to the container.
+    * Names are the human-readable aliases assigned to the container.
     */
-    'name'?: string;
+    'names'?: Array<string>;
+    /**
+    * Network contains networking-related information for the container.
+    */
+    'network'?: ContainerSvcNetwork;
     /**
     * Node Id Please see the documentation for the envar OPENORCH_NODE_ID
     */
     'nodeId'?: string;
     /**
-    * Port is the internal port exposed by the container.
+    * Ports maps host ports (keys) to container ports (values).
     */
-    'port'?: number;
+    'ports'?: {
+        [key: string]: number;
+    };
+    /**
+    * Resources defines CPU, memory, and disk constraints for the container.
+    */
+    'resources'?: ContainerSvcResources;
+    /**
+    * Runtime specifies the container runtime (e.g., Docker, containerd, etc.).
+    */
+    'runtime'?: string;
     /**
     * Status indicates the current state of the container (e.g., running, stopped).
     */
     'status'?: string;
+    /**
+    * Volumes mounted by the container.
+    */
+    'volumes'?: Array<ContainerSvcVolume>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

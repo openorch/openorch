@@ -17,24 +17,19 @@ export class ContainerSvcContainer {
 ContainerSvcContainer.discriminator = undefined;
 ContainerSvcContainer.attributeTypeMap = [
     {
-        "name": "envs",
-        "baseName": "envs",
-        "type": "Array<string>"
+        "name": "capabilities",
+        "baseName": "capabilities",
+        "type": "ContainerSvcCapabilities"
     },
     {
-        "name": "gpuEnabled",
-        "baseName": "gpuEnabled",
-        "type": "boolean"
+        "name": "envs",
+        "baseName": "envs",
+        "type": "Array<ContainerSvcEnvVar>"
     },
     {
         "name": "hash",
         "baseName": "hash",
         "type": "string"
-    },
-    {
-        "name": "hostPort",
-        "baseName": "hostPort",
-        "type": "number"
     },
     {
         "name": "id",
@@ -49,7 +44,7 @@ ContainerSvcContainer.attributeTypeMap = [
     {
         "name": "keeps",
         "baseName": "keeps",
-        "type": "Array<string>"
+        "type": "Array<ContainerSvcKeep>"
     },
     {
         "name": "labels",
@@ -57,9 +52,14 @@ ContainerSvcContainer.attributeTypeMap = [
         "type": "{ [key: string]: string; }"
     },
     {
-        "name": "name",
-        "baseName": "name",
-        "type": "string"
+        "name": "names",
+        "baseName": "names",
+        "type": "Array<string>"
+    },
+    {
+        "name": "network",
+        "baseName": "network",
+        "type": "ContainerSvcNetwork"
     },
     {
         "name": "nodeId",
@@ -67,13 +67,28 @@ ContainerSvcContainer.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "port",
-        "baseName": "port",
-        "type": "number"
+        "name": "ports",
+        "baseName": "ports",
+        "type": "{ [key: string]: number; }"
+    },
+    {
+        "name": "resources",
+        "baseName": "resources",
+        "type": "ContainerSvcResources"
+    },
+    {
+        "name": "runtime",
+        "baseName": "runtime",
+        "type": "string"
     },
     {
         "name": "status",
         "baseName": "status",
         "type": "string"
+    },
+    {
+        "name": "volumes",
+        "baseName": "volumes",
+        "type": "Array<ContainerSvcVolume>"
     }
 ];

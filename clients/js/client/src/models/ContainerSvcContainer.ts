@@ -13,6 +13,49 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ContainerSvcKeep } from './ContainerSvcKeep';
+import {
+    ContainerSvcKeepFromJSON,
+    ContainerSvcKeepFromJSONTyped,
+    ContainerSvcKeepToJSON,
+    ContainerSvcKeepToJSONTyped,
+} from './ContainerSvcKeep';
+import type { ContainerSvcNetwork } from './ContainerSvcNetwork';
+import {
+    ContainerSvcNetworkFromJSON,
+    ContainerSvcNetworkFromJSONTyped,
+    ContainerSvcNetworkToJSON,
+    ContainerSvcNetworkToJSONTyped,
+} from './ContainerSvcNetwork';
+import type { ContainerSvcCapabilities } from './ContainerSvcCapabilities';
+import {
+    ContainerSvcCapabilitiesFromJSON,
+    ContainerSvcCapabilitiesFromJSONTyped,
+    ContainerSvcCapabilitiesToJSON,
+    ContainerSvcCapabilitiesToJSONTyped,
+} from './ContainerSvcCapabilities';
+import type { ContainerSvcVolume } from './ContainerSvcVolume';
+import {
+    ContainerSvcVolumeFromJSON,
+    ContainerSvcVolumeFromJSONTyped,
+    ContainerSvcVolumeToJSON,
+    ContainerSvcVolumeToJSONTyped,
+} from './ContainerSvcVolume';
+import type { ContainerSvcEnvVar } from './ContainerSvcEnvVar';
+import {
+    ContainerSvcEnvVarFromJSON,
+    ContainerSvcEnvVarFromJSONTyped,
+    ContainerSvcEnvVarToJSON,
+    ContainerSvcEnvVarToJSONTyped,
+} from './ContainerSvcEnvVar';
+import type { ContainerSvcResources } from './ContainerSvcResources';
+import {
+    ContainerSvcResourcesFromJSON,
+    ContainerSvcResourcesFromJSONTyped,
+    ContainerSvcResourcesToJSON,
+    ContainerSvcResourcesToJSONTyped,
+} from './ContainerSvcResources';
+
 /**
  * 
  * @export
@@ -20,29 +63,23 @@ import { mapValues } from '../runtime';
  */
 export interface ContainerSvcContainer {
     /**
-     * Envs are environment variables set within the container.
-     * @type {Array<string>}
+     * Capabilities define additional runtime features, such as GPU support.
+     * @type {ContainerSvcCapabilities}
      * @memberof ContainerSvcContainer
      */
-    envs?: Array<string>;
+    capabilities?: ContainerSvcCapabilities;
     /**
-     * GPUEnabled specifies whether GPU support is enabled for the container.
-     * @type {boolean}
+     * Envs are environment variables set within the container.
+     * @type {Array<ContainerSvcEnvVar>}
      * @memberof ContainerSvcContainer
      */
-    gpuEnabled?: boolean;
+    envs?: Array<ContainerSvcEnvVar>;
     /**
      * Hash is a unique identifier associated with the container.
      * @type {string}
      * @memberof ContainerSvcContainer
      */
     hash?: string;
-    /**
-     * HostPort is the port on the host machine mapped to the container’s internal port.
-     * @type {number}
-     * @memberof ContainerSvcContainer
-     */
-    hostPort?: number;
     /**
      * Id is the unique identifier for the container instance.
      * @type {string}
@@ -58,10 +95,10 @@ export interface ContainerSvcContainer {
     /**
      * Keeps are paths that persist across container restarts.
      * They function like mounts or volumes, but their external storage location is irrelevant.
-     * @type {Array<string>}
+     * @type {Array<ContainerSvcKeep>}
      * @memberof ContainerSvcContainer
      */
-    keeps?: Array<string>;
+    keeps?: Array<ContainerSvcKeep>;
     /**
      * Labels are metadata tags assigned to the container.
      * @type {{ [key: string]: string; }}
@@ -69,11 +106,17 @@ export interface ContainerSvcContainer {
      */
     labels?: { [key: string]: string; };
     /**
-     * Name is the human-readable name assigned to the container.
-     * @type {string}
+     * Names are the human-readable aliases assigned to the container.
+     * @type {Array<string>}
      * @memberof ContainerSvcContainer
      */
-    name?: string;
+    names?: Array<string>;
+    /**
+     * Network contains networking-related information for the container.
+     * @type {ContainerSvcNetwork}
+     * @memberof ContainerSvcContainer
+     */
+    network?: ContainerSvcNetwork;
     /**
      * Node Id
      * Please see the documentation for the envar OPENORCH_NODE_ID
@@ -82,17 +125,35 @@ export interface ContainerSvcContainer {
      */
     nodeId?: string;
     /**
-     * Port is the internal port exposed by the container.
-     * @type {number}
+     * Ports maps host ports (keys) to container ports (values).
+     * @type {{ [key: string]: number; }}
      * @memberof ContainerSvcContainer
      */
-    port?: number;
+    ports?: { [key: string]: number; };
+    /**
+     * Resources defines CPU, memory, and disk constraints for the container.
+     * @type {ContainerSvcResources}
+     * @memberof ContainerSvcContainer
+     */
+    resources?: ContainerSvcResources;
+    /**
+     * Runtime specifies the container runtime (e.g., Docker, containerd, etc.).
+     * @type {string}
+     * @memberof ContainerSvcContainer
+     */
+    runtime?: string;
     /**
      * Status indicates the current state of the container (e.g., running, stopped).
      * @type {string}
      * @memberof ContainerSvcContainer
      */
     status?: string;
+    /**
+     * Volumes mounted by the container.
+     * @type {Array<ContainerSvcVolume>}
+     * @memberof ContainerSvcContainer
+     */
+    volumes?: Array<ContainerSvcVolume>;
 }
 
 /**
@@ -112,18 +173,21 @@ export function ContainerSvcContainerFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'envs': json['envs'] == null ? undefined : json['envs'],
-        'gpuEnabled': json['gpuEnabled'] == null ? undefined : json['gpuEnabled'],
+        'capabilities': json['capabilities'] == null ? undefined : ContainerSvcCapabilitiesFromJSON(json['capabilities']),
+        'envs': json['envs'] == null ? undefined : ((json['envs'] as Array<any>).map(ContainerSvcEnvVarFromJSON)),
         'hash': json['hash'] == null ? undefined : json['hash'],
-        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'] == null ? undefined : json['id'],
         'image': json['image'] == null ? undefined : json['image'],
-        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'keeps': json['keeps'] == null ? undefined : ((json['keeps'] as Array<any>).map(ContainerSvcKeepFromJSON)),
         'labels': json['labels'] == null ? undefined : json['labels'],
-        'name': json['name'] == null ? undefined : json['name'],
+        'names': json['names'] == null ? undefined : json['names'],
+        'network': json['network'] == null ? undefined : ContainerSvcNetworkFromJSON(json['network']),
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
-        'port': json['port'] == null ? undefined : json['port'],
+        'ports': json['ports'] == null ? undefined : json['ports'],
+        'resources': json['resources'] == null ? undefined : ContainerSvcResourcesFromJSON(json['resources']),
+        'runtime': json['runtime'] == null ? undefined : json['runtime'],
         'status': json['status'] == null ? undefined : json['status'],
+        'volumes': json['volumes'] == null ? undefined : ((json['volumes'] as Array<any>).map(ContainerSvcVolumeFromJSON)),
     };
 }
 
@@ -138,18 +202,21 @@ export function ContainerSvcContainerToJSONTyped(value?: ContainerSvcContainer |
 
     return {
         
-        'envs': value['envs'],
-        'gpuEnabled': value['gpuEnabled'],
+        'capabilities': ContainerSvcCapabilitiesToJSON(value['capabilities']),
+        'envs': value['envs'] == null ? undefined : ((value['envs'] as Array<any>).map(ContainerSvcEnvVarToJSON)),
         'hash': value['hash'],
-        'hostPort': value['hostPort'],
         'id': value['id'],
         'image': value['image'],
-        'keeps': value['keeps'],
+        'keeps': value['keeps'] == null ? undefined : ((value['keeps'] as Array<any>).map(ContainerSvcKeepToJSON)),
         'labels': value['labels'],
-        'name': value['name'],
+        'names': value['names'],
+        'network': ContainerSvcNetworkToJSON(value['network']),
         'nodeId': value['nodeId'],
-        'port': value['port'],
+        'ports': value['ports'],
+        'resources': ContainerSvcResourcesToJSON(value['resources']),
+        'runtime': value['runtime'],
         'status': value['status'],
+        'volumes': value['volumes'] == null ? undefined : ((value['volumes'] as Array<any>).map(ContainerSvcVolumeToJSON)),
     };
 }
 

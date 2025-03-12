@@ -11,6 +11,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContainerSvcKeepFromJSON, ContainerSvcKeepToJSON, } from './ContainerSvcKeep';
+import { ContainerSvcNetworkFromJSON, ContainerSvcNetworkToJSON, } from './ContainerSvcNetwork';
+import { ContainerSvcCapabilitiesFromJSON, ContainerSvcCapabilitiesToJSON, } from './ContainerSvcCapabilities';
+import { ContainerSvcVolumeFromJSON, ContainerSvcVolumeToJSON, } from './ContainerSvcVolume';
+import { ContainerSvcEnvVarFromJSON, ContainerSvcEnvVarToJSON, } from './ContainerSvcEnvVar';
+import { ContainerSvcResourcesFromJSON, ContainerSvcResourcesToJSON, } from './ContainerSvcResources';
 /**
  * Check if a given object implements the ContainerSvcContainer interface.
  */
@@ -25,18 +31,21 @@ export function ContainerSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'envs': json['envs'] == null ? undefined : json['envs'],
-        'gpuEnabled': json['gpuEnabled'] == null ? undefined : json['gpuEnabled'],
+        'capabilities': json['capabilities'] == null ? undefined : ContainerSvcCapabilitiesFromJSON(json['capabilities']),
+        'envs': json['envs'] == null ? undefined : (json['envs'].map(ContainerSvcEnvVarFromJSON)),
         'hash': json['hash'] == null ? undefined : json['hash'],
-        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
         'id': json['id'] == null ? undefined : json['id'],
         'image': json['image'] == null ? undefined : json['image'],
-        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'keeps': json['keeps'] == null ? undefined : (json['keeps'].map(ContainerSvcKeepFromJSON)),
         'labels': json['labels'] == null ? undefined : json['labels'],
-        'name': json['name'] == null ? undefined : json['name'],
+        'names': json['names'] == null ? undefined : json['names'],
+        'network': json['network'] == null ? undefined : ContainerSvcNetworkFromJSON(json['network']),
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
-        'port': json['port'] == null ? undefined : json['port'],
+        'ports': json['ports'] == null ? undefined : json['ports'],
+        'resources': json['resources'] == null ? undefined : ContainerSvcResourcesFromJSON(json['resources']),
+        'runtime': json['runtime'] == null ? undefined : json['runtime'],
         'status': json['status'] == null ? undefined : json['status'],
+        'volumes': json['volumes'] == null ? undefined : (json['volumes'].map(ContainerSvcVolumeFromJSON)),
     };
 }
 export function ContainerSvcContainerToJSON(json) {
@@ -47,17 +56,20 @@ export function ContainerSvcContainerToJSONTyped(value, ignoreDiscriminator = fa
         return value;
     }
     return {
-        'envs': value['envs'],
-        'gpuEnabled': value['gpuEnabled'],
+        'capabilities': ContainerSvcCapabilitiesToJSON(value['capabilities']),
+        'envs': value['envs'] == null ? undefined : (value['envs'].map(ContainerSvcEnvVarToJSON)),
         'hash': value['hash'],
-        'hostPort': value['hostPort'],
         'id': value['id'],
         'image': value['image'],
-        'keeps': value['keeps'],
+        'keeps': value['keeps'] == null ? undefined : (value['keeps'].map(ContainerSvcKeepToJSON)),
         'labels': value['labels'],
-        'name': value['name'],
+        'names': value['names'],
+        'network': ContainerSvcNetworkToJSON(value['network']),
         'nodeId': value['nodeId'],
-        'port': value['port'],
+        'ports': value['ports'],
+        'resources': ContainerSvcResourcesToJSON(value['resources']),
+        'runtime': value['runtime'],
         'status': value['status'],
+        'volumes': value['volumes'] == null ? undefined : (value['volumes'].map(ContainerSvcVolumeToJSON)),
     };
 }

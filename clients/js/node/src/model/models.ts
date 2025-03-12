@@ -17,22 +17,28 @@ export * from './configSvcConfig';
 export * from './configSvcGetConfigResponse';
 export * from './configSvcSaveConfigRequest';
 export * from './containerSvcBuildImageRequest';
+export * from './containerSvcCapabilities';
 export * from './containerSvcContainer';
 export * from './containerSvcContainerIsRunningResponse';
 export * from './containerSvcDaemonInfoResponse';
+export * from './containerSvcEnvVar';
 export * from './containerSvcErrorResponse';
 export * from './containerSvcGetContainerSummaryResponse';
 export * from './containerSvcGetHostResponse';
 export * from './containerSvcImagePullableResponse';
+export * from './containerSvcKeep';
 export * from './containerSvcListContainersRequest';
 export * from './containerSvcListContainersResponse';
 export * from './containerSvcListLogsRequest';
 export * from './containerSvcListLogsResponse';
 export * from './containerSvcLog';
+export * from './containerSvcNetwork';
+export * from './containerSvcResources';
 export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
 export * from './containerSvcStopContainerRequest';
+export * from './containerSvcVolume';
 export * from './dataSvcCreateObjectFields';
 export * from './dataSvcCreateObjectRequest';
 export * from './dataSvcCreateObjectResponse';
@@ -220,22 +226,28 @@ import { ConfigSvcConfig } from './configSvcConfig';
 import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
 import { ContainerSvcBuildImageRequest } from './containerSvcBuildImageRequest';
+import { ContainerSvcCapabilities } from './containerSvcCapabilities';
 import { ContainerSvcContainer } from './containerSvcContainer';
 import { ContainerSvcContainerIsRunningResponse } from './containerSvcContainerIsRunningResponse';
 import { ContainerSvcDaemonInfoResponse } from './containerSvcDaemonInfoResponse';
+import { ContainerSvcEnvVar } from './containerSvcEnvVar';
 import { ContainerSvcErrorResponse } from './containerSvcErrorResponse';
 import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContainerSummaryResponse';
 import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
 import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
+import { ContainerSvcKeep } from './containerSvcKeep';
 import { ContainerSvcListContainersRequest } from './containerSvcListContainersRequest';
 import { ContainerSvcListContainersResponse } from './containerSvcListContainersResponse';
 import { ContainerSvcListLogsRequest } from './containerSvcListLogsRequest';
 import { ContainerSvcListLogsResponse } from './containerSvcListLogsResponse';
 import { ContainerSvcLog } from './containerSvcLog';
+import { ContainerSvcNetwork } from './containerSvcNetwork';
+import { ContainerSvcResources } from './containerSvcResources';
 import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
 import { ContainerSvcStopContainerRequest } from './containerSvcStopContainerRequest';
+import { ContainerSvcVolume } from './containerSvcVolume';
 import { DataSvcCreateObjectFields } from './dataSvcCreateObjectFields';
 import { DataSvcCreateObjectRequest } from './dataSvcCreateObjectRequest';
 import { DataSvcCreateObjectResponse } from './dataSvcCreateObjectResponse';
@@ -439,22 +451,28 @@ let typeMap: {[index: string]: any} = {
     "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
     "ContainerSvcBuildImageRequest": ContainerSvcBuildImageRequest,
+    "ContainerSvcCapabilities": ContainerSvcCapabilities,
     "ContainerSvcContainer": ContainerSvcContainer,
     "ContainerSvcContainerIsRunningResponse": ContainerSvcContainerIsRunningResponse,
     "ContainerSvcDaemonInfoResponse": ContainerSvcDaemonInfoResponse,
+    "ContainerSvcEnvVar": ContainerSvcEnvVar,
     "ContainerSvcErrorResponse": ContainerSvcErrorResponse,
     "ContainerSvcGetContainerSummaryResponse": ContainerSvcGetContainerSummaryResponse,
     "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
     "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
+    "ContainerSvcKeep": ContainerSvcKeep,
     "ContainerSvcListContainersRequest": ContainerSvcListContainersRequest,
     "ContainerSvcListContainersResponse": ContainerSvcListContainersResponse,
     "ContainerSvcListLogsRequest": ContainerSvcListLogsRequest,
     "ContainerSvcListLogsResponse": ContainerSvcListLogsResponse,
     "ContainerSvcLog": ContainerSvcLog,
+    "ContainerSvcNetwork": ContainerSvcNetwork,
+    "ContainerSvcResources": ContainerSvcResources,
     "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,
     "ContainerSvcStopContainerRequest": ContainerSvcStopContainerRequest,
+    "ContainerSvcVolume": ContainerSvcVolume,
     "DataSvcCreateObjectFields": DataSvcCreateObjectFields,
     "DataSvcCreateObjectRequest": DataSvcCreateObjectRequest,
     "DataSvcCreateObjectResponse": DataSvcCreateObjectResponse,

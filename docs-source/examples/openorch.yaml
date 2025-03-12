@@ -171,23 +171,27 @@ definitions:
     type: object
   container_svc.BuildImageResponse:
     type: object
-  container_svc.Container:
+  container_svc.Capabilities:
     properties:
-      envs:
-        description: Envs are environment variables set within the container.
-        items:
-          type: string
-        type: array
       gpuEnabled:
         description: GPUEnabled specifies whether GPU support is enabled for the container.
         type: boolean
+    type: object
+  container_svc.Container:
+    properties:
+      capabilities:
+        allOf:
+        - $ref: '#/definitions/container_svc.Capabilities'
+        description: Capabilities define additional runtime features, such as GPU
+          support.
+      envs:
+        description: Envs are environment variables set within the container.
+        items:
+          $ref: '#/definitions/container_svc.EnvVar'
+        type: array
       hash:
         description: Hash is a unique identifier associated with the container.
         type: string
-      hostPort:
-        description: HostPort is the port on the host machine mapped to the container’s
-          internal port.
-        type: integer
       id:
         description: Id is the unique identifier for the container instance.
         type: string
@@ -199,28 +203,49 @@ definitions:
           Keeps are paths that persist across container restarts.
           They function like mounts or volumes, but their external storage location is irrelevant.
         items:
-          type: string
+          $ref: '#/definitions/container_svc.Keep'
         type: array
       labels:
         additionalProperties:
           type: string
         description: Labels are metadata tags assigned to the container.
         type: object
-      name:
-        description: Name is the human-readable name assigned to the container.
-        type: string
+      names:
+        description: Names are the human-readable aliases assigned to the container.
+        items:
+          type: string
+        type: array
+      network:
+        allOf:
+        - $ref: '#/definitions/container_svc.Network'
+        description: Network contains networking-related information for the container.
       nodeId:
         description: |-
           Node Id
           Please see the documentation for the envar OPENORCH_NODE_ID
         type: string
-      port:
-        description: Port is the internal port exposed by the container.
-        type: integer
+      ports:
+        additionalProperties:
+          type: integer
+        description: Ports maps host ports (keys) to container ports (values).
+        type: object
+      resources:
+        allOf:
+        - $ref: '#/definitions/container_svc.Resources'
+        description: Resources defines CPU, memory, and disk constraints for the container.
+      runtime:
+        description: Runtime specifies the container runtime (e.g., Docker, containerd,
+          etc.).
+        type: string
       status:
         description: Status indicates the current state of the container (e.g., running,
           stopped).
         type: string
+      volumes:
+        description: Volumes mounted by the container.
+        items:
+          $ref: '#/definitions/container_svc.Volume'
+        type: array
     type: object
   container_svc.ContainerIsRunningResponse:
     properties:
@@ -239,6 +264,15 @@ definitions:
         type: string
     required:
     - available
+    type: object
+  container_svc.EnvVar:
+    properties:
+      key:
+        description: Key is the environment variable name.
+        type: string
+      value:
+        description: Value is the environment variable value.
+        type: string
     type: object
   container_svc.ErrorResponse:
     properties:
@@ -272,6 +306,16 @@ definitions:
         type: boolean
     required:
     - pullable
+    type: object
+  container_svc.Keep:
+    properties:
+      path:
+        description: Path is the absolute path inside the container for the folder
+          that should persist across restarts.
+        type: string
+      readOnly:
+        description: ReadOnly indicates whether the keep is read-only.
+        type: boolean
     type: object
   container_svc.ListContainersRequest:
     properties:
@@ -323,6 +367,32 @@ definitions:
           Node Id
           Please see the documentation for the envar OPENORCH_NODE_ID
         type: string
+    type: object
+  container_svc.Network:
+    properties:
+      ipAddress:
+        description: IPAddress is the assigned IP address of the container.
+        type: string
+      macAddress:
+        description: MacAddress is the container's MAC address if applicable.
+        type: string
+      mode:
+        description: Mode specifies the container's network mode (e.g., bridge, host,
+          none, custom).
+        type: string
+    type: object
+  container_svc.Resources:
+    properties:
+      cpu:
+        description: CPU cores allocated to the container (e.g., 0.5 = 500m, 2 = 2
+          cores).
+        type: number
+      diskMB:
+        description: Disk space allocated to the container in megabytes.
+        type: integer
+      memoryMB:
+        description: Memory allocated to the container in megabytes.
+        type: integer
     type: object
   container_svc.RunContainerOptions:
     properties:
@@ -402,6 +472,18 @@ definitions:
         type: string
     type: object
   container_svc.StopContainerResponse:
+    type: object
+  container_svc.Volume:
+    properties:
+      destination:
+        description: Destination is the path inside the container.
+        type: string
+      readOnly:
+        description: ReadOnly indicates whether the mount is read-only.
+        type: boolean
+      source:
+        description: Source is the host path or volume name.
+        type: string
     type: object
   data_svc.CreateObjectFields:
     properties:
