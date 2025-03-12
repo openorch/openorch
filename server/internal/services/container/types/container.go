@@ -11,6 +11,68 @@ type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
+// Resources defines resource constraints for the container.
+type Resources struct {
+	// CPU cores allocated to the container (e.g., 0.5 = 500m, 2 = 2 cores).
+	CPU float64 `json:"cpu,omitempty"`
+
+	// Memory allocated to the container in megabytes.
+	MemoryMB int `json:"memoryMB,omitempty"`
+
+	// Disk space allocated to the container in megabytes.
+	DiskMB int `json:"diskMB,omitempty"`
+}
+
+// Capabilities defines additional runtime features of the container.
+type Capabilities struct {
+	// GPUEnabled specifies whether GPU support is enabled for the container.
+	GPUEnabled bool `json:"gpuEnabled,omitempty"`
+}
+
+// Network defines networking details for the container.
+type Network struct {
+	// Mode specifies the container's network mode (e.g., bridge, host, none, custom).
+	Mode string `json:"mode,omitempty"`
+
+	// IPAddress is the assigned IP address of the container.
+	IPAddress string `json:"ipAddress,omitempty"`
+
+	// MacAddress is the container's MAC address if applicable.
+	MacAddress string `json:"macAddress,omitempty"`
+}
+
+// EnvVar represents an environment variable inside the container.
+type EnvVar struct {
+	// Key is the environment variable name.
+	Key string `json:"key"`
+
+	// Value is the environment variable value.
+	Value string `json:"value"`
+}
+
+// Volume represents a persistent mount or volume inside the container.
+type Volume struct {
+	// Source is the host path or volume name.
+	Source string `json:"source"`
+
+	// Destination is the path inside the container.
+	Destination string `json:"destination"`
+
+	// ReadOnly indicates whether the mount is read-only.
+	ReadOnly bool `json:"readOnly,omitempty"`
+}
+
+// Keep represents a simplified volume where only the persistence of specific internal files matters,
+// without concern for their exact location on the host system.
+type Keep struct {
+	// Path is the absolute path inside the container for the folder that should persist across restarts.
+	Path string `json:"path"`
+
+	// ReadOnly indicates whether the keep is read-only.
+	ReadOnly bool `json:"readOnly,omitempty"`
+}
+
+// Container represents a running container instance.
 type Container struct {
 	// Id is the unique identifier for the container instance.
 	Id string `json:"id"`
@@ -19,17 +81,14 @@ type Container struct {
 	// Please see the documentation for the envar OPENORCH_NODE_ID
 	NodeId string `json:"nodeId"`
 
-	// Name is the human-readable name assigned to the container.
-	Name string `json:"name,omitempty"`
+	// Names are the human-readable aliases assigned to the container.
+	Names []string `json:"names,omitempty"`
 
 	// Image is the Docker image used to create the container.
 	Image string `json:"image"`
 
-	// Port is the internal port exposed by the container.
-	Port int `json:"port"`
-
-	// HostPort is the port on the host machine mapped to the container’s internal port.
-	HostPort int `json:"hostPort"`
+	// Ports maps host ports (keys) to container ports (values).
+	Ports map[uint16]uint16 `json:"ports,omitempty"`
 
 	// Hash is a unique identifier associated with the container.
 	Hash string `json:"hash,omitempty"`
@@ -38,17 +97,29 @@ type Container struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// Envs are environment variables set within the container.
-	Envs []string `json:"envs,omitempty"`
+	Envs []EnvVar `json:"envs,omitempty"`
 
 	// Keeps are paths that persist across container restarts.
 	// They function like mounts or volumes, but their external storage location is irrelevant.
-	Keeps []string `json:"keeps,omitempty"`
+	Keeps []Keep `json:"keeps,omitempty"`
 
-	// GPUEnabled specifies whether GPU support is enabled for the container.
-	GPUEnabled bool `json:"gpuEnabled,omitempty"`
+	// Volumes mounted by the container.
+	Volumes []Volume `json:"volumes,omitempty"`
 
 	// Status indicates the current state of the container (e.g., running, stopped).
 	Status string `json:"status"`
+
+	// Runtime specifies the container runtime (e.g., Docker, containerd, etc.).
+	Runtime string `json:"runtime,omitempty"`
+
+	// Resources defines CPU, memory, and disk constraints for the container.
+	Resources *Resources `json:"resources,omitempty"`
+
+	// Capabilities define additional runtime features, such as GPU support.
+	Capabilities *Capabilities `json:"capabilities,omitempty"`
+
+	// Network contains networking-related information for the container.
+	Network *Network `json:"network,omitempty"`
 }
 
 func (l *Container) GetId() string {

@@ -20,30 +20,36 @@ var _ MappedNullable = &ContainerSvcContainer{}
 
 // ContainerSvcContainer struct for ContainerSvcContainer
 type ContainerSvcContainer struct {
+	// Capabilities define additional runtime features, such as GPU support.
+	Capabilities *ContainerSvcCapabilities `json:"capabilities,omitempty"`
 	// Envs are environment variables set within the container.
-	Envs []string `json:"envs,omitempty"`
-	// GPUEnabled specifies whether GPU support is enabled for the container.
-	GpuEnabled *bool `json:"gpuEnabled,omitempty"`
+	Envs []ContainerSvcEnvVar `json:"envs,omitempty"`
 	// Hash is a unique identifier associated with the container.
 	Hash *string `json:"hash,omitempty"`
-	// HostPort is the port on the host machine mapped to the container’s internal port.
-	HostPort *int32 `json:"hostPort,omitempty"`
 	// Id is the unique identifier for the container instance.
 	Id *string `json:"id,omitempty"`
 	// Image is the Docker image used to create the container.
 	Image *string `json:"image,omitempty"`
 	// Keeps are paths that persist across container restarts. They function like mounts or volumes, but their external storage location is irrelevant.
-	Keeps []string `json:"keeps,omitempty"`
+	Keeps []ContainerSvcKeep `json:"keeps,omitempty"`
 	// Labels are metadata tags assigned to the container.
 	Labels *map[string]string `json:"labels,omitempty"`
-	// Name is the human-readable name assigned to the container.
-	Name *string `json:"name,omitempty"`
+	// Names are the human-readable aliases assigned to the container.
+	Names []string `json:"names,omitempty"`
+	// Network contains networking-related information for the container.
+	Network *ContainerSvcNetwork `json:"network,omitempty"`
 	// Node Id Please see the documentation for the envar OPENORCH_NODE_ID
 	NodeId *string `json:"nodeId,omitempty"`
-	// Port is the internal port exposed by the container.
-	Port *int32 `json:"port,omitempty"`
+	// Ports maps host ports (keys) to container ports (values).
+	Ports *map[string]int32 `json:"ports,omitempty"`
+	// Resources defines CPU, memory, and disk constraints for the container.
+	Resources *ContainerSvcResources `json:"resources,omitempty"`
+	// Runtime specifies the container runtime (e.g., Docker, containerd, etc.).
+	Runtime *string `json:"runtime,omitempty"`
 	// Status indicates the current state of the container (e.g., running, stopped).
 	Status *string `json:"status,omitempty"`
+	// Volumes mounted by the container.
+	Volumes []ContainerSvcVolume `json:"volumes,omitempty"`
 }
 
 // NewContainerSvcContainer instantiates a new ContainerSvcContainer object
@@ -63,10 +69,42 @@ func NewContainerSvcContainerWithDefaults() *ContainerSvcContainer {
 	return &this
 }
 
+// GetCapabilities returns the Capabilities field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetCapabilities() ContainerSvcCapabilities {
+	if o == nil || IsNil(o.Capabilities) {
+		var ret ContainerSvcCapabilities
+		return ret
+	}
+	return *o.Capabilities
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetCapabilitiesOk() (*ContainerSvcCapabilities, bool) {
+	if o == nil || IsNil(o.Capabilities) {
+		return nil, false
+	}
+	return o.Capabilities, true
+}
+
+// HasCapabilities returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasCapabilities() bool {
+	if o != nil && !IsNil(o.Capabilities) {
+		return true
+	}
+
+	return false
+}
+
+// SetCapabilities gets a reference to the given ContainerSvcCapabilities and assigns it to the Capabilities field.
+func (o *ContainerSvcContainer) SetCapabilities(v ContainerSvcCapabilities) {
+	o.Capabilities = &v
+}
+
 // GetEnvs returns the Envs field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetEnvs() []string {
+func (o *ContainerSvcContainer) GetEnvs() []ContainerSvcEnvVar {
 	if o == nil || IsNil(o.Envs) {
-		var ret []string
+		var ret []ContainerSvcEnvVar
 		return ret
 	}
 	return o.Envs
@@ -74,7 +112,7 @@ func (o *ContainerSvcContainer) GetEnvs() []string {
 
 // GetEnvsOk returns a tuple with the Envs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetEnvsOk() ([]string, bool) {
+func (o *ContainerSvcContainer) GetEnvsOk() ([]ContainerSvcEnvVar, bool) {
 	if o == nil || IsNil(o.Envs) {
 		return nil, false
 	}
@@ -90,41 +128,9 @@ func (o *ContainerSvcContainer) HasEnvs() bool {
 	return false
 }
 
-// SetEnvs gets a reference to the given []string and assigns it to the Envs field.
-func (o *ContainerSvcContainer) SetEnvs(v []string) {
+// SetEnvs gets a reference to the given []ContainerSvcEnvVar and assigns it to the Envs field.
+func (o *ContainerSvcContainer) SetEnvs(v []ContainerSvcEnvVar) {
 	o.Envs = v
-}
-
-// GetGpuEnabled returns the GpuEnabled field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetGpuEnabled() bool {
-	if o == nil || IsNil(o.GpuEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.GpuEnabled
-}
-
-// GetGpuEnabledOk returns a tuple with the GpuEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetGpuEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.GpuEnabled) {
-		return nil, false
-	}
-	return o.GpuEnabled, true
-}
-
-// HasGpuEnabled returns a boolean if a field has been set.
-func (o *ContainerSvcContainer) HasGpuEnabled() bool {
-	if o != nil && !IsNil(o.GpuEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetGpuEnabled gets a reference to the given bool and assigns it to the GpuEnabled field.
-func (o *ContainerSvcContainer) SetGpuEnabled(v bool) {
-	o.GpuEnabled = &v
 }
 
 // GetHash returns the Hash field value if set, zero value otherwise.
@@ -157,38 +163,6 @@ func (o *ContainerSvcContainer) HasHash() bool {
 // SetHash gets a reference to the given string and assigns it to the Hash field.
 func (o *ContainerSvcContainer) SetHash(v string) {
 	o.Hash = &v
-}
-
-// GetHostPort returns the HostPort field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetHostPort() int32 {
-	if o == nil || IsNil(o.HostPort) {
-		var ret int32
-		return ret
-	}
-	return *o.HostPort
-}
-
-// GetHostPortOk returns a tuple with the HostPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetHostPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.HostPort) {
-		return nil, false
-	}
-	return o.HostPort, true
-}
-
-// HasHostPort returns a boolean if a field has been set.
-func (o *ContainerSvcContainer) HasHostPort() bool {
-	if o != nil && !IsNil(o.HostPort) {
-		return true
-	}
-
-	return false
-}
-
-// SetHostPort gets a reference to the given int32 and assigns it to the HostPort field.
-func (o *ContainerSvcContainer) SetHostPort(v int32) {
-	o.HostPort = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -256,9 +230,9 @@ func (o *ContainerSvcContainer) SetImage(v string) {
 }
 
 // GetKeeps returns the Keeps field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetKeeps() []string {
+func (o *ContainerSvcContainer) GetKeeps() []ContainerSvcKeep {
 	if o == nil || IsNil(o.Keeps) {
-		var ret []string
+		var ret []ContainerSvcKeep
 		return ret
 	}
 	return o.Keeps
@@ -266,7 +240,7 @@ func (o *ContainerSvcContainer) GetKeeps() []string {
 
 // GetKeepsOk returns a tuple with the Keeps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetKeepsOk() ([]string, bool) {
+func (o *ContainerSvcContainer) GetKeepsOk() ([]ContainerSvcKeep, bool) {
 	if o == nil || IsNil(o.Keeps) {
 		return nil, false
 	}
@@ -282,8 +256,8 @@ func (o *ContainerSvcContainer) HasKeeps() bool {
 	return false
 }
 
-// SetKeeps gets a reference to the given []string and assigns it to the Keeps field.
-func (o *ContainerSvcContainer) SetKeeps(v []string) {
+// SetKeeps gets a reference to the given []ContainerSvcKeep and assigns it to the Keeps field.
+func (o *ContainerSvcContainer) SetKeeps(v []ContainerSvcKeep) {
 	o.Keeps = v
 }
 
@@ -319,36 +293,68 @@ func (o *ContainerSvcContainer) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
+// GetNames returns the Names field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetNames() []string {
+	if o == nil || IsNil(o.Names) {
+		var ret []string
 		return ret
 	}
-	return *o.Name
+	return o.Names
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNamesOk returns a tuple with the Names field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+func (o *ContainerSvcContainer) GetNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Names) {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Names, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ContainerSvcContainer) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+// HasNames returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasNames() bool {
+	if o != nil && !IsNil(o.Names) {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ContainerSvcContainer) SetName(v string) {
-	o.Name = &v
+// SetNames gets a reference to the given []string and assigns it to the Names field.
+func (o *ContainerSvcContainer) SetNames(v []string) {
+	o.Names = v
+}
+
+// GetNetwork returns the Network field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetNetwork() ContainerSvcNetwork {
+	if o == nil || IsNil(o.Network) {
+		var ret ContainerSvcNetwork
+		return ret
+	}
+	return *o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetNetworkOk() (*ContainerSvcNetwork, bool) {
+	if o == nil || IsNil(o.Network) {
+		return nil, false
+	}
+	return o.Network, true
+}
+
+// HasNetwork returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasNetwork() bool {
+	if o != nil && !IsNil(o.Network) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetwork gets a reference to the given ContainerSvcNetwork and assigns it to the Network field.
+func (o *ContainerSvcContainer) SetNetwork(v ContainerSvcNetwork) {
+	o.Network = &v
 }
 
 // GetNodeId returns the NodeId field value if set, zero value otherwise.
@@ -383,36 +389,100 @@ func (o *ContainerSvcContainer) SetNodeId(v string) {
 	o.NodeId = &v
 }
 
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetPort() int32 {
-	if o == nil || IsNil(o.Port) {
-		var ret int32
+// GetPorts returns the Ports field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetPorts() map[string]int32 {
+	if o == nil || IsNil(o.Ports) {
+		var ret map[string]int32
 		return ret
 	}
-	return *o.Port
+	return *o.Ports
 }
 
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
+// GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.Port) {
+func (o *ContainerSvcContainer) GetPortsOk() (*map[string]int32, bool) {
+	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
-	return o.Port, true
+	return o.Ports, true
 }
 
-// HasPort returns a boolean if a field has been set.
-func (o *ContainerSvcContainer) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
+// HasPorts returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasPorts() bool {
+	if o != nil && !IsNil(o.Ports) {
 		return true
 	}
 
 	return false
 }
 
-// SetPort gets a reference to the given int32 and assigns it to the Port field.
-func (o *ContainerSvcContainer) SetPort(v int32) {
-	o.Port = &v
+// SetPorts gets a reference to the given map[string]int32 and assigns it to the Ports field.
+func (o *ContainerSvcContainer) SetPorts(v map[string]int32) {
+	o.Ports = &v
+}
+
+// GetResources returns the Resources field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetResources() ContainerSvcResources {
+	if o == nil || IsNil(o.Resources) {
+		var ret ContainerSvcResources
+		return ret
+	}
+	return *o.Resources
+}
+
+// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetResourcesOk() (*ContainerSvcResources, bool) {
+	if o == nil || IsNil(o.Resources) {
+		return nil, false
+	}
+	return o.Resources, true
+}
+
+// HasResources returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasResources() bool {
+	if o != nil && !IsNil(o.Resources) {
+		return true
+	}
+
+	return false
+}
+
+// SetResources gets a reference to the given ContainerSvcResources and assigns it to the Resources field.
+func (o *ContainerSvcContainer) SetResources(v ContainerSvcResources) {
+	o.Resources = &v
+}
+
+// GetRuntime returns the Runtime field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetRuntime() string {
+	if o == nil || IsNil(o.Runtime) {
+		var ret string
+		return ret
+	}
+	return *o.Runtime
+}
+
+// GetRuntimeOk returns a tuple with the Runtime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetRuntimeOk() (*string, bool) {
+	if o == nil || IsNil(o.Runtime) {
+		return nil, false
+	}
+	return o.Runtime, true
+}
+
+// HasRuntime returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasRuntime() bool {
+	if o != nil && !IsNil(o.Runtime) {
+		return true
+	}
+
+	return false
+}
+
+// SetRuntime gets a reference to the given string and assigns it to the Runtime field.
+func (o *ContainerSvcContainer) SetRuntime(v string) {
+	o.Runtime = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -447,6 +517,38 @@ func (o *ContainerSvcContainer) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetVolumes returns the Volumes field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetVolumes() []ContainerSvcVolume {
+	if o == nil || IsNil(o.Volumes) {
+		var ret []ContainerSvcVolume
+		return ret
+	}
+	return o.Volumes
+}
+
+// GetVolumesOk returns a tuple with the Volumes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetVolumesOk() ([]ContainerSvcVolume, bool) {
+	if o == nil || IsNil(o.Volumes) {
+		return nil, false
+	}
+	return o.Volumes, true
+}
+
+// HasVolumes returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasVolumes() bool {
+	if o != nil && !IsNil(o.Volumes) {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumes gets a reference to the given []ContainerSvcVolume and assigns it to the Volumes field.
+func (o *ContainerSvcContainer) SetVolumes(v []ContainerSvcVolume) {
+	o.Volumes = v
+}
+
 func (o ContainerSvcContainer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -457,17 +559,14 @@ func (o ContainerSvcContainer) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcContainer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Capabilities) {
+		toSerialize["capabilities"] = o.Capabilities
+	}
 	if !IsNil(o.Envs) {
 		toSerialize["envs"] = o.Envs
 	}
-	if !IsNil(o.GpuEnabled) {
-		toSerialize["gpuEnabled"] = o.GpuEnabled
-	}
 	if !IsNil(o.Hash) {
 		toSerialize["hash"] = o.Hash
-	}
-	if !IsNil(o.HostPort) {
-		toSerialize["hostPort"] = o.HostPort
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -481,17 +580,29 @@ func (o ContainerSvcContainer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if !IsNil(o.Names) {
+		toSerialize["names"] = o.Names
+	}
+	if !IsNil(o.Network) {
+		toSerialize["network"] = o.Network
 	}
 	if !IsNil(o.NodeId) {
 		toSerialize["nodeId"] = o.NodeId
 	}
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
+	if !IsNil(o.Ports) {
+		toSerialize["ports"] = o.Ports
+	}
+	if !IsNil(o.Resources) {
+		toSerialize["resources"] = o.Resources
+	}
+	if !IsNil(o.Runtime) {
+		toSerialize["runtime"] = o.Runtime
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Volumes) {
+		toSerialize["volumes"] = o.Volumes
 	}
 	return toSerialize, nil
 }

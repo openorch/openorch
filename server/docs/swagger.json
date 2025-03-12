@@ -5588,27 +5588,36 @@
         "container_svc.BuildImageResponse": {
             "type": "object"
         },
+        "container_svc.Capabilities": {
+            "type": "object",
+            "properties": {
+                "gpuEnabled": {
+                    "description": "GPUEnabled specifies whether GPU support is enabled for the container.",
+                    "type": "boolean"
+                }
+            }
+        },
         "container_svc.Container": {
             "type": "object",
             "properties": {
+                "capabilities": {
+                    "description": "Capabilities define additional runtime features, such as GPU support.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Capabilities"
+                        }
+                    ]
+                },
                 "envs": {
                     "description": "Envs are environment variables set within the container.",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/container_svc.EnvVar"
                     }
-                },
-                "gpuEnabled": {
-                    "description": "GPUEnabled specifies whether GPU support is enabled for the container.",
-                    "type": "boolean"
                 },
                 "hash": {
                     "description": "Hash is a unique identifier associated with the container.",
                     "type": "string"
-                },
-                "hostPort": {
-                    "description": "HostPort is the port on the host machine mapped to the container’s internal port.",
-                    "type": "integer"
                 },
                 "id": {
                     "description": "Id is the unique identifier for the container instance.",
@@ -5622,7 +5631,7 @@
                     "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/container_svc.Keep"
                     }
                 },
                 "labels": {
@@ -5632,21 +5641,54 @@
                         "type": "string"
                     }
                 },
-                "name": {
-                    "description": "Name is the human-readable name assigned to the container.",
-                    "type": "string"
+                "names": {
+                    "description": "Names are the human-readable aliases assigned to the container.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "network": {
+                    "description": "Network contains networking-related information for the container.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Network"
+                        }
+                    ]
                 },
                 "nodeId": {
                     "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
                     "type": "string"
                 },
-                "port": {
-                    "description": "Port is the internal port exposed by the container.",
-                    "type": "integer"
+                "ports": {
+                    "description": "Ports maps host ports (keys) to container ports (values).",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "resources": {
+                    "description": "Resources defines CPU, memory, and disk constraints for the container.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Resources"
+                        }
+                    ]
+                },
+                "runtime": {
+                    "description": "Runtime specifies the container runtime (e.g., Docker, containerd, etc.).",
+                    "type": "string"
                 },
                 "status": {
                     "description": "Status indicates the current state of the container (e.g., running, stopped).",
                     "type": "string"
+                },
+                "volumes": {
+                    "description": "Volumes mounted by the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Volume"
+                    }
                 }
             }
         },
@@ -5674,6 +5716,19 @@
                     "type": "boolean"
                 },
                 "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.EnvVar": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "Key is the environment variable name.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is the environment variable value.",
                     "type": "string"
                 }
             }
@@ -5724,6 +5779,19 @@
             ],
             "properties": {
                 "pullable": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.Keep": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "description": "Path is the absolute path inside the container for the folder that should persist across restarts.",
+                    "type": "string"
+                },
+                "readOnly": {
+                    "description": "ReadOnly indicates whether the keep is read-only.",
                     "type": "boolean"
                 }
             }
@@ -5797,6 +5865,40 @@
                 "nodeId": {
                     "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
                     "type": "string"
+                }
+            }
+        },
+        "container_svc.Network": {
+            "type": "object",
+            "properties": {
+                "ipAddress": {
+                    "description": "IPAddress is the assigned IP address of the container.",
+                    "type": "string"
+                },
+                "macAddress": {
+                    "description": "MacAddress is the container's MAC address if applicable.",
+                    "type": "string"
+                },
+                "mode": {
+                    "description": "Mode specifies the container's network mode (e.g., bridge, host, none, custom).",
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.Resources": {
+            "type": "object",
+            "properties": {
+                "cpu": {
+                    "description": "CPU cores allocated to the container (e.g., 0.5 = 500m, 2 = 2 cores).",
+                    "type": "number"
+                },
+                "diskMB": {
+                    "description": "Disk space allocated to the container in megabytes.",
+                    "type": "integer"
+                },
+                "memoryMB": {
+                    "description": "Memory allocated to the container in megabytes.",
+                    "type": "integer"
                 }
             }
         },
@@ -5903,6 +6005,23 @@
         },
         "container_svc.StopContainerResponse": {
             "type": "object"
+        },
+        "container_svc.Volume": {
+            "type": "object",
+            "properties": {
+                "destination": {
+                    "description": "Destination is the path inside the container.",
+                    "type": "string"
+                },
+                "readOnly": {
+                    "description": "ReadOnly indicates whether the mount is read-only.",
+                    "type": "boolean"
+                },
+                "source": {
+                    "description": "Source is the host path or volume name.",
+                    "type": "string"
+                }
+            }
         },
         "data_svc.CreateObjectFields": {
             "type": "object",

@@ -3,17 +3,17 @@ package dockerbackend
 import (
 	"context"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 	"sync"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
+	dockerapitypes "github.com/docker/docker/api/types"
 	dockercontainer "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/events"
 	"github.com/docker/docker/client"
 	container "github.com/openorch/openorch/server/internal/services/container/types"
+	"github.com/samber/lo"
 )
 
 type ContainerTracker struct {
@@ -71,14 +71,16 @@ func (t *ContainerTracker) AddContainerFromList(c types.Container) {
 	defer t.mu.Unlock()
 
 	t.containers[c.ID] = container.Container{
-		Id:       c.ID,
-		NodeId:   os.Getenv("OPENORCH_NODE_ID"),
-		Name:     strings.TrimPrefix(c.Names[0], "/"),
-		Image:    c.Image,
-		Port:     extractPortFromList(c),
-		HostPort: extractHostPortFromList(c),
-		Labels:   c.Labels,
-		Status:   c.State,
+		Id:     c.ID,
+		Names:  cleanNames(c.Names),
+		Image:  c.Image,
+		Ports:  extractPortsFromList(c.Ports),
+		Labels: c.Labels,
+		Status: c.State,
+		//Envs:   convertEnvToEnvVar(c.Env), // Convert Env into your custom EnvVar struct
+		Capabilities: &container.Capabilities{
+			//GPUEnabled: checkGPUEnabled(info),
+		},
 	}
 }
 
@@ -87,19 +89,35 @@ func (t *ContainerTracker) AddContainerFromInspect(info types.ContainerJSON) {
 	defer t.mu.Unlock()
 
 	t.containers[info.ID] = container.Container{
-		Id:         info.ID,
-		NodeId:     os.Getenv("OPENORCH_NODE_ID"),
-		Name:       info.Name,
-		Image:      info.Config.Image,
-		Port:       extractPortFromInspect(info),
-		HostPort:   extractHostPortFromInspect(info),
-		Hash:       info.Config.Labels["hash"],
-		Labels:     info.Config.Labels,
-		Envs:       info.Config.Env,
-		Keeps:      extractKeeps(info),
-		GPUEnabled: checkGPUEnabled(info),
-		Status:     info.State.Status,
+		Id: info.ID,
+		Names: []string{
+			cleanName(info.Name, 0),
+		},
+		Image:  info.Config.Image,
+		Ports:  extractPortsFromInspect(info),
+		Hash:   info.Config.Labels["hash"],
+		Labels: info.Config.Labels,
+		Envs:   convertEnvToEnvVar(info.Config.Env), // Convert Env into your custom EnvVar struct
+		Capabilities: &container.Capabilities{
+			GPUEnabled: checkGPUEnabled(info),
+		},
+		Status: info.State.Status,
 	}
+}
+
+// Convert the Docker environment variables (e.g., "KEY=VALUE") to your custom EnvVar format
+func convertEnvToEnvVar(env []string) []container.EnvVar {
+	var envVars []container.EnvVar
+	for _, e := range env {
+		parts := strings.SplitN(e, "=", 2)
+		if len(parts) == 2 {
+			envVars = append(envVars, container.EnvVar{
+				Key:   parts[0],
+				Value: parts[1],
+			})
+		}
+	}
+	return envVars
 }
 
 func (t *ContainerTracker) RemoveContainer(containerID string) {
@@ -119,66 +137,46 @@ func (t *ContainerTracker) GetContainers() []container.Container {
 	return result
 }
 
-func extractPortFromList(c types.Container) int {
-	if len(c.Ports) > 0 {
-		return int(c.Ports[0].PrivatePort)
-	}
-	return 0
+func cleanNames(names []string) []string {
+	return lo.Map(names, cleanName)
 }
 
-func extractHostPortFromList(c types.Container) int {
-	if len(c.Ports) > 0 {
-		// Example:
-		// ([]types.Port) (len=3 cap=4) {
-		// (types.Port) {
-		//	IP: (string) "",
-		//	PrivatePort: (uint16) 80,
-		//	PublicPort: (uint16) 0,
-		//	Type: (string) (len=3) "tcp"
-		//   },
-		//   (types.Port) {
-		//	IP: (string) (len=7) "0.0.0.0",
-		//	PrivatePort: (uint16) 8080,
-		//	PublicPort: (uint16) 8081,
-		//	Type: (string) (len=3) "tcp"
-		//   },
-		//   (types.Port) {
-		//	IP: (string) (len=2) "::",
-		//	PrivatePort: (uint16) 8080,
-		//	PublicPort: (uint16) 8081,
-		//	Type: (string) (len=3) "tcp"
-		//   }
-		//  }
-		for _, port := range c.Ports {
-			if port.IP == "0.0.0.0" {
-				return int(port.PublicPort)
-			}
-		}
-	}
-	return 0
+func cleanName(s string, index int) string {
+	return strings.Trim(s, "/")
 }
 
-func extractPortFromInspect(info types.ContainerJSON) int {
-	if len(info.Config.ExposedPorts) > 0 {
-		for port := range info.Config.ExposedPorts {
-			p, _ := strconv.Atoi(strings.Split(string(port), "/")[0])
-			return p
-		}
+func extractPortsFromList(ports []dockerapitypes.Port) map[uint16]uint16 {
+	ret := map[uint16]uint16{}
+
+	for _, port := range ports {
+		ret[port.PublicPort] = port.PrivatePort
 	}
-	return 0
+
+	return ret
 }
 
-func extractHostPortFromInspect(info types.ContainerJSON) int {
-	spew.Dump("host port inspect", info.NetworkSettings)
+func extractPortsFromInspect(info types.ContainerJSON) map[uint16]uint16 {
+	ret := map[uint16]uint16{}
+
 	if len(info.NetworkSettings.Ports) > 0 {
-		for _, bindings := range info.NetworkSettings.Ports {
+		for port, bindings := range info.NetworkSettings.Ports {
 			if len(bindings) > 0 {
-				p, _ := strconv.Atoi(bindings[0].HostPort)
-				return p
+				hostPort, err := strconv.Atoi(bindings[0].HostPort)
+				if err != nil {
+					// Handle error if HostPort conversion fails
+					continue
+				}
+				privatePort, err := strconv.Atoi(port.Port())
+				if err != nil {
+					// Handle error if private port conversion fails
+					continue
+				}
+				ret[uint16(hostPort)] = uint16(privatePort)
 			}
 		}
 	}
-	return 0
+
+	return ret
 }
 
 func extractKeeps(info types.ContainerJSON) []string {

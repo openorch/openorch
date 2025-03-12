@@ -18,9 +18,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
+	"github.com/samber/lo"
 	"github.com/stretchr/testify/require"
 )
 
@@ -72,10 +74,11 @@ func TestListContainers(t *testing.T) {
 
 		found := false
 		for _, c := range rsp.Containers {
-			if *c.Name == "test-container-2" {
+			spew.Dump("fasz", c.Names)
+			if lo.Contains(c.Names, "test-container-2") {
 				require.Equal(t, true, len(rsp.Containers) > 0)
 				require.Equal(t, "nginx:latest", *c.Image)
-				require.Equal(t, int32(9082), *c.HostPort)
+				require.Equal(t, int32(9080), (*c.Ports)["9082"])
 				found = true
 			}
 		}

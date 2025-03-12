@@ -20,7 +20,7 @@ require (
 	github.com/openorch/openorch/sdk/go v0.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/r3labs/sse v0.0.0-20210224172625-26fe804710bc
-	github.com/samber/lo v1.47.0
+	github.com/samber/lo v1.49.1
 	github.com/sendgrid/sendgrid-go v3.16.0+incompatible
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/stretchr/testify v1.10.0
@@ -91,9 +91,9 @@ require (
 	go.opentelemetry.io/otel/trace v1.27.0 // indirect
 	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/sync v0.8.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.24.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
 	gopkg.in/cenkalti/backoff.v1 v1.1.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect

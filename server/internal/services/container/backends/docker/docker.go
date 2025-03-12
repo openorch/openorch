@@ -110,37 +110,27 @@ func (ds *DockerBackend) DaemonAddress() (string, error) {
 
 func mapDockerContainerToContainer(dockerContainer dockerapitypes.Container) container.Container {
 	return container.Container{
-		Id:         dockerContainer.ID,
-		Name:       getFirstName(dockerContainer.Names),
-		Image:      dockerContainer.Image,
-		Port:       getFirstExposedPort(dockerContainer.Ports),
-		HostPort:   getFirstHostPort(dockerContainer.Ports),
-		Hash:       dockerContainer.ImageID,
-		Labels:     dockerContainer.Labels,
-		Envs:       nil,   // Not directly available
-		Keeps:      nil,   // No direct equivalent
-		GPUEnabled: false, // No direct mapping
-		Status:     dockerContainer.State,
+		Id:     dockerContainer.ID,
+		Names:  dockerContainer.Names,
+		Image:  dockerContainer.Image,
+		Ports:  getPorts(dockerContainer.Ports),
+		Hash:   dockerContainer.ImageID,
+		Labels: dockerContainer.Labels,
+		Envs:   nil, // Not directly available
+		Keeps:  nil, // No direct equivalent
+		Capabilities: &container.Capabilities{
+			GPUEnabled: false,
+		},
+		Status: dockerContainer.State,
 	}
 }
 
-func getFirstName(names []string) string {
-	if len(names) > 0 {
-		return names[0]
-	}
-	return ""
-}
+func getPorts(ports []dockerapitypes.Port) map[uint16]uint16 {
+	ret := map[uint16]uint16{}
 
-func getFirstExposedPort(ports []dockerapitypes.Port) int {
-	if len(ports) > 0 {
-		return int(ports[0].PrivatePort)
+	for _, port := range ports {
+		ret[port.PublicPort] = port.PrivatePort
 	}
-	return 0
-}
 
-func getFirstHostPort(ports []dockerapitypes.Port) int {
-	if len(ports) > 0 && ports[0].PublicPort > 0 {
-		return int(ports[0].PublicPort)
-	}
-	return 0
+	return ret
 }
