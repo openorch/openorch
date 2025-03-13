@@ -18,7 +18,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	openapi "github.com/openorch/openorch/clients/go"
 	"github.com/openorch/openorch/sdk/go/test"
 	"github.com/openorch/openorch/server/internal/di"
@@ -50,16 +49,31 @@ func TestListContainers(t *testing.T) {
 
 	t.Run("run container", func(t *testing.T) {
 		_, _, err := adminClient.ContainerSvcAPI.RunContainer(ctx).Body(openapi.ContainerSvcRunContainerRequest{
-			Image:    "nginx:latest",
-			Port:     9080,
-			HostPort: openapi.PtrInt32(9082),
-			Options: &openapi.ContainerSvcRunContainerOptions{
-				Name:   openapi.PtrString("test-container-2"),
-				Hash:   openapi.PtrString("abc123"),
-				Envs:   []string{"ENV_VAR=value"},
-				Labels: &map[string]string{"app": "test"},
-				Keeps:  []string{"/data"},
-				// Assets: &map[string]string{"MODEL": "https://example.com/model.gguf"},
+			Image: "nginx:latest",
+			Ports: []openapi.ContainerSvcPortMapping{
+				{
+					Internal: 9080,
+					Host:     9082,
+				},
+			},
+			Names: []string{"test-container-2"},
+			Hash:  openapi.PtrString("abc123"),
+			Envs: []openapi.ContainerSvcEnvVar{
+				{
+					Key:   "ENV_VAR",
+					Value: "value",
+				},
+			},
+			Labels: []openapi.ContainerSvcLabel{
+				{
+					Key:   "app",
+					Value: "test",
+				},
+			},
+			Keeps: []openapi.ContainerSvcKeep{
+				{
+					Path: "/data",
+				},
 			},
 		}).Execute()
 
@@ -74,11 +88,17 @@ func TestListContainers(t *testing.T) {
 
 		found := false
 		for _, c := range rsp.Containers {
-			spew.Dump("fasz", c.Names)
 			if lo.Contains(c.Names, "test-container-2") {
 				require.Equal(t, true, len(rsp.Containers) > 0)
 				require.Equal(t, "nginx:latest", *c.Image)
-				require.Equal(t, int32(9080), (*c.Ports)["9082"])
+
+				portFound := false
+				for _, port := range c.Ports {
+					if port.Internal == 9080 && port.Host == 9082 {
+						portFound = true
+					}
+				}
+				require.Equal(t, true, portFound)
 				found = true
 			}
 		}

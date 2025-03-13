@@ -166,10 +166,15 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				{
 					Id: "test-a",
 					Image: &openapi.RegistrySvcImageSpec{
-						Name: "hashicorp/http-echo",
-						Port: 8080,
+						Name:          "hashicorp/http-echo",
+						InternalPorts: []int32{8080},
 					},
-					HostPort: openapi.PtrInt32(8887),
+					Ports: []openapi.RegistrySvcPortMapping{
+						{
+							Internal: 8080,
+							Host:     8887,
+						},
+					},
 				},
 			}
 		})
@@ -210,10 +215,15 @@ var _ = ginkgo.Describe("Deploy Loop", func() {
 				{
 					Id: "test-a",
 					Image: &openapi.RegistrySvcImageSpec{
-						Name: "hashicorp/http-echo",
-						Port: 8080,
+						Name:          "hashicorp/http-echo",
+						InternalPorts: []int32{8080},
 					},
-					HostPort: openapi.PtrInt32(8887),
+					Ports: []openapi.RegistrySvcPortMapping{
+						{
+							Internal: 8080,
+							Host:     8887,
+						},
+					},
 				},
 			}
 		})

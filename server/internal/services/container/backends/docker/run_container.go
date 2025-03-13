@@ -173,14 +173,19 @@ func (d *DockerBackend) RunContainer(
 
 	containerConfig.Labels["openorch-hash"] = req.Hash
 
+	name := ""
+	if len(req.Names) > 0 {
+		// If docker doesn't accept multipoe names, request should not either perhaps
+		name = req.Names[0]
+	}
+
 	createdContainer, err := d.client.ContainerCreate(
 		ctx,
 		containerConfig,
 		hostConfig,
 		nil,
 		nil,
-		// huh?
-		req.Names[0],
+		name,
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, "error creating Docker container")

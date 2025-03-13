@@ -48,16 +48,31 @@ func TestListLogs(t *testing.T) {
 
 	t.Run("run container", func(t *testing.T) {
 		_, _, err := adminClient.ContainerSvcAPI.RunContainer(ctx).Body(openapi.ContainerSvcRunContainerRequest{
-			Image:    "nginx:latest",
-			Port:     9080,
-			HostPort: openapi.PtrInt32(9081),
-			Options: &openapi.ContainerSvcRunContainerOptions{
-				Name:   openapi.PtrString("test-container"),
-				Hash:   openapi.PtrString("abc123"),
-				Envs:   []string{"ENV_VAR=value"},
-				Labels: &map[string]string{"app": "test"},
-				Keeps:  []string{"/data"},
-				// Assets: &map[string]string{"MODEL": "https://example.com/model.gguf"},
+			Image: "nginx:latest",
+			Ports: []openapi.ContainerSvcPortMapping{
+				{
+					Internal: 9080,
+					Host:     9081,
+				},
+			},
+			Names: []string{"test-container"},
+			Hash:  openapi.PtrString("abc123"),
+			Envs: []openapi.ContainerSvcEnvVar{
+				{
+					Key:   "ENV_VAR",
+					Value: "value",
+				},
+			},
+			Labels: []openapi.ContainerSvcLabel{
+				{
+					Key:   "app",
+					Value: "test",
+				},
+			},
+			Keeps: []openapi.ContainerSvcKeep{
+				{
+					Path: "/data",
+				},
 			},
 		}).Execute()
 
