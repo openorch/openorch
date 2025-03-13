@@ -15,6 +15,10 @@
  * Check if a given object implements the ContainerSvcEnvVar interface.
  */
 export function instanceOfContainerSvcEnvVar(value) {
+    if (!('key' in value) || value['key'] === undefined)
+        return false;
+    if (!('value' in value) || value['value'] === undefined)
+        return false;
     return true;
 }
 export function ContainerSvcEnvVarFromJSON(json) {
@@ -25,8 +29,8 @@ export function ContainerSvcEnvVarFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'key': json['key'] == null ? undefined : json['key'],
-        'value': json['value'] == null ? undefined : json['value'],
+        'key': json['key'],
+        'value': json['value'],
     };
 }
 export function ContainerSvcEnvVarToJSON(json) {

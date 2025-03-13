@@ -21,11 +21,11 @@ var _ MappedNullable = &ModelSvcContainer{}
 // ModelSvcContainer struct for ModelSvcContainer
 type ModelSvcContainer struct {
 	// Environment variables to be passed to the container (e.g., \"DEVICES=all\").
-	Envars []string `json:"envars,omitempty"`
+	Envars []ModelSvcEnvVar `json:"envars,omitempty"`
 	// Template for constructing the container image name.
 	ImageTemplate *string `json:"imageTemplate,omitempty"`
 	// List of container paths that should persist across restarts.
-	Keeps []string `json:"keeps,omitempty"`
+	Keeps []ModelSvcKeep `json:"keeps,omitempty"`
 	// Internal port exposed by the container.
 	Port *int32 `json:"port,omitempty"`
 }
@@ -48,9 +48,9 @@ func NewModelSvcContainerWithDefaults() *ModelSvcContainer {
 }
 
 // GetEnvars returns the Envars field value if set, zero value otherwise.
-func (o *ModelSvcContainer) GetEnvars() []string {
+func (o *ModelSvcContainer) GetEnvars() []ModelSvcEnvVar {
 	if o == nil || IsNil(o.Envars) {
-		var ret []string
+		var ret []ModelSvcEnvVar
 		return ret
 	}
 	return o.Envars
@@ -58,7 +58,7 @@ func (o *ModelSvcContainer) GetEnvars() []string {
 
 // GetEnvarsOk returns a tuple with the Envars field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcContainer) GetEnvarsOk() ([]string, bool) {
+func (o *ModelSvcContainer) GetEnvarsOk() ([]ModelSvcEnvVar, bool) {
 	if o == nil || IsNil(o.Envars) {
 		return nil, false
 	}
@@ -74,8 +74,8 @@ func (o *ModelSvcContainer) HasEnvars() bool {
 	return false
 }
 
-// SetEnvars gets a reference to the given []string and assigns it to the Envars field.
-func (o *ModelSvcContainer) SetEnvars(v []string) {
+// SetEnvars gets a reference to the given []ModelSvcEnvVar and assigns it to the Envars field.
+func (o *ModelSvcContainer) SetEnvars(v []ModelSvcEnvVar) {
 	o.Envars = v
 }
 
@@ -112,9 +112,9 @@ func (o *ModelSvcContainer) SetImageTemplate(v string) {
 }
 
 // GetKeeps returns the Keeps field value if set, zero value otherwise.
-func (o *ModelSvcContainer) GetKeeps() []string {
+func (o *ModelSvcContainer) GetKeeps() []ModelSvcKeep {
 	if o == nil || IsNil(o.Keeps) {
-		var ret []string
+		var ret []ModelSvcKeep
 		return ret
 	}
 	return o.Keeps
@@ -122,7 +122,7 @@ func (o *ModelSvcContainer) GetKeeps() []string {
 
 // GetKeepsOk returns a tuple with the Keeps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcContainer) GetKeepsOk() ([]string, bool) {
+func (o *ModelSvcContainer) GetKeepsOk() ([]ModelSvcKeep, bool) {
 	if o == nil || IsNil(o.Keeps) {
 		return nil, false
 	}
@@ -138,8 +138,8 @@ func (o *ModelSvcContainer) HasKeeps() bool {
 	return false
 }
 
-// SetKeeps gets a reference to the given []string and assigns it to the Keeps field.
-func (o *ModelSvcContainer) SetKeeps(v []string) {
+// SetKeeps gets a reference to the given []ModelSvcKeep and assigns it to the Keeps field.
+func (o *ModelSvcContainer) SetKeeps(v []ModelSvcKeep) {
 	o.Keeps = v
 }
 

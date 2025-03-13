@@ -71,11 +71,11 @@ func (t *ContainerTracker) AddContainerFromList(c types.Container) {
 	defer t.mu.Unlock()
 
 	t.containers[c.ID] = container.Container{
-		Id:     c.ID,
-		Names:  cleanNames(c.Names),
-		Image:  c.Image,
-		Ports:  extractPortsFromList(c.Ports),
-		Labels: c.Labels,
+		Id:    c.ID,
+		Names: cleanNames(c.Names),
+		Image: c.Image,
+		Ports: extractPortsFromList(c.Ports),
+		// Labels: c.Labels,
 		Status: c.State,
 		//Envs:   convertEnvToEnvVar(c.Env), // Convert Env into your custom EnvVar struct
 		Capabilities: &container.Capabilities{
@@ -93,11 +93,11 @@ func (t *ContainerTracker) AddContainerFromInspect(info types.ContainerJSON) {
 		Names: []string{
 			cleanName(info.Name, 0),
 		},
-		Image:  info.Config.Image,
-		Ports:  extractPortsFromInspect(info),
-		Hash:   info.Config.Labels["hash"],
-		Labels: info.Config.Labels,
-		Envs:   convertEnvToEnvVar(info.Config.Env), // Convert Env into your custom EnvVar struct
+		Image: info.Config.Image,
+		Ports: extractPortsFromInspect(info),
+		Hash:  info.Config.Labels["hash"],
+		// Labels: info.Config.Labels,
+		Envs: convertEnvToEnvVar(info.Config.Env), // Convert Env into your custom EnvVar struct
 		Capabilities: &container.Capabilities{
 			GPUEnabled: checkGPUEnabled(info),
 		},
@@ -145,18 +145,21 @@ func cleanName(s string, index int) string {
 	return strings.Trim(s, "/")
 }
 
-func extractPortsFromList(ports []dockerapitypes.Port) map[uint16]uint16 {
-	ret := map[uint16]uint16{}
+func extractPortsFromList(ports []dockerapitypes.Port) []container.PortMapping {
+	ret := []container.PortMapping{}
 
 	for _, port := range ports {
-		ret[port.PublicPort] = port.PrivatePort
+		ret = append(ret, container.PortMapping{
+			Internal: port.PrivatePort,
+			Host:     port.PublicPort,
+		})
 	}
 
 	return ret
 }
 
-func extractPortsFromInspect(info types.ContainerJSON) map[uint16]uint16 {
-	ret := map[uint16]uint16{}
+func extractPortsFromInspect(info types.ContainerJSON) []container.PortMapping {
+	ret := []container.PortMapping{}
 
 	if len(info.NetworkSettings.Ports) > 0 {
 		for port, bindings := range info.NetworkSettings.Ports {
@@ -171,7 +174,11 @@ func extractPortsFromInspect(info types.ContainerJSON) map[uint16]uint16 {
 					// Handle error if private port conversion fails
 					continue
 				}
-				ret[uint16(hostPort)] = uint16(privatePort)
+
+				ret = append(ret, container.PortMapping{
+					Host:     uint16(hostPort),
+					Internal: uint16(privatePort),
+				})
 			}
 		}
 	}

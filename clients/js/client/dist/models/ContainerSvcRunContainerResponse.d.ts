@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { ContainerSvcPortMapping } from './ContainerSvcPortMapping';
 /**
  *
  * @export
@@ -16,17 +17,17 @@
  */
 export interface ContainerSvcRunContainerResponse {
     /**
+     * Ports is returned here as host ports might get mapped dynamically.
+     * @type {Array<ContainerSvcPortMapping>}
+     * @memberof ContainerSvcRunContainerResponse
+     */
+    ports?: Array<ContainerSvcPortMapping>;
+    /**
      *
      * @type {boolean}
      * @memberof ContainerSvcRunContainerResponse
      */
-    newContainerStarted?: boolean;
-    /**
-     *
-     * @type {number}
-     * @memberof ContainerSvcRunContainerResponse
-     */
-    portNumber?: number;
+    started?: boolean;
 }
 /**
  * Check if a given object implements the ContainerSvcRunContainerResponse interface.

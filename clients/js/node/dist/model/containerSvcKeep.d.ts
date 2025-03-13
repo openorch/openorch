@@ -13,7 +13,7 @@ export declare class ContainerSvcKeep {
     /**
     * Path is the absolute path inside the container for the folder that should persist across restarts.
     */
-    'path'?: string;
+    'path': string;
     /**
     * ReadOnly indicates whether the keep is read-only.
     */

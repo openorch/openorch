@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ContainerSvcEnvVar type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &ContainerSvcEnvVar{}
 // ContainerSvcEnvVar struct for ContainerSvcEnvVar
 type ContainerSvcEnvVar struct {
 	// Key is the environment variable name.
-	Key *string `json:"key,omitempty"`
+	Key string `json:"key"`
 	// Value is the environment variable value.
-	Value *string `json:"value,omitempty"`
+	Value string `json:"value"`
 }
+
+type _ContainerSvcEnvVar ContainerSvcEnvVar
 
 // NewContainerSvcEnvVar instantiates a new ContainerSvcEnvVar object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerSvcEnvVar() *ContainerSvcEnvVar {
+func NewContainerSvcEnvVar(key string, value string) *ContainerSvcEnvVar {
 	this := ContainerSvcEnvVar{}
+	this.Key = key
+	this.Value = value
 	return &this
 }
 
@@ -43,68 +49,52 @@ func NewContainerSvcEnvVarWithDefaults() *ContainerSvcEnvVar {
 	return &this
 }
 
-// GetKey returns the Key field value if set, zero value otherwise.
+// GetKey returns the Key field value
 func (o *ContainerSvcEnvVar) GetKey() string {
-	if o == nil || IsNil(o.Key) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Key
+
+	return o.Key
 }
 
-// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
 func (o *ContainerSvcEnvVar) GetKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.Key) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Key, true
+	return &o.Key, true
 }
 
-// HasKey returns a boolean if a field has been set.
-func (o *ContainerSvcEnvVar) HasKey() bool {
-	if o != nil && !IsNil(o.Key) {
-		return true
-	}
-
-	return false
-}
-
-// SetKey gets a reference to the given string and assigns it to the Key field.
+// SetKey sets field value
 func (o *ContainerSvcEnvVar) SetKey(v string) {
-	o.Key = &v
+	o.Key = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *ContainerSvcEnvVar) GetValue() string {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Value
+
+	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *ContainerSvcEnvVar) GetValueOk() (*string, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *ContainerSvcEnvVar) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given string and assigns it to the Value field.
+// SetValue sets field value
 func (o *ContainerSvcEnvVar) SetValue(v string) {
-	o.Value = &v
+	o.Value = v
 }
 
 func (o ContainerSvcEnvVar) MarshalJSON() ([]byte, error) {
@@ -117,13 +107,47 @@ func (o ContainerSvcEnvVar) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcEnvVar) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Key) {
-		toSerialize["key"] = o.Key
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["key"] = o.Key
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
+}
+
+func (o *ContainerSvcEnvVar) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"key",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varContainerSvcEnvVar := _ContainerSvcEnvVar{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varContainerSvcEnvVar)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContainerSvcEnvVar(varContainerSvcEnvVar)
+
+	return err
 }
 
 type NullableContainerSvcEnvVar struct {

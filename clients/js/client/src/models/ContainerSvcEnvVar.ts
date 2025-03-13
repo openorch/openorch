@@ -24,19 +24,21 @@ export interface ContainerSvcEnvVar {
      * @type {string}
      * @memberof ContainerSvcEnvVar
      */
-    key?: string;
+    key: string;
     /**
      * Value is the environment variable value.
      * @type {string}
      * @memberof ContainerSvcEnvVar
      */
-    value?: string;
+    value: string;
 }
 
 /**
  * Check if a given object implements the ContainerSvcEnvVar interface.
  */
 export function instanceOfContainerSvcEnvVar(value: object): value is ContainerSvcEnvVar {
+    if (!('key' in value) || value['key'] === undefined) return false;
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 
@@ -50,8 +52,8 @@ export function ContainerSvcEnvVarFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'key': json['key'] == null ? undefined : json['key'],
-        'value': json['value'] == null ? undefined : json['value'],
+        'key': json['key'],
+        'value': json['value'],
     };
 }
 

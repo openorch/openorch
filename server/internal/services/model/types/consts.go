@@ -22,7 +22,12 @@ var PlatformLlamaCpp = Platform{
 				Port: 8000,
 				// For the source of this image, see `server/docker/llama-cpp-python/cuda`
 				ImageTemplate: "crufter/llama-cpp-python:cuda-$cudaVersion-latest",
-				Envars:        []string{"NVIDIA_VISIBLE_DEVICES=all"},
+				Envars: []EnvVar{
+					{
+						Key:   "NVIDIA_VISIBLE_DEVICES",
+						Value: "all",
+					},
+				},
 			},
 		},
 	},
@@ -40,8 +45,12 @@ var PlatformStableDiffusion = Platform{
 			Container: Container{
 				Port:          7860,
 				ImageTemplate: "crufter/stable-diffusion:default-1-latest",
-				Envars:        []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-				Keeps:         []string{},
+				Envars: []EnvVar{
+					{
+						Key:   "CLI_ARGS",
+						Value: "--no-half --precision full --allow-code --enable-insecure-extension-access --api",
+					},
+				},
 			},
 		},
 		Cuda: CudaParameters{
@@ -50,8 +59,12 @@ var PlatformStableDiffusion = Platform{
 			Container: Container{
 				Port:          7860,
 				ImageTemplate: "crufter/stable-diffusion:cuda-$cudaVersion-latest",
-				Envars:        []string{`CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api`},
-				Keeps:         []string{},
+				Envars: []EnvVar{
+					{
+						Key:   "CLI_ARGS",
+						Value: "--no-half --precision full --allow-code --enable-insecure-extension-access --api",
+					},
+				},
 			},
 		},
 	},
@@ -84,8 +97,11 @@ var Models = []*Model{
 	//
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -103,8 +119,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -122,8 +141,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -141,8 +163,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q3_K_L.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_L.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q3_K_L.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -160,8 +185,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q4_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -179,8 +207,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -198,8 +229,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q5_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q5_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q5_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -217,8 +251,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q5_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q5_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q5_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -236,8 +273,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q6_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q6_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q6_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -255,8 +295,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q8_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q8_0.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q8_0.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -277,8 +320,11 @@ var Models = []*Model{
 	//
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -296,8 +342,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q3_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -315,8 +364,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -334,8 +386,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q3_K_L.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_L.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q3_K_L.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -353,8 +408,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q4_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -372,8 +430,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_K_M.gguf",
+			},
 		},
 		Name:           "CodeLlama",
 		PlatformId:     PlatformLlamaCpp.Id,
@@ -391,8 +452,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q5_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q5_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -410,8 +474,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q5_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q5_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q5_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -429,8 +496,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q6_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q6_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q6_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -448,8 +518,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-7b.Q8_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q8_0.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q8_0.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -468,8 +541,11 @@ var Models = []*Model{
 	// CodeLLama 13B
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -487,8 +563,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q3_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -506,8 +585,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -525,8 +607,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q3_K_L.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_L.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q3_K_L.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -544,8 +629,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q4_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q4_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q4_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -563,8 +651,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q4_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q4_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -582,8 +673,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q5_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q5_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q5_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -601,8 +695,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q5_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q5_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q5_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -620,8 +717,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q6_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q6_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q6_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -639,8 +739,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/codellama-13b.Q6_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q8_0.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/CodeLlama-13B-GGUF/resolve/main/codellama-13b.Q8_0.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "CodeLlama",
@@ -661,8 +764,11 @@ var Models = []*Model{
 	//
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -681,8 +787,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q3_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -701,8 +810,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -721,8 +833,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_L.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q3_K_L.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -741,8 +856,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q4_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q4_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -761,8 +879,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q4_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q4_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -781,8 +902,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q5_K_S.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q5_K_S.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -801,8 +925,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q5_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q5_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -821,8 +948,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q6_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q6_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -841,8 +971,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/llama2_7b_chat_uncensored.Q8_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q8_0.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/llama2_7b_chat_uncensored-GGUF/resolve/main/llama2_7b_chat_uncensored.Q8_0.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "LLaMA2",
@@ -862,8 +995,11 @@ var Models = []*Model{
 	// Llama 3 8B
 	{
 		Id: "huggingface/QuantFactory/Meta-Llama-3-8B-Instruct.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/QuantFactory/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct.Q3_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/QuantFactory/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct.Q3_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Llama 3",
@@ -881,8 +1017,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/QuantFactory/Meta-Llama-3-70B-Instruct.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/QuantFactory/Meta-Llama-3-70B-Instruct-GGUF/resolve/main/Meta-Llama-3-70B-Instruct.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/QuantFactory/Meta-Llama-3-70B-Instruct-GGUF/resolve/main/Meta-Llama-3-70B-Instruct.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Llama 3",
@@ -900,8 +1039,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/QuantFactory/Meta-Llama-3-70B-Instruct.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/QuantFactory/Meta-Llama-3-70B-Instruct-GGUF/resolve/main/Meta-Llama-3-70B-Instruct.Q4_K_M.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/QuantFactory/Meta-Llama-3-70B-Instruct-GGUF/resolve/main/Meta-Llama-3-70B-Instruct.Q4_K_M.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Llama 3",
@@ -919,8 +1061,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q2_K.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q2_K.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -938,8 +1083,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -957,8 +1105,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q4_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_0.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_0.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -976,8 +1127,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q4_K_M.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -995,8 +1149,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q5_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q5_0.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q5_0.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -1014,8 +1171,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q5_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q5_K_M.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q5_K_M.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -1033,8 +1193,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q6_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q6_K.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q6_K.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -1052,8 +1215,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/mixtral-8x7b-instruct-v0.1.Q8_0.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q8_0.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/resolve/main/mixtral-8x7b-instruct-v0.1.Q8_0.gguf?download=true",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mixtral",
@@ -1080,8 +1246,11 @@ var Models = []*Model{
 	//
 	{
 		Id: "huggingface/TheBloke/tinyllama-1.1b-chat-v1.0.Q4_K_S.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_S.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_S.gguf?download=true",
+			},
 		},
 		PlatformId:   PlatformLlamaCpp.Id,
 		Name:         "TinyLlama",
@@ -1105,8 +1274,11 @@ var Models = []*Model{
 	//
 	{
 		Id: "huggingface/TheBloke/mistral-7b-instruct-v0.2.Q2_K.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf",
+			},
 		},
 		PlatformId:     PlatformLlamaCpp.Id,
 		Name:           "Mistral",
@@ -1124,8 +1296,11 @@ var Models = []*Model{
 	},
 	{
 		Id: "huggingface/TheBloke/deepseek-llm-67b-chat.Q4_K_M.gguf",
-		Assets: map[string]string{
-			"MODEL": "https://huggingface.co/TheBloke/deepseek-llm-67b-chat-GGUF/resolve/main/deepseek-llm-67b-chat.Q4_K_M.gguf?download=true",
+		Assets: []Asset{
+			{
+				EnvVarKey: "MODEL",
+				Url:       "https://huggingface.co/TheBloke/deepseek-llm-67b-chat-GGUF/resolve/main/deepseek-llm-67b-chat.Q4_K_M.gguf?download=true",
+			},
 		},
 		PlatformId:   PlatformLlamaCpp.Id,
 		Name:         "DeepSeek",

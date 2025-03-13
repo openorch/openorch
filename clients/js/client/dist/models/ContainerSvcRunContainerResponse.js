@@ -11,6 +11,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContainerSvcPortMappingFromJSON, ContainerSvcPortMappingToJSON, } from './ContainerSvcPortMapping';
 /**
  * Check if a given object implements the ContainerSvcRunContainerResponse interface.
  */
@@ -25,8 +26,8 @@ export function ContainerSvcRunContainerResponseFromJSONTyped(json, ignoreDiscri
         return json;
     }
     return {
-        'newContainerStarted': json['newContainerStarted'] == null ? undefined : json['newContainerStarted'],
-        'portNumber': json['portNumber'] == null ? undefined : json['portNumber'],
+        'ports': json['ports'] == null ? undefined : (json['ports'].map(ContainerSvcPortMappingFromJSON)),
+        'started': json['started'] == null ? undefined : json['started'],
     };
 }
 export function ContainerSvcRunContainerResponseToJSON(json) {
@@ -37,7 +38,7 @@ export function ContainerSvcRunContainerResponseToJSONTyped(value, ignoreDiscrim
         return value;
     }
     return {
-        'newContainerStarted': value['newContainerStarted'],
-        'portNumber': value['portNumber'],
+        'ports': value['ports'] == null ? undefined : (value['ports'].map(ContainerSvcPortMappingToJSON)),
+        'started': value['started'],
     };
 }

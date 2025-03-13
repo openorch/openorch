@@ -20,25 +20,25 @@ import { mapValues } from '../runtime';
  */
 export interface RegistrySvcImageSpec {
     /**
+     * InternalPorts are the ports the container will listen on internally
+     * @type {Array<number>}
+     * @memberof RegistrySvcImageSpec
+     */
+    internalPorts: Array<number>;
+    /**
      * Name is the container image name/URL to use for the container
      * @type {string}
      * @memberof RegistrySvcImageSpec
      */
     name: string;
-    /**
-     * Port is the port number that the container will listen on internally
-     * @type {number}
-     * @memberof RegistrySvcImageSpec
-     */
-    port: number;
 }
 
 /**
  * Check if a given object implements the RegistrySvcImageSpec interface.
  */
 export function instanceOfRegistrySvcImageSpec(value: object): value is RegistrySvcImageSpec {
+    if (!('internalPorts' in value) || value['internalPorts'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
-    if (!('port' in value) || value['port'] === undefined) return false;
     return true;
 }
 
@@ -52,8 +52,8 @@ export function RegistrySvcImageSpecFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
+        'internalPorts': json['internalPorts'],
         'name': json['name'],
-        'port': json['port'],
     };
 }
 
@@ -68,8 +68,8 @@ export function RegistrySvcImageSpecToJSONTyped(value?: RegistrySvcImageSpec | n
 
     return {
         
+        'internalPorts': value['internalPorts'],
         'name': value['name'],
-        'port': value['port'],
     };
 }
 

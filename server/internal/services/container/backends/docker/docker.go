@@ -115,7 +115,7 @@ func mapDockerContainerToContainer(dockerContainer dockerapitypes.Container) con
 		Image:  dockerContainer.Image,
 		Ports:  getPorts(dockerContainer.Ports),
 		Hash:   dockerContainer.ImageID,
-		Labels: dockerContainer.Labels,
+		Labels: getLabels(dockerContainer.Labels),
 		Envs:   nil, // Not directly available
 		Keeps:  nil, // No direct equivalent
 		Capabilities: &container.Capabilities{
@@ -125,11 +125,27 @@ func mapDockerContainerToContainer(dockerContainer dockerapitypes.Container) con
 	}
 }
 
-func getPorts(ports []dockerapitypes.Port) map[uint16]uint16 {
-	ret := map[uint16]uint16{}
+func getPorts(ports []dockerapitypes.Port) []container.PortMapping {
+	ret := []container.PortMapping{}
 
 	for _, port := range ports {
-		ret[port.PublicPort] = port.PrivatePort
+		ret = append(ret, container.PortMapping{
+			Host:     port.PublicPort,
+			Internal: port.PrivatePort,
+		})
+	}
+
+	return ret
+}
+
+func getLabels(labels map[string]string) []container.Label {
+	ret := []container.Label{}
+
+	for k, v := range labels {
+		ret = append(ret, container.Label{
+			Key:   k,
+			Value: v,
+		})
 	}
 
 	return ret

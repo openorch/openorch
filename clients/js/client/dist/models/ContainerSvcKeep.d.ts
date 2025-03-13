@@ -20,7 +20,7 @@ export interface ContainerSvcKeep {
      * @type {string}
      * @memberof ContainerSvcKeep
      */
-    path?: string;
+    path: string;
     /**
      * ReadOnly indicates whether the keep is read-only.
      * @type {boolean}

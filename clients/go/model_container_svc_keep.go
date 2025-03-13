@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ContainerSvcKeep type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,20 @@ var _ MappedNullable = &ContainerSvcKeep{}
 // ContainerSvcKeep struct for ContainerSvcKeep
 type ContainerSvcKeep struct {
 	// Path is the absolute path inside the container for the folder that should persist across restarts.
-	Path *string `json:"path,omitempty"`
+	Path string `json:"path"`
 	// ReadOnly indicates whether the keep is read-only.
 	ReadOnly *bool `json:"readOnly,omitempty"`
 }
+
+type _ContainerSvcKeep ContainerSvcKeep
 
 // NewContainerSvcKeep instantiates a new ContainerSvcKeep object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerSvcKeep() *ContainerSvcKeep {
+func NewContainerSvcKeep(path string) *ContainerSvcKeep {
 	this := ContainerSvcKeep{}
+	this.Path = path
 	return &this
 }
 
@@ -43,36 +48,28 @@ func NewContainerSvcKeepWithDefaults() *ContainerSvcKeep {
 	return &this
 }
 
-// GetPath returns the Path field value if set, zero value otherwise.
+// GetPath returns the Path field value
 func (o *ContainerSvcKeep) GetPath() string {
-	if o == nil || IsNil(o.Path) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Path
+
+	return o.Path
 }
 
-// GetPathOk returns a tuple with the Path field value if set, nil otherwise
+// GetPathOk returns a tuple with the Path field value
 // and a boolean to check if the value has been set.
 func (o *ContainerSvcKeep) GetPathOk() (*string, bool) {
-	if o == nil || IsNil(o.Path) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Path, true
+	return &o.Path, true
 }
 
-// HasPath returns a boolean if a field has been set.
-func (o *ContainerSvcKeep) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
-		return true
-	}
-
-	return false
-}
-
-// SetPath gets a reference to the given string and assigns it to the Path field.
+// SetPath sets field value
 func (o *ContainerSvcKeep) SetPath(v string) {
-	o.Path = &v
+	o.Path = v
 }
 
 // GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
@@ -117,13 +114,48 @@ func (o ContainerSvcKeep) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcKeep) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Path) {
-		toSerialize["path"] = o.Path
-	}
+	toSerialize["path"] = o.Path
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly
 	}
 	return toSerialize, nil
+}
+
+func (o *ContainerSvcKeep) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"path",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varContainerSvcKeep := _ContainerSvcKeep{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varContainerSvcKeep)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContainerSvcKeep(varContainerSvcKeep)
+
+	return err
 }
 
 type NullableContainerSvcKeep struct {

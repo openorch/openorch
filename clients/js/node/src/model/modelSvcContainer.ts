@@ -11,12 +11,14 @@
  */
 
 import { RequestFile } from './models';
+import { ModelSvcEnvVar } from './modelSvcEnvVar';
+import { ModelSvcKeep } from './modelSvcKeep';
 
 export class ModelSvcContainer {
     /**
     * Environment variables to be passed to the container (e.g., \"DEVICES=all\").
     */
-    'envars'?: Array<string>;
+    'envars'?: Array<ModelSvcEnvVar>;
     /**
     * Template for constructing the container image name.
     */
@@ -24,7 +26,7 @@ export class ModelSvcContainer {
     /**
     * List of container paths that should persist across restarts.
     */
-    'keeps'?: Array<string>;
+    'keeps'?: Array<ModelSvcKeep>;
     /**
     * Internal port exposed by the container.
     */
@@ -36,7 +38,7 @@ export class ModelSvcContainer {
         {
             "name": "envars",
             "baseName": "envars",
-            "type": "Array<string>"
+            "type": "Array<ModelSvcEnvVar>"
         },
         {
             "name": "imageTemplate",
@@ -46,7 +48,7 @@ export class ModelSvcContainer {
         {
             "name": "keeps",
             "baseName": "keeps",
-            "type": "Array<string>"
+            "type": "Array<ModelSvcKeep>"
         },
         {
             "name": "port",

@@ -17,13 +17,13 @@ export class RegistrySvcImageSpec {
 RegistrySvcImageSpec.discriminator = undefined;
 RegistrySvcImageSpec.attributeTypeMap = [
     {
+        "name": "internalPorts",
+        "baseName": "internalPorts",
+        "type": "Array<number>"
+    },
+    {
         "name": "name",
         "baseName": "name",
         "type": "string"
-    },
-    {
-        "name": "port",
-        "baseName": "port",
-        "type": "number"
     }
 ];

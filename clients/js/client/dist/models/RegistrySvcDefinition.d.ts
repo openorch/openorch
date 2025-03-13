@@ -10,9 +10,11 @@
  * Do not edit the class manually.
  */
 import type { RegistrySvcAPISpec } from './RegistrySvcAPISpec';
+import type { RegistrySvcPortMapping } from './RegistrySvcPortMapping';
 import type { RegistrySvcImageSpec } from './RegistrySvcImageSpec';
 import type { RegistrySvcRepositorySpec } from './RegistrySvcRepositorySpec';
 import type { RegistrySvcClient } from './RegistrySvcClient';
+import type { RegistrySvcEnvVar } from './RegistrySvcEnvVar';
 /**
  *
  * @export
@@ -36,19 +38,10 @@ export interface RegistrySvcDefinition {
      * E.g., {"DB_URL": "mysql://user:password@host:port/db"}
      * These will be injected into the service instances (see Registry Svc Instance) at runtime.
      * The value of a key here is the default value. The actual value can be overridden at deployment time.
-     * @type {{ [key: string]: string; }}
+     * @type {Array<RegistrySvcEnvVar>}
      * @memberof RegistrySvcDefinition
      */
-    envars?: {
-        [key: string]: string;
-    };
-    /**
-     * HostPort is a clutch until automatic port assignment works.
-     * It will go a way as it doesn't make any sense in a Definition.
-     * @type {number}
-     * @memberof RegistrySvcDefinition
-     */
-    hostPort?: number;
+    envars?: Array<RegistrySvcEnvVar>;
     /**
      *
      * @type {string}
@@ -62,6 +55,14 @@ export interface RegistrySvcDefinition {
      * @memberof RegistrySvcDefinition
      */
     image?: RegistrySvcImageSpec;
+    /**
+     * Ports have host ports and internal ports currently but they
+     * really only should have internal ports as host ports should be assigned
+     * by the system. Host ports might go away in the future.
+     * @type {Array<RegistrySvcPortMapping>}
+     * @memberof RegistrySvcDefinition
+     */
+    ports?: Array<RegistrySvcPortMapping>;
     /**
      * Repository based definitions is an alternative to Image definitions.
      * Instead of deploying an already built and pushed image, a source code repository

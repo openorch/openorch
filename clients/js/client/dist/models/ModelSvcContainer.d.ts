@@ -9,6 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { ModelSvcKeep } from './ModelSvcKeep';
+import type { ModelSvcEnvVar } from './ModelSvcEnvVar';
 /**
  *
  * @export
@@ -17,10 +19,10 @@
 export interface ModelSvcContainer {
     /**
      * Environment variables to be passed to the container (e.g., "DEVICES=all").
-     * @type {Array<string>}
+     * @type {Array<ModelSvcEnvVar>}
      * @memberof ModelSvcContainer
      */
-    envars?: Array<string>;
+    envars?: Array<ModelSvcEnvVar>;
     /**
      * Template for constructing the container image name.
      * @type {string}
@@ -29,10 +31,10 @@ export interface ModelSvcContainer {
     imageTemplate?: string;
     /**
      * List of container paths that should persist across restarts.
-     * @type {Array<string>}
+     * @type {Array<ModelSvcKeep>}
      * @memberof ModelSvcContainer
      */
-    keeps?: Array<string>;
+    keeps?: Array<ModelSvcKeep>;
     /**
      * Internal port exposed by the container.
      * @type {number}

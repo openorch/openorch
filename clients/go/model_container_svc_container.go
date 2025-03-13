@@ -20,6 +20,8 @@ var _ MappedNullable = &ContainerSvcContainer{}
 
 // ContainerSvcContainer struct for ContainerSvcContainer
 type ContainerSvcContainer struct {
+	// Assets maps environment variable names to file URLs. Example: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"} These files are downloaded by the File Svc and mounted in the container. The environment variable `MODEL` will point to the local file path in the container.
+	Assets []ContainerSvcAsset `json:"assets,omitempty"`
 	// Capabilities define additional runtime features, such as GPU support.
 	Capabilities *ContainerSvcCapabilities `json:"capabilities,omitempty"`
 	// Envs are environment variables set within the container.
@@ -33,7 +35,7 @@ type ContainerSvcContainer struct {
 	// Keeps are paths that persist across container restarts. They function like mounts or volumes, but their external storage location is irrelevant.
 	Keeps []ContainerSvcKeep `json:"keeps,omitempty"`
 	// Labels are metadata tags assigned to the container.
-	Labels *map[string]string `json:"labels,omitempty"`
+	Labels []ContainerSvcLabel `json:"labels,omitempty"`
 	// Names are the human-readable aliases assigned to the container.
 	Names []string `json:"names,omitempty"`
 	// Network contains networking-related information for the container.
@@ -41,7 +43,7 @@ type ContainerSvcContainer struct {
 	// Node Id Please see the documentation for the envar OPENORCH_NODE_ID
 	NodeId *string `json:"nodeId,omitempty"`
 	// Ports maps host ports (keys) to container ports (values).
-	Ports *map[string]int32 `json:"ports,omitempty"`
+	Ports []ContainerSvcPortMapping `json:"ports,omitempty"`
 	// Resources defines CPU, memory, and disk constraints for the container.
 	Resources *ContainerSvcResources `json:"resources,omitempty"`
 	// Runtime specifies the container runtime (e.g., Docker, containerd, etc.).
@@ -67,6 +69,38 @@ func NewContainerSvcContainer() *ContainerSvcContainer {
 func NewContainerSvcContainerWithDefaults() *ContainerSvcContainer {
 	this := ContainerSvcContainer{}
 	return &this
+}
+
+// GetAssets returns the Assets field value if set, zero value otherwise.
+func (o *ContainerSvcContainer) GetAssets() []ContainerSvcAsset {
+	if o == nil || IsNil(o.Assets) {
+		var ret []ContainerSvcAsset
+		return ret
+	}
+	return o.Assets
+}
+
+// GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerSvcContainer) GetAssetsOk() ([]ContainerSvcAsset, bool) {
+	if o == nil || IsNil(o.Assets) {
+		return nil, false
+	}
+	return o.Assets, true
+}
+
+// HasAssets returns a boolean if a field has been set.
+func (o *ContainerSvcContainer) HasAssets() bool {
+	if o != nil && !IsNil(o.Assets) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssets gets a reference to the given []ContainerSvcAsset and assigns it to the Assets field.
+func (o *ContainerSvcContainer) SetAssets(v []ContainerSvcAsset) {
+	o.Assets = v
 }
 
 // GetCapabilities returns the Capabilities field value if set, zero value otherwise.
@@ -262,17 +296,17 @@ func (o *ContainerSvcContainer) SetKeeps(v []ContainerSvcKeep) {
 }
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetLabels() map[string]string {
+func (o *ContainerSvcContainer) GetLabels() []ContainerSvcLabel {
 	if o == nil || IsNil(o.Labels) {
-		var ret map[string]string
+		var ret []ContainerSvcLabel
 		return ret
 	}
-	return *o.Labels
+	return o.Labels
 }
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetLabelsOk() (*map[string]string, bool) {
+func (o *ContainerSvcContainer) GetLabelsOk() ([]ContainerSvcLabel, bool) {
 	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
@@ -288,9 +322,9 @@ func (o *ContainerSvcContainer) HasLabels() bool {
 	return false
 }
 
-// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
-func (o *ContainerSvcContainer) SetLabels(v map[string]string) {
-	o.Labels = &v
+// SetLabels gets a reference to the given []ContainerSvcLabel and assigns it to the Labels field.
+func (o *ContainerSvcContainer) SetLabels(v []ContainerSvcLabel) {
+	o.Labels = v
 }
 
 // GetNames returns the Names field value if set, zero value otherwise.
@@ -390,17 +424,17 @@ func (o *ContainerSvcContainer) SetNodeId(v string) {
 }
 
 // GetPorts returns the Ports field value if set, zero value otherwise.
-func (o *ContainerSvcContainer) GetPorts() map[string]int32 {
+func (o *ContainerSvcContainer) GetPorts() []ContainerSvcPortMapping {
 	if o == nil || IsNil(o.Ports) {
-		var ret map[string]int32
+		var ret []ContainerSvcPortMapping
 		return ret
 	}
-	return *o.Ports
+	return o.Ports
 }
 
 // GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerSvcContainer) GetPortsOk() (*map[string]int32, bool) {
+func (o *ContainerSvcContainer) GetPortsOk() ([]ContainerSvcPortMapping, bool) {
 	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
@@ -416,9 +450,9 @@ func (o *ContainerSvcContainer) HasPorts() bool {
 	return false
 }
 
-// SetPorts gets a reference to the given map[string]int32 and assigns it to the Ports field.
-func (o *ContainerSvcContainer) SetPorts(v map[string]int32) {
-	o.Ports = &v
+// SetPorts gets a reference to the given []ContainerSvcPortMapping and assigns it to the Ports field.
+func (o *ContainerSvcContainer) SetPorts(v []ContainerSvcPortMapping) {
+	o.Ports = v
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
@@ -559,6 +593,9 @@ func (o ContainerSvcContainer) MarshalJSON() ([]byte, error) {
 
 func (o ContainerSvcContainer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Assets) {
+		toSerialize["assets"] = o.Assets
+	}
 	if !IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
 	}

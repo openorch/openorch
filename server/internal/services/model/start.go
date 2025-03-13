@@ -87,17 +87,20 @@ func (ms *ModelService) startWithDocker(
 	model *modeltypes.Model,
 	platform *modeltypes.Platform,
 ) error {
-	launchOptions := &openapi.ContainerSvcRunContainerOptions{}
+	req := &openapi.ContainerSvcRunContainerRequest{
+		Capabilities: &openapi.ContainerSvcCapabilities{},
+	}
 
 	image := platform.Architectures.Default.Container.ImageTemplate
 	port := platform.Architectures.Default.Container.Port
-	launchOptions.Envs = platform.Architectures.Default.Container.Envars
-	launchOptions.Keeps = platform.Architectures.Default.Container.Keeps
-	launchOptions.Assets = &model.Assets
+
+	req.Envs = toContainerEnvVars(platform.Architectures.Default.Container.Envars)
+	req.Keeps = toContainerKeeps(platform.Architectures.Default.Container.Keeps)
+	req.Assets = toContainerAssets(model.Assets)
 
 	switch ms.gpuPlatform {
 	case "cuda":
-		launchOptions.GpuEnabled = openapi.PtrBool(true)
+		req.Capabilities.GpuEnabled = openapi.PtrBool(true)
 
 		if platform.Architectures.Cuda.Container.ImageTemplate != "" {
 			cudaImageTemplate := platform.Architectures.Cuda.Container.ImageTemplate
@@ -138,10 +141,10 @@ func (ms *ModelService) startWithDocker(
 			port = platform.Architectures.Cuda.Container.Port
 		}
 		if len(platform.Architectures.Cuda.Container.Envars) > 0 {
-			launchOptions.Envs = platform.Architectures.Cuda.Container.Envars
+			req.Envs = toContainerEnvVars(platform.Architectures.Cuda.Container.Envars)
 		}
 		if len(platform.Architectures.Cuda.Container.Keeps) > 0 {
-			launchOptions.Keeps = platform.Architectures.Cuda.Container.Keeps
+			req.Keeps = toContainerKeeps(platform.Architectures.Cuda.Container.Keeps)
 		}
 	}
 
@@ -149,36 +152,76 @@ func (ms *ModelService) startWithDocker(
 	if err != nil {
 		return err
 	}
-	launchOptions.Hash = openapi.PtrString(hash)
+	req.Hash = openapi.PtrString(hash)
+
+	req.Image = image
+	req.Ports = []openapi.ContainerSvcPortMapping{
+		{
+			Internal: int32(port),
+			Host:     int32(hostPortNum),
+		},
+	}
 
 	runRsp, _, err := ms.clientFactory.Client(sdk.WithToken(ms.token)).
 		ContainerSvcAPI.RunContainer(context.Background()).
-		Body(
-			openapi.ContainerSvcRunContainerRequest{
-				Image:    image,
-				Port:     int32(port),
-				HostPort: openapi.PtrInt32(int32(hostPortNum)),
-				Options:  launchOptions,
-			},
-		).
+		Body(*req).
 		Execute()
 	if err != nil {
 		return errors.Wrap(err, "failed to launch container")
 	}
 
-	if *runRsp.NewContainerStarted {
-		state := ms.get(int(*runRsp.PortNumber))
+	if *runRsp.Started {
+		// @todo multiport issue
+		externalPort := int(runRsp.Ports[0].Host)
+		state := ms.get(externalPort)
 		if !state.HasCheckerRunning {
 			go ms.checkIfAnswers(
 				model,
 				platform,
-				int(*runRsp.PortNumber),
+				externalPort,
 				state,
 			)
 		}
 	}
 
 	return nil
+}
+
+func toContainerKeeps(keeps []modeltypes.Keep) []openapi.ContainerSvcKeep {
+	ret := []openapi.ContainerSvcKeep{}
+
+	for _, keep := range keeps {
+		ret = append(ret, openapi.ContainerSvcKeep{
+			Path: keep.Path,
+		})
+	}
+
+	return ret
+}
+
+func toContainerEnvVars(envVars []modeltypes.EnvVar) []openapi.ContainerSvcEnvVar {
+	ret := []openapi.ContainerSvcEnvVar{}
+
+	for _, envVar := range envVars {
+		ret = append(ret, openapi.ContainerSvcEnvVar{
+			Key: envVar.Key,
+		})
+	}
+
+	return ret
+}
+
+func toContainerAssets(assets []modeltypes.Asset) []openapi.ContainerSvcAsset {
+	ret := []openapi.ContainerSvcAsset{}
+
+	for _, asset := range assets {
+		ret = append(ret, openapi.ContainerSvcAsset{
+			EnvVarKey: asset.EnvVarKey,
+			Url:       asset.Url,
+		})
+	}
+
+	return ret
 }
 
 func (ms *ModelService) cudaVersion(precision int) (string, error) {

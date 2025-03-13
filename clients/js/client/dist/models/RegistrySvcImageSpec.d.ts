@@ -16,17 +16,17 @@
  */
 export interface RegistrySvcImageSpec {
     /**
+     * InternalPorts are the ports the container will listen on internally
+     * @type {Array<number>}
+     * @memberof RegistrySvcImageSpec
+     */
+    internalPorts: Array<number>;
+    /**
      * Name is the container image name/URL to use for the container
      * @type {string}
      * @memberof RegistrySvcImageSpec
      */
     name: string;
-    /**
-     * Port is the port number that the container will listen on internally
-     * @type {number}
-     * @memberof RegistrySvcImageSpec
-     */
-    port: number;
 }
 /**
  * Check if a given object implements the RegistrySvcImageSpec interface.

@@ -9,9 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 export declare class ContainerSvcRunContainerResponse {
-    'newContainerStarted'?: boolean;
-    'portNumber'?: number;
+    /**
+    * Ports is returned here as host ports might get mapped dynamically.
+    */
+    'ports'?: Array<ContainerSvcPortMapping>;
+    'started'?: boolean;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

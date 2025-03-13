@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ContainerSvcPortMapping } from './ContainerSvcPortMapping';
+import {
+    ContainerSvcPortMappingFromJSON,
+    ContainerSvcPortMappingFromJSONTyped,
+    ContainerSvcPortMappingToJSON,
+    ContainerSvcPortMappingToJSONTyped,
+} from './ContainerSvcPortMapping';
+
 /**
  * 
  * @export
@@ -20,17 +28,17 @@ import { mapValues } from '../runtime';
  */
 export interface ContainerSvcRunContainerResponse {
     /**
+     * Ports is returned here as host ports might get mapped dynamically.
+     * @type {Array<ContainerSvcPortMapping>}
+     * @memberof ContainerSvcRunContainerResponse
+     */
+    ports?: Array<ContainerSvcPortMapping>;
+    /**
      * 
      * @type {boolean}
      * @memberof ContainerSvcRunContainerResponse
      */
-    newContainerStarted?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof ContainerSvcRunContainerResponse
-     */
-    portNumber?: number;
+    started?: boolean;
 }
 
 /**
@@ -50,8 +58,8 @@ export function ContainerSvcRunContainerResponseFromJSONTyped(json: any, ignoreD
     }
     return {
         
-        'newContainerStarted': json['newContainerStarted'] == null ? undefined : json['newContainerStarted'],
-        'portNumber': json['portNumber'] == null ? undefined : json['portNumber'],
+        'ports': json['ports'] == null ? undefined : ((json['ports'] as Array<any>).map(ContainerSvcPortMappingFromJSON)),
+        'started': json['started'] == null ? undefined : json['started'],
     };
 }
 
@@ -66,8 +74,8 @@ export function ContainerSvcRunContainerResponseToJSONTyped(value?: ContainerSvc
 
     return {
         
-        'newContainerStarted': value['newContainerStarted'],
-        'portNumber': value['portNumber'],
+        'ports': value['ports'] == null ? undefined : ((value['ports'] as Array<any>).map(ContainerSvcPortMappingToJSON)),
+        'started': value['started'],
     };
 }
 

@@ -19,7 +19,7 @@ ModelSvcModel.attributeTypeMap = [
     {
         "name": "assets",
         "baseName": "assets",
-        "type": "{ [key: string]: string; }"
+        "type": "Array<ModelSvcAsset>"
     },
     {
         "name": "bits",

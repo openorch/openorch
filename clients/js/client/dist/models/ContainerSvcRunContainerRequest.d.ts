@@ -9,7 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import type { ContainerSvcRunContainerOptions } from './ContainerSvcRunContainerOptions';
+import type { ContainerSvcKeep } from './ContainerSvcKeep';
+import type { ContainerSvcAsset } from './ContainerSvcAsset';
+import type { ContainerSvcCapabilities } from './ContainerSvcCapabilities';
+import type { ContainerSvcLabel } from './ContainerSvcLabel';
+import type { ContainerSvcEnvVar } from './ContainerSvcEnvVar';
+import type { ContainerSvcPortMapping } from './ContainerSvcPortMapping';
 /**
  *
  * @export
@@ -17,11 +22,32 @@ import type { ContainerSvcRunContainerOptions } from './ContainerSvcRunContainer
  */
 export interface ContainerSvcRunContainerRequest {
     /**
-     * HostPort is the port on the host machine that will be mapped to the container's port
-     * @type {number}
+     * Assets maps environment variable names to file URLs.
+     * Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
+     * These files are downloaded by the File Svc and mounted in the container.
+     * The environment variable `MODEL` will point to the local file path in the container.
+     * @type {Array<ContainerSvcAsset>}
      * @memberof ContainerSvcRunContainerRequest
      */
-    hostPort?: number;
+    assets?: Array<ContainerSvcAsset>;
+    /**
+     * Capabilities define additional runtime features, such as GPU support.
+     * @type {ContainerSvcCapabilities}
+     * @memberof ContainerSvcRunContainerRequest
+     */
+    capabilities?: ContainerSvcCapabilities;
+    /**
+     * Envs are environment variables set within the container.
+     * @type {Array<ContainerSvcEnvVar>}
+     * @memberof ContainerSvcRunContainerRequest
+     */
+    envs?: Array<ContainerSvcEnvVar>;
+    /**
+     * Hash is a unique identifier for the container
+     * @type {string}
+     * @memberof ContainerSvcRunContainerRequest
+     */
+    hash?: string;
     /**
      * Image is the Docker image to use for the container
      * @type {string}
@@ -29,17 +55,30 @@ export interface ContainerSvcRunContainerRequest {
      */
     image: string;
     /**
-     * Options provides additional options for launching the container
-     * @type {ContainerSvcRunContainerOptions}
+     * Keeps are paths that persist across container restarts.
+     * They function like mounts or volumes, but their external storage location is irrelevant.
+     * @type {Array<ContainerSvcKeep>}
      * @memberof ContainerSvcRunContainerRequest
      */
-    options?: ContainerSvcRunContainerOptions;
+    keeps?: Array<ContainerSvcKeep>;
     /**
-     * Port is the port number that the container will expose
-     * @type {number}
+     * Labels are metadata tags assigned to the container.
+     * @type {Array<ContainerSvcLabel>}
      * @memberof ContainerSvcRunContainerRequest
      */
-    port: number;
+    labels?: Array<ContainerSvcLabel>;
+    /**
+     * Names are the human-readable aliases assigned to the container.
+     * @type {Array<string>}
+     * @memberof ContainerSvcRunContainerRequest
+     */
+    names?: Array<string>;
+    /**
+     * Ports maps host ports (keys) to container ports (values).
+     * @type {Array<ContainerSvcPortMapping>}
+     * @memberof ContainerSvcRunContainerRequest
+     */
+    ports?: Array<ContainerSvcPortMapping>;
 }
 /**
  * Check if a given object implements the ContainerSvcRunContainerRequest interface.

@@ -11,10 +11,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ModelSvcAssetFromJSON, ModelSvcAssetToJSON, } from './ModelSvcAsset';
 /**
  * Check if a given object implements the ModelSvcModel interface.
  */
 export function instanceOfModelSvcModel(value) {
+    if (!('id' in value) || value['id'] === undefined)
+        return false;
+    if (!('name' in value) || value['name'] === undefined)
+        return false;
+    if (!('platformId' in value) || value['platformId'] === undefined)
+        return false;
     return true;
 }
 export function ModelSvcModelFromJSON(json) {
@@ -25,19 +32,19 @@ export function ModelSvcModelFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'assets': json['assets'] == null ? undefined : json['assets'],
+        'assets': json['assets'] == null ? undefined : (json['assets'].map(ModelSvcAssetFromJSON)),
         'bits': json['bits'] == null ? undefined : json['bits'],
         'description': json['description'] == null ? undefined : json['description'],
         'extension': json['extension'] == null ? undefined : json['extension'],
         'flavour': json['flavour'] == null ? undefined : json['flavour'],
         'fullName': json['fullName'] == null ? undefined : json['fullName'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'maxBits': json['maxBits'] == null ? undefined : json['maxBits'],
         'maxRam': json['maxRam'] == null ? undefined : json['maxRam'],
         'mirrors': json['mirrors'] == null ? undefined : json['mirrors'],
-        'name': json['name'] == null ? undefined : json['name'],
+        'name': json['name'],
         'parameters': json['parameters'] == null ? undefined : json['parameters'],
-        'platformId': json['platformId'] == null ? undefined : json['platformId'],
+        'platformId': json['platformId'],
         'promptTemplate': json['promptTemplate'] == null ? undefined : json['promptTemplate'],
         'quality': json['quality'] == null ? undefined : json['quality'],
         'quantComment': json['quantComment'] == null ? undefined : json['quantComment'],
@@ -55,7 +62,7 @@ export function ModelSvcModelToJSONTyped(value, ignoreDiscriminator = false) {
         return value;
     }
     return {
-        'assets': value['assets'],
+        'assets': value['assets'] == null ? undefined : (value['assets'].map(ModelSvcAssetToJSON)),
         'bits': value['bits'],
         'description': value['description'],
         'extension': value['extension'],

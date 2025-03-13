@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import type { ModelSvcAsset } from './ModelSvcAsset';
 /**
  *
  * @export
@@ -17,12 +18,10 @@
 export interface ModelSvcModel {
     /**
      *
-     * @type {{ [key: string]: string; }}
+     * @type {Array<ModelSvcAsset>}
      * @memberof ModelSvcModel
      */
-    assets?: {
-        [key: string]: string;
-    };
+    assets?: Array<ModelSvcAsset>;
     /**
      *
      * @type {number}
@@ -58,7 +57,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    id?: string;
+    id: string;
     /**
      *
      * @type {number}
@@ -82,7 +81,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    name?: string;
+    name: string;
     /**
      *
      * @type {string}
@@ -94,7 +93,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    platformId?: string;
+    platformId: string;
     /**
      *
      * @type {string}

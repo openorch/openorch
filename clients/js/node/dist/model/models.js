@@ -14,6 +14,7 @@ export * from './chatSvcUpdateThreadRequest';
 export * from './configSvcConfig';
 export * from './configSvcGetConfigResponse';
 export * from './configSvcSaveConfigRequest';
+export * from './containerSvcAsset';
 export * from './containerSvcBuildImageRequest';
 export * from './containerSvcCapabilities';
 export * from './containerSvcContainer';
@@ -25,14 +26,15 @@ export * from './containerSvcGetContainerSummaryResponse';
 export * from './containerSvcGetHostResponse';
 export * from './containerSvcImagePullableResponse';
 export * from './containerSvcKeep';
+export * from './containerSvcLabel';
 export * from './containerSvcListContainersRequest';
 export * from './containerSvcListContainersResponse';
 export * from './containerSvcListLogsRequest';
 export * from './containerSvcListLogsResponse';
 export * from './containerSvcLog';
 export * from './containerSvcNetwork';
+export * from './containerSvcPortMapping';
 export * from './containerSvcResources';
-export * from './containerSvcRunContainerOptions';
 export * from './containerSvcRunContainerRequest';
 export * from './containerSvcRunContainerResponse';
 export * from './containerSvcStopContainerRequest';
@@ -81,11 +83,14 @@ export * from './firehoseSvcErrorResponse';
 export * from './firehoseSvcEvent';
 export * from './firehoseSvcEventPublishRequest';
 export * from './modelSvcArchitectures';
+export * from './modelSvcAsset';
 export * from './modelSvcContainer';
 export * from './modelSvcCudaParameters';
 export * from './modelSvcDefaultParameters';
+export * from './modelSvcEnvVar';
 export * from './modelSvcErrorResponse';
 export * from './modelSvcGetModelResponse';
+export * from './modelSvcKeep';
 export * from './modelSvcListModelsResponse';
 export * from './modelSvcListPlatformsResponse';
 export * from './modelSvcModel';
@@ -124,6 +129,7 @@ export * from './promptSvcTypesResponse';
 export * from './registrySvcAPISpec';
 export * from './registrySvcClient';
 export * from './registrySvcDefinition';
+export * from './registrySvcEnvVar';
 export * from './registrySvcErrorResponse';
 export * from './registrySvcGPU';
 export * from './registrySvcImageSpec';
@@ -136,6 +142,7 @@ export * from './registrySvcListNodesRequest';
 export * from './registrySvcListNodesResponse';
 export * from './registrySvcNode';
 export * from './registrySvcNodeSelfResponse';
+export * from './registrySvcPortMapping';
 export * from './registrySvcProcess';
 export * from './registrySvcRegisterInstanceRequest';
 export * from './registrySvcRepositorySpec';
@@ -209,6 +216,7 @@ import { ChatSvcUpdateThreadRequest } from './chatSvcUpdateThreadRequest';
 import { ConfigSvcConfig } from './configSvcConfig';
 import { ConfigSvcGetConfigResponse } from './configSvcGetConfigResponse';
 import { ConfigSvcSaveConfigRequest } from './configSvcSaveConfigRequest';
+import { ContainerSvcAsset } from './containerSvcAsset';
 import { ContainerSvcBuildImageRequest } from './containerSvcBuildImageRequest';
 import { ContainerSvcCapabilities } from './containerSvcCapabilities';
 import { ContainerSvcContainer } from './containerSvcContainer';
@@ -220,14 +228,15 @@ import { ContainerSvcGetContainerSummaryResponse } from './containerSvcGetContai
 import { ContainerSvcGetHostResponse } from './containerSvcGetHostResponse';
 import { ContainerSvcImagePullableResponse } from './containerSvcImagePullableResponse';
 import { ContainerSvcKeep } from './containerSvcKeep';
+import { ContainerSvcLabel } from './containerSvcLabel';
 import { ContainerSvcListContainersRequest } from './containerSvcListContainersRequest';
 import { ContainerSvcListContainersResponse } from './containerSvcListContainersResponse';
 import { ContainerSvcListLogsRequest } from './containerSvcListLogsRequest';
 import { ContainerSvcListLogsResponse } from './containerSvcListLogsResponse';
 import { ContainerSvcLog } from './containerSvcLog';
 import { ContainerSvcNetwork } from './containerSvcNetwork';
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 import { ContainerSvcResources } from './containerSvcResources';
-import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
 import { ContainerSvcRunContainerRequest } from './containerSvcRunContainerRequest';
 import { ContainerSvcRunContainerResponse } from './containerSvcRunContainerResponse';
 import { ContainerSvcStopContainerRequest } from './containerSvcStopContainerRequest';
@@ -276,11 +285,14 @@ import { FirehoseSvcErrorResponse } from './firehoseSvcErrorResponse';
 import { FirehoseSvcEvent } from './firehoseSvcEvent';
 import { FirehoseSvcEventPublishRequest } from './firehoseSvcEventPublishRequest';
 import { ModelSvcArchitectures } from './modelSvcArchitectures';
+import { ModelSvcAsset } from './modelSvcAsset';
 import { ModelSvcContainer } from './modelSvcContainer';
 import { ModelSvcCudaParameters } from './modelSvcCudaParameters';
 import { ModelSvcDefaultParameters } from './modelSvcDefaultParameters';
+import { ModelSvcEnvVar } from './modelSvcEnvVar';
 import { ModelSvcErrorResponse } from './modelSvcErrorResponse';
 import { ModelSvcGetModelResponse } from './modelSvcGetModelResponse';
+import { ModelSvcKeep } from './modelSvcKeep';
 import { ModelSvcListModelsResponse } from './modelSvcListModelsResponse';
 import { ModelSvcListPlatformsResponse } from './modelSvcListPlatformsResponse';
 import { ModelSvcModel } from './modelSvcModel';
@@ -319,6 +331,7 @@ import { PromptSvcTypesResponse } from './promptSvcTypesResponse';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
 import { RegistrySvcDefinition } from './registrySvcDefinition';
+import { RegistrySvcEnvVar } from './registrySvcEnvVar';
 import { RegistrySvcErrorResponse } from './registrySvcErrorResponse';
 import { RegistrySvcGPU } from './registrySvcGPU';
 import { RegistrySvcImageSpec } from './registrySvcImageSpec';
@@ -331,6 +344,7 @@ import { RegistrySvcListNodesRequest } from './registrySvcListNodesRequest';
 import { RegistrySvcListNodesResponse } from './registrySvcListNodesResponse';
 import { RegistrySvcNode } from './registrySvcNode';
 import { RegistrySvcNodeSelfResponse } from './registrySvcNodeSelfResponse';
+import { RegistrySvcPortMapping } from './registrySvcPortMapping';
 import { RegistrySvcProcess } from './registrySvcProcess';
 import { RegistrySvcRegisterInstanceRequest } from './registrySvcRegisterInstanceRequest';
 import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
@@ -431,6 +445,7 @@ let typeMap = {
     "ConfigSvcConfig": ConfigSvcConfig,
     "ConfigSvcGetConfigResponse": ConfigSvcGetConfigResponse,
     "ConfigSvcSaveConfigRequest": ConfigSvcSaveConfigRequest,
+    "ContainerSvcAsset": ContainerSvcAsset,
     "ContainerSvcBuildImageRequest": ContainerSvcBuildImageRequest,
     "ContainerSvcCapabilities": ContainerSvcCapabilities,
     "ContainerSvcContainer": ContainerSvcContainer,
@@ -442,14 +457,15 @@ let typeMap = {
     "ContainerSvcGetHostResponse": ContainerSvcGetHostResponse,
     "ContainerSvcImagePullableResponse": ContainerSvcImagePullableResponse,
     "ContainerSvcKeep": ContainerSvcKeep,
+    "ContainerSvcLabel": ContainerSvcLabel,
     "ContainerSvcListContainersRequest": ContainerSvcListContainersRequest,
     "ContainerSvcListContainersResponse": ContainerSvcListContainersResponse,
     "ContainerSvcListLogsRequest": ContainerSvcListLogsRequest,
     "ContainerSvcListLogsResponse": ContainerSvcListLogsResponse,
     "ContainerSvcLog": ContainerSvcLog,
     "ContainerSvcNetwork": ContainerSvcNetwork,
+    "ContainerSvcPortMapping": ContainerSvcPortMapping,
     "ContainerSvcResources": ContainerSvcResources,
-    "ContainerSvcRunContainerOptions": ContainerSvcRunContainerOptions,
     "ContainerSvcRunContainerRequest": ContainerSvcRunContainerRequest,
     "ContainerSvcRunContainerResponse": ContainerSvcRunContainerResponse,
     "ContainerSvcStopContainerRequest": ContainerSvcStopContainerRequest,
@@ -494,11 +510,14 @@ let typeMap = {
     "FirehoseSvcEvent": FirehoseSvcEvent,
     "FirehoseSvcEventPublishRequest": FirehoseSvcEventPublishRequest,
     "ModelSvcArchitectures": ModelSvcArchitectures,
+    "ModelSvcAsset": ModelSvcAsset,
     "ModelSvcContainer": ModelSvcContainer,
     "ModelSvcCudaParameters": ModelSvcCudaParameters,
     "ModelSvcDefaultParameters": ModelSvcDefaultParameters,
+    "ModelSvcEnvVar": ModelSvcEnvVar,
     "ModelSvcErrorResponse": ModelSvcErrorResponse,
     "ModelSvcGetModelResponse": ModelSvcGetModelResponse,
+    "ModelSvcKeep": ModelSvcKeep,
     "ModelSvcListModelsResponse": ModelSvcListModelsResponse,
     "ModelSvcListPlatformsResponse": ModelSvcListPlatformsResponse,
     "ModelSvcModel": ModelSvcModel,
@@ -531,6 +550,7 @@ let typeMap = {
     "RegistrySvcAPISpec": RegistrySvcAPISpec,
     "RegistrySvcClient": RegistrySvcClient,
     "RegistrySvcDefinition": RegistrySvcDefinition,
+    "RegistrySvcEnvVar": RegistrySvcEnvVar,
     "RegistrySvcErrorResponse": RegistrySvcErrorResponse,
     "RegistrySvcGPU": RegistrySvcGPU,
     "RegistrySvcImageSpec": RegistrySvcImageSpec,
@@ -541,6 +561,7 @@ let typeMap = {
     "RegistrySvcListNodesResponse": RegistrySvcListNodesResponse,
     "RegistrySvcNode": RegistrySvcNode,
     "RegistrySvcNodeSelfResponse": RegistrySvcNodeSelfResponse,
+    "RegistrySvcPortMapping": RegistrySvcPortMapping,
     "RegistrySvcProcess": RegistrySvcProcess,
     "RegistrySvcRegisterInstanceRequest": RegistrySvcRegisterInstanceRequest,
     "RegistrySvcRepositorySpec": RegistrySvcRepositorySpec,

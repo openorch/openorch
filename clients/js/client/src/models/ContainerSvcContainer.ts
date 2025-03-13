@@ -20,6 +20,13 @@ import {
     ContainerSvcKeepToJSON,
     ContainerSvcKeepToJSONTyped,
 } from './ContainerSvcKeep';
+import type { ContainerSvcAsset } from './ContainerSvcAsset';
+import {
+    ContainerSvcAssetFromJSON,
+    ContainerSvcAssetFromJSONTyped,
+    ContainerSvcAssetToJSON,
+    ContainerSvcAssetToJSONTyped,
+} from './ContainerSvcAsset';
 import type { ContainerSvcNetwork } from './ContainerSvcNetwork';
 import {
     ContainerSvcNetworkFromJSON,
@@ -41,6 +48,13 @@ import {
     ContainerSvcVolumeToJSON,
     ContainerSvcVolumeToJSONTyped,
 } from './ContainerSvcVolume';
+import type { ContainerSvcLabel } from './ContainerSvcLabel';
+import {
+    ContainerSvcLabelFromJSON,
+    ContainerSvcLabelFromJSONTyped,
+    ContainerSvcLabelToJSON,
+    ContainerSvcLabelToJSONTyped,
+} from './ContainerSvcLabel';
 import type { ContainerSvcEnvVar } from './ContainerSvcEnvVar';
 import {
     ContainerSvcEnvVarFromJSON,
@@ -55,6 +69,13 @@ import {
     ContainerSvcResourcesToJSON,
     ContainerSvcResourcesToJSONTyped,
 } from './ContainerSvcResources';
+import type { ContainerSvcPortMapping } from './ContainerSvcPortMapping';
+import {
+    ContainerSvcPortMappingFromJSON,
+    ContainerSvcPortMappingFromJSONTyped,
+    ContainerSvcPortMappingToJSON,
+    ContainerSvcPortMappingToJSONTyped,
+} from './ContainerSvcPortMapping';
 
 /**
  * 
@@ -62,6 +83,15 @@ import {
  * @interface ContainerSvcContainer
  */
 export interface ContainerSvcContainer {
+    /**
+     * Assets maps environment variable names to file URLs.
+     * Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
+     * These files are downloaded by the File Svc and mounted in the container.
+     * The environment variable `MODEL` will point to the local file path in the container.
+     * @type {Array<ContainerSvcAsset>}
+     * @memberof ContainerSvcContainer
+     */
+    assets?: Array<ContainerSvcAsset>;
     /**
      * Capabilities define additional runtime features, such as GPU support.
      * @type {ContainerSvcCapabilities}
@@ -101,10 +131,10 @@ export interface ContainerSvcContainer {
     keeps?: Array<ContainerSvcKeep>;
     /**
      * Labels are metadata tags assigned to the container.
-     * @type {{ [key: string]: string; }}
+     * @type {Array<ContainerSvcLabel>}
      * @memberof ContainerSvcContainer
      */
-    labels?: { [key: string]: string; };
+    labels?: Array<ContainerSvcLabel>;
     /**
      * Names are the human-readable aliases assigned to the container.
      * @type {Array<string>}
@@ -126,10 +156,10 @@ export interface ContainerSvcContainer {
     nodeId?: string;
     /**
      * Ports maps host ports (keys) to container ports (values).
-     * @type {{ [key: string]: number; }}
+     * @type {Array<ContainerSvcPortMapping>}
      * @memberof ContainerSvcContainer
      */
-    ports?: { [key: string]: number; };
+    ports?: Array<ContainerSvcPortMapping>;
     /**
      * Resources defines CPU, memory, and disk constraints for the container.
      * @type {ContainerSvcResources}
@@ -173,17 +203,18 @@ export function ContainerSvcContainerFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
+        'assets': json['assets'] == null ? undefined : ((json['assets'] as Array<any>).map(ContainerSvcAssetFromJSON)),
         'capabilities': json['capabilities'] == null ? undefined : ContainerSvcCapabilitiesFromJSON(json['capabilities']),
         'envs': json['envs'] == null ? undefined : ((json['envs'] as Array<any>).map(ContainerSvcEnvVarFromJSON)),
         'hash': json['hash'] == null ? undefined : json['hash'],
         'id': json['id'] == null ? undefined : json['id'],
         'image': json['image'] == null ? undefined : json['image'],
         'keeps': json['keeps'] == null ? undefined : ((json['keeps'] as Array<any>).map(ContainerSvcKeepFromJSON)),
-        'labels': json['labels'] == null ? undefined : json['labels'],
+        'labels': json['labels'] == null ? undefined : ((json['labels'] as Array<any>).map(ContainerSvcLabelFromJSON)),
         'names': json['names'] == null ? undefined : json['names'],
         'network': json['network'] == null ? undefined : ContainerSvcNetworkFromJSON(json['network']),
         'nodeId': json['nodeId'] == null ? undefined : json['nodeId'],
-        'ports': json['ports'] == null ? undefined : json['ports'],
+        'ports': json['ports'] == null ? undefined : ((json['ports'] as Array<any>).map(ContainerSvcPortMappingFromJSON)),
         'resources': json['resources'] == null ? undefined : ContainerSvcResourcesFromJSON(json['resources']),
         'runtime': json['runtime'] == null ? undefined : json['runtime'],
         'status': json['status'] == null ? undefined : json['status'],
@@ -202,17 +233,18 @@ export function ContainerSvcContainerToJSONTyped(value?: ContainerSvcContainer |
 
     return {
         
+        'assets': value['assets'] == null ? undefined : ((value['assets'] as Array<any>).map(ContainerSvcAssetToJSON)),
         'capabilities': ContainerSvcCapabilitiesToJSON(value['capabilities']),
         'envs': value['envs'] == null ? undefined : ((value['envs'] as Array<any>).map(ContainerSvcEnvVarToJSON)),
         'hash': value['hash'],
         'id': value['id'],
         'image': value['image'],
         'keeps': value['keeps'] == null ? undefined : ((value['keeps'] as Array<any>).map(ContainerSvcKeepToJSON)),
-        'labels': value['labels'],
+        'labels': value['labels'] == null ? undefined : ((value['labels'] as Array<any>).map(ContainerSvcLabelToJSON)),
         'names': value['names'],
         'network': ContainerSvcNetworkToJSON(value['network']),
         'nodeId': value['nodeId'],
-        'ports': value['ports'],
+        'ports': value['ports'] == null ? undefined : ((value['ports'] as Array<any>).map(ContainerSvcPortMappingToJSON)),
         'resources': ContainerSvcResourcesToJSON(value['resources']),
         'runtime': value['runtime'],
         'status': value['status'],

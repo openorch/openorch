@@ -15,6 +15,8 @@
  * Check if a given object implements the ContainerSvcKeep interface.
  */
 export function instanceOfContainerSvcKeep(value) {
+    if (!('path' in value) || value['path'] === undefined)
+        return false;
     return true;
 }
 export function ContainerSvcKeepFromJSON(json) {
@@ -25,7 +27,7 @@ export function ContainerSvcKeepFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'path': json['path'] == null ? undefined : json['path'],
+        'path': json['path'],
         'readOnly': json['readOnly'] == null ? undefined : json['readOnly'],
     };
 }

@@ -9,24 +9,49 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ContainerSvcRunContainerOptions } from './containerSvcRunContainerOptions';
+import { ContainerSvcAsset } from './containerSvcAsset';
+import { ContainerSvcCapabilities } from './containerSvcCapabilities';
+import { ContainerSvcEnvVar } from './containerSvcEnvVar';
+import { ContainerSvcKeep } from './containerSvcKeep';
+import { ContainerSvcLabel } from './containerSvcLabel';
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 export declare class ContainerSvcRunContainerRequest {
     /**
-    * HostPort is the port on the host machine that will be mapped to the container\'s port
+    * Assets maps environment variable names to file URLs. Example: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"} These files are downloaded by the File Svc and mounted in the container. The environment variable `MODEL` will point to the local file path in the container.
     */
-    'hostPort'?: number;
+    'assets'?: Array<ContainerSvcAsset>;
+    /**
+    * Capabilities define additional runtime features, such as GPU support.
+    */
+    'capabilities'?: ContainerSvcCapabilities;
+    /**
+    * Envs are environment variables set within the container.
+    */
+    'envs'?: Array<ContainerSvcEnvVar>;
+    /**
+    * Hash is a unique identifier for the container
+    */
+    'hash'?: string;
     /**
     * Image is the Docker image to use for the container
     */
     'image': string;
     /**
-    * Options provides additional options for launching the container
+    * Keeps are paths that persist across container restarts. They function like mounts or volumes, but their external storage location is irrelevant.
     */
-    'options'?: ContainerSvcRunContainerOptions;
+    'keeps'?: Array<ContainerSvcKeep>;
     /**
-    * Port is the port number that the container will expose
+    * Labels are metadata tags assigned to the container.
     */
-    'port': number;
+    'labels'?: Array<ContainerSvcLabel>;
+    /**
+    * Names are the human-readable aliases assigned to the container.
+    */
+    'names'?: Array<string>;
+    /**
+    * Ports maps host ports (keys) to container ports (values).
+    */
+    'ports'?: Array<ContainerSvcPortMapping>;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

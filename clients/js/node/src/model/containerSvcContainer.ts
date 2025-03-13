@@ -11,14 +11,21 @@
  */
 
 import { RequestFile } from './models';
+import { ContainerSvcAsset } from './containerSvcAsset';
 import { ContainerSvcCapabilities } from './containerSvcCapabilities';
 import { ContainerSvcEnvVar } from './containerSvcEnvVar';
 import { ContainerSvcKeep } from './containerSvcKeep';
+import { ContainerSvcLabel } from './containerSvcLabel';
 import { ContainerSvcNetwork } from './containerSvcNetwork';
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 import { ContainerSvcResources } from './containerSvcResources';
 import { ContainerSvcVolume } from './containerSvcVolume';
 
 export class ContainerSvcContainer {
+    /**
+    * Assets maps environment variable names to file URLs. Example: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"} These files are downloaded by the File Svc and mounted in the container. The environment variable `MODEL` will point to the local file path in the container.
+    */
+    'assets'?: Array<ContainerSvcAsset>;
     /**
     * Capabilities define additional runtime features, such as GPU support.
     */
@@ -46,7 +53,7 @@ export class ContainerSvcContainer {
     /**
     * Labels are metadata tags assigned to the container.
     */
-    'labels'?: { [key: string]: string; };
+    'labels'?: Array<ContainerSvcLabel>;
     /**
     * Names are the human-readable aliases assigned to the container.
     */
@@ -62,7 +69,7 @@ export class ContainerSvcContainer {
     /**
     * Ports maps host ports (keys) to container ports (values).
     */
-    'ports'?: { [key: string]: number; };
+    'ports'?: Array<ContainerSvcPortMapping>;
     /**
     * Resources defines CPU, memory, and disk constraints for the container.
     */
@@ -83,6 +90,11 @@ export class ContainerSvcContainer {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "assets",
+            "baseName": "assets",
+            "type": "Array<ContainerSvcAsset>"
+        },
         {
             "name": "capabilities",
             "baseName": "capabilities",
@@ -116,7 +128,7 @@ export class ContainerSvcContainer {
         {
             "name": "labels",
             "baseName": "labels",
-            "type": "{ [key: string]: string; }"
+            "type": "Array<ContainerSvcLabel>"
         },
         {
             "name": "names",
@@ -136,7 +148,7 @@ export class ContainerSvcContainer {
         {
             "name": "ports",
             "baseName": "ports",
-            "type": "{ [key: string]: number; }"
+            "type": "Array<ContainerSvcPortMapping>"
         },
         {
             "name": "resources",

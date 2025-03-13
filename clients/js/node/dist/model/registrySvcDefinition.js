@@ -29,12 +29,7 @@ RegistrySvcDefinition.attributeTypeMap = [
     {
         "name": "envars",
         "baseName": "envars",
-        "type": "{ [key: string]: string; }"
-    },
-    {
-        "name": "hostPort",
-        "baseName": "hostPort",
-        "type": "number"
+        "type": "Array<RegistrySvcEnvVar>"
     },
     {
         "name": "id",
@@ -45,6 +40,11 @@ RegistrySvcDefinition.attributeTypeMap = [
         "name": "image",
         "baseName": "image",
         "type": "RegistrySvcImageSpec"
+    },
+    {
+        "name": "ports",
+        "baseName": "ports",
+        "type": "Array<RegistrySvcPortMapping>"
     },
     {
         "name": "repository",

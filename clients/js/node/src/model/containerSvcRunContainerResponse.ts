@@ -11,23 +11,27 @@
  */
 
 import { RequestFile } from './models';
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 
 export class ContainerSvcRunContainerResponse {
-    'newContainerStarted'?: boolean;
-    'portNumber'?: number;
+    /**
+    * Ports is returned here as host ports might get mapped dynamically.
+    */
+    'ports'?: Array<ContainerSvcPortMapping>;
+    'started'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "newContainerStarted",
-            "baseName": "newContainerStarted",
-            "type": "boolean"
+            "name": "ports",
+            "baseName": "ports",
+            "type": "Array<ContainerSvcPortMapping>"
         },
         {
-            "name": "portNumber",
-            "baseName": "portNumber",
-            "type": "number"
+            "name": "started",
+            "baseName": "started",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {

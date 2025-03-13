@@ -49,7 +49,7 @@ func TestModel(t *testing.T) {
 			Execute()
 		require.NoError(t, err)
 
-		require.Equal(t, 1, len(*getModelsRsp.Models[0].Assets))
+		require.Equal(t, 1, len(getModelsRsp.Models[0].Assets))
 	})
 
 	t.Run("model status is not running, not ready", func(t *testing.T) {

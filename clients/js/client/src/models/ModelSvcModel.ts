@@ -13,6 +13,14 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ModelSvcAsset } from './ModelSvcAsset';
+import {
+    ModelSvcAssetFromJSON,
+    ModelSvcAssetFromJSONTyped,
+    ModelSvcAssetToJSON,
+    ModelSvcAssetToJSONTyped,
+} from './ModelSvcAsset';
+
 /**
  * 
  * @export
@@ -21,10 +29,10 @@ import { mapValues } from '../runtime';
 export interface ModelSvcModel {
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {Array<ModelSvcAsset>}
      * @memberof ModelSvcModel
      */
-    assets?: { [key: string]: string; };
+    assets?: Array<ModelSvcAsset>;
     /**
      * 
      * @type {number}
@@ -60,7 +68,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    id?: string;
+    id: string;
     /**
      * 
      * @type {number}
@@ -84,7 +92,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {string}
@@ -96,7 +104,7 @@ export interface ModelSvcModel {
      * @type {string}
      * @memberof ModelSvcModel
      */
-    platformId?: string;
+    platformId: string;
     /**
      * 
      * @type {string}
@@ -145,6 +153,9 @@ export interface ModelSvcModel {
  * Check if a given object implements the ModelSvcModel interface.
  */
 export function instanceOfModelSvcModel(value: object): value is ModelSvcModel {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('platformId' in value) || value['platformId'] === undefined) return false;
     return true;
 }
 
@@ -158,19 +169,19 @@ export function ModelSvcModelFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'assets': json['assets'] == null ? undefined : json['assets'],
+        'assets': json['assets'] == null ? undefined : ((json['assets'] as Array<any>).map(ModelSvcAssetFromJSON)),
         'bits': json['bits'] == null ? undefined : json['bits'],
         'description': json['description'] == null ? undefined : json['description'],
         'extension': json['extension'] == null ? undefined : json['extension'],
         'flavour': json['flavour'] == null ? undefined : json['flavour'],
         'fullName': json['fullName'] == null ? undefined : json['fullName'],
-        'id': json['id'] == null ? undefined : json['id'],
+        'id': json['id'],
         'maxBits': json['maxBits'] == null ? undefined : json['maxBits'],
         'maxRam': json['maxRam'] == null ? undefined : json['maxRam'],
         'mirrors': json['mirrors'] == null ? undefined : json['mirrors'],
-        'name': json['name'] == null ? undefined : json['name'],
+        'name': json['name'],
         'parameters': json['parameters'] == null ? undefined : json['parameters'],
-        'platformId': json['platformId'] == null ? undefined : json['platformId'],
+        'platformId': json['platformId'],
         'promptTemplate': json['promptTemplate'] == null ? undefined : json['promptTemplate'],
         'quality': json['quality'] == null ? undefined : json['quality'],
         'quantComment': json['quantComment'] == null ? undefined : json['quantComment'],
@@ -192,7 +203,7 @@ export function ModelSvcModelToJSONTyped(value?: ModelSvcModel | null, ignoreDis
 
     return {
         
-        'assets': value['assets'],
+        'assets': value['assets'] == null ? undefined : ((value['assets'] as Array<any>).map(ModelSvcAssetToJSON)),
         'bits': value['bits'],
         'description': value['description'],
         'extension': value['extension'],

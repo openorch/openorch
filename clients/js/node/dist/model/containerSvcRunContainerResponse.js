@@ -17,13 +17,13 @@ export class ContainerSvcRunContainerResponse {
 ContainerSvcRunContainerResponse.discriminator = undefined;
 ContainerSvcRunContainerResponse.attributeTypeMap = [
     {
-        "name": "newContainerStarted",
-        "baseName": "newContainerStarted",
-        "type": "boolean"
+        "name": "ports",
+        "baseName": "ports",
+        "type": "Array<ContainerSvcPortMapping>"
     },
     {
-        "name": "portNumber",
-        "baseName": "portNumber",
-        "type": "number"
+        "name": "started",
+        "baseName": "started",
+        "type": "boolean"
     }
 ];

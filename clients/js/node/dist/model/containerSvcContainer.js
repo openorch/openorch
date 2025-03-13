@@ -17,6 +17,11 @@ export class ContainerSvcContainer {
 ContainerSvcContainer.discriminator = undefined;
 ContainerSvcContainer.attributeTypeMap = [
     {
+        "name": "assets",
+        "baseName": "assets",
+        "type": "Array<ContainerSvcAsset>"
+    },
+    {
         "name": "capabilities",
         "baseName": "capabilities",
         "type": "ContainerSvcCapabilities"
@@ -49,7 +54,7 @@ ContainerSvcContainer.attributeTypeMap = [
     {
         "name": "labels",
         "baseName": "labels",
-        "type": "{ [key: string]: string; }"
+        "type": "Array<ContainerSvcLabel>"
     },
     {
         "name": "names",
@@ -69,7 +74,7 @@ ContainerSvcContainer.attributeTypeMap = [
     {
         "name": "ports",
         "baseName": "ports",
-        "type": "{ [key: string]: number; }"
+        "type": "Array<ContainerSvcPortMapping>"
     },
     {
         "name": "resources",

@@ -44,10 +44,10 @@ type Network struct {
 // EnvVar represents an environment variable inside the container.
 type EnvVar struct {
 	// Key is the environment variable name.
-	Key string `json:"key"`
+	Key string `json:"key" binding:"required"`
 
 	// Value is the environment variable value.
-	Value string `json:"value"`
+	Value string `json:"value" binding:"required"`
 }
 
 // Volume represents a persistent mount or volume inside the container.
@@ -66,10 +66,25 @@ type Volume struct {
 // without concern for their exact location on the host system.
 type Keep struct {
 	// Path is the absolute path inside the container for the folder that should persist across restarts.
-	Path string `json:"path"`
+	Path string `json:"path" binding:"required"`
 
 	// ReadOnly indicates whether the keep is read-only.
 	ReadOnly bool `json:"readOnly,omitempty"`
+}
+
+type PortMapping struct {
+	Internal uint16 `json:"internal" binding:"required"`
+	Host     uint16 `json:"host" binding:"required"`
+}
+
+type Label struct {
+	Key   string `json:"key" binding:"required"`
+	Value string `json:"value" binding:"required"`
+}
+
+type Asset struct {
+	EnvVarKey string `json:"envVarKey" binding:"required"`
+	Url       string `json:"url" binding:"required"`
 }
 
 // Container represents a running container instance.
@@ -88,13 +103,19 @@ type Container struct {
 	Image string `json:"image"`
 
 	// Ports maps host ports (keys) to container ports (values).
-	Ports map[uint16]uint16 `json:"ports,omitempty"`
+	Ports []PortMapping `json:"ports,omitempty"`
 
 	// Hash is a unique identifier associated with the container.
 	Hash string `json:"hash,omitempty"`
 
 	// Labels are metadata tags assigned to the container.
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels []Label `json:"labels,omitempty"`
+
+	// Assets maps environment variable names to file URLs.
+	// Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
+	// These files are downloaded by the File Svc and mounted in the container.
+	// The environment variable `MODEL` will point to the local file path in the container.
+	Assets []Asset `json:"assets,omitempty"`
 
 	// Envs are environment variables set within the container.
 	Envs []EnvVar `json:"envs,omitempty"`
@@ -127,49 +148,43 @@ func (l *Container) GetId() string {
 }
 
 type RunContainerRequest struct {
+	// Names are the human-readable aliases assigned to the container.
+	Names []string `json:"names,omitempty"`
+
 	// Image is the Docker image to use for the container
 	Image string `json:"image" example:"nginx:latest" binding:"required"`
 
-	// Port is the port number that the container will expose
-	Port int `json:"port" example:"8080" binding:"required"`
-
-	// HostPort is the port on the host machine that will be mapped to the container's port
-	HostPort int `json:"hostPort" example:"8081"`
-
-	// Options provides additional options for launching the container
-	Options *RunContainerOptions `json:"options"`
-}
-
-type RunContainerOptions struct {
-	// Name is the name of the container
-	Name string `json:"name,omitempty"`
+	// Ports maps host ports (keys) to container ports (values).
+	Ports []PortMapping `json:"ports,omitempty"`
 
 	// Hash is a unique identifier for the container
 	Hash string `json:"hash,omitempty"`
 
-	// Envs are environment variables to set in the container
-	Envs []string `json:"envs,omitempty"`
-
-	// Labels are metadata labels associated with the container
-	Labels map[string]string `json:"labels,omitempty"`
-
-	// Keeps are paths that persist across container restarts.
-	// They function like mounts or volumes, but their external storage location is irrelevant.
-	Keeps []string `json:"keeps,omitempty"`
-
-	// GPUEnabled specifies if GPU support is enabled
-	GPUEnabled bool `json:"gpuEnabled,omitempty"`
+	// Labels are metadata tags assigned to the container.
+	Labels []Label `json:"labels,omitempty"`
 
 	// Assets maps environment variable names to file URLs.
 	// Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
 	// These files are downloaded by the File Svc and mounted in the container.
 	// The environment variable `MODEL` will point to the local file path in the container.
-	Assets map[string]string `json:"assets,omitempty"`
+	Assets []Asset `json:"assets,omitempty"`
+
+	// Envs are environment variables set within the container.
+	Envs []EnvVar `json:"envs,omitempty"`
+
+	// Keeps are paths that persist across container restarts.
+	// They function like mounts or volumes, but their external storage location is irrelevant.
+	Keeps []Keep `json:"keeps,omitempty"`
+
+	// Capabilities define additional runtime features, such as GPU support.
+	Capabilities *Capabilities `json:"capabilities,omitempty"`
 }
 
 type RunContainerResponse struct {
-	NewContainerStarted bool
-	PortNumber          int
+	Started bool
+
+	// Ports is returned here as host ports might get mapped dynamically.
+	Ports []PortMapping
 }
 
 type StopContainerRequest struct {

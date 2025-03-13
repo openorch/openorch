@@ -22,10 +22,10 @@ var _ MappedNullable = &RegistrySvcImageSpec{}
 
 // RegistrySvcImageSpec struct for RegistrySvcImageSpec
 type RegistrySvcImageSpec struct {
+	// InternalPorts are the ports the container will listen on internally
+	InternalPorts []int32 `json:"internalPorts"`
 	// Name is the container image name/URL to use for the container
 	Name string `json:"name"`
-	// Port is the port number that the container will listen on internally
-	Port int32 `json:"port"`
 }
 
 type _RegistrySvcImageSpec RegistrySvcImageSpec
@@ -34,10 +34,10 @@ type _RegistrySvcImageSpec RegistrySvcImageSpec
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegistrySvcImageSpec(name string, port int32) *RegistrySvcImageSpec {
+func NewRegistrySvcImageSpec(internalPorts []int32, name string) *RegistrySvcImageSpec {
 	this := RegistrySvcImageSpec{}
+	this.InternalPorts = internalPorts
 	this.Name = name
-	this.Port = port
 	return &this
 }
 
@@ -47,6 +47,30 @@ func NewRegistrySvcImageSpec(name string, port int32) *RegistrySvcImageSpec {
 func NewRegistrySvcImageSpecWithDefaults() *RegistrySvcImageSpec {
 	this := RegistrySvcImageSpec{}
 	return &this
+}
+
+// GetInternalPorts returns the InternalPorts field value
+func (o *RegistrySvcImageSpec) GetInternalPorts() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+
+	return o.InternalPorts
+}
+
+// GetInternalPortsOk returns a tuple with the InternalPorts field value
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcImageSpec) GetInternalPortsOk() ([]int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InternalPorts, true
+}
+
+// SetInternalPorts sets field value
+func (o *RegistrySvcImageSpec) SetInternalPorts(v []int32) {
+	o.InternalPorts = v
 }
 
 // GetName returns the Name field value
@@ -73,30 +97,6 @@ func (o *RegistrySvcImageSpec) SetName(v string) {
 	o.Name = v
 }
 
-// GetPort returns the Port field value
-func (o *RegistrySvcImageSpec) GetPort() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value
-// and a boolean to check if the value has been set.
-func (o *RegistrySvcImageSpec) GetPortOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Port, true
-}
-
-// SetPort sets field value
-func (o *RegistrySvcImageSpec) SetPort(v int32) {
-	o.Port = v
-}
-
 func (o RegistrySvcImageSpec) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,8 +107,8 @@ func (o RegistrySvcImageSpec) MarshalJSON() ([]byte, error) {
 
 func (o RegistrySvcImageSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["internalPorts"] = o.InternalPorts
 	toSerialize["name"] = o.Name
-	toSerialize["port"] = o.Port
 	return toSerialize, nil
 }
 
@@ -117,8 +117,8 @@ func (o *RegistrySvcImageSpec) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"internalPorts",
 		"name",
-		"port",
 	}
 
 	allProperties := make(map[string]interface{})

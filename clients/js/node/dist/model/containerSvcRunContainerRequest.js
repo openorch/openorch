@@ -17,9 +17,24 @@ export class ContainerSvcRunContainerRequest {
 ContainerSvcRunContainerRequest.discriminator = undefined;
 ContainerSvcRunContainerRequest.attributeTypeMap = [
     {
-        "name": "hostPort",
-        "baseName": "hostPort",
-        "type": "number"
+        "name": "assets",
+        "baseName": "assets",
+        "type": "Array<ContainerSvcAsset>"
+    },
+    {
+        "name": "capabilities",
+        "baseName": "capabilities",
+        "type": "ContainerSvcCapabilities"
+    },
+    {
+        "name": "envs",
+        "baseName": "envs",
+        "type": "Array<ContainerSvcEnvVar>"
+    },
+    {
+        "name": "hash",
+        "baseName": "hash",
+        "type": "string"
     },
     {
         "name": "image",
@@ -27,13 +42,23 @@ ContainerSvcRunContainerRequest.attributeTypeMap = [
         "type": "string"
     },
     {
-        "name": "options",
-        "baseName": "options",
-        "type": "ContainerSvcRunContainerOptions"
+        "name": "keeps",
+        "baseName": "keeps",
+        "type": "Array<ContainerSvcKeep>"
     },
     {
-        "name": "port",
-        "baseName": "port",
-        "type": "number"
+        "name": "labels",
+        "baseName": "labels",
+        "type": "Array<ContainerSvcLabel>"
+    },
+    {
+        "name": "names",
+        "baseName": "names",
+        "type": "Array<string>"
+    },
+    {
+        "name": "ports",
+        "baseName": "ports",
+        "type": "Array<ContainerSvcPortMapping>"
     }
 ];

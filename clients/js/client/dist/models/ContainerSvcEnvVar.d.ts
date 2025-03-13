@@ -20,13 +20,13 @@ export interface ContainerSvcEnvVar {
      * @type {string}
      * @memberof ContainerSvcEnvVar
      */
-    key?: string;
+    key: string;
     /**
      * Value is the environment variable value.
      * @type {string}
      * @memberof ContainerSvcEnvVar
      */
-    value?: string;
+    value: string;
 }
 /**
  * Check if a given object implements the ContainerSvcEnvVar interface.

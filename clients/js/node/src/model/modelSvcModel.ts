@@ -11,21 +11,22 @@
  */
 
 import { RequestFile } from './models';
+import { ModelSvcAsset } from './modelSvcAsset';
 
 export class ModelSvcModel {
-    'assets'?: { [key: string]: string; };
+    'assets'?: Array<ModelSvcAsset>;
     'bits'?: number;
     'description'?: string;
     'extension'?: string;
     'flavour'?: string;
     'fullName'?: string;
-    'id'?: string;
+    'id': string;
     'maxBits'?: number;
     'maxRam'?: number;
     'mirrors'?: Array<string>;
-    'name'?: string;
+    'name': string;
     'parameters'?: string;
-    'platformId'?: string;
+    'platformId': string;
     'promptTemplate'?: string;
     'quality'?: string;
     'quantComment'?: string;
@@ -40,7 +41,7 @@ export class ModelSvcModel {
         {
             "name": "assets",
             "baseName": "assets",
-            "type": "{ [key: string]: string; }"
+            "type": "Array<ModelSvcAsset>"
         },
         {
             "name": "bits",

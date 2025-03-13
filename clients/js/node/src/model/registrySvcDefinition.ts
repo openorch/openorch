@@ -13,7 +13,9 @@
 import { RequestFile } from './models';
 import { RegistrySvcAPISpec } from './registrySvcAPISpec';
 import { RegistrySvcClient } from './registrySvcClient';
+import { RegistrySvcEnvVar } from './registrySvcEnvVar';
 import { RegistrySvcImageSpec } from './registrySvcImageSpec';
+import { RegistrySvcPortMapping } from './registrySvcPortMapping';
 import { RegistrySvcRepositorySpec } from './registrySvcRepositorySpec';
 
 export class RegistrySvcDefinition {
@@ -28,16 +30,16 @@ export class RegistrySvcDefinition {
     /**
     * Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run. E.g., {\"DB_URL\": \"mysql://user:password@host:port/db\"} These will be injected into the service instances (see Registry Svc Instance) at runtime. The value of a key here is the default value. The actual value can be overridden at deployment time.
     */
-    'envars'?: { [key: string]: string; };
-    /**
-    * HostPort is a clutch until automatic port assignment works. It will go a way as it doesn\'t make any sense in a Definition.
-    */
-    'hostPort'?: number;
+    'envars'?: Array<RegistrySvcEnvVar>;
     'id': string;
     /**
     * Container specifications for Docker, K8s, etc. Use this to deploy already built images.
     */
     'image'?: RegistrySvcImageSpec;
+    /**
+    * Ports have host ports and internal ports currently but they really only should have internal ports as host ports should be assigned by the system. Host ports might go away in the future.
+    */
+    'ports'?: Array<RegistrySvcPortMapping>;
     /**
     * Repository based definitions is an alternative to Image definitions. Instead of deploying an already built and pushed image, a source code repository url can be provided. The container will be built from the source.
     */
@@ -59,12 +61,7 @@ export class RegistrySvcDefinition {
         {
             "name": "envars",
             "baseName": "envars",
-            "type": "{ [key: string]: string; }"
-        },
-        {
-            "name": "hostPort",
-            "baseName": "hostPort",
-            "type": "number"
+            "type": "Array<RegistrySvcEnvVar>"
         },
         {
             "name": "id",
@@ -75,6 +72,11 @@ export class RegistrySvcDefinition {
             "name": "image",
             "baseName": "image",
             "type": "RegistrySvcImageSpec"
+        },
+        {
+            "name": "ports",
+            "baseName": "ports",
+            "type": "Array<RegistrySvcPortMapping>"
         },
         {
             "name": "repository",

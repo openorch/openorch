@@ -13,6 +13,21 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ModelSvcKeep } from './ModelSvcKeep';
+import {
+    ModelSvcKeepFromJSON,
+    ModelSvcKeepFromJSONTyped,
+    ModelSvcKeepToJSON,
+    ModelSvcKeepToJSONTyped,
+} from './ModelSvcKeep';
+import type { ModelSvcEnvVar } from './ModelSvcEnvVar';
+import {
+    ModelSvcEnvVarFromJSON,
+    ModelSvcEnvVarFromJSONTyped,
+    ModelSvcEnvVarToJSON,
+    ModelSvcEnvVarToJSONTyped,
+} from './ModelSvcEnvVar';
+
 /**
  * 
  * @export
@@ -21,10 +36,10 @@ import { mapValues } from '../runtime';
 export interface ModelSvcContainer {
     /**
      * Environment variables to be passed to the container (e.g., "DEVICES=all").
-     * @type {Array<string>}
+     * @type {Array<ModelSvcEnvVar>}
      * @memberof ModelSvcContainer
      */
-    envars?: Array<string>;
+    envars?: Array<ModelSvcEnvVar>;
     /**
      * Template for constructing the container image name.
      * @type {string}
@@ -33,10 +48,10 @@ export interface ModelSvcContainer {
     imageTemplate?: string;
     /**
      * List of container paths that should persist across restarts.
-     * @type {Array<string>}
+     * @type {Array<ModelSvcKeep>}
      * @memberof ModelSvcContainer
      */
-    keeps?: Array<string>;
+    keeps?: Array<ModelSvcKeep>;
     /**
      * Internal port exposed by the container.
      * @type {number}
@@ -62,9 +77,9 @@ export function ModelSvcContainerFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'envars': json['envars'] == null ? undefined : json['envars'],
+        'envars': json['envars'] == null ? undefined : ((json['envars'] as Array<any>).map(ModelSvcEnvVarFromJSON)),
         'imageTemplate': json['imageTemplate'] == null ? undefined : json['imageTemplate'],
-        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'keeps': json['keeps'] == null ? undefined : ((json['keeps'] as Array<any>).map(ModelSvcKeepFromJSON)),
         'port': json['port'] == null ? undefined : json['port'],
     };
 }
@@ -80,9 +95,9 @@ export function ModelSvcContainerToJSONTyped(value?: ModelSvcContainer | null, i
 
     return {
         
-        'envars': value['envars'],
+        'envars': value['envars'] == null ? undefined : ((value['envars'] as Array<any>).map(ModelSvcEnvVarToJSON)),
         'imageTemplate': value['imageTemplate'],
-        'keeps': value['keeps'],
+        'keeps': value['keeps'] == null ? undefined : ((value['keeps'] as Array<any>).map(ModelSvcKeepToJSON)),
         'port': value['port'],
     };
 }

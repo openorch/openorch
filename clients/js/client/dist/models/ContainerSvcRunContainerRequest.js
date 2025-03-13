@@ -11,14 +11,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ContainerSvcRunContainerOptionsFromJSON, ContainerSvcRunContainerOptionsToJSON, } from './ContainerSvcRunContainerOptions';
+import { ContainerSvcKeepFromJSON, ContainerSvcKeepToJSON, } from './ContainerSvcKeep';
+import { ContainerSvcAssetFromJSON, ContainerSvcAssetToJSON, } from './ContainerSvcAsset';
+import { ContainerSvcCapabilitiesFromJSON, ContainerSvcCapabilitiesToJSON, } from './ContainerSvcCapabilities';
+import { ContainerSvcLabelFromJSON, ContainerSvcLabelToJSON, } from './ContainerSvcLabel';
+import { ContainerSvcEnvVarFromJSON, ContainerSvcEnvVarToJSON, } from './ContainerSvcEnvVar';
+import { ContainerSvcPortMappingFromJSON, ContainerSvcPortMappingToJSON, } from './ContainerSvcPortMapping';
 /**
  * Check if a given object implements the ContainerSvcRunContainerRequest interface.
  */
 export function instanceOfContainerSvcRunContainerRequest(value) {
     if (!('image' in value) || value['image'] === undefined)
-        return false;
-    if (!('port' in value) || value['port'] === undefined)
         return false;
     return true;
 }
@@ -30,10 +33,15 @@ export function ContainerSvcRunContainerRequestFromJSONTyped(json, ignoreDiscrim
         return json;
     }
     return {
-        'hostPort': json['hostPort'] == null ? undefined : json['hostPort'],
+        'assets': json['assets'] == null ? undefined : (json['assets'].map(ContainerSvcAssetFromJSON)),
+        'capabilities': json['capabilities'] == null ? undefined : ContainerSvcCapabilitiesFromJSON(json['capabilities']),
+        'envs': json['envs'] == null ? undefined : (json['envs'].map(ContainerSvcEnvVarFromJSON)),
+        'hash': json['hash'] == null ? undefined : json['hash'],
         'image': json['image'],
-        'options': json['options'] == null ? undefined : ContainerSvcRunContainerOptionsFromJSON(json['options']),
-        'port': json['port'],
+        'keeps': json['keeps'] == null ? undefined : (json['keeps'].map(ContainerSvcKeepFromJSON)),
+        'labels': json['labels'] == null ? undefined : (json['labels'].map(ContainerSvcLabelFromJSON)),
+        'names': json['names'] == null ? undefined : json['names'],
+        'ports': json['ports'] == null ? undefined : (json['ports'].map(ContainerSvcPortMappingFromJSON)),
     };
 }
 export function ContainerSvcRunContainerRequestToJSON(json) {
@@ -44,9 +52,14 @@ export function ContainerSvcRunContainerRequestToJSONTyped(value, ignoreDiscrimi
         return value;
     }
     return {
-        'hostPort': value['hostPort'],
+        'assets': value['assets'] == null ? undefined : (value['assets'].map(ContainerSvcAssetToJSON)),
+        'capabilities': ContainerSvcCapabilitiesToJSON(value['capabilities']),
+        'envs': value['envs'] == null ? undefined : (value['envs'].map(ContainerSvcEnvVarToJSON)),
+        'hash': value['hash'],
         'image': value['image'],
-        'options': ContainerSvcRunContainerOptionsToJSON(value['options']),
-        'port': value['port'],
+        'keeps': value['keeps'] == null ? undefined : (value['keeps'].map(ContainerSvcKeepToJSON)),
+        'labels': value['labels'] == null ? undefined : (value['labels'].map(ContainerSvcLabelToJSON)),
+        'names': value['names'],
+        'ports': value['ports'] == null ? undefined : (value['ports'].map(ContainerSvcPortMappingToJSON)),
     };
 }

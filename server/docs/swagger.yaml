@@ -151,6 +151,16 @@ definitions:
     type: object
   config_svc.SaveConfigResponse:
     type: object
+  container_svc.Asset:
+    properties:
+      envVarKey:
+        type: string
+      url:
+        type: string
+    required:
+    - envVarKey
+    - url
+    type: object
   container_svc.BuildImageRequest:
     properties:
       contextPath:
@@ -179,6 +189,15 @@ definitions:
     type: object
   container_svc.Container:
     properties:
+      assets:
+        description: |-
+          Assets maps environment variable names to file URLs.
+          Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
+          These files are downloaded by the File Svc and mounted in the container.
+          The environment variable `MODEL` will point to the local file path in the container.
+        items:
+          $ref: '#/definitions/container_svc.Asset'
+        type: array
       capabilities:
         allOf:
         - $ref: '#/definitions/container_svc.Capabilities'
@@ -206,10 +225,10 @@ definitions:
           $ref: '#/definitions/container_svc.Keep'
         type: array
       labels:
-        additionalProperties:
-          type: string
         description: Labels are metadata tags assigned to the container.
-        type: object
+        items:
+          $ref: '#/definitions/container_svc.Label'
+        type: array
       names:
         description: Names are the human-readable aliases assigned to the container.
         items:
@@ -225,10 +244,10 @@ definitions:
           Please see the documentation for the envar OPENORCH_NODE_ID
         type: string
       ports:
-        additionalProperties:
-          type: integer
         description: Ports maps host ports (keys) to container ports (values).
-        type: object
+        items:
+          $ref: '#/definitions/container_svc.PortMapping'
+        type: array
       resources:
         allOf:
         - $ref: '#/definitions/container_svc.Resources'
@@ -273,6 +292,9 @@ definitions:
       value:
         description: Value is the environment variable value.
         type: string
+    required:
+    - key
+    - value
     type: object
   container_svc.ErrorResponse:
     properties:
@@ -316,6 +338,18 @@ definitions:
       readOnly:
         description: ReadOnly indicates whether the keep is read-only.
         type: boolean
+    required:
+    - path
+    type: object
+  container_svc.Label:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    required:
+    - key
+    - value
     type: object
   container_svc.ListContainersRequest:
     properties:
@@ -381,6 +415,16 @@ definitions:
           none, custom).
         type: string
     type: object
+  container_svc.PortMapping:
+    properties:
+      host:
+        type: integer
+      internal:
+        type: integer
+    required:
+    - host
+    - internal
+    type: object
   container_svc.Resources:
     properties:
       cpu:
@@ -394,73 +438,68 @@ definitions:
         description: Memory allocated to the container in megabytes.
         type: integer
     type: object
-  container_svc.RunContainerOptions:
+  container_svc.RunContainerRequest:
     properties:
       assets:
-        additionalProperties:
-          type: string
         description: |-
           Assets maps environment variable names to file URLs.
           Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
           These files are downloaded by the File Svc and mounted in the container.
           The environment variable `MODEL` will point to the local file path in the container.
-        type: object
-      envs:
-        description: Envs are environment variables to set in the container
         items:
-          type: string
+          $ref: '#/definitions/container_svc.Asset'
         type: array
-      gpuEnabled:
-        description: GPUEnabled specifies if GPU support is enabled
-        type: boolean
+      capabilities:
+        allOf:
+        - $ref: '#/definitions/container_svc.Capabilities'
+        description: Capabilities define additional runtime features, such as GPU
+          support.
+      envs:
+        description: Envs are environment variables set within the container.
+        items:
+          $ref: '#/definitions/container_svc.EnvVar'
+        type: array
       hash:
         description: Hash is a unique identifier for the container
+        type: string
+      image:
+        description: Image is the Docker image to use for the container
+        example: nginx:latest
         type: string
       keeps:
         description: |-
           Keeps are paths that persist across container restarts.
           They function like mounts or volumes, but their external storage location is irrelevant.
         items:
-          type: string
+          $ref: '#/definitions/container_svc.Keep'
         type: array
       labels:
-        additionalProperties:
+        description: Labels are metadata tags assigned to the container.
+        items:
+          $ref: '#/definitions/container_svc.Label'
+        type: array
+      names:
+        description: Names are the human-readable aliases assigned to the container.
+        items:
           type: string
-        description: Labels are metadata labels associated with the container
-        type: object
-      name:
-        description: Name is the name of the container
-        type: string
-    type: object
-  container_svc.RunContainerRequest:
-    properties:
-      hostPort:
-        description: HostPort is the port on the host machine that will be mapped
-          to the container's port
-        example: 8081
-        type: integer
-      image:
-        description: Image is the Docker image to use for the container
-        example: nginx:latest
-        type: string
-      options:
-        allOf:
-        - $ref: '#/definitions/container_svc.RunContainerOptions'
-        description: Options provides additional options for launching the container
-      port:
-        description: Port is the port number that the container will expose
-        example: 8080
-        type: integer
+        type: array
+      ports:
+        description: Ports maps host ports (keys) to container ports (values).
+        items:
+          $ref: '#/definitions/container_svc.PortMapping'
+        type: array
     required:
     - image
-    - port
     type: object
   container_svc.RunContainerResponse:
     properties:
-      newContainerStarted:
+      ports:
+        description: Ports is returned here as host ports might get mapped dynamically.
+        items:
+          $ref: '#/definitions/container_svc.PortMapping'
+        type: array
+      started:
         type: boolean
-      portNumber:
-        type: integer
     type: object
   container_svc.StopContainerRequest:
     properties:
@@ -1129,12 +1168,22 @@ definitions:
         - $ref: '#/definitions/model_svc.DefaultParameters'
         description: Default container configuration for non-GPU environments.
     type: object
+  model_svc.Asset:
+    properties:
+      envVarKey:
+        type: string
+      url:
+        type: string
+    required:
+    - envVarKey
+    - url
+    type: object
   model_svc.Container:
     properties:
       envars:
         description: Environment variables to be passed to the container (e.g., "DEVICES=all").
         items:
-          type: string
+          $ref: '#/definitions/model_svc.EnvVar'
         type: array
       imageTemplate:
         description: Template for constructing the container image name.
@@ -1142,7 +1191,7 @@ definitions:
       keeps:
         description: List of container paths that should persist across restarts.
         items:
-          type: string
+          $ref: '#/definitions/model_svc.Keep'
         type: array
       port:
         description: Internal port exposed by the container.
@@ -1172,6 +1221,15 @@ definitions:
       container:
         $ref: '#/definitions/model_svc.Container'
     type: object
+  model_svc.EnvVar:
+    properties:
+      key:
+        description: Key is the environment variable name.
+        type: string
+      value:
+        description: Value is the environment variable value.
+        type: string
+    type: object
   model_svc.ErrorResponse:
     properties:
       error:
@@ -1189,6 +1247,16 @@ definitions:
     - exists
     - model
     - platform
+    type: object
+  model_svc.Keep:
+    properties:
+      path:
+        description: Path is the absolute path inside the container for the folder
+          that should persist across restarts.
+        type: string
+      readOnly:
+        description: ReadOnly indicates whether the keep is read-only.
+        type: boolean
     type: object
   model_svc.ListModelsResponse:
     properties:
@@ -1211,9 +1279,9 @@ definitions:
   model_svc.Model:
     properties:
       assets:
-        additionalProperties:
-          type: string
-        type: object
+        items:
+          $ref: '#/definitions/model_svc.Asset'
+        type: array
       bits:
         type: integer
       description:
@@ -1256,6 +1324,10 @@ definitions:
         type: boolean
       version:
         type: string
+    required:
+    - id
+    - name
+    - platformId
     type: object
   model_svc.ModelStatus:
     properties:
@@ -1815,19 +1887,14 @@ definitions:
           $ref: '#/definitions/registry_svc.Client'
         type: array
       envars:
-        additionalProperties:
-          type: string
         description: |-
           Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.
           E.g., {"DB_URL": "mysql://user:password@host:port/db"}
           These will be injected into the service instances (see Registry Svc Instance) at runtime.
           The value of a key here is the default value. The actual value can be overridden at deployment time.
-        type: object
-      hostPort:
-        description: |-
-          HostPort is a clutch until automatic port assignment works.
-          It will go a way as it doesn't make any sense in a Definition.
-        type: integer
+        items:
+          $ref: '#/definitions/registry_svc.EnvVar'
+        type: array
       id:
         type: string
       image:
@@ -1836,6 +1903,14 @@ definitions:
         description: |-
           Container specifications for Docker, K8s, etc.
           Use this to deploy already built images.
+      ports:
+        description: |-
+          Ports have host ports and internal ports currently but they
+          really only should have internal ports as host ports should be assigned
+          by the system. Host ports might go away in the future.
+        items:
+          $ref: '#/definitions/registry_svc.PortMapping'
+        type: array
       repository:
         allOf:
         - $ref: '#/definitions/registry_svc.RepositorySpec'
@@ -1845,6 +1920,18 @@ definitions:
           url can be provided. The container will be built from the source.
     required:
     - id
+    type: object
+  registry_svc.EnvVar:
+    properties:
+      key:
+        description: Key is the environment variable name.
+        type: string
+      value:
+        description: Value is the environment variable value.
+        type: string
+    required:
+    - key
+    - value
     type: object
   registry_svc.ErrorResponse:
     properties:
@@ -1887,17 +1974,18 @@ definitions:
     type: object
   registry_svc.ImageSpec:
     properties:
+      internalPorts:
+        description: InternalPorts are the ports the container will listen on internally
+        items:
+          type: integer
+        type: array
       name:
         description: Name is the container image name/URL to use for the container
         example: nginx:latest
         type: string
-      port:
-        description: Port is the port number that the container will listen on internally
-        example: 8080
-        type: integer
     required:
+    - internalPorts
     - name
-    - port
     type: object
   registry_svc.Instance:
     properties:
@@ -2115,6 +2203,16 @@ definitions:
     required:
     - node
     type: object
+  registry_svc.PortMapping:
+    properties:
+      host:
+        type: integer
+      internal:
+        type: integer
+    required:
+    - host
+    - internal
+    type: object
   registry_svc.Process:
     properties:
       memoryUsage:
@@ -2175,10 +2273,11 @@ definitions:
           Relative from the build context. By default, it is assumed to be a Dockerfile.
         example: docker/Dockerfile
         type: string
-      port:
-        description: Port is the port number that the container will listen on internally
-        example: 8080
-        type: integer
+      ports:
+        description: Ports the container will listen on internally
+        items:
+          type: integer
+        type: array
       url:
         description: URL is the URL to the repository
         example: https://github.com/openorch/openorch.git
@@ -2188,6 +2287,7 @@ definitions:
         example: v1.0.0
         type: string
     required:
+    - ports
     - url
     type: object
   registry_svc.ResourceUsage:

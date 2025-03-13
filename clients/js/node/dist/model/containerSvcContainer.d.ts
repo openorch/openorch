@@ -9,13 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ContainerSvcAsset } from './containerSvcAsset';
 import { ContainerSvcCapabilities } from './containerSvcCapabilities';
 import { ContainerSvcEnvVar } from './containerSvcEnvVar';
 import { ContainerSvcKeep } from './containerSvcKeep';
+import { ContainerSvcLabel } from './containerSvcLabel';
 import { ContainerSvcNetwork } from './containerSvcNetwork';
+import { ContainerSvcPortMapping } from './containerSvcPortMapping';
 import { ContainerSvcResources } from './containerSvcResources';
 import { ContainerSvcVolume } from './containerSvcVolume';
 export declare class ContainerSvcContainer {
+    /**
+    * Assets maps environment variable names to file URLs. Example: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"} These files are downloaded by the File Svc and mounted in the container. The environment variable `MODEL` will point to the local file path in the container.
+    */
+    'assets'?: Array<ContainerSvcAsset>;
     /**
     * Capabilities define additional runtime features, such as GPU support.
     */
@@ -43,9 +50,7 @@ export declare class ContainerSvcContainer {
     /**
     * Labels are metadata tags assigned to the container.
     */
-    'labels'?: {
-        [key: string]: string;
-    };
+    'labels'?: Array<ContainerSvcLabel>;
     /**
     * Names are the human-readable aliases assigned to the container.
     */
@@ -61,9 +66,7 @@ export declare class ContainerSvcContainer {
     /**
     * Ports maps host ports (keys) to container ports (values).
     */
-    'ports'?: {
-        [key: string]: number;
-    };
+    'ports'?: Array<ContainerSvcPortMapping>;
     /**
     * Resources defines CPU, memory, and disk constraints for the container.
     */

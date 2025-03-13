@@ -11,13 +11,13 @@
  */
 export declare class RegistrySvcImageSpec {
     /**
+    * InternalPorts are the ports the container will listen on internally
+    */
+    'internalPorts': Array<number>;
+    /**
     * Name is the container image name/URL to use for the container
     */
     'name': string;
-    /**
-    * Port is the port number that the container will listen on internally
-    */
-    'port': number;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

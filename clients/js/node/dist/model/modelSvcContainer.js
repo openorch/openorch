@@ -19,7 +19,7 @@ ModelSvcContainer.attributeTypeMap = [
     {
         "name": "envars",
         "baseName": "envars",
-        "type": "Array<string>"
+        "type": "Array<ModelSvcEnvVar>"
     },
     {
         "name": "imageTemplate",
@@ -29,7 +29,7 @@ ModelSvcContainer.attributeTypeMap = [
     {
         "name": "keeps",
         "baseName": "keeps",
-        "type": "Array<string>"
+        "type": "Array<ModelSvcKeep>"
     },
     {
         "name": "port",

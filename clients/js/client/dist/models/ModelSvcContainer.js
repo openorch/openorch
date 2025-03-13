@@ -11,6 +11,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ModelSvcKeepFromJSON, ModelSvcKeepToJSON, } from './ModelSvcKeep';
+import { ModelSvcEnvVarFromJSON, ModelSvcEnvVarToJSON, } from './ModelSvcEnvVar';
 /**
  * Check if a given object implements the ModelSvcContainer interface.
  */
@@ -25,9 +27,9 @@ export function ModelSvcContainerFromJSONTyped(json, ignoreDiscriminator) {
         return json;
     }
     return {
-        'envars': json['envars'] == null ? undefined : json['envars'],
+        'envars': json['envars'] == null ? undefined : (json['envars'].map(ModelSvcEnvVarFromJSON)),
         'imageTemplate': json['imageTemplate'] == null ? undefined : json['imageTemplate'],
-        'keeps': json['keeps'] == null ? undefined : json['keeps'],
+        'keeps': json['keeps'] == null ? undefined : (json['keeps'].map(ModelSvcKeepFromJSON)),
         'port': json['port'] == null ? undefined : json['port'],
     };
 }
@@ -39,9 +41,9 @@ export function ModelSvcContainerToJSONTyped(value, ignoreDiscriminator = false)
         return value;
     }
     return {
-        'envars': value['envars'],
+        'envars': value['envars'] == null ? undefined : (value['envars'].map(ModelSvcEnvVarToJSON)),
         'imageTemplate': value['imageTemplate'],
-        'keeps': value['keeps'],
+        'keeps': value['keeps'] == null ? undefined : (value['keeps'].map(ModelSvcKeepToJSON)),
         'port': value['port'],
     };
 }

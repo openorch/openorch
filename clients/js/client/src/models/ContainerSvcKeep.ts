@@ -24,7 +24,7 @@ export interface ContainerSvcKeep {
      * @type {string}
      * @memberof ContainerSvcKeep
      */
-    path?: string;
+    path: string;
     /**
      * ReadOnly indicates whether the keep is read-only.
      * @type {boolean}
@@ -37,6 +37,7 @@ export interface ContainerSvcKeep {
  * Check if a given object implements the ContainerSvcKeep interface.
  */
 export function instanceOfContainerSvcKeep(value: object): value is ContainerSvcKeep {
+    if (!('path' in value) || value['path'] === undefined) return false;
     return true;
 }
 
@@ -50,7 +51,7 @@ export function ContainerSvcKeepFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'path': json['path'] == null ? undefined : json['path'],
+        'path': json['path'],
         'readOnly': json['readOnly'] == null ? undefined : json['readOnly'],
     };
 }

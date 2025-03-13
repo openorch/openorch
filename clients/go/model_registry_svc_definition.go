@@ -27,12 +27,12 @@ type RegistrySvcDefinition struct {
 	// Programming language clients such as on npm or GitHub.
 	Clients []RegistrySvcClient `json:"clients,omitempty"`
 	// Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run. E.g., {\"DB_URL\": \"mysql://user:password@host:port/db\"} These will be injected into the service instances (see Registry Svc Instance) at runtime. The value of a key here is the default value. The actual value can be overridden at deployment time.
-	Envars *map[string]string `json:"envars,omitempty"`
-	// HostPort is a clutch until automatic port assignment works. It will go a way as it doesn't make any sense in a Definition.
-	HostPort *int32 `json:"hostPort,omitempty"`
+	Envars []RegistrySvcEnvVar `json:"envars,omitempty"`
 	Id string `json:"id"`
 	// Container specifications for Docker, K8s, etc. Use this to deploy already built images.
 	Image *RegistrySvcImageSpec `json:"image,omitempty"`
+	// Ports have host ports and internal ports currently but they really only should have internal ports as host ports should be assigned by the system. Host ports might go away in the future.
+	Ports []RegistrySvcPortMapping `json:"ports,omitempty"`
 	// Repository based definitions is an alternative to Image definitions. Instead of deploying an already built and pushed image, a source code repository url can be provided. The container will be built from the source.
 	Repository *RegistrySvcRepositorySpec `json:"repository,omitempty"`
 }
@@ -122,17 +122,17 @@ func (o *RegistrySvcDefinition) SetClients(v []RegistrySvcClient) {
 }
 
 // GetEnvars returns the Envars field value if set, zero value otherwise.
-func (o *RegistrySvcDefinition) GetEnvars() map[string]string {
+func (o *RegistrySvcDefinition) GetEnvars() []RegistrySvcEnvVar {
 	if o == nil || IsNil(o.Envars) {
-		var ret map[string]string
+		var ret []RegistrySvcEnvVar
 		return ret
 	}
-	return *o.Envars
+	return o.Envars
 }
 
 // GetEnvarsOk returns a tuple with the Envars field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RegistrySvcDefinition) GetEnvarsOk() (*map[string]string, bool) {
+func (o *RegistrySvcDefinition) GetEnvarsOk() ([]RegistrySvcEnvVar, bool) {
 	if o == nil || IsNil(o.Envars) {
 		return nil, false
 	}
@@ -148,41 +148,9 @@ func (o *RegistrySvcDefinition) HasEnvars() bool {
 	return false
 }
 
-// SetEnvars gets a reference to the given map[string]string and assigns it to the Envars field.
-func (o *RegistrySvcDefinition) SetEnvars(v map[string]string) {
-	o.Envars = &v
-}
-
-// GetHostPort returns the HostPort field value if set, zero value otherwise.
-func (o *RegistrySvcDefinition) GetHostPort() int32 {
-	if o == nil || IsNil(o.HostPort) {
-		var ret int32
-		return ret
-	}
-	return *o.HostPort
-}
-
-// GetHostPortOk returns a tuple with the HostPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegistrySvcDefinition) GetHostPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.HostPort) {
-		return nil, false
-	}
-	return o.HostPort, true
-}
-
-// HasHostPort returns a boolean if a field has been set.
-func (o *RegistrySvcDefinition) HasHostPort() bool {
-	if o != nil && !IsNil(o.HostPort) {
-		return true
-	}
-
-	return false
-}
-
-// SetHostPort gets a reference to the given int32 and assigns it to the HostPort field.
-func (o *RegistrySvcDefinition) SetHostPort(v int32) {
-	o.HostPort = &v
+// SetEnvars gets a reference to the given []RegistrySvcEnvVar and assigns it to the Envars field.
+func (o *RegistrySvcDefinition) SetEnvars(v []RegistrySvcEnvVar) {
+	o.Envars = v
 }
 
 // GetId returns the Id field value
@@ -241,6 +209,38 @@ func (o *RegistrySvcDefinition) SetImage(v RegistrySvcImageSpec) {
 	o.Image = &v
 }
 
+// GetPorts returns the Ports field value if set, zero value otherwise.
+func (o *RegistrySvcDefinition) GetPorts() []RegistrySvcPortMapping {
+	if o == nil || IsNil(o.Ports) {
+		var ret []RegistrySvcPortMapping
+		return ret
+	}
+	return o.Ports
+}
+
+// GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegistrySvcDefinition) GetPortsOk() ([]RegistrySvcPortMapping, bool) {
+	if o == nil || IsNil(o.Ports) {
+		return nil, false
+	}
+	return o.Ports, true
+}
+
+// HasPorts returns a boolean if a field has been set.
+func (o *RegistrySvcDefinition) HasPorts() bool {
+	if o != nil && !IsNil(o.Ports) {
+		return true
+	}
+
+	return false
+}
+
+// SetPorts gets a reference to the given []RegistrySvcPortMapping and assigns it to the Ports field.
+func (o *RegistrySvcDefinition) SetPorts(v []RegistrySvcPortMapping) {
+	o.Ports = v
+}
+
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *RegistrySvcDefinition) GetRepository() RegistrySvcRepositorySpec {
 	if o == nil || IsNil(o.Repository) {
@@ -292,12 +292,12 @@ func (o RegistrySvcDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Envars) {
 		toSerialize["envars"] = o.Envars
 	}
-	if !IsNil(o.HostPort) {
-		toSerialize["hostPort"] = o.HostPort
-	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.Image) {
 		toSerialize["image"] = o.Image
+	}
+	if !IsNil(o.Ports) {
+		toSerialize["ports"] = o.Ports
 	}
 	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository

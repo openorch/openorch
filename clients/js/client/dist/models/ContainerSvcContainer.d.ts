@@ -10,17 +10,29 @@
  * Do not edit the class manually.
  */
 import type { ContainerSvcKeep } from './ContainerSvcKeep';
+import type { ContainerSvcAsset } from './ContainerSvcAsset';
 import type { ContainerSvcNetwork } from './ContainerSvcNetwork';
 import type { ContainerSvcCapabilities } from './ContainerSvcCapabilities';
 import type { ContainerSvcVolume } from './ContainerSvcVolume';
+import type { ContainerSvcLabel } from './ContainerSvcLabel';
 import type { ContainerSvcEnvVar } from './ContainerSvcEnvVar';
 import type { ContainerSvcResources } from './ContainerSvcResources';
+import type { ContainerSvcPortMapping } from './ContainerSvcPortMapping';
 /**
  *
  * @export
  * @interface ContainerSvcContainer
  */
 export interface ContainerSvcContainer {
+    /**
+     * Assets maps environment variable names to file URLs.
+     * Example: {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
+     * These files are downloaded by the File Svc and mounted in the container.
+     * The environment variable `MODEL` will point to the local file path in the container.
+     * @type {Array<ContainerSvcAsset>}
+     * @memberof ContainerSvcContainer
+     */
+    assets?: Array<ContainerSvcAsset>;
     /**
      * Capabilities define additional runtime features, such as GPU support.
      * @type {ContainerSvcCapabilities}
@@ -60,12 +72,10 @@ export interface ContainerSvcContainer {
     keeps?: Array<ContainerSvcKeep>;
     /**
      * Labels are metadata tags assigned to the container.
-     * @type {{ [key: string]: string; }}
+     * @type {Array<ContainerSvcLabel>}
      * @memberof ContainerSvcContainer
      */
-    labels?: {
-        [key: string]: string;
-    };
+    labels?: Array<ContainerSvcLabel>;
     /**
      * Names are the human-readable aliases assigned to the container.
      * @type {Array<string>}
@@ -87,12 +97,10 @@ export interface ContainerSvcContainer {
     nodeId?: string;
     /**
      * Ports maps host ports (keys) to container ports (values).
-     * @type {{ [key: string]: number; }}
+     * @type {Array<ContainerSvcPortMapping>}
      * @memberof ContainerSvcContainer
      */
-    ports?: {
-        [key: string]: number;
-    };
+    ports?: Array<ContainerSvcPortMapping>;
     /**
      * Resources defines CPU, memory, and disk constraints for the container.
      * @type {ContainerSvcResources}

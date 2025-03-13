@@ -29,11 +29,11 @@ export interface RegistrySvcRepositorySpec {
      */
     containerFile?: string;
     /**
-     * Port is the port number that the container will listen on internally
-     * @type {number}
+     * Ports the container will listen on internally
+     * @type {Array<number>}
      * @memberof RegistrySvcRepositorySpec
      */
-    port?: number;
+    ports: Array<number>;
     /**
      * URL is the URL to the repository
      * @type {string}

@@ -14,26 +14,26 @@ import { RequestFile } from './models';
 
 export class RegistrySvcImageSpec {
     /**
+    * InternalPorts are the ports the container will listen on internally
+    */
+    'internalPorts': Array<number>;
+    /**
     * Name is the container image name/URL to use for the container
     */
     'name': string;
-    /**
-    * Port is the port number that the container will listen on internally
-    */
-    'port': number;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
+            "name": "internalPorts",
+            "baseName": "internalPorts",
+            "type": "Array<number>"
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
-            "name": "port",
-            "baseName": "port",
-            "type": "number"
         }    ];
 
     static getAttributeTypeMap() {

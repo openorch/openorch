@@ -13,11 +13,11 @@ export declare class ContainerSvcEnvVar {
     /**
     * Key is the environment variable name.
     */
-    'key'?: string;
+    'key': string;
     /**
     * Value is the environment variable value.
     */
-    'value'?: string;
+    'value': string;
     static discriminator: string | undefined;
     static attributeTypeMap: Array<{
         name: string;

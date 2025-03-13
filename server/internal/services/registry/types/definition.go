@@ -32,15 +32,30 @@ type Definition struct {
 	// E.g., {"DB_URL": "mysql://user:password@host:port/db"}
 	// These will be injected into the service instances (see Registry Svc Instance) at runtime.
 	// The value of a key here is the default value. The actual value can be overridden at deployment time.
-	Envars map[string]string `json:"envars,omitempty"`
+	Envars []EnvVar `json:"envars,omitempty"`
 
-	// HostPort is a clutch until automatic port assignment works.
-	// It will go a way as it doesn't make any sense in a Definition.
-	HostPort int32 `json:"hostPort,omitempty"`
+	// Ports have host ports and internal ports currently but they
+	// really only should have internal ports as host ports should be assigned
+	// by the system. Host ports might go away in the future.
+	Ports []PortMapping `json:"ports,omitempty"`
 }
 
 func (s Definition) GetId() string {
 	return s.Id
+}
+
+type PortMapping struct {
+	Internal uint16 `json:"internal" binding:"required"`
+	Host     uint16 `json:"host" binding:"required"`
+}
+
+// EnvVar represents an environment variable inside the container.
+type EnvVar struct {
+	// Key is the environment variable name.
+	Key string `json:"key" binding:"required"`
+
+	// Value is the environment variable value.
+	Value string `json:"value" binding:"required"`
 }
 
 type RepositorySpec struct {
@@ -57,16 +72,16 @@ type RepositorySpec struct {
 	// Relative from the build context. By default, it is assumed to be a Dockerfile.
 	ContainerFile string `json:"containerFile,omitempty" example:"docker/Dockerfile"`
 
-	// Port is the port number that the container will listen on internally
-	Port int `json:"port" example:"8080"`
+	// Ports the container will listen on internally
+	Ports []uint16 `json:"ports" binding:"required"`
 }
 
 type ImageSpec struct {
 	// Name is the container image name/URL to use for the container
 	Name string `json:"name" example:"nginx:latest" binding:"required"`
 
-	// Port is the port number that the container will listen on internally
-	Port int `json:"port" example:"8080" binding:"required"`
+	// InternalPorts are the ports the container will listen on internally
+	InternalPorts []uint16 `json:"internalPorts" binding:"required"`
 }
 
 type APISpec struct {
