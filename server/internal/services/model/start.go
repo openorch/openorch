@@ -155,6 +155,11 @@ func (ms *ModelService) startWithDocker(
 	req.Hash = openapi.PtrString(hash)
 
 	req.Image = image
+
+	// We give it a constant name here. This will limit the system
+	// to only run one AI container per node.
+	req.Names = []string{"the-openorch-container"}
+
 	req.Ports = []openapi.ContainerSvcPortMapping{
 		{
 			Internal: int32(port),
