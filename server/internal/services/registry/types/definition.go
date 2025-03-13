@@ -73,7 +73,7 @@ type RepositorySpec struct {
 	ContainerFile string `json:"containerFile,omitempty" example:"docker/Dockerfile"`
 
 	// Ports the container will listen on internally
-	Ports []uint16 `json:"ports" binding:"required"`
+	InternalPorts []uint16 `json:"ports" binding:"required"`
 }
 
 type ImageSpec struct {
