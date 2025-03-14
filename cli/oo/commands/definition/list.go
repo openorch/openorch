@@ -57,11 +57,12 @@ func List(cmd *cobra.Command, args []string) error {
 		}
 
 		port := ""
+		// @todo multiport issue
 		if definition.Image != nil {
-			port = fmt.Sprintf("%d", definition.Image.Port)
+			port = fmt.Sprintf("%d", definition.Image.InternalPorts[0])
 		}
 		if definition.Repository != nil {
-			port = fmt.Sprintf("%d", *definition.Repository.Port)
+			port = fmt.Sprintf("%d", &definition.Repository.InternalPorts[0])
 		}
 
 		fmt.Fprintf(

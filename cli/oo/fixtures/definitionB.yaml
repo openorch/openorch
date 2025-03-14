@@ -3,4 +3,5 @@ repository:
   url: https://github.com/openorch/openorch.git
   containerFile: server/docker/Dockerfile
   port: 58231
-hostPort: 9998
+ports:
+  "9998": 58231

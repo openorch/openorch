@@ -128,6 +128,7 @@ func (ds *ContainerService) Start() error {
 
 	go ds.containerLoop()
 	go ds.logLoop()
+	go ds.containerLoop()
 
 	return ds.registerPermissions()
 }
@@ -169,53 +170,56 @@ func (ms *ContainerService) logLoop() {
 		// }
 	})
 
-	dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
-}
-
-// Remove invalid UTF-8 byte sequences, including specific problematic bytes like 0x00
-func cleanInvalidUTF8(data []byte) []byte {
-	var result []byte
-
-	for len(data) > 0 {
-		r, size := utf8.DecodeRune(data)
-		if r == utf8.RuneError && size == 1 {
-			// Invalid byte sequence, skip it
-			data = data[size:]
-			continue
-		}
-
-		// Skip specific invalid bytes like 0x00 (null byte) or others (0x80, etc.)
-		if r == utf8.RuneError || r == '\x00' {
-			// Skip over invalid byte and continue to the next
-			data = data[size:]
-			continue
-		}
-
-		// Otherwise, it's a valid character, so add it to the result
-		result = append(result, data[:size]...)
-		data = data[size:]
-	}
-
-	return result
+	go dockerbackend.StartDockerLogListener(ms.backend.Client().(*dockerclient.Client), la)
 }
 
 func (ms *ContainerService) containerLoop() {
+	ctracker := dockerbackend.NewContainerTracker()
+
+	go dockerbackend.StartDockerContainerTracker(ms.backend.Client().(*dockerclient.Client), ctracker)
+
 	ticker := time.NewTicker(1000 * time.Millisecond)
 	defer ticker.Stop()
 
 	for {
 		select {
 		case <-ticker.C:
-		case <-ms.containerLoopTrigger:
-		}
-
-		err := ms.containerLoopCycle()
-		if err != nil {
-			logger.Error("Error processing prompt",
-				slog.String("error", err.Error()),
-			)
+			for _, c := range ctracker.GetContainers() {
+				err := ms.containerStore.Upsert(&c)
+				if err != nil {
+					logger.Error("Error saving container",
+						slog.String("error", err.Error()),
+					)
+				}
+			}
 		}
 	}
+}
+
+// Remove invalid UTF-8 sequences and unwanted control characters
+func cleanInvalidUTF8(data []byte) []byte {
+	result := make([]byte, 0, len(data)) // Preallocate for efficiency
+
+	for len(data) > 0 {
+		r, size := utf8.DecodeRune(data)
+		if r == utf8.RuneError && size == 1 {
+			// Skip invalid UTF-8 bytes
+			data = data[size:]
+			continue
+		}
+
+		// Skip null byte (0x00) and other control characters (0x01 - 0x1F, excluding \t, \n, \r)
+		if r == '\x00' || (r < 32 && r != '\t' && r != '\n' && r != '\r') {
+			data = data[size:]
+			continue
+		}
+
+		// Append valid characters
+		result = append(result, data[:size]...)
+		data = data[size:]
+	}
+
+	return result
 }
 
 func (ms *ContainerService) containerLoopCycle() error {

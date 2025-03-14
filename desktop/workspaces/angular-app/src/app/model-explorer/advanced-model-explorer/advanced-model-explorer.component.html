@@ -168,8 +168,8 @@
 						</span>
 						<span style="padding-left: 0.25rem">
 							<app-downloading
-								*ngIf="model?.assets?.MODEL"
-								[url]="model.assets!.MODEL"
+								*ngIf="hasModelAsset(model)"
+								[url]="modelAssetUrl(model)"
 							></app-downloading>
 						</span>
 

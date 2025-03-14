@@ -120,6 +120,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "openorch/list-containers",
+          label: "List Containers",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "openorch/container-daemon-info",
           label: "Get Container Daemon Information",
           className: "api-method get",
@@ -141,6 +147,12 @@ const sidebar: SidebarsConfig = {
           id: "openorch/image-pullable",
           label: "Check if Container Image is Pullable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "openorch/list-container-logs",
+          label: "List Logs",
+          className: "api-method post",
         },
       ],
     },

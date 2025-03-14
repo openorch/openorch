@@ -12,7 +12,7 @@ import { ElectronAppService } from '../services/electron-app.service';
 import { combineLatest, Subscription } from 'rxjs';
 import { DownloadService, FileSvcConfig } from '../services/download.service';
 import { ModelService, ModelSvcConfig } from '../services/model.service';
-import { ModelSvcModel as Model } from '@openorch/client';
+import { ModelSvcModel } from '@openorch/client';
 import { ContainerService } from '../services/container.service';
 import { ConfigService } from '../services/config.service';
 import {
@@ -77,7 +77,7 @@ export class StartupComponent implements OnInit {
 		} catch {}
 	}
 
-	models: Model[] = [];
+	models: ModelSvcModel[] = [];
 	allIsWell = false;
 	isDownloading = false;
 	downloaded = false;
@@ -131,7 +131,7 @@ export class StartupComponent implements OnInit {
 		return displayName;
 	}
 
-	selectedModel(cu: Config | null): Model | undefined {
+	selectedModel(cu: Config | null): ModelSvcModel | undefined {
 		if (!cu) {
 			return;
 		}
@@ -236,14 +236,9 @@ export class StartupComponent implements OnInit {
 		if (!model) {
 			throw `Cannot find model with id ${modelId}`;
 		}
-		const assetURLs = Object.values(model.assets!);
 
-		if (!assetURLs?.length) {
-			throw `Nothing to download for ${modelId}`;
-		}
-
-		for (const url of assetURLs) {
-			this.downloadService.downloadDo(url);
+		for (const asset of model.assets!) {
+			this.downloadService.downloadDo(asset.url);
 		}
 	}
 
@@ -251,6 +246,14 @@ export class StartupComponent implements OnInit {
 	async installRuntime() {
 		this.ipcService.send(WindowApiConst.INSTALL_RUNTIME_REQUEST, {});
 		this.isRuntimeInstalling = true;
+	}
+
+	hasModelAsset(model?: ModelSvcModel): boolean {
+		return model?.assets?.find((a) => a.envVarKey == 'MODEL') != undefined;
+	}
+
+	modelAssetUrl(model?: ModelSvcModel): string {
+		return model?.assets?.find((a) => a.envVarKey == 'MODEL')?.url || '';
 	}
 }
 

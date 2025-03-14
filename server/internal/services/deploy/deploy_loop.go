@@ -291,11 +291,12 @@ func (ns *DeployService) executeStartCommand(
 	if err != nil {
 		return errors.Wrap(err, "error parsing node url")
 	}
-	if definition.HostPort != nil {
+	if definition.Ports != nil {
 		ur.Host = strings.Replace(
 			ur.Host,
 			ur.Port(),
-			fmt.Sprintf("%v", *definition.HostPort),
+			// @todo multiport issue
+			fmt.Sprintf("%v", definition.Ports[0].Host),
 			1,
 		)
 	}
@@ -309,9 +310,10 @@ func (ns *DeployService) executeStartCommand(
 			DeploymentId: openapi.PtrString(deployment.Id),
 			Url:          ur.String(),
 			Host:         openapi.PtrString(ur.Hostname()),
-			Port:         definition.HostPort,
-			Scheme:       openapi.PtrString(ur.Scheme),
-			Path:         openapi.PtrString(ur.Path),
+			// @todo multiport
+			Port:   &definition.Ports[0].Host,
+			Scheme: openapi.PtrString(ur.Scheme),
+			Path:   openapi.PtrString(ur.Path),
 		},
 	).Execute()
 	if err != nil {
@@ -339,17 +341,22 @@ func (ns *DeployService) makeSureItRuns(
 	}
 
 	if definition.Image != nil {
-		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
-			openapi.ContainerSvcRunContainerRequest{
-				Image:    definition.Image.Name,
-				Port:     definition.Image.Port,
-				HostPort: definition.HostPort,
-				Options: &openapi.ContainerSvcRunContainerOptions{
-					Name: openapi.PtrString(
-						fmt.Sprintf("openorch-%v", definition.Id),
-					),
-				},
+		runContainerReq := openapi.ContainerSvcRunContainerRequest{
+			Image: definition.Image.Name,
+			Ports: []openapi.ContainerSvcPortMapping{},
+			Names: []string{
+				fmt.Sprintf("openorch-%v", definition.Id),
 			},
+		}
+		for _, port := range definition.Ports {
+			runContainerReq.Ports = append(runContainerReq.Ports, openapi.ContainerSvcPortMapping{
+				Host:     port.Host,
+				Internal: port.Internal,
+			})
+		}
+
+		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
+			runContainerReq,
 		).Execute()
 	} else {
 		var checkoutRsp *openapi.SourceSvcCheckoutRepoResponse
@@ -379,15 +386,20 @@ func (ns *DeployService) makeSureItRuns(
 			return err
 		}
 
-		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
-			openapi.ContainerSvcRunContainerRequest{
-				Image:    fmt.Sprintf("openorch-%v", definition.Id),
-				Port:     *definition.Repository.Port,
-				HostPort: definition.HostPort,
-				Options: &openapi.ContainerSvcRunContainerOptions{
-					Name: openapi.PtrString(fmt.Sprintf("openorch-%v", definition.Id)),
+		runContainerReq := openapi.ContainerSvcRunContainerRequest{
+			Image: fmt.Sprintf("openorch-%v", definition.Id),
+			Ports: []openapi.ContainerSvcPortMapping{
+				{
+					// @todo multiport issues
+					Internal: definition.Image.InternalPorts[0],
+					Host:     definition.Repository.Ports[0],
 				},
 			},
+			Names: []string{fmt.Sprintf("openorch-%v", definition.Id)},
+		}
+
+		_, _, err = client.ContainerSvcAPI.RunContainer(ctx).Body(
+			runContainerReq,
 		).Execute()
 	}
 

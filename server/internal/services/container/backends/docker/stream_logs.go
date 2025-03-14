@@ -8,6 +8,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	dockercontainer "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/events"
 	"github.com/docker/docker/client"
 	"github.com/openorch/openorch/server/internal/services/container/logaccumulator"
@@ -21,7 +22,7 @@ func StartDockerLogListener(cli *client.Client, la *logaccumulator.LogAccumulato
 	activeContainers := make(map[string]bool)
 	var mu sync.Mutex
 
-	containers, err := cli.ContainerList(ctx, container.ListOptions{})
+	containers, err := cli.ContainerList(ctx, dockercontainer.ListOptions{})
 	if err != nil {
 		log.Fatal("Error listing containers:", err)
 	}

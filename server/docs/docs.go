@@ -913,6 +913,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/container-svc/containers": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List containers.\n\nRequires the ` + "`" + `container-svc:container:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "List Containers",
+                "operationId": "listContainers",
+                "parameters": [
+                    {
+                        "description": "List Containers Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListContainersRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListContainersResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/container-svc/daemon/info": {
             "get": {
                 "security": [
@@ -1086,6 +1144,64 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/container_svc.ImagePullableResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/container-svc/logs": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "List Container logs.\n\nRequires the ` + "`" + `container-svc:log:view` + "`" + ` permission.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Container Svc"
+                ],
+                "summary": "List Logs",
+                "operationId": "listContainerLogs",
+                "parameters": [
+                    {
+                        "description": "List Logs Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListLogsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ListLogsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON",
+                        "schema": {
+                            "$ref": "#/definitions/container_svc.ErrorResponse"
                         }
                     },
                     "401": {
@@ -5451,6 +5567,21 @@ const docTemplate = `{
         "config_svc.SaveConfigResponse": {
             "type": "object"
         },
+        "container_svc.Asset": {
+            "type": "object",
+            "required": [
+                "envVarKey",
+                "url"
+            ],
+            "properties": {
+                "envVarKey": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
         "container_svc.BuildImageRequest": {
             "type": "object",
             "required": [
@@ -5478,6 +5609,117 @@ const docTemplate = `{
         "container_svc.BuildImageResponse": {
             "type": "object"
         },
+        "container_svc.Capabilities": {
+            "type": "object",
+            "properties": {
+                "gpuEnabled": {
+                    "description": "GPUEnabled specifies whether GPU support is enabled for the container.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.Container": {
+            "type": "object",
+            "properties": {
+                "assets": {
+                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Asset"
+                    }
+                },
+                "capabilities": {
+                    "description": "Capabilities define additional runtime features, such as GPU support.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Capabilities"
+                        }
+                    ]
+                },
+                "envs": {
+                    "description": "Envs are environment variables set within the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.EnvVar"
+                    }
+                },
+                "hash": {
+                    "description": "Hash is a unique identifier associated with the container.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Id is the unique identifier for the container instance.",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "Image is the Docker image used to create the container.",
+                    "type": "string"
+                },
+                "keeps": {
+                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Keep"
+                    }
+                },
+                "labels": {
+                    "description": "Labels are metadata tags assigned to the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Label"
+                    }
+                },
+                "names": {
+                    "description": "Names are the human-readable aliases assigned to the container.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "network": {
+                    "description": "Network contains networking-related information for the container.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Network"
+                        }
+                    ]
+                },
+                "nodeId": {
+                    "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
+                    "type": "string"
+                },
+                "ports": {
+                    "description": "Ports maps host ports (keys) to container ports (values).",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.PortMapping"
+                    }
+                },
+                "resources": {
+                    "description": "Resources defines CPU, memory, and disk constraints for the container.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Resources"
+                        }
+                    ]
+                },
+                "runtime": {
+                    "description": "Runtime specifies the container runtime (e.g., Docker, containerd, etc.).",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Status indicates the current state of the container (e.g., running, stopped).",
+                    "type": "string"
+                },
+                "volumes": {
+                    "description": "Volumes mounted by the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Volume"
+                    }
+                }
+            }
+        },
         "container_svc.ContainerIsRunningResponse": {
             "type": "object",
             "required": [
@@ -5502,6 +5744,23 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.EnvVar": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "description": "Key is the environment variable name.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is the environment variable value.",
                     "type": "string"
                 }
             }
@@ -5556,91 +5815,237 @@ const docTemplate = `{
                 }
             }
         },
-        "container_svc.RunContainerOptions": {
+        "container_svc.Keep": {
+            "type": "object",
+            "required": [
+                "path"
+            ],
+            "properties": {
+                "path": {
+                    "description": "Path is the absolute path inside the container for the folder that should persist across restarts.",
+                    "type": "string"
+                },
+                "readOnly": {
+                    "description": "ReadOnly indicates whether the keep is read-only.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "container_svc.Label": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.ListContainersRequest": {
             "type": "object",
             "properties": {
-                "assets": {
-                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "envs": {
-                    "description": "Envs are environment variables to set in the container",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "gpuEnabled": {
-                    "description": "GPUEnabled specifies if GPU support is enabled",
-                    "type": "boolean"
-                },
-                "hash": {
-                    "description": "Hash is a unique identifier for the container",
+                "containerId": {
                     "type": "string"
                 },
-                "keeps": {
-                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
+                "limit": {
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.ListContainersResponse": {
+            "type": "object",
+            "properties": {
+                "containers": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/container_svc.Container"
                     }
-                },
-                "labels": {
-                    "description": "Labels are metadata labels associated with the container",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "name": {
-                    "description": "Name is the name of the container",
+                }
+            }
+        },
+        "container_svc.ListLogsRequest": {
+            "type": "object",
+            "properties": {
+                "containerId": {
                     "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "nodeId": {
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.ListLogsResponse": {
+            "type": "object",
+            "properties": {
+                "logs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Log"
+                    }
+                }
+            }
+        },
+        "container_svc.Log": {
+            "type": "object",
+            "properties": {
+                "containerId": {
+                    "description": "ContainerId is the raw underlying container ID.\nEg. Docker container id. Node local.",
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "nodeId": {
+                    "description": "Node Id\nPlease see the documentation for the envar OPENORCH_NODE_ID",
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.Network": {
+            "type": "object",
+            "properties": {
+                "ipAddress": {
+                    "description": "IPAddress is the assigned IP address of the container.",
+                    "type": "string"
+                },
+                "macAddress": {
+                    "description": "MacAddress is the container's MAC address if applicable.",
+                    "type": "string"
+                },
+                "mode": {
+                    "description": "Mode specifies the container's network mode (e.g., bridge, host, none, custom).",
+                    "type": "string"
+                }
+            }
+        },
+        "container_svc.PortMapping": {
+            "type": "object",
+            "required": [
+                "host",
+                "internal"
+            ],
+            "properties": {
+                "host": {
+                    "type": "integer"
+                },
+                "internal": {
+                    "type": "integer"
+                }
+            }
+        },
+        "container_svc.Resources": {
+            "type": "object",
+            "properties": {
+                "cpu": {
+                    "description": "CPU cores allocated to the container (e.g., 0.5 = 500m, 2 = 2 cores).",
+                    "type": "number"
+                },
+                "diskMB": {
+                    "description": "Disk space allocated to the container in megabytes.",
+                    "type": "integer"
+                },
+                "memoryMB": {
+                    "description": "Memory allocated to the container in megabytes.",
+                    "type": "integer"
                 }
             }
         },
         "container_svc.RunContainerRequest": {
             "type": "object",
             "required": [
-                "image",
-                "port"
+                "image"
             ],
             "properties": {
-                "hostPort": {
-                    "description": "HostPort is the port on the host machine that will be mapped to the container's port",
-                    "type": "integer",
-                    "example": 8081
+                "assets": {
+                    "description": "Assets maps environment variable names to file URLs.\nExample: {\"MODEL\": \"https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf\"}\nThese files are downloaded by the File Svc and mounted in the container.\nThe environment variable ` + "`" + `MODEL` + "`" + ` will point to the local file path in the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Asset"
+                    }
+                },
+                "capabilities": {
+                    "description": "Capabilities define additional runtime features, such as GPU support.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/container_svc.Capabilities"
+                        }
+                    ]
+                },
+                "envs": {
+                    "description": "Envs are environment variables set within the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.EnvVar"
+                    }
+                },
+                "hash": {
+                    "description": "Hash is a unique identifier for the container",
+                    "type": "string"
                 },
                 "image": {
                     "description": "Image is the Docker image to use for the container",
                     "type": "string",
                     "example": "nginx:latest"
                 },
-                "options": {
-                    "description": "Options provides additional options for launching the container",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/container_svc.RunContainerOptions"
-                        }
-                    ]
+                "keeps": {
+                    "description": "Keeps are paths that persist across container restarts.\nThey function like mounts or volumes, but their external storage location is irrelevant.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Keep"
+                    }
                 },
-                "port": {
-                    "description": "Port is the port number that the container will expose",
-                    "type": "integer",
-                    "example": 8080
+                "labels": {
+                    "description": "Labels are metadata tags assigned to the container.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.Label"
+                    }
+                },
+                "names": {
+                    "description": "Names are the human-readable aliases assigned to the container.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ports": {
+                    "description": "Ports maps host ports (keys) to container ports (values).",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.PortMapping"
+                    }
                 }
             }
         },
         "container_svc.RunContainerResponse": {
             "type": "object",
             "properties": {
-                "newContainerStarted": {
-                    "type": "boolean"
+                "ports": {
+                    "description": "Ports is returned here as host ports might get mapped dynamically.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/container_svc.PortMapping"
+                    }
                 },
-                "portNumber": {
-                    "type": "integer"
+                "started": {
+                    "type": "boolean"
                 }
             }
         },
@@ -5659,6 +6064,23 @@ const docTemplate = `{
         },
         "container_svc.StopContainerResponse": {
             "type": "object"
+        },
+        "container_svc.Volume": {
+            "type": "object",
+            "properties": {
+                "destination": {
+                    "description": "Destination is the path inside the container.",
+                    "type": "string"
+                },
+                "readOnly": {
+                    "description": "ReadOnly indicates whether the mount is read-only.",
+                    "type": "boolean"
+                },
+                "source": {
+                    "description": "Source is the host path or volume name.",
+                    "type": "string"
+                }
+            }
         },
         "data_svc.CreateObjectFields": {
             "type": "object",
@@ -6538,6 +6960,21 @@ const docTemplate = `{
                 }
             }
         },
+        "model_svc.Asset": {
+            "type": "object",
+            "required": [
+                "envVarKey",
+                "url"
+            ],
+            "properties": {
+                "envVarKey": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
         "model_svc.Container": {
             "type": "object",
             "properties": {
@@ -6545,7 +6982,7 @@ const docTemplate = `{
                     "description": "Environment variables to be passed to the container (e.g., \"DEVICES=all\").",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/model_svc.EnvVar"
                     }
                 },
                 "imageTemplate": {
@@ -6556,7 +6993,7 @@ const docTemplate = `{
                     "description": "List of container paths that should persist across restarts.",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/model_svc.Keep"
                     }
                 },
                 "port": {
@@ -6598,6 +7035,19 @@ const docTemplate = `{
                 }
             }
         },
+        "model_svc.EnvVar": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "Key is the environment variable name.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is the environment variable value.",
+                    "type": "string"
+                }
+            }
+        },
         "model_svc.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -6622,6 +7072,19 @@ const docTemplate = `{
                 },
                 "platform": {
                     "$ref": "#/definitions/model_svc.Platform"
+                }
+            }
+        },
+        "model_svc.Keep": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "description": "Path is the absolute path inside the container for the folder that should persist across restarts.",
+                    "type": "string"
+                },
+                "readOnly": {
+                    "description": "ReadOnly indicates whether the keep is read-only.",
+                    "type": "boolean"
                 }
             }
         },
@@ -6655,11 +7118,16 @@ const docTemplate = `{
         },
         "model_svc.Model": {
             "type": "object",
+            "required": [
+                "id",
+                "name",
+                "platformId"
+            ],
             "properties": {
                 "assets": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model_svc.Asset"
                     }
                 },
                 "bits": {
@@ -7475,14 +7943,10 @@ const docTemplate = `{
                 },
                 "envars": {
                     "description": "Envars is a map of Renvironment variables that a deployment (see Deploy Svc Deployment) of this definition will REQUIRE to run.\nE.g., {\"DB_URL\": \"mysql://user:password@host:port/db\"}\nThese will be injected into the service instances (see Registry Svc Instance) at runtime.\nThe value of a key here is the default value. The actual value can be overridden at deployment time.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/registry_svc.EnvVar"
                     }
-                },
-                "hostPort": {
-                    "description": "HostPort is a clutch until automatic port assignment works.\nIt will go a way as it doesn't make any sense in a Definition.",
-                    "type": "integer"
                 },
                 "id": {
                     "type": "string"
@@ -7495,6 +7959,13 @@ const docTemplate = `{
                         }
                     ]
                 },
+                "ports": {
+                    "description": "Ports have host ports and internal ports currently but they\nreally only should have internal ports as host ports should be assigned\nby the system. Host ports might go away in the future.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/registry_svc.PortMapping"
+                    }
+                },
                 "repository": {
                     "description": "Repository based definitions is an alternative to Image definitions.\nInstead of deploying an already built and pushed image, a source code repository\nurl can be provided. The container will be built from the source.",
                     "allOf": [
@@ -7502,6 +7973,23 @@ const docTemplate = `{
                             "$ref": "#/definitions/registry_svc.RepositorySpec"
                         }
                     ]
+                }
+            }
+        },
+        "registry_svc.EnvVar": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "description": "Key is the environment variable name.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value is the environment variable value.",
+                    "type": "string"
                 }
             }
         },
@@ -7567,19 +8055,21 @@ const docTemplate = `{
         "registry_svc.ImageSpec": {
             "type": "object",
             "required": [
-                "name",
-                "port"
+                "internalPorts",
+                "name"
             ],
             "properties": {
+                "internalPorts": {
+                    "description": "InternalPorts are the ports the container will listen on internally",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
                 "name": {
                     "description": "Name is the container image name/URL to use for the container",
                     "type": "string",
                     "example": "nginx:latest"
-                },
-                "port": {
-                    "description": "Port is the port number that the container will listen on internally",
-                    "type": "integer",
-                    "example": 8080
                 }
             }
         },
@@ -7845,6 +8335,21 @@ const docTemplate = `{
                 }
             }
         },
+        "registry_svc.PortMapping": {
+            "type": "object",
+            "required": [
+                "host",
+                "internal"
+            ],
+            "properties": {
+                "host": {
+                    "type": "integer"
+                },
+                "internal": {
+                    "type": "integer"
+                }
+            }
+        },
         "registry_svc.Process": {
             "type": "object",
             "properties": {
@@ -7912,6 +8417,7 @@ const docTemplate = `{
         "registry_svc.RepositorySpec": {
             "type": "object",
             "required": [
+                "ports",
                 "url"
             ],
             "properties": {
@@ -7925,10 +8431,12 @@ const docTemplate = `{
                     "type": "string",
                     "example": "docker/Dockerfile"
                 },
-                "port": {
-                    "description": "Port is the port number that the container will listen on internally",
-                    "type": "integer",
-                    "example": 8080
+                "ports": {
+                    "description": "Ports the container will listen on internally",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 },
                 "url": {
                     "description": "URL is the URL to the repository",
@@ -8851,7 +9359,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "ownerId": {
-                    "description": "Service who owns the permission",
+                    "description": "Service who owns the permission\n\nUncertain if this aligns with the system's use of slugs.\nIssue encountered: I renamed Docker Svc to Container Svc in two steps (by mistake).\nThe name/slug had already changed to \"container-svc,\" but data was still being saved\nin the \"dockerSvcCredentials\" table.\nAfter renaming the tables as well, I hit a \"cannot update unowned permission\" error\nbecause ownership relies on this field rather than the user slug. YMMV.",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -9073,7 +9581,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "0.3.0-rc.26",
+	Version:          "0.3.0-rc.29",
 	Host:             "localhost:58231",
 	BasePath:         "/",
 	Schemes:          []string{},

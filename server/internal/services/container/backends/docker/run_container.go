@@ -38,7 +38,6 @@ import (
 	"github.com/openorch/openorch/sdk/go/logger"
 
 	container "github.com/openorch/openorch/server/internal/services/container/types"
-	dockertypes "github.com/openorch/openorch/server/internal/services/container/types"
 )
 
 // This obviously means there is a single container that can be active at the moment on a node.
@@ -52,9 +51,6 @@ func (d *DockerBackend) RunContainer(
 
 ) (*container.RunContainerResponse, error) {
 	image := req.Image
-	internalPort := req.Port
-	hostPort := req.HostPort
-	options := req.Options
 
 	err := d.pullImage(image)
 	if err != nil {
@@ -64,44 +60,46 @@ func (d *DockerBackend) RunContainer(
 	d.runContainerMutex.Lock()
 	defer d.runContainerMutex.Unlock()
 
-	if options == nil {
-		options = &dockertypes.RunContainerOptions{}
-	}
-	if options.Name == "" {
-		options.Name = launchedContainerName
-	}
-
 	envs, hostBinds, err := d.additionalEnvsAndHostBinds(
-		options.Assets,
-		options.Keeps,
+		req.Assets,
+		req.Keeps,
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	containerConfig := &dockercontainer.Config{
-		Image: image,
-		Env:   append(options.Envs, envs...),
-		ExposedPorts: nat.PortSet{
-			nat.Port(fmt.Sprintf("%v/tcp", internalPort)): {},
-		},
-		Labels: map[string]string{},
+	for _, env := range req.Envs {
+		envs = append(envs, fmt.Sprintf("%v=%v", env.Key, env.Value))
 	}
+
+	containerConfig := &dockercontainer.Config{
+		Image:        image,
+		Env:          envs,
+		ExposedPorts: nat.PortSet{},
+		Labels:       map[string]string{},
+	}
+
+	for _, port := range req.Ports {
+		containerConfig.ExposedPorts[nat.Port(fmt.Sprintf("%v/tcp", port.Internal))] = struct{}{}
+	}
+
 	hostConfig := &dockercontainer.HostConfig{
-		Binds: hostBinds,
-		PortBindings: map[nat.Port][]nat.PortBinding{
-			nat.Port(fmt.Sprintf("%v/tcp", internalPort)): {
-				{
-					HostPort: fmt.Sprintf("%v", hostPort),
-				},
-			},
-		},
+		Binds:        hostBinds,
+		PortBindings: map[nat.Port][]nat.PortBinding{},
 		Resources: dockercontainer.Resources{
 			DeviceRequests: []dockercontainer.DeviceRequest{},
 		},
 	}
 
-	if options.GPUEnabled {
+	for _, port := range req.Ports {
+		hostConfig.PortBindings[nat.Port(fmt.Sprintf("%v/tcp", port.Internal))] = []nat.PortBinding{
+			{
+				HostPort: fmt.Sprintf("%v", port.Host),
+			},
+		}
+	}
+
+	if req.Capabilities != nil && req.Capabilities.GPUEnabled {
 		hostConfig.Resources.DeviceRequests = append(
 			hostConfig.Resources.DeviceRequests,
 			dockercontainer.DeviceRequest{
@@ -127,12 +125,15 @@ func (d *DockerBackend) RunContainer(
 	}
 
 	var existingContainer *types.Container
+
 	for _, container := range containers {
-		for _, name := range container.Names {
-			if name == "/"+options.Name || name == options.Name ||
-				strings.Contains(name, options.Name) {
-				existingContainer = &container
-				break
+		for _, containerName := range container.Names {
+			for _, requestName := range req.Names {
+				if containerName == "/"+requestName || containerName == requestName ||
+					strings.Contains(containerName, requestName) {
+					existingContainer = &container
+					break
+				}
 			}
 		}
 		if existingContainer != nil {
@@ -142,9 +143,9 @@ func (d *DockerBackend) RunContainer(
 
 	if existingContainer != nil {
 		if existingContainer.State != "running" ||
-			existingContainer.Labels["openorch-hash"] != options.Hash {
+			existingContainer.Labels["openorch-hash"] != req.Hash {
 			logs, err := d.GetContainerSummary(container.GetContainerSummaryRequest{
-				Hash:  options.Hash,
+				Hash:  req.Hash,
 				Lines: 10,
 			})
 			if err != nil {
@@ -164,13 +165,19 @@ func (d *DockerBackend) RunContainer(
 			}
 		} else {
 			return &container.RunContainerResponse{
-				NewContainerStarted: false,
-				PortNumber:          hostPort,
+				Started: false,
+				Ports:   req.Ports,
 			}, nil
 		}
 	}
 
-	containerConfig.Labels["openorch-hash"] = options.Hash
+	containerConfig.Labels["openorch-hash"] = req.Hash
+
+	name := ""
+	if len(req.Names) > 0 {
+		// If docker doesn't accept multipoe names, request should not either perhaps
+		name = req.Names[0]
+	}
 
 	createdContainer, err := d.client.ContainerCreate(
 		ctx,
@@ -178,7 +185,7 @@ func (d *DockerBackend) RunContainer(
 		hostConfig,
 		nil,
 		nil,
-		options.Name,
+		name,
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, "error creating Docker container")
@@ -189,14 +196,14 @@ func (d *DockerBackend) RunContainer(
 	}
 
 	return &container.RunContainerResponse{
-		NewContainerStarted: true,
-		PortNumber:          hostPort,
+		Started: true,
+		Ports:   req.Ports,
 	}, nil
 }
 
 func (d *DockerBackend) additionalEnvsAndHostBinds(
-	assets map[string]string,
-	persistentPaths []string,
+	assets []container.Asset,
+	keeps []container.Keep,
 ) ([]string, []string, error) {
 	// We turn the asset map (which is an envar name to file URL map)
 	// eg. {"MODEL": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q2_K.gguf"}
@@ -207,11 +214,11 @@ func (d *DockerBackend) additionalEnvsAndHostBinds(
 	// We translate URLs in the assets map into local file paths
 	// by streaming the URL from the File Svc into a file and then mounting that file.
 
-	for envarName, assetURL := range assets {
+	for _, asset := range assets {
 		// We use the /root/.openorch/downloads as it's also the location that the File Svc uses.
 		// So if everything is running on the same node we avoid unnecessary processing.
 		// This is obviously just a hack for local setups when we run directly on the host and not inside containers.
-		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(assetURL))
+		assetPath := filepath.Join("/root/.openorch/downloads", encodeURLtoFileName(asset.Url))
 
 		assetExists := false
 		if fileExists(assetPath) {
@@ -221,7 +228,7 @@ func (d *DockerBackend) additionalEnvsAndHostBinds(
 		if !assetExists {
 			// @todo we could do checksum calculation to verify file integrity as well
 			rspFile, _, err := d.clientFactory.Client(sdk.WithToken(d.token)).
-				FileSvcAPI.ServeDownload(context.Background(), assetURL).
+				FileSvcAPI.ServeDownload(context.Background(), asset.Url).
 				Execute()
 			if err != nil {
 				return nil, nil, err
@@ -247,7 +254,7 @@ func (d *DockerBackend) additionalEnvsAndHostBinds(
 			environment,
 			fmt.Sprintf(
 				"%v=%v",
-				envarName,
+				asset.EnvVarKey,
 				assetPath,
 			),
 		)
@@ -307,13 +314,13 @@ func (d *DockerBackend) additionalEnvsAndHostBinds(
 	// Persistent paths are paths in the container we want to persist.
 	// eg. /root/.cache/huggingface/diffusers
 	// Then here we mount openorch-data:/root/.cache/huggingface/diffusers
-	for _, persistentPath := range persistentPaths {
+	for _, keep := range keeps {
 		hostBinds = append(
 			hostBinds,
 			fmt.Sprintf(
 				"%v:%v",
 				openorchVolumeName,
-				persistentPath,
+				keep.Path,
 			),
 		)
 	}

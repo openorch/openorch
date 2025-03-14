@@ -3,7 +3,7 @@ OpenOrch
 
 A language-agnostic microservices framework for building AI applications.
 
-API version: 0.3.0-rc.26
+API version: 0.3.0-rc.29
 Contact: sales@singulatron.com
 */
 
@@ -13,6 +13,8 @@ package openapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ModelSvcModel type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,19 @@ var _ MappedNullable = &ModelSvcModel{}
 
 // ModelSvcModel struct for ModelSvcModel
 type ModelSvcModel struct {
-	Assets *map[string]string `json:"assets,omitempty"`
+	Assets []ModelSvcAsset `json:"assets,omitempty"`
 	Bits *int32 `json:"bits,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Extension *string `json:"extension,omitempty"`
 	Flavour *string `json:"flavour,omitempty"`
 	FullName *string `json:"fullName,omitempty"`
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	MaxBits *int32 `json:"maxBits,omitempty"`
 	MaxRam *float32 `json:"maxRam,omitempty"`
 	Mirrors []string `json:"mirrors,omitempty"`
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	Parameters *string `json:"parameters,omitempty"`
-	PlatformId *string `json:"platformId,omitempty"`
+	PlatformId string `json:"platformId"`
 	PromptTemplate *string `json:"promptTemplate,omitempty"`
 	Quality *string `json:"quality,omitempty"`
 	QuantComment *string `json:"quantComment,omitempty"`
@@ -42,12 +44,17 @@ type ModelSvcModel struct {
 	Version *string `json:"version,omitempty"`
 }
 
+type _ModelSvcModel ModelSvcModel
+
 // NewModelSvcModel instantiates a new ModelSvcModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelSvcModel() *ModelSvcModel {
+func NewModelSvcModel(id string, name string, platformId string) *ModelSvcModel {
 	this := ModelSvcModel{}
+	this.Id = id
+	this.Name = name
+	this.PlatformId = platformId
 	return &this
 }
 
@@ -60,17 +67,17 @@ func NewModelSvcModelWithDefaults() *ModelSvcModel {
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *ModelSvcModel) GetAssets() map[string]string {
+func (o *ModelSvcModel) GetAssets() []ModelSvcAsset {
 	if o == nil || IsNil(o.Assets) {
-		var ret map[string]string
+		var ret []ModelSvcAsset
 		return ret
 	}
-	return *o.Assets
+	return o.Assets
 }
 
 // GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelSvcModel) GetAssetsOk() (*map[string]string, bool) {
+func (o *ModelSvcModel) GetAssetsOk() ([]ModelSvcAsset, bool) {
 	if o == nil || IsNil(o.Assets) {
 		return nil, false
 	}
@@ -86,9 +93,9 @@ func (o *ModelSvcModel) HasAssets() bool {
 	return false
 }
 
-// SetAssets gets a reference to the given map[string]string and assigns it to the Assets field.
-func (o *ModelSvcModel) SetAssets(v map[string]string) {
-	o.Assets = &v
+// SetAssets gets a reference to the given []ModelSvcAsset and assigns it to the Assets field.
+func (o *ModelSvcModel) SetAssets(v []ModelSvcAsset) {
+	o.Assets = v
 }
 
 // GetBits returns the Bits field value if set, zero value otherwise.
@@ -251,36 +258,28 @@ func (o *ModelSvcModel) SetFullName(v string) {
 	o.FullName = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ModelSvcModel) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModel) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ModelSvcModel) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ModelSvcModel) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetMaxBits returns the MaxBits field value if set, zero value otherwise.
@@ -379,36 +378,28 @@ func (o *ModelSvcModel) SetMirrors(v []string) {
 	o.Mirrors = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *ModelSvcModel) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModel) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ModelSvcModel) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *ModelSvcModel) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetParameters returns the Parameters field value if set, zero value otherwise.
@@ -443,36 +434,28 @@ func (o *ModelSvcModel) SetParameters(v string) {
 	o.Parameters = &v
 }
 
-// GetPlatformId returns the PlatformId field value if set, zero value otherwise.
+// GetPlatformId returns the PlatformId field value
 func (o *ModelSvcModel) GetPlatformId() string {
-	if o == nil || IsNil(o.PlatformId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PlatformId
+
+	return o.PlatformId
 }
 
-// GetPlatformIdOk returns a tuple with the PlatformId field value if set, nil otherwise
+// GetPlatformIdOk returns a tuple with the PlatformId field value
 // and a boolean to check if the value has been set.
 func (o *ModelSvcModel) GetPlatformIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PlatformId, true
+	return &o.PlatformId, true
 }
 
-// HasPlatformId returns a boolean if a field has been set.
-func (o *ModelSvcModel) HasPlatformId() bool {
-	if o != nil && !IsNil(o.PlatformId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformId gets a reference to the given string and assigns it to the PlatformId field.
+// SetPlatformId sets field value
 func (o *ModelSvcModel) SetPlatformId(v string) {
-	o.PlatformId = &v
+	o.PlatformId = v
 }
 
 // GetPromptTemplate returns the PromptTemplate field value if set, zero value otherwise.
@@ -727,9 +710,7 @@ func (o ModelSvcModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FullName) {
 		toSerialize["fullName"] = o.FullName
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.MaxBits) {
 		toSerialize["maxBits"] = o.MaxBits
 	}
@@ -739,15 +720,11 @@ func (o ModelSvcModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Mirrors) {
 		toSerialize["mirrors"] = o.Mirrors
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if !IsNil(o.PlatformId) {
-		toSerialize["platformId"] = o.PlatformId
-	}
+	toSerialize["platformId"] = o.PlatformId
 	if !IsNil(o.PromptTemplate) {
 		toSerialize["promptTemplate"] = o.PromptTemplate
 	}
@@ -770,6 +747,45 @@ func (o ModelSvcModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["version"] = o.Version
 	}
 	return toSerialize, nil
+}
+
+func (o *ModelSvcModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"name",
+		"platformId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varModelSvcModel := _ModelSvcModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varModelSvcModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ModelSvcModel(varModelSvcModel)
+
+	return err
 }
 
 type NullableModelSvcModel struct {

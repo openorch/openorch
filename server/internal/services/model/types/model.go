@@ -74,6 +74,29 @@ type CudaParameters struct {
 	DefaultCudnnVersion string `json:"defaultCudnnVersion"`
 }
 
+// EnvVar represents an environment variable inside the container.
+//
+// Inspired by `container-svc`'s EnvVar type.
+type EnvVar struct {
+	// Key is the environment variable name.
+	Key string `json:"key"`
+
+	// Value is the environment variable value.
+	Value string `json:"value"`
+}
+
+// Keep represents a simplified volume where only the persistence of specific internal files matters,
+// without concern for their exact location on the host system.
+//
+// Inspired by `container-svc`'s Keep type.
+type Keep struct {
+	// Path is the absolute path inside the container for the folder that should persist across restarts.
+	Path string `json:"path"`
+
+	// ReadOnly indicates whether the keep is read-only.
+	ReadOnly bool `json:"readOnly,omitempty"`
+}
+
 /*
 Container represents a deployable container configuration, including
 image details, environment variables, and persistence settings.
@@ -86,35 +109,38 @@ type Container struct {
 	ImageTemplate string `json:"imageTemplate"`
 
 	// Environment variables to be passed to the container (e.g., "DEVICES=all").
-	Envars []string `json:"envars"`
+	Envars []EnvVar `json:"envars"`
 
 	// List of container paths that should persist across restarts.
-	Keeps []string `json:"keeps,omitempty"`
+	Keeps []Keep `json:"keeps,omitempty"`
 }
 
-type Assets map[string]string
+type Asset struct {
+	EnvVarKey string `json:"envVarKey" binding:"required"`
+	Url       string `json:"url" binding:"required"`
+}
 
 type Model struct {
-	Id             string            `json:"id"`
-	PlatformId     string            `json:"platformId"`
-	Name           string            `json:"name"`
-	Parameters     string            `json:"parameters"`
-	Flavour        string            `json:"flavour"`
-	Version        string            `json:"version"`
-	Quality        string            `json:"quality"`
-	Extension      string            `json:"extension"`
-	FullName       string            `json:"fullName"`
-	Tags           []string          `json:"tags"`
-	Mirrors        []string          `json:"mirrors"`
-	Size           float64           `json:"size"`
-	Uncensored     bool              `json:"uncensored"`
-	MaxRam         float64           `json:"maxRam"`
-	Description    string            `json:"description"`
-	PromptTemplate string            `json:"promptTemplate"`
-	QuantComment   string            `json:"quantComment"`
-	MaxBits        int               `json:"maxBits"`
-	Bits           int               `json:"bits"`
-	Assets         map[string]string `json:"assets"`
+	Id             string   `json:"id" binding:"required"`
+	PlatformId     string   `json:"platformId" binding:"required"`
+	Name           string   `json:"name" binding:"required"`
+	Parameters     string   `json:"parameters,omitempty"`
+	Flavour        string   `json:"flavour,omitempty"`
+	Version        string   `json:"version,omitempty"`
+	Quality        string   `json:"quality,omitempty"`
+	Extension      string   `json:"extension,omitempty"`
+	FullName       string   `json:"fullName,omitempty"`
+	Tags           []string `json:"tags,omitempty"`
+	Mirrors        []string `json:"mirrors,omitempty"`
+	Size           float64  `json:"size,omitempty"`
+	Uncensored     bool     `json:"uncensored,omitempty"`
+	MaxRam         float64  `json:"maxRam,omitempty"`
+	Description    string   `json:"description,omitempty"`
+	PromptTemplate string   `json:"promptTemplate,omitempty"`
+	QuantComment   string   `json:"quantComment,omitempty"`
+	MaxBits        int      `json:"maxBits,omitempty"`
+	Bits           int      `json:"bits,omitempty"`
+	Assets         []Asset  `json:"assets,omitempty"`
 }
 
 func (g Model) GetId() string {

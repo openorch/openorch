@@ -205,12 +205,14 @@
 									<h2>
 										<app-downloading
 											*ngIf="
-												selectedModel(configService.config$ | async)?.assets
-													?.MODEL
+												hasModelAsset(
+													selectedModel(configService.config$ | async)
+												)
 											"
 											[url]="
-												selectedModel(configService.config$ | async)?.assets
-													?.MODEL || ''
+												modelAssetUrl(
+													selectedModel(configService.config$ | async)
+												)
 											"
 											(downloadStatusChange)="handleDownloadStatus($event)"
 										></app-downloading>

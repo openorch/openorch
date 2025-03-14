@@ -7,7 +7,9 @@
  */
 package container_svc
 
-import "time"
+import (
+	"time"
+)
 
 type Log struct {
 	Id string `json:"id"`
@@ -27,4 +29,14 @@ type Log struct {
 
 func (l *Log) GetId() string {
 	return l.Id
+}
+
+type ListLogsRequest struct {
+	NodeId      string `json:"nodeId,omitempty"`
+	ContainerId string `json:"containerId,omitempty"`
+	Limit       int64  `json:"limit,omitempty"`
+}
+
+type ListLogsResponse struct {
+	Logs []*Log `json:"logs,omitempty"`
 }

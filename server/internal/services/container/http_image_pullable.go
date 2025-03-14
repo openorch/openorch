@@ -101,7 +101,7 @@ func imageExistsInRegistry(image, tag string) (bool, error) {
 		image = "library/" + image
 	}
 
-	url := fmt.Sprintf("https://hub.docker.com/v2/repositories/%s/tags/%s", image, tag)
+	url := fmt.Sprintf("https://hub.docker.com/v2/repositories/%s/tags/%s", image, url.PathEscape(tag))
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -117,11 +117,15 @@ func imageExistsInRegistry(image, tag string) (bool, error) {
 		return false, fmt.Errorf("unexpected response from Docker Hub: %v", resp.Status)
 	}
 
-	var response DockerHubResponse
-	err = json.NewDecoder(resp.Body).Decode(&response)
-	if err != nil {
-		return false, fmt.Errorf("error decoding response: %v", err)
-	}
+	return true, nil
 
-	return response.TagStatus == "active", nil
+	// @crufter images that exist but haven't been pulled for a while seem to be marked as inactive
+	//
+	// var response DockerHubResponse
+	// err = json.NewDecoder(resp.Body).Decode(&response)
+	// if err != nil {
+	// 	return false, fmt.Errorf("error decoding response: %v", err)
+	// }
+	//
+	// return response.TagStatus == "active", nil
 }

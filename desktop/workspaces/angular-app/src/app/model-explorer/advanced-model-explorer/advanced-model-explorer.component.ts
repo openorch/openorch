@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModelService } from '../../services/model.service';
-import { ModelSvcModel as Model } from '@openorch/client';
+import { ModelSvcModel as Model, ModelSvcModel } from '@openorch/client';
 import { DownloadService } from '../../services/download.service';
 import { DownloadStatusChangeEvent } from '../../services/download.service';
 import { ConfigService } from '../../services/config.service';
@@ -157,17 +157,22 @@ export class AdvancedModelExplorerComponent {
 		const activeCategories = this.modelCategoryOptions.filter(
 			(option) => option.active
 		);
+
 		let models = this.allModels;
+
 		if (this.showOnlyDownloadedModels) {
 			const downloadedModels = [];
 			const downloadsResponse = await this.downloadService.downloadList();
+
 			for (const model of models) {
+				const assetUrls = model.assets?.map((a) => a.url);
+
 				if (
 					downloadsResponse.downloads?.some(
 						(download) =>
 							download.status === 'completed' &&
 							model.assets &&
-							Object.values(model.assets)?.includes(download.url!)
+							assetUrls?.includes(download.url!)
 					)
 				) {
 					downloadedModels.push(model);
@@ -225,9 +230,10 @@ export class AdvancedModelExplorerComponent {
 		if (status === null) {
 			return false;
 		}
-		const c = status?.allDownloads?.find(
-			(download) =>
-				model.assets && Object.values(model.assets).includes(download.url!)
+
+		const assetUrls = model.assets?.map((a) => a.url);
+		const c = status?.allDownloads?.find((download) =>
+			assetUrls!.includes(download.url!)
 		);
 		if (c?.status === 'inProgress' || c?.status === 'paused') {
 			return true;
@@ -260,10 +266,11 @@ export class AdvancedModelExplorerComponent {
 		if (status === null) {
 			return false;
 		}
+
+		const assetUrls = model.assets?.map((a) => a.url);
 		if (
-			status?.allDownloads?.find(
-				(download) =>
-					model.assets && Object.values(model.assets)?.includes(download.url!)
+			status?.allDownloads?.find((download) =>
+				assetUrls!.includes(download.url!)
 			)?.status === 'completed'
 		) {
 			return true;
@@ -276,13 +283,8 @@ export class AdvancedModelExplorerComponent {
 	}
 
 	async download(model: Model) {
-		const assetURLs = Object.values(model.assets!);
-		if (!assetURLs?.length) {
-			throw `No assets to download for ${model.id}`;
-		}
-
-		for (const url of assetURLs) {
-			this.downloadService.downloadDo(url);
+		for (const asset of model.assets!) {
+			this.downloadService.downloadDo(asset.url);
 		}
 	}
 
@@ -359,6 +361,14 @@ export class AdvancedModelExplorerComponent {
 
 	trackById(_: number, message: { id?: string }): string {
 		return message.id!;
+	}
+
+	hasModelAsset(model: ModelSvcModel): boolean {
+		return model?.assets?.find((a) => a.envVarKey == 'MODEL') != undefined;
+	}
+
+	modelAssetUrl(model: ModelSvcModel): string {
+		return model?.assets?.find((a) => a.envVarKey == 'MODEL')?.url || '';
 	}
 }
 

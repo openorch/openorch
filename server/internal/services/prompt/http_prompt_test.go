@@ -133,7 +133,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			Return(&openapi.ModelSvcGetModelResponse{
 				Exists: true,
 				Model: openapi.ModelSvcModel{
-					Id: openapi.PtrString("mistral-1"),
+					Id: "mistral-1",
 				},
 				Platform: openapi.ModelSvcPlatform{
 					Id: openapi.PtrString(modeltypes.PlatformLlamaCpp.Id),
@@ -201,7 +201,7 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 			Return(&openapi.ModelSvcListModelsResponse{
 				Models: []openapi.ModelSvcModel{
 					{
-						Id: openapi.PtrString("mistral-1"),
+						Id: "mistral-1",
 					},
 				},
 			}, nil, nil)
@@ -277,12 +277,12 @@ var _ = ginkgo.Describe("Prompt Processing Loop", func() {
 
 			var model *openapi.ModelSvcModel
 			for _, v := range mrsp.Models {
-				if !strings.Contains(*v.Id, "mistral") {
+				if !strings.Contains(v.Id, "mistral") {
 					continue
 				}
 				currentModelIdI := dipper.Get(crsp.Config.Data, "model-svc.currentModelId")
 				currentModelId, ok := currentModelIdI.(string)
-				if ok && *v.Id == currentModelId {
+				if ok && v.Id == currentModelId {
 					model = &v
 				}
 			}
