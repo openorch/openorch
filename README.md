@@ -1,4 +1,4 @@
-THIS PROJECT MOVED TO https://github.com/1backend/1backend
+<strong>THIS PROJECT HAS MOVED TO</strong> https://github.com/1backend/1backend
 
 <p align="center">
   <img width="150px" src="./docs-source/openorch_logo.svg" style="border-radius: 50%;" />
